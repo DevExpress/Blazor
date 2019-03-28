@@ -1,0 +1,83 @@
+@page "/GridColumnTypes"
+@using Demo.RazorComponents.Services
+@inject WeatherForecastService ForecastService
+
+<div class="demo-description">
+    <h2>Data Grid - Column Types</h2>
+
+    <p>
+        This demo demonstrates different column types supported by the DevExpress Data Grid for Razor Components.
+    </p>
+    <ul>
+        <li>
+            <b>DxDataGridCommandColumn</b>
+            <p>Displays data management commands such as New, Edit, Delete, Update, and so on.</p>
+        </li>
+        <li>
+            <b>DxDataGridColumn (Temp. C)</b>
+            <p>Default column type that displays strings and uses a text box to edit values.</p>
+        </li>
+        <li>
+            <b>DxDataGridSpinEditColumn (Temp. F)</b>
+            <p>Uses a spin editor with up/down buttons to edit column values.</p>
+        </li>
+        <li>
+            <b>DxDataGridComboBoxColumn (Summary)</b>
+            <p>Uses a combo box control to edit column values.</p>
+        </li>
+        <li>
+            <b>DXDataGridDateEditColumn (Date)</b>
+            <p>Uses a drop-down calendar control to edit column values.</p>
+        </li>
+    </ul>
+    <p>
+        Click the Edit command in any row to see the integrated data editors displayed by the columns listed above.
+    </p>
+</div>
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <DxDataGrid Data=@forecasts
+                PageSize=5
+                RowRemoving=@((dataItem) => OnRowRemoving(dataItem))
+                RowUpdating=@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))
+                RowInserting=@((newValues) => OnRowInserting(newValues))>
+        <DxDataGridCommandColumn Width="150px"></DxDataGridCommandColumn>
+        <DxDataGridColumn Field=@nameof(WeatherForecast.TemperatureC) Caption="Temp. (C)"></DxDataGridColumn>
+        <DxDataGridSpinEditColumn Field=@nameof(WeatherForecast.TemperatureF) Caption="Temp. (F)"></DxDataGridSpinEditColumn>
+        <DxDataGridComboBoxColumn Field=@nameof(WeatherForecast.Summary) Caption="Summary" Data=@summaries></DxDataGridComboBoxColumn>
+        <DxDataGridDateEditColumn Field=@nameof(WeatherForecast.Date)></DxDataGridDateEditColumn>
+    </DxDataGrid>
+
+    <CodeSnippet_GridColumnTypes></CodeSnippet_GridColumnTypes>
+
+}
+@functions {
+    WeatherForecast[] forecasts;
+    string[] summaries;
+
+    protected override async Task OnInitAsync()
+    {
+        forecasts = await ForecastService.GetForecastAsync();
+        summaries = await ForecastService.GetSummariesAsync();
+    }
+    async void OnRowRemoving(WeatherForecast dataItem)
+    {
+        forecasts = await ForecastService.Remove(dataItem);
+        StateHasChanged();
+    }
+    async void OnRowUpdating(WeatherForecast dataItem, Dictionary<string, object> newValue)
+    {
+        forecasts = await ForecastService.Update(dataItem, newValue);
+        StateHasChanged();
+    }
+    async void OnRowInserting(Dictionary<string, object> newValue)
+    {
+        forecasts = await ForecastService.Insert(newValue);
+        StateHasChanged();
+    }
+}

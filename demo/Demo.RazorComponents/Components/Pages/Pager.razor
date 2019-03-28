@@ -1,0 +1,90 @@
+﻿@page "/Pager"
+@using Demo.RazorComponents.Model
+
+<div class="demo-description">
+    <h2>Pager - Overview</h2>
+    <p>
+        The Pager is a standalone UI component that enables you to enable data navigation and to visualize the current position within a bound data source.
+    </p>
+    <p>
+        You can specify the following attributes:
+    </p>
+    <ul>
+        <li><b>PageCount</b> - Total page count</li>
+        <li><b>ActivePageIndex</b> - Active page index </li>
+        <li><b>CollapseButtonCount</b> - Maximum number of page numbers displayed simultaneously</li>
+    </ul>
+    <p>
+        If the total number of pages is greater than the CollapseButtonCount value, the pager hides part of page number buttons and displays an ellipsis in their place.
+    </p>
+    <p>
+        Try the demo below – use the pager control or linked Spin Editor controls and notice the two-way synchronization.
+    </p>
+</div>
+
+<div class="card demo-card">
+    <div class="card-body">
+        <DxPager PageCount=@PageCount1.Value
+                 CollapseButtonCount=@PageNumberButtonCount1.Value
+                 bind-ActivePageIndex=@ActivePageIndex1.Value>
+        </DxPager>
+    </div>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Pager></CodeSnippet_Pager>
+        <DxSpinEdit bind-Value=@PageCount1.Value MinValue=0 MaxValue=int.MaxValue></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // PageCount</span>
+        <br />
+        <DxSpinEdit bind-Value=@ActivePageIndex1.Value MinValue=0 MaxValue=@(PageCount1.Value-1)></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // ActivePageIndex</span>
+        <br />
+        <DxSpinEdit bind-Value=@PageNumberButtonCount1.Value MinValue=1 MaxValue=int.MaxValue></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // CollapseButtonCount</span>
+    </div>
+</div>
+
+<div class="demo-description">
+    <h2>Pager – All Pages Numbers Visible</h2>
+    <p>
+        This example demonstrates a simple scenario where the Pager Control displays all its page numbers simultaneously.
+    </p>
+</div>
+
+<div class="card demo-card">
+    <div class="card-body">
+        <DxPager PageCount=5
+                 CollapseButtonCount=10
+                 ActivePageIndex=2>
+        </DxPager>
+    </div>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Pager_Small></CodeSnippet_Pager_Small>
+    </div>
+</div>
+
+<div class="demo-description">
+    <h2>Pager – Limit the Number of Page Buttons</h2>
+    <p>
+        This example sets the total number of pages to 100, but limits the number of visible buttons to 10. See how the DxPager control skips number ranges and displays ellipses instead.
+    </p>
+</div>
+
+<div class="card demo-card">
+    <div class="card-body">
+        <DxPager PageCount=100
+                 CollapseButtonCount=10
+                 ActivePageIndex=50>
+        </DxPager>
+    </div>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Pager_Large></CodeSnippet_Pager_Large>
+    </div>
+</div>
+
+@functions {
+    StateProperty<int> PageCount1 = new StateProperty<int>(10);
+    StateProperty<int> ActivePageIndex1 = new StateProperty<int>(1);
+    StateProperty<int> PageNumberButtonCount1 = new StateProperty<int>(10);
+
+    protected override void OnInit()
+    {
+        StateProperty.OnChanged = () => { StateHasChanged(); };
+    }
+
+}

@@ -1,0 +1,77 @@
+<div class="top-row pl-4 navbar navbar-dark logo-container">
+    <img src="images/logo.svg" />
+    <button class="navbar-toggler" onclick="@ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+<div class="@NavMenuCssClass" onclick="@ToggleNavMenu">
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <img class="demo-icon" src="images/Overview.svg" alt="Overview" aria-hidden="true"> Overview
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="GridColumnTypes">
+                <img class="demo-icon" src="images/GridColumnType.svg" alt="Grid - Column Types" aria-hidden="true"> Grid - Column Types
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="GridTemplate">
+                <img class="demo-icon" src="images/GridTemplates.svg" alt="Grid - Column Types" aria-hidden="true"> Grid - Templates
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="GridLargeDataBase">
+                <img class="demo-icon" src="images/GridLargeData.svg" alt="Grid - Large Data" aria-hidden="true"> Grid - Large Data
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="PivotGrid">
+                <img class="demo-icon" src="images/PivotGrid.svg" alt="Pivot Grid" aria-hidden="true"> Pivot Grid
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="PivotGridTemplates">
+                <img class="demo-icon" src="images/PivotGridTemplate.svg" alt="Pivot Grid - Templates" aria-hidden="true"> Pivot Grid - Templates
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="PivotGridLargeDataBase">
+                <img class="demo-icon" src="images/PivotGridLargeData.svg" alt="Pivot Grid - Large Data" aria-hidden="true"> Pivot Grid - Large Data
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="Editors">
+                <img class="demo-icon" src="images/Editors.svg" alt="Editors" aria-hidden="true"> Editors
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="Pager">
+                <img class="demo-icon" src="images/Pager.svg" alt="Pager" aria-hidden="true"> Pager
+            </NavLink>
+        </li>
+    </ul>
+</div>
+
+<div class="footer">
+    <div class="info-wrapper">
+        <div class="version">Version: Preview</div>
+        <div class="copyright">
+            <span>Copyright &copy; 2006-</span><span>@(DateTime.Now.Year.ToString())</span>
+            Developer Express Inc
+        </div>
+    </div>
+</div>
+
+@functions {
+    bool collapseNavMenu = true;
+
+    string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

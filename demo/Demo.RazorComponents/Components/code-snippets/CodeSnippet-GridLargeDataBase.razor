@@ -1,0 +1,20 @@
+﻿<CodeSnippet>
+@(@"<DxDataGrid Data=@largeDataSource AllowRowSelection=false PageSize=""10"" KeyFieldName=""Oid"">
+    <DxDataGridColumn Field=@nameof(AreaRentInfo.State)></DxDataGridColumn>
+    <DxDataGridColumn Field=@nameof(AreaRentInfo.Area)></DxDataGridColumn>
+    <DxDataGridColumn Field=@nameof(AreaRentInfo.City) Caption=""County""></DxDataGridColumn>
+    <DxDataGridColumn Field=@nameof(AreaRentInfo.Name) Caption=""Location""></DxDataGridColumn>
+    <DxDataGridColumn Field=@nameof(AreaRentInfo.Year)></DxDataGridColumn>
+    <DxDataGridColumn Field=@nameof(AreaRentInfo.Bedrooms)></DxDataGridColumn>
+    <DxDataGridColumn Field=@nameof(AreaRentInfo.Rent)>
+        <DisplayTemplate>
+            @(((context as AreaRentInfo).Rent).ToString(""C2""))
+        </DisplayTemplate>
+    </DxDataGridColumn>
+    <DxDataGridColumn Field=@nameof(AreaRentInfo.Population)>
+        <DisplayTemplate>
+            @(((context as AreaRentInfo).Population).ToString(""#,0""))
+        </DisplayTemplate>
+    </DxDataGridColumn>
+</DxDataGrid>")
+</CodeSnippet>

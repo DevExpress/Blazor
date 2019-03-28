@@ -1,0 +1,201 @@
+/* Demos specific */
+.ctrl-fixed-width-xs,
+.ctrl-fixed-width-sm,
+.ctrl-fixed-width,
+.ctrl-fixed-width-lg {
+    width: 100%;
+}
+.card.demo-card {
+    width: 760px;
+}
+
+@media(max-width: 1080px) {
+    .card.demo-card {
+        width: 100%;
+    }
+}
+@media(min-width: 840px) {
+    .ctrl-fixed-width-xs {
+        width: 150px;
+        min-width: 150px;
+    }
+
+    .ctrl-fixed-width-sm {
+        width: 200px;
+        min-width: 200px;
+    }
+
+    .ctrl-fixed-width {
+        width: 320px;
+        min-width: 320px;
+    }
+
+    .ctrl-fixed-width-lg {
+        width: 480px;
+        min-width: 480px;
+    }
+}
+
+.card-deck.demo > .card {
+    min-width: 400px;
+    max-width: 800px;
+    height: 150px;
+    margin-bottom: 15px;
+    margin-left: 0px;
+}
+    .card.demo-card > .card-footer,
+    .card.demo-card-wide > .card-footer {
+        padding-top: 0;
+    }
+
+        .card.demo-card > .card-footer > pre,
+        .card.demo-card-wide > .card-footer > pre {
+            margin: 0;
+            padding: 0;
+        }
+
+.hljs {
+    background-color: transparent;
+}
+
+.hljs-name,
+.hljs-attr,
+.hljs-tag,
+code.hljs.xml {
+    color: #800080 !important;
+}
+
+.main {
+    min-width: 0;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+    .main .top-row {
+        z-index: 10000;
+    }
+
+.logo-container {
+    padding-left: 20px !important;
+}
+
+    .logo-container img {
+        width: 180px;
+        height: 30px;
+    }
+
+div.logo {
+    padding-top: 10px;
+}
+
+.caption {
+    color: #212529;
+}
+
+.sidebar .footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-left: 10px;
+    padding-bottom: 12px;
+}
+
+    .sidebar .footer .version,
+    .sidebar .footer .copyright {
+        color: #d7d7d7;
+        font-size: 11px;
+    }
+
+div.content > .card:last-child {
+    margin-bottom: 50px;
+}
+
+.card-footer.text-muted > .dxbs-spin-edit {
+    display: inline-block;
+    width: 100px;
+}
+
+/*Mac OS Safari does not support position:sticky*/
+@media (min-width: 768px) {
+    _:-webkit-full-screen, _::-webkit-full-page-media, _:future, :root .main {
+        margin-left: 250px;
+    }
+    _:-webkit-full-screen, _::-webkit-full-page-media, _:future, :root .main .top-row {
+        position: fixed;
+        width: 100%;
+    }
+    _:-webkit-full-screen, _::-webkit-full-page-media, _:future, :root .main .content {
+        margin-top: 3.5rem;
+    }
+    _:-webkit-full-screen, _::-webkit-full-page-media, _:future, :root .sidebar {
+        position: fixed;
+    }
+}
+
+.online-only-warrning {
+    margin-top: 32px;
+    margin-bottom: 40px;
+    padding: 16px 16px 0 16px;
+    max-width: 1024px;
+}
+
+    .online-only-warrning > img {
+        width: 36px;
+        height: 36px;
+        position: absolute;
+        top: 21px;
+    }
+
+    .online-only-warrning .info-caption {
+        margin-left: 50px;
+        font-size: 16px;
+        margin-bottom: 2px;
+    }
+
+    .online-only-warrning .info-descrition {
+        margin-left: 50px;
+        font-size: 14px;
+        margin-bottom: 16px;
+    }
+
+.demo-icon {
+    width: 26px;
+    height: 26px;
+    margin-right: 9px;
+    margin-left: -3px;
+}
+
+.demo-description {
+    max-width: 1024px;
+}
+
+.demo-description > h2:not(:first-child) {
+    margin-top: 32px;
+}
+.demo-description > h2 {
+    margin-bottom: 24px;
+}
+
+.main > div.social-panel {
+    padding-left: 0 !important;
+}
+.social-panel {
+    border-bottom: 1px solid #DEDEDE;
+    font-size: 15px;
+    font-weight: 600;
+    padding-top: 16px;
+    padding-bottom: 18px;
+    margin-left: 32px;
+    margin-right: 32px;
+}
+    .social-panel .sp-caption {
+        display: inline-block;
+        margin-right: 4px;
+    }
+    .fb_iframe_widget iframe {
+        vertical-align: text-bottom;
+    }
+    .twitter-share-button[style] {
+        vertical-align: bottom !important;
+    }

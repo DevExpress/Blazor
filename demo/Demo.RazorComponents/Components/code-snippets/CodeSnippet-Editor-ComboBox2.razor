@@ -1,0 +1,29 @@
+﻿<CodeSnippet>
+@(@"<DxComboBox Data=@Countries
+            TextFieldName=""CountryName""
+            SelectedItem=@CurrentCountry
+            SelectedItemChanged=@SelectedCountryChanged>
+</DxComboBox>
+<DxComboBox Data=@CurrentCountryCities
+            TextFieldName=""CityName""
+            SelectedItem=@CurrentCity
+            SelectedItemChanged=@SelectedCityChanged>
+</DxComboBox>
+
+@functions {
+    List<Country> Countries = ...;
+    List<City> CurrentCountryCities = ...;
+    Country CurrentCountry;
+    City CurrentCity;
+    void SelectedCountryChanged(Country country)
+    {
+        CurrentCountry = country;
+        CurrentCountryCities = Cities.FindAll(city => city.CountryId == CurrentCountry.Id);
+        CurrentCity = CurrentCountryCities[0];
+    }
+    void SelectedCityChanged(City city)
+    {
+        CurrentCity = city;
+    }
+}")
+</CodeSnippet>

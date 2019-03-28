@@ -1,0 +1,17 @@
+﻿<div class="card demo-card-wide" style="border-top: none">
+    <div class="card-footer text-muted" style="border-top: none">
+        <CodeSnippet>
+@(@"<DxPivotGrid Data=@GridData>
+	<DxPivotGridField Field=@nameof(SaleInfo.Region) SortOrder=@SortOrder.Asc Area=@PivotGridFieldArea.Row></DxPivotGridField>
+	<DxPivotGridField Field=@nameof(SaleInfo.Country) Area=@PivotGridFieldArea.Row></DxPivotGridField>
+	<DxPivotGridField Field=@nameof(SaleInfo.City) Area=@PivotGridFieldArea.Row></DxPivotGridField>
+	<DxPivotGridField Field=@nameof(SaleInfo.Date) GroupInterval=@PivotGridGroupInterval.Year Area=@PivotGridFieldArea.Column Caption=""Year""></DxPivotGridField>
+	<DxPivotGridField Field=@nameof(SaleInfo.Date) GroupInterval=@PivotGridGroupInterval.Quarter Area=@PivotGridFieldArea.Column Caption=""Quarter"">
+		<HeaderTemplate>@string.Format(""Q{0}"", context)</HeaderTemplate>
+	</DxPivotGridField>
+	<DxPivotGridField Field=@nameof(SaleInfo.Amount) Area=@PivotGridFieldArea.Data SummaryType=@PivotGridSummaryType.Sum></DxPivotGridField>
+	<DxPivotGridField Field=@nameof(SaleInfo.OrderId) Caption=""Count"" Area=@PivotGridFieldArea.Data SummaryType=@PivotGridSummaryType.Count></DxPivotGridField>
+</DxPivotGrid>")
+        </CodeSnippet>
+    </div>
+</div>

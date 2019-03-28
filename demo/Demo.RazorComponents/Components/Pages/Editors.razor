@@ -1,0 +1,148 @@
+﻿@page "/Editors"
+@using Demo.RazorComponents.Model
+@using Demo.RazorComponents.Services
+
+<div class="demo-description">
+    <h2>Combo Box – Business Object List as Data Source</h2>
+    <p>
+        The Combo Box component is a drop-down list editor that allows an end user to select from a list of items.
+    </p>
+    <p>
+        This sample demonstrates the Combo Box bound to a list of complex business objects. The text displayed in list items is retrieved from the specified business object property. Try to change the selection to view the current object’s property values.
+    </p>
+</div>
+
+<div class="card demo-card" style="height: 600px">
+    <div class="card-header">SelectedRealBusinessObject { FirstName=<b>@(RealBusinessObject_Selected.Value.FirstName)</b>, LastName=<b>@(RealBusinessObject_Selected.Value.LastName)</b>, Department=<b>@(RealBusinessObject_Selected.Value.Department)</b> }</div>
+    <div class="card-body">
+        <DxComboBox Data=@Persons.DataSource
+                    TextFieldName="Text"
+                    bind-DropDownVisible=@DropDownVisible1.Value
+                    bind-SelectedItem=@RealBusinessObject_Selected.Value
+                    CssClass="ctrl-fixed-width-lg"></DxComboBox>
+    </div>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_ComboBox1></CodeSnippet_Editor_ComboBox1>
+    </div>
+</div>
+
+<div class="demo-description">
+    <h2>Combo Box – Cascading Lists</h2>
+    <p>
+        This demo shows how to populate a DxComboBox editor with items based on user selection made in another DxComboBox.
+    </p>
+</div>
+
+<div class="card demo-card" style="height: 900px">
+    <div class="card-header">Selected values are: <b>@CurrentCountry.CountryName</b> / <b>@CurrentCity.CityName</b></div>
+    <div class="card-body">
+        <div class="d-inline-block">
+            <DxComboBox Data=@CountryCity.Countries
+                        TextFieldName="CountryName"
+                        SelectedItem=@CurrentCountry
+                        bind-DropDownVisible=@DropDownVisible2.Value
+                        SelectedItemChanged=@SelectedCountryChanged></DxComboBox>
+        </div>
+        <div class="d-inline-block">
+            <DxComboBox Data=@CurrentCountryCities
+                        TextFieldName="CityName"
+                        SelectedItem=@CurrentCity
+                        bind-DropDownVisible=@DropDownVisible3.Value
+                        SelectedItemChanged=@SelectedCityChanged></DxComboBox>
+        </div>
+    </div>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_ComboBox2></CodeSnippet_Editor_ComboBox2>
+    </div>
+</div>
+
+<div class="demo-description">
+    <h2>Date Edit</h2>
+    <p>
+        DxDateEdit is a date editor with a dropdown calendar. You can enter a date into the text box or pick one from the dropdown.
+    </p>
+</div>
+
+<div class="card demo-card" style="height: 670px">
+    <div class="card-header">Selected date is: <b>@DateTime1.Value.ToString("dddd, dd MMMM yyyy")</b></div>
+    <div class="card-body">
+        <DxDateEdit bind-Date=@DateTime1.Value
+                    bind-DropDownVisible=@DropDownVisible4.Value
+                    CssClass="ctrl-fixed-width-lg"></DxDateEdit>
+    </div>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_DateEdit></CodeSnippet_Editor_DateEdit>
+    </div>
+</div>
+
+<div class="demo-description">
+    <h2>Spin Edit – Decimal Value Type</h2>
+    <p>
+        DxSpinEdit displays a numeric values and allows users to modify them by typing into the text box or by using the up/down spin buttons.
+    </p>
+    <p>
+        DxSpinEdit works with .NET built-in data types, including System.Decimal the most precise of any other .NET floating point types.
+        The editor processes values directly on the server side, without relying on JavaScript types. This ensures that specified values never lose precision because of type conversions.
+    </p>
+</div>
+
+<div class="card demo-card">
+    <div class="card-header">SpinEdit decimal value is: <b>@Decimal1.Value</b></div>
+    <div class="card-body">
+        <DxSpinEdit bind-Value=@Decimal1.Value CssClass="ctrl-fixed-width-lg"></DxSpinEdit>
+    </div>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_SpinEdit></CodeSnippet_Editor_SpinEdit>
+    </div>
+</div>
+
+<div class="demo-description">
+    <h2>Text Box</h2>
+    <p>
+        The DxTextBox is a UI component that enables a user to enter and edit a single line of text.
+    </p>
+</div>
+
+<div class="card demo-card">
+    <div class="card-header">TextBox text is: "<b>@Text1.Value</b>"</div>
+    <div class="card-body">
+        <DxTextBox bind-Text=@Text1.Value CssClass="ctrl-fixed-width-lg"></DxTextBox>
+    </div>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_TextBox></CodeSnippet_Editor_TextBox>
+    </div>
+</div>
+
+@functions {
+    StateProperty<DateTime> DateTime1 = new StateProperty<DateTime>(DateTime.Now);
+    StateProperty<string> Text1 = new StateProperty<string>("Some text");
+    StateProperty<Decimal> Decimal1 = new StateProperty<Decimal>(Decimal.MaxValue - 10000);
+
+    StateProperty<Person> RealBusinessObject_Selected = new StateProperty<Person>(Persons.DataSource[0]);
+
+    List<City> CurrentCountryCities = new List<City>();
+    Country CurrentCountry = CountryCity.Countries[1];
+    City CurrentCity = CountryCity.Cities[4];
+
+    StateProperty<bool> DropDownVisible1 = new StateProperty<bool>(true);
+    StateProperty<bool> DropDownVisible2 = new StateProperty<bool>(true);
+    StateProperty<bool> DropDownVisible3 = new StateProperty<bool>(true);
+    StateProperty<bool> DropDownVisible4 = new StateProperty<bool>(true);
+
+    protected override void OnInit()
+    {
+        StateProperty.OnChanged = () => { base.Invoke(StateHasChanged); };
+        SelectedCountryChanged(CurrentCountry);
+    }
+
+    void SelectedCountryChanged(Country country)
+    {
+        CurrentCountry = country;
+        CurrentCountryCities = CountryCity.Cities.FindAll(city => city.CountryId == CurrentCountry.Id);
+        CurrentCity = CurrentCountryCities[0];
+    }
+    void SelectedCityChanged(City city)
+    {
+        CurrentCity = city;
+    }
+}

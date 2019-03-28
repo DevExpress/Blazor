@@ -1,0 +1,4767 @@
+/* Common */
+.dx-hc
+{
+    display: none;
+}
+.dxbs-spacer::before
+{
+    content: ' ';
+    display: inline-block;
+    width: 1em;
+}
+.dxbs-defc
+{
+    cursor: default;
+}
+.dxbs-lp
+{
+    z-index: 30000;
+}
+.dxbs-lp.card
+{
+    margin: 0;
+}
+.dxbs-lp span.image
+{
+    animation-name: spin;
+    animation-duration: 2000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+.dxbs-lp span.image:not(:last-child)
+{
+    margin-right: 0.4em;
+}
+.dxbs-lp span.image:not(:first-child)
+{
+    margin-left: 0.4em;
+}
+.dxbs-lp.dxbs-lp-inline
+{
+    border: none;
+    display: block;
+    text-align: center;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.dxbs-lp.dx-hc,
+.dxbs-lp.dxbs-lp-inline.dx-hc
+{
+    display: none;
+}
+@keyframes spin
+{
+    from
+    {
+        transform: rotate(0deg);
+    }
+    to
+    {
+        transform: rotate(360deg);
+    }
+}
+.dxbs-ld
+{
+    position: absolute !important;
+    z-index: 29999;
+    opacity: 0.01;
+}
+.dxbs-position-static
+{
+    position: static;
+}
+.dxbs-position-relative
+{
+    position: relative;
+}
+.dxbs-position-absolute
+{
+    position: absolute;
+}
+.dxbs-position-fixed
+{
+    position: fixed;
+}
+.dxbs-position-sticky
+{
+    position: -webkit-sticky;
+    position: sticky;
+}
+.dxbs-rounded-0
+{
+    border-radius: 0 !important;
+}
+.dxbs-border-top-0
+{
+    border-top: 0 !important;
+}
+/* Ripple common*/
+.dxRippleContainer
+{
+    overflow: hidden !important;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    pointer-events: none;
+    direction: ltr;
+}
+.dxRipple
+{
+    position: relative;
+    z-index: 3;
+    background-color: rgba(0,0,0,0.085);
+    width: 0%;
+    height: 0%;
+    -webkit-border-radius: 50% !important;
+    border-radius: 50% !important;
+    pointer-events: none;
+}
+.dxAndroidMobilePlatform .dxRipple,
+.dxMacOSMobilePlatform .dxRipple
+{
+    background-color: rgba(0,0,0,0.15);
+}
+/* Accessibility */
+.dxAIFE,
+.dxAIFME
+{
+    clip: rect(1px, 1px, 1px, 1px);
+    -webkit-clip-path: polygon(0 0);
+    /* clip-path: polygon(0 0); */
+}
+.dxAIFE
+{
+    height: 1px;
+    overflow: hidden;
+    position: absolute !important;
+}
+.dxAIFME
+{
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+/* Mobile */
+.dxTouchVScrollHandle, .dxTouchHScrollHandle
+{
+    background-color: Black;
+    position: absolute;
+    opacity: 0;
+    border-radius: 5px;
+    transition-property: opacity;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+    -webkit-transition-property: opacity;
+    -webkit-transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+}
+.dxTouchVScrollHandle
+{
+    width: 5px;
+    height: 50%;
+    margin-bottom: 3px;
+}
+.dxTouchHScrollHandle
+{
+    width: 50%;
+    height: 5px;
+    margin-right: 3px;
+}
+.dxTouchScrollHandleVisible
+{
+    transition-duration: 0s;
+    -webkit-transition-duration: 0s;
+    opacity: 0.4 !important;
+}
+.dxTouchNativeScrollHandle::-webkit-scrollbar
+{
+    width: 5px;
+    height: 5px;
+}
+.dxTouchNativeScrollHandle::-webkit-scrollbar-thumb
+{
+    background-color: rgba(0,0,0,0.3);
+}
+.dxTouchNativeScrollHandle::-webkit-scrollbar-corner
+{
+    background: transparent;
+}
+.dxbs-hl
+{
+    position: absolute !important;
+    top: -10000px !important;
+    left: -10000px !important;
+}
+.dxbs-hl:not(.show)
+{
+    visibility: hidden !important;
+}
+/* Edit */
+.input-group .dxbs-textbox,
+.input-group .dxbs-memo,
+.input-group .dxbs-button-edit,
+.input-group .dxbs-spin-edit,
+.input-group .dxbs-dropdown-edit
+{
+    display: table;
+    width: 100%;
+}
+.form-inline .input-group .dxbs-textbox,
+.form-inline .input-group .dxbs-memo,
+.form-inline .input-group .dxbs-button-edit,
+.form-inline .input-group .dxbs-spin-edit,
+.form-inline .input-group .dxbs-dropdown-edit
+{
+    display: inline-table;
+}
+.input-group .dxbs-textbox > div,
+.input-group .dxbs-memo > div,
+.input-group .dxbs-button-edit > div:not(.input-group),
+.input-group .dxbs-spin-edit > div:not(.dxbs-out-of-range-warn):not(.input-group),
+.input-group .dxbs-dropdown-edit > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp):not(.input-group)
+{
+    display: table-row;
+}
+.dxbs-3 .input-group .input-group-addon + .dxbs-textbox .form-control,
+.input-group .input-group-prepend + .dxbs-textbox .form-control,
+.dxbs-3 .input-group .input-group-addon + .dxbs-memo .form-control,
+.input-group .input-group-prepend + .dxbs-memo .form-control,
+.dxbs-3 .input-group .input-group-addon + .dxbs-button-edit .form-control,
+.input-group .input-group-prepend + .dxbs-button-edit .form-control,
+.dxbs-3 .input-group .input-group-addon + .dxbs-spin-edit .form-control,
+.input-group .input-group-prepend + .dxbs-spin-edit .form-control,
+.dxbs-3 .input-group .input-group-addon + .dxbs-dropdown-edit .form-control,
+.input-group .input-group-prepend + .dxbs-dropdown-edit .form-control
+{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.dxbs-3 .input-group .dxbs-textbox + .input-group-addon:not(:first-child),
+.dxbs-3 .input-group .dxbs-memo + .input-group-addon:not(:first-child),
+.dxbs-3 .input-group .dxbs-button-edit + .input-group-addon:not(:first-child),
+.dxbs-3 .input-group .dxbs-spin-edit + .input-group-addon:not(:first-child),
+.dxbs-3 .input-group .dxbs-dropdown-edit + .input-group-addon:not(:first-child)
+{
+    border-left: 0;
+}
+.form-inline .dxbs-textbox,
+.form-inline .dxbs-memo,
+.form-inline .dxbs-button-edit,
+.form-inline .dxbs-spin-edit,
+.form-inline .dxbs-dropdown-edit,
+.form-inline .dxbs-combobox,
+.form-inline .dxbs-tagbox
+{
+    display: inline-block;
+}
+.dxbs-textbox > div,
+.dxbs-memo > div,
+.dxbs-button-edit,
+.dxbs-button-edit > div,
+.dxbs-button-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend),
+.dxbs-dropdown-edit,
+.dxbs-dropdown-edit > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp),
+.dxbs-dropdown-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp),
+.dxbs-spin-edit,
+.dxbs-spin-edit > div:not(.dxbs-out-of-range-warn),
+.dxbs-spin-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend)
+{
+    position: relative;
+}
+.form-inline .dxbs-textbox .col-form-label,
+.form-inline .dxbs-memo .col-form-label,
+.form-inline .dxbs-button-edit .col-form-label,
+.form-inline .dxbs-spin-edit .col-form-label,
+.form-inline .dxbs-dropdown-edit .col-form-label
+{
+    width: auto;
+    margin-right: 0.3em;
+}
+.dxbs-textbox.form-group-lg .col-form-label,
+.dxbs-memo.form-group-lg .col-form-label,
+.dxbs-button-edit.form-group-lg .col-form-label,
+.dxbs-spin-edit.form-group-lg .col-form-label,
+.dxbs-dropdown-edit.form-group-lg .col-form-label
+{
+    font-size: 18px;
+}
+.dxbs-textbox.form-group-sm .col-form-label,
+.dxbs-memo.form-group-sm .col-form-label,
+.dxbs-button-edit.form-group-sm .col-form-label,
+.dxbs-spin-edit.form-group-sm .col-form-label,
+.dxbs-dropdown-edit.form-group-sm .col-form-label
+{
+    font-size: 12px;
+}
+.dxbs-textbox .form-control::-ms-clear,
+.dxbs-memo .form-control::-ms-clear,
+.dxbs-button-edit .form-control::-ms-clear,
+.dxbs-spin-edit .form-control::-ms-clear,
+.dxbs-dropdown-edit .form-control::-ms-clear,
+.dxbs-tagbox-input::-ms-clear
+{
+    display: none;
+}
+.dxbs-textbox .form-control,
+.dxbs-memo .form-control,
+.dxbs-button-edit .form-control,
+.dxbs-button-edit .input-group .form-control,
+.dxbs-spin-edit .form-control,
+.dxbs-spin-edit .input-group .form-control,
+.dxbs-dropdown-edit .input-group .form-control,
+.dxbs-textbox .col-form-label,
+.dxbs-memo .col-form-label,
+.dxbs-button-edit .col-form-label,
+.dxbs-spin-edit .col-form-label,
+.dxbs-dropdown-edit .col-form-label
+{
+    vertical-align: middle;
+}
+.dxbs-textbox .form-control,
+.dxbs-memo .form-control,
+.dxbs-button-edit .form-control,
+.dxbs-button-edit .input-group .form-control,
+.dxbs-spin-edit .form-control,
+.dxbs-spin-edit .input-group .form-control,
+.dxbs-dropdown-edit .input-group .form-control
+{
+    display: inline-block;
+    margin-bottom: 0px;
+}
+.dxbs-memo .form-control
+{
+    resize: vertical;
+}
+.dxbs-button-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend) > .form-control:focus,
+.dxbs-spin-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend) > .form-control:focus,
+.dxbs-dropdown-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp) > .form-control:focus,
+.dxbs-uc div.input-group > div:not(.input-group-append):not(.input-group-prepend) > .form-control:focus
+{
+    z-index: 4;
+}
+
+.dxbs-3 .dxbs-button-edit .input-group-btn:not(:first-child):not(:last-child),
+.dxbs-button-edit .input-group > div:not(.input-group-append):not(.input-group-prepend):not(:first-child):not(:last-child) .form-control,
+.dxbs-3 .dxbs-dropdown-edit .input-group-btn:not(:first-child):not(:last-child),
+.dxbs-dropdown-edit .input-group > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp):not(:first-child):not(:last-child) .form-control,
+.dxbs-3 .dxbs-spin-edit .input-group-btn:not(:first-child):not(:last-child),
+.dxbs-spin-edit .input-group > div:not(.input-group-append):not(.input-group-prepend):not(:first-child):not(:last-child) .form-control
+{
+    border-radius: 0;
+}
+.dxbs-button-edit .input-group > div:not(.input-group-append):not(.input-group-prepend):not(:last-child) .form-control,
+.dxbs-dropdown-edit .input-group > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp):not(:last-child) .form-control,
+.dxbs-spin-edit .input-group > div:not(.input-group-append):not(.input-group-prepend):not(:last-child) .form-control,
+.dxbs-uc div.input-group > div:not(.input-group-append):not(.input-group-prepend) .form-control
+{
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+.dxbs-button-edit .input-group > div:not(.input-group-append):not(.input-group-prepend):not(:first-child) .form-control,
+.dxbs-dropdown-edit .input-group > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp):not(:first-child) .form-control,
+.dxbs-spin-edit .input-group > div:not(.input-group-append):not(.input-group-prepend):not(:first-child) .form-control
+{
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+.form-inline .dxbs-textbox > div,
+.form-inline .dxbs-memo > div,
+.form-inline .dxbs-button-edit > div,
+.form-inline .dxbs-spin-edit > div:not(.dxbs-out-of-range-warn),
+.form-inline .dxbs-dropdown-edit > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp),
+.dxbs-button-edit .input-group,
+.dxbs-spin-edit .input-group,
+.dxbs-dropdown-edit .input-group
+{
+    display: inline-table;
+    vertical-align: middle;
+}
+.form-inline .dxbs-button-edit .input-group > div:not(.input-group-append):not(.input-group-prepend) > .form-control,
+.form-inline .dxbs-dropdown-edit .input-group > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp) > .form-control,
+.form-inline .dxbs-spin-edit .input-group > div:not(.input-group-append):not(.input-group-prepend) > .form-control
+{
+    width: 100%;
+}
+.form-horizontal .dxbs-textbox input.form-control + .dxbs-feedback,
+.form-horizontal .dxbs-textbox .dxbs-null-text + .dxbs-feedback,
+.form-horizontal .dxbs-memo textarea.form-control + .dxbs-feedback,
+.form-horizontal .dxbs-memo .dxbs-null-text + .dxbs-feedback,
+.form-horizontal .dxbs-button-edit input.form-control + .dxbs-feedback,
+.form-horizontal .dxbs-button-edit .dxbs-null-text + .dxbs-feedback,
+.form-horizontal .dxbs-button-edit .input-group input.form-control + .dxbs-feedback,
+.form-horizontal .dxbs-button-edit .input-group .dxbs-null-text + .dxbs-feedback,
+.form-horizontal .dxbs-dropdown-edit input.form-control + .dxbs-feedback,
+.form-horizontal .dxbs-dropdown-edit .dxbs-null-text + .dxbs-feedback,
+.form-horizontal .dxbs-dropdown-edit .input-group input.form-control + .dxbs-feedback,
+.form-horizontal .dxbs-dropdown-edit .input-group .dxbs-null-text + .dxbs-feedback,
+.form-horizontal .dxbs-spin-edit input.form-control + .dxbs-feedback,
+.form-horizontal .dxbs-spin-edit .dxbs-null-text + .dxbs-feedback,
+.form-horizontal .dxbs-spin-edit .input-group input.form-control + .dxbs-feedback,
+.form-horizontal .dxbs-spin-edit .input-group .dxbs-null-text + .dxbs-feedback,
+.dxbs-textbox input.form-control + .dxbs-feedback,
+.dxbs-textbox .dxbs-null-text + .dxbs-feedback,
+.dxbs-memo textarea.form-control + .dxbs-feedback,
+.dxbs-memo .dxbs-null-text + .dxbs-feedback,
+.dxbs-button-edit input.form-control + .dxbs-feedback,
+.dxbs-button-edit .dxbs-null-text + .dxbs-feedback,
+.dxbs-button-edit .input-group input.form-control + .dxbs-feedback,
+.dxbs-button-edit .input-group .dxbs-null-text + .dxbs-feedback,
+.dxbs-dropdown-edit input.form-control + .dxbs-feedback,
+.dxbs-dropdown-edit .dxbs-null-text + .dxbs-feedback,
+.dxbs-dropdown-edit .input-group input.form-control + .dxbs-feedback,
+.dxbs-dropdown-edit .input-group .dxbs-null-text + .dxbs-feedback,
+.dxbs-spin-edit input.form-control + .dxbs-feedback,
+.dxbs-spin-edit .dxbs-null-text + .dxbs-feedback,
+.dxbs-spin-edit .input-group input.form-control + .dxbs-feedback,
+.dxbs-spin-edit .input-group .dxbs-null-text + .dxbs-feedback,
+.dxbs-tagbox .form-control .dxbs-feedback,
+.dxbs-tagbox .input-group .form-control .dxbs-feedback
+{
+    right: 0px;
+    pointer-events: auto;
+    z-index: 3;
+    width: auto;
+}
+.dxbs-button-edit > .input-group ~ .dxbs-feedback,
+.dxbs-dropdown-edit > .input-group ~ .dxbs-feedback,
+.dxbs-spin-edit > .input-group ~ .dxbs-feedback
+{
+    top: auto;
+    bottom: 0;
+    z-index: 3;
+}
+.form-horizontal .dxbs-button-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend) > .form-control:focus ~ .dxbs-feedback,
+.form-horizontal .dxbs-dropdown-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp) > .form-control:focus ~ .dxbs-feedback,
+.form-horizontal .dxbs-spin-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend) > .form-control:focus ~ .dxbs-feedback,
+.dxbs-button-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend) > .form-control:focus ~ .dxbs-feedback,
+.dxbs-dropdown-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp) > .form-control:focus ~ .dxbs-feedback,
+.dxbs-spin-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend) > .form-control:focus ~ .dxbs-feedback,
+.dxbs-button-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend) > .form-control:focus + .dxbs-null-text,
+.dxbs-dropdown-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp) > .form-control:focus + .dxbs-null-text,
+.dxbs-spin-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend) > .form-control:focus + .dxbs-null-text
+{
+    z-index: 4;
+}
+.dxbs-edit-error-text,
+.dxbs-edit-error-text.form-text
+{
+    display: block;
+}
+.form-inline .dxbs-edit-error-text,
+.form-inline .dxbs-edit-error-text.form-text
+{
+    width: auto;
+}
+.dxbs-edit-error-text [data-error-image]
+{
+    margin-right: 0.4em;
+}
+.form-inline .dxbs-edit-error-text [data-error-image]
+{
+    margin-left: 0.4em;
+}
+.dxbs-textbox .dxbs-feedback [data-error-image],
+.dxbs-memo .dxbs-feedback [data-error-image],
+.dxbs-button-edit .dxbs-feedback .dxbs-clear-btn,
+.dxbs-button-edit .dxbs-feedback [data-error-image],
+.dxbs-dropdown-edit .dxbs-feedback .dxbs-clear-btn,
+.dxbs-dropdown-edit .dxbs-feedback [data-error-image],
+.dxbs-spin-edit .dxbs-feedback .dxbs-clear-btn,
+.dxbs-spin-edit .dxbs-feedback [data-error-image],
+.dxbs-uc .input-group .dxbs-feedback .dxbs-clear-btn
+{
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+    display: inline-block;
+    height: 100%;
+}
+.dxbs-edit-error-frame .dxbs-feedback [data-error-image]
+{
+    padding-left: 0.6em;
+}
+.form-inline .dxbs-edit-error-frame.dxbs-cbl .dxbs-feedback [data-error-image]
+{
+    padding-right: 0.6em;
+}
+.dxbs-textbox .dxbs-feedback [data-error-image],
+.dxbs-memo .dxbs-feedback [data-error-image],
+.dxbs-button-edit .dxbs-feedback [data-error-image],
+.dxbs-dropdown-edit .dxbs-feedback [data-error-image],
+.dxbs-spin-edit .dxbs-feedback [data-error-image],
+.dxbs-clear-btn > span
+{
+    top: 0;
+}
+.dxbs-textbox .form-control-feedback [data-error-image],
+.dxbs-memo .form-control-feedback [data-error-image],
+.dxbs-button-edit .form-control-feedback [data-error-image],
+.dxbs-dropdown-edit .form-control-feedback [data-error-image],
+.dxbs-spin-edit .form-control-feedback [data-error-image],
+.form-control-feedback > .dxbs-clear-btn > span
+{
+    line-height: inherit;
+}
+.dxbs-spin-edit .dxbs-feedback > .dxbs-clear-btn
+{
+    display: flex;
+    display: -ms-flexbox;
+    white-space: nowrap;
+    align-items: center;
+    -ms-flex-align: center;
+}
+.dxbs-edit-btn.disabled,
+.dxbs-listbox > li.disabled,
+.dxbs-listbox > ul > li.disabled,
+.dxbs-listbox > li > .disabled,
+.dxbs-listbox > ul > li > .disabled,
+.dxbs-calendar .btn.disabled,
+.dxbs-textbox input.form-control[disabled] + .dxbs-feedback,
+.dxbs-memo textarea.form-control[disabled] + .dxbs-feedback,
+.dxbs-button-edit input.form-control[disabled] + .dxbs-feedback,
+.dxbs-button-edit .input-group-append.disabled,
+.dxbs-button-edit .input-group-prepend.disabled,
+.dxbs-button-edit .input-group-append .btn.disabled,
+.dxbs-button-edit .input-group-prepend .btn.disabled,
+.dxbs-dropdown-edit input.form-control[disabled] + .dxbs-feedback,
+.dxbs-dropdown-edit .input-group-append.disabled,
+.dxbs-dropdown-edit .input-group-prepend.disabled,
+.dxbs-dropdown-edit .input-group-append .btn.disabled,
+.dxbs-dropdown-edit .input-group-prepend .btn.disabled,
+.dxbs-spin-edit input.form-control[disabled] + .dxbs-feedback,
+.dxbs-spin-edit .input-group-append.disabled,
+.dxbs-spin-edit .input-group-prepend.disabled,
+.dxbs-spin-edit .input-group-append .btn.disabled,
+.dxbs-spin-edit .input-group-prepend .btn.disabled
+{
+    pointer-events: none;
+}
+.dxbs-edit-btn.dxbs-clear-btn
+{
+    color: gray;
+}
+.dxbs-edit-btn.dxbs-clear-btn > .glyphicon,
+.dxbs-edit-btn.dxbs-clear-btn > .dxbs-icon
+{
+    font-size: 0.75em;
+}
+.dxbs-edit-btn.dxbs-clear-btn:hover,
+.dxbs-edit-btn.dxbs-clear-btn:focus,
+.dxbs-edit-btn.inc:hover,
+.dxbs-edit-btn.inc:focus,
+.dxbs-edit-btn.dec:hover,
+.dxbs-edit-btn.dec:focus
+{
+    opacity: .8;
+}
+.dxbs-edit-btn:hover
+{
+    cursor: pointer;
+}
+.dxbs-edit-btn.text-icon .image
+{
+    margin-right: .4em;
+}
+.dxbs-spin-edit .dxbs-feedback,
+.dxbs-spin-edit .dxbs-feedback:not(.dxbs-spin-btn-group) > span
+{
+    display: flex;
+    display: -ms-flexbox;
+}
+.dxbs-spin-edit .dxbs-feedback:not(.dxbs-spin-btn-group)
+{
+    flex-flow: row nowrap;
+    -ms-flex-flow: row nowrap;
+    align-items: center;
+    -ms-flex-align: center;
+}
+.dxbs-spin-btn-group
+{
+    display: flex;
+    display: -ms-flexbox;
+    flex-flow: row nowrap;
+    -ms-flex-flow: row nowrap;
+    height: 100%;
+    padding-right: 0.25em;
+}
+.dxbs-spin-btn-group .dxbs-edit-btn.disabled
+{
+    opacity: .65;
+}
+.dxbs-spin-btn-group .increment,
+.dxbs-spin-btn-group .increment-lg
+{
+    display: flex;
+    display: -ms-flexbox;
+    flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex-flow: column nowrap;
+    -ms-flex-flow: column nowrap;
+}
+.dxbs-spin-btn-group .increment
+{
+    align-items: center;
+    -ms-flex-align: center;
+}
+.dxbs-spin-btn-group .increment-lg > .dxbs-edit-btn,
+.dxbs-spin-btn-group .increment > .dxbs-edit-btn
+{
+    display: flex;
+    display: -ms-flexbox;
+    flex: 1 100%;
+    -ms-flex: 1 1 100%;
+    white-space: nowrap;
+}
+.dxbs-spin-btn-group .dxbs-edit-btn > *
+{
+    top: 0;
+}
+.dxbs-spin-btn-group .dxbs-edit-btn,
+.dxbs-spin-btn-group .dxbs-edit-btn > *
+{
+    width: 100%;
+}
+.dxbs-spin-btn-group .dxbs-edit-btn
+{
+    align-items: center;
+    -ms-flex-align: center;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+.dxbs-spin-btn-group .increment .inc .caret,
+.dxbs-spin-btn-group .increment .inc .dropdown-toggle
+{
+    transform: rotate(180deg);
+}
+.dxbs-spin-btn-group .increment-lg .inc .caret,
+.dxbs-spin-btn-group .increment-lg .inc .dropdown-toggle
+{
+    transform: rotate(-90deg);
+}
+.dxbs-spin-btn-group .increment-lg .dec .caret,
+.dxbs-spin-btn-group .increment-lg .dec .dropdown-toggle
+{
+    transform: rotate(90deg);
+}
+.dxbs-spin-btn-group .increment .inc .caret,
+.dxbs-spin-btn-group .increment .inc .dropdown-toggle
+{
+    margin-bottom: -4px;
+}
+.dxbs-spin-btn-group .increment .dec .caret,
+.dxbs-spin-btn-group .increment .dec .dropdown-toggle
+{
+    margin-top: -4px;
+}
+.dxbs-dropdown-edit.dxbs-combobox .dxbs-listbox.dropdown-menu,
+.dxbs-dropdown-edit.dxbs-tagbox .dxbs-listbox.dropdown-menu
+{
+    padding-top: 0px;
+    padding-bottom: 0px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.dxbs-listbox > li > a mark,
+.dxbs-listbox > li > .form-check mark,
+.dxbs-listbox > ul > li > a mark,
+.dxbs-listbox > ul > li > .form-check mark,
+.dxbs-combobox .dxbs-listbox > li > a mark,
+.dxbs-tagbox .dxbs-listbox > li > a mark
+{
+    padding: 0;
+}
+.dxbs-tagbox .form-control
+{
+    height: auto;
+}
+.dxbs-tagbox .dxbs-tag
+{
+    /*font-size: inherit;*/
+    /*font-weight: inherit;*/
+    line-height: inherit;
+    display: inline-block;
+    height: 100%;
+}
+.dxbs-tagbox .dxbs-tag.dxbs-tag-disabled
+{
+    opacity: .65;
+    pointer-events: none;
+}
+.dxbs-tagbox .dxbs-tag > span
+{
+    display: inline-block;
+    vertical-align: middle;
+}
+.dxbs-tagbox .dxbs-tag:not(:only-child)
+{
+    margin-right: 0.4em;
+}
+.dxbs-tagbox .dxbs-tagbox-input,
+.dxbs-tagbox .dxbs-tagbox-input:focus,
+.dxbs-tagbox.has-error .dxbs-tagbox-input,
+.dxbs-tagbox.has-error .dxbs-tagbox-input:focus
+{
+    font-size: inherit;
+    background: none;
+    font-weight: inherit;
+    height: 100%;
+    border: none;
+    box-shadow: none;
+    display: inline-block;
+    outline: none;
+    width: 1em;
+}
+.dxbs-tagbox .dxbs-tag-remove-btn
+{
+    cursor: pointer;
+    font-weight: inherit;
+    display: inline-block;
+    height: 100%;
+    margin-left: 0.8em;
+    top: 0;
+}
+.dxbs-listbox .dxbs-hidden-row
+{
+    display: none !important;
+}
+.dxbs-listbox > li,
+.dxbs-listbox > ul > li
+{
+    display: block;
+}
+.dxbs-listbox > li > a,
+.dxbs-listbox > ul > li > a,
+.dxbs-listbox > li > .form-check,
+.dxbs-listbox > ul > li > .form-check
+{
+    cursor: pointer;
+}
+.dxbs-listbox > li > .form-check > .badge:not(:first-child),
+.dxbs-listbox > ul > li > .form-check > .badge:not(:first-child)
+{
+    margin-left: 0.4em;
+}
+.dxbs-listbox.dx-dropdown-menu > li > .dropdown-item > .badge
+{
+    float: right;
+}
+.dxbs-listbox.form-control li:not(.active):not(.disabled):not(:hover):not(:focus):not(:active),
+.dxbs-listbox.form-control div.list-group-item:not(.active):not(.disabled):not(:hover):not(:focus):not(:active),
+.dxbs-listbox.form-control div.list-group-item > label,
+.dxbs-listbox.form-control a.list-group-item:not(.active):not(.disabled):not(:hover):not(:focus):not(:active)
+{
+    color: inherit;
+    text-shadow: none;
+}
+.dxbs-listbox.form-control > li:not(.active):not(.disabled) > a:not(.active):not(.disabled):not(:hover):not(:focus):not(:active),
+.dxbs-listbox.form-control > ul > li:not(.active):not(.disabled) > a:not(.active):not(.disabled):not(:hover):not(:focus):not(:active)
+{
+    text-shadow: none;
+}
+.dxbs-listbox > li > .form-check,
+.dxbs-listbox > ul > li > .form-check,
+.dxbs-listbox .dxbs-list-selectall > .form-check
+{
+    position: relative;
+    display: block;
+}
+.dxbs-listbox > li > .form-check > label,
+.dxbs-listbox > ul > li > .form-check > label
+{
+    min-height: 0;
+}
+.dxbs-listbox > li > .checkbox > label,
+.dxbs-listbox > ul > li > .checkbox > label,
+.dxbs-listbox .dxbs-list-selectall > .checkbox > label
+{
+    padding-left: 20px;
+}
+.dxbs-listbox > li > .checkbox > label > input[type="checkbox"],
+.dxbs-listbox > ul > li > .checkbox > label > input[type="checkbox"],
+.dxbs-listbox .dxbs-list-selectall > .checkbox > label > input[type="checkbox"]
+{
+    position: absolute;
+}
+.dxbs-listbox.form-control > li > .form-check > label,
+.dxbs-listbox.form-control > ul > li > .form-check > label
+{
+    font-size: inherit;
+}
+.dxbs-listbox.form-control > li > .form-check.disabled.active > label,
+.dxbs-listbox.form-control > ul > li > .form-check.disabled.active > label
+{
+    color: inherit;
+}
+.dxbs-listbox > li > a > span:not(:last-child),
+.dxbs-listbox > ul > li > a > span:not(:last-child),
+.dxbs-listbox > li > .form-check > label > span:not(:last-child),
+.dxbs-listbox > ul > li > .form-check > label > span:not(:last-child)
+{
+    margin-right: 0.4em;
+}
+.dxbs-listbox > li > a > span[class="image"]:first-child::before,
+.dxbs-listbox > ul > li > a > span[class="image"]:first-child::before,
+.dxbs-listbox > li > .form-check > label > input + span[class="image"]::before,
+.dxbs-listbox > ul > li > .form-check > label > input + span[class="image"]::before
+{
+    content: " ";
+    display: inline-block;
+    width: 1em;
+}
+.dxbs-listbox.card,
+.dxbs-listbox.list-group,
+.dxbs-listbox > .list-group
+{
+    margin-bottom: 0;
+}
+.dxbs-listbox > li.list-group-item,
+.dxbs-listbox > .list-group > li.list-group-item,
+.dxbs-listbox > li > .list-group-item,
+.dxbs-listbox > .list-group > li > .list-group-item
+{
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+.dxbs-listbox.form-control .form-check:not(.active):not(.disabled):not(:active):not(:hover):not(:focus),
+.dxbs-listbox.form-control a.list-group-item:not(.active):not(.disabled):not(:active):not(:hover):not(:focus),
+.dxbs-listbox ul.form-control a.list-group-item:not(.active):not(.disabled):not(:active):not(:hover):not(:focus),
+.dxbs-popup[id*="_DXHFP"].hf-list .dxbs-listbox.card ul.list-group
+{
+    background: none;
+}
+.dxbs-listbox > li > .form-check,
+.dxbs-listbox > ul > li > .form-check
+{
+    margin-top: 0;
+}
+ul.dxbs-listbox
+{
+    min-height: 2em;
+}
+.has-feedback .dxbs-listbox.form-control,
+.dxbs-listbox.form-control,
+.dxbs-listbox > ul.form-control,
+.dxbs-popup[id*="_DXHFP"].hf-list .dxbs-listbox.card > ul
+{
+    height: auto;
+    padding: 0px;
+}
+.dxbs-listbox > ul.form-control,
+.dxbs-popup[id*="_DXHFP"].hf-list .dxbs-listbox.card > ul
+{
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+.dxbs-listbox.form-control > ul.form-control
+{
+    border: none !important;
+    box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+.has-feedback ul.dxbs-listbox.form-control,
+ul.dxbs-listbox.form-control,
+.dxbs-listbox > ul.form-control,
+.dxbs-popup[id*="_DXHFP"].hf-list .dxbs-listbox.card > ul
+{
+    overflow-y: auto;
+}
+.dxbs-listbox.form-control > li > a,
+.dxbs-listbox.form-control > ul > li > a,
+.dxbs-listbox.form-control > li > a:hover,
+.dxbs-listbox.form-control > ul > li > a:hover,
+.dxbs-listbox.form-control > li > a:focus,
+.dxbs-listbox.form-control > ul > li > a:focus,
+.dxbs-listbox.form-control > li > a:active,
+.dxbs-listbox.form-control > ul > li > a:active,
+.dxbs-listbox.form-control > li.active > a,
+.dxbs-listbox.form-control > ul > li.active > a,
+.dxbs-listbox.form-control > li.active > a:hover,
+.dxbs-listbox.form-control > ul > li.active > a:hover,
+.dxbs-listbox.form-control > li.active > a:focus,
+.dxbs-listbox.form-control > ul > li.active > a:focus,
+.dxbs-listbox.form-control > li.active > a:active,
+.dxbs-listbox.form-control > ul > li.active > a:active
+{
+    border-radius: 0;
+    border: none;
+}
+.dxbs-listbox.card.form-control
+{
+    color: inherit;
+}
+.dxbs-listbox .dxbs-list-filter,
+.dxbs-listbox .dxbs-list-selectall
+{
+    max-height: 100%;
+}
+.dxbs-listbox.card > .dxbs-list-filter.card-header
+{
+    position: relative;
+}
+.dxbs-listbox.card > .dxbs-list-filter.card-header .input-group-text,
+.dxbs-listbox.card > .dxbs-list-filter.card-header .input-group-prepend ~ .dxbs-list-filter-edit .form-control,
+.dxbs-listbox.card > .dxbs-list-filter.card-header .dxbs-list-filter-edit .input-group-prepend + .form-control
+{
+    background: none;
+    border: none;
+    box-shadow: none;
+    color: inherit;
+}
+.dxbs-listbox.card > .dxbs-list-filter.card-header .input-group-text,
+.dxbs-listbox.card > .dxbs-list-filter.card-header .dxbs-list-filter-edit .input-group-prepend .btn
+{
+    padding: 0;
+}
+.dxbs-listbox.card > .dxbs-list-filter.card-header .input-group-prepend ~ .dxbs-list-filter-edit .form-control,
+.dxbs-listbox.card > .dxbs-list-filter.card-header .dxbs-list-filter-edit .input-group-prepend + .form-control
+{
+    padding-top: 0;
+    padding-bottom: 0;
+    height: auto;
+}
+/*.dxbs-listbox.card > .dxbs-list-filter.card-header .dxbs-list-filter-edit .dxbs-clear-btn
+{
+    padding-right: 0;
+}*/
+.dxbs-listbox.card > .dxbs-list-selectall.card-header > .form-check
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.dxbs-listbox.card > .dxbs-list-filter.card-header .dxbs-list-filter-show,
+.dxbs-listbox.card > .dxbs-list-filter.card-header .dxbs-list-filter-hide
+{
+    text-decoration: none;
+}
+.dxbs-listbox.card > .dxbs-list-filter.card-header .dxbs-list-filter-show:not(:hover):not(:focus),
+.dxbs-listbox.card > .dxbs-list-filter.card-header .dxbs-list-filter-hide:not(:hover):not(:focus)
+{
+    color: inherit;
+}
+.dxbs-listbox.card > .dxbs-list-filter.card-header .dxbs-list-filter-show
+{
+    position: absolute;
+    right: 0;
+}
+.dxbs-3 .dxbs-listbox.card > .dxbs-list-selectall.card-header > .form-check
+{
+    display: inline-block;
+}
+.dxbs-3 .dxbs-listbox.card > .dxbs-list-filter.card-header .dxbs-list-filter-show
+{
+    display: inline-table;
+    vertical-align: middle;
+}
+.dxbs-listbox.card > .card-header.collapsed:not(.calculating)
+{
+    max-height: 0;
+    padding: 0 !important;
+    border: none;
+}
+.dxbs-listbox.card > .card-header.collapsed.animated
+{
+    transition: max-height 0.5s, opacity 0.5s, padding-top 0.5s, padding-bottom 0.5s;
+}
+.dxbs-listbox.card > .card-header.collapsed:not(.calculating) .dxbs-list-filter-edit
+{
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+.dxbs-listbox.card > .card-header.animated:not(.collapsed) .dxbs-list-filter-edit
+{
+    transition: max-height 1.5s, opacity 1.5s, visibility 0.5s;
+}
+.dxbs-listbox.card > .card-header.collapsed.animated + .dxbs-list-selectall + .list-group
+{
+    transition: max-height 0.5s;
+}
+.dxbs-kbs-input
+{
+    width: 0;
+    height: 0;
+    position: absolute;
+    background-color: transparent;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 0;
+}
+.dxbs-out-of-range-warn,
+.dxbs-popup-help-text
+{
+    position: absolute;
+}
+.dxbs-out-of-range-warn
+{
+    display: none;
+    z-index: 1050;
+}
+.dxbs-popup-help-text.form-text
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.dxbs-popup-help-text
+{
+    opacity: 0;
+    z-index: 990;
+}
+.dxbs-null-text
+{
+    position: absolute;
+    background-color: transparent;
+    pointer-events: none;
+    border-color: transparent;
+}
+input:-webkit-autofill + .dxbs-null-text
+{
+    display: none !important;
+}
+.form-control + .dxbs-null-text
+{
+    z-index: 4;
+}
+/*Error controls*/
+.dxbs-edit-error-frame .dxbs-calendar.card:first-child,
+.dxbs-edit-error-frame .dxbs-listbox.form-control:first-child
+{
+    margin-top: 20px;
+}
+.dxbs-calendar > .dxbs-feedback,
+.dxbs-edit-error-frame .dxbs-listbox.form-control ~ .dxbs-feedback,
+.dxbs-cbl .dxbs-feedback
+{
+    width: auto;
+    height: auto;
+    pointer-events: auto;
+    line-height: inherit;
+    padding-bottom: 0.1em;
+}
+.dxbs-cbl .dxbs-feedback
+{
+    position: inherit;
+    text-align: right;
+}
+.dxbs-calendar > .dxbs-feedback
+{
+    top: auto !important;
+    bottom: 100%;
+}
+.dxbs-calendar > .dxbs-feedback [data-error-image]
+{
+    top: 0;
+}
+.dxbs-edit-error-frame .dxbs-edit-caption + .dxbs-listbox.form-control ~ .dxbs-feedback
+{
+    top: 0;
+}
+.dxbs-edit-error-frame .dxbs-listbox.form-control:first-child ~ .dxbs-feedback
+{
+    top: -20px;
+}
+.dxbs-edit-error-frame.form-check label > [data-error-image],
+.dxbs-edit-error-frame.form-check label > [data-error-image],
+.dxbs-edit-error-frame.form-check.form-check-inline > [data-error-image],
+.dxbs-edit-error-frame.form-check.form-check-inline > [data-error-image]
+{
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+    cursor: default;
+}
+.dxbs-edit-error-frame.form-check label > [data-error-image]:active:after,
+.dxbs-edit-error-frame.form-check label > [data-error-image]:active:after,
+.dxbs-edit-error-frame.form-check.form-check-inline > [data-error-image]:active:after,
+.dxbs-edit-error-frame.form-check.form-check-inline > [data-error-image]:active:after,
+.form-inline .dxbs-cbl div:not(.column-element):first-child .dxbs-feedback:only-child > [data-error-image]:active:after
+{
+    right: auto;
+    left: 100%;
+    padding-right: 0.6em;
+    padding-left: 0.6em;
+}
+[data-error-image]:active:after
+{
+    content: attr(data-error-tooltip);
+    position: absolute;
+    z-index: 1070;
+    right: 100%;
+    white-space: pre;
+    font: normal 0.75em/2 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 0 0.6em;
+    background-color: #fdf7f7;
+    top: calc(50% - 1em);
+    pointer-events: none;
+}
+/* Button */
+.dxbs-button.btn-link
+{
+    /*padding: 0;*/
+}
+.dxbs-button:not(.icon-only) > .image,
+.dxbs-hyperlink:not(.icon-only) > .image,
+.dxbs-button .badge > .image:not(:only-child),
+.dxbs-hyperlink .badge > .image:not(:only-child),
+.form-check > label > .image,
+.form-check > label > .image
+{
+    margin-right: 0.4em;
+}
+.dxbs-button[type="submit"] .image,
+.dxbs-button[type="submit"] .badge
+{
+    pointer-events: none;
+    display: inline-block;
+}
+.dxbs-button .badge,
+.dxbs-hyperlink .badge
+{
+    margin-left: 0.4em;
+}
+.dxbs-hyperlink
+{
+    display: inline-block;
+}
+.btn-group > .btn.dxbs-button:last-of-type:not(:first-child):not(:last-child)
+{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.btn-group-vertical > .btn.dxbs-button:last-of-type:not(:first-child):not(:last-child)
+{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.btn-group-lg > .btn.dxbs-button:last-of-type:not(:first-child):not(:last-child)
+{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+.btn-group-vertical.btn-group-lg > .btn.dxbs-button:last-of-type:not(:first-child):not(:last-child)
+{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+.btn-group-sm > .btn.dxbs-button:last-of-type:not(:first-child):not(:last-child),
+.btn-group-xs > .btn.dxbs-button:last-of-type:not(:first-child):not(:last-child)
+{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.btn-group-vertical.btn-group-sm > .btn.dxbs-button:last-of-type:not(:first-child):not(:last-child),
+.btn-group-vertical.btn-group-xs > .btn.dxbs-button:last-of-type:not(:first-child):not(:last-child)
+{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+/* Calendar */
+.dxbs-calendar
+{
+    position: relative;
+    white-space: normal;
+}
+.dxbs-calendar,
+.dxbs-calendar.card
+{
+    display: inline-block;
+}
+.dxbs-calendar .calendar-row
+{
+    display: flex;
+    display: -ms-flexbox;
+    flex-flow: row nowrap;
+    -ms-flex-flow: row nowrap;
+    width: 100%;
+}
+.dxbs-calendar .calendar-row .calendar-view
+{
+    display: flex;
+    display: -ms-flexbox;
+    flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex-direction: column;
+    -ms-flex-direction: column;
+    justify-content: center;
+    -ms-flex-pack: center;
+}
+.dxbs-calendar .calendar-row .calendar-view:first-of-type:not(:last-of-type) [id*=_NMC_] > *,
+.dxbs-calendar .calendar-row .calendar-view:first-of-type:not(:last-of-type) [id*=_NYC_] > *,
+.dxbs-calendar .calendar-row .calendar-view:first-of-type:not(:last-of-type) [id*=_NTPC_] > *,
+.dxbs-calendar .calendar-row .calendar-view:last-of-type:not(:first-of-type) [id*=_PMC_] > *,
+.dxbs-calendar .calendar-row .calendar-view:last-of-type:not(:first-of-type) [id*=_PYC_] > *,
+.dxbs-calendar .calendar-row .calendar-view:last-of-type:not(:first-of-type) [id*=_PTPC_] > *
+{
+    visibility: hidden;
+}
+@media (max-width: 767px)
+{
+    .dxbs-calendar .calendar-row
+    {
+        flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+    }
+}
+.dxbs-3 .col-form-label + .dxbs-calendar,
+.dxbs-3 .col-form-label + * + .dxbs-calendar,
+.dxbs-3 .dxbs-calendar + .col-form-label
+{
+    display: table;
+}
+.form-inline .col-form-label + .dxbs-calendar,
+.form-inline .col-form-label + * + .dxbs-calendar,
+.form-inline .dxbs-calendar + .col-form-label
+{
+    display: inline-block;
+}
+.form-inline .col-form-label + .dxbs-calendar.card,
+.form-inline .col-form-label + * + .dxbs-calendar.card,
+.form-inline .dxbs-calendar.card + .col-form-label,
+.form-inline .col-form-label + .dxbs-listbox.form-control,
+.form-inline .col-form-label + * + .dxbs-listbox.form-control,
+.form-inline .dxbs-listbox.form-control + .col-form-label,
+.form-inline .dxbs-cbl > label:not(:first-child),
+.form-inline .dxbs-cbl > div > div:not(:first-child)
+{
+    margin-left: 0.3em;
+}
+.table .dxbs-calendar .dxbs-month-table,
+.dxbs-calendar .dxbs-month-table,
+.dxbs-calendar .dxbs-fast-nav .year-table,
+.dxbs-calendar .btn-group .btn,
+.dxbs-calendar .btn-group .btn + .btn,
+.dxbs-calendar .btn-group .btn:hover
+{
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.dxbs-calendar .calendar-view
+{
+    margin-bottom: 0px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.dxbs-calendar .calendar-view:only-child
+{
+    width: 100%;
+    max-width: 100%;
+}
+.dxbs-calendar .calendar-view > .card-header
+{
+    padding: 0px;
+    border: 0;
+}
+.dxbs-calendar .calendar-row .calendar-view:not(:first-child),
+.dxbs-calendar .calendar-row .calendar-view:not(:first-child) .card-header
+{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.dxbs-calendar .calendar-row .calendar-view:not(:last-child),
+.dxbs-calendar .calendar-row .calendar-view:not(:last-child) .card-header
+{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.dxbs-calendar .calendar-row + .calendar-row .calendar-view,
+.dxbs-calendar .calendar-row + .calendar-row .calendar-view .card-header
+{
+    border-radius: 0;
+}
+.dxbs-calendar > .calendar-row > .calendar-view:not(:first-child) > .card-body
+{
+    padding-left: 0px;
+}
+.table .dxbs-calendar .dxbs-month-table,
+.dxbs-calendar .dxbs-month-table
+{
+    background: none;
+    font-size: inherit;
+    margin: 0;
+}
+.dxbs-calendar .dxbs-month-table > tbody > tr,
+.dxbs-calendar .dxbs-fast-nav .table
+{
+    float: none;
+    margin: 0;
+}
+.dxbs-calendar .dxbs-month-table.navbar-default > tbody > tr > td,
+.dxbs-calendar .dxbs-month-table.navbar-default > tbody > tr > th,
+.dxbs-calendar .dxbs-fast-nav .table:not(.table-bordered) > tbody > tr > td
+{
+    border: none;
+    border-radius: 0;
+}
+.dxbs-calendar .dxbs-month-table > tbody > tr > td,
+.dxbs-calendar .dxbs-month-table > tbody > tr > th
+{
+    cursor: default;
+}
+.dxbs-calendar .dxbs-month-table.navbar-default > tbody > tr > td.dxbs-day
+{
+    padding: 0;
+}
+.dxbs-calendar .dxbs-month-table .dxbs-day:not(.disabled):not(.dxbs-out-of-range),
+.dxbs-calendar .dxbs-fast-nav .table > tbody > tr > td
+{
+    cursor: pointer;
+}
+.dxbs-calendar .dxbs-month-table [class="dxbs-day"],
+.dxbs-calendar .dxbs-month-table td small
+{
+    color: inherit;
+}
+.dxbs-calendar .dxbs-month-table td:not(.dxbs-day):first-child small
+{
+    opacity: .6;
+}
+.dxbs-calendar .dxbs-month-table.navbar-default .dxbs-day a
+{
+    display: block;
+    padding: 5px;
+}
+.dxbs-calendar .dxbs-month-table .dxbs-day a
+{
+    color: inherit;
+}
+.dxbs-calendar .dxbs-month-table .dxbs-day a:not([href]),
+.dxbs-calendar .dxbs-month-table .dxbs-day a:not([href]):hover,
+.dxbs-calendar .dxbs-month-table .dxbs-day a:not([href]):focus
+{
+    text-decoration: none;
+}
+.dxbs-calendar .dxbs-month-table.navbar-default .dxbs-today a
+{
+    border: solid 1px currentColor;
+    padding: 4px;
+}
+.dxbs-calendar .dxbs-month-table .dxbs-day.dxbs-in-range a
+{
+    background-color: transparent;
+    background-image: none;
+}
+.dxbs-calendar .dxbs-month-title
+{
+    width: 100%;
+    -ms-flex: 1 1 100%;
+}
+.dxbs-calendar .fa
+{
+    font-size: 1.33em;
+    font-weight: bold;
+}
+.dxbs-calendar .btn-toolbar,
+.dxbs-calendar .btn-group
+{
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    -ms-flex-align: center;
+    justify-content: center;
+    -ms-flex-pack: center;
+}
+.dxbs-calendar .btn-group .btn,
+.dxbs-calendar .btn-group .btn + .btn,
+.dxbs-calendar .btn-group .btn:hover
+{
+    color: inherit;
+    background-color: transparent;
+    background-image: none;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.dxbs-calendar .btn-toolbar.card-footer
+{
+    margin: 0;
+}
+.dxbs-calendar .btn-toolbar > .btn:first-child
+{
+    margin-left: 0px;
+}
+.dxbs-calendar .dxbs-fast-nav
+{
+    margin: 0;
+    padding: 0;
+}
+.dxbs-calendar .dxbs-fast-nav .table
+{
+    text-align: center;
+    background-color: transparent;
+    background-image: none;
+}
+.dxbs-calendar .dxbs-fast-nav .year-table .prev-year,
+.dxbs-calendar .dxbs-fast-nav .year-table .next-year
+{
+    vertical-align: middle;
+}
+.dxbs-calendar .calendar-view .dxbs-fast-nav
+{
+    border: none;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.dxbs-calendar .calendar-view .dxbs-fast-nav
+{
+    display: flex;
+    display: -ms-flexbox;
+    flex-flow: column nowrap;
+    -ms-flex-flow: column nowrap;
+}
+.dxbs-calendar .calendar-view .dxbs-fast-nav .card-header,
+.dxbs-calendar .calendar-view .dxbs-fast-nav .card-body
+{
+    display: flex;
+    display: -ms-flexbox;
+}
+.dxbs-calendar .calendar-view .dxbs-fast-nav .card-header
+{
+    border-bottom: none;
+    border-radius: 0;
+    padding: 0;
+    flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+}
+.dxbs-calendar .calendar-view .dxbs-fast-nav .card-body
+{
+    padding: 0.5em;
+    flex: 1 100%;
+    -ms-flex: 1 100%;
+}
+.dxbs-calendar .calendar-view .dxbs-fast-nav,
+.dxbs-calendar .calendar-view .dxbs-fast-nav .card-body > table
+{
+    height: 100%;
+}
+.dxbs-calendar .calendar-view .dxbs-fast-nav .card-body > table > tbody > tr > td
+{
+    vertical-align: middle;
+}
+.dxbs-calendar .calendar-view .dxbs-fast-nav .card-body > table > tbody > tr > td:empty
+{
+    pointer-events: none;
+}
+.dxbs-calendar .calendar-view .dxbs-fast-nav .card-header .btn,
+.dxbs-calendar .calendar-view .dxbs-fast-nav .card-header .btn:hover
+{
+    color: inherit;
+    background-color: transparent;
+    background-image: none;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.dxbs-calendar .calendar-view .dxbs-fast-nav .card-header .btn:only-child,
+.dxbs-calendar .calendar-view .dxbs-fast-nav .card-header .btn:not(:first-child):not(:last-child)
+{
+    width: 100%;
+}
+.dxbs-date-edit .dropdown-menu.card
+{
+    margin-bottom: 0px;
+    padding: 0px;
+    position: absolute;
+    width: auto;
+}
+.dxbs-calendar .dxbs-time-section
+{
+    margin: 0;
+    border-left: none;
+    border-bottom: none;
+    border-right: none;
+    border-radius: 0;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+/* CheckBoxList */
+.dxbs-cbl > div
+{
+    display: flex;
+    display: -ms-flexbox;
+    flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+}
+.dxbs-cbl.hor .column-element
+{
+    flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+}
+.dxbs-cbl.hor .column-element:not(:last-child)
+{
+    padding-right: 1rem;
+}
+/*.dxbs-cbl.dxbs-edit-error-frame > div:not(.column-element)
+{
+    display: flex;
+    display: -ms-flexbox;
+    flex-flow: row nowrap;
+    -ms-flex-flow: row nowrap;
+}*/
+.dxbs-cbl .dxbs-feedback:only-child [data-error-image]
+{
+    padding-left: 0;
+    margin-right: 0.4em;
+}
+.dxbs-cbl .dxbs-feedback [data-error-image]
+{
+    top: 0;
+}
+.dxbs-cbl > div > .column-element > div
+{
+    overflow: hidden;
+    white-space: normal;
+    min-width: 0;
+}
+.dxbs-cbl > div > .column-element,
+.dxbs-cbl.dxbs-edit-error-frame > div > div:not(.column-element) > *
+{
+    white-space: nowrap;
+    flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+}
+.dxbs-cbl > div > label,
+.dxbs-cbl.dxbs-edit-error-frame > div > label,
+.dxbs-cbl.dxbs-edit-error-frame > div:not(.column-element) > div:not(.column-element)
+{
+    white-space: nowrap;
+    flex: 1 100%;
+    -ms-flex: 1 1 100%;
+}
+.form-inline .dxbs-cbl > div > label,
+.form-inline .dxbs-cbl.dxbs-edit-error-frame > div:not(.column-element)
+{
+    flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+}
+.dxbs-cbl > div > .column-element > div:first-child,
+.dxbs-cbl > div > .column-element > .form-check + .form-check,
+.dxbs-cbl > div > .column-element > .form-check + .form-check
+{
+    margin-top: auto;
+}
+.dxbs-preventsel
+{
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/* ProgressBar */
+.dxbs-progress.disabled > .progress > .progress-bar
+{
+    animation: none;
+    -webkit-animation: none;
+}
+/* UploadControl */
+.dxbs-uc input[type='file']:not([disabled])
+{
+    cursor: pointer;
+}
+.dxbs-uc .dxbs-clear-btn
+{
+    color: gray;
+    pointer-events: auto;
+}
+.dxbs-uc .dxbs-clear-btn:hover,
+.dxbs-uc .dxbs-clear-btn:focus
+{
+    opacity: .8;
+}
+.dxbs-uc .dxbs-clear-btn:hover
+{
+    cursor: pointer;
+}
+.dxbs-uc .input-group > div:not(.input-group-append):not(.input-group-prepend)
+{
+    position: relative;
+}
+.dxbs-uc .input-group .dxbs-feedback
+{
+    z-index: 10;
+}
+.dxbs-uc .input-group-append .image
+{
+    margin-right: 0.4em;
+}
+.dxbs-drop-zone
+{
+    text-align: center;
+    vertical-align: middle;
+    position: fixed;
+    box-sizing: border-box;
+    z-index: 19999;
+    background-color: rgba(0,0,0,0.5);
+}
+.dxbs-drop-zone > div
+{
+    height: 100%;
+    width: 100%;
+    display: table;
+}
+.dxbs-drop-zone > div > div
+{
+    display: table-cell;
+    vertical-align: middle;
+}
+.dxbs-uc .dxbs-file-list
+{
+    list-style-type: none;
+    padding-left: 0px;
+    display: table;
+}
+.dxbs-uc .dxbs-file-list > li
+{
+    display: table-row;
+}
+.dxbs-uc .dxbs-file-list > li > div
+{
+    display: table-cell;
+}
+.dxbs-uc .dxbs-file-list li > button
+{
+    display: table-cell;
+}
+.dxbs-uc .dxbs-file-name
+{
+    white-space: nowrap;
+    padding-top: 0.4em;
+}
+.dxbs-uc .dxbs-bar-div
+{
+    width: 100%;
+    padding-left: 0.4em;
+}
+.dxbs-uc .dxbs-file-list button
+{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.dxbs-uc .dxbs-file-list > li
+{
+    border: none;
+}
+.dxbs-uc .dxbs-file-list .progress
+{
+    margin-bottom: 0px;
+}
+.dxbs-uc .dxbs-input
+{
+    position: absolute;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    top: -5000px;
+    z-index: 5;
+}
+.dxbs-uc-hidden
+{
+    position: fixed;
+    left: -9999px;
+}
+.dxucFFIHolder,
+.dxucFFIHolder .dxucFFI
+{
+    position: relative;
+    width: 0;
+    height: 0;
+    border-width: 0;
+}
+.dxucFFIHolder
+{
+    line-height: 0;
+    font-size: 0;
+}
+.dxucFFIHolder .dxucFFI
+{
+    top: 0;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+}
+/* Binary Image */
+.dxbs-binary-image
+{
+    height: 200px;
+}
+.dxbs-binary-image > div
+{
+    display: table;
+    width: 100%;
+    height: inherit;
+}
+.dxbs-binary-image > div > div
+{
+    height: inherit;
+    width: 100%;
+    position: relative;
+    vertical-align: middle;
+    display: table-cell;
+    border-style: dashed;
+    padding: 0px;
+}
+.dxbs-binary-image .bin-img-content
+{
+    position: relative;
+    height: inherit;
+    width: 100%;
+}
+.dxbs-binary-image .bin-img-preview-container
+{
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    width: 100%;
+}
+.dxbs-binary-image .bin-img-preview-container img
+{
+    vertical-align: middle;
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.dxbs-binary-image .bin-img-text-panel,
+.dxbs-binary-image .bin-img-drope-zone
+{
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.dxbs-binary-image .bin-img-tbl
+{
+    height: 100%;
+    width: 100%;
+}
+.dxbs-binary-image .bin-img-text-panel .bin-img-tbl > div
+{
+    font-size: 200%;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+}
+.dxbs-binary-image .bin-img-tbl
+{
+    display: table;
+}
+.dxbs-binary-image .bin-img-text-panel > .bin-img-tbl > div
+{
+    opacity: 0.5;
+}
+.dxbs-binary-image .bin-img-panel
+{
+    height: 2.5em;
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+}
+.dxbs-binary-image .bin-img-panel .bin-img-fill-parent:first-child
+{
+    background: currentColor;
+}
+.dxbs-binary-image .bin-img-panel .btn
+{
+    line-height: 1em;
+}
+.dxbs-binary-image .top
+{
+    top: 0;
+}
+.dxbs-binary-image .bin-img-panel > .bin-img-tbl > div
+{
+    vertical-align: middle;
+    display: table-cell;
+    white-space: nowrap;
+}
+.dxbs-binary-image .bin-img-panel > .bin-img-tbl button
+{
+    background-color: transparent;
+    border-color: transparent;
+    opacity: 0.6;
+    background-image: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.dxbs-binary-image .bin-img-panel > .bin-img-tbl button:hover
+{
+    opacity: 1 !important;
+}
+.dxbs-binary-image .bin-img-progress-panel
+{
+    position: absolute;
+    overflow: hidden;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+.dxbs-binary-image .bin-img-progress-panel > .bin-img-tbl > div
+{
+    vertical-align: middle;
+    display: table-cell;
+}
+.dxbs-binary-image .bin-img-tbl div > img
+{
+    max-width: 100%;
+    max-height: 100%;
+}
+.dxbs-binary-image .bin-img-fill-parent
+{
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    display: -ms-flexbox;
+    justify-content: center;
+    -ms-flex-pack: center;
+}
+.dxbs-binary-image .bin-img-fill-parent.contentLeft
+{
+    justify-content: flex-start;
+    -ms-flex-pack: start;
+}
+.dxbs-binary-image .bin-img-fill-parent.contentRight
+{
+    justify-content: flex-end;
+    -ms-flex-pack: end;
+}
+.dxbs-binary-image .bin-img-progress-panel
+{
+    position: absolute;
+    overflow: hidden;
+}
+.dxbs-binary-image .bin-img-progress-panel .bin-img-tbl
+{
+    height: 100%;
+    width: 100%;
+}
+.dxbs-binary-image .bin-img-progress-bar-container
+{
+    text-align: center;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+.dxbs-binary-image .bin-img-progress-bar-container > span,
+.dxbs-binary-image .bin-img-progress-bar-container > div
+{
+    margin-top: 1em;
+}
+.dxbs-binary-image .bin-img-disabled-cover
+{
+    opacity: 0.2;
+    background-color: currentColor;
+    cursor: not-allowed;
+}
+/*coloredit*/
+[data-color=""],
+[data-item-color=""]:before
+{
+    background-color: transparent;
+    border: 1px solid black;
+    opacity: 0.6;
+}
+.dxbs-3 .dxbs-coloredit .input-group > div:not(.input-group-append):not(.input-group-prepend)
+{
+    display: flex;
+}
+.dxbs-3 .dxbs-coloredit .dxbs-coloredit-ci.form-control
+{
+    display: inline-block;
+    height: 2em;
+    width: 2em;
+    margin-left: 0.25rem;
+    margin-right: calc(-2em - 0.25rem);
+    background-color: transparent;
+    box-shadow: none;
+    z-index: 5;
+    align-self: center;
+    padding: 0;
+}
+.dxbs-coloredit .dxbs-coloredit-ci:not(.dxbs-ce-ci-empty)
+{
+    border-color: transparent;
+}
+.dxbs-coloredit .dxbs-coloredit-ci + .form-control
+{
+    padding-left: calc(2em + 2 * 0.25rem);
+}
+.dxbs-ce-btn-custom
+{
+    width: 100%;
+}
+.dxbs-coloredit .dxbs-ce-btn:not(:first-child)
+{
+    margin-left: 0.25rem;
+}
+.dxbs-ce-md,
+.dxbs-ce-selector
+{
+    padding: 0.5em;
+}
+.dxbs-ce-md,
+.dxbs-ct-table,
+.dxbs-cct-table
+{
+    display: flex;
+    flex-direction: column;
+}
+.dxbs-ce-md [role=row]
+{
+    display: flex;
+}
+.dxbs-ce-md [role=gridcell],
+.dxbs-ce-auto-cd
+{
+    width: 1.5em;
+    height: 1.5em;
+    cursor: pointer;
+}
+.dxbs-ce-md [role=gridcell]:not(:last-child),
+.dxbs-ce-auto-cell
+{
+    margin-right: 0.25rem;
+}
+.dxbs-3 .dxbs-ce-md,
+.dxbs-3 .dxbs-ce-md > div,
+.dxbs-3 .dxbs-ce-md > div > div,
+.dxbs-3 .dxbs-ce-md > div > div > .dxbs-border
+{
+    border: inherit;
+    border-style: none;
+}
+.dxbs-3 .dxbs-ce-md > div > div > .dxbs-border
+{
+    border-style: solid;
+    border-width: 1px;
+    box-sizing: border-box;
+}
+.dxbs-3 .dxbs-ce-md > div > div > .dxbs-border.border-primary
+{
+    border-color: currentColor;
+    border-width: 2px;
+}
+.dxbs-ct-table [role=row]
+{
+    padding-bottom: 0.25rem;
+}
+.dxbs-cct-table [role=row]
+{
+    padding-top: 0.25rem;
+}
+.dxbs-ce-bp
+{
+    padding-top: inherit;
+    display: flex;
+    justify-content: flex-end;
+}
+.dxbs-ce-selector .dxbs-ce-bp .btn:not(:first-child)
+{
+    margin-left: 0.25rem;
+}
+.dxbs-cp-rgb,
+.dxbs-ce-auto-i
+{
+    margin-bottom: 0.25rem;
+}
+.dxbs-cp-wrapper,
+.dxbs-ce-auto-i
+{
+    display: flex;
+    flex-wrap: wrap;
+}
+.dxbs-ce-auto-i
+{
+    cursor: pointer;
+}
+.dxbs-cp-tw,
+.dxbs-cp-wrapper
+{
+    flex-direction: column;
+}
+.dxbs-cp-tw
+{
+    padding-top: 0.25rem;
+}
+.dxbs-cp-wrapper > div
+{
+    display: inline-flex;
+    flex-wrap: nowrap;
+}
+.dxbs-cp-wrapper > div:first-child
+{
+    width: 100%;
+}
+.dxbs-cp-scv
+{
+    width: 1em;
+}
+.dxbs-cp-hue-area
+{
+    margin-left: 0.5rem;
+}
+.dxbs-cp-wrapper .dxbs-canvas-holder:not(.dxbs-cp-hue-area)
+{
+    cursor: crosshair;
+}
+.dxbs-canvas-holder
+{
+    position: relative;
+    overflow: hidden;
+}
+.dxbs-canvas-selection
+{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 1px solid white;
+    border-radius: 50%;
+    z-index: 1;
+}
+.dxbs-canvas-selection:before
+{
+    content: " ";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 1px solid black;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+}
+.dxbs-canvas-overlay
+{
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.dxbs-canvas-selection-rect
+{
+    position: absolute;
+    width: 100%;
+    left: 0 !important;
+    height: 0.5rem;
+    border: 1px solid white;
+    z-index: 1;
+}
+.dxbs-canvas-selection-rect:before
+{
+    content: " ";
+    position: absolute;
+    width: 100%;
+    height: calc(0.5rem - 2px);
+    border: 1px solid black;
+    top: 0;
+    left: 0;
+}
+.dxbs-coloredit-static.row
+{
+    margin: 0;
+}
+.dxbs-coloredit-static > .col
+{
+    padding: 0;
+}
+.dxbs-coloredit-static > div:not(.input-group-append):not(.input-group-prepend)
+{
+    margin-right: 0.25em;
+    min-width: 1.5em;
+}
+/* GridView */
+.dxbs-gridview
+{
+    display: table;
+    width: 100%;
+}
+.dxbs-gridview > .dxbs-toolbar-adaptive.btn-toolbar
+{
+    display: block;
+}
+.dxbs-gridview > .btn-toolbar:first-of-type
+{
+    margin-bottom: 1em;
+}
+.dxbs-gridview > .btn-toolbar:last-of-type
+{
+    margin-top: 1em;
+}
+.dxbs-gridview .dxbs-arrow-drag
+{
+    position: absolute;
+    visibility: hidden;
+    top: -10000px;
+    left: -10000px;
+}
+.dxbs-gridview .dxbs-arrow-drag > span.rotated
+{
+    transform: rotate(90deg);
+}
+.dxbs-gridview > .card .dxbs-table
+{
+    margin-bottom: 0;
+}
+.dxbs-gridview > .card > .dxbs-nohor-borders > tbody > tr > td
+{
+    border-bottom: 0;
+}
+.dxbs-gridview > .card > .dxbs-nohor-borders > tbody > tr:not(:first-child) > td
+{
+    border-top: 0;
+}
+.dxbs-gridview > .card > .card-body > .card-body,
+.dxbs-gridview > .card > .card-header.btn-toolbar
+{
+    padding: 0;
+}
+.dxbs-gridview > .card > .card-body:first-of-type > .card-body:not(:first-child)
+{
+    padding-top: inherit;
+}
+.dxbs-gridview > .card > .card-body:not(:first-of-type) > .card-body:not(:last-child)
+{
+    padding-bottom: inherit;
+}
+.dxbs-gridview .dxbs-sg-wrapped
+{
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -ms-flex-wrap: wrap-reverse;
+    flex-wrap: wrap-reverse;
+    align-items: center;
+    -ms-flex-align: center;
+    margin: -0.5em 0;
+}
+.dxbs-gridview > .card > .card-body .dxbs-sg-wrapped .dxbs-search-panel
+{
+    flex-grow: 1;
+    flex-basis: 25%;
+    min-width: 250px;
+    margin: 0.5em 0;
+}
+.dxbs-gridview > .card > .card-body .dxbs-sg-wrapped .dxbs-group-panel
+{
+    flex-grow: 1;
+    flex-basis: 75%;
+    margin: 0.5em 0;
+}
+.dxbs-gridview .dxbs-editform
+{
+    padding: 1em 0.5em;
+}
+.dxbs-gridview .dxbs-editform .dxbs-fl-ctrl > .btn:not(.btn-link):not(:last-child)
+{
+    margin-right: 0.4em;
+}
+.dxbs-gridview .dxbs-fixed .dxbs-editform .dxbs-fl .row > div,
+.dxbs-gridview .dxbs-fixed .dxbs-editform .dxbs-fl .dxbs-fl-gd > .card
+{
+    position: static;
+}
+.dxbs-gridview > .card > .card-body .dxbs-search-panel
+{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+.dxbs-gridview > .card > .card-body .dxbs-search-panel > div:first-of-type
+{
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    width: 1%;
+}
+.dxIE.dxBrowserVersion-9 .dxbs-gridview > .card > .card-body .dxbs-search-panel
+{
+    display: table;
+}
+.dxIE.dxBrowserVersion-9 .dxbs-gridview > .card > .card-body .dxbs-search-panel > :not(script)
+{
+    display: table-cell;
+    width: 100%;
+}
+.dxIE.dxBrowserVersion-9 .dxbs-gridview > .card > .card-body .dxbs-search-panel > button
+{
+    width: 1%;
+}
+.dxbs-gridview > .card .card-body .dxbs-search-panel .input-group > .dxbs-button-edit
+{
+    display: block;
+    width: auto;
+}
+.dxbs-gridview > .card .card-body .dxbs-search-panel .input-group > .dxbs-button-edit > div
+{
+    display: block;
+}
+.dxbs-gridview > .card .card-body .dxbs-search-panel .input-group > .dxbs-button-edit:not(:last-child) > div > .form-control
+{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.dxbs-gridview > .card .card-body .dxbs-search-panel > .input-group > .input-group-append > .btn:not(:last-child):hover,
+.dxbs-gridview > .card .card-body .dxbs-search-panel > .input-group > .input-group-append > .btn:not(:last-child):focus,
+.dxbs-gridview > .card .card-body .dxbs-search-panel > .input-group > .input-group-append > .btn:not(:last-child):active
+{
+    z-index: 3;
+}
+.dxbs-gridview .dxbs-editform > .form-horizontal .row
+{
+    margin-right: 0;
+    margin-left: 0;
+}
+@-moz-document url-prefix()
+{
+    .dxbs-gridview [tabindex]:focus:not(:-moz-focusring)
+    {
+        outline: 1px dotted black;
+    }
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td,
+.dxbs-gridview > .card .dxbs-table > thead > tr > th
+{
+    vertical-align: middle;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.bg-primary .btn-link
+{
+    color: white;
+}
+.dxbs-gridview .dxbs-table:not(.dxbs-fixed) .dxbs-header-indent,
+.dxbs-gridview .dxbs-table:not(.dxbs-fixed) .dxbs-empty-header,
+.dxbs-gridview .dxbs-table:not(.dxbs-fixed) .dxbs-group-btn-cell
+{
+    width: 0.1%;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-indent-cell
+{
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    text-align: center;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxbs-footer-row > td
+{
+    border-right-width: 0px;
+    border-left-width: 0px;
+}
+.dxbs-gridview > .card > .dxbs-popup > .modal-content > .modal-header > .dxbs-calendar
+{
+    margin-bottom: 0;
+}
+.dxbs-gridview .progress
+{
+    margin-bottom: 0;
+}
+.dxbs-gridview > .card .dxbs-table > thead > tr.dxbs-filter-row > td
+{
+    border-bottom-width: 0px;
+    padding: 2px;
+    vertical-align: middle;
+}
+.dxbs-gridview > .card .dxbs-table > thead > tr.dxbs-filter-row > td .btn-link
+{
+    padding: 0 0.4em;
+}
+.dxbs-gridview > .card .dxbs-table > thead > tr > .dx-ac
+{
+    white-space: nowrap;
+}
+.dxbs-gridview > .card .dxbs-table > thead > .dxbs-filter-row > td > div
+{
+    display: flex;
+    display: -ms-flexbox;
+    flex-flow: row nowrap;
+    -ms-flex-flow: row nowrap;
+}
+.dxbs-gridview > .card .dxbs-table > thead > .dxbs-filter-row > td > div > div
+{
+    flex: 0 1 100%;
+    -ms-flex: 0 1 100%;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > .dxbs-preview-row > td
+{
+    white-space: normal;
+    padding: 0.5em 1em;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > .dxbs-empty-data-row > td
+{
+    padding: 1em;
+    text-align: center;
+}
+/* empty cells before group button */
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxbs-group-row > td.dxbs-indent-cell
+{
+    border-top: 0;
+    border-bottom: 0;
+    width: 0;
+}
+/* cell with master-detail button */
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-md-btn-cell
+{
+    border-bottom: 0;
+    width: 1px;
+}
+/* group button and master-detail button */
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxbs-group-row > td > .btn-link,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-md-btn-cell > .btn-link,
+.dxbs-gridview > .card .dxbs-table > thead > tr > th > .btn-link
+{
+    padding: 0 0.4em;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxbs-group-row > td:first-child:not(.dxbs-indent-cell),
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxbs-group-row > td.dxbs-indent-cell + td:not(.dxbs-indent-cell)
+{
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    width: 0.1%;
+}
+/* next cell after group button */
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxbs-group-row > td:first-child:not(.dxbs-indent-cell) + td,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxbs-group-row > td.dxbs-indent-cell + td:not(.dxbs-indent-cell) + td
+{
+    border-left-width: 0px;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxbs-groupf > td:not(.dxbs-indent-cell)
+{
+    border-right-width: 0px;
+    border-left-width: 0px;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.active > td.dxbs-indent-cell
+{
+    background: none;
+}
+/* non-data-header */
+.dxbs-gridview > .card .dxbs-table > thead > tr > th.dxbs-noclick,
+.dxbs-gridview > .card .dxbs-table > thead > tr > th.dxbs-cmd-cell,
+.dxbs-gridview > .card .dxbs-table > thead > tr > th.dxbs-header-indent
+{
+    cursor: default;
+}
+.dxbs-gridview > .card .dxbs-table > thead > tr > th > .dxbs-cmd-cb
+{
+    padding-left: 0;
+}
+.dxbs-gridview > .card .dxbs-table > thead > tr > th > .dxbs-cmd-cb input
+{
+    position: relative;
+    margin-left: 0;
+}
+/* command cell buttons */
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > .btn.btn-link,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > .dxgBCTC > .btn.btn-link,
+.dxbs-gridview > .card .dxbs-table > thead > tr > th.dxbs-cmd-cell > .btn.btn-link
+{
+    border: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > .btn:not(.btn-link):not(:last-child),
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > .dxgBCTC > .btn:not(.btn-link):not(:last-child),
+.dxbs-gridview > .card .dxbs-table > thead > tr > th.dxbs-cmd-cell > .btn:not(.btn-link):not(:last-child)
+{
+    margin-right: 0.4em;
+}
+.dxbs-gridview > .card .dxbs-table > thead > tr > th.dxbs-cmd-cell > .btn + .dxbs-cmd-cb,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > .btn + .dxbs-cmd-cb,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > .dxgbBCTC > .btn + .dxbs-cmd-cb
+{
+    margin-left: 0.4em;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > .dxbs-cmd-cb,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > .dxgBCTC > .dxbs-cmd-cb,
+.dxbs-gridview > .card .dxbs-table > thead > tr > th.dxbs-cmd-cell > .dxbs-cmd-cb,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxbs-cmd-cb
+{
+    margin-left: 1em;
+    margin-right: 1em;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > .dxbs-cmd-cb,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > .dxgBCTC > .dxbs-cmd-cb
+{
+    cursor: auto;
+    padding-left: 0;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > .dxbs-cmd-cb:active,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > .dxgBCTC > .dxbs-cmd-cb:active
+{
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > .dxbs-cmd-cb input,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > .dxgBCTC > .dxbs-cmd-cb input
+{
+    position: relative;
+    margin-left: 0;
+}
+/* data cell checkbox */
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > .form-check.form-check-inline > label,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > div[data-dxci] > .form-check.form-check-inline > label,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > .dxgBCTC > .form-check.form-check-inline > label,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADDC > .form-check.form-check-inline > label,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADDC > .dxgBCTC > .form-check.form-check-inline > label,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADDC > div[data-dxci] > .form-check.form-check-inline > label,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADCMDC > .form-check.form-check-inline > label,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADCMDC > .dxgBCTC > .form-check.form-check-inline > label
+{
+    padding-left: 0;
+    cursor: default;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR:not(.dxbs-edit-row) .form-horizontal .dxgvADDC > .form-check.form-check-inline > label,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .form-horizontal .dxgvADDC > .dxgBCTC > .form-check.form-check-inline > label
+{
+    padding-top: 0;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADDC > div[data-dxci] > .form-check.form-check-inline > label
+{
+    padding-left: 0;
+    cursor: default;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > .check-adaptive,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > .dxgBCTC > .check-adaptive
+{
+    display: none;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > .form-check.form-check-inline input,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > div[data-dxci] > .form-check.form-check-inline input,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > .dxgBCTC > .form-check.form-check-inline input,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADDC > .form-check.form-check-inline input,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADDC > div[data-dxci] > .form-check.form-check-inline input
+{
+    position: relative;
+    margin-left: 0;
+}
+.dxbs-gridview .dxbs-pager
+{
+    display: block;
+}
+.dxbs-gridview .dxbs-pager > .form-group > .form-control
+{
+    padding-left: 0;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxbs-edit-row > td
+{
+    vertical-align: middle;
+    padding: 2px;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxbs-edit-row > td > .form-check.form-check-inline > label
+{
+    padding-left: 0;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td mark
+{
+    padding: 0;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxbs-details-row > td > .dxbs-gridview
+{
+    margin-bottom: 0;
+}
+.dxbs-gridview .dxbs-cmd-cell
+{
+    text-align: center;
+    white-space: nowrap;
+}
+.dxbs-gridview .dxbs-parent-rows-list
+{
+    margin-bottom: 0;
+}
+.dxbs-gridview .deleted
+{
+    text-decoration: line-through;
+}
+.dxbs-gridview > .card > .card-footer
+{
+    text-align: right;
+    border-top: none;
+}
+.dxbs-gridview > .card > .card-footer .btn:not(:first-of-type)
+{
+    margin-left: 0.4em;
+}
+.dxbs-gridview .dxbs-loading
+{
+    display: inline-block;
+}
+.dxbs-gridview .dxbs-loading .dxbs-lp
+{
+    border: none;
+    display: inline-block;
+    background: transparent;
+    box-shadow: none;
+    margin-left: 1em;
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+}
+.dxbs-gridview .dxbs-loading .dxbs-lp .card-body
+{
+    padding: 0;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr td.dxbs-batch-editing:not(.dxbs-batch-editing-checkbox-cell)
+{
+    padding: 0;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR td.dxbs-batch-editing-checkbox-cell
+{
+    padding-top: 0;
+    padding-bottom: 0;
+}
+/* Conditional formating*/
+.dxbs-gridview .dxFCRule
+{
+    position: relative;
+}
+.dxbs-gridview .dxFCRule:before
+{
+    content: "";
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    width: 16px;
+    height: 16px;
+    margin-top: -8px;
+}
+.dxbs-gridview td.dxFCRule:before,
+.dxbs-gridview td.dx-al.dxFCRule:before,
+.dxbs-gridview td.dxFCRule:before
+{
+    right: 2px;
+    left: auto;
+}
+.dxbs-gridview td.dx-ar.dxFCRule:before,
+.dxbs-gridview td.text-right.dxFCRule:before
+{
+    left: 2px;
+    right: auto;
+}
+/* Adaptivity */
+.dxgvAH,
+.dxgvAIC,
+.dxgvAIC .dxgvADHB
+{
+    display: none;
+}
+.dxgvAE .dxgvAIC,
+.dxgvALE .dxgvAIC,
+.dxgvAdD .dxgvAE .dxgvAIC,
+.dxgvAdD .dxgvALE .dxgvAIC
+{
+    display: table-cell;
+}
+.dxgvAE .dxgvAdD .dxgvAIC,
+.dxgvALE .dxgvAdD .dxgvAIC
+{
+    display: none;
+}
+.dxgvADR .dxgvAIC
+{
+    vertical-align: top;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR > td:not(.dxbs-md-btn-cell)
+{
+    padding: 0.8em 0.5em;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR table.dxgvADT
+{
+    background-color: transparent;
+    width: auto;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR table.dxgvADT > tbody > tr > td
+{
+    border-top: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADT.table > tbody > tr > td.dxgvADDC,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADT.table > tbody > tr > td.dxgvADDC > .form-check.form-check-inline:not(.check-adaptive),
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADT.table > tbody > tr > td.dxgvADDC > div[data-dxci] > .form-check.form-check-inline
+{
+    padding-left: 0.9em;
+    padding-right: 0.9em;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADT.table > tbody > tr > td.dxgvADDC > div[data-dxci]
+{
+    margin-left: -0.9em;
+    margin-right: -0.9em;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR.dxbs-edit-row table.dxgvADT > tbody > tr > td.dxgvADDC
+{
+    padding: 0;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR.dxbs-edit-row table.dxgvADT > tbody > tr > td,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR table.dxgvADT > tbody > tr > td.dxbs-batch-editing
+{
+    vertical-align: middle;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADCC
+{
+    font-weight: bold;
+    white-space: nowrap;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADDC > .check-icon,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADDC > .dxgBCTC > .check-icon
+{
+    display: none;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADDC .form-check.form-check-inline input,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxbs-cmd-cb input
+{
+    position: relative;
+    margin-left: 0;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .form-control-plaintext.dxbs-fl-ctrl:not(.dxbs-batch-editing)
+{
+    padding-left: 0.9em;
+    padding-right: 0.9em;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxbs-fl-ctrl:not(.form-control-plaintext) > .form-check.form-check-inline,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxbs-fl-ctrl:not(.form-control-plaintext).dxbs-batch-editing > div[data-dxci] > .form-check.form-check-inline
+{
+    padding-left: 0.9em;
+    padding-right: 0.9em;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxbs-fl:not(.form-horizontal) .dxbs-fl-ctrl:not(.form-control-plaintext) > .form-check.form-check-inline,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxbs-fl:not(.form-horizontal) .form-control-plaintext.dxbs-fl-ctrl:not(.dxbs-batch-editing):not(.bg-success)
+{
+    padding-left: 0;
+    padding-right: 0;
+}
+@media (max-width: 991px)
+{
+    .dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxbs-fl.form-horizontal .dxbs-fl-ctrl:not(.form-control-plaintext) > .form-check.form-check-inline,
+    .dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxbs-fl.form-horizontal .form-control-plaintext.dxbs-fl-ctrl:not(.dxbs-batch-editing):not(.bg-success)
+    {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxgvAIC .dxgvADSB,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxgvAIC .dxgvADHB
+{
+    vertical-align: middle;
+    padding: 0 0.5em;
+}
+.dxbs-gridview .dxgvADFSD,
+.dxbs-gridview .dxgvADH
+{
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+}
+.dxbs-gridview.dxgvAdD > .card > .card-body.dxbs-ap + .table
+{
+    border-top: 0;
+}
+/* Batch Edit */
+.dxbs-gridview td .dxbs-textbox
+{
+    min-width: 40px;
+}
+.dxbs-gridview td .dxbs-date-edit
+{
+    min-width: 120px;
+}
+.dxbs-gridview .error-text + .error-icon
+{
+    margin-left: 0.4em;
+}
+.dxbs-gridview .dxgvBEHI
+{
+    display: none;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxbs-preview-group-row
+{
+    font-weight: 600;
+}
+.dxbs-gridview [data-toggle='gridview-previewchanges'] > .badge,
+.dxbs-gridview [data-toggle='gridview-previewchanges'] > .badge:empty
+{
+    top: 0;
+    display: inline-block;
+    text-decoration: none;
+}
+.dxbs-gridview [data-toggle='gridview-previewchanges'] > .badge:empty
+{
+    padding: 0;
+    margin: 0;
+}
+/* header filter popup */
+.dxbs-popup[id*="_DXHFP"].modal-dialog .modal-body
+{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.dxbs-popup[id*="_DXHFP"].modal-dialog .modal-footer .btn-toolbar
+{
+    margin-left: 0px;
+}
+.dxbs-popup[id*="_DXHFP"].modal-dialog .modal-footer .btn-toolbar .btn
+{
+    float: none;
+}
+.dxbs-popup[id*="_DXHFP"].hf-list > .modal-content,
+.dxbs-popup[id*="_DXCDWindow"] > .modal-content
+{
+    overflow: hidden;
+}
+.dxbs-popup[id*="_DXHFP"].hf-list .modal-body
+{
+    padding: 0;
+}
+.dxbs-popup[id*="_DXCDWindow"] > .modal-content > .modal-body
+{
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.dxbs-popup[id*="_DXHFP"].hf-list .modal-body .dxbs-listbox.card,
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxbs-listbox.card
+{
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    height: 100%;
+}
+.dxbs-popup[id*="_DXHFP"].hf-list .modal-body .dxbs-listbox.panel,
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxbs-listbox.panel
+{
+    display: flex;
+    display: -ms-flexbox;
+    flex-flow: column nowrap;
+    -ms-flex-flow: column nowrap;
+}
+.dxbs-popup[id*="_DXHFP"].hf-list .modal-body .dxbs-listbox.card .form-check:not(.disabled):not(:focus),
+.dxbs-popup[id*="_DXHFP"].hf-list .modal-body .dxbs-listbox.card a.list-group-item:not(.active):not(.disabled):not(:active):not(:hover):not(:focus),
+.dxbs-popup[id*="_DXHFP"].hf-list .modal-body .dxbs-list-selectall.card-header,
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxbs-listbox.card .form-check:not(.disabled):not(:focus),
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxbs-listbox.card a.list-group-item:not(.active):not(.disabled):not(:active):not(:hover):not(:focus),
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxbs-list-selectall.card-header
+{
+    background: inherit;
+    color: inherit;
+    font: inherit;
+}
+.dxbs-popup[id*="_DXHFP"].hf-list .modal-body .dxbs-listbox.card .list-group-item,
+.dxbs-popup[id*="_DXHFP"].hf-list .modal-body .dxbs-listbox.card .dxbs-list-selectall,
+.dxbs-popup[id*="_DXHFP"].hf-list .modal-body .dxbs-listbox.card .dxbs-list-filter,
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxbs-listbox.card .list-group-item,
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxbs-listbox.card .dxbs-list-selectall,
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxbs-listbox.card .dxbs-list-filter
+{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+.dxbs-popup[id*="_DXHFP"].hf-list .modal-body .dxbs-listbox.card a.list-group-item,
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxbs-listbox.card a.list-group-item
+{
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxbs-listbox.card > ul
+{
+    padding: 0px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    overflow-y: auto;
+}
+.dxbs-popup[id*="_DXHFP"].hf-list .modal-body .dxbs-listbox.card > ul,
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxbs-listbox.card > ul
+{
+    border: none;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    outline: none;
+}
+.dxbs-popup[id*="_DXHFP"].hf-list .modal-body .dxbs-listbox.card > ul:not(:focus):not(:active) a.list-group-item.active,
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxbs-listbox.card > ul:not(:focus):not(:active) a.list-group-item.active
+{
+    opacity: .8;
+}
+.dxbs-popup[id*="_DXHFP"].modal-dialog .dxbs-listbox.dropdown-menu
+{
+    position: static;
+    border: none;
+    box-shadow: none;
+    display: inherit;
+    float: none;
+    width: 100%;
+    overflow-y: auto;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+}
+.dxbs-popup[id*="_DXHFP"].modal-dialog .form-check ~ .dxbs-listbox.dropdown-menu
+{
+    margin-top: 0px;
+    background-color: transparent;
+    border-radius: 0;
+}
+.dxbs-3 .dxbs-popup[id*="_DXHFP"].modal-dialog:not(.hf-list) .form-check
+{
+    padding-left: 1em;
+}
+.dxbs-popup[id*="_DXHFP"].hf-list .form-check
+{
+    margin-bottom: 0px;
+}
+.dxbs-popup[id*="_DXHFP"].modal-dialog .dxbs-listbox.dropdown-menu > li:not(.dropdown-divider) > a
+{
+    padding-left: 1em;
+    padding-right: 1em;
+}
+.dxbs-popup[id*="_DXHFP"].modal-dialog .dxbs-listbox.dropdown-menu .list-group-item:not(.active)
+{
+    background-color: transparent;
+}
+.dxbs-popup[id*="_DXHFP"].modal-dialog .dxbs-listbox.dropdown-menu .list-group-item
+{
+    padding: 0.5rem 1em;
+}
+/* Cust dialog */
+.dxbs-gridview .dxbs-cd-header > div
+{
+    display: table-cell;
+    vertical-align: middle;
+}
+.dxbs-gridview .dxbs-cd-header > div.dxgvCD_TSC
+{
+    width: 100%;
+}
+.dxbs-gridview .dxbs-cd-header .dxgvCD_TS
+{
+    overflow: hidden;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+.dxbs-gridview .dxbs-cd-header .dxgvCD_TS .dxgvCD_TSLS,
+.dxbs-gridview .dxbs-cd-header .dxgvCD_TS .dxgvCD_TSRS
+{
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 100%;
+    z-index: 1;
+    box-shadow: 0 0 0.5em 0.5em transparent;
+}
+.dxbs-gridview .dxbs-cd-header .dxgvCD_TS .dxgvCD_TSLS
+{
+    left: 0;
+}
+.dxbs-gridview .dxbs-cd-header .dxgvCD_TS .dxgvCD_TSRS
+{
+    right: 0;
+}
+.dxbs-gridview .dxbs-cd-header .dxgvCD_TSBW
+{
+    overflow: hidden;
+    padding: 0 0.8em;
+}
+.dxbs-gridview .dxbs-cd-header > div:not(.dxgvCD_TSC) .btn-link
+{
+    height: 2.5em;
+    width: 2.5em;
+    padding: 0;
+    margin: 0.2em 0 0;
+}
+.dxbs-gridview .dxbs-cd-header > div:not(.dxgvCD_TSC) .btn-link[data-toggle='gridview-custdialog-apply'] > span.dxbs-icon
+{
+    font-size: 1.5em;
+    line-height: 0.9em;
+}
+.dxbs-gridview .dxbs-cd-content
+{
+    padding-top: 1em;
+}
+.dxbs-gridview .dxbs-cd-content .dxgvCD_DAW
+{
+    position: relative;
+}
+.dxbs-gridview .dxbs-cd-content .dxgvCD_DAEB
+{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 0.4em;
+    margin: 0;
+    min-height: 0;
+    cursor: pointer;
+    text-align: center;
+}
+.dxbs-gridview .dxbs-cd-content .dxgvCD_DAEB .dxgvCD_DAEI
+{
+    vertical-align: middle;
+}
+.dxbs-gridview .dxbs-cd-content .dxgvCD_CAWP
+{
+    overflow: hidden;
+    margin-top: -39px;
+    padding-top: 39px;
+}
+.dxbs-gridview .dxbs-cd-content .dxgvCD_CAPC
+{
+    position: relative;
+}
+.dxbs-gridview .dxbs-cd-content .dxgvCD_CAPC > div
+{
+    top: 0;
+    position: absolute;
+}
+.dxbs-gridview .dxgvCD_DAETC
+{
+    margin-top: 2em;
+    text-align: center;
+}
+.dxbs-gridview .dxgvCD_LAC
+{
+    font-weight: bold;
+    padding-bottom: 0.5em;
+    margin: 2em 0 0.5em;
+}
+.dxbs-gridview .dxbs-cd-drag-area
+{
+    padding-bottom: 0.5em;
+}
+.dxbs-gridview .dxbs-cd-column-item.card,
+.dxbs-gridview .dxbs-cd-filter-item.card
+{
+    margin-bottom: 0.4em;
+}
+.dxbs-gridview .dxbs-cd-column-item.card div:not([class])
+{
+    width: 100%;
+}
+.dxbs-gridview .dxbs-cd-list-area .dxbs-cd-column-item.card
+{
+    border: 0;
+    box-shadow: none;
+    margin-bottom: 0;
+}
+.dxbs-gridview .dxbs-cd-column-item.card.card-body
+{
+    padding: 0.8em;
+}
+.dxbs-gridview .dxbs-cd-list-area .dxbs-cd-column-item.card.card-body
+{
+    padding: 0.8em 0;
+}
+.dxbs-gridview .dxbs-cd-column-item
+{
+    transition: all 0.2s;
+}
+.dxbs-gridview .dxbs-cd-column-item.DXCDDraggingItem
+{
+    transition: none;
+    position: relative;
+    z-index: 1;
+}
+.dxbs-gridview .dxbs-cd-column-item.card.card-body > div
+{
+    display: table-cell;
+    vertical-align: middle;
+}
+.dxbs-gridview .dxbs-cd-column-item .dxgvCD_CIPA:not(.text-muted) > span
+{
+    cursor: pointer;
+}
+.dxbs-gridview .dxbs-cd-column-item .dxgvCD_CIPA + div:not(.dxgvCD_CIPA)
+{
+    padding-left: 1em;
+}
+.dxbs-gridview .dxbs-cd-column-item .dxgvCD_CIPA > span.dxbs-icon
+{
+    margin-top: 0.2em;
+}
+.dxbs-gridview .dxbs-cd-column-item .dxgvCD_CIPA > .form-check.form-check-inline > input
+{
+    position: static;
+}
+.dxbs-gridview .dxbs-cd-column-item.dxgvCD_EFCI
+{
+    margin-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 0;
+}
+.dxbs-gridview .dxbs-cd-column-item + .dxbs-cd-filter-item
+{
+    display: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.dxbs-gridview .dxbs-cd-column-item.dxgvCD_EFCI + .dxbs-cd-filter-item
+{
+    display: block;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_FR > a,
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_FR > span
+{
+    margin-bottom: 0.2em;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_FR > div > .btn.btn-link[data-toggle='gridview-filterrow-menu']
+{
+    display: none;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF
+{
+    text-align: center;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF > a
+{
+    display: inline-block;
+    margin-bottom: 1em;
+    text-transform: uppercase;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF:first-child > a
+{
+    margin-top: 1em;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF.dxgvCD_UFLBV > a,
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UFSC
+{
+    display: none;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxgvCD_UFSC
+{
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+    text-align: left;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF:first-child .dxgvCD_UFSC
+{
+    border-top: 0;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF.dxgvCD_UFLBV .dxgvCD_UFSC
+{
+    display: block;
+    width: 100%;
+    height: 200px;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF.dxgvCD_UFLBV .dxgvCD_UFSC.dxgvCD_UDFSC
+{
+    overflow-x: visible;
+    overflow-y: visible;
+    height: auto;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxbs-listbox.dropdown-menu
+{
+    border: 0;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    display: block;
+    float: none;
+    position: static;
+    overflow-y: auto;
+    height: 100%;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .form-check ~ .dxbs-listbox.dropdown-menu
+{
+    margin-top: 0px;
+    background-color: transparent;
+    border-radius: 0;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxbs-listbox.dropdown-menu > li:not(.dropdown-divider) > a
+{
+    padding-left: 1em;
+    padding-right: 1em;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxbs-listbox.dropdown-menu .list-group-item
+{
+    padding: 0.5rem 1em;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxbs-listbox.dropdown-menu .list-group-item:not(.active)
+{
+    background-color: transparent;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxgvCD_UFSC:not(.dxgvCD_UDFSC) > .form-check,
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxgvCD_UFSC:not(.dxgvCD_UDFSC) > .form-check ~ .dxbs-listbox.dropdown-menu .form-check
+{
+    padding-left: 1em;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxgvCD_UFSC:not(.dxgvCD_UDFSC) .form-check
+{
+    margin-bottom: 0px;
+}
+.dxbs-gridview .dxbs-cd-btn
+{
+    line-height: 1em;
+    margin: 0;
+    padding: 0.2em 0.5em;
+}
+.dxbs-gridview .dxbs-cd-btn:hover
+{
+    text-decoration: none;
+}
+.dxbs-gridview .dxbs-cd-toggle > span:not(:first-child)
+{
+    display: none;
+}
+.dxbs-gridview .dxbs-cd-toggle.checked > span:first-child
+{
+    display: none;
+}
+.dxbs-gridview .dxbs-cd-toggle.checked > span:not(:first-child)
+{
+    display: inline-block;
+}
+/* Fixed layout */
+.dxbs-gridview .dxbs-fixed .dxgvArm > th
+{
+    padding: 0;
+    border-top: 0;
+    border-bottom: 0;
+}
+.dxbs-gridview .dxbs-fixed .dxgvArm + tr > th
+{
+    border-top: 0;
+    border-bottom: 0;
+}
+.dxbs-gridview .dxbs-fixed
+{
+    table-layout: fixed;
+}
+.dxbs-gridview .dxbs-fixed > thead > tr > th,
+.dxbs-gridview .dxbs-fixed > tbody > tr > td,
+.dxbs-gridview .dxbs-fixed > tfoot > tr > td
+{
+    overflow: hidden;
+    white-space: nowrap;
+}
+.dxbs-gridview .dxbs-fixed > thead > tr > th,
+.dxbs-gridview .dxbs-fixed > tfoot > tr > td
+{
+    text-overflow: ellipsis;
+}
+.dxbs-gridview .dxbs-fixed .dxbs-textbox > div,
+.dxbs-gridview .dxbs-fixed .dxbs-memo > div,
+.dxbs-gridview .dxbs-fixed .dxbs-button-edit,
+.dxbs-gridview .dxbs-fixed .dxbs-button-edit > div.input-group,
+.dxbs-gridview .dxbs-fixed .dxbs-dropdown-edit,
+.dxbs-gridview .dxbs-fixed .dxbs-dropdown-edit > div.input-group,
+.dxbs-gridview .dxbs-fixed .dxbs-spin-edit,
+.dxbs-gridview .dxbs-fixed .dxbs-spin-edit > div.input-group
+{
+    position: static !important;
+}
+.dxbs-gridview .dx-ellipsis
+{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.dxbs-gridview .dx-ellipsis .dxgBCTC table[id*='DXCErrorTable'],
+.dxbs-gridview .dx-ellipsis .dxeCI
+{
+    table-layout: fixed;
+}
+.dxbs-gridview .dx-ellipsis .dxeCI
+{
+    width: 100%;
+}
+.dxbs-gridview .dx-ellipsis .dxeCIT
+{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.dxFirefox .dxbs-gridview .dx-ellipsis
+{
+    -moz-text-overflow: ellipsis;
+}
+/* Scrolling */
+.dxbs-gridview > .card > .dxgvHSDC,
+.dxbs-gridview > .card > .dxgvCSD,
+.dxbs-gridview > .card > .dxgvFSDC
+{
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    margin-bottom: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    display: block;
+    position: static;
+}
+.dxbs-gridview > .card > .dxgvHSDC > div,
+.dxbs-gridview > .card > .dxgvFSDC > div
+{
+    overflow: hidden;
+}
+.dxbs-gridview > .card > .dxgvHSDC:first-child,
+.dxbs-gridview > .card > .dxgvHSDC + .dxgvCSD,
+.dxbs-gridview > .card > .dxgvCSD:first-child,
+.dxbs-gridview > .card > .dxgvCSD + .dxgvFSDC
+{
+    border-top: 0;
+}
+.dxbs-gridview > .card > .dxgvFSDC
+{
+    border-bottom: 0;
+}
+.dxbs-3 .dxbs-gridview > .card > .dxgvCSD > .table-bordered > tbody > tr > td:last-child
+{
+    border-right: 1px solid transparent;
+}
+/* Fixed Columns */
+.dxbs-gridview .dxgvHFC
+{
+    display: none;
+}
+/* Borders */
+.dxbs-gridview > .card .dxbs-table > thead > tr:first-child > th,
+.dxbs-gridview > .card .dxbs-table > thead > tr:first-child > td
+{
+    border-top: 0;
+}
+.dxbs-gridview .dxbs-nlb,
+.dxbs-gridview > .card .dxbs-table > thead > tr > th:first-child,
+.dxbs-gridview > .card .dxbs-table > thead > tr > td:first-child,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td:first-child,
+.dxbs-gridview > .card .dxbs-table > tfoot > tr > td:first-child
+{
+    border-left: 0;
+}
+.dxbs-gridview .dxbs-nrb,
+.dxbs-gridview td.RRB,
+.dxbs-gridview table.dxgvHHEC td.dxgvPHEC,
+.dxbs-gridview > .card > table > thead > tr > th:last-child,
+.dxbs-gridview > .card > table > thead > tr > td:last-child,
+.dxbs-gridview > .card > table > tbody > tr > td:last-child,
+.dxbs-gridview > .card > table > tfoot > tr > td:last-child
+{
+    border-right: 0;
+}
+.dxbs-gridview .dxbs-nbb,
+.dxbs-gridview > .card .dxbs-table > thead > tr > th,
+.dxbs-gridview > .card .dxbs-table > thead > tr > td
+{
+    border-bottom: 0;
+}
+.dxbs-gridview > .card > .dxgvHSDC > div > table,
+.dxbs-gridview > .card > .dxgvCSD > table,
+.dxbs-gridview > .card > .dxgvFSDC > div > table
+{
+    border: 0;
+}
+.dxbs-gridview > .card > .dxgvHSDC > div > table > thead > tr > th,
+.dxbs-gridview > .card > .dxgvFSDC > div > table > tfoot > tr > td
+{
+    border-top: 0;
+    border-bottom: 0;
+}
+.dxbs-gridview > .card > .dxgvHSDC + .dxgvCSD > table > tbody > tr:first-child > td
+{
+    border-top: 0;
+}
+.dxbs-gridview:not(.dxbs-fm-details) > .card > .dxgvCSD > table > tbody > tr:last-child > td,
+.dxbs-gridview:not(.dxbs-fm-details) > .card > .dxgvCSD > table > tfoot > tr:last-child > td
+{
+    border-bottom: 0;
+}
+/* GridView and CardView headers (cells and blocks) */
+.dxbs-th.card
+{
+    margin: 0 0.5em 0.4em 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+.dxbs-th.card > .card-body
+{
+    padding: 0.4em;
+}
+.dxbs-gridview > .card .dxbs-table > thead > tr > th,
+.dxbs-th.card > .card-body
+{
+    cursor: pointer;
+    vertical-align: middle;
+}
+.dxbs-gridview > .card .dxbs-table > thead > tr > th.dxbs-noclick,
+.dxbs-th.card > .card-body.dxbs-noclick
+{
+    cursor: default;
+}
+.dxbs-gridview > .card .dxbs-table > thead > tr > th > a,
+.dxbs-gridview > .card .dxbs-table > thead > tr > th > span,
+.dxbs-th.card > .card-body > a,
+.dxbs-th.card > .card-body > span
+{
+    font-weight: bold;
+}
+.dxbs-gridview > .card .dxbs-table > thead > tr > th > a:not(:last-child),
+.dxbs-gridview > .card .dxbs-table > thead > tr > th > span:not(:last-child),
+.dxbs-th.card > .card-body > a:not(:last-child),
+.dxbs-th.card > .card-body > span:not(:last-child)
+{
+    display: table-cell;
+    width: 99.9%;
+    vertical-align: middle;
+}
+.dxbs-gridview > .card .dxbs-table > thead > tr > th > .h-icons,
+.dxbs-th.card > .card-body > .h-icons
+{
+    display: table-cell;
+    text-align: right;
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding-left: .2rem;
+}
+.dxbs-gridview > .card .dxbs-table > thead > tr > th > .h-icons button[data-toggle$='-filterpopup']:not(.active),
+.dxbs-th.card > .card-body > .h-icons button[data-toggle$='-filterpopup']:not(.active)
+{
+    opacity: .6;
+}
+.dxbs-gridview > .card .dxbs-table > thead > tr > th > .h-icons > button,
+.dxbs-gridview > .card .dxbs-table > thead > tr > th > button,
+.dxbs-th.card > .card-body > .h-icons > button,
+.dxbs-th.card > .card-body > button
+{
+    padding: 0 .2rem;
+    border-top: none;
+    border-bottom: none;
+}
+.dxbs-fixed-header-content
+{
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+    -ms-flex-align: center;
+}
+.dxbs-fixed-header-content > a,
+.dxbs-fixed-header-content > span:only-child
+{
+    flex-grow: 1;
+}
+.dxbs-fixed-header-content > a,
+.dxbs-fixed-header-content > span
+{
+    font-weight: bold;
+}
+.dxbs-fixed-header-content > .h-icons
+{
+    white-space: nowrap;
+    vertical-align: middle;
+    padding-left: .2rem;
+}
+.dxbs-fixed-header-content > .h-icons button[data-toggle$='-filterpopup']:not(.active)
+{
+    opacity: .6;
+}
+.dxbs-fixed-header-content > .h-icons > button,
+.dxbs-fixed-header-content > button
+{
+    padding: 0 .2rem;
+    text-decoration: none;
+    border-top: none;
+    border-bottom: none;
+}
+.dxbs-gridview .dxbs-fixed .dxbs-fixed-header-content > a,
+.dxbs-gridview .dxbs-fixed .dxbs-fixed-header-content > span:only-child
+{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+body > div > .dxbs-th .card-body
+{
+    /* header while dragging */
+    width: 1px;
+    display: table-cell !important;
+    white-space: nowrap;
+}
+.dxbs-gridview > .card .dxbs-table > thead > tr > th > span:first-child:last-child
+{
+    display: inline;
+}
+/* PopupControl */
+.dxbs-popup-wrapper,
+.dxbs-popup-wrapper-scroll
+{
+    top: 0px;
+    left: 0px;
+    width: 0px;
+    height: 0px;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+}
+:not(.modal) > .dxbs-popup
+{
+    visibility: hidden;
+    margin: 0 !important;
+    position: absolute;
+}
+.modal > .dxbs-popup
+{
+    position: relative;
+    left: auto;
+    top: auto;
+    box-sizing: border-box;
+}
+.dxbs-modal.modal
+{
+    overflow: auto;
+}
+.dxbs-modal.modal .drag
+{
+    cursor: default;
+}
+.dxbs-modal-back
+{
+    visibility: hidden;
+}
+.dxFixedHeader, .dxFixedFooter
+{
+    background-color: inherit;
+    box-sizing: content-box;
+    position: fixed;
+}
+.dxWebKitTouchUI .dxFixedHeader,
+.dxWebKitTouchUI .dxFixedFooter
+{
+    position: -webkit-sticky;
+}
+.dxFixedHeader
+{
+    top: 0;
+    z-index: 1;
+}
+.dxFixedFooter
+{
+    bottom: 0;
+}
+.dxbs-popup.modal-dialog
+{
+    padding: 0;
+}
+.dxbs-popup .drag
+{
+    cursor: move;
+}
+.dxbs-popup .modal-header .close-btn
+{
+    float: right;
+    margin: 0.2em 0 0 0.4em;
+    cursor: pointer;
+}
+.dxbs-popup .modal-header .close-btn:hover
+{
+    text-decoration: none;
+}
+.dxbs-popup .modal-body
+{
+    width: 100%;
+    z-index: 0;
+}
+.dxChrome .dxbs-popup a:not(.close-btn):focus,
+.dxFirefox .dxbs-popup a:not(.close-btn):focus
+{
+    outline: none;
+    position: relative;
+}
+.dxChrome .dxbs-popup a:not(.close-btn):focus:after,
+.dxFirefox .dxbs-popup a:not(.close-btn):focus:after
+{
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+.dxChrome .dxbs-popup a:not(.close-btn):focus:after
+{
+    outline: 5px auto -webkit-focus-ring-color;
+}
+.dxFirefox .dxbs-popup a:not(.close-btn):focus:after
+{
+    outline: 1px dotted highlight;
+}
+/* FormLayout */
+.dxbs-fl .row
+{
+    margin-left: 0;
+    margin-right: 0;
+}
+.dxbs-fl .dxbs-fl-g
+{
+    padding-left: 0;
+    padding-right: 0;
+}
+.dxbs-fl .dxbs-fl-gd,
+.dxbs-fl .dxbs-fl-gt
+{
+    margin-top: 1em;
+}
+.dxbs-fl .dxbs-fl-gd
+{
+    margin-bottom: 1em;
+}
+.dxbs-fl .dxbs-fl-gt .dxbs-tabs .tab-content
+{
+    padding-bottom: 0;
+}
+.dxbs-fl .dxbs-fl-g > .row,
+.dxbs-fl .dxbs-fl-gd > .card > .row,
+.dxbs-fl .dxbs-fl-gr + .row:not(.dxbs-fl-gr)
+{
+    padding-top: 1em;
+}
+.dxbs-fl .dxbs-fl-g > .row > .dxbs-fl-g > .row
+{
+    padding-top: 0;
+}
+.dxbs-fl.form-horizontal .form-group
+{
+    margin-left: 0;
+    margin-right: 0;
+}
+.dxbs-fl.form-horizontal .form-group > .dxbs-fl-cpt
+{
+    margin-bottom: 5px;
+}
+.dxbs-fl.form-horizontal .form-group > .dxbs-fl-cpt:not(:first-child):not(:last-child)
+{
+    padding-right: 0.6em;
+    padding-left: 0.6em;
+}
+.dxbs-fl.form-horizontal .form-group > .dxbs-fl-cpt:first-child
+{
+    padding-right: 0.6em;
+}
+.dxbs-fl.form-horizontal .form-group > .dxbs-fl-cpt:last-child
+{
+    padding-right: 0;
+    padding-left: 0.6em;
+    text-align: left;
+}
+.dxbs-fl.form-horizontal .row > div > .form-text
+{
+    margin-top: calc(-1em + 5px);
+}
+@media (min-width: 992px)
+{
+    .dxbs-3 .dxbs-fl.form-horizontal .form-group
+    {
+        display: table;
+        width: 100%;
+    }
+    .dxbs-3 .dxbs-fl.form-horizontal .form-group > .col-form-label,
+    .dxbs-3 .dxbs-fl.form-horizontal .form-group > .dxbs-fl-ctrl
+    {
+        display: table-cell;
+        vertical-align: top;
+    }
+    .dxbs-fl.form-horizontal .form-group > .col-form-label
+    {
+        white-space: nowrap;
+    }
+    .dxbs-fl.form-horizontal:not(.dxbs-fl-calc) .form-group > .col-form-label
+    {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .dxbs-fl.form-horizontal .form-group > .dxbs-fl-ctrl:not(img)
+    {
+        width: 100%;
+    }
+    .dxbs-fl.form-horizontal .row > div > .form-text
+    {
+        white-space: nowrap;
+    }
+}
+.dxbs-fl .form-group label em
+{
+    margin: 0 0.4em;
+    font-weight: normal;
+    font-style: normal;
+}
+.dxbs-fl-calc .form-group > .dxbs-fl-cpt
+{
+    width: auto !important;
+    flex: none !important;
+    -ms-flex: none !important;
+}
+.dxbs-fl-calc .form-group > .dxbs-fl-ctrl:not(img):not(.dxbs-fl-ctrl-nc)
+{
+    width: 100% !important;
+}
+/* Pager */
+.dxbs-pager:before,
+.dxbs-pager:after
+{
+    display: table;
+    content: " ";
+}
+.dxbs-pager:after
+{
+    clear: both;
+}
+.dxbs-pager .pagination
+{
+    margin: 0;
+    float: left;
+}
+.dxbs-3 .dxbs-pager .pagination
+{
+    display: block;
+}
+.dxbs-pager .pagination > li.active > a
+{
+    cursor: default !important;
+}
+.dxbs-pager .pagination > li > a .image:not(:last-child)
+{
+    margin: 0 0.4em 0 0;
+}
+.dxbs-pager .pagination.left
+{
+    float: right;
+}
+.dxbs-pager .summary.form-group,
+.dxbs-pager .page-size.form-group
+{
+    width: initial !important;
+}
+.dxbs-pager .summary.form-inline
+{
+    float: left;
+    margin: 0;
+}
+.dxbs-pager .summary.form-inline:not(:last-child)
+{
+    margin-right: 0.5em;
+}
+.dxbs-pager .summary.form-inline:not(:first-child)
+{
+    margin-left: 0.5em;
+}
+.dxbs-pager .summary.form-inline.left
+{
+    float: right;
+}
+.dxbs-pager .summary.form-inline .form-control
+{
+    background: inherit;
+    color: inherit;
+    border: 0;
+    box-shadow: none;
+    width: auto;
+}
+.dxbs-pager .page-size.form-inline .input-group
+{
+    display: inline-table;
+    vertical-align: middle;
+    width: auto;
+}
+.dxbs-pager .page-size.form-inline .input-group .form-control
+{
+    width: 4em;
+    box-sizing: border-box;
+}
+.dxbs-pager .page-size.form-inline
+{
+    float: right;
+    margin: 0 0.5em;
+}
+.dxbs-pager .page-size.form-inline.left
+{
+    float: left;
+}
+.dxbs-pager .page-size.form-inline .col-form-label
+{
+    margin: 0 0.3em 0 0.5em;
+    font-weight: normal;
+}
+.dxbs-pager .page-size.form-inline.left .col-form-label
+{
+    margin-left: 0;
+}
+.dxbs-pager .page-size .input-group-append
+{
+    cursor: pointer;
+    width: auto;
+}
+.dxbs-pager .page-size .input-group-append .dropdown-menu
+{
+    min-width: 6em;
+}
+.dxbs-pager .ellipsis > span
+{
+    cursor: default !important;
+}
+.dxbs-button:not([disabled])
+{
+    cursor: pointer;
+}
+.form-inline .dxbs-button-edit > div.input-group,
+.form-inline .dxbs-spin-edit > div.input-group,
+.form-inline .dxbs-dropdown-edit > div.input-group,
+.form-inline .dxbs-spin-edit > div:not(.dxbs-out-of-range-warn),
+.form-inline .dxbs-dropdown-edit > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp),
+.dxbs-button-edit > div.input-group,
+.dxbs-spin-edit > div.input-group,
+.dxbs-dropdown-edit > div.input-group
+{
+    display: flex;
+    display: -ms-flexbox;
+}
+.dxbs-uc div.input-group
+{
+    display: flex;
+    display: -ms-flexbox;
+}
+.dxbs-button-edit > div.input-group > div:not(.input-group-append):not(.input-group-prepend),
+.dxbs-spin-edit > div.input-group > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-out-of-range-warn),
+.dxbs-dropdown-edit > div.input-group > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp),
+.dxbs-uc div.input-group > div:not(.input-group-append):not(.input-group-prepend)
+{
+    width: 1%;
+    display: flex;
+    display: -ms-flexbox;
+    flex-direction: column;
+    -ms-flex-direction: column;
+    justify-content: center;
+    -ms-flex-pack: center;
+}
+.dxbs-button-edit > div.input-group > div:not(.input-group-append):not(.input-group-prepend),
+.dxbs-spin-edit > div.input-group > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-out-of-range-warn),
+.dxbs-dropdown-edit > div.input-group > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp),
+.dxbs-uc div.input-group > div:not(.input-group-append):not(.input-group-prepend),
+.dxbs-button-edit > div.input-group > div:not(.input-group-append):not(.input-group-prepend) > .form-control,
+.dxbs-spin-edit > div.input-group > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-out-of-range-warn) > .form-control,
+.dxbs-dropdown-edit > div.input-group > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp) > .form-control,
+.dxbs-uc div.input-group > div:not(.input-group-append):not(.input-group-prepend) > .form-control
+{
+    flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+}
+.dxbs-button-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend) > .form-control:focus,
+.dxbs-spin-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend) > .form-control:focus,
+.dxbs-dropdown-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp) > .form-control:focus,
+.dxbs-uc div.input-group > div:not(.input-group-append):not(.input-group-prepend) > .form-control:focus
+{
+    z-index: 3;
+}
+.form-inline .dxbs-textbox,
+.form-inline .input-group .dxbs-textbox,
+.form-inline .dxbs-memo,
+.form-inline .input-group .dxbs-memo,
+.form-inline .dxbs-button-edit,
+.form-inline .input-group .dxbs-button-edit,
+.form-inline .dxbs-spin-edit,
+.form-inline .input-group .dxbs-spin-edit,
+.form-inline .dxbs-dropdown-edit,
+.form-inline .input-group .dxbs-dropdown-edit,
+.form-inline .dxbs-combobox,
+.form-inline .dxbs-tagbox,
+.form-inline .dxbs-edit-error-frame
+{
+    display: flex;
+    display: -ms-flexbox;
+    flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    align-items: center;
+    -ms-flex-align: center;
+}
+.input-group .dxbs-textbox,
+.input-group .dxbs-memo,
+.input-group .dxbs-button-edit,
+.input-group .dxbs-spin-edit,
+.input-group .dxbs-dropdown-edit
+{
+    display: block;
+    width: auto;
+    flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+}
+.input-group .dxbs-textbox > div,
+.input-group .dxbs-memo > div,
+.input-group .dxbs-button-edit > div:not(.input-group),
+.input-group .dxbs-spin-edit > div:not(.dxbs-out-of-range-warn):not(.input-group),
+.input-group .dxbs-dropdown-edit > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp):not(.input-group)
+{
+    display: block;
+}
+@media (max-width: 576px)
+{
+    .form-inline .dxbs-textbox,
+    .form-inline .dxbs-memo,
+    .form-inline .dxbs-button-edit,
+    .form-inline .dxbs-spin-edit,
+    .form-inline .dxbs-dropdown-edit,
+    .form-inline .dxbs-combobox,
+    .form-inline .dxbs-tagbox
+    {
+        width: 100%;
+    }
+    .form-inline .dxbs-textbox > div,
+    .form-inline .dxbs-memo > div,
+    .form-inline .dxbs-button-edit > div:not(.input-group),
+    .form-inline .dxbs-spin-edit > div:not(.input-group):not(.dxbs-out-of-range-warn),
+    .form-inline .dxbs-dropdown-edit > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp):not(.input-group)
+    {
+        display: block;
+        width: 100%;
+    }
+}
+.dxbs-textbox > div > input.form-control,
+.dxbs-memo > div > input.form-control,
+.dxbs-button-edit > div:not(.input-group) > input.form-control,
+.dxbs-spin-edit > div:not(.input-group) > input.form-control,
+.dxbs-dropdown-edit > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp):not(.input-group) > input.form-control,
+.dxbs-button-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend) > input.form-control,
+.dxbs-spin-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend) > input.form-control,
+.dxbs-dropdown-edit > .input-group > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp) > input.form-control
+{
+    width: 100%;
+}
+.form-inline .dxbs-textbox .dxbs-feedback,
+.form-inline .dxbs-memo .dxbs-feedback,
+.form-inline .dxbs-button-edit .dxbs-feedback,
+.form-inline .dxbs-button-edit .input-group .dxbs-feedback,
+.form-inline .dxbs-dropdown-edit .dxbs-feedback,
+.form-inline .dxbs-dropdown-edit .input-group .dxbs-feedback,
+.form-inline .dxbs-spin-edit .dxbs-feedback,
+.form-inline .dxbs-spin-edit .input-group .dxbs-feedback,
+.form-inline .dxbs-uc .input-group .dxbs-feedback,
+.dxbs-textbox .dxbs-feedback,
+.dxbs-memo .dxbs-feedback,
+.dxbs-button-edit .dxbs-feedback,
+.dxbs-button-edit .input-group .dxbs-feedback,
+.dxbs-dropdown-edit .dxbs-feedback,
+.dxbs-dropdown-edit .input-group .dxbs-feedback,
+.dxbs-spin-edit .dxbs-feedback,
+.dxbs-spin-edit .input-group .dxbs-feedback,
+.dxbs-uc .input-group .dxbs-feedback
+{
+    position: absolute;
+    text-align: center;
+}
+.form-inline .dxbs-button-edit .input-group .dxbs-feedback,
+.form-inline .dxbs-dropdown-edit .input-group .dxbs-feedback,
+.form-inline .dxbs-spin-edit .dxbs-feedback,
+.form-inline .dxbs-spin-edit .input-group .dxbs-feedback,
+.form-inline .dxbs-uc .input-group .dxbs-feedback,
+.dxbs-button-edit .input-group .dxbs-feedback,
+.dxbs-dropdown-edit .input-group .dxbs-feedback,
+.dxbs-spin-edit .dxbs-feedback,
+.dxbs-spin-edit .input-group .dxbs-feedback
+.dxbs-uc .input-group .dxbs-feedback
+{
+    margin-top: 0;
+}
+.form-inline .dxbs-textbox .dxbs-feedback,
+.form-inline .dxbs-memo .dxbs-feedback,
+.form-inline .dxbs-button-edit .dxbs-feedback,
+.form-inline .dxbs-dropdown-edit > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp) .dxbs-feedback,
+.form-inline .dxbs-uc .input-group .dxbs-feedback,
+.dxbs-textbox .dxbs-feedback,
+.dxbs-textbox .form-control.is-invalid ~ .dxbs-feedback,
+.dxbs-memo .dxbs-feedback,
+.dxbs-memo .form-control.is-invalid ~ .dxbs-feedback,
+.dxbs-button-edit .dxbs-feedback,
+.dxbs-button-edit .form-control.is-invalid ~ .dxbs-feedback,
+.dxbs-dropdown-edit > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp) .dxbs-feedback,
+.dxbs-dropdown-edit .form-control.is-invalid ~ .dxbs-feedback,
+.dxbs-uc .input-group .dxbs-feedback
+{
+    display: flex;
+    display: -ms-flexbox;
+    flex-flow: row nowrap;
+    -ms-flex-flow: row nowrap;
+    align-items: center;
+    -ms-flex-align: center;
+    top: 0;
+    margin-top: 0;
+    height: 100%;
+}
+.dxbs-textbox .form-control.is-invalid,
+.dxbs-memo .form-control.is-invalid,
+.dxbs-button-edit .form-control.is-invalid,
+.dxbs-dropdown-edit .form-control.is-invalid
+{
+    background-image: none;
+}
+.dxbs-textbox .dxbs-feedback > .dxbs-clear-btn,
+.dxbs-textbox .dxbs-feedback > [data-error-image],
+.dxbs-memo .dxbs-feedback > .dxbs-clear-btn,
+.dxbs-memo .dxbs-feedback > [data-error-image],
+.dxbs-button-edit .dxbs-feedback > .dxbs-clear-btn,
+.dxbs-button-edit .dxbs-feedback > [data-error-image],
+.dxbs-dropdown-edit > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp) .dxbs-feedback > .dxbs-clear-btn,
+.dxbs-dropdown-edit > div:not(.input-group-append):not(.input-group-prepend):not(.dxbs-dropdown-area):not(.dxbs-out-of-range-warn):not(.dxbs-ld):not(.dxbs-lp) .dxbs-feedback > [data-error-image],
+.dxbs-uc .input-group .dxbs-feedback > .dxbs-clear-btn
+{
+    display: flex;
+    display: -ms-flexbox;
+    white-space: nowrap;
+    align-items: center;
+    -ms-flex-align: center;
+}
+.dxbs-edit-error-frame .dxbs-feedback.invalid-feedback,
+.dxbs-edit-error-text.invalid-feedback
+{
+    display: block;
+}
+.form-inline .dxbs-edit-error-text.invalid-feedback
+{
+    width: auto;
+}
+.dxbs-edit-error-frame [data-error-image].invalid-feedback,
+.dxbs-cbl .dxbs-feedback.invalid-feedback
+{
+    display: inline-block;
+    width: auto;
+    margin-top: 0;
+}
+.form-inline .dxbs-button-edit > .input-group ~ .dxbs-feedback,
+.form-inline .dxbs-dropdown-edit > .input-group ~ .dxbs-feedback
+{
+    top: auto;
+}
+.dxbs-button-edit > .input-group ~ .dxbs-feedback,
+.dxbs-dropdown-edit > .input-group ~ .dxbs-feedback
+{
+    top: 0;
+    bottom: 0.5rem;
+    right: 0;
+}
+.dxbs-button-edit > .input-group ~ .dxbs-feedback.invalid-feedback,
+.dxbs-dropdown-edit > .input-group ~ .dxbs-feedback.invalid-feedback,
+.dxbs-spin-edit > .input-group ~ .dxbs-feedback.invalid-feedback
+{
+    width: auto;
+}
+.form-inline .dxbs-spin-edit > .input-group ~ .dxbs-feedback,
+.dxbs-spin-edit > .input-group ~ .dxbs-feedback
+{
+    height: auto;
+    top: calc(100% - 2.5em);
+    right: 0;
+}
+.form-inline .dxbs-spin-edit .dxbs-feedback,
+.form-inline .dxbs-spin-edit .input-group .dxbs-feedback,
+.dxbs-spin-edit .dxbs-feedback,
+.dxbs-spin-edit .input-group .dxbs-feedback
+{
+    height: 100%;
+}
+.dxbs-spin-edit .form-control.is-invalid ~ .dxbs-feedback.invalid-feedback,
+.dxbs-spin-edit .dxbs-feedback.invalid-feedback
+{
+    display: flex;
+    display: -ms-flexbox;
+}
+.dxbs-spin-btn-group .increment .inc,
+.dxbs-spin-btn-group .increment .dec
+{
+    align-items: center;
+    -ms-flex-align: center;
+}
+.dxbs-spin-btn-group .dxbs-edit-btn .dropdown-toggle:after
+{
+    margin: 0;
+}
+.dxbs-spin-btn-group .increment .dec .dropdown-toggle
+{
+    transform: rotate(360deg);
+}
+.dxbs-clear-btn,
+.dxbs-spin-btn-group .dxbs-edit-btn
+{
+    font-size: 1rem;
+}
+.dxbs-spin-btn-group .dxbs-edit-btn > *
+{
+    line-height: 1;
+}
+.form-inline .dxbs-spin-edit div .dxbs-feedback,
+.form-inline .dxbs-spin-edit .input-group div .dxbs-feedback,
+.dxbs-spin-edit div .dxbs-feedback,
+.dxbs-spin-edit .input-group div .dxbs-feedback
+{
+    top: 0;
+}
+.dxbs-listbox.list-group > li,
+.dxbs-listbox > .list-group > li,
+.dxbs-listbox.list-group .list-group-item,
+.dxbs-listbox > .list-group .list-group-item
+{
+    display: block;
+}
+.dxbs-listbox.list-group > li,
+.dxbs-listbox > .list-group > li
+{
+    flex: 0 1 auto;
+    -ms-flex: 0 0 auto;
+}
+.dxbs-listbox.list-group > li[data-type="spacer"],
+.dxbs-listbox > .list-group > li[data-type="spacer"]
+{
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+}
+.dxbs-listbox > li span.image,
+.dxbs-listbox > ul > li span.image
+{
+    min-width: 1em;
+}
+.dxbs-listbox > li > .form-check.form-check-inline,
+.dxbs-listbox > ul > li > .form-check.form-check-inline
+{
+    margin-right: 0;
+}
+.dxbs-listbox > li > .form-check > label,
+.dxbs-listbox > ul > li > .form-check > label
+{
+    display: inline-block;
+    position: relative;
+}
+.dxbs-listbox.card > .dxbs-list-filter > .input-group
+{
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+.dxbs-listbox.card > .card-header .dxbs-list-filter-show
+{
+    display: flex;
+    display: -ms-flexbox;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.dxbs-popup[id*="_DXHFP"]:not(.hf-list) > .modal-content > .modal-header
+{
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+.dxbs-tagbox .dxbs-tag
+{
+    display: inline-flex;
+    display: -ms-inline-flexbox;
+    flex-flow: row nowrap;
+    -ms-flex-flow: row nowrap;
+    align-items: center;
+    -ms-flex-align: center;
+    max-width: 100%;
+}
+.dxbs-tagbox .dxbs-tag > span
+{
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.dxbs-tagbox .dxbs-tag > span.dxbs-tag-remove-btn
+{
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+}
+.dxbs-calendar,
+.dxbs-calendar.card
+{
+    display: inline-flex;
+    display: -ms-inline-flexbox;
+    flex-direction: column;
+    -ms-flex-direction: column;
+}
+.dxbs-calendar .dxbs-month-table > tbody > tr > td:not(.table-active):not(.dxbs-today),
+.dxbs-calendar .dxbs-month-table > tbody > tr > th,
+.dxbs-calendar .dxbs-fast-nav .table > tbody > tr > td:not(.table-active)
+{
+    border-color: transparent;
+    border-image: none;
+    border-radius: 0;
+}
+.dxbs-calendar .table-sm th,
+.dxbs-calendar .table-sm td
+{
+    padding: 0.3rem;
+}
+.dxbs-calendar .dxbs-month-table.table-bordered,
+.dxbs-calendar .dxbs-fast-nav .table-bordered
+{
+    border: none;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 0;
+}
+.dxbs-calendar .dxbs-month-table > tbody > tr > td.dxbs-today
+{
+    border-color: currentColor;
+}
+.dxbs-calendar .btn-toolbar > .btn + .btn
+{
+    margin-left: 0.4em;
+}
+.dxbs-fast-nav.dropdown-menu,
+.dxbs-dropdown-area.dropdown-menu
+{
+    display: none;
+    position: absolute;
+    margin-bottom: 0px;
+    padding: 0px;
+}
+.dxbs-calendar .btn:not(.disabled)
+{
+    cursor: pointer;
+}
+.dxbs-edit-error-frame
+{
+    position: relative;
+}
+.dxbs-edit-error-frame:not(.dxbs-cbl) .dxbs-feedback
+{
+    position: absolute;
+    right: 0;
+}
+.dxbs-uc .input-group input.form-control
+{
+    width: 100%;
+}
+.dxbs-uc .input-group .dxbs-feedback
+{
+    position: absolute;
+    right: 0;
+}
+.dxbs-listbox.dx-dropdown-menu > li > .dropdown-item > .badge
+{
+    float: none;
+}
+.dxbs-uc .dxbs-file-list,
+.dxbs-uc .dxbs-file-list > li > div,
+.dxbs-uc .dxbs-file-list li > button
+{
+    display: block;
+}
+.dxbs-uc .dxbs-file-list > li
+{
+    display: flex;
+    display: -ms-flexbox;
+    flex-flow: row nowrap;
+    -ms-flex-flow: row nowrap;
+    align-items: baseline;
+    -ms-flex-align: baseline;
+}
+.dxbs-drop-zone > div,
+.dxbs-binary-image > div,
+.dxbs-binary-image .bin-img-tbl
+{
+    display: flex;
+    display: -ms-flexbox;
+    flex-direction: column;
+    -ms-flex-direction: column;
+    justify-content: center;
+    -ms-flex-pack: center;
+}
+.dxbs-drop-zone > div > div,
+.dxbs-binary-image > div > div,
+.dxbs-binary-image .bin-img-text-panel .bin-img-tbl > div,
+.dxbs-binary-image .bin-img-panel > .bin-img-tbl > div,
+.dxbs-binary-image .bin-img-progress-panel > .bin-img-tbl > div
+{
+    display: block;
+}
+.dxbs-coloredit .input-group > div:not(.input-group-append):not(.input-group-prepend)
+{
+    flex-direction: row !important;
+}
+.dxbs-coloredit .dxbs-coloredit-ci
+{
+    display: inline-flex;
+    max-height: calc(100% - 2 * 0.25rem);
+    align-self: center;
+    width: 2em;
+    height: 100%;
+    margin-left: 0.25rem;
+    margin-right: calc(-2em - 0.25rem);
+    background-color: transparent;
+    z-index: 5;
+    padding: 0;
+    border-radius: 0;
+}
+.dxbs-gridview > .card
+{
+    display: block;
+}
+.dxbs-gridview > .card > .dxbs-table.table-bordered
+{
+    border-left: 0;
+    border-right: 0;
+}
+.dxbs-gridview > .card > .table-bordered:first-child,
+.dxbs-gridview > .card > .table-bordered:first-child > thead > tr > th,
+.dxbs-gridview > .card > .table-bordered:first-child > tbody:first-child > tr:first-child > td
+{
+    border-top: 0;
+}
+.dxbs-gridview > .card > .table-bordered:last-child
+{
+    border-bottom: 0;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.bg-primary.text-white > td a
+{
+    color: inherit;
+}
+.dxbs-gridview > .card .dxbs-table > thead > tr > th.dxbs-cmd-cell > .dxbs-cmd-cb label,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > .dxbs-cmd-cb label
+{
+    padding-left: 0;
+}
+.dxbs-gridview > .card .dxbs-table > thead > tr > th:not(.dxbs-cmd-cell) > button,
+.dxbs-gridview > .card .dxbs-table > thead > tr > th:not(.dxbs-cmd-cell) > button > *
+{
+    line-height: inherit;
+}
+.dxbs-gridview > .card .card-body .dxbs-search-panel > .input-group,
+.dxbs-cardview > .card .card-body .dxbs-search-panel > .input-group
+{
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+.dxbs-gridview .dxbs-popup[id*="_DXHFP"] > .modal-content > .modal-header
+{
+    display: block;
+}
+.dxbs-gridview .dxbs-cd-column-item .btn.btn-link,
+.dxbs-gridview .dxbs-cd-filter-item .btn.btn-link
+{
+    cursor: pointer;
+}
+.dxbs-gridview .dxbs-cd-column-item.card
+{
+    flex-flow: row;
+    -ms-flex-flow: row;
+    align-items: center;
+    -ms-flex-align: center;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UFSC .modal-header
+{
+    display: block;
+}
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UFSC > .form-check
+{
+    margin-top: 1em;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > .form-check.form-check-inline,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > div[data-dxci] > .form-check.form-check-inline,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > .dxgBCTC > .form-check.form-check-inline,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADDC > .form-check.form-check-inline,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADDC > .dxgBCTC > .form-check.form-check-inline,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADDC > div[data-dxci] > .form-check.form-check-inline,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADCMDC > .form-check.form-check-inline,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADCMDC > .dxgBCTC > .form-check.form-check-inline
+{
+    margin-bottom: 0;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > .form-check.form-check-inline,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > div[data-dxci] > .form-check.form-check-inline,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > .dxgBCTC > .form-check.form-check-inline,
+.dxbs-gridview > .card .dxbs-table > thead > tr > th > .dxbs-cmd-cb input,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > .form-check.form-check-inline input,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > div[data-dxci] > .form-check.form-check-inline input,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > .dxgBCTC > .form-check.form-check-inline input,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADDC > .form-check.form-check-inline input,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADDC > div[data-dxci] > .form-check.form-check-inline input
+{
+    margin-right: 0;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > .form-check.form-check-inline.dxbs-cmd-cb,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > div[data-dxci] > .form-check.form-check-inline.dxbs-cmd-cb,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > .dxgBCTC > .form-check.form-check-inline.dxbs-cmd-cb,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADCMDC > .form-check.form-check-inline.dxbs-cmd-cb
+{
+    margin-left: 1em;
+    margin-right: 1em;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > .btn + .form-check.form-check-inline.dxbs-cmd-cb,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > div[data-dxci] > .btn + .form-check.form-check-inline.dxbs-cmd-cb,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td > .dxgBCTC > .btn + .form-check.form-check-inline.dxbs-cmd-cb,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADCMDC > .btn + .form-check.form-check-inline.dxbs-cmd-cb,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADCMDC > .dxgBCTC > .btn + .form-check.form-check-inline.dxbs-cmd-cb
+{
+    margin-left: 0.5em;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADT.table > tbody > tr > td.dxgvADDC,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADT.table > tbody > tr > td.dxgvADCC,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADT.table > tbody > tr > td.dxgvADCMDC,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADT.table > tbody > tr > td.dxgvADDC > .form-check.form-check-inline:not(.check-adaptive),
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADT.table > tbody > tr > td.dxgvADDC > div[data-dxci] > .form-check.form-check-inline
+{
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxgvADR .dxgvADT.table > tbody > tr > td.dxgvADDC > div[data-dxci]
+{
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+    margin-top: -0.75rem;
+    margin-bottom: -0.75rem;
+}
+.dxbs-popup[id*="_DXHFP"].modal-dialog .dxbs-cbl > div > .column-element > div
+{
+    padding-left: 1rem;
+}
+.dxbs-popup[id*="_DXHFP"].modal-dialog .dxbs-listbox.dx-dropdown-menu > li > .dropdown-item.form-check
+{
+    padding: 0.5rem 1rem;
+}
+.dxbs-popup[id*="_DXHFP"].modal-dialog .dxbs-listbox.dx-dropdown-menu > li > .dropdown-item:not(.active):not(.disabled):not(:hover):not(:focus):not(:active),
+.dxbs-popup[id*="_DXHFP"].modal-dialog .dxbs-listbox.dx-dropdown-menu > li > .dropdown-item label,
+.dxbs-popup[id*="_DXHFP"].modal-dialog .dxbs-listbox.card .form-check:not(.active):not(.disabled):not(:active):not(:hover):not(:focus),
+.dxbs-popup[id*="_DXHFP"].modal-dialog .dxbs-listbox.card a.list-group-item:not(.active):not(.disabled):not(:active):not(:hover):not(:focus),
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxbs-listbox.card .form-check:not(.active):not(.disabled):not(:active):not(:hover):not(:focus),
+.dxbs-gridview .dxbs-cd-filter-item .dxgvCD_UF .dxbs-listbox.card a.list-group-item:not(.active):not(.disabled):not(:active):not(:hover):not(:focus)
+{
+    color: inherit;
+}
+.dxbs-gridview .dxbs-cd-header
+{
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+    -ms-flex-align: center;
+}
+.dxbs-gridview .dxbs-cd-header > div
+{
+    display: block;
+    flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+}
+.dxbs-gridview .dxbs-cd-column-item.card.card-body > div
+{
+    display: block;
+}
+.dxbs-gridview .dxbs-th.card > .card-body,
+.dxbs-cardview .dxbs-th.card > .card-body
+{
+    display: flex;
+    display: -ms-flexbox;
+    flex-flow: row nowrap;
+    -ms-flex-flow: row nowrap;
+    align-items: center;
+    -ms-flex-align: center;
+}
+.dxbs-gridview .dxbs-th.card > .card-body > a:not(:last-child),
+.dxbs-gridview .dxbs-th.card > .card-body > span:not(:last-child),
+.dxbs-cardview .dxbs-th.card > .card-body > a:not(:last-child),
+.dxbs-cardview .dxbs-th.card > .card-body > span:not(:last-child)
+{
+    display: inline-block;
+}
+.dxbs-gridview .dxbs-th.card > .card-body > .h-icons,
+.dxbs-cardview .dxbs-th.card > .card-body > .h-icons
+{
+    display: block;
+    width: auto;
+}
+/* Batch Edit */
+.dxbs-gridview > .card .dxbs-table > tbody > tr.bg-success > td:not(.dxbs-batch-editing),
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxbs-batch-changed > td:not(.dxbs-batch-editing)
+{
+    background: inherit;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.bg-success > td:not(.dxbs-batch-editing),
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxbs-batch-changed > td:not(.dxbs-batch-editing),
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td:not(.dxbs-batch-editing).dxbs-batch-changed
+{
+    position: relative;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.bg-success > td:not(.dxbs-batch-editing):before,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxbs-batch-changed > td:not(.dxbs-batch-editing):before,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td:not(.dxbs-batch-editing).dxbs-batch-changed:before
+{
+    content: ' ';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: inherit;
+    opacity: .75;
+}
+.dxbs-gridview > .card .dxbs-table > tbody > tr.bg-success td:not(.dxbs-batch-editing) > *,
+.dxbs-gridview > .card .dxbs-table > tbody > tr.dxbs-batch-changed td:not(.dxbs-batch-editing) > *,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td:not(.dxbs-batch-editing).dxbs-batch-changed > *
+{
+    transform: scale(1);
+}
+.dxbs-fl .dxbs-fl-cpt
+{
+    font-weight: bold;
+}
+.dxbs-fl.form-horizontal .row > div > .form-text
+{
+    margin-bottom: 0.6em;
+}
+@media (min-width: 992px)
+{
+    .dxbs-fl.form-horizontal .form-group > .dxbs-fl-ctrl
+    {
+        align-self: center;
+        -ms-flex-item-align: center;
+    }
+}
+.dxbs-fl.form-horizontal .form-group
+{
+    display: flex;
+    display: -ms-flexbox;
+    flex-direction: column;
+    -ms-flex-direction: column;
+    width: 100%;
+}
+@media (min-width: 992px)
+{
+    .dxbs-fl.form-horizontal .form-group
+    {
+        flex-flow: row nowrap;
+        -ms-flex-flow: row nowrap;
+    }
+    .dxbs-fl.form-horizontal .form-group > .col-form-label
+    {
+        flex: 1 0 auto;
+        -ms-flex: 1 0 auto;
+    }
+}
+.dxbs-fl.form-horizontal .form-group > .col-form-label
+{
+    margin-bottom: 0;
+}
+.dxbs-fl .dxbs-fl-gd,
+.dxbs-fl .dxbs-fl-gt
+{
+    margin-top: 1rem;
+}
+.dxbs-fl .dxbs-fl-gd
+{
+    margin-bottom: 1rem;
+}
+.dxbs-fl .dxbs-fl-g > .row,
+.dxbs-fl .dxbs-fl-gd > .card > .row,
+.dxbs-fl .dxbs-fl-gr + .row:not(.dxbs-fl-gr)
+{
+    padding-top: 1rem;
+}
+.dxbs-popup .modal-header .close-btn
+{
+    float: none;
+}
+.dxbs-popup .modal-content
+{
+    display: block;
+}
+.dxbs-popup .btn-toolbar > .btn:not(:first-child)
+{
+    margin-left: 0.4em;
+}
+:not(.modal) > .dxbs-popup-fixed-width
+{
+    max-width: none;
+    min-width: 0;
+}
+.dxbs-acc ul.nav > li > a:not(.disabled)
+{
+    cursor: pointer;
+}
+.dxbs-menu ul.nav > li > a:not(.disabled),
+.dxbs-menu ul.dx-dropdown-menu > li > .dropdown-item:not(.disabled),
+.dxbs-popup-menu.dx-dropdown-menu > li > .dropdown-item:not(.disabled),
+.dxbs-popup-menu .dx-dropdown-menu > li > .dropdown-item:not(.disabled)
+{
+    cursor: pointer;
+}
+.dxbs-menu ul.nav.nav-justified > li.separator
+{
+    flex: 0 0;
+    -ms-flex: 0 0;
+    padding: 0 0.4em;
+}
+.dxbs-menu ul.flex-column > li > a > span.popout,
+.dxbs-menu ul.dx-dropdown-menu > li > .dropdown-item > span.popout,
+.dxbs-popup-menu.dx-dropdown-menu > li > .dropdown-item > span.popout,
+.dxbs-popup-menu .dx-dropdown-menu > li > .dropdown-item > span.popout,
+.dxbs-toolbar .dx-dropdown-menu > li > .dropdown-item > span.popout
+{
+    top: 0;
+    bottom: 0;
+}
+.dxbs-menu ul > li > a > .badge
+{
+    margin-left: 0.4em;
+}
+.dxbs-menu .dxbs-navbar
+{
+    padding: 0 1em;
+}
+.dxbs-toolbar > .btn-group > .btn-group[data-toggle='toolbar-dropdownmode'] > .dropdown-toggle::after
+{
+    margin-left: 0;
+}
+.dxbs-toolbar > .btn-group
+{
+    margin-bottom: 0.1rem;
+}
+.dxbs-toolbar > .btn-group:not(:last-child)
+{
+    margin-right: 0.5rem;
+}
+.dxbs-pager .pagination > li > a:not(.disabled)
+{
+    cursor: pointer;
+}
+.dxbs-pager .page-size.form-inline .input-group
+{
+    display: flex;
+    display: -ms-flexbox;
+}
+.dxbs-pager .page-size.form-inline .input-group .form-control
+{
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+.dxbs-tabs ul.nav > li > a:not(.disabled)
+{
+    cursor: pointer;
+}
+.dxbs-tree ul.nav > li > a:not(.disabled)
+{
+    cursor: pointer;
+}
+.dxbs-tree ul.flex-column
+{
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+.dxbs-tree ul.nav > li > a > span + .badge
+{
+    margin-left: 0.3em;
+}
+.dxbs-pager:before,
+.dxbs-pager:after
+{
+    display: none;
+    content: "";
+}
+.dxbs-pager,
+.dxbs-gridview .dxbs-pager
+{
+    display: flex;
+    display: -ms-flexbox;
+    flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    align-items: center;
+    -ms-flex-align: center;
+}
+.dxbs-pager .summary.form-inline,
+.dxbs-pager .pagination,
+.dxbs-pager .summary.form-inline.left,
+.dxbs-pager .pagination.left,
+.dxbs-pager .page-size.form-inline,
+.dxbs-pager .page-size.form-inline.left
+{
+    float: none;
+}
+.dxbs-pager .page-size.form-inline
+{
+    margin-left: 0;
+    margin-right: 0;
+}
+.dxbs-acc > .card > .card-header
+{
+    display: flex;
+    display: -ms-flexbox;
+    flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    align-items: center;
+    -ms-flex-align: center;
+}
+.dxbs-acc .card-header .expand-btn:last-child
+{
+    float: none;
+}
+.dxbs-acc .card-header .card-title
+{
+    margin-bottom: 0;
+}
+.dxbs-tabs .dxbs-right
+{
+    justify-content: flex-end;
+    -ms-flex-pack: end;
+}
+.dxbs-tabs .dxbs-right > li
+{
+    float: none;
+}
+.dxbs-4 .dx-small-image
+{
+    width: 1rem;
+    height: 1rem;
+}
+/* Razor Components */
+
+/** Razor Components Data Grid **/
+
+/* command cell buttons */
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > span > .btn.btn-link,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > span > .dxgBCTC > .btn.btn-link,
+.dxbs-gridview > .card .dxbs-table > thead > tr > th.dxbs-cmd-cell > span > .btn.btn-link {
+    border: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/** Razor Components Combo Box **/
+.dx-listbox .input-group-append > .dropdown-menu {
+	padding: 0;
+}
+
+	.dx-listbox .input-group-append > .dropdown-menu > table {
+		margin-bottom: 0;
+	}
+
+		.dx-listbox .input-group-append > .dropdown-menu > table > tbody tr:first-child > td {
+			border-top: none;
+		}
+
+.dx-listbox .dropdown-menu {
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.dx-lb-datagrid > .card {
+    border: 0;
+}
+.dx-lb-datagrid > .card > table > tbody > tr:last-child > td {
+    
+    border-bottom: 0;
+}
+/** Razor Components Calendar **/
+.dxbs-calendar > .calendar-row > .calendar-view {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+/** Razor Components Pager **/
+.dx-pager .pagination {
+	margin: 0;
+}
+/** Razor Components PivotGrid **/
+.dx-pivotgrid {
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+.dx-pivotgrid .btn,
+.dx-pivotgrid .table td {
+    white-space: nowrap;
+}
+.dx-pivotgrid .dxpg-header .btn {
+    color: inherit;
+    padding: 0 0.25rem;
+    text-align: left;
+    text-decoration: none;
+    width: 100%;
+}
+.dx-pivotgrid .dxpg-header .btn .image {
+    margin-right: 0.5rem;
+}
+.dx-pivotgrid .dxpg-field-panel:first-child,
+.dx-pivotgrid .dxpg-header {
+    width: 1%;
+}
+.dx-pivotgrid .table td.dxpg-area-row {
+    vertical-align: bottom;
+}
+.dx-pivotgrid .table td.dxpg-data {
+    text-align: right;
+}
+.dx-pivotgrid > table {
+    margin-bottom: 0;
+    border: 0;
+}
+.dx-pivotgrid > table > tbody > tr > td:first-child {
+    border-left-style: none;
+}
+.dx-pivotgrid > table > tbody > tr > td {
+    border-right-style: none;
+}
+.dx-pivotgrid.dxpg-no-pager > table > tbody > tr:last-child td {
+    border-bottom: 0;
+}
+.dx-pivotgrid .table td.dxpg-field-panel {
+    border-style: none;
+}
+.dx-pivotgrid .dxpg-field-panel > .btn {
+    border-radius: 0;
+    border-color: inherit;
+    border-style: solid;
+    font-weight: 600;
+}
+.dx-pivotgrid .dxpg-field-panel .btn .image {
+    margin-left: 0.5rem;
+}
+.dx-pivotgrid .dxpg-field-panel > .btn.inactive {
+    cursor: default;
+    color: inherit;
+    text-decoration: none;
+}
+.dx-pivotgrid .dxpg-field-panel.dxpg-area-column {
+    padding-left: 0;
+}
+.dx-pivotgrid .dxpg-loading-panel {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+}
+.dx-pivotgrid .dxpg-loading-panel > span {
+    margin-left: 0.5rem;
+}
+.dx-pivotgrid tr:first-child td:first-child {
+    width: 1%;
+}

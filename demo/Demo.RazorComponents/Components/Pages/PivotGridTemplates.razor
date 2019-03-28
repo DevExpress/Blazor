@@ -1,0 +1,75 @@
+﻿@page "/PivotGridTemplates"
+@using Demo.RazorComponents.Model
+@using DevExpress.RazorComponents.PivotGrid
+
+<div class="demo-description">
+    <h2>Pivot Grid Templates</h2>
+    <p>
+        The Pivot Grid component allows you to use native Razor markup to define custom templates for its elements.
+    </p>
+    <p>
+        This demo specifies templates for the following Pivot Grid Fields:
+    </p>
+    <ul>
+        <li>
+            <b>Quarter</b>
+            <p>Uses a HeaderTemplate to format quarter numbers.</p>
+        </li>
+        <li>
+            <b>Month</b>
+            <p>Uses a HeaderTemplate to transform month numbers into culture-specific month names.</p>
+        </li>
+        <li>
+            <b>Count</b>
+            <p>Uses a DataTemplate to apply bold formatting to all values.</p>
+        </li>
+        <li>
+            <b>Amount</b>
+            <p>Uses a DataTemplate to apply conditional formatting to values.</p>
+        </li>
+    </ul>
+</div>
+
+@if(GridData == null) {
+    <p><em>Loading...</em></p>
+} else {
+    <DxPivotGrid Data=@GridData ShowGrandTotals="@ShowGrandTotals" ShowFieldHeaders="@ShowFieldHeaders">
+        <DxPivotGridField Field=@nameof(SaleInfo.Region) SortOrder=@SortOrder.Asc Area=@PivotGridFieldArea.Row></DxPivotGridField>
+        <DxPivotGridField Field=@nameof(SaleInfo.Country) Area=@PivotGridFieldArea.Row></DxPivotGridField>
+        <DxPivotGridField Field=@nameof(SaleInfo.City) Area=@PivotGridFieldArea.Row></DxPivotGridField>
+        <DxPivotGridField Field=@nameof(SaleInfo.Date) GroupInterval=@PivotGridGroupInterval.Year Area=@PivotGridFieldArea.Column Caption="Year"></DxPivotGridField>
+        <DxPivotGridField Field=@nameof(SaleInfo.Date) GroupInterval=@PivotGridGroupInterval.Quarter Area=@PivotGridFieldArea.Column Caption="Quarter">
+            <HeaderTemplate>
+                @($"Q{context}")
+            </HeaderTemplate>
+        </DxPivotGridField>
+        <DxPivotGridField Field=@nameof(SaleInfo.Date) GroupInterval=@PivotGridGroupInterval.Month Area=@PivotGridFieldArea.Column Caption="Month">
+            <HeaderTemplate>
+                @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName((int)context)
+            </HeaderTemplate>
+        </DxPivotGridField>
+        <DxPivotGridField Field=@nameof(SaleInfo.Amount) Area=@PivotGridFieldArea.Data SummaryType=@PivotGridSummaryType.Sum>
+            <DataTemplate>
+                <span class=@((decimal)context > 100000 ? "text-success" : "text-danger")>
+                    @string.Format("{0:c0}", context)
+                </span>
+            </DataTemplate>
+        </DxPivotGridField>
+        <DxPivotGridField Field=@nameof(SaleInfo.OrderId) Caption="Count" Area=@PivotGridFieldArea.Data SummaryType=@PivotGridSummaryType.Count>
+            <DataTemplate>
+                <span class="font-weight-bold">@context</span>
+            </DataTemplate>
+        </DxPivotGridField>
+    </DxPivotGrid>
+    <CodeSnippet_Pivot_Templates></CodeSnippet_Pivot_Templates>
+}
+
+@functions {
+
+    IQueryable<SaleInfo> GridData;
+    bool ShowGrandTotals = true, ShowFieldHeaders = true;
+
+    protected override async Task OnInitAsync() {
+        GridData = await Sales.Load();
+    }
+}

@@ -1,0 +1,13 @@
+﻿@inject IJSRuntime JSRuntime
+@using Microsoft.JSInterop;
+<pre><code class="hljs xml">@ChildContent</code></pre>
+
+
+@functions {
+    [Parameter] private RenderFragment ChildContent { get; set; }
+
+    protected override async Task OnAfterRenderAsync()
+    {
+        await JSRuntime.InvokeAsync<string>("HighlightJSUpdate", "");
+    }
+}

@@ -1,0 +1,17 @@
+﻿<div class="card demo-card-wide" style="border-top: none">
+    <div class="card-footer text-muted" style="border-top: none">
+        <CodeSnippet>
+@(@"<DxDataGrid Data=@forecasts
+            PageSize=5
+            RowRemoving=@((dataItem) => OnRowRemoving(dataItem))
+            RowUpdating=@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))
+            RowInserting=@((newValues) => OnRowInserting(newValues))>
+    <DxDataGridCommandColumn Width=""150px""></DxDataGridCommandColumn>
+    <DxDataGridColumn Field=@nameof(WeatherForecast.TemperatureC) Caption=""Temp. (C)""></DxDataGridColumn>
+    <DxDataGridSpinEditColumn Field=@nameof(WeatherForecast.TemperatureF) Caption=""Temp. (F)""></DxDataGridSpinEditColumn>
+    <DxDataGridComboBoxColumn Field=@nameof(WeatherForecast.Summary) Caption=""Summary"" Data=@summaries></DxDataGridComboBoxColumn>
+    <DxDataGridDateEditColumn Field=@nameof(WeatherForecast.Date)></DxDataGridDateEditColumn>
+</DxDataGrid>")
+        </CodeSnippet>
+    </div>
+</div>
