@@ -136,7 +136,7 @@ div.content > .card:last-child {
 .online-only-warrning {
     margin-top: 32px;
     margin-bottom: 40px;
-    padding: 16px 16px 0 16px;
+    padding: 16px 16px 0 66px;
     max-width: 1024px;
 }
 
@@ -145,16 +145,15 @@ div.content > .card:last-child {
         height: 36px;
         position: absolute;
         top: 21px;
+        left: 16px;
     }
 
     .online-only-warrning .info-caption {
-        margin-left: 50px;
         font-size: 16px;
         margin-bottom: 2px;
     }
 
-    .online-only-warrning .info-descrition {
-        margin-left: 50px;
+    .online-only-warrning .info-description {
         font-size: 14px;
         margin-bottom: 16px;
     }
@@ -170,7 +169,7 @@ div.content > .card:last-child {
     max-width: 1024px;
 }
 
-.demo-description > h2:not(:first-child) {
+.demo-description:not(:first-child) > h2 {
     margin-top: 32px;
 }
 .demo-description > h2 {
@@ -190,8 +189,6 @@ div.content > .card:last-child {
     margin-right: 32px;
 }
     .social-panel .sp-caption {
-        display: inline-block;
-        margin-right: 4px;
     }
     .fb_iframe_widget iframe {
         vertical-align: text-bottom;

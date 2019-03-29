@@ -2,7 +2,7 @@
 
 <div class="social-panel">
     <div>
-        <div class="sp-caption">Share this page</div>
+        <div class="sp-caption">Help spread the word – DevExpress UI for Razor Components is available for free.</div>
         <div class="fb-share-button"
              data-href="https://dxpr.es/2WogLq7"
              data-layout="button"
@@ -24,6 +24,6 @@
 @functions {
     protected override Task OnAfterRenderAsync()
     {
-        return JsRuntime.InvokeAsync<string>("UpdateTwitterButton");
+        return JsRuntime.InvokeAsync<string>("UpdateSharingButton");
     }
 }
