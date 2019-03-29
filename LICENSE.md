@@ -80,12 +80,13 @@ Distribution by the LICENSEE of any design-time tools (EXE's or DLL's), executab
 The LICENSEE may NOT distribute the SOFTWARE DEVELOPMENT PRODUCT(S), in any format, to others for development or application compilation purposes.
 
 If you have purchased a 12 month subscription as described in Section 9 of this AGREEMENT, or have obtained a COMPLIMENTARY USE LICENSE as described in Section 1.3 of this AGREEMENT, you may reproduce and distribute copies of the REDISTRIBUTABLES, provided that such copies are made from the original copy of the REDISTRIBUTABLES included with the SOFTWARE DEVELOPMENT PRODUCT(S) or modified versions of the REDISTRIBUTABLES which are provided to you by DEVEXPRESS or those which you create. Copies of REDISTRIBUTABLES may only be distributed with and for the sole purpose of executing application programs permitted under this AGREEMENT that you have created using the SOFTWARE DEVELOPMENT PRODUCT(S).
-
-The complete list of REDISTRIBUTABLES under this AGREEMENT is as follows:
-DevExtreme.AspNet.Data.dll
-DevExpress.RazorComponents.dll
-dx-razor-components.css
-dx-razor-components.js
+  
+The complete list of REDISTRIBUTABLES under this AGREEMENT is as follows:  
+DevExtreme.AspNet.Data.dll  
+DevExpress.RazorComponents.dll  
+dx-razor-components.css  
+dx-razor-components.js  
+  
 
 LICENSEE MAY NOT REDISTRIBUTE any files in the SOFTWARE DEVELOPMENT PRODUCT(S) distribution if using an evaluation, trial, Not for Resale, or demo version of the SOFTWARE DEVELOPMENT PRODUCT(S).
 
