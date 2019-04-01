@@ -9,8 +9,8 @@
     <h2>Data Grid - Large Data Source</h2>
 
     <p>
-        This demo illustrates DxDataGrid control’s performance when bound to a dataset that contains a million rows and has a total size of over 1GB.
-        Try to navigate between pages and sort data to experience the control’s responsiveness.
+        This demo shows the performance of the data grid when it is bound to a dataset that contains a million rows with a total size of over 1GB.
+        Experiment with navigating between the pages and sorting the data to experience the responsiveness of the grid in this situation.
     </p>
     <p>
         In this example, Entity Framework Core (version 3.0) provides DxDataGrid with an IQueryable&lt;T&gt; source.
@@ -42,18 +42,18 @@ else
             <DxDataGridColumn Field=@nameof(AreaRentInfo.Area)></DxDataGridColumn>
             <DxDataGridColumn Field=@nameof(AreaRentInfo.City) Caption="County"></DxDataGridColumn>
             <DxDataGridColumn Field=@nameof(AreaRentInfo.Name) Caption="Location"></DxDataGridColumn>
-            <DxDataGridColumn Field=@nameof(AreaRentInfo.Year)></DxDataGridColumn>
-            <DxDataGridColumn Field=@nameof(AreaRentInfo.Bedrooms)></DxDataGridColumn>
-            <DxDataGridColumn Field=@nameof(AreaRentInfo.Rent)>
+            <DxDataGridSpinEditColumn Field=@nameof(AreaRentInfo.Year)></DxDataGridSpinEditColumn>
+            <DxDataGridSpinEditColumn Field=@nameof(AreaRentInfo.Bedrooms)></DxDataGridSpinEditColumn>
+            <DxDataGridSpinEditColumn Field=@nameof(AreaRentInfo.Rent)>
                 <DisplayTemplate>
                     @(((context as AreaRentInfo).Rent).ToString("C2"))
                 </DisplayTemplate>
-            </DxDataGridColumn>
-            <DxDataGridColumn Field=@nameof(AreaRentInfo.Population)>
+            </DxDataGridSpinEditColumn>
+            <DxDataGridSpinEditColumn Field=@nameof(AreaRentInfo.Population)>
                 <DisplayTemplate>
                     @(((context as AreaRentInfo).Population).ToString("#,0"))
                 </DisplayTemplate>
-            </DxDataGridColumn>
+            </DxDataGridSpinEditColumn>
         </DxDataGrid>
     }
     <div class="card demo-card-wide" style="border-top: none">
