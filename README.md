@@ -29,7 +29,7 @@ In the "Create a new project" Visual Studio 2019 dialog select "ASP.NET Core Web
 ![Create New ASP.NET Core Web Application Project"](https://raw.githubusercontent.com/DevExpress/RazorComponents/master/media/VisualStudio2019CreateNewProject_AspNetCoreWebApp.png)
 
 In the next step ensure you have "ASP.NET Core 3.*" framework is selected, and select "Razor Components" project template.
-![Create New ASP.NET Core Web Application Project"](https://raw.githubusercontent.com/DevExpress/RazorComponents/master/media/VisualStudio2019CreateNewProject_AspNetCoreWebApp.png)
+![Create New ASP.NET Core Web Application Project"](https://raw.githubusercontent.com/DevExpress/RazorComponents/master/media/VisualStudio2019CreateNewProject_RazorComponents.png)
 
 2. Register the DevExpress Early Access feed in Visual Studio's NuGet Package Manager.
 
