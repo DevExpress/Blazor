@@ -27,11 +27,11 @@ Follow the steps below to try our Razor Components in your own application.
 2. Register the DevExpress Early Access feed in Visual Studio's NuGet Package Manager.
 
 Open the "Package Manager Settings"
-![Open the "Package Manager Settings"](https://github.com/DevExpress/RazorComponents/raw/master/media/NuGetPackageManagerSettings.png)
+![Open the "Package Manager Settings"](https://raw.githubusercontent.com/DevExpress/RazorComponents/master/media/NuGetPackageManagerSettings.png)
 
 Add new NuGet source:
 ```https://nuget.devexpress.com/early-access/api```
-![Add new NuGet source](https://github.com/DevExpress/RazorComponents/raw/master/media/DevExpressEarlyAccessNuGetSource.png)
+![Add new NuGet source](https://raw.githubusercontent.com/DevExpress/RazorComponents/master/media/DevExpressEarlyAccessNuGetSource.png)
 
 3. Install the "DevExpress.RazorComponents" NuGet package.
 4. Obtain the client runtime from this GitHub repository - download all files from the "client-runtime" directory. Include the downloaded files into your start page.
