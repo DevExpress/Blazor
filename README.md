@@ -30,13 +30,14 @@ Follow the steps below to try our Razor Components in your own application.
 
 See the [Setup Visual Studio's NuGet Package Manager](https://docs.devexpress.com/GeneralInformation/116698/installation/install-devexpress-controls-using-nuget-packages/setup-visual-studio%27s-nuget-package-manager) topic for more information.
 
-3. Obtain the client runtime from this GitHub repository - download all files from the "client-runtime" directory. Include the downloaded files into your start page.
-4. Register our tag namespace and helper in /Components/_ViewImports.cshtml: 
+3. Install the "DevExpress.RazorComponents" NuGet package.
+4. Obtain the client runtime from this GitHub repository - download all files from the "client-runtime" directory. Include the downloaded files into your start page.
+5. Register our tag namespace and helper in /Components/_ViewImports.cshtml: 
 ```
 @using DevExpress.RazorComponents
 addTagHelper *, DevExpress.RazorComponents
 ```
-5. Your application is ready to use DevExpress Razor Components.
+6. Your application is ready to use DevExpress Razor Components.
 
 # Included Demo Modules
 
