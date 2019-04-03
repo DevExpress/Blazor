@@ -23,7 +23,14 @@ See also:
 
 Follow the steps below to try our Razor Components in your own application. 
 
-1. Create a new solution using the "Razor Components" or "Blazor" template in Visual Studio 2019 (select "ASP.NET Core 3.*" framework version).
+1. Create a new solution using the "Razor Components" or "Blazor" template in Visual Studio 2019.
+
+In the "Create a new project" Visual Studio 2019 dialog select "ASP.NET Core Web Application (where the language is C#).
+![Create New ASP.NET Core Web Application Project"](https://raw.githubusercontent.com/DevExpress/RazorComponents/master/media/VisualStudio2019CreateNewProject_AspNetCoreWebApp.png)
+
+In the next step ensure you have "ASP.NET Core 3.*" framework is selected, and select "Razor Components" project template.
+![Create New ASP.NET Core Web Application Project"](https://raw.githubusercontent.com/DevExpress/RazorComponents/master/media/VisualStudio2019CreateNewProject_AspNetCoreWebApp.png)
+
 2. Register the DevExpress Early Access feed in Visual Studio's NuGet Package Manager.
 
 Open the "Package Manager Settings"
