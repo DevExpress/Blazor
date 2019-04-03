@@ -35,7 +35,7 @@ See the [Setup Visual Studio's NuGet Package Manager](https://docs.devexpress.co
 5. Register our tag namespace and helper in /Components/_ViewImports.cshtml: 
 ```
 @using DevExpress.RazorComponents
-addTagHelper *, DevExpress.RazorComponents
+@addTagHelper *, DevExpress.RazorComponents
 ```
 6. Your application is ready to use DevExpress Razor Components.
 
