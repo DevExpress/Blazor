@@ -6,12 +6,19 @@ The DevExpress UI components featured in this demo are available for free downlo
 
 > \* Like any software preview, the DevExpress UI for Razor Components is not without fault. You should not use these products in production environments or in mission-critical applications.
 
+# Set up your environment
+
+1. Install Visual Studio 2019
+2. Ensure that you have .NET Core 3 installed.
+3. If you have the release version of Visual Studio 2019, please ensure that you have the "Use previews of the .NET Core SDK" option enabled.
+
+![Enable SDK preview in VS 2019 Release"](https://raw.githubusercontent.com/DevExpress/RazorComponents/master/media/VS2019Release-EnablePreviewSDK.png)
+
 # How to run this demo on your machine
 
-1. Ensure that you have .NET Core 3 installed.
-2. Download the "**demo**" directory from this repository.
-3. Open **demo/Demo.RazorComponents.sln** in Visual Studio 2019.
-4. Start the application.
+1. Download the "**demo**" directory from this repository.
+2. Open **demo/Demo.RazorComponents.sln** in Visual Studio 2019.
+3. Start the application.
 
 See also: 
 
