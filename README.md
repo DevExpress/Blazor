@@ -56,6 +56,36 @@ Add new NuGet source:
 ```
 6. Your application is ready to use DevExpress Razor Components.
 
+# Troubleshooting
+
+## 1. DxDataGrid in Blazor
+
+If you use Blazor (client-side hosting via MonoWASM) with DxDataGrid, you may find the following exception in the browser:
+
+![Troubleshooting - No Generic Method 'Take' On Type System.Linq.Queryable](https://raw.githubusercontent.com/DevExpress/RazorComponents/master/media/Troubleshooting-NoGenericMethodTakeOnTypeSystemLinqQueryable.png)
+
+> "System.InvalidOperationException: No generic method 'Take' on type 'System.Linq.Queryable' is compatible with the supplied type arguments and arguments."
+
+Please refer the [original mono issue in github for a solution](https://github.com/mono/mono/issues/12917#issuecomment-462925005):
+
+Or, your can just turn off the linker. To do this, navigate to your [ProjectName].Client.csproj and add the following line:
+
+```
+<BlazorLinkOnBuild>false</BlazorLinkOnBuild>
+```
+
+So, the project content looks as follows:
+
+```
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+  ...
+    <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
+  </PropertyGroup>
+  ...
+</Project>
+```
+
 # Included Demo Modules
 
 
