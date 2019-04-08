@@ -48,7 +48,7 @@ Add new NuGet source:
 ![Add new NuGet source](https://raw.githubusercontent.com/DevExpress/RazorComponents/master/media/DevExpressEarlyAccessNuGetSource.png)
 
 3. Install the "DevExpress.RazorComponents" NuGet package.
-4. Obtain the client runtime from this GitHub repository - download all files from the "client-runtime" directory. Include the downloaded files into your start page.
+4. Obtain the client runtime directory from the GitHub repository - download all files from this directory. Put the downloaded files in the "wwwroot" directory of your project. Include that files to your start page.
 5. Register our tag namespace and helper in /Components/_ViewImports.cshtml: 
 ```
 @using DevExpress.RazorComponents
