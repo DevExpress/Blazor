@@ -4688,9 +4688,13 @@ body > div > .dxbs-th .card-body
     margin-right: 0px;
     margin-left: 0px;
 }
+/** Razor Components Date Edit **/
+.dxbs-dropdown-area .dxbs-calendar .calendar-view {
+    border-radius: .25rem;
+}
 /** Razor Components Pager **/
 .dx-pager .pagination {
-	margin: 0;
+    margin: 0;
 }
 /** Razor Components PivotGrid **/
 .dx-pivotgrid {
