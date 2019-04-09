@@ -4658,10 +4658,9 @@ body > div > .dxbs-th .card-body
     padding-top: 0;
     padding-bottom: 0;
 }
-
 /** Razor Components Combo Box **/
 .dx-listbox .input-group-append > .dropdown-menu {
-	padding: 0;
+    padding: 0;
 }
 
 	.dx-listbox .input-group-append > .dropdown-menu > table {
@@ -4680,13 +4679,18 @@ body > div > .dxbs-th .card-body
     border: 0;
 }
 .dx-lb-datagrid > .card > table > tbody > tr:last-child > td {
-    
-    border-bottom: 0;
+     border-bottom: 0;
 }
 /** Razor Components Calendar **/
 .dxbs-calendar > .calendar-row > .calendar-view {
     margin-right: 0px;
     margin-left: 0px;
+}
+.dxbs-calendar .oi-media-skip-backward:before {
+    content: '\e02e\e02e';
+}
+.dxbs-calendar .oi-media-skip-forward:before {
+    content: '\e02f\e02f';
 }
 /** Razor Components Date Edit **/
 .dxbs-dropdown-area .dxbs-calendar .calendar-view {
