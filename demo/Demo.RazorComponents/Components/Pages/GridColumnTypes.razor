@@ -14,11 +14,11 @@
             <p>Displays data management commands such as New, Edit, Delete, Update, and so on.</p>
         </li>
         <li>
-            <b>DxDataGridColumn (Temp. (C))</b>
+            <b>DxDataGridColumn (Temp. (&#x2103;))</b>
             <p>Default column type that displays strings and uses a text box to edit values.</p>
         </li>
         <li>
-            <b>DxDataGridSpinEditColumn (Temp. (F))</b>
+            <b>DxDataGridSpinEditColumn (Temp. (&#x2109;))</b>
             <p>Uses a spin editor with up/down buttons to edit column values.</p>
         </li>
         <li>
@@ -47,8 +47,8 @@ else
                 RowUpdating=@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))
                 RowInserting=@((newValues) => OnRowInserting(newValues))>
         <DxDataGridCommandColumn Width="150px"></DxDataGridCommandColumn>
-        <DxDataGridColumn Field=@nameof(WeatherForecast.TemperatureC) Caption="Temp. (C)"></DxDataGridColumn>
-        <DxDataGridSpinEditColumn Field=@nameof(WeatherForecast.TemperatureF) Caption="Temp. (F)"></DxDataGridSpinEditColumn>
+        <DxDataGridColumn Field=@nameof(WeatherForecast.TemperatureC) Caption=@("Temp. (\x2103)")></DxDataGridColumn>
+        <DxDataGridSpinEditColumn Field=@nameof(WeatherForecast.TemperatureF) Caption=@("Temp. (\x2109)")></DxDataGridSpinEditColumn>
         <DxDataGridComboBoxColumn Field=@nameof(WeatherForecast.Summary) Caption="Summary" Data=@summaries></DxDataGridComboBoxColumn>
         <DxDataGridDateEditColumn Field=@nameof(WeatherForecast.Date)></DxDataGridDateEditColumn>
     </DxDataGrid>
