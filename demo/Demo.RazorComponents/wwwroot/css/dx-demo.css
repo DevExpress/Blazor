@@ -119,14 +119,12 @@ div.content > .card:last-child {
 /*Mac OS Safari does not support position:sticky*/
 @media (min-width: 768px) {
     _:-webkit-full-screen, _::-webkit-full-page-media, _:future, :root .main {
-        margin-left: 250px;
+        margin-left: 300px;
+        margin-top: 56px;
     }
     _:-webkit-full-screen, _::-webkit-full-page-media, _:future, :root .main .top-row {
         position: fixed;
         width: 100%;
-    }
-    _:-webkit-full-screen, _::-webkit-full-page-media, _:future, :root .main .content {
-        margin-top: 3.5rem;
     }
     _:-webkit-full-screen, _::-webkit-full-page-media, _:future, :root .sidebar {
         position: fixed;
