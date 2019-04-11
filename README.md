@@ -1,10 +1,14 @@
 # DevExpress UI for Razor Components
 
-This demo application is a preview of the DevExpress UI for Razor Components. 
+This demo application is a preview of the [DevExpress UI for Razor Components].
 
 The DevExpress UI components featured in this demo are available for free download and can be used in your next Razor Components/Blazor app.* 
 
 > \* Like any software preview, the DevExpress UI for Razor Components is not without fault. You should not use these products in production environments or in mission-critical applications.
+
+# Live Demo
+ 
+Check out this [demo in live](https://demos.devexpress.com/razor-components/).
 
 # Set up your environment
 
