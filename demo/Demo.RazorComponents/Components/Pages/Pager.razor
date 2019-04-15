@@ -24,18 +24,18 @@
 
 <div class="card demo-card">
     <div class="card-body">
-        <DxPager PageCount=@PageCount1.Value
-                 CollapseButtonCount=@PageNumberButtonCount1.Value
-                 bind-ActivePageIndex=@ActivePageIndex1.Value>
+        <DxPager PageCount=@PageCount.Value
+                 CollapseButtonCount=@CollapseButtonCount.Value
+                 bind-ActivePageIndex=@ActivePageIndex.Value>
         </DxPager>
     </div>
     <div class="card-footer text-muted ">
         <CodeSnippet_Pager></CodeSnippet_Pager>
-        <DxSpinEdit bind-Value=@PageCount1.Value MinValue=0 MaxValue=int.MaxValue></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // PageCount</span>
+        <DxSpinEdit bind-Value=@PageCount.Value MinValue=0 MaxValue=int.MaxValue></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // PageCount</span>
         <br />
-        <DxSpinEdit bind-Value=@ActivePageIndex1.Value MinValue=0 MaxValue=@(PageCount1.Value-1)></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // ActivePageIndex</span>
+        <DxSpinEdit bind-Value=@ActivePageIndex.Value MinValue=0 MaxValue=@(PageCount.Value-1)></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // ActivePageIndex</span>
         <br />
-        <DxSpinEdit bind-Value=@PageNumberButtonCount1.Value MinValue=1 MaxValue=int.MaxValue></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // CollapseButtonCount</span>
+        <DxSpinEdit bind-Value=@CollapseButtonCount.Value MinValue=1 MaxValue=100></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // CollapseButtonCount</span>
     </div>
 </div>
 
@@ -78,9 +78,9 @@
 </div>
 
 @functions {
-    StateProperty<int> PageCount1 = new StateProperty<int>(10);
-    StateProperty<int> ActivePageIndex1 = new StateProperty<int>(1);
-    StateProperty<int> PageNumberButtonCount1 = new StateProperty<int>(10);
+    StateProperty<int> PageCount = new StateProperty<int>(10);
+    StateProperty<int> ActivePageIndex = new StateProperty<int>(1);
+    StateProperty<int> CollapseButtonCount = new StateProperty<int>(10);
 
     protected override void OnInit()
     {

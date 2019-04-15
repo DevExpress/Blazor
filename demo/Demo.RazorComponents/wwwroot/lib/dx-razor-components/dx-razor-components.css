@@ -4745,7 +4745,11 @@ body > div > .dxbs-th .card-body
 .dx-pivotgrid .table td.dxpg-field-panel {
     border-style: none;
 }
-.dx-pivotgrid .dxpg-field-panel > .btn {
+.dx-pivotgrid .dxpg-field-panel > div {
+    border: inherit;
+    display: inline-flex;
+}
+.dx-pivotgrid .dxpg-field-panel > div > .btn {
     border-radius: 0;
     border-color: inherit;
     border-style: solid;
@@ -4754,7 +4758,7 @@ body > div > .dxbs-th .card-body
 .dx-pivotgrid .dxpg-field-panel .btn .image {
     margin-left: 0.5rem;
 }
-.dx-pivotgrid .dxpg-field-panel > .btn.inactive {
+.dx-pivotgrid .dxpg-field-panel > div > .btn.inactive {
     cursor: default;
     color: inherit;
     text-decoration: none;
