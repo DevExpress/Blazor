@@ -89,6 +89,10 @@ So, the project content looks as follows:
   ...
 </Project>
 ```
+## 2. The "Early Access" NuGet Feed is empty in Visual Studio
+
+If you don't see packages in the ```https://nuget.devexpress.com/early-access/api``` NuGet feed, make sure that the "Include prerelease" option is selected:
+![Include prerelease](https://raw.githubusercontent.com/DevExpress/RazorComponents/master/media/VisualStudio2019NuGetIncludePrerelease.png)
 
 # Included Demo Modules
 
