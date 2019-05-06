@@ -54,6 +54,19 @@ Follow the steps below to try our UI for Blazor in your own application.
   ![Add new NuGet source](media/DevExpressEarlyAccessNuGetSource.png)
 
 3. Install the "DevExpress.Blazor" NuGet package.
+
+   Navigate to:
+   
+   ![Add new NuGet source](media/NuGetPackageManagerOpenManagerMenu.png)
+   
+   Select the "Early Access" NuGet package source you have just created in the "Package source" combo box.
+
+   Make sure that the "Include prerelease" option is selected.
+   
+   Install the "DevExpress.Blazor" NuGet package.
+   
+   ![Add new NuGet source](media/VS2019Release-AddNuGetPackage.png)
+
 4. Navigate to the GitHub repository and download all files from the "client-runtime" directory. Put the downloaded files into the "wwwroot" directory of your project. Include these files to your start page.
 5. Register our tag namespace and helper in _Imports.razor file: 
 
@@ -116,3 +129,6 @@ If you don't see packages in the ```https://nuget.devexpress.com/early-access/ap
   * Spin Edit
   * Text Box
 * Pager
+
+
+
