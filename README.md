@@ -1,84 +1,87 @@
-# DevExpress UI for Razor Components
+# DevExpress UI for Blazor
+This project demonstrates the Preview (CTP) version of [DevExpress UI Components for Blazor](https://www.devexpress.com/blazor/).
 
-This demo application is a preview of the [DevExpress UI for Razor Components](https://www.devexpress.com/products/blazor-razor-components/).
+The DevExpress UI components featured in this demo are available for free download and can be used in your next Blazor app.* 
 
-The DevExpress UI components featured in this demo are available for free download and can be used in your next Razor Components/Blazor app.* 
-
-> \* Like any software preview, the DevExpress UI for Razor Components is not without fault. You should not use these products in production environments or in mission-critical applications.
+> \* Like any software preview, the DevExpress UI for Blazor is not without fault. You should not use these products in production environments or in mission-critical applications.
 
 # Live Demo
  
-Check out this [demo in live](https://demos.devexpress.com/razor-components/).
+Check out this [demo in live](https://demos.devexpress.com/blazor/).
 
 # Set up your environment
 
-1. Install Visual Studio 2019
-2. Ensure that you have .NET Core 3 installed.
-3. If you have the release version of Visual Studio 2019, please ensure that you have the "Use previews of the .NET Core SDK" option enabled.
+1. Install Visual Studio 2019 (latest update).
+2. Ensure that you have .NET Core 3 (preview 4) installed.
+3. If you work with the release version of Visual Studio 2019, make sure to enable the option "Use previews of the .NET Core SDK".
 
-![Enable SDK preview in VS 2019 Release"](https://raw.githubusercontent.com/DevExpress/RazorComponents/master/media/VS2019Release-EnablePreviewSDK.png)
+![Create New ASP.NET Core Web Application Project"](media/VS2019Release-EnablePreviewSDK.png)
 
 # How to run this demo on your machine
 
 1. Download the "**demo**" directory from this repository.
-2. Open **demo/Demo.RazorComponents.sln** in Visual Studio 2019.
+2. Open **demo/BlazorDemo.ServerSide/BlazorDemo.ServerSide.sln** in Visual Studio 2019.
 3. Start the application.
 
 See also: 
 
-[Introduction to Razor Components](https://docs.microsoft.com/aspnet/core/razor-components/?view=aspnetcore-3.0)
-
-[Get started with Razor Components](https://docs.microsoft.com/ru-ru/aspnet/core/razor-components/get-started?view=aspnetcore-3.0&tabs=visual-studio)
+[Official Microsoft Blazor site](https://dotnet.microsoft.com/apps/aspnet/web-apps/client)
 
 # How to create a new project
 
-Follow the steps below to try our Razor Components in your own application. 
+Follow the steps below to try our UI for Blazor in your own application. 
 
-1. Create a new solution using the "Razor Components" or "Blazor" template in Visual Studio 2019.
+1. Create a new solution using the "Blazor (server-side)" or "Blazor" template in Visual Studio 2019.
 
-In the "Create a new project" Visual Studio 2019 dialog select "ASP.NET Core Web Application (where the language is C#).
-![Create New ASP.NET Core Web Application Project"](https://raw.githubusercontent.com/DevExpress/RazorComponents/master/media/VisualStudio2019CreateNewProject_AspNetCoreWebApp.png)
+  In the "Create a new project" dialog select "ASP.NET Core Web Application (where the language is C#).
+  
+  ![Create New ASP.NET Core Web Application Project"](media/VisualStudio2019CreateNewProject_AspNetCoreWebApp.png)
 
-In the next step ensure you have "ASP.NET Core 3.*" framework is selected, and select "Razor Components" project template.
-![Create New ASP.NET Core Web Application Project"](https://raw.githubusercontent.com/DevExpress/RazorComponents/master/media/VisualStudio2019CreateNewProject_RazorComponents.png)
+  In the next step ensure that an "ASP.NET Core 3.\*" framework is selected, and select the "Blazor (server-side)" project template.
+  
+  ![Create New ASP.NET Core Web Application Project"](media/VisualStudio2019CreateNewProject_Blazor.png)
 
 2. Register the DevExpress Early Access feed in Visual Studio's NuGet Package Manager.
 
-Open the "Package Manager Settings"
-![Open the "Package Manager Settings"](https://raw.githubusercontent.com/DevExpress/RazorComponents/master/media/NuGetPackageManagerSettings.png)
+  Open the "Package Manager Settings".
 
-Add new NuGet source:
-```https://nuget.devexpress.com/early-access/api```
-![Add new NuGet source](https://raw.githubusercontent.com/DevExpress/RazorComponents/master/media/DevExpressEarlyAccessNuGetSource.png)
+  ![Open the "Package Manager Settings"](media/NuGetPackageManagerSettings.png)
 
-3. Install the "DevExpress.RazorComponents" NuGet package.
-4. Obtain the client runtime directory from the GitHub repository - download all files from this directory. Put the downloaded files in the "wwwroot" directory of your project. Include that files to your start page.
-5. Register our tag namespace and helper in /Components/_ViewImports.cshtml: 
-```
-@using DevExpress.RazorComponents
-@addTagHelper *, DevExpress.RazorComponents
-```
-6. Your application is ready to use DevExpress Razor Components.
+  Add new NuGet source:
+  
+  ```https://nuget.devexpress.com/early-access/api```
+
+  ![Add new NuGet source](media/DevExpressEarlyAccessNuGetSource.png)
+
+3. Install the "DevExpress.Blazor" NuGet package.
+4. Navigate to the GitHub repository and download all files from the "client-runtime" directory. Put the downloaded files into the "wwwroot" directory of your project. Include these files to your start page.
+5. Register our tag namespace and helper in _Imports.razor file: 
+
+  ```
+  @using DevExpress.Blazor
+  ```
+
+6. Your application is ready to use DevExpress Blazor.
 
 # Troubleshooting
 
 ## 1. DxDataGrid in Blazor
 
-If you use Blazor (client-side hosting via MonoWASM) with DxDataGrid, you may find the following exception in the browser:
+If you use Blazor (client-side) with DxDataGrid, you may see the following exception in a browser:
 
-![Troubleshooting - No Generic Method 'Take' On Type System.Linq.Queryable](https://raw.githubusercontent.com/DevExpress/RazorComponents/master/media/Troubleshooting-NoGenericMethodTakeOnTypeSystemLinqQueryable.png)
+![Troubleshooting - No Generic Method 'Take' On Type System.Linq.Queryable](media/Troubleshooting-NoGenericMethodTakeOnTypeSystemLinqQueryable.png)
 
 > "System.InvalidOperationException: No generic method 'Take' on type 'System.Linq.Queryable' is compatible with the supplied type arguments and arguments."
 
-Please refer the [original mono issue in github for a solution](https://github.com/mono/mono/issues/12917#issuecomment-462925005):
+One solution is described in the [original issue](https://github.com/mono/mono/issues/12917#issuecomment-462925005) on GitHub.
 
-Or, your can just turn off the linker. To do this, navigate to your [ProjectName].Client.csproj and add the following line:
+As an alternative solution, your can turn off the linker. To do this, add the following line to the [ProjectName].Client.csproj file:
 
 ```
 <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
 ```
 
-So, the project content looks as follows:
+Project content should look as follows:
 
 ```
 <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -92,10 +95,9 @@ So, the project content looks as follows:
 ## 2. The "Early Access" NuGet Feed is empty in Visual Studio
 
 If you don't see packages in the ```https://nuget.devexpress.com/early-access/api``` NuGet feed, make sure that the "Include prerelease" option is selected:
-![Include prerelease](https://raw.githubusercontent.com/DevExpress/RazorComponents/master/media/VisualStudio2019NuGetIncludePrerelease.png)
+![Include prerelease](media/VisualStudio2019NuGetIncludePrerelease.png)
 
 # Included Demo Modules
-
 
 * Data Grid
   * Column Types
@@ -105,6 +107,8 @@ If you don't see packages in the ```https://nuget.devexpress.com/early-access/ap
   * Data Binding Basics
   * Templates
   * Large Datasets
+* Tabs
+* Form Layout
 * Data Editors
   * Combo Box – Business Object List
   * Combo Box – Cascading Lists
@@ -112,6 +116,3 @@ If you don't see packages in the ```https://nuget.devexpress.com/early-access/ap
   * Spin Edit
   * Text Box
 * Pager
-
-
-
