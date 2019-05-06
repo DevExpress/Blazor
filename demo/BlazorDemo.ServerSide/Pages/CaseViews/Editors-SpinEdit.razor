@@ -1,0 +1,27 @@
+﻿<div class="demo-description">
+    <h2>Spin Edit - Decimal Value Type</h2>
+    <p>
+        DxSpinEdit displays a numeric value and allows the user to modify it, either by typing a new value into the text box, or by using the up/down spin buttons to increment/decrement the value.
+    </p>
+    <p>
+        DxSpinEdit works with .NET built-in data types, including System.Decimal.
+        The editor processes values directly on the server side, without changing to or from JavaScript number types.
+        This ensures that values entered by the user never lose precision because of possible type conversions.
+    </p>
+</div>
+
+<div class="card demo-card">
+    <div class="card-header">SpinEdit decimal value is: <b>@DecimalValue</b></div>
+    <div class="card-body mw-480">
+        <DxSpinEdit bind-Value=@DecimalValue></DxSpinEdit>
+    </div>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_SpinEdit></CodeSnippet_Editor_SpinEdit>
+    </div>
+</div>
+
+@functions {
+    Decimal decimalValue = decimal.MaxValue - 10000;
+    Decimal DecimalValue { get => decimalValue; set { decimalValue = value; StateHasChanged(); } }
+
+}

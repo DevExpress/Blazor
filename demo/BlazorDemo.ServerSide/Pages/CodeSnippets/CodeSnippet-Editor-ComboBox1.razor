@@ -1,0 +1,11 @@
+﻿<CodeSnippet>
+@(@"<DxComboBox Data=@RealBusinessObjectsDataSource
+            TextFieldName=""Text""
+            bind-SelectedItem=@SelectedRealBusinessObject>
+</DxComboBox>
+
+@functions {
+    Person selectedRealBusinessObject = ...;
+    Person SelectedRealBusinessObject { get => selectedRealBusinessObject; set { selectedRealBusinessObject = value; StateHasChanged(); } }
+}")
+</CodeSnippet>

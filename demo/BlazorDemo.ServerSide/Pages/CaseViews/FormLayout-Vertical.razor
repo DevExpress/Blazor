@@ -1,0 +1,51 @@
+﻿@using Demo.Blazor.Model
+
+<div class="demo-description">
+    <h2>Caption Position</h2>
+    <p>
+        The Form Layout’s <b>CaptionPosition</b> property defines where to display caption labels. In this demo, the <b>CaptionPosition</b> property is set to <b>Vertical</b> to stack captions above associated editors.
+    </p>
+</div>
+
+<div class="card demo-card-wide">
+    <div class="card-header">@nameof(Location)=<b>@(Location)</b>, @nameof(CheckIn)=<b>@(CheckIn)</b>, @nameof(CheckOut)=<b>@(CheckOut)</b></div>
+    <div class="card-body">
+        <DxFormLayout CaptionPosition=@CaptionPosition.Vertical>
+            <DxFormLayoutItem Caption="Location:" ColSpanLg="4" ColSpanMd="12">
+                <Template>
+                    <DxTextBox bind-Text=@Location></DxTextBox>
+                </Template>
+            </DxFormLayoutItem>
+
+            <DxFormLayoutItem Caption="Check in:" ColSpanLg="4" ColSpanMd="6">
+                <Template>
+                    <DxDateEdit bind-Date=@CheckIn></DxDateEdit>
+                </Template>
+            </DxFormLayoutItem>
+
+            <DxFormLayoutItem Caption="Check out:" ColSpanLg="4" ColSpanMd="6">
+                <Template>
+                    <DxDateEdit bind-Date=@CheckOut></DxDateEdit>
+                </Template>
+            </DxFormLayoutItem>
+        </DxFormLayout>
+
+    </div>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_FormLayout_Default_Vertical/>
+    </div>
+</div>
+
+@functions {
+    string location = "London";
+    string Location { get => location; set { location = value; OnChanged(); } }
+
+    DateTime checkIn = DateTime.Now;
+    DateTime CheckIn { get => checkIn; set { checkIn = value; OnChanged(); } }
+
+    DateTime checkOut = DateTime.Now;
+    DateTime CheckOut { get => checkOut; set { checkOut = value; OnChanged(); } }
+
+
+    void OnChanged() { StateHasChanged(); }
+}

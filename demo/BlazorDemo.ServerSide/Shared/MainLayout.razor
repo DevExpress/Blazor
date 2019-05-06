@@ -1,0 +1,19 @@
+﻿@inherits LayoutComponentBase
+
+<div class="sidebar">
+    <NavMenu />
+</div>
+
+<div class="main">
+    <div class="top-row px-4" id="navbar">
+        <div class="logo">
+            <h5 class="caption">Online Demos - DevExpress UI for Blazor (CTP)</h5>
+        </div>
+    </div>
+
+    <SocialButtonPanel></SocialButtonPanel>
+
+    <div class="content px-4">
+        @Body
+    </div>
+</div>

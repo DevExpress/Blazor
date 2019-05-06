@@ -1,0 +1,83 @@
+﻿@using Demo.Blazor.Model
+
+<div class="demo-description">
+    <h2>Groups</h2>
+    <p>
+        A layout group (DxFormLayoutGroup) is a container for layout items (DxFormLayoutItem) and other layout groups. Layout groups, just like individual items, allow you to specify their width using the same set of <b>ColSpanXX</b> properties.
+    </p>
+    <p>
+        Note that you cannot mix layout groups and items in one grid row. If an item preceeds a group, the group is placed on a new row as if it had the <b>BeginRow</b> property set to <b>true</b>.
+    </p>
+</div>
+
+<div class="card demo-card-wide">
+    <div class="card-header">@nameof(FirstName)=<b>@(FirstName)</b>, @nameof(LastName)=<b>@(LastName)</b>, @nameof(Birthday)=<b>@(Birthday)</b></div>
+    <div class="card-header">@nameof(Position)=<b>@(Position)</b>, @nameof(HireDate)=<b>@(HireDate)</b>, @nameof(Notes)=<b>@(Notes)</b></div>
+    <div class="card-body">
+        <DxFormLayout>
+            <DxFormLayoutGroup Caption="Personal Information">
+                <DxFormLayoutItem Caption="First Name:" ColSpanMd="6">
+                    <Template>
+                        <DxTextBox bind-Text=@FirstName></DxTextBox>
+                    </Template>
+                </DxFormLayoutItem>
+
+                <DxFormLayoutItem Caption="Last Name:" ColSpanMd="6">
+                    <Template>
+                        <DxTextBox bind-Text=@LastName></DxTextBox>
+                    </Template>
+                </DxFormLayoutItem>
+
+                <DxFormLayoutItem Caption="Birthday:" ColSpanMd="6">
+                    <Template>
+                        <DxDateEdit bind-Date=@Birthday></DxDateEdit>
+                    </Template>
+                </DxFormLayoutItem>
+            </DxFormLayoutGroup>
+
+            <DxFormLayoutGroup Caption="Work Information">
+                <DxFormLayoutItem Caption="Position:" ColSpanMd="6">
+                    <Template>
+                        <DxTextBox bind-Text=@Position></DxTextBox>
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Hire Date:" ColSpanMd="6">
+                    <Template>
+                        <DxDateEdit bind-Date=@HireDate></DxDateEdit>
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Notes:" ColSpanMd="6">
+                    <Template>
+                        <DxTextBox bind-Text=@Notes></DxTextBox>
+                    </Template>
+                </DxFormLayoutItem>
+            </DxFormLayoutGroup>
+        </DxFormLayout>
+
+    </div>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_FormLayout_Default_Groups />
+    </div>
+</div>
+
+@functions {
+    string firstName = "Nancy";
+    string FirstName { get => firstName; set { firstName = value; OnChanged(); } }
+
+    string lastName = "Davolio";
+    string LastName { get => lastName; set { lastName = value; OnChanged(); } }
+
+    DateTime birthday = DateTime.Now.AddYears(-20);
+    DateTime Birthday { get => birthday; set { birthday = value; OnChanged(); } }
+
+    string position = "Sales Representative";
+    string Position { get => position; set { position = value; OnChanged(); } }
+
+    DateTime hireDate = DateTime.Now.AddYears(-20);
+    DateTime HireDate { get => hireDate; set { hireDate = value; OnChanged(); } }
+
+    string notes = "Education includes a BA in psychology.";
+    string Notes { get => notes; set { notes = value; OnChanged(); } }
+
+    void OnChanged() { StateHasChanged(); }
+}

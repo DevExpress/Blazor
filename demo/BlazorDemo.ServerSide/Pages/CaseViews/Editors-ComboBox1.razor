@@ -1,0 +1,34 @@
+﻿@using Demo.Blazor.Model
+
+<div class="demo-description">
+    <h2>Combo Box - Business Object List as Data Source</h2>
+    <p>
+        The Combo Box component is a drop-down list editor that allows an end user to select from a list of items.
+    </p>
+    <p>
+        This sample demonstrates the Combo Box bound to a list of complex business objects.
+        The text for the items displayed in the list is retrieved from the specified business object property.
+        Try changing the selection to see the current object's property values.
+    </p>
+</div>
+
+<div class="card demo-card" style="height: 585px">
+    <div class="card-header">SelectedRealBusinessObject { FirstName=<b>@(SelectedRealBusinessObject.FirstName)</b>, LastName=<b>@(SelectedRealBusinessObject.LastName)</b>, Department=<b>@(SelectedRealBusinessObject.Department)</b> }</div>
+    <div class="card-body mw-480">
+        <DxComboBox Data=@Persons.DataSource
+                    TextFieldName="Text"
+                    bind-DropDownVisible=@DropDownVisible
+                    bind-SelectedItem=@SelectedRealBusinessObject></DxComboBox>
+    </div>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_ComboBox1></CodeSnippet_Editor_ComboBox1>
+    </div>
+</div>
+
+@functions {
+    Person selectedRealBusinessObject = Persons.DataSource[0];
+    Person SelectedRealBusinessObject { get => selectedRealBusinessObject; set { selectedRealBusinessObject = value; StateHasChanged(); } }
+
+    bool dropDownVisible = true;
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; StateHasChanged(); }  }
+}
