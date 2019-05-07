@@ -1,0 +1,1 @@
+Demo sources have been relocated to demo/BlazorDemo.ServerSide.
