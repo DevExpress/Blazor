@@ -9,6 +9,16 @@ The DevExpress UI components featured in this demo are available for free downlo
  
 Check out this [demo in live](https://demos.devexpress.com/blazor/).
 
+# Version compatibility
+
+The following table describes the version compatibility of .NET Core 3.0 Preview and the DevExpress.Blazor NuGet package.
+
+| .NET Core 3.0 version | DevExpress.Blazor.nuget version |
+| ------------- | ------------- |
+| .NET Core 3.0 Preview **3** | 0.0.**3** |
+| .NET Core 3.0 Preview **4** | 0.0.**4** |
+| .NET Core 3.0 Preview **5** | 0.0.**5** |
+
 # Set up your environment
 
 1. Install Visual Studio 2019 (latest update).
@@ -130,5 +140,6 @@ If you don't see packages in the ```https://nuget.devexpress.com/early-access/ap
   * Text Box
 * Pager
 
+# NuGet Package Change Log
 
-
+Check out thе NuGet package's [version history](changelog.md).
