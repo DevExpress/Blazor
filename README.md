@@ -96,25 +96,41 @@ If you use Blazor (client-side) with DxDataGrid, you may see the following excep
 
 > "System.InvalidOperationException: No generic method 'Take' on type 'System.Linq.Queryable' is compatible with the supplied type arguments and arguments."
 
-One solution is described in the [original issue](https://github.com/mono/mono/issues/12917#issuecomment-462925005) on GitHub.
+The solution is to follow the [official Blazor documentation](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker?view=aspnetcore-3.0).
 
-As an alternative solution, your can turn off the linker. To do this, add the following line to the [ProjectName].Client.csproj file:
+So, you can either [Disable linking](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker?view=aspnetcore-3.0#disable-linking-with-a-msbuild-property) or [Control linking](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker?view=aspnetcore-3.0#control-linking-with-a-configuration-file).
 
-```
-<BlazorLinkOnBuild>false</BlazorLinkOnBuild>
-```
-
-Project content should look as follows:
+In case you decide to control linking: the following types types must be added in the **Linker.xml** file:
 
 ```
-<Project Sdk="Microsoft.NET.Sdk.Web">
-  <PropertyGroup>
-  ...
-    <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
-  </PropertyGroup>
-  ...
-</Project>
+    <type fullname="System.Linq.Expressions*" />
+    <type fullname="System.Linq.Queryable*" />
+    <type fullname="System.Linq.Enumerable*" />
+    <type fullname="System.Linq.EnumerableRewriter*" />
+```    
+
+So, the **Linker.xml** file should look as follows:
+
 ```
+<?xml version="1.0" encoding="UTF-8" ?>
+...
+<linker>
+  <assembly fullname="mscorlib">
+...
+    <type fullname="System.Threading.WasmRuntime" />
+  </assembly>
+  <assembly fullname="System.Core">
+...
+    <type fullname="System.Linq.Expressions*" />
+    <type fullname="System.Linq.Queryable*" />
+    <type fullname="System.Linq.Enumerable*" />
+    <type fullname="System.Linq.EnumerableRewriter*" />
+  </assembly>
+...
+  <assembly fullname="[PUT YOUR ASSEMBLY NAME HERE]" />
+</linker>
+```
+
 ## 2. The "Early Access" NuGet Feed is empty in Visual Studio
 
 If you don't see packages in the ```https://nuget.devexpress.com/early-access/api``` NuGet feed, make sure that the "Include prerelease" option is selected:
