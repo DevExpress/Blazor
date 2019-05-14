@@ -2,16 +2,19 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
-## [0.0.5] (latest release)
+## [0.0.6] (latest release)
+
+### Fixed
+- Fix Blazor (client-side) support
+
+## [0.0.5] 
 
 ### Added
-
 - Support for .Net Core 3.0 Preview 5.
 
 ## [0.0.4]
 
 ### Added
-
 - New Form Layout Component.
 - New Tabs Component.
 - Use a new Form Layout component as the Data Grid's edit form.
