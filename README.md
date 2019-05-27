@@ -150,6 +150,7 @@ If you don't see packages in the ```https://nuget.devexpress.com/early-access/ap
   * Large Datasets
 * Tabs
 * Form Layout
+* Form Validation
 * Data Editors
   * Combo Box – Business Object List
   * Combo Box – Cascading Lists
