@@ -11,21 +11,12 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Native Blazor Components powered by DevExpress" />
     <meta property="og:description" content="Free DevExpress UI for Blazor ships with 7 user interface components (including a Data Grid and Pivot Grid) so you can design rich user experiences with both Blazor." />
-    <meta property="og:image" content="https://static.devexpress.com/Products/Blazor/razor-components-demo-social.png" />
+    <meta property="og:image" content="https://static.devexpress.com/Products/Blazor/blazor-demo-social.png" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@@devexpress" />
     <title>Demos: Blazor UI Components | DevExpress</title>
     <base href="~/" />
-    <environment include="Development">
-        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              asp-fallback-href="css/bootstrap/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-              crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
-    </environment>
+
     <link href="css/site.css" rel="stylesheet" />
 
     <link rel="stylesheet"
@@ -40,8 +31,14 @@
             });
         }
         window.UpdateSharingButton = function () {
-            FB.XFBML.parse();
-            twttr.widgets.load();
+            window.setTimeout(function () {
+                try {
+                    twttr.widgets.load();
+                    FB.XFBML.parse();
+                } catch (e) {
+                    return null;
+                }
+            }, 0);
         }
     </script>
 

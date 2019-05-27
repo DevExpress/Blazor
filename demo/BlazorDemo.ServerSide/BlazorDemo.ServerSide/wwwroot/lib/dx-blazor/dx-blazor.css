@@ -4987,8 +4987,33 @@ html:not(.dxMobileUI) .dxbs-tabs-scrollable.has-overflow .nav,
     width: 1%;
 }
 
-/* Common for Blazor*/
+/* Common for Blazor */
 .dxbs-border-radius-top-0 {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+/* Blazor Validation */
+.dxbs-textbox.invalid,
+.dxbs-textbox.valid,
+.dxbs-spin-edit.invalid,
+.dxbs-spin-edit.valid,
+.dxbs-combobox.valid,
+.dxbs-combobox.invalid,
+.dxbs-date-edit.valid,
+.dxbs-date-edit.invalid {
+    outline: none !important;
+}
+.dxbs-textbox.invalid .form-control,
+.dxbs-spin-edit.invalid .form-control,
+.dxbs-combobox.invalid .form-control,
+.dxbs-date-edit.invalid .form-control {
+    border-color: red;
+}
+.dxbs-textbox.valid.modified .form-control,
+.dxbs-spin-edit.valid.modified .form-control,
+.dxbs-combobox.valid.modified .form-control,
+.dxbs-date-edit.valid.modified .form-control {
+
+    border-color: #26b050;
 }

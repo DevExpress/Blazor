@@ -2,7 +2,14 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
-## [0.0.6] (latest release)
+## [0.0.7] (latest release)
+
+### Added
+- Support for Blazor Validation in the Form Layout component and date editors.
+- Support for NullText in the Combo Box component.
+- Theme switcher for demos.
+
+## [0.0.6]
 
 ### Fixed
 - Fix Blazor (client-side) support
