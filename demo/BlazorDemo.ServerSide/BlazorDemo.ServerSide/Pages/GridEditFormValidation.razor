@@ -1,0 +1,178 @@
+﻿@page "/GridEditFormTemplateValidation"
+
+@using System.ComponentModel.DataAnnotations
+@using Demo.Blazor.Model
+@using DevExpress.Blazor
+
+<div class="demo-description">
+    <h2>Data Grid - Data Grid - Edit Form Template with Validation</h2>
+
+    <p>
+        This module illustrates how to implement a custom edit form for the <b>DxDataGrid</b> using the following components and API members:
+    </p>
+
+    <ul>
+        <li>
+            The <b>RowEditStart</b> event of the DXDataGrid object is used to build an editing context with a custom logic.
+        </li>
+        <li>
+            The custom <b>EditForm</b> component creates a custom form layout.
+        </li>
+        <li>
+            The Blazor's built-in <b>EditForm</b> component validates combo boxes data.
+        </li>
+    </ul> 
+
+    <p>
+        Click <b>Edit</b> to see the edit form with a validation in action. 
+        Also, pay attention to the <b>Region</b> and <b>City</b> combo boxes’ cascade logic implemented within the custom <b>FormEditContext</b> class.
+    </p>
+</div>
+
+@if (Vacancies == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <DxDataGrid ref=@grid
+                Data=@Vacancies
+                ShowFilterRow=@false
+                ShowPager=@false
+                RowRemoving=@((dataItem) => OnRowRemoving(dataItem))
+                RowEditStart=@(dataItem => OnRowEditStarting(dataItem))
+                RowInsertStart=@(() => OnRowEditStarting(null))>
+        <ChildContent>
+            <DxDataGridCommandColumn Width="150px"></DxDataGridCommandColumn>
+            <DxDataGridColumn Field=@nameof(Vacancy.Description)></DxDataGridColumn>
+            <DxDataGridComboBoxColumn Field=@nameof(Vacancy.Region) Data=@VacancyRepository.Regions></DxDataGridComboBoxColumn>
+            <DxDataGridColumn Field=@nameof(Vacancy.City)></DxDataGridColumn>
+        </ChildContent>
+        <EditFormTemplate>
+            <EditForm Model="@EditContext" Context="EditFormContext" OnValidSubmit=@HandleValidSubmit>
+                <DataAnnotationsValidator />
+                <DxFormLayout>
+                    <DxFormLayoutItem Caption="Vacancy Description:" ColSpanMd="12" Context="FormLayoutContext">
+                        <Template>
+                            <DxTextBox bind-Text="@EditContext.Description" />
+                        </Template>
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Region:" ColSpanMd="6" Context="FormLayoutContext">
+                        <Template>
+                            <DxComboBox Data=@VacancyRepository.Regions
+                                        NullText="Select Region..."
+                                        bind-SelectedItem=@EditContext.Region>
+                            </DxComboBox>
+                        </Template>
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="City:" ColSpanMd="6" Context="FormLayoutContext">
+                        <Template>
+                            <DxComboBox Data=@EditContext.OfficeLocations
+                                        NullText="Select City..."
+                                        bind-SelectedItem=@EditContext.City>
+                            </DxComboBox>
+                        </Template>
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem ColSpanMd="12" Context="FormLayoutContext">
+                        <Template>
+                            <ValidationSummary />
+                        </Template>
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem ColSpanMd="12" Context="FormLayoutContext">
+                        <Template>
+                            <div class="dxbs-fl-ctrl dxbs-fl-ctrl-nc text-right">
+                                <button class="btn btn-link" type="submit">Update</button>
+                                <button class="btn btn-link" type="button" onclick="@OnCancelButtonClick">Cancel</button>
+                            </div>
+                        </Template>
+                    </DxFormLayoutItem>
+                </DxFormLayout>
+            </EditForm>
+        </EditFormTemplate>
+    </DxDataGrid>
+}
+
+<CodeSnippet_GridEditFormValidation></CodeSnippet_GridEditFormValidation>
+
+@functions {
+    DxDataGrid<Vacancy> grid;
+    IEnumerable<Vacancy> Vacancies;
+
+    protected override async Task OnInitAsync()
+    {
+        Vacancies = await VacancyRepository.GetVacancies();
+    }
+
+    class FormEditContext
+    {
+        public FormEditContext(Vacancy dataItem)
+        {
+            DataItem = dataItem;
+            if (DataItem == null)
+            {
+                DataItem = new Vacancy();
+                IsNewRow = true;
+            }
+            Description = DataItem.Description;
+            Region = DataItem.Region;
+            City = DataItem.City;
+        }
+
+        public Vacancy DataItem { get; set; }
+        public bool IsNewRow { get; set; }
+
+        [StringLength(maximumLength: 16, MinimumLength = 4,
+        ErrorMessage = "The description should be 4 to 16 characters.")]
+        public string Description { get; set; }
+
+        string region;
+        [Required]
+        public string Region {
+            get => region;
+            set {
+                region = value;
+                City = null;
+                OfficeLocations = VacancyRepository.GetOfficeLocationsByRegion(value).Select(x => x.City);
+                StateHasChanged?.Invoke();
+            }
+        }
+
+        [Required]
+        public string City { get; set; }
+
+        public IEnumerable<string> OfficeLocations = null;
+
+        public Action StateHasChanged { get; set; }
+    }
+
+    FormEditContext EditContext = null;
+    void OnRowEditStarting(Vacancy vacancy)
+    {
+        EditContext = new FormEditContext(vacancy);
+        EditContext.StateHasChanged += () => { this.StateHasChanged(); };
+    }
+    void OnCancelButtonClick()
+    {
+        EditContext = null;
+        grid.CancelRowEdit();
+    }
+    void HandleValidSubmit()
+    {
+        EditContext.DataItem.Description = EditContext.Description;
+        EditContext.DataItem.Region = EditContext.Region;
+        EditContext.DataItem.City = EditContext.City;
+        if(EditContext.IsNewRow)
+        {
+            Vacancies = (new Vacancy[] { EditContext.DataItem }).Concat(Vacancies);
+        }
+
+        EditContext = null;
+        grid.CancelRowEdit();
+    }
+
+    void OnRowRemoving(Vacancy vacancy)
+    {
+        Vacancies = Vacancies.Where(v => v != vacancy).ToArray();
+        StateHasChanged();
+    }
+}

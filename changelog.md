@@ -2,7 +2,20 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
-## [0.0.7] (latest release)
+## [0.0.8] (latest release)
+
+### Added:
+
+New DxDataGrid features:
+*	Cascading combo boxes in the cell's Edit Template.
+*	Edit Form with custom templates.
+*	Edit Form validation.
+
+### Fixed:
+
+* [DxDataGrid - The NullReferenceException occurs after you cancel new row editing](https://www.devexpress.com/Support/Center/Question/Details/T745260/).
+
+## [0.0.7]
 
 ### Added
 - Support for Blazor Validation in the Form Layout component and date editors.

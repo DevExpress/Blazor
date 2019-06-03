@@ -25,7 +25,6 @@
     <div class="card-header">@FormValidationState</div>
     <div class="card-body">
 
-        @*<EditForm Model="@starship" OnSubmit="@OnSubmit">*@
         <EditForm Model="@starship" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
             <DataAnnotationsValidator />
 

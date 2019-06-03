@@ -15,6 +15,7 @@ The following table describes the version compatibility of .NET Core 3.0 Previe
 
 | .NET Core 3.0 version | DevExpress.Blazor.nuget version |
 | ------------- | ------------- |
+| .NET Core 3.0 Preview **5** | 0.0.**8** |
 | .NET Core 3.0 Preview **5** | 0.0.**7** |
 | .NET Core 3.0 Preview **5** | 0.0.**6** |
 | .NET Core 3.0 Preview **5** | 0.0.**5** |
@@ -27,7 +28,13 @@ The following table describes the version compatibility of .NET Core 3.0 Previe
 2. Ensure that you have .NET Core 3 (preview 4) installed.
 3. If you work with the release version of Visual Studio 2019, make sure to enable the option "Use previews of the .NET Core SDK".
 
+Depending on the Visual Studio build version this check box can be found here:
+
 ![Create New ASP.NET Core Web Application Project"](media/VS2019Release-EnablePreviewSDK.png)
+
+or here:
+
+![Create New ASP.NET Core Web Application Project"](media/VS2019Release-EnablePreviewSDK_2.png)
 
 # How to run this demo on your machine
 
