@@ -1,0 +1,29 @@
+﻿@inject IJSRuntime JsRuntime;
+
+<div class="social-panel">
+    <div>
+        <div class="sp-caption">Help spread the word - DevExpress UI for Blazor is available for free.</div>
+        <div class="fb-share-button"
+             data-href="https://dxpr.es/2WogLq7"
+             data-layout="button"
+             data-size="small">
+        </div>
+
+        <a class="twitter-share-button"
+           href="https://twitter.com/intent/tweet"
+           data-text="Free DevExpress UI for Blazor ships with 7 user interface components including a Data Grid and Pivot Grid."
+           data-url="https://dxpr.es/2WogLq7"
+           data-size="small"
+           data-hashtags="Blazor, RazorComponents, monowasm, DevExpress"
+           data-related="DevExpress">
+            Tweet
+        </a>
+    </div>
+</div>
+
+@functions {
+    protected override Task OnAfterRenderAsync()
+    {
+        return JsRuntime.InvokeAsync<string>("UpdateSharingButton");
+    }
+}

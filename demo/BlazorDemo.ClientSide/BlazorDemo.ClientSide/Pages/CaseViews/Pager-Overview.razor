@@ -1,0 +1,50 @@
+@using Demo.Blazor.Model
+
+<div class="demo-description">
+    <h2>Pager - Overview</h2>
+    <p>
+        The Pager is a standalone UI component that enables data navigation and helps visualize the current position within a bound data source.
+    </p>
+    <p>
+        You can specify the following attributes:
+    </p>
+    <ul>
+        <li><b>PageCount</b> - Total number of pages</li>
+        <li><b>ActivePageIndex</b> - Index of the active page</li>
+        <li><b>CollapseButtonCount</b> - Maximum number of page numbers displayed simultaneously</li>
+    </ul>
+    <p>
+        If the total number of pages is greater than the CollapseButtonCount value, the pager hides some of the page number buttons and displays an ellipsis in their place.
+    </p>
+    <p>
+        Try the demo below - use the pager control or linked Spin Editor controls and notice the two-way synchronization.
+    </p>
+</div>
+
+<div class="card demo-card">
+    <div class="card-body">
+        <DxPager PageCount=@PageCount
+                 CollapseButtonCount=@CollapseButtonCount
+                 bind-ActivePageIndex=@ActivePageIndex>
+        </DxPager>
+    </div>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Pager></CodeSnippet_Pager>
+        <DxSpinEdit bind-Value=@PageCount MinValue=0 MaxValue=int.MaxValue></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // PageCount</span>
+        <br />
+        <DxSpinEdit bind-Value=@ActivePageIndex MinValue=0 MaxValue=@(PageCount - 1)></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // ActivePageIndex</span>
+        <br />
+        <DxSpinEdit bind-Value=@CollapseButtonCount MinValue=1 MaxValue=100></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // CollapseButtonCount</span>
+    </div>
+</div>
+
+@functions {
+    int pageCount = 10;
+    int PageCount { get => pageCount; set { pageCount = value; StateHasChanged(); } }
+
+    int activePageIndex = 1;
+    int ActivePageIndex { get => activePageIndex; set { activePageIndex = value; StateHasChanged(); } }
+
+    int collapseButtonCount = 10;
+    int CollapseButtonCount { get => collapseButtonCount; set { collapseButtonCount = value; StateHasChanged(); } }
+}

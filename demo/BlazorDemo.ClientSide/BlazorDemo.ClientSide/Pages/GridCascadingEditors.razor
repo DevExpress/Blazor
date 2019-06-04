@@ -1,0 +1,137 @@
+﻿@page "/GridCascadingEditors"
+@using Demo.Blazor.Model
+
+<div class="demo-description">
+    <h2>Data Grid - Cascading Editors</h2>
+
+    <p>
+        This module illustrates cascade combo boxes: <b>City</b> and <b>Region</b>. 
+        These combo boxes are displayed when you edit a grid row. 
+        The <b>City</b> combo box is dynamically populated with city names based on the value selected in the <b>Region</b> combo box.
+    </p>
+
+    <p>
+        Both the Region and City columns use the <b>EditTemplate context</b> cast to the <b>CellEditContext</b> type that contains:
+    </p>
+       
+    <ul>
+        <li>
+            An original cell value as a <b>DataItem</b> object
+        </li>
+        <li>
+            An <b>EditedValues</b> dictionary with changed cell values.
+        </li>
+        <li>
+            A <b>CellValue</b> object that stores the current cell’s value.
+        </li>
+        <li>
+            Two overloads of the <b>OnChanged</b> method that allow one combo box to respond to another combo box’s value change.
+        </li>
+        <li>
+            The <b>GetEditorValue</b> method that returns a value of any grid cell.
+        </li>
+    </ul> 
+    
+    <p>
+        Click <b>Edit</b> to see how the <b>Region</b> and <b>City</b> combo boxes communicate using the <b>OnChanged</b> and <b>GetEditorValue</b> methods to pass/get values to/from each other.
+    </p>
+</div>
+
+@if (Vacancies == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <DxDataGrid Data=@Vacancies
+                ShowFilterRow=@false
+                ShowPager=@false
+                RowRemoving=@((dataItem) => OnRowRemoving(dataItem))
+                RowInserting=@((newValues) => OnRowInserting(newValues))
+                RowUpdating=@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))>
+        <DxDataGridCommandColumn Width="150px"></DxDataGridCommandColumn>
+        <DxDataGridColumn Field=@nameof(Vacancy.Description)></DxDataGridColumn>
+
+        <DxDataGridComboBoxColumn Field=@nameof(Vacancy.Region) Data=@VacancyRepository.Regions>
+            <EditTemplate>
+                @{
+                    var editingContext = (CellEditContext)context;
+                    var region = (string)editingContext.GetEditorValue(nameof(Vacancy.Region));
+                }
+                <DxComboBox Data=@VacancyRepository.Regions
+                            NullText="Select Region..."
+                            SelectedItem=@region
+                            SelectedItemChanged=@(newCellValue => {
+                                                editingContext.OnChanged(newCellValue);
+                                                editingContext.OnChanged(nameof(Vacancy.City), null);
+                                                OnRegionChanged();
+                                                })>
+                </DxComboBox>
+            </EditTemplate>
+        </DxDataGridComboBoxColumn>
+        <DxDataGridColumn Field=@nameof(Vacancy.City)>
+            <EditTemplate>
+                @{
+                    var editingContext = (CellEditContext)context;
+
+                    var region = (string)editingContext.GetEditorValue(nameof(Vacancy.Region));
+                    var city = ((string)(editingContext.GetEditorValue(nameof(Vacancy.City))));
+
+                    var cities = VacancyRepository.GetOfficeLocationsByRegion(region).Select(x => x.City);
+                }
+                <DxComboBox Data=@cities
+                            NullText="Select City..."
+                            Text=@city
+                            SelectedItemChanged=@(newCellValue => editingContext.OnChanged(newCellValue))>
+                </DxComboBox>
+            </EditTemplate>
+        </DxDataGridColumn>
+    </DxDataGrid>
+}
+
+<CodeSnippet_GridCascadingEditors></CodeSnippet_GridCascadingEditors>
+
+@functions {
+    IEnumerable<Vacancy> Vacancies;
+
+    protected override async Task OnInitAsync()
+    {
+        Vacancies = await VacancyRepository.GetVacancies();
+    }
+
+    public void OnRegionChanged()
+    {
+        StateHasChanged();
+    }
+    void OnRowUpdating(Vacancy vacancy, Dictionary<string, object> newValue)
+    {
+        foreach (var field in newValue.Keys)
+        {
+            switch (field)
+            {
+                case "Description":
+                    vacancy.Description = (string)newValue[field];
+                    break;
+                case "Region":
+                    vacancy.Region = (string)newValue[field];
+                    break;
+                case "City":
+                    vacancy.City = (string)newValue[field];
+                    break;
+            }
+        }
+    }
+    void OnRowRemoving(Vacancy vacancy)
+    {
+        Vacancies = Vacancies.Where(v => v != vacancy).ToArray();
+        StateHasChanged();
+    }
+    void OnRowInserting(Dictionary<string, object> newValue)
+    {
+        var newVacancy = new Vacancy();
+        OnRowUpdating(newVacancy, newValue);
+        Vacancies = (new Vacancy[] { newVacancy }).Concat(Vacancies);
+        
+        StateHasChanged();
+    }
+}

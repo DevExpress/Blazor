@@ -1,0 +1,226 @@
+/* Demos specific */
+body {
+    margin: 0;
+}
+html, body * {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.main {
+	overflow-x: auto;
+	overflow-x: hidden;
+}
+
+.card.demo-card {
+    width: 760px;
+}
+
+@media(max-width: 1080px) {
+    .card.demo-card {
+        width: 100%;
+    }
+}
+
+.mw-480 {
+    max-width: 480px;
+}
+
+.card-deck.demo > .card {
+    min-width: 400px;
+    max-width: 800px;
+    height: 150px;
+    margin-bottom: 15px;
+    margin-left: 0px;
+}
+.card.demo-card-wide > .card-footer {
+    background-color: #fff;
+}
+.card.demo-card > .card-footer {
+    background-color: #fff;
+}
+
+.card.demo-card > .card-footer,
+.card.demo-card-wide > .card-footer {
+    padding-top: 0;
+}
+
+    .card.demo-card > .card-footer > pre,
+    .card.demo-card-wide > .card-footer > pre {
+        margin: 0;
+        padding: 0;
+    }
+
+.hljs {
+    background-color: transparent;
+}
+
+.hljs-name,
+.hljs-attr,
+.hljs-tag,
+code.hljs.xml {
+    color: #800080 !important;
+}
+
+.main {
+    min-width: 0;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+    .main .top-row {
+        z-index: 10000;
+        padding-right:0!important;
+    }
+
+.sidebar > .logo-container {
+    padding: 0 !important;
+    border: 0 !important;
+    margin: 0 !important;
+}
+
+.logo-container img {
+    width: 180px;
+    height: 30px;
+    margin-left: 16px;
+}
+
+div.logo {
+    padding-top: 10px;
+    float: left;
+    width: 100%;
+}
+
+.caption {
+    color: #212529;
+}
+
+.sidebar .footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-left: 10px;
+    padding-bottom: 12px;
+}
+
+    .sidebar .footer .version,
+    .sidebar .footer .copyright {
+        color: #d7d7d7;
+        font-size: 11px;
+    }
+
+div.content > .card:last-child {
+    margin-bottom: 50px;
+}
+
+.card-footer.text-muted > .dxbs-spin-edit {
+    display: inline-block;
+    width: 100px;
+}
+
+/*Mac OS Safari does not support position:sticky*/
+@media (min-width: 768px) {
+    _:-webkit-full-screen, _::-webkit-full-page-media, _:future, :root .main {
+        margin-left: 300px;
+        margin-top: 56px;
+    }
+
+        _:-webkit-full-screen, _::-webkit-full-page-media, _:future, :root .main .top-row {
+            position: fixed;
+            width: 100%;
+        }
+
+    _:-webkit-full-screen, _::-webkit-full-page-media, _:future, :root .sidebar {
+        position: fixed;
+    }
+}
+
+.online-only-warrning {
+    margin-top: 32px;
+    margin-bottom: 40px;
+    padding: 16px 16px 0 66px;
+    max-width: 1024px;
+}
+
+    .online-only-warrning > img {
+        width: 36px;
+        height: 36px;
+        position: absolute;
+        top: 21px;
+        left: 16px;
+    }
+
+    .online-only-warrning .info-caption {
+        font-size: 16px;
+        margin-bottom: 2px;
+    }
+
+    .online-only-warrning .info-description {
+        font-size: 14px;
+        margin-bottom: 16px;
+    }
+
+.demo-icon {
+    width: 26px;
+    height: 26px;
+    margin-right: 9px;
+    margin-left: -3px;
+}
+
+.demo-description {
+    max-width: 1024px;
+}
+
+    .demo-description:not(:first-child) > h2 {
+        margin-top: 32px;
+    }
+
+    .demo-description > h2 {
+        margin-bottom: 24px;
+    }
+
+.main > div.social-panel {
+    padding-left: 0 !important;
+}
+
+.social-panel {
+    border-bottom: 1px solid #DEDEDE;
+    font-size: 15px;
+    font-weight: 600;
+    padding-top: 16px;
+    padding-bottom: 18px;
+    margin-left: 32px;
+    margin-right: 32px;
+}
+
+    .social-panel .sp-caption {
+    }
+
+.fb_iframe_widget iframe {
+    vertical-align: text-bottom;
+}
+
+.twitter-share-button[style] {
+    vertical-align: bottom !important;
+}
+
+.app-sidebar .nav-link > span {
+    flex: 1;
+}
+
+    .app-sidebar .nav-link > span.badge {
+        flex: 0;
+    }
+
+.sidebar .navbar-toggler {
+    border: 0;
+    padding: 0;
+    margin-left: 16px;
+}
+.sidebar .navbar-dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(33,33,33, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+    background-color: white !important;
+    width: 44px;
+    height: 40px;
+    border-radius: 3px;
+}

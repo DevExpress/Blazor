@@ -1,0 +1,28 @@
+﻿@using Demo.Blazor.Model
+
+<div class="demo-description">
+    <h2>Combo Box - NullText</h2>
+    <p>
+        This example illustrates how the <b>NullText</b> property can be used to display prompt text (watermark) in the editor's edit box. Specified text is displayed when the value of the editor is null.
+    </p>
+</div>
+
+<div class="card demo-card" style="height: 485px">
+    <div class="card-header">Option Selected: <b>@Option</b></div>
+    <div class="card-body mw-480">
+        <DxComboBox NullText="Select Option ..."
+                    Data=@(new string[] { null, "Option 1", "Option 2", "Option 3" })
+                    bind-SelectedItem="@Option" />
+    </div>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_ComboBox_NullText></CodeSnippet_Editor_ComboBox_NullText>
+    </div>
+</div>
+
+@functions {
+    string option;
+    string Option { get => option; set { option = value; StateHasChanged(); } }
+
+    bool dropDownVisible = true;
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; StateHasChanged(); }  }
+}

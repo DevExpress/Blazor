@@ -1,0 +1,13 @@
+﻿<CodeSnippet>
+@(@"<DxPivotGrid Data=@largeDataSource ShowPager=""true"" PageSize=""10"">
+	<DxPivotGridField Field=@nameof(Sale.StoreName) Caption=""Store"" Area=@PivotGridFieldArea.Row></DxPivotGridField>
+	<DxPivotGridField Field=@nameof(Sale.DateKey) GroupInterval=@PivotGridGroupInterval.Year Caption=""Year"" Area=@PivotGridFieldArea.Column></DxPivotGridField>
+	<DxPivotGridField Field=@nameof(Sale.SalesAmount) Caption=""Amount"" Area=@PivotGridFieldArea.Data SummaryType=@PivotGridSummaryType.Sum>
+		<DataTemplate>@string.Format(""{0:c0}"", context)</DataTemplate>
+	</DxPivotGridField>
+	<DxPivotGridField Field=@nameof(Sale.OrderId) Caption=""Count"" Area=@PivotGridFieldArea.Data SummaryType=@PivotGridSummaryType.Count>
+		<DataTemplate>@string.Format(""{0:n0}"", context)</DataTemplate>
+	</DxPivotGridField>
+</DxPivotGrid>")
+</CodeSnippet>
+

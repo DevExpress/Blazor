@@ -1,0 +1,63 @@
+﻿@using Demo.Blazor.Model
+
+<div class="demo-description">
+    <h2>Combo Box - Cascading Lists</h2>
+    <p>
+        This demo shows how to populate a DxComboBox editor with items based on the user selection from another DxComboBox.
+    </p>
+</div>
+
+<div class="card demo-card" style="height: 888px">
+    <div class="card-header">Selected values are: <b>@CurrentCountry.CountryName</b> / <b>@CurrentCity.CityName</b></div>
+    <div class="card-body">
+        <div class="d-inline-block">
+            <DxComboBox Data=@Countries
+                        TextFieldName="CountryName"
+                        SelectedItem=@CurrentCountry
+                        bind-DropDownVisible=@DropDownVisible1
+                        SelectedItemChanged=@SelectedCountryChanged></DxComboBox>
+        </div>
+        <div class="d-inline-block">
+            <DxComboBox Data=@CurrentCountryCities
+                        TextFieldName="CityName"
+                        SelectedItem=@CurrentCity
+                        bind-DropDownVisible=@DropDownVisible2
+                        SelectedItemChanged=@SelectedCityChanged></DxComboBox>
+        </div>
+    </div>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_ComboBox_Cascading></CodeSnippet_Editor_ComboBox_Cascading>
+    </div>
+</div>
+
+@functions {
+    List<Country> Countries = CountryCity.Countries;
+    List<City> CurrentCountryCities = new List<City>();
+    Country CurrentCountry = CountryCity.Countries[1];
+    City CurrentCity = CountryCity.Cities[4];
+
+    bool dropDownVisible1 = true;
+    bool DropDownVisible1 { get => dropDownVisible1; set { dropDownVisible1 = value; StateHasChanged(); }  }
+
+    bool dropDownVisible2 = true;
+    bool DropDownVisible2 { get => dropDownVisible2; set { dropDownVisible2 = value; StateHasChanged(); }  }
+
+
+    protected override void OnInit()
+    {
+        SelectedCountryChanged(CurrentCountry);
+    }
+
+    void SelectedCountryChanged(Country country)
+    {
+        CurrentCountry = country;
+        CurrentCountryCities = CountryCity.Cities.FindAll(city => city.CountryId == CurrentCountry.Id);
+        CurrentCity = CurrentCountryCities[0];
+        StateHasChanged();
+    }
+    void SelectedCityChanged(City city)
+    {
+        CurrentCity = city;
+        StateHasChanged();
+    }
+}

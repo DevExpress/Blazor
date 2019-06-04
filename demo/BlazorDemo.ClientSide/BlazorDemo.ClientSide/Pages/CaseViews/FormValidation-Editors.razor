@@ -1,0 +1,103 @@
+﻿@using System.ComponentModel.DataAnnotations
+
+    <div class="demo-description">
+        <h2>Custom Form based on DevExpress Editors</h2>
+        <p>
+            The following example shows a standard <b>EditForm</b> component with a few DevExpress editors in it:
+        </p>
+        <ul>
+            <li>DxTextBox</li>
+            <li>DxComboBox</li>
+            <li>DxSpinEdit</li>
+            <li>DxDateEdit</li>
+        </ul>
+        <p>
+            Once you attempt to submit changes, editors become marked with colored outlines.
+            <span class="invalid" style="color:red;">Red</span> indicates invalid values, while
+            <span class="modified" style="outline: 1px solid #26b050; color:#26b050;">green</span> indicates values that were posted successfully.
+        </p>
+        <p>
+            The code also adds a standard <b>ValidationMessage</b> component for each editor to display error messages.
+        </p>
+    </div>
+
+<div class="card demo-card-wide">
+    <div class="card-header">@FormValidationState</div>
+    <div class="card-body">
+
+        <EditForm Model="@starship" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+            <DataAnnotationsValidator />
+
+            <div style="height:100px">
+                <label for="identifier">Identifier: </label>
+                <DxTextBox Id="identifier" bind-Text="@starship.Identifier" />
+                <ValidationMessage For="@(() => starship.Identifier)" />
+            </div>
+            <div style="height:100px">
+                <label for="classification">Primary Classification: </label>
+                <DxComboBox Id="classification" NullText="Select classification ..."
+                            Data=@(new List<string>() { null, "Defense", "Exploration", "Diplomacy" })
+                            bind-SelectedItem="@starship.Classification" />
+                <ValidationMessage For="@(() => starship.Classification)" />
+            </div>
+            <div style="height:100px">
+                <label for="accommodation">Maximum Accommodation: </label>
+                <DxSpinEdit Id="accommodation" bind-Value="@starship.MaximumAccommodation" />
+                <ValidationMessage For="@(() => starship.MaximumAccommodation)" />
+            </div>
+            <div style="height:100px">
+                <label for="productionDate">Production Date: </label>
+                <DxDateEdit bind-Date="@starship.ProductionDate" />
+                <ValidationMessage For="@(() => starship.ProductionDate)" />
+            </div>
+
+            <button type="submit">Submit</button>
+
+        </EditForm>
+
+    </div>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_FormValidation_Editors />
+    </div>
+</div>
+
+@functions {
+    string FormValidationState = @"Press the ""Submit"" button to validate the form.";
+    private Starship starship = new Starship() { ProductionDate = DateTime.Now + TimeSpan.FromDays(1) };
+
+    private void HandleValidSubmit()
+    {
+        FormValidationState = @"Form is valid";
+    }
+    private void HandleInvalidSubmit()
+    {
+        FormValidationState = @"Form is invalid";
+    }
+
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+    public class DateInPastAttribute: ValidationAttribute
+    {
+        public override bool IsValid(object value)
+        {
+            return (DateTime)value <= DateTime.Today;
+        }
+    }
+
+    public class Starship
+    {
+        [Required]
+        [StringLength(16,
+        ErrorMessage = "Identifier too long (16 character limit).")]
+        public string Identifier { get; set; }
+
+        [Required]
+        public string Classification { get; set; }
+
+        [Range(1, 100000, ErrorMessage = "Accommodation invalid (1-100000).")]
+        public int MaximumAccommodation { get; set; }
+
+        [Required]
+        [DateInPastAttribute(ErrorMessage = "Date should be in past.")]
+        public DateTime ProductionDate { get; set; }
+    }
+}

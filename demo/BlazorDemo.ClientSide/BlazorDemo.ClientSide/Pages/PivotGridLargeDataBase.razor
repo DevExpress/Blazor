@@ -1,0 +1,66 @@
+﻿@page "/PivotGridLargeDataBase"
+@using Demo.Blazor.Model
+@using DevExpress.Blazor.PivotGrid
+
+@inject ContosoRetailContext ContosoRetailContext
+@inject IOptions<DemoConfiguration> DemoConfiguration
+
+<div class="demo-description">
+    <h2>Pivot Grid - Large Data Source</h2>
+    <p>
+        This demo shows the performance of the Pivot Grid when it is bound to a dataset that contains a million rows. Experiment with navigating between the pages and sorting the data to experience the responsiveness of the pivot grid in this situation. The pager is enabled by setting the Pivot Grid's ShowPager and PageSize properties.
+    </p>
+    <p>
+        In this example, Entity Framework Core (version 3.0) provides the Pivot Grid with an IQueryable&lt;T&gt; source.
+    </p>
+</div>
+@if (!DemoConfiguration.Value.SiteMode)
+{
+    <div class="online-only-warrning card">
+        <img src="images/Information.svg" alt="Information" />
+        <p class="info-caption">To try this demo, please navigate to the <a href="https://demos.devexpress.com/razor-components/PivotGridLargeDataBase">online demo page</a>.</p>
+        <p class="info-description">This demo is only accessible online because it uses a large data source that is hosted on a DevExpress internal database server.</p>
+    </div>
+
+    <div class="card demo-card-wide">
+        <div class="card-footer text-muted border-top-0">
+            <CodeSnippet_Pivot_LargeDataSource></CodeSnippet_Pivot_LargeDataSource>
+        </div>
+    </div>
+}
+else
+{
+    if (largeDataSource == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <DxPivotGrid Data=@largeDataSource ShowPager="true" PageSize="10">
+            <DxPivotGridField Field=@nameof(Sale.StoreName) Caption="Store" Area=@PivotGridFieldArea.Row></DxPivotGridField>
+            <DxPivotGridField Field=@nameof(Sale.DateKey) GroupInterval=@PivotGridGroupInterval.Year Caption="Year" Area=@PivotGridFieldArea.Column></DxPivotGridField>
+            <DxPivotGridField Field=@nameof(Sale.SalesAmount) Caption="Amount" Area=@PivotGridFieldArea.Data SummaryType=@PivotGridSummaryType.Sum>
+                <DataTemplate>@string.Format("{0:c0}", context)</DataTemplate>
+            </DxPivotGridField>
+            <DxPivotGridField Field=@nameof(Sale.Id) Caption="Count" Area=@PivotGridFieldArea.Data SummaryType=@PivotGridSummaryType.Count>
+                <DataTemplate>@string.Format("{0:n0}", context)</DataTemplate>
+            </DxPivotGridField>
+        </DxPivotGrid>
+    }
+    <div class="card demo-card-wide border-top-0">
+        <div class="card-footer text-muted border-top-0">
+            <CodeSnippet_Pivot_LargeDataSource></CodeSnippet_Pivot_LargeDataSource>
+        </div>
+    </div>
+
+}
+
+@functions {
+
+    IQueryable<Sale> largeDataSource;
+
+    protected override void OnInit()
+    {
+        largeDataSource = ContosoRetailContext.Sales;
+    }
+}
