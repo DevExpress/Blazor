@@ -31,7 +31,7 @@ namespace BlazorDemo.ServerSide
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
+            services.AddScoped<WeatherForecastService>();
             services.AddDbContext<FMRDemoContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("GridLargeDataConnectionString"), opt => opt.UseRowNumberForPaging()));
             services.AddDbContext<ContosoRetailContext>(options =>
