@@ -28,7 +28,7 @@ The following table describes the version compatibility of .NET Core 3.0 Previe
 2. Ensure that you have .NET Core 3 (preview 4) installed.
 3. If you work with the release version of Visual Studio 2019, make sure to enable the option "Use previews of the .NET Core SDK".
 
-Depending on the Visual Studio build version this check box can be found here:
+The corresponding check box's location depends on the Visual Studio build number. You can find the check box here:
 
 ![Create New ASP.NET Core Web Application Project"](media/VS2019Release-EnablePreviewSDK.png)
 
@@ -36,10 +36,26 @@ or here:
 
 ![Create New ASP.NET Core Web Application Project"](media/VS2019Release-EnablePreviewSDK_2.png)
 
-# How to run this demo on your machine
+# How to run this demo locally
 
-1. Download the "**demo**" directory from this repository.
-2. Open **demo/BlazorDemo.ServerSide/BlazorDemo.ServerSide.sln** in Visual Studio 2019.
+The Blazor framework uses either WebAssembly-based .NET runtime (**client-side Blazor**) or server-side ASP.NET Core (**server-side Blazor**). Our Blazor components support both of these approaches. 
+
+You can find appropriate demos in the repositories below:
+
+* demo/BlazorDemo.ServerSide
+* demo/BlazorDemo.ClientSide
+
+To open the required demo, do the following:
+
+1. Download the "**demo**" folder from the proper repository.
+2. Use Visual Studio 2019 to open the solution file:
+	
+	**demo/BlazorDemo.ServerSide/BlazorDemo.ServerSide.sln**
+	
+	or
+	
+	**demo/BlazorDemo.ClientSide/BlazorDemo.ClientSide.sln** 
+	  
 3. Start the application.
 
 See also: 
