@@ -87,6 +87,7 @@
         public Vacancy DataItem { get; set; }
         public bool IsNewRow { get; set; }
 
+        [Required]
         [StringLength(maximumLength: 16, MinimumLength = 4,
         ErrorMessage = ""The description should be 4 to 16 characters."")]
         public string Description { get; set; }

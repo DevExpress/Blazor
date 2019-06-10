@@ -4993,6 +4993,11 @@ html:not(.dxMobileUI) .dxbs-tabs-scrollable.has-overflow .nav,
     border-top-right-radius: 0;
 }
 
+/*iOS click does not work - workaround*/
+.dxbs-clickable {
+    cursor: pointer;
+}
+
 /* Blazor Validation */
 .dxbs-textbox.invalid,
 .dxbs-textbox.valid,

@@ -15,6 +15,7 @@ The following table describes the version compatibility of .NET Core 3.0 Previe
 
 | .NET Core 3.0 version | DevExpress.Blazor.nuget version |
 | ------------- | ------------- |
+| .NET Core 3.0 Preview **5** | 0.0.**9** |
 | .NET Core 3.0 Preview **5** | 0.0.**8** |
 | .NET Core 3.0 Preview **5** | 0.0.**7** |
 | .NET Core 3.0 Preview **5** | 0.0.**6** |

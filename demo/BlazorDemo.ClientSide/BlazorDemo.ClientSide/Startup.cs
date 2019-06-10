@@ -13,7 +13,7 @@ namespace BlazorDemo.ClientSide
     {
         public void ConfigureServices(IServiceCollection services)
         {
-			services.AddSingleton<WeatherForecastService>();
+			services.AddScoped<WeatherForecastService>();
             services.AddSingleton<IOptions<DemoConfiguration>, ClientSideDemoConfiguration>();
             services.AddDbContext<FMRDemoContext>(options =>
                 options.UseSqlServer("YOUR CONNECTION STRING HERE", opt => opt.UseRowNumberForPaging()));

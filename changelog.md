@@ -2,7 +2,17 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
-## [0.0.8] (latest release)
+## [0.0.9] (latest release)
+
+### Fixed:
+
+* Data Grid
+  * A row cannot be selected on iOS.
+  * The NullReferenceException occurs when a user edits a new row with a null row editor value.
+* Combo Box - A drop-down item cannot be selected on iOS.
+* Form Layout - The NullReferenceException occurs when the component is bound to a Model with null property values.
+
+## [0.0.8]
 
 ### Added:
 

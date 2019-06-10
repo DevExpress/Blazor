@@ -5,7 +5,7 @@
 @using DevExpress.Blazor
 
 <div class="demo-description">
-    <h2>Data Grid - Data Grid - Edit Form Template with Validation</h2>
+    <h2>Data Grid - Edit Form Template with Validation</h2>
 
     <p>
         This module illustrates how to implement a custom edit form for the <b>DxDataGrid</b> using the following components and API members:
@@ -121,6 +121,7 @@ else
         public Vacancy DataItem { get; set; }
         public bool IsNewRow { get; set; }
 
+        [Required]
         [StringLength(maximumLength: 16, MinimumLength = 4,
         ErrorMessage = "The description should be 4 to 16 characters.")]
         public string Description { get; set; }
