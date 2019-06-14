@@ -105,7 +105,7 @@ Follow the steps below to try our UI for Blazor in your own application.
    ![Add new NuGet source](media/VS2019Release-AddNuGetPackage.png)
 
 4. Navigate to the GitHub repository and download all files from the "client-runtime" directory. Put the downloaded files into the "wwwroot" directory of your project. Include these files to your start page.
-5. Register our tag namespace and helper in _Imports.razor file: 
+5. Register our namespace in _Imports.razor file: 
 
   ```
   @using DevExpress.Blazor
