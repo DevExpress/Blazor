@@ -8,15 +8,15 @@
 <div class="card demo-card" style="height: 629px">
     <div class="card-header">Selected date is: <b>@DateTimeValue.ToString("dddd, dd MMMM yyyy")</b></div>
     <div class="card-body mw-480">
-        <DxDateEdit bind-Date=@DateTimeValue
-                    bind-DropDownVisible=@DropDownVisible></DxDateEdit>
+        <DxDateEdit @bind-Date=@DateTimeValue
+                    @bind-DropDownVisible=@DropDownVisible></DxDateEdit>
     </div>
     <div class="card-footer text-muted ">
         <CodeSnippet_Editor_DateEdit></CodeSnippet_Editor_DateEdit>
     </div>
 </div>
 
-@functions {
+@code {
     DateTime dateTimeValue = DateTime.Now;
     DateTime DateTimeValue { get => dateTimeValue; set { dateTimeValue = value; StateHasChanged(); }  }
 

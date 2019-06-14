@@ -2,17 +2,17 @@
 
 <div class="sidebar">
     <div class="top-row pl-4 navbar navbar-dark logo-container">
-        <button class="navbar-toggler" onclick="@ToggleNavMenu">
+        <button class="navbar-toggler" @onclick="@ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
         <img src="images/logo.svg" />
         <div class=@($"theme-settings-collapsed { ThemeSwitcherShown }")>
-            <a class="nav-item nav-link" onclick="@ToggleThemeSwitcherPanel" href="javascript:void(0);">
+            <a class="nav-item nav-link" @onclick="@ToggleThemeSwitcherPanel" href="javascript:void(0);">
                 <span class="oi oi-cog"></span>
             </a>
         </div>
     </div>
-    <div class="@NavMenuCssClass" onclick="@ToggleNavMenu">
+    <div class="@NavMenuCssClass" @onclick="@ToggleNavMenu">
         <NavMenu />
     </div>
 </div>
@@ -23,21 +23,21 @@
             <h5 class="caption">Online Demos - DevExpress UI for Blazor (CTP)</h5>
         </div>
         <div class=@($"theme-settings { ThemeSwitcherShown }")>
-            <a class="nav-item nav-link" onclick="@ToggleThemeSwitcherPanel" href="javascript:void(0);">
+            <a class="nav-item nav-link" @onclick="@ToggleThemeSwitcherPanel" href="javascript:void(0);">
                 <span class="oi oi-cog"></span>
             </a>
         </div>
     </div>
 
     <SocialButtonPanel></SocialButtonPanel>
-    <ThemeSwitcher bind-Shown=@ThemeSwitcherShown></ThemeSwitcher>
+    <ThemeSwitcher @bind-Shown=@ThemeSwitcherShown></ThemeSwitcher>
 
     <div class="content px-4">
         @Body
     </div>
 </div>
 
-@functions {
+@code {
     bool collapseNavMenu = true;
 
     string NavMenuCssClass => collapseNavMenu ? "collapse" : null;

@@ -3,11 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <LangVersion>7.3</LangVersion>
-    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor" Version="0.0.9-ctp" />
+    <PackageReference Include="DevExpress.Blazor" Version="0.0.10-ctp" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0-preview4.19216.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0-preview4.19216.3" />
   </ItemGroup>

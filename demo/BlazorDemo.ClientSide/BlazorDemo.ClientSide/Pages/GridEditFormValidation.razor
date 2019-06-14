@@ -35,7 +35,7 @@
 }
 else
 {
-    <DxDataGrid ref=@grid
+    <DxDataGrid @ref=@grid
                 Data=@Vacancies
                 ShowFilterRow=@false
                 ShowPager=@false
@@ -54,14 +54,14 @@ else
                 <DxFormLayout>
                     <DxFormLayoutItem Caption="Vacancy Description:" ColSpanMd="12" Context="FormLayoutContext">
                         <Template>
-                            <DxTextBox bind-Text="@EditContext.Description" />
+                            <DxTextBox @bind-Text="@EditContext.Description" />
                         </Template>
                     </DxFormLayoutItem>
                     <DxFormLayoutItem Caption="Region:" ColSpanMd="6" Context="FormLayoutContext">
                         <Template>
                             <DxComboBox Data=@VacancyRepository.Regions
                                         NullText="Select Region..."
-                                        bind-SelectedItem=@EditContext.Region>
+                                        @bind-SelectedItem=@EditContext.Region>
                             </DxComboBox>
                         </Template>
                     </DxFormLayoutItem>
@@ -69,7 +69,7 @@ else
                         <Template>
                             <DxComboBox Data=@EditContext.OfficeLocations
                                         NullText="Select City..."
-                                        bind-SelectedItem=@EditContext.City>
+                                        @bind-SelectedItem=@EditContext.City>
                             </DxComboBox>
                         </Template>
                     </DxFormLayoutItem>
@@ -82,7 +82,7 @@ else
                         <Template>
                             <div class="dxbs-fl-ctrl dxbs-fl-ctrl-nc text-right">
                                 <button class="btn btn-link" type="submit">Update</button>
-                                <button class="btn btn-link" type="button" onclick="@OnCancelButtonClick">Cancel</button>
+                                <button class="btn btn-link" type="button" @onclick="@OnCancelButtonClick">Cancel</button>
                             </div>
                         </Template>
                     </DxFormLayoutItem>
@@ -94,7 +94,7 @@ else
 
 <CodeSnippet_GridEditFormValidation></CodeSnippet_GridEditFormValidation>
 
-@functions {
+@code {
     DxDataGrid<Vacancy> grid;
     IEnumerable<Vacancy> Vacancies;
 

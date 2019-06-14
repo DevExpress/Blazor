@@ -14,14 +14,14 @@
             <DxComboBox Data=@Countries
                         TextFieldName="CountryName"
                         SelectedItem=@CurrentCountry
-                        bind-DropDownVisible=@DropDownVisible1
+                        @bind-DropDownVisible=@DropDownVisible1
                         SelectedItemChanged=@SelectedCountryChanged></DxComboBox>
         </div>
         <div class="d-inline-block">
             <DxComboBox Data=@CurrentCountryCities
                         TextFieldName="CityName"
                         SelectedItem=@CurrentCity
-                        bind-DropDownVisible=@DropDownVisible2
+                        @bind-DropDownVisible=@DropDownVisible2
                         SelectedItemChanged=@SelectedCityChanged></DxComboBox>
         </div>
     </div>
@@ -30,7 +30,7 @@
     </div>
 </div>
 
-@functions {
+@code {
     List<Country> Countries = CountryCity.Countries;
     List<City> CurrentCountryCities = new List<City>();
     Country CurrentCountry = CountryCity.Countries[1];

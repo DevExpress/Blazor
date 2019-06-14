@@ -1,5 +1,5 @@
 ﻿<CodeSnippet>
-@(@"<DxTabs bind-ActiveTabIndex=@ActiveTabIndex>
+@(@"<DxTabs @bind-ActiveTabIndex=@ActiveTabIndex>
     <DxTab Text=""Home""></DxTab>
     <DxTab Text=""Products""></DxTab>
     <DxTab Text=""Support""></DxTab>
@@ -23,7 +23,7 @@
     </div>
 </div>
 
-@functions {
+@code {
     int activeTabIndex = 1;
     int ActiveTabIndex 
     { 

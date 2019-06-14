@@ -17,15 +17,15 @@
     <div class="card-body mw-480">
         <DxComboBox Data=@Persons.DataSource
                     TextFieldName="Text"
-                    bind-DropDownVisible=@DropDownVisible
-                    bind-SelectedItem=@SelectedRealBusinessObject></DxComboBox>
+                    @bind-DropDownVisible=@DropDownVisible
+                    @bind-SelectedItem=@SelectedRealBusinessObject></DxComboBox>
     </div>
     <div class="card-footer text-muted ">
         <CodeSnippet_Editor_ComboBox></CodeSnippet_Editor_ComboBox>
     </div>
 </div>
 
-@functions {
+@code {
     Person selectedRealBusinessObject = Persons.DataSource[0];
     Person SelectedRealBusinessObject { get => selectedRealBusinessObject; set { selectedRealBusinessObject = value; StateHasChanged(); } }
 

@@ -1,7 +1,7 @@
 ﻿<div class="card demo-card-wide border-top-0">
     <div class="card-footer text-muted border-top-0">
         <CodeSnippet>
-@(@"<DxDataGrid ref=@grid
+@(@"<DxDataGrid @ref=@grid
         Data=@Vacancies
         ShowFilterRow=@false
         ShowPager=@false
@@ -20,7 +20,7 @@
             <DxFormLayout>
                 <DxFormLayoutItem Caption=""Vacancy Description:"" ColSpanMd=""12"" Context=""FormLayoutContext"">
                     <Template>
-                        <DxTextBox bind-Text=""@EditContext.Description"" />
+                        <DxTextBox @bind-Text=""@EditContext.Description"" />
                     </Template>
                 </DxFormLayoutItem>
                 @*<DxFormLayoutGroup Caption=""Office Location"">*@
@@ -28,7 +28,7 @@
                     <Template>
                         <DxComboBox Data=@VacancyRepository.Regions
                                                         NullText=""Select Region...""
-                                                        bind-SelectedItem=@EditContext.Region>
+                                                        @bind-SelectedItem=@EditContext.Region>
                         </DxComboBox>
                     </Template>
                 </DxFormLayoutItem>
@@ -36,7 +36,7 @@
                     <Template>
                         <DxComboBox Data=@EditContext.OfficeLocations
                                                         NullText=""Select City...""
-                                                        bind-SelectedItem=@EditContext.City>
+                                                        @bind-SelectedItem=@EditContext.City>
                         </DxComboBox>
                     </Template>
                 </DxFormLayoutItem>
@@ -50,7 +50,7 @@
                     <Template>
                         <div class=""dxbs-fl-ctrl dxbs-fl-ctrl-nc text-right"">
                             <button class=""btn btn-link"" type=""submit"">Update</button>
-                            <button class=""btn btn-link"" type=""button"" onclick=""@OnCancelButtonClick"">Cancel</button>
+                            <button class=""btn btn-link"" type=""button"" @onclick=""@OnCancelButtonClick"">Cancel</button>
                         </div>
                     </Template>
                 </DxFormLayoutItem>
@@ -60,7 +60,7 @@
 </DxDataGrid>
 
 
-@functions {
+@code {
     DxDataGrid<Vacancy> grid;
     IEnumerable<Vacancy> Vacancies;
 

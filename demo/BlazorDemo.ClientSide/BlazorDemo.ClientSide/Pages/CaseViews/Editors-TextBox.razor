@@ -8,14 +8,14 @@
 <div class="card demo-card">
     <div class="card-header">TextBox text is: "<b>@TextValue</b>"</div>
     <div class="card-body mw-480">
-        <DxTextBox bind-Text=@TextValue></DxTextBox>
+        <DxTextBox @bind-Text=@TextValue></DxTextBox>
     </div>
     <div class="card-footer text-muted ">
         <CodeSnippet_Editor_TextBox></CodeSnippet_Editor_TextBox>
     </div>
 </div>
 
-@functions {
+@code {
     string textValue = "Some text";
     string TextValue { get => textValue; set { textValue = value; StateHasChanged(); } }
 }

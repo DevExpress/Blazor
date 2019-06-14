@@ -1,10 +1,10 @@
 ﻿<CodeSnippet>
 @(@"<DxPager PageCount=@PageCount
-         bind-ActivePageIndex=@ActivePageIndex 
+         @bind-ActivePageIndex=@ActivePageIndex 
          CollapseButtonCount=@CollapseButtonCount> 
 </DxPager>
 
-@functions { 
+@code { 
     int PageCount = 10; 
     int ActivePageIndex = 1; 
     int CollapseButtonCount = 10; 

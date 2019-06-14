@@ -12,14 +12,14 @@
     <div class="card-body mw-480">
         <DxComboBox NullText="Select Option ..."
                     Data=@(new string[] { null, "Option 1", "Option 2", "Option 3" })
-                    bind-SelectedItem="@Option" />
+                    @bind-SelectedItem=@Option />
     </div>
     <div class="card-footer text-muted ">
         <CodeSnippet_Editor_ComboBox_NullText></CodeSnippet_Editor_ComboBox_NullText>
     </div>
 </div>
 
-@functions {
+@code {
     string option;
     string Option { get => option; set { option = value; StateHasChanged(); } }
 

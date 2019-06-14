@@ -12,23 +12,23 @@
     <div class="card-header">@nameof(Position)=<b>@(Position)</b>, @nameof(HireDate)=<b>@(HireDate)</b>, @nameof(Notes)=<b>@(Notes)</b></div>
     <div class="card-body">
         <DxFormLayout>
-            <DxFormLayoutTabPages bind-ActiveTabIndex=@ActiveTabIndex>
+            <DxFormLayoutTabPages @bind-ActiveTabIndex=@ActiveTabIndex>
                 <DxFormLayoutTabPage Caption="Personal Information">
                     <DxFormLayoutItem Caption="First Name:" ColSpanMd="6">
                         <Template>
-                            <DxTextBox bind-Text=@FirstName></DxTextBox>
+                            <DxTextBox @bind-Text=@FirstName></DxTextBox>
                         </Template>
                     </DxFormLayoutItem>
 
                     <DxFormLayoutItem Caption="Last Name:" ColSpanMd="6">
                         <Template>
-                            <DxTextBox bind-Text=@LastName></DxTextBox>
+                            <DxTextBox @bind-Text=@LastName></DxTextBox>
                         </Template>
                     </DxFormLayoutItem>
 
                     <DxFormLayoutItem Caption="Birthday:" ColSpanMd="6">
                         <Template>
-                            <DxDateEdit bind-Date=@Birthday></DxDateEdit>
+                            <DxDateEdit @bind-Date=@Birthday></DxDateEdit>
                         </Template>
                     </DxFormLayoutItem>
                 </DxFormLayoutTabPage>
@@ -36,17 +36,17 @@
                 <DxFormLayoutTabPage Caption="Work Information">
                     <DxFormLayoutItem Caption="Position:" ColSpanMd="6">
                         <Template>
-                            <DxTextBox bind-Text=@Position></DxTextBox>
+                            <DxTextBox @bind-Text=@Position></DxTextBox>
                         </Template>
                     </DxFormLayoutItem>
                     <DxFormLayoutItem Caption="Hire Date:" ColSpanMd="6">
                         <Template>
-                            <DxDateEdit bind-Date=@HireDate></DxDateEdit>
+                            <DxDateEdit @bind-Date=@HireDate></DxDateEdit>
                         </Template>
                     </DxFormLayoutItem>
                     <DxFormLayoutItem Caption="Notes:" ColSpanMd="6">
                         <Template>
-                            <DxTextBox bind-Text=@Notes></DxTextBox>
+                            <DxTextBox @bind-Text=@Notes></DxTextBox>
                         </Template>
                     </DxFormLayoutItem>
                 </DxFormLayoutTabPage>
@@ -59,7 +59,7 @@
     </div>
 </div>
 
-@functions {
+@code {
     int ActiveTabIndex { get; set; } = 1;
 
     string firstName = "Nancy";

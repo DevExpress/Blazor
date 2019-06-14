@@ -14,7 +14,7 @@
                     <li class="nav-item" id="themeSet.Title.ToLower()-themes-menu_li">
                         <a class="nav-link @(CurrentTheme == theme ? "active" : "") "
                            href="javascript:;"
-                           onclick="@(() => OnItemClick(theme))">
+                           @onclick="@(() => OnItemClick(theme))">
                             <span class="image @theme.ToLower().Replace(" ", "-")" aria-hidden="true"></span>
                             <span>@theme</span>
                         </a>
@@ -25,7 +25,7 @@
     </nav>
 </div>
 
-@functions {
+@code {
     [Parameter] public bool Shown { get; set; } = false;
     [Parameter] Action<bool> ShownChanged { get; set; }
     string CurrentTheme { get; set; } = "Default";

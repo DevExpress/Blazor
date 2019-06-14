@@ -1,8 +1,8 @@
 ﻿<CodeSnippet>
  @(@"<DxComboBox NullText=""Select Option ...""
                 Data=@(new string[] { null, ""Option 1"", ""Option 2"", ""Option 3"" })
-                bind-SelectedItem=""@Option"" />
-@functions {
+                @bind-SelectedItem=""@Option"" />
+@code {
     string option;
     string Option { get => option; set { option = value; StateHasChanged(); } }
 }

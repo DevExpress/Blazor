@@ -9,7 +9,7 @@
 
 <div class="card demo-card border-0 ">
     <div class="card-body p-0">
-        <DxTabs bind-ActiveTabIndex=@ActiveTabIndex>
+        <DxTabs @bind-ActiveTabIndex=@ActiveTabIndex>
             <DxTab Text="Home"></DxTab>
             <DxTab Text="Products"></DxTab>
             <DxTab Text="Support"></DxTab>
@@ -39,7 +39,7 @@
     </div>
 </div>
 
-@functions {
+@code {
     int activeTabIndex = 1;
     int ActiveTabIndex { get => activeTabIndex; set { activeTabIndex = value; StateHasChanged(); } }
 }

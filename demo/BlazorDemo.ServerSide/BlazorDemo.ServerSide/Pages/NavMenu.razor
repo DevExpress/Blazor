@@ -1,11 +1,11 @@
 <div class="top-row pl-4 navbar navbar-dark logo-container">
     <img src="images/logo.svg" />
-    <button class="navbar-toggler" onclick="@ToggleNavMenu">
+    <button class="navbar-toggler" @onclick="@ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
     </button>
 </div>
 
-<div class="@NavMenuCssClass" onclick="@ToggleNavMenu">
+<div class="@NavMenuCssClass" @onclick="@ToggleNavMenu">
     <ul class="nav flex-column app-sidebar">
         <li class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
@@ -84,7 +84,7 @@
     </div>
 </div>
 
-@functions {
+@code {
     bool collapseNavMenu = true;
 
     string NavMenuCssClass => collapseNavMenu ? "collapse" : null;

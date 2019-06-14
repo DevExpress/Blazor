@@ -25,20 +25,20 @@
     <div class="card-body">
         <DxPager PageCount=@PageCount
                  CollapseButtonCount=@CollapseButtonCount
-                 bind-ActivePageIndex=@ActivePageIndex>
+                 @bind-ActivePageIndex=@ActivePageIndex>
         </DxPager>
     </div>
     <div class="card-footer text-muted ">
         <CodeSnippet_Pager></CodeSnippet_Pager>
-        <DxSpinEdit bind-Value=@PageCount MinValue=0 MaxValue=int.MaxValue></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // PageCount</span>
+        <DxSpinEdit @bind-Value=@PageCount MinValue=0 MaxValue=int.MaxValue></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // PageCount</span>
         <br />
-        <DxSpinEdit bind-Value=@ActivePageIndex MinValue=0 MaxValue=@(PageCount - 1)></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // ActivePageIndex</span>
+        <DxSpinEdit @bind-Value=@ActivePageIndex MinValue=0 MaxValue=@(PageCount - 1)></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // ActivePageIndex</span>
         <br />
-        <DxSpinEdit bind-Value=@CollapseButtonCount MinValue=1 MaxValue=100></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // CollapseButtonCount</span>
+        <DxSpinEdit @bind-Value=@CollapseButtonCount MinValue=1 MaxValue=100></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // CollapseButtonCount</span>
     </div>
 </div>
 
-@functions {
+@code {
     int pageCount = 10;
     int PageCount { get => pageCount; set { pageCount = value; StateHasChanged(); } }
 
