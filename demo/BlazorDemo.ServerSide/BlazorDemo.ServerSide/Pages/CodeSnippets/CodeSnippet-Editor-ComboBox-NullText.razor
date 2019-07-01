@@ -1,10 +1,10 @@
 ﻿<CodeSnippet>
  @(@"<DxComboBox NullText=""Select Option ...""
                 Data=@(new string[] { null, ""Option 1"", ""Option 2"", ""Option 3"" })
-                @bind-SelectedItem=""@Option"" />
+                @bind-SelectedItem=""@Option""></DxComboBox>
+
 @code {
     string option;
-    string Option { get => option; set { option = value; StateHasChanged(); } }
-}
-")
+    string Option { get => option; set { option = value; base.Invoke(StateHasChanged); } }
+}")
 </CodeSnippet>

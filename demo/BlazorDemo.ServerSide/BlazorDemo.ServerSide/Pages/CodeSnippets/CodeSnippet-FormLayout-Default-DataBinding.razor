@@ -38,7 +38,7 @@
             editFormData.Position = newValue.ToString();
         }
 
-        StateHasChanged();
+        base.Invoke(StateHasChanged);
     }
 }")
 </CodeSnippet>

@@ -5,15 +5,15 @@
     <h2>Data Grid - Cascading Editors</h2>
 
     <p>
-        This module illustrates cascade combo boxes: <b>City</b> and <b>Region</b>. 
-        These combo boxes are displayed when you edit a grid row. 
+        This module illustrates cascade combo boxes: <b>City</b> and <b>Region</b>.
+        These combo boxes are displayed when you edit a grid row.
         The <b>City</b> combo box is dynamically populated with city names based on the value selected in the <b>Region</b> combo box.
     </p>
 
     <p>
         Both the Region and City columns use the <b>EditTemplate context</b> cast to the <b>CellEditContext</b> type that contains:
     </p>
-       
+
     <ul>
         <li>
             An original cell value as a <b>DataItem</b> object
@@ -30,8 +30,8 @@
         <li>
             The <b>GetEditorValue</b> method that returns a value of any grid cell.
         </li>
-    </ul> 
-    
+    </ul>
+
     <p>
         Click <b>Edit</b> to see how the <b>Region</b> and <b>City</b> combo boxes communicate using the <b>OnChanged</b> and <b>GetEditorValue</b> methods to pass/get values to/from each other.
     </p>
@@ -101,7 +101,7 @@ else
 
     public void OnRegionChanged()
     {
-        StateHasChanged();
+        base.Invoke(StateHasChanged);
     }
     void OnRowUpdating(Vacancy vacancy, Dictionary<string, object> newValue)
     {
@@ -124,14 +124,14 @@ else
     void OnRowRemoving(Vacancy vacancy)
     {
         Vacancies = Vacancies.Where(v => v != vacancy).ToArray();
-        StateHasChanged();
+        base.Invoke(StateHasChanged);
     }
     void OnRowInserting(Dictionary<string, object> newValue)
     {
         var newVacancy = new Vacancy();
         OnRowUpdating(newVacancy, newValue);
         Vacancies = (new Vacancy[] { newVacancy }).Concat(Vacancies);
-        
-        StateHasChanged();
+
+        base.Invoke(StateHasChanged);
     }
 }

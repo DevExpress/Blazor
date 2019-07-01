@@ -1,0 +1,23 @@
+﻿<CodeSnippet>
+@(@"<DxComboBox Data=""@Cities""
+            AllowUserInput=""@true""
+            NullText=""Select City ...""
+            @bind-SelectedItem=""@SelectedItem""
+            @bind-Text=""@Text""
+            @bind-DropDownVisible=""@DropDownVisible"">
+</DxComboBox>
+
+@code {
+    IEnumerable<string> Cities = new List<string>() {
+        ""London"",
+        ""Berlin"",
+        ""Paris"",
+    };
+    
+    string text = ""New York"";
+    string Text { get => text; set { text = value; base.Invoke(StateHasChanged); }  }
+
+    string selectedItem = """";
+    string SelectedItem { get => selectedItem; set { selectedItem = value; base.Invoke(StateHasChanged); }  }
+}")
+</CodeSnippet>

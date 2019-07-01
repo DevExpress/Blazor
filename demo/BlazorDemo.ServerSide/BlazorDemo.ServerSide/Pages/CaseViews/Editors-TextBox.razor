@@ -10,6 +10,7 @@
     <div class="card-body mw-480">
         <DxTextBox @bind-Text=@TextValue></DxTextBox>
     </div>
+    <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted ">
         <CodeSnippet_Editor_TextBox></CodeSnippet_Editor_TextBox>
     </div>
@@ -17,5 +18,5 @@
 
 @code {
     string textValue = "Some text";
-    string TextValue { get => textValue; set { textValue = value; StateHasChanged(); } }
+    string TextValue { get => textValue; set { textValue = value; base.Invoke(StateHasChanged); } }
 }

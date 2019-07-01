@@ -1,0 +1,14 @@
+﻿<CodeSnippet>
+@(@"<DxComboBox Data=""@Data""
+            FilteringMode=@FilteringMode.Contains
+            @bind-DropDownVisible=@DropDownVisible></DxComboBox>
+
+@code {
+    IEnumerable<string> Data;
+
+    protected override async Task OnInitAsync()
+    {
+        Data = await CountryNamesService.Load();
+    }
+}")
+</CodeSnippet>

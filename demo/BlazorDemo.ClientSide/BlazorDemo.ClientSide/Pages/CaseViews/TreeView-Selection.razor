@@ -1,0 +1,69 @@
+﻿<div class="demo-description">
+    <h2>
+        Tree View - Selection
+    </h2>
+    <p>
+        The Tree View is a component that displays a collection of tree-like items. Primarily designed for navigation, the Tree View can also be used for any hierarchical data presentation.
+    </p>
+    <p>
+        A collection of Tree View nodes is populated by the <b>Nodes</b> parameter. For each node, you can also specify its child nodes (using the parent node’s <b>Nodes</b> parameter), unique identifier, text, target URL, and etc.
+    </p>
+    <p>
+        The Tree View allows users to select a node with a mouse click. The selected node is automatically highlighted. The following API is related to the node selection:
+    </p>
+    <ul>
+        <li><b>AllowSelectNodes</b> - Controls whether or not nodes can be selected.</li>
+        <li><b>SelectionChanged</b> - Occurs after node selection.</li>
+        <li><b>GetSelectedNodeInfo</b> - Returns information about the currently selected node: name, text and etc.</li>
+    </ul>
+    <p>Additionally, Tree View supports synchronization of a node selection with the path of the currently displayed page. The left-hand navigation tree of this demo shows the mentioned feature in action.*</p>
+    <p>
+        <i>* You can find the navigation Tree View’s source code in the <a href="https://github.com/DevExpress/Blazor/blob/master/demo/BlazorDemo.ServerSide/BlazorDemo.ServerSide/Shared/NavMenu.razor">NavMenu.razor</a> file within the <a href="https://github.com/DevExpress/Blazor">DevExpress Blazor</a> GitHub repository.</i>
+    </p>
+</div>
+<div class="card demo-card">
+    <div class="card-header">Selected group: <b>@SelectedGroup</b></div>
+    <div class="card-body">
+        <h5 class="card-title">Chemical elements</h5>
+        <DxTreeView AllowSelectNodes="true" SelectionChanged=@SelectionChanged ExpandButtonIconCssClass="oi oi-chevron-right" CollapseButtonIconCssClass="oi oi-chevron-bottom" CssClass="mw-480">
+            <Nodes>
+                <DxTreeViewNode Text="Metals">
+                    <Nodes>
+                        <DxTreeViewNode Text="Alkali metals" />
+                        <DxTreeViewNode Text="Alkaline earth metals" />
+                        <DxTreeViewNode Text="Inner transition elements">
+                            <Nodes>
+                                <DxTreeViewNode Text="Lanthanides" />
+                                <DxTreeViewNode Text="Actinides" />
+                            </Nodes>
+                        </DxTreeViewNode>
+                        <DxTreeViewNode Text="Transition elements" />
+                        <DxTreeViewNode Text="Other metals" />
+                    </Nodes>
+                </DxTreeViewNode>
+                <DxTreeViewNode Text="Metalloids" />
+                <DxTreeViewNode Text="Nonmetals">
+                    <Nodes>
+                        <DxTreeViewNode Text="Halogens" />
+                        <DxTreeViewNode Text="Noble gases" />
+                        <DxTreeViewNode Text="Other nonmetals" />
+                    </Nodes>
+                </DxTreeViewNode>
+            </Nodes>
+        </DxTreeView>
+    </div>
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
+        <CodeSnippet_TreeView_Selection></CodeSnippet_TreeView_Selection>
+    </div>
+</div>
+
+@code  {
+    string SelectedGroup = "none";
+
+    protected void SelectionChanged(TreeViewNodeEventArgs e)
+    {
+        SelectedGroup = e.NodeInfo.Text;
+        base.Invoke(StateHasChanged);
+    }
+}

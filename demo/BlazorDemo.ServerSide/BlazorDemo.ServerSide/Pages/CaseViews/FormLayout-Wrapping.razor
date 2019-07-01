@@ -41,6 +41,7 @@
         </DxFormLayout>
 
     </div>
+    <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted ">
         <CodeSnippet_FormLayout_Default_Wrapping />
     </div>
@@ -59,5 +60,5 @@
     string country = "UK";
     string Country { get => country; set { country = value; OnChanged(); } }
 
-    void OnChanged() { StateHasChanged(); }
+    void OnChanged() { base.Invoke(StateHasChanged); }
 }

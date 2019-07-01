@@ -2,8 +2,17 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+## [0.0.11] (latest release)
 
-## [0.0.10] (latest release)
+### Added
+
+* Tree View
+* Combo Box
+  * Filter Data
+  * Allow User Input
+  * Keyboard Support
+
+## [0.0.10]
 
 ### Added
 - Support for .Net Core 3.0 Preview 6.
@@ -22,7 +31,7 @@ Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
 ### Added:
 
-New DxDataGrid features:
+New Data Grid features:
 *	Cascading combo boxes in the cell's Edit Template.
 *	Edit Form with custom templates.
 *	Edit Form validation.

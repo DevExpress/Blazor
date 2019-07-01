@@ -28,7 +28,7 @@
 @code {
     [Parameter] public bool Shown { get; set; } = false;
     [Parameter] Action<bool> ShownChanged { get; set; }
-    string CurrentTheme { get; set; } = "Default";
+    string CurrentTheme { get; set; } = "Pulse";
 
     public class ThemeSetModel
     {
@@ -45,7 +45,7 @@
             "Office White"
         } },
         new ThemeSetModel() { Title = "Bootswatch Themes",  Themes = new List<string>() {
-            "cerulean",
+            "Cerulean",
             "Cosmo",
             "Cyborg",
             "Darkly",
@@ -64,7 +64,7 @@
             "Solar",
             "Spacelab",
             "Superhero",
-            "united",
+            "United",
             "Yeti",
         } },
     };

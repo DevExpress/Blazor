@@ -12,14 +12,15 @@
     </p>
 </div>
 
-<div class="card demo-card" style="height: 585px">
+<div class="card demo-card">
     <div class="card-header">SelectedRealBusinessObject { FirstName=<b>@(SelectedRealBusinessObject.FirstName)</b>, LastName=<b>@(SelectedRealBusinessObject.LastName)</b>, Department=<b>@(SelectedRealBusinessObject.Department)</b> }</div>
-    <div class="card-body mw-480">
+    <div class="card-body mw-480" style="height: 280px;">
         <DxComboBox Data=@Persons.DataSource
                     TextFieldName="Text"
                     @bind-DropDownVisible=@DropDownVisible
                     @bind-SelectedItem=@SelectedRealBusinessObject></DxComboBox>
     </div>
+    <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted ">
         <CodeSnippet_Editor_ComboBox></CodeSnippet_Editor_ComboBox>
     </div>
@@ -27,8 +28,8 @@
 
 @code {
     Person selectedRealBusinessObject = Persons.DataSource[0];
-    Person SelectedRealBusinessObject { get => selectedRealBusinessObject; set { selectedRealBusinessObject = value; StateHasChanged(); } }
+    Person SelectedRealBusinessObject { get => selectedRealBusinessObject; set { selectedRealBusinessObject = value; base.Invoke(StateHasChanged); } }
 
     bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; StateHasChanged(); }  }
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; base.Invoke(StateHasChanged); }  }
 }

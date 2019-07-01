@@ -30,6 +30,6 @@
     DateTime CheckOut { get => checkOut; set { checkOut = value; OnChanged(); } }
 
 
-    void OnChanged() { StateHasChanged(); }
+    void OnChanged() { base.Invoke(StateHasChanged); }
 }")
 </CodeSnippet>

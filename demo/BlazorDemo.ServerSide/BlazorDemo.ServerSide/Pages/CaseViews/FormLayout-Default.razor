@@ -15,7 +15,7 @@
         <li><b>ColSpanSm</b> - Small screens (576px or wider).</li>
         <li><b>ColSpanXs</b> - Extra small screens (less than 576px).</li>
     </ol>
-    
+
 </div>
 
 <div class="card demo-card-wide">
@@ -48,8 +48,9 @@
         </DxFormLayout>
 
     </div>
+    <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted ">
-        <CodeSnippet_FormLayout_Default/>
+        <CodeSnippet_FormLayout_Default />
     </div>
 </div>
 
@@ -66,5 +67,5 @@
     int worked = 3;
     int Worked { get => worked; set { worked = value; OnChanged(); } }
 
-    void OnChanged() { StateHasChanged(); }
+    void OnChanged() { base.Invoke(StateHasChanged); }
 }

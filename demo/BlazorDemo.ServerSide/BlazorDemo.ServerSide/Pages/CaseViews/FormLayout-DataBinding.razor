@@ -4,9 +4,9 @@
 <div class="demo-description">
     <h2>Data Binding</h2>
     <p>
-        You can use the Form Layout component to display and edit data from an external source. 
-        In this demo, such data source is assigned to the <b>Data</b> property. 
-        Form Layout items must be declared and bound to data source fields using the <b>FieldName</b> property. 
+        You can use the Form Layout component to display and edit data from an external source.
+        In this demo, such data source is assigned to the <b>Data</b> property.
+        Form Layout items must be declared and bound to data source fields using the <b>FieldName</b> property.
         Each item automatically displays a DevExpress data editor suitable for the target data type. 
     </p>
     <p>
@@ -36,6 +36,7 @@
         </DxFormLayout>
 
     </div>
+    <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted ">
         <CodeSnippet_FormLayout_Default_DataBinding />
     </div>
@@ -69,6 +70,6 @@
             editFormData.Position = newValue.ToString();
         }
 
-        StateHasChanged();
+        base.Invoke(StateHasChanged);
     }
 }

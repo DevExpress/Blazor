@@ -1,79 +1,48 @@
-
-    <ul class="nav flex-column app-sidebar">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <img class="demo-icon" src="images/Overview.svg" alt="Overview" aria-hidden="true"><span>Overview</span>
-                <badge_upd />
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="GridColumnTypes">
-                <img class="demo-icon" src="images/GridColumnType.svg" alt="Grid - Column Types" aria-hidden="true"><span>Grid - Column Types</span>
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="GridTemplate">
-                <img class="demo-icon" src="images/GridTemplates.svg" alt="Grid - Column Types" aria-hidden="true"><span>Grid - Templates</span>
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="GridCascadingEditors">
-                <img class="demo-icon" src="images/GridCascadingEditors.svg" alt="Grid - Column Types" aria-hidden="true"><span>Grid - Cascading Editors</span>
-                <badge_new />
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="GridEditFormTemplateValidation">
-                <img class="demo-icon" src="images/GridEditFormTemplate.svg" alt="Grid - Column Types" aria-hidden="true"><span>Grid - Edit Form Validation</span>
-                <badge_new />
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="GridLargeDataBase">
-                <img class="demo-icon" src="images/GridLargeData.svg" alt="Grid - Large Data" aria-hidden="true"><span>Grid - Large Data Source</span>
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="PivotGrid">
-                <img class="demo-icon" src="images/PivotGrid.svg" alt="Pivot Grid" aria-hidden="true"><span>Pivot Grid</span>
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="PivotGridTemplates">
-                <img class="demo-icon" src="images/PivotGridTemplate.svg" alt="Pivot Grid - Templates" aria-hidden="true"><span>Pivot Grid - Templates</span>
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="PivotGridLargeDataBase">
-                <img class="demo-icon" src="images/PivotGridLargeData.svg" alt="Pivot Grid - Large Data" aria-hidden="true"><span>Pivot Grid - Large Data Source</span>
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="FormLayout">
-                <img class="demo-icon" src="images/FormLayout.svg" alt="Forms" aria-hidden="true"><span>Form Layout</span>
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="FormValidation">
-                <img class="demo-icon" src="images/GridColumnType.svg" alt="Grid - Column Types" aria-hidden="true"><span>Form Validation</span>
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="Tabs">
-                <img class="demo-icon" src="images/Tabs.svg" alt="Tabs" aria-hidden="true"><span>Tabs</span>
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="Editors">
-                <img class="demo-icon" src="images/Editors.svg" alt="Editors" aria-hidden="true"><span>Editors</span>
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="Pager">
-                <img class="demo-icon" src="images/Pager.svg" alt="Pager" aria-hidden="true"><span>Pager</span>
-            </NavLink>
-        </li>
-    </ul>
+<DxTreeView @ref=@treeView CssClass="app-sidebar" ExpandButtonIconCssClass="demo-icon-expand" CollapseButtonIconCssClass="demo-icon-collapse"
+            AllowSelectNodes="true" ExpandedChanging=@ExpandedChanging SelectionChanged=@SelectionChanged>
+    <Nodes>
+        <DxTreeViewNode Text="Overview" NavigateUrl="">
+        </DxTreeViewNode>
+        <DxTreeViewNode Text="Grid">
+            <Nodes>
+                <DxTreeViewNode Text="Column Types" NavigateUrl="GridColumnTypes"></DxTreeViewNode>
+                <DxTreeViewNode Text="Templates" NavigateUrl="GridTemplate"></DxTreeViewNode>
+                <DxTreeViewNode Text="Cascading Editors" NavigateUrl="GridCascadingEditors"></DxTreeViewNode>
+                <DxTreeViewNode Text="Edit Form Validation" NavigateUrl="GridEditFormTemplateValidation"></DxTreeViewNode>
+                <DxTreeViewNode Text="Large Data Source" NavigateUrl="GridLargeDataBase"></DxTreeViewNode>
+            </Nodes>
+        </DxTreeViewNode>
+        <DxTreeViewNode Text="Pivot Grid">
+            <Nodes>
+                <DxTreeViewNode Text="Overview" NavigateUrl="PivotGrid"></DxTreeViewNode>
+                <DxTreeViewNode Text="Templates" NavigateUrl="PivotGridTemplates"></DxTreeViewNode>
+                <DxTreeViewNode Text="Large Data Source" NavigateUrl="PivotGridLargeDataBase"></DxTreeViewNode>
+            </Nodes>
+        </DxTreeViewNode>
+        <DxTreeViewNode Text="Editors" BadgeText="Upd">
+            <Nodes>
+                <DxTreeViewNode Text="Combo Box" NavigateUrl="ComboBox" BadgeText="Upd">
+                </DxTreeViewNode>
+                <DxTreeViewNode Text="Spin Edit" NavigateUrl="SpinEdit">
+                </DxTreeViewNode>
+                <DxTreeViewNode Text="Date Edit" NavigateUrl="DateEdit">
+                </DxTreeViewNode>
+                <DxTreeViewNode Text="Text Box" NavigateUrl="TextBox">
+                </DxTreeViewNode>
+            </Nodes>
+        </DxTreeViewNode>
+        <DxTreeViewNode Text="Form Layout" NavigateUrl="FormLayout">
+        </DxTreeViewNode>
+        <DxTreeViewNode Text="Form Validation" NavigateUrl="FormValidation">
+        </DxTreeViewNode>
+        <DxTreeViewNode Text="Tree View" NavigateUrl="TreeView" BadgeText="New">
+        </DxTreeViewNode>
+        <DxTreeViewNode Text="Tabs" NavigateUrl="Tabs">
+        </DxTreeViewNode>
+        <DxTreeViewNode Text="Pager" NavigateUrl="Pager">
+        </DxTreeViewNode>
+    </Nodes>
+</DxTreeView>
 
 <div class="footer">
     <div class="info-wrapper">
@@ -84,3 +53,25 @@
         </div>
     </div>
 </div>
+
+@code {
+    DxTreeView treeView;
+
+    protected void SelectionChanged(TreeViewNodeEventArgs e) {
+        if(e.NodeInfo.IsLeaf && e.NodeInfo.Level == 0) {
+            treeView.CollapseAll();
+        }
+        else if(!e.NodeInfo.IsLeaf) {
+            Func<ITreeViewNodeInfo, bool> nodePredicate = n => string.Equals(n.Text, e.NodeInfo.Text);
+
+            bool nodeExpanded = treeView.GetNodeExpanded(nodePredicate);
+            if(!nodeExpanded)
+                treeView.CollapseAll();
+            treeView.SetNodeExpanded(nodePredicate, !nodeExpanded);
+        }
+    }
+
+    protected void ExpandedChanging(TreeViewNodeCancelEventArgs e) {
+        e.Cancel = true;
+    }
+}

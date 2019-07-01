@@ -1,24 +1,26 @@
 ﻿@inherits LayoutComponentBase
 
+@inject Microsoft.AspNetCore.Components.IUriHelper UriHelper
+
 <div class="sidebar">
-    <div class="top-row pl-4 navbar navbar-dark logo-container">
+    <div class="top-row logo-container pl-4 navbar-dark bg-light text-body">
         <button class="navbar-toggler" @onclick="@ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <img src="images/logo.svg" />
+        <span class="logo-image" />
         <div class=@($"theme-settings-collapsed { ThemeSwitcherShown }")>
             <a class="nav-item nav-link" @onclick="@ToggleThemeSwitcherPanel" href="javascript:void(0);">
                 <span class="oi oi-cog"></span>
             </a>
         </div>
     </div>
-    <div class="@NavMenuCssClass" @onclick="@ToggleNavMenu">
+    <div class="@NavMenuCssClass">
         <NavMenu />
     </div>
 </div>
 
 <div class="main">
-    <div class="top-row px-4" id="navbar">
+    <div class="top-row bg-light text-body px-4" id="navbar">
         <div class="logo">
             <h5 class="caption">Online Demos - DevExpress UI for Blazor (CTP)</h5>
         </div>
@@ -49,7 +51,7 @@
     }
 
     bool themeSwitcherShown = false;
-    bool ThemeSwitcherShown { get => themeSwitcherShown; set { themeSwitcherShown = value; StateHasChanged(); } }
+    bool ThemeSwitcherShown { get => themeSwitcherShown; set { themeSwitcherShown = value; base.Invoke(StateHasChanged); } }
 
     void ToggleThemeSwitcherPanel()
     {
@@ -57,6 +59,16 @@
         if (ThemeSwitcherShown) {
             collapseNavMenu = true;
         }
-        //StateHasChanged();
+    }
+
+    protected override void OnInit()
+    {
+        base.OnInit();
+        UriHelper.OnLocationChanged += (sender, args) => {
+            if(!collapseNavMenu) {
+                collapseNavMenu = true;
+                base.Invoke(StateHasChanged);
+            }
+        };
     }
 }

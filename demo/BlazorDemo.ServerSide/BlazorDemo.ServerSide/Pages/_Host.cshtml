@@ -1,81 +1,16 @@
 ﻿@page "/"
+@using DevExpress.Blazor.DocumentMetadata
 @namespace BlazorDemo.ServerSide.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta property="og:url" content="https://dxpr.es/2WogLq7" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Native Blazor Components powered by DevExpress" />
-    <meta property="og:description" content="Free DevExpress UI for Blazor ships with 7 user interface components (including a Data Grid and Pivot Grid) so you can design rich user experiences with both Blazor." />
-    <meta property="og:image" content="https://static.devexpress.com/Products/Blazor/blazor-demo-social.png" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@@devexpress" />
-    <title>Demos: Blazor UI Components | DevExpress</title>
-    <base href="~/" />
-
-    @*Uncomment for following code block if you do not use the ThemeSwitcher.razor component:*@
-    @*<environment include="Development">
-        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              asp-fallback-href="css/bootstrap/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-              crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
-    </environment>*@
-
-    <link href="css/site.css" rel="stylesheet" />
-
-    <link rel="stylesheet"
-          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-
-    <script>
-        window.HighlightJSUpdate = function () {
-            document.querySelectorAll('pre code').forEach((block) => {
-                hljs.highlightBlock(block);
-            });
-        }
-        window.UpdateSharingButton = function () {
-            window.setTimeout(function () {
-                try {
-                    twttr.widgets.load();
-                    FB.XFBML.parse();
-                } catch (e) {
-                    return null;
-                }
-            }, 0);
-        }
-    </script>
-
-    <link href="~/css/dx-demo.css" rel="stylesheet" />
-    <link href="lib/dx-blazor/dx-blazor.css" rel="stylesheet" />
-    <script src="lib/dx-blazor/dx-blazor.js"></script>
+    @(await Html.RenderComponentAsync<DocumentMetadataComponent>())
 </head>
 <body>
-    @*<FacebookButton>*@
     <div id="fb-root"></div>
-    <script>
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-    @*</FacebookButton>*@
-
     <app>@(await Html.RenderComponentAsync<App>())</app>
-
     <script src="_framework/blazor.server.js"></script>
-    @*<TwitterButton>*@
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    @*</TwitterButton>*@
 </body>
 </html>

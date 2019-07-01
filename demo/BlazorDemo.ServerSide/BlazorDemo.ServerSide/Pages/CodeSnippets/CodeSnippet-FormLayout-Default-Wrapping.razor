@@ -38,6 +38,6 @@
     string country = ""UK"";
     string Country { get => country; set { country = value; OnChanged(); } }
 
-    void OnChanged() { StateHasChanged(); }
+    void OnChanged() { base.Invoke(StateHasChanged); }
 }")
 </CodeSnippet>

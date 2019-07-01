@@ -25,6 +25,7 @@
                         SelectedItemChanged=@SelectedCityChanged></DxComboBox>
         </div>
     </div>
+    <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted ">
         <CodeSnippet_Editor_ComboBox_Cascading></CodeSnippet_Editor_ComboBox_Cascading>
     </div>
@@ -37,10 +38,10 @@
     City CurrentCity = CountryCity.Cities[4];
 
     bool dropDownVisible1 = true;
-    bool DropDownVisible1 { get => dropDownVisible1; set { dropDownVisible1 = value; StateHasChanged(); }  }
+    bool DropDownVisible1 { get => dropDownVisible1; set { dropDownVisible1 = value; base.Invoke(StateHasChanged); }  }
 
     bool dropDownVisible2 = true;
-    bool DropDownVisible2 { get => dropDownVisible2; set { dropDownVisible2 = value; StateHasChanged(); }  }
+    bool DropDownVisible2 { get => dropDownVisible2; set { dropDownVisible2 = value; base.Invoke(StateHasChanged); }  }
 
 
     protected override void OnInit()
@@ -53,11 +54,11 @@
         CurrentCountry = country;
         CurrentCountryCities = CountryCity.Cities.FindAll(city => city.CountryId == CurrentCountry.Id);
         CurrentCity = CurrentCountryCities[0];
-        StateHasChanged();
+        base.Invoke(StateHasChanged);
     }
     void SelectedCityChanged(City city)
     {
         CurrentCity = city;
-        StateHasChanged();
+        base.Invoke(StateHasChanged);
     }
 }

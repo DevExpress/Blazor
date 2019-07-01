@@ -5,12 +5,13 @@
     </p>
 </div>
 
-<div class="card demo-card" style="height: 629px">
+<div class="card demo-card" style="height: 663px">
     <div class="card-header">Selected date is: <b>@DateTimeValue.ToString("dddd, dd MMMM yyyy")</b></div>
     <div class="card-body mw-480">
         <DxDateEdit @bind-Date=@DateTimeValue
                     @bind-DropDownVisible=@DropDownVisible></DxDateEdit>
     </div>
+    <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted ">
         <CodeSnippet_Editor_DateEdit></CodeSnippet_Editor_DateEdit>
     </div>
@@ -18,8 +19,8 @@
 
 @code {
     DateTime dateTimeValue = DateTime.Now;
-    DateTime DateTimeValue { get => dateTimeValue; set { dateTimeValue = value; StateHasChanged(); }  }
+    DateTime DateTimeValue { get => dateTimeValue; set { dateTimeValue = value; base.Invoke(StateHasChanged); }  }
 
     bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; StateHasChanged(); }  }
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; base.Invoke(StateHasChanged); }  }
 }

@@ -1,5 +1,6 @@
 ﻿<div class="card demo-card-wide border-top-0">
-    <div class="card-footer text-muted border-top-0">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
         <CodeSnippet>
 @(@"<DxDataGrid @ref=@grid
         Data=@Vacancies
@@ -116,7 +117,7 @@
     void OnRowEditStarting(Vacancy vacancy)
     {
         EditContext = new FormEditContext(vacancy);
-        EditContext.StateHasChanged += () => { this.StateHasChanged(); };
+        EditContext.StateHasChanged += () => { base.Invoke(StateHasChanged); };
     }
     void OnCancelButtonClick()
     {
@@ -140,7 +141,7 @@
     void OnRowRemoving(Vacancy vacancy)
     {
         Vacancies = Vacancies.Where(v => v != vacancy).ToArray();
-        StateHasChanged();
+        base.Invoke(StateHasChanged);
     }
 }")
         </CodeSnippet>

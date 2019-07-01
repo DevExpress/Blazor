@@ -28,23 +28,24 @@
                  @bind-ActivePageIndex=@ActivePageIndex>
         </DxPager>
     </div>
+    <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted ">
         <CodeSnippet_Pager></CodeSnippet_Pager>
-        <DxSpinEdit @bind-Value=@PageCount MinValue=0 MaxValue=int.MaxValue></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // PageCount</span>
+        <DxSpinEdit @bind-Value=@PageCount MinValue=0 MaxValue=int.MaxValue CssClass="mr-1 my-1"></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // PageCount</span>
         <br />
-        <DxSpinEdit @bind-Value=@ActivePageIndex MinValue=0 MaxValue=@(PageCount - 1)></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // ActivePageIndex</span>
+        <DxSpinEdit @bind-Value=@ActivePageIndex MinValue=0 MaxValue=@(PageCount - 1) CssClass="mr-1 my-1"></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // ActivePageIndex</span>
         <br />
-        <DxSpinEdit @bind-Value=@CollapseButtonCount MinValue=1 MaxValue=100></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // CollapseButtonCount</span>
+        <DxSpinEdit @bind-Value=@CollapseButtonCount MinValue=1 MaxValue=100 CssClass="mr-1 my-1"></DxSpinEdit><span class="hljs-attr" style="white-space: nowrap;"> // CollapseButtonCount</span>
     </div>
 </div>
 
 @code {
     int pageCount = 10;
-    int PageCount { get => pageCount; set { pageCount = value; StateHasChanged(); } }
+    int PageCount { get => pageCount; set { pageCount = value; base.Invoke(StateHasChanged); } }
 
     int activePageIndex = 1;
-    int ActivePageIndex { get => activePageIndex; set { activePageIndex = value; StateHasChanged(); } }
+    int ActivePageIndex { get => activePageIndex; set { activePageIndex = value; base.Invoke(StateHasChanged); } }
 
     int collapseButtonCount = 10;
-    int CollapseButtonCount { get => collapseButtonCount; set { collapseButtonCount = value; StateHasChanged(); } }
+    int CollapseButtonCount { get => collapseButtonCount; set { collapseButtonCount = value; base.Invoke(StateHasChanged); } }
 }

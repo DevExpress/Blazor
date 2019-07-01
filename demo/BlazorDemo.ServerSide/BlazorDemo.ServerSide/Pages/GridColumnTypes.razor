@@ -68,16 +68,16 @@ else
     async void OnRowRemoving(WeatherForecast dataItem)
     {
         forecasts = await ForecastService.Remove(dataItem);
-        StateHasChanged();
+        base.Invoke(StateHasChanged);
     }
     async void OnRowUpdating(WeatherForecast dataItem, Dictionary<string, object> newValue)
     {
         forecasts = await ForecastService.Update(dataItem, newValue);
-        StateHasChanged();
+        base.Invoke(StateHasChanged);
     }
     async void OnRowInserting(Dictionary<string, object> newValue)
     {
         forecasts = await ForecastService.Insert(newValue);
-        StateHasChanged();
+        base.Invoke(StateHasChanged);
     }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +13,8 @@ using Demo.Blazor.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Demo.Blazor;
+using DevExpress.Blazor.DocumentMetadata;
+using Microsoft.Extensions.Options;
 
 namespace BlazorDemo.ServerSide
 {
@@ -39,6 +41,12 @@ namespace BlazorDemo.ServerSide
 
             services.Configure<DemoConfiguration>(Configuration.GetSection("DemoConfiguration"));
             services.AddTransient<ProductService>();
+            services.AddSingleton<CountryNamesService>();
+            services.AddDocumentMetadata((serviceProvider, registrator) =>
+            {
+                DemoConfiguration config = serviceProvider.GetService<IOptions<DemoConfiguration>>().Value;
+                config.RegisterPagesMetadata(registrator);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

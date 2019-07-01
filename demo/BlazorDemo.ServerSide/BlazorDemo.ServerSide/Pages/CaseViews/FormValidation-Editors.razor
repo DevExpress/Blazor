@@ -21,45 +21,46 @@
         </p>
     </div>
 
-<div class="card demo-card-wide">
-    <div class="card-header">@FormValidationState</div>
-    <div class="card-body">
+    <div class="card demo-card-wide">
+        <div class="card-header">@FormValidationState</div>
+        <div class="card-body">
 
-        <EditForm Model="@starship" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
-            <DataAnnotationsValidator />
+            <EditForm Model="@starship" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+                <DataAnnotationsValidator />
 
-            <div style="height:100px">
-                <label for="identifier">Identifier: </label>
-                <DxTextBox Id="identifier" @bind-Text=@starship.Identifier />
-                <ValidationMessage For="@(() => starship.Identifier)" />
-            </div>
-            <div style="height:100px">
-                <label for="classification">Primary Classification: </label>
-                <DxComboBox Id="classification" NullText="Select classification ..."
-                            Data=@(new List<string>() { null, "Defense", "Exploration", "Diplomacy" })
-                            @bind-SelectedItem=@starship.Classification />
-                <ValidationMessage For="@(() => starship.Classification)" />
-            </div>
-            <div style="height:100px">
-                <label for="accommodation">Maximum Accommodation: </label>
-                <DxSpinEdit Id="accommodation" @bind-Value=@starship.MaximumAccommodation />
-                <ValidationMessage For="@(() => starship.MaximumAccommodation)" />
-            </div>
-            <div style="height:100px">
-                <label for="productionDate">Production Date: </label>
-                <DxDateEdit @bind-Date=@starship.ProductionDate />
-                <ValidationMessage For="@(() => starship.ProductionDate)" />
-            </div>
+                <div style="height:100px">
+                    <label for="identifier">Identifier: </label>
+                    <DxTextBox Id="identifier" @bind-Text=@starship.Identifier />
+                    <ValidationMessage For="@(() => starship.Identifier)" />
+                </div>
+                <div style="height:100px">
+                    <label for="classification">Primary Classification: </label>
+                    <DxComboBox Id="classification" NullText="Select classification ..."
+                                Data=@(new List<string>() { null, "Defense", "Exploration", "Diplomacy" })
+                                @bind-SelectedItem=@starship.Classification />
+                    <ValidationMessage For="@(() => starship.Classification)" />
+                </div>
+                <div style="height:100px">
+                    <label for="accommodation">Maximum Accommodation: </label>
+                    <DxSpinEdit Id="accommodation" @bind-Value=@starship.MaximumAccommodation />
+                    <ValidationMessage For="@(() => starship.MaximumAccommodation)" />
+                </div>
+                <div style="height:100px">
+                    <label for="productionDate">Production Date: </label>
+                    <DxDateEdit @bind-Date=@starship.ProductionDate />
+                    <ValidationMessage For="@(() => starship.ProductionDate)" />
+                </div>
 
-            <button type="submit">Submit</button>
+                <button type="submit">Submit</button>
 
-        </EditForm>
+            </EditForm>
 
+        </div>
+        <CodeSnippetHeader></CodeSnippetHeader>
+        <div class="card-footer text-muted ">
+            <CodeSnippet_FormValidation_Editors />
+        </div>
     </div>
-    <div class="card-footer text-muted ">
-        <CodeSnippet_FormValidation_Editors />
-    </div>
-</div>
 
 @code {
     string FormValidationState = @"Press the ""Submit"" button to validate the form.";

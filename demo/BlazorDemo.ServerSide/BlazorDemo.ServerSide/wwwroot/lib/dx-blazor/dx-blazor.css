@@ -4890,6 +4890,12 @@ html:not(.dxMobileUI) .dxbs-tabs-scrollable.has-overflow .nav,
 .dx-lb-datagrid > .card > table > tbody > tr:last-child > td {
      border-bottom: 0;
 }
+div.dxbs-dm > .dxbs-listbox {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-bottom: 0;
+}
 /** Blazor Calendar **/
 .dxbs-calendar > .calendar-row > .calendar-view {
     margin-right: 0px;
@@ -5021,4 +5027,55 @@ html:not(.dxMobileUI) .dxbs-tabs-scrollable.has-overflow .nav,
 .dxbs-date-edit.valid.modified .form-control {
 
     border-color: #26b050;
+}
+
+/** Blazor TreeView **/
+.dxbs-tree ul.flex-column {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+
+.dxbs-tree ul.nav > li > a:not(.disabled) {
+    cursor: pointer;
+}
+
+.dxbs-tree ul.nav > li > a > span.image:not(:last-child), .dxbs-tree ul.nav > li > a > .badge > span.image:not(:last-child), .dxbs-tree ul.nav > li > a > span.expand-btn:not(:last-child), .dxbs-tree ul.nav > li > a > span.node-lp:not(:last-child) {
+    padding: 0.4em;
+    margin: -0.4em;
+    margin-right: 0;
+}
+
+.dxbs-icon {
+    position: relative;
+    top: 2px;
+    display: inline-block;
+    text-rendering: auto;
+    font-family: "dxbs-icons" !important;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+
+.dxbs-icon-minus::before {
+    content: "\e035";
+}
+
+.dxbs-icon-plus::before {
+    content: "\e037";
+}
+
+.dxbs-icon::before {
+    vertical-align: top;
+}
+
+.dxbs-tree > ul.nav ul.nav {
+    margin: 0.2em 2em;
+    overflow-y: hidden;
+}
+
+.dxbs-tree ul.flex-column {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
 }

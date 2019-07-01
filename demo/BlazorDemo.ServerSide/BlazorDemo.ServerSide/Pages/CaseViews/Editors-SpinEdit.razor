@@ -15,6 +15,7 @@
     <div class="card-body mw-480">
         <DxSpinEdit @bind-Value=@DecimalValue></DxSpinEdit>
     </div>
+    <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted ">
         <CodeSnippet_Editor_SpinEdit></CodeSnippet_Editor_SpinEdit>
     </div>
@@ -22,5 +23,5 @@
 
 @code {
     Decimal decimalValue = decimal.MaxValue - 10000;
-    Decimal DecimalValue { get => decimalValue; set { decimalValue = value; StateHasChanged(); } }
+    Decimal DecimalValue { get => decimalValue; set { decimalValue = value; base.Invoke(StateHasChanged); } }
 }

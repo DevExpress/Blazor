@@ -1,0 +1,101 @@
+﻿#settingsbar #themesMenu li > a > .image.default {
+    background: #007bff;
+}
+
+#settingsbar #themesMenu li > a > .image.cerulean {
+    background: #2fa4e7;
+}
+
+#settingsbar #themesMenu li > a > .image.cosmo {
+    background: #2780e3;
+}
+
+#settingsbar #themesMenu li > a > .image.cyborg {
+    background: #060606;
+}
+
+#settingsbar #themesMenu li > a > .image.darkly {
+    background: #00bc8c;
+}
+
+#settingsbar #themesMenu li > a > .image.flatly {
+    background: #dce4ec;
+}
+
+#settingsbar #themesMenu li > a > .image.journal {
+    background: #eb6864;
+}
+
+#settingsbar #themesMenu li > a > .image.litera {
+    background: #4582ec;
+}
+
+#settingsbar #themesMenu li > a > .image.lumen {
+    background: #158cba;
+}
+
+#settingsbar #themesMenu li > a > .image.lux {
+    background: #1a1a1a;
+}
+
+#settingsbar #themesMenu li > a > .image.materia {
+    background: #2196f3;
+}
+
+#settingsbar #themesMenu li > a > .image.minty {
+    background: #78c2ad;
+}
+
+#settingsbar #themesMenu li > a > .image.pulse {
+    background: #593196;
+}
+
+#settingsbar #themesMenu li > a > .image.sandstone {
+    background: #93c54b;
+}
+
+#settingsbar #themesMenu li > a > .image.simplex {
+    background: #d9230f;
+}
+
+#settingsbar #themesMenu li > a > .image.sketchy {
+    background-color: transparent;
+    border: 2px solid #333;
+    border-radius: 2px 8px 2px 4px/5px 3px 5px 3px;
+}
+
+#settingsbar #themesMenu li > a.active .image.sketchy {
+    border-color: #fff;
+}
+
+#settingsbar #themesMenu li > a > .image.slate {
+    background: #484e55;
+}
+
+#settingsbar #themesMenu li > a > .image.solar {
+    background: #b58900;
+}
+
+#settingsbar #themesMenu li > a > .image.spacelab {
+    background: #446e9b;
+}
+
+#settingsbar #themesMenu li > a > .image.superhero {
+    background: #df691a;
+}
+
+#settingsbar #themesMenu li > a > .image.united {
+    background: #e95420;
+}
+
+#settingsbar #themesMenu li > a > .image.yeti {
+    background: #008cba;
+}
+
+#settingsbar #themesMenu li > a > .image.purple {
+    background: #7989ff;
+}
+
+#settingsbar #themesMenu li > a > .image.office-white {
+    background: #fe7109;
+}

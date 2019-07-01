@@ -1,5 +1,6 @@
 ﻿<div class="card demo-card-wide border-top-0">
-    <div class="card-footer text-muted border-top-0">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
         <CodeSnippet>
 @(@"<DxDataGrid Data=@Vacancies
         ShowFilterRow=@false
@@ -56,7 +57,7 @@
 
     public void OnRegionChanged()
     {
-        StateHasChanged();
+        base.Invoke(StateHasChanged);
     }
     void OnRowUpdating(Vacancy vacancy, Dictionary<string, object> newValue)
     {
@@ -79,7 +80,7 @@
     void OnRowRemoving(Vacancy vacancy)
     {
         Vacancies = Vacancies.Where(v => v != vacancy).ToArray();
-        StateHasChanged();
+        base.Invoke(StateHasChanged);
     }
     void OnRowInserting(Dictionary<string, object> newValue)
     {
@@ -87,7 +88,7 @@
         OnRowUpdating(newVacancy, newValue);
         Vacancies = (new Vacancy[] { newVacancy }).Concat(Vacancies);
         
-        StateHasChanged();
+        base.Invoke(StateHasChanged);
     }
 }
 ")

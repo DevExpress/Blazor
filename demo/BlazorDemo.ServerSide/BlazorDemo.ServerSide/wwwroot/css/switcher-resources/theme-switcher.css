@@ -3,27 +3,32 @@
     float: right;
 }
 
-.theme-settings-collapsed .nav-link {
-    padding-right: 9px !important;
+.theme-settings,
+.theme-settings-collapsed {
+    border-top: none!important;
+    border: 1px solid transparent;
 }
 
 .theme-settings.True,
 .theme-settings-collapsed.True {
     background-color: #fff;
+    color: #222;
+    border-left-color: #d5d5d5;
+    border-bottom-color: #ffffff;
+    border-right-color: #ffffff;
+    height: 3.5rem;
 }
 
-    .theme-settings.True:after {
-        height: 1px;
-        width: 56px;
-        border-bottom: 1px solid #F3F3F3;
-        position: absolute;
-        content: '';
-    }
+.theme-settings-collapsed.True {
+    z-index: 31;
+}
 
-    .theme-settings-collapsed.True .oi.oi-cog {
-        color: rgba(33,33,33,1);
-    }
-
+.theme-settings.True:after {
+    height: 1px;
+    width: 56px;
+    position: absolute;
+    content: '';
+}
 
 #settingsbar {
     transition: width 200ms;
@@ -46,7 +51,6 @@
 
 @media (min-width: 768px) {
     #themesMenu {
-        margin-top: 3.5rem;
     }
 }
 
@@ -59,21 +63,21 @@
     width: 50%;
 }
 
-    #themesMenu li > a {
-        white-space: nowrap;
-        font-weight: 500;
-        border-radius: 0;
-        border: 0;
-        padding: 12px 12px 8px 22px;
-    }
+#themesMenu li > a {
+    white-space: nowrap;
+    font-weight: 500;
+    border-radius: 0;
+    border: 0;
+    padding: 12px 12px 8px 22px;
+}
 
-        #themesMenu li > a:not(.active) {
-            background-image: none;
-        }
+#themesMenu li > a:not(.active) {
+    background-image: none;
+}
 
-            #themesMenu li > a:not(.active):hover {
-                background: #e8e8e8;
-            }
+#themesMenu li > a:not(.active):hover {
+    background: #e8e8e8;
+}
 
 #themesMenu .nav-item {
     margin-right: 0;
@@ -85,34 +89,35 @@
     min-width: 250px;
 }
 
-    #themesMenu .nav {
-        font-size: 14px;
-    }
+#themesMenu .nav {
+    font-size: 14px;
+}
 
-    #themesMenu li > a:not(.active) {
-        color: #a9a9a9;
-    }
+#themesMenu li > a:not(.active) {
+    color: #a9a9a9;
+}
 
-    #themesMenu li.theme-group {
-        font-weight: 600;
-        font-size: 15px;
-        padding: 7px 12px 8px;
-        white-space: nowrap;
-        width: 100% !important;
-        border-color: #E9E9EA;
-        border-style: solid;
-        border-width: 1px 0;
-    }
+#themesMenu li.theme-group {
+    font-weight: 600;
+    font-size: 15px;
+    padding: 7px 12px 8px;
+    white-space: nowrap;
+    width: 100% !important;
+    border-color: #E9E9EA;
+    border-style: solid;
+    border-width: 1px 0;
+}
 
-        #themesMenu li.theme-group:first-child {
-            border-top-width: 0;
-            padding-top: 11px;
-            padding-bottom: 8px;
-        }
+#themesMenu li.theme-group:first-child {
+    border-top-width: 0;
+    padding-top: 11px;
+    padding-bottom: 8px;
+}
 
 #settingsbar * {
     text-shadow: none;
     letter-spacing: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 #settingsbar h5 {
@@ -133,7 +138,7 @@
     background: #484e55;
 }
 
-
+.theme-settings-collapsed > a,
 .theme-settings > a {
     padding: 15px 16px 9px 16px;
     line-height: 24px;
@@ -147,20 +152,20 @@
 }
 
 .theme-settings .oi.oi-cog {
-    color: #222;
     letter-spacing: 0;
 }
 
-    .theme-settings .oi.oi-cog:hover {
-        color: #888;
-    }
-
+.theme-settings > a,
 .theme-settings-collapsed > a {
-    padding: 0;
+    color: inherit !important;
 }
 
-.theme-settings-collapsed .oi.oi-cog {
-    color: rgba(255,255,255,.5);
+.theme-settings-collapsed {
+    height: 100%;
+}
+.theme-settings-collapsed > a {
+    margin: 0 !important;
+    background: none !important;
 }
 
 @media (min-width: 768px) {
@@ -187,7 +192,6 @@
 }
 
 /*Theme reset*/
-
 .logo > h5 {
     font-size: 20px;
     font-weight: 500;
@@ -197,20 +201,24 @@
     text-shadow: inherit;
 }
 
-.sidebar .app-sidebar {
-    letter-spacing: 0;
-}
-
-.sidebar .nav-item {
+.sidebar .nav-pills .nav-item {
     margin: 0;
 }
 
-.sidebar .app-sidebar span {
+.sidebar .app-sidebar span.badge {
     font-weight: 400;
 }
 
-.sidebar .nav-link {
-    padding: 8px 16px;
+.sidebar .nav-pills .nav-item .nav-link {
+    padding: .5rem 1rem;
+}
+
+.app-sidebar .nav-pills > .nav-item > a:not(.active) {
+    background-image: none !important;
+}
+
+.app-sidebar .nav-pills > .nav-item > a {
+    border: none !important;
 }
 
 .app-sidebar .badge {
@@ -222,46 +230,38 @@
 }
 
 .sidebar {
-    font-size: 16px !important;
+    font-size: 1rem !important;
 }
 
-    .sidebar .logo-container {
-        font-size: 16px !important;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-weight: 400 !important;
-        line-height: 24px;
-        box-shadow: none;
-        text-shadow: none;
-    }
+.sidebar .logo-container {
+    font-size: 16px !important;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400 !important;
+    line-height: 24px;
+    box-shadow: none;
+    text-shadow: none;
+}
 
-    .sidebar .navbar-toggler {
-        border-radius: 4px;
-        font-size: 20px;
-        color: rgba(255,255,255,.5) !important;
-        background-color: rgba(255, 255, 255, 0.1) !important;
-        border-image-width: 0 !important;
-    }
+.sidebar .navbar-toggler {
+    border-radius: 4px;
+    font-size: 20px;
+    color: rgba(255,255,255,.5) !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-image-width: 0 !important;
+}
 
-    .sidebar .navbar-toggler-icon {
-        background-color: rgba(255, 255, 255, 0.1) !important;
-        font-size: 20px;
-    }
-
-    .sidebar .nav-link {
-        padding: 15px 16px 14px 16px !important;
-        border: 0 !important;
-        border-image: 0 !important;
-        border-image-width: 0 !important;
-        text-transform: none;
-    }
+.sidebar .navbar-toggler-icon {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    font-size: 20px;
+}
 
 #themesMenu .nav-link {
     font-size: 14px;
 }
 
-    #themesMenu .nav-link span {
-        line-height: 22px;
-    }
+#themesMenu .nav-link span {
+    line-height: 22px;
+}
 
 .sidebar *, #themesMenu * {
     text-transform: none;
@@ -272,4 +272,8 @@
     width: 0px;
     height: 0px;
     overflow: hidden;
+}
+
+#themesMenu .theme-name {
+    text-transform: capitalize;
 }

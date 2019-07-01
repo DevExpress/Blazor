@@ -7,13 +7,15 @@
     </p>
 </div>
 
-<div class="card demo-card" style="height: 485px">
+<div class="card demo-card" style="height: 480px">
     <div class="card-header">Option Selected: <b>@Option</b></div>
     <div class="card-body mw-480">
         <DxComboBox NullText="Select Option ..."
-                    Data=@(new string[] { null, "Option 1", "Option 2", "Option 3" })
-                    @bind-SelectedItem=@Option />
+                    Data="@(new string[] { null, "Option 1", "Option 2", "Option 3" })"
+                    @bind-SelectedItem="@Option"
+                    @bind-DropDownVisible="@DropDownVisible"/>
     </div>
+    <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted ">
         <CodeSnippet_Editor_ComboBox_NullText></CodeSnippet_Editor_ComboBox_NullText>
     </div>
@@ -21,8 +23,8 @@
 
 @code {
     string option;
-    string Option { get => option; set { option = value; StateHasChanged(); } }
+    string Option { get => option; set { option = value; base.Invoke(StateHasChanged) ;} }
 
     bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; StateHasChanged(); }  }
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; base.Invoke(StateHasChanged); }  }
 }

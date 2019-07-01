@@ -1,8 +1,8 @@
 ﻿<div class="demo-description">
     <h2>Create a Page Control: Update Linked Content Area</h2>
     <p>
-        This sample shows how you can emulate a Page control in your Blazor application. 
-        The code below uses the tab control’s <b>ActiveTabIndex</b> property to track active tab change events. 
+        This sample shows how you can emulate a Page control in your Blazor application.
+        The code below uses the tab control’s <b>ActiveTabIndex</b> property to track active tab change events.
         When a user selects a tab, the code updates the linked content area.
     </p>
 </div>
@@ -29,17 +29,18 @@
                         break;
 
                 }
-                </div>
             </div>
         </div>
+    </div>
 </div>
 <div class="card demo-card border-top-0">
-    <div class="card-footer text-muted border-top-0">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
         <CodeSnippet_Tabs_ContendChanges></CodeSnippet_Tabs_ContendChanges>
     </div>
 </div>
 
 @code {
     int activeTabIndex = 1;
-    int ActiveTabIndex { get => activeTabIndex; set { activeTabIndex = value; StateHasChanged(); } }
+    int ActiveTabIndex { get => activeTabIndex; set { activeTabIndex = value; base.Invoke(StateHasChanged); } }
 }
