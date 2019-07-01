@@ -47,6 +47,9 @@ You can find appropriate demos in the repositories below:
 
 * demo/BlazorDemo.ServerSide
 * demo/BlazorDemo.ClientSide
+* demo/BlazorDemo.ClientSideWithPrerendering&#42; 
+
+> &#42; For more information, see the [Update Metadata at Runtime - Free SEO Tool](https://community.devexpress.com/blogs/aspnet/archive/2019/06/27/devexpress-blazor-update-metadata-at-runtime-free-seo-tool.aspx) blog post.
 
 To open the required demo, do the following:
 
@@ -58,6 +61,10 @@ To open the required demo, do the following:
 	or
 	
 	**demo/BlazorDemo.ClientSide/BlazorDemo.ClientSide.sln** 
+	
+	or
+	
+	**demo/BlazorDemo.ClientSideWithPrerendering/BlazorDemo.ClientSideWithPrerendering.sln** 
 	  
 3. Start the application.
 
