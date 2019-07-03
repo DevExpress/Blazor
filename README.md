@@ -11,7 +11,7 @@ Check out this [demo in live](https://demos.devexpress.com/blazor/).
 
 # Version compatibility
 
-The following table describes the version compatibility of .NET Core 3.0 Preview and the DevExpress.Blazor NuGet package.
+The following table describes the version compatibility of .NET Core 3.0 Preview and the DevExpress.Blazor NuGet package:
 
 | .NET Core 3.0 version | DevExpress.Blazor.nuget version |
 | ------------- | ------------- |
@@ -27,9 +27,9 @@ The following table describes the version compatibility of .NET Core 3.0 Previe
 
 # Set up your environment
 
-1. Install Visual Studio 2019 (latest update).
-2. Ensure that you have .NET Core 3 (preview 4) installed.
-3. If you work with the release version of Visual Studio 2019, make sure to enable the option "Use previews of the .NET Core SDK".
+1. Install the latest Visual Studio 2019 update.
+2. Ensure that you have the latest .NET Core 3 version (from supported versions listed above) installed.
+3. If you use the release version of Visual Studio 2019, ensure the "Use previews of the .NET Core SDK" option is enabled.
 
 The corresponding check box's location depends on the Visual Studio build number. You can find the check box here:
 
