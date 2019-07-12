@@ -112,14 +112,29 @@ Follow the steps below to try our UI for Blazor in your own application.
    
    ![Add new NuGet source](media/VS2019Release-AddNuGetPackage.png)
 
-4. Navigate to the GitHub repository and download all files from the "client-runtime" directory. Put the downloaded files into the "wwwroot" directory of your project. Include these files to your start page.
-5. Register our namespace in _Imports.razor file: 
+4. Navigate to the DevExpress Blazor GitHub repository and download all the files from the [client-runtime directory](https://github.com/DevExpress/Blazor/tree/master/client-runtime) to your project’s `wwwroot` directory.
 
-  ```
-  @using DevExpress.Blazor
-  ```
+   > To download a file, open it on GitHub, click the **Raw** button, right-click anywhere within the file contents, and select **Save as...** from the displayed context menu.
 
-6. Your application is ready to use DevExpress Blazor.
+5. Link the downloaded files:
+   * For server-side Blazor, add the lines below to the _\_Host.cshtml_ file.
+   * For client-side Blazor, add the lines below to the _Index.cshtml_ file.
+    
+    ```html
+    <head>
+      ...
+      <link href="dx-blazor.css" rel="stylesheet" />
+      <script src="dx-blazor.js"></script>
+    </head>
+    ```
+  
+6. Register DevExpress.Blazor namespace in _\_Imports.razor_ file:
+
+   ```html
+   @using DevExpress.Blazor
+   ```
+
+7. Your application is ready to use DevExpress Blazor.
 
 # Troubleshooting
 
