@@ -205,7 +205,7 @@ If you don't see packages in the ```https://nuget.devexpress.com/early-access/ap
   * Spin Edit
   * Date Edit  
   * Text Box
-* Tree View
+* TreeView
 * Form Layout
 * Form Validation
 * Tabs
