@@ -15,6 +15,8 @@ namespace DevExpress.Blazor.Internal
     {
         DocumentMetadataContainer Metadata { get; }
         event EventHandler OnMetadataUpdated;
+        bool CheckBeforeRender(MetadataEntity entity);
+        string ResolveUrl(string attrValue);
     }
     public interface IDocumentMetadataSettings : IDocumentMetadataBuilder
     {

@@ -22,6 +22,8 @@ namespace DevExpress.Blazor.Internal
         public virtual string Name { get; }
         public virtual string Content { get; set; }
         public virtual Dictionary<string, string> Attributes { get; }
+
+        public virtual MetadataEntity Origin => this;
     }
     public class ActiveMetadataEntity : MetadataEntity
     {
@@ -37,6 +39,8 @@ namespace DevExpress.Blazor.Internal
         public override string Content { get => _metadataEntity.Content; set {} }
         public override string Key => _metadataEntity.Key;
         public override Dictionary<string, string> Attributes => _metadataEntity.Attributes;
+
+        public override MetadataEntity Origin => _metadataEntity;
     }
     public class DocumentMetadataBuilderProvider : IDocumentMetadataSettingsProvider
     {
@@ -151,6 +155,7 @@ namespace DevExpress.Blazor.Internal
 
         protected Action RevertPageSpecificMetaData { get; private set; }
         protected string PageName { get; private set; }
+        protected List<MetadataEntity> RenderedScripts { get; private set; } = new List<MetadataEntity>();
 
         public DocumentMetadataService(IDocumentMetadataSettingsProvider metadataProvider, IUriHelper uriHelper)
         {
@@ -196,6 +201,29 @@ namespace DevExpress.Blazor.Internal
             MetadataProvider = null;
             UriHelper = null;
             RevertPageSpecificMetaData = null;
+            RenderedScripts?.Clear();
+            RenderedScripts = null;
+        }
+        public bool CheckBeforeRender(MetadataEntity entity) {
+            MetadataEntity origin = entity.Origin;
+            if (origin.Name == "titleFormat")
+                return false;
+            if (origin.Name == "script") {
+                bool isRendered = RenderedScripts.Contains(origin);
+                if(!isRendered)
+                    RenderedScripts.Add(origin);
+                return !isRendered;
+            }
+            return true;
+        }
+        public string ResolveUrl(string url) {
+            if (url.StartsWith("~/")) {
+                string baseUrl = UriHelper.GetBaseUri();
+                string absoluteUrl = baseUrl + url.Substring(2);
+                url = UriHelper.ToBaseRelativePath(baseUrl, absoluteUrl);
+                url = UriHelper.ToAbsoluteUri(url).PathAndQuery;
+            }
+            return url;
         }
     }
 }

@@ -187,7 +187,7 @@ namespace Demo.Blazor
             });
             DemoPages.Add(new DemoPageConfiguration() {
                 Url = "TreeView",
-                Title = "Tree View",
+                Title = "TreeView",
                 Icon = "images/TreeView.svg",
                 IsNew = true
             });

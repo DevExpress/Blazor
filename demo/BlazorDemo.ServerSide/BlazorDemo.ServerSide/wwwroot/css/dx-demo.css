@@ -333,3 +333,12 @@ div.content > .card:last-child {
     height: 40px;
     border-radius: 3px;
 }
+
+.badge.demo-badge {
+    border-radius: 0.25rem !important;
+    vertical-align: super;
+    margin-left: 0.5em;
+    font-size: 35%;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+}

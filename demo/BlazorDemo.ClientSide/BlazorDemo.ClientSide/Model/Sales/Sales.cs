@@ -4,19 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Demo.Blazor.Model;
 
-namespace Demo.Blazor.Model
-{
+namespace Demo.Blazor.Model {
 
-    public class Sales
-    {
+    public class Sales {
         static IList<SaleInfo> dataSource;
-        static Sales()
-        {
+        static Sales() {
             CreateDataSource();
         }
 
-        static void CreateDataSource()
-        {
+        static void CreateDataSource() {
             dataSource = new List<SaleInfo> {
                 new SaleInfo {
                     OrderId = 10248,
@@ -5148,8 +5144,7 @@ namespace Demo.Blazor.Model
                 }
             };
         }
-        public static Task<IQueryable<SaleInfo>> Load()
-        {
+        public static Task<IQueryable<SaleInfo>> Load() {
             return Task.FromResult(dataSource.AsQueryable());
         }
     }

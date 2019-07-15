@@ -1,12 +1,13 @@
 <DxTreeView @ref=@treeView CssClass="app-sidebar" ExpandButtonIconCssClass="demo-icon-expand" CollapseButtonIconCssClass="demo-icon-collapse"
-            AllowSelectNodes="true" ExpandedChanging=@ExpandedChanging SelectionChanged=@SelectionChanged>
+            AllowSelectNodes="true" BeforeCollapse=@BeforeExpandCollapse BeforeExpand=@BeforeExpandCollapse SelectionChanged=@SelectionChanged>
     <Nodes>
         <DxTreeViewNode Text="Overview" NavigateUrl="">
         </DxTreeViewNode>
-        <DxTreeViewNode Text="Grid">
+        <DxTreeViewNode Text="Grid" BadgeText="Upd">
             <Nodes>
                 <DxTreeViewNode Text="Column Types" NavigateUrl="GridColumnTypes"></DxTreeViewNode>
                 <DxTreeViewNode Text="Templates" NavigateUrl="GridTemplate"></DxTreeViewNode>
+                <DxTreeViewNode Text="Virtual Scrolling" NavigateUrl="GridVirtualScrolling" BadgeText="New"></DxTreeViewNode>
                 <DxTreeViewNode Text="Cascading Editors" NavigateUrl="GridCascadingEditors"></DxTreeViewNode>
                 <DxTreeViewNode Text="Edit Form Validation" NavigateUrl="GridEditFormTemplateValidation"></DxTreeViewNode>
                 <DxTreeViewNode Text="Large Data Source" NavigateUrl="GridLargeDataBase"></DxTreeViewNode>
@@ -21,7 +22,7 @@
         </DxTreeViewNode>
         <DxTreeViewNode Text="Editors" BadgeText="Upd">
             <Nodes>
-                <DxTreeViewNode Text="Combo Box" NavigateUrl="ComboBox" BadgeText="Upd">
+                <DxTreeViewNode Text="ComboBox" NavigateUrl="ComboBox" BadgeText="Upd">
                 </DxTreeViewNode>
                 <DxTreeViewNode Text="Spin Edit" NavigateUrl="SpinEdit">
                 </DxTreeViewNode>
@@ -35,7 +36,7 @@
         </DxTreeViewNode>
         <DxTreeViewNode Text="Form Validation" NavigateUrl="FormValidation">
         </DxTreeViewNode>
-        <DxTreeViewNode Text="Tree View" NavigateUrl="TreeView" BadgeText="New">
+        <DxTreeViewNode Text="TreeView" NavigateUrl="TreeView">
         </DxTreeViewNode>
         <DxTreeViewNode Text="Tabs" NavigateUrl="Tabs">
         </DxTreeViewNode>
@@ -71,7 +72,7 @@
         }
     }
 
-    protected void ExpandedChanging(TreeViewNodeCancelEventArgs e) {
+    protected void BeforeExpandCollapse(TreeViewNodeCancelEventArgs e) {
         e.Cancel = true;
     }
 }

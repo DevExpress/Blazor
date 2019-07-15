@@ -1,4 +1,5 @@
 ﻿@inject IJSRuntime JsRuntime;
+@inject IComponentContext ComponentContext
 
 <div class="social-panel">
     <div>
@@ -22,8 +23,9 @@
 </div>
 
 @code {
-    protected override Task OnAfterRenderAsync()
+    protected override void OnAfterRender()
     {
-        return JsRuntime.InvokeAsync<string>("UpdateSharingButton");
+        if(ComponentContext.IsConnected)
+            JsRuntime.InvokeAsync<string>("UpdateSharingButton");
     }
 }

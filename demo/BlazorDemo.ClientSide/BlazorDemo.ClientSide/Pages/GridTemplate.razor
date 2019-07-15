@@ -9,12 +9,10 @@
     <p>This module illustrates how you can use column templates to format cell values and provide custom data editors.</p>
     <ul>
         <li>
-            <b>Availability column</b>
-            <p>DisplayTemplate formats cell values using check boxes and colored text. EditTemplate embeds a DxComboBox control into the edit form.</p>
+            <p><b>Availability column</b> - DisplayTemplate formats cell values using check boxes and colored text. EditTemplate embeds a DxComboBox control into the edit form.</p>
         </li>
         <li>
-            <b>Category column</b>
-            <p>DisplayTemplate builds a composite string and displays it in plain text. EditTemplate embeds another DxDataGrid to enable lookup functionality.</p>
+            <p><b>Category column</b> - DisplayTemplate builds a composite string and displays it in plain text. EditTemplate embeds another DxDataGrid to enable lookup functionality.</p>
         </li>
     </ul>  
     <p>
@@ -22,14 +20,14 @@
     </p>
 </div>
 
-@if (DataSource == null)
+@if (DataSource == null || NestedDataSource == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
     <DxDataGrid Data=@DataSource
-                AllowRowSelection=true
+                AllowDataRowSelection=true
                 ShowFilterRow=false
                 RowRemoving=@((dataItem) => OnRowRemoving(dataItem))
                 RowUpdating=@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))
@@ -71,14 +69,16 @@ else
             <DisplayTemplate>
                 @{
                     var item = NestedDataSource.Where(x => x.ProductSubcategoryID == (int)((context as Product).ProductCategoryId)).FirstOrDefault();
-                    <span>@item.Category/@item.Subcategory</span>
+                    string category = item != null ? item.Category.ToString() : "none";
+                    string subcategory = item != null ? item.Subcategory : "none";
+                    <span>@category/@subcategory</span>
                 }
             </DisplayTemplate>
             <EditTemplate>
                 <DxDataGrid Data=@NestedDataSource
                             PageSize=5
-                            SelectedDataItem=@(NestedDataSource.Where(x => x.ProductSubcategoryID == (int)((CellEditContext)context).CellValue).FirstOrDefault())
-                            SelectedItemChanged=@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue.ProductSubcategoryID))>
+                            SelectedDataRow=@(NestedDataSource.Where(x => x.ProductSubcategoryID == (int)((CellEditContext)context).CellValue).FirstOrDefault())
+                            SelectedDataRowChanged=@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue.ProductSubcategoryID))>
                     <DxDataGridColumn Field=@nameof(ProductCategory.ProductSubcategoryID) Width="150px"></DxDataGridColumn>
                     <DxDataGridColumn Field=@nameof(ProductCategory.Category) Width="150px"></DxDataGridColumn>
                     <DxDataGridColumn Field=@nameof(ProductCategory.Subcategory) Width="150px"></DxDataGridColumn>

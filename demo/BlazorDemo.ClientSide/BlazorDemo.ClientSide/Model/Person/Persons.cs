@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Demo.Blazor.Model
-{
-    public static class Persons
-    {
-        private static readonly Lazy<List<Person>> dataSource = new Lazy<List<Person>>(() =>
-        {
+namespace Demo.Blazor.Model {
+    public static class Persons {
+        private static readonly Lazy<List<Person>> dataSource = new Lazy<List<Person>>(() => {
             var dataSource = new List<Person>() {
                 new Person() { Id= 0 , FirstName="John", LastName="Heart", Department=Department.Electronics },
                 new Person() { Id= 1 , FirstName="Samantha", LastName="Bright", Department=Department.Motors },

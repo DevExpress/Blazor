@@ -4,10 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Demo.Blazor
-{
-    public class DemoPageConfiguration
-    {
+namespace Demo.Blazor {
+    public class DemoPageConfiguration {
         public DemoPageConfiguration ParentPage { get; set; }
 
         public string Url { get; set; }
@@ -28,25 +26,23 @@ namespace Demo.Blazor
         public bool HasUpdates() => IsUpdated || DemoPages.Any(x => x.HasUpdates());
     }
 
-    public class DemoConfiguration
-    {
+    public class DemoConfiguration {
         public bool SiteMode { get; set; }
         public List<DemoPageConfiguration> DemoPages { get; set; } = new List<DemoPageConfiguration>();
 
-        public void RegisterPagesMetadata(IDocumentMetadataRegistrator registrator)
-        {
+        public void RegisterPagesMetadata(IDocumentMetadataRegistrator registrator) {
             registrator.Default()
                 .Base("~/")
                 .Charset("utf-8")
                 .TitleFormat("Blazor: {0} | DevExpress")
                 .Viewport("width=device-width, initial-scale=1.0")
-                
+
                 .OpenGraph("url", "https://dxpr.es/2WogLq7")
                 .OpenGraph("type", "website")
                 .OpenGraph("title", "Native Blazor Components powered by DevExpress")
                 .OpenGraph("description", "Free DevExpress UI for Blazor ships with 7 user interface components (including a Data Grid and Pivot Grid) so you can design rich user experiences with both Blazor.")
                 .OpenGraph("image", "https://static.devexpress.com/Products/Blazor/blazor-demo-social.png")
-                
+
                 .Meta("twitter:card", "summary")
                 .Meta("twitter:site", "@@devexpress")
 
@@ -66,23 +62,19 @@ namespace Demo.Blazor
                     styleSheetUrl: "css/switcher-resources/themes/pulse/bootstrap.min.css"
                 );
 
-            DemoPages.ForEach(pageMetadata =>
-            {
+            DemoPages.ForEach(pageMetadata => {
                 RegisterPageMetadata(registrator, pageMetadata);
             });
         }
 
-        void RegisterPageMetadata(IDocumentMetadataRegistrator registrator, DemoPageConfiguration pageMetadata)
-        {
-            if (pageMetadata.Url != null)
-            {
+        void RegisterPageMetadata(IDocumentMetadataRegistrator registrator, DemoPageConfiguration pageMetadata) {
+            if (pageMetadata.Url != null) {
                 IDocumentMetadataBuilder metadataBuilder = registrator.Page(pageMetadata.Url);
                 metadataBuilder.Title(pageMetadata.GetSeoTitle());
                 if (!string.IsNullOrEmpty(pageMetadata.TitleFormat))
                     metadataBuilder.TitleFormat(pageMetadata.TitleFormat);
             }
-            foreach (var childPageMetadata in pageMetadata.DemoPages)
-            {
+            foreach (var childPageMetadata in pageMetadata.DemoPages) {
                 childPageMetadata.ParentPage = pageMetadata;
                 RegisterPageMetadata(registrator, childPageMetadata);
             }

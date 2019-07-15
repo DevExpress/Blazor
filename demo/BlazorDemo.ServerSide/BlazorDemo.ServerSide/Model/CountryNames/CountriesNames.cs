@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Demo.Blazor.Model
-{
-    public class Countries
-    {
+namespace Demo.Blazor.Model {
+    public class Countries {
         public static List<string> Names { get { return names.Value; } }
-        private static readonly Lazy<List<string>> names = new Lazy<List<string>>(() =>
-        {
+        private static readonly Lazy<List<string>> names = new Lazy<List<string>>(() => {
             return new List<string>() {
                 "Afghanistan",
                 "Albania",

@@ -3,10 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 
-namespace Demo.Blazor.Model
-{
-    public partial class FMRDemoContext : DbContext
-    {
+namespace Demo.Blazor.Model {
+    public partial class FMRDemoContext : DbContext {
         public FMRDemoContext(DbContextOptions<FMRDemoContext> options)
             : base(options) { }
 
@@ -15,12 +13,10 @@ namespace Demo.Blazor.Model
 
         public virtual DbQuery<AreaRentInfo> AreaRentInfo { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.HasAnnotation("ProductVersion", "3.0.0-preview3.19153.1");
 
-            modelBuilder.Entity<Area>(entity =>
-            {
+            modelBuilder.Entity<Area>(entity => {
                 entity.HasKey(e => e.Oid)
                     .HasName("PK__AREA__C2FFCF137F60ED59");
 
@@ -59,8 +55,7 @@ namespace Demo.Blazor.Model
                     .IsFixedLength();
             });
 
-            modelBuilder.Entity<Rentinfo>(entity =>
-            {
+            modelBuilder.Entity<Rentinfo>(entity => {
                 entity.HasKey(e => e.Oid)
                     .HasName("PK__RENTINFO__C2FFCF1303317E3D");
 

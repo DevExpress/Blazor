@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Demo.Blazor.Model
-{
-    public partial class Area
-    {
-        public Area()
-        {
+namespace Demo.Blazor.Model {
+    public partial class Area {
+        public Area() {
             Rentinfo = new HashSet<Rentinfo>();
         }
 

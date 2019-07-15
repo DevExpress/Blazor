@@ -1,0 +1,47 @@
+﻿@page "/ComboBoxVirtualScrolling"
+
+<div class="demo-description">
+    <h2>ComboBox - Virtual Scrolling<span class="badge badge-success demo-badge">New</span></h2>
+    <p>
+        The <b>DataLoadMode</b> property specifies how the ComboBox loads the item list. 
+    </p>
+    <ul>
+        <li><b>Default</b> - The ComboBox loads the entire item list. This option is suitable for small item lists where scrolling should work instantly.</li>
+        <li><b>VirtualScrolling</b> - The ComboBox loads visible items only. This approach improves performance when the list is too heavy to load at a time.</li>
+    </ul>
+    <p>
+        In this demo, the <b>DataLoadMode</b> property is set to <b>ComboBoxDataLoadMode.VirtualScrolling</b>.
+    </p>
+</div>
+
+<div class="card demo-card">
+    <div class="card-header">SelectedItem = <b>@(SelectedItem != null ? SelectedItem : "null")</b></div>
+    <div class="card-body mw-480" style="height: 280px;">
+        <DxComboBox Data=@Strings
+                    DataLoadMode="@ComboBoxDataLoadMode.VirtualScrolling"
+                    FilteringMode="@FilteringMode.Contains"
+                    @bind-SelectedItem=@SelectedItem
+                    @bind-DropDownVisible=@DropDownVisible>
+
+        </DxComboBox>
+    </div>
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_ComboBox_VirtualScrolling></CodeSnippet_ComboBox_VirtualScrolling>
+    </div>
+</div>
+
+@code {
+	string selectedItem = null;
+    string SelectedItem { get => selectedItem; set { selectedItem = value; Invoke(StateHasChanged); } }
+
+    List<string> Strings = new List<string>();
+    protected override void OnInit()
+    {
+        for(int i = 0; i < 1000; i++ )
+            Strings.Add($"Option #{i}");
+    }
+
+    bool dropDownVisible = true;
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; base.Invoke(StateHasChanged); }  }
+}

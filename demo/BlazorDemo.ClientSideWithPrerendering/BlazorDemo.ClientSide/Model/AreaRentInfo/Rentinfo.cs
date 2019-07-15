@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Demo.Blazor.Model
-{
-    public partial class Rentinfo
-    {
+namespace Demo.Blazor.Model {
+    public partial class Rentinfo {
         public Guid Oid { get; set; }
         public Guid Area { get; set; }
         public int Bedrooms { get; set; }

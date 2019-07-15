@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Demo.Blazor.Model
-{
-    public partial class Sale
-    {
+namespace Demo.Blazor.Model {
+    public partial class Sale {
         public int Id { get; set; }
         public string ProductCategoryName { get; set; }
         public string ProductSubcategoryName { get; set; }

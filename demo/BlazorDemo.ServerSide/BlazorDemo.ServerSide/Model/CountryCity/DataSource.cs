@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Demo.Blazor.Model
-{
-    public static class CountryCity
-    {
-        private static readonly Lazy<List<Country>> countries = new Lazy<List<Country>>(() =>
-        {
+namespace Demo.Blazor.Model {
+    public static class CountryCity {
+        private static readonly Lazy<List<Country>> countries = new Lazy<List<Country>>(() => {
             return new List<Country>()
             {
                 new Country() { Id = 0, CountryName = "USA" },
@@ -14,8 +11,7 @@ namespace Demo.Blazor.Model
                 new Country() { Id = 2, CountryName = "Japan" }
             };
         });
-        private static readonly Lazy<List<City>> cities = new Lazy<List<City>>(() =>
-        {
+        private static readonly Lazy<List<City>> cities = new Lazy<List<City>>(() => {
             return new List<City>() {
                 new City() { Id = 0, CountryId = 0, CityName = "Washington" },
                 new City() { Id = 1, CountryId = 0, CityName = "New York" },

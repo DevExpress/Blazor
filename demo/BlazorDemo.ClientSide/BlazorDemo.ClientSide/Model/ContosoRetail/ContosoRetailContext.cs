@@ -3,21 +3,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 
-namespace Demo.Blazor.Model
-{
-    public partial class ContosoRetailContext : DbContext
-    {
+namespace Demo.Blazor.Model {
+    public partial class ContosoRetailContext : DbContext {
         public ContosoRetailContext(DbContextOptions<ContosoRetailContext> options)
             : base(options) { }
 
         public virtual DbSet<Sale> Sales { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.HasAnnotation("ProductVersion", "3.0.0-preview3.19153.1");
 
-            modelBuilder.Entity<Sale>(entity =>
-            {
+            modelBuilder.Entity<Sale>(entity => {
                 entity.HasIndex(e => e.DateKey)
                     .HasName("I_DateKey");
 

@@ -1,0 +1,119 @@
+﻿@page "/GridVirtualScrolling"
+@using Demo.Blazor.Model
+@using Demo.Blazor.Services
+@inject ProductService ProductService
+
+<div class="demo-description">
+    <h2>Data Grid - Virtual Scrolling</h2>
+
+    <p>
+        The Data Grid supports virtual scrolling that allows end-users to navigate through grid rows using the vertical scrollbar much faster. 
+        Use the DataNavigationMode property to activate virtual scrolling.  
+    </p>
+    <p>
+        This property accepts the following values:
+    </p>
+    <ul>
+        <li>
+            <p><b>Paging</b> - Users navigate through the data rows with the help of a pager.</p>
+        </li>
+        <li>
+            <p>
+                <b>VirtualScrolling</b> - Enables virtual scrolling. 
+                Users navigate through data rows using the vertical scrollbar. 
+                When a user scrolls, the Data Grid fetches and renders data rows that become visible. 
+                In this mode, the Data Grid uses popup windows for data edit and insertion.
+            </p>
+        </li>
+    </ul>
+    <p>
+        In this demo, the <b>DataNavigationMode</b> property is set to <b>DataGridNavigationMode.VirtualScrolling</b>.
+    </p>
+</div>
+
+@if (DataSource == null || NestedDataSource == null) {
+    <p><em>Loading...</em></p>
+} else {
+    <DxDataGrid Data=@DataSource
+                AllowDataRowSelection=true
+                ShowFilterRow=false
+                DataNavigationMode="@DataGridNavigationMode.VirtualScrolling"
+                RowRemoving=@((dataItem) => OnRowRemoving(dataItem))
+                RowUpdating=@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))
+                RowInserting=@((newValues) => OnRowInserting(newValues))>
+
+        <DxDataGridCommandColumn Width="150px"></DxDataGridCommandColumn>
+
+        <DxDataGridColumn Field=@nameof(Product.Id) Caption="Id" Width="50px">
+        </DxDataGridColumn>
+
+        <DxDataGridColumn Field=@nameof(Product.ProductName) Caption="Product Name">
+        </DxDataGridColumn>
+
+        <DxDataGridColumn Field=@nameof(Product.Availability ) Caption="Availability" Width="85px">
+            <DisplayTemplate>
+                @{
+                    var id = Guid.NewGuid().ToString();
+                    var inStock = (context as Product).Availability;
+                    <input id=@id type="checkbox" checked=@inStock disabled readonly />
+                    if (inStock) {
+                        <label class="form-check-label text-success" for=@id><span>In stock</span></label>
+                    } else {
+                        <label class="form-check-label text-danger" for=@id><span>Sold out</span></label>
+                    }
+                }
+            </DisplayTemplate>
+            <EditTemplate>
+                <DxComboBox Data=@(new List<string>() { "In stock", "Sold out" })
+                            SelectedItem=@(((bool)((CellEditContext)context).CellValue) ? "In stock" : "Sold out" )
+                            SelectedItemChanged=@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue == "In stock"))>
+                </DxComboBox>
+            </EditTemplate>
+        </DxDataGridColumn>
+
+        <DxDataGridColumn Field=@nameof(Product.ProductCategoryId) Caption="Category">
+            <DisplayTemplate>
+                @{
+                    var item = NestedDataSource.Where(x => x.ProductSubcategoryID == (int)((context as Product).ProductCategoryId)).FirstOrDefault();
+                    string category = item != null ? item.Category.ToString() : "none";
+                    string subcategory = item != null ? item.Subcategory : "none";
+                    <span>@category/@subcategory</span>
+                }
+            </DisplayTemplate>
+            <EditTemplate>
+                <DxComboBox Data=@NestedDataSource
+                            TextFieldName="CategorySubcategory"
+                            SelectedItem=@(NestedDataSource.Where(x => x.ProductSubcategoryID == (int)((CellEditContext)context).CellValue).FirstOrDefault())
+                            SelectedItemChanged=@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue.ProductSubcategoryID))>
+                </DxComboBox>
+            </EditTemplate>
+        </DxDataGridColumn>
+
+    </DxDataGrid>
+
+    <CodeSnippet_GridVirtualScrolling></CodeSnippet_GridVirtualScrolling>
+}
+
+@code {
+    IQueryable<Product> DataSource;
+    IEnumerable<ProductCategory> NestedDataSource;
+
+    protected override async Task OnInitAsync()
+    {
+        DataSource = await ProductService.Load();
+        NestedDataSource = await ProductService.LoadNestedDataSource();
+    }
+
+    void OnRowRemoving(Product dataItem)
+    {
+        ProductService.Remove(dataItem);
+    }
+    void OnRowUpdating(Product dataItem, Dictionary<string, object> newValue)
+    {
+        ProductService.Update(dataItem, newValue);
+    }
+    void OnRowInserting(Dictionary<string, object> newValue)
+    {
+        ProductService.Insert(newValue);
+    }
+}

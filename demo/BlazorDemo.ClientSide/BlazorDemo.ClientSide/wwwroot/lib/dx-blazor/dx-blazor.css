@@ -4859,6 +4859,16 @@ html:not(.dxMobileUI) .dxbs-tabs-scrollable.has-overflow .nav,
 
 /** Blazor Data Grid **/
 
+/* Virtual Scrolling */
+
+.dxbs-gridview > div > .dxbs-grid-vsd {
+    height: 200px;
+    overflow-x: hidden;
+}
+.dxbs-scrollbar-padding {
+    padding-right: 17px;
+}
+
 /* command cell buttons */
 .dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > span > .btn.btn-link,
 .dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > span > .dxgBCTC > .btn.btn-link,
@@ -4867,7 +4877,8 @@ html:not(.dxMobileUI) .dxbs-tabs-scrollable.has-overflow .nav,
     padding-top: 0;
     padding-bottom: 0;
 }
-/** Blazor Combo Box **/
+
+/** Blazor ComboBox **/
 .dx-listbox .input-group-append > .dropdown-menu {
     padding: 0;
 }
@@ -4880,7 +4891,7 @@ html:not(.dxMobileUI) .dxbs-tabs-scrollable.has-overflow .nav,
 			border-top: none;
 		}
 
-.dx-listbox .dropdown-menu {
+.dx-listbox-scrollable {
 	overflow-x: hidden;
 	overflow-y: auto;
 }
@@ -4890,11 +4901,17 @@ html:not(.dxMobileUI) .dxbs-tabs-scrollable.has-overflow .nav,
 .dx-lb-datagrid > .card > table > tbody > tr:last-child > td {
      border-bottom: 0;
 }
-div.dxbs-dm > .dxbs-listbox {
+div.dxbs-dm > .dxbs-listbox,
+div.dxbs-dm.dxbs-listbox > ul {
     padding-top: 0;
     padding-bottom: 0;
     padding-left: 0;
     margin-bottom: 0;
+}
+
+.dxbs-combobox > div > div.input-group-append > div.dxbs-dm.dropdown-menu {
+    display: block;
+    max-height: 200px;
 }
 /** Blazor Calendar **/
 .dxbs-calendar > .calendar-row > .calendar-view {

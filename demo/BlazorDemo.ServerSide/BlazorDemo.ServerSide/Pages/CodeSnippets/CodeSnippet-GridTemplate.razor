@@ -3,7 +3,7 @@
     <div class="card-footer text-muted">
         <CodeSnippet>
 @(@"<DxDataGrid Data=@DataSource
-            AllowRowSelection=true
+            AllowDataRowSelection=true
             ShowFilterRow=false
             RowRemoving=@((dataItem) => OnRowRemoving(dataItem))
             RowUpdating=@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))
@@ -51,8 +51,8 @@
         <EditTemplate>
             <DxDataGrid Data=@NestedDataSource
                         PageSize=5
-                        SelectedDataItem=@(NestedDataSource.Where(x => x.ProductSubcategoryID == (int)((CellEditContext)context).CellValue).FirstOrDefault())
-                        SelectedItemChanged=@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue.ProductSubcategoryID))>
+                        SelectedDataRow=@(NestedDataSource.Where(x => x.ProductSubcategoryID == (int)((CellEditContext)context).CellValue).FirstOrDefault())
+                        SelectedDataRowChanged=@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue.ProductSubcategoryID))>
                 <DxDataGridColumn Field=@nameof(ProductCategory.ProductSubcategoryID) Width=""150px""></DxDataGridColumn>
                 <DxDataGridColumn Field=@nameof(ProductCategory.Category) Width=""150px""></DxDataGridColumn>
                 <DxDataGridColumn Field=@nameof(ProductCategory.Subcategory) Width=""150px""></DxDataGridColumn>

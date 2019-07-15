@@ -1,20 +1,18 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Demo.Blazor.Model
-{
-    public class FormDataItem
-    {
+namespace Demo.Blazor.Model {
+    public class FormDataItem {
         [Required]
         [Display(Name = "Public name")]
         public string Name { get; set; }
-        
+
         [Required]
-        [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*")] 
+        [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*")]
         public string Email { get; set; }
-        
+
         [Range(typeof(DateTime), "01/01/1945", "01/01/2000")]
-        [DisplayFormat(DataFormatString = "dd MMMM yyyy")] 
+        [DisplayFormat(DataFormatString = "dd MMMM yyyy")]
         public DateTime? Birthday { get; set; }
 
         [DataType(DataType.MultilineText)]

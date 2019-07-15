@@ -2,11 +2,27 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
-## [0.0.11] (latest release)
+## [0.0.12] (latest release)
+
+### Added
+* Data Grid - Virtual Scroll
+* ComboBox - Virtual Scroll
+
+### Renamed and Restructed API
+
+* Data Grid
+  * _AllowRowSelection_ renamed to _AllowDataRowSelection_
+  * _SelectedDataItem_ renamed to _SelectedDataRow_
+  * _SelectedItemChanged_ renamed to _SelectedDataRowChanged_
+* TreeView
+  * _ExpandedChanging_ divided into two events: _BeforeCollapse_ and _BeforeExpand_
+  * _ExpandedChanged_ divided into two events: _AfterCollapse_ and _AfterExpand_
+  
+## [0.0.11] 
 
 ### Added
 
-* Tree View
+* TreeView
 * Combo Box
   * Filter Data
   * Allow User Input
