@@ -192,6 +192,9 @@ If you don't see packages in the ```https://nuget.devexpress.com/early-access/ap
 * Data Grid
   * Column Types
   * Templates
+  * Virtual Scrolling
+  * Cascading Editors
+  * Edit Form Template Validation
   * Large Datasets
 * Pivot Grid
   * Data Binding Basics
@@ -199,6 +202,7 @@ If you don't see packages in the ```https://nuget.devexpress.com/early-access/ap
   * Large Datasets
 * Data Editors
   * Combo Box – Business Object List
+  * ComboBox - Virtual Scrolling
   * Combo Box - Allow Input
   * Combo Box - Incremental Filtering
   * Combo Box - NullText
