@@ -57,7 +57,7 @@
 
     public void OnRegionChanged()
     {
-        base.Invoke(StateHasChanged);
+        Invoke(StateHasChanged);
     }
     void OnRowUpdating(Vacancy vacancy, Dictionary<string, object> newValue)
     {
@@ -80,7 +80,7 @@
     void OnRowRemoving(Vacancy vacancy)
     {
         Vacancies = Vacancies.Where(v => v != vacancy).ToArray();
-        base.Invoke(StateHasChanged);
+        Invoke(StateHasChanged);
     }
     void OnRowInserting(Dictionary<string, object> newValue)
     {
@@ -88,7 +88,7 @@
         OnRowUpdating(newVacancy, newValue);
         Vacancies = (new Vacancy[] { newVacancy }).Concat(Vacancies);
         
-        base.Invoke(StateHasChanged);
+        Invoke(StateHasChanged);
     }
 }
 ")

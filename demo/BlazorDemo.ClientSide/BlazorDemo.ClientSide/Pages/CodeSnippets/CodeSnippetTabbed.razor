@@ -25,7 +25,7 @@
         get => activeTabIndex;
         set {
             activeTabIndex = value;
-            base.Invoke(StateHasChanged);
+            Invoke(StateHasChanged);
         }
     }
 

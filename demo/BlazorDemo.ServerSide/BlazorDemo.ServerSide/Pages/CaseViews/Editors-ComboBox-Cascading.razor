@@ -41,10 +41,10 @@
     City CurrentCity = CountryCity.Cities[4];
 
     bool dropDownVisible1 = true;
-    bool DropDownVisible1 { get => dropDownVisible1; set { dropDownVisible1 = value; base.Invoke(StateHasChanged); }  }
+    bool DropDownVisible1 { get => dropDownVisible1; set { dropDownVisible1 = value; Invoke(StateHasChanged); }  }
 
     bool dropDownVisible2 = true;
-    bool DropDownVisible2 { get => dropDownVisible2; set { dropDownVisible2 = value; base.Invoke(StateHasChanged); }  }
+    bool DropDownVisible2 { get => dropDownVisible2; set { dropDownVisible2 = value; Invoke(StateHasChanged); }  }
 
 
     protected override void OnInit()
@@ -57,11 +57,11 @@
         CurrentCountry = country;
         CurrentCountryCities = CountryCity.Cities.FindAll(city => city.CountryId == CurrentCountry.Id);
         CurrentCity = CurrentCountryCities[0];
-        base.Invoke(StateHasChanged);
+        Invoke(StateHasChanged);
     }
     void SelectedCityChanged(City city)
     {
         CurrentCity = city;
-        base.Invoke(StateHasChanged);
+        Invoke(StateHasChanged);
     }
 }

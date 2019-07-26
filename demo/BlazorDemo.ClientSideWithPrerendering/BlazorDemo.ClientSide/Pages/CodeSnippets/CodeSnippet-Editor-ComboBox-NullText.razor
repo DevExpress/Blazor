@@ -5,6 +5,6 @@
 
 @code {
     string option;
-    string Option { get => option; set { option = value; base.Invoke(StateHasChanged); } }
+    string Option { get => option; set { option = value; Invoke(StateHasChanged); } }
 }")
 </CodeSnippet>

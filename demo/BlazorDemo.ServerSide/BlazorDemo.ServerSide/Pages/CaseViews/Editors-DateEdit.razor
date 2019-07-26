@@ -22,8 +22,8 @@
 
 @code {
     DateTime dateTimeValue = DateTime.Now;
-    DateTime DateTimeValue { get => dateTimeValue; set { dateTimeValue = value; base.Invoke(StateHasChanged); }  }
+    DateTime DateTimeValue { get => dateTimeValue; set { dateTimeValue = value; Invoke(StateHasChanged); }  }
 
     bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; base.Invoke(StateHasChanged); }  }
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; Invoke(StateHasChanged); }  }
 }

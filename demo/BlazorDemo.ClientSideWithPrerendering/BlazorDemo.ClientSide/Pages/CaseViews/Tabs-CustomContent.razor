@@ -42,5 +42,5 @@
 
 @code {
     int activeTabIndex = 1;
-    int ActiveTabIndex { get => activeTabIndex; set { activeTabIndex = value; base.Invoke(StateHasChanged); } }
+    int ActiveTabIndex { get => activeTabIndex; set { activeTabIndex = value; Invoke(StateHasChanged); } }
 }

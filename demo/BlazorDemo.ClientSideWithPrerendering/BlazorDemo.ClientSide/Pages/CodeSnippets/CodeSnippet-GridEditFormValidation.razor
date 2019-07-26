@@ -117,7 +117,7 @@
     void OnRowEditStarting(Vacancy vacancy)
     {
         EditContext = new FormEditContext(vacancy);
-        EditContext.StateHasChanged += () => { base.Invoke(StateHasChanged); };
+        EditContext.StateHasChanged += () => { Invoke(StateHasChanged); };
     }
     void OnCancelButtonClick()
     {
@@ -141,7 +141,7 @@
     void OnRowRemoving(Vacancy vacancy)
     {
         Vacancies = Vacancies.Where(v => v != vacancy).ToArray();
-        base.Invoke(StateHasChanged);
+        Invoke(StateHasChanged);
     }
 }")
         </CodeSnippet>

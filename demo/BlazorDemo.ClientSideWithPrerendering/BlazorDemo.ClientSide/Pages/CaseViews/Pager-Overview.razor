@@ -44,11 +44,11 @@
 
 @code {
     int pageCount = 10;
-    int PageCount { get => pageCount; set { pageCount = value; base.Invoke(StateHasChanged); } }
+    int PageCount { get => pageCount; set { pageCount = value; Invoke(StateHasChanged); } }
 
     int activePageIndex = 1;
-    int ActivePageIndex { get => activePageIndex; set { activePageIndex = value; base.Invoke(StateHasChanged); } }
+    int ActivePageIndex { get => activePageIndex; set { activePageIndex = value; Invoke(StateHasChanged); } }
 
     int collapseButtonCount = 10;
-    int CollapseButtonCount { get => collapseButtonCount; set { collapseButtonCount = value; base.Invoke(StateHasChanged); } }
+    int CollapseButtonCount { get => collapseButtonCount; set { collapseButtonCount = value; Invoke(StateHasChanged); } }
 }

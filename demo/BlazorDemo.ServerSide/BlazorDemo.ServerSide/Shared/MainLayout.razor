@@ -51,7 +51,7 @@
     }
 
     bool themeSwitcherShown = false;
-    bool ThemeSwitcherShown { get => themeSwitcherShown; set { themeSwitcherShown = value; base.Invoke(StateHasChanged); } }
+    bool ThemeSwitcherShown { get => themeSwitcherShown; set { themeSwitcherShown = value; Invoke(StateHasChanged); } }
 
     void ToggleThemeSwitcherPanel()
     {
@@ -67,7 +67,7 @@
         UriHelper.OnLocationChanged += (sender, args) => {
             if(!collapseNavMenu) {
                 collapseNavMenu = true;
-                base.Invoke(StateHasChanged);
+                Invoke(StateHasChanged);
             }
         };
     }

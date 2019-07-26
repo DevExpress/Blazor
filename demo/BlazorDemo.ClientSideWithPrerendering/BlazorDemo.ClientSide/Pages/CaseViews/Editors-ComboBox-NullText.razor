@@ -26,8 +26,8 @@
 
 @code {
     string option;
-    string Option { get => option; set { option = value; base.Invoke(StateHasChanged) ;} }
+    string Option { get => option; set { option = value; Invoke(StateHasChanged) ;} }
 
     bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; base.Invoke(StateHasChanged); }  }
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; Invoke(StateHasChanged); }  }
 }

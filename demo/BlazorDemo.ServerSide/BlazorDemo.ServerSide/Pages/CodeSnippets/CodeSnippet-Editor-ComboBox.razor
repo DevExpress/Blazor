@@ -6,7 +6,7 @@
 
 @code {
     Person selectedRealBusinessObject = ...;
-    Person SelectedRealBusinessObject { get => selectedRealBusinessObject; set { selectedRealBusinessObject = value; base.Invoke(StateHasChanged); } }
+    Person SelectedRealBusinessObject { get => selectedRealBusinessObject; set { selectedRealBusinessObject = value; Invoke(StateHasChanged); } }
 }
 
 public class Person

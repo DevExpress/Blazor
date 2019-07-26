@@ -83,5 +83,5 @@
     string notes = "Education includes a BA in psychology.";
     string Notes { get => notes; set { notes = value; OnChanged(); } }
 
-    void OnChanged() { base.Invoke(StateHasChanged); }
+    void OnChanged() { Invoke(StateHasChanged); }
 }

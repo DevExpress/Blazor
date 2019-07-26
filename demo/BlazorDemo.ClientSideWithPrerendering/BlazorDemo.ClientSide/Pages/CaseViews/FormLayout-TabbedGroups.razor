@@ -66,20 +66,20 @@
     int ActiveTabIndex { get; set; } = 1;
 
     string firstName = "Nancy";
-    string FirstName { get => firstName; set { firstName = value; base.Invoke(StateHasChanged); } }
+    string FirstName { get => firstName; set { firstName = value; Invoke(StateHasChanged); } }
 
     string lastName = "Davolio";
-    string LastName { get => lastName; set { lastName = value; base.Invoke(StateHasChanged); } }
+    string LastName { get => lastName; set { lastName = value; Invoke(StateHasChanged); } }
 
     DateTime birthday = DateTime.Now.AddYears(-20);
-    DateTime Birthday { get => birthday; set { birthday = value; base.Invoke(StateHasChanged); } }
+    DateTime Birthday { get => birthday; set { birthday = value; Invoke(StateHasChanged); } }
 
     string position = "Sales Representative";
-    string Position { get => position; set { position = value; base.Invoke(StateHasChanged); } }
+    string Position { get => position; set { position = value; Invoke(StateHasChanged); } }
 
     DateTime hireDate = DateTime.Now.AddYears(-20);
-    DateTime HireDate { get => hireDate; set { hireDate = value; base.Invoke(StateHasChanged); } }
+    DateTime HireDate { get => hireDate; set { hireDate = value; Invoke(StateHasChanged); } }
 
     string notes = "Education includes a BA in psychology.";
-    string Notes { get => notes; set { notes = value; base.Invoke(StateHasChanged); } }
+    string Notes { get => notes; set { notes = value; Invoke(StateHasChanged); } }
 }
