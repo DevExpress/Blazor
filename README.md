@@ -108,8 +108,6 @@ Follow the steps below to try our UI for Blazor in your own application.
    
    Select the "Early Access" NuGet package source you have just created in the "Package source" combo box.
 
-   Make sure that the "Include prerelease" option is selected.
-   
    Install the "DevExpress.Blazor" NuGet package.
    
    ![Add new NuGet source](media/VS2019Release-AddNuGetPackage.png)
