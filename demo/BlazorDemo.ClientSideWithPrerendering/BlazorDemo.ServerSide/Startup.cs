@@ -47,6 +47,7 @@ namespace BlazorDemo.ServerSide
 
             services.AddSingleton<IOptions<DemoConfiguration>, ClientSideDemoConfiguration>();
             services.AddTransient<ProductService>();
+            services.AddSingleton<FlatProductService>();
             services.AddSingleton<CountryNamesService>();
 
             services.AddDocumentMetadata((serviceProvider, registrator) =>

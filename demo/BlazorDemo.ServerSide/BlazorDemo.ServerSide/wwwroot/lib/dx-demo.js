@@ -7,8 +7,9 @@ function HighlightJSUpdate() {
 function UpdateSharingButton() {
     window.setTimeout(function () {
         try {
-            twttr.widgets.load();
-            FB.XFBML.parse();
+            var container = document.querySelector(".social-panel")
+            twttr.widgets.load(container);
+            FB.XFBML.parse(container);
         } catch (e) {
             return null;
         }

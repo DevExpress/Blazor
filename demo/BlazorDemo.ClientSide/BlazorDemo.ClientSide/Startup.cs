@@ -22,6 +22,7 @@ namespace BlazorDemo.ClientSide
 
             //services.Configure<Demo.Blazor.DemoConfiguration>(Configuration.GetSection("DemoConfiguration"));
             services.AddTransient<ProductService>();
+            services.AddSingleton<FlatProductService>();
             services.AddSingleton<CountryNamesService>();
         }
 

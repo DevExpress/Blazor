@@ -1,0 +1,34 @@
+﻿@using Demo.Blazor.Model
+@using DevExpress.Blazor
+
+<div class="demo-description">
+    <h2>Scheduler - Work Week View</h2>
+    <p>
+        This module demonstrates how to configure the Work Week View (<b>DxSchedulerWorkWeekView</b>).
+    </p>
+</div>
+
+<DxScheduler Id="schedulerWorkWeekView"
+             StartDate=@(DateTime.Today)
+             DataStorage=@DataStorage>
+
+    <DxSchedulerWorkWeekView ShowWorkTimeOnly="true"></DxSchedulerWorkWeekView>
+</DxScheduler>
+<CodeSnippet_Scheduler_WorkWeekView></CodeSnippet_Scheduler_WorkWeekView>
+
+@code {
+    DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
+        AppointmentsSource = AppointmentCollection.DataSource,
+        AppointmentMappings = new DxSchedulerAppointmentMappings() {
+            Id = "AppointmentId",
+            Start = "StartDate",
+            End = "EndDate",
+            Subject = "Caption",
+            AllDay = "AllDay",
+            Location = "Location",
+            Description = "Description",
+            LabelId = "Label",
+            StatusId = "Status"
+        }
+    };
+}

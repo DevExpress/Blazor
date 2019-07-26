@@ -13,6 +13,8 @@ namespace Demo.Blazor {
         public string TitleFormat { get; set; }
         public string Icon { get; set; }
         public string NavLinkText { get; set; }
+        public string Keywords { get; set; }
+        public string Description { get; set; }
 
 
         public bool IsNew { get; set; }
@@ -40,15 +42,15 @@ namespace Demo.Blazor {
                 .OpenGraph("url", "https://dxpr.es/2WogLq7")
                 .OpenGraph("type", "website")
                 .OpenGraph("title", "Native Blazor Components powered by DevExpress")
-                .OpenGraph("description", "Free DevExpress UI for Blazor ships with 7 user interface components (including a Data Grid and Pivot Grid) so you can design rich user experiences with both Blazor.")
-                .OpenGraph("image", "https://static.devexpress.com/Products/Blazor/blazor-demo-social.png")
+                .OpenGraph("description", "Free DevExpress UI for Blazor ships with 11 user interface components (including a Data Grid, Pivot Grid and Scheduler) so you can design rich user experiences with both Blazor.")
+                .OpenGraph("image", "https://static.devexpress.com/Products/Blazor/blazor-components-grid-pivot-scheduler-devexpress.jpg")
 
                 .Meta("twitter:card", "summary")
                 .Meta("twitter:site", "@@devexpress")
 
-                .Script("highlight-js", "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js", defer: true)
-                .Script("demo-js", "~/lib/dx-demo.js", defer: true)
-                .Script("dx-blazor-js", "~/lib/dx-blazor/dx-blazor.js", defer: true)
+                .Script("highlight-js", "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js", defer: false)
+                .Script("demo-js", "~/lib/dx-demo.js", defer: false)
+                .Script("dx-blazor-js", "~/lib/dx-blazor/dx-blazor.js", defer: false)
 
                 .Script("facebook-jssdk", "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0", async: true)
                 .Script("twitter-js", "https://platform.twitter.com/widgets.js", async: true)
@@ -73,6 +75,10 @@ namespace Demo.Blazor {
                 metadataBuilder.Title(pageMetadata.GetSeoTitle());
                 if (!string.IsNullOrEmpty(pageMetadata.TitleFormat))
                     metadataBuilder.TitleFormat(pageMetadata.TitleFormat);
+                if(!string.IsNullOrEmpty(pageMetadata.Keywords))
+                    metadataBuilder.Meta("keywords", pageMetadata.Keywords);
+                if(!string.IsNullOrEmpty(pageMetadata.Description))
+                    metadataBuilder.Meta("description", pageMetadata.Description);
             }
             foreach (var childPageMetadata in pageMetadata.DemoPages) {
                 childPageMetadata.ParentPage = pageMetadata;

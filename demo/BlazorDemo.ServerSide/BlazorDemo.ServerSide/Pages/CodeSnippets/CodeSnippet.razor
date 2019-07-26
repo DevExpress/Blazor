@@ -1,15 +1,20 @@
 ﻿@inject IJSRuntime JSRuntime
 @inject IComponentContext ComponentContext
 @using Microsoft.JSInterop;
+
+@if (Visible) { 
 <pre><code class="hljs xml">@ChildContent</code></pre>
+}
 
 
 @code {
     [Parameter] private RenderFragment ChildContent { get; set; }
 
-    protected override void OnAfterRender()
-    {
-        if(ComponentContext.IsConnected)
+    [Parameter] bool Visible { get; set; } = true;
+
+    protected override void OnAfterRender() {
+        if (ComponentContext.IsConnected) {
             JSRuntime.InvokeAsync<string>("HighlightJSUpdate");
+        }
     }
 }

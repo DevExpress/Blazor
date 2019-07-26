@@ -1,9 +1,8 @@
 ﻿@page "/PivotGrid"
 @using Demo.Blazor.Model
-@using DevExpress.Blazor.PivotGrid
 
 <div class="demo-description">
-    <h2>Pivot Grid</h2>
+    <h2>Pivot Grid - Overview</h2>
     <p>
         The Pivot Grid component summarizes data from the underlying data source and presents the results in cross-tabulated format. This demo allows you to browse sales data - number of sales and their amount - summarized against geographical regions and time intervals.
     </p>
@@ -30,7 +29,7 @@
     <p><em>Loading...</em></p>
 } else {
     <DxPivotGrid Data=@GridData>
-        <DxPivotGridField Field=@nameof(SaleInfo.Region) SortOrder=@SortOrder.Asc Area=@PivotGridFieldArea.Row></DxPivotGridField>
+        <DxPivotGridField Field=@nameof(SaleInfo.Region) SortOrder=@PivotGridSortOrder.Ascending Area=@PivotGridFieldArea.Row></DxPivotGridField>
         <DxPivotGridField Field=@nameof(SaleInfo.Country) Area=@PivotGridFieldArea.Row></DxPivotGridField>
         <DxPivotGridField Field=@nameof(SaleInfo.City) Area=@PivotGridFieldArea.Row></DxPivotGridField>
         <DxPivotGridField Field=@nameof(SaleInfo.Date) GroupInterval=@PivotGridGroupInterval.Year Area=@PivotGridFieldArea.Column Caption="Year"></DxPivotGridField>

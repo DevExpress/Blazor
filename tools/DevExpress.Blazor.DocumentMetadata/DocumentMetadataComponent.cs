@@ -73,7 +73,10 @@ namespace DevExpress.Blazor.DocumentMetadata
             }
             if (EntityOrigin.Name == "script" || !string.IsNullOrEmpty(EntityOrigin.Content)) {
                 sb.Append(">");
-                sb.Append(EntityOrigin.Content);
+                if(EntityOrigin.Name == "title")
+                    sb.Append(string.Format(TitleFormat, EntityOrigin.Content));
+                else
+                    sb.Append(EntityOrigin.Content);
                 sb.Append($"</{EntityOrigin.Name}>");
             } else
                 sb.Append("/>");

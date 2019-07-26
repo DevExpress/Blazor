@@ -15,6 +15,7 @@ The following table describes the version compatibility of .NET Core 3.0 Preview
 
 | .NET Core 3.0 version | DevExpress.Blazor.nuget version |
 | ------------- | ------------- |
+| [.NET Core 3.0 Preview **7**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-7/) | **Beta 1** |
 | [.NET Core 3.0 Preview **6**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-6/) | 0.0.**12** |
 | [.NET Core 3.0 Preview **6**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-6/) | 0.0.**11** |
 | [.NET Core 3.0 Preview **6**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-6/) | 0.0.**10** |
@@ -192,6 +193,7 @@ If you don't see packages in the ```https://nuget.devexpress.com/early-access/ap
 * Data Grid
   * Column Types
   * Templates
+  * Scrolling
   * Virtual Scrolling
   * Cascading Editors
   * Edit Form Template Validation
@@ -200,13 +202,18 @@ If you don't see packages in the ```https://nuget.devexpress.com/early-access/ap
   * Data Binding Basics
   * Templates
   * Large Datasets
+* Scheduler
+  * Day View
+  * Work Week View
+  * Week View
+  * Recurring Appointments
 * Data Editors
-  * Combo Box – Business Object List
+  * ComboBox – Business Object List
   * ComboBox - Virtual Scrolling
-  * Combo Box - Allow Input
-  * Combo Box - Incremental Filtering
-  * Combo Box - NullText
-  * Combo Box – Cascading Lists
+  * ComboBox - Allow Input
+  * ComboBox - Incremental Filtering
+  * ComboBox - NullText
+  * ComboBox – Cascading Lists
   * Spin Edit
   * Date Edit  
   * Text Box

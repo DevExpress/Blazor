@@ -1,0 +1,34 @@
+﻿@using Demo.Blazor.Model
+@using DevExpress.Blazor
+
+<div class="demo-description">
+    <h2>Scheduler - Day View</h2>
+    <p>
+        This module demonstrates how to configure the Day View (<b>DxSchedulerDayView</b>).
+    </p>
+</div>
+
+<DxScheduler Id="schedulerDayView"
+             StartDate=@(DateTime.Today)
+             DataStorage=@DataStorage>
+
+    <DxSchedulerDayView ShowWorkTimeOnly="true" DayCount="1"></DxSchedulerDayView>
+</DxScheduler>
+<CodeSnippet_Scheduler_DayView></CodeSnippet_Scheduler_DayView>
+
+@code {
+    DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
+        AppointmentsSource = AppointmentCollection.DataSource,
+        AppointmentMappings = new DxSchedulerAppointmentMappings() {
+            Id = "AppointmentId",
+            Start = "StartDate",
+            End = "EndDate",
+            Subject = "Caption",
+            AllDay = "AllDay",
+            Location = "Location",
+            Description = "Description",
+            LabelId = "Label",
+            StatusId = "Status"
+        }
+    };
+}

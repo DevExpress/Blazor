@@ -22,6 +22,7 @@ namespace BlazorDemo.ClientSide
                 options.UseSqlServer("YOUR CONNECTION STRING HERE"));
 
             services.AddTransient<ProductService>();
+            services.AddSingleton<FlatProductService>();
             services.AddSingleton<CountryNamesService>();
             services.AddDocumentMetadata((serviceProvider, registrator) =>
             {

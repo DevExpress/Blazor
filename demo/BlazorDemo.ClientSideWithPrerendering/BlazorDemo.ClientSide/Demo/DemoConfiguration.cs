@@ -51,13 +51,13 @@ namespace Demo.Blazor
                 .OpenGraph("type", "website")
                 .OpenGraph("title", "Native Blazor Components powered by DevExpress")
                 .OpenGraph("description", "Free DevExpress UI for Blazor ships with 7 user interface components (including a Data Grid and Pivot Grid) so you can design rich user experiences with both Blazor.")
-                .OpenGraph("image", "https://static.devexpress.com/Products/Blazor/blazor-demo-social.png")
+                .OpenGraph("image", "https://static.devexpress.com/Products/Blazor/blazor-components-grid-pivot-scheduler-devexpress.jpg")
                 .Meta("twitter:card", "summary")
                 .Meta("twitter:site", "@@devexpress")
 
-                .Script("highlight-js", "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js", defer: true)
-                .Script("demo-js", "~/lib/dx-demo.js", defer: true)
-                .Script("dx-blazor-js", "~/lib/dx-blazor/dx-blazor.js", defer: true)
+                .Script("highlight-js", "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js", defer: false)
+                .Script("demo-js", "~/lib/dx-demo.js", defer: false)
+                .Script("dx-blazor-js", "~/lib/dx-blazor/dx-blazor.js", defer: false)
 
                 .Script("facebook-jssdk", "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0", async: true)
                 .Script("twitter-js", "https://platform.twitter.com/widgets.js", async: true)
@@ -130,6 +130,14 @@ namespace Demo.Blazor
                 Title = "Large Data Source",
                 Icon = "images/GridLargeData.svg"
             });
+            gridPages.DemoPages.Add(new DemoPageConfiguration() {
+                Url = "GridScrolling",
+                Title = "Scrolling"
+            });
+            gridPages.DemoPages.Add(new DemoPageConfiguration() {
+                Url = "GridVirtualScrolling",
+                Title = "Virtual Scrolling"
+            });
             DemoPages.Add(gridPages);
             
             var pivotGridPages = new DemoPageConfiguration() { Title = "Pivot Grid" };
@@ -149,6 +157,18 @@ namespace Demo.Blazor
                 Icon = "images/PivotGridLargeData.svg"
             });
             DemoPages.Add(pivotGridPages);
+			
+			
+            var schedulerPages = new DemoPageConfiguration() { Title = "Scheduler" };
+            schedulerPages.DemoPages.Add(new DemoPageConfiguration() {
+                Url = "SchedulerViewTypes",
+                Title = "View Types"
+            });
+            schedulerPages.DemoPages.Add(new DemoPageConfiguration() {
+                Url = "SchedulerRecurringAppointments",
+                Title = "Recurring Appointments"
+            });
+            DemoPages.Add(schedulerPages);
 
             var editorPages = new DemoPageConfiguration() { Title = "Editors" };
             editorPages.DemoPages.Add(new DemoPageConfiguration() {

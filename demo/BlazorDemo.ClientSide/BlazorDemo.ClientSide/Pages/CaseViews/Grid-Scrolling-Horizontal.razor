@@ -1,0 +1,70 @@
+﻿@using Demo.Blazor.Model
+@using Demo.Blazor.Services
+@inject FlatProductService FlatProductService
+
+<div class="demo-description">
+    <h2>Data Grid - Horizontal Scrolling</h2>
+    <p>
+        This demo module illustrates how to enable horizontal scrolling in the DevExpress Data Grid for Blazor.
+    </p>
+    <p>
+        Use the <b>DxDataGrid.HorizontalScrollBarMode</b> property to specify the horizontal scrollbar’s display mode:
+    </p>
+    <ul>
+        <li><b>Auto</b> - The scrollbar is automatically shown when the size of the component content exceeds the size of the component itself.</li>
+        <li><b>Hidden</b> - The scrollbar is hidden.</li>
+        <li><b>Visible</b> - The scrollbar is visible.</li>
+    </ul>
+</div>
+
+@if (DataSource == null) {
+    <p><em>Loading...</em></p>
+} else {
+
+    <DxDataGrid Data=@DataSource 
+            HorizontalScrollBarMode="@ScrollBarMode.Visible"
+            ShowFilterRow="@false"
+            CssClass="mw-1100">
+
+        <DxDataGridColumn Field=@nameof(ProductFlat.Id) Caption="Id" Width="50px">
+        </DxDataGridColumn>
+
+        <DxDataGridColumn Field=@nameof(ProductFlat.ProductName) Caption="Product Name" Width="350px">
+        </DxDataGridColumn>
+
+        <DxDataGridColumn Field=@nameof(ProductFlat.Availability ) Caption="Availability" Width="85px">
+            <DisplayTemplate>
+                @{
+                    var id = Guid.NewGuid().ToString();
+                    var inStock = (context as ProductFlat).Availability;
+                    <input id=@id type="checkbox" checked=@inStock disabled readonly />
+                    if (inStock) {
+                        <label class="form-check-label text-success" for=@id><span>In stock</span></label>
+                    } else {
+                        <label class="form-check-label text-danger" for=@id><span>Sold out</span></label>
+                    }
+                }
+            </DisplayTemplate>
+        </DxDataGridColumn>
+
+        <DxDataGridColumn Field=@nameof(ProductFlat.Category) Caption="Category" Width="350px"></DxDataGridColumn>
+        <DxDataGridColumn Field=@nameof(ProductFlat.Subcategory) Caption="Subcategory" Width="350px"></DxDataGridColumn>
+        <DxDataGridDateEditColumn Field=@nameof(ProductFlat.LastUpdatedDate) Caption="Last Updated Date" Width="350px"></DxDataGridDateEditColumn>
+
+    </DxDataGrid>
+    <div class="code-snippet card demo-card-wide">
+        <CodeSnippetHeader></CodeSnippetHeader>
+        <div class="card-footer text-muted ">
+            <CodeSnippet_Grid_Scrolling_Horizontal></CodeSnippet_Grid_Scrolling_Horizontal>
+        </div>
+    </div>
+}
+
+@code {
+    IQueryable<ProductFlat> DataSource;
+
+    protected override async Task OnInitAsync()
+    {
+        DataSource = await FlatProductService.Load();
+    }
+}

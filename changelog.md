@@ -2,7 +2,34 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
-## [0.0.12] (latest release)
+# Beta 1 (latest release)
+
+### New Scheduler Component
+
+The new Scheduler component has the following features:
+
+* Three built-in views: Day, Work Week and Week
+* Data binding 
+* Recurring appointments
+
+### Added Features
+
+* Support for .Net Core 3.0 Preview 7
+* Grid 
+  * Column Visibility
+  * Column Editor Visibility
+  * Horizontal Scrolling
+  * Vertical Scrolling
+* TreeView - Data Binding
+* Form Layout - Items Visibility
+
+### Renamed and Restructured API
+
+* _ComboBoxDataLoadMode.Defaul_ renamed to _ComboBoxDataLoadMode.Default_.
+* Pivot Grid-related enumerations moved from the _DevExpress.Blazor.PivotGrid_ namespace to the _DevExpress.Blazor_ namespace.
+* The _SortOrder_ enumeration renamed to _PivotGridSortOrder_, and its members (_Asc_ and _Desc_) renamed to _Ascending_ and _Descending_, respectively.
+
+## [0.0.12] 
 
 ### Added
 * Data Grid - Virtual Scroll

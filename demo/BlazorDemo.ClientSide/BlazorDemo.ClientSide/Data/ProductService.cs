@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -50,6 +50,9 @@ namespace Demo.Blazor.Services
         }
         public void Insert(Dictionary<string, object> newValue)
         {
+            if(!newValue.ContainsKey(nameof(Product.Id)))
+                newValue.Add(nameof(Product.Id), Guid.NewGuid().ToString());
+
             var dataItem = new Product();
             Update(dataItem, newValue);
             ((IList<Product>)dataSource).Add(dataItem);

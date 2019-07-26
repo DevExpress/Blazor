@@ -1,0 +1,56 @@
+﻿<CodeSnippetTabbed>
+<CodeSnippetTabPage Text="Razor">
+@(@"<DxTreeView Data=@Enum.GetValues(typeof(ProductCategoryMain)) 
+    TextExpression=@(dataItem => GetNodeText(dataItem))
+    ChildrenExpression=@(dataItem => GetNodeChildren(dataItem))>
+</DxTreeView>
+
+@code {
+    IQueryable<Product> products;
+    IEnumerable<ProductCategory> productSubcategories;
+    
+    System.Collections.IEnumerable GetNodeChildren(object dataItem) {
+        if (dataItem is ProductCategoryMain) {
+            return productSubcategories
+                .Where(c => c.Category.Equals((ProductCategoryMain)dataItem));
+        }
+        else if (dataItem is ProductCategory) {
+            return products
+                .Where(p => p.ProductCategoryId == ((ProductCategory)dataItem).ProductSubcategoryID);
+        }
+        return null;
+    }
+
+    string GetNodeText(object dataItem) {
+        if (dataItem is ProductCategoryMain) {
+            return dataItem.ToString();
+        }
+        else if (dataItem is ProductCategory) {
+            return ((ProductCategory)dataItem).Subcategory;
+        }
+        else if (dataItem is Product) {
+            return ((Product)dataItem).ProductName;
+        }
+        return """";
+    }
+}")
+</CodeSnippetTabPage>
+<CodeSnippetTabPage Text="ProductCategory">
+@(@"public enum ProductCategoryMain { Bikes, Components, Clothing, Accessories }
+
+public class ProductCategory {
+    public int ProductSubcategoryID { get; set; }
+
+    public ProductCategoryMain Category { get; set; }
+
+    public string Subcategory { get; set; }
+}")
+</CodeSnippetTabPage>
+<CodeSnippetTabPage Text="Product">
+@(@"public class Product {
+    public string ProductName { get; set; }
+
+    public int ProductCategoryId { get; set; }
+}")
+</CodeSnippetTabPage>
+</CodeSnippetTabbed>

@@ -1,0 +1,39 @@
+﻿@page "/SchedulerRecurringAppointments"
+@using Demo.Blazor.Model
+@using DevExpress.Blazor
+
+<div class="demo-description">
+    <h2>Scheduler - Recurring Appointments</h2>
+    <p>
+        This module demonstrates how to set up recurring appointments for the Scheduler component. Note that the appointment object should contain the <b>RecurrenceInfo</b> field (see the code below) to use this functionality.
+    </p>
+</div>
+
+<DxScheduler Id="scheduler"
+             StartDate=@(DateTime.Today)
+             DataStorage=@DataStorage
+             ActiveViewType=@SchedulerViewType.WorkWeek>
+
+    <DxSchedulerDayView VisibleTime=@VisibleTime></DxSchedulerDayView>
+    <DxSchedulerWorkWeekView VisibleTime=@VisibleTime></DxSchedulerWorkWeekView>
+    <DxSchedulerWeekView VisibleTime=@VisibleTime></DxSchedulerWeekView>
+</DxScheduler>
+<CodeSnippet_Scheduler_RecurringAppointments></CodeSnippet_Scheduler_RecurringAppointments>
+
+@code {
+    DxSchedulerTimeSpanRange VisibleTime = new DxSchedulerTimeSpanRange(TimeSpan.FromHours(8), TimeSpan.FromHours(19));
+
+    DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
+        AppointmentsSource = RecurringAppointmentCollection.DataSource,
+        AppointmentMappings = new DxSchedulerAppointmentMappings() {
+            Id = "AppointmentId",
+            Type = "AppointmentType",
+            Start = "StartDate",
+            End = "EndDate",
+            Subject = "Caption",
+            AllDay = "AllDay",
+            LabelId = "Label",
+            RecurrenceInfo = "Recurrence"
+        }
+    };
+}

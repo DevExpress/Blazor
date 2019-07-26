@@ -1,4 +1,4 @@
-/* Demos specific */
+﻿/* Demos specific */
 body {
     margin: 0;
 }
@@ -12,6 +12,13 @@ body {
     width: 760px;
 }
 
+.demo-card,
+.demo-card-wide,
+.card.code-snippet,
+.demo-description+div {
+    margin-top: 2rem;
+}
+
 @media(max-width: 1080px) {
     .card.demo-card {
         width: 100%;
@@ -20,6 +27,9 @@ body {
 
 .mw-480 {
     max-width: 480px;
+}
+.mw-1100 {
+    max-width: 1100px;
 }
 
 .card-deck.demo > .card {
@@ -48,6 +58,10 @@ body {
     border: none;
 }
 
+.card.code-snippet {
+    overflow: hidden;
+}
+
 .code-header.card-footer {
     background-color: #f5f5f5 !important;
     background-image: none;
@@ -67,8 +81,11 @@ body {
     z-index: 1;
 }
 
-.code-header > .nav-code .nav-link.active {
+.code-header > .nav-code .nav-link {
     color: #444;
+}
+
+.code-header > .nav-code .nav-link.active {
     background-color: #fff;
     border-bottom: 1px solid;
 }
@@ -92,6 +109,13 @@ body {
     border-top-color: #d6d5d5;
     background-color: #f5f5f5!important;
 } 
+
+.code-header-tabs {
+    padding-bottom: 1px;
+}
+.code-header-tabs .nav-tabs {
+    border-bottom-color: #d6d5d5;
+}
 
 .hljs {
     background-color: transparent;
@@ -285,9 +309,6 @@ div.content > .card:last-child {
     -webkit-mask-image: url("../images/Pager.svg");
 }
 
-.demo-description {
-    max-width: 1024px;
-}
 .demo-description:not(:first-child) > h2 {
     margin-top: 32px;
 }
@@ -311,6 +332,7 @@ div.content > .card:last-child {
 }
 
 .social-panel .sp-caption {
+    padding-bottom: 8px;
 }
 
 .fb_iframe_widget iframe {

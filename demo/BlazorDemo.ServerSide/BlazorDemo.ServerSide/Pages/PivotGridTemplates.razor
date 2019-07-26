@@ -1,6 +1,5 @@
 ﻿@page "/PivotGridTemplates"
 @using Demo.Blazor.Model
-@using DevExpress.Blazor.PivotGrid
 
 <div class="demo-description">
     <h2>Pivot Grid Templates</h2>
@@ -30,7 +29,7 @@
     <p><em>Loading...</em></p>
 } else {
     <DxPivotGrid Data=@GridData ShowGrandTotals="@ShowGrandTotals" ShowFieldHeaders="@ShowFieldHeaders">
-        <DxPivotGridField Field=@nameof(SaleInfo.Region) SortOrder=@SortOrder.Asc Area=@PivotGridFieldArea.Row></DxPivotGridField>
+        <DxPivotGridField Field=@nameof(SaleInfo.Region) SortOrder=@PivotGridSortOrder.Ascending Area=@PivotGridFieldArea.Row></DxPivotGridField>
         <DxPivotGridField Field=@nameof(SaleInfo.Country) Area=@PivotGridFieldArea.Row></DxPivotGridField>
         <DxPivotGridField Field=@nameof(SaleInfo.City) Area=@PivotGridFieldArea.Row></DxPivotGridField>
         <DxPivotGridField Field=@nameof(SaleInfo.Date) GroupInterval=@PivotGridGroupInterval.Year Area=@PivotGridFieldArea.Column Caption="Year"></DxPivotGridField>
