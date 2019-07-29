@@ -12,18 +12,17 @@ The new Scheduler component has the following features:
 * Data binding 
 * Recurring appointments
 
-### Added Features
+### Added
 
 * Support for .Net Core 3.0 Preview 7
-* Grid 
+* Data Grid 
   * Column Visibility
-  * Column Editor Visibility
   * Horizontal Scrolling
   * Vertical Scrolling
 * TreeView - Data Binding
 * Form Layout - Items Visibility
 
-### Renamed and Restructured API
+### Changed API
 
 * _ComboBoxDataLoadMode.Defaul_ renamed to _ComboBoxDataLoadMode.Default_.
 * Pivot Grid-related enumerations moved from the _DevExpress.Blazor.PivotGrid_ namespace to the _DevExpress.Blazor_ namespace.
@@ -35,7 +34,7 @@ The new Scheduler component has the following features:
 * Data Grid - Virtual Scroll
 * ComboBox - Virtual Scroll
 
-### Renamed and Restructed API
+### Changed API
 
 * Data Grid
   * _AllowRowSelection_ renamed to _AllowDataRowSelection_
