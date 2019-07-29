@@ -6,7 +6,7 @@ Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
 ### New Scheduler Component
 
-The new Scheduler component has the following features:
+The new Scheduler component supports the following features:
 
 * Three built-in views: Day, Work Week and Week
 * Data binding 
@@ -14,13 +14,13 @@ The new Scheduler component has the following features:
 
 ### Added
 
-* Support for .Net Core 3.0 Preview 7
+* .Net Core 3.0 Preview 7 support
 * Data Grid 
-  * Column Visibility
-  * Horizontal Scrolling
-  * Vertical Scrolling
-* TreeView - Data Binding
-* Form Layout - Items Visibility
+  * Toggle column visibility
+  * Horizontal scrolling
+  * Vertical scrolling
+* TreeView - Data binding
+* Form Layout - Toggle item visibility
 
 ### Changed API
 
@@ -31,8 +31,8 @@ The new Scheduler component has the following features:
 ## [0.0.12] 
 
 ### Added
-* Data Grid - Virtual Scroll
-* ComboBox - Virtual Scroll
+* Data Grid - Virtual scroll
+* ComboBox - Virtual scroll
 
 ### Changed API
 
@@ -49,15 +49,15 @@ The new Scheduler component has the following features:
 ### Added
 
 * TreeView
-* Combo Box
-  * Filter Data
-  * Allow User Input
-  * Keyboard Support
+* ComboBox
+  * Filter data
+  * Allow user input
+  * Keyboard support
 
 ## [0.0.10]
 
 ### Added
-- Support for .Net Core 3.0 Preview 6.
+- .Net Core 3.0 Preview 6 support
 
 ## [0.0.9]
 
@@ -66,17 +66,17 @@ The new Scheduler component has the following features:
 * Data Grid
   * A row cannot be selected on iOS.
   * The NullReferenceException occurs when a user edits a new row with a null row editor value.
-* Combo Box - A drop-down item cannot be selected on iOS.
+* ComboBox - A drop-down item cannot be selected on iOS.
 * Form Layout - The NullReferenceException occurs when the component is bound to a Model with null property values.
 
 ## [0.0.8]
 
 ### Added:
 
-New Data Grid features:
-*	Cascading combo boxes in the cell's Edit Template.
-*	Edit Form with custom templates.
-*	Edit Form validation.
+Data Grid
+*	Cascading combo boxes in the cell's Edit Template
+*	Edit Form with custom templates
+*	Edit Form validation
 
 ### Fixed:
 
@@ -85,9 +85,9 @@ New Data Grid features:
 ## [0.0.7]
 
 ### Added
-- Support for Blazor Validation in the Form Layout component and date editors.
-- Support for NullText in the Combo Box component.
-- Theme switcher for demos.
+- Support for Blazor Validation in the Form Layout component and date editors
+- Support for NullText in the ComboBox component
+- Theme switcher for demos
 
 ## [0.0.6]
 
@@ -97,7 +97,7 @@ New Data Grid features:
 ## [0.0.5] 
 
 ### Added
-- Support for .Net Core 3.0 Preview 5.
+- .Net Core 3.0 Preview 5 support
 
 ## [0.0.4]
 
@@ -105,17 +105,17 @@ New Data Grid features:
 - New Form Layout Component.
 - New Tabs Component.
 - Use a new Form Layout component as the Data Grid's edit form.
-- Support for .Net Core 3.0 Preview 4.
+- .Net Core 3.0 Preview 4 support.
 - Follow Microsoft's renaming from "Razor Components" to "Blazor".
 
 ## [0.0.3]
 
 ### Added
 - Update DevExtreme.AspNet.Data to version 2.2.0 to improve the overall performance.
-- Add the Bootstrap hover and select effects to the Combo Box' drop-down list items.
+- Add the Bootstrap hover and select effects to the ComboBox' drop-down list items.
  
 ### Fixed
-- The down arrow image is not properly aligned within the Combo Box' drop-down button.
+- The down arrow image is not properly aligned within the ComboBox' drop-down button.
 - Arrow images within the Date Edit calendar's month/year navigation buttons do not have the same height.
 
 ## [0.0.2]
@@ -127,5 +127,5 @@ New Data Grid features:
 Initial version contains:
 - Data Grid
 - Pivot Grid
-- Data Editors (Combo Box, Date Edit, Spin Edit, Text Box)
+- Data Editors (ComboBox, Date Edit, Spin Edit, Text Box)
 - Pager 
