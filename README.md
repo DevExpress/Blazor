@@ -122,9 +122,9 @@ Follow the steps below to try our UI for Blazor in your own application.
         dx-blazor/dx-blazor.js
         dx-blazor/dx-blazor.css
     ```
-    For existing Blazor projects, move the DevExpress static files to the `Lib/dx-blazor` folder. 
+    For existing Blazor projects, copy the DevExpress static files from the `Lib/dx-blazor` folder to the appropriate folder in your project. 
 
-    > The `Lib/dx-blazor` folder is automatically cleared while the project is built and contains static files for an installed nuget package only. Do not store your styles here.
+    > The `Lib/dx-blazor` folder is automatically cleared while the project is built and contains static files for an installed nuget package only. Do not store your files here.
 
 6. Link the `dx-blazor.js` and `dx-blazor.css` files to your layout’s HEAD section:
    * For server-side Blazor, add the lines below to the _\_Host.cshtml_ file.
