@@ -12,6 +12,8 @@ namespace DevExpress.Blazor.DocumentMetadata
         [Inject] public IDocumentMetadataContainerOwner MetadataContainerOwner { get; set; }
         [Inject] public IUriHelper UriHelper { get; set; }
 
+        [Parameter] public RenderFragment ChildContent { get; set; }
+
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var entities = MetadataContainerOwner.Metadata.Entities.GroupBy(x => x.Key).Select(x => x.OrderBy(i => i.Priority).Last().Origin).ToList();
@@ -28,14 +30,14 @@ namespace DevExpress.Blazor.DocumentMetadata
             }
         }
 
-        protected override void OnInit()
+        protected override void OnInitialized()
         {
             MetadataContainerOwner.OnMetadataUpdated += OnMetadataUpdated;
-            base.OnInit();
+            base.OnInitialized();
         }
 
         void OnMetadataUpdated(object sender, EventArgs e) {
-            Invoke(StateHasChanged);
+            InvokeAsync(StateHasChanged);
         }
 
         void IDisposable.Dispose()
