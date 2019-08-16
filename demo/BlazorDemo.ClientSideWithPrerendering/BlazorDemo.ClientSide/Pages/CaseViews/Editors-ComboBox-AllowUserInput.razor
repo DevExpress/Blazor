@@ -1,6 +1,6 @@
 ﻿@using Demo.Blazor.Model
 
-<div class="demo-description">
+<div class="demo-description" id="AllowInput">
     <h2>ComboBox - Allow Input</h2>
     <p>
         The <b>AllowUserInput</b> property specifies whether users are allowed to input values into an editor's edit box. The following property values are available:
@@ -28,11 +28,11 @@
 </div>
 
 <div class="code-snippet card demo-card-wide">
-        <CodeSnippetHeader></CodeSnippetHeader>
-        <div class="card-footer text-muted">
-            <CodeSnippet_Editors_ComboBox_AllowUserInput></CodeSnippet_Editors_ComboBox_AllowUserInput>
-        </div>
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
+        <CodeSnippet_Editors_ComboBox_AllowUserInput></CodeSnippet_Editors_ComboBox_AllowUserInput>
     </div>
+</div>
 
 @code {
     IEnumerable<string> Cities = new List<string>() {
@@ -42,11 +42,11 @@
     };
     
     string text = "New York";
-    string Text { get => text; set { text = value; Invoke(StateHasChanged); }  }
+    string Text { get => text; set { text = value; InvokeAsync(StateHasChanged); }  }
 
     string selectedItem = null;
-    string SelectedItem { get => selectedItem; set { selectedItem = value; Invoke(StateHasChanged); }  }
+    string SelectedItem { get => selectedItem; set { selectedItem = value; InvokeAsync(StateHasChanged); }  }
 
     bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; Invoke(StateHasChanged); }  }
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); }  }
 }

@@ -1,0 +1,54 @@
+﻿@page "/ChartDynamicSeries"
+@using Demo.Blazor
+@using Demo.Blazor.Model
+@using DevExpress.Blazor
+@using System.Linq
+<div class="demo-description">
+    <h2>Charts - Dynamic Series</h2>
+    <p>
+        The <b>&lt;DxChart&gt;</b> allows you select data that matches the specified criterion from a data source and display chart series based on this data.
+    </p>
+    <p>
+        To do this, use the following settings available through the <b>DxChartCommonSeries</b> object:
+    </p>
+    <ul>
+        <li><b>NameField</b> – A data field that provides series names.</li>
+        <li>
+            <b>AggregationMethod</b> – A data aggregation method. You can use any function with the Func&lt;IEnumerable&lt;TValue&gt;, TValue&gt; signature as a value of this setting.
+            A static <b>Enumerble.Sum</b> method is used in this demo.
+        </li>
+        <li><b>ArgumentField</b> – A data field that provides series arguments.</li>
+        <li><b>ValueField</b> – Specifies a data field that provides series values.</li>
+    </ul>
+    <p>
+        You can also use the <b>SeriesTemplate</b> property to specify different templates for specific series types: <b>DxChartBarSeries</b>, <b>DxChartLineSeries</b>, and other type-specific series objects. 
+        Note that the <b>SeriesTemplate</b> property is used as many times as the number of data groups that match the specified criterion.
+    </p>
+</div>
+<DxChart Data=@GridData>
+    <DxChartTitle Text="Sales amount" />
+    <DxChartCommonSeries
+            AggregationMethod=@Enumerable.Sum
+            NameField=@((SaleInfo s) => s.Date.Year) 
+            ArgumentField=@((SaleInfo s) => s.City) 
+            ValueField=@((SaleInfo s) => s.Amount)>
+        <SeriesTemplate Context="settings">
+            @if(settings.GroupKey == 2015) {
+                <DxChartLineSeries Name='Last year' Settings=@settings>
+                </DxChartLineSeries>
+            } else {
+                <DxChartBarSeries Settings=@settings>
+                    <DxChartSeriesLabel Visible="true"></DxChartSeriesLabel>
+                </DxChartBarSeries>
+            }
+        </SeriesTemplate>
+    </DxChartCommonSeries>
+</DxChart>
+<CodeSnippet_Charts_DynamicSeries />
+@code {
+    IQueryable<SaleInfo> GridData;
+
+    protected override async Task OnInitializedAsync() {
+        GridData = await Sales.Load();
+    }
+}

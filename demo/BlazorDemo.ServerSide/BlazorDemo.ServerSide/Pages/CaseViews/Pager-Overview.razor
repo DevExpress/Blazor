@@ -1,7 +1,7 @@
 @using Demo.Blazor.Model
 
-<div class="demo-description">
-    <h2>Pager - Overview</h2>
+<div class="demo-description" id="Overview">
+    <h2><NavLink class="demo-anchor" href="Pager#Overview" />Pager - Overview</h2>
     <p>
         The Pager is a standalone UI component that enables data navigation and helps visualize the current position within a bound data source.
     </p>
@@ -44,11 +44,11 @@
 
 @code {
     int pageCount = 10;
-    int PageCount { get => pageCount; set { pageCount = value; Invoke(StateHasChanged); } }
+    int PageCount { get => pageCount; set { pageCount = value; InvokeAsync(StateHasChanged); } }
 
     int activePageIndex = 1;
-    int ActivePageIndex { get => activePageIndex; set { activePageIndex = value; Invoke(StateHasChanged); } }
+    int ActivePageIndex { get => activePageIndex; set { activePageIndex = value; InvokeAsync(StateHasChanged); } }
 
     int collapseButtonCount = 10;
-    int CollapseButtonCount { get => collapseButtonCount; set { collapseButtonCount = value; Invoke(StateHasChanged); } }
+    int CollapseButtonCount { get => collapseButtonCount; set { collapseButtonCount = value; InvokeAsync(StateHasChanged); } }
 }

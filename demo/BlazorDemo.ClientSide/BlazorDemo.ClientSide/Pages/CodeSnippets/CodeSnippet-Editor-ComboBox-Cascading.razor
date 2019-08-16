@@ -20,12 +20,12 @@
         CurrentCountry = country;
         CurrentCountryCities = Cities.FindAll(city => city.CountryId == CurrentCountry.Id);
         CurrentCity = CurrentCountryCities[0];
-        Invoke(StateHasChanged);
+        InvokeAsync(StateHasChanged);
     }
     void SelectedCityChanged(City city)
     {
         CurrentCity = city;
-        Invoke(StateHasChanged);
+        InvokeAsync(StateHasChanged);
     }
 }")
 </CodeSnippet>

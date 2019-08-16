@@ -38,6 +38,6 @@
     int worked = 3;
     int Worked { get => worked; set { worked = value; OnChanged(); } }
 
-    void OnChanged() { Invoke(StateHasChanged); }
+    void OnChanged() { InvokeAsync(StateHasChanged); }
 }")
 </CodeSnippet>

@@ -1,7 +1,7 @@
 ﻿@page "/ComboBoxVirtualScrolling"
 
-<div class="demo-description">
-    <h2>ComboBox - Virtual Scrolling</h2>
+<div class="demo-description" id="VirtualScrolling">
+    <h2><NavLink class="demo-anchor" href="ComboBox#VirtualScrolling" />ComboBox - Virtual Scrolling</h2>
     <p>
         The <b>DataLoadMode</b> property specifies how the ComboBox loads the item list. 
     </p>
@@ -36,15 +36,15 @@
 
 @code {
 	string selectedItem = null;
-    string SelectedItem { get => selectedItem; set { selectedItem = value; Invoke(StateHasChanged); } }
+    string SelectedItem { get => selectedItem; set { selectedItem = value; InvokeAsync(StateHasChanged); } }
 
     List<string> Strings = new List<string>();
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
         for(int i = 0; i < 1000; i++ )
             Strings.Add($"Option #{i}");
     }
 
     bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; Invoke(StateHasChanged); }  }
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); }  }
 }

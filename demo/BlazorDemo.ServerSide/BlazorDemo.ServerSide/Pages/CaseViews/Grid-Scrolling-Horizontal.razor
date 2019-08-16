@@ -2,8 +2,8 @@
 @using Demo.Blazor.Services
 @inject FlatProductService FlatProductService
 
-<div class="demo-description">
-    <h2>Data Grid - Horizontal Scrolling</h2>
+<div class="demo-description" id="HorizontalScrolling">
+    <h2><NavLink class="demo-anchor" href="GridScrolling#HorizontalScrolling" />Data Grid - Horizontal Scrolling</h2>
     <p>
         This demo module illustrates how to enable horizontal scrolling in the DevExpress Data Grid for Blazor.
     </p>
@@ -26,7 +26,7 @@
             ShowFilterRow="@false"
             CssClass="mw-1100">
 
-        <DxDataGridColumn Field=@nameof(ProductFlat.Id) Caption="Id" Width="50px">
+        <DxDataGridColumn Field=@nameof(ProductFlat.Id) Caption="ID" Width="50px">
         </DxDataGridColumn>
 
         <DxDataGridColumn Field=@nameof(ProductFlat.ProductName) Caption="Product Name" Width="350px">
@@ -63,7 +63,7 @@
 @code {
     IQueryable<ProductFlat> DataSource;
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         DataSource = await FlatProductService.Load();
     }

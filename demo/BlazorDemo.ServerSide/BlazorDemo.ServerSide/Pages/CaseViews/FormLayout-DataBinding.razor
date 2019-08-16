@@ -1,8 +1,8 @@
 ﻿@using Demo.Blazor.Model
 @using DevExpress.Blazor
 
-<div class="demo-description">
-    <h2>Data Binding</h2>
+<div class="demo-description" id="DataBinding">
+    <h2><NavLink class="demo-anchor" href="FormLayout#DataBinding" />Form Layout - Data Binding</h2>
     <p>
         You can use the Form Layout component to display and edit data from an external source.
         In this demo, such data source is assigned to the <b>Data</b> property.
@@ -73,6 +73,6 @@
             editFormData.Position = newValue.ToString();
         }
 
-        Invoke(StateHasChanged);
+        InvokeAsync(StateHasChanged);
     }
 }

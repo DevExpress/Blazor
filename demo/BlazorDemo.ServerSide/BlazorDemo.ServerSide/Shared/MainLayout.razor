@@ -1,6 +1,11 @@
 ﻿@inherits LayoutComponentBase
+@implements IDisposable
 
 @inject Microsoft.AspNetCore.Components.IUriHelper UriHelper
+@inject IJSRuntime JSRuntime
+@inject Microsoft.AspNetCore.Components.IComponentContext ComponentContext
+
+@using Microsoft.JSInterop;
 
 <div class="sidebar">
     <div class="top-row logo-container pl-4 navbar-dark bg-light text-body">
@@ -31,7 +36,6 @@
         </div>
     </div>
 
-    <SocialButtonPanel></SocialButtonPanel>
     <ThemeSwitcher @bind-Shown=@ThemeSwitcherShown></ThemeSwitcher>
 
     <div class="content px-4">
@@ -42,6 +46,8 @@
 @code {
     bool collapseNavMenu = true;
 
+    bool navigationToTargetAllowed = true;
+
     string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
     void ToggleNavMenu()
@@ -51,24 +57,53 @@
     }
 
     bool themeSwitcherShown = false;
-    bool ThemeSwitcherShown { get => themeSwitcherShown; set { themeSwitcherShown = value; Invoke(StateHasChanged); } }
+    bool ThemeSwitcherShown {
+        get => themeSwitcherShown;
+        set {
+            themeSwitcherShown = value;
+            navigationToTargetAllowed = false;
+            InvokeAsync(StateHasChanged); }
+    }
 
     void ToggleThemeSwitcherPanel()
     {
         ThemeSwitcherShown = !ThemeSwitcherShown;
-        if (ThemeSwitcherShown) {
+        if (ThemeSwitcherShown)
+        {
             collapseNavMenu = true;
         }
     }
 
-    protected override void OnInit()
+    string UriFragment { get; set; } = "";
+
+    void OnLocationChanged(object sender, LocationChangedEventArgs args)
     {
-        base.OnInit();
-        UriHelper.OnLocationChanged += (sender, args) => {
-            if(!collapseNavMenu) {
-                collapseNavMenu = true;
-                Invoke(StateHasChanged);
-            }
-        };
+        UriFragment = UriHelper.ToAbsoluteUri(args.Location).Fragment;
+        if (!collapseNavMenu)
+        {
+            collapseNavMenu = true;
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        UriHelper.OnLocationChanged += OnLocationChanged;
+    }
+
+    protected override Task OnAfterRenderAsync()
+    {
+        if (navigationToTargetAllowed && ComponentContext.IsConnected)
+        {
+            JSRuntime.InvokeAsync<string>("ScrollToTarget", UriFragment);
+        }
+        navigationToTargetAllowed = true;
+        return base.OnAfterRenderAsync();
+    }
+
+    void IDisposable.Dispose()
+    {
+        UriHelper.OnLocationChanged -= OnLocationChanged;
     }
 }

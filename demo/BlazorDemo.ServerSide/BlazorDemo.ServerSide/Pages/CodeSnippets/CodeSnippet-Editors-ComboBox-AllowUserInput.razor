@@ -15,9 +15,9 @@
     };
     
     string text = ""New York"";
-    string Text { get => text; set { text = value; Invoke(StateHasChanged); }  }
+    string Text { get => text; set { text = value; InvokeAsync(StateHasChanged); }  }
 
     string selectedItem = """";
-    string SelectedItem { get => selectedItem; set { selectedItem = value; Invoke(StateHasChanged); }  }
+    string SelectedItem { get => selectedItem; set { selectedItem = value; InvokeAsync(StateHasChanged); }  }
 }")
 </CodeSnippet>

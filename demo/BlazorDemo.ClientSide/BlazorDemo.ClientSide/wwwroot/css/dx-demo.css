@@ -1,4 +1,4 @@
-﻿/* Demos specific */
+/* Demos specific */
 body {
     margin: 0;
 }
@@ -108,7 +108,7 @@ body {
     margin-top: -1px;
     border-top-color: #d6d5d5;
     background-color: #f5f5f5!important;
-} 
+}
 
 .code-header-tabs {
     padding-bottom: 1px;
@@ -204,7 +204,7 @@ div.content > .card:last-child {
 }
 
 /*Mac OS Safari does not support position:sticky*/
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
     _:-webkit-full-screen, _::-webkit-full-page-media, _:future, :root .main {
         margin-left: 300px;
         /*margin-top: 56px;*/
@@ -317,32 +317,6 @@ div.content > .card:last-child {
     margin-bottom: 24px;
 }
 
-.main > div.social-panel {
-    padding-left: 0 !important;
-}
-
-.social-panel {
-    border-bottom: 1px solid #DEDEDE;
-    font-size: 15px;
-    font-weight: 600;
-    padding-top: 16px;
-    padding-bottom: 18px;
-    margin-left: 32px;
-    margin-right: 32px;
-}
-
-.social-panel .sp-caption {
-    padding-bottom: 8px;
-}
-
-.fb_iframe_widget iframe {
-    vertical-align: text-bottom;
-}
-
-.twitter-share-button[style] {
-    vertical-align: bottom !important;
-}
-
 .sidebar .navbar-toggler {
     border: 0;
     padding: 0;
@@ -363,4 +337,14 @@ div.content > .card:last-child {
     font-size: 35%;
     padding-left: 0.4em;
     padding-right: 0.4em;
+}
+
+.demo-charts-seriestypes.card-deck > .card {
+    min-width: 360px;
+}
+.demo-charts-seriestypes.card-deck > .card > .card-body:first-child {
+    align-items: baseline;
+}
+.demo-charts-seriestypes.card-deck .dx-listbox-scrollable {
+    max-height: none !important;
 }

@@ -31,7 +31,6 @@
         </div>
     </div>
 
-    <SocialButtonPanel></SocialButtonPanel>
     <ThemeSwitcher @bind-Shown=@ThemeSwitcherShown></ThemeSwitcher>
 
     <div class="content px-4">
@@ -51,7 +50,7 @@
     }
 
     bool themeSwitcherShown = false;
-    bool ThemeSwitcherShown { get => themeSwitcherShown; set { themeSwitcherShown = value; Invoke(StateHasChanged); } }
+    bool ThemeSwitcherShown { get => themeSwitcherShown; set { themeSwitcherShown = value; InvokeAsync(StateHasChanged); } }
 
     void ToggleThemeSwitcherPanel()
     {
@@ -61,13 +60,13 @@
         }
     }
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
-        base.OnInit();
+        base.OnInitialized();
         UriHelper.OnLocationChanged += (sender, args) => {
             if(!collapseNavMenu) {
                 collapseNavMenu = true;
-                Invoke(StateHasChanged);
+                InvokeAsync(StateHasChanged);
             }
         };
     }

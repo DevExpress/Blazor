@@ -6,7 +6,7 @@
 @code {
     IEnumerable<string> Data;
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         Data = await CountryNamesService.Load();
     }

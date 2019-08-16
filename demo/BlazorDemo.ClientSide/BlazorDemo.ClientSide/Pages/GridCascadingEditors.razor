@@ -94,14 +94,14 @@ else
 @code {
     IEnumerable<Vacancy> Vacancies;
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         Vacancies = await VacancyRepository.GetVacancies();
     }
 
     public void OnRegionChanged()
     {
-        Invoke(StateHasChanged);
+        InvokeAsync(StateHasChanged);
     }
     void OnRowUpdating(Vacancy vacancy, Dictionary<string, object> newValue)
     {
@@ -124,7 +124,7 @@ else
     void OnRowRemoving(Vacancy vacancy)
     {
         Vacancies = Vacancies.Where(v => v != vacancy).ToArray();
-        Invoke(StateHasChanged);
+        InvokeAsync(StateHasChanged);
     }
     void OnRowInserting(Dictionary<string, object> newValue)
     {
@@ -132,6 +132,6 @@ else
         OnRowUpdating(newVacancy, newValue);
         Vacancies = (new Vacancy[] { newVacancy }).Concat(Vacancies);
 
-        Invoke(StateHasChanged);
+        InvokeAsync(StateHasChanged);
     }
 }

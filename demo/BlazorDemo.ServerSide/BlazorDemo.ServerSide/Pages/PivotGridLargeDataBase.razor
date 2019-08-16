@@ -60,7 +60,7 @@ else
 
     IQueryable<Sale> largeDataSource;
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
         largeDataSource = ContosoRetailContext.Sales;
     }

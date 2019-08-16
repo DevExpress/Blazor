@@ -1,7 +1,7 @@
 ﻿@using Demo.Blazor.Model
 
-<div class="demo-description">
-    <h2>Form Layout - Overview</h2>
+<div class="demo-description" id="Overview">
+    <h2><NavLink class="demo-anchor" href="FormLayout#Overview" />Form Layout - Overview</h2>
     <p>
         The DevExpress Form Layout component for Blazor allows you to easily construct responsive and automatically-aligned edit forms.
     </p>
@@ -70,5 +70,5 @@
     int worked = 3;
     int Worked { get => worked; set { worked = value; OnChanged(); } }
 
-    void OnChanged() { Invoke(StateHasChanged); }
+    void OnChanged() { InvokeAsync(StateHasChanged); }
 }

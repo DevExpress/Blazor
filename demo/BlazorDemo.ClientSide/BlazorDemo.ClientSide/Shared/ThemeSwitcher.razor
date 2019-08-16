@@ -26,12 +26,11 @@
 </div>
 
 @code {
-    [Parameter] public bool Shown { get; set; } = false;
-    [Parameter] Action<bool> ShownChanged { get; set; }
+    [Parameter] public bool Shown { get; set; }
+    [Parameter] public Action<bool> ShownChanged { get; set; }
     string CurrentTheme { get; set; } = "Pulse";
 
-    public class ThemeSetModel
-    {
+    public class ThemeSetModel {
         public string Title { get; set; }
         public List<string> Themes { get; set; }
     }
@@ -70,8 +69,7 @@
     };
 
 
-    void OnItemClick(string theme)
-    {
+    void OnItemClick(string theme) {
         CurrentTheme = theme;
         Shown = !Shown;
         ShownChanged?.Invoke(Shown);

@@ -10,7 +10,6 @@
     @(await Html.RenderStaticComponentAsync<DocumentMetadataComponent>())
 </head>
 <body>
-    <div id="fb-root"></div>
     <app>@(await Html.RenderStaticComponentAsync<App>())</app>
     <script src="_framework/blazor.webassembly.js"></script>
 </body>

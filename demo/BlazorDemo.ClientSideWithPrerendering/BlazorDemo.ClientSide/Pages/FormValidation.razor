@@ -1,7 +1,7 @@
 ﻿@page "/FormValidation"
 
     <div class="demo-description">
-        <h1>Form Validation</h1>
+        <h1>Form Validation - Overview</h1>
         <p>
             The DevExpress UI components support the Blazor's form validation.
             You can read about the Blazor forms and validation in the <a href="https://docs.microsoft.com/aspnet/core/blazor/forms-validation?view=aspnetcore-3.0">official documentation</a>.
@@ -18,17 +18,17 @@
 {
     [Required]
     [StringLength(16,
-    ErrorMessage = ""Identifier too long (16 character limit)."")]
+    ErrorMessage = ""The Identifier exceeds 16 characters."")]
     public string Identifier { get; set; }
 
     [Required]
     public string Classification { get; set; }
 
-    [Range(1, 100000, ErrorMessage = ""Accommodation invalid (1-100000)."")]
+    [Range(1, 100000, ErrorMessage = ""The Maximum Accommodation value should be a number between 1 and 100,000."")]
     public int MaximumAccommodation { get; set; }
 
     [Required]
-    [DateInPastAttribute(ErrorMessage = ""Date should be in past."")]
+    [DateInPastAttribute(ErrorMessage = ""The Production Date value cannot be later than today."")]
     public DateTime ProductionDate { get; set; }
 }
 
@@ -48,5 +48,5 @@ public class DateInPastAttribute: ValidationAttribute
         </p>
     </div>
 
-<FormValidation_Editors />
 <FormValidation_FormLayout />
+<FormValidation_CustomForm />

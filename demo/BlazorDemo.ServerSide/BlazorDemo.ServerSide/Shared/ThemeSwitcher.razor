@@ -11,7 +11,7 @@
                     <li class="nav-item">
                         <a class="nav-link @(currentTheme == theme ? "active" : "") "
                            href="javascript:;"
-                           onclick="@(() => OnItemClick(theme))">
+                           @onclick="@(() => OnItemClick(theme))">
                             <span class="image @theme.ToLower().Replace(" ", "-")" aria-hidden="true"></span>
                             <span class="theme-name">@theme</span>
                         </a>
@@ -24,7 +24,7 @@
 
 @code {
     [Parameter] public bool Shown { get; set; }
-    [Parameter] Action<bool> ShownChanged { get; set; }
+    [Parameter] public Action<bool> ShownChanged { get; set; }
     [Inject] IDocumentMetadataService DocumentMetadataService { get; set; }
 
     string currentTheme = "pulse";

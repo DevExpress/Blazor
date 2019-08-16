@@ -1,7 +1,7 @@
 ﻿@using Demo.Blazor.Model
 
-<div class="demo-description">
-    <h2>ComboBox - NullText</h2>
+<div class="demo-description" id="NullText">
+    <h2><NavLink class="demo-anchor" href="ComboBox#NullText" />ComboBox - NullText</h2>
     <p>
         This example illustrates how the <b>NullText</b> property can be used to display prompt text (watermark) in the editor's edit box. Specified text is displayed when the value of the editor is null.
     </p>
@@ -26,8 +26,8 @@
 
 @code {
     string option;
-    string Option { get => option; set { option = value; Invoke(StateHasChanged) ;} }
+    string Option { get => option; set { option = value; InvokeAsync(StateHasChanged) ;} }
 
     bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; Invoke(StateHasChanged); }  }
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); }  }
 }

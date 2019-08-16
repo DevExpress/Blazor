@@ -68,7 +68,7 @@ else
 @code {
     IQueryable<AreaRentInfo> largeDataSource;
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
         var dal = new EFDataAccessLayer(FMRDemoContext);
         largeDataSource = dal.GetQueryableAreaRentInfo();

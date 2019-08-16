@@ -2,19 +2,19 @@
     <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted">
         <CodeSnippet>
-@(@"<DxDataGrid Data=@DataSource
-            AllowDataRowSelection=true
-            ShowFilterRow=false
-            RowRemoving=@((dataItem) => OnRowRemoving(dataItem))
-            RowUpdating=@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))
-            RowInserting=@((newValues) => OnRowInserting(newValues))>
+@(@"<DxDataGrid Data=""@DataSource""
+            AllowDataRowSelection=""true""
+            ShowFilterRow=""false""
+            RowRemoving=""@((dataItem) => OnRowRemoving(dataItem))""
+            RowUpdating=""@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))""
+            RowInserting=""@((newValues) => OnRowInserting(newValues))"">
 
     <DxDataGridCommandColumn Width=""150px""></DxDataGridCommandColumn>
 
-    <DxDataGridColumn Field=@nameof(Product.ProductName) Caption=""Product Name"">
+    <DxDataGridColumn Field=""@nameof(Product.ProductName)"" Caption=""Product Name"">
     </DxDataGridColumn>
 
-    <DxDataGridColumn Field=@nameof(Product.Availability ) Caption=""Availability"" Width=""150px"">
+    <DxDataGridColumn Field=""@nameof(Product.Availability)"" Caption=""Availability"" Width=""150px"">
         <DisplayTemplate>
             @{
                 var id = Guid.NewGuid().ToString();
@@ -38,22 +38,31 @@
         </EditTemplate>
     </DxDataGridColumn>
 
-    <DxDataGridColumn Field=@nameof(Product.ProductCategoryId) Caption=""Category"">
+    <DxDataGridColumn Field=""@nameof(Product.ProductCategoryId)"" Caption=""Category"">
         <DisplayTemplate>
             @{
-                var item = NestedDataSource.Where(x => x.ProductSubcategoryID == (int)((context as Product).ProductCategoryId)).FirstOrDefault();
-                <span>@item.Category/@item.Subcategory</span>
+                var product = context as Product;
+                int currentCellValue = (int)product.ProductCategoryId;
+                var nestedItem = NestedDataSource.Where(x => x.ProductSubcategoryID == currentCellValue).FirstOrDefault();
+                string category = nestedItem != null ? nestedItem.Category.ToString() : ""none"";
+                string subcategory = nestedItem != null ? nestedItem.Subcategory : ""none"";
+                <span>@category/@subcategory</span>
             }
         </DisplayTemplate>
         <EditTemplate>
-            <DxDataGrid Data=@NestedDataSource
-                        PageSize=5
-                        SelectedDataRow=@(NestedDataSource.Where(x => x.ProductSubcategoryID == (int)((CellEditContext)context).CellValue).FirstOrDefault())
-                        SelectedDataRowChanged=@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue.ProductSubcategoryID))>
-                <DxDataGridColumn Field=@nameof(ProductCategory.ProductSubcategoryID) Width=""150px""></DxDataGridColumn>
-                <DxDataGridColumn Field=@nameof(ProductCategory.Category) Width=""150px""></DxDataGridColumn>
-                <DxDataGridColumn Field=@nameof(ProductCategory.Subcategory) Width=""150px""></DxDataGridColumn>
-                <DxDataGridColumn Field=@nameof(ProductCategory.LastUpdatedDate) Width=""150px""></DxDataGridColumn>
+            @{ 
+                var cellEditContext = (CellEditContext)context;
+                int currentCellValue = (int)cellEditContext.CellValue;
+                var nestedItem = NestedDataSource.Where(x => x.ProductSubcategoryID == currentCellValue).FirstOrDefault();
+            }
+            <DxDataGrid Data=""@NestedDataSource""
+                        PageSize=""5""
+                        SelectedDataRow=""@nestedItem""
+                        SelectedDataRowChanged=""@(newCellValue => cellEditContext.OnChanged(newCellValue.ProductSubcategoryID))"">
+                <DxDataGridColumn Field=""@nameof(ProductCategory.ProductSubcategoryID)"" Width=""150px""></DxDataGridColumn>
+                <DxDataGridColumn Field=""@nameof(ProductCategory.Category)"" Width=""150px""></DxDataGridColumn>
+                <DxDataGridColumn Field=""@nameof(ProductCategory.Subcategory)"" Width=""150px""></DxDataGridColumn>
+                <DxDataGridColumn Field=""@nameof(ProductCategory.LastUpdatedDate)"" Width=""150px""></DxDataGridColumn>
             </DxDataGrid>
         </EditTemplate>
     </DxDataGridColumn>

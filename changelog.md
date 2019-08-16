@@ -2,20 +2,41 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
-# Beta 1 (latest release)
+# Beta 2 (latest release)
+
+### New Chart Component
+
+We included the following features in the new Blazor Chart component:
+
+* Area, Bar, Line, and Bubble series types
+* Dynamic series creation
+* Tooltip and legend customization 
+* Multiple axes 
+* Pivot Grid data visualization
+
+### Added
+* Support for .Net Core 3.0 Preview 8
+* Data Grid 
+  * Enable/disable sorting within the entire grid (API)
+  * Control an individual column’s sorting (enable/disable sorting, set up a column sort order and position among sorted columns)
+  * Multiple column sorting
+  * Cell text alignment
+  * Customize command buttons and control their visibility
+
+# Beta 1
 
 ### New Scheduler Component
 
-The new Scheduler component has the following features:
+The new Scheduler component includes the following features:
 
 * Three built-in views: Day, Work Week and Week
 * Data binding 
 * Recurring appointments
 
-### Added Features
+### Added
 
 * Support for .Net Core 3.0 Preview 7
-* Grid 
+* Data Grid 
   * Column Visibility
   * Column Editor Visibility
   * Horizontal Scrolling

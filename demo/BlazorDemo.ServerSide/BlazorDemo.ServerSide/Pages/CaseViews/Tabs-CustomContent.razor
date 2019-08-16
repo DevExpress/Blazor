@@ -1,5 +1,5 @@
-﻿<div class="demo-description">
-    <h2>Create a Page Control: Update Linked Content Area</h2>
+﻿<div class="demo-description" id="PageControl">
+    <h2><NavLink class="demo-anchor" href="Tabs#PageControl" />Create a Page Control: Update Linked Content Area</h2>
     <p>
         This sample shows how you can emulate a Page control in your Blazor application.
         The code below uses the tab control’s <b>ActiveTabIndex</b> property to track active tab change events.
@@ -42,5 +42,5 @@
 
 @code {
     int activeTabIndex = 1;
-    int ActiveTabIndex { get => activeTabIndex; set { activeTabIndex = value; Invoke(StateHasChanged); } }
+    int ActiveTabIndex { get => activeTabIndex; set { activeTabIndex = value; InvokeAsync(StateHasChanged); } }
 }

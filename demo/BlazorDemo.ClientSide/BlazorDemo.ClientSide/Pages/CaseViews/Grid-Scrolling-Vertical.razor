@@ -30,7 +30,7 @@
                 PageSize="30"
                 ShowFilterRow="@false">
 
-        <DxDataGridColumn Field=@nameof(ProductFlat.Id) Caption="Id" Width="50px">
+        <DxDataGridColumn Field=@nameof(ProductFlat.Id) Caption="ID" Width="50px">
         </DxDataGridColumn>
 
         <DxDataGridColumn Field=@nameof(ProductFlat.ProductName) Caption="Product Name">
@@ -67,7 +67,7 @@
 @code {
     IQueryable<ProductFlat> DataSource;
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         DataSource = await FlatProductService.Load();
     }

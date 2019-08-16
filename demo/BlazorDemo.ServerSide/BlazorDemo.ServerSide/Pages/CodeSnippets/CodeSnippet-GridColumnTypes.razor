@@ -3,15 +3,15 @@
     <div class="card-footer text-muted">
         <CodeSnippet>
 @(@"<DxDataGrid Data=@forecasts
-            PageSize=5
+            PageSize=""5""
             RowRemoving=@((dataItem) => OnRowRemoving(dataItem))
             RowUpdating=@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))
             RowInserting=@((newValues) => OnRowInserting(newValues))>
     <DxDataGridCommandColumn Width=""150px""></DxDataGridCommandColumn>
-    <DxDataGridColumn Field=@nameof(WeatherForecast.TemperatureC) Caption=""Temp. (C)""></DxDataGridColumn>
-    <DxDataGridSpinEditColumn Field=@nameof(WeatherForecast.TemperatureF) Caption=""Temp. (F)""></DxDataGridSpinEditColumn>
-    <DxDataGridComboBoxColumn Field=@nameof(WeatherForecast.Summary) Caption=""Summary"" Data=@summaries></DxDataGridComboBoxColumn>
-    <DxDataGridDateEditColumn Field=@nameof(WeatherForecast.Date)></DxDataGridDateEditColumn>
+    <DxDataGridColumn Field=""@nameof(WeatherForecast.TemperatureC)"" Caption=""Temp. (C)"" TextAlignment=""@DataGridTextAlign.Right""></DxDataGridColumn>
+    <DxDataGridSpinEditColumn Field=""@nameof(WeatherForecast.TemperatureF)"" Caption=""Temp. (F)""></DxDataGridSpinEditColumn>
+    <DxDataGridComboBoxColumn Field=""@nameof(WeatherForecast.Summary)"" Caption=""Summary"" Data=""@summaries""></DxDataGridComboBoxColumn>
+    <DxDataGridDateEditColumn Field=""@nameof(WeatherForecast.Date)"" DisplayFormatString=""D"" EditFormatString=""d""></DxDataGridDateEditColumn>
 </DxDataGrid>")
         </CodeSnippet>
     </div>

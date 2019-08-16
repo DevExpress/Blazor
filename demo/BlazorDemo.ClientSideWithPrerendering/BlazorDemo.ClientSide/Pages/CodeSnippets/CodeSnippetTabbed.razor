@@ -25,11 +25,11 @@
         get => activeTabIndex;
         set {
             activeTabIndex = value;
-            Invoke(StateHasChanged);
+            InvokeAsync(StateHasChanged);
         }
     }
 
-    [Parameter] private RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
     List<CodeSnippetTabPage> tabPages = new List<CodeSnippetTabPage>();
 

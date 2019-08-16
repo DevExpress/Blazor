@@ -1,6 +1,6 @@
 ﻿@using Demo.Blazor.Model
 
-<div class="demo-description">
+<div class="demo-description" id="ItemWrapping">
     <h2>Form Layout - Item Wrapping</h2>
     <p>
         All layout items are rendered as <b>.col</b> elements within a single <b>.row</b> container by default. An item moves to the next row if there are not enough columns within the current row. You can also use an item’s <b>BeginRow</b> property to explicitly indicate that it should be placed onto a new row.
@@ -62,5 +62,5 @@
     string country = "UK";
     string Country { get => country; set { country = value; OnChanged(); } }
 
-    void OnChanged() { Invoke(StateHasChanged); }
+    void OnChanged() { InvokeAsync(StateHasChanged); }
 }

@@ -3,12 +3,12 @@
 @code {
     [CascadingParameter] protected CodeSnippetTabbed Parent { get; set; }
 
-    [Parameter] internal string Text { get; private set; }
+    [Parameter] public string Text { get; set; }
 
-    [Parameter] internal RenderFragment ChildContent { get; private set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
-    protected override void OnInit() {
-        base.OnInit();
+    protected override void OnInitialized() {
+        base.OnInitialized();
         if (Parent != null) {
             Register(Parent);
         }

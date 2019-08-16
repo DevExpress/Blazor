@@ -44,7 +44,7 @@
 
         <DxDataGridCommandColumn Width="150px"></DxDataGridCommandColumn>
 
-        <DxDataGridColumn Field=@nameof(Product.Id) Caption="Id" Width="50px">
+        <DxDataGridColumn Field=@nameof(Product.Id) Caption="ID" Width="50px">
         </DxDataGridColumn>
 
         <DxDataGridColumn Field=@nameof(Product.ProductName) Caption="Product Name">
@@ -98,7 +98,7 @@
     IQueryable<Product> DataSource;
     IEnumerable<ProductCategory> NestedDataSource;
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         DataSource = await ProductService.Load();
         NestedDataSource = await ProductService.LoadNestedDataSource();

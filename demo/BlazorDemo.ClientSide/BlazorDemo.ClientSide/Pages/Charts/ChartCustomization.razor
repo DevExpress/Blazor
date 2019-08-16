@@ -1,0 +1,88 @@
+﻿@page "/ChartCustomization"
+@using Demo.Blazor
+@using Demo.Blazor.Model
+@using DevExpress.Blazor
+
+<div class="demo-description" id="Tooltip">
+    <h2>Charts - Tooltip Customization</h2>
+    <p>
+        The <b>&lt;DxChartTooltip&gt;</b> component enables you to specify templates for the tooltips that are displayed when the mouse hovers over a chart series. 
+        A <b>ChartTooltipData</b> type object represents the template’s context. 
+        This object provides information about the hovered series point.
+    </p>
+</div>
+<DxChart Data=@SalesData>
+    <DxChartTitle Text="Sales amount" />
+    <DxChartTooltip>
+        <div class="p-3">
+            <p class="text-align-center"><b>@context.Point.SeriesName</b></p>
+            <p>City: @context.Point.Argument</p>
+            <p>Amout: @context.Point.Value</p>
+        </div>
+    </DxChartTooltip>
+    <DxChartBarSeries Name="2013" Filter=@((SaleInfo s) => s.Date.Year == 2013) AggregationMethod=@Enumerable.Sum ArgumentField=@(s => s.City) ValueField=@(s => s.Amount)></DxChartBarSeries>
+    <DxChartBarSeries Name="2014" Filter=@((SaleInfo s) => s.Date.Year == 2014) AggregationMethod=@Enumerable.Sum ArgumentField=@(s => s.City) ValueField=@(s => s.Amount)></DxChartBarSeries>
+    <DxChartLineSeries Name="2015" Filter=@((SaleInfo s) => s.Date.Year == 2014) AggregationMethod=@Enumerable.Sum ArgumentField=@(s=> s.City) ValueField=@(s => s.Amount)></DxChartLineSeries>
+</DxChart>
+<CodeSnippet_Charts_TooltipCustomization />
+
+<div class="demo-description" id="Legend">
+    <h2>Charts - Legend Customization</h2>
+    <p>
+        The <b>&lt;DxChartSeriesLegendItem&gt;</b> component in a chart series’ markup allows you to customize a legend item’s appearance. 
+        This component allows you to change a legend item’s position and visibility. 
+        You can also customize the legend item text via the <b>Text</b>, <b>TextFormat</b>, and <b>TextTemplate</b> properties. 
+
+        To show and hide series when a user clicks the corresponding legend item, set the <b>AllowToggleSeries</b> property to <b>true</b>.
+    </p>
+</div>
+
+<DxChart Data=@SalesData>
+    <DxChartTitle Text="Sales amount" />
+    <DxChartBarSeries Name="2013" Filter=@((SaleInfo s) => s.Date.Year == 2013) AggregationMethod=@Enumerable.Sum ArgumentField=@(s => s.City) ValueField=@(s => s.Amount)></DxChartBarSeries>
+    <DxChartBarSeries Name="2014" Filter=@((SaleInfo s) => s.Date.Year == 2014) AggregationMethod=@Enumerable.Sum ArgumentField=@(s => s.City) ValueField=@(s => s.Amount)></DxChartBarSeries>
+    <DxChartLineSeries Name="2015" Filter=@((SaleInfo s) => s.Date.Year == 2015) AggregationMethod=@Enumerable.Sum ArgumentField=@(s=> s.City) ValueField=@(s => s.Amount)>
+        <DxChartSeriesLegendItem IconCssClass="oi oi-flag">
+            <TextTemplate>Last year</TextTemplate>
+        </DxChartSeriesLegendItem>
+    </DxChartLineSeries>
+    <DxChartLegend AllowToggleSeries="true" Orientation=@Orientation.Vertical HorizontalAlignment=@HorizontalAlignment.Right>
+        <DxChartTitle Text="Legend">
+            <DxChartSubTitle Text="(custom)"></DxChartSubTitle>
+        </DxChartTitle>
+    </DxChartLegend>
+</DxChart>
+<CodeSnippet_Charts_LegendCustomization />
+
+<div class="demo-description" id="MultipleAxes">
+    <h2>Charts - Multiple Axes Customization</h2>
+    <p>
+        The <b>&lt;DxChart&gt;</b> component allows you to display charts with multiple axes and combine several charts.
+    </p>
+</div>
+<DxChart Data=@SalesData>
+    <DxChartTitle Text="Sales amount" />
+    <DxChartLegend Position=@RelativePosition.Outside />
+    <DxChartValueAxis>
+        <DxChartAxisLabel Format=@ChartAxisLabelFormat.Decimal></DxChartAxisLabel>
+        <DxChartAxisTitle Text="Amount"></DxChartAxisTitle>
+    </DxChartValueAxis>
+    <DxChartValueAxis Name="TotalAxis" Position=@HorizontalEdge.Right>
+        <DxChartAxisTitle Text="Total Amount"></DxChartAxisTitle>
+    </DxChartValueAxis>
+    <DxChartArgumentAxis>
+        <DxChartAxisTitle Text="Cities"></DxChartAxisTitle>
+    </DxChartArgumentAxis>
+    <DxChartFullStackedBarSeries Name="2013" Filter=@((SaleInfo s) => s.Date.Year == 2013) AggregationMethod=@Enumerable.Sum ArgumentField=@(s => s.City) ValueField=@(s => s.Amount) />
+    <DxChartFullStackedBarSeries Name="2014" Filter=@((SaleInfo s) => s.Date.Year == 2014) AggregationMethod=@Enumerable.Sum ArgumentField=@(s => s.City) ValueField=@(s => s.Amount) />
+    <DxChartFullStackedBarSeries Name="2015" Filter=@((SaleInfo s) => s.Date.Year == 2015) AggregationMethod=@Enumerable.Sum ArgumentField=@(s=> s.City) ValueField=@(s => s.Amount) />
+    <DxChartSplineSeries Name="Total" AggregationMethod=@Enumerable.Sum ArgumentField=@((SaleInfo s)=> s.City) ValueField=@(s => s.Amount) Axis="TotalAxis" />
+</DxChart>
+<CodeSnippet_Charts_MultipleAxesCustomization />
+@code {
+    IQueryable<SaleInfo> SalesData;
+
+    protected override async Task OnInitializedAsync() {
+        SalesData = await Sales.Load();
+    }
+}

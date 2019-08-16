@@ -8,8 +8,6 @@
     <meta property="og:title" content="Native Blazor Components powered by DevExpress" />
     <meta property="og:description" content="Free DevExpress UI for Blazor ships with 7 user interface components (including a Data Grid and Pivot Grid) so you can design rich user experiences with both Blazor." />
     <meta property="og:image" content="https://static.devexpress.com/Products/Blazor/blazor-components-grid-pivot-scheduler-devexpress.jpg" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@@devexpress" />
     <title>Demos: Blazor UI Components | DevExpress</title>
     <base href="/" />
 
@@ -26,16 +24,6 @@
                 hljs.highlightBlock(block);
             });
         }
-        window.UpdateSharingButton = function () {
-            window.setTimeout(function () {
-                try {
-                    twttr.widgets.load();
-                    FB.XFBML.parse();
-                } catch (e) {
-                    return null;
-                }
-            }, 0);
-        }
     </script>
 
     <link href="/css/dx-demo.css" rel="stylesheet" />
@@ -43,20 +31,8 @@
     <script src="lib/dx-blazor/dx-blazor.js"></script>
 </head>
 <body>
-	<div id="fb-root"></div>
-    <script>
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-		
     <app>Loading...</app>
 
     <script src="_framework/blazor.webassembly.js"></script>
-	
-	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
 </html>

@@ -8,9 +8,9 @@
 
 
 @code {
-    [Parameter] private RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
-    [Parameter] bool Visible { get; set; } = true;
+    [Parameter] public bool Visible { get; set; } = true;
 
     protected override void OnAfterRender() {
         if (ComponentContext.IsConnected) {

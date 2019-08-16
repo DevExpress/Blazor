@@ -15,6 +15,7 @@ The following table describes the version compatibility of .NET Core 3.0 Preview
 
 | .NET Core 3.0 version | DevExpress.Blazor.nuget version |
 | ------------- | ------------- |
+| [.NET Core 3.0 Preview **8**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-8/) | **0.2.0 Beta** |
 | [.NET Core 3.0 Preview **7**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-7/) | **0.1.0 Beta** |
 | [.NET Core 3.0 Preview **6**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-6/) | 0.0.**12** |
 | [.NET Core 3.0 Preview **6**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-6/) | 0.0.**11** |
@@ -112,29 +113,39 @@ Follow the steps below to try our UI for Blazor in your own application.
    
    ![Add new NuGet source](media/VS2019Release-AddNuGetPackage.png)
 
-4. Navigate to the DevExpress Blazor GitHub repository and download all the files from the [client-runtime directory](https://github.com/DevExpress/Blazor/tree/master/client-runtime) to your project’s `wwwroot` directory.
+4. Build the project.
+5. Make sure the following folder is automatically created in your project’s `wwwroot` directory:
+    ```
+    Lib/dx-blazor
+        dx-blazor/.gitignore
+        dx-blazor/modules/
+        dx-blazor/dx-blazor.js
+        dx-blazor/dx-blazor.css
+    ```
+    For existing Blazor projects, move the DevExpress static files to the `Lib/dx-blazor` folder. 
 
-   > To download a file, open it on GitHub, click the **Raw** button, right-click anywhere within the file contents, and select **Save as...** from the displayed context menu.
+    > The `Lib/dx-blazor` folder is automatically cleared while the project is built and contains static files for an installed nuget package only. Do not store your styles here.
 
-5. Link the downloaded files:
+6. Link the `dx-blazor.js` and `dx-blazor.css` files to your layout’s HEAD section:
    * For server-side Blazor, add the lines below to the _\_Host.cshtml_ file.
    * For client-side Blazor, add the lines below to the _Index.cshtml_ file.
     
     ```html
     <head>
-      ...
-      <link href="dx-blazor.css" rel="stylesheet" />
-      <script src="dx-blazor.js"></script>
+        ...
+        <link href="lib/dx-blazor/dx-blazor.css" rel="stylesheet" />
+        <script src="lib/dx-blazor/dx-blazor.js"></script>
     </head>
     ```
+    > Reference this JavaScript file only because the `dx-blazor/dx-blazor.js` file is the entry point for DevExpress module files.
   
-6. Register DevExpress.Blazor namespace in _\_Imports.razor_ file:
+7. Register DevExpress.Blazor namespace in _\_Imports.razor_ file:
 
    ```html
    @using DevExpress.Blazor
    ```
 
-7. Your application is ready to use DevExpress Blazor.
+8. Your application is ready to use DevExpress Blazor.
 
 # Troubleshooting
 
@@ -190,6 +201,7 @@ If you don't see packages in the ```https://nuget.devexpress.com/early-access/ap
 
 * Data Grid
   * Column Types
+  * Sort Data
   * Templates
   * Scrolling
   * Virtual Scrolling
@@ -200,6 +212,11 @@ If you don't see packages in the ```https://nuget.devexpress.com/early-access/ap
   * Data Binding Basics
   * Templates
   * Large Datasets
+  * Chart Integration
+* Charts
+  * Series Types
+  * Dynamic Series
+  * Customization  
 * Scheduler
   * Day View
   * Work Week View

@@ -61,6 +61,6 @@
     protected void SelectionChanged(TreeViewNodeEventArgs e)
     {
         SelectedGroup = e.NodeInfo.Text;
-        Invoke(StateHasChanged);
+        InvokeAsync(StateHasChanged);
     }
 }

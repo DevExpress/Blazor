@@ -1,7 +1,7 @@
 ﻿@using Demo.Blazor.Model
 
-<div class="demo-description">
-    <h2>ComboBox - Business Object List as Data Source</h2>
+<div class="demo-description" id="BusinessObjectList">
+    <h2><NavLink class="demo-anchor" href="ComboBox#BusinessObjectList" />ComboBox - Business Object List as Data Source</h2>
     <p>
         The ComboBox component is a drop-down list editor that allows an end user to select from a list of items.
     </p>
@@ -31,8 +31,11 @@
 
 @code {
     Person selectedRealBusinessObject = Persons.DataSource[0];
-    Person SelectedRealBusinessObject { get => selectedRealBusinessObject; set { selectedRealBusinessObject = value; Invoke(StateHasChanged); } }
+    Person SelectedRealBusinessObject { 
+        get => selectedRealBusinessObject; 
+        set { selectedRealBusinessObject = value; InvokeAsync(StateHasChanged); } 
+    }
 
     bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; Invoke(StateHasChanged); }  }
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); }  }
 }

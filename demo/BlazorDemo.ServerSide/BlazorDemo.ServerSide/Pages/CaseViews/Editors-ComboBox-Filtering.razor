@@ -2,8 +2,8 @@
 @using Demo.Blazor.Services;
 @inject CountryNamesService CountryNamesService
 
-<div class="demo-description">
-    <h2>ComboBox - Incremental Filtering</h2>
+<div class="demo-description" id="IncrementalFiltering">
+    <h2><NavLink class="demo-anchor" href="ComboBox#IncrementalFiltering" />ComboBox - Incremental Filtering</h2>
     <p>
         The ComboBox allows you to dynamically filter list items based on the text typed into the editor. For this purpose, apply the required mode to the <b>FilteringMode</b> property.
     </p>
@@ -42,18 +42,18 @@
 @code {
     IEnumerable<string> Data;
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         Data = await CountryNamesService.Load();
     }
 
     string text = "";
-    string Text { get => text; set { text = value; Invoke(StateHasChanged); } }
+    string Text { get => text; set { text = value; InvokeAsync(StateHasChanged); } }
 
     string selectedItem = null;
-    string SelectedItem { get => selectedItem; set { selectedItem = value; Invoke(StateHasChanged); } }
+    string SelectedItem { get => selectedItem; set { selectedItem = value; InvokeAsync(StateHasChanged); } }
 
 
     bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; Invoke(StateHasChanged); }  }
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); }  }
 }

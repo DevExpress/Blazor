@@ -6,11 +6,8 @@ using System.Threading;
 namespace Demo.Blazor.Model {
 
     public static class DateTimeUtils {
-        public static DayOfWeek FirstDayOfWeek { 
-            get { return Thread.CurrentThread.CurrentCulture.DateTimeFormat.FirstDayOfWeek; }
-        }
         public static DateTime CreateWeekStart() {
-            return DateTime.Today.DayOfWeek == FirstDayOfWeek ? ValidWeekStart(DateTime.Today.Date) : ValidWeekStart(DateTime.Today.Date - CreateWeekOffset(DateTime.Today, FirstDayOfWeek));
+            return DateTime.Today.DayOfWeek == DayOfWeek.Sunday ? ValidWeekStart(DateTime.Today.Date) : ValidWeekStart(DateTime.Today.Date - CreateWeekOffset(DateTime.Today, DayOfWeek.Sunday));
         }
 
         static DateTime ValidWeekStart(DateTime date) {

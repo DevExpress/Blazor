@@ -49,7 +49,7 @@
 #themesMenu {
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
     #themesMenu {
     }
 }
@@ -168,7 +168,7 @@
     background: none !important;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
     .theme-settings-collapsed {
         display: none;
     }

@@ -1,6 +1,6 @@
 ﻿@using Demo.Blazor.Model
 
-<div class="demo-description">
+<div class="demo-description" id="TabbedGroups">
     <h2>Form Layout - Tabbed Groups</h2>
     <p>
         The Form Layout component allows you to group layout items and layout groups into tabbed containers. A tab page collection (DxFormLayoutTabPages) allows you to specify the active page using the ActiveTabIndex property.
@@ -66,20 +66,20 @@
     int ActiveTabIndex { get; set; } = 1;
 
     string firstName = "Nancy";
-    string FirstName { get => firstName; set { firstName = value; Invoke(StateHasChanged); } }
+    string FirstName { get => firstName; set { firstName = value; InvokeAsync(StateHasChanged); } }
 
     string lastName = "Davolio";
-    string LastName { get => lastName; set { lastName = value; Invoke(StateHasChanged); } }
+    string LastName { get => lastName; set { lastName = value; InvokeAsync(StateHasChanged); } }
 
     DateTime birthday = DateTime.Now.AddYears(-20);
-    DateTime Birthday { get => birthday; set { birthday = value; Invoke(StateHasChanged); } }
+    DateTime Birthday { get => birthday; set { birthday = value; InvokeAsync(StateHasChanged); } }
 
     string position = "Sales Representative";
-    string Position { get => position; set { position = value; Invoke(StateHasChanged); } }
+    string Position { get => position; set { position = value; InvokeAsync(StateHasChanged); } }
 
     DateTime hireDate = DateTime.Now.AddYears(-20);
-    DateTime HireDate { get => hireDate; set { hireDate = value; Invoke(StateHasChanged); } }
+    DateTime HireDate { get => hireDate; set { hireDate = value; InvokeAsync(StateHasChanged); } }
 
     string notes = "Education includes a BA in psychology.";
-    string Notes { get => notes; set { notes = value; Invoke(StateHasChanged); } }
+    string Notes { get => notes; set { notes = value; InvokeAsync(StateHasChanged); } }
 }

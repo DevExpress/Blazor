@@ -1,7 +1,7 @@
 ﻿@using System.ComponentModel.DataAnnotations
 
-<div class="demo-description">
-    <h2>Form Layout Validation</h2>
+<div class="demo-description" id="FormLayout">
+    <h2>Form Validation - Form Layout</h2>
     <p>
         Our <b>DxFormLayout</b> component allows you to easily construct responsive and automatically-aligned edit forms.
         The standard <b>EditForm</b> component enables data validation.
@@ -21,7 +21,7 @@
         <span class="invalid" style="color:red;">Red</span> indicates invalid values, while <span class="modified" style="outline: 1px solid #26b050; color:#26b050;">green</span> indicates values that were posted successfully.
     </p>
     <p>
-        Bellow the form the standard Blazor <b>ValidationSummary</b> component displayes the validation summarizy.
+        Below the form the standard Blazor <b>ValidationSummary</b> component displays the validation summary.
     </p>
 </div>
 
@@ -92,11 +92,11 @@
 
     private void HandleValidSubmit()
     {
-        FormValidationState = @"Form is valid";
+        FormValidationState = @"Form data is valid";
     }
     private void HandleInvalidSubmit()
     {
-        FormValidationState = @"Form is invalid";
+        FormValidationState = @"Form data is invalid";
     }
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
@@ -110,19 +110,19 @@
 
     public class Starship
     {
-        [Required]
+        [Required(ErrorMessage = "The Identifier value should be specified.")]
         [StringLength(16,
-        ErrorMessage = "Identifier too long (16 character limit).")]
+        ErrorMessage = "The Identifier exceeds 16 characters.")]
         public string Identifier { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The Primary Classification value should be specified.")]
         public string Classification { get; set; }
 
-        [Range(1, 100000, ErrorMessage = "Accommodation invalid (1-100000).")]
+        [Range(1, 100000, ErrorMessage = "The Maximum Accommodation value should be a number between 1 and 100,000.")]
         public int MaximumAccommodation { get; set; }
 
         [Required]
-        [DateInPastAttribute(ErrorMessage = "Date should be in past.")]
+        [DateInPastAttribute(ErrorMessage = "The Production Date value cannot be later than today.")]
         public DateTime ProductionDate { get; set; }
     }
 }

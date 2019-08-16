@@ -2,7 +2,7 @@
     <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted">
         <CodeSnippet>
-@(@"<DxDataGrid @ref=@grid
+@(@"<DxDataGrid @ref=@grid @ref:suppressField
         Data=@Vacancies
         ShowFilterRow=@false
         ShowPager=@false
@@ -65,7 +65,7 @@
     DxDataGrid<Vacancy> grid;
     IEnumerable<Vacancy> Vacancies;
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         Vacancies = await VacancyRepository.GetVacancies();
     }
@@ -101,7 +101,7 @@
                 region = value;
                 City = null;
                 OfficeLocations = VacancyRepository.GetOfficeLocationsByRegion(value).Select(x => x.City);
-                StateHasChanged?.Invoke();
+                StateHasChanged?.InvokeAsync();
             }
         }
 
@@ -117,7 +117,7 @@
     void OnRowEditStarting(Vacancy vacancy)
     {
         EditContext = new FormEditContext(vacancy);
-        EditContext.StateHasChanged += () => { Invoke(StateHasChanged); };
+        EditContext.StateHasChanged += () => { InvokeAsync(StateHasChanged); };
     }
     void OnCancelButtonClick()
     {
@@ -141,7 +141,7 @@
     void OnRowRemoving(Vacancy vacancy)
     {
         Vacancies = Vacancies.Where(v => v != vacancy).ToArray();
-        Invoke(StateHasChanged);
+        InvokeAsync(StateHasChanged);
     }
 }")
         </CodeSnippet>

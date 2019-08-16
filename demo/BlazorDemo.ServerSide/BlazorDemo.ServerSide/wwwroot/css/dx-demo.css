@@ -204,7 +204,7 @@ div.content > .card:last-child {
 }
 
 /*Mac OS Safari does not support position:sticky*/
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
     _:-webkit-full-screen, _::-webkit-full-page-media, _:future, :root .main {
         margin-left: 300px;
         /*margin-top: 56px;*/
@@ -317,30 +317,30 @@ div.content > .card:last-child {
     margin-bottom: 24px;
 }
 
-.main > div.social-panel {
-    padding-left: 0 !important;
+.demo-description .demo-anchor {
+    opacity: 0;
+    transition: opacity 150ms;
+    width: 1.5rem;
+    margin-left: -1.5rem;
+    display: inline-block;
+    text-decoration: none !important;
+    text-align: center;
 }
 
-.social-panel {
-    border-bottom: 1px solid #DEDEDE;
-    font-size: 15px;
-    font-weight: 600;
-    padding-top: 16px;
-    padding-bottom: 18px;
-    margin-left: 32px;
-    margin-right: 32px;
+.demo-description .demo-anchor:before {
+    content: "#";
 }
 
-.social-panel .sp-caption {
-    padding-bottom: 8px;
+@media (min-width: 1200px) {
+    .demo-description .demo-anchor {
+        width: 2rem;
+        margin-left: -2rem;
+    }
 }
 
-.fb_iframe_widget iframe {
-    vertical-align: text-bottom;
-}
-
-.twitter-share-button[style] {
-    vertical-align: bottom !important;
+.demo-description > h1:hover .demo-anchor,
+.demo-description > h2:hover .demo-anchor {
+    opacity: 1;
 }
 
 .sidebar .navbar-toggler {
@@ -363,4 +363,14 @@ div.content > .card:last-child {
     font-size: 35%;
     padding-left: 0.4em;
     padding-right: 0.4em;
+}
+
+.demo-charts-seriestypes.card-deck > .card {
+    min-width: 360px;
+}
+.demo-charts-seriestypes.card-deck > .card > .card-body:first-child {
+    align-items: baseline;
+}
+.demo-charts-seriestypes.card-deck .dx-listbox-scrollable {
+    max-height: none !important;
 }

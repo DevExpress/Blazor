@@ -52,15 +52,10 @@ namespace Demo.Blazor
                 .OpenGraph("title", "Native Blazor Components powered by DevExpress")
                 .OpenGraph("description", "Free DevExpress UI for Blazor ships with 7 user interface components (including a Data Grid and Pivot Grid) so you can design rich user experiences with both Blazor.")
                 .OpenGraph("image", "https://static.devexpress.com/Products/Blazor/blazor-components-grid-pivot-scheduler-devexpress.jpg")
-                .Meta("twitter:card", "summary")
-                .Meta("twitter:site", "@@devexpress")
 
                 .Script("highlight-js", "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js", defer: false)
                 .Script("demo-js", "~/lib/dx-demo.js", defer: false)
                 .Script("dx-blazor-js", "~/lib/dx-blazor/dx-blazor.js", defer: false)
-
-                .Script("facebook-jssdk", "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0", async: true)
-                .Script("twitter-js", "https://platform.twitter.com/widgets.js", async: true)
 
                 .StyleSheet("site-css", "~/css/site.css")
                 .StyleSheet("highlight-css", "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css")

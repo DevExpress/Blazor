@@ -36,16 +36,17 @@
 }
 else
 {
-    <DxDataGrid Data=@forecasts
-                PageSize=5
+    <DxDataGrid Data="@forecasts"
+                PageSize="5"
                 RowRemoving=@((dataItem) => OnRowRemoving(dataItem))
                 RowUpdating=@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))
                 RowInserting=@((newValues) => OnRowInserting(newValues))>
         <DxDataGridCommandColumn Width="150px"></DxDataGridCommandColumn>
-        <DxDataGridColumn Field=@nameof(WeatherForecast.TemperatureC) Caption=@("Temp. (\x2103)")></DxDataGridColumn>
-        <DxDataGridSpinEditColumn Field=@nameof(WeatherForecast.TemperatureF) Caption=@("Temp. (\x2109)")></DxDataGridSpinEditColumn>
-        <DxDataGridComboBoxColumn Field=@nameof(WeatherForecast.Summary) Caption="Summary" Data=@summaries></DxDataGridComboBoxColumn>
-        <DxDataGridDateEditColumn Field=@nameof(WeatherForecast.Date)></DxDataGridDateEditColumn>
+
+        <DxDataGridColumn Field="@nameof(WeatherForecast.TemperatureC)" Caption="@("Temp. (\x2103)")" TextAlignment="@DataGridTextAlign.Right"></DxDataGridColumn>
+        <DxDataGridSpinEditColumn Field="@nameof(WeatherForecast.TemperatureF)" Caption="@("Temp. (\x2109)")"></DxDataGridSpinEditColumn>
+        <DxDataGridComboBoxColumn Field="@nameof(WeatherForecast.Summary)" Caption="Summary" Data="@summaries"></DxDataGridComboBoxColumn>
+        <DxDataGridDateEditColumn Field="@nameof(WeatherForecast.Date)" DisplayFormatString="D" EditFormatString="d"></DxDataGridDateEditColumn>
     </DxDataGrid>
 
     <CodeSnippet_GridColumnTypes></CodeSnippet_GridColumnTypes>
@@ -55,7 +56,7 @@ else
     WeatherForecast[] forecasts;
     string[] summaries;
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         forecasts = await ForecastService.GetForecastAsync();
         summaries = await ForecastService.GetSummariesAsync();
@@ -63,16 +64,16 @@ else
     async void OnRowRemoving(WeatherForecast dataItem)
     {
         forecasts = await ForecastService.Remove(dataItem);
-        await Invoke(StateHasChanged);
+        await InvokeAsync(StateHasChanged);
     }
     async void OnRowUpdating(WeatherForecast dataItem, Dictionary<string, object> newValue)
     {
         forecasts = await ForecastService.Update(dataItem, newValue);
-        await Invoke(StateHasChanged);
+        await InvokeAsync(StateHasChanged);
     }
     async void OnRowInserting(Dictionary<string, object> newValue)
     {
         forecasts = await ForecastService.Insert(newValue);
-        await Invoke(StateHasChanged);
+        await InvokeAsync(StateHasChanged);
     }
 }

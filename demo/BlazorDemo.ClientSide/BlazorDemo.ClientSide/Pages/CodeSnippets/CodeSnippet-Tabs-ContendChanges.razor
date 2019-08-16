@@ -28,7 +28,7 @@
     int ActiveTabIndex 
     { 
         get => activeTabIndex; 
-        set { activeTabIndex = value; Invoke(StateHasChanged); } 
+        set { activeTabIndex = value; InvokeAsync(StateHasChanged); } 
     }
 }")
 </CodeSnippet>

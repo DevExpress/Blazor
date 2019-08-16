@@ -26,5 +26,5 @@
 
 @code {
     Decimal decimalValue = decimal.MaxValue - 10000;
-    Decimal DecimalValue { get => decimalValue; set { decimalValue = value; Invoke(StateHasChanged); } }
+    Decimal DecimalValue { get => decimalValue; set { decimalValue = value; InvokeAsync(StateHasChanged); } }
 }

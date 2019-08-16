@@ -64,7 +64,7 @@
     IQueryable<SaleInfo> GridData;
     bool ShowGrandTotals = true, ShowFieldHeaders = true;
 
-    protected override async Task OnInitAsync() {
+    protected override async Task OnInitializedAsync() {
         GridData = await Sales.Load();
     }
 }

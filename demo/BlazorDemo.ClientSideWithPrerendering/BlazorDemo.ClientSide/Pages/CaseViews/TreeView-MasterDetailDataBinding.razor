@@ -3,9 +3,9 @@
 @using Demo.Blazor.Services;
 @inject ProductService ProductService;
 
-<div class="demo-description">
+<div class="demo-description" id="MasterDetailDataBinding">
     <h2>
-        TreeView - Master-Detail Data Binding<span class="badge badge-success demo-badge">New</span>
+        TreeView - Master-Detail Data Binding
     </h2>
     <p>The DevExpress TreeView for Blazor allows you to load data from several data sources and display the master-detail relationships within the component.</p>
     <p>This demo module binds the TreeView to three data sources and populates component nodes as follows:</p>
@@ -29,7 +29,7 @@
     IQueryable<Product> products;
     IEnumerable<ProductCategory> productSubcategories;
 
-    protected override async Task OnInitAsync() {
+    protected override async Task OnInitializedAsync() {
         products = await ProductService.Load();
         productSubcategories = await ProductService.LoadNestedDataSource();
     }

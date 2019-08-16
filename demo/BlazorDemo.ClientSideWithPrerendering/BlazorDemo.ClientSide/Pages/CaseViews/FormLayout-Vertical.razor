@@ -1,6 +1,6 @@
 ﻿@using Demo.Blazor.Model
 
-<div class="demo-description">
+<div class="demo-description" id="CaptionPosition">
     <h2>Form Layout - Caption Position</h2>
     <p>
         The Form Layout’s <b>CaptionPosition</b> property defines where to display caption labels. In this demo, the <b>CaptionPosition</b> property is set to <b>Vertical</b> to stack captions above associated editors.
@@ -50,5 +50,5 @@
     DateTime CheckOut { get => checkOut; set { checkOut = value; OnChanged(); } }
 
 
-    void OnChanged() { Invoke(StateHasChanged); }
+    void OnChanged() { InvokeAsync(StateHasChanged); }
 }
