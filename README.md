@@ -81,11 +81,11 @@ Follow the steps below to try our UI for Blazor in your own application.
 
 1. Create a new solution using the "Blazor (server-side)" or "Blazor" template in Visual Studio 2019.
 
-  In the "Create a new project" dialog select "ASP.NET Core Web Application (where the language is C#).
+  In the "Create a new project" dialog select "Blazor App".
   
   ![Create New ASP.NET Core Web Application Project"](media/VisualStudio2019CreateNewProject_AspNetCoreWebApp.png)
 
-  In the next step ensure that an "ASP.NET Core 3.\*" framework is selected, and select the "Blazor (server-side)" project template.
+  In the next step select the "Blazor (server-side)" project template.
   
   ![Create New ASP.NET Core Web Application Project"](media/VisualStudio2019CreateNewProject_Blazor.png)
 
