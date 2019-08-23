@@ -31,6 +31,7 @@ namespace Demo.Blazor {
     public class DemoConfiguration {
         public bool SiteMode { get; set; }
         public List<DemoPageConfiguration> DemoPages { get; set; } = new List<DemoPageConfiguration>();
+        const string Description = "DevExpress UI for Blazor ships with 12 user interface components (including a Data Grid, Pivot Grid, Charts and Scheduler) so you can design rich user experiences with both Blazor.";
 
         public void RegisterPagesMetadata(IDocumentMetadataRegistrator registrator) {
             registrator.Default()
@@ -42,8 +43,10 @@ namespace Demo.Blazor {
                 .OpenGraph("url", "https://dxpr.es/2WogLq7")
                 .OpenGraph("type", "website")
                 .OpenGraph("title", "Native Blazor Components powered by DevExpress")
-                .OpenGraph("description", "Free DevExpress UI for Blazor ships with 11 user interface components (including a Data Grid, Pivot Grid and Scheduler) so you can design rich user experiences with both Blazor.")
-                .OpenGraph("image", "https://static.devexpress.com/Products/Blazor/blazor-components-grid-pivot-scheduler-devexpress.jpg")
+                .OpenGraph("description", Description)
+                .OpenGraph("image", "https://static.devexpress.com/Products/Blazor/blazor-components-grid-pivot-scheduler-charts-devexpress.jpg")
+
+                .Meta("description", Description)
 
                 .Script("highlight-js", "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js", defer: false)
                 .Script("demo-js", "~/lib/dx-demo.js", defer: false)
