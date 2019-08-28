@@ -1,0 +1,22 @@
+﻿@namespace DevExpress.Blazor.AnchorUtils
+@using Microsoft.AspNetCore.Components.Routing
+
+@inject IUriHelper UriHelper
+
+<NavLink @attributes="@Attributes" href="@GetHref()">@ChildContent</NavLink>
+
+@code {
+    [Parameter(CaptureUnmatchedValues = true)] public Dictionary<string, object> Attributes { get; set; }
+
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    string GetHref()
+    {
+        var hrefValue = Attributes["href"].ToString();
+        if (hrefValue.StartsWith("#"))
+        {
+            hrefValue = UriHelper.ToAbsoluteUri(UriHelper.GetAbsoluteUri()).GetLeftPart(UriPartial.Path) + hrefValue;
+        }
+        return hrefValue;
+    }
+}
