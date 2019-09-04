@@ -2,7 +2,26 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
-# Beta 2 (latest release)
+# Beta 3 (latest release)
+
+### Added
+* Data Grid
+  * Multiple selection
+  * Specify a column's position in code
+  * Drag and drop column headers
+  * Grouping 
+  * Master-Detail view
+* Scheduler - Appointment editing
+* Text Box - Password mode
+* All Data Editors - Read-only mode
+
+### Changed API
+
+* *DxDataGrid.AllowDataRowSelection* became obsolete, use *DxDataGrid.SelectionMode = “DataGridSelectionMode”* instead.
+* *DxDataGrid.SelectedDataRow* renamed to *DxDataGrid.SingleSelectedDataRow*.
+* *DxDataGrid.SelectedDataRowChanged* renamed to *DxDataGrid.SingleSelectedDataRowChanged*.
+
+# Beta 2
 
 ### New Chart Component
 
