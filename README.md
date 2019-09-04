@@ -156,7 +156,12 @@ The following DevExpress Blazor products are available free-of-charge:
 
 # Troubleshooting
 
-## 1. DxDataGrid in Blazor
+## 1. Could not find 'X' in 'window.DxBlazor'.
+Earlier, our clients' scripts were manually added to a project. Now, we automatically distribute them with the NuGet Package in the lib/dx-blazor folder (see the 6th item of the [How to create a new project](https://github.com/devexpress/blazor#how-to-create-a-new-project) paragraph). So, our users may face such an issue if they reference an old version of our static files instead of the new one. For example, a similar issue was discussed in the [I have a formlayout error when running a Blazor website](https://stackoverflow.com/questions/57593583/i-have-a-formlayout-error-when-running-a-blazor-website) SO thread.
+ 
+If solutions suggested there do not help, create an issue here or submit a ticket in our [Support Center](https://www.devexpress.com/Support/Center/Question/Create) so that we can investigate your case.
+
+## 2. DxDataGrid in Blazor
 
 If you use Blazor (client-side) with DxDataGrid, you may see the following exception in a browser:
 
@@ -199,7 +204,7 @@ So, the **Linker.xml** file should look as follows:
 </linker>
 ```
 
-## 2. The "Early Access" NuGet Feed is empty in Visual Studio
+## 3. The "Early Access" NuGet Feed is empty in Visual Studio
 
 If you don't see packages in the ```https://nuget.devexpress.com/early-access/api``` NuGet feed, make sure that the "Include prerelease" option is selected:
 ![Include prerelease](media/VisualStudio2019NuGetIncludePrerelease.png)
