@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\tools\DevExpress.Blazor.DocumentMetadata\DevExpress.BlazorClientSide.DocumentMetadata.csproj" />
+    <ProjectReference Include="..\..\..\tools\DevExpress.Blazor.DocumentMetadata\DevExpress.Blazor.DocumentMetadata.csproj" />
     <ProjectReference Include="..\BlazorDemo.ClientSide\BlazorDemo.ClientSide.csproj" />
   </ItemGroup>
 

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDemo.ClientSide", "Bl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDemo.ServerSide", "BlazorDemo.ServerSide\BlazorDemo.ServerSide.csproj", "{86DC6BDB-10BA-4178-B069-46D219841362}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevExpress.BlazorClientSide.DocumentMetadata", "..\..\tools\DevExpress.Blazor.DocumentMetadata\DevExpress.BlazorClientSide.DocumentMetadata.csproj", "{4AEA5B72-80B5-48C9-84DA-E27E5382917C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevExpress.Blazor.DocumentMetadata", "..\..\tools\DevExpress.Blazor.DocumentMetadata\DevExpress.Blazor.DocumentMetadata.csproj", "{4AEA5B72-80B5-48C9-84DA-E27E5382917C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
