@@ -1,8 +1,8 @@
 ﻿<CodeSnippetTabbed>
 <CodeSnippetTabPage Text="Razor">
-@(@"<DxTreeView Data=@Enum.GetValues(typeof(ProductCategoryMain)) 
-    TextExpression=@(dataItem => GetNodeText(dataItem))
-    ChildrenExpression=@(dataItem => GetNodeChildren(dataItem))>
+@(@"<DxTreeView Data=""@Enum.GetValues(typeof(ProductCategoryMain))"" 
+    TextExpression=""@(dataItem => GetNodeText(dataItem))""
+    ChildrenExpression=""@(dataItem => GetNodeChildren(dataItem))"">
 </DxTreeView>
 
 @code {

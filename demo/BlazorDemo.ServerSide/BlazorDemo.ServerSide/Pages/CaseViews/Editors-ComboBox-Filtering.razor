@@ -24,10 +24,10 @@
         <div class="card-body mw-480" style="height: 280px">
                 <DxComboBox Id="ComboBox1"
                             Data="@Data"
-                            FilteringMode=@DataGridFilteringMode.Contains
+                            FilteringMode="@DataGridFilteringMode.Contains"
                             @bind-SelectedItem="@SelectedItem"
                             @bind-Text="@Text"
-                            @bind-DropDownVisible=@DropDownVisible></DxComboBox>
+                            @bind-DropDownVisible="@DropDownVisible"></DxComboBox>
         </div>
     </div>
 

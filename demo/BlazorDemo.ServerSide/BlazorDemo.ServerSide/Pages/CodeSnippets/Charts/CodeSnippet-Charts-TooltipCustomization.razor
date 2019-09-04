@@ -2,7 +2,7 @@
     <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted ">
         <CodeSnippet>
-@(@"<DxChart Data=@SalesData>
+@(@"<DxChart Data=""@SalesData"">
     <DxChartTitle Text=""Sales amount"" />
     <DxChartTooltip>
         <div class=""p-3"">
@@ -11,9 +11,9 @@
             <p>Amout: @context.Point.Value</p>
         </div>
     </DxChartTooltip>
-    <DxChartBarSeries Name=""2013"" Filter=@((SaleInfo s) => s.Date.Year == 2013) AggregationMethod=@Enumerable.Sum ArgumentField=@(s => s.City) ValueField=@(s => s.Amount)></DxChartBarSeries>
-    <DxChartBarSeries Name=""2014"" Filter=@((SaleInfo s) => s.Date.Year == 2014) AggregationMethod=@Enumerable.Sum ArgumentField=@(s => s.City) ValueField=@(s => s.Amount)></DxChartBarSeries>
-    <DxChartLineSeries Name=""2015"" Filter=@((SaleInfo s) => s.Date.Year == 2014) AggregationMethod=@Enumerable.Sum ArgumentField=@(s=> s.City) ValueField=@(s => s.Amount)></DxChartLineSeries>
+    <DxChartBarSeries  Name=""2013"" Filter=""@((SaleInfo s) => s.Date.Year == 2013)"" AggregationMethod=""@Enumerable.Sum"" ArgumentField=""@(s => s.City)"" ValueField=""@(s => s.Amount)""></DxChartBarSeries>
+    <DxChartBarSeries  Name=""2014"" Filter=""@((SaleInfo s) => s.Date.Year == 2014)"" AggregationMethod=""@Enumerable.Sum"" ArgumentField=""@(s => s.City)"" ValueField=""@(s => s.Amount)""></DxChartBarSeries>
+    <DxChartLineSeries Name=""2015"" Filter=""@((SaleInfo s) => s.Date.Year == 2014)"" AggregationMethod=""@Enumerable.Sum"" ArgumentField=""@(s => s.City)"" ValueField=""@(s => s.Amount)""></DxChartLineSeries>
 </DxChart>")
         </CodeSnippet>
     </div>

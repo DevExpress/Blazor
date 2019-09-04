@@ -17,20 +17,20 @@
 <div class="card demo-card-wide">
     <div class="card-header">DataObject = { @nameof(FormDataItem.Name)=<b>@(editFormData.Name)</b>, @nameof(FormDataItem.Birthday)=<b>@(editFormData.Birthday)</b>, @nameof(FormDataItem.Worked)=<b>@(editFormData.Worked)</b>, @nameof(FormDataItem.Position)=<b>@(editFormData.Position)</b> }</div>
     <div class="card-body">
-        <DxFormLayout Data=@editFormData
-                      ItemUpdating=@((fieldName, newValue) => OnItemUpdating(fieldName, newValue))>
+        <DxFormLayout Data="@editFormData"
+                      ItemUpdating="@((fieldName, newValue) => OnItemUpdating(fieldName, newValue))">
 
-            <DxFormLayoutItem Field=@nameof(FormDataItem.Name) Caption="Contact Name:" ColSpanMd="6" />
+            <DxFormLayoutItem Field="@nameof(FormDataItem.Name)" Caption="Contact Name:" ColSpanMd="6" />
 
-            <DxFormLayoutItem Field=@nameof(FormDataItem.Birthday) Caption="Birthday:" ColSpanMd="6" />
+            <DxFormLayoutItem Field="@nameof(FormDataItem.Birthday)" Caption="Birthday:" ColSpanMd="6" />
 
-            <DxFormLayoutItem Field=@nameof(FormDataItem.Worked) Caption="Worked year(s):" ColSpanMd="6" />
+            <DxFormLayoutItem Field="@nameof(FormDataItem.Worked)" Caption="Worked year(s):" ColSpanMd="6" />
 
-            <DxFormLayoutItem Field=@nameof(FormDataItem.Position) Caption="Position:" ColSpanMd="6">
+            <DxFormLayoutItem Field="@nameof(FormDataItem.Position)" Caption="Position:" ColSpanMd="6">
                 <Template>
-                    <DxComboBox Data=@(new List<string>() { "Sales Representative", "Designer" })
-                                SelectedItem=@(((string)((ValueEditingContext)context).Value))
-                                SelectedItemChanged=@(value => ((ValueEditingContext)context).OnChanged(value))></DxComboBox>
+                    <DxComboBox Data="@(new List<string>() { "Sales Representative", "Designer" })"
+                                SelectedItem="@(((string)((ValueEditingContext)context).Value))"
+                                SelectedItemChanged="@(value => ((ValueEditingContext)context).OnChanged(value))"></DxComboBox>
                 </Template>
             </DxFormLayoutItem>
         </DxFormLayout>

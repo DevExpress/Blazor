@@ -2,11 +2,11 @@
     <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted">
         <CodeSnippet>
-@(@"<DxDataGrid Data=@forecasts
+@(@"<DxDataGrid Data=""@forecasts""
             PageSize=""5""
-            RowRemoving=@((dataItem) => OnRowRemoving(dataItem))
-            RowUpdating=@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))
-            RowInserting=@((newValues) => OnRowInserting(newValues))>
+            RowRemoving=""@((dataItem) => OnRowRemoving(dataItem))""
+            RowUpdating=""@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))""
+            RowInserting=""@((newValues) => OnRowInserting(newValues))"">
     <DxDataGridCommandColumn Width=""150px""></DxDataGridCommandColumn>
     <DxDataGridColumn Field=""@nameof(WeatherForecast.TemperatureC)"" Caption=""Temp. (C)"" TextAlignment=""@DataGridTextAlign.Right""></DxDataGridColumn>
     <DxDataGridSpinEditColumn Field=""@nameof(WeatherForecast.TemperatureF)"" Caption=""Temp. (F)""></DxDataGridSpinEditColumn>

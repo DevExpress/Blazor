@@ -15,10 +15,10 @@
 <div class="card demo-card">
     <div class="card-header">SelectedRealBusinessObject { FirstName=<b>@(SelectedRealBusinessObject.FirstName)</b>, LastName=<b>@(SelectedRealBusinessObject.LastName)</b>, Department=<b>@(SelectedRealBusinessObject.Department)</b> }</div>
     <div class="card-body mw-480" style="height: 280px;">
-        <DxComboBox Data=@Persons.DataSource
+        <DxComboBox Data="@Persons.DataSource"
                     TextFieldName="Text"
-                    @bind-DropDownVisible=@DropDownVisible
-                    @bind-SelectedItem=@SelectedRealBusinessObject></DxComboBox>
+                    @bind-DropDownVisible="@DropDownVisible"
+                    @bind-SelectedItem="@SelectedRealBusinessObject"></DxComboBox>
     </div>
 </div>
 

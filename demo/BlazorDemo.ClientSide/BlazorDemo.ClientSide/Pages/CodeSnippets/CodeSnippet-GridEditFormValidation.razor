@@ -2,21 +2,21 @@
     <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted">
         <CodeSnippet>
-@(@"<DxDataGrid @ref=@grid @ref:suppressField
-        Data=@Vacancies
-        ShowFilterRow=@false
-        ShowPager=@false
-        RowRemoving=@((dataItem) => OnRowRemoving(dataItem))
-        RowEditStart=@(dataItem => OnRowEditStarting(dataItem))
-        RowInsertStart=@(() => OnRowEditStarting(null))>
+@(@"<DxDataGrid @ref=""@grid"" @ref:suppressField
+            Data=""@Vacancies""
+            ShowFilterRow=""false""
+            ShowPager=""false""
+            RowRemoving=""@((dataItem) => OnRowRemoving(dataItem))""
+            RowEditStart=""@(dataItem => OnRowEditStarting(dataItem))""
+            RowInsertStart=""@(() => OnRowEditStarting(null))"">
     <ChildContent>
         <DxDataGridCommandColumn Width=""150px""></DxDataGridCommandColumn>
-        <DxDataGridColumn Field=@nameof(Vacancy.Description)></DxDataGridColumn>
-        <DxDataGridComboBoxColumn Field=@nameof(Vacancy.Region) Data=@VacancyRepository.Regions></DxDataGridComboBoxColumn>
-        <DxDataGridColumn Field=@nameof(Vacancy.City)></DxDataGridColumn>
+        <DxDataGridColumn Field=""@nameof(Vacancy.Description)""></DxDataGridColumn>
+        <DxDataGridComboBoxColumn Field=""@nameof(Vacancy.Region)"" Data=""@VacancyRepository.Regions""></DxDataGridComboBoxColumn>
+        <DxDataGridColumn Field=""@nameof(Vacancy.City)""></DxDataGridColumn>
     </ChildContent>
     <EditFormTemplate>
-        <EditForm Model=""@EditContext"" Context=""EditFormContext"" OnValidSubmit=@HandleValidSubmit>
+        <EditForm Model=""@EditContext"" Context=""EditFormContext"" OnValidSubmit=""@HandleValidSubmit"">
             <DataAnnotationsValidator />
             <DxFormLayout>
                 <DxFormLayoutItem Caption=""Vacancy Description:"" ColSpanMd=""12"" Context=""FormLayoutContext"">
@@ -24,24 +24,22 @@
                         <DxTextBox @bind-Text=""@EditContext.Description"" />
                     </Template>
                 </DxFormLayoutItem>
-                @*<DxFormLayoutGroup Caption=""Office Location"">*@
                 <DxFormLayoutItem Caption=""Region:"" ColSpanMd=""6"" Context=""FormLayoutContext"">
                     <Template>
-                        <DxComboBox Data=@VacancyRepository.Regions
-                                                        NullText=""Select Region...""
-                                                        @bind-SelectedItem=@EditContext.Region>
+                        <DxComboBox Data=""@VacancyRepository.Regions""
+                                    NullText=""Select Region...""
+                                    @bind-SelectedItem=""@EditContext.Region"">
                         </DxComboBox>
                     </Template>
                 </DxFormLayoutItem>
                 <DxFormLayoutItem Caption=""City:"" ColSpanMd=""6"" Context=""FormLayoutContext"">
                     <Template>
-                        <DxComboBox Data=@EditContext.OfficeLocations
-                                                        NullText=""Select City...""
-                                                        @bind-SelectedItem=@EditContext.City>
+                        <DxComboBox Data=""@EditContext.OfficeLocations""
+                                    NullText=""Select City...""
+                                    @bind-SelectedItem=""@EditContext.City"">
                         </DxComboBox>
                     </Template>
                 </DxFormLayoutItem>
-                @*</DxFormLayoutGroup>*@
                 <DxFormLayoutItem ColSpanMd=""12"" Context=""FormLayoutContext"">
                     <Template>
                         <ValidationSummary />
@@ -67,7 +65,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        Vacancies = await VacancyRepository.GetVacancies();
+        Vacancies = await VacancyRepository.GetVacancies(3);
     }
 
     class FormEditContext

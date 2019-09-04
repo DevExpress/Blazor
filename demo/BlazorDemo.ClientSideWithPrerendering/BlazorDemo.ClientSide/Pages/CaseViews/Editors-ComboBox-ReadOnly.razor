@@ -1,0 +1,41 @@
+﻿@using Demo.Blazor.Model
+
+<div class="demo-description">
+    <h2>ComboBox - ReadOnly<span class="demo-badge badge badge-success">New</span></h2>
+    <p>
+        This feature will allow you to display the value, but do not allow end user to change it.
+        Set the <b>ReadOnly</b> DxComboBox property to true to switch the password mode on.
+    </p>
+</div>
+
+<div class="card demo-card">
+    <div class="card-header">Option Selected: <b>@Option</b></div>
+    <div class="card-body mw-480" style="height: 210px">
+        <DxComboBox Data="@DataSource"
+                    @bind-SelectedItem="@Option"
+                    @bind-DropDownVisible="@DropDownVisible"
+                    ReadOnly="true"/>
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_ComboBox_ReadOnly></CodeSnippet_Editor_ComboBox_ReadOnly>
+    </div>
+</div>
+
+@code {
+    String[] DataSource = null;
+
+    string option;
+    string Option { get => option; set { option = value; InvokeAsync(StateHasChanged) ;} }
+
+    bool dropDownVisible = true;
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); }  }
+
+    protected override void OnInitialized() { 
+        DataSource = new string[] { "Option 1", "Option 2", "Option 3" };
+        Option = DataSource[1];
+    }
+}

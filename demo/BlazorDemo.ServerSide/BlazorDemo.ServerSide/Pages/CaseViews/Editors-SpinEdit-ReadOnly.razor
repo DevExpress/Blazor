@@ -1,0 +1,26 @@
+﻿<div class="demo-description" id="ReadOnly">
+    <h2><NavLink class="demo-anchor" href="SpinEdit#ReadOnly" />Spin Edit - Read-Only Mode<span class="demo-badge badge badge-success">New</span></h2>
+    <p>
+        The Spin Edit component allows you to display the value, but do not allow users to change it.
+        Set the <b>ReadOnly</b> property to <b>true</b> to activate the read-only mode.
+    </p>
+</div>
+
+<div class="card demo-card">
+    <div class="card-header">SpinEdit decimal value is: <b>@DecimalValue</b></div>
+    <div class="card-body mw-480">
+        <DxSpinEdit @bind-Value="@DecimalValue" ReadOnly="true"></DxSpinEdit>
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_SpinEdit_ReadOnly></CodeSnippet_Editor_SpinEdit_ReadOnly>
+    </div>
+</div>
+
+@code {
+    Decimal decimalValue = decimal.MaxValue - 10000;
+    Decimal DecimalValue { get => decimalValue; set { decimalValue = value; InvokeAsync(StateHasChanged); } }
+}

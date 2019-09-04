@@ -43,33 +43,33 @@
 }
 else
 {
-    <DxDataGrid Data=@Vacancies
-                ShowFilterRow=@false
-                ShowPager=@false
-                RowRemoving=@((dataItem) => OnRowRemoving(dataItem))
-                RowInserting=@((newValues) => OnRowInserting(newValues))
-                RowUpdating=@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))>
+    <DxDataGrid Data="@Vacancies"
+                ShowFilterRow="false"
+                ShowPager="false"
+                RowRemoving="@((dataItem) => OnRowRemoving(dataItem))"
+                RowInserting="@((newValues) => OnRowInserting(newValues))"
+                RowUpdating="@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))">
         <DxDataGridCommandColumn Width="150px"></DxDataGridCommandColumn>
-        <DxDataGridColumn Field=@nameof(Vacancy.Description)></DxDataGridColumn>
+        <DxDataGridColumn Field="@nameof(Vacancy.Description)"></DxDataGridColumn>
 
-        <DxDataGridComboBoxColumn Field=@nameof(Vacancy.Region) Data=@VacancyRepository.Regions>
+        <DxDataGridComboBoxColumn Field="@nameof(Vacancy.Region)" Data="@VacancyRepository.Regions">
             <EditTemplate>
                 @{
                     var editingContext = (CellEditContext)context;
                     var region = (string)editingContext.GetEditorValue(nameof(Vacancy.Region));
                 }
-                <DxComboBox Data=@VacancyRepository.Regions
+                <DxComboBox Data="@VacancyRepository.Regions"
                             NullText="Select Region..."
-                            SelectedItem=@region
-                            SelectedItemChanged=@(newCellValue => {
+                            SelectedItem="@region"
+                            SelectedItemChanged="@(newCellValue => {
                                                 editingContext.OnChanged(newCellValue);
                                                 editingContext.OnChanged(nameof(Vacancy.City), null);
                                                 OnRegionChanged();
-                                                })>
+                                                })">
                 </DxComboBox>
             </EditTemplate>
         </DxDataGridComboBoxColumn>
-        <DxDataGridColumn Field=@nameof(Vacancy.City)>
+        <DxDataGridColumn Field="@nameof(Vacancy.City)">
             <EditTemplate>
                 @{
                     var editingContext = (CellEditContext)context;
@@ -79,10 +79,10 @@ else
 
                     var cities = VacancyRepository.GetOfficeLocationsByRegion(region).Select(x => x.City);
                 }
-                <DxComboBox Data=@cities
+                <DxComboBox Data="@cities"
                             NullText="Select City..."
-                            Text=@city
-                            SelectedItemChanged=@(newCellValue => editingContext.OnChanged(newCellValue))>
+                            Text="@city"
+                            SelectedItemChanged="@(newCellValue => editingContext.OnChanged(newCellValue))">
                 </DxComboBox>
             </EditTemplate>
         </DxDataGridColumn>
@@ -96,7 +96,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        Vacancies = await VacancyRepository.GetVacancies();
+        Vacancies = await VacancyRepository.GetVacancies(3);
     }
 
     public void OnRegionChanged()

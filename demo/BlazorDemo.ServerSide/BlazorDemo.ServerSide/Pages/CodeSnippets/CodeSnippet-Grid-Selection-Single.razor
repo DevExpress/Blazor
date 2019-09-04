@@ -1,0 +1,20 @@
+﻿<CodeSnippet>
+@(@"<DxDataGrid Data=""@DataSource""
+            @bind-SingleSelectedDataRow=""@SelectedProduct"">
+    <DxDataGridColumn Field=""@nameof(ProductFlat.ProductName)"" Caption=""Product Name""></DxDataGridColumn>
+    <DxDataGridColumn Field=""@nameof(ProductFlat.Category)""></DxDataGridColumn>
+    <DxDataGridColumn Field=""@nameof(ProductFlat.Subcategory)""></DxDataGridColumn>
+</DxDataGrid>
+
+@code {
+    ProductFlat selectedProduct;
+    public ProductFlat SelectedProduct {
+        get { return selectedProduct; }
+        set {
+            selectedProduct = value;
+            InvokeAsync(StateHasChanged);
+        }
+    }
+}
+")
+</CodeSnippet>

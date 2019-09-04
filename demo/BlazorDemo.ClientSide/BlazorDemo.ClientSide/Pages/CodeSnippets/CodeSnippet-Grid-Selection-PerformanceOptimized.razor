@@ -1,0 +1,29 @@
+﻿<CodeSnippet>
+@(@"<DxDataGrid Data=""@DataSource""
+            KeyFieldName=""Id""
+            SelectionMode=""DataGridSelectionMode.OptimizedMultipleSelection""
+            SelectAllMode=""DataGridSelectAllMode.AllPages""
+            OptimizedMultipleSelectionChanged=""OnSelectionChanged"">
+    <DxDataGridSelectionColumn></DxDataGridSelectionColumn>
+    <DxDataGridColumn Field=""@nameof(ProductFlat.ProductName)"" Caption=""Product Name""></DxDataGridColumn>
+    <DxDataGridColumn Field=""@nameof(ProductFlat.Category)""></DxDataGridColumn>
+    <DxDataGridColumn Field=""@nameof(ProductFlat.Subcategory)""></DxDataGridColumn>
+</DxDataGrid>
+
+@code {
+    int SelectedCount { get; set; }
+
+    int StoredSelectedCount { get; set; }
+
+    int StoredUnselectedCount { get; set; }
+
+    protected void OnSelectionChanged(DataGridSelection<ProductFlat> selection)
+    {
+        StoredSelectedCount = selection.SelectedKeysStored.Count();
+        StoredUnselectedCount = selection.UnselectedKeysStored.Count();
+        SelectedCount = selection.SelectedKeys.Count();
+        InvokeAsync(StateHasChanged);
+    }
+}
+")
+</CodeSnippet>

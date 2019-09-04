@@ -317,6 +317,32 @@ div.content > .card:last-child {
     margin-bottom: 24px;
 }
 
+.demo-description .demo-anchor {
+    opacity: 0;
+    transition: opacity 150ms;
+    width: 1.5rem;
+    margin-left: -1.5rem;
+    display: inline-block;
+    text-decoration: none !important;
+    text-align: center;
+}
+
+.demo-description .demo-anchor:before {
+    content: "#";
+}
+
+@media (min-width: 1200px) {
+    .demo-description .demo-anchor {
+        width: 2rem;
+        margin-left: -2rem;
+    }
+}
+
+.demo-description > h1:hover .demo-anchor,
+.demo-description > h2:hover .demo-anchor {
+    opacity: 1;
+}
+
 .sidebar .navbar-toggler {
     border: 0;
     padding: 0;
@@ -340,7 +366,7 @@ div.content > .card:last-child {
 }
 
 .demo-charts-seriestypes.card-deck > .card {
-    min-width: 360px;
+    min-width: 380px;
 }
 .demo-charts-seriestypes.card-deck > .card > .card-body:first-child {
     align-items: baseline;

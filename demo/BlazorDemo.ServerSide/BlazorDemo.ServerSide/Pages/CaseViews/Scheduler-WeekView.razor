@@ -9,8 +9,8 @@
 </div>
 
 <DxScheduler Id="schedulerWeekView"
-             StartDate=@(DateTime.Today)
-             DataStorage=@DataStorage>
+             StartDate="@DateTime.Today"
+             DataStorage="@DataStorage">
 
     <DxSchedulerWeekView ShowWorkTimeOnly="true"></DxSchedulerWeekView>
 </DxScheduler>
@@ -18,9 +18,9 @@
 
 @code {
     DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
-        AppointmentsSource = AppointmentCollection.DataSource,
+        AppointmentsSource = AppointmentCollection.GetAppointments(),
         AppointmentMappings = new DxSchedulerAppointmentMappings() {
-            Id = "AppointmentId",
+            Type = "AppointmentType",
             Start = "StartDate",
             End = "EndDate",
             Subject = "Caption",
@@ -28,7 +28,8 @@
             Location = "Location",
             Description = "Description",
             LabelId = "Label",
-            StatusId = "Status"
+            StatusId = "Status",
+            RecurrenceInfo = "Recurrence"
         }
     };
 }

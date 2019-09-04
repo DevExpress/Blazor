@@ -6,13 +6,13 @@
         <div class="code-header card-footer p-0">
             <div class="lang-group nav nav-code">
                 @foreach (var tabPage in tabPages) {
-                    <a @key="@tabPage" href="javascript:;" class="@GetTabCssClass(tabPage)" @onclick=@(() => OnTabClick(tabPage))>@tabPage.Text</a>
+                    <a @key="@tabPage" href="javascript:;" class="@GetTabCssClass(tabPage)" @onclick="@(() => OnTabClick(tabPage))">@tabPage.Text</a>
                 }
             </div>
         </div>
         <div class="card-footer text-muted">
             @foreach (var tabPage in tabPages) {
-                <CodeSnippet Visible=@IsActiveTabPage(tabPage) ChildContent=@tabPage.ChildContent></CodeSnippet>
+                <CodeSnippet Visible="@IsActiveTabPage(tabPage)" ChildContent="@tabPage.ChildContent"></CodeSnippet>
             }
         </div>
     </div>

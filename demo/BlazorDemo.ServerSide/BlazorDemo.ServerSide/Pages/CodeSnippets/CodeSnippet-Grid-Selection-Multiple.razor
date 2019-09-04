@@ -1,0 +1,21 @@
+﻿<CodeSnippet>
+@(@"<DxDataGrid Data=""@DataSource""
+            SelectionMode=""DataGridSelectionMode.MultipleSelectedDataRows""
+            @bind-MultipleSelectedDataRows=""@SelectedProducts"">
+    <DxDataGridColumn Field=""@nameof(ProductFlat.ProductName)"" Caption=""Product Name""></DxDataGridColumn>
+    <DxDataGridColumn Field=""@nameof(ProductFlat.Category)""></DxDataGridColumn>
+    <DxDataGridColumn Field=""@nameof(ProductFlat.Subcategory)""></DxDataGridColumn>
+</DxDataGrid>
+
+@code {
+    IEnumerable<ProductFlat> selectedProducts;
+    IEnumerable<ProductFlat> SelectedProducts {
+        get { return selectedProducts; }
+        set {
+            selectedProducts = value;
+            InvokeAsync(StateHasChanged);
+        }
+    }
+}
+")
+</CodeSnippet>

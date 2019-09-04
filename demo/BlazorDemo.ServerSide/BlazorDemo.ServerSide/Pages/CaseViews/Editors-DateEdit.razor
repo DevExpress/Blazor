@@ -1,5 +1,5 @@
-﻿<div class="demo-description">
-    <h2>Date Edit</h2>
+﻿<div class="demo-description" id="Overview">
+    <h2><NavLink class="demo-anchor" href="DateEdit#Overview" />Date Edit</h2>
     <p>
         DxDateEdit is a date editor with a dropdown calendar. You can enter a date into the text box or pick one from the dropdown.
     </p>
@@ -8,8 +8,8 @@
 <div class="card demo-card">
     <div class="card-header">Selected date is: <b>@DateTimeValue.ToString("dddd, dd MMMM yyyy")</b></div>
     <div class="card-body mw-480" style="height: 425px">
-        <DxDateEdit @bind-Date=@DateTimeValue
-                    @bind-DropDownVisible=@DropDownVisible></DxDateEdit>
+        <DxDateEdit @bind-Date="@DateTimeValue"
+                    @bind-DropDownVisible="@DropDownVisible"></DxDateEdit>
     </div>
 </div>
 

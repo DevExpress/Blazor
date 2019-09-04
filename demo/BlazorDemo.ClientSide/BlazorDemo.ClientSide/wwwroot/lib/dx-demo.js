@@ -1,6 +1,6 @@
 ﻿hljs.initHighlightingOnLoad();
 function HighlightJSUpdate() {
-    document.querySelectorAll('pre code').forEach((block) => {
+    Array.prototype.slice.call(document.querySelectorAll('pre code')).forEach(function(block) {
         hljs.highlightBlock(block);
     });
 }

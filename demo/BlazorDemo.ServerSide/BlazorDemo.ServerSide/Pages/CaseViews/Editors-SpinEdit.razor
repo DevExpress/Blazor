@@ -1,5 +1,5 @@
-﻿<div class="demo-description">
-    <h2>Spin Edit - Decimal Value Type</h2>
+﻿<div class="demo-description" id="DecimalValueType">
+    <h2><NavLink class="demo-anchor" href="SpinEdit#DecimalValueType" />Spin Edit - Decimal Value Type</h2>
     <p>
         DxSpinEdit displays a numeric value and allows the user to modify it, either by typing a new value into the text box, or by using the up/down spin buttons to increment/decrement the value.
     </p>
@@ -13,7 +13,7 @@
 <div class="card demo-card">
     <div class="card-header">SpinEdit decimal value is: <b>@DecimalValue</b></div>
     <div class="card-body mw-480">
-        <DxSpinEdit @bind-Value=@DecimalValue></DxSpinEdit>
+        <DxSpinEdit @bind-Value="@DecimalValue"></DxSpinEdit>
     </div>
 </div>
 

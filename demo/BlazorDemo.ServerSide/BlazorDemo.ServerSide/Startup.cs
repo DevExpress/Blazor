@@ -31,6 +31,10 @@ namespace BlazorDemo.ServerSide
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            #if DEBUG
+                services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; });
+            #endif
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<WeatherForecastService>();

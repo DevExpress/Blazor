@@ -25,19 +25,19 @@
         Note that the <b>SeriesTemplate</b> property is used as many times as the number of data groups that match the specified criterion.
     </p>
 </div>
-<DxChart Data=@GridData>
+<DxChart Data="@GridData">
     <DxChartTitle Text="Sales amount" />
     <DxChartCommonSeries
-            AggregationMethod=@Enumerable.Sum
-            NameField=@((SaleInfo s) => s.Date.Year) 
-            ArgumentField=@((SaleInfo s) => s.City) 
-            ValueField=@((SaleInfo s) => s.Amount)>
+            AggregationMethod="@Enumerable.Sum"
+            NameField="@((SaleInfo s) => s.Date.Year)" 
+            ArgumentField="@((SaleInfo s) => s.City)" 
+            ValueField="@((SaleInfo s) => s.Amount)">
         <SeriesTemplate Context="settings">
             @if(settings.GroupKey == 2015) {
-                <DxChartLineSeries Name='Last year' Settings=@settings>
+                <DxChartLineSeries Name='Last year' Settings="@settings">
                 </DxChartLineSeries>
             } else {
-                <DxChartBarSeries Settings=@settings>
+                <DxChartBarSeries Settings="@settings">
                     <DxChartSeriesLabel Visible="true"></DxChartSeriesLabel>
                 </DxChartBarSeries>
             }

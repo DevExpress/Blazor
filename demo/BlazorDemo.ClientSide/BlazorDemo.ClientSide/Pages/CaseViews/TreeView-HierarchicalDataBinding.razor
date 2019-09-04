@@ -21,9 +21,9 @@
 <div class="card demo-card">
     <div class="card-body">
         <h5 class="card-title">Chemical elements</h5>
-        <DxTreeView CssClass="mw-480" Data=@ChemicalElements.Groups ExpandButtonIconCssClass="oi oi-chevron-right" CollapseButtonIconCssClass="oi oi-chevron-bottom"
-            TextExpression=@(dataItem => ((ChemicalElementGroup)dataItem).Name) 
-            ChildrenExpression=@(dataItem => ((ChemicalElementGroup)dataItem).Groups)>
+        <DxTreeView CssClass="mw-480" Data="@ChemicalElements.Groups" ExpandButtonIconCssClass="oi oi-chevron-right" CollapseButtonIconCssClass="oi oi-chevron-bottom"
+            TextExpression="@(dataItem => ((ChemicalElementGroup)dataItem).Name)"
+            ChildrenExpression="@(dataItem => ((ChemicalElementGroup)dataItem).Groups)">
         </DxTreeView>
     </div>
 </div>

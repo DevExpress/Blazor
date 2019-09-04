@@ -9,7 +9,7 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor" Version="0.2.0" />
+    <PackageReference Include="DevExpress.Blazor" Version="0.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview8.19405.7" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.0.0-preview8.19405.7" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.0.0-preview8.19405.7" />
@@ -19,6 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\tools\DevExpress.Blazor.DocumentMetadata\DevExpress.BlazorClientSide.DocumentMetadata.csproj" />
+    <ProjectReference Include="..\..\..\tools\DevExpress.Blazor.DocumentMetadata\DevExpress.Blazor.DocumentMetadata.csproj" />
   </ItemGroup>
 </Project>

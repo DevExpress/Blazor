@@ -10,22 +10,22 @@
 <div class="card demo-card-wide">
     <div class="card-header">@nameof(Location)=<b>@(Location)</b>, @nameof(CheckIn)=<b>@(CheckIn)</b>, @nameof(CheckOut)=<b>@(CheckOut)</b></div>
     <div class="card-body">
-        <DxFormLayout CaptionPosition=@CaptionPosition.Vertical>
+        <DxFormLayout CaptionPosition="@CaptionPosition.Vertical">
             <DxFormLayoutItem Caption="Location:" ColSpanLg="4" ColSpanMd="12">
                 <Template>
-                    <DxTextBox @bind-Text=@Location></DxTextBox>
+                    <DxTextBox @bind-Text="@Location"></DxTextBox>
                 </Template>
             </DxFormLayoutItem>
 
             <DxFormLayoutItem Caption="Check in:" ColSpanLg="4" ColSpanMd="6">
                 <Template>
-                    <DxDateEdit @bind-Date=@CheckIn></DxDateEdit>
+                    <DxDateEdit @bind-Date="@CheckIn"></DxDateEdit>
                 </Template>
             </DxFormLayoutItem>
 
             <DxFormLayoutItem Caption="Check out:" ColSpanLg="4" ColSpanMd="6">
                 <Template>
-                    <DxDateEdit @bind-Date=@CheckOut></DxDateEdit>
+                    <DxDateEdit @bind-Date="@CheckOut"></DxDateEdit>
                 </Template>
             </DxFormLayoutItem>
         </DxFormLayout>

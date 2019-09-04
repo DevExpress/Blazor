@@ -2,16 +2,16 @@
     <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted ">
         <CodeSnippet>
-@(@"<DxChart Data=@SalesData>
+@(@"<DxChart Data=""@SalesData"">
     <DxChartTitle Text=""Sales amount"" />
-    <DxChartBarSeries Name=""2013"" Filter=@((SaleInfo s) => s.Date.Year == 2013) AggregationMethod=@Enumerable.Sum ArgumentField=@(s => s.City) ValueField=@(s => s.Amount)></DxChartBarSeries>
-    <DxChartBarSeries Name=""2014"" Filter=@((SaleInfo s) => s.Date.Year == 2014) AggregationMethod=@Enumerable.Sum ArgumentField=@(s => s.City) ValueField=@(s => s.Amount)></DxChartBarSeries>
-    <DxChartLineSeries Name=""2015"" Filter=@((SaleInfo s) => s.Date.Year == 2015) AggregationMethod=@Enumerable.Sum ArgumentField=@(s=> s.City) ValueField=@(s => s.Amount)>
+    <DxChartBarSeries  Name=""2013"" Filter=""@((SaleInfo s) => s.Date.Year == 2013)"" AggregationMethod=""@Enumerable.Sum"" ArgumentField=""@(s => s.City)"" ValueField=""@(s => s.Amount)""></DxChartBarSeries>
+    <DxChartBarSeries  Name=""2014"" Filter=""@((SaleInfo s) => s.Date.Year == 2014)"" AggregationMethod=""@Enumerable.Sum"" ArgumentField=""@(s => s.City)"" ValueField=""@(s => s.Amount)""></DxChartBarSeries>
+    <DxChartLineSeries Name=""2015"" Filter=""@((SaleInfo s) => s.Date.Year == 2015)"" AggregationMethod=""@Enumerable.Sum"" ArgumentField=""@(s => s.City)"" ValueField=""@(s => s.Amount)"">
         <DxChartSeriesLegendItem IconCssClass=""oi oi-flag"">
             <TextTemplate>Last year</TextTemplate>
         </DxChartSeriesLegendItem>
     </DxChartLineSeries>
-    <DxChartLegend AllowToggleSeries=""true"" Orientation=@Orientation.Vertical HorizontalAlignment=@HorizontalAlignment.Right>
+    <DxChartLegend AllowToggleSeries=""true"" Orientation=""@Orientation.Vertical"" HorizontalAlignment=""@HorizontalAlignment.Right"">
         <DxChartTitle Text=""Legend"">
             <DxChartSubtitle Text=""(custom)""></DxChartSubtitle>
         </DxChartTitle>

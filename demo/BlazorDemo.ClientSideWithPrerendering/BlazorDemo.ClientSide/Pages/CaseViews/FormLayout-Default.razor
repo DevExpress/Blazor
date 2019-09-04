@@ -24,25 +24,25 @@
         <DxFormLayout>
             <DxFormLayoutItem Caption="Contact Name:" ColSpanMd="6">
                 <Template>
-                    <DxTextBox @bind-Text=@Name></DxTextBox>
+                    <DxTextBox @bind-Text="@Name"></DxTextBox>
                 </Template>
             </DxFormLayoutItem>
 
             <DxFormLayoutItem Caption="Email:" ColSpanMd="6">
                 <Template>
-                    <DxTextBox @bind-Text=@Email></DxTextBox>
+                    <DxTextBox @bind-Text="@Email"></DxTextBox>
                 </Template>
             </DxFormLayoutItem>
 
             <DxFormLayoutItem Caption="Birthday:" ColSpanMd="6">
                 <Template>
-                    <DxDateEdit @bind-Date=@Birthday></DxDateEdit>
+                    <DxDateEdit @bind-Date="@Birthday"></DxDateEdit>
                 </Template>
             </DxFormLayoutItem>
 
             <DxFormLayoutItem Caption="Worked year(s):" ColSpanMd="6">
                 <Template>
-                    <DxSpinEdit @bind-Value=@Worked></DxSpinEdit>
+                    <DxSpinEdit @bind-Value="@Worked"></DxSpinEdit>
                 </Template>
             </DxFormLayoutItem>
         </DxFormLayout>

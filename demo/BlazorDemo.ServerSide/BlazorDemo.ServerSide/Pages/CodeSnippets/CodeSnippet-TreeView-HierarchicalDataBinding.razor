@@ -1,8 +1,8 @@
 ﻿<CodeSnippetTabbed>
 <CodeSnippetTabPage Text="Razor">
-@(@"<DxTreeView Data=@ChemicalElements.Groups
-    TextExpression=@(dataItem => ((ChemicalElementGroup)dataItem).Name)
-    ChildrenExpression=@(dataItem => ((ChemicalElementGroup)dataItem).Groups)>
+@(@"<DxTreeView Data=""@ChemicalElements.Groups""
+    TextExpression=""@(dataItem => ((ChemicalElementGroup)dataItem).Name)""
+    ChildrenExpression=""@(dataItem => ((ChemicalElementGroup)dataItem).Groups)"">
 </DxTreeView>")
 </CodeSnippetTabPage>
 <CodeSnippetTabPage Text="ChemicalElements">

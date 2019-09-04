@@ -1,0 +1,46 @@
+﻿@page "/GridGrouping"
+@using Demo.Blazor.Model
+
+<div class="demo-description">
+    <h2>Data Grid - Grouping</h2>
+
+    <p>
+        The Data Grid component enables you to drag-and-drop grid headers or use API members listed below to group data against data columns.
+    </p>
+
+    <ul>
+        <li><b>ShowGroupPanel</b> - controls the Group Panel's visibility.</li>
+        <li><b>ShowGroupedColumns</b> - specifies whether the grouped columns are displayed within the grid.</li>
+        <li><b>GroupIndex</b> - specifies the column’s index among grouped columns. If this property is set to -1, the grid data is not grouped by the corresponding column.</li>
+        <li><b>AllowGroup</b> - specifies if a grid can be grouped against the corresponding column.</li>
+    </ul>
+
+</div>
+
+@if (Vacancies == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <DxDataGrid Data="@Vacancies"
+                ShowFilterRow="true"
+                ShowPager="true"
+                ShowGroupPanel="true">
+        <DxDataGridColumn Field="@nameof(Vacancy.Id)" Width="70px" AllowGroup="false"></DxDataGridColumn>
+        <DxDataGridColumn Field="@nameof(Vacancy.Description)"></DxDataGridColumn>
+        <DxDataGridComboBoxColumn Field="@nameof(Vacancy.Region)" Data="@VacancyRepository.Regions" GroupIndex="0"></DxDataGridComboBoxColumn>
+        <DxDataGridColumn Field="@nameof(Vacancy.City)" GroupIndex="1"></DxDataGridColumn>
+    </DxDataGrid>
+}
+
+<CodeSnippet_GridGrouping></CodeSnippet_GridGrouping>
+
+@code {
+    IEnumerable<Vacancy> Vacancies;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Vacancies = await VacancyRepository.GetVacancies(100);
+    }
+}

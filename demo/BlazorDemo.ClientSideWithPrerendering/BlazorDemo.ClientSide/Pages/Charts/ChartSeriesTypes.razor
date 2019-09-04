@@ -10,13 +10,13 @@
     <div class="card">
         <div class="card-body d-flex flex-row">
             <h5 class="card-title mr-3">Line Series</h5>
-            <DxComboBox CssClass="ml-auto" Data=@LineSeriesTypes @bind-SelectedItem=@LineSeriesType></DxComboBox>
+            <DxComboBox CssClass="ml-auto" Data="@LineSeriesTypes" @bind-SelectedItem="@LineSeriesType"></DxComboBox>
         </div>
         <div class="card-body">
-            <DxChart Data=@ChartsData>
-                <DxChartCommonSeries NameField=@((SaleInfo s) => s.Date.Year) ArgumentField=@((SaleInfo s) => s.City) ValueField=@((SaleInfo s) => s.Amount) SeriesType=@LineSeriesType>
+            <DxChart Data="@ChartsData">
+                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@((SaleInfo s) => s.City)" ValueField="@((SaleInfo s) => s.Amount)" SeriesType="@LineSeriesType">
                 </DxChartCommonSeries>
-                <DxChartLegend Position=@RelativePosition.Outside HorizontalAlignment=@HorizontalAlignment.Right />
+                <DxChartLegend Position="@RelativePosition.Outside" HorizontalAlignment="@HorizontalAlignment.Right" />
             </DxChart>
         </div>
         <div class="card-body">
@@ -31,13 +31,13 @@
     <div class="card">
         <div class="card-body d-flex flex-row">
             <h5 class="card-title mr-3">Area Series</h5>
-            <DxComboBox CssClass="ml-auto" Data=@AreaSeriesTypes @bind-SelectedItem=@AreaSeriesType></DxComboBox>
+            <DxComboBox CssClass="ml-auto" Data="@AreaSeriesTypes" @bind-SelectedItem="@AreaSeriesType"></DxComboBox>
         </div>
         <div class="card-body">
-            <DxChart Data=@ChartsData>
-                <DxChartCommonSeries NameField=@((SaleInfo s) => s.Date.Year) ArgumentField=@((SaleInfo s) => s.City) ValueField=@((SaleInfo s) => s.Amount) SeriesType=@AreaSeriesType>
+            <DxChart Data="@ChartsData">
+                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@((SaleInfo s) => s.City)" ValueField="@((SaleInfo s) => s.Amount)" SeriesType="@AreaSeriesType">
                 </DxChartCommonSeries>
-                <DxChartLegend Position=@RelativePosition.Outside HorizontalAlignment=@HorizontalAlignment.Right />
+                <DxChartLegend Position="@RelativePosition.Outside" HorizontalAlignment="@HorizontalAlignment.Right" />
             </DxChart>
         </div>
         <div class="card-body">
@@ -54,13 +54,13 @@
     <div class="card">
         <div class="card-body d-flex flex-row">
             <h5 class="card-title mr-3">Bar Series</h5>
-            <DxComboBox CssClass="ml-auto" Data=@BarSeriesTypes @bind-SelectedItem=@BarSeriesType></DxComboBox>
+            <DxComboBox CssClass="ml-auto" Data="@BarSeriesTypes" @bind-SelectedItem="@BarSeriesType"></DxComboBox>
         </div>
         <div class="card-body">
-            <DxChart Data=@ChartsData>
-                <DxChartCommonSeries NameField=@((SaleInfo s) => s.Date.Year) ArgumentField=@((SaleInfo s) => s.City) ValueField=@((SaleInfo s) => s.Amount) SeriesType=@BarSeriesType>
+            <DxChart Data="@ChartsData">
+                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@((SaleInfo s) => s.City)" ValueField="@((SaleInfo s) => s.Amount)" SeriesType="@BarSeriesType">
                 </DxChartCommonSeries>
-                <DxChartLegend Position=@RelativePosition.Outside HorizontalAlignment=@HorizontalAlignment.Right />
+                <DxChartLegend Position="@RelativePosition.Outside" HorizontalAlignment="@HorizontalAlignment.Right" />
             </DxChart>
         </div>
         <div class="card-body">
@@ -77,21 +77,21 @@
             <h5 class="card-title">Bubble Series</h5>
         </div>
         <div class="card-body">
-            <DxChart Data=@ChartsData>
-                <DxChartCommonSeries NameField=@((SaleInfo s) => s.Country) Filter=@(s => s.Region == "North America") 
-                                     ArgumentField=@(s => s.Date.DayOfWeek.ToString()) 
-                                     ValueField=@(s => s.Date.Year.ToString()) SeriesType=@ChartSeriesType.Bubble>
+            <DxChart Data="@ChartsData">
+                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Country)" Filter="@(s => s.Region == "North America")" 
+                                     ArgumentField="@(s => s.Date.DayOfWeek.ToString())" 
+                                     ValueField="@(s => s.Date.Year.ToString())" SeriesType="@ChartSeriesType.Bubble">
                     <SeriesTemplate>
                         <DxChartBubbleSeries 
-                                             Settings=@context 
-                                             SizeField=@(s => s.Amount) 
+                                             Settings="@context" 
+                                             SizeField="@(s => s.Amount)"
                                              Color="@(context.GroupKey == "Canada" ? Color.FromArgb(252, 58, 48) : Color.FromArgb(208, 208, 208))" 
-                                             AggregationMethod=@Enumerable.Max />
+                                             AggregationMethod="@Enumerable.Max" />
                     </SeriesTemplate>
                 </DxChartCommonSeries>
-                <DxChartLegend Position=@RelativePosition.Outside HorizontalAlignment=@HorizontalAlignment.Right />
+                <DxChartLegend Position="@RelativePosition.Outside" HorizontalAlignment="@HorizontalAlignment.Right" />
                 <DxChartValueAxis>
-                    <DxChartAxisLabel Format=@ChartAxisLabelFormat.FixedPoint></DxChartAxisLabel>
+                    <DxChartAxisLabel Format="@ChartAxisLabelFormat.FixedPoint"></DxChartAxisLabel>
                 </DxChartValueAxis>
             </DxChart>
         </div>

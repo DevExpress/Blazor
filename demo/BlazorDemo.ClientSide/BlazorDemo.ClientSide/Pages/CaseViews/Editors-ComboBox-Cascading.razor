@@ -11,18 +11,18 @@
     <div class="card-header">Selected values are: <b>@CurrentCountry.CountryName</b> / <b>@CurrentCity.CityName</b></div>
     <div class="card-body" style="height: 180px">
         <div class="d-inline-block">
-            <DxComboBox Data=@Countries
+            <DxComboBox Data="@Countries"
                         TextFieldName="CountryName"
-                        SelectedItem=@CurrentCountry
-                        @bind-DropDownVisible=@DropDownVisible1
-                        SelectedItemChanged=@SelectedCountryChanged></DxComboBox>
+                        SelectedItem="@CurrentCountry"
+                        @bind-DropDownVisible="@DropDownVisible1"
+                        SelectedItemChanged="@SelectedCountryChanged"></DxComboBox>
         </div>
         <div class="d-inline-block">
-            <DxComboBox Data=@CurrentCountryCities
+            <DxComboBox Data="@CurrentCountryCities"
                         TextFieldName="CityName"
-                        SelectedItem=@CurrentCity
-                        @bind-DropDownVisible=@DropDownVisible2
-                        SelectedItemChanged=@SelectedCityChanged></DxComboBox>
+                        SelectedItem="@CurrentCity"
+                        @bind-DropDownVisible="@DropDownVisible2"
+                        SelectedItemChanged="@SelectedCityChanged"></DxComboBox>
         </div>
     </div>
 </div>

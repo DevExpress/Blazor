@@ -18,7 +18,7 @@
     <div class="card-header">Text = "<b>@(Text)</b>", SelectedItem = <b>@(SelectedItem == null ? "Null" : SelectedItem)</b></div>
     <div class="card-body mw-480" style="height: 180px">
         <DxComboBox Data="@Cities"
-                    AllowUserInput="@true"
+                    AllowUserInput="true"
                     NullText="Select City ..."
                     @bind-SelectedItem="@SelectedItem"
                     @bind-Text="@Text"

@@ -1,0 +1,26 @@
+﻿<div class="demo-description">
+    <h2>Text Box - ReadOnly<span class="demo-badge badge badge-success">New</span></h2>
+    <p>
+        This feature will allow you to display the value, but do not allow end user to change it.
+        Set the <b>ReadOnly</b> DxTextBox property to true to switch the password mode on.
+    </p>
+</div>
+
+<div class="card demo-card">
+    <div class="card-header">TextBox text is: "<b>@TextValue</b>"</div>
+    <div class="card-body mw-480">
+        <DxTextBox @bind-Text="@TextValue" ReadOnly="true"></DxTextBox>
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_TextBox_ReadOnly></CodeSnippet_Editor_TextBox_ReadOnly>
+    </div>
+</div>
+
+@code {
+    string textValue = "End user can change the DxTextBox Value";
+    string TextValue { get => textValue; set { textValue = value; InvokeAsync(StateHasChanged); } }
+}

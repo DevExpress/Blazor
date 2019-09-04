@@ -34,44 +34,43 @@
 @if (DataSource == null || NestedDataSource == null) {
     <p><em>Loading...</em></p>
 } else {
-    <DxDataGrid Data=@DataSource
-                AllowDataRowSelection=true
-                ShowFilterRow=false
+    <DxDataGrid Data="@DataSource"
+                ShowFilterRow="false"
                 DataNavigationMode="@DataGridNavigationMode.VirtualScrolling"
-                RowRemoving=@((dataItem) => OnRowRemoving(dataItem))
-                RowUpdating=@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))
-                RowInserting=@((newValues) => OnRowInserting(newValues))>
+                RowRemoving="@((dataItem) => OnRowRemoving(dataItem))"
+                RowUpdating="@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))"
+                RowInserting="@((newValues) => OnRowInserting(newValues))">
 
         <DxDataGridCommandColumn Width="150px"></DxDataGridCommandColumn>
 
-        <DxDataGridColumn Field=@nameof(Product.Id) Caption="ID" Width="50px">
+        <DxDataGridColumn Field="@nameof(Product.Id)" Caption="ID" Width="50px">
         </DxDataGridColumn>
 
-        <DxDataGridColumn Field=@nameof(Product.ProductName) Caption="Product Name">
+        <DxDataGridColumn Field="@nameof(Product.ProductName)" Caption="Product Name">
         </DxDataGridColumn>
 
-        <DxDataGridColumn Field=@nameof(Product.Availability ) Caption="Availability" Width="85px">
+        <DxDataGridColumn Field="@nameof(Product.Availability)" Caption="Availability" Width="85px">
             <DisplayTemplate>
                 @{
                     var id = Guid.NewGuid().ToString();
                     var inStock = (context as Product).Availability;
-                    <input id=@id type="checkbox" checked=@inStock disabled readonly />
+                    <input id="@id" type="checkbox" checked="@inStock" disabled readonly />
                     if (inStock) {
-                        <label class="form-check-label text-success" for=@id><span>In stock</span></label>
+                        <label class="form-check-label text-success" for="@id"><span>In stock</span></label>
                     } else {
-                        <label class="form-check-label text-danger" for=@id><span>Sold out</span></label>
+                        <label class="form-check-label text-danger" for="@id"><span>Sold out</span></label>
                     }
                 }
             </DisplayTemplate>
             <EditTemplate>
-                <DxComboBox Data=@(new List<string>() { "In stock", "Sold out" })
-                            SelectedItem=@(((bool)((CellEditContext)context).CellValue) ? "In stock" : "Sold out" )
-                            SelectedItemChanged=@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue == "In stock"))>
+                <DxComboBox Data="@(new List<string>() { "In stock", "Sold out" })"
+                            SelectedItem="@(((bool)((CellEditContext)context).CellValue) ? "In stock" : "Sold out" )"
+                            SelectedItemChanged="@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue == "In stock"))">
                 </DxComboBox>
             </EditTemplate>
         </DxDataGridColumn>
 
-        <DxDataGridColumn Field=@nameof(Product.ProductCategoryId) Caption="Category">
+        <DxDataGridColumn Field="@nameof(Product.ProductCategoryId)" Caption="Category">
             <DisplayTemplate>
                 @{
                     var item = NestedDataSource.Where(x => x.ProductSubcategoryID == (int)((context as Product).ProductCategoryId)).FirstOrDefault();
@@ -81,10 +80,10 @@
                 }
             </DisplayTemplate>
             <EditTemplate>
-                <DxComboBox Data=@NestedDataSource
+                <DxComboBox Data="@NestedDataSource"
                             TextFieldName="CategorySubcategory"
-                            SelectedItem=@(NestedDataSource.Where(x => x.ProductSubcategoryID == (int)((CellEditContext)context).CellValue).FirstOrDefault())
-                            SelectedItemChanged=@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue.ProductSubcategoryID))>
+                            SelectedItem="@(NestedDataSource.Where(x => x.ProductSubcategoryID == (int)((CellEditContext)context).CellValue).FirstOrDefault())"
+                            SelectedItemChanged="@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue.ProductSubcategoryID))">
                 </DxComboBox>
             </EditTemplate>
         </DxDataGridColumn>

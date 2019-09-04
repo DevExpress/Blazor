@@ -1,0 +1,25 @@
+﻿<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
+        <CodeSnippet>
+@(@"<DxDataGrid Data=""@Vacancies""
+            ShowFilterRow=""true""
+            ShowPager=""true""
+            ShowGroupPanel=""true"">
+    <DxDataGridColumn Field=""@nameof(Vacancy.Id)"" Width=""70px"" AllowGroup=""false""></DxDataGridColumn>
+    <DxDataGridColumn Field=""@nameof(Vacancy.Description)""></DxDataGridColumn>
+    <DxDataGridComboBoxColumn Field=""@nameof(Vacancy.Region)"" Data=""@VacancyRepository.Regions"" GroupIndex=""0""></DxDataGridComboBoxColumn>
+    <DxDataGridColumn Field=""@nameof(Vacancy.City)"" GroupIndex=""1""></DxDataGridColumn>
+</DxDataGrid>
+
+@code {
+    IEnumerable<Vacancy> Vacancies;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Vacancies = await VacancyRepository.GetVacancies(100);
+    }
+}")
+        </CodeSnippet>
+    </div>
+</div>

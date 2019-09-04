@@ -21,35 +21,35 @@
     <p><em>Loading...</em></p>
 } else {
 
-    <DxDataGrid Data=@DataSource 
+    <DxDataGrid Data="@DataSource"
             HorizontalScrollBarMode="@ScrollBarMode.Visible"
-            ShowFilterRow="@false"
+            ShowFilterRow="false"
             CssClass="mw-1100">
 
-        <DxDataGridColumn Field=@nameof(ProductFlat.Id) Caption="ID" Width="50px">
+        <DxDataGridColumn Field="@nameof(ProductFlat.Id)" Caption="ID" Width="50px">
         </DxDataGridColumn>
 
-        <DxDataGridColumn Field=@nameof(ProductFlat.ProductName) Caption="Product Name" Width="350px">
+        <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name" Width="350px">
         </DxDataGridColumn>
 
-        <DxDataGridColumn Field=@nameof(ProductFlat.Availability ) Caption="Availability" Width="85px">
+        <DxDataGridColumn Field="@nameof(ProductFlat.Availability)" Caption="Availability" Width="85px">
             <DisplayTemplate>
                 @{
                     var id = Guid.NewGuid().ToString();
                     var inStock = (context as ProductFlat).Availability;
-                    <input id=@id type="checkbox" checked=@inStock disabled readonly />
+                    <input id="@id" type="checkbox" checked="@inStock" disabled readonly />
                     if (inStock) {
-                        <label class="form-check-label text-success" for=@id><span>In stock</span></label>
+                        <label class="form-check-label text-success" for="@id"><span>In stock</span></label>
                     } else {
-                        <label class="form-check-label text-danger" for=@id><span>Sold out</span></label>
+                        <label class="form-check-label text-danger" for="@id"><span>Sold out</span></label>
                     }
                 }
             </DisplayTemplate>
         </DxDataGridColumn>
 
-        <DxDataGridColumn Field=@nameof(ProductFlat.Category) Caption="Category" Width="350px"></DxDataGridColumn>
-        <DxDataGridColumn Field=@nameof(ProductFlat.Subcategory) Caption="Subcategory" Width="350px"></DxDataGridColumn>
-        <DxDataGridDateEditColumn Field=@nameof(ProductFlat.LastUpdatedDate) Caption="Last Updated Date" Width="350px"></DxDataGridDateEditColumn>
+        <DxDataGridColumn Field="@nameof(ProductFlat.Category)" Caption="Category" Width="350px"></DxDataGridColumn>
+        <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)" Caption="Subcategory" Width="350px"></DxDataGridColumn>
+        <DxDataGridDateEditColumn Field="@nameof(ProductFlat.LastUpdatedDate)" Caption="Last Updated Date" Width="350px"></DxDataGridDateEditColumn>
 
     </DxDataGrid>
     <div class="code-snippet card demo-card-wide">

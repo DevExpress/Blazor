@@ -3,7 +3,6 @@
     <div class="card-footer text-muted">
         <CodeSnippet>
 @(@"<DxDataGrid Data=""@DataSource""
-            AllowDataRowSelection=""true""
             ShowFilterRow=""false""
             RowRemoving=""@((dataItem) => OnRowRemoving(dataItem))""
             RowUpdating=""@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))""
@@ -19,21 +18,21 @@
             @{
                 var id = Guid.NewGuid().ToString();
                 var inStock = (context as Product).Availability;
-                <input id=@id type=""checkbox"" checked=@inStock disabled readonly />
+                <input id=""@id"" type=""checkbox"" checked=""@inStock"" disabled readonly />
                 if (inStock)
                 {
-                    <label class=""form-check-label text-success"" for=@id><span>In stock</span></label>
+                    <label class=""form-check-label text-success"" for=""@id""><span>In stock</span></label>
                 }
                 else
                 {
-                    <label class=""form-check-label text-danger"" for=@id><span>Sold out</span></label>
+                    <label class=""form-check-label text-danger"" for=""@id""><span>Sold out</span></label>
                 }
             }
         </DisplayTemplate>
         <EditTemplate>
-            <DxComboBox Data=@(new List<string>() { ""In stock"", ""Sold out"" })
-                        SelectedItem=@(((bool)((CellEditContext)context).CellValue) ? ""In stock"" : ""Sold out"" )
-                        SelectedItemChanged=@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue == ""In stock""))>
+            <DxComboBox Data=""@(new List<string>() { ""In stock"", ""Sold out"" })""
+                        SelectedItem=""@(((bool)((CellEditContext)context).CellValue) ? ""In stock"" : ""Sold out"" )""
+                        SelectedItemChanged=""@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue == ""In stock""))"">
             </DxComboBox>
         </EditTemplate>
     </DxDataGridColumn>
@@ -57,8 +56,8 @@
             }
             <DxDataGrid Data=""@NestedDataSource""
                         PageSize=""5""
-                        SelectedDataRow=""@nestedItem""
-                        SelectedDataRowChanged=""@(newCellValue => cellEditContext.OnChanged(newCellValue.ProductSubcategoryID))"">
+                        SingleSelectedDataRow=""@nestedItem""
+                        SingleSelectedDataRowChanged=""@(newCellValue => cellEditContext.OnChanged(newCellValue.ProductSubcategoryID))"">
                 <DxDataGridColumn Field=""@nameof(ProductCategory.ProductSubcategoryID)"" Width=""150px""></DxDataGridColumn>
                 <DxDataGridColumn Field=""@nameof(ProductCategory.Category)"" Width=""150px""></DxDataGridColumn>
                 <DxDataGridColumn Field=""@nameof(ProductCategory.Subcategory)"" Width=""150px""></DxDataGridColumn>

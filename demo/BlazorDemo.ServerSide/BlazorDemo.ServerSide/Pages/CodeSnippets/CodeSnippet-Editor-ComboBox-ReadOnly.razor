@@ -1,0 +1,16 @@
+﻿<CodeSnippet>
+ @(@"<DxComboBox Data=""@DataSource""
+    @bind-SelectedItem=""@Option""
+    ReadOnly=""true""/>
+
+@code {
+    String[] DataSource = null;
+
+    string Option;
+
+    protected override void OnInitialized() { 
+        DataSource = new string[] { ""Option 1"", ""Option 2"", ""Option 3"" };
+        Option = DataSource[1];
+    }
+}")
+</CodeSnippet>

@@ -147,6 +147,13 @@ Follow the steps below to try our UI for Blazor in your own application.
 
 8. Your application is ready to use DevExpress Blazor.
 
+# Free Blazor Utilities and Dev Tools
+
+The following DevExpress Blazor products are available free-of-charge:
+
+* [Document metadata tool](https://github.com/DevExpress/Blazor/tree/master/tools/DevExpress.Blazor.DocumentMetadata).
+* [Anchor navigation tool](https://github.com/DevExpress/Blazor/tree/master/tools/DevExpress.Blazor.AnchorUtils).
+
 # Troubleshooting
 
 ## 1. DxDataGrid in Blazor
