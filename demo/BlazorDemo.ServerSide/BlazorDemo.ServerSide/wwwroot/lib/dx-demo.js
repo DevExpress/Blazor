@@ -7,7 +7,7 @@ function HighlightJSUpdate() {
 
 function ScrollToTarget(targetSelector) {
     var selector = targetSelector ? targetSelector : document.location.hash;
-    var scrollToTargetCore = () => {
+    var scrollToTargetCore = function () {
         if(selector) {
             var targetElement = document.querySelector(selector);
             if (targetElement) {
@@ -24,11 +24,11 @@ function ScrollToTarget(targetSelector) {
             window.scroll(0, 0);
         }
     };
-    var pendingStyleSheets = Array.from(document.head.querySelectorAll("link")).filter((l) => {
+    var pendingStyleSheets = Array.from(document.head.querySelectorAll("link")).filter(function (l) {
         var isLoaded = !!l.sheet;
         if(isLoaded) {
             try {
-                if(Array.from(l.sheet.rules).filter((r) => r.href && !r.styleSheet).length)
+                if (Array.from(l.sheet.rules).filter(function (r) { return r.href && !r.styleSheet; }).length)
                     isLoaded = false;
             }
             catch (e) { }
@@ -36,7 +36,7 @@ function ScrollToTarget(targetSelector) {
         return !isLoaded;
     });
     if (pendingStyleSheets.length)
-        pendingStyleSheets.forEach((l) => { l.addEventListener("load", scrollToTargetCore, { once: true }); });
+        pendingStyleSheets.forEach(function (l) { return l.addEventListener("load", scrollToTargetCore, { once: true }); });
     else
         scrollToTargetCore();
 }

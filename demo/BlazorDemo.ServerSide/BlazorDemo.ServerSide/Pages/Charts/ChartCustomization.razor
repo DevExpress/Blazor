@@ -2,6 +2,8 @@
 @using Demo.Blazor
 @using Demo.Blazor.Model
 @using DevExpress.Blazor
+@using Demo.Blazor.Services
+@inject WeatherForecastService ForecastService
 
 <div class="demo-description" id="Tooltip">
     <h2><NavLink class="demo-anchor" href="ChartCustomization#Tooltip" />Charts - Tooltip Customization</h2>
@@ -79,10 +81,36 @@
     <DxChartSplineSeries Name="Total" AggregationMethod="@Enumerable.Sum" ArgumentField="@((SaleInfo s)=> s.City)" ValueField="@(s => s.Amount)" Axis="TotalAxis" />
 </DxChart>
 <CodeSnippet_Charts_MultipleAxesCustomization />
+
+<div class="demo-description" id="MultiplePanes">
+    <h2><NavLink class="demo-anchor" href="ChartCustomization#MultiplePanes" />Charts - Multiple Panes Customization</h2>
+    <p>
+        The <b>&lt;DxChart&gt;</b> component allows you to create charts with multiple panes located under each other. 
+        A pane can display one or more series and can share the argument axis with other panes.
+    </p>
+</div>
+<DxChart Data="@WeatherForecasts">
+    <DxChartTitle Text="@($"Temperature in {DateTime.Now.ToString("MMMM")}")" />
+    <DxChartLegend Position="@RelativePosition.Outside" VerticalAlignment="@VerticalEdge.Bottom" />
+    <DxChartPane Name="TopPane" />
+    <DxChartPane Name="BottomPane" />
+    <DxChartLineSeries Pane="TopPane" Name="Average Temperature, C" AggregationMethod="@((v) => (int)Enumerable.Average(v))" ArgumentField="@(s => s.Date.Day)" ValueField="@((WeatherForecast s) => s.TemperatureC)">
+        <DxChartSeriesLabel Visible="true" />
+    </DxChartLineSeries>
+    <DxChartBarSeries Pane="BottomPane" Name="Max Temperature, C" AggregationMethod="@((v) => (int)Enumerable.Max(v))" ArgumentField="@(s => s.Date.Day)" ValueField="@((WeatherForecast s) => s.TemperatureC)">
+        <DxChartSeriesLabel Visible="true" />
+    </DxChartBarSeries>
+    <DxChartBarSeries Pane="BottomPane" Name="Min Temperature, C" AggregationMethod="@((v) => (int)Enumerable.Min(v))" ArgumentField="@(s => s.Date.Day)" ValueField="@((WeatherForecast s) => s.TemperatureC)">
+        <DxChartSeriesLabel Visible="true" />
+    </DxChartBarSeries>
+</DxChart>
+<CodeSnippet_Charts_MultiplePanesCustomization />
 @code {
     IQueryable<SaleInfo> SalesData;
+    WeatherForecast[] WeatherForecasts;
 
     protected override async Task OnInitializedAsync() {
         SalesData = await Sales.Load();
+        WeatherForecasts = await ForecastService.GetDetailedForecastAsync();
     }
 }

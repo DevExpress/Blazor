@@ -1,7 +1,7 @@
 ﻿@namespace DevExpress.Blazor.AnchorUtils
 @using Microsoft.AspNetCore.Components.Routing
 
-@inject IUriHelper UriHelper
+@inject NavigationManager NavigationManager
 
 <NavLink @attributes="@Attributes" href="@GetHref()">@ChildContent</NavLink>
 
@@ -15,7 +15,7 @@
         var hrefValue = Attributes["href"].ToString();
         if (hrefValue.StartsWith("#"))
         {
-            hrefValue = UriHelper.ToAbsoluteUri(UriHelper.GetAbsoluteUri()).GetLeftPart(UriPartial.Path) + hrefValue;
+            hrefValue = NavigationManager.ToAbsoluteUri(NavigationManager.Uri).GetLeftPart(UriPartial.Path) + hrefValue;
         }
         return hrefValue;
     }

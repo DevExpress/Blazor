@@ -6,10 +6,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @(await Html.RenderComponentAsync<DocumentMetadataComponent>())
+    @(await Html.RenderComponentAsync<DocumentMetadataComponent>(RenderMode.ServerPrerendered))
 </head>
 <body>
-    <app>@(await Html.RenderComponentAsync<App>())</app>
+    <app>
+        @(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))
+    </app>
+
     <script src="_framework/blazor.server.js"></script>
 </body>
 </html>

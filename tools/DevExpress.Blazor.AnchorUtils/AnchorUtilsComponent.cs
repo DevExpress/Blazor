@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace DevExpress.Blazor.AnchorUtils {
     public class AnchorUtilsComponent: ComponentBase, IDisposable {
-        [Inject] public IUriHelper UriHelper { get; set; }
+        [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public IJSRuntime JSRuntime { get; set; }
-        [Inject] public IComponentContext ComponentContext { get; set; }
 
         [Parameter] public RenderFragment ChildContent { get; set; }
 
@@ -22,41 +21,31 @@ namespace DevExpress.Blazor.AnchorUtils {
         {
             base.OnInitialized();
 
-            ForceScroll = true;
-
-            UriHelper.OnLocationChanged += OnLocationChanged;
+            NavigationManager.LocationChanged += OnLocationChanged;
         }
 
-        protected override Task OnAfterRenderAsync()
+        protected override Task OnAfterRenderAsync(bool firstRender)
         {
-            ScrollToAnchor(Anchor);
+            if (firstRender)
+                ScrollToAnchor(forceScroll: true);
 
-            ForceScroll = false; 
-
-            return base.OnAfterRenderAsync();
+            return base.OnAfterRenderAsync(firstRender);
         }
 
         void OnLocationChanged(object sender, LocationChangedEventArgs args)
         {
-            var anchor = UriHelper.ToAbsoluteUri(args.Location).Fragment;
-            if (!ScrollToAnchor(anchor)) 
-                Anchor = anchor;
+            ScrollToAnchor(NavigationManager.ToAbsoluteUri(args.Location).Fragment);
         }
 
-        bool ScrollToAnchor(string anchor)
+        void ScrollToAnchor(string anchor = "", bool forceScroll = false)
         {
-            if (ComponentContext.IsConnected && (!string.IsNullOrEmpty(anchor) || ForceScroll))
-            {
+            if (!string.IsNullOrEmpty(anchor) || forceScroll)
                 JSRuntime.InvokeAsync<string>("scrollToAnchor", anchor);
-                return true;
-            }
-
-            return false;
         }
 
         void IDisposable.Dispose()
         {
-            UriHelper.OnLocationChanged -= OnLocationChanged;
+            NavigationManager.LocationChanged -= OnLocationChanged;
         }
     }
 }

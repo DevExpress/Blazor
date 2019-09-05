@@ -1,9 +1,8 @@
 ﻿@inherits LayoutComponentBase
 @implements IDisposable
 
-@inject Microsoft.AspNetCore.Components.IUriHelper UriHelper
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @inject IJSRuntime JSRuntime
-@inject Microsoft.AspNetCore.Components.IComponentContext ComponentContext
 
 @using Microsoft.JSInterop;
 
@@ -46,8 +45,6 @@
 @code {
     bool collapseNavMenu = true;
 
-    bool navigationToTargetAllowed = true;
-
     string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
     void ToggleNavMenu()
@@ -61,7 +58,6 @@
         get => themeSwitcherShown;
         set {
             themeSwitcherShown = value;
-            navigationToTargetAllowed = false;
             InvokeAsync(StateHasChanged); }
     }
 
@@ -78,7 +74,7 @@
 
     void OnLocationChanged(object sender, LocationChangedEventArgs args)
     {
-        UriFragment = UriHelper.ToAbsoluteUri(args.Location).Fragment;
+        JSRuntime.InvokeAsync<string>("ScrollToTarget", NavigationManager.ToAbsoluteUri(args.Location).Fragment);
         if (!collapseNavMenu)
         {
             collapseNavMenu = true;
@@ -89,21 +85,20 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        UriHelper.OnLocationChanged += OnLocationChanged;
+        NavigationManager.LocationChanged += OnLocationChanged;
     }
 
-    protected override Task OnAfterRenderAsync()
+    protected override Task OnAfterRenderAsync(bool firstRender)
     {
-        if (navigationToTargetAllowed && ComponentContext.IsConnected)
+        if (firstRender)
         {
-            JSRuntime.InvokeAsync<string>("ScrollToTarget", UriFragment);
+            JSRuntime.InvokeAsync<string>("ScrollToTarget");
         }
-        navigationToTargetAllowed = true;
-        return base.OnAfterRenderAsync();
+        return base.OnAfterRenderAsync(firstRender);
     }
 
     void IDisposable.Dispose()
     {
-        UriHelper.OnLocationChanged -= OnLocationChanged;
+        NavigationManager.LocationChanged -= OnLocationChanged;
     }
 }

@@ -23,15 +23,36 @@ namespace Demo.Blazor.Services
                 Summary = Summaries[rng.Next(Summaries.Length)]
             }).ToList();
         }
+        private List<WeatherForecast> CreateDetailedForecast() {
+            var rng = new Random();
+            DateTime startDate = DateTime.Now.Date;
+            return Enumerable.Range(1, 15).SelectMany(day => { 
+                var dayDate = startDate.AddDays(day);
+                int avgTemp = rng.Next(-20, 55);
+                int minTemp = Math.Max(-20, avgTemp - 10);
+                int maxTemp = Math.Min(55, avgTemp + 10);
+                return Enumerable.Range(0, 24).Select(hour => new WeatherForecast
+                {
+                    Date = dayDate.AddHours(hour),
+                    TemperatureC = rng.Next(minTemp, maxTemp),
+                    Summary = Summaries[rng.Next(Summaries.Length)]
+                });
+            }).ToList();
+        }
 
         private List<WeatherForecast> Forecasts { get; set; }
+        private List<WeatherForecast> DetailedForecast { get; set; }
         public WeatherForecastService()
         {
             Forecasts = CreateForecast();
+            DetailedForecast = CreateDetailedForecast();
         }
         public Task<WeatherForecast[]> GetForecastAsync()
         {
             return Task.FromResult(Forecasts.ToArray());
+        }
+        public Task<WeatherForecast[]> GetDetailedForecastAsync() {
+            return Task.FromResult(DetailedForecast.ToArray());
         }
         public Task<string[]> GetSummariesAsync()
         {

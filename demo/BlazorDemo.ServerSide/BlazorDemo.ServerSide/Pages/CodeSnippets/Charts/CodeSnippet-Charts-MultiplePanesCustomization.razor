@@ -1,0 +1,16 @@
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet>
+@(@"<DxChart Data=""@WeatherForecasts"">
+    <DxChartTitle Text=""@($""Temperature in {DateTime.Now.ToString(""MMMM"")}"")"" />
+    <DxChartLegend Position=""@RelativePosition.Outside"" VerticalAlignment=""@VerticalEdge.Bottom"" />
+    <DxChartPane Name=""TopPane"" />
+    <DxChartPane Name=""BottomPane"" />
+    <DxChartBarSeries Pane=""TopPane"" Name=""Average Temperature, F"" AggregationMethod=""@Enumerable.Average"" ArgumentField=""@(s => s.Date.Day)"" ValueField=""@((WeatherForecast s) => s.TemperatureF)"" />
+    <DxChartLineSeries Pane=""BottomPane"" Name=""Max Temperature, F"" AggregationMethod=""@Enumerable.Max"" ArgumentField=""@(s => s.Date.Day)"" ValueField=""@((WeatherForecast s) => s.TemperatureF)"" />
+    <DxChartLineSeries Pane=""BottomPane"" Name=""Min Temperature, F"" AggregationMethod=""@Enumerable.Min"" ArgumentField=""@(s => s.Date.Day)"" ValueField=""@((WeatherForecast s) => s.TemperatureF)"" />
+</DxChart>")
+        </CodeSnippet>
+    </div>
+</div>

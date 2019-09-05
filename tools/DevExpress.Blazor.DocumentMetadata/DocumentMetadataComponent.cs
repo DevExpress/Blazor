@@ -3,14 +3,14 @@ using System.Linq;
 using System.Text;
 using DevExpress.Blazor.Internal;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.RenderTree;
+using Microsoft.AspNetCore.Components.Rendering;
 
 namespace DevExpress.Blazor.DocumentMetadata
 {
     public class DocumentMetadataComponent : ComponentBase, IDisposable
     {
         [Inject] public IDocumentMetadataContainerOwner MetadataContainerOwner { get; set; }
-        [Inject] public IUriHelper UriHelper { get; set; }
+        [Inject] public NavigationManager UriHelper { get; set; }
 
         [Parameter] public RenderFragment ChildContent { get; set; }
 
@@ -48,7 +48,7 @@ namespace DevExpress.Blazor.DocumentMetadata
 
     public class DocumentMetadataEntityComponent : ComponentBase, IDisposable
     {
-        [Inject] public IUriHelper UriHelper { get; set; }
+        [Inject] public NavigationManager UriHelper { get; set; }
         [Inject] public IDocumentMetadataContainerOwner MetadataContainerOwner { get; set; }
         [Parameter] public MetadataEntity EntityOrigin { get; set; }
         [Parameter] public string TitleFormat { get; set; }

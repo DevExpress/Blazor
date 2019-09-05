@@ -3,7 +3,7 @@
 @inject FlatProductService FlatProductService
 
 <div class="demo-description">
-    <h2>Data Grid - Single Data Row Selection</h2>
+    <h2>Data Grid - Single Row Selection</h2>
     <p>The Data Grid component allows users to click a row to select it. Use the <b>SingleSelectedDataRow</b> property to specify the selected data row in code. To track selection changes in this mode, use the <b>SingleSelectedDataRowChanged</b> event or the two-way synchronization as demonstrated in this module.</p>
 </div>
 
@@ -18,8 +18,8 @@ else
     </div>
 
     <DxDataGrid Data="@DataSource"
-                @bind-SingleSelectedDataRow="@SelectedProduct"
-                ShowFilterRow="false">
+        @bind-SingleSelectedDataRow="@SelectedProduct"
+        ShowFilterRow="false">
         <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name"></DxDataGridColumn>
         <DxDataGridColumn Field="@nameof(ProductFlat.Category)"></DxDataGridColumn>
         <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)"></DxDataGridColumn>

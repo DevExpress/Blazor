@@ -1,5 +1,5 @@
 ﻿@inject IJSRuntime JSRuntime
-@inject IComponentContext ComponentContext
+@*@inject IComponentContext ComponentContext*@
 @using Microsoft.JSInterop;
 
 @if (Visible) { 
@@ -12,8 +12,9 @@
 
     [Parameter] public bool Visible { get; set; } = true;
 
-    protected override void OnAfterRender() {
-        if (ComponentContext.IsConnected) {
+    protected override void OnAfterRender(bool firstRender) {
+        //if (ComponentContext.IsConnected) {
+        if (firstRender) {
             JSRuntime.InvokeAsync<string>("HighlightJSUpdate");
         }
     }

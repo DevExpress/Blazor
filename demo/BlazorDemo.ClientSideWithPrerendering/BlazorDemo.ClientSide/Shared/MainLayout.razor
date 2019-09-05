@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
-@inject Microsoft.AspNetCore.Components.IUriHelper UriHelper
+@inject Microsoft.AspNetCore.Components.NavigationManager UriHelper
 
 <div class="sidebar">
     <div class="top-row logo-container pl-4 navbar-dark bg-light text-body">
@@ -63,7 +63,7 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        UriHelper.OnLocationChanged += (sender, args) => {
+        UriHelper.LocationChanged += (sender, args) => {
             if(!collapseNavMenu) {
                 collapseNavMenu = true;
                 InvokeAsync(StateHasChanged);

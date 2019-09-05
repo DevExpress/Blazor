@@ -151,19 +151,19 @@ namespace DevExpress.Blazor.Internal
         public DocumentMetadataContainer Metadata { get; } = new DocumentMetadataContainer();
 
         protected IDocumentMetadataSettingsProvider MetadataProvider { get; private set; }
-        protected IUriHelper UriHelper { get; private set; }
+        protected NavigationManager UriHelper { get; private set; }
 
         protected Action RevertPageSpecificMetaData { get; private set; }
         protected string PageName { get; private set; }
         protected List<MetadataEntity> RenderedScripts { get; private set; } = new List<MetadataEntity>();
 
-        public DocumentMetadataService(IDocumentMetadataSettingsProvider metadataProvider, IUriHelper uriHelper)
+        public DocumentMetadataService(IDocumentMetadataSettingsProvider metadataProvider, NavigationManager uriHelper)
         {
             UriHelper = uriHelper;
             MetadataProvider = metadataProvider;
-            UriHelper.OnLocationChanged += OnLocationChanged;
+            UriHelper.LocationChanged += OnLocationChanged;
             MetadataProvider.GetDefault()?.Apply(Metadata);
-            LoadMetadataForPage(GetPageNameByLocation(UriHelper.GetAbsoluteUri()));
+            LoadMetadataForPage(GetPageNameByLocation(UriHelper.Uri));
         }
 
         public void Update(Action<IDocumentMetadataBuilder> update)
@@ -192,12 +192,12 @@ namespace DevExpress.Blazor.Internal
             }
         }
 
-        string GetPageNameByLocation(string location) => UriHelper.ToBaseRelativePath(UriHelper.GetBaseUri(), location);
+        string GetPageNameByLocation(string location) => UriHelper.ToBaseRelativePath(location);
 
         void IDisposable.Dispose()
         {
             if(UriHelper != null)
-                UriHelper.OnLocationChanged -= OnLocationChanged;
+                UriHelper.LocationChanged -= OnLocationChanged;
             MetadataProvider = null;
             UriHelper = null;
             RevertPageSpecificMetaData = null;
@@ -218,9 +218,9 @@ namespace DevExpress.Blazor.Internal
         }
         public string ResolveUrl(string url) {
             if (url.StartsWith("~/")) {
-                string baseUrl = UriHelper.GetBaseUri();
+                string baseUrl = UriHelper.BaseUri;
                 string absoluteUrl = baseUrl + url.Substring(2);
-                url = UriHelper.ToBaseRelativePath(baseUrl, absoluteUrl);
+                url = UriHelper.ToBaseRelativePath(absoluteUrl);
                 url = UriHelper.ToAbsoluteUri(url).PathAndQuery;
             }
             return url;

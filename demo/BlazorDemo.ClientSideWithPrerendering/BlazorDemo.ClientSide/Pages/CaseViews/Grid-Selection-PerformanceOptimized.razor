@@ -19,7 +19,7 @@ else
         <div class="card-header border-bottom-0">The total count of selected rows: <b>@SelectedCount</b> (stored selected rows: <b>@StoredSelectedCount</b>, stored unselected rows: <b>@StoredUnselectedCount</b>)</div>
     </div>
 
-    <DxDataGrid Data="@DataSource" @ref="@grid" @ref:suppressField
+    <DxDataGrid Data="@DataSource" @ref="@grid"
                 KeyFieldName="Id"
                 SelectionMode="DataGridSelectionMode.OptimizedMultipleSelection"
                 SelectAllMode="DataGridSelectAllMode.AllPages"
@@ -57,7 +57,7 @@ else
         DataSource = await FlatProductService.Load();
     }
 
-    protected override Task OnAfterRenderAsync()
+    protected override Task OnAfterRenderAsync(bool firstRender)
     {
         if (SetInitialSelection)
         {
@@ -66,7 +66,7 @@ else
                 grid.SetDataRowSelected(product, true);
             SetInitialSelection = false;
         }
-        return base.OnAfterRenderAsync();
+        return base.OnAfterRenderAsync(firstRender);
     }
 
     protected void OnSelectionChanged(DataGridSelection<ProductFlat> selection)
