@@ -15,6 +15,7 @@ The following table describes the version compatibility of .NET Core 3.0 Preview
 
 | .NET Core 3.0 version | DevExpress.Blazor.nuget version |
 | ------------- | ------------- |
+| [.NET Core 3.0 RC1](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-release-candidate-1/) | **0.3.3 Beta** |
 | [.NET Core 3.0 Preview **9**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-9/) | **0.3.2 Beta** |
 | [.NET Core 3.0 Preview **9**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-9/) | **0.3.1 Beta** |
 | [.NET Core 3.0 Preview **8**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-8/) | **0.3.0 Beta** |
