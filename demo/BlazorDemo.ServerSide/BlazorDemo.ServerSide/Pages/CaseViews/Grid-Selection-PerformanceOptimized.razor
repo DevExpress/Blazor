@@ -44,8 +44,6 @@ else
 
     IQueryable<ProductFlat> DataSource;
 
-    bool SetInitialSelection { get; set; } = true;
-
     int SelectedCount { get; set; }
 
     int StoredSelectedCount { get; set; }
@@ -59,12 +57,11 @@ else
 
     protected override Task OnAfterRenderAsync(bool firstRender)
     {
-        if (SetInitialSelection)
+        if (firstRender)
         {
             var products = DataSource.Take(10).AsEnumerable().Where((p, i) => i % 2 != 0);
             foreach (var product in products)
                 grid.SetDataRowSelected(product, true);
-            SetInitialSelection = false;
         }
         return base.OnAfterRenderAsync(firstRender);
     }

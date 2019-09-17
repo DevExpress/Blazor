@@ -46,6 +46,7 @@ namespace BlazorDemo.ServerSide
                 options.UseSqlServer("YOUR CONNECTION STRING HERE"));
 
             services.AddSingleton<IOptions<DemoConfiguration>, ClientSideDemoConfiguration>();
+            services.AddSingleton<SalesViewerService>();
             services.AddTransient<ProductService>();
             services.AddSingleton<FlatProductService>();
             services.AddSingleton<CountryNamesService>();

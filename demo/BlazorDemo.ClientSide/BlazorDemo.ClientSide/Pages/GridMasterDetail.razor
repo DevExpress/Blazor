@@ -1,8 +1,8 @@
 ﻿@page "/GridMasterDetail"
 
-@using Demo.Blazor.Model
+@using Demo.Blazor.Model.SalesViewer
 @using Demo.Blazor.Services
-@inject FlatProductService FlatProductService
+@inject SalesViewerService SalesViewerService
 
 <div class="demo-description">
     <h2>Data Grid - Master-Detail View</h2>
@@ -24,29 +24,68 @@
 </div>
 
 
-<DxDataGrid Data="@ProductCategories.DataSource" AutoCollapseDetailRow="true" SelectionMode="DataGridSelectionMode.None">
-    <ChildContent>
-        <DxDataGridColumn Field="@nameof(ProductCategory.ProductSubcategoryID)" Caption="ID" AllowSort="@DefaultBoolean.False" Width="50px"></DxDataGridColumn>
-        <DxDataGridColumn Field="@nameof(ProductCategory.Subcategory)" SortOrder="@DataGridColumnSortOrder.Descending" SortIndex="0"></DxDataGridColumn>
-        <DxDataGridColumn Field="@nameof(ProductCategory.Category)" SortOrder="@DataGridColumnSortOrder.Ascending" SortIndex="1"></DxDataGridColumn>
-    </ChildContent>
-    <DetailRowTemplate>
-        <div class="card border-0">
-            <div class="card-body">
-                <h5 class="card-title">Available Products</h5>
-                <div>
-                    <DxDataGrid ShowPager="false" PageSize="10" SelectionMode="DataGridSelectionMode.None" Data="@ProductsDataSource.Where(x => x.ProductCategoryId == context.ProductSubcategoryID && x.Availability)">
-                        <ChildContent>
-                            <DxDataGridColumn Field="@nameof(ProductFlat.Id)" Caption="ID" AllowSort="@DefaultBoolean.False" Width="50px"></DxDataGridColumn>
-                            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" SortOrder="@DataGridColumnSortOrder.Descending" SortIndex="0"></DxDataGridColumn>
-                            <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)" SortOrder="@DataGridColumnSortOrder.Ascending" SortIndex="1"></DxDataGridColumn>
-                        </ChildContent>
-                    </DxDataGrid>
-                </div>
-            </div>
-        </div>
-    </DetailRowTemplate>
-</DxDataGrid>
+@if (ProductsDataSource != null)
+{
+    <DxDataGrid @ref="@grid" Data="@ProductsDataSource" AutoCollapseDetailRow="true" ShowDetailRow="true" SelectionMode="DataGridSelectionMode.None" PageSize="4">
+        <ChildContent>
+            <DxDataGridColumn Field="@nameof(Product.Name)" />
+            <DxDataGridColumn Field="@nameof(Product.Description)" />
+            <DxDataGridColumn Field="@nameof(Product.ListPrice)" />
+            <DxDataGridColumn Field="@nameof(Product.UnitsInInventory)" />
+            <DxDataGridColumn Field="@nameof(Product.UnitsInManufacturing)" />
+        </ChildContent>
+        <DetailRowTemplate>
+            <DxTabs>
+                <DxTabPage Text="Sales">
+                    <div class="p-3">
+                        @if (SalesDataSource != null)
+                        {
+                            <DxDataGrid SelectionMode="DataGridSelectionMode.None" Data="@SalesDataSource.Where(x => x.ProductId == context.Id)">
+                                <DxDataGridColumn Field="@nameof(Sale.SaleDate)" />
+                                <DxDataGridColumn Field="@nameof(Sale.Units)" />
+                                <DxDataGridColumn Field="@nameof(Sale.TotalCost)" />
+                                <DxDataGridColumn Field="@nameof(Sale.Discount)" />
+                            </DxDataGrid>
+                        }
+                        else
+                        {
+                            <em>Loading Sales...</em>
+                        }
+                    </div>
+                </DxTabPage>
+                <DxTabPage Text="Plant Info">
+                    @{
+                        var plantInfo = PlantsDataSource?.FirstOrDefault(x => x.Id == context.PlantId);
+                    }
+                    @if (plantInfo != null)
+                    {
+                        <div class="p-3">
+                            <b>Name:</b>
+                            <p>
+                                @plantInfo.Name
+                            </p>
+                            <b>Address:</b>
+                            <p>
+                                @plantInfo.Address
+                            </p>
+                            <b>Zip:</b>
+                            <p>
+                                @plantInfo.Zip
+                            </p>
+                        </div>
+                    }
+                    else
+                    {
+                        <em>Loading Plant Info...</em>
+                    }
+                </DxTabPage>
+            </DxTabs>
+        </DetailRowTemplate>
+    </DxDataGrid>
+} else
+{
+    <em>Loading...</em>
+}
 <div class="code-snippet card demo-card-wide">
     <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted ">
@@ -56,10 +95,27 @@
 
 
 @code {
-    IQueryable<ProductFlat> ProductsDataSource;
+
+    IEnumerable<Product> ProductsDataSource;
+    IEnumerable<Sale> SalesDataSource;
+    IEnumerable<Plant> PlantsDataSource;
+
+    DxDataGrid<Product> grid;
+    bool expandedRowInitialized;
 
     protected override async Task OnInitializedAsync()
     {
-        ProductsDataSource = await FlatProductService.Load();
+        ProductsDataSource = await SalesViewerService.GetProducts();
+        SalesDataSource = await SalesViewerService.GetSales();
+        PlantsDataSource = await SalesViewerService.GetPlants();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!expandedRowInitialized)
+        {
+            grid.DetailRows.ExpandRow(ProductsDataSource.First());
+            expandedRowInitialized = true;
+        }
+        await base.OnAfterRenderAsync(firstRender);
     }
 }

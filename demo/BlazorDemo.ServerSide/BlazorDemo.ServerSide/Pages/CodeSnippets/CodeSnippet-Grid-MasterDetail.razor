@@ -1,25 +1,58 @@
 ﻿<CodeSnippet>
-@(@"<DxDataGrid Data=""@ProductCategories.DataSource"" AutoCollapseDetailRow=""true"" ShowFilterRow=""true"">
-    <ChildContent>
-        <DxDataGridColumn Field=""@nameof(ProductCategory.ProductSubcategoryID)"" Caption=""ID"" AllowSort=""@DefaultBoolean.False"" Width=""50px""></DxDataGridColumn>
-        <DxDataGridColumn Field=""@nameof(ProductCategory.Subcategory)"" SortOrder=""@DataGridColumnSortOrder.Descending"" SortIndex=""0""></DxDataGridColumn>
-        <DxDataGridColumn Field=""@nameof(ProductCategory.Category)"" SortOrder=""@DataGridColumnSortOrder.Ascending"" SortIndex=""1""></DxDataGridColumn>
-    </ChildContent>
-    <DetailRowTemplate>
-        <div class=""card border-0"">
-            <div class=""card-body"">
-                <h5 class=""card-title"">Available Products</h5>
-                <div>
-                    <DxDataGrid ShowPager=""false"" PageSize=""10"" Data=""@ProductsDataSource.Where(x => x.ProductCategoryId == context.ProductSubcategoryID && x.Availability)"">
-                        <ChildContent>
-                            <DxDataGridColumn Field=""@nameof(ProductFlat.Id)"" Caption=""ID"" AllowSort=""@DefaultBoolean.False"" Width=""50px""></DxDataGridColumn>
-                            <DxDataGridColumn Field=""@nameof(ProductFlat.ProductName)"" SortOrder=""@DataGridColumnSortOrder.Descending"" SortIndex=""0""></DxDataGridColumn>
-                            <DxDataGridColumn Field=""@nameof(ProductFlat.Subcategory)"" SortOrder=""@DataGridColumnSortOrder.Ascending"" SortIndex=""1""></DxDataGridColumn>
-                        </ChildContent>
-                    </DxDataGrid>
-                </div>
-            </div>
-        </div>
-    </DetailRowTemplate>
+@(@"<DxDataGrid @ref=""@grid"" Data=""@ProductsDataSource"" AutoCollapseDetailRow=""true"" ShowDetailRow=""true"" SelectionMode=""DataGridSelectionMode.None"" PageSize=""4"">
+	<ChildContent>
+		<DxDataGridColumn Field=""@nameof(Product.Name)"" />
+		<DxDataGridColumn Field=""@nameof(Product.Description)"" />
+		<DxDataGridColumn Field=""@nameof(Product.ListPrice)"" />
+		<DxDataGridColumn Field=""@nameof(Product.UnitsInInventory)"" />
+		<DxDataGridColumn Field=""@nameof(Product.UnitsInManufacturing)"" />
+	</ChildContent>
+	<DetailRowTemplate>
+		<DxTabs>
+			<DxTabPage Text=""Sales"">
+				<div class=""p-3"">
+					@if (SalesDataSource != null)
+					{
+						<DxDataGrid SelectionMode=""DataGridSelectionMode.None"" Data=""@SalesDataSource.Where(x => x.ProductId == context.Id)"">
+							<DxDataGridColumn Field=""@nameof(Sale.SaleDate)"" />
+							<DxDataGridColumn Field=""@nameof(Sale.Units)"" />
+							<DxDataGridColumn Field=""@nameof(Sale.TotalCost)"" />
+							<DxDataGridColumn Field=""@nameof(Sale.Discount)"" />
+						</DxDataGrid>
+					}
+					else
+					{
+						<em>Loading Sales...</em>
+					}
+				</div>
+			</DxTabPage>
+			<DxTabPage Text=""Plant Info"">
+				@{
+					var plantInfo = PlantsDataSource?.FirstOrDefault(x => x.Id == context.PlantId);
+				}
+				@if (plantInfo != null)
+				{
+					<div class=""p-3"">
+						<b>Name:</b>
+						<p>
+							@plantInfo.Name
+						</p>
+						<b>Address:</b>
+						<p>
+							@plantInfo.Address
+						</p>
+						<b>Zip:</b>
+						<p>
+							@plantInfo.Zip
+						</p>
+					</div>
+				}
+				else
+				{
+					<em>Loading Plant Info...</em>
+				}
+			</DxTabPage>
+		</DxTabs>
+	</DetailRowTemplate>
 </DxDataGrid>")
 </CodeSnippet>

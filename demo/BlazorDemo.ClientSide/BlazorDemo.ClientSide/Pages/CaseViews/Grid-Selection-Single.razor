@@ -18,8 +18,8 @@ else
     </div>
 
     <DxDataGrid Data="@DataSource"
-        @bind-SingleSelectedDataRow="@SelectedProduct"
-        ShowFilterRow="false">
+                @bind-SingleSelectedDataRow="@SelectedProduct"
+                ShowFilterRow="false">
         <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name"></DxDataGridColumn>
         <DxDataGridColumn Field="@nameof(ProductFlat.Category)"></DxDataGridColumn>
         <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)"></DxDataGridColumn>

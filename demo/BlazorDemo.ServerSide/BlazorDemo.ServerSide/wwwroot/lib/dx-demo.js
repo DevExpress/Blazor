@@ -1,8 +1,12 @@
 ﻿hljs.initHighlightingOnLoad();
 function HighlightJSUpdate() {
-    Array.prototype.slice.call(document.querySelectorAll('pre code')).forEach(function(block) {
-        hljs.highlightBlock(block);
-    });
+    window.setTimeout(function() {
+        Array.prototype.slice.call(document.querySelectorAll('pre code')).forEach(function(block) {
+            if(block["highlighted"]) return;
+            block["highlighted"] = true;
+            hljs.highlightBlock(block);
+        });
+    }, 0);
 }
 
 function ScrollToTarget(targetSelector) {

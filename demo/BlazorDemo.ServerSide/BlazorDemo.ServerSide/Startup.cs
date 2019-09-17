@@ -12,10 +12,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Demo.Blazor.Services;
 using Demo.Blazor.Model;
+using Demo.Blazor.Model.SalesViewer;
 using Microsoft.EntityFrameworkCore;
 using Demo.Blazor;
 using DevExpress.Blazor.DocumentMetadata;
 using Microsoft.Extensions.Options;
+using DevExpress.Blazor;
 
 namespace BlazorDemo.ServerSide
 {
@@ -48,6 +50,7 @@ namespace BlazorDemo.ServerSide
             services.AddTransient<ProductService>();
             services.AddSingleton<FlatProductService>();
             services.AddSingleton<CountryNamesService>();
+            services.AddSingleton<SalesViewerService>();
             services.AddDocumentMetadata((serviceProvider, registrator) =>
             {
                 DemoConfiguration config = serviceProvider.GetService<IOptions<DemoConfiguration>>().Value;

@@ -1,4 +1,4 @@
-using Demo.Blazor.Services;
+﻿using Demo.Blazor.Services;
 using Demo.Blazor;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +24,7 @@ namespace BlazorDemo.ClientSide
             services.AddTransient<ProductService>();
             services.AddSingleton<FlatProductService>();
             services.AddSingleton<CountryNamesService>();
+            SalesViewerService.RegisterSingleton(services);
         }
 
         public void Configure(IComponentsApplicationBuilder app)
