@@ -9,6 +9,10 @@ The DevExpress UI components featured in this demo are available for free downlo
  
 Check out this [demo in live](https://demos.devexpress.com/blazor/).
 
+# Examples 
+
+DevExpress Blazor components are shipped with GitHub feature-based examples. Refer to [examples.md](examples.md) for more information.
+
 # Version compatibility
 
 The following table describes the version compatibility of .NET Core 3.0 Preview and the DevExpress.Blazor NuGet package:
@@ -160,12 +164,22 @@ The following DevExpress Blazor products are available free-of-charge:
 
 # Troubleshooting
 
-## 1. Could not find 'X' in 'window.DxBlazor'.
+## 1. There was an unhandled exception on the current circuit, so this circuit will be terminated. For more details turn on detailed exceptions in 'CircuitOptions.DetailedErrors'.
+
+If you see this error message or a similar message, add the following code to the `ConfigureServices` method declared in the *Startup.cs* file: 
+
+```cs
+services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; });
+```
+
+This provides more detailed information about these errors. 
+
+## 2. Could not find 'X' in 'window.DxBlazor'.
 Earlier, our clients' scripts were manually added to a project. Now, we automatically distribute them with the NuGet Package in the lib/dx-blazor folder (see the 6th item of the [How to create a new project](https://github.com/devexpress/blazor#how-to-create-a-new-project) paragraph). So, our users may face such an issue if they reference an old version of our static files instead of the new one. For example, a similar issue was discussed in the [I have a formlayout error when running a Blazor website](https://stackoverflow.com/questions/57593583/i-have-a-formlayout-error-when-running-a-blazor-website) SO thread.
  
 If solutions suggested there do not help, create an issue here or submit a ticket in our [Support Center](https://www.devexpress.com/Support/Center/Question/Create) so that we can investigate your case.
 
-## 2. DxDataGrid in Blazor
+## 3. DxDataGrid in Blazor
 
 If you use Blazor (client-side) with DxDataGrid, you may see the following exception in a browser:
 
@@ -208,7 +222,17 @@ So, the **Linker.xml** file should look as follows:
 </linker>
 ```
 
-## 3. The "Early Access" NuGet Feed is empty in Visual Studio
+## 4. DxTabs are rendered incorrectly when the default Microsoft template is applied
+
+If you create a new Blazor project based on the default Microsoft project template, the first tab of the DxTabs component can be rendered incorrectly.
+
+This is caused by the following Microsoft issues:
+* https://github.com/aspnet/AspNetCore/issues/11267
+* https://github.com/aspnet/Blazor/issues/1203
+
+To resolve this issue, write more strict style rules in the *site.css* file so that they only apply `.navbar` templates.
+
+## 5. The "Early Access" NuGet Feed is empty in Visual Studio
 
 If you don't see packages in the ```https://nuget.devexpress.com/early-access/api``` NuGet feed, make sure that the "Include prerelease" option is selected:
 ![Include prerelease](media/VisualStudio2019NuGetIncludePrerelease.png)
