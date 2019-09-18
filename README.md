@@ -5,6 +5,16 @@ The DevExpress UI components featured in this demo are available for free downlo
 
 > \* Like any software preview, the DevExpress UI for Blazor is not without fault. You should not use these products in production environments or in mission-critical applications.
 
+* [Live Demo](#live-demo)
+* [Examples](#examples)
+* [Version Compatibility](#version-compatibility)
+* [Set Up Your Environment](#set-up-your-environment)
+* [How to Run This Demo Locally](#how-to-run-this-demo-locally)
+* [How to Create a New Project](#how-to-create-a-new-project)
+* [Free Blazor Utilities and Dev Tools](#free-blazor-utilities-and-dev-tools)
+* [Troubleshooting](#troubleshooting)
+* [Included Demo Modules](#included-demo-modules)
+
 # Live Demo
  
 Check out this [demo in live](https://demos.devexpress.com/blazor/).
@@ -13,7 +23,7 @@ Check out this [demo in live](https://demos.devexpress.com/blazor/).
 
 DevExpress Blazor components are shipped with GitHub feature-based examples. Refer to [examples.md](examples.md) for more information.
 
-# Version compatibility
+# Version Compatibility
 
 The following table describes the version compatibility of .NET Core 3.0 Preview and the DevExpress.Blazor NuGet package:
 
@@ -36,7 +46,7 @@ The following table describes the version compatibility of .NET Core 3.0 Preview
 | .NET Core 3.0 Preview **4** | 0.0.**4** |
 | .NET Core 3.0 Preview **3** | 0.0.**3** |
 
-# Set up your environment
+# Set Up Your Environment
 
 1. Install the latest Visual Studio 2019 update.
 2. Ensure that you have the latest .NET Core 3 version (from supported versions listed above) installed.
@@ -50,7 +60,7 @@ or here:
 
 ![Create New ASP.NET Core Web Application Project"](media/VS2019Release-EnablePreviewSDK_2.png)
 
-# How to run this demo locally
+# How to Run This Demo Locally
 
 The Blazor framework uses either WebAssembly-based .NET runtime (**client-side Blazor**) or server-side ASP.NET Core (**server-side Blazor**). Our Blazor components support both of these approaches. 
 
@@ -83,7 +93,7 @@ See also:
 
 [Official Microsoft Blazor site](https://dotnet.microsoft.com/apps/aspnet/web-apps/client)
 
-# How to create a new project
+# How to Create a New Project
 
 Follow the steps below to try our UI for Blazor in your own application. 
 
