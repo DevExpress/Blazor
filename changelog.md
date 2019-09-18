@@ -2,7 +2,28 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
-# Beta 3 (latest release)
+# 0.3.3 (latest release)
+ 
+### Added
+* Support for .NET Core 3.0 Release Candidate 1
+
+# 0.3.2
+ 
+### Added
+Form Layout    
+* Build group layouts for different screen resolutions. Use the DxFormLayoutGroup class' ColSpanXX properties to specify the width of layout groups for different screens. 	
+* Build tabbed layouts for different screen resolutions. Use the DxFormLayoutTabPages class' ColSpanXX properties to specify the width of layout tabs for different screens.
+ 
+### Fixed
+* [DevExpress/Blazor: Issue #40](https://github.com/DevExpress/Blazor/issues/40) 	
+* [DevExpress/Blazor: Issue #43](https://github.com/DevExpress/Blazor/issues/43)
+
+# 0.3.1
+
+### Added
+* Support for NET Core 3.0 Preview 9
+
+# Beta 3 
 
 ### Added
 * Data Grid
