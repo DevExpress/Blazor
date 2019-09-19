@@ -2,7 +2,25 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
-# 0.3.3 (latest release)
+# RC (latest release)
+
+### New Components
+* Calendar
+* ListBox
+* Popup
+
+### Added
+* Data Grid 
+  * Bind to ExpandoObjects instances
+  * Bind to complex data objects 
+  * Filter Row enhancements
+* Charts - New series types: Financial, Range, Pie, and Donut 
+
+### Changed API
+* *ComboBoxDataLoadMode {Default, VirtualScrolling}* renamed to *ListRenderMode {Entire, Virtual}*
+* *DxComboBox.DataLoadMode* renamed to *DxComboBox.ListRenderMode*
+
+# 0.3.3
  
 ### Added
 * Support for .NET Core 3.0 Release Candidate 1

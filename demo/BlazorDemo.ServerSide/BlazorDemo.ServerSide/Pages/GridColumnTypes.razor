@@ -38,6 +38,7 @@ else
 {
     <DxDataGrid Data="@forecasts"
                 PageSize="5"
+                ShowFilterRow="false"
                 RowRemoving="@((dataItem) => OnRowRemoving(dataItem))"
                 RowUpdating="@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))"
                 RowInserting="@((newValues) => OnRowInserting(newValues))">

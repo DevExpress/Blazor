@@ -308,6 +308,12 @@ div.content > .card:last-child {
     mask-image: url("../images/Pager.svg");
     -webkit-mask-image: url("../images/Pager.svg");
 }
+.demo-icon-info {
+    width: 20px;
+    height: 20px;
+    mask-image: url("../images/Info.svg");
+    -webkit-mask-image: url("../images/Info.svg");
+}
 
 .demo-description:not(:first-child) > h2 {
     margin-top: 32px;
@@ -373,4 +379,37 @@ div.content > .card:last-child {
 }
 .demo-charts-seriestypes.card-deck .dx-listbox-scrollable {
     max-height: none !important;
+}
+
+.target-container:before {
+    content: "Click to show popup";
+    text-transform: uppercase;
+    line-height: 190px;
+}
+.target-container {
+    height: 200px;
+    text-align: center;
+    cursor: pointer;
+}
+.custom-popup .modal-header {
+    padding: 0;
+}
+.custom-popup .custom-header {
+    padding: 0.3rem 0;
+    font-size: 1.4rem;
+    justify-content: right;
+    display: flex;
+    align-items: center;
+}
+.custom-popup .demo-icon-info {
+    margin: 0 0.5rem 0 0.6rem;
+}
+.custom-popup .custom-header .close-button {
+    font-size: 0.9rem;
+    margin-left: auto;
+    margin-bottom: 0.2rem;
+    margin-right: 0.9rem;
+}
+.custom-popup .modal-body {
+    padding-top: 0.6rem;
 }

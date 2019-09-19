@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Demo.Blazor.Model.SalesViewer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Demo.Blazor.Services {
     public class SalesViewerService {
@@ -42,5 +43,13 @@ namespace Demo.Blazor.Services {
         public Task<IEnumerable<Region>> GetRegions() => GetDataTable(d => d.Regions);
         public Task<IEnumerable<Sale>> GetSales() => GetDataTable(d => d.Sales);
         public Task<IEnumerable<Sector>> GetSectors() => GetDataTable(d => d.Sectors);
+    }
+
+    public static class SalesViewerServiceExtensions {
+        public static void AddSalesViewerService(this IServiceCollection serviceCollection) {
+            var serviceInstance = new SalesViewerService();
+            serviceCollection.AddSingleton<SalesViewerService>((serviceProvider) => serviceInstance);
+            Task.WaitAll(serviceInstance.GetSales());
+        }
     }
 }

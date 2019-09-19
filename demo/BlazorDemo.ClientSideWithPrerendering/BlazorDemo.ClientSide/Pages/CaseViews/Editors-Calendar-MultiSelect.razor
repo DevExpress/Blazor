@@ -1,0 +1,35 @@
+﻿@using Demo.Blazor.Model
+
+<div class="demo-description">
+    <h2>Calendar - Multi Select</h2>
+    <p>In this demo module, the <b>DxCalendar</b> component allows you to select several dates simultaneously. Click a date while you press Ctrl to add a date to the selection.</p>
+    <ul>
+        <li><b>EnableMultiSelect</b> - Specifies whether multiple date selection is enabled.</li>
+        <li><b>SelectedDates</b> - Specifies the collection of selected dates.</li>
+    </ul>
+</div>
+
+<div class="card demo-card border-0">
+    <div class="card-body">
+        <DxCalendar EnableMultiSelect="true" SelectedDates="@GetSelectedDates()" SelectedDatesChanged="@OnSelectedDatesChanged">
+        </DxCalendar>
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
+        <CodeSnippet_Editor_Calendar_MultiSelect></CodeSnippet_Editor_Calendar_MultiSelect>
+    </div>
+</div>
+
+@code {
+    List<DateTime> GetSelectedDates() {
+        DateTime baseDate = DateTime.Today;
+
+        return new List<DateTime>() { baseDate.AddDays(-9), baseDate.AddDays(-5), baseDate.AddDays(-4), baseDate.AddDays(6), baseDate.AddDays(12), baseDate.AddDays(13), baseDate.AddDays(15) };
+    }
+    void OnSelectedDatesChanged(IEnumerable<DateTime> days) {
+
+    }
+}

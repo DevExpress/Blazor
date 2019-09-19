@@ -1,58 +1,65 @@
 ﻿<CodeSnippet>
-@(@"<DxDataGrid @ref=""@grid"" Data=""@ProductsDataSource"" AutoCollapseDetailRow=""true"" ShowDetailRow=""true"" SelectionMode=""DataGridSelectionMode.None"" PageSize=""4"">
-	<ChildContent>
-		<DxDataGridColumn Field=""@nameof(Product.Name)"" />
-		<DxDataGridColumn Field=""@nameof(Product.Description)"" />
-		<DxDataGridColumn Field=""@nameof(Product.ListPrice)"" />
-		<DxDataGridColumn Field=""@nameof(Product.UnitsInInventory)"" />
-		<DxDataGridColumn Field=""@nameof(Product.UnitsInManufacturing)"" />
-	</ChildContent>
-	<DetailRowTemplate>
-		<DxTabs>
-			<DxTabPage Text=""Sales"">
-				<div class=""p-3"">
-					@if (SalesDataSource != null)
-					{
-						<DxDataGrid SelectionMode=""DataGridSelectionMode.None"" Data=""@SalesDataSource.Where(x => x.ProductId == context.Id)"">
-							<DxDataGridColumn Field=""@nameof(Sale.SaleDate)"" />
-							<DxDataGridColumn Field=""@nameof(Sale.Units)"" />
-							<DxDataGridColumn Field=""@nameof(Sale.TotalCost)"" />
-							<DxDataGridColumn Field=""@nameof(Sale.Discount)"" />
-						</DxDataGrid>
-					}
-					else
-					{
-						<em>Loading Sales...</em>
-					}
-				</div>
-			</DxTabPage>
-			<DxTabPage Text=""Plant Info"">
-				@{
-					var plantInfo = PlantsDataSource?.FirstOrDefault(x => x.Id == context.PlantId);
-				}
-				@if (plantInfo != null)
-				{
-					<div class=""p-3"">
-						<b>Name:</b>
-						<p>
-							@plantInfo.Name
-						</p>
-						<b>Address:</b>
-						<p>
-							@plantInfo.Address
-						</p>
-						<b>Zip:</b>
-						<p>
-							@plantInfo.Zip
-						</p>
-					</div>
-				}
-				else
-				{
-					<em>Loading Plant Info...</em>
-				}
-			</DxTabPage>
-		</DxTabs>
-	</DetailRowTemplate>
+@(@"<DxDataGrid @ref=""@grid"" 
+            Data=""@ProductsDataSource"" 
+            AutoCollapseDetailRow=""true"" 
+            ShowFilterRow=""false""
+            SelectionMode=""DataGridSelectionMode.None"" 
+            PageSize=""4"">
+    <ChildContent>
+        <DxDataGridColumn Field=""@nameof(Product.Name)"" />
+        <DxDataGridColumn Field=""@nameof(Product.Description)"" />
+        <DxDataGridSpinEditColumn Field=""@nameof(Product.ListPrice)"" />
+        <DxDataGridSpinEditColumn Field=""@nameof(Product.UnitsInInventory)"" />
+        <DxDataGridSpinEditColumn Field=""@nameof(Product.UnitsInManufacturing)"" />
+    </ChildContent>
+    <DetailRowTemplate>
+        <DxTabs>
+            <DxTabPage Text=""Sales"">
+                <div class=""p-3"">
+                    @if (SalesDataSource != null)
+                    {
+                        <DxDataGrid Data=""@SalesDataSource.Where(x => x.ProductId == context.Id)"" 
+                                    SelectionMode=""DataGridSelectionMode.None"" 
+                                    ShowFilterRow=""false"">
+                            <DxDataGridDateEditColumn Field=""@nameof(Sale.SaleDate)"" />
+                            <DxDataGridSpinEditColumn Field=""@nameof(Sale.Units)"" />
+                            <DxDataGridSpinEditColumn Field=""@nameof(Sale.TotalCost)"" />
+                            <DxDataGridSpinEditColumn Field=""@nameof(Sale.Discount)"" />
+                        </DxDataGrid>
+                    }
+                    else
+                    {
+                        <em>Loading Sales...</em>
+                    }
+                </div>
+            </DxTabPage>
+            <DxTabPage Text=""Plant Info"">
+                @{
+                    var plantInfo = PlantsDataSource?.FirstOrDefault(x => x.Id == context.PlantId);
+                }
+                @if (plantInfo != null)
+                {
+                    <div class=""p-3"">
+                        <b>Name:</b>
+                        <p>
+                            @plantInfo.Name
+                        </p>
+                        <b>Address:</b>
+                        <p>
+                            @plantInfo.Address
+                        </p>
+                        <b>Zip:</b>
+                        <p>
+                            @plantInfo.Zip
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <em>Loading Plant Info...</em>
+                }
+            </DxTabPage>
+        </DxTabs>
+    </DetailRowTemplate>
 </DxDataGrid>")
 </CodeSnippet>

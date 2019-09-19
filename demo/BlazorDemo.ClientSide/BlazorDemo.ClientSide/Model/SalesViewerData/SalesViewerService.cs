@@ -8,8 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Demo.Blazor.Services {
     public class SalesViewerService {
-        static readonly SalesViewerService _instance = new SalesViewerService();
-
         protected Lazy<SalesViewerDataGenerator> DataGenerator { get; }
         protected Lazy<Task> DataGenerated { get; }
         protected SalesViewerContext DataContext { get; }
@@ -45,11 +43,13 @@ namespace Demo.Blazor.Services {
         public Task<IEnumerable<Region>> GetRegions() => GetDataTable(d => d.Regions);
         public Task<IEnumerable<Sale>> GetSales() => GetDataTable(d => d.Sales);
         public Task<IEnumerable<Sector>> GetSectors() => GetDataTable(d => d.Sectors);
+    }
 
-
-        public static void RegisterSingleton(IServiceCollection services) {
-            services.AddSingleton<SalesViewerService>((serviceProvider) => _instance);
-            Task.WaitAll(_instance.DataGenerated.Value);
+    public static class SalesViewerServiceExtensions {
+        public static void AddSalesViewerService(this IServiceCollection serviceCollection) {
+            var serviceInstance = new SalesViewerService();
+            serviceCollection.AddSingleton<SalesViewerService>((serviceProvider) => serviceInstance);
+            Task.WaitAll(serviceInstance.GetSales());
         }
     }
 }

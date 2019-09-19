@@ -1,0 +1,62 @@
+﻿@page "/GridFilterRow"
+@using Demo.Blazor.Model
+@using Demo.Blazor.Services
+@inject WeatherForecastService ForecastService
+
+<div class="demo-description">
+    <h2>Data Filter Row</h2>
+    <p>
+        The <b>Filter Row</b> allows users to filter data as they type text in cells. An additional drop-down menu also displays a list of filter conditions.
+    </p>
+    <p>
+        Set the <b>ShowFilterRow</b> property to true to display the Filter Row in the Data Grid.
+    </p>
+</div>
+
+@if (Orders == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <DxDataGrid Data="@Orders"
+                ShowFilterRow="true"
+                CssClass="mw-1100">
+        <DxDataGridDateEditColumn Field="@nameof(Order.OrderDate)"
+                                  DisplayFormatString="D"
+                                  EditFormatString="d"
+                                  Width="240px">
+        </DxDataGridDateEditColumn>
+        <DxDataGridComboBoxColumn Field="@nameof(Order.ShipRegionID)"
+                                  Caption="Ship Region"
+                                  Data="@ShipRegions"
+                                  ValueFieldName="@nameof(ShipRegion.RegionID)"
+                                  TextFieldName="@nameof(ShipRegion.Name)"
+                                  Width="250px">
+        </DxDataGridComboBoxColumn>
+        <DxDataGridSpinEditColumn Field="@nameof(Order.Price)"
+                                  DisplayFormatString="c"
+                                  Width="120px">
+        </DxDataGridSpinEditColumn>
+        <DxDataGridColumn Field="@nameof(Order.Product)">
+        </DxDataGridColumn>
+        <DxDataGridCommandColumn NewButtonVisible="false"
+                                 EditButtonVisible="false"
+                                 DeleteButtonVisible="false"
+                                 Width="70px">
+        </DxDataGridCommandColumn>
+    </DxDataGrid>
+
+    <CodeSnippet_Grid_FilterRow></CodeSnippet_Grid_FilterRow>
+
+}
+@code {
+    IEnumerable<Order> Orders;
+    IEnumerable<ShipRegion> ShipRegions;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Orders = await OrderRepository.Load();
+        ShipRegions = await ShipRegionRepository.Load();
+    }
+}

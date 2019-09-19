@@ -1,0 +1,12 @@
+﻿<CodeSnippet>
+@(@"<DxCalendar EnableMultiSelect=""true"" SelectedDates=""@GetSelectedDates()"">
+</DxCalendar>
+
+
+@code {
+    List<DateTime> GetSelectedDates() {
+        DateTime baseDate = DateTime.Today;
+        return new List<DateTime>() { baseDate.AddDays(-9), baseDate.AddDays(-5), baseDate.AddDays(-4), baseDate.AddDays(6), baseDate.AddDays(12), baseDate.AddDays(13), baseDate.AddDays(15) };
+    }
+}")
+</CodeSnippet>

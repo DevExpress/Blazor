@@ -1,0 +1,12 @@
+﻿<CodeSnippet>
+@(@"<DxListBox Data=""@Persons.DataSource""
+           TextFieldName=""Text""
+           ReadOnly=""true""
+           SelectedItems=""@SelectedItems"">
+</DxListBox>
+
+@code {
+    IEnumerable<Person> SelectedItems => Persons.DataSource.Take(1);
+}
+")
+</CodeSnippet>

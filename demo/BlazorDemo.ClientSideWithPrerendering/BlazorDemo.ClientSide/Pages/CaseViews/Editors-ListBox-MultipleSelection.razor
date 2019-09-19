@@ -1,0 +1,58 @@
+﻿@using Demo.Blazor.Model
+
+<div class="demo-description">
+    <h2>List Box - Multiple Selection</h2>
+    <p>
+        The List Box component allows users to select multiple items. To enable this feature, set the <b>SelectionMode</b> property to <b>ListBoxSelectionMode.Multiple</b>. Users can press <kbd>Ctrl</kbd> (for individual item) or <kbd>Shift</kbd> (for a range of items) and click items to select them. If the <b>ShowCheckboxes</b> property is set to <b>true</b>, users can click the items or corresponding checkboxes to select the items.
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-auto col-sm-12">
+        <DxListBox Data="@Persons.DataSource" style="width: 480px; max-width: 100%; height: 232px;"
+                   TextFieldName="Text"
+                   SelectionMode="ListBoxSelectionMode.Multiple"
+                   ShowCheckboxes="@ShowCheckboxes"
+                   @bind-SelectedItems="@SelectedItems">
+        </DxListBox>
+    </div>
+    <div class="col-md-auto col-sm-12">
+        <div class="card mt-3 mt-md-0 h-100 mw-480" style="width: 480px; max-width: 100%">
+            <div class="card-header bg-transparent text-body py-1 border-bottom-0 font-weight-bold">Selected items:</div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush bg-transparent border-0">
+                    @foreach (var item in SelectedItems)
+                    {
+                        <li class="list-group-item bg-transparent text-body py-1 border-0">@item.Text</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
+        <div class="custom-control custom-checkbox" style="margin: 1em 0 -1em .5em">
+            <input type="checkbox" class="custom-control-input" id="ShowCheckboxes" checked="@ShowCheckboxes" @bind-value="@ShowCheckboxes" />
+            <label class="custom-control-label" for="ShowCheckboxes"><b class="hljs-attr" style="white-space: nowrap;"> ShowCheckboxes</b></label>
+        </div>
+        <CodeSnippet_Editors_ListBox_MultipleSelection></CodeSnippet_Editors_ListBox_MultipleSelection>
+    </div>
+</div>
+
+@code {
+    bool showCheckboxes = true;
+    bool ShowCheckboxes {
+        get => showCheckboxes;
+        set { showCheckboxes = value; InvokeAsync(StateHasChanged); }
+    }
+
+    IEnumerable<Person> selectedItems = Persons.DataSource.Take(2);
+    IEnumerable<Person> SelectedItems {
+        get => selectedItems;
+        set { selectedItems = value; InvokeAsync(StateHasChanged); }
+    }
+}
+

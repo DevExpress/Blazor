@@ -1,0 +1,36 @@
+﻿<CodeSnippet>
+@(@"<DxCalendar>
+    <DayCellTemplate>
+        <a class=""@GetCssClassNames(context)"">@context.Day.ToString()</a>
+    </DayCellTemplate>
+</DxCalendar>
+
+@code {
+    DateTime BaseDate = DateTime.Today;
+
+    string GetCssClassNames(DateTime date) {
+        string result = string.Empty;
+
+        if(GetPersonalDays().Exists(d => DaysEqual(d, date)))
+            result = ""font-weight-bold text-success"";
+        if(GetHolidays().Exists(d => DaysEqual(d, date)))
+            result = ""text-danger"";
+        if(GetBirthdays().Exists(d => DaysEqual(d, date)))
+            result += ""font-weight-bold text-info"";
+
+        return result;
+    }
+    bool DaysEqual(DateTime date1, DateTime date2) {
+        return (date1.Year == date2.Year && date1.DayOfYear == date2.DayOfYear);
+    }
+    List<DateTime> GetPersonalDays() {
+        return new List<DateTime>() { BaseDate.AddDays(-7), BaseDate.AddDays(-2), BaseDate.AddDays(-1), BaseDate.AddDays(3), BaseDate.AddDays(4), BaseDate.AddDays(9), BaseDate.AddDays(10), BaseDate.AddDays(12), BaseDate.AddDays(15) };
+    }
+    List<DateTime> GetHolidays() {
+        return new List<DateTime>() { BaseDate.AddDays(-14), BaseDate.AddDays(-8),  BaseDate.AddDays(12), BaseDate.AddDays(13) };
+    }
+    List<DateTime> GetBirthdays() {
+        return new List<DateTime>() { BaseDate.AddDays(-20),  BaseDate.AddDays(-5), BaseDate, BaseDate.AddDays(1), BaseDate.AddDays(6), BaseDate.AddDays(7), BaseDate.AddDays(17) };
+    }
+}")
+</CodeSnippet>

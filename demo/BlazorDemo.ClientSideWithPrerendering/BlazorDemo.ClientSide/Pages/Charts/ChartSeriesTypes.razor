@@ -10,11 +10,11 @@
     <div class="card">
         <div class="card-body d-flex flex-row">
             <h5 class="card-title mr-3">Line Series</h5>
-            <DxComboBox CssClass="ml-auto" Data="@LineSeriesTypes" @bind-SelectedItem="@LineSeriesType"></DxComboBox>
+            <DxComboBox CssClass="ml-auto" Data="@LineSeriesTypes" @bind-SelectedItem="@LineSeriesType" TextFieldName="Text"></DxComboBox>
         </div>
         <div class="card-body">
             <DxChart Data="@ChartsData">
-                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@((SaleInfo s) => s.City)" ValueField="@((SaleInfo s) => s.Amount)" SeriesType="@LineSeriesType">
+                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@((SaleInfo s) => s.City)" ValueField="@((SaleInfo s) => s.Amount)" SeriesType="@LineSeriesType.Value">
                 </DxChartCommonSeries>
                 <DxChartLegend Position="@RelativePosition.Outside" HorizontalAlignment="@HorizontalAlignment.Right" />
             </DxChart>
@@ -31,11 +31,11 @@
     <div class="card">
         <div class="card-body d-flex flex-row">
             <h5 class="card-title mr-3">Area Series</h5>
-            <DxComboBox CssClass="ml-auto" Data="@AreaSeriesTypes" @bind-SelectedItem="@AreaSeriesType"></DxComboBox>
+            <DxComboBox CssClass="ml-auto" Data="@AreaSeriesTypes" @bind-SelectedItem="@AreaSeriesType" TextFieldName="Text"></DxComboBox>
         </div>
         <div class="card-body">
             <DxChart Data="@ChartsData">
-                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@((SaleInfo s) => s.City)" ValueField="@((SaleInfo s) => s.Amount)" SeriesType="@AreaSeriesType">
+                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@((SaleInfo s) => s.City)" ValueField="@((SaleInfo s) => s.Amount)" SeriesType="@AreaSeriesType.Value">
                 </DxChartCommonSeries>
                 <DxChartLegend Position="@RelativePosition.Outside" HorizontalAlignment="@HorizontalAlignment.Right" />
             </DxChart>
@@ -54,11 +54,11 @@
     <div class="card">
         <div class="card-body d-flex flex-row">
             <h5 class="card-title mr-3">Bar Series</h5>
-            <DxComboBox CssClass="ml-auto" Data="@BarSeriesTypes" @bind-SelectedItem="@BarSeriesType"></DxComboBox>
+            <DxComboBox CssClass="ml-auto" Data="@BarSeriesTypes" @bind-SelectedItem="@BarSeriesType" TextFieldName="Text"></DxComboBox>
         </div>
         <div class="card-body">
             <DxChart Data="@ChartsData">
-                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@((SaleInfo s) => s.City)" ValueField="@((SaleInfo s) => s.Amount)" SeriesType="@BarSeriesType">
+                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@((SaleInfo s) => s.City)" ValueField="@((SaleInfo s) => s.Amount)" SeriesType="@BarSeriesType.Value">
                 </DxChartCommonSeries>
                 <DxChartLegend Position="@RelativePosition.Outside" HorizontalAlignment="@HorizontalAlignment.Right" />
             </DxChart>
@@ -103,28 +103,39 @@
     </div>
 </div>
 @code {
-    ChartSeriesType lineSeriesType = ChartSeriesType.Line;
-    ChartSeriesType areaSeriesType = ChartSeriesType.SplineArea;
-    ChartSeriesType barSeriesType = ChartSeriesType.Bar;
 
-    ChartSeriesType LineSeriesType { get => lineSeriesType; set { lineSeriesType = value; InvokeAsync(StateHasChanged); } }
-    ChartSeriesType AreaSeriesType { get => areaSeriesType; set { areaSeriesType = value; InvokeAsync(StateHasChanged); } }
-    ChartSeriesType BarSeriesType { get => barSeriesType; set { barSeriesType = value; InvokeAsync(StateHasChanged); } }
+    static readonly IEnumerable<ChartSeriesTypeItem> LineSeriesTypes = ChartSeriesTypeItem.Create(ChartSeriesType.Line, ChartSeriesType.StepLine, 
+        ChartSeriesType.StackedLine, ChartSeriesType.FullStackedLine);
 
-    IEnumerable<ChartSeriesType> LineSeriesTypes = new ChartSeriesType[] {
-        ChartSeriesType.Line, ChartSeriesType.StepLine, ChartSeriesType.StackedLine, ChartSeriesType.FullStackedLine
-    };
-    IEnumerable<ChartSeriesType> AreaSeriesTypes = new ChartSeriesType[] {
-        ChartSeriesType.Area, ChartSeriesType.FullStackedArea, ChartSeriesType.FullStackedSplineArea, ChartSeriesType.SplineArea,
-        ChartSeriesType.StackedArea, ChartSeriesType.StackedSplineArea, ChartSeriesType.StepArea
-    };
-    IEnumerable<ChartSeriesType> BarSeriesTypes = new ChartSeriesType[] {
-        ChartSeriesType.Bar, ChartSeriesType.FullStackedBar, ChartSeriesType.StackedBar
-    };
+    static readonly IEnumerable<ChartSeriesTypeItem> AreaSeriesTypes = ChartSeriesTypeItem.Create(ChartSeriesType.Area, ChartSeriesType.FullStackedArea, ChartSeriesType.FullStackedSplineArea, 
+        ChartSeriesType.SplineArea, ChartSeriesType.StackedArea, ChartSeriesType.StackedSplineArea, ChartSeriesType.StepArea);
+
+    static readonly IEnumerable<ChartSeriesTypeItem> BarSeriesTypes = ChartSeriesTypeItem.Create(ChartSeriesType.Bar, ChartSeriesType.FullStackedBar, ChartSeriesType.StackedBar);
+
+    ChartSeriesTypeItem lineSeriesType = LineSeriesTypes.First();
+    ChartSeriesTypeItem areaSeriesType = AreaSeriesTypes.First();
+    ChartSeriesTypeItem barSeriesType = BarSeriesTypes.First();
+
+    ChartSeriesTypeItem LineSeriesType { get => lineSeriesType; set { lineSeriesType = value; InvokeAsync(StateHasChanged); } }
+    ChartSeriesTypeItem AreaSeriesType { get => areaSeriesType; set { areaSeriesType = value; InvokeAsync(StateHasChanged); } }
+    ChartSeriesTypeItem BarSeriesType { get => barSeriesType; set { barSeriesType = value; InvokeAsync(StateHasChanged); } }
 
     IQueryable<SaleInfo> ChartsData;
 
     protected override async Task OnInitializedAsync() {
         ChartsData = await Sales.Load();
+    }
+
+
+    class ChartSeriesTypeItem
+    {
+        public ChartSeriesTypeItem(ChartSeriesType value) {
+            Value = value;
+            Text = System.Text.RegularExpressions.Regex.Replace(value.ToString(), "[a-z][A-Z]", m => m.Value[0] + " " + m.Value[1]);
+        }
+        public string Text { get; }
+        public ChartSeriesType Value { get; }
+
+        public static IEnumerable<ChartSeriesTypeItem> Create(params ChartSeriesType[] itemValues) => itemValues.Select(x => new ChartSeriesTypeItem(x));
     }
 }

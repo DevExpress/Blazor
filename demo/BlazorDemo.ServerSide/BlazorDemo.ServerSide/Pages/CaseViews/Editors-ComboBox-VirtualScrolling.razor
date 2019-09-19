@@ -3,14 +3,14 @@
 <div class="demo-description" id="VirtualScrolling">
     <h2><NavLink class="demo-anchor" href="ComboBox#VirtualScrolling" />ComboBox - Virtual Scrolling</h2>
     <p>
-        The <b>DataLoadMode</b> property specifies how the ComboBox loads the item list. 
+        The <b>ListRenderMode</b> property specifies how the ComboBox loads the item list. 
     </p>
     <ul>
-        <li><b>Default</b> - The ComboBox loads the entire item list. This option is suitable for small item lists where scrolling should work instantly.</li>
-        <li><b>VirtualScrolling</b> - The ComboBox loads visible items only. This approach improves performance when the list is too heavy to load at a time.</li>
+        <li><b>Entire</b> - The ComboBox loads the entire item list. This option is suitable for small item lists where scrolling should work instantly.</li>
+        <li><b>Virtual</b> - The ComboBox loads visible items only. This approach improves performance when the list is too heavy to load at a time.</li>
     </ul>
     <p>
-        In this demo, the <b>DataLoadMode</b> property is set to <b>ComboBoxDataLoadMode.VirtualScrolling</b>.
+        In this demo, the <b>ListRenderMode</b> property is set to <b>ListRenderMode.Virtual</b>.
     </p>
 </div>
 
@@ -18,7 +18,7 @@
     <div class="card-header">SelectedItem = <b>@(SelectedItem != null ? SelectedItem : "null")</b></div>
     <div class="card-body mw-480" style="height: 280px;">
         <DxComboBox Data="@Strings"
-                    DataLoadMode="@ComboBoxDataLoadMode.VirtualScrolling"
+                    ListRenderMode="@ListRenderMode.Virtual"
                     FilteringMode="@DataGridFilteringMode.Contains"
                     @bind-SelectedItem="@SelectedItem"
                     @bind-DropDownVisible="@DropDownVisible">

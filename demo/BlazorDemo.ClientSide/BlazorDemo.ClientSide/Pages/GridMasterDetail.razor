@@ -26,13 +26,18 @@
 
 @if (ProductsDataSource != null)
 {
-    <DxDataGrid @ref="@grid" Data="@ProductsDataSource" AutoCollapseDetailRow="true" ShowDetailRow="true" SelectionMode="DataGridSelectionMode.None" PageSize="4">
+    <DxDataGrid @ref="@grid" 
+                Data="@ProductsDataSource" 
+                AutoCollapseDetailRow="true" 
+                ShowFilterRow="false"
+                SelectionMode="DataGridSelectionMode.None" 
+                PageSize="4">
         <ChildContent>
             <DxDataGridColumn Field="@nameof(Product.Name)" />
             <DxDataGridColumn Field="@nameof(Product.Description)" />
-            <DxDataGridColumn Field="@nameof(Product.ListPrice)" />
-            <DxDataGridColumn Field="@nameof(Product.UnitsInInventory)" />
-            <DxDataGridColumn Field="@nameof(Product.UnitsInManufacturing)" />
+            <DxDataGridSpinEditColumn Field="@nameof(Product.ListPrice)" />
+            <DxDataGridSpinEditColumn Field="@nameof(Product.UnitsInInventory)" />
+            <DxDataGridSpinEditColumn Field="@nameof(Product.UnitsInManufacturing)" />
         </ChildContent>
         <DetailRowTemplate>
             <DxTabs>
@@ -40,11 +45,13 @@
                     <div class="p-3">
                         @if (SalesDataSource != null)
                         {
-                            <DxDataGrid SelectionMode="DataGridSelectionMode.None" Data="@SalesDataSource.Where(x => x.ProductId == context.Id)">
-                                <DxDataGridColumn Field="@nameof(Sale.SaleDate)" />
-                                <DxDataGridColumn Field="@nameof(Sale.Units)" />
-                                <DxDataGridColumn Field="@nameof(Sale.TotalCost)" />
-                                <DxDataGridColumn Field="@nameof(Sale.Discount)" />
+                            <DxDataGrid Data="@SalesDataSource.Where(x => x.ProductId == context.Id)" 
+                                        SelectionMode="DataGridSelectionMode.None" 
+                                        ShowFilterRow="false">
+                                <DxDataGridDateEditColumn Field="@nameof(Sale.SaleDate)" />
+                                <DxDataGridSpinEditColumn Field="@nameof(Sale.Units)" />
+                                <DxDataGridSpinEditColumn Field="@nameof(Sale.TotalCost)" />
+                                <DxDataGridSpinEditColumn Field="@nameof(Sale.Discount)" />
                             </DxDataGrid>
                         }
                         else

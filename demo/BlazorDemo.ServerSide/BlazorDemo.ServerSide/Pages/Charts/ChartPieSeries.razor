@@ -1,0 +1,44 @@
+﻿@page "/ChartPieSeries"
+@using Demo.Blazor
+@using Demo.Blazor.Model
+@using DevExpress.Blazor
+@using Demo.Blazor.Services
+
+<div class="demo-description" id="PieSeries">
+    <h2><NavLink class="demo-anchor" href="ChartPieSeries#Pie" />Charts - Pie Series</h2>
+    <p>
+        This demo illustrates how to use the <b>Pie</b> series within the <b>DxChart</b> component.
+        You can use the Pie series to compare the percentage values of different point arguments in the same series and illustrate these values as pie slices.
+    </p>
+</div>
+<DxChart Data="@SalesData">
+    <DxChartTitle Text="Total Sales" />
+    <DxChartLegend VerticalAlignment="@VerticalEdge.Bottom" Position="@RelativePosition.Outside" />
+    <DxChartPieSeries ValueField="@((SaleInfo i) => i.Amount)" ArgumentField="@(i => i.City)" AggregationMethod="@Enumerable.Sum">
+        <DxChartSeriesLabel Visible="true" />
+    </DxChartPieSeries>
+</DxChart>
+<CodeSnippet_Charts_PieSeries />
+<div class="demo-description" id="Donut">
+    <h2><NavLink class="demo-anchor" href="ChartPieSeries#Donut" />Charts - Donut Series</h2>
+    <p>
+        This demo illustrates how to use <b>Donut</b> series within the <b>DxChart</b> component.
+        The Donut series displays data as a Pie series (see above) with a hole in the center.
+    </p>
+</div>
+<DxChart Data="@SalesData">
+    <DxChartTitle Text="Total Sales" />
+    <DxChartLegend AllowToggleSeries="true" VerticalAlignment="@VerticalEdge.Bottom" Position="@RelativePosition.Outside" />
+    <DxChartDonutSeries ValueField="@((SaleInfo i) => i.Amount)" ArgumentField="@(i => i.City)" AggregationMethod="@Enumerable.Sum">
+        <DxChartSeriesLabel Visible="true" />
+    </DxChartDonutSeries>
+</DxChart>
+<CodeSnippet_Charts_DonutSeries />
+@code {
+    IQueryable<SaleInfo> SalesData;
+
+    protected override async Task OnInitializedAsync()
+    {
+        SalesData = (await Sales.Load()).Where(x => x.Country == "United States");
+    }
+}

@@ -1,0 +1,39 @@
+﻿@using Demo.Blazor.Services;
+@inject CountryNamesService CountryNamesService
+
+<div class="demo-description" id="VirtualScrolling">
+    <h2><NavLink class="demo-anchor" href="ListBox#VirtualScrolling" />List Box - Virtual Scrolling</h2>
+    <p>
+        The <b>ListRenderMode</b> property specifies how the List Box loads the item list.
+    </p>
+    <ul>
+        <li><b>Entire</b> - The List Box loads the entire item list. Use this option for small item lists where scrolling should be instantly.</li>
+        <li><b>Virtual</b> - The List Box loads visible items only. This approach improves performance when the list contains many items.</li>
+    </ul>
+    <p>
+        In this demo, the <b>ListRenderMode</b> property is set to <b>ListRenderMode.Virtual</b>.
+    </p>
+</div>
+
+@if (Data != null)
+{
+    <DxListBox Data="@Data" style="height: 232px"
+               ListRenderMode="ListRenderMode.Virtual"
+               CssClass="mw-480">
+    </DxListBox>
+
+    <div class="code-snippet card demo-card-wide">
+        <CodeSnippetHeader></CodeSnippetHeader>
+        <div class="card-footer text-muted">
+            <CodeSnippet_Editors_ListBox_VirtualScrolling></CodeSnippet_Editors_ListBox_VirtualScrolling>
+        </div>
+    </div>
+}
+
+@code {
+    IEnumerable<string> Data;
+
+    protected override async Task OnInitializedAsync() {
+        Data = await CountryNamesService.Load();
+    }
+}

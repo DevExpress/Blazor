@@ -1,0 +1,24 @@
+﻿<CodeSnippet>
+@(@"<DxListBox Data=""@Persons.DataSource""
+           TextFieldName=""Text""
+           @bind-SelectedItems=""@SelectedItems"">
+</DxListBox>
+
+@code {
+    IEnumerable<Person> selectedItems = Persons.DataSource.Take(1);
+    IEnumerable<Person> SelectedItems {
+        get => selectedItems;
+        set { selectedItems = value; InvokeAsync(StateHasChanged); }
+    }
+}
+
+public class Person
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public Department Department { get; set; }
+
+    public string Text => $""{FirstName} {LastName} ({Department} Dept.)"";
+}")
+</CodeSnippet>

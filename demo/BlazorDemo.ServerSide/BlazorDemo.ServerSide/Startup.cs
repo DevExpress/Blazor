@@ -50,7 +50,7 @@ namespace BlazorDemo.ServerSide
             services.AddTransient<ProductService>();
             services.AddSingleton<FlatProductService>();
             services.AddSingleton<CountryNamesService>();
-            services.AddSingleton<SalesViewerService>();
+            services.AddSalesViewerService();
             services.AddDocumentMetadata((serviceProvider, registrator) =>
             {
                 DemoConfiguration config = serviceProvider.GetService<IOptions<DemoConfiguration>>().Value;

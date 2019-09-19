@@ -62,7 +62,7 @@ namespace Demo.Blazor.Model.SalesViewer {
             int companiesCount = 22;
 
             var today = DateTime.Today;
-            var startDate = today.AddMonths(-1).Date;
+            var startDate = new DateTime(today.Year, 1, 1, 8, 0, 0);
             var endDate = new DateTime(today.Year, 12, 31, 17, 0, 0);
             var curDate = startDate;
             List<Sale> result = new List<Sale>();

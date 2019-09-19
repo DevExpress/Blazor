@@ -1,0 +1,17 @@
+﻿<CodeSnippet>
+@(@"<DxCalendar CustomDisabledDate=""@OnCustomDisabledDate"">
+</DxCalendar>
+
+@code {
+    void OnCustomDisabledDate(CalendarCustomDisabledDateEventArgs args) {
+        args.IsDisabled = args.Date < DateTime.Today.AddDays(-20) || GetDisabledDates().Exists(d => DaysEqual(d, args.Date));
+    }
+    bool DaysEqual(DateTime date1, DateTime date2) {
+        return (date1.Year == date2.Year && date1.DayOfYear == date2.DayOfYear);
+    }
+    List<DateTime> GetDisabledDates() {
+        DateTime baseDate = DateTime.Today;
+        return new List<DateTime>() { baseDate.AddDays(-9), baseDate.AddDays(-4), baseDate.AddDays(-3), baseDate.AddDays(3), baseDate.AddDays(5), baseDate.AddDays(6), baseDate.AddDays(15) };
+    }
+}")
+</CodeSnippet>

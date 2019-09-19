@@ -24,7 +24,7 @@ namespace BlazorDemo.ClientSide
             services.AddTransient<ProductService>();
             services.AddSingleton<FlatProductService>();
             services.AddSingleton<CountryNamesService>();
-            SalesViewerService.RegisterSingleton(services);
+            services.AddSalesViewerService();
         }
 
         public void Configure(IComponentsApplicationBuilder app)
