@@ -75,7 +75,7 @@ You can find appropriate demos in the repositories below:
 
 To open the required demo, do the following:
 
-1. Download the "**demo**" folder from the proper repository.
+1. Download the "**demo**" and **tools** folders from the proper repository.
 2. Use Visual Studio 2019 to open the solution file:
 	
 	**demo/BlazorDemo.ServerSide/BlazorDemo.ServerSide.sln**
