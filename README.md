@@ -253,11 +253,15 @@ If you don't see packages in the ```https://nuget.devexpress.com/early-access/ap
 * Data Grid
   * Column Types
   * Sort Data
+  * Grouping
+  * Data Filter Row
+  * Selection
   * Templates
   * Scrolling
   * Virtual Scrolling
   * Cascading Editors
   * Edit Form Template Validation
+  * Master-Detail
   * Large Datasets
 * Pivot Grid
   * Data Binding Basics
@@ -267,27 +271,29 @@ If you don't see packages in the ```https://nuget.devexpress.com/early-access/ap
 * Charts
   * Series Types
   * Dynamic Series
-  * Customization  
+  * Range Series
+  * Financial Series
+  * Pie Series
+  * Customization
 * Scheduler
   * Day View
   * Work Week View
   * Week View
   * Recurring Appointments
 * Data Editors
-  * ComboBox – Business Object List
-  * ComboBox - Virtual Scrolling
-  * ComboBox - Allow Input
-  * ComboBox - Incremental Filtering
-  * ComboBox - NullText
-  * ComboBox – Cascading Lists
+  * Calendar
+  * ComboBox
+  * Date Edit
+  * List Box
   * Spin Edit
-  * Date Edit  
   * Text Box
-* TreeView
-* Form Layout
+* Navigation and Layout
+  * Form Layout
+  * Pager
+  * Popup
+  * Tabs
+  * TreeView
 * Form Validation
-* Tabs
-* Pager
 
 # NuGet Package Change Log
 
