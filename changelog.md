@@ -18,7 +18,7 @@ Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
 ### New Components
 * Calendar
-* ListBox
+* List Box
 * Popup
 
 ### Added
