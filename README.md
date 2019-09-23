@@ -89,7 +89,31 @@ To open the required demo, do the following:
 	
 	**demo/BlazorDemo.ClientSideWithPrerendering/BlazorDemo.ClientSideWithPrerendering.sln** 
 	  
-3. Start the application.
+3. Register the DevExpress Early Access feed in Visual Studio's NuGet Package Manager.
+
+   Open the "Package Manager Settings".
+
+   ![Open the "Package Manager Settings"](media/NuGetPackageManagerSettings.png)
+
+   Add new NuGet source:
+  
+   ```https://nuget.devexpress.com/early-access/api```
+
+   ![Add new NuGet source](media/DevExpressEarlyAccessNuGetSource.png)
+
+4. Install the "DevExpress.Blazor" NuGet package.
+
+   Navigate to:
+   
+   ![Add new NuGet source](media/NuGetPackageManagerOpenManagerMenu.png)
+   
+   Select the "Early Access" NuGet package source you have just created in the "Package source" combo box.
+
+   Install the "DevExpress.Blazor" NuGet package.
+   
+   ![Add new NuGet source](media/VS2019Release-AddNuGetPackage.png) 
+
+5. Start the application.
 
 See also: 
 
