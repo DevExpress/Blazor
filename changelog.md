@@ -2,7 +2,19 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
-# RC (latest release)
+# 0.4.1 (latest release)
+
+### Fixed
+
+* [Date Edit - Clicking a date does not work properly in Data Grid's Edit Form](https://github.com/DevExpress/Blazor/issues/45)
+* Date Edit - The component does not prevent an internal calendar from changing a selected day in read-only mode
+* Data Grid - A click on a grid header with *Ctrl* pressed opens a new tab in Firefox
+* Data Grid - Grouping data by a ComboBox column outputs a column value to a group row instead of text
+* Data Grid - Expanding a DateTime group does not display data rows
+* Data Grid - A format string applied to a Spin Edit column does not affect a corresponding cell in a group row
+* List Box - The component does not allow selecting a range of items with *Shift* pressed if the **ShowCheckboxes** property is set to **true**
+
+# RC
 
 ### New Components
 * Calendar
