@@ -2,7 +2,13 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
-# 0.4.1 (latest release)
+# 19.1.7 (latest release)
+
+### Added
+
+* Support for .NET Core 3.0 Release
+
+# 0.4.1
 
 ### Fixed
 
