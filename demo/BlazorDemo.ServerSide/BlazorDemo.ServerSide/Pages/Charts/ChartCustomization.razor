@@ -8,8 +8,8 @@
 <div class="demo-description" id="Tooltip">
     <h2><NavLink class="demo-anchor" href="ChartCustomization#Tooltip" />Charts - Tooltip Customization</h2>
     <p>
-        The <b>DxChartTooltip</b> component enables you to specify templates for the tooltips that are displayed when the mouse hovers over a chart series. 
-        A <b>ChartTooltipData</b> type object represents the template’s context. 
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartTooltip">DxChartTooltip</a> component enables you to specify templates for the tooltips that are displayed when the mouse hovers over a chart series. 
+        A <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartTooltipData">ChartTooltipData</a> type object represents the template’s context. 
         This object provides information about the hovered series point.
     </p>
 </div>
@@ -31,11 +31,11 @@
 <div class="demo-description" id="Legend">
     <h2><NavLink class="demo-anchor" href="ChartCustomization#Legend" />Charts - Legend Customization</h2>
     <p>
-        The <b>DxChartSeriesLegendItem</b> component in a chart series’ markup allows you to customize a legend item’s appearance. 
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesLegendItem">DxChartSeriesLegendItem</a> component in a chart series’ markup allows you to customize a legend item’s appearance. 
         This component allows you to change a legend item’s position and visibility. 
-        You can also customize the legend item text via the <b>Text</b>, <b>TextFormat</b>, and <b>TextTemplate</b> properties. 
+        You can also customize the legend item text via the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesLegendItem.Text">Text</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesLegendItem.TextTemplate">TextTemplate</a> properties. 
 
-        To show and hide series when a user clicks the corresponding legend item, set the <b>AllowToggleSeries</b> property to <b>true</b>.
+        To show and hide series when a user clicks the corresponding legend item, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartLegend.AllowToggleSeries">AllowToggleSeries</a> property to <b>true</b>.
     </p>
 </div>
 
@@ -43,7 +43,7 @@
     <DxChartTitle Text="Sales amount" />
     <DxChartBarSeries Name="2013" Filter="@((SaleInfo s) => s.Date.Year == 2013)" AggregationMethod="@Enumerable.Sum" ArgumentField="@(s => s.City)" ValueField="@(s => s.Amount)"></DxChartBarSeries>
     <DxChartBarSeries Name="2014" Filter="@((SaleInfo s) => s.Date.Year == 2014)" AggregationMethod="@Enumerable.Sum" ArgumentField="@(s => s.City)" ValueField="@(s => s.Amount)"></DxChartBarSeries>
-    <DxChartLineSeries Name="2015" Filter="@((SaleInfo s) => s.Date.Year == 2015)" AggregationMethod="@Enumerable.Sum" ArgumentField="@(s=> s.City)" ValueField="@(s => s.Amount)">"
+    <DxChartLineSeries Name="2015" Filter="@((SaleInfo s) => s.Date.Year == 2015)" AggregationMethod="@Enumerable.Sum" ArgumentField="@(s=> s.City)" ValueField="@(s => s.Amount)">
         <DxChartSeriesLegendItem IconCssClass="oi oi-flag">
             <TextTemplate>Last year</TextTemplate>
         </DxChartSeriesLegendItem>
@@ -59,7 +59,7 @@
 <div class="demo-description" id="MultipleAxes">
     <h2><NavLink class="demo-anchor" href="ChartCustomization#MultipleAxes" />Charts - Multiple Axes Customization</h2>
     <p>
-        The <b>DxChart</b> component allows you to display charts with multiple axes and combine several charts.
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1">DxChart</a> component allows you to display charts with multiple axes and combine several charts.
     </p>
 </div>
 <DxChart Data="@SalesData">
@@ -85,7 +85,7 @@
 <div class="demo-description" id="MultiplePanes">
     <h2><NavLink class="demo-anchor" href="ChartCustomization#MultiplePanes" />Charts - Multiple Panes Customization</h2>
     <p>
-        The <b>DxChart</b> component allows you to create charts with multiple panes located under each other. 
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1">DxChart</a> component allows you to create charts with multiple panes located under each other. 
         A pane can display one or more series and can share the argument axis with other panes.
     </p>
 </div>

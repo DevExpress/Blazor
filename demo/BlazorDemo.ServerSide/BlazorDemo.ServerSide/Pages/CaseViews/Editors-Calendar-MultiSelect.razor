@@ -2,16 +2,16 @@
 
 <div class="demo-description" id="MultiSelect">
     <h2><NavLink class="demo-anchor" href="Calendar#MultiSelect" />Calendar - Multi Select</h2>
-    <p>In this demo module, the <b>DxCalendar</b> component allows you to select several dates simultaneously. Click a date while you press Ctrl to add a date to the selection.</p>
+    <p>In this demo module, the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar">DxCalendar</a> component allows you to select several dates simultaneously. Click a date while you press Ctrl to add a date to the selection.</p>
     <ul>
-        <li><b>EnableMultiSelect</b> - Specifies whether multiple date selection is enabled.</li>
-        <li><b>SelectedDates</b> - Specifies the collection of selected dates.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxCalendarBase.EnableMultiSelect">EnableMultiSelect</a> - Specifies whether multiple date selection is enabled.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxCalendarBase.SelectedDates">SelectedDates</a> - Specifies the collection of selected dates.</li>
     </ul>
 </div>
 
 <div class="card demo-card border-0">
     <div class="card-body">
-        <DxCalendar EnableMultiSelect="true" SelectedDates="@GetSelectedDates()" SelectedDatesChanged="@OnSelectedDatesChanged">
+        <DxCalendar EnableMultiSelect="true" SelectedDates="@GetSelectedDates()">
         </DxCalendar>
     </div>
 </div>
@@ -28,8 +28,5 @@
         DateTime baseDate = DateTime.Today;
 
         return new List<DateTime>() { baseDate.AddDays(-9), baseDate.AddDays(-5), baseDate.AddDays(-4), baseDate.AddDays(6), baseDate.AddDays(12), baseDate.AddDays(13), baseDate.AddDays(15) };
-    }
-    void OnSelectedDatesChanged(IEnumerable<DateTime> days) {
-
     }
 }

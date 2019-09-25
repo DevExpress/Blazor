@@ -1,9 +1,7 @@
 # DevExpress UI for Blazor
-This project demonstrates the Preview (CTP) version of [DevExpress UI Components for Blazor](https://www.devexpress.com/blazor/).
+This project demonstrates the [DevExpress UI Components for Blazor](https://www.devexpress.com/blazor/).
 
-The DevExpress UI components featured in this demo are available for free download and can be used in your next Blazor app.* 
-
-> \* Like any software preview, the DevExpress UI for Blazor is not without fault. You should not use these products in production environments or in mission-critical applications.
+The DevExpress UI components featured in this demo are available for free download and can be used in your next Blazor app.
 
 * [Live Demo](#live-demo)
 * [Examples](#examples)
@@ -25,10 +23,11 @@ DevExpress Blazor components are shipped with GitHub feature-based examples. Ref
 
 # Version Compatibility
 
-The following table describes the version compatibility of .NET Core 3.0 Preview and the DevExpress.Blazor NuGet package:
+The following table describes the version compatibility of .NET Core 3.0 and the DevExpress.Blazor NuGet package:
 
 | .NET Core 3.0 version | DevExpress.Blazor.nuget version |
 | ------------- | ------------- |
+| [.NET Core 3.0 Release](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0/) | **19.1.7 Release**&#42; |
 | [.NET Core 3.0 RC1](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-release-candidate-1/) | **0.4.1 RC** |
 | [.NET Core 3.0 RC1](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-release-candidate-1/) | **0.4.0 RC** |
 | [.NET Core 3.0 RC1](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-release-candidate-1/) | **0.3.3 Beta** |
@@ -48,19 +47,13 @@ The following table describes the version compatibility of .NET Core 3.0 Preview
 | .NET Core 3.0 Preview **4** | 0.0.**4** |
 | .NET Core 3.0 Preview **3** | 0.0.**3** |
 
+> &#42; Starting with v19.1.7, DevExpress UI components for Blazor are distributed through a [personal NuGet feed](https://nuget.devexpress.com/). Register at [devexpress.com](https://www.devexpress.com/) to subscribe to the feed.
+
+
 # Set Up Your Environment
 
 1. Install the latest Visual Studio 2019 update.
 2. Ensure that you have the latest .NET Core 3 version (from supported versions listed above) installed.
-3. If you use the release version of Visual Studio 2019, ensure the "Use previews of the .NET Core SDK" option is enabled.
-
-The corresponding check box's location depends on the Visual Studio build number. You can find the check box here:
-
-![Create New ASP.NET Core Web Application Project"](media/VS2019Release-EnablePreviewSDK.png)
-
-or here:
-
-![Create New ASP.NET Core Web Application Project"](media/VS2019Release-EnablePreviewSDK_2.png)
 
 # How to Run This Demo Locally
 
@@ -89,7 +82,7 @@ To open the required demo, do the following:
 	
 	**demo/BlazorDemo.ClientSideWithPrerendering/BlazorDemo.ClientSideWithPrerendering.sln** 
 	  
-3. Register the DevExpress Early Access feed in Visual Studio's NuGet Package Manager.
+3. Go to [nuget.devexpress.com](https://nuget.devexpress.com), log in as a registered DevExpress customer and click **Obtain Feed URL**. The subsequent page displays a development account's NuGet Feed URL.
 
    Open the "Package Manager Settings".
 
@@ -97,7 +90,7 @@ To open the required demo, do the following:
 
    Add new NuGet source:
   
-   ```https://nuget.devexpress.com/early-access/api```
+   ```https://nuget.devexpress.com/{your feed authorization key}/api```
 
    ![Add new NuGet source](media/DevExpressEarlyAccessNuGetSource.png)
 
@@ -107,8 +100,6 @@ To open the required demo, do the following:
    
    ![Add new NuGet source](media/NuGetPackageManagerOpenManagerMenu.png)
    
-   Select the "Early Access" NuGet package source you have just created in the "Package source" combo box.
-
    Install the "DevExpress.Blazor" NuGet package.
    
    ![Add new NuGet source](media/VS2019Release-AddNuGetPackage.png) 
@@ -123,27 +114,25 @@ See also:
 
 Follow the steps below to try our UI for Blazor in your own application. 
 
-1. Create a new solution using the "Blazor (server-side)" or "Blazor" template in Visual Studio 2019.
-
-  In the "Create a new project" dialog select "Blazor App".
+1. In the "Create a new project" dialog select "Blazor App".
   
   ![Create New ASP.NET Core Web Application Project"](media/VisualStudio2019CreateNewProject_AspNetCoreWebApp.png)
 
-  In the next step select the "Blazor (server-side)" project template.
+  In the next step select a project template.
   
   ![Create New ASP.NET Core Web Application Project"](media/VisualStudio2019CreateNewProject_Blazor.png)
 
-2. Register the DevExpress Early Access feed in Visual Studio's NuGet Package Manager.
+2. Go to [nuget.devexpress.com](https://nuget.devexpress.com), log in as a registered DevExpress customer and click **Obtain Feed URL**. The subsequent page displays a development account's NuGet Feed URL.
 
-  Open the "Package Manager Settings".
+   Open the "Package Manager Settings".
 
-  ![Open the "Package Manager Settings"](media/NuGetPackageManagerSettings.png)
+   ![Open the "Package Manager Settings"](media/NuGetPackageManagerSettings.png)
 
-  Add new NuGet source:
+   Add new NuGet source:
   
-  ```https://nuget.devexpress.com/early-access/api```
+   ```https://nuget.devexpress.com/{your feed authorization key}/api```
 
-  ![Add new NuGet source](media/DevExpressEarlyAccessNuGetSource.png)
+   ![Add new NuGet source](media/DevExpressEarlyAccessNuGetSource.png)
 
 3. Install the "DevExpress.Blazor" NuGet package.
 
@@ -151,12 +140,9 @@ Follow the steps below to try our UI for Blazor in your own application.
    
    ![Add new NuGet source](media/NuGetPackageManagerOpenManagerMenu.png)
    
-   Select the "Early Access" NuGet package source you have just created in the "Package source" combo box.
-
    Install the "DevExpress.Blazor" NuGet package.
    
-   ![Add new NuGet source](media/VS2019Release-AddNuGetPackage.png)
-
+   ![Add new NuGet source](media/VS2019Release-AddNuGetPackage.png) 
 4. Build the project.
 5. Make sure the following folder is automatically created in your project’s `wwwroot` directory:
     ```
@@ -267,11 +253,6 @@ This is caused by the following Microsoft issues:
 * https://github.com/aspnet/Blazor/issues/1203
 
 To resolve this issue, write more strict style rules in the *site.css* file so that they only apply `.navbar` templates.
-
-## 5. The "Early Access" NuGet Feed is empty in Visual Studio
-
-If you don't see packages in the ```https://nuget.devexpress.com/early-access/api``` NuGet feed, make sure that the "Include prerelease" option is selected:
-![Include prerelease](media/VisualStudio2019NuGetIncludePrerelease.png)
 
 # Included Demo Modules
 

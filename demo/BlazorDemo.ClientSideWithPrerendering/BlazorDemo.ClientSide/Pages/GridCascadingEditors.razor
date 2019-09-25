@@ -5,13 +5,13 @@
     <h2>Data Grid - Cascading Editors</h2>
 
     <p>
-        This module illustrates cascade comboboxes: <b>City</b> and <b>Region</b>.
-        These comboboxes are displayed when you edit a grid row.
+        This module illustrates <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-1#cascading-combo-boxes">cascade comboboxes</a>: <b>City</b> and <b>Region</b>.
+        These comboboxes are displayed when you <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#edit-data">edit a grid row</a>.
         The <b>City</b> combobox is dynamically populated with city names based on the value selected in the <b>Region</b> combobox.
     </p>
 
     <p>
-        Both the Region and City columns use the <b>EditTemplate context</b> cast to the <b>CellEditContext</b> type that contains:
+        Both the Region and City columns use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.EditTemplate#returns">EditTemplate context</a> cast to the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.CellEditContext">CellEditContext</a> type that contains:
     </p>
 
     <ul>
@@ -19,21 +19,21 @@
             An original cell value as a <b>DataItem</b> object
         </li>
         <li>
-            An <b>EditedValues</b> dictionary with changed cell values.
+            An <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.CellEditContext.EditedValues">EditedValues</a> dictionary with changed cell values.
         </li>
         <li>
-            A <b>CellValue</b> object that stores the current cell’s value.
+            A <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.CellEditContext.CellValue">CellValue</a> object that stores the current cell’s value.
         </li>
         <li>
-            Two overloads of the <b>OnChanged</b> method that allow one combobox to respond to another combobox’s value change.
+            Two overloads of the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.CellEditContext.OnChanged(System.Object)">OnChanged</a> method that allow one combobox to respond to another combobox’s value change.
         </li>
         <li>
-            The <b>GetEditorValue</b> method that returns a value of any grid cell.
+            The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.CellEditContext.GetEditorValue(System.String)">GetEditorValue</a> method that returns a value of any grid cell.
         </li>
     </ul>
 
     <p>
-        Click <b>Edit</b> to see how the <b>Region</b> and <b>City</b> comboboxes communicate using the <b>OnChanged</b> and <b>GetEditorValue</b> methods to pass/get values to/from each other.
+        Click <b>Edit</b> to see how the <b>Region</b> and <b>City</b> comboboxes communicate using the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.CellEditContext.OnChanged(System.Object)">OnChanged</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.CellEditContext.GetEditorValue(System.String)">GetEditorValue</a> methods to pass/get values to/from each other.
     </p>
 </div>
 

@@ -3,20 +3,16 @@
 <div class="demo-description">
     <h1>DevExpress UI Components for Blazor</h1>
     <p>
-        The DevExpress UI components featured in this demo are available for free download and can be used in your next Blazor app.*
+        The DevExpress UI components featured in this demo are available for free download and can be used in your next Blazor app.
     </p>
     <p>
         Review our <a href="https://github.com/DevExpress/Blazor">GitHub Guide</a> for details on how to set up your environment.
     </p>
 
-    <p>
-        <i>* Like any software preview, the DevExpress UI Suite for Blazor is not without fault. You should not use these products in production environments or in mission-critical applications.</i>
-    </p>
-
     <h2>How to run this demo on your machine</h2>
     <ol>
         <li>Ensure that you have .NET Core 3 installed.</li>
-        <li>Download the "<b>demo</b>" directory from the <a href="https://github.com/DevExpress/Blazor">GitHub repository</a>.</li>
+        <li>Download the "<b>demo</b>" and "<b>tools</b>" directories from the <a href="https://github.com/DevExpress/Blazor">GitHub repository</a>.</li>
         <li>Open <b>demo/BlazorDemo.ServerSide/BlazorDemo.ServerSide.sln</b> in Visual Studio 2019.</li>
         <li>Start the application.</li>
     </ol>
@@ -32,12 +28,14 @@
     <ol>
         <li>Create a new solution using the "Blazor (server-side)" or "Blazor" template in Visual Studio 2019.</li>
         <li>
-            <p>Register the DevExpress Early Access feed in Visual Studio's NuGet Package Manager.</p>
-<CodeSnippet>https://nuget.devexpress.com/early-access/api</CodeSnippet>
-            <p>See the <a href="https://docs.devexpress.com/GeneralInformation/116698/installation/install-devexpress-controls-using-nuget-packages/setup-visual-studio%27s-nuget-package-manager" rel="nofollow">Setup Visual Studio's NuGet Package Manager</a> topic for more information.</p>
+            <p>Go to <a href="https://nuget.devexpress.com">nuget.devexpress.com</a>, log in as a registered DevExpress customer and click <b>Obtain Feed URL</b>. 
+               The subsequent page displays a development account's NuGet Feed URL.
+            </p>
+            <p>Register the DevExpress NuGet feed in Visual Studio's NuGet Package Manager.</p>
+            <CodeSnippet>https://nuget.devexpress.com/{your feed authorization key}/api</CodeSnippet>
+            <p>See the <a class="helplink" target="_blank" href="https://docs.devexpress.com/GeneralInformation/116698/installation/install-devexpress-controls-using-nuget-packages/setup-visual-studio%27s-nuget-package-manager" rel="nofollow">Setup Visual Studio's NuGet Package Manager</a> topic for more information.</p>
         </li>
         <li>Install the "DevExpress.Blazor" NuGet package.</li>
-        <li>Obtain the client runtime from our <a href="https://github.com/DevExpress/Blazor">GitHub repository</a> - download all files from the "<b>client-runtime</b>" directory. Include the downloaded files into your start page.</li>
         <li>
             Register our tag namespace and helper in <b>_Imports.razor</b> file: 
             <CodeSnippet>
@@ -89,9 +87,9 @@
         <li>
             Scheduler
             <ul>
-                <li><NavLink href="SchedulerViewTypes">Week View</NavLink></li>
-                <li><NavLink href="SchedulerViewTypes">Work Week View</NavLink></li>
-                <li><NavLink href="SchedulerViewTypes">Day View</NavLink></li>
+                <li><NavLink href="SchedulerViewTypes#WeekView">Week View</NavLink></li>
+                <li><NavLink href="SchedulerViewTypes#WorkWeekView">Work Week View</NavLink></li>
+                <li><NavLink href="SchedulerViewTypes#DayView">Day View</NavLink></li>
                 <li><NavLink href="SchedulerRecurringAppointments">Recurring Appointments</NavLink></li>
             </ul>
         </li>

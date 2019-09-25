@@ -413,3 +413,7 @@ div.content > .card:last-child {
 .custom-popup .modal-body {
     padding-top: 0.6rem;
 }
+
+a.helplink {
+    text-decoration: underline;
+}

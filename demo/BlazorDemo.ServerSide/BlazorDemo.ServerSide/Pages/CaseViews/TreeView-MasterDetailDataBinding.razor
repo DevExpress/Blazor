@@ -7,10 +7,10 @@
     <h2>
         <NavLink class="demo-anchor" href="TreeView#MasterDetailDataBinding" />TreeView - Master-Detail Data Binding
     </h2>
-    <p>The DevExpress TreeView for Blazor allows you to load data from several data sources and display the master-detail relationships within the component.</p>
+    <p>The DevExpress <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView#bind-to-data">TreeView</a> for Blazor allows you to load data from several data sources and display the master-detail relationships within the component.</p>
     <p>This demo module binds the TreeView to three data sources and populates component nodes as follows:</p>
     <ul>
-        <li>First-level nodes are bound to an array of <i>ProductCategoryMain</i> items via the component's <b>Data</b> property.</li>
+        <li>First-level nodes are bound to an array of <i>ProductCategoryMain</i> items via the component's <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTreeViewBase.Data">Data</a> property.</li>
         <li>Second-level nodes are obtained from the second data source. Each node is represented by the <i>ProductCategory</i> object and depends on a parent value (the corresponding first-level node).</li>
         <li>Third-level nodes are obtained from the third data source. Each node is represented by the <i>Product</i> object based on a master-detail relationship between the second and third data sources. This relationship is established through the <i>ProductCategory.ProductSubcategoryID</i> and <i>Product.ProductCategoryId</i> properties.</li>
     </ul>

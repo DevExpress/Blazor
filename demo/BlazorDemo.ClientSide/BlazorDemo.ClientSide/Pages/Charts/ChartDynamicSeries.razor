@@ -6,23 +6,23 @@
 <div class="demo-description">
     <h2>Charts - Dynamic Series</h2>
     <p>
-        The <b>DxChart</b> allows you select data that matches the specified criterion from a data source and display chart series based on this data.
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1">DxChart</a> allows you select data that matches the specified criterion from a data source and display chart series based on this data.
     </p>
     <p>
-        To do this, use the following settings available through the <b>DxChartCommonSeries</b> object:
+        To do this, use the following settings available through the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4">DxChartCommonSeries</a> object:
     </p>
     <ul>
-        <li><b>NameField</b> – A data field that provides series names.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4.NameField">NameField</a> – A data field that provides series names.</li>
         <li>
-            <b>AggregationMethod</b> – A data aggregation method. You can use any function with the Func&lt;IEnumerable&lt;TValue&gt;, TValue&gt; signature as a value of this setting.
+            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4.AggregationMethod">AggregationMethod</a> – A data aggregation method. You can use any function with the Func&lt;IEnumerable&lt;TValue&gt;, TValue&gt; signature as a value of this setting.
             A static <b>Enumerble.Sum</b> method is used in this demo.
         </li>
-        <li><b>ArgumentField</b> – A data field that provides series arguments.</li>
-        <li><b>ValueField</b> – Specifies a data field that provides series values.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4.ArgumentField">ArgumentField</a> – A data field that provides series arguments.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4.ValueField">ValueField</a> – Specifies a data field that provides series values.</li>
     </ul>
     <p>
-        You can also use the <b>SeriesTemplate</b> property to specify different templates for specific series types: <b>DxChartBarSeries</b>, <b>DxChartLineSeries</b>, and other type-specific series objects. 
-        Note that the <b>SeriesTemplate</b> property is used as many times as the number of data groups that match the specified criterion.
+        You can also use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4.SeriesTemplate">SeriesTemplate</a> property to specify different templates for specific series types: <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartBarSeries-3">DxChartBarSeries</a>, <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartLineSeries-3">DxChartLineSeries</a>, and other type-specific series objects. 
+        Note that the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4.SeriesTemplate">SeriesTemplate</a> property is used as many times as the number of data groups that match the specified criterion.
     </p>
 </div>
 <DxChart Data="@GridData">

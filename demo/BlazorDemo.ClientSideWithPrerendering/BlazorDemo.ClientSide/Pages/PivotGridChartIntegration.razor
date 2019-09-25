@@ -5,7 +5,7 @@
 <div class="demo-description">
     <h2>Pivot Grid - Chart Integration</h2>
     <p>
-        This demo illustrates linked Chart and Pivot Grid components. The chart is automatically updated when a user expands or collapses rows/columns in the Pivot Grid, and the Chart shows data from the Pivot Grid's lowest expanded level.
+        This demo illustrates linked <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1">DxChart</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPivotGrid-1">DxPivotGrid</a> components. The chart is automatically updated when a user expands or collapses rows/columns in the Pivot Grid, and the Chart shows data from the Pivot Grid's lowest expanded level.
     </p>
     <p>
         To link these components, do the following:
@@ -15,12 +15,12 @@
             Create a custom method that asynchronously returns an <b>IEnumerable&lt;T&gt;</b>
             collection (<i>Sales.Load()</i> in this demo).
         </li>
-        <li>Create a data provider object (PivotGridDataProvider in this demo).</li>
-        <li>Bind the Pivot Grid to the data provider object's <b>PivotGridDataSource</b> property.</li>
-        <li>Bind Charts to the data provider object's <b>ChartDataSource</b> property.</li>
-        <li>Assign corresponding fields to <b>NameField</b>, <b>ArgumentField</b>, and <b>ValueField</b> properties.</li>
+        <li>Create a data provider object (<i>PivotGridDataProvider</i> in this demo).</li>
+        <li>Bind the Pivot Grid to the data provider object's <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPivotGridDataProvider-1.PivotGridDataSource">PivotGridDataSource</a> property.</li>
+        <li>Bind Charts to the data provider object's <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPivotGridDataProvider-1.ChartDataSource">ChartDataSource</a> property.</li>
+        <li>Assign corresponding fields to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4.NameField">NameField</a>, <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4.ArgumentField">ArgumentField</a>, and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4.ValueField">ValueField</a> properties.</li>
         <li>
-            Additionally, you can assign a data field name to the <b>PaneField</b> property. This enables the Chart to group data by the corresponding field's values and create a separate Pane for each group.
+            Additionally, you can assign a data field name to the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4.PaneField">PaneField</a> property. This enables the Chart to group data by the corresponding field's values and create a separate Pane for each group.
         </li>
     </ol> 
 </div>
