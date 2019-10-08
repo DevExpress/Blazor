@@ -11,6 +11,10 @@ namespace Demo.Blazor.Services
         {
             "Hot", "Warm", "Cold", "Freezing"
         };
+        private static string[] WeatherTypes = new [] 
+        {
+            "PartlyCloudy", "Storm", "Cloudy", "Rain", "Sunny"
+        };
 
         private List<WeatherForecast> CreateForecast()
         {
@@ -20,7 +24,8 @@ namespace Demo.Blazor.Services
             {
                 Date = startDate.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
+                Summary = Summaries[rng.Next(Summaries.Length)],
+                WeatherType = WeatherTypes[rng.Next(WeatherTypes.Length)]
             }).ToList();
         }
         private List<WeatherForecast> CreateDetailedForecast() {
@@ -35,7 +40,8 @@ namespace Demo.Blazor.Services
                 {
                     Date = dayDate.AddHours(hour),
                     TemperatureC = rng.Next(minTemp, maxTemp),
-                    Summary = Summaries[rng.Next(Summaries.Length)]
+                    Summary = Summaries[rng.Next(Summaries.Length)],
+                    WeatherType = WeatherTypes[rng.Next(WeatherTypes.Length)]
                 });
             }).ToList();
         }

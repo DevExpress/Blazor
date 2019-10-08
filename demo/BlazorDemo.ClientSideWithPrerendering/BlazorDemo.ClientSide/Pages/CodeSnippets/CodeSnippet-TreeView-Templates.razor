@@ -1,0 +1,37 @@
+﻿<CodeSnippet>
+@(@"<DxTreeView @ref=""@treeView""
+            Data=""@ComponentsData.ComponentSets""
+            ChildrenExpression=""@(dataItem => ((ComponentSet)dataItem).ComponentSets)"">
+    <NodeTemplate>
+        @{
+            var dataItem = (ComponentSet)context.DataItem;
+        }
+        @if (!context.IsLeaf)
+        {
+            <h4 class=""my-0 p-2 d-flex align-items-center justify-content-between"">
+                <span class=""mr-3"">@dataItem.Title</span>
+                <small class=""@GetExpandButtonCssClass(dataItem)"" style=""top: 0px""></small>
+            </h4>
+        }
+        else
+        {
+            <div class=""media p-2"">
+                <img src=""@dataItem.ImageUrl"" class=""bg-primary rounded mr-3"" style=""padding: 2px; width: 30px; height: 30px;"" alt=""@dataItem.Title"" />
+                <div class=""media-body"">
+                    <h5 class=""mt-0"">@dataItem.Title</h5>
+                    @dataItem.Description
+                </div>
+            </div>
+        }
+    </NodeTemplate>
+</DxTreeView>
+
+@code {
+    DxTreeView treeView;
+
+    string GetExpandButtonCssClass(ComponentSet nodeDataItem)
+    {
+        return String.Format(""oi oi-chevron-{0}"", treeView.GetNodeExpanded(n => n.DataItem == nodeDataItem) ? ""bottom"" : ""right"");
+    }
+}")
+</CodeSnippet>

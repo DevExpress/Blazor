@@ -2,7 +2,28 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
-# 19.1.7 (latest release)
+# 19.1.8 (latest release)
+
+### Fixed
+
+* https://supportcenter.devexpress.com/internal/ticket/details/T814205
+* https://supportcenter.devexpress.com/internal/ticket/details/T815667
+* https://supportcenter.devexpress.com/internal/ticket/details/T819540
+
+### Added
+
+* Data Grid 
+  * API for managing the index of the current page (PageIndex and PageIndexChanged)
+  * API for getting the current page count (PageCount and PageCountChanged)
+
+* TreeView
+  * Templates
+  * Customizing the way how end-users can expand/collapse nodes 
+  * Detecting whether the event triggering was caused by an API method call or not. 
+  * Finding all nodes that satisfy the specified condition (predicate).
+  * Getting the node's parent node information.
+
+# 19.1.7
 
 ### Added
 

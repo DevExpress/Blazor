@@ -1,0 +1,29 @@
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet>
+@(@"<DxChart Data=""@WeatherForecasts"" OnCustomizeSeriesPoint=""@PreparePointLabel"">
+    <DxChartLineSeries AggregationMethod=""@(i => (int)i.Average())""
+                       ValueField=""@((WeatherForecast i) => i.TemperatureF)""
+                       ArgumentField=""@(i => i.Date.ToString(""yyyy/MM/dd""))""
+                       Name=""Temperature, F"">
+        <DxChartSeriesLabel Position=""@RelativePosition.Outside"">
+            <DxChartSeriesLabelConnector Visible=""true"" Width=""3"" />
+        </DxChartSeriesLabel>
+    </DxChartLineSeries>
+    <DxChartLegend Position=""@RelativePosition.Outside"" />
+</DxChart>
+
+@code {
+    WeatherForecast[] WeatherForecasts;
+
+    protected void PreparePointLabel(ChartSeriesPointCustomizationSettings pointSettings)
+    {
+        double value = (double)pointSettings.Point.Value;
+        if(value > 25 && value < 75)
+            pointSettings.PointLabel.Visible = true;
+    }
+}")
+        </CodeSnippet>
+    </div>
+</div>

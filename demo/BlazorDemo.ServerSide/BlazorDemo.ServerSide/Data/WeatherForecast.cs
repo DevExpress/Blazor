@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Demo.Blazor.Services
 {
@@ -11,5 +11,7 @@ namespace Demo.Blazor.Services
         public double TemperatureF => Math.Round((TemperatureC * 1.8 + 32), 2);
 
         public string Summary { get; set; }
+
+        public string WeatherType { get; set; }
     }
 }

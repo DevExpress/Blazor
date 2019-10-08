@@ -1,0 +1,94 @@
+﻿@page "/ChartSeriesCustomization"
+@using Demo.Blazor
+@using Demo.Blazor.Model
+@using DevExpress.Blazor
+@using Demo.Blazor.Services
+@using System.Linq
+@inject WeatherForecastService ForecastService
+<div class="demo-description" id="Point">
+    <h2><NavLink class="demo-anchor" href="ChartSeriesCustomization#Point" />Charts - Series Point Customization</h2>
+    <p>
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesPoint">DxChartSeriesPoint</a> component allows you to customize a point's color, size, symbol, and visibility. 
+        You can use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxChartBase-1.OnCustomizeSeriesPoint">OnCustomizeSeriesPoint</a> to change individual points' appearance.
+        In this demo, points are colored according to their values.
+    </p>
+</div>
+<DxChart Data="@WeatherForecasts" OnCustomizeSeriesPoint="@PreparePointColor">
+    <DxChartLineSeries AggregationMethod="@(i => (int)i.Average())"
+                       Color="@System.Drawing.Color.Gray"
+                       ValueField="@((WeatherForecast i) => i.TemperatureF)"
+                       ArgumentField="@(i => i.Date.ToString("yyyy/MM/dd"))"
+                       Name="Temperature, F">
+        <DxChartSeriesPoint Symbol="@ChartPointSymbol.Polygon" Color="@System.Drawing.Color.Gray" Size="25" />
+    </DxChartLineSeries>
+    <DxChartLegend Position="@RelativePosition.Outside" />
+</DxChart>
+<CodeSnippet_Charts_SeriesPointCustomization />
+<div class="demo-description" id="PointImage">
+    <h2><NavLink class="demo-anchor" href="ChartSeriesCustomization#PointImage" />Charts - Series Point Image</h2>
+    <p>
+        This demo illustrates how to use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesPointImage">DxChartSeriesPointImage</a> component to use custom images for points.
+        To do this, handle the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxChartBase-1.OnCustomizeSeriesPoint">OnCustomizeSeriesPoint</a> event and use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartSeriesPointImageModel">e.PointAppearance.Image</a> property to access a point's image settings.
+</p>
+</div>
+<DxChart Data="@WeatherForecasts" OnCustomizeSeriesPoint="@PreparePointImage">
+    <DxChartLineSeries AggregationMethod="@(i => (int)i.Average())"
+                       ValueField="@((WeatherForecast i) => i.TemperatureF)"
+                       ArgumentField="@(i => i.Date.ToString("yyyy/MM/dd"))"
+                       Name="Temperature, F">
+        <DxChartSeriesPoint>
+            <DxChartSeriesPointImage Width="50" Height="50" />
+        </DxChartSeriesPoint>
+    </DxChartLineSeries>
+    <DxChartLegend Position="@RelativePosition.Outside" />
+</DxChart>
+<CodeSnippet_Charts_SeriesPointImage />
+<div class="demo-description" id="Label">
+    <h2><NavLink class="demo-anchor" href="ChartSeriesCustomization#Label" />Charts - Series Label Customization</h2>
+    <p>
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesLabel">DxChartSeriesLabel</a> component allows you to customize a label's position, visibility, background color, and connector appearance.
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartSeriesLabelModel">e.PointLabel</a> property in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxChartBase-1.OnCustomizeSeriesPoint">OnCustomizeSeriesPoint</a> event handler to access a label's customization settings.
+        In this demo, points' labels are visible if their values are between 25 and 75.
+    </p>
+</div>
+<DxChart Data="@WeatherForecasts" OnCustomizeSeriesPoint="@PreparePointLabel">
+    <DxChartLineSeries AggregationMethod="@(i => (int)i.Average())"
+                       ValueField="@((WeatherForecast i) => i.TemperatureF)"
+                       ArgumentField="@(i => i.Date.ToString("yyyy/MM/dd"))"
+                       Name="Temperature, F">
+        <DxChartSeriesLabel Position="@RelativePosition.Outside">
+            <DxChartSeriesLabelConnector Visible="true" Width="3" />
+        </DxChartSeriesLabel>
+    </DxChartLineSeries>
+    <DxChartLegend Position="@RelativePosition.Outside" />
+</DxChart>
+<CodeSnippet_Charts_SeriesLabelCustomization />
+@code {
+    WeatherForecast[] WeatherForecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        WeatherForecasts = await ForecastService.GetDetailedForecastAsync();
+    }
+
+    protected void PreparePointColor(ChartSeriesPointCustomizationSettings pointSettings)
+    {
+        double value = (double)pointSettings.Point.Value;
+        if(value > 75)
+            pointSettings.PointAppearance.Color = System.Drawing.Color.Red;
+        else if(value < 25)
+            pointSettings.PointAppearance.Color = System.Drawing.Color.Blue;
+    }
+    protected void PreparePointLabel(ChartSeriesPointCustomizationSettings pointSettings)
+    {
+        double value = (double)pointSettings.Point.Value;
+        if(value > 25 && value < 75)
+            pointSettings.PointLabel.Visible = true;
+    }
+    protected void PreparePointImage(ChartSeriesPointCustomizationSettings pointSettings)
+    {
+        IEnumerable<WeatherForecast> dataItems = pointSettings.Point.DataItems.Cast<WeatherForecast>();
+        var mostyleAppliedWeatherType = dataItems.GroupBy(x => x.WeatherType).OrderByDescending(x => x.Count()).First().Key;
+        pointSettings.PointAppearance.Image.Url = $"images/{mostyleAppliedWeatherType}.png";
+    }
+}
