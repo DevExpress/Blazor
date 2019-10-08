@@ -6,19 +6,29 @@
         The DevExpress UI components featured in this demo are available for free download and can be used in your next Blazor app.
     </p>
     <p>
-        Review our <a href="https://github.com/DevExpress/Blazor">GitHub Guide</a> for details on how to set up your environment.
+        Review our <a class="helplink" href="https://github.com/DevExpress/Blazor" target="_blank" >GitHub Guide</a> for details on how to set up your environment.
     </p>
 
     <h2>How to run this demo on your machine</h2>
     <ol>
         <li>Ensure that you have .NET Core 3 installed.</li>
-        <li>Download the "<b>demo</b>" and "<b>tools</b>" directories from the <a href="https://github.com/DevExpress/Blazor">GitHub repository</a>.</li>
+        <li>Download the "<b>demo</b>" and "<b>tools</b>" directories from the <a class="helplink" target="_blank" href="https://github.com/DevExpress/Blazor">GitHub repository</a>.</li>
         <li>Open <b>demo/BlazorDemo.ServerSide/BlazorDemo.ServerSide.sln</b> in Visual Studio 2019.</li>
+        <li>
+            <p>
+                Go to <a class="helplink" target="_blank" href="https://nuget.devexpress.com">nuget.devexpress.com</a>, log in or sign up and click <b>Obtain Feed URL</b>. 
+                This redirects you to a page's section that displays a development account's NuGet Feed URL.
+            </p>
+            <p>Register the DevExpress NuGet feed in Visual Studio's NuGet Package Manager.</p>
+            <CodeSnippet>https://nuget.devexpress.com/{your feed authorization key}/api</CodeSnippet>
+            <p>See the <a class="helplink" target="_blank" href="https://docs.devexpress.com/GeneralInformation/116698/installation/install-devexpress-controls-using-nuget-packages/setup-visual-studio%27s-nuget-package-manager" rel="nofollow">Setup Visual Studio's NuGet Package Manager</a> topic for more information.</p>
+        </li>
         <li>Start the application.</li>
     </ol>
     See also:
     <ul style="list-style-type: none;padding:0;">
-        <li><a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/client">Official Microsoft Blazor site</a></li>
+        <li><a class="helplink" href="https://dotnet.microsoft.com/apps/aspnet/web-apps/client" target="_blank">Official Microsoft Blazor site</a></li>
+        <li><a class="helplink" href="https://github.com/DevExpress/Blazor#how-to-run-this-demo-locally" target="_blank">Instruction on GitHub</a></li>
     </ul>
 
     <h2>How to create a new project</h2>
@@ -26,16 +36,48 @@
         Follow the steps below to try our Blazor in your own application.
     </p>
     <ol>
-        <li>Create a new solution using the "Blazor (server-side)" or "Blazor" template in Visual Studio 2019.</li>
+        <li>Create a new solution using the "Blazor App" template in Visual Studio 2019.</li>
         <li>
-            <p>Go to <a href="https://nuget.devexpress.com">nuget.devexpress.com</a>, log in as a registered DevExpress customer and click <b>Obtain Feed URL</b>. 
-               The subsequent page displays a development account's NuGet Feed URL.
+            <p>
+                Go to <a class="helplink" target="_blank" href="https://nuget.devexpress.com">nuget.devexpress.com</a>, log in or sign up and click <b>Obtain Feed URL</b>.
+                This redirects you to a page's section that displays a development account's NuGet Feed URL.
             </p>
             <p>Register the DevExpress NuGet feed in Visual Studio's NuGet Package Manager.</p>
             <CodeSnippet>https://nuget.devexpress.com/{your feed authorization key}/api</CodeSnippet>
             <p>See the <a class="helplink" target="_blank" href="https://docs.devexpress.com/GeneralInformation/116698/installation/install-devexpress-controls-using-nuget-packages/setup-visual-studio%27s-nuget-package-manager" rel="nofollow">Setup Visual Studio's NuGet Package Manager</a> topic for more information.</p>
         </li>
         <li>Install the "DevExpress.Blazor" NuGet package.</li>
+        <li>Build the project.</li>
+        <li>
+            <p>Make sure the following folder is automatically created in your project’s wwwroot directory:</p>
+            <ul>
+                <li>lib/dx-blazor/</li>
+                <li>dx-blazor/.gitignore</li>
+                <li>dx-blazor/modules/</li>
+                <li>dx-blazor/dx-blazor.js</li>
+                <li>dx-blazor/dx-blazor.css</li>
+            </ul>
+            <p>
+                For existing Blazor projects, copy the DevExpress static files from the Lib/dx-blazor folder to the appropriate folder in your project.
+                <i>The Lib/dx-blazor folder is automatically cleared while the project is built and contains static files for an installed nuget package only. Do not store your files here.</i>
+            </p>
+        </li>
+        <li>
+            <p>Link the <em>dx-blazor.js</em> and <em>dx-blazor.css</em> files to your layout’s HEAD section:</p>
+            <ul>
+                <li>For server-side Blazor, add the lines below to the <em>_Host.cshtml</em> file.</li>
+                <li>For client-side Blazor, add the lines below to the <em>Index.cshtm</em>l file.</li>
+            </ul>
+            <CodeSnippet>
+&lt;head&gt;
+    ...
+    &lt;link href=&quot;lib/dx-blazor/dx-blazor.css&quot; rel=&quot;stylesheet&quot; /&gt;
+    &lt;script src=&quot;lib/dx-blazor/dx-blazor.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+            </CodeSnippet>
+            <p>Reference this JavaScript file only because the dx-blazor/dx-blazor.js file is the entry point for DevExpress module files.</p>
+        </li>
+
         <li>
             Register our tag namespace and helper in <b>_Imports.razor</b> file: 
             <CodeSnippet>
@@ -44,6 +86,10 @@
         </li>
         <li>Your application is ready to use DevExpress UI for Blazor.</li>
     </ol>
+    See also:
+    <ul style="list-style-type: none;padding:0;">
+        <li><a class="helplink" href="https://github.com/DevExpress/Blazor#how-to-create-a-new-project" target="_blank">Instruction on GitHub</a></li>
+    </ul>
 
     <h2>Included Demo Modules</h2>
     <ul>
@@ -82,6 +128,7 @@
                 <li><NavLink href="ChartFinancialSeries">Financial Series</NavLink></li>
                 <li><NavLink href="ChartPieSeries">Pie Series</NavLink></li>
                 <li><NavLink href="ChartCustomization">Customization</NavLink></li>
+                <li><NavLink href="ChartSeriesCustomization">Series Customization</NavLink></li>
             </ul>
         </li>
         <li>

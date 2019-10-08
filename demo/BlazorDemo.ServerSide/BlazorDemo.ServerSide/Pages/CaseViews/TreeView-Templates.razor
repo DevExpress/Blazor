@@ -1,0 +1,83 @@
+﻿@using Demo.Blazor.Model
+
+<div class="demo-description" id="Templates">
+    <h2>
+        <NavLink class="demo-anchor" href="TreeView#Templates" />TreeView - Templates<span class="demo-badge badge badge-success">New</span>
+    </h2>
+    <p>
+        You can use templates in the DevExpress <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView">TreeView</a> component for Blazor to customize TreeView nodes. The templates allow you to specify a node’s text, content, and appearance. A template can be applied to all TreeView nodes or a specific node.
+    </p>
+    <p>
+        Use the following properties to specify TreeView templates:
+    </p>
+    <ul>
+        <li>
+            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView">DxTreeView</a> properties (templates that are applied to all nodes):
+            <ul>
+                <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTreeViewBase.NodeTemplate">NodeTemplate</a> – Specifies a common template for all TreeView nodes' content.</li>
+                <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTreeViewBase.NodeTextTemplate">NodeTextTemplate</a> – Specifies a common template for all TreeView nodes' text.</li>
+            </ul>
+        </li>
+        <li>
+            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeViewNode">DxTreeViewNode</a> properties (templates that are applied to a specific node):
+            <ul>
+                <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeViewNode.Template">Template</a> – Specifies a template for the corresponding node's content.</li>
+                <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeViewNode.TextTemplate">TextTemplate</a> – Specifies a template for the corresponding node's text.</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="card demo-card border-0">
+    <div class="card-body py-0">
+        <DxTreeView @ref="@treeView"
+                    Data="@ComponentsData.ComponentSets"
+                    ChildrenExpression="@(dataItem => ((ComponentSet)dataItem).ComponentSets)">
+            <NodeTemplate>
+                @{
+                    var dataItem = (ComponentSet)context.DataItem;
+                }
+                @if (!context.IsLeaf)
+                {
+                    <h4 class="my-0 p-2 d-flex align-items-center justify-content-between">
+                        <span class="mr-3">@dataItem.Title</span>
+                        <small class="@GetExpandButtonCssClass(dataItem)" style="top: 0px"></small>
+                    </h4>
+                }
+                else
+                {
+                    <div class="media p-2">
+                        <img src=@dataItem.ImageUrl class="bg-primary rounded mr-3" style="padding: 2px; width: 30px; height: 30px;" alt="@dataItem.Title" />
+                        <div class="media-body">
+                            <h5 class="mt-0">@dataItem.Title</h5>
+                            @dataItem.Description
+                        </div>
+                    </div>
+                }
+            </NodeTemplate>
+        </DxTreeView>
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
+        <CodeSnippet_TreeView_Templates />
+    </div>
+</div>
+
+@code {
+    DxTreeView treeView;
+
+    string GetExpandButtonCssClass(ComponentSet nodeDataItem)
+    {
+        return String.Format("oi oi-chevron-{0}", treeView.GetNodeExpanded(n => n.DataItem == nodeDataItem) ? "bottom" : "right");
+    }
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            treeView.ExpandAll();
+        return base.OnAfterRenderAsync(firstRender);
+    }
+}
