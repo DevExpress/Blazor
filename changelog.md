@@ -12,16 +12,21 @@ Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
 ### Added
 
-* Data Grid 
-  * API for managing the index of the current page (PageIndex and PageIndexChanged)
-  * API for getting the current page count (PageCount and PageCountChanged)
+Charts
 
-* TreeView
-  * Templates
-  * Customizing the way how end-users can expand/collapse nodes 
-  * Detecting whether the event triggering was caused by an API method call or not. 
-  * Finding all nodes that satisfy the specified condition (predicate).
-  * Getting the node's parent node information.
+Support for series points appearance customization. Users can customize series points and their labels' appearance and provide custom images for points. This features was implemented in the scope of the T814205, T815667, T819540 tickets. 
+
+Data Grid
+
+- New API to specify the current page's index and count and handle their change events. 
+
+TreeView
+
+ - Templates Support.
+ - Ability to specify which user actions expand/collapse nodes. 
+ - New API to identify whether an event was triggered by user action or programmatically. 
+ - New API to get information about the nodes that match custom conditions.
+ - New API to get a node's parent node information.
 
 # 19.1.7
 
