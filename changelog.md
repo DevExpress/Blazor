@@ -6,15 +6,15 @@ Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
 ### Fixed
 
-* https://supportcenter.devexpress.com/internal/ticket/details/T814205
-* https://supportcenter.devexpress.com/internal/ticket/details/T815667
-* https://supportcenter.devexpress.com/internal/ticket/details/T819540
+* [T814205](https://supportcenter.devexpress.com/ticket/details/T814205)
+* [T815667](https://supportcenter.devexpress.com/ticket/details/T815667)
+* [T819540](https://supportcenter.devexpress.com/ticket/details/T819540)
 
 ### Added
 
 Charts
 
-Support for series points appearance customization. Users can customize series points and their labels' appearance and provide custom images for points. This features was implemented in the scope of the T814205, T815667, T819540 tickets. 
+Support for series points appearance customization. Users can customize series points and their labels' appearance and provide custom images for points. This features was implemented in the scope of the [T819957](https://supportcenter.devexpress.com/ticket/details/T819957), [T818419](https://supportcenter.devexpress.com/ticket/details/T818419), [T818942](https://supportcenter.devexpress.com/ticket/details/T818942) tickets. 
 
 Data Grid
 
