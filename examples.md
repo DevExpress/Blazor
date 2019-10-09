@@ -16,4 +16,4 @@ DevExpress Blazor components are shipped with GitHub feature-based examples. Fol
   * [How to show a Data Grid's detail information in DxFormLayout](https://www.devexpress.com/Support/Center/Example/Details/T802161/blazor-data-grid-how-to-show-a-detail-information-in-dxformlayout)
  
  
- Refer to [Blazor Examples](https://www.devexpress.com/Support/Center/Example/ChangeFilterSet/1?FavoritesOnly=False&MyItemsOnly=False&MyTeamItemsOnly=False&PlatformName=Blazor%2FRazor%20Components&ProductName=AllProducts&TicketType=Examples) to see all the examples for DevExpress Blazor components.
+ Refer to [Blazor Examples](https://supportcenter.devexpress.com/ticket/list/?preset=a6cf855e-af17-4f6b-8ffc-0f9854b97da1) to see all the examples for DevExpress Blazor components.
