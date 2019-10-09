@@ -9,6 +9,7 @@ DevExpress Blazor components are shipped with GitHub feature-based examples. Fol
   * [How to bind a grid to a DataTable object](https://www.devexpress.com/Support/Center/Example/Details/T816800/blazor-data-grid-how-to-bind-a-grid-to-a-datatable-object)
   * and more.
 * Data Editors
+  * [How to implement the multiple selection editor](https://supportcenter.devexpress.com/ticket/details/t820528/blazor-editors-how-to-implement-the-multiple-selection-editor)
   * [How to implement the date range selector](https://www.devexpress.com/Support/Center/Example/Details/T809157/blazor-date-edit-how-to-implement-the-date-range-selector)
 * Form Layout
   * [How to change DxFormLayout's item and group visibility](https://www.devexpress.com/Support/Center/Example/Details/T803618/blazor-form-layout-how-to-change-dxformlayout-s-item-and-group-visibility)
