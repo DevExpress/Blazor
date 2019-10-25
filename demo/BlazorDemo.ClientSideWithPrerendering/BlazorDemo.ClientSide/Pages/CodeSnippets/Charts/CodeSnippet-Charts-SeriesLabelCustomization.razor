@@ -2,7 +2,7 @@
     <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted ">
         <CodeSnippet>
-@(@"<DxChart Data=""@WeatherForecasts"" OnCustomizeSeriesPoint=""@PreparePointLabel"">
+@(@"<DxChart Data=""@WeatherForecasts"" CustomizeSeriesPoint=""@PreparePointLabel"">
     <DxChartLineSeries AggregationMethod=""@(i => (int)i.Average())""
                        ValueField=""@((WeatherForecast i) => i.TemperatureF)""
                        ArgumentField=""@(i => i.Date.ToString(""yyyy/MM/dd""))""

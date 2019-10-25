@@ -1,0 +1,48 @@
+﻿<div class="demo-description" id="AdaptiveScrollPicker">
+    <h2>
+        <NavLink class="demo-anchor" href="DateEdit#AdaptiveScrollPicker" />Date Edit - Adaptive Scroll Picker<span class="demo-badge badge badge-success">New</span>
+    </h2>
+    <p>
+        <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit">DxDateEdit</a> allows you to adapt a displayed datepicker to a device type. 
+        To specify a picker type, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit.PickerDisplayMode">PickerDisplayMode</a> property that supports the following values:
+        <ul>
+            <li>
+                <b>Auto</b> (default) - Mobile and tablet devices display a datepicker as a scroll picker. 
+                Also, mobile devices show a modal window to display datepickers. Other device types display a datepicker as a calendar.
+            </li>
+            <li><b>Calendar</b> - All devices display a datepicker as a calendar.</li>
+            <li><b>ScrollPicker</b> - All devices display a datepicker as a scroll picker.</li>
+        </ul>
+    </p>
+    <p>
+        When the datepicker is displayed as a scroll picker (in Auto or ScrollPicker mode), use the ScrollPickerFormat property to define a date format for each scroll picker part (a day, month, and year). The supported formats are:
+        <ul>
+            <li><b>ddd</b> - A day is specified by the date and a short name of the day of the week, for example, <i>15 Fri</i>.</li>
+            <li><b>dddd</b> - A day is specified by the date and a full name of the day of the week, for example, <i>15 Friday</i>. </li>
+            <li><b>dd</b> or <b>d</b> - A day is specified by the date, for example, <i>15</i>.</li>
+            <li><b>MMM</b> - A month is specified by its short name, for example, <i>Oct</i>.</li>
+            <li><b>M</b>,<b>MM</b>,or <b>MMMM</b> - A month is specified by its full name, for example, <i>October</i>.</li>
+            <li><b>y</b>, <b>yy</b>, <b>yyy</b>, or <b>yyyy</b> - A year is specified by its full number, for example, <i>2019</i>.</li>
+        </ul>
+        An order of the specified formats defines an order of the corresponding scroll picker parts.
+    </p>
+</div>
+
+<div class="card demo-card">
+    <div class="card-header">Selected date is: <b>@DateTimeValue.ToString("dddd, dd MMMM yyyy")</b></div>
+    <div class="card-body mw-480" style="height: 425px">
+        <DxDateEdit @bind-Date="@DateTimeValue" PickerDisplayMode="@DatePickerDisplayMode.ScrollPicker" ScrollPickerFormat="dddd MMMM yyyy"></DxDateEdit>
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_DateEdit_AdaptiveScrollPicker />
+    </div>
+</div>
+
+@code {
+    DateTime dateTimeValue = DateTime.Now;
+    DateTime DateTimeValue { get => dateTimeValue; set { dateTimeValue = value; InvokeAsync(StateHasChanged); }  }
+}

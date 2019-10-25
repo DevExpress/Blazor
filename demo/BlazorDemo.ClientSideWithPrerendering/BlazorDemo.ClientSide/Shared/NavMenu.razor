@@ -1,5 +1,11 @@
-<DxTreeView @ref="@treeView" CssClass="app-sidebar" ExpandButtonIconCssClass="demo-icon-expand" CollapseButtonIconCssClass="demo-icon-collapse"
-            AllowSelectNodes="true" BeforeCollapse="@BeforeExpandCollapse" BeforeExpand="@BeforeExpandCollapse" SelectionChanged="@SelectionChanged">
+<DxTreeView @ref="@treeView" 
+            CssClass="app-sidebar" 
+            ExpandButtonIconCssClass="demo-icon-expand" 
+            CollapseButtonIconCssClass="demo-icon-collapse"
+            AllowSelectNodes="true" 
+            NodeExpandCollapseAction="TreeViewNodeExpandCollapseAction.NodeClick"
+            BeforeExpand="@BeforeExpand"
+            SelectionChanged="@SelectionChanged">
     <Nodes>
         <DxTreeViewNode Text="Overview" NavigateUrl="">
         </DxTreeViewNode>
@@ -35,6 +41,7 @@
                 <DxTreeViewNode Text="Financial Series" NavigateUrl="ChartFinancialSeries"></DxTreeViewNode>
                 <DxTreeViewNode Text="Pie Series" NavigateUrl="ChartPieSeries"></DxTreeViewNode>
                 <DxTreeViewNode Text="Customization" NavigateUrl="ChartCustomization"></DxTreeViewNode>
+                <DxTreeViewNode Text="Series Customization" NavigateUrl="ChartSeriesCustomization"></DxTreeViewNode>
             </Nodes>
         </DxTreeViewNode>
         <DxTreeViewNode Text="Scheduler">
@@ -80,7 +87,7 @@
 
 <div class="footer">
     <div class="info-wrapper">
-        <div class="version">Version: 19.1.8.0</div>
+        <div class="version">Version: 19.1.9.0</div>
         <div class="copyright">
             <span>Copyright &copy; 2006-</span><span>@(DateTime.Now.Year.ToString())</span>
             Developer Express Inc
@@ -92,21 +99,20 @@
     DxTreeView treeView;
 
     protected void SelectionChanged(TreeViewNodeEventArgs e) {
-        if (e.NodeInfo.IsLeaf && e.NodeInfo.Level == 0) {
-            treeView.CollapseAll();
-        }
-        else if (!e.NodeInfo.IsLeaf) {
-            Func<ITreeViewNodeInfo, bool> nodePredicate = n => string.Equals(n.Text, e.NodeInfo.Text);
-
-            bool nodeExpanded = treeView.GetNodeExpanded(nodePredicate);
-            if (!nodeExpanded) {
-                treeView.CollapseAll();
+        if (e.NodeInfo.IsLeaf) {
+            var parentInfo = e.NodeInfo.Parent;
+            if (parentInfo != null) {
+                var parentSiblingNodesInfo = treeView.GetNodesInfo(n => !n.IsLeaf && n.Level == parentInfo.Level && !string.Equals(n.Text, parentInfo.Text));
+                foreach (var nodeInfo in parentSiblingNodesInfo)
+                    treeView.SetNodeExpanded(n => string.Equals(n.Text, nodeInfo.Text), false);
             }
-            treeView.SetNodeExpanded(nodePredicate, !nodeExpanded);
+            else
+                treeView.CollapseAll();
         }
     }
 
-    protected void BeforeExpandCollapse(TreeViewNodeCancelEventArgs e) {
-        e.Cancel = true;
+    protected void BeforeExpand(TreeViewNodeCancelEventArgs e) {
+        if (!e.CausedByAPI)
+            treeView.CollapseAll();
     }
 }

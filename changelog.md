@@ -2,31 +2,50 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
-# 19.1.8 (latest release)
-
-### Fixed
-
-* [T814205](https://supportcenter.devexpress.com/ticket/details/T814205)
-* [T815667](https://supportcenter.devexpress.com/ticket/details/T815667)
-* [T819540](https://supportcenter.devexpress.com/ticket/details/T819540)
+# 19.1.9 (latest release)
 
 ### Added
 
-Charts
+* Data Grid - Save and restore the layout
+* DateEdit - ScrollPicker mode
+	
+### Fixed
+	
+* Support tickets
+  * https://supportcenter.devexpress.com/ticket/details/T821637
+  * https://supportcenter.devexpress.com/ticket/details/T823526
+  * https://supportcenter.devexpress.com/ticket/details/T823175
+* Data Grid bugs
+  * GroupIndex is not taken into account when the SortOrder property value is specified in the markup
+  * The pager does not work properly when a user groups grid data and it changes the number of data pages
+  * Column widths are calculated incorrectly when grid data is grouped and the navigation mode is set to VirtualScrolling 
+  * The component does not switch to a previous page if a user deletes the last row on the last page
+		
+### Changed API
 
-Support for series points appearance customization. Users can customize series points and their labels' appearance and provide custom images for points. This features was implemented in the scope of the [T819957](https://supportcenter.devexpress.com/ticket/details/T819957), [T818419](https://supportcenter.devexpress.com/ticket/details/T818419), [T818942](https://supportcenter.devexpress.com/ticket/details/T818942) tickets. 
+* [OnCustomizeSeriesPoint renamed to CustomizeSeriesPoint](https://supportcenter.devexpress.com/ticket/details/T826048)
 
-Data Grid
 
-- New API to specify the current page's index and count and handle their change events. 
+# 19.1.8 
 
-TreeView
+### Fixed
 
- - Templates Support.
- - Ability to specify which user actions expand/collapse nodes. 
- - New API to identify whether an event was triggered by user action or programmatically. 
- - New API to get information about the nodes that match custom conditions.
- - New API to get a node's parent node information.
+* https://supportcenter.devexpress.com/internal/ticket/details/T814205
+* https://supportcenter.devexpress.com/internal/ticket/details/T815667
+* https://supportcenter.devexpress.com/internal/ticket/details/T819540
+
+### Added
+
+* Data Grid 
+  * API for managing the index of the current page (PageIndex and PageIndexChanged)
+  * API for getting the current page count (PageCount and PageCountChanged)
+
+* TreeView
+  * Templates
+  * Customizing the way how end-users can expand/collapse nodes 
+  * Detecting whether the event triggering was caused by an API method call or not. 
+  * Finding all nodes that satisfy the specified condition (predicate).
+  * Getting the node's parent node information.
 
 # 19.1.7
 

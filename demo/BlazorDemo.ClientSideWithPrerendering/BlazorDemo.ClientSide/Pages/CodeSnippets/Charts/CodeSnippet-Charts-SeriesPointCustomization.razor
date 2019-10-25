@@ -2,7 +2,7 @@
     <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted ">
         <CodeSnippet>
-@(@"<DxChart Data=""@WeatherForecasts"" OnCustomizeSeriesPoint=""@PreparePointColor"">
+@(@"<DxChart Data=""@WeatherForecasts"" CustomizeSeriesPoint=""@PreparePointColor"">
     <DxChartLineSeries AggregationMethod=""@(i => (int)i.Average())""
                        Color=""@System.Drawing.Color.Gray""
                        ValueField=""@((WeatherForecast i) => i.TemperatureF)"" 
