@@ -5,6 +5,7 @@ The DevExpress UI components featured in this demo are available for free downlo
 
 * [Live Demo](#live-demo)
 * [Examples](#examples)
+* [Documentation](#documentation)
 * [Version Compatibility](#version-compatibility)
 * [Set Up Your Environment](#set-up-your-environment)
 * [How to Run This Demo Locally](#how-to-run-this-demo-locally)
@@ -20,6 +21,10 @@ Check out this [demo in live](https://demos.devexpress.com/blazor/).
 # Examples 
 
 DevExpress Blazor components are shipped with GitHub feature-based examples. Refer to [examples.md](examples.md) for more information.
+
+# Documentation 
+
+Our online documentation is available at [docs.devexpress.com/Blazor/](https://docs.devexpress.com/Blazor/400725/blazor-components).
 
 # Version Compatibility
 
