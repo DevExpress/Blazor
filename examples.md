@@ -7,6 +7,7 @@ DevExpress Blazor components are shipped with GitHub feature-based examples. Fol
   * [How to edit a row on a separate page](https://www.devexpress.com/Support/Center/Example/Details/T802173/blazor-data-grid-how-to-edit-a-row-on-a-separate-page)
   * [How to implement the delete confirmation feature](https://www.devexpress.com/Support/Center/Example/Details/T802166/blazor-data-grid-how-to-implement-the-delete-confirmation-feature)
   * [How to bind a grid to a DataTable object](https://www.devexpress.com/Support/Center/Example/Details/T816800/blazor-data-grid-how-to-bind-a-grid-to-a-datatable-object)
+  * [How to save/load a grid's layout information](https://supportcenter.devexpress.com/ticket/details/t826240/blazor-data-grid-how-to-save-load-a-grid-s-layout-information)
   * and more.
 * Data Editors
   * [How to implement the multiple selection editor](https://supportcenter.devexpress.com/ticket/details/t820528/blazor-editors-how-to-implement-the-multiple-selection-editor)
