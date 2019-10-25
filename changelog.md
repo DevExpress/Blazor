@@ -7,7 +7,7 @@ Version history of the "DevExpress.Blazor" NuGet package is listed below.
 ### Added
 
 * Data Grid - Save and restore the layout
-* DateEdit - ScrollPicker mode
+* DateEdit - [ScrollPicker mode](https://demos.devexpress.com/blazor/DateEdit#AdaptiveScrollPicker)
 	
 ### Fixed
 	
