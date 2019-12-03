@@ -16,7 +16,7 @@ DevExpress Blazor components are shipped with GitHub feature-based examples. Fol
   * [How to change DxFormLayout's item and group visibility](https://www.devexpress.com/Support/Center/Example/Details/T803618/blazor-form-layout-how-to-change-dxformlayout-s-item-and-group-visibility)
   * [How to show a Data Grid's detail information in DxFormLayout](https://www.devexpress.com/Support/Center/Example/Details/T802161/blazor-data-grid-how-to-show-a-detail-information-in-dxformlayout)
 * Charts
-  * [Charts for Blazor - How to filter the chart based on DataGrid selection](https://www.devexpress.com/Support/Center/Example/Details/T838027/charts-for-blazor-how-to-filter-the-chart-based-on-datagrid-selection)
+  * [How to filter the chart based on DataGrid selection](https://www.devexpress.com/Support/Center/Example/Details/T838027/charts-for-blazor-how-to-filter-the-chart-based-on-datagrid-selection)
  
  
  Refer to [Blazor Examples](https://supportcenter.devexpress.com/ticket/list/?preset=a6cf855e-af17-4f6b-8ffc-0f9854b97da1) to see all the examples for DevExpress Blazor components.
