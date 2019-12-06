@@ -192,7 +192,13 @@ namespace DevExpress.Blazor.Internal
             }
         }
 
-        string GetPageNameByLocation(string location) => UriHelper.ToBaseRelativePath(location);
+        string GetPageNameByLocation(string location)
+        {
+            var uriFragment = UriHelper.ToAbsoluteUri(location).Fragment;
+            if (!string.IsNullOrEmpty(uriFragment))
+                location = location.Replace(uriFragment, "");
+            return UriHelper.ToBaseRelativePath(location);
+        }
 
         void IDisposable.Dispose()
         {
