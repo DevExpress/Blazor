@@ -1,0 +1,48 @@
+﻿@using Demo.Blazor.Model
+@using DevExpress.Blazor
+@{
+    RenderFragment<string> GetLink = (propName) =>
+    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxCheckBoxBase-1.@propName">@propName</a>;
+}
+
+<div class="demo-description" id="SwitchMode">
+    <h2><NavLink class="demo-anchor" href="CheckBox#SwitchMode" />CheckBox - Switch Mode</h2>
+    <p>
+        To activate Switch mode in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1">CheckBox</a>, set the @GetLink(nameof(DxCheckBox<bool>.CheckType)) property to <b>Switch</b>.
+    </p>
+</div>
+
+<div class="card demo-card ju" style="width: 18rem;">
+    <ul class="list-group list-group-flush bg-white text-dark" style="border:none">
+        <li class="list-group-item d-flex justify-content-between" style="background-color:transparent;color:inherit;">
+            <DxCheckBox CheckType="CheckType.Switch" LabelPosition ="@LabelPosition.Left" style="width:100%" Checked="@SilentMode" CheckedChanged="@CheckedChanged">Silent Mode</DxCheckBox>
+        </li>
+        <li class="list-group-item d-flex justify-content-between" style="background-color:transparent;color:inherit;">            
+            <DxCheckBox CheckType="CheckType.Switch" LabelPosition="@LabelPosition.Left" style="width:100%" @bind-Checked="@Sound" Enabled="@Enabled">Enable sound</DxCheckBox>
+        </li>
+        <li class="list-group-item d-flex justify-content-between" style="background-color:transparent;color:inherit;">            
+            <DxCheckBox CheckType="CheckType.Switch" LabelPosition="@LabelPosition.Left" style="width:100%" @bind-Checked="@Vibration" Enabled="@Enabled">Enable vibration</DxCheckBox>
+        </li>
+    </ul>
+</div>
+
+@code {
+    bool Enabled { get; set; } = false;
+
+    bool SilentMode { get; set; } = true;
+    bool Sound { get; set; } = true;
+    bool Vibration { get; set; } = false;
+
+    void CheckedChanged(bool value) {
+        SilentMode = value;
+        Enabled = !value;
+        StateHasChanged();
+    }
+}
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_CheckBox_Switch></CodeSnippet_Editor_CheckBox_Switch>
+    </div>
+</div>

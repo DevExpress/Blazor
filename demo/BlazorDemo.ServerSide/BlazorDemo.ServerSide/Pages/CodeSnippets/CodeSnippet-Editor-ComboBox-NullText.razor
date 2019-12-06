@@ -1,10 +1,14 @@
 ﻿<CodeSnippet>
- @(@"<DxComboBox NullText=""Select Option ...""
-                Data=""@(new string[] { null, ""Option 1"", ""Option 2"", ""Option 3"" })""
-                @bind-SelectedItem=""@Option""></DxComboBox>
+ @(@"<DxComboBox NullText=""Select an option...""
+            Data=""@DataSource""
+            @bind-SelectedItem=""@SelectedOption""
+            @bind-DropDownVisible=""@DropDownVisible""
+            TextFieldName=""Text""
+            ClearButtonDisplayMode=""@DataEditorClearButtonDisplayMode.Auto""></DxComboBox>
 
 @code {
-    string option;
-    string Option { get => option; set { option = value; InvokeAsync(StateHasChanged); } }
+    List<Options> DataSource = ...
+
+    Options SelectedOption { get; set; }
 }")
 </CodeSnippet>

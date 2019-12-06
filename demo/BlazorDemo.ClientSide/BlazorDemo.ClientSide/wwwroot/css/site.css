@@ -105,7 +105,7 @@ app {
 
 .dxbs-tree.app-sidebar > ul.nav ul.nav .nav-link {
     font-size: 0.875rem;
-    padding-left: 3rem;
+    padding: 0.5rem 1rem 0.5rem 2rem;
     font-weight: 400;
 }
 

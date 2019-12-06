@@ -6,8 +6,8 @@ using System.Threading;
 namespace Demo.Blazor.Model {
 
     public static class DateTimeUtils {
-        public static DateTime CreateWeekStart() {
-            return DateTime.Today.DayOfWeek == DayOfWeek.Sunday ? ValidWeekStart(DateTime.Today.Date) : ValidWeekStart(DateTime.Today.Date - CreateWeekOffset(DateTime.Today, DayOfWeek.Sunday));
+        public static DateTime CreateWeekStart(DateTime date) {
+            return date.DayOfWeek == DayOfWeek.Sunday ? ValidWeekStart(date.Date) : ValidWeekStart(date.Date - CreateWeekOffset(date, DayOfWeek.Sunday));
         }
 
         static DateTime ValidWeekStart(DateTime date) {

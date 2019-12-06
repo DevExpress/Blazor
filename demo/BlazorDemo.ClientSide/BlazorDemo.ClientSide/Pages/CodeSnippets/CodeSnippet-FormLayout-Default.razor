@@ -23,6 +23,12 @@
             <DxSpinEdit @bind-Value=""@Worked""></DxSpinEdit>
         </Template>
     </DxFormLayoutItem>
+
+    <DxFormLayoutItem Caption=""At Vacation:"">
+        <Template>
+            <DxCheckBox @bind-Checked=""@AtVacation""></DxCheckBox>
+        </Template>
+    </DxFormLayoutItem>
 </DxFormLayout>
 
 @code {
@@ -37,6 +43,9 @@
 
     int worked = 3;
     int Worked { get => worked; set { worked = value; OnChanged(); } }
+
+    bool atVacation = true;
+    bool AtVacation { get => atVacation; set { atVacation = value; OnChanged(); } }
 
     void OnChanged() { InvokeAsync(StateHasChanged); }
 }")

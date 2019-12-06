@@ -6,7 +6,7 @@ namespace Demo.Blazor.Model {
 
     public static partial class RecurringAppointmentCollection {
         public static List<RecurringAppointment> GetAppointments() {
-            DateTime date = DateTimeUtils.CreateWeekStart();
+            DateTime date = DateTimeUtils.CreateWeekStart(DateTime.Now);
             return new List<RecurringAppointment>() {
                 new RecurringAppointment {
                     AppointmentType = 1,

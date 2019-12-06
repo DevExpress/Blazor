@@ -8,24 +8,18 @@
     <h2>Data Grid - Edit Form Template with Validation</h2>
 
     <p>
-        This module illustrates how to implement a custom edit form for the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#edit-data">DxDataGrid</a> using the following components and API members:
+        This demo illustrates how to use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#edit-data">Data Grid</a>'s <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.EditFormTemplate">EditFormTemplate</a> with
+        Blazor's standard <a class="helplink" target="_blank" href="https://docs.microsoft.com/aspnet/core/blazor/forms-validation?view=aspnetcore-3.0">EditForm</a> component to create a custom edit form with validation.
     </p>
 
-    <ul>
-        <li>
-            The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.RowEditStart">RowEditStart</a> event of the DXDataGrid object is used to build an editing context with a custom logic.
-        </li>
-        <li>
-            The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.EditFormTemplate">EditFormTemplate</a> template creates a custom form layout.
-        </li>
-        <li>
-            The Blazor's built-in <a class="helplink" target="_blank" href="https://docs.microsoft.com/aspnet/core/blazor/forms-validation?view=aspnetcore-3.0#inputtext-based-on-the-input-event">EditForm</a> component validates comboboxes data.
-        </li>
-    </ul> 
+    <p>
+        Click <b>Edit</b> to show this form. All form fields are marked as required, and the <b>Vacancy Description</b> field’s value should have a length between 4 and 16 characters. The <b>City</b> and <b>Region</b> comboboxes are cascaded.
+    </p>
 
     <p>
-        Click <b>Edit</b> to see the edit form with a validation in action. 
-        Also, pay attention to the <b>Region</b> and <b>City</b> comboboxes’ cascade logic implemented within the custom <b>FormEditContext</b> class.
+        When you attempt to submit changes, editors are marked with colored outlines.
+        <span class="invalid" style="color:red;">Red</span> indicates invalid values and
+        <span class="modified" style="outline: 1px solid #26b050; color:#26b050;">green</span> indicates values that were posted successfully.
     </p>
 </div>
 

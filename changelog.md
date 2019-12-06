@@ -2,12 +2,52 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
-# 19.1.9 (latest release)
+# 19.1.10 (latest release)
+
+### .NET Core 3.1 Support
+In this version, we added support for the release of [.Net Core 3.1](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/).
+
+### New CheckBox Component
+We added the following features to the new Blazor CheckBox component:
+
+* Bind to any data type	 	
+* Toggle switch mode
+* Support for the indeterminate state
+* Customizable appearance
+
+### Added
+* Data Grid 
+  * Handle a row click
+  * Cell and row HTML decoration
+  * *Ctrl+click* to clear a column’s sort order 
+* TreeView – Load child nodes on demand 	
+* Date Edit – Support for null values 	
+* The **Clear** button was added to the Text Box, Spin Edit, Date Edit, and ComboBox
+
+### Fixed
+* Data Grid
+  * Users cannot edit grid rows if a data source is IQueryable 	
+  * [Selection doesn't work correctly when the AutoMapper is used](https://github.com/DevExpress/Blazor/issues/54)	
+  * [The RowInserting and RowUpdating events are raised if the "Close" button is clicked in a popup edit form](https://github.com/DevExpress/Blazor/issues/74)
+* [Charts - The "System.ArgumentNullException: Value cannot be null. (Parameter 'source')" error occurs if data is provided to charts too late](https://supportcenter.devexpress.com/ticket/details/T828593) 	
+* Date Edit
+  * [The September 1, 2019 day cell is not displayed in the September month if the FirstDayOfWeek property is set to Monday](https://supportcenter.devexpress.com/internal/ticket/details/T832166)
+  * Scroll speed depends on the browser when the component is in ScrollPicker mode 	
+* [Form Layout - Focus an editor on a label click](https://github.com/DevExpress/Blazor/issues/58)
+
+
+
+### Breaking changes
+
+* [Date Edit has become generic-typed](https://supportcenter.devexpress.com/internal/ticket/details/t838351)
+
+
+# 19.1.9 
 
 ### Added
 
 * Data Grid - Save and restore the layout
-* DateEdit - [ScrollPicker mode](https://demos.devexpress.com/blazor/DateEdit#AdaptiveScrollPicker)
+* DateEdit - ScrollPicker mode
 	
 ### Fixed
 	

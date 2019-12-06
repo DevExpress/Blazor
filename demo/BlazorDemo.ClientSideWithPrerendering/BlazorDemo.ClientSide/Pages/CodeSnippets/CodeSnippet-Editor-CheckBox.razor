@@ -1,0 +1,50 @@
+﻿<CodeSnippet>
+    @(@"
+<div class=""card demo-card"">
+    <div class=""card-body mw-480"">
+        Choose your new car options:
+        <div class=""container"">
+            <div class=""row"">
+                <div class=""col"">
+                    <DxCheckBox Checked=""@Multimedia"" CheckedChanged=""@Update(v => Multimedia = v)"">Multimedia</DxCheckBox>
+                    <DxCheckBox Checked=""@AirConditioning"" CheckedChanged=""@Update(v => AirConditioning=v)"">Air conditioning</DxCheckBox>
+                    <DxCheckBox Checked=""@ParkingSensors"" CheckedChanged=""@Update(v => ParkingSensors=v)"">Parking camera</DxCheckBox>
+                    <DxCheckBox Checked=""@HeatedSeats"" CheckedChanged=""@Update(v => HeatedSeats=v)"">Heated seats</DxCheckBox>
+                    <b class=""mt-3"">Total price:</b>
+                </div>
+                <div class=""col"">
+                    <div style=""@GetStyle(Multimedia)"">$130</div>
+                    <div style=""@GetStyle(AirConditioning)"">$800</div>
+                    <div style=""@GetStyle(ParkingSensors)"">$400</div>
+                    <div style=""@GetStyle(HeatedSeats)"">$230</div>
+                    <div style=""@GetStyle(true)"">
+                        <b class=""mt-3"">$@GetTotalPrice()</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code{
+    bool AirConditioning { get; set; } = true;
+    bool Multimedia { get; set; } = false;
+    bool ParkingSensors { get; set; } = false;
+    bool HeatedSeats { get; set; } = true;
+
+    public Action<bool> Update(Action<bool> set) {
+        return (v) => { set(v); InvokeAsync(StateHasChanged); };
+    }
+    decimal GetTotalPrice() {
+        decimal price = 0;
+        price += Multimedia ? 130 : 0;
+        price += AirConditioning ? 800 : 0;
+        price += ParkingSensors ? 400 : 0;
+        price += HeatedSeats ? 230 : 0;
+        return price;
+    }
+    string GetStyle(bool selected) {
+        return ""text-align:center;"" + (selected ? """" : ""text-decoration:line-through;"");
+    }
+}")
+</CodeSnippet>

@@ -17,7 +17,7 @@
 </div>
 <div class="card demo-card">
     <div class="card-body">
-        <DxTreeView CssClass="mw-480" Data="@Enum.GetValues(typeof(ProductCategoryMain))" ExpandButtonIconCssClass="oi oi-chevron-right" CollapseButtonIconCssClass="oi oi-chevron-bottom"
+        <DxTreeView CssClass="mw-480" Data="@Enum.GetValues(typeof(ProductCategoryMain))"
             TextExpression="@(dataItem => GetNodeText(dataItem))"
             ChildrenExpression="@(dataItem => GetNodeChildren(dataItem))">
         </DxTreeView>

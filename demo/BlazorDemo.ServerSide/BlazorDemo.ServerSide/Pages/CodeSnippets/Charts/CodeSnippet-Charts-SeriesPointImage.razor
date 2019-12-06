@@ -19,8 +19,8 @@
     protected void PreparePointImage(ChartSeriesPointCustomizationSettings pointSettings)
     {
         IEnumerable<WeatherForecast> dataItems = pointSettings.Point.DataItems.Cast<WeatherForecast>();
-        var mostyleAppliedWeatherType = dataItems.GroupBy(x => x.WeatherType).OrderByDescending(x => x.Count()).First().Key;
-        pointSettings.PointAppearance.Image.Url = $""images/{mostyleAppliedWeatherType}.png"";
+        var weatherType = dataItems.GroupBy(x => x.WeatherType).OrderByDescending(x => x.Count()).First().Key;
+        pointSettings.PointAppearance.Image.Url = $""images/{weatherType}.png"";
     }
 }")
         </CodeSnippet>

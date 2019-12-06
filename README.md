@@ -32,6 +32,7 @@ The following table describes the version compatibility of .NET Core 3.0 and the
 
 | .NET Core 3.0 version | DevExpress.Blazor.nuget version |
 | ------------- | ------------- |
+| [.NET Core 3.1 Release](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | **19.1.10 Release**&#42; |
 | [.NET Core 3.0 Release](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0/) | **19.1.9 Release**&#42; |
 | [.NET Core 3.0 Release](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0/) | **19.1.8 Release**&#42; |
 | [.NET Core 3.0 Release](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0/) | **19.1.7 Release**&#42; |
@@ -59,7 +60,7 @@ The following table describes the version compatibility of .NET Core 3.0 and the
 
 # Set Up Your Environment
 
-1. Install the latest Visual Studio 2019 update.
+1. Install the latest Visual Studio 2019 update with the **ASP.NET and web development** workload.
 2. Ensure that you have the latest .NET Core 3 version (from supported versions listed above) installed.
 
 # How to Run This Demo Locally
@@ -210,48 +211,86 @@ If solutions suggested there do not help, create an issue here or submit a ticke
 
 ## 3. DxDataGrid in Blazor
 
-If you use Blazor (client-side) with DxDataGrid, you may see the following exception in a browser:
+If you use client-side Blazor with DxDataGrid, you may see the following exception in a browser:
 
 ![Troubleshooting - No Generic Method 'Take' On Type System.Linq.Queryable](media/Troubleshooting-NoGenericMethodTakeOnTypeSystemLinqQueryable.png)
 
 > "System.InvalidOperationException: No generic method 'Take' on type 'System.Linq.Queryable' is compatible with the supplied type arguments and arguments."
 
-The solution is to follow the [official Blazor documentation](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker?view=aspnetcore-3.0).
+Do one of the following to resolve this issue:
 
-So, you can either [Disable linking](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker?view=aspnetcore-3.0#disable-linking-with-a-msbuild-property) or [Control linking](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker?view=aspnetcore-3.0#control-linking-with-a-configuration-file).
+* Set the `BlazorLinkOnBuild` property to **false** in the project file to disable linking with a MSBuild property.
 
-In case you decide to control linking: the following types types must be added in the **Linker.xml** file:
+  ```
+  <PropertyGroup>
+    ...
+    <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
+  </PropertyGroup>
+  ```  
 
-```
-    <type fullname="System.Linq.Expressions*" />
-    <type fullname="System.Linq.Queryable*" />
-    <type fullname="System.Linq.Enumerable*" />
-    <type fullname="System.Linq.EnumerableRewriter*" />
-```    
+* Include the following assemblies and types in the **Linker.xml** file:
 
-So, the **Linker.xml** file should look as follows:
+  ```
+  <?xml version="1.0" encoding="UTF-8" ?>
+  ...
+  <linker>
+    <assembly fullname="mscorlib">
+  ...
+      <type fullname="System.Threading.WasmRuntime" />
+    </assembly>
+    <assembly fullname="System.Core">
+  ...
+      <type fullname="System.Linq.Expressions*" />
+      <type fullname="System.Linq.Queryable*" />
+      <type fullname="System.Linq.Enumerable*" />
+      <type fullname="System.Linq.EnumerableRewriter*" />
+    </assembly>
+  ...
+    <assembly fullname="[PUT YOUR ASSEMBLY NAME HERE]" />
+  </linker>
+  ```
 
-```
-<?xml version="1.0" encoding="UTF-8" ?>
-...
-<linker>
-  <assembly fullname="mscorlib">
-...
-    <type fullname="System.Threading.WasmRuntime" />
-  </assembly>
-  <assembly fullname="System.Core">
-...
-    <type fullname="System.Linq.Expressions*" />
-    <type fullname="System.Linq.Queryable*" />
-    <type fullname="System.Linq.Enumerable*" />
-    <type fullname="System.Linq.EnumerableRewriter*" />
-  </assembly>
-...
-  <assembly fullname="[PUT YOUR ASSEMBLY NAME HERE]" />
-</linker>
-```
+See [Configure the Linker for ASP.NET Core Blazor](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker?view=aspnetcore-3.0) for more information.
 
-## 4. DxTabs are rendered incorrectly when the default Microsoft template is applied
+
+## 4. DxScheduler in Blazor
+
+If you use client-side Blazor with DxScheduler, you may see the following exception or a similar exception:
+
+> "System.MissingMethodException: Constructor on type 'System.ComponentModel.Int32Converter' not found."
+
+Do one of the following to resolve this issue:
+
+* Set the `BlazorLinkOnBuild` property to **false** in the project file to disable linking with a MSBuild property.
+
+  ```
+  <PropertyGroup>
+    ...
+    <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
+  </PropertyGroup>
+  ```  
+
+* Include the following assembly and types in the **Linker.xml** file:
+
+  ```
+  <?xml version="1.0" encoding="UTF-8" ?>
+  ...
+  <linker>
+    ...
+    <assembly fullname="System">
+      <type fullname="System.ComponentModel*" />
+      <!--<type fullname="System.ComponentModel.Int32Converter*" />
+      <type fullname="System.ComponentModel.BooleanConverter*" />
+      <type fullname="System.ComponentModel.DateTimeConverter*" />
+      <type fullname="System.ComponentModel.StringConverter*" />-->
+      ...
+    </assembly>
+  </linker>
+  ```
+
+See [Configure the Linker for ASP.NET Core Blazor](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker?view=aspnetcore-3.0) for more information.
+
+## 5. DxTabs are rendered incorrectly when the default Microsoft template is applied
 
 If you create a new Blazor project based on the default Microsoft project template, the first tab of the DxTabs component can be rendered incorrectly.
 
@@ -296,6 +335,7 @@ To resolve this issue, write more strict style rules in the *site.css* file so t
   * Recurring Appointments
 * Data Editors
   * Calendar
+  * Check Box
   * ComboBox
   * Date Edit
   * List Box

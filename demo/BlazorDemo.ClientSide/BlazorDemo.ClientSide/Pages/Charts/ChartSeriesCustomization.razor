@@ -9,7 +9,7 @@
     <h2>Charts - Series Point Customization</h2>
     <p>
         The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesPoint">DxChartSeriesPoint</a> component allows you to customize a point's color, size, symbol, and visibility. 
-        You can use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxChartBase-1.CustomizeSeriesPoint">CustomizeSeriesPoint</a> to change individual points' appearance.
+        You can use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxChartBase-1.CustomizeSeriesPoint">CustomizeSeriesPoint</a> event to change individual points' appearance.
         In this demo, points are colored according to their values.
     </p>
 </div>
@@ -27,9 +27,9 @@
 <div class="demo-description" id="PointImage">
     <h2>Charts - Series Point Image</h2>
     <p>
-        This demo illustrates how to use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesPointImage">DxChartSeriesPointImage</a> component to use custom images for points.
-        To do this, handle the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxChartBase-1.CustomizeSeriesPoint">CustomizeSeriesPoint</a> event and use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartSeriesPointImageModel">e.PointAppearance.Image</a> property to access a point's image settings.
-</p>
+        This demo illustrates how to use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesPointImage">DxChartSeriesPointImage</a> component to provide custom images for points.
+        To do this, handle the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxChartBase-1.CustomizeSeriesPoint">CustomizeSeriesPoint</a> event and use the event argument's <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartSeriesPointImageModel">PointAppearance.Image</a> property to access a point's image settings.
+    </p>
 </div>
 <DxChart Data="@WeatherForecasts" CustomizeSeriesPoint="@PreparePointImage">
     <DxChartLineSeries AggregationMethod="@(i => (int)i.Average())"
@@ -47,7 +47,7 @@
     <h2>Charts - Series Label Customization</h2>
     <p>
         The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesLabel">DxChartSeriesLabel</a> component allows you to customize a label's position, visibility, background color, and connector appearance.
-        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartSeriesLabelModel">e.PointLabel</a> property in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxChartBase-1.CustomizeSeriesPoint">CustomizeSeriesPoint</a> event handler to access a label's customization settings.
+        Use the event argument's <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartSeriesLabelModel">PointLabel</a> property in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxChartBase-1.CustomizeSeriesPoint">CustomizeSeriesPoint</a> event handler to access a label's customization settings.
         In this demo, points' labels are visible if their values are between 25 and 75.
     </p>
 </div>
@@ -88,7 +88,7 @@
     protected void PreparePointImage(ChartSeriesPointCustomizationSettings pointSettings)
     {
         IEnumerable<WeatherForecast> dataItems = pointSettings.Point.DataItems.Cast<WeatherForecast>();
-        var mostyleAppliedWeatherType = dataItems.GroupBy(x => x.WeatherType).OrderByDescending(x => x.Count()).First().Key;
-        pointSettings.PointAppearance.Image.Url = $"images/{mostyleAppliedWeatherType}.png";
+        var weatherType = dataItems.GroupBy(x => x.WeatherType).OrderByDescending(x => x.Count()).First().Key;
+        pointSettings.PointAppearance.Image.Url = $"images/{weatherType}.png";
     }
 }

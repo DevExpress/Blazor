@@ -1,0 +1,26 @@
+﻿<CodeSnippet>
+    @(@"
+<div class=""card demo-card"">
+    <div class=""card-body mw-480"">
+        <DxCheckBox @bind-Checked=""@Value"" AllowIndeterminateStateByClick
+                    ValueChecked=""@Opinion.Yes"" ValueUnchecked=""@Opinion.No"" ValueIndeterminate=""@Opinion.Abstain"">@GetText()</DxCheckBox>
+        <DxCheckBox Checked=""Opinion.Yes"" Enabled=""false"" 
+                    ValueChecked=""@Opinion.Yes"" ValueUnchecked=""@Opinion.No"" ValueIndeterminate=""@Opinion.Abstain"">Disabled Checked</DxCheckBox>
+        <DxCheckBox Checked=""Opinion.No"" Enabled=""false"" 
+                    ValueChecked=""@Opinion.Yes"" ValueUnchecked=""@Opinion.No"" ValueIndeterminate=""@Opinion.Abstain"">Disabled Unchecked</DxCheckBox>
+        <DxCheckBox Checked=""Opinion.Abstain"" Enabled=""false"" 
+                    ValueChecked=""@Opinion.Yes"" ValueUnchecked=""@Opinion.No"" ValueIndeterminate=""@Opinion.Abstain"">Disabled Indeterminate</DxCheckBox>
+    </div>
+</div>
+
+    @code{
+        enum Opinion { Yes, No, Abstain }
+        Opinion Value = Opinion.Abstain;
+
+        string GetText() {
+            if(Value == Opinion.Yes) return ""Checked"";
+            if(Value == Opinion.No) return ""Unchecked"";
+            return ""Indeterminate"";
+        }
+    }")
+</CodeSnippet>
