@@ -228,27 +228,36 @@ Do one of the following to resolve this issue:
   </PropertyGroup>
   ```  
 
-* Include the following assemblies and types in the **Linker.xml** file:
+* Add the **Linker.xml** file and include the following assemblies and types:
 
   ```
   <?xml version="1.0" encoding="UTF-8" ?>
   ...
   <linker>
     <assembly fullname="mscorlib">
-  ...
+    ...
       <type fullname="System.Threading.WasmRuntime" />
     </assembly>
     <assembly fullname="System.Core">
-  ...
+    ...
       <type fullname="System.Linq.Expressions*" />
       <type fullname="System.Linq.Queryable*" />
       <type fullname="System.Linq.Enumerable*" />
       <type fullname="System.Linq.EnumerableRewriter*" />
     </assembly>
-  ...
+    ...
     <assembly fullname="[PUT YOUR ASSEMBLY NAME HERE]" />
   </linker>
   ```
+
+  Specify this file as a MSBuild item in the project file.  
+
+  ```
+  <ItemGroup>
+    ...
+    <BlazorLinkerDescriptor Include="Linker.xml" />
+  </ItemGroup>
+  ```  
 
 See [Configure the Linker for ASP.NET Core Blazor](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker?view=aspnetcore-3.0) for more information.
 
@@ -270,7 +279,7 @@ Do one of the following to resolve this issue:
   </PropertyGroup>
   ```  
 
-* Include the following assembly and types in the **Linker.xml** file:
+* Add the **Linker.xml** file and include the following assembly:
 
   ```
   <?xml version="1.0" encoding="UTF-8" ?>
@@ -278,7 +287,9 @@ Do one of the following to resolve this issue:
   <linker>
     ...
     <assembly fullname="System">
+      <!--Use this line to include the entire assembly.-->
       <type fullname="System.ComponentModel*" />
+      <!--Uncomment the following lines to include individual types. -->
       <!--<type fullname="System.ComponentModel.Int32Converter*" />
       <type fullname="System.ComponentModel.BooleanConverter*" />
       <type fullname="System.ComponentModel.DateTimeConverter*" />
@@ -287,6 +298,15 @@ Do one of the following to resolve this issue:
     </assembly>
   </linker>
   ```
+
+  Specify this file as a MSBuild item in the project file.  
+
+  ```
+  <ItemGroup>
+    ...
+    <BlazorLinkerDescriptor Include="Linker.xml" />
+  </ItemGroup>
+  ```  
 
 See [Configure the Linker for ASP.NET Core Blazor](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker?view=aspnetcore-3.0) for more information.
 
