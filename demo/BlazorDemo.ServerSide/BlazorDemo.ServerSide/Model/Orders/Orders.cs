@@ -18,10 +18,11 @@ namespace Demo.Blazor.Model {
                     OrderID = startOrderId++,
                     Product = productName,
                     OrderDate = OrderDate,
-                    ShippedDate = OrderDate.AddDays(random.Next(1, 3)),
+                    ShippedDate = OrderDate.AddHours(random.Next(5, 55)),
                     UnitPrice = random.Next(1, 12),
                     ShipRegionID = random.Next(1, 4),
                     UnitsInOrder = random.Next(1, 43),
+                    OrderStatus = random.Next(1, 100) < 70 ? OrderStatus.Processing : (random.Next(1, 100) < 50 ? OrderStatus.InTransit : OrderStatus.Delivered)
                 };
                 orders.Add(order);
             }
@@ -31,7 +32,7 @@ namespace Demo.Blazor.Model {
         public static Task<IEnumerable<Order>> Load() {
             return Task.FromResult<IEnumerable<Order>>(GenerateData());
         }
-        static Lazy<List<Order>> DataPreset1 = new Lazy<List<Order>>( () => {
+        static Lazy<List<Order>> DataPreset1 = new Lazy<List<Order>>(() => {
             var dateTimeNow = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             var Orders = new List<Order>() {
             new Order() { OrderID=125, OrderDate = dateTimeNow.AddDays(-5), ShippedDate = dateTimeNow.AddDays(-0), UnitPrice = 5, UnitsInOrder=122 , Product="Guaraná Fantástica"},

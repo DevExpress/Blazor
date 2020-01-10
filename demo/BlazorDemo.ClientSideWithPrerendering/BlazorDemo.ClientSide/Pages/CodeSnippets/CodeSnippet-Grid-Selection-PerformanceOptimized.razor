@@ -17,12 +17,13 @@
 
     int StoredUnselectedCount { get; set; }
 
-    protected void OnSelectionChanged(DataGridSelection<ProductFlat> selection)
+    protected async Task OnSelectionChanged(DataGridSelection<ProductFlat> selection)
     {
         StoredSelectedCount = selection.SelectedKeysStored.Count();
         StoredUnselectedCount = selection.UnselectedKeysStored.Count();
-        SelectedCount = selection.SelectedKeys.Count();
-        InvokeAsync(StateHasChanged);
+        var selectedKeys = await selection.SelectedKeysAsync;
+        SelectedCount = selectedKeys.Count();
+        await InvokeAsync(StateHasChanged);
     }
 }
 ")

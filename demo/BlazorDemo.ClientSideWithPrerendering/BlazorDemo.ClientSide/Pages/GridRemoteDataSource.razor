@@ -1,0 +1,112 @@
+﻿@page "/GridRemoteDataSource"
+@using Demo.Blazor.Model
+@using Demo.Blazor.Services
+@using DevExtreme.AspNet.Data.ResponseModel
+@using DevExtreme.AspNet.Data
+@using System.Threading
+@using System.Threading.Tasks
+@using System.Net.Http
+@using System.Text.Json
+
+<div class="demo-description" id="CustomDataSource">
+    <h2><NavLink class="demo-anchor" href="GridRemoteDataSource#CustomDataSource" />Data Grid - Custom Data Source</h2>
+    <p>
+        This demo illustrates how to bind the <a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1" target="_blank">Data Grid</a> component to a Web API service.
+        To do this, assign the data source type to the component’s <b>T</b> parameter and use the <a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.CustomData" target="_blank">CustomData</a> property to implement data load logic.
+        Use the <b>ConvertToGetRequestUri</b> extension method to generate a GET request URI with parameters based on load options (a <a class="helplink" href="https://devexpress.github.io/DevExtreme.AspNet.Data/net/api/DevExtreme.AspNet.Data.DataSourceLoadOptionsBase.html" target="_blank">DataSourceLoadOptionsBase</a> object).
+    </p>
+
+    <p>
+        In this demo, the <b>Customer ID</b> and <b>Ship Via</b> columns are bound to the Web API service via the <a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridComboBoxColumnBase-1.CustomData" target="_blank">CustomData</a> property.
+    </p>
+</div>
+
+<DxDataGrid T="@WebApiOrder" CustomData="@LoadOrderData">
+    <Columns>
+        <DxDataGridComboBoxColumn T="@(WebApiCustomerLookup)" TextFieldName="Text" ValueFieldName="Value"
+                                  CustomData="@LoadCustomerData" Field="@nameof(WebApiOrder.CustomerID)" />
+        <DxDataGridDateEditColumn Field="@nameof(WebApiOrder.OrderDate)" />
+        <DxDataGridSpinEditColumn Field="@nameof(WebApiOrder.Freight)" />
+        <DxDataGridColumn Field="@nameof(WebApiOrder.ShipCountry)" />
+        <DxDataGridComboBoxColumn T="@(WebApiShipperLookup)" TextFieldName="Text" ValueFieldName="Value"
+                                  CustomData="@LoadShipmentData" Field="@nameof(WebApiOrder.ShipVia)" />
+    </Columns>
+</DxDataGrid>
+<CodeSnippet_Grid_DataBinding_CustomDataSource />
+@code {
+    [Inject] protected HttpClient Client { get; set; }
+
+    protected async Task<LoadResult> LoadOrderData(DataSourceLoadOptionsBase options, CancellationToken cancellationToken)
+        => await LoadCustomData("https://js.devexpress.com/Demos/NetCore/api/DataGridWebApi/Orders", options, cancellationToken);
+    protected async Task<LoadResult> LoadCustomerData(DataSourceLoadOptionsBase options, CancellationToken cancellationToken)
+        => await LoadCustomData("https://js.devexpress.com/Demos/NetCore/api/DataGridWebApi/CustomersLookup", options, cancellationToken);
+    protected async Task<LoadResult> LoadShipmentData(DataSourceLoadOptionsBase options, CancellationToken cancellationToken)
+        => await LoadCustomData("https://js.devexpress.com/Demos/NetCore/api/DataGridWebApi/ShippersLookup", options, cancellationToken);
+
+    protected async Task<LoadResult> LoadCustomData(string dataEndpointUri, DataSourceLoadOptionsBase options, CancellationToken cancellationToken)
+    {
+        using var response = await Client.GetAsync(options.ConvertToGetRequestUri(dataEndpointUri), cancellationToken);
+        response.EnsureSuccessStatusCode();
+        using var responseStream = await response.Content.ReadAsStreamAsync();
+        return await JsonSerializer.DeserializeAsync<LoadResult>(responseStream, cancellationToken: cancellationToken);
+    }
+}
+
+<div class="demo-description" id="AsyncOperations">
+    <h2><NavLink class="demo-anchor" href="GridRemoteDataSource#AsyncOperations" />Data Grid - Asynchronous Data-Aware Operations</h2>
+    <p>
+        This demo illustrates how the <a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1" target="_blank">Data Grid</a> component performs data-aware operations asynchronously:
+        removes/adds/updates rows, sorts/filters data, navigates between pages, and so on.
+        These operations do not disable the Data Grid’s user interface during execution.
+    </p>
+    <p>The Data Grid ships with the following asynchronous API members:</p>
+    <ul>
+        <li>
+            <p><a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.DataAsync" target="_blank">DataAsync</a> – Specifies an asynchronous function that returns the data source.</p>
+        </li>
+        <li>
+            <p><a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.RowRemovingAsync" target="_blank">RowRemovingAsync</a> - Fires when a user deletes a data row.</p>
+        </li>
+        <li>
+            <p><a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.RowUpdatingAsync" target="_blank">RowUpdatingAsync</a> - Fires when a user edits a data row.</p>
+        </li>
+        <li>
+            <p><a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.RowInsertingAsync" target="_blank">RowInsertingAsync</a> - Fires when a user adds a data row.</p>
+        </li>
+    </ul>
+</div>
+
+<DxDataGrid DataAsync="@ForecastService.GetForecastAsync"
+            PageSize="5"
+            ShowFilterRow="false"
+            RowRemovingAsync="@OnRowRemoving"
+            RowUpdatingAsync="@OnRowUpdating"
+            RowInsertingAsync="@OnRowInserting">
+    <DxDataGridCommandColumn Width="150px" />
+    <DxDataGridDateEditColumn Field="@nameof(WeatherForecast.Date)" DisplayFormatString="D" EditFormatString="D" />
+    <DxDataGridColumn Field="@nameof(WeatherForecast.Summary)" Caption="Summary" Width="150px" />
+    <DxDataGridSpinEditColumn Field="@nameof(WeatherForecast.TemperatureC)" Caption="@("Temp. (\x2103)")" TextAlignment="@DataGridTextAlign.Left" Width="150px" />
+    <DxDataGridComboBoxColumn Field="@nameof(WeatherForecast.WeatherType)" Caption="Cloudiness" DataAsync="@ForecastService.GetCloudinessAsync" TextAlignment="@DataGridTextAlign.Left" Width="150px" />
+    <DxDataGridCheckBoxColumn Field="@nameof(WeatherForecast.Precipitates)" Caption="Precipitates" Width="100px" />
+</DxDataGrid>
+<CodeSnippet_Grid_DataBinding_AsyncSupport />
+
+@code {
+
+    [Inject] protected WeatherForecastService ForecastService { get; set; }
+    [Inject] protected IJSRuntime JSRuntime { get; set; }
+
+    async Task OnRowRemoving(WeatherForecast dataItem) {
+        bool approved = await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete this record?");
+        if (approved)
+            await ForecastService.Remove(dataItem);
+    }
+    async Task OnRowUpdating(WeatherForecast dataItem, IDictionary<string, object> newValue) {
+        await Task.Delay(2000);
+        await ForecastService.Update(dataItem, newValue);
+    }
+    async Task OnRowInserting(IDictionary<string, object> newValue) {
+        await Task.Delay(2000);
+        await ForecastService.Insert(newValue);
+    }
+}

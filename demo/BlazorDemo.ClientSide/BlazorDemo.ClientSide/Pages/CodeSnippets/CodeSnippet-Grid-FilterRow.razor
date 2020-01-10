@@ -3,29 +3,39 @@
     <div class="card-footer text-muted">
         <CodeSnippet>
 @(@"<DxDataGrid Data=""@Orders""
-            ShowFilterRow=""true"">
+            ShowFilterRow=""true""
+            CssClass=""mw-1100"">
     <DxDataGridDateEditColumn Field=""@nameof(Order.OrderDate)""
-                                DisplayFormatString=""D""
-                                EditFormatString=""d""
-                                Width=""240px"">
+                              DisplayFormatString=""D""
+                              EditFormatString=""d""
+                              Width=""240px"">
     </DxDataGridDateEditColumn>
     <DxDataGridComboBoxColumn Field=""@nameof(Order.ShipRegionID)""
-                                Caption=""Ship Region""
-                                Data=""@ShipRegions""
-                                ValueFieldName=""@nameof(ShipRegion.RegionID)""
-                                TextFieldName=""@nameof(ShipRegion.Name)""
-                                Width=""250px"">
+                              Caption=""Ship Region""
+                              Data=""@ShipRegions""
+                              ValueFieldName=""@nameof(ShipRegion.RegionID)""
+                              TextFieldName=""@nameof(ShipRegion.Name)""
+                              Width=""250px"">
     </DxDataGridComboBoxColumn>
-    <DxDataGridSpinEditColumn Field=""@nameof(Order.Price)""
-                                DisplayFormatString=""c""
-                                Width=""120px"">
+    <DxDataGridSpinEditColumn Field=""@nameof(Order.UnitPrice)""
+                              DisplayFormatString=""c""
+                              Width=""120px"">
     </DxDataGridSpinEditColumn>
     <DxDataGridColumn Field=""@nameof(Order.Product)"">
     </DxDataGridColumn>
+    <DxDataGridCheckBoxColumn Field=""@nameof(Order.OrderStatus)""
+                              FilterTextChecked=""Delivered""
+                              FilterTextUnchecked=""Processing""
+                              FilterTextIndeterminate=""In transit""
+                              ValueChecked=""@OrderStatus.Delivered""
+                              ValueUnchecked=""@OrderStatus.Processing""
+                              ValueIndeterminate=""@OrderStatus.InTransit""
+                              Caption=""Order Status"">
+    </DxDataGridCheckBoxColumn>
     <DxDataGridCommandColumn NewButtonVisible=""false""
-                                EditButtonVisible=""false""
-                                DeleteButtonVisible=""false""
-                                Width=""70px"">
+                             EditButtonVisible=""false""
+                             DeleteButtonVisible=""false""
+                             Width=""70px"">
     </DxDataGridCommandColumn>
 </DxDataGrid>")
         </CodeSnippet>

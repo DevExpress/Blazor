@@ -1,14 +1,20 @@
-﻿<div class="demo-description">
-    <h2>Text Box - Clear Button</h2>
+﻿<div class="demo-description" id="ClearButton">
+    <h2>
+        Text Box - Clear Button<span class="demo-badge badge badge-success">Upd</span>
+    </h2>
     <p>
-        Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTextBoxBase.ClearButtonDisplayMode">ClearButtonDisplayMode</a> property to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataEditorClearButtonDisplayMode.Auto">DataEditorClearButtonDisplayMode.Auto</a> to display the <b>Clear</b> button in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextBox">DxTextBox</a> when there is a value in the editor.
+        Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTextBoxBase.ClearButtonDisplayMode">ClearButtonDisplayMode</a> property to <b>Auto</b> to display the <b>Clear</b> button in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextBox">DxTextBox</a> when it is not empty.
+    </p>
+    <p>
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTextBoxBase.NullText">NullText</a> property to display placeholder text in the DxTextBox when it is empty.
     </p>
 </div>
 
 <div class="card demo-card">
     <div class="card-body mw-480">
-        <DxTextBox @bind-Text="@TextValue" 
-                   ClearButtonDisplayMode="@DataEditorClearButtonDisplayMode.Auto"></DxTextBox>
+        <DxTextBox @bind-Text="@TextValue"
+                   ClearButtonDisplayMode="@DataEditorClearButtonDisplayMode.Auto"
+                   NullText="Type text..."></DxTextBox>
     </div>
 </div>
 

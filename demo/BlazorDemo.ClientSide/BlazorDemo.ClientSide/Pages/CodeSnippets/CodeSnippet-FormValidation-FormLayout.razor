@@ -11,8 +11,9 @@
             <Template >
                 <DxComboBox
                             NullText=""Select classification ...""
+                            ClearButtonDisplayMode=""DataEditorClearButtonDisplayMode.Auto""
                             @bind-SelectedItem=""@starship.Classification""
-                            Data=""@(new List<string>() { null, ""Defense"", ""Exploration"", ""Diplomacy"" })""
+                            Data=""@(new List<string>() { ""Defense"", ""Exploration"", ""Diplomacy"" })""
                 />
             </Template >
         </DxFormLayoutItem >

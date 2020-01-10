@@ -22,12 +22,13 @@
             @{
                 var id = Guid.NewGuid().ToString();
                 var inStock = (context as Product).Availability;
-                <input id=""@id"" type=""checkbox"" checked=""@inStock"" disabled readonly />
-                if (inStock) {
+                <DxCheckBox Id=""@id"" Checked=""@inStock"" Enabled=""false"">
+                    @if(inStock) {
                     <label class=""form-check-label text-success"" for=""@id""><span>In stock</span></label>
-                } else {
+                    } else {
                     <label class=""form-check-label text-danger"" for=""@id""><span>Sold out</span></label>
-                }
+                    }
+                </DxCheckBox>
             }
         </DisplayTemplate>
         <EditTemplate>

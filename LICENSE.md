@@ -2,7 +2,7 @@ DEVELOPER EXPRESS INC
 
 DevExpress UI for Blazor
 
-Copyright (C) 2000-2019 Developer Express Inc.
+Copyright (C) 2000-2020 Developer Express Inc.
 
 Last revised April, 2019
 

@@ -1,0 +1,39 @@
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
+        <CodeSnippet>
+@(@"<DxDataGrid DataAsync=""@ForecastService.GetForecastAsync""
+            PageSize=""5""
+            ShowFilterRow=""false""
+            RowRemovingAsync=""@OnRowRemoving""
+            RowUpdatingAsync=""@OnRowUpdating""
+            RowInsertingAsync=""@OnRowInserting"">
+    <DxDataGridCommandColumn Width=""150px"" />
+    <DxDataGridDateEditColumn Field=""@nameof(WeatherForecast.Date)"" DisplayFormatString=""D"" EditFormatString=""D"" />
+    <DxDataGridColumn Field=""@nameof(WeatherForecast.Summary)"" Caption=""Summary"" Width=""150px"" />
+    <DxDataGridSpinEditColumn Field=""@nameof(WeatherForecast.TemperatureC)"" Caption=""@(""Temp. (\x2103)"")"" TextAlignment=""@DataGridTextAlign.Left"" Width=""150px"" />
+    <DxDataGridComboBoxColumn Field=""@nameof(WeatherForecast.WeatherType)"" Caption=""Cloudiness"" DataAsync=""@ForecastService.GetCloudinessAsync"" TextAlignment=""@DataGridTextAlign.Left"" Width=""150px"" />
+    <DxDataGridCheckBoxColumn Field=""@nameof(WeatherForecast.Precipitates)"" Caption=""Precipitates"" Width=""100px"" />
+</DxDataGrid>
+@code {
+
+    [Inject] protected WeatherForecastService ForecastService { get; set; }
+    [Inject] protected IJSRuntime JSRuntime { get; set; }
+
+    async Task OnRowRemoving(WeatherForecast dataItem) {
+        bool approved = await JSRuntime.InvokeAsync<bool>(""confirm"", ""Are you sure you want to delete this record?"");
+        if (approved)
+            await ForecastService.Remove(dataItem);
+    }
+    async Task OnRowUpdating(WeatherForecast dataItem, IDictionary<string, object> newValue) {
+        await Task.Delay(2000);
+        await ForecastService.Update(dataItem, newValue);
+    }
+    async Task OnRowInserting(IDictionary<string, object> newValue) {
+        await Task.Delay(2000);
+        await ForecastService.Insert(newValue);
+    }
+}")
+        </CodeSnippet>
+    </div>
+</div>

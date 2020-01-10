@@ -47,7 +47,7 @@ We added the following features to the new Blazor CheckBox component:
 ### Added
 
 * Data Grid - Save and restore the layout
-* DateEdit - ScrollPicker mode
+* Date Edit - ScrollPicker mode
 	
 ### Fixed
 	

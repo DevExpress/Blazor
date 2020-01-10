@@ -1,24 +1,28 @@
 ﻿<div class="demo-description" id="NullableDate">
     <h2>
-        <NavLink class="demo-anchor" href="DateEdit#NullableDate" />Date Edit - Nullable Date<span class="demo-badge badge badge-success">New</span>
+        <NavLink class="demo-anchor" href="DateEdit#NullableDate" />Date Edit - Nullable Date<span class="demo-badge badge badge-success">Upd</span>
     </h2>
     <p>
-        You can do any of the following to clear the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1">DxDateEdit</a> (set it to NULL):
+        Do any of the following to clear the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1">DxDateEdit</a> (set its value to null):
     </p>
     <ul>
         <li>
             Delete the value in the editor.
         </li>
         <li>
-            Click the <b>Clear</b> button. This button is displayed when you set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDateEditBase-1.ClearButtonDisplayMode">ClearButtonDisplayMode</a> property to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataEditorClearButtonDisplayMode.Auto">DataEditorClearButtonDisplayMode.Auto</a>.
+            Click the <b>Clear</b> button. To display this button, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDateEditBase-1.ClearButtonDisplayMode">ClearButtonDisplayMode</a> property to <b>Auto</b>.
         </li>
     </ul>
+    <p>
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDateEdit-1.NullText">NullText</a> property to display placeholder text in the DxDateEdit when its value is null.
+    </p>
 </div>
 
 <div class="card demo-card">
     <div class="card-header">Selected date is: <b>@(DateTimeValue != null ? DateTimeValue.Value.ToString("dddd, dd MMMM yyyy") : "null")</b></div>
     <div class="card-body mw-480" style="height: 425px">
         <DxDateEdit @bind-Date="@DateTimeValue"
+                    NullText="Select a date..."
                     ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"></DxDateEdit>
     </div>
 </div>

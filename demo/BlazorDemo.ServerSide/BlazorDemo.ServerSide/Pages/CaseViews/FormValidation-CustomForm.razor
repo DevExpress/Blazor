@@ -36,7 +36,8 @@
                 <div style="height:100px">
                     <label for="classification">Primary Classification: </label>
                     <DxComboBox Id="classification" NullText="Select classification ..."
-                                Data="@(new List<string>() { null, "Defense", "Exploration", "Diplomacy" })"
+                                ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                                Data="@(new List<string>() { "Defense", "Exploration", "Diplomacy" })"
                                 @bind-SelectedItem="@starship.Classification" />
                     <ValidationMessage For="@(() => starship.Classification)" />
                 </div>

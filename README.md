@@ -10,6 +10,8 @@ The DevExpress UI components featured in this demo are available for free downlo
 * [Set Up Your Environment](#set-up-your-environment)
 * [How to Run This Demo Locally](#how-to-run-this-demo-locally)
 * [How to Create a New Project](#how-to-create-a-new-project)
+* [Themes](#themes)
+* [Localization](#localization)
 * [Free Blazor Utilities and Dev Tools](#free-blazor-utilities-and-dev-tools)
 * [Troubleshooting](#troubleshooting)
 * [Included Demo Modules](#included-demo-modules)
@@ -32,6 +34,7 @@ The following table describes the version compatibility of .NET Core 3.0 and the
 
 | .NET Core 3.0 version | DevExpress.Blazor.nuget version |
 | ------------- | ------------- |
+| [.NET Core 3.1 Release](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | **19.2.1 Beta**&#42; (make sure the [Include prerelease](#InstallPackage) option is enabled) |
 | [.NET Core 3.1 Release](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | **19.1.10 Release**&#42; |
 | [.NET Core 3.0 Release](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0/) | **19.1.9 Release**&#42; |
 | [.NET Core 3.0 Release](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0/) | **19.1.8 Release**&#42; |
@@ -101,6 +104,8 @@ To open the required demo, do the following:
    ```https://nuget.devexpress.com/{your feed authorization key}/api```
 
    ![Add new NuGet source](media/DevExpressEarlyAccessNuGetSource.png)
+   
+   > Make sure the `nuget.org` package source is also enabled.
 
 4. Install the "DevExpress.Blazor" NuGet package.
 
@@ -109,6 +114,8 @@ To open the required demo, do the following:
    ![Add new NuGet source](media/NuGetPackageManagerOpenManagerMenu.png)
    
    Install the "DevExpress.Blazor" NuGet package.
+
+   To install the latest Release package version, clear the **Include prereleases** checkbox. To test a Beta version of the "DevExpress.Blazor" NuGet package, make sure that the **Include prerelease** option is enabled.
    
    ![Add new NuGet source](media/VS2019Release-AddNuGetPackage.png) 
 
@@ -141,6 +148,8 @@ Follow the steps below to try our UI for Blazor in your own application.
    ```https://nuget.devexpress.com/{your feed authorization key}/api```
 
    ![Add new NuGet source](media/DevExpressEarlyAccessNuGetSource.png)
+   
+   > Make sure the `nuget.org` package source is also enabled.
 
 3. Install the "DevExpress.Blazor" NuGet package.
 
@@ -148,42 +157,38 @@ Follow the steps below to try our UI for Blazor in your own application.
    
    ![Add new NuGet source](media/NuGetPackageManagerOpenManagerMenu.png)
    
-   Install the "DevExpress.Blazor" NuGet package.
+   <a name="InstallPackage"/>Install the "DevExpress.Blazor" NuGet package.
+
+   To install the latest Release package version, clear the **Include prereleases** checkbox. To test a Beta version of the "DevExpress.Blazor" NuGet package, make sure that the **Include prerelease** option is enabled.
    
    ![Add new NuGet source](media/VS2019Release-AddNuGetPackage.png) 
 4. Build the project.
-5. Make sure the following folder is automatically created in your project’s `wwwroot` directory:
-    ```
-    Lib/dx-blazor
-        dx-blazor/.gitignore
-        dx-blazor/modules/
-        dx-blazor/dx-blazor.js
-        dx-blazor/dx-blazor.css
-    ```
-    For existing Blazor projects, copy the DevExpress static files from the `Lib/dx-blazor` folder to the appropriate folder in your project. 
-
-    > The `Lib/dx-blazor` folder is automatically cleared while the project is built and contains static files for an installed nuget package only. Do not store your files here.
-
-6. Link the `dx-blazor.js` and `dx-blazor.css` files to your layout’s HEAD section:
-   * For server-side Blazor, add the lines below to the _\_Host.cshtml_ file.
-   * For client-side Blazor, add the lines below to the _Index.cshtml_ file.
+5. Link the following file to your layout’s HEAD section:
+   * For server-side Blazor, add the line below to the _\_Host.cshtml_ file.
+   * For client-side Blazor, add the line below to the _index.html_ file.
     
     ```html
     <head>
         ...
-        <link href="lib/dx-blazor/dx-blazor.css" rel="stylesheet" />
-        <script src="lib/dx-blazor/dx-blazor.js"></script>
+        <link href="_content/DevExpress.Blazor/dx-blazor.css" rel="stylesheet" />
     </head>
     ```
-    > Reference this JavaScript file only because the `dx-blazor/dx-blazor.js` file is the entry point for DevExpress module files.
   
-7. Register DevExpress.Blazor namespace in _\_Imports.razor_ file:
+6. Register DevExpress.Blazor namespace in _\_Imports.razor_ file:
 
    ```html
    @using DevExpress.Blazor
    ```
 
-8. Your application is ready to use DevExpress Blazor.
+7. Your application is ready to use DevExpress Blazor.
+
+# Themes
+
+DevExpress Blazor components use the client-side Bootstrap framework to render their user interface. You can apply a Bootstrap-based theme to a Blazor application to change the appearance of all the components. Refer to the [Themes](http://docs.devexpress.com/Blazor/401523/common-concepts/themes) help topic for more information.
+
+# Localization
+
+DevExpress Blazor components ship localizable resources for UI elements, such as button captions, menu items, error messages, and dialog boxes. Refer to [localization.md](localization.md) for more information.
 
 # Free Blazor Utilities and Dev Tools
 
@@ -326,15 +331,17 @@ To resolve this issue, write more strict style rules in the *site.css* file so t
   * Column Types
   * Sort Data
   * Grouping
-  * Data Filter Row
+  * Filter Row
   * Selection
   * Templates
   * Scrolling
   * Virtual Scrolling
   * Cascading Editors
   * Edit Form Template Validation
-  * Master-Detail
+  * Remote Data Source
   * Large Datasets
+  * Master-Detail
+  * HTML Decoration
 * Pivot Grid
   * Data Binding Basics
   * Templates
@@ -355,7 +362,7 @@ To resolve this issue, write more strict style rules in the *site.css* file so t
   * Recurring Appointments
 * Data Editors
   * Calendar
-  * Check Box
+  * CheckBox
   * ComboBox
   * Date Edit
   * List Box

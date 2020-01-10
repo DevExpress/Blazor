@@ -1,0 +1,36 @@
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
+        <CodeSnippet>
+@(@"<DxDataGrid T=""@WebApiOrder"" CustomData=""@LoadOrderData"">
+    <Columns>
+        <DxDataGridComboBoxColumn T=""@(WebApiCustomerLookup)"" TextFieldName=""Text"" ValueFieldName=""Value""
+                                  CustomData=""@LoadCustomerData"" Field=""@nameof(WebApiOrder.CustomerID)"" />
+        <DxDataGridDateEditColumn Field=""@nameof(WebApiOrder.OrderDate)"" />
+        <DxDataGridSpinEditColumn Field=""@nameof(WebApiOrder.Freight)"" />
+        <DxDataGridColumn Field=""@nameof(WebApiOrder.ShipCountry)"" />
+        <DxDataGridComboBoxColumn T=""@(WebApiShipperLookup)"" TextFieldName=""Text"" ValueFieldName=""Value""
+                                  CustomData=""@LoadShipmentData"" Field=""@nameof(WebApiOrder.ShipVia)"" />
+    </Columns>
+</DxDataGrid>
+@code {
+    [Inject] protected HttpClient Client { get; set; }
+
+    protected async Task<LoadResult> LoadOrderData(DataSourceLoadOptionsBase options, CancellationToken cancellationToken)
+        => await LoadCustomData(""https://js.devexpress.com/Demos/NetCore/api/DataGridWebApi/Orders"", options, cancellationToken);
+    protected async Task<LoadResult> LoadCustomerData(DataSourceLoadOptionsBase options, CancellationToken cancellationToken)
+        => await LoadCustomData(""https://js.devexpress.com/Demos/NetCore/api/DataGridWebApi/CustomersLookup"", options, cancellationToken);
+    protected async Task<LoadResult> LoadShipmentData(DataSourceLoadOptionsBase options, CancellationToken cancellationToken)
+        => await LoadCustomData(""https://js.devexpress.com/Demos/NetCore/api/DataGridWebApi/ShippersLookup"", options, cancellationToken);
+
+    protected async Task<LoadResult> LoadCustomData(string dataEndpointUri, DataSourceLoadOptionsBase options, CancellationToken cancellationToken)
+    {
+        using var response = await Client.GetAsync(options.ConvertToGetRequestUri(dataEndpointUri), cancellationToken);
+        response.EnsureSuccessStatusCode();
+        using var responseStream = await response.Content.ReadAsStreamAsync();
+        return await JsonSerializer.DeserializeAsync<LoadResult>(responseStream, cancellationToken: cancellationToken);
+    }
+}")
+        </CodeSnippet>
+    </div>
+</div>

@@ -14,7 +14,7 @@
         </div>
         <div class="card-body">
             <DxChart Data="@ChartsData">
-                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@((SaleInfo s) => s.City)" ValueField="@((SaleInfo s) => s.Amount)" SeriesType="@LineSeriesType.Value">
+                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@(s => s.City)" ValueField="@(s => s.Amount)"  AggregationMethod="@Enumerable.Sum" SeriesType="@LineSeriesType.Value">
                 </DxChartCommonSeries>
                 <DxChartLegend Position="@RelativePosition.Outside" HorizontalAlignment="@HorizontalAlignment.Right" />
             </DxChart>
@@ -35,7 +35,7 @@
         </div>
         <div class="card-body">
             <DxChart Data="@ChartsData">
-                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@((SaleInfo s) => s.City)" ValueField="@((SaleInfo s) => s.Amount)" SeriesType="@AreaSeriesType.Value">
+                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@(s => s.City)" ValueField="@(s => s.Amount)" AggregationMethod="@Enumerable.Sum" SeriesType="@AreaSeriesType.Value">
                 </DxChartCommonSeries>
                 <DxChartLegend Position="@RelativePosition.Outside" HorizontalAlignment="@HorizontalAlignment.Right" />
             </DxChart>
@@ -58,7 +58,7 @@
         </div>
         <div class="card-body">
             <DxChart Data="@ChartsData">
-                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@((SaleInfo s) => s.City)" ValueField="@((SaleInfo s) => s.Amount)" SeriesType="@BarSeriesType.Value">
+                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@(s => s.City)" ValueField="@(s => s.Amount)" AggregationMethod="@Enumerable.Sum" SeriesType="@BarSeriesType.Value">
                 </DxChartCommonSeries>
                 <DxChartLegend Position="@RelativePosition.Outside" HorizontalAlignment="@HorizontalAlignment.Right" />
             </DxChart>

@@ -12,5 +12,12 @@ namespace Demo.Blazor.Model {
         public DateTime ShippedDate { get; set; }
         public int ShipRegionID { get; set; }
         public int UnitsInOrder { get; set; }
+
+        public OrderStatus OrderStatus { get; set; }
+    }
+    public enum OrderStatus {
+        Processing,
+        InTransit,
+        Delivered
     }
 }

@@ -77,7 +77,7 @@
     int Worked { get => worked; set { worked = value; OnChanged(); } }
 
     bool atVacation = true;
-    bool AtVacation { get => atVacation; set { atVacation= value; OnChanged(); } }
+    bool AtVacation { get => atVacation; set { atVacation = value; OnChanged(); } }
 
     void OnChanged() { InvokeAsync(StateHasChanged); }
 }

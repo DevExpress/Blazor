@@ -14,6 +14,8 @@ namespace BlazorDemo.ClientSide
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDevExpressBlazor();
+            
 			services.AddScoped<WeatherForecastService>();
             services.AddSingleton<IOptions<DemoConfiguration>, ClientSideDemoConfiguration>();
             services.AddDbContext<FMRDemoContext>(options =>

@@ -9,11 +9,7 @@
     </p>
 </div>
 
-<DxScheduler Id="scheduler"
-             StartDate="@DateTime.Today"
-             DataStorage="@DataStorage"
-             ActiveViewType="@SchedulerViewType.WorkWeek">
-
+<DxScheduler StartDate="@DateTime.Today" DataStorage="@DataStorage" ActiveViewType="@SchedulerViewType.WorkWeek">
     <DxSchedulerDayView VisibleTime="@VisibleTime"></DxSchedulerDayView>
     <DxSchedulerWorkWeekView VisibleTime="@VisibleTime"></DxSchedulerWorkWeekView>
     <DxSchedulerWeekView VisibleTime="@VisibleTime"></DxSchedulerWeekView>

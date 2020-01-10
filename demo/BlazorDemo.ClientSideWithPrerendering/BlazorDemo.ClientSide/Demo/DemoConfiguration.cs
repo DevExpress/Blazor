@@ -55,12 +55,11 @@ namespace Demo.Blazor
 
                 .Script("highlight-js", "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js", defer: false)
                 .Script("demo-js", "~/lib/dx-demo.js", defer: false)
-                .Script("dx-blazor-js", "~/lib/dx-blazor/dx-blazor.js", defer: false)
 
                 .StyleSheet("site-css", "~/css/site.css")
                 .StyleSheet("highlight-css", "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css")
                 .StyleSheet("demo-css", "~/css/dx-demo.css")
-                .StyleSheet("dx-css", "~/lib/dx-blazor/dx-blazor.css")
+                .StyleSheet("dx-css", "~/_content/DevExpress.Blazor/dx-blazor.css")
                 .StyleSheet(
                     name: "currentTheme",
                     styleSheetUrl: "css/switcher-resources/themes/pulse/bootstrap.min.css"
