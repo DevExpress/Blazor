@@ -2,7 +2,47 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
-# 19.1.10 (latest release)
+# 19.2.1 Beta (latest release)
+
+### Added
+
+* Localization
+* Data Grid 
+  * Asynchronous data binding 
+  * Binding to custom data sources
+  * A CheckBox column
+  * The Go to Page input box to jump to the corresponding page
+* Scheduler - New events to handle CRUD operations (add, update, and remove appointments)
+* Date Edit, Spin Edit, and Text Box - NullText support
+* Pager - The Go to Page input box to jump to the corresponding page
+
+### Fixed
+
+* Data Grid
+  * Incorrect styles are applied to multiple selected data rows
+  * [The grid jumps in virtual scrolling mode](https://github.com/DevExpress/Blazor/issues/55)
+  * [The clear button for the filter row editors is shown at an incorrect position if the horizontal scrollbar is shown](https://www.devexpress.com/Support/Center/Question/Details/T850224/datagrid-for-blazor-the-clear-button-for-the-filter-row-editors-is-shown-at-an-incorrect)
+* [ComboBox - The "Value cannot be null. (Parameter 'accessor')" exception is thrown if the ListRenderMode property is set to Virtual](https://supportcenter.devexpress.com/ticket/details/T846352)
+* Date Edit 
+  * Dates BC (before Christ) lead to an exception
+  * The Clear button is displayed when the component is bound to a non-nullable data type
+  * [Clicking the "Today" button leads to the "Value cannot be null. (Parameter 'accessor')" error](https://supportcenter.devexpress.com/ticket/details/T829754)
+* Spin Edit - Negative numbers lead to an exception when the component is bound to an unsigned numeric type
+* [List Box - Items have an unnecessary border if the render mode is set to "Virtual" and checkboxes are shown](https://www.devexpress.com/Support/Center/Question/Details/T825718/list-box-for-blazor-items-have-an-unnecessary-border-if-the-render-mode-is-set-to)
+
+### Breaking Changes
+
+* [Location of DevExpress resources has been changed](https://supportcenter.devexpress.com/ticket/details/T850893)
+* [Client-side Blazor applications now require calling the AddDevExpressBlazor method](https://supportcenter.devexpress.com/ticket/details/T850922)
+* [DevExpress Blazor components no longer support .NET Standard 2.0 and .NET Core 3.0](https://supportcenter.devexpress.com/ticket/details/T851146)
+* Data Grid
+  * [Base column-related classes have become abstract](https://supportcenter.devexpress.com/ticket/details/T849926)
+  * [The OptimizedMultipleSelectionChanged event has become asynchronous](https://supportcenter.devexpress.com/ticket/details/T851209)
+  * [The default navigation mode has been changed](https://supportcenter.devexpress.com/ticket/details/T851310)
+* [Checkbox - Numeric values other than 0 and 1 are now interpreted as an indeterminate state](https://supportcenter.devexpress.com/ticket/details/T850998)
+* [Pager - The default navigation mode has been changed](https://supportcenter.devexpress.com/ticket/details/T851310)
+
+# 19.1.10 
 
 ### .NET Core 3.1 Support
 In this version, we added support for the release of [.Net Core 3.1](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/).
