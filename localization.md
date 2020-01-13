@@ -19,7 +19,7 @@ DevExpress components provide NuGet packages with predefined satellite resource 
 
 To obtain satellite assemblies for DevExpress .NET controls that correspond to other cultures, use the [DevExpress Localization Service](http://localization.devexpress.com/). This service allows you to modify the existing translations, compile and download the satellite assemblies.
 
-After that, DevExpress Blazor components start to use the added satellite assemblies to localize component resources according to the user’s culture. For more information about how Blazor applications select the user culture, refer to the [Localization](https://docs.microsoft.com/en-us/aspnet/core/blazor/components?view=aspnetcore-3.1#localization) MSDN article.
+DevExpress Blazor components start to use the added satellite assemblies to localize component resources according to the user’s culture. For more information about how Blazor applications select the user culture, refer to the [Localization](https://docs.microsoft.com/en-us/aspnet/core/blazor/components?view=aspnetcore-3.1#localization) MSDN article.
 The [Localization example](https://www.devexpress.com/Support/Center/Example/Details/T850867/how-to-localize-devexpress-blazor-components) demonstrates how to localize DevExpress Blazor components via Satellite Resource Assemblies.
 
 ## Blazor WebAssembly
