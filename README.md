@@ -164,16 +164,37 @@ Follow the steps below to try our UI for Blazor in your own application.
    ![Add new NuGet source](media/VS2019Release-AddNuGetPackage.png) 
 4. Build the project.
 5. Link the following file to your layout’s HEAD section:
-   * For server-side Blazor, add the line below to the _\_Host.cshtml_ file.
-   * For client-side Blazor, add the line below to the _index.html_ file.
-    
-    ```html
-    <head>
-        ...
-        <link href="_content/DevExpress.Blazor/dx-blazor.css" rel="stylesheet" />
-    </head>
-    ```
-  
+   * For server-side Blazor, add the line below to the `_Host.cshtml` file. 
+        ```Razor
+        <head>
+            ...
+            <link href="_content/DevExpress.Blazor/dx-blazor.css" rel="stylesheet" />
+        </head>
+        ```
+    * For client-side Blazor, add the line below to the `index.html` file.
+        ```Razor
+        <head>
+            ...
+            <link href="_content/DevExpress.Blazor/dx-blazor.css" rel="stylesheet" />
+        </head>
+        ```
+        Call the [AddDevExpressBlazor](https://docs.devexpress.com/Blazor/Microsoft.Extensions.DependencyInjection.DevExpressServiceCollectionExtensions.AddDevExpressBlazor(Microsoft.Extensions.DependencyInjection.IServiceCollection)) method from your project's  `Startup.ConfigureServices()` method:
+        ```csharp
+        using Microsoft.Extensions.DependencyInjection;
+
+        public class Startup {
+            public Startup(IConfiguration configuration) {
+                Configuration = configuration;
+            }
+
+            public IConfiguration Configuration { get; }
+
+            public void ConfigureServices(IServiceCollection services) {
+                ...
+                services.AddDevExpressBlazor();
+            }
+        }
+        ```  
 6. Register DevExpress.Blazor namespace in _\_Imports.razor_ file:
 
    ```html
