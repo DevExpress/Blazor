@@ -49,35 +49,45 @@
         <li>Install the "DevExpress.Blazor" NuGet package.</li>
         <li>Build the project.</li>
         <li>
-            <p>Make sure the following folder is automatically created in your project’s wwwroot directory:</p>
+            <p>Link the following file to your layout’s HEAD section:</p>
             <ul>
-                <li>lib/dx-blazor/</li>
-                <li>dx-blazor/.gitignore</li>
-                <li>dx-blazor/modules/</li>
-                <li>dx-blazor/dx-blazor.js</li>
-                <li>dx-blazor/dx-blazor.css</li>
-            </ul>
-            <p>
-                For existing Blazor projects, copy the DevExpress static files from the Lib/dx-blazor folder to the appropriate folder in your project.
-                <i>The Lib/dx-blazor folder is automatically cleared while the project is built and contains static files for an installed nuget package only. Do not store your files here.</i>
-            </p>
-        </li>
-        <li>
-            <p>Link the <em>dx-blazor.js</em> and <em>dx-blazor.css</em> files to your layout’s HEAD section:</p>
-            <ul>
-                <li>For server-side Blazor, add the lines below to the <em>_Host.cshtml</em> file.</li>
-                <li>For client-side Blazor, add the lines below to the <em>Index.cshtm</em>l file.</li>
-            </ul>
-            <CodeSnippet>
+                <li>
+                    <p>For server-side Blazor, add the line below to the <em>_Host.cshtml</em> file.</p>
+                    <CodeSnippet>
 &lt;head&gt;
     ...
-    &lt;link href=&quot;lib/dx-blazor/dx-blazor.css&quot; rel=&quot;stylesheet&quot; /&gt;
-    &lt;script src=&quot;lib/dx-blazor/dx-blazor.js&quot;&gt;&lt;/script&gt;
+    &lt;link href=&quot;_content/DevExpress.Blazor/dx-blazor.css&quot; rel=&quot;stylesheet&quot; /&gt;
 &lt;/head&gt;
             </CodeSnippet>
-            <p>Reference this JavaScript file only because the dx-blazor/dx-blazor.js file is the entry point for DevExpress module files.</p>
-        </li>
+                </li>
+                <li>
+                    <p>For client-side Blazor, add the line below to the <em>Index.cshtm</em>l file.</p>
+                     <CodeSnippet>
+&lt;head&gt;
+    ...
+    &lt;link href=&quot;_content/DevExpress.Blazor/dx-blazor.css&quot; rel=&quot;stylesheet&quot; /&gt;
+&lt;/head&gt;
+            </CodeSnippet>
+                    <p>Call the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/Microsoft.Extensions.DependencyInjection.DevExpressServiceCollectionExtensions.AddDevExpressBlazor(Microsoft.Extensions.DependencyInjection.IServiceCollection)" rel="nofollow">AddDevExpressBlazor(IServiceCollection)</a> method from your project's <em>Startup.ConfigureServices()</em> method:</p>
+                    <CodeSnippet>
+using Microsoft.Extensions.DependencyInjection;
 
+public class Startup {
+    public Startup(IConfiguration configuration) {
+        Configuration = configuration;
+    }
+
+    public IConfiguration Configuration { get; }
+
+    public void ConfigureServices(IServiceCollection services) {
+        ...
+        services.AddDevExpressBlazor();
+    }
+}
+            </CodeSnippet>
+                </li>
+            </ul>
+        </li>
         <li>
             Register our tag namespace and helper in <b>_Imports.razor</b> file: 
             <CodeSnippet>
