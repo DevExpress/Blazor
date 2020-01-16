@@ -30,7 +30,7 @@ Our online documentation is available at [docs.devexpress.com/Blazor/](https://d
 
 # Version Compatibility
 
-The following table describes the version compatibility of .NET Core 3.0 and the DevExpress.Blazor NuGet package:
+The following table describes the version compatibility of .NET Core and the DevExpress.Blazor NuGet package:
 
 | .NET Core 3.0 version | DevExpress.Blazor.nuget version |
 | ------------- | ------------- |
