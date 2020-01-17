@@ -2,7 +2,22 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
-# 19.2.1 Beta (latest release)
+# 19.2.2 Beta
+
+### .NET Core 3.1.1 Support
+
+In this version, we support [.NET Core 3.1.1](https://devblogs.microsoft.com/dotnet/net-core-january-2020/) that contains security and reliability fixes.
+
+### Increased Stability
+
+We polished features delivered in 19.2.1 Beta.
+
+### Breaking Changes
+
+* [Data Grid - The OptimizedMultipleSelectionChanged event has become asynchronous](https://supportcenter.devexpress.com/ticket/details/t851209)
+* [Data Grid - The StartRowEdit, CancelRowEdit and SetDataRowSelectedByKey methods have become asynchronous](https://supportcenter.devexpress.com/ticket/details/t852758)
+
+# 19.2.1 Beta
 
 ### Added
 
@@ -37,7 +52,6 @@ Version history of the "DevExpress.Blazor" NuGet package is listed below.
 * [DevExpress Blazor components no longer support .NET Standard 2.0 and .NET Core 3.0](https://supportcenter.devexpress.com/ticket/details/T851146)
 * Data Grid
   * [Base column-related classes have become abstract](https://supportcenter.devexpress.com/ticket/details/T849926)
-  * [The OptimizedMultipleSelectionChanged event has become asynchronous](https://supportcenter.devexpress.com/ticket/details/T851209)
   * [The default navigation mode has been changed](https://supportcenter.devexpress.com/ticket/details/T851310)
 * [Checkbox - Numeric values other than 0 and 1 are now interpreted as an indeterminate state](https://supportcenter.devexpress.com/ticket/details/T850998)
 * [Pager - The default navigation mode has been changed](https://supportcenter.devexpress.com/ticket/details/T851310)

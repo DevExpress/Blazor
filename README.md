@@ -34,6 +34,7 @@ The following table describes the version compatibility of .NET Core and the Dev
 
 | .NET Core 3.0 version | DevExpress.Blazor.nuget version |
 | ------------- | ------------- |
+| [.NET Core 3.1.1 Release](https://devblogs.microsoft.com/dotnet/net-core-january-2020/) | **19.2.2 Beta**&#42; (make sure the [Include prerelease](#InstallPackage) option is enabled) |
 | [.NET Core 3.1 Release](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | **19.2.1 Beta**&#42; (make sure the [Include prerelease](#InstallPackage) option is enabled) |
 | [.NET Core 3.1 Release](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | **19.1.10 Release**&#42; |
 | [.NET Core 3.0 Release](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0/) | **19.1.9 Release**&#42; |

@@ -21,7 +21,7 @@
     {
         StoredSelectedCount = selection.SelectedKeysStored.Count();
         StoredUnselectedCount = selection.UnselectedKeysStored.Count();
-        var selectedKeys = await selection.SelectedKeysAsync;
+        var selectedKeys = await selection.SelectedKeys;
         SelectedCount = selectedKeys.Count();
         await InvokeAsync(StateHasChanged);
     }

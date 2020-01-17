@@ -1,12 +1,12 @@
 # Localization
 
-Localization is the process of translating a product into a different language. DevExpress Blazor components ship localizable resources for UI elements, such as button captions, menu items, error messages, and dialog boxes.
+Localization is the process of translating a product into a different language. DevExpress Blazor components ship with localizable resources for UI elements, such as button captions, menu items, error messages, and dialog boxes.
 
-The localization mechanism depends on your application’s [hosting model](https://docs.microsoft.com/en-us/aspnet/core/blazor/hosting-models?view=aspnetcore-3.0): Blazor server (ASP.NET Core) or Blazor WebAssembly.
+The localization mechanism depends on your application’s [hosting model](https://docs.microsoft.com/en-us/aspnet/core/blazor/hosting-models?view=aspnetcore-3.0): Blazor Server (ASP.NET Core) or Blazor WebAssembly.
 
 ## Blazor Server
 
-DevExpress components for server-side Blazor use the standard localization mechanism from the .NET framework - Satellite Resource Assemblies. For more information, refer to the [Creating Satellite Assemblies](https://docs.microsoft.com/en-us/dotnet/framework/resources/creating-satellite-assemblies-for-desktop-apps?view=netframework-4.8) MSDN article.
+DevExpress components in server-side Blazor applications use the standard localization mechanism from the .NET framework - Satellite Resource Assemblies. For more information, refer to the [Creating Satellite Assemblies](https://docs.microsoft.com/en-us/dotnet/framework/resources/creating-satellite-assemblies-for-desktop-apps?view=netframework-4.8) MSDN article.
 DevExpress components provide NuGet packages with predefined satellite resource assemblies for the following languages and cultures:
 
 | Nuget package postfix      | Corresponding culture |
@@ -17,12 +17,12 @@ DevExpress components provide NuGet packages with predefined satellite resource 
 | ru      |    Russian |
 
 
-To obtain satellite assemblies for DevExpress .NET controls that correspond to other cultures, use the [DevExpress Localization Service](http://localization.devexpress.com/). This service allows you to modify the existing translations, compile and download the satellite assemblies.
+To obtain satellite assemblies for DevExpress Blazor components that correspond to other cultures, use the [DevExpress Localization Service](http://localization.devexpress.com/). This service allows you to modify the existing translations, compile and download the satellite assemblies.
 
-DevExpress Blazor components start to use the added satellite assemblies to localize component resources according to the user’s culture. For more information about how Blazor applications select the user culture, refer to the [Localization](https://docs.microsoft.com/en-us/aspnet/core/blazor/components?view=aspnetcore-3.1#localization) MSDN article.
+DevExpress Blazor components use the added satellite assemblies to localize component resources according to the user’s culture. For more information about how Blazor applications select the user culture, refer to the [Localization](https://docs.microsoft.com/en-us/aspnet/core/blazor/components?view=aspnetcore-3.1#localization) MSDN article.
 The [Localization example](https://www.devexpress.com/Support/Center/Example/Details/T850867/how-to-localize-devexpress-blazor-components) demonstrates how to localize DevExpress Blazor components via Satellite Resource Assemblies.
 
 ## Blazor WebAssembly
 
-Currently, there is no official or recommended approach on how to localize Blazor WebAssembly applications. 
-DevExpress components for Blazor WebAssembly are localized via the [IDxLocalizationService](http://docs.devexpress.com/Blazor/DevExpress.Blazor.Localization.IDxLocalizationService) interface implementation. For more information, refer to the [Localization example](https://www.devexpress.com/Support/Center/Example/Details/T850867/how-to-localize-devexpress-blazor-components).
+Currently, there is no official nor recommended approach on how to localize Blazor WebAssembly applications. 
+DevExpress components in Blazor WebAssembly applications are localized via the [IDxLocalizationService](http://docs.devexpress.com/Blazor/DevExpress.Blazor.Localization.IDxLocalizationService) interface implementation. For more information, refer to the [Localization example](https://www.devexpress.com/Support/Center/Example/Details/T850867/how-to-localize-devexpress-blazor-components).

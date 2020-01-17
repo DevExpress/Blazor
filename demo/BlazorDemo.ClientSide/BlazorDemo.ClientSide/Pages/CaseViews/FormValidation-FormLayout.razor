@@ -41,7 +41,8 @@
                 <DxFormLayoutItem Caption="Primary Classification:" ColSpanMd="6">
                     <Template>
                         <DxComboBox NullText="Select classification ..."
-                                    Data="@(new List<string>() { null, "Defense", "Exploration", "Diplomacy" })"
+                                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                                    Data="@(new List<string>() { "Defense", "Exploration", "Diplomacy" })"
                                     @bind-SelectedItem="@starship.Classification" />
                         @*<ValidationMessage For="@(() => starship.Classification)" />*@
                     </Template>
