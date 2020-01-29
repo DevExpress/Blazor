@@ -231,14 +231,18 @@ services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedEr
 
 This provides more detailed information about these errors. 
 
-## 2. Could not find 'X' in 'window.DxBlazor'.
+## 2. System.ArgumentNullException: Value cannot be null. (Parameter 'accessor') 
+ 
+To resolve this issue, use the solution from the [ComboBox for Blazor - How to resolve the 'System.ArgumentNullException: Value cannot be null. (Parameter 'accessor')' error](https://supportcenter.devexpress.com/ticket/details/t850754/combobox-for-blazor-how-to-resolve-the-system-argumentnullexception-value-cannot-be-null) ticket.
+
+## 3. Could not find 'X' in 'window.DxBlazor'.
 Earlier, our clients' scripts were manually added to a project. Now, we automatically distribute them with the NuGet Package in the lib/dx-blazor folder (see the 6th item of the [How to create a new project](https://github.com/devexpress/blazor#how-to-create-a-new-project) paragraph). So, our users may face such an issue if they reference an old version of our static files instead of the new one. For example, a similar issue was discussed in the [I have a formlayout error when running a Blazor website](https://stackoverflow.com/questions/57593583/i-have-a-formlayout-error-when-running-a-blazor-website) SO thread.
- 
+ 
 If solutions suggested there do not help, create an issue here or submit a ticket in our [Support Center](https://www.devexpress.com/Support/Center/Question/Create) so that we can investigate your case.
 
-## 3. DxDataGrid in Blazor
+## 4. DxDataGrid in Blazor
 
-If you use client-side Blazor with DxDataGrid, you may see the following exception in a browser:
+If you use Blazor WebAssemly (aka client-side Blazor) with DxDataGrid, you may see the following exception in a browser:
 
 ![Troubleshooting - No Generic Method 'Take' On Type System.Linq.Queryable](media/Troubleshooting-NoGenericMethodTakeOnTypeSystemLinqQueryable.png)
 
@@ -289,7 +293,7 @@ Do one of the following to resolve this issue:
 See [Configure the Linker for ASP.NET Core Blazor](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker?view=aspnetcore-3.0) for more information.
 
 
-## 4. DxScheduler in Blazor
+## 5. DxScheduler in Blazor
 
 If you use client-side Blazor with DxScheduler, you may see the following exception or a similar exception:
 
@@ -337,7 +341,7 @@ Do one of the following to resolve this issue:
 
 See [Configure the Linker for ASP.NET Core Blazor](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker?view=aspnetcore-3.0) for more information.
 
-## 5. DxTabs are rendered incorrectly when the default Microsoft template is applied
+## 6. DxTabs are rendered incorrectly when the default Microsoft template is applied
 
 If you create a new Blazor project based on the default Microsoft project template, the first tab of the DxTabs component can be rendered incorrectly.
 
