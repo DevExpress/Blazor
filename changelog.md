@@ -2,6 +2,44 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 19.2.3 Release
+
+> Please also explore new features and breaking changes introduced in [19.2.1 Beta](#1921-beta) and [19.2.2 Beta](#1922-beta) versions.
+
+### New Bootstrap Theme
+We created a new “Blazing Berry” theme for applications that are built using Bootstrap v4. This theme is now the default theme for our [online demos](https://demos.devexpress.com/blazor/).
+ 
+### New Components
+In this version, we added two new components to our DevExpress UI for Blazor:
+
+* Button
+* TagBox 
+
+### Added
+* Data Grid
+  * Page size selector
+  * The ability to limit the number of visible numeric buttons in a pager
+  * Row preview section
+  * New row initialization
+  * Reload data in code
+* Chart - The ability to specify an axis type
+* Spin Edit - Hide spin buttons
+* Pager -  The ability to limit the number of visible numeric buttons
+* Popup
+  * Footer template
+  * Change the header's visibility in code
+  * Change the component’s visibility in code
+  * A scrollbar in the pop-up window’s content.
+
+### Fixed
+* [The Virtual Scrolling mode and the Master-Detail view do not work properly together.](https://github.com/DevExpress/Blazor/issues/75)
+
+### Breaking Changes
+* [Pager and Data Grid's Pager - The navigation mode was changed and the CollapseButtonCount property removed.](https://supportcenter.devexpress.com/internal/ticket/details/T851310)
+
+### Known Issues
+* [Drop-down editors in the Popup component are not displayed over the Popup's boundaries and cause scroll bars to appear instead.](https://supportcenter.devexpress.com/ticket/details/t860343/drop-down-editors-located-in-the-popup-component-cause-scroll-bars-instead-of-displaying)
+
 # 19.2.2 Beta
 
 ### .NET Core 3.1.1 Support
