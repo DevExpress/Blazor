@@ -1,0 +1,53 @@
+﻿<CodeSnippetTabbed>
+<CodeSnippetTabPage Text="Razor">
+@(@"<DxTagBox Data=""@DataSource""
+          TextFieldName =""Data""
+          AllowCustomTags =""true""
+          @bind-Tags=""@Tags""
+          @bind-DropDownVisible=""@DropDownVisible"">
+            <TagTemplate Context=""tagInfo"">
+                @{
+                    string tagClass = tagInfo.IsCustom ? ""btn btn-outline-secondary"" : ""btn "" + tagInfo.DataItem.CssClass;
+                    <span class=@tagClass>
+                        <span>@tagInfo.Text</span>
+                        <span @onclick=""@tagInfo.RemoveTagAction"">&times;</span>
+                    </span>
+                }
+            </TagTemplate>
+</DxTagBox>
+
+@code {
+    Option[] DataSource = null;
+    
+    IEnumerable<string> tags;
+    IEnumerable<string> Tags { get => tags; set { tags = value; InvokeAsync(StateHasChanged); } }
+
+    bool dropDownVisible = true;
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); } }
+
+    protected override void OnInitialized() {
+        DataSource = new Option[] {
+            new Option(""Option 1"", ""btn-primary""),
+            new Option(""Option 2"", ""btn-success""),
+            new Option(""Option 3"", ""btn-primary""),
+            new Option(""Option 4"", ""btn-success""),
+            new Option(""Option 5"", ""btn-primary""),
+            new Option(""Option 6"", ""btn-success""),
+            new Option(""Option 7"", ""btn-primary"")
+        };
+        tags = new List<string>() { ""Option 2"", ""Option 5"", ""Custom Option"" };
+    }
+}")
+</CodeSnippetTabPage>
+<CodeSnippetTabPage Text="Option">
+@(@"public class Option {
+    public Option(string data, string cssClass) {
+        Data = data;
+        CssClass = cssClass;
+    }
+    
+    public string Data { get; set; }
+    public string CssClass { get; set; }
+}")
+</CodeSnippetTabPage>
+</CodeSnippetTabbed>

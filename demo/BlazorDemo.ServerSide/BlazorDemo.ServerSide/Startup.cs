@@ -28,7 +28,7 @@ namespace BlazorDemo.ServerSide {
 #if DEBUG
             services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; });
 #endif
-            
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<WeatherForecastService>();
@@ -40,6 +40,7 @@ namespace BlazorDemo.ServerSide {
             services.Configure<DemoConfiguration>(Configuration.GetSection("DemoConfiguration"));
             services.AddTransient<ProductService>();
             services.AddSingleton<FlatProductService>();
+            services.AddTransient<EmployeeService>();
             services.AddSingleton<CountryNamesService>();
             services.AddSalesViewerService();
             services.AddDocumentMetadata((serviceProvider, registrator) => {

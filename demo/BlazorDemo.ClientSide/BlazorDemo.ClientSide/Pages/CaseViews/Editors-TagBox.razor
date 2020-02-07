@@ -1,0 +1,54 @@
+﻿@using Demo.Blazor.Model
+@{
+    RenderFragment<string> GetLink = (propName) =>
+    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTagBoxBase-1.@propName">@propName</a>;
+}
+
+<div class="demo-description" id="Overview">
+    <h2><DemoNavLink Link="TagBox#Overview" />TagBox - Overview</h2>
+    <p>
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-1">TagBox</a> is an editor that allows users to select multiple items (tags) from a predefined drop-down list. Users can also type in the edit box to filter list items that contain the search string. To remove a tag, users can click its remove button or press Backspace.
+    </p>
+    <p>
+        The main TagBox API members are listed below.
+    </p>
+    <p>
+        <ul>
+            <li>@GetLink("Data") - Specifies the data source that populates the editor’s list items.</li>
+            <li>@GetLink("TextFieldName") - Specifies the data source’s field that supplies text for items.</li>
+            <li>@GetLink("Tags") - Specifies the editor’s tags.</li>
+            <li>@GetLink("TagsChanged") - Fires when the tag collection is changed.</li>
+            <li>@GetLink("SelectedItems") - Specifies the drop-down list’s selected items.</li>
+            <li>@GetLink("SelectedItemsChanged") - Fires when the selected item collection is changed.</li>
+        </ul>
+    </p>
+    <p>This demo illustrates how to bind the TagBox to a list of complex business objects.</p>
+</div>
+
+<div class="card demo-card">
+    <div class="card-body" style="height: 280px;">
+        <DxTagBox Data="@Persons.DataSource"
+                  TextFieldName="Text"
+                  @bind-DropDownVisible="@DropDownVisible"
+                  @bind-SelectedItems="@SelectedPersons"></DxTagBox>
+    </div>
+</div>
+
+<CodeSnippet_Editor_TagBox></CodeSnippet_Editor_TagBox>
+<!--<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_TagBox></CodeSnippet_Editor_TagBox>
+    </div>
+</div>-->
+
+@code {
+    IEnumerable<Person> selectedPersons = new List<Person>() { Persons.DataSource[0] };
+    IEnumerable<Person> SelectedPersons {
+        get => selectedPersons;
+        set { selectedPersons = value; InvokeAsync(StateHasChanged); }
+    }
+
+    bool dropDownVisible = true;
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); } }
+}

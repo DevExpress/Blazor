@@ -1,0 +1,76 @@
+﻿@using Demo.Blazor.Model
+
+<div class="demo-description" id="TagTemplate">
+    <h2><DemoNavLink Link="TagBox#TagTemplate" />TagBox - Tag Template</h2>
+    <p>
+        This demo illustrates how to use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTagBoxBase-1.TagTemplate">TagTemplate</a> property to customize tag's appearance.
+    </p>
+    <p>
+        The template’s <b>Context</b> parameter has the following properties:
+    </p>
+    <ul>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.TagInfo-1.DataItem">DataItem</a> - The tag’s bound data item (if the tag is not custom).</li>
+        <li><a class="helplink" target="_blank" href=" https://docs.devexpress.com/Blazor/DevExpress.Blazor.TagInfo-1.IsCustom">IsCustom</a> -Returns whether the current tag is custom (not stored in the assigned data source).</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.TagInfo-1.RemoveTagAction">RemoveTagAction</a> - The predefined action that removes the tag.</li>
+        <li><a class="helplink" target="_blank" href=" https://docs.devexpress.com/Blazor/DevExpress.Blazor.TagInfo-1.Text">Text</a> - The tag’s text. </li>
+    </ul>
+</div>
+
+<div class="card demo-card">
+    <div class="card-body mw-480" style="height: 300px">
+        <DxTagBox Data="@DataSource"
+                  TextFieldName ="Data"
+                  AllowCustomTags ="true"
+                  @bind-Tags="@Tags"
+                  @bind-DropDownVisible="@DropDownVisible">
+            <TagTemplate Context="tagInfo">
+                @{
+                    string tagClass = tagInfo.IsCustom ? "btn btn-outline-secondary" : "btn " + tagInfo.DataItem.CssClass;
+                    <span class=@tagClass>
+                        <span>@tagInfo.Text</span>
+                        <span @onclick="@tagInfo.RemoveTagAction">&times;</span>
+                    </span>
+                }
+            </TagTemplate>
+        </DxTagBox>
+    </div>
+</div>
+
+
+<CodeSnippet_Editor_TagBox_TagTemplate></CodeSnippet_Editor_TagBox_TagTemplate>
+
+
+@code {
+        Option[] DataSource = null;
+
+        IEnumerable<string> tags;
+        IEnumerable<string> Tags { get => tags; set { tags = value; InvokeAsync(StateHasChanged); } }
+
+        bool dropDownVisible = true;
+        bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); } }
+
+    protected override void OnInitialized() {
+        DataSource = new Option[] {
+            new Option("Option 1", "btn-primary"),
+            new Option("Option 2", "btn-success"),
+            new Option("Option 3", "btn-primary"),
+            new Option("Option 4", "btn-success"),
+            new Option("Option 5", "btn-primary"),
+            new Option("Option 6", "btn-success"),
+            new Option("Option 7", "btn-primary")
+        };
+        tags = new List<string>() { "Option 2", "Option 5", "Custom Option" };
+    }
+
+    public class Option {
+
+        public Option(string data, string cssClass) {
+            Data = data;
+            CssClass = cssClass;
+        }
+
+        public string Data { get; set; }
+        public string CssClass { get; set; }
+    }
+
+}

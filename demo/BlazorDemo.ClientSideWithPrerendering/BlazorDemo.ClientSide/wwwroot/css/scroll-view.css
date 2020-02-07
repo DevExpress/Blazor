@@ -1,0 +1,934 @@
+﻿.blazor-scroll-view .dx-state-invisible {
+    display: none !important;
+}
+.dx-widget {
+  display: block;
+  -ms-content-zooming: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: none;
+  -webkit-touch-callout: none;
+  padding: 0;
+  outline: 0;
+  -webkit-print-color-adjust: exact;
+  color-adjust: exact;
+}
+.dx-widget,
+.dx-widget *,
+.dx-widget :after,
+.dx-widget :before,
+.dx-widget:after,
+.dx-widget:before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dx-scrollable-scrollbar-simulated {
+  position: relative;
+}
+.dx-scrollable {
+  display: block;
+  height: 100%;
+  min-height: 0;
+}
+.dx-scrollable-native {
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  -ms-scroll-snap-type: proximity;
+}
+.dx-scrollable-native .dx-scrollable-scrollbar {
+  display: none;
+}
+.dx-scrollable-native.dx-scrollable-scrollbar-simulated .dx-scrollable-scrollbar {
+  display: block;
+}
+.dx-scrollable-native .dx-scrollable-container {
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  height: 100%;
+}
+.dx-scrollable-native.dx-scrollable-vertical,
+.dx-scrollable-native.dx-scrollable-vertical .dx-scrollable-container {
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.dx-scrollable-native.dx-scrollable-horizontal,
+.dx-scrollable-native.dx-scrollable-horizontal .dx-scrollable-container {
+  -ms-touch-action: pan-x;
+  touch-action: pan-x;
+  float: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.dx-scrollable-native.dx-scrollable-both,
+.dx-scrollable-native.dx-scrollable-both .dx-scrollable-container {
+  -ms-touch-action: pan-y pan-x;
+  touch-action: pan-y pan-x;
+  float: none;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+.dx-scrollable-native.dx-scrollable-disabled,
+.dx-scrollable-native.dx-scrollable-disabled .dx-scrollable-container {
+  -ms-touch-action: auto;
+  touch-action: auto;
+}
+.dx-scrollable-native.dx-scrollable-scrollbars-hidden ::-webkit-scrollbar {
+  opacity: 0;
+}
+.dx-scrollable-native.dx-scrollable-native-ios .dx-scrollable-content {
+  min-height: 101%;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.dx-scrollable-native.dx-scrollable-native-ios.dx-scrollable-horizontal .dx-scrollable-content {
+  min-height: 0;
+  padding: 0;
+}
+.dx-scrollable-native.dx-scrollable-native-generic {
+  -ms-overflow-style: auto;
+  overflow: hidden;
+}
+.dx-scrollable-native.dx-scrollable-native-generic .dx-scrollable-content {
+  height: auto;
+}
+.dx-scrollable-native.dx-scrollable-native-android .dx-scrollable-content {
+  -webkit-transform: none;
+  transform: none;
+  z-index: 0;
+}
+.dx-scrollable-scrollbar-simulated .dx-scrollable-container ::-webkit-scrollbar,
+.dx-scrollable-scrollbar-simulated ::-webkit-scrollbar {
+  display: none;
+}
+.dx-scrollable-container {
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+.dx-scrollable-container:focus {
+  outline: 0;
+}
+.dx-scrollable-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.dx-scrollable-content {
+  position: relative;
+  min-height: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dx-scrollable-content:after,
+.dx-scrollable-content:before {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.dx-scrollable-content:after {
+  clear: both;
+}
+.dx-scrollable-both .dx-scrollable-content,
+.dx-scrollable-horizontal .dx-scrollable-content {
+  display: block;
+  float: left;
+  min-width: 100%;
+}
+.dx-scrollable-scrollbar {
+  position: absolute;
+  pointer-events: auto;
+}
+.dx-scrollbar-vertical {
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+.dx-scrollbar-vertical .dx-scrollable-scroll {
+  width: 5px;
+}
+.dx-scrollbar-horizontal .dx-scrollable-scroll {
+  height: 5px;
+}
+.dx-scrollable-scroll {
+  position: relative;
+  background-color: rgba(0,0,0,.5);
+  -webkit-transform: translate(0,0);
+  -webkit-transition: background-color linear;
+  transition: background-color linear;
+}
+.dx-scrollable-scroll.dx-state-invisible {
+  display: block!important;
+  background-color: rgba(0,0,0,0);
+  -webkit-transition: background-color .5s linear 1s;
+  transition: background-color .5s linear 1s;
+}
+.dx-rtl .dx-scrollable,
+.dx-rtl .dx-scrollable .dx-scrollable-container,
+.dx-rtl .dx-scrollable .dx-scrollable-content,
+.dx-rtl.dx-scrollable,
+.dx-rtl.dx-scrollable .dx-scrollable-container,
+.dx-rtl.dx-scrollable .dx-scrollable-content {
+  direction: ltr;
+}
+.dx-rtl .dx-scrollable .dx-scrollable-content > *,
+.dx-rtl.dx-scrollable .dx-scrollable-content > * {
+  direction: rtl;
+}
+.dx-rtl .dx-scrollable .dx-scrollable-scrollbar.dx-scrollbar-vertical,
+.dx-rtl.dx-scrollable .dx-scrollable-scrollbar.dx-scrollbar-vertical {
+  right: auto;
+  left: 0;
+}
+.dx-rtl .dx-scrollable .dx-scrollable-scrollbar.dx-scrollbar-horizontal,
+.dx-rtl.dx-scrollable .dx-scrollable-scrollbar.dx-scrollbar-horizontal {
+  direction: ltr;
+}
+.dx-device-ios-6 .dx-scrollable-content {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.dx-device-android .dx-scrollable-native.dx-scrollable-scrollbars-hidden ::-webkit-scrollbar {
+  display: none;
+}
+.dx-scrollable-simulated .dx-scrollable-content {
+  overflow-anchor: none;
+}
+.dx-scrollable-simulated.dx-scrollable-disabled .dx-scrollable-scrollbar {
+  pointer-events: none;
+}
+.dx-scrollable-native.dx-scrollable-native-generic .dx-scrollview-top-pocket {
+  position: absolute;
+  display: none;
+}
+.dx-scrollable-native.dx-scrollable-native-android .dx-scrollview-top-pocket {
+  width: 40px;
+  height: 40px;
+  left: 50%;
+  position: absolute;
+  z-index: 1;
+}
+.dx-scrollable-native.dx-scrollable-native-android .dx-scrollview-pull-down {
+  background-image: none;
+  position: static;
+  height: 100%;
+  width: 100%;
+  left: -50%;
+  margin-left: -20px;
+  padding: 0;
+  border-radius: 50%;
+}
+.dx-scrollable-native.dx-scrollable-native-android .dx-scrollview-pull-down.dx-scrollview-pull-down-loading {
+  -webkit-transition: -webkit-transform .1s linear;
+  transition: transform .1s linear;
+  transition: transform .1s linear,-webkit-transform .1s linear;
+}
+.dx-scrollable-native.dx-scrollable-native-android .dx-scrollview-pull-down .dx-scrollview-pull-down-indicator {
+  position: relative;
+  top: 0;
+  padding: 4px;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  float: left;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dx-scrollable-native.dx-scrollable-native-android .dx-scrollview-pull-down .dx-scrollview-pull-down-indicator .dx-loadindicator {
+  float: left;
+}
+.dx-scrollable-native.dx-scrollable-native-android .dx-icon-pulldown {
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  font-size: 24px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: opacity .2s;
+  transition: opacity .2s;
+}
+.dx-scrollable-native.dx-scrollable-native-android .dx-scrollview-pull-down-loading.dx-scrollview-pull-down {
+  -webkit-transition: top .2s ease-out;
+  transition: top .2s ease-out;
+}
+.dx-scrollable-native.dx-scrollable-native-android .dx-scrollview-pull-down-image {
+  position: absolute;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-size: contain;
+  -webkit-transition: opacity .2s;
+  transition: opacity .2s;
+}
+.dx-scrollable-native.dx-scrollable-native-android .dx-scrollview-pull-down-loading .dx-icon-pulldown {
+  display: none;
+}
+.dx-scrollable-native.dx-scrollable-native-ios .dx-scrollview-top-pocket {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow-y: auto;
+  -webkit-transition: -webkit-transform .4s;
+  transition: transform .4s;
+  transition: transform .4s,-webkit-transform .4s;
+  -webkit-transform: translate(0,0);
+  transform: translate(0,0);
+}
+.dx-scrollable-native.dx-scrollable-native-ios .dx-scrollview-content {
+  -webkit-transition: -webkit-transform .4s;
+  transition: transform .4s;
+  transition: transform .4s,-webkit-transform .4s;
+  -webkit-transform: none;
+  transform: none;
+}
+.dx-scrollable-native.dx-scrollable-native-win8.dx-scrollable-disabled {
+  overflow-y: auto;
+}
+.dx-scrollable-native.dx-scrollable-native-win8.dx-scrollable-disabled .dx-scrollable-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.dx-scrollable-native.dx-scrollable-native-win8.dx-scrollable-disabled .dx-scrollable-content,
+.dx-scrollable-native.dx-scrollable-native-win8.dx-scrollable-disabled .dx-scrollview-content {
+  overflow-y: hidden;
+}
+.dx-scrollable-native.dx-scrollable-native-win8 .dx-scrollable-container {
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+.dx-scrollable-native.dx-scrollable-native-win8 .dx-scrollview-bottom-pocket {
+  width: 100%;
+  text-align: center;
+}
+.dx-device-android-4 .dx-scrollable-native.dx-scrollable-native-android .dx-scrollview-pull-down-loading .dx-icon-pulldown {
+  display: block;
+}
+.dx-scrollview-content {
+  position: static;
+}
+.dx-scrollview-content:after,
+.dx-scrollview-content:before {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.dx-scrollview-content:after {
+  clear: both;
+}
+.dx-scrollview-pull-down {
+  width: 100%;
+  height: 50px;
+  padding: 15px 0;
+  top: -80px;
+  overflow: hidden;
+  -webkit-transform: translate(0,0);
+  transform: translate(0,0);
+  -webkit-user-drag: none;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.dx-scrollview-pull-down-container {
+  display: inline-block;
+  width: 49%;
+  text-align: right;
+}
+.dx-scrollview-pull-down-indicator {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  display: inline-block;
+  margin: -15px 20px 0 15px;
+  width: 20px;
+  -webkit-user-drag: none;
+}
+.dx-scrollview-pull-down-image {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 20px;
+  width: 20px;
+  height: 50px;
+  background-size: contain;
+  -webkit-user-drag: none;
+  -webkit-transform: translate(0,0) rotate(0);
+  transform: translate(0,0) rotate(0);
+  -webkit-transition: -webkit-transform .2s linear;
+  transition: transform .2s linear;
+  transition: transform .2s linear,-webkit-transform .2s linear;
+}
+.dx-scrollview-pull-down-text {
+  display: inline;
+  vertical-align: middle;
+  position: relative;
+  overflow: visible;
+  -webkit-user-drag: none;
+}
+.dx-scrollview-pull-down-text div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  overflow: visible;
+  opacity: 0;
+}
+.dx-scrollview-pull-down-text div.dx-scrollview-pull-down-text-visible {
+  opacity: 1;
+}
+.dx-scrollview-pull-down-ready .dx-scrollview-pull-down-image {
+  -webkit-transform: translate(0,0) rotate(-180deg);
+  transform: translate(0,0) rotate(-180deg);
+}
+.dx-scrollview-pull-down-loading .dx-scrollview-pull-down-image {
+  opacity: 0;
+}
+.dx-scrollview-pull-down-loading .dx-scrollview-pull-down-indicator {
+  opacity: 1;
+}
+.dx-scrollview-scrollbottom {
+  width: 100%;
+  padding: 10px 0;
+  overflow: hidden;
+  text-align: center;
+  -webkit-transform: translate(0,0);
+  transform: translate(0,0);
+}
+.dx-scrollview-scrollbottom:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.dx-scrollview-scrollbottom-indicator {
+  display: inline-block;
+  margin: 0 10px 0 0;
+  -webkit-user-drag: none;
+}
+.dx-scrollview-scrollbottom-text {
+  display: inline-block;
+  margin-top: -20px;
+  vertical-align: middle;
+  -webkit-user-drag: none;
+}
+.dx-scrollview-scrollbottom-end {
+  opacity: 0;
+}
+.dx-rtl .dx-scrollable-native.dx-scrollable-native-ios .dx-scrollview-top-pocket,
+.dx-scrollable-native.dx-rtl.dx-scrollable-native-ios .dx-scrollview-top-pocket {
+  left: auto;
+  right: 0;
+}
+.dx-rtl .dx-scrollview-pull-down-container {
+  text-align: left;
+}
+.dx-rtl .dx-scrollview-pull-down-indicator,
+.dx-rtl .dx-scrollview-pull-down-text div {
+  left: auto;
+  right: 0;
+}
+.dx-rtl .dx-scrollview-scrollbottom-indicator {
+  margin: 0 0 0 10px;
+}
+.dx-list .dx-scrollview-content:focus {
+  outline: 0;
+}
+.dx-overlay-wrapper {
+  top: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  z-index: 1000;
+}
+.dx-overlay-wrapper,
+.dx-overlay-wrapper *,
+.dx-overlay-wrapper :after,
+.dx-overlay-wrapper :before,
+.dx-overlay-wrapper:after,
+.dx-overlay-wrapper:before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dx-overlay-modal {
+  width: 100%;
+  height: 100%;
+}
+.dx-overlay-shader {
+  background-color: rgba(128,128,128,.5);
+  pointer-events: auto;
+}
+.dx-overlay-content {
+  position: absolute;
+  pointer-events: auto;
+  z-index: 1000;
+  outline: 0;
+  overflow: hidden;
+}
+.dx-overlay-content > .dx-template-wrapper {
+  height: 100%;
+  width: 100%;
+}
+.dx-device-android .dx-overlay-content {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.dx-device-android .dx-scrollable-native .dx-overlay-content {
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
+}
+.dx-overlay-content > .dx-template-wrapper.dx-popup-title {
+  height: auto;
+  width: auto;
+}
+.dx-overlay-content .dx-popup-content > .dx-template-wrapper {
+  height: 100%;
+  width: 100%;
+}
+.dx-overlay-content .dx-popup-content {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.dx-overlay-wrapper .dx-overlay-content.dx-popup-flex-height > .dx-popup-bottom,
+.dx-overlay-wrapper .dx-overlay-content.dx-popup-flex-height > .dx-popup-title {
+  width: 100%;
+}
+.dx-loadindicator {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  overflow: hidden;
+  border: none;
+  background-color: transparent;
+}
+.dx-loadindicator-wrapper {
+  width: 100%;
+  height: 100%;
+  font-size: 32px;
+  margin: auto;
+}
+.dx-loadindicator-image {
+  background-size: contain;
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+.dx-loadindicator-icon {
+  direction: ltr;
+}
+.dx-loadindicator-icon-custom {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -webkit-animation: 1.5s linear infinite dx-loadindicator-icon-custom-rotate;
+  animation: 1.5s linear infinite dx-loadindicator-icon-custom-rotate;
+}
+@-webkit-keyframes dx-loadindicator-icon-custom-rotate {
+  from {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes dx-loadindicator-icon-custom-rotate {
+  from {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.dx-loadindicator-container > .dx-loadindicator {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  margin-top: -16px;
+  margin-left: -16px;
+}
+.dx-loadindicator-container > .dx-loadindicator.dx-loadindicator {
+  margin-top: -16px;
+  margin-left: -16px;
+}
+.dx-loadindicator-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.dx-loadpanel-content {
+  padding: 10px;
+  border: 1px solid #ccc;
+  background: #fefefe;
+  text-align: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  border-radius: 5px;
+}
+.dx-loadpanel-content:before {
+  display: inline-block;
+  height: 100%;
+  content: '';
+  vertical-align: middle;
+}
+.dx-loadpanel-content-wrapper {
+  display: inline-block;
+  width: 100%;
+  vertical-align: middle;
+}
+.dx-loadpanel-message {
+  text-align: center;
+}
+.dx-loadpanel-content.dx-loadpanel-pane-hidden {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none;
+  background: 0 0;
+}
+@-webkit-keyframes dx-loadpanel-opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes dx-loadpanel-opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.dx-scrollview-pulldown {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAABkCAQAAABebbrxAAABD0lEQVRo3u2XvQ3CMBCFLbmjYYGsAA2wA1X2gAbEAEwB2eIKflagh6zACJAuUihASUic+M5GNH56dT7J8efTPUXKkDkzrS8LpQAEMBygcwAss2UGQADDBmLa+AMvzAAIYNhATBt/YMEMgACGDcS0wbQBEEAAAQQQwD8CEzaiL7sKqOnojTuQrh95SKkX7kqD5j+M6O6Mu1NkupQJZU64B426bjmmXIzLKe7TZiUGLmweyhTa28XWdJKpYn8pXIVub1U4T4+jUKkKbyWeWhR6Vqpwd+w+hb5U4S/ta54qkhZgVihxrxWaznZVZD2lqVDaVkVafOoKGVWRN6nZR6GMxr+qZjHl3aq4db0NLXld7wVjuu7NS9f7yAAAAABJRU5ErkJggg==);
+  background-position: 0 0;
+  background-repeat: no-repeat;
+}
+.dx-loadindicator-image-small {
+  background-image: url(data:image/gif;base64,R0lGODlhFAAUAKECADI6RTI6Rv///////yH/C05FVFNDQVBFMi4wAwEAAAAh+QQJCQABACwAAAAAFAAUAAACI4yPqZsADM+LcNJlb9Mq8+B8iCeWBqmFJnqpJUu5ojzDplIAACH5BAkJAAEALAAAAAAUABQAAAIhjI+py+3gXmxwrmoRzgZ4fnxgIIIl523o2KmZ+7KdTIMFACH5BAkJAAIALAAAAAAUABQAAAIflI+py+0Po4zAgDptFhXP60ngNmYdyaGBiYXbC8dwAQAh+QQJCQADACwAAAAAFAAUAAACIpyPqcsL3cCDSlJ368xnc+Nx1geG2Uiin3mpIlnC7gnXTAEAIfkECQkAAwAsAAAAABQAFAAAAiKcD6e74AxRivHRenGGc6vuIWEzluaJbuC4eq36XlboxGUBACH5BAkJAAMALAAAAAAUABQAAAIjnA8Jx226nBxp2mpnzG7z5n3iSJbmiaaqFIrt93LYOMP1UQAAIfkECQkAAwAsAAAAABQAFAAAAh2cD6l53eyiA7Iii7PevPsPhuJIluZpUB6ELWxTAAAh+QQJCQADACwAAAAAFAAUAAACHZx/oMit/5p0a9oBrt68+w+G4kiW5rllYbRCLFIAACH5BAkJAAMALAAAAAAUABQAAAIenH+ggO24noRq2molzo3xD4biSJbmSXqpuYlR2ToFACH5BAkJAAMALAAAAAAUABQAAAIhnI+pi+AMzYsQ0HrXzI2n7Q1WSJbMSKIh6Kmty7GtKWUFACH5BAkJAAMALAAAAAAUABQAAAIinI+py+3gXmxwKlAtytpgrmHdIY5DOX6mt56t24Kd/NZMAQAh+QQJCQADACwAAAAAFAAUAAACIZyPqcvtD6OMwIA6w8Czcnl91DVZW3mKkIeqK+ai8kyXBQAh+QQJCQADACwAAAAAFAAUAAACI5yPqcsL3cCDSlJ368xn82F9RiiSn8l5pziqmXuhMUzR7F0AACH5BAkJAAMALAAAAAAUABQAAAIfnI+pB70/HFxyKmBp1rv7D4aMiIXld6KmmW6V+7pKAQAh+QQJCQADACwAAAAAFAAUAAACIZw/oMi9Dc2LEVBqL8y6+w+G4kiWJBein+pNK4sp8CY3BQAh+QQJCQADACwAAAAAFAAUAAACHZw/oIt96iICstqLs968+w+G4kh+VHdukLW06VEAACH5BAkJAAMALAAAAAAUABQAAAIbnI+pCu29InKygoqz3rz7D4biSJbZ9VHpoyIFACH5BAkJAAMALAAAAAAUABQAAAIfnI8AyM26nDxq2hGvy7r7D4biSJYg51WiGkKju8JOAQA7);
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.dx-loadindicator-image-large {
+  background-image: url(data:image/gif;base64,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);
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.dx-widget {
+  color: #333;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: 'Helvetica Neue','Segoe UI',Helvetica,Verdana,sans-serif;
+  line-height: 1.35715;
+}
+.dx-widget input,
+.dx-widget textarea {
+  font-family: 'Helvetica Neue','Segoe UI',Helvetica,Verdana,sans-serif;
+  line-height: 1.35715;
+}
+.dx-state-disabled .dx-widget,
+.dx-state-disabled.dx-widget {
+  opacity: .5;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  cursor: default;
+}
+.dx-state-disabled .dx-widget .dx-widget,
+.dx-state-disabled.dx-widget .dx-widget {
+  opacity: 1;
+}
+.dx-scrollable-content {
+  -webkit-transform: none;
+}
+.dx-scrollable-scroll {
+  padding: 2px;
+  background-color: transparent;
+  opacity: 1;
+  overflow: hidden;
+  -webkit-transition: opacity linear;
+  transition: opacity linear;
+}
+.dx-scrollable-scroll.dx-state-invisible {
+  opacity: 0;
+  -webkit-transition: opacity .5s linear 1s;
+  transition: opacity .5s linear 1s;
+}
+.dx-scrollable-scroll-content {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(191,191,191,.7);
+  -webkit-box-shadow: 0 0 0 1px transparent;
+  box-shadow: 0 0 0 1px transparent;
+}
+.dx-scrollbar-hoverable.dx-scrollable-scrollbar-active,
+.dx-scrollbar-hoverable.dx-state-hover {
+  background-color: rgba(191,191,191,.2);
+}
+.dx-scrollbar-hoverable.dx-scrollable-scrollbar-active .dx-scrollable-scroll-content {
+  background-color: #bfbfbf;
+}
+.dx-scrollbar-hoverable .dx-scrollable-scroll.dx-state-invisible {
+  opacity: 1;
+}
+.dx-scrollbar-hoverable .dx-scrollable-scroll.dx-state-invisible .dx-scrollable-scroll-content {
+  background-color: rgba(0,0,0,0);
+  -webkit-box-shadow: 0 0 0 1px transparent;
+  box-shadow: 0 0 0 1px transparent;
+}
+.dx-scrollbar-vertical .dx-scrollable-scroll {
+  float: right;
+  width: 8px;
+}
+.dx-scrollbar-vertical.dx-scrollbar-hoverable {
+  width: 8px;
+  -webkit-transition: width .2s linear .15s,background-color .2s linear .15s;
+  transition: width .2s linear .15s,background-color .2s linear .15s;
+}
+.dx-scrollbar-vertical.dx-scrollbar-hoverable .dx-scrollable-scroll {
+  -webkit-transition: background-color .5s linear 1s,width .2s linear 150ms;
+  transition: background-color .5s linear 1s,width .2s linear 150ms;
+}
+.dx-scrollbar-vertical.dx-scrollbar-hoverable .dx-scrollable-scroll .dx-scrollable-scroll-content {
+  -webkit-transition: background-color .15s linear .15s,-webkit-box-shadow .15s linear .15s;
+  transition: box-shadow .15s linear .15s,background-color .15s linear .15s,-webkit-box-shadow .15s linear .15s;
+}
+.dx-scrollbar-vertical.dx-scrollbar-hoverable .dx-scrollable-scroll.dx-state-invisible {
+  -webkit-transition: background-color .5s linear 1s,width .2s linear .15s;
+  transition: background-color .5s linear 1s,width .2s linear .15s;
+}
+.dx-scrollbar-vertical.dx-scrollbar-hoverable .dx-scrollable-scroll.dx-state-invisible .dx-scrollable-scroll-content {
+  -webkit-transition: background-color .5s linear 1s,-webkit-box-shadow .5s linear 1s;
+  transition: box-shadow .5s linear 1s,background-color .5s linear 1s,-webkit-box-shadow .5s linear 1s;
+}
+.dx-scrollbar-vertical.dx-scrollbar-hoverable.dx-scrollable-scrollbar-active,
+.dx-scrollbar-vertical.dx-scrollbar-hoverable.dx-scrollable-scrollbar-active .dx-scrollable-scroll,
+.dx-scrollbar-vertical.dx-scrollbar-hoverable.dx-state-hover,
+.dx-scrollbar-vertical.dx-scrollbar-hoverable.dx-state-hover .dx-scrollable-scroll {
+  width: 15px;
+}
+.dx-scrollbar-horizontal .dx-scrollable-scroll {
+  height: 8px;
+}
+.dx-scrollbar-horizontal.dx-scrollbar-hoverable .dx-scrollable-scroll {
+  -webkit-transition: background-color .5s linear 1s,height .2s linear .15s;
+  transition: background-color .5s linear 1s,height .2s linear .15s;
+}
+.dx-scrollbar-horizontal.dx-scrollbar-hoverable .dx-scrollable-scroll .dx-scrollable-scroll-content {
+  -webkit-transition: background-color .15s linear .15s,-webkit-box-shadow .15s linear .15s;
+  transition: box-shadow .15s linear .15s,background-color .15s linear .15s,-webkit-box-shadow .15s linear .15s;
+}
+.dx-scrollbar-horizontal.dx-scrollbar-hoverable .dx-scrollable-scroll.dx-state-invisible {
+  -webkit-transition: background-color .5s linear 1s,height .2s linear .15s;
+  transition: background-color .5s linear 1s,height .2s linear .15s;
+}
+.dx-scrollbar-horizontal.dx-scrollbar-hoverable .dx-scrollable-scroll.dx-state-invisible .dx-scrollable-scroll-content {
+  -webkit-transition: background-color .5s linear 1s,-webkit-box-shadow .5s linear 1s;
+  transition: box-shadow .5s linear 1s,background-color .5s linear 1s,-webkit-box-shadow .5s linear 1s;
+}
+.dx-scrollbar-horizontal.dx-scrollbar-hoverable.dx-scrollable-scrollbar-active,
+.dx-scrollbar-horizontal.dx-scrollbar-hoverable.dx-scrollable-scrollbar-active .dx-scrollable-scroll,
+.dx-scrollbar-horizontal.dx-scrollbar-hoverable.dx-state-hover,
+.dx-scrollbar-horizontal.dx-scrollbar-hoverable.dx-state-hover .dx-scrollable-scroll {
+  height: 15px;
+}
+.dx-scrollable-scrollbars-alwaysvisible.dx-scrollable-both > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content,
+.dx-scrollable-scrollbars-alwaysvisible.dx-scrollable-vertical > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
+  padding-right: 8px;
+}
+.dx-rtl .dx-scrollable-scrollbars-alwaysvisible.dx-scrollable-both > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content,
+.dx-rtl .dx-scrollable-scrollbars-alwaysvisible.dx-scrollable-vertical > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content,
+.dx-rtl.dx-scrollable-scrollbars-alwaysvisible.dx-scrollable-both > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content,
+.dx-rtl.dx-scrollable-scrollbars-alwaysvisible.dx-scrollable-vertical > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
+  padding-right: 0;
+  padding-left: 8px;
+}
+.dx-scrollable-scrollbars-alwaysvisible.dx-scrollable-both > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content,
+.dx-scrollable-scrollbars-alwaysvisible.dx-scrollable-horizontal > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
+  padding-bottom: 8px;
+}
+.dx-scrollable-customizable-scrollbars .dx-scrollable-container {
+  -ms-scrollbar-base-color: #757575;
+  -ms-scrollbar-arrow-color: #757575;
+  -ms-scrollbar-shadow-color: #fff;
+  -ms-scrollbar-track-color: #fff;
+}
+.dx-scrollable-customizable-scrollbars .dx-scrollable-container::-webkit-scrollbar:horizontal {
+  height: 19px;
+}
+.dx-scrollable-customizable-scrollbars .dx-scrollable-container::-webkit-scrollbar:vertical {
+  width: 19px;
+}
+.dx-scrollable-customizable-scrollbars .dx-scrollable-container::-webkit-scrollbar {
+  background-color: transparent;
+}
+.dx-scrollable-customizable-scrollbars .dx-scrollable-container::-webkit-scrollbar-thumb {
+  background-color: #757575;
+  border-right: 2px solid transparent;
+  border-left: 1px solid transparent;
+  background-clip: content-box;
+}
+.dx-scrollable-customizable-scrollbars .dx-scrollable-container::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.dx-scrollable-customizable-scrollbars .dx-scrollable-container::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+.dx-scrollable-customizable-scrollbars .dx-scrollable-container::-webkit-scrollbar-button {
+  background-color: transparent;
+}
+.dx-scrollable-customizable-scrollbars .dx-scrollable-container::-webkit-scrollbar-button:horizontal:decrement {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAMCAQAAADrXgSlAAAAMklEQVQY02P4z/CfIRECfRngHN/E/zAOkJmIzExEZoI4cCYGB0UZmgHIRkPt8kXigLgA3gNGp/JuZjQAAAAASUVORK5CYII=) center no-repeat;
+}
+.dx-scrollable-customizable-scrollbars .dx-scrollable-container::-webkit-scrollbar-button:horizontal:increment {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAMCAQAAADrXgSlAAAAN0lEQVQYV2NI9E1kAMH/QMiQ+B/ChXHAXAQHyoVxwFwEB8jFwUFSBjYebjSM4wuyA2IPnPmfAQA1rkanVpjRrQAAAABJRU5ErkJggg==) center no-repeat;
+}
+.dx-scrollable-customizable-scrollbars .dx-scrollable-container::-webkit-scrollbar-button:vertical:decrement {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAGCAQAAABd57cKAAAAM0lEQVQYV2P4z/CfIRECfYGQAcQHQTABFf4PhHApmAREGCoFghAJhDBcClMYKoVNGCwFAKZMRqcg5DihAAAAAElFTkSuQmCC) 3px 5px no-repeat;
+}
+.dx-scrollable-customizable-scrollbars .dx-scrollable-container::-webkit-scrollbar-button:vertical:increment {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAGCAQAAABd57cKAAAAMUlEQVQY023JwQ0AMAyDQBZkCO8/hPuqGqkRP46YLklZyEB/MlyYZJhwyVBKBxDfLgftpkant8t4aAAAAABJRU5ErkJggg==) 3px 5px no-repeat;
+}
+.dx-rtl .dx-scrollable .dx-scrollable-scroll,
+.dx-rtl.dx-scrollable .dx-scrollable-scroll {
+  float: left;
+}
+.dx-loadindicator {
+  background-color: transparent;
+}
+.dx-loadindicator-image {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-image: url(data:image/gif;base64,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);
+}
+.dx-loadindicator-icon {
+  position: relative;
+  top: 15%;
+  left: 15%;
+  width: 70%;
+  height: 70%;
+}
+.dx-loadindicator-icon .dx-loadindicator-segment {
+  position: absolute;
+  width: 19%;
+  height: 30%;
+  left: 44.5%;
+  top: 37%;
+  opacity: 0;
+  background: #606060;
+  border-radius: 10% 10% 50% 50%;
+  -webkit-box-shadow: 0 0 3px rgba(0,0,0,.2);
+  box-shadow: 0 0 3px rgba(0,0,0,.2);
+  -webkit-animation: 1s linear infinite dx-generic-loadindicator-opacity;
+  animation: 1s linear infinite dx-generic-loadindicator-opacity;
+}
+.dx-loadindicator-icon .dx-loadindicator-segment0 {
+  -webkit-transform: rotate(0) translate(0,-142%);
+  transform: rotate(0) translate(0,-142%);
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+.dx-loadindicator-icon .dx-loadindicator-segment1 {
+  -webkit-transform: rotate(45deg) translate(0,-142%);
+  transform: rotate(45deg) translate(0,-142%);
+  -webkit-animation-delay: -875ms;
+  animation-delay: -875ms;
+}
+.dx-loadindicator-icon .dx-loadindicator-segment2 {
+  -webkit-transform: rotate(90deg) translate(0,-142%);
+  transform: rotate(90deg) translate(0,-142%);
+  -webkit-animation-delay: -.75s;
+  animation-delay: -.75s;
+}
+.dx-loadindicator-icon .dx-loadindicator-segment3 {
+  -webkit-transform: rotate(135deg) translate(0,-142%);
+  transform: rotate(135deg) translate(0,-142%);
+  -webkit-animation-delay: -625ms;
+  animation-delay: -625ms;
+}
+.dx-loadindicator-icon .dx-loadindicator-segment4 {
+  -webkit-transform: rotate(180deg) translate(0,-142%);
+  transform: rotate(180deg) translate(0,-142%);
+  -webkit-animation-delay: -.5s;
+  animation-delay: -.5s;
+}
+.dx-loadindicator-icon .dx-loadindicator-segment5 {
+  -webkit-transform: rotate(225deg) translate(0,-142%);
+  transform: rotate(225deg) translate(0,-142%);
+  -webkit-animation-delay: -375ms;
+  animation-delay: -375ms;
+}
+.dx-loadindicator-icon .dx-loadindicator-segment6 {
+  -webkit-transform: rotate(270deg) translate(0,-142%);
+  transform: rotate(270deg) translate(0,-142%);
+  -webkit-animation-delay: -.25s;
+  animation-delay: -.25s;
+}
+.dx-loadindicator-icon .dx-loadindicator-segment7 {
+  -webkit-transform: rotate(315deg) translate(0,-142%);
+  transform: rotate(315deg) translate(0,-142%);
+  -webkit-animation-delay: -125ms;
+  animation-delay: -125ms;
+}
+.dx-loadindicator-icon .dx-loadindicator-segment10,
+.dx-loadindicator-icon .dx-loadindicator-segment11,
+.dx-loadindicator-icon .dx-loadindicator-segment12,
+.dx-loadindicator-icon .dx-loadindicator-segment13,
+.dx-loadindicator-icon .dx-loadindicator-segment14,
+.dx-loadindicator-icon .dx-loadindicator-segment15,
+.dx-loadindicator-icon .dx-loadindicator-segment8,
+.dx-loadindicator-icon .dx-loadindicator-segment9 {
+  display: none;
+}
+.dx-rtl .dx-loadindicator-icon {
+  right: 15%;
+  left: 0;
+}
+.dx-overlay-shader {
+  background-color: rgba(255,255,255,.8);
+}
+.dx-overlay-wrapper {
+  color: #333;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: 'Helvetica Neue','Segoe UI',Helvetica,Verdana,sans-serif;
+  line-height: 1.35715;
+}
+.dx-overlay-wrapper input,
+.dx-overlay-wrapper textarea {
+  font-family: 'Helvetica Neue','Segoe UI',Helvetica,Verdana,sans-serif;
+  line-height: 1.35715;
+}
+.dx-loadpanel-content {
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.25);
+  box-shadow: 0 6px 12px rgba(0,0,0,.25);
+}
+.dx-scrollview-pull-down-image {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAABkCAQAAABebbrxAAABD0lEQVRo3u2XvQ3CMBCFLbmjYYGsAA2wA1X2gAbEAEwB2eIKflagh6zACJAuUihASUic+M5GNH56dT7J8efTPUXKkDkzrS8LpQAEMBygcwAss2UGQADDBmLa+AMvzAAIYNhATBt/YMEMgACGDcS0wbQBEEAAAQQQwD8CEzaiL7sKqOnojTuQrh95SKkX7kqD5j+M6O6Mu1NkupQJZU64B426bjmmXIzLKe7TZiUGLmweyhTa28XWdJKpYn8pXIVub1U4T4+jUKkKbyWeWhR6Vqpwd+w+hb5U4S/ta54qkhZgVihxrxWaznZVZD2lqVDaVkVafOoKGVWRN6nZR6GMxr+qZjHl3aq4db0NLXld7wVjuu7NS9f7yAAAAABJRU5ErkJggg==) 0 0/100% no-repeat;
+}
+.dx-scrollable-native.dx-scrollable-native-android .dx-scrollview-pull-down {
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,.37);
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,.37);
+}
+.dx-scrollview-scrollbottom-loading .dx-scrollview-scrollbottom-image {
+  width: 24px;
+  height: 24px;
+}

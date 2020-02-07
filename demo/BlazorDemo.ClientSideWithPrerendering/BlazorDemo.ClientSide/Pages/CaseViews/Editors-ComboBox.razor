@@ -1,19 +1,32 @@
 ﻿@using Demo.Blazor.Model
+@{
+    RenderFragment<string> GetLink = (propName) =>
+    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxComboBoxBase-1.@propName">@propName</a>;
+}
 
-<div class="demo-description">
-    <h2>ComboBox - Business Object List as Data Source</h2>
+<div class="demo-description" id="BusinessObjectList">
+    <h2><DemoNavLink Link="ComboBox#BusinessObjectList" />ComboBox – Overview</h2>
     <p>
-        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-1">ComboBox</a> component is a drop-down list editor that allows an end user to select from a list of items.
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-1">ComboBox</a> is an editor that allows users to select an item from a drop-down list.
     </p>
     <p>
-        This sample demonstrates the ComboBox bound to a list of complex business objects.
-        The text for the items displayed in the list is retrieved from the specified business object property.
-        Try changing the selection to see the current object's property values.
+        The main ComboBox API members are listed below.
+    </p>
+    <ul>
+        <li>@GetLink("Data") – Specifies the data source that populates the editor’s list items.</li>
+        <li>@GetLink("TextFieldName") – Specifies the data source’s field that supplies text for items.</li>
+        <li>@GetLink("Text") – Specifies the editor’s text.</li>
+        <li>@GetLink("TextChanged") - Fires when the editor text was changed.</li>
+        <li>@GetLink("SelectedItem") – Specifies the drop-down list’s selected item.</li>
+        <li>@GetLink("SelectedItemChanged") – Fires when the selected item was changed.</li>
+    </ul>
+    <p>
+        This demo illustrates how to bind the ComboBox to a list of complex business objects.
     </p>
 </div>
 
 <div class="card demo-card">
-    <div class="card-header">SelectedRealBusinessObject { FirstName=<b>@(SelectedRealBusinessObject.FirstName)</b>, LastName=<b>@(SelectedRealBusinessObject.LastName)</b>, Department=<b>@(SelectedRealBusinessObject.Department)</b> }</div>
+    <div class="card-header">SelectedPerson { FirstName=<b>@(SelectedRealBusinessObject.FirstName)</b>, LastName=<b>@(SelectedRealBusinessObject.LastName)</b>, Department=<b>@(SelectedRealBusinessObject.Department)</b> }</div>
     <div class="card-body mw-480" style="height: 280px;">
         <DxComboBox Data="@Persons.DataSource"
                     TextFieldName="Text"
@@ -31,11 +44,11 @@
 
 @code {
     Person selectedRealBusinessObject = Persons.DataSource[0];
-    Person SelectedRealBusinessObject { 
-        get => selectedRealBusinessObject; 
-        set { selectedRealBusinessObject = value; InvokeAsync(StateHasChanged); } 
+    Person SelectedRealBusinessObject {
+        get => selectedRealBusinessObject;
+        set { selectedRealBusinessObject = value; InvokeAsync(StateHasChanged); }
     }
 
     bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); }  }
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); } }
 }

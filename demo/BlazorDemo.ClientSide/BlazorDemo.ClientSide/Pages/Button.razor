@@ -1,0 +1,139 @@
+﻿@inject IJSRuntime JSRuntime
+@using Microsoft.JSInterop
+@using System.Linq
+@page "/Button"
+
+<div class="demo-description" id="Style">
+    <h2><DemoNavLink Link="Button#Style" />Button – Styles</h2>
+    <p>
+        This demo illustrates the DevExpress Blazor <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton">Button</a> component with different styles and options. The main Button API members are listed below.
+        <ul>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxButtonBase.Text">Text</a> – Specifies the text within the button.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxButtonBase.RenderStyle">RenderStyle</a> – Specifies the button’s render style.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxButtonBase.RenderStyleMode">RenderStyleMode</a> – Specifies how to apply the render style to the button.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxButtonBase.Click">Click</a> - Occurs after the button is clicked.</li>
+        </ul>
+        Click any button below to see the corresponding code snippet.
+    </p>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+        <td style="width: 8em; min-width: 8em;">
+            <span style="line-height: 100%">Contained style:</span>
+        </td>
+        <td>
+            <div class="row" style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: flex-start;">
+                @foreach (ButtonRenderStyle style in renderStyles) {
+                    <div class="col col-6 col-sm-auto" style="border: 0px; padding: 1em 0.5em;">
+                        <DxButton RenderStyle="@style" CssClass="w-100" Text="@Enum.GetName(typeof(ButtonRenderStyle), style)" Click="@((args) => { CreateSnippet(style, ButtonRenderStyleMode.Contained); })" />
+                    </div>
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span style="line-height: 100%">Outline style:</span>
+        </td>
+        <td>
+            <div class="row" style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: flex-start">
+                @foreach (ButtonRenderStyle style in renderStyles) {
+                    <div class="col col-6 col-sm-auto" style="border: 0px; padding: 1em 0.5em;">
+                        <DxButton RenderStyle="@style" CssClass="w-100" RenderStyleMode="@ButtonRenderStyleMode.Outline" Text="@Enum.GetName(typeof(ButtonRenderStyle), style)" Click="@((args) => { CreateSnippet(style, ButtonRenderStyleMode.Outline); })" />
+                    </div>
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span style="line-height: 100%">Text style:</span>
+        </td>
+        <td>
+            <div class="row" style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: flex-start">
+                @foreach (ButtonRenderStyle style in renderStyles) {
+                    <div class="col col-6 col-sm-auto" style="border: 0px; padding: 1em 0.5em;">
+                        <DxButton RenderStyle="@style" CssClass="w-100" RenderStyleMode="@ButtonRenderStyleMode.Text" Text="@Enum.GetName(typeof(ButtonRenderStyle), style)" Click="@((args) => { CreateSnippet(style, ButtonRenderStyleMode.Text); })" />
+                    </div>
+                }
+            </div>
+        </td>
+    </tr>
+</table>
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <pre><code class="hljs xml" @ref="@reference">@(@"<DxButton RenderStyle=""@ButtonRenderStyle.None"" RenderStyleMode=""@ButtonRenderStyleMode.Contained"" Text=""None"" />")</code></pre>
+    </div>
+</div>
+<br />
+<br />
+<p>
+    Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxButtonBase.Enabled">Enabled</a> property to <b>false</b> to disable the button so that it does not respond to user actions.
+</p>
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: flex-start">
+    <div style="border: 0px; margin: 5px;">
+        <DxButton RenderStyle="@ButtonRenderStyle.Primary" Text="Primary" Enabled="false" />
+    </div>
+</div>
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Button_Disabled />
+    </div>
+</div>
+<br />
+<div class="demo-description" id="Icons">
+    <h2><DemoNavLink Link="Button#Icons" />Button – Icons</h2>
+    <p>
+        This demo illustrates how to display an icon in the Button component.
+        <ul>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxButtonBase.IconCssClass">IconCssClass</a> – Specifies the name of the icon’s CSS class.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxButtonBase.IconPosition">IconPosition</a> – Specifies the icon’s position relative to the text.</li>
+        </ul>
+        The demo also shows how to use the <b>Title</b> HTML attribute to display a tooltip text when the mouse moves over the button.
+    </p>
+</div>
+<br />
+<DxButton RenderStyle="@ButtonRenderStyle.Dark" Text="Undo" Title="Undo the last action." IconCssClass="undo" style="margin-right: 0.5em;"/>
+<DxButton RenderStyle="@ButtonRenderStyle.Dark" Text="Redo" Title="Restore the previously undone action." IconCssClass="redo" IconPosition="@ButtonIconPosition.AfterText" />
+<CodeSnippet_Button_Picture />
+
+<div class="demo-description" id="CustomContent">
+    <h2><DemoNavLink Link="Button#CustomContent" />Button – Custom Content</h2>
+    <p>
+        This demo illustrates how to customize the Button’s appearance and content.
+    </p>
+</div>
+<br />
+<DxButton RenderStyle="@ButtonRenderStyle.Info" Click="@Like" IconCssClass="like" Text="Like">
+    @context
+    <span style="width: 0.8em; margin-left: 8px;">@(likes < 10 ? likes.ToString() : "9")</span>
+</DxButton>
+<CodeSnippet_Button_Template />
+@code {
+    int likes;
+    List<ButtonRenderStyle> renderStyles;
+    ElementReference reference;
+
+    protected override void OnInitialized() {
+        likes = 1;
+        Array namesAsArray = Enum.GetValues(typeof(ButtonRenderStyle));
+        renderStyles = new List<ButtonRenderStyle>(namesAsArray.Length);
+        for (int itemIndex = 0; itemIndex < namesAsArray.Length; itemIndex++)
+            renderStyles.Add((ButtonRenderStyle)namesAsArray.GetValue(itemIndex));
+    }
+
+    void CreateSnippet(ButtonRenderStyle renderStyle, ButtonRenderStyleMode renderMode) {
+        string style = Enum.GetName(typeof(ButtonRenderStyle), renderStyle);
+        string mode = Enum.GetName(typeof(ButtonRenderStyleMode), renderMode);
+        string newSnippet = $@"<DxButton RenderStyle=""@ButtonRenderStyle.{style}"" RenderStyleMode=""@ButtonRenderStyleMode.{mode}"" Text=""{style}"" />";
+        StateHasChanged();
+        JSRuntime.InvokeAsync<string>("ChangeSnippet", reference, newSnippet);
+    }
+
+    void Like(MouseEventArgs args) {
+        likes++;
+        StateHasChanged();
+    }
+}

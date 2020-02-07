@@ -1,0 +1,35 @@
+<CodeSnippet>
+@(@"<DxDataGrid Data=""@DataSource""
+        VerticalScrollBarMode=""@ScrollBarMode.Auto""
+        VerticalScrollableHeight=""400""
+        ShowPager=""false""
+        RowRemoving=""@((dataItem) => OnRowRemoving(dataItem))""
+        RowUpdating=""@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))""
+        RowInserting=""@((newValues) => OnRowInserting(newValues))"">
+
+    <Columns>
+        <DxDataGridColumn Field=""@nameof(Employee.FirstName)"" SortOrder=""@DataGridColumnSortOrder.Ascending""></DxDataGridColumn>
+        <DxDataGridColumn Field=""@nameof(Employee.LastName)""></DxDataGridColumn>
+        <DxDataGridColumn Field=""@nameof(Employee.Position)"" Caption=""Position"" EditorVisible=""@DefaultBoolean.True""></DxDataGridColumn>
+        <DxDataGridDateEditColumn Field=""@nameof(Employee.BirthDate)"" DisplayFormatString=""D"" EditFormatString=""d"" Caption=""Birth Date"" EditorVisible=""@DefaultBoolean.True""></DxDataGridDateEditColumn>
+        <DxDataGridDateEditColumn Field=""@nameof(Employee.HireDate)"" DisplayFormatString=""D"" EditFormatString=""d"" Caption=""Hire Date"" EditorVisible=""@DefaultBoolean.True""></DxDataGridDateEditColumn>
+    </Columns>
+    <RowPreviewTemplate Context=""ItemInfo"">
+        @{
+            Employee employee = ItemInfo.DataItem;
+            <table cellpadding=""5"" cellspacing=""0"">
+                <tbody>
+                    <tr>
+                        <td rowspan=""4"" style=""border: 0px;"">
+                            <img src=""images/Employees/@(employee.FileName).png"" width=""76"" />
+                        </td>
+                        <td style=""border: 0px; white-space: normal;"">
+                            @employee.Notes
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+    </RowPreviewTemplate>
+</DxDataGrid>")
+</CodeSnippet>

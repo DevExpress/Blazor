@@ -32,34 +32,17 @@ Our online documentation is available at [docs.devexpress.com/Blazor/](https://d
 
 The following table describes the version compatibility of .NET Core and the DevExpress.Blazor NuGet package:
 
-| .NET Core 3.0 version | DevExpress.Blazor.nuget version |
+| Supported frameworks | DevExpress.Blazor.nuget version |
 | ------------- | ------------- |
-| [.NET Core 3.1.1 Release](https://devblogs.microsoft.com/dotnet/net-core-january-2020/) | **19.2.2 Beta**&#42; (make sure the [Include prerelease](#InstallPackage) option is enabled) |
-| [.NET Core 3.1 Release](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | **19.2.1 Beta**&#42; (make sure the [Include prerelease](#InstallPackage) option is enabled) |
-| [.NET Core 3.1 Release](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | **19.1.10 Release**&#42; |
-| [.NET Core 3.0 Release](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0/) | **19.1.9 Release**&#42; |
-| [.NET Core 3.0 Release](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0/) | **19.1.8 Release**&#42; |
-| [.NET Core 3.0 Release](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0/) | **19.1.7 Release**&#42; |
-| [.NET Core 3.0 RC1](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-release-candidate-1/) | **0.4.1 RC** |
-| [.NET Core 3.0 RC1](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-release-candidate-1/) | **0.4.0 RC** |
-| [.NET Core 3.0 RC1](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-release-candidate-1/) | **0.3.3 Beta** |
-| [.NET Core 3.0 Preview **9**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-9/) | **0.3.2 Beta** |
-| [.NET Core 3.0 Preview **9**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-9/) | **0.3.1 Beta** |
-| [.NET Core 3.0 Preview **8**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-8/) | **0.3.0 Beta** |
-| [.NET Core 3.0 Preview **8**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-8/) | **0.2.0 Beta** |
-| [.NET Core 3.0 Preview **7**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-7/) | **0.1.0 Beta** |
-| [.NET Core 3.0 Preview **6**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-6/) | 0.0.**12** |
-| [.NET Core 3.0 Preview **6**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-6/) | 0.0.**11** |
-| [.NET Core 3.0 Preview **6**](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0-preview-6/) | 0.0.**10** |
-| .NET Core 3.0 Preview **5** | 0.0.**9** |
-| .NET Core 3.0 Preview **5** | 0.0.**8** |
-| .NET Core 3.0 Preview **5** | 0.0.**7** |
-| .NET Core 3.0 Preview **5** | 0.0.**6** |
-| .NET Core 3.0 Preview **5** | 0.0.**5** |
-| .NET Core 3.0 Preview **4** | 0.0.**4** |
-| .NET Core 3.0 Preview **3** | 0.0.**3** |
+|  [.NET Core 3.1.1 Release](https://devblogs.microsoft.com/dotnet/net-core-january-2020/) <br /> [Blazor WebAssembly 3.2.0 Preview 1](https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-1-release-now-available/) | **19.2.3 Release** |
+| [.NET Core 3.1.1 Release](https://devblogs.microsoft.com/dotnet/net-core-january-2020/) | **19.2.2 Beta** (make sure the [Include prerelease](#InstallPackage) option is enabled) |
+| [.NET Core 3.1 Release](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | **19.2.1 Beta** (make sure the [Include prerelease](#InstallPackage) option is enabled) |
+| [.NET Core 3.1 Release](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | **19.1.10 Release** |
+| [.NET Core 3.0 Release](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0/) | **19.1.9 Release** |
+| [.NET Core 3.0 Release](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0/) | **19.1.8 Release** |
+| [.NET Core 3.0 Release](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0/) | **19.1.7 Release** |
 
-> &#42; Starting with v19.1.7, DevExpress UI components for Blazor are distributed through a [personal NuGet feed](https://nuget.devexpress.com/). Register at [devexpress.com](https://www.devexpress.com/) to subscribe to the feed.
+> Starting with v19.1.7, DevExpress UI components for Blazor are distributed through a [personal NuGet feed](https://nuget.devexpress.com/). Register at [devexpress.com](https://www.devexpress.com/) to subscribe to the feed.
 
 
 # Set Up Your Environment
@@ -165,37 +148,16 @@ Follow the steps below to try our UI for Blazor in your own application.
    ![Add new NuGet source](media/VS2019Release-AddNuGetPackage.png) 
 4. Build the project.
 5. Link the following file to your layout’s HEAD section:
-   * For server-side Blazor, add the line below to the `_Host.cshtml` file. 
-        ```Razor
-        <head>
-            ...
-            <link href="_content/DevExpress.Blazor/dx-blazor.css" rel="stylesheet" />
-        </head>
-        ```
-    * For client-side Blazor, add the line below to the `index.html` file.
-        ```Razor
-        <head>
-            ...
-            <link href="_content/DevExpress.Blazor/dx-blazor.css" rel="stylesheet" />
-        </head>
-        ```
-        Call the [AddDevExpressBlazor](https://docs.devexpress.com/Blazor/Microsoft.Extensions.DependencyInjection.DevExpressServiceCollectionExtensions.AddDevExpressBlazor(Microsoft.Extensions.DependencyInjection.IServiceCollection)) method from your project's  `Startup.ConfigureServices()` method:
-        ```csharp
-        using Microsoft.Extensions.DependencyInjection;
-
-        public class Startup {
-            public Startup(IConfiguration configuration) {
-                Configuration = configuration;
-            }
-
-            public IConfiguration Configuration { get; }
-
-            public void ConfigureServices(IServiceCollection services) {
-                ...
-                services.AddDevExpressBlazor();
-            }
-        }
-        ```  
+   * For server-side Blazor, add the line below to the _\_Host.cshtml_ file.
+   * For client-side Blazor, add the line below to the _index.html_ file.
+    
+    ```html
+    <head>
+        ...
+        <link href="_content/DevExpress.Blazor/dx-blazor.css" rel="stylesheet" />
+    </head>
+    ```
+  
 6. Register DevExpress.Blazor namespace in _\_Imports.razor_ file:
 
    ```html
@@ -210,7 +172,7 @@ DevExpress Blazor components use the client-side Bootstrap framework to render t
 
 # Localization
 
-DevExpress Blazor components ship localizable resources for UI elements, such as button captions, menu items, error messages, and dialog boxes. Refer to [localization.md](localization.md) for more information.
+DevExpress Blazor components ship localizable resources for UI elements, such as button captions, menu items, error messages, and dialog boxes. Refer to the [Localization](https://docs.devexpress.com/Blazor/401564/common-concepts/localization) help topic for more information.
 
 # Free Blazor Utilities and Dev Tools
 
@@ -231,18 +193,14 @@ services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedEr
 
 This provides more detailed information about these errors. 
 
-## 2. System.ArgumentNullException: Value cannot be null. (Parameter 'accessor') 
- 
-To resolve this issue, use the solution from the [ComboBox for Blazor - How to resolve the 'System.ArgumentNullException: Value cannot be null. (Parameter 'accessor')' error](https://supportcenter.devexpress.com/ticket/details/t850754/combobox-for-blazor-how-to-resolve-the-system-argumentnullexception-value-cannot-be-null) ticket.
-
-## 3. Could not find 'X' in 'window.DxBlazor'.
+## 2. Could not find 'X' in 'window.DxBlazor'.
 Earlier, our clients' scripts were manually added to a project. Now, we automatically distribute them with the NuGet Package in the lib/dx-blazor folder (see the 6th item of the [How to create a new project](https://github.com/devexpress/blazor#how-to-create-a-new-project) paragraph). So, our users may face such an issue if they reference an old version of our static files instead of the new one. For example, a similar issue was discussed in the [I have a formlayout error when running a Blazor website](https://stackoverflow.com/questions/57593583/i-have-a-formlayout-error-when-running-a-blazor-website) SO thread.
- 
+ 
 If solutions suggested there do not help, create an issue here or submit a ticket in our [Support Center](https://www.devexpress.com/Support/Center/Question/Create) so that we can investigate your case.
 
-## 4. DxDataGrid in Blazor
+## 3. DxDataGrid in Blazor
 
-If you use Blazor WebAssemly (aka client-side Blazor) with DxDataGrid, you may see the following exception in a browser:
+If you use client-side Blazor with DxDataGrid, you may see the following exception in a browser:
 
 ![Troubleshooting - No Generic Method 'Take' On Type System.Linq.Queryable](media/Troubleshooting-NoGenericMethodTakeOnTypeSystemLinqQueryable.png)
 
@@ -293,7 +251,7 @@ Do one of the following to resolve this issue:
 See [Configure the Linker for ASP.NET Core Blazor](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker?view=aspnetcore-3.0) for more information.
 
 
-## 5. DxScheduler in Blazor
+## 4. DxScheduler in Blazor
 
 If you use client-side Blazor with DxScheduler, you may see the following exception or a similar exception:
 
@@ -341,7 +299,7 @@ Do one of the following to resolve this issue:
 
 See [Configure the Linker for ASP.NET Core Blazor](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker?view=aspnetcore-3.0) for more information.
 
-## 6. DxTabs are rendered incorrectly when the default Microsoft template is applied
+## 5. DxTabs are rendered incorrectly when the default Microsoft template is applied
 
 If you create a new Blazor project based on the default Microsoft project template, the first tab of the DxTabs component can be rendered incorrectly.
 
@@ -360,18 +318,17 @@ To resolve this issue, write more strict style rules in the *site.css* file so t
   * Filter Row
   * Selection
   * Templates
-  * Scrolling
-  * Virtual Scrolling
+  * Paging and Scrolling
   * Cascading Editors
-  * Edit Form Template Validation
+  * Edit Form Validation
   * Remote Data Source
-  * Large Datasets
-  * Master-Detail
+  * Large Data Source
+  * Master-Detail View
   * HTML Decoration
 * Pivot Grid
-  * Data Binding Basics
+  * Overview
   * Templates
-  * Large Datasets
+  * Large Data Source
   * Chart Integration
 * Charts
   * Series Types
@@ -382,9 +339,7 @@ To resolve this issue, write more strict style rules in the *site.css* file so t
   * Customization
   * Series Customization
 * Scheduler
-  * Day View
-  * Work Week View
-  * Week View
+  * View Types
   * Recurring Appointments
 * Data Editors
   * Calendar
@@ -393,7 +348,10 @@ To resolve this issue, write more strict style rules in the *site.css* file so t
   * Date Edit
   * List Box
   * Spin Edit
+  * TagBox
   * Text Box
+* Buttons
+  * Button
 * Navigation and Layout
   * Form Layout
   * Pager

@@ -1,0 +1,40 @@
+﻿@using Demo.Blazor.Model
+
+<div class="demo-description" id="ShowSelectedItems">
+    <h2><DemoNavLink Link="TagBox#ShowSelectedItems" />TagBox - Show Selected Items</h2>
+    <p>
+        In this demo, the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-1">TagBox</a> displays selected items in the drop-down list.
+        Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTagBox-1.HideSelectedItems">HideSelectedItems</a> property to <b>false</b> to enable this behavior.
+    </p>
+</div>
+
+<div class="card demo-card">
+    <div class="card-body mw-480" style="height: 260px">
+        <DxTagBox Data="@DataSource"
+                @bind-SelectedItems="@Items"
+                @bind-DropDownVisible="@DropDownVisible"
+                HideSelectedItems="false"/>
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_TagBox_ShowHideSelectedItems></CodeSnippet_Editor_TagBox_ShowHideSelectedItems>
+    </div>
+</div>
+
+@code {
+    String[] DataSource = null;
+
+    IEnumerable<string> items;
+    IEnumerable<string> Items { get => items; set { items = value; InvokeAsync(StateHasChanged); } }
+
+    bool dropDownVisible = true;
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); } }
+
+    protected override void OnInitialized() {
+        DataSource = new string[] { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7" };
+        Items = new List<string>() { DataSource[3], DataSource[5] };
+    }
+}

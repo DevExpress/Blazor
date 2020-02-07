@@ -1,14 +1,14 @@
 ﻿<CodeSnippet>
 @(@"<DxComboBox Data=""@Persons.DataSource""
             TextFieldName=""Text""
-            @bind-SelectedItem=""@SelectedRealBusinessObject"">
+            @bind-SelectedItem=""@SelectedPerson"">
 </DxComboBox>
 
 @code {
-    Person selectedRealBusinessObject = ...;
-    Person SelectedRealBusinessObject { 
-        get => selectedRealBusinessObject; 
-        set { selectedRealBusinessObject = value; InvokeAsync(StateHasChanged); } 
+    Person selectedPerson = ...;
+    Person SelectedPerson { 
+        get => selectedPerson; 
+        set { selectedPerson = value; InvokeAsync(StateHasChanged); } 
     }
 }
 

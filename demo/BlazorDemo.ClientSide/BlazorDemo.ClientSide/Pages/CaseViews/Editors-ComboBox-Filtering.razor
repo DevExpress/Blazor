@@ -1,19 +1,23 @@
 ﻿@using Demo.Blazor.Model
 @using Demo.Blazor.Services;
 @inject CountryNamesService CountryNamesService
+@{
+    RenderFragment<string> GetLink = (propName) =>
+    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode">@propName</a>;
+}
 
 <div class="demo-description" id="IncrementalFiltering">
-    <h2>ComboBox - Incremental Filtering</h2>
+    <h2><DemoNavLink Link="ComboBox#IncrementalFiltering" />ComboBox - Incremental Filtering</h2>
     <p>
-        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-1#filter-data">ComboBox</a> allows you to dynamically filter list items based on the text typed into the editor. For this purpose, apply the required mode to the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxComboBoxBase-1.FilteringMode">FilteringMode</a> property.
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxComboBoxBase-1.FilteringMode">FilteringMode</a> property to specify whether and how the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-1#filter-data">ComboBox</a> filters list items when users type in the edit box.
     </p>
     <ul>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode">Contains</a> - The editor is filtered for list items that contain the search string. Search string matches are highlighted.</li>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode">StartsWith</a> - The editor is filtered for list items that begin with the search string.</li>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode">None</a> - The filter is not applied to list items.</li>
+        <li>@GetLink("Contains") - The ComboBox filters list items that contain the search string and highlights matches.</li>
+        <li>@GetLink("StartsWith") - The ComboBox filters list items that begin with the search string and highlights matches.</li>
+        <li>@GetLink("None") - The ComboBox does not filter list items.</li>
     </ul>
     <p>
-        In this demo, the filter mode is set to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode">DataGridFilteringMode.Contains</a>. To see the feature in action, set the focus to the ComboBox component and enter a search query.
+        In this demo, the filter mode is set to @GetLink("Contains"). To filter list items, focus the ComboBox and type a search string.
     </p>
 </div>
 
@@ -22,12 +26,12 @@
     <div class="card demo-card">
         <div class="card-header">Text = "<b>@(Text)</b>", SelectedItem = <b>@(SelectedItem == null ? "Null" : SelectedItem)</b></div>
         <div class="card-body mw-480" style="height: 280px">
-                <DxComboBox Id="ComboBox1"
-                            Data="@Data"
-                            FilteringMode="@DataGridFilteringMode.Contains"
-                            @bind-SelectedItem="@SelectedItem"
-                            @bind-Text="@Text"
-                            @bind-DropDownVisible="@DropDownVisible"></DxComboBox>
+            <DxComboBox Id="ComboBox1"
+                        Data="@Data"
+                        FilteringMode="@DataGridFilteringMode.Contains"
+                        @bind-SelectedItem="@SelectedItem"
+                        @bind-Text="@Text"
+                        @bind-DropDownVisible="@DropDownVisible"></DxComboBox>
         </div>
     </div>
 
@@ -42,8 +46,7 @@
 @code {
     IEnumerable<string> Data;
 
-    protected override async Task OnInitializedAsync()
-    {
+    protected override async Task OnInitializedAsync() {
         Data = await CountryNamesService.Load();
     }
 
@@ -55,5 +58,5 @@
 
 
     bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); }  }
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); } }
 }

@@ -28,7 +28,7 @@
 @code {
     [Parameter] public bool Shown { get; set; }
     [Parameter] public Action<bool> ShownChanged { get; set; }
-    string CurrentTheme { get; set; } = "Pulse";
+    string CurrentTheme { get; set; } = "Blazing Berry";
 
     public class ThemeSetModel {
         public string Title { get; set; }
@@ -40,6 +40,7 @@
             "Default",
         } },
         new ThemeSetModel() { Title = "DevExpress Themes",  Themes = new List<string>() {
+            "Blazing Berry",
             "Purple",
             "Office White"
         } },

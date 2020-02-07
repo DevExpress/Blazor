@@ -99,7 +99,7 @@
                 region = value;
                 City = null;
                 OfficeLocations = VacancyRepository.GetOfficeLocationsByRegion(value).Select(x => x.City);
-                StateHasChanged?.InvokeAsync();
+                StateHasChanged?.Invoke();
             }
         }
 

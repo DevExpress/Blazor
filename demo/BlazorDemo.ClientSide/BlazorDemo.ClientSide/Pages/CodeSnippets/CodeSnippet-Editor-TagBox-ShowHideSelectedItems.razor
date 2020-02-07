@@ -1,0 +1,16 @@
+﻿<CodeSnippet>
+@(@"<DxTagBox Data=""@DataSource""
+          HideSelectedItems=""false""
+          @bind-SelectedItems=""@Items""/>
+
+@code {
+    String[] DataSource = null;
+
+    IEnumerable<string> Items;
+
+    protected override void OnInitialized() {
+        DataSource = new string[] { ""Item 1"", ""Item 2"", ""Item 3"", ""Item 4"", ""Item 5"", ""Item 6"", ""Item 7"" };
+        Items = new List<string>() { DataSource[3], DataSource[5] };
+    }
+}")
+</CodeSnippet>

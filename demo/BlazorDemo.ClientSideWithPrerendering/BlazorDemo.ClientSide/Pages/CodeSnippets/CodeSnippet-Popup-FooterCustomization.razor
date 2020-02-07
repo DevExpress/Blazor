@@ -1,0 +1,20 @@
+﻿<CodeSnippet>
+@(@"<div class=""target-container"" @onclick=""@(() => PopupVisible = true)""></div>
+<DxPopup HeaderText=""Header""
+        @bind-Visible=""@PopupVisible"">
+    <ChildContent>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. 
+            Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</p>
+    </ChildContent>
+    <FooterTemplate>
+        <div class=""modal-footer"">
+            <button class=""btn btn-primary"" @onclick=""@(() => PopupVisible = false)"">OK</button>
+        </div>   
+    </FooterTemplate>
+</DxPopup>
+}
+
+@code {
+    bool PopupVisible { get; set; }
+}")
+</CodeSnippet>

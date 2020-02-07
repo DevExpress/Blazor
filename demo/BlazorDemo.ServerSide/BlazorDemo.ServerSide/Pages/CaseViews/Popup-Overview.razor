@@ -2,23 +2,20 @@
 @using DevExpress.Blazor
 
 <div class="demo-description" id="Overview">
-    <h2><NavLink class="demo-anchor" href="Popup#Overview" />Popup - Overview</h2>
+    <h2><DemoNavLink Link="Popup#Overview" />Popup - Overview</h2>
     <p>
-        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup">DxPopup</a> component is a pop-up window that overlays the current view. The component consists of a header with a <b>Close</b> button and the pop-up body with content. 
-        To add the pop-up window’s content, use the <a class="helplink" target="_blank" href="https://docs.microsoft.com/en-us/aspnet/core/blazor/components?view=aspnetcore-3.0#child-content">ChildContent</a> property.
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup">Popup</a> component is a pop-up window that overlays the current view. It consists of a header with a <b>Close</b> button, the pop-up body, and a footer (optional).
+        To specify the pop-up body's content, use the <a class="helplink" target="_blank" href="https://docs.microsoft.com/en-us/aspnet/core/blazor/components?view=aspnetcore-3.0#child-content">ChildContent</a> property.
     </p>
 </div>
 
 <div class="card border-0">
     <div class="card-body">
         <div class="target-container" @onclick="@(() => PopupVisible = true)"></div>
-        @if (PopupVisible) {
-            <DxPopup HeaderText="Header" CloseButtonClick="@(() => PopupVisible = false)">
-                <ChildContent>
+            <DxPopup HeaderText="Header"
+                     @bind-Visible="@PopupVisible">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</p>
-                </ChildContent>
             </DxPopup>
-        }
     </div>
 </div>
 
@@ -30,6 +27,5 @@
 </div>
 
 @code {
-    bool popupVisible = false;
-    bool PopupVisible { get => popupVisible; set { popupVisible = value; InvokeAsync(StateHasChanged); } }
+    bool PopupVisible { get; set; } = false;
 }

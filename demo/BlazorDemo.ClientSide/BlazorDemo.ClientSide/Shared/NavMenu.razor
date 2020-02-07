@@ -16,9 +16,8 @@
                 <DxTreeViewNode Text="Grouping" NavigateUrl="GridGrouping"></DxTreeViewNode>
                 <DxTreeViewNode Text="Filter Row" NavigateUrl="GridFilterRow" BadgeText="Upd"></DxTreeViewNode>
                 <DxTreeViewNode Text="Selection" NavigateUrl="GridSelection"></DxTreeViewNode>
-                <DxTreeViewNode Text="Templates" NavigateUrl="GridTemplate"></DxTreeViewNode>
-                <DxTreeViewNode Text="Scrolling" NavigateUrl="GridScrolling"></DxTreeViewNode>
-                <DxTreeViewNode Text="Virtual Scrolling" NavigateUrl="GridVirtualScrolling"></DxTreeViewNode>
+                <DxTreeViewNode Text="Templates" NavigateUrl="GridTemplate" BadgeText="Upd"></DxTreeViewNode>
+                <DxTreeViewNode Text="Paging and Scrolling" NavigateUrl="GridPagingAndScrolling" BadgeText="Upd"></DxTreeViewNode>
                 <DxTreeViewNode Text="Cascading Editors" NavigateUrl="GridCascadingEditors"></DxTreeViewNode>
                 <DxTreeViewNode Text="Edit Form Validation" NavigateUrl="GridEditFormTemplateValidation"></DxTreeViewNode>
                 <DxTreeViewNode Text="Remote Data Source" NavigateUrl="GridRemoteDataSource" BadgeText="New" />
@@ -35,14 +34,14 @@
                 <DxTreeViewNode Text="Chart Integration" NavigateUrl="PivotGridChartIntegration"></DxTreeViewNode>
             </Nodes>
         </DxTreeViewNode>
-        <DxTreeViewNode Text="Charts">
+        <DxTreeViewNode Text="Charts" BadgeText="Upd">
             <Nodes>
                 <DxTreeViewNode Text="Series Types" NavigateUrl="ChartSeriesTypes"></DxTreeViewNode>
                 <DxTreeViewNode Text="Dynamic Series" NavigateUrl="ChartDynamicSeries"></DxTreeViewNode>
                 <DxTreeViewNode Text="Range Series" NavigateUrl="ChartRangeSeries"></DxTreeViewNode>
                 <DxTreeViewNode Text="Financial Series" NavigateUrl="ChartFinancialSeries"></DxTreeViewNode>
                 <DxTreeViewNode Text="Pie Series" NavigateUrl="ChartPieSeries"></DxTreeViewNode>
-                <DxTreeViewNode Text="Customization" NavigateUrl="ChartCustomization"></DxTreeViewNode>
+                <DxTreeViewNode Text="Customization" NavigateUrl="ChartCustomization" BadgeText="Upd"></DxTreeViewNode>
                 <DxTreeViewNode Text="Series Customization" NavigateUrl="ChartSeriesCustomization"></DxTreeViewNode>
             </Nodes>
         </DxTreeViewNode>
@@ -66,8 +65,15 @@
                 </DxTreeViewNode>
                 <DxTreeViewNode Text="Spin Edit" NavigateUrl="SpinEdit" BadgeText="Upd">
                 </DxTreeViewNode>
+                <DxTreeViewNode Text="TagBox" NavigateUrl="TagBox" BadgeText="New">
+                </DxTreeViewNode>
                 <DxTreeViewNode Text="Text Box" NavigateUrl="TextBox" BadgeText="Upd">
                 </DxTreeViewNode>
+            </Nodes>
+        </DxTreeViewNode>
+        <DxTreeViewNode Text="Buttons" BadgeText="New">
+            <Nodes>
+                <DxTreeViewNode Text="Button" NavigateUrl="Button" BadgeText="New"></DxTreeViewNode>
             </Nodes>
         </DxTreeViewNode>
         <DxTreeViewNode Text="Navigation and Layout" BadgeText="Upd">
@@ -76,7 +82,7 @@
                 </DxTreeViewNode>
                 <DxTreeViewNode Text="Pager" NavigateUrl="Pager" BadgeText="Upd">
                 </DxTreeViewNode>
-                <DxTreeViewNode Text="Popup" NavigateUrl="Popup">
+                <DxTreeViewNode Text="Popup" NavigateUrl="Popup" BadgeText="Upd">
                 </DxTreeViewNode>
                 <DxTreeViewNode Text="Tabs" NavigateUrl="Tabs">
                 </DxTreeViewNode>
@@ -88,16 +94,6 @@
         </DxTreeViewNode>
     </Nodes>
 </DxTreeView>
-
-<div class="footer">
-    <div class="info-wrapper">
-        <div class="version">Version: 19.2.2</div>
-        <div class="copyright">
-            <span>Copyright &copy; 2006-</span><span>@(DateTime.Now.Year.ToString())</span>
-            Developer Express Inc
-        </div>
-    </div>
-</div>
 
 @code {
     DxTreeView treeView;

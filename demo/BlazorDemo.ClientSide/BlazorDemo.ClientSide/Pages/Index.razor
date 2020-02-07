@@ -1,179 +1,114 @@
-﻿@page "/"
+@page "/"
 
-<div class="demo-description">
-    <h1>DevExpress UI Components for Blazor</h1>
-    <p>
-        The DevExpress UI components featured in this demo are available for free download and can be used in your next Blazor app.
-    </p>
-    <p>
-        Review our <a class="helplink" href="https://github.com/DevExpress/Blazor" target="_blank" >GitHub Guide</a> for details on how to set up your environment.
-    </p>
+@inject NavigationManager NavigationManager
 
-    <h2>How to run this demo on your machine</h2>
-    <ol>
-        <li>Ensure that you have .NET Core 3 installed.</li>
-        <li>Download the "<b>demo</b>" and "<b>tools</b>" directories from the <a class="helplink" target="_blank" href="https://github.com/DevExpress/Blazor">GitHub repository</a>.</li>
-        <li>Open <b>demo/BlazorDemo.ServerSide/BlazorDemo.ServerSide.sln</b> in Visual Studio 2019.</li>
-        <li>
-            <p>
-                Go to <a class="helplink" target="_blank" href="https://nuget.devexpress.com">nuget.devexpress.com</a>, log in or sign up and click <b>Obtain Feed URL</b>. 
-                This redirects you to a page's section that displays a development account's NuGet Feed URL.
-            </p>
-            <p>Register the DevExpress NuGet feed in Visual Studio's NuGet Package Manager.</p>
-            <CodeSnippet>https://nuget.devexpress.com/{your feed authorization key}/api</CodeSnippet>
-            <p>See the <a class="helplink" target="_blank" href="https://docs.devexpress.com/GeneralInformation/116698/installation/install-devexpress-controls-using-nuget-packages/setup-visual-studio%27s-nuget-package-manager" rel="nofollow">Setup Visual Studio's NuGet Package Manager</a> topic for more information.</p>
-        </li>
-        <li>Start the application.</li>
-    </ol>
-    See also:
-    <ul style="list-style-type: none;padding:0;">
-        <li><a class="helplink" href="https://dotnet.microsoft.com/apps/aspnet/web-apps/client" target="_blank">Official Microsoft Blazor site</a></li>
-        <li><a class="helplink" href="https://github.com/DevExpress/Blazor#how-to-run-this-demo-locally" target="_blank">Instruction on GitHub</a></li>
-    </ul>
-
-    <h2>How to create a new project</h2>
-    <p>
-        Follow the steps below to try our Blazor in your own application.
-    </p>
-    <ol>
-        <li>Create a new solution using the "Blazor App" template in Visual Studio 2019.</li>
-        <li>
-            <p>
-                Go to <a class="helplink" target="_blank" href="https://nuget.devexpress.com">nuget.devexpress.com</a>, log in or sign up and click <b>Obtain Feed URL</b>.
-                This redirects you to a page's section that displays a development account's NuGet Feed URL.
-            </p>
-            <p>Register the DevExpress NuGet feed in Visual Studio's NuGet Package Manager.</p>
-            <CodeSnippet>https://nuget.devexpress.com/{your feed authorization key}/api</CodeSnippet>
-            <p>See the <a class="helplink" target="_blank" href="https://docs.devexpress.com/GeneralInformation/116698/installation/install-devexpress-controls-using-nuget-packages/setup-visual-studio%27s-nuget-package-manager" rel="nofollow">Setup Visual Studio's NuGet Package Manager</a> topic for more information.</p>
-        </li>
-        <li>Install the "DevExpress.Blazor" NuGet package.</li>
-        <li>Build the project.</li>
-        <li>
-            <p>Link the following file to your layout’s HEAD section:</p>
-            <ul>
-                <li>
-                    <p>For server-side Blazor, add the line below to the <em>_Host.cshtml</em> file.</p>
-                    <CodeSnippet>
-&lt;head&gt;
-    ...
-    &lt;link href=&quot;_content/DevExpress.Blazor/dx-blazor.css&quot; rel=&quot;stylesheet&quot; /&gt;
-&lt;/head&gt;
-            </CodeSnippet>
-                </li>
-                <li>
-                    <p>For client-side Blazor, add the line below to the <em>Index.cshtm</em>l file.</p>
-                     <CodeSnippet>
-&lt;head&gt;
-    ...
-    &lt;link href=&quot;_content/DevExpress.Blazor/dx-blazor.css&quot; rel=&quot;stylesheet&quot; /&gt;
-&lt;/head&gt;
-            </CodeSnippet>
-                    <p>Call the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/Microsoft.Extensions.DependencyInjection.DevExpressServiceCollectionExtensions.AddDevExpressBlazor(Microsoft.Extensions.DependencyInjection.IServiceCollection)" rel="nofollow">AddDevExpressBlazor(IServiceCollection)</a> method from your project's <em>Startup.ConfigureServices()</em> method:</p>
-                    <CodeSnippet>
-using Microsoft.Extensions.DependencyInjection;
-
-public class Startup {
-    public Startup(IConfiguration configuration) {
-        Configuration = configuration;
-    }
-
-    public IConfiguration Configuration { get; }
-
-    public void ConfigureServices(IServiceCollection services) {
-        ...
-        services.AddDevExpressBlazor();
-    }
+@{
+    RenderFragment<DemoProductInfo> DemoProduct = (info) =>
+    @<div class="col-xl-4 col-sm-6 col-xs-12">
+        <div class="jumbotron shadow-sm demo-product" @onclick="@(() => { NavigationManager.NavigateTo(info.PageUri); })">
+            <div class="media p-2">
+                <span class="mr-3 bg-primary demo-product-icon demo-product-icon-@info.IconName" title="@info.Title"></span>
+                <div class="media-body">
+                    <h5 class="mt-0 text-body">@info.Title</h5>
+                    <span class="demo-product-info text-muted">@info.Description</span>
+                </div>
+            </div>
+        </div>
+    </div>;
 }
-            </CodeSnippet>
-                </li>
-            </ul>
-        </li>
-        <li>
-            Register our tag namespace and helper in <b>_Imports.razor</b> file: 
-            <CodeSnippet>
-@(@"@using DevExpress.Blazor")
-            </CodeSnippet>
-        </li>
-        <li>Your application is ready to use DevExpress UI for Blazor.</li>
-    </ol>
-    See also:
-    <ul style="list-style-type: none;padding:0;">
-        <li><a class="helplink" href="https://github.com/DevExpress/Blazor#how-to-create-a-new-project" target="_blank">Instruction on GitHub</a></li>
-    </ul>
 
-    <h2>Included Demo Modules</h2>
-    <ul>
-        <li>
-            Data Grid
-            <ul>
-                <li><NavLink href="GridColumnTypes">Column Types</NavLink></li>
-                <li><NavLink href="GridSortData">Sort Data</NavLink></li>
-                <li><NavLink href="GridGrouping">Grouping</NavLink></li>
-                <li><NavLink href="GridFilterRow">Data Filter Row</NavLink></li>
-                <li><NavLink href="GridSelection">Selection</NavLink></li>
-                <li><NavLink href="GridTemplate">Templates</NavLink></li>
-                <li><NavLink href="GridScrolling">Scrolling</NavLink></li>
-                <li><NavLink href="GridVirtualScrolling">Virtual Scrolling</NavLink></li>
-                <li><NavLink href="GridCascadingEditors">Cascading Editors</NavLink></li>
-                <li><NavLink href="GridEditFormTemplateValidation">Edit Form Template Validation</NavLink></li>
-                <li><NavLink href="GridRemoteDataSource">Custom Data Source</NavLink></li>
-                <li><NavLink href="GridLargeDataBase">Large Datasets</NavLink></li>
-                <li><NavLink href="GridMasterDetail">Master-Detail</NavLink></li>
-                <li><NavLink href="GridHTMLDecoration">HTML Decoration</NavLink></li>
-            </ul>
-        </li>
-        <li>
-            Pivot Grid
-            <ul>
-                <li><NavLink href="PivotGrid">Data Binding Basics</NavLink></li>
-                <li><NavLink href="PivotGridTemplates">Templates</NavLink></li>
-                <li><NavLink href="PivotGridLargeDataBase">Large Datasets</NavLink></li>
-                <li><NavLink href="PivotGridChartIntegration">Chart Integration</NavLink></li>
-            </ul>
-        </li>
-        <li>
-            Charts
-            <ul>
-                <li><NavLink href="ChartSeriesTypes">Series Types</NavLink></li>
-                <li><NavLink href="ChartDynamicSeries">Dynamic Series</NavLink></li>
-                <li><NavLink href="ChartRangeSeries">Range Series</NavLink></li>
-                <li><NavLink href="ChartFinancialSeries">Financial Series</NavLink></li>
-                <li><NavLink href="ChartPieSeries">Pie Series</NavLink></li>
-                <li><NavLink href="ChartCustomization">Customization</NavLink></li>
-                <li><NavLink href="ChartSeriesCustomization">Series Customization</NavLink></li>
-            </ul>
-        </li>
-        <li>
-            Scheduler
-            <ul>
-                <li><NavLink href="SchedulerViewTypes#WeekView">Week View</NavLink></li>
-                <li><NavLink href="SchedulerViewTypes#WorkWeekView">Work Week View</NavLink></li>
-                <li><NavLink href="SchedulerViewTypes#DayView">Day View</NavLink></li>
-                <li><NavLink href="SchedulerRecurringAppointments">Recurring Appointments</NavLink></li>
-            </ul>
-        </li>
-        <li>
-            Data Editors
-            <ul>
-                <li><NavLink href="Calendar">Calendar</NavLink></li>
-                <li><NavLink href="CheckBox">CheckBox</NavLink></li>
-                <li><NavLink href="ComboBox">ComboBox</NavLink></li>
-                <li><NavLink href="DateEdit">Date Edit</NavLink></li>
-                <li><NavLink href="ListBox">List Box</NavLink></li>
-                <li><NavLink href="SpinEdit">Spin Edit</NavLink></li>
-                <li><NavLink href="TextBox">Text Box</NavLink></li>
-            </ul>
-        </li>
-        <li>
-            Navigation and Layout
-            <ul>
-                <li><NavLink href="FormLayout">Form Layout</NavLink></li>
-                <li><NavLink href="Pager">Pager</NavLink></li>
-                <li><NavLink href="Popup">Popup</NavLink></li>
-                <li><NavLink href="Tabs">Tabs</NavLink></li>
-                <li><NavLink href="TreeView">TreeView</NavLink></li>
-            </ul>
-        </li>
-        <li><NavLink href="FormValidation">Form Validation</NavLink></li>
-    </ul>
+<div class="demo-description demo-products">
+    <h1 class="mb-4">DevExpress UI Components for Blazor</h1>
+
+    <p class="mb-5">The <a class="helplink" href="https://www.devexpress.com/blazor/" target="_blank">DevExpress UI for Blazor</a> ships with native user interface components (including a Data Grid, Pivot Grid, Charts, and Scheduler) so you can design rich user experiences in your business apps.</p>
+
+    <div class="row mb-3">
+        @foreach (var info in DemoProductsInfo)
+        {
+            @DemoProduct.Invoke(info)
+        }
+    </div>
 </div>
+
+<h2 class="mb-4">Getting Started</h2>
+
+<p>
+    Our components come with extensive reference material, documentation, examples and step-by-step instructions. This material will help you not only start using our products from scratch, but also learn about all of their capabilities much faster.
+</p>
+
+<ul>
+    <li><a class="helplink" href="https://github.com/DevExpress/Blazor#set-up-your-environment" target="_blank">Set up your Environment</a></li>
+    <li><a class="helplink" href="https://github.com/DevExpress/Blazor#how-to-run-this-demo-locally" target="_blank">Run this demo on your machine</a></li>
+    <li><a class="helplink" href="https://github.com/DevExpress/Blazor#how-to-create-a-new-project" target="_blank">Create and configure a new project</a></li>
+</ul>
+
+<h2 class="my-4">Helpful Resources</h2>
+
+<p>
+    Refer to the following online resources to get started with DevExpress Blazor components:
+</p>
+
+<ul>
+    <li><a class="helplink" href="https://docs.devexpress.com/Blazor/400725/blazor-components" target="_blank">Documentation</a></li>
+    <li><a class="helplink" href="https://github.com/DevExpress/Blazor/blob/master/examples.md" target="_blank">Examples</a></li>
+    <li><a class="helplink" href="https://www.devexpress.com/support/training/blazor/" target="_blank">Free Blazor training course</a></li>
+    <li><a class="helplink" href="https://dotnet.microsoft.com/apps/aspnet/web-apps/client" target="_blank">Official Blazor documentation</a></li>
+</ul>
+
+<h2 class="my-4">Troubleshooting</h2>
+
+<p>
+    Need help or require more information? Explore the <a class="helplink" href="https://github.com/DevExpress/Blazor#troubleshooting" target="_blank">Troubleshooting</a> section in our GitHub repository or submit your support inquiries via the <a class="helplink" href="https://supportcenter.devexpress.com/" target="_blank">DevExpress Support Center</a> for assistance.
+</p>
+
+@code {
+    class DemoProductInfo
+    {
+        public string Title { get; set; }
+
+        public string PageUri { get; set; }
+
+        public string IconName { get; set; }
+
+        public string Description { get; set; }
+    }
+
+    List<DemoProductInfo> DemoProductsInfo = new List<DemoProductInfo>() {
+        new DemoProductInfo {
+            Title = "Data Grid",
+            PageUri = "GridColumnTypes",
+            IconName = "grid",
+            Description = "A fast and responsive grid component with unlimited master-detail levels and unmatched data shaping capabilities."
+        },
+        new DemoProductInfo {
+            Title = "Pivot Grid",
+            PageUri = "PivotGrid",
+            IconName = "pivot",
+            Description = "An Excel-inspired pivot table control engineered for multi-dimensional data analysis and cross-tab reporting."
+        },
+        new DemoProductInfo {
+            Title = "Charts",
+            PageUri = "ChartSeriesTypes",
+            IconName = "charts",
+            Description = "Fast and lightweight chart component with 20+ data presentation types."
+        },
+        new DemoProductInfo {
+            Title = "Scheduler",
+            PageUri = "SchedulerViewTypes",
+            IconName = "scheduler",
+            Description = "A fully-featured scheduling solution that easily displays a detailed snapshot of events/appointments in your web application across a single day or a week."
+        },
+        new DemoProductInfo {
+            Title = "Data Editors",
+            PageUri = "Calendar",
+            IconName = "editors",
+            Description = "An extensive suite of data editors to be used standalone or within container components."
+        },
+        new DemoProductInfo {
+            Title = "Navigation and Layout",
+            PageUri = "FormLayout",
+            IconName = "navigation",
+            Description = "A suite of navigation components including TreeView and Pager, in conjunction with layout components that are designed to make your UI adaptive."
+        }
+    };
+}

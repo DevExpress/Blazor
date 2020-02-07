@@ -1,0 +1,20 @@
+﻿<CodeSnippet>
+@(@"<DxTagBox Data=""@Data""
+          FilteringMode=""@FilteringMode""
+          @bind-SelectedItems=""@SelectedItems""
+          @bind-DropDownVisible=""@DropDownVisible"">
+</DxTagBox>
+
+@code {
+    IEnumerable<string> Data;
+
+    DataGridFilteringMode filteringMode = DataGridFilteringMode.StartsWith;
+    DataGridFilteringMode FilteringMode { get => filteringMode; set { filteringMode = value; InvokeAsync(StateHasChanged); } }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Data = await CountryNamesService.Load();
+        SelectedItems = new List<string> { ""United Kingdom"", ""United States"" };
+    }
+}")
+</CodeSnippet>

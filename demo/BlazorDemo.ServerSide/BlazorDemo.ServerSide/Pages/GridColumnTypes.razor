@@ -39,6 +39,7 @@
             RowRemovingAsync="@OnRowRemoving"
             RowUpdatingAsync="@OnRowUpdating"
             RowInsertingAsync="@OnRowInserting"
+            InitNewRow="@OnInitNewRow"
             style="width:70%">
 
     <DxDataGridCommandColumn Width="150px"></DxDataGridCommandColumn>
@@ -66,5 +67,12 @@
     }
     async Task OnRowInserting(IDictionary<string, object> newValue) {
         await ForecastService.Insert(newValue);
+    }
+    Task OnInitNewRow (Dictionary<string, object> values) {
+        values.Add("Date", DateTime.Now);
+        values.Add("TemperatureC", 13);
+        values.Add("Summary", "Warm");
+        values.Add("WeatherType", "Sunny");
+        return Task.CompletedTask;
     }
 }

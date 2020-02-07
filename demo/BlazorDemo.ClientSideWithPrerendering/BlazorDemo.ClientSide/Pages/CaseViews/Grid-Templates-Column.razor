@@ -1,0 +1,117 @@
+﻿@using Demo.Blazor.Model
+@using Demo.Blazor.Services
+@inject ProductService ProductService
+
+<div class="demo-description" id="ColumnTemplate">
+    <h2><DemoNavLink Link="GridTemplate#ColumnTemplates" />Data Grid - Column Templates</h2>
+
+    <p>This module illustrates how you can use <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#templates">column templates</a> to format cell values and provide custom data editors.</p>
+    <ul>
+        <li>
+            <p><b>Availability column</b> - <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.DisplayTemplate">DisplayTemplate</a> formats cell values using check boxes and colored text. <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.EditTemplate">EditTemplate</a> embeds a ComboBox control into the edit form.</p>
+        </li>
+        <li>
+            <p><b>Category column</b> - <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.DisplayTemplate">DisplayTemplate</a> builds a composite string and displays it in plain text. <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.EditTemplate">EditTemplate</a> embeds another Data Grid to enable lookup functionality.</p>
+        </li>
+    </ul>  
+    <p>
+        Review how values in the Availability and Category columns are formatted and try the Edit action to see the custom editors integrated into the edit form.
+    </p>
+</div>
+
+@if (DataSource == null || NestedDataSource == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <DxDataGrid Data="@DataSource"
+                ShowFilterRow="false"
+                RowRemoving="@((dataItem) => OnRowRemoving(dataItem))"
+                RowUpdating="@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))"
+                RowInserting="@((newValues) => OnRowInserting(newValues))">
+
+        <DxDataGridCommandColumn Width="150px"></DxDataGridCommandColumn>
+
+        <DxDataGridColumn Field="@nameof(Product.ProductName)" Caption="Product Name">
+        </DxDataGridColumn>
+
+        <DxDataGridColumn Field="@nameof(Product.Availability)" Caption="Availability" Width="150px">
+            <DisplayTemplate>
+                @{
+                    var id = Guid.NewGuid().ToString();
+                    var inStock = (context as Product).Availability;
+                    <DxCheckBox Id="@id" Checked="@inStock" Enabled="false">
+                        @if(inStock) {
+                        <label class="form-check-label text-success" for="@id"><span>In stock</span></label>
+                        } else {
+                        <label class="form-check-label text-danger" for="@id"><span>Sold out</span></label>
+                        }
+                    </DxCheckBox>
+                }
+            </DisplayTemplate>
+            <EditTemplate>
+                <DxComboBox Data="@(new List<string>() { "In stock", "Sold out" })"
+                            SelectedItem="@(((bool)((CellEditContext)context).CellValue) ? "In stock" : "Sold out" )"
+                            SelectedItemChanged="@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue == "In stock"))">
+                </DxComboBox>
+            </EditTemplate>
+        </DxDataGridColumn>
+
+        <DxDataGridColumn Field="@nameof(Product.ProductCategoryId)" Caption="Category">
+            <DisplayTemplate>
+                @{
+                    var product = context as Product;
+                    int currentCellValue = (int)product.ProductCategoryId;
+                    var nestedItem = NestedDataSource.Where(x => x.ProductSubcategoryID == currentCellValue).FirstOrDefault();
+                    string category = nestedItem != null ? nestedItem.Category.ToString() : "none";
+                    string subcategory = nestedItem != null ? nestedItem.Subcategory : "none";
+                    <span>@category/@subcategory</span>
+                }
+            </DisplayTemplate>
+            <EditTemplate>
+                @{ 
+                    var cellEditContext = (CellEditContext)context;
+                    int currentCellValue = (int)cellEditContext.CellValue;
+                    var nestedItem = NestedDataSource.Where(x => x.ProductSubcategoryID == currentCellValue).FirstOrDefault();
+                }
+                <DxDataGrid Data="@NestedDataSource"
+                            PageSize="5"
+                            SingleSelectedDataRow="@nestedItem"
+                            SingleSelectedDataRowChanged="@(newCellValue => cellEditContext.OnChanged(newCellValue.ProductSubcategoryID))">
+                    <DxDataGridColumn Field="@nameof(ProductCategory.ProductSubcategoryID)" Width="150px"></DxDataGridColumn>
+                    <DxDataGridColumn Field="@nameof(ProductCategory.Category)" Width="150px"></DxDataGridColumn>
+                    <DxDataGridColumn Field="@nameof(ProductCategory.Subcategory)" Width="150px"></DxDataGridColumn>
+                    <DxDataGridColumn Field="@nameof(ProductCategory.LastUpdatedDate)" Width="150px"></DxDataGridColumn>
+                </DxDataGrid>
+            </EditTemplate>
+        </DxDataGridColumn>
+
+    </DxDataGrid>
+
+    <CodeSnippet_GridTemplate></CodeSnippet_GridTemplate>
+}
+
+@code {
+    IQueryable<Product> DataSource;
+    IEnumerable<ProductCategory> NestedDataSource;
+
+    protected override async Task OnInitializedAsync()
+    {
+        DataSource = await ProductService.Load();
+        NestedDataSource = await ProductService.LoadNestedDataSource();
+    }
+
+    void OnRowRemoving(Product dataItem)
+    {
+        ProductService.Remove(dataItem);
+    }
+    void OnRowUpdating(Product dataItem, Dictionary<string, object> newValue)
+    {
+        ProductService.Update(dataItem, newValue);
+    }
+    void OnRowInserting(Dictionary<string, object> newValue)
+    {
+        ProductService.Insert(newValue);
+    }
+}

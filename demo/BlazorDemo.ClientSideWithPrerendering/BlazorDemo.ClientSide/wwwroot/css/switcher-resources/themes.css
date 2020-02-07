@@ -2,6 +2,10 @@
     background: #007bff;
 }
 
+#settingsbar #themesMenu li > a > .image.blazing-berry {
+    background: #5c2d91;
+}
+
 #settingsbar #themesMenu li > a > .image.cerulean {
     background: #2fa4e7;
 }

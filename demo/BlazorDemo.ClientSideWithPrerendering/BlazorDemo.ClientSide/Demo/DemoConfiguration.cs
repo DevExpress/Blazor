@@ -54,15 +54,17 @@ namespace Demo.Blazor
                 .OpenGraph("image", "https://static.devexpress.com/Products/Blazor/blazor-components-grid-pivot-scheduler-devexpress.jpg")
 
                 .Script("highlight-js", "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js", defer: false)
+                .Script("scroll-view-js", "~/lib/scroll-view.js", defer: false)
                 .Script("demo-js", "~/lib/dx-demo.js", defer: false)
 
                 .StyleSheet("site-css", "~/css/site.css")
                 .StyleSheet("highlight-css", "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css")
                 .StyleSheet("demo-css", "~/css/dx-demo.css")
+                .StyleSheet("scroll-view", "~/css/scroll-view.css")
                 .StyleSheet("dx-css", "~/_content/DevExpress.Blazor/dx-blazor.css")
                 .StyleSheet(
                     name: "currentTheme",
-                    styleSheetUrl: "css/switcher-resources/themes/pulse/bootstrap.min.css"
+                    styleSheetUrl: "css/switcher-resources/themes/blazing berry/bootstrap.min.css"
                 );
 
             DemoPages.ForEach(pageMetadata =>

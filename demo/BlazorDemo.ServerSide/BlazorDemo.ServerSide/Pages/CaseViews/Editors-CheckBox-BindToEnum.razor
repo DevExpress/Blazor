@@ -6,7 +6,7 @@
 }
 
 <div class="demo-description" id="BindToCustomDataTypes">
-    <h2><NavLink class="demo-anchor" href="CheckBox#BindToCustomDataTypes" />CheckBox - Bind to Custom Data Types</h2>
+    <h2><DemoNavLink Link="CheckBox#BindToCustomDataTypes" />CheckBox - Bind to Custom Data Types</h2>
     <p>
         The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1">CheckBox</a> allows you to bind its states (check, uncheck, indeterminate) to custom data types. This module demonstrates how to bind the component to an Enum object.
         <ul>
@@ -26,13 +26,13 @@
 
 <div class="card demo-card">
     <div class="card-body mw-480">
-        <DxCheckBox @bind-Checked="@Value" AllowIndeterminateStateByClick 
+        <DxCheckBox @bind-Checked="@Value" AllowIndeterminateStateByClick CssClass="mb-1"
                     ValueChecked="@Opinion.Yes" ValueUnchecked="@Opinion.No" ValueIndeterminate="@Opinion.Abstain">@GetText()</DxCheckBox>
-        <DxCheckBox Checked="Opinion.Yes" Enabled="false" 
+        <DxCheckBox Checked="Opinion.Yes" Enabled="false" CssClass="mb-1"
                     ValueChecked="@Opinion.Yes" ValueUnchecked="@Opinion.No" ValueIndeterminate="@Opinion.Abstain">Disabled Checked</DxCheckBox>
-        <DxCheckBox Checked="Opinion.No" Enabled="false" 
+        <DxCheckBox Checked="Opinion.No" Enabled="false" CssClass="mb-1"
                     ValueChecked="@Opinion.Yes" ValueUnchecked="@Opinion.No" ValueIndeterminate="@Opinion.Abstain">Disabled Unchecked</DxCheckBox>
-        <DxCheckBox Checked="Opinion.Abstain" Enabled="false" 
+        <DxCheckBox Checked="Opinion.Abstain" Enabled="false" CssClass="mb-1"
                     ValueChecked="@Opinion.Yes" ValueUnchecked="@Opinion.No" ValueIndeterminate="@Opinion.Abstain">Disabled Indeterminate</DxCheckBox>
     </div>
 </div>
@@ -40,7 +40,7 @@
 @code{
     enum Opinion { Yes, No, Abstain }
     Opinion Value = Opinion.Abstain;
-    
+
     string GetText() {
         if(Value == Opinion.Yes) return "Checked";
         if(Value == Opinion.No) return "Unchecked";

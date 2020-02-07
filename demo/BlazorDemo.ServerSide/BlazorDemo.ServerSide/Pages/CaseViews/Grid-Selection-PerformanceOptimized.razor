@@ -3,7 +3,7 @@
 @inject FlatProductService FlatProductService
 
 <div class="demo-description" id="OptimizedMultipleSelection">
-    <h2><NavLink class="demo-anchor" href="GridSelection#OptimizedMultipleSelection" />Data Grid - Multiple Selection with Optimized Performance</h2>
+    <h2><DemoNavLink Link="GridSelection#OptimizedMultipleSelection" />Data Grid - Multiple Selection with Optimized Performance</h2>
     <p>
         The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#row-selection">Data Grid</a> also provides the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.SelectionMode">DataGridSelectionMode.OptimizedMultipleSelection</a> selection mode. 
         In this mode, the Data Grid stores information about the selection to improve performance. 
@@ -25,11 +25,12 @@
 }
 else
 {
-    <div class="card demo-card-wide border-bottom-0">
+    <div class="card demo-card-wide border-bottom-0" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0">
         <div class="card-header border-bottom-0">The total count of selected rows: <b>@SelectedCount</b> (stored selected rows: <b>@StoredSelectedCount</b>, stored unselected rows: <b>@StoredUnselectedCount</b>)</div>
     </div>
 
     <DxDataGrid Data="@DataSource" @ref="@grid"
+                CssClass="datagrid-border-radius-top-0"
                 KeyFieldName="Id"
                 SelectionMode="DataGridSelectionMode.OptimizedMultipleSelection"
                 SelectAllMode="DataGridSelectAllMode.AllPages"

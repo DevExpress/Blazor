@@ -1,33 +1,61 @@
 ﻿/* Theme switch button*/
-.theme-settings {
-    float: right;
-}
-
-.theme-settings,
-.theme-settings-collapsed {
-    border-top: none!important;
-    border: 1px solid transparent;
+.theme-settings:not(.True) {
+    border-width: 0px !important;
 }
 
 .theme-settings.True,
 .theme-settings-collapsed.True {
-    background-color: #fff;
-    color: #222;
-    border-left-color: #d5d5d5;
-    border-bottom-color: #ffffff;
-    border-right-color: #ffffff;
+    background-color: #fff!important;
+    color: #222!important;
+}
+
+.theme-settings a {
+    position: relative;
+    transform: scale(1);
     height: 3.5rem;
+    display: inline-block;
 }
 
-.theme-settings-collapsed.True {
-    z-index: 31;
+.theme-settings.True a {
+    color: inherit !important;
+    background-color: transparent!important;
 }
 
-.theme-settings.True:after {
-    height: 1px;
-    width: 56px;
+.theme-settings a::before {
+    content: "";
     position: absolute;
-    content: '';
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1px;
+    background-color: currentColor;
+    opacity: .2;
+}
+
+.theme-settings a,
+.theme-settings a:hover,
+.theme-settings a:active,
+.theme-settings a:focus {
+    color: inherit!important;
+    background: transparent!important;
+}
+.theme-settings a:hover:before {
+    opacity: 1;
+}
+.theme-settings a:hover:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 1px;
+    height: 100%;
+    width: calc(100% - 1px);
+    z-index: -1;
+    background-color: currentColor;
+    opacity: 1;
+}
+.theme-settings a:hover > span {
+    opacity: .9;
+    color: #fff;
 }
 
 #settingsbar {
@@ -40,10 +68,11 @@
     border-left: 1px solid #e3e3e3;
     border-bottom: 1px solid #e3e3e3;
     padding: 0 !important;
-    width: 280px;
+    width: 310px;
     height: 100%;
     z-index: 30;
     overflow-y: visible;
+    top: 3.5rem;
 }
 
 #themesMenu {
@@ -86,7 +115,7 @@
 
 #themesMenu {
     font-size: 14px;
-    min-width: 250px;
+    min-width: 300px;
 }
 
 #themesMenu .nav {
@@ -241,19 +270,6 @@
     line-height: 24px;
     box-shadow: none;
     text-shadow: none;
-}
-
-.sidebar .navbar-toggler {
-    border-radius: 4px;
-    font-size: 20px;
-    color: rgba(255,255,255,.5) !important;
-    background-color: rgba(255, 255, 255, 0.1) !important;
-    border-image-width: 0 !important;
-}
-
-.sidebar .navbar-toggler-icon {
-    background-color: rgba(255, 255, 255, 0.1) !important;
-    font-size: 20px;
 }
 
 #themesMenu .nav-link {

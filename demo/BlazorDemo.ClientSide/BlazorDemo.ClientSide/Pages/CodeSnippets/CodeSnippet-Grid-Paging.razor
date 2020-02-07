@@ -1,0 +1,27 @@
+﻿<CodeSnippet>
+@(@"<DxDataGrid Data=""@DataSource"" 
+            ShowFilterRow=""false"" 
+            ShowPager=""true"" 
+            PagerPageSizeSelectorVisible=""true"" 
+            PagerAllDataRowsItemVisible=""true"" 
+            PagerAllowedPageSizes=@(new int[] {2,10,20,40}) 
+            PagerNavigationMode=PagerNavigationMode.InputBox>
+
+        <DxDataGridColumn Field=""@nameof(ProductFlat.Id)"" Caption=""Id"" Width=""50px"">
+        </DxDataGridColumn>
+
+        <DxDataGridColumn Field=""@nameof(ProductFlat.ProductName)"" Caption=""Product Name"" Width=""330px"">
+        </DxDataGridColumn>
+
+        <DxDataGridColumn Field=""@nameof(ProductFlat.Availability)"" Caption=""Availability"" Width=""110px"">
+            <DisplayTemplate>
+               ...
+            </DisplayTemplate>
+        </DxDataGridColumn>
+
+        <DxDataGridColumn Field=""@nameof(ProductFlat.Category)"" Caption=""Category"" Width=""150px""></DxDataGridColumn>
+        <DxDataGridColumn Field=""@nameof(ProductFlat.Subcategory)"" Caption=""Subcategory"" Width=""150px""></DxDataGridColumn>
+        <DxDataGridDateEditColumn Field=""@nameof(ProductFlat.LastUpdatedDate)"" Caption=""Last Updated Date"" Width=""200px""></DxDataGridDateEditColumn>
+
+</DxDataGrid>")
+</CodeSnippet>

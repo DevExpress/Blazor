@@ -1,0 +1,24 @@
+﻿<CodeSnippet>
+@(@"<DxTagBox Data=""@Cities""
+          AllowCustomTags=""true""
+          @bind-Tags=""Tags""
+          @bind-DropDownVisible=""@DropDownVisible"">
+</DxTagBox>
+
+@code {
+    IEnumerable<string> Cities = new List<string>() {
+        ""London"",
+        ""Berlin"",
+        ""Paris"",
+    };
+
+     IEnumerable<string> tags = new List<string>() {
+        ""London"",
+        ""New York""
+    };
+    IEnumerable<string> Tags { get => tags; set { tags = value; InvokeAsync(StateHasChanged); } }
+
+    bool dropDownVisible = true;
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); } }
+}")
+</CodeSnippet>

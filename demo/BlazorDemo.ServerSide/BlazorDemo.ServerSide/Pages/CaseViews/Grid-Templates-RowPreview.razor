@@ -1,0 +1,74 @@
+﻿@using Demo.Blazor.Model
+@using Demo.Blazor.Services
+@inject EmployeeService EmployeeService
+
+<div class="demo-description" id="RowPreviewTemplate">
+    <h2><DemoNavLink Link="GridTemplate#RowPreviewTemplate" />Data Grid - Row Preview Template<span class="demo-badge badge badge-success">New</span></h2>
+    <p>
+        This demo illustrates how to use the Data Grid’s <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.RowPreviewTemplate">RowPreviewTemplate</a> property to show preview sections under each data row across all columns. These sections can display any content, such as tables, images, values from data source fields, custom text, and so on.
+    </p>
+
+</div>
+
+@if (DataSource == null) {
+    <p><em>Loading...</em></p>
+}
+else {
+    <DxDataGrid Data="@DataSource"
+                VerticalScrollBarMode="@ScrollBarMode.Auto"
+                VerticalScrollableHeight="400"
+                ShowPager="false"
+                RowRemoving="@((dataItem) => OnRowRemoving(dataItem))"
+                RowUpdating="@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))"
+                RowInserting="@((newValues) => OnRowInserting(newValues))"
+                CssClass="mw-1100">
+
+        <Columns>
+            <DxDataGridColumn Field="@nameof(Employee.FirstName)" SortOrder="@DataGridColumnSortOrder.Ascending"></DxDataGridColumn>
+            <DxDataGridColumn Field="@nameof(Employee.LastName)"></DxDataGridColumn>
+            <DxDataGridColumn Field="@nameof(Employee.Position)" Caption="Position" EditorVisible="@DefaultBoolean.True"></DxDataGridColumn>
+            <DxDataGridDateEditColumn Field="@nameof(Employee.BirthDate)" DisplayFormatString="D" EditFormatString="d" Caption="Birth Date" EditorVisible="@DefaultBoolean.True"></DxDataGridDateEditColumn>
+            <DxDataGridDateEditColumn Field="@nameof(Employee.HireDate)" DisplayFormatString="D" EditFormatString="d" Caption="Hire Date" EditorVisible="@DefaultBoolean.True"></DxDataGridDateEditColumn>
+        </Columns>
+        <RowPreviewTemplate Context="ItemInfo">
+            @{
+                Employee employee = ItemInfo.DataItem;
+                <table cellpadding="5" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td rowspan="4" style="border: 0px;">
+                                <img src="images/Employees/@(employee.FileName).png" width="76" />
+                            </td>
+                            <td style="border: 0px; white-space: normal;">
+                                @employee.Notes
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+        </RowPreviewTemplate>
+    </DxDataGrid>
+    <div class="code-snippet card demo-card-wide">
+        <CodeSnippetHeader></CodeSnippetHeader>
+        <div class="card-footer text-muted ">
+            <CodeSnippet_Grid_RowPreviewTemplate></CodeSnippet_Grid_RowPreviewTemplate>
+        </div>
+    </div>
+}
+
+@code {
+    IQueryable<Employee> DataSource;
+
+    protected override async Task OnInitializedAsync() {
+        DataSource = await EmployeeService.Load();
+    }
+    void OnRowRemoving(Employee dataItem) {
+        EmployeeService.Remove(dataItem);
+    }
+    void OnRowUpdating(Employee dataItem, Dictionary<string, object> newValue) {
+        EmployeeService.Update(dataItem, newValue);
+    }
+    void OnRowInserting(Dictionary<string, object> newValue) {
+        EmployeeService.Insert(newValue);
+    }
+}

@@ -1,0 +1,18 @@
+﻿<CodeSnippet>
+@(@"<DxTagBox Data=""@Fruits""
+          @bind-SelectedItems=""@SelectedFruits""
+          ReadOnly=""true""
+          HideSelectedItems=""false"">
+</DxTagBox>
+
+@code {
+    String[] Fruits = null;
+
+    IEnumerable<string> SelectedFruits;
+
+    protected override void OnInitialized() {
+        Fruits= new string[] { ""Apple"", ""Banana"", ""Lemon"", ""Orange"", ""Pear"", ""Pinapple"", ""Peach"" };
+        SelectedFruits = new List<string>() { DataSource[1], DataSource[4] };
+    }
+}")
+</CodeSnippet>

@@ -76,7 +76,7 @@ namespace BlazorDemo.ServerSide
                 app.UseHsts();
             }
 
-            app.UseClientSideBlazorFiles<ClientSide.Startup>();
+            app.UseClientSideBlazorFiles<ClientSide.Program>();
 
             app.UseHttpsRedirection();
 

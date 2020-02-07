@@ -1,14 +1,17 @@
 <div class="demo-description" id="LimitPageButtonsNumber">
-    <h2><NavLink class="demo-anchor" href="Pager#LimitPageButtonsNumber" />Pager - Limit the Number of Page Buttons</h2>
+    <h2><DemoNavLink Link="Pager#LimitPageButtonsNumber" />Pager - Limit the Number of Page Buttons</h2>
     <p>
-        This example sets the total number of pages to 100, but limits the number of visible buttons to 10. See how the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPager">DxPager</a> control skips number ranges and displays ellipses instead.
+        In this demo module, the total number of pages (<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxPagerBase.PageCount">PageCount</a>) 
+        is set to 100 and the number of visible numeric buttons (<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxPagerBase.VisibleNumericButtonCount">VisibleNumericButtonCount</a>) 
+        is set to 7. Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPager">Pager</a> component's navigation buttons to switch between pages.
+
     </p>
 </div>
 
 <div class="card demo-card">
     <div class="card-body">
         <DxPager PageCount="100"
-                 CollapseButtonCount="10"
+                 VisibleNumericButtonCount="7"
                  ActivePageIndex="50"
                  NavigationMode="PagerNavigationMode.NumericButtons">
         </DxPager>

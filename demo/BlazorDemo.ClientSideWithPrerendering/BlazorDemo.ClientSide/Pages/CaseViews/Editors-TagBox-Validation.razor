@@ -1,0 +1,87 @@
+﻿@using Demo.Blazor.Model
+@using System.ComponentModel.DataAnnotations
+
+<div class="demo-description" id="Validation">
+    <h2><DemoNavLink Link="TagBox#Validation" />TagBox - Validation</h2>
+    <p>
+        This demo illustrates how to add the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-1">TagBox</a> to Blazor's standard 
+        <a class="helplink" target="_blank" href="https://docs.microsoft.com/aspnet/core/blazor/forms-validation?view=aspnetcore-3.0">EditForm</a> component. This component allows data validation.
+    </p>
+    <p>
+        Use the TagBox’s <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTagBoxBase-1.ValidateBy">ValidateBy</a> property to specify whether to validate 
+        the editor’s tags or the drop-down list’s selected items. In this demo, this property is set to 
+        <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.TagBoxValidateBy">TagBoxValidateBy.Tags</a>.
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTagBoxBase-1.Tags">Tags</a> property’s bound field is marked with the Required 
+        attribute and a custom <a class="helplink" target="_blank" href="https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-3.0">data annotation attribute</a> that validates email formats.
+    </p>
+    <p>
+        Users can select email recipients from a drop-down list or type email addresses in the edit box. The TagBox is outlined in color: <span class="invalid" style="color:red;">red</span> indicates the editor contains 
+        invalid tags or is empty; <span class="modified" style="outline: 1px solid #26b050; color:#26b050;">green</span> indicates valid tags.
+    </p>
+</div>
+
+<div class="card demo-card">
+    <div class="card-header">@FormValidationState</div>
+    <div class="card-body mw-480" style="height: 300px">
+        <EditForm Model="@recipients" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+            <DataAnnotationsValidator />
+            <p>
+                <label for="emails">Recipients:</label>
+                <DxTagBox Id="emails"
+                          Data="@Emails.DataSource"
+                          NullText="Select email recipients"
+                          AllowCustomTags="true"
+                          ValidateBy="@TagBoxValidateBy.Tags"
+                          @bind-Tags="@recipients.Data"
+                          @bind-DropDownVisible="@DropDownVisible">
+                </DxTagBox>
+                <ValidationMessage For="@(() => recipients.Data)" />
+            </p>
+            <DxButton SubmitFormOnClick="true" Text="Submit" RenderStyle="@ButtonRenderStyle.Secondary" />
+        </EditForm>
+    </div>
+</div>
+
+<CodeSnippet_Editor_TagBox_Validation></CodeSnippet_Editor_TagBox_Validation>
+
+
+@code {
+    string FormValidationState = @"Press the ""Submit"" button to validate the form.";
+
+    EmailRecipients recipients = new EmailRecipients();
+
+    private void HandleValidSubmit()
+    {
+        FormValidationState = @"Form data is valid";
+    }
+    private void HandleInvalidSubmit()
+    {
+        FormValidationState = @"Form data is invalid";
+    }
+
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+    public class EmailAdressesAttribute: ValidationAttribute
+    {
+        public override bool IsValid(object value)
+        {
+            IEnumerable<string> data = value as IEnumerable<string>;
+            if (data != null) {
+                foreach (var item in data)
+                    if (!item.Contains("@") || !item.Substring(item.IndexOf('@')).Contains("."))
+                        return false;
+                return true;
+            } else
+                return false;
+        }
+    }
+
+    bool dropDownVisible = true;
+    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); } }
+
+    public class EmailRecipients {
+        [Required]
+        [EmailAdresses(ErrorMessage = "Invalid email")]
+        public IEnumerable<string> Data { get; set;} = null;
+    }
+
+    }

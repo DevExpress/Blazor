@@ -134,20 +134,11 @@ code.hljs.xml {
     flex-direction: column;
 }
 
-.main .top-row {
-    z-index: 1000;
-    padding-right:0!important;
-    box-shadow: none;
-}
-
-.main .top-row .caption {
-    color: inherit;
-}
-
 .top-row {
-    border-left: 0 !important;
-    border-right: 0 !important;
-    border-top: 0 !important;
+    border: none;
+    background-color: inherit;
+    border-radius: 0;
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
 }
 
 .sidebar > .logo-container {
@@ -162,12 +153,24 @@ code.hljs.xml {
 }
 
 .logo-container .logo-image {
+    background-color: currentColor;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    cursor: pointer;
+    margin-left: 16px;
     width: 180px;
     height: 30px;
-    margin-left: 16px;
-    background-color: currentColor;
     mask-image: url("../images/logo.svg");
     -webkit-mask-image: url("../images/logo.svg");
+}
+
+@media (max-width: 359.98px) {
+    .logo-container .logo-image {
+        width: 28px;
+        height: 28px;
+        mask-image: url("../images/logo-xs.svg");
+        -webkit-mask-image: url("../images/logo-xs.svg");
+    }
 }
 
 div.logo {
@@ -180,19 +183,41 @@ div.logo {
     color: #212529;
 }
 
+.footer {
+    padding-bottom: 12px;
+}
+
+.footer .version,
+.footer .copyright {
+    font-size: 11px;
+}
+
 .sidebar .footer {
-    position: absolute;
+    display: none;
+    padding-top: 12px;
     bottom: 0;
     left: 0;
     right: 0;
     padding-left: 10px;
-    padding-bottom: 12px;
+    position: relative;
 }
 
-    .sidebar .footer .version,
-    .sidebar .footer .copyright {
-        font-size: 11px;
-    }
+.sidebar .footer:before {
+    content: "";
+    border-top-width: 1px;
+    border-top-color: currentColor;
+    border-top-style: solid;
+    opacity: 0.15;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.main .footer {
+    padding-left: 1.5rem;
+    padding-top: 1.1rem;
+}
 
 div.content > .card:last-child {
     margin-bottom: 50px;
@@ -347,19 +372,6 @@ div.content > .card:last-child {
 .demo-description > h1:hover .demo-anchor,
 .demo-description > h2:hover .demo-anchor {
     opacity: 1;
-}
-
-.sidebar .navbar-toggler {
-    border: 0;
-    padding: 0;
-    margin-left: 16px;
-}
-.sidebar .navbar-dark .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(33,33,33, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
-    background-color: white !important;
-    width: 44px;
-    height: 40px;
-    border-radius: 3px;
 }
 
 .badge.demo-badge {
@@ -551,4 +563,33 @@ a.helplink {
     width: 100%;
     height: 100%;
     top: 0%;
+}
+
+.undo {
+    width: 16px;
+    height: 16px;
+    background-image: url("../images/undo.svg");
+    margin: 0 8px 0 0;
+}
+
+.redo {
+    width: 16px;
+    height: 16px;
+    background-image: url("../images/redo.svg");
+    margin: 0 0 0 8px;
+}
+
+.like {
+    height: 16px;
+    width: 16px;
+    background-image: url("../images/like.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    margin-right: 8px;
+}
+
+.datagrid-border-radius-top-0 > .card {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
