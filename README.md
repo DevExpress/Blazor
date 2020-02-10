@@ -60,7 +60,7 @@ You can find appropriate demos in the repositories below:
 * demo/BlazorDemo.ClientSide
 * demo/BlazorDemo.ClientSideWithPrerendering&#42; 
 
-> &#42; For more information, see the [Update Metadata at Runtime - Free SEO Tool](https://community.devexpress.com/blogs/aspnet/archive/2019/06/27/devexpress-blazor-update-metadata-at-runtime-free-seo-tool.aspx) blog post.
+> &#42; For more information, see the [Update Metadata at Runtime - Free SEO Tool](https://community.devexpress.com/blogs/aspnet/archive/2019/06/27/devexpress-blazor-update-metadata-at-runtime-free-seo-tool.aspx) blog post. Make sure that you [run this demo correctly](#ClientSideWithPrerendering).
 
 To open the required demo, do the following:
 
@@ -104,6 +104,8 @@ To open the required demo, do the following:
    ![Add new NuGet source](media/VS2019Release-AddNuGetPackage.png) 
 
 5. Start the application.
+
+  > <a name="ClientSideWithPrerendering"/> For the **ClientSideWithPrerendering** demo, make sure that the **ServerSide** project is set as the solution's startup project.
 
 See also: 
 
