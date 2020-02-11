@@ -17,7 +17,7 @@ The DevExpress UI components featured in this demo are available for free downlo
 * [Included Demo Modules](#included-demo-modules)
 
 # Live Demo
- 
+ 
 Check out this [demo in live](https://demos.devexpress.com/blazor/).
 
 # Examples 
@@ -217,7 +217,7 @@ To resolve this issue, use the solution from the [ComboBox for Blazor - How to r
 ## 3. Could not find 'X' in 'window.DxBlazor'.
 
 Earlier, our clients' scripts were manually added to a project. Now, we automatically distribute them with the NuGet Package in the `_content/DevExpress.Blazor/` folder (see the 6th item of the [How to create a new project](https://github.com/devexpress/blazor#how-to-create-a-new-project) paragraph). So, our users may face such an issue if they reference an old version of our static files instead of the new one. For example, a similar issue was discussed in the [I have a formlayout error when running a Blazor website](https://stackoverflow.com/questions/57593583/i-have-a-formlayout-error-when-running-a-blazor-website) SO thread.
- 
+ 
 If solutions suggested there do not help, create an issue here or submit a ticket in our [Support Center](https://www.devexpress.com/Support/Center/Question/Create) so that we can investigate your case.
 
 ## 4. DxDataGrid in Blazor
@@ -275,7 +275,7 @@ See [Configure the Linker for ASP.NET Core Blazor](https://docs.microsoft.com/en
 
 ## 5. DxScheduler in Blazor
 
-If you use client-side Blazor with DxScheduler, you may see the following exception or a similar exception:
+If you use Blazor WebAssembly with DxScheduler, you may see the following exception or a similar exception:
 
 > "System.MissingMethodException: Constructor on type 'System.ComponentModel.Int32Converter' not found."
 
