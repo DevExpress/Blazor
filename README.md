@@ -52,7 +52,7 @@ The following table describes the version compatibility of .NET Core and the Dev
 
 # How to Run This Demo Locally
 
-The Blazor framework uses either WebAssembly-based .NET runtime (**client-side Blazor**) or server-side ASP.NET Core (**server-side Blazor**). Our Blazor components support both of these approaches. 
+The Blazor framework uses either WebAssembly-based .NET runtime (**Blazor WebAssembly**) or server-side ASP.NET Core (**Blazor Server**). Our Blazor components support both of these approaches. 
 
 You can find appropriate demos in the repositories below:
 
@@ -150,14 +150,14 @@ Follow the steps below to try our UI for Blazor in your own application.
    ![Add new NuGet source](media/VS2019Release-AddNuGetPackage.png) 
 4. Build the project.
 5. Link the following file to your layout’s HEAD section:
-   * For Blazor Server, add the line below to the `_Host.cshtml` file. 
+   * For Blazor Server, add the line below to the `Pages/_Host.cshtml` file. 
         ```Razor
         <head>
             ...
             <link href="_content/DevExpress.Blazor/dx-blazor.css" rel="stylesheet" />
         </head>
         ```
-    * For Blazor WebAssembly, add the line below to the `index.html` file.
+    * For Blazor WebAssembly, add the line below to the `wwwroot/index.html` file.
         ```Razor
         <head>
             ...
