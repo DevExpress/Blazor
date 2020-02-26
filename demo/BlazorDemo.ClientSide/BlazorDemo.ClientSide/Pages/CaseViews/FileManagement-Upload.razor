@@ -1,0 +1,55 @@
+﻿@using Demo.Blazor.Model
+@inject NavigationManager NavigationManager
+
+<div class="demo-description" id="Overview">
+    <h2><NavLink class="demo-anchor" href="Upload#Overview" />Upload - Overview</h2>
+    <p>
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload">Upload</a> component allows users to upload files to the server. Users can select files in the open file dialog or drag and drop files to the drop zone.
+    </p>
+    <p>
+        The main Upload API members are listed below.
+    </p>
+    <p>
+        <ul>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxUploadBase.Name">Name</a> - Required to access uploaded files on the server.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxUploadBase.UploadUrl">UploadUrl</a> - Specifies a target URL for the upload request.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxUploadBase.Visible">Visible</a> - Specifies whether the component is visible.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxUploadBase.SelectedFilesChanged">SelectedFilesChanged</a> - Fires when the file list is changed.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxUploadBase.ExternalSelectButtonCssSelector">ExternalSelectButtonCssSelector</a> - Specifies the CSS selector of a button or HTML element that invokes the open file dialog.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxUploadBase.ExternalDropZoneCssSelector">ExternalDropZoneCssSelector</a> - Specifies the CSS selector of a container or HTML element where to drop the files.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxUploadBase.ExternalDropZoneDragOverCssClass">ExternalDropZoneDragOverCssClass</a> - Specifies the CSS class that is used for a drop zone when users drag files over it.</li>
+        </ul>
+    </p>
+    <p>This demo illustrates how to implement the external <b>Select File</b> button and drop zone container. The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload">Upload</a> component is hidden when the file list is empty.</p>
+</div>
+
+<div class="card demo-card border-0">
+    <div class="card-body">
+        <div id="overviewDemoDropZone" class="card custom-drop-zone jumbotron">
+            <svg class="drop-file-icon mb-3" role="img" style="width: 42px; height: 42px;"><use href="#drop-file-icon"></use></svg>
+            <span>Drag and Drop File Here</span><span class="m-1">or</span>
+            <button id="overviewDemoSelectButton" class="btn border-primary btn-primary m-1">Select File</button>
+        </div>
+        <DxUpload Name="myFile" Visible="@UploadVisible" ExternalSelectButtonCssSelector="#overviewDemoSelectButton" ExternalDropZoneCssSelector="#overviewDemoDropZone" MaxFileSize="15000000"
+                  ExternalDropZoneDragOverCssClass="custom-drag-over border-light text-white" UploadUrl="@GetUploadUrl("api/Upload/UploadFile/")" SelectedFilesChanged="@SelectedFilesChanged">
+        </DxUpload>
+    </div>
+</div>
+
+<CodeSnippet_FileManagement_Upload></CodeSnippet_FileManagement_Upload>
+
+
+@code {
+    bool UploadVisible { get; set; } = false;
+
+    protected void SelectedFilesChanged(IEnumerable<UploadFileInfo> files) {
+        UploadVisible = files.ToList().Count > 0;
+
+        InvokeAsync(StateHasChanged);
+    }
+    protected string GetUploadUrl(string url) {
+        return NavigationManager.ToAbsoluteUri(url).AbsoluteUri;
+    }
+}
+
+<FileManagement_Images></FileManagement_Images>

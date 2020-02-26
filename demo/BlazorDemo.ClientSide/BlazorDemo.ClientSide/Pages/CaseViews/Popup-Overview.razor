@@ -14,7 +14,9 @@
         <div class="target-container" @onclick="@(() => PopupVisible = true)"></div>
             <DxPopup HeaderText="Header"
                      @bind-Visible="@PopupVisible">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</p>
+                    <Content>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</p>
+                    </Content>
             </DxPopup>
     </div>
 </div>

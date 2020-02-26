@@ -50,7 +50,7 @@ namespace Demo.Blazor {
 
                 .Script("highlight-js", "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js", defer: false)
                 .Script("scroll-view-js", "~/lib/scroll-view.js", defer: false)
-                .Script("demo-js", "~/lib/dx-demo.js", defer: true)
+                .Script("demo-js", "~/lib/dx-demo.js", defer: false)
 
 
                 .StyleSheet("site-css", "~/css/site.css")

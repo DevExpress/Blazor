@@ -7,6 +7,9 @@
 
 @code {
     IEnumerable<string> Data;
+    IEnumerable<string> SelectedItems { get; set; }
+
+    bool DropDownVisible { get; set; } = true
 
     DataGridFilteringMode filteringMode = DataGridFilteringMode.StartsWith;
     DataGridFilteringMode FilteringMode { get => filteringMode; set { filteringMode = value; InvokeAsync(StateHasChanged); } }

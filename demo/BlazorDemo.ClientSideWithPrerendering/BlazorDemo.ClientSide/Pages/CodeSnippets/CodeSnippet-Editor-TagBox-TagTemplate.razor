@@ -19,13 +19,12 @@
 @code {
     Option[] DataSource = null;
     
-    IEnumerable<string> tags;
-    IEnumerable<string> Tags { get => tags; set { tags = value; InvokeAsync(StateHasChanged); } }
+    IEnumerable<string> Tags { get; set; }
 
-    bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); } }
+    bool DropDownVisible { get; set; } = true;
 
-    protected override void OnInitialized() {
+    protected override void OnInitialized() 
+    {
         DataSource = new Option[] {
             new Option(""Option 1"", ""btn-primary""),
             new Option(""Option 2"", ""btn-success""),
@@ -41,7 +40,8 @@
 </CodeSnippetTabPage>
 <CodeSnippetTabPage Text="Option">
 @(@"public class Option {
-    public Option(string data, string cssClass) {
+    public Option(string data, string cssClass) 
+    {
         Data = data;
         CssClass = cssClass;
     }

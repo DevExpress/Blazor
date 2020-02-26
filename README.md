@@ -15,6 +15,7 @@ The DevExpress UI components featured in this demo are available for free downlo
 * [Free Blazor Utilities and Dev Tools](#free-blazor-utilities-and-dev-tools)
 * [Troubleshooting](#troubleshooting)
 * [Included Demo Modules](#included-demo-modules)
+* [NuGet Package Change Log](#nuget-package-change-log)
 
 # Live Demo
  
@@ -34,7 +35,8 @@ The following table describes the version compatibility of .NET Core and the Dev
 
 | Supported frameworks | DevExpress.Blazor.nuget version |
 | ------------- | ------------- |
-|  [.NET Core 3.1.1 Release](https://devblogs.microsoft.com/dotnet/net-core-january-2020/) <br /> [Blazor WebAssembly 3.2.0 Preview 1](https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-1-release-now-available/) | **19.2.3 Release** |
+| [.NET Core 3.1.2 Release](https://devblogs.microsoft.com/dotnet/net-core-february-2020/) <br /> [Blazor WebAssembly 3.2.0 Preview 1](https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-1-release-now-available/) | **19.2.4-Release** |
+| [.NET Core 3.1.1 Release](https://devblogs.microsoft.com/dotnet/net-core-january-2020/) <br /> [Blazor WebAssembly 3.2.0 Preview 1](https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-1-release-now-available/) | **19.2.3 Release** |
 | [.NET Core 3.1.1 Release](https://devblogs.microsoft.com/dotnet/net-core-january-2020/) | **19.2.2 Beta** (make sure the [Include prerelease](#InstallPackage) option is enabled) |
 | [.NET Core 3.1 Release](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | **19.2.1 Beta** (make sure the [Include prerelease](#InstallPackage) option is enabled) |
 | [.NET Core 3.1 Release](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | **19.1.10 Release** |
@@ -149,7 +151,7 @@ Follow the steps below to try our UI for Blazor in your own application.
    
    ![Add new NuGet source](media/VS2019Release-AddNuGetPackage.png) 
 4. Build the project.
-5. Link the following file to your layout’s HEAD section:
+5. Link the following file to your layout's HEAD section:
    * For Blazor Server, add the line below to the `Pages/_Host.cshtml` file. 
         ```Razor
         <head>
@@ -164,15 +166,16 @@ Follow the steps below to try our UI for Blazor in your own application.
             <link href="_content/DevExpress.Blazor/dx-blazor.css" rel="stylesheet" />
         </head>
         ```
-        Call the [AddDevExpressBlazor](https://docs.devexpress.com/Blazor/Microsoft.Extensions.DependencyInjection.DevExpressServiceCollectionExtensions.AddDevExpressBlazor(Microsoft.Extensions.DependencyInjection.IServiceCollection)) method from your project's  `Startup.ConfigureServices()` method:
+        Call the [AddDevExpressBlazor](https://docs.devexpress.com/Blazor/Microsoft.Extensions.DependencyInjection.DevExpressServiceCollectionExtensions.AddDevExpressBlazor(Microsoft.Extensions.DependencyInjection.IServiceCollection)) method from your project's  `Program.Main()` method:
         ```csharp
         using Microsoft.Extensions.DependencyInjection;
-        public class Startup {
-            
-            public void ConfigureServices(IServiceCollection services) {
-                ...
-                services.AddDevExpressBlazor();
-            }
+        
+        public class Program {
+          public static async Task Main(string[] args) {
+            ...
+            builder.Services.AddDevExpressBlazor();
+            await builder.Build().RunAsync();
+          }
         }
         ```  
 6. Register DevExpress.Blazor namespace in _\_Imports.razor_ file:
@@ -212,7 +215,21 @@ This provides more detailed information about these errors.
 
 ## 2. System.ArgumentNullException: Value cannot be null. (Parameter 'accessor') 
 
-To resolve this issue, use the solution from the [ComboBox for Blazor - How to resolve the 'System.ArgumentNullException: Value cannot be null. (Parameter 'accessor')' error](https://supportcenter.devexpress.com/ticket/details/t850754/combobox-for-blazor-how-to-resolve-the-system-argumentnullexception-value-cannot-be-null) ticket.
+This is a common Blazor exception that occurs if an EditForm's editor does not use two-way binding.
+
+To fix the issue, do one of the following:
+
+* Specify the Expression property for the properties you use. For example, if you use the [SelectedItem](http://docs.devexpress.devx/Blazor/DevExpress.Blazor.Base.DxComboBoxBase-1.SelectedItem) property and the [SelectedItemChanged](http://docs.devexpress.devx/Blazor/DevExpress.Blazor.Base.DxComboBoxBase-1.SelectedItemChanged) event separately, specify the [SelectedItemExpression](http://docs.devexpress.devx/Blazor/DevExpress.Blazor.Base.DxComboBoxBase-1.SelectedItemExpression) property also.
+
+  ```
+  <DxComboBox Data="@Strings"
+      SelectedItem="@selectedItem" 
+      SelectedItemChanged="@SelectedItemChanged"
+      SelectedItemExpression="@(() => selectedItem )">
+  </DxComboBox>
+  ``` 
+
+* Implement the two-way binding in the EditForm.
 
 ## 3. Could not find 'X' in 'window.DxBlazor'.
 
@@ -384,4 +401,4 @@ To resolve this issue, write more strict style rules in the *site.css* file so t
 
 # NuGet Package Change Log
 
-Check out thе NuGet package's [version history](changelog.md).
+Check out the NuGet package's [version history](changelog.md).

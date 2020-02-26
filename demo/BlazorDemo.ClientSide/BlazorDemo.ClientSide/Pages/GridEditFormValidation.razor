@@ -36,12 +36,12 @@ else
                 RowRemoving="@((dataItem) => OnRowRemoving(dataItem))"
                 RowEditStart="@(dataItem => OnRowEditStarting(dataItem))"
                 RowInsertStart="@(() => OnRowEditStarting(null))">
-        <ChildContent>
+        <Columns>
             <DxDataGridCommandColumn Width="150px"></DxDataGridCommandColumn>
             <DxDataGridColumn Field="@nameof(Vacancy.Description)"></DxDataGridColumn>
             <DxDataGridComboBoxColumn Field="@nameof(Vacancy.Region)" Data="@VacancyRepository.Regions"></DxDataGridComboBoxColumn>
             <DxDataGridColumn Field="@nameof(Vacancy.City)"></DxDataGridColumn>
-        </ChildContent>
+        </Columns>
         <EditFormTemplate>
             <EditForm Model="@EditContext" Context="EditFormContext" OnValidSubmit="@HandleValidSubmit">
                 <DataAnnotationsValidator />

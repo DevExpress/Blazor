@@ -1,0 +1,52 @@
+﻿<CodeSnippetTabbed>
+<CodeSnippetTabPage Text="Razor">
+@(@"<div id=""overviewDemoDropZone"" class=""card custom-drop-zone jumbotron"">
+    <svg class=""drop-file-icon mb-3"" role=""img"" style=""width: 42px; height: 42px;""><use href=""#drop-file-icon""></use></svg>
+    <span>Drag and Drop File Here</span><span class=""m-1"">or</span>
+    <button id=""overviewDemoSelectButton"" class=""btn border-primary btn-primary m-1"">Select File</button>
+</div>
+<DxUpload Name=""myFile"" Visible=""@UploadVisible"" ExternalSelectButtonCssSelector=""#overviewDemoSelectButton"" ExternalDropZoneCssSelector=""#overviewDemoDropZone"" MaxFileSize=""15000000""
+        ExternalDropZoneDragOverCssClass=""custom-drag-over border-light text-white"" UploadUrl=""@GetUploadUrl(""api/Upload/UploadFile/"")"" SelectedFilesChanged=""@SelectedFilesChanged"">
+</DxUpload>
+
+@code {
+    bool UploadVisible { get; set; } = false;
+
+    protected void SelectedFilesChanged(IEnumerable<UploadFileInfo> files) {
+        UploadVisible = files.ToList().Count > 0;
+
+        InvokeAsync(StateHasChanged);
+    }
+    protected string GetUploadUrl(string url) {
+        return NavigationManager.ToAbsoluteUri(url).AbsoluteUri;
+    }
+}")
+</CodeSnippetTabPage>
+<CodeSnippetTabPage Text="UploadController">
+@(@"[Route(""api/[controller]"")]
+public class UploadController : ControllerBase {
+    private readonly IWebHostEnvironment _hostingEnvironment;
+
+    public UploadController(IWebHostEnvironment hostingEnvironment) {
+        _hostingEnvironment = hostingEnvironment;
+    }
+
+    [HttpPost]
+    public ActionResult UploadFile(IFormFile myFile) {
+        try {
+            var path = Path.Combine(_hostingEnvironment.WebRootPath, ""uploads"");
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            using (var fileStream = System.IO.File.Create(Path.Combine(path, myFile.FileName))) {
+                myFile.CopyTo(fileStream);
+            }
+        } catch {
+            Response.StatusCode = 400;
+        }
+
+        return new EmptyResult();
+    }
+}")
+</CodeSnippetTabPage>
+</CodeSnippetTabbed>

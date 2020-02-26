@@ -27,11 +27,9 @@
 @code {
     String[] DataSource = null;
 
-    IEnumerable<string> items;
-    IEnumerable<string> Items { get => items; set { items = value; InvokeAsync(StateHasChanged); } }
+    IEnumerable<string> Items { get; set; }
 
-    bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); } }
+    bool DropDownVisible { get; set; } = true;
 
     protected override void OnInitialized() {
         DataSource = new string[] { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7" };

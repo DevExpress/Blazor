@@ -2,6 +2,58 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 19.2.4 Release
+
+### .NET Core 3.1.2 Support
+
+In this version, we added support for the [.NET Core 3.1.2](https://github.com/dotnet/core/blob/master/release-notes/3.1/3.1.2/3.1.2.md) update.
+
+### New Upload Component
+
+Our new Upload component for Blazor includes the following features:
+
+* Chunk upload for large files
+* Upload multiple files at once
+* Drag-and-drop area for uploaded files
+* File extension and size validation
+* Instant upload
+* Upload on a button click
+
+[Demos](https://demos.devexpress.com/blazor/Upload) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload)
+
+### Added
+
+* Chart – Rotation ([Demo](https://demos.devexpress.com/blazor/ChartAxes#ChartRotation) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxChartBase-1.Rotated))
+* Calendar - Navigation through months, years, decades, and centuries ([Demo](https://demos.devexpress.com/blazor/Calendar) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar#select-dates))
+
+### Fixed
+
+* Data Grid
+  * [NullReferenceException occurs when DxCheckBox changes the ShowFilterRow property value](https://supportcenter.devexpress.com/ticket/details/T862009)
+  * [NullReferenceException occurs if the grid is empty and DxDataGridComboBoxColumn is used with a hidden filter row](https://supportcenter.devexpress.com/ticket/details/T853567)
+  * [Virtual scrolling does not work if the grid is bound to data via the CustomData property](https://supportcenter.devexpress.com/ticket/details/T854655)
+  * [ComboBox does not keep the selected item while Grid records are edited if a ComboBox column is bound to a collection of custom objects](https://supportcenter.devexpress.com/ticket/details/t863709)
+* [Drop-down editors in the Popup component are not displayed over the Popup's boundaries and cause scroll bars to appear instead.](https://supportcenter.devexpress.com/ticket/details/t860343)
+
+
+### Breaking Changes
+
+* [Data Grid – For combo box columns bound to a collection of custom objects, the RowUpdating(Async) and RowInserting(Async) event handlers now accept the entire selected item instead of the selected item's value](https://supportcenter.devexpress.com/ticket/details/t865261)
+* [Upload - Changes in the UploadMode enumeration, AcceptedFileTypes property, and upload events](https://supportcenter.devexpress.com/ticket/details/t863515) (compared to [v19.2.4-Preview](#1924-preview))
+
+# 19.2.4-Preview
+
+### New Upload Component
+
+Our new Upload component for Blazor includes the following features:
+
+* Chunk upload for large files
+* Upload multiple files at once
+* Drag-and-drop area for uploaded files
+* File extension and size validation
+* Instant upload
+* Upload on a button click
+
 # 19.2.3 Release
 
 > Please also explore new features and breaking changes introduced in [19.2.1 Beta](#1921-beta) and [19.2.2 Beta](#1922-beta) versions.

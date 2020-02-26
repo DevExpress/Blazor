@@ -1,0 +1,153 @@
+﻿@page "/ChartAxes"
+@using System.Globalization
+@using Demo.Blazor
+@using Demo.Blazor.Model
+@using DevExpress.Blazor
+@using Demo.Blazor.Services
+@inject WeatherForecastService ForecastService
+<div class="demo-description" id="MultipleAxes">
+    <h2><DemoNavLink Link="ChartAxes#MultipleAxes" />Charts - Multiple Axes</h2>
+    <p>
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1">Chart</a> component allows you to display charts with multiple axes and combine several charts.
+    </p>
+</div>
+<DxChart Data="@SalesData">
+    <DxChartTitle Text="Sales amount" />
+    <DxChartLegend Position="@RelativePosition.Outside" />
+    <DxChartValueAxis>
+        <DxChartAxisLabel Format="@ChartAxisLabelFormat.Decimal"></DxChartAxisLabel>
+        <DxChartAxisTitle Text="Amount"></DxChartAxisTitle>
+    </DxChartValueAxis>
+    <DxChartValueAxis Name="TotalAxis" Position="@HorizontalEdge.Right">
+        <DxChartAxisTitle Text="Total Amount"></DxChartAxisTitle>
+    </DxChartValueAxis>
+    <DxChartArgumentAxis>
+        <DxChartAxisTitle Text="Cities"></DxChartAxisTitle>
+    </DxChartArgumentAxis>
+    <DxChartFullStackedBarSeries Name="2013" Filter="@((SaleInfo s) => s.Date.Year == 2013)" AggregationMethod="@Enumerable.Sum" ArgumentField="@(s => s.City)" ValueField="@(s => s.Amount)" />
+    <DxChartFullStackedBarSeries Name="2014" Filter="@((SaleInfo s) => s.Date.Year == 2014)" AggregationMethod="@Enumerable.Sum" ArgumentField="@(s => s.City)" ValueField="@(s => s.Amount)" />
+    <DxChartFullStackedBarSeries Name="2015" Filter="@((SaleInfo s) => s.Date.Year == 2015)" AggregationMethod="@Enumerable.Sum" ArgumentField="@(s=> s.City)" ValueField="@(s => s.Amount)" />
+    <DxChartSplineSeries Name="Total" AggregationMethod="@Enumerable.Sum" ArgumentField="@((SaleInfo s)=> s.City)" ValueField="@(s => s.Amount)" Axis="TotalAxis" />
+</DxChart>
+<CodeSnippet_Charts_MultipleAxesCustomization />
+
+<div class="demo-description" id="ChartRotation">
+    <h2>
+        <DemoNavLink Link="ChartAxes#ChartRotation" />Charts - Rotation<span class="demo-badge badge badge-success">New</span>
+    </h2>
+    <p>
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1">Chart</a>
+        component allows you to swap the argument (X) and value (Y) axes and display the X axis vertically and the Y axis
+        horizontally. To do this, set the chart’s
+        <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxChartBase-1.Rotated">Rotated</a>
+        property to <b>true</b>.
+    </p>
+    <p>
+        This demo shows two charts bound to the same data source. The chart on the left has the default axes, and the chart
+        on the right has swapped axes.
+    </p>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-evenly; min-width: 500px;">
+    <div class="medium-chart-container" style="width: 500px; height: 380px;">
+        <DxChart Data="@GetData()">
+            <DxChartTitle Text="@($"The loudness of sounds (no changes)")" />
+            <DxChartLegend Visible="false" />
+            <DxChartArgumentAxis Type="@ChartAxisType.Discrete" />
+            <DxChartValueAxis Type="@ChartAxisType.Logarithmic" LogarithmBase="2" />
+            <DxChartLineSeries ArgumentField="@((DataPoint s) => s.Argument)" ValueField="@((DataPoint s) => s.Value)" />
+        </DxChart>
+    </div>
+    <div class="medium-chart-container rotated-chart" style="width: 500px; height: 380px; overflow: hidden;">
+        <DxChart Data="@GetData()" Rotated="true">
+            <DxChartTitle Text="@($"The loudness of sounds (swapped axes)")" />
+            <DxChartLegend Visible="false" />
+            <DxChartArgumentAxis Type="@ChartAxisType.Discrete" />
+            <DxChartValueAxis Type="@ChartAxisType.Logarithmic" LogarithmBase="2" />
+            <DxChartLineSeries ArgumentField="@((DataPoint s) => s.Argument)" ValueField="@((DataPoint s) => s.Value)" />
+        </DxChart>
+    </div>
+</div>
+<CodeSnippet_Charts_Rotated />
+
+<div class="demo-description" id="AxisTypes">
+    <h2>
+        <DemoNavLink Link="ChartAxes#AxisTypes" />Charts - Axis Types
+    </h2>
+    <p>
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1">Chart</a> component automatically detects the first series’ data type and uses it to render X (argument) and Y (value) axes. If the data range or format is series specific, each series can use its own Y axis. The number of Chart's Y axes is not limited.
+    </p>
+    <p>
+        To change the type of an axis, use its <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartArgumentAxis.Type">Type</a> property. The following axis types are available:
+        <ul>
+            <li>
+                <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartAxisType">Auto</a> (Default) - For integer and float data types, displays numeric arguments/values divided by ticks (the <b>Continuous</b> type). For other data types, displays discrete arguments/values that correspond to chart points (the <b>Discrete</b> type).
+            </li>
+            <li>
+                <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartAxisType">Continuous</a> - Displays numeric arguments/values divided by ticks.
+            </li>
+            <li>
+                <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartAxisType">Discrete</a> - Displays discrete arguments/values that correspond to chart points.
+            </li>
+            <li>
+                <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartAxisType">Logarithmic</a> - Displays numeric arguments/values that grow exponentially. Each axis argument/value equals to the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartArgumentAxis.LogarithmBase">LogarithmBase</a> value raised to some power. For example, if <b>LogarithmBase</b> is set to 10, the following arguments/values are displayed: 10<sup>-2</sup>, 10<sup>-1</sup>, 10<sup>0</sup>, 10<sup>1</sup>, 10<sup>2</sup>, etc. This type is useful when you need to visualize a dataset of rapidly-growing values.
+            </li>
+        </ul>
+    </p>
+    <p>
+        In this demo, two Chart components display argument axes of the <b>Discrete</b> type, and value axes of <b>Continuous</b> and <b>Logarithmic</b> types, respectively. The <b>LogarithmBase</b> property for the second chart is set to 2.
+    </p>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-evenly; min-width: 500px;">
+    <div>
+        <DxChart Data="@GetData()">
+            <DxChartTitle Text="@($"The loudness of sounds (continuous value axis)")" />
+            <DxChartLegend Visible="false" />
+            <DxChartArgumentAxis Type="@ChartAxisType.Discrete" />
+            <DxChartValueAxis Type="@ChartAxisType.Continuous" />
+            <DxChartLineSeries ArgumentField="@((DataPoint s) => s.Argument)" ValueField="@((DataPoint s) => s.Value)" />
+        </DxChart>
+    </div>
+    <div>
+        <DxChart Data="@GetData()">
+            <DxChartTitle Text="@($"The loudness of sounds (logarithmic value axis)")" />
+            <DxChartLegend Visible="false" />
+            <DxChartArgumentAxis Type="@ChartAxisType.Discrete" />
+            <DxChartValueAxis Type="@ChartAxisType.Logarithmic" LogarithmBase="2" />
+            <DxChartLineSeries ArgumentField="@((DataPoint s) => s.Argument)" ValueField="@((DataPoint s) => s.Value)" />
+        </DxChart>
+    </div>
+</div>
+<CodeSnippet_Charts_AxesTypes />
+
+@code {
+    IQueryable<SaleInfo> SalesData;
+    WeatherForecast[] WeatherForecasts;
+    Random random;
+
+    protected override async Task OnInitializedAsync() {
+        SalesData = await Sales.Load();
+        WeatherForecasts = await ForecastService.GetDetailedForecastAsync();
+        random = new Random();
+    }
+
+    List<DataPoint> GetData() {
+        List<DataPoint> result = new List<DataPoint>(9);
+        result.Add(new DataPoint("Whisper", 0.15));
+        result.Add(new DataPoint("Street noise", 8));
+        result.Add(new DataPoint("Jackhummer", 32));
+        result.Add(new DataPoint("Subway train", 64));
+        result.Add(new DataPoint("Loud music", 128));
+        result.Add(new DataPoint("Pain threshold", 256));
+        result.Add(new DataPoint("Buzzer", 512));
+        result.Add(new DataPoint("Rocket start", 2048));
+        result.Add(new DataPoint("Deadly level", 16348));
+        return result;
+    }
+
+    struct DataPoint {
+        public DataPoint(string argument, double value) { Argument = argument; Value = value; }
+        public string Argument { get; set; }
+        public double Value { get; set; }
+    }
+}

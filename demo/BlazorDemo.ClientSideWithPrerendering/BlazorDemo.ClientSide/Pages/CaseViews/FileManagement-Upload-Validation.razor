@@ -1,0 +1,23 @@
+﻿@using Demo.Blazor.Model
+@inject NavigationManager NavigationManager
+
+<div class="demo-description" id="Validation">
+    <h2><NavLink class="demo-anchor" href="Upload#Validation" />Upload - Validation</h2>
+    <p>This demo illustrates how to use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxUploadBase.MaxFileSize">MaxFileSize</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxUploadBase.AllowedFileExtensions">AllowedFileExtensions</a> properties to limit the maximum file size and specify file extensions that the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload">Upload</a> component accepts. Note that the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload">Upload</a> validates files on the client side. This demo also shows how to validate file extensions on the server side.</p>
+</div>
+
+<div class="card demo-card border-0">
+    <div class="card-body">
+        <DxUpload Name="myFile" UploadUrl="@GetUploadUrl("api/Upload/UploadImage/")"
+                  AllowedFileExtensions="@(new List<string> { ".jpg", ".jpeg", ".gif", ".png" })" MaxFileSize="4000000">
+        </DxUpload>
+    </div>
+</div>
+
+<CodeSnippet_FileManagement_Upload_Validation></CodeSnippet_FileManagement_Upload_Validation>
+
+@code {
+    protected string GetUploadUrl(string url) {
+        return NavigationManager.ToAbsoluteUri(url).AbsoluteUri;
+    }
+}

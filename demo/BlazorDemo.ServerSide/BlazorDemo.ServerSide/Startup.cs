@@ -13,6 +13,8 @@ using DevExpress.Blazor;
 using DevExpress.Blazor.DocumentMetadata;
 using System;
 using System.Net.Http;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BlazorDemo.ServerSide {
     public class Startup {
@@ -28,6 +30,9 @@ namespace BlazorDemo.ServerSide {
 #if DEBUG
             services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; });
 #endif
+
+            services.AddMvc(options => options.EnableEndpointRouting = false)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
@@ -70,6 +75,7 @@ namespace BlazorDemo.ServerSide {
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseMvcWithDefaultRoute();
 
             app.UseEndpoints(endpoints => {
                 endpoints.MapBlazorHub();

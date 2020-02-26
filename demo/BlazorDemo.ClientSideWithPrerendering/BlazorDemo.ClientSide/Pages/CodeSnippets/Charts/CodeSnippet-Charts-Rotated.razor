@@ -1,0 +1,37 @@
+<CodeSnippetTabbed>
+    <CodeSnippetTabPage Text="Razor">@(@"<DxChart Data=""@GetData()"">
+    <DxChartTitle Text=""@($""The loudness of sounds (no changes)"")"" />
+    <DxChartLegend Visible=""false"" />
+    <DxChartArgumentAxis Type=""ChartAxisType.Discrete"" />
+    <DxChartValueAxis Type=""ChartAxisType.Logarithmic"" LogarithmBase=""2"" />
+    <DxChartLineSeries ArgumentField=""@((DataPoint s) => s.Argument)"" ValueField=""@((DataPoint s) => s.Value)"" />
+</DxChart>
+<DxChart Data=""@GetData()"" Rotated=""true"">
+    <DxChartTitle Text=""@($""The loudness of sounds (swapped axes)"")"" />
+    <DxChartLegend Visible=""false"" />
+    <DxChartArgumentAxis Type=""ChartAxisType.Discrete"" />
+    <DxChartValueAxis Type=""ChartAxisType.Logarithmic"" LogarithmBase=""2"" />
+    <DxChartLineSeries ArgumentField=""@((DataPoint s) => s.Argument)"" ValueField=""@((DataPoint s) => s.Value)"" />
+</DxChart>")</CodeSnippetTabPage>
+    <CodeSnippetTabPage Text="@("@code")">@(@"@code {
+    List<DataPoint> GetData() {
+        List<DataPoint> result = new List<DataPoint>(9);
+        result.Add(new DataPoint(""Whisper"", 0.15));
+        result.Add(new DataPoint(""Street noise"", 8));
+        result.Add(new DataPoint(""Jackhummer"", 32));
+        result.Add(new DataPoint(""Subway train"", 64));
+        result.Add(new DataPoint(""Loud music"", 128));
+        result.Add(new DataPoint(""Pain threshold"", 256));
+        result.Add(new DataPoint(""Buzzer"", 512));
+        result.Add(new DataPoint(""Rocket start"", 2048));
+        result.Add(new DataPoint(""Deadly level"", 16348));
+        return result;
+    }
+
+    struct DataPoint {
+        public DataPoint (string argument, double value) { Argument = argument; Value = value; }
+        public string Argument { get; set; }
+        public double Value { get; set; }
+    }
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

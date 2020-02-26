@@ -35,8 +35,8 @@
         public int Id { get; set; }
         public string Text { get; set; }
     }
-    IEnumerable<Options> selectedOptions;
-    IEnumerable<Options> SelectedOptions { get => selectedOptions; set { selectedOptions = value; InvokeAsync(StateHasChanged); } }
+    
+    IEnumerable<Options> SelectedOptions { get; set; }
 
     List<Options> DataSource = new List<Options>() {
         new Options() { Id = 0, Text = "Option 1" },
@@ -44,6 +44,5 @@
         new Options() { Id = 0, Text = "Option 3" },
         };
 
-    bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); } }
+    bool DropDownVisible { get; set; } = true;
 }

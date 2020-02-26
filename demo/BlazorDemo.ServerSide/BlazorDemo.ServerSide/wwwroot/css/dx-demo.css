@@ -202,6 +202,11 @@ div.logo {
     position: relative;
 }
 
+.sidebar .blazor-scroll-view:not(.dx-scrollview) {
+    height: calc(100% - 56px);
+    overflow: hidden;
+}
+
 .sidebar .footer:before {
     content: "";
     border-top-width: 1px;
@@ -589,12 +594,53 @@ a.helplink {
     margin-right: 8px;
 }
 
+.app-sidebar .nav-pills .nav-item.dx-badge-preview .nav-link > span.badge {
+    min-width: inherit;
+    font-weight: 700;
+    color: #212529 !important;
+    background-color: #ffc107 !important;
+}
+
 .datagrid-border-radius-top-0 > .card {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
 
-.datagrid-popup-edit-form .dxbs-popup-scrollable .modal-content,
-.datagrid-popup-edit-form .dxbs-popup-scrollable .modal-body {
-    overflow: visible !important;
+.custom-drop-zone {
+    padding: 0 !important;
+    border-style: dashed !important;
+    border-width: 2px !important;
+    height: 230px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.custom-drop-zone.custom-drag-over {
+    background-color: #868A8D;
+}
+.custom-drop-zone img {
+    width: 42px;
+    height: 42px;
+}
+
+.medium-chart-container {
+    margin: 16px;
+}
+
+.medium-chart-container .dxc-arg-elements text {
+    font-weight: 600 !important;
+}
+
+.dx-chart {
+    margin: 0 15px;
+}
+
+.rotated-chart .dx-chart {
+    margin-bottom: 50px;
+}
+
+.medium-chart-container.rotated-chart .dx-chart {
+    height: 250px;
+    min-height: 250px;
 }

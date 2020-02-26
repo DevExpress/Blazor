@@ -43,11 +43,10 @@
 @code {
         Option[] DataSource = null;
 
-        IEnumerable<string> tags;
-        IEnumerable<string> Tags { get => tags; set { tags = value; InvokeAsync(StateHasChanged); } }
+        
+        IEnumerable<string> Tags { get; set; }
 
-        bool dropDownVisible = true;
-        bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); } }
+         bool DropDownVisible { get; set; } = true;
 
     protected override void OnInitialized() {
         DataSource = new Option[] {
@@ -59,7 +58,7 @@
             new Option("Option 6", "btn-success"),
             new Option("Option 7", "btn-primary")
         };
-        tags = new List<string>() { "Option 2", "Option 5", "Custom Option" };
+        Tags = new List<string>() { "Option 2", "Option 5", "Custom Option" };
     }
 
     public class Option {

@@ -1,0 +1,34 @@
+﻿@using Demo.Blazor.Model
+@inject NavigationManager NavigationManager
+
+<div class="demo-description" id="UploadModes">
+    <h2><NavLink class="demo-anchor" href="Upload#UploadModes" />Upload - Upload Modes</h2>
+    <p>
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxUploadBase.UploadMode">UploadMode</a> property to specify how the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload">Upload</a> component uploads files.
+    </p>
+    <p>
+        <ul>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.UploadMode">Instant</a> (Default) - Files are uploaded when a user selects or drops them.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.UploadMode">OnButtonClick</a> - Files are uploaded after a user clicks the common upload button or individual buttons for each file.</li>
+        </ul>
+    </p>
+    <p>
+        In this demo, the upload mode is set to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.UploadMode">UploadMode.UseButtons</a>.
+    </p>
+</div>
+
+<div class="card demo-card border-0">
+    <div class="card-body">
+        <DxUpload Name="myFile" UploadUrl="@GetUploadUrl("api/Upload/UploadFile/")" AllowMultiFileUpload="true"
+                  UploadMode="UploadMode.OnButtonClick" MaxFileSize="15000000">
+        </DxUpload>
+    </div>
+</div>
+
+<CodeSnippet_FileManagement_Upload_UploadMode></CodeSnippet_FileManagement_Upload_UploadMode>
+
+@code {
+    protected string GetUploadUrl(string url) {
+        return NavigationManager.ToAbsoluteUri(url).AbsoluteUri;
+    }
+}

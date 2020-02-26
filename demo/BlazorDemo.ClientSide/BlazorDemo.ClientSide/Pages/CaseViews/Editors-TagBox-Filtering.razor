@@ -54,11 +54,9 @@
         SelectedItems = new List<string> { "United Kingdom", "United States" };
     }
 
-    IEnumerable<string> selectedItems = null;
-    IEnumerable<string> SelectedItems { get => selectedItems; set { selectedItems = value; InvokeAsync(StateHasChanged); } }
+    IEnumerable<string> SelectedItems { get; set; }
 
-    bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); } }
+    bool DropDownVisible { get; set; } = true;
 
     DataGridFilteringMode filteringMode = DataGridFilteringMode.StartsWith;
     DataGridFilteringMode FilteringMode { get => filteringMode; set { filteringMode = value; InvokeAsync(StateHasChanged); } }

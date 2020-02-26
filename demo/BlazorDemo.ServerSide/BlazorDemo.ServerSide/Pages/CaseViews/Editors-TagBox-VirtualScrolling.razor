@@ -33,8 +33,7 @@
 </div>
 
 @code {
-    IEnumerable<string> selectedItems = null;
-    IEnumerable<string> SelectedItems { get => selectedItems; set { selectedItems = value; InvokeAsync(StateHasChanged); } }
+    IEnumerable<string> SelectedItems { get; set; }
 
     List<string> Strings = new List<string>();
     protected override void OnInitialized()
@@ -44,6 +43,5 @@
         SelectedItems = new List<string> { Strings[0], Strings[1] };
     }
 
-    bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); }  }
+     bool DropDownVisible { get; set; } = true;
 }

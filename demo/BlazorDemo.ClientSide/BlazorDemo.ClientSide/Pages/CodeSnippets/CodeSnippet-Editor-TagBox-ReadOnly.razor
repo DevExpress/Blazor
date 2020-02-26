@@ -10,7 +10,8 @@
 
     IEnumerable<string> SelectedFruits;
 
-    protected override void OnInitialized() {
+    protected override void OnInitialized() 
+    {
         Fruits= new string[] { ""Apple"", ""Banana"", ""Lemon"", ""Orange"", ""Pear"", ""Pinapple"", ""Peach"" };
         SelectedFruits = new List<string>() { DataSource[1], DataSource[4] };
     }

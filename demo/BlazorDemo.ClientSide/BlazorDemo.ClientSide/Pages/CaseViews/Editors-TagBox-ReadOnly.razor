@@ -28,11 +28,9 @@
 @code {
     String[] DataSource = null;
 
-    IEnumerable<string> options;
-    IEnumerable<string> Options { get => options; set { options = value; InvokeAsync(StateHasChanged); } }
+    IEnumerable<string> Options { get; set; }
 
-    bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); } }
+    bool DropDownVisible { get; set; } = true;
 
     protected override void OnInitialized() {
         DataSource = new string[] { "Apple", "Banana", "Lemon", "Orange", "Pear", "Pinapple", "Peach" };

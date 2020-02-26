@@ -13,7 +13,7 @@
     <DxChartValueAxis Type=""ChartAxisType.Logarithmic"" LogarithmBase=""2"" />
     <DxChartLineSeries ArgumentField=""@((DataPoint s) => s.Argument)"" ValueField=""@((DataPoint s) => s.Value)"" />
 </DxChart>")</CodeSnippetTabPage>
-    <CodeSnippetTabPage Text="@codeString">@(@"@code {
+    <CodeSnippetTabPage Text="@("@code")">@(@"@code {
     List<DataPoint> GetData() {
         List<DataPoint> result = new List<DataPoint>(9);
         result.Add(new DataPoint(""Whisper"", 0.15));
@@ -35,7 +35,3 @@
     }
 }")</CodeSnippetTabPage>
 </CodeSnippetTabbed>
-
-@code {
-    string codeString = "@code";
-}

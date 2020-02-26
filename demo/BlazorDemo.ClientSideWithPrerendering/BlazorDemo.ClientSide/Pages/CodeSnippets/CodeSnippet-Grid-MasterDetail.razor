@@ -6,13 +6,13 @@
             ShowFilterRow=""false""
             SelectionMode=""DataGridSelectionMode.None"" 
             PageSize=""4"">
-    <ChildContent>
+    <Columns>
         <DxDataGridColumn Field=""@nameof(Product.Name)"" />
         <DxDataGridColumn Field=""@nameof(Product.Description)"" />
         <DxDataGridSpinEditColumn Field=""@nameof(Product.ListPrice)"" />
         <DxDataGridSpinEditColumn Field=""@nameof(Product.UnitsInInventory)"" />
         <DxDataGridSpinEditColumn Field=""@nameof(Product.UnitsInManufacturing)"" />
-    </ChildContent>
+    </Columns>
     <DetailRowTemplate>
         <DxTabs>
             <DxTabPage Text=""Sales"">

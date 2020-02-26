@@ -46,9 +46,8 @@
     IEnumerable<Person> selectedPersons = new List<Person>() { Persons.DataSource[0] };
     IEnumerable<Person> SelectedPersons {
         get => selectedPersons;
-        set { selectedPersons = value; InvokeAsync(StateHasChanged); }
+        set { selectedPersons = value; }
     }
 
-    bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); } }
+    bool DropDownVisible { get; set; } = true;
 }

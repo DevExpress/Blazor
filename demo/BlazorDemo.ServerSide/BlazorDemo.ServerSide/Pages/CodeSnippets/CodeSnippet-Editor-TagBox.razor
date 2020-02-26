@@ -7,9 +7,10 @@
 
 @code {
     IEnumerable<Person> selectedPersons = new List<Person>() { Persons.DataSource[0] };
-    IEnumerable<Person> SelectedPersons {
+    IEnumerable<Person> SelectedPersons 
+    {
         get => selectedPersons;
-        set { selectedPersons = value; InvokeAsync(StateHasChanged); }
+        set { selectedPersons = value; }
     }
 }")
 </CodeSnippetTabPage>

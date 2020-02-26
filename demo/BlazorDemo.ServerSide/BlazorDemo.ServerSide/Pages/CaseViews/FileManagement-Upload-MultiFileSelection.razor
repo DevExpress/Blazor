@@ -1,0 +1,23 @@
+﻿@using Demo.Blazor.Model
+@inject NavigationManager NavigationManager
+
+<div class="demo-description" id="MultiFileSelection">
+    <h2><NavLink class="demo-anchor" href="Upload#MultiFileSelection" />Upload - Multiple File Selection</h2>
+    <p>In this demo, users can upload multiple files at once. Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxUploadBase.AllowMultiFileUpload">AllowMultiFileUpload</a> property to <b>true</b> to enable this behavior.</p>
+</div>
+
+<div class="card demo-card border-0">
+    <div class="card-body">
+        <DxUpload Name="myFile" UploadUrl="@GetUploadUrl("api/Upload/UploadFile/")"
+                  AllowMultiFileUpload="true" MaxFileSize="15000000">
+        </DxUpload>
+    </div>
+</div>
+
+<CodeSnippet_FileManagement_Upload_MultiFileSelection></CodeSnippet_FileManagement_Upload_MultiFileSelection>
+
+@code {
+    protected string GetUploadUrl(string url) {
+        return NavigationManager.ToAbsoluteUri(url).AbsoluteUri;
+    }
+}

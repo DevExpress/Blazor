@@ -1,6 +1,6 @@
 ﻿@using Demo.Blazor.Model
 
-<div class="demo-description" id="AllowCustomTags">
+<div class="demo-description" id="CustomTags">
     <h2><DemoNavLink Link="TagBox#CustomTags" />TagBox - Custom Tags</h2>
     <p>
         In this demo, the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-1">TagBox</a> supports custom tags that are not stored in a bound data source
@@ -34,15 +34,10 @@
         "Paris",
     };
 
-    IEnumerable<string> tags = new List<string>() {
+    IEnumerable<string> Tags { get; set; } = new List<string>() {
         "London",
         "New York"
     };
-    IEnumerable<string> Tags { get => tags; set { tags = value; InvokeAsync(StateHasChanged); } }
 
-    IEnumerable<string> selectedItems = new List<string>() { "London" };
-    IEnumerable<string> SelectedItems { get => selectedItems; set { selectedItems = value; InvokeAsync(StateHasChanged); } }
-
-    bool dropDownVisible = true;
-    bool DropDownVisible { get => dropDownVisible; set { dropDownVisible = value; InvokeAsync(StateHasChanged); } }
+    bool DropDownVisible { get; set; } = true;
 }

@@ -9,8 +9,7 @@
                   Data=""@Emails.DataSource""
                   AllowCustomTags=""true""
                   ValidateBy=""@TagBoxValidateBy.Tags""
-                  @bind-Tags=""@recipients.Data""
-                  @bind-DropDownVisible=""@DropDownVisible"">
+                  @bind-Tags=""@recipients.Data""/>
         </DxTagBox>
         <ValidationMessage For=""@(() => recipients.Data)"" />
     </p>
@@ -20,10 +19,12 @@
 @code {
     EmailRecipients recipients = new EmailRecipients();
 
-    private void HandleValidSubmit() {
+    private void HandleValidSubmit() 
+    {
         Console.WriteLine(""OnValidSubmit"");
     }
-    private void HandleInvalidSubmit() {
+    private void HandleInvalidSubmit() 
+    {
         Console.WriteLine(""OnInvalidSubmit"");
     }
 }")
