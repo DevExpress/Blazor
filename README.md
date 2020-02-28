@@ -1,11 +1,13 @@
 # DevExpress UI for Blazor
-This project demonstrates the [DevExpress UI Components for Blazor](https://www.devexpress.com/blazor/).
 
-The DevExpress UI components featured in this demo are available for free download and can be used in your next Blazor app.
+[DevExpress UI for Blazor](https://www.devexpress.com/blazor/) ships with over 15 UI components (including a Data Grid, Pivot Grid, Scheduler and Charts) so you can design rich user experiences for both Blazor server-side and Blazor client-side platforms.
+
+The DevExpress UI components are available for free download and can be used in your next Blazor app.
 
 * [Live Demo](#live-demo)
 * [Examples](#examples)
 * [Documentation](#documentation)
+* [Blog](#blog)
 * [Version Compatibility](#version-compatibility)
 * [Set Up Your Environment](#set-up-your-environment)
 * [How to Run This Demo Locally](#how-to-run-this-demo-locally)
@@ -17,17 +19,21 @@ The DevExpress UI components featured in this demo are available for free downlo
 * [Included Demo Modules](#included-demo-modules)
 * [NuGet Package Change Log](#nuget-package-change-log)
 
-# Live Demo
+# Online Demos
  
-Check out this [demo in live](https://demos.devexpress.com/blazor/).
+Check out the DevExpress UI Components for Blazor's [online demos here](https://demos.devexpress.com/blazor/).
 
-# Examples 
+# Code Examples 
 
 DevExpress Blazor components are shipped with GitHub feature-based examples. Refer to [examples.md](examples.md) for more information.
 
 # Documentation 
 
 Our online documentation is available at [docs.devexpress.com/Blazor/](https://docs.devexpress.com/Blazor/400725/blazor-components).
+
+# Blog
+
+Read about the latest updates to the DevExpress Blazor UI components on our [blog](https://community.devexpress.com/tags/Blazor/default.aspx).
 
 # Version Compatibility
 
