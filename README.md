@@ -1,17 +1,16 @@
 # DevExpress UI for Blazor
 
-[DevExpress UI for Blazor](https://www.devexpress.com/blazor/) ships with over 15 UI components (including a Data Grid, Pivot Grid, Scheduler and Charts) so you can design rich user experiences for both Blazor server-side and Blazor client-side platforms.
+[DevExpress UI for Blazor](https://www.devexpress.com/blazor/) ships with over 15 UI components (including a Data Grid, Pivot Grid, Scheduler, and Charts) so you can design rich user experiences for both Blazor Server and Blazor WebAssembly.
 
-The DevExpress UI components are available for free download and can be used in your next Blazor app.
-
-* [Live Demo](#live-demo)
-* [Examples](#examples)
+* [Online Demos](#online-demos)
+* [Code Examples](#code-examples)
 * [Documentation](#documentation)
 * [Blog](#blog)
 * [Version Compatibility](#version-compatibility)
 * [Set Up Your Environment](#set-up-your-environment)
-* [How to Run This Demo Locally](#how-to-run-this-demo-locally)
-* [How to Create a New Project](#how-to-create-a-new-project)
+* [Get NuGet Feed](#get-nuget-feed)
+* [Run This Demo Locally](#run-this-demo-locally)
+* [Create a New Project](#create-a-new-project)
 * [Themes](#themes)
 * [Localization](#localization)
 * [Free Blazor Utilities and Dev Tools](#free-blazor-utilities-and-dev-tools)
@@ -20,12 +19,12 @@ The DevExpress UI components are available for free download and can be used in 
 * [NuGet Package Change Log](#nuget-package-change-log)
 
 # Online Demos
- 
-Check out the DevExpress UI Components for Blazor's [online demos here](https://demos.devexpress.com/blazor/).
+
+DevExpress Blazor components are shipped with [online feature-based demos](https://demos.devexpress.com/blazor/).
 
 # Code Examples 
 
-DevExpress Blazor components are shipped with GitHub feature-based examples. Refer to [examples.md](examples.md) for more information.
+Refer to [examples.md](examples.md) for information about GitHub feature-based examples for DevExpress Blazor components.
 
 # Documentation 
 
@@ -33,7 +32,7 @@ Our online documentation is available at [docs.devexpress.com/Blazor/](https://d
 
 # Blog
 
-Read about the latest updates to the DevExpress Blazor UI components on our [blog](https://community.devexpress.com/tags/Blazor/default.aspx).
+Read about the latest updates to DevExpress Blazor components on our [blog](https://community.devexpress.com/tags/Blazor/default.aspx).
 
 # Version Compatibility
 
@@ -50,15 +49,45 @@ The following table describes the version compatibility of .NET Core and the Dev
 | [.NET Core 3.0 Release](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0/) | **19.1.8 Release** |
 | [.NET Core 3.0 Release](https://devblogs.microsoft.com/aspnet/asp-net-core-and-blazor-updates-in-net-core-3-0/) | **19.1.7 Release** |
 
-> Starting with v19.1.7, DevExpress UI components for Blazor are distributed through a [personal NuGet feed](https://nuget.devexpress.com/). Register at [devexpress.com](https://www.devexpress.com/) to subscribe to the feed.
+> Starting with v19.1.7, DevExpress UI components for Blazor are distributed through a [personal NuGet Feed URL](#get-nuget-feed). 
 
 
 # Set Up Your Environment
 
 1. Install the latest Visual Studio 2019 update with the **ASP.NET and web development** workload.
-2. Ensure that you have the latest .NET Core 3 version (from supported versions listed above) installed.
+2. Install the latest .NET Core 3 version (from supported versions listed above).
 
-# How to Run This Demo Locally
+# Get NuGet Feed
+
+Get the **Blazor UI Component** subscription and your personal NuGet Feed URL to use DevExpress Blazor components.
+
+## Universal/DXperience/ASP.NET Subsription
+
+The **Blazor UI Component** subscription is available if you purchased the **Universal**, **DXperience**, or **ASP.NET** subscription. Refer to the [subscription comparison table](https://www.devexpress.com/buy/net/) for more information.
+
+Go to [nuget.devexpress.com](https://nuget.devexpress.com/), login as a registered DevExpress customer, [obtain your NuGet Feed URL](https://docs.devexpress.com/GeneralInformation/116042), and copy it to clipboard.
+
+![Obtain NuGet Feed](media/ObtainNugetFeed.png)
+
+You can also access this NuGet Feed URL in the [Download Manager](https://www.devexpress.com/clientcenter/downloadmanager/).
+
+## Free Blazor UI Component Subsription
+
+For a limited time, you can obtain the **Blazor UI Component** subscription free-of-charge.
+
+Go to the [Blazor Registration](https://www.devexpress.com/blazor-registration) page and register your personal information.
+
+* If you already have a DevExpress account, login, verify your contact information, and click **Register**.
+
+    ![Registration Form For Registered Users](media/RegistrationFormForRegisteredUsers.png)
+
+* If you do not have a DevExpress account, enter you contact information and click **Create Account**.
+
+    ![Registration Form For New Users](media/RegistrationFormForNewUsers.png)
+
+Open the message that was sent to your email address, and copy the NuGet Feed URL to clipboard. You can also access this NuGet Feed at [nuget.devexpress.com](https://nuget.devexpress.com/) or in the [Download Manager](https://www.devexpress.com/clientcenter/downloadmanager/).
+
+# Run This Demo Locally
 
 The Blazor framework uses either WebAssembly-based .NET runtime (**Blazor WebAssembly**) or server-side ASP.NET Core (**Blazor Server**). Our Blazor components support both of these approaches. 
 
@@ -85,13 +114,11 @@ To open the required demo, do the following:
 	
 	**demo/BlazorDemo.ClientSideWithPrerendering/BlazorDemo.ClientSideWithPrerendering.sln** 
 	  
-3. Go to [nuget.devexpress.com](https://nuget.devexpress.com), log in as a registered DevExpress customer and click **Obtain Feed URL**. The subsequent page displays a development account's NuGet Feed URL.
-
-   Open the "Package Manager Settings".
+3. [Get your personal NuGet Feed URL](#get-nuget-feed) and open the **Package Manager Settings**.
 
    ![Open the "Package Manager Settings"](media/NuGetPackageManagerSettings.png)
 
-   Add new NuGet source:
+   Add a new NuGet package source:
   
    ```https://nuget.devexpress.com/{your feed authorization key}/api```
 
@@ -99,19 +126,15 @@ To open the required demo, do the following:
    
    > Make sure the `nuget.org` package source is also enabled.
 
-4. Install the "DevExpress.Blazor" NuGet package.
-
-   Navigate to:
+4. Select **Tools** -> **NuGet Package Manager** -> **Manage NuGet Packages for Solution**. 
    
    ![Add new NuGet source](media/NuGetPackageManagerOpenManagerMenu.png)
    
-   Install the "DevExpress.Blazor" NuGet package.
-
-   To install the latest Release package version, clear the **Include prereleases** checkbox. To test a Beta version of the "DevExpress.Blazor" NuGet package, make sure that the **Include prerelease** option is enabled.
-   
+5. In the invoked dialog, open the **Browse** tab, select the created package source, and install the `DevExpress.Blazor` NuGet package.
+ 
    ![Add new NuGet source](media/VS2019Release-AddNuGetPackage.png) 
 
-5. Start the application.
+6. Start the application.
 
   > <a name="ClientSideWithPrerendering"/> For the **ClientSideWithPrerendering** demo, make sure that the **ServerSide** project is set as the solution's startup project.
 
@@ -119,25 +142,29 @@ See also:
 
 [Official Microsoft Blazor site](https://dotnet.microsoft.com/apps/aspnet/web-apps/client)
 
-# How to Create a New Project
+# Create a New Project
 
 Follow the steps below to try our UI for Blazor in your own application. 
 
-1. In the "Create a new project" dialog select "Blazor App".
+1. In the **Create a new project** dialog, select **Blazor App**.
   
   ![Create New ASP.NET Core Web Application Project"](media/VisualStudio2019CreateNewProject_AspNetCoreWebApp.png)
 
-  In the next step select a project template.
+2. Specify the project name and location. In the next step, select a project template.
   
   ![Create New ASP.NET Core Web Application Project"](media/VisualStudio2019CreateNewProject_Blazor.png)
 
-2. Go to [nuget.devexpress.com](https://nuget.devexpress.com), log in as a registered DevExpress customer and click **Obtain Feed URL**. The subsequent page displays a development account's NuGet Feed URL.
+  Run the following command in a command shell to install the Blazor WebAssembly template:
 
-   Open the "Package Manager Settings".
+  ```
+  dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview3.20168.3
+  ``` 
+
+3. [Get you personal NuGet Feed URL](#get-nuget-feed) and open the **Package Manager Settings**.
 
    ![Open the "Package Manager Settings"](media/NuGetPackageManagerSettings.png)
 
-   Add new NuGet source:
+   Add a new NuGet package source:
   
    ```https://nuget.devexpress.com/{your feed authorization key}/api```
 
@@ -145,18 +172,17 @@ Follow the steps below to try our UI for Blazor in your own application.
    
    > Make sure the `nuget.org` package source is also enabled.
 
-3. Install the "DevExpress.Blazor" NuGet package.
-
-   Navigate to:
+4. Select **Tools** -> **NuGet Package Manager** -> **Manage NuGet Packages for Solution**. 
    
    ![Add new NuGet source](media/NuGetPackageManagerOpenManagerMenu.png)
    
-   <a name="InstallPackage"/>Install the "DevExpress.Blazor" NuGet package.
-
-   To install the latest Release package version, clear the **Include prereleases** checkbox. To test a Beta version of the "DevExpress.Blazor" NuGet package, make sure that the **Include prerelease** option is enabled.
-   
+5. In the invoked dialog, open the **Browse** tab, select the created package source, and install the `DevExpress.Blazor` NuGet package.
+ 
    ![Add new NuGet source](media/VS2019Release-AddNuGetPackage.png) 
-4. Build the project.
+
+   <a name="InstallPackage"/> To install the most recent Release package version, uncheck the **Include prerelease** option. To test a Beta version of the `DevExpress.Blazor` NuGet package, enable the **Include prerelease** option.
+
+6. Build the project.
 5. Link the following file to your layout's HEAD section:
    * For Blazor Server, add the line below to the `Pages/_Host.cshtml` file. 
         ```Razor
@@ -190,7 +216,16 @@ Follow the steps below to try our UI for Blazor in your own application.
    @using DevExpress.Blazor
    ```
 
-7. Your application is ready to use DevExpress Blazor.
+7. For Blazor WebAssembly, set the `BlazorLinkOnBuild` property to **false** in the project file to disable the link to a MSBuild property.
+
+    ```Razor
+    <PropertyGroup>
+        ...
+        <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
+    </PropertyGroup>
+    ```
+
+8. Your application is ready to use DevExpress Blazor.
 
 # Themes
 
@@ -209,7 +244,11 @@ The following DevExpress Blazor products are available free-of-charge:
 
 # Troubleshooting
 
-## 1. There was an unhandled exception on the current circuit, so this circuit will be terminated. For more details turn on detailed exceptions in 'CircuitOptions.DetailedErrors'.
+## 1. Update to a New Version
+
+If an error occurs after you upgraded DevExpress Blazor components to a newer version, review the [list of breaking changes](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=BreakingChanges) and update your project accordingly. Also make sure that you configure the project as described at [Create a New Project](#create-a-new-project).
+
+## 2. There was an unhandled exception on the current circuit, so this circuit will be terminated. For more details turn on detailed exceptions in 'CircuitOptions.DetailedErrors'.
 
 If you see this error message or a similar message, add the following code to the `ConfigureServices` method declared in the *Startup.cs* file: 
 
@@ -219,9 +258,11 @@ services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedEr
 
 This provides more detailed information about these errors. 
 
-## 2. System.ArgumentNullException: Value cannot be null. (Parameter 'accessor') 
+## 3. System.ArgumentNullException: 'X' requires a value for the 'Expression' property
 
 This is a common Blazor exception that occurs if an EditForm's editor does not use two-way binding.
+
+*DxComboBox requires a value for the 'SelectedItemExpression' property. It is specified automatically when you use two-way binding ('bind-SelectedItem').*
 
 To fix the issue, do one of the following:
 
@@ -237,13 +278,23 @@ To fix the issue, do one of the following:
 
 * Implement the two-way binding in the EditForm.
 
-## 3. Could not find 'X' in 'window.DxBlazor'.
+## 4. Could not find 'X' in 'window.DxBlazor'.
 
-Earlier, our clients' scripts were manually added to a project. Now, we automatically distribute them with the NuGet Package in the `_content/DevExpress.Blazor/` folder (see the 6th item of the [How to create a new project](https://github.com/devexpress/blazor#how-to-create-a-new-project) paragraph). So, our users may face such an issue if they reference an old version of our static files instead of the new one. For example, a similar issue was discussed in the [I have a formlayout error when running a Blazor website](https://stackoverflow.com/questions/57593583/i-have-a-formlayout-error-when-running-a-blazor-website) SO thread.
+Earlier, our clients' scripts were manually added to a project. Now, we automatically distribute them with the NuGet Package in the `_content/DevExpress.Blazor/` folder (see the 7th item of the [Create a New Project](#create-a-new-project) section). So, our users may face such an issue if they reference an old version of our static files instead of the new one. For example, a similar issue was discussed in the [I have a formlayout error when running a Blazor website](https://stackoverflow.com/questions/57593583/i-have-a-formlayout-error-when-running-a-blazor-website) SO thread.
  
 If solutions suggested there do not help, create an issue here or submit a ticket in our [Support Center](https://www.devexpress.com/Support/Center/Question/Create) so that we can investigate your case.
 
-## 4. DxDataGrid in Blazor
+## 5. Failed to load resource
+
+DevExpress Blazor components use a RCL ([Razor class library](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/ui-class)) with static assets to share resources. The following exception occurs if your application does not load client-side resources correctly:
+
+> *Failed to load resource: the server responded with a status of 404 () - dx-blazor.js*
+>
+> *Failed to load resource: the server responded with a status of 404 () - dx-blazor.css*
+
+To fix the issue, review the [Consume content from a referenced RCL](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/ui-class#consume-content-from-a-referenced-rcl) topic.
+
+## 6. DxDataGrid in Blazor
 
 If you use Blazor WebAssemly (aka client-side Blazor) with DxDataGrid, you may see the following exception in a browser:
 
@@ -296,7 +347,7 @@ Do one of the following to resolve this issue:
 See [Configure the Linker for ASP.NET Core Blazor](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker?view=aspnetcore-3.0) for more information.
 
 
-## 5. DxScheduler in Blazor
+## 7. DxScheduler in Blazor
 
 If you use Blazor WebAssembly with DxScheduler, you may see the following exception or a similar exception:
 
@@ -344,7 +395,7 @@ Do one of the following to resolve this issue:
 
 See [Configure the Linker for ASP.NET Core Blazor](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker?view=aspnetcore-3.0) for more information.
 
-## 6. DxTabs are rendered incorrectly when the default Microsoft template is applied
+## 8. DxTabs are rendered incorrectly when the default Microsoft template is applied
 
 If you create a new Blazor project based on the default Microsoft project template, the first tab of the DxTabs component can be rendered incorrectly.
 
@@ -381,6 +432,7 @@ To resolve this issue, write more strict style rules in the *site.css* file so t
   * Range Series
   * Financial Series
   * Pie Series
+  * Axes
   * Customization
   * Series Customization
 * Scheduler
@@ -403,6 +455,8 @@ To resolve this issue, write more strict style rules in the *site.css* file so t
   * Popup
   * Tabs
   * TreeView
+* File Management 
+  * Upload
 * Form Validation
 
 # NuGet Package Change Log
