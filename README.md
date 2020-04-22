@@ -40,6 +40,7 @@ The following table describes the version compatibility of .NET Core and the Dev
 
 | Supported frameworks | DevExpress.Blazor.nuget version |
 | ------------- | ------------- |
+| [.NET Core 3.1.3 Release](https://github.com/dotnet/core/blob/master/release-notes/3.1/3.1.3/3.1.3.md) <br /> [Blazor WebAssembly 3.2.0 Preview 4](https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-4-release-now-available/) | **19.2.5-Preview** (make sure the [Include prerelease](#InstallPackage) option is enabled) |
 | [.NET Core 3.1.2 Release](https://devblogs.microsoft.com/dotnet/net-core-february-2020/) <br /> [Blazor WebAssembly 3.2.0 Preview 1](https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-1-release-now-available/) | **19.2.4-Release** |
 | [.NET Core 3.1.1 Release](https://devblogs.microsoft.com/dotnet/net-core-january-2020/) <br /> [Blazor WebAssembly 3.2.0 Preview 1](https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-1-release-now-available/) | **19.2.3 Release** |
 | [.NET Core 3.1.1 Release](https://devblogs.microsoft.com/dotnet/net-core-january-2020/) | **19.2.2 Beta** (make sure the [Include prerelease](#InstallPackage) option is enabled) |
@@ -54,8 +55,20 @@ The following table describes the version compatibility of .NET Core and the Dev
 
 # Set Up Your Environment
 
-1. Install the latest Visual Studio 2019 update with the **ASP.NET and web development** workload.
-2. Install the latest .NET Core 3 version (from supported versions listed above).
+## Blazor Server
+
+1. Install the latest [Visual Studio 2019](https://visualstudio.microsoft.com/) version with the **ASP.NET and web development** workload.
+2. Install [.NET Core 3.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1).
+
+## Blazor WebAssembly
+
+1. Install the latest [Visual Studio 2019 Preview](https://visualstudio.microsoft.com/vs/preview/) version with the **ASP.NET and web development** workload.
+2. Install [.NET Core 3.1.201 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1) or later.
+3. Install the [Blazor WebAssembly template](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/). To do this, run the following command in a command shell:
+
+  > `dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview4.20210.8`
+
+
 
 # Get NuGet Feed
 
@@ -154,12 +167,6 @@ Follow the steps below to try our UI for Blazor in your own application.
   
   ![Create New ASP.NET Core Web Application Project"](media/VisualStudio2019CreateNewProject_Blazor.png)
 
-  Run the following command in a command shell to install the Blazor WebAssembly template:
-
-  ```
-  dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview3.20168.3
-  ``` 
-
 3. [Get you personal NuGet Feed URL](#get-nuget-feed) and open the **Package Manager Settings**.
 
    ![Open the "Package Manager Settings"](media/NuGetPackageManagerSettings.png)
@@ -183,22 +190,32 @@ Follow the steps below to try our UI for Blazor in your own application.
    <a name="InstallPackage"/> To install the most recent Release package version, uncheck the **Include prerelease** option. To test a Beta version of the `DevExpress.Blazor` NuGet package, enable the **Include prerelease** option.
 
 6. Build the project.
-5. Link the following file to your layout's HEAD section:
-   * For Blazor Server, add the line below to the `Pages/_Host.cshtml` file. 
+
+7. Configure the project.
+
+  * **Blazor Server**
+
+    Add the following line to the `Pages/_Host.cshtml` file's HEAD section:
+  
         ```Razor
         <head>
             ...
             <link href="_content/DevExpress.Blazor/dx-blazor.css" rel="stylesheet" />
         </head>
         ```
-    * For Blazor WebAssembly, add the line below to the `wwwroot/index.html` file.
+
+  * **Blazor WebAssembly** 
+
+    7.1. Add the following line to the `wwwroot/index.html` file's HEAD section:
+
         ```Razor
         <head>
             ...
             <link href="_content/DevExpress.Blazor/dx-blazor.css" rel="stylesheet" />
         </head>
         ```
-        Call the [AddDevExpressBlazor](https://docs.devexpress.com/Blazor/Microsoft.Extensions.DependencyInjection.DevExpressServiceCollectionExtensions.AddDevExpressBlazor(Microsoft.Extensions.DependencyInjection.IServiceCollection)) method from your project's  `Program.Main()` method:
+
+    7.2. Call the [AddDevExpressBlazor](https://docs.devexpress.com/Blazor/Microsoft.Extensions.DependencyInjection.DevExpressServiceCollectionExtensions.AddDevExpressBlazor(Microsoft.Extensions.DependencyInjection.IServiceCollection)) method from your project's  `Program.Main()` method:
         ```csharp
         using Microsoft.Extensions.DependencyInjection;
         
@@ -210,22 +227,18 @@ Follow the steps below to try our UI for Blazor in your own application.
           }
         }
         ```  
-6. Register DevExpress.Blazor namespace in _\_Imports.razor_ file:
+
+    7.3. Configure the linker as described in [Configure the Linker for ASP.NET Core Blazor](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker).
+
+8. Register the **DevExpress.Blazor** namespace in the `_Imports.razor` file:
 
    ```html
    @using DevExpress.Blazor
    ```
 
-7. For Blazor WebAssembly, set the `BlazorLinkOnBuild` property to **false** in the project file to disable the link to a MSBuild property.
+9. Your application is ready to use DevExpress Blazor.
 
-    ```Razor
-    <PropertyGroup>
-        ...
-        <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
-    </PropertyGroup>
-    ```
-
-8. Your application is ready to use DevExpress Blazor.
+    > If you enabled the **ASP.NET Core hosted** option in the Blazor WebAssembly template, make sure that the server-side project is set as the solution's startup project.
 
 # Themes
 
@@ -262,7 +275,7 @@ This provides more detailed information about these errors.
 
 This is a common Blazor exception that occurs if an EditForm's editor does not use two-way binding.
 
-*DxComboBox requires a value for the 'SelectedItemExpression' property. It is specified automatically when you use two-way binding ('bind-SelectedItem').*
+*DevExpress.Blazor.DxComboBox requires a value for the 'SelectedItemExpression' property. It is specified automatically when you use two-way binding ('bind-SelectedItem').*
 
 To fix the issue, do one of the following:
 
@@ -304,16 +317,16 @@ If you use Blazor WebAssemly (aka client-side Blazor) with DxDataGrid, you may s
 
 Do one of the following to resolve this issue:
 
-* Set the `BlazorLinkOnBuild` property to **false** in the project file to disable linking with a MSBuild property.
+* Set the `BlazorWebAssemblyEnableLinking` property to **false** in the project file to disable linking with a MSBuild property.
 
   ```
   <PropertyGroup>
     ...
-    <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
+    <BlazorWebAssemblyEnableLinking>false</BlazorWebAssemblyEnableLinking>
   </PropertyGroup>
   ```  
 
-* Add the **Linker.xml** file and include the following assemblies and types:
+* Add the **LinkerConfig.xml** file and include the following assemblies and types:
 
   ```
   <?xml version="1.0" encoding="UTF-8" ?>
@@ -340,7 +353,7 @@ Do one of the following to resolve this issue:
   ```
   <ItemGroup>
     ...
-    <BlazorLinkerDescriptor Include="Linker.xml" />
+    <BlazorLinkerDescriptor Include="LinkerConfig.xml" />
   </ItemGroup>
   ```  
 
@@ -355,16 +368,16 @@ If you use Blazor WebAssembly with DxScheduler, you may see the following except
 
 Do one of the following to resolve this issue:
 
-* Set the `BlazorLinkOnBuild` property to **false** in the project file to disable linking with a MSBuild property.
+* Set the `BlazorWebAssemblyEnableLinking` property to **false** in the project file to disable linking with a MSBuild property.
 
   ```
   <PropertyGroup>
     ...
-    <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
+    <BlazorWebAssemblyEnableLinking>false</BlazorWebAssemblyEnableLinking>
   </PropertyGroup>
   ```  
 
-* Add the **Linker.xml** file and include the following assembly:
+* Add the **LinkerConfig.xml** file and include the following assembly:
 
   ```
   <?xml version="1.0" encoding="UTF-8" ?>
@@ -389,7 +402,7 @@ Do one of the following to resolve this issue:
   ```
   <ItemGroup>
     ...
-    <BlazorLinkerDescriptor Include="Linker.xml" />
+    <BlazorLinkerDescriptor Include="LinkerConfig.xml" />
   </ItemGroup>
   ```  
 

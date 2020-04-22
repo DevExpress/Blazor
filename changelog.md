@@ -2,6 +2,63 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 19.2.5-Preview
+
+### .NET Core 3.1.3 and Blazor WebAssembly 3.2.0 Preview 4 Support
+
+In this version, we added support for the [.NET Core 3.1.3](https://github.com/dotnet/core/blob/master/release-notes/3.1/3.1.3/3.1.3.md) and [Blazor Web Assembly 3.2.0 Preview 4](https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-4-release-now-available/) updates.
+
+### New Toolbar Component
+Our new Toolbar component for Blazor includes the following features:
+* Various button types 
+  * Drop-down items
+  * Checked/unchecked items 
+  * Radio groups
+  * Link items
+* Button render and style customization
+* Adaptive mode
+
+### New Context Menu Component
+Our new Context Menu component for Blazor includes the following features:
+* Data binding
+* Unbound mode
+* Item groups
+* Item appearance customization
+
+### Data Grid Enhancements
+* Column chooser
+* Header template
+
+### Charts Enhancements
+* Axis data type customization
+* Handle a series' visibility changes
+
+### Data Editors Enhancements
+* Display format
+* CheckBox - Alignment
+* Spin Edit
+  * Touch device usability enhancements
+  * Custom increment values
+  * Update the value on input change
+  * Support for HTML attributes
+* Text Box 
+  * Update the value on input change
+  * Support for HTML attributes
+* ComboBox, Date Edit, TagBox - Support for HTML attributes
+
+### Resolved Issues
+* [Data Grid - Grouping works incorrectly when PageSize is set to "All"](https://supportcenter.devexpress.com/ticket/details/T873887)
+* [TreeView - It's not possible to expand a parent node if this node contains the NavigateUrl field](https://supportcenter.devexpress.com/ticket/details/T822277)
+* Data Editors - Update the “System.ArgumentNullException: Value cannot be null. (Parameter 'accessor')” error message to make error text more informative
+* Spin Edit - Prevent unacceptable characters and separators from being entered into an editor
+
+### Breaking Changes
+* [Data Grid - Format-related properties of the Spin Edit and Date Edit columns have been renamed](https://supportcenter.devexpress.com/ticket/details/T874276)
+* TreeView 
+  * [Click on a node's expand/collapse button no longer invokes an action associated with a click on the node itself](https://supportcenter.devexpress.com/ticket/details/t875624)
+  * [The TreeViewNodeInfo class has been moved to an internal namespace](https://supportcenter.devexpress.com/ticket/details/T878784)
+* [Date Edit - The default date format is now culture-dependent](https://supportcenter.devexpress.com/ticket/details/T874294)
+
 # 19.2.4 Release
 
 ### .NET Core 3.1.2 Support
