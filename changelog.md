@@ -47,10 +47,8 @@ Our new Context Menu component for Blazor includes the following features:
 * ComboBox, Date Edit, TagBox - Support for HTML attributes
 
 ### Resolved Issues
-* [Data Grid - Grouping works incorrectly when PageSize is set to "All"](https://supportcenter.devexpress.com/ticket/details/T873887)
-* [TreeView - It's not possible to expand a parent node if this node contains the NavigateUrl field](https://supportcenter.devexpress.com/ticket/details/T822277)
-* Data Editors - Update the “System.ArgumentNullException: Value cannot be null. (Parameter 'accessor')” error message to make error text more informative
-* Spin Edit - Prevent unacceptable characters and separators from being entered into an editor
+Refer to [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=19.2.5&endBuildName=19.2.4&buildsMode=Single&hasPlatformsWithProducts=true
+) for a complete list of issues that were resolved in 19.2.5-Preview.
 
 ### Breaking Changes
 * [Data Grid - Format-related properties of the Spin Edit and Date Edit columns have been renamed](https://supportcenter.devexpress.com/ticket/details/T874276)
