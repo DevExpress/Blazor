@@ -1,0 +1,73 @@
+@implements IDisposable
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+<DemoScriptLoader @ref=@helperFuncLoaderRef 
+                   Code="function _demoMatchesQuery(mediaQuery, dotNetHelper) { 
+                       var query = window.matchMedia(mediaQuery), pendingCall;
+                       handleQuery(query).then(function() {
+                            return query.addListener(handleQuery); 
+                       });
+
+                       function handleQuery(queryMatch) {
+                           return (pendingCall || Promise.resolve(true))
+                                .then(function() {
+                                    return pendingCall = new Promise(function(resolve, reject) {
+                                        dotNetHelper.invokeMethodAsync('OnQueryChanged', queryMatch.matches).then(resolve).catch(reject);
+                                    });
+                               });
+                       }
+                    }" />
+<button class="navbar-toggler d-block bg-primary border-0" @onclick="@OnToggleButtonClick">
+    <span class="navbar-toggler-icon"></span>
+</button>
+@code {
+    DemoScriptLoader helperFuncLoaderRef;
+    bool _isDesktop, _canToggle, _isToggled;
+    [Parameter] public string StateCssClass { get; set; }
+    [Parameter] public EventCallback<string> StateCssClassChanged { get; set; }
+
+    protected override void OnInitialized() {
+        NavigationManager.LocationChanged += OnLocationChanged;
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        _canToggle = true;
+        if (firstRender)
+            await helperFuncLoaderRef.InvokeVoidAsync("_demoMatchesQuery", "(min-width: 1200px)", DotNetObjectReference.Create(this));
+    }
+
+    
+    [JSInvokable]
+    public async Task OnQueryChanged(bool isDesktop) {
+        if(_isDesktop != isDesktop) {
+            _isDesktop = isDesktop;
+            if(!isDesktop)
+                await ToggleState(false);
+        }
+    }
+    async void OnLocationChanged(object sender, LocationChangedEventArgs args)
+    {
+        if (_canToggle && !_isDesktop)
+            await ToggleState(false);
+    }
+    async Task OnToggleButtonClick() => await ToggleState(!_isToggled);
+    async Task ToggleState(bool isToggled)
+    {
+        if (_canToggle && _isToggled != isToggled)
+        {
+            _isToggled = isToggled;
+            string stateCssClass = null;
+            if (_isDesktop)
+                stateCssClass = _isToggled ? "desktop-sidebar-hidden" : "desktop-sidebar-shown";
+            else
+                stateCssClass = _isToggled ? "mobile-sidebar-shown" : "mobile-sidebar-hidden";
+            if(StateCssClass != stateCssClass) {
+                StateCssClass = stateCssClass;
+                await StateCssClassChanged.InvokeAsync(StateCssClass);
+            }
+        }
+    }
+    public void Dispose() {
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+}

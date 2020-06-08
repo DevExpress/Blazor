@@ -1,0 +1,43 @@
+﻿<div class="code-snippet card demo-card-wide mw-1100">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
+        <CodeSnippet>
+@(@"<DxDataGrid Data=""@DataSource"" ShowFilterRow=""false"" AllowColumnDragDrop=""false""
+            RowRemovingAsync=""@OnRowRemoving""
+            RowUpdatingAsync=""@OnRowUpdating""
+            RowInsertingAsync=""@OnRowInserting""
+            CssClass=""mw-1100"">
+    <HeaderTemplate>
+        <DxToolbar>
+            <DxDataGridColumnChooserToolbarItem Alignment=""ToolbarItemAlignment.Right"" />
+        </DxToolbar>
+    </HeaderTemplate>
+    <Columns>
+        <DxDataGridColumn Field=""@nameof(ProductFlat.ProductName)"" ShowInColumnChooser=""false"" />
+        <DxDataGridComboBoxColumn Field=""@nameof(ProductFlat.Category)"" Data=""@Categoties"" />
+        <DxDataGridColumn Field=""@nameof(ProductFlat.Subcategory)"" />
+        <DxDataGridCheckBoxColumn Field=""@nameof(ProductFlat.Availability)"" />
+        <DxDataGridCommandColumn ShowInColumnChooser=""true"" />
+    </Columns>
+</DxDataGrid>
+
+@code {
+    IEnumerable<ProductFlat> DataSource;
+    string[] Categoties = new[] { ""Bikes"", ""Components"", ""Clothing"", ""Accessories"" };
+
+    protected override async Task OnInitializedAsync() {
+        DataSource = await FlatProductService.LoadProductsAsync();
+    }
+    async Task OnRowRemoving(ProductFlat dataItem) {
+        await FlatProductService.Remove(dataItem);
+    }
+    async Task OnRowUpdating(ProductFlat dataItem, IDictionary<string, object> newValue) {
+        await FlatProductService.Update(dataItem, newValue);
+    }
+    async Task OnRowInserting(IDictionary<string, object> newValue) {
+        await FlatProductService.Add(newValue);
+    }
+}")
+        </CodeSnippet>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+﻿<DemoScriptLoader @ref=@scriptLoaderRef Src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" />
+<pre><code @ref=@codeBlockRef class="hljs xml">@ChildContent</code></pre>
+
+@code {
+    
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    
+    ElementReference codeBlockRef;
+    DemoScriptLoader scriptLoaderRef;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if(firstRender)
+            await scriptLoaderRef.InvokeVoidAsync("hljs.highlightBlock", codeBlockRef);
+    }
+}

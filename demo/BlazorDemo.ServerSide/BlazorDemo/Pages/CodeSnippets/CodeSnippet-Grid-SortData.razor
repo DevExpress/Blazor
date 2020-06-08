@@ -1,0 +1,28 @@
+﻿<div class="code-snippet card demo-card-wide mw-1100">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet>
+@(@"<DxDataGrid Data=""@DataSource""
+            CssClass=""mw-1100"">
+    <DxDataGridColumn Field=""@nameof(ProductFlat.Id)""
+                      AllowSort=""@DefaultBoolean.False""
+                      Width=""50px"">
+    </DxDataGridColumn>
+    <DxDataGridColumn Field=""@nameof(ProductFlat.Category)""
+                      SortOrder=""@DataGridColumnSortOrder.Descending""
+                      SortIndex=""0""
+                      Width=""350px"">
+    </DxDataGridColumn>
+    <DxDataGridColumn Field=""@nameof(ProductFlat.Subcategory)""
+                      SortOrder=""@DataGridColumnSortOrder.Ascending""
+                      SortIndex=""1""
+                      Width=""350px"">
+    </DxDataGridColumn>
+    <DxDataGridColumn Field=""@nameof(ProductFlat.ProductName)""
+                      Caption=""Product Name""
+                      Width=""350px"">
+    </DxDataGridColumn>
+</DxDataGrid>")
+        </CodeSnippet>
+    </div>
+</div>

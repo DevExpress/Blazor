@@ -1,0 +1,37 @@
+<div class="code-snippet card demo-card-wide mw-1100">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
+        <CodeSnippet>
+@(@"<DxDataGrid Data=""@DataSource""
+        VerticalScrollBarMode=""@ScrollBarMode.Auto""
+        VerticalScrollableHeight=""400""
+        ShowPager=""false"">
+
+    <Columns>
+        <DxDataGridColumn Field=""@nameof(Employee.FirstName)"" SortOrder=""@DataGridColumnSortOrder.Ascending"" />
+        <DxDataGridColumn Field=""@nameof(Employee.LastName)"" />
+        <DxDataGridColumn Field=""@nameof(Employee.Position)"" Caption=""Position"" EditorVisible=""@DefaultBoolean.True"" />
+        <DxDataGridDateEditColumn Field=""@nameof(Employee.BirthDate)"" DisplayFormat=""D"" Caption=""Birth Date"" EditorVisible=""@DefaultBoolean.True"" />
+        <DxDataGridDateEditColumn Field=""@nameof(Employee.HireDate)"" DisplayFormat=""D"" Caption=""Hire Date"" EditorVisible=""@DefaultBoolean.True"" />
+    </Columns>
+    <RowPreviewTemplate Context=""ItemInfo"">
+        @{
+            Employee employee = ItemInfo.DataItem;
+            <table cellpadding=""5"" cellspacing=""0"">
+                <tbody>
+                    <tr>
+                        <td rowspan=""4"" style=""border: 0px;"">
+                            <img src=""_content/BlazorDemo/images/Employees/@(employee.FileName).png"" width=""76"" />
+                        </td>
+                        <td style=""border: 0px; white-space: normal;"">
+                            @employee.Notes
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+    </RowPreviewTemplate>
+</DxDataGrid>")
+        </CodeSnippet>
+    </div>
+</div>

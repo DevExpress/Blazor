@@ -1,0 +1,28 @@
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet>
+@(@"<DxChart Data=""@SalesData""
+         CssClass=""mw-1100"">
+    <DxChartTitle Text=""Sales amount"">
+        <DxChartSubTitle Text=""by cities"" />
+    </DxChartTitle>
+    <DxChartBarSeries Name=""2017"" Filter=""@((SaleInfo s) => s.Date.Year == 2017)"" AggregationMethod=""@Enumerable.Sum"" ArgumentField=""@(s => s.City)"" 
+                      ValueField=""@(s => s.Amount)"" />
+    <DxChartBarSeries Name=""2018"" Filter=""@((SaleInfo s) => s.Date.Year == 2018)"" AggregationMethod=""@Enumerable.Sum"" ArgumentField=""@(s => s.City)"" 
+                      ValueField=""@(s => s.Amount)"" />
+    <DxChartLineSeries Name=""2019"" Filter=""@((SaleInfo s) => s.Date.Year == 2019)"" AggregationMethod=""@Enumerable.Sum"" ArgumentField=""@(s=> s.City)"" 
+                       ValueField=""@(s => s.Amount)"">""
+        <DxChartSeriesLegendItem IconCssClass=""oi oi-flag"">
+            <TextTemplate>Last year</TextTemplate>
+        </DxChartSeriesLegendItem>
+    </DxChartLineSeries>
+    <DxChartLegend AllowToggleSeries=""true"" Orientation=""@Orientation.Vertical"" HorizontalAlignment=""@HorizontalAlignment.Right"">
+        <DxChartTitle Text=""Years"">
+            <DxChartSubTitle Text=""(2017-2019)""></DxChartSubTitle>
+        </DxChartTitle>
+    </DxChartLegend>
+</DxChart>")
+        </CodeSnippet>
+    </div>
+</div>

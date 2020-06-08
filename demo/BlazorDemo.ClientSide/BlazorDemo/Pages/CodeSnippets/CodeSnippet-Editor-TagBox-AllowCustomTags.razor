@@ -1,0 +1,20 @@
+﻿<CodeSnippet>
+@(@"<DxTagBox Data=""@Cities""
+          AllowCustomTags=""true""
+          @bind-Tags=""Tags"">
+</DxTagBox>
+
+@code {
+    IEnumerable<string> Cities { get; set; } = new List<string>() {
+    {
+        ""London"",
+        ""Berlin"",
+        ""Paris"",
+    };
+
+    IEnumerable<string> Tags { get; set; } = new List<string>() {
+        ""London"",
+        ""New York""
+    };
+}")
+</CodeSnippet>

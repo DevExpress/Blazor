@@ -1,0 +1,42 @@
+@implements IDisposable
+
+<a @ref=@linkRef class="demo-anchor" href="@Link" />
+@code {
+
+    [Parameter] public string Link { get; set; }
+
+    [Inject] NavigationManager NavigationManager { get; set; }
+
+    [Inject] IJSRuntime JsRuntime { get; set; }
+
+    ElementReference linkRef;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        NavigationManager.LocationChanged += OnLocationChanged;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            await ScrollToIfNeeded(NavigationManager.Uri);
+    }
+
+    void OnLocationChanged(object sender, LocationChangedEventArgs args)
+    {
+        InvokeAsync(async () => { await ScrollToIfNeeded(args.Location); });
+    }
+
+    async Task ScrollToIfNeeded(string uri)
+    {
+        if (uri.EndsWith(Link))
+            await JsRuntime.InvokeVoidAsync("Element.prototype.scrollIntoView.call", linkRef);
+    }
+
+    void IDisposable.Dispose()
+    {
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+}

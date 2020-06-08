@@ -1,0 +1,32 @@
+﻿@inherits DemoWithResizableComponent
+
+<div class="demo-description" id="DisplayFormat">
+    <h2><DemoNavLink Link="SpinEdit#DisplayFormat" />Spin Edit - Display Format<span class="demo-badge badge badge-success">New</span></h2>
+    <p>
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSpinEditBase-1.DisplayFormat">DisplayFormat</a> property to format the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1">Spin Edit</a>’s display value when the editor is not focused.
+    </p>
+    <p>
+        Spin Edit supports standard formats. See the <a class="helplink" target="_blank" href="https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings">Standard Numeric Format Strings</a> and <a class="helplink" target="_blank" href="https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings">Custom Numeric Format Strings</a> help topics for more information.
+    </p>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode" Title="Enter a price" />
+    </div>
+    <div class="card-body mw-480">
+        <DxSpinEdit @bind-Value="@DecimalValue" DisplayFormat="C" SizeMode="SizeMode"></DxSpinEdit>
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_SpinEdit_DisplayFormat />
+    </div>
+</div>
+
+@code {
+    Decimal decimalValue = 320.5m;
+    Decimal DecimalValue { get => decimalValue; set { decimalValue = value; InvokeAsync(StateHasChanged); } }
+}

@@ -1,0 +1,125 @@
+﻿<div class="demo-description" id="Adaptivity">
+    <h2>
+        <DemoNavLink Link="Toolbar#Adaptivity" />Toolbar - Adaptivity
+    </h2>
+    <p>
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar">Toolbar</a> component supports adaptive mode. The following properties control how the toolbar responds when the container’s width changes:
+    </p>
+    <ul>
+        <li>
+            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarBase.AdaptivityAutoCollapseItemsToIcons">AdaptivityAutoCollapseItemsToIcons</a> - If <b>true</b>, the text of all items that contain icons is hidden. You can also use the item's <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarItemBase.AdaptivePriority">AdaptivePriority</a> property to hide a specific item before other items.
+        </li>
+        <li>
+            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarBase.AdaptivityAutoHideRootItems">AdaptivityAutoHideRootItems</a> - If <b>true</b>, the toolbar combines root items one by one in the root submenu until the toolbar contains the minimum number of root items (specified by the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarBase.AdaptivityMinRootItemCount">AdaptivityMinRootItemCount</a> property).
+        </li>
+    </ul>
+</div>
+
+<div class="demo-device-container @GetOrientation() mw-1100">
+    <div class="demo-device-orientation-selector">
+        <div>
+            <button type="button" class="btn btn-secondary d-inline-flex align-items-center vertical @GetButtonOrientationSelector(Orientation.Vertical)" @onclick="() => ChangeOrientation(Orientation.Vertical)">
+                <span class="mobile-view"></span>
+            </button>
+            <button type="button" class="btn btn-secondary d-inline-flex align-items-center horizontal @GetButtonOrientationSelector(Orientation.Horizontal)" @onclick="() => ChangeOrientation(Orientation.Horizontal)">
+                <span class="mobile-view-horizontal"></span>
+            </button>
+        </div>
+    </div>
+    <div class="demo-device border border-secondary">
+        <div class="demo-display border border-secondary">
+            <div class="card m-3">
+                <div class="card-header p-2 bg-transparent">
+                    <DxToolbar Title="New Article" ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" ItemSizeMode="SizeMode.Small" AdaptivityMinRootItemCount="2" AdaptivityAutoHideRootItems="true" AdaptivityAutoCollapseItemsToIcons="true">
+                        <Items>
+                            <DxToolbarItem BeginGroup="true" Name="Undo" IconCssClass="tb-icon tb-icon-undo" AdaptiveText="Undo" />
+                            <DxToolbarItem Name="Redo" IconCssClass="tb-icon tb-icon-redo" AdaptiveText="Redo" />
+                            <DxToolbarItem Name="FontFamily" Text="@currentFont.Name" BeginGroup="true" AdaptiveText="Font Family">
+                                <Items>
+                                    @foreach(var font in FontInfo.DefaultFonts) {
+                                        <DxToolbarItem Text="@font.Name" Style="@font.GetCssString()" Click="(x) => { currentFont = font; }" GroupName="fontGroup" />
+                                    }
+                                </Items>
+                            </DxToolbarItem>
+                            <DxToolbarItem Name="FontSize" Text="@currentSize.Size.ToString()" BeginGroup="true" AdaptiveText="Font Size">
+                                <Items>
+                                    @foreach(var fontSize in FontSizeInfo.DefaultFontSizes) {
+                                        <DxToolbarItem Text="@fontSize.Size.ToString()" Click="(x) => { currentSize = fontSize; }" GroupName="fontSizeGroup" />
+                                    }
+                                </Items>
+                            </DxToolbarItem>
+                            <DxToolbarItem AdaptivePriority="1" GroupName="font-bold" BeginGroup="true" Name="Bold" IconCssClass="tb-icon tb-icon-bold" AdaptiveText="Bold" />
+                            <DxToolbarItem AdaptivePriority="1" GroupName="font-italic" Name="Italic" IconCssClass="tb-icon tb-icon-italic" AdaptiveText="Italic" />
+                            <DxToolbarItem AdaptivePriority="1" GroupName="font-underline" Name="Underline" IconCssClass="tb-icon tb-icon-underline" AdaptiveText="Underline" />
+                            <DxToolbarItem AdaptivePriority="1" BeginGroup="true" GroupName="align" IconCssClass="tb-icon tb-icon-align-left" AdaptiveText="Left" />
+                            <DxToolbarItem AdaptivePriority="1" GroupName="align" IconCssClass="tb-icon tb-icon-align-center" AdaptiveText="Center" />
+                            <DxToolbarItem AdaptivePriority="1" GroupName="align" IconCssClass="tb-icon tb-icon-align-right" AdaptiveText="Right" />
+                        </Items>
+                    </DxToolbar>
+                </div>
+
+                <div class="card-body p-3">
+                    <p class="bg-light p3 m-3"><br></p>
+                    <p class="bg-light p3 m-3"><br></p>
+                    <p class="bg-light p3 m-3"><br></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    Orientation orientation;
+    FontInfo currentFont = FontInfo.DefaultFonts[0];
+    FontSizeInfo currentSize = FontSizeInfo.DefaultFontSizes[0];
+    public class FontInfo {
+        public string Name { get; private set; }
+        public string CssString { get; private set; }
+        public FontInfo(string name, string cssString) {
+            Name = name;
+            CssString = cssString;
+        }
+        public string GetCssString() {
+            return $"font-family:{CssString};";
+        }
+        public static readonly FontInfo[] DefaultFonts = new FontInfo[] {
+            new FontInfo("Arial", "Arial, Helvetica, sans-serif"),
+            new FontInfo("Courier New", "'Courier New', Courier, monospace"),
+            new FontInfo("Segoe UI", "'Segoe UI', sans-serif"),
+            new FontInfo("Tahoma", "Tahoma, Geneva, sans-serif"),
+            new FontInfo("Times New Roman", "'Times New Roman', Times, serif"),
+            new FontInfo("Verdana", "Verdana, Geneva, sans-serif"),
+        };
+    }
+
+    public class FontSizeInfo {
+        public int Size { get; private set; }
+
+        public FontSizeInfo(int size) {
+            Size = size;
+        }
+        public static readonly FontSizeInfo[] DefaultFontSizes = new FontSizeInfo[] {
+            new FontSizeInfo(8),
+            new FontSizeInfo(10),
+            new FontSizeInfo(12),
+            new FontSizeInfo(14),
+            new FontSizeInfo(18),
+            new FontSizeInfo(24),
+            new FontSizeInfo(36),
+        };
+    }
+
+    string GetOrientation() {
+        return orientation.ToString().ToLower();
+    }
+    void ChangeOrientation(Orientation orientation) {
+        if(this.orientation == orientation) return;
+        this.orientation = orientation;
+        InvokeAsync(StateHasChanged);
+    }
+    string GetButtonOrientationSelector(Orientation orientation) {
+        return this.orientation == orientation ? "active" : string.Empty;
+    }
+}
+<CodeSnippet_Toolbar_Adaptivity />

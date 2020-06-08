@@ -1,0 +1,95 @@
+﻿<div class="demo-description" id="TabbedGroups">
+    <h2><DemoNavLink Link="FormLayout#TabbedGroups" />Form Layout - Tabbed Groups</h2>
+    <p>
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayout#tabs">Form Layout</a> component allows you to group layout items and layout groups into tabbed containers. A tab page collection (<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutTabPages">DxFormLayoutTabPages</a>) allows you to specify the active page using the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxFormLayoutTabPagesBase.ActiveTabIndex">ActiveTabIndex</a> property.
+    </p>
+</div>
+
+<div class="card demo-card-wide demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar ShowSizeSelector="false">
+            <TitleTemplate>
+                @nameof(FirstName)=<b>@FirstName</b>, @nameof(LastName)=<b>@LastName</b>, @nameof(BirthDate)=<b>@BirthDate</b>
+            </TitleTemplate>
+        </DemoToolbar>
+    </div>
+    <div class="card-header">
+        <DemoToolbar ShowSizeSelector="false">
+            <TitleTemplate>
+                @nameof(Position)=<b>@Position</b>, @nameof(HireDate)=<b>@HireDate</b>, @nameof(Notes)=<b>@Notes</b>
+            </TitleTemplate>
+        </DemoToolbar>
+    </div>
+    <div class="card-body card-body-fl" style="padding-top:0">
+        <DxFormLayout>
+            <DxFormLayoutTabPages @bind-ActiveTabIndex="@ActiveTabIndex">
+                <DxFormLayoutTabPage Caption="Personal Information">
+                    <DxFormLayoutItem Caption="First Name:" ColSpanMd="6">
+                        <Template>
+                            <DxTextBox @bind-Text="@FirstName"></DxTextBox>
+                        </Template>
+                    </DxFormLayoutItem>
+
+                    <DxFormLayoutItem Caption="Last Name:" ColSpanMd="6">
+                        <Template>
+                            <DxTextBox @bind-Text="@LastName"></DxTextBox>
+                        </Template>
+                    </DxFormLayoutItem>
+
+                    <DxFormLayoutItem Caption="Birth Date:" ColSpanMd="6">
+                        <Template>
+                            <DxDateEdit @bind-Date="@BirthDate"></DxDateEdit>
+                        </Template>
+                    </DxFormLayoutItem>
+                </DxFormLayoutTabPage>
+
+                <DxFormLayoutTabPage Caption="Work Information">
+                    <DxFormLayoutItem Caption="Position:" ColSpanMd="6">
+                        <Template>
+                            <DxTextBox @bind-Text="@Position"></DxTextBox>
+                        </Template>
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Hire Date:" ColSpanMd="6">
+                        <Template>
+                            <DxDateEdit @bind-Date="@HireDate"></DxDateEdit>
+                        </Template>
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Notes:" ColSpanMd="6">
+                        <Template>
+                            <DxTextBox @bind-Text="@Notes"></DxTextBox>
+                        </Template>
+                    </DxFormLayoutItem>
+                </DxFormLayoutTabPage>
+            </DxFormLayoutTabPages>
+        </DxFormLayout>
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_FormLayout_Default_TabbedGroups />
+    </div>
+</div>
+
+@code {
+    int ActiveTabIndex { get; set; } = 1;
+
+    string firstName = "Nancy";
+    string FirstName { get => firstName; set { firstName = value; InvokeAsync(StateHasChanged); } }
+
+    string lastName = "Davolio";
+    string LastName { get => lastName; set { lastName = value; InvokeAsync(StateHasChanged); } }
+
+    DateTime birthDate = DateTime.Now.AddYears(-20);
+    DateTime BirthDate { get => birthDate; set { birthDate = value; InvokeAsync(StateHasChanged); } }
+
+    string position = "Sales Representative";
+    string Position { get => position; set { position = value; InvokeAsync(StateHasChanged); } }
+
+    DateTime hireDate = DateTime.Now.AddYears(-20);
+    DateTime HireDate { get => hireDate; set { hireDate = value; InvokeAsync(StateHasChanged); } }
+
+    string notes = "Education includes a BA in psychology.";
+    string Notes { get => notes; set { notes = value; InvokeAsync(StateHasChanged); } }
+}

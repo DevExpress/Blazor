@@ -1,0 +1,20 @@
+@using Microsoft.AspNetCore.Components
+
+@code {
+    [CascadingParameter] protected CodeSnippetTabbed Parent { get; set; }
+
+    [Parameter] public string Text { get; set; }
+
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    protected override void OnInitialized() {
+        base.OnInitialized();
+        if (Parent != null) {
+            Register(Parent);
+        }
+    }
+
+    protected void Register(CodeSnippetTabbed parent) {
+        parent.AddTabPage(this);
+    }
+}

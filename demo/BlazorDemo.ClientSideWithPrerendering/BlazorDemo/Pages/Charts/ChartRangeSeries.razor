@@ -1,0 +1,45 @@
+﻿@page "/ChartRangeSeries"
+@using DevExpress.Blazor
+@inject WeatherForecastService ForecastService
+<div class="demo-description" id="RangeBar">
+    <h2><DemoNavLink Link="ChartRangeSeries#RangeBar" />Charts - Range Bar Series</h2>
+    <p>
+        This demo illustrates how to use <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartRangeBarSeries-3">Range Bar</a> series within the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1">Chart</a> component. 
+        Range Bar series display value ranges that correspond to argument values. 
+        Chart data is represented as rectangles between a specified start and end value.
+    </p>
+</div>
+<DxChart Data="@WeatherForecasts"
+         CssClass="mw-1100">
+    <DxChartRangeBarSeries ValueField="@((WeatherForecast i) => i.TemperatureF)" ArgumentField="@(i => i.Date.Date)" Name="Temperature, F" />
+    <DxChartTooltip>
+        @context.GetRangePoint().Render((rangePoint) =>
+                    @<div class="p-3">
+                        <p>Max: @rangePoint.EndValue</p>
+                        <p>Min: @rangePoint.StartValue</p>
+                    </div>
+        )
+    </DxChartTooltip>
+</DxChart>
+<CodeSnippet_Charts_RangeBarSeries />
+<div class="demo-description" id="RangeArea">
+    <h2><DemoNavLink Link="ChartRangeSeries#RangeArea" />Charts - Range Area Series</h2>
+    <p>
+        This demo illustrates how to use <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartRangeAreaSeries-3">Range Area</a> series within the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1">Chart</a> component. 
+        Range Area series display value ranges that correspond to argument values. 
+        Chart data is represented as a color-filled space between the lines that displays the series start and end points.
+    </p>
+</div>
+<DxChart Data="@WeatherForecasts"
+         CssClass="mw-1100">
+    <DxChartRangeAreaSeries ValueField="@((WeatherForecast i) => i.TemperatureF)" ArgumentField="@(i => i.Date.Date)" Name="Temperature, F" />
+</DxChart>
+<CodeSnippet_Charts_RangeAreaSeries />
+@code {
+    WeatherForecast[] WeatherForecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        WeatherForecasts = await ForecastService.GetDetailedForecastAsync();
+    }
+}

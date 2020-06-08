@@ -1,0 +1,21 @@
+﻿<DemoScriptLoader @ref=@scriptLoaderRef Src="_content/BlazorDemo/lib/scroll-view.js" />
+<div @attributes=@Attributes class="blazor-scroll-view @CssClass" @ref=@elementRef>
+    @ChildContent
+</div>
+@code {
+    ElementReference elementRef;
+    DemoScriptLoader scriptLoaderRef;
+
+    [Parameter] public string CssClass { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)] public IEnumerable<KeyValuePair<string, object>> Attributes { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await scriptLoaderRef.InvokeVoidAsync("DevExpress.ui.ensureScrollView", elementRef);
+    }
+
+    protected override bool ShouldRender() => false;
+
+}

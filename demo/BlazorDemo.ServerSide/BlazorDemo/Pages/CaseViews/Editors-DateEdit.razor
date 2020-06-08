@@ -1,0 +1,36 @@
+﻿@inherits DemoWithResizableComponent
+
+<div class="demo-description" id="Overview">
+    <h2><DemoNavLink Link="DateEdit#Overview" />Date Edit - Overview</h2>
+    <p>
+        <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1">Date Edit</a> is a date editor with a dropdown calendar. You can enter a date into the text box or pick one from the dropdown.
+    </p>
+    <p>
+        The Date Edit component supports different size modes. To specify the component's size in code, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxResizableEditorBase-2.SizeMode">SizeMode</a> property. To apply different size modes, use the drop-down list in the demo card's header.
+    </p>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode">
+            <TitleTemplate>
+                Date: <b>@DateTimeValue.ToString("dddd, dd MMMM yyyy")</b>
+            </TitleTemplate>
+        </DemoToolbar>
+    </div>
+    <div class="card-body mw-480">
+        <DxDateEdit @bind-Date="@DateTimeValue" SizeMode="SizeMode"></DxDateEdit>
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_DateEdit></CodeSnippet_Editor_DateEdit>
+    </div>
+</div>
+
+@code {
+    DateTime dateTimeValue = DateTime.Now;
+    DateTime DateTimeValue { get => dateTimeValue; set { dateTimeValue = value; InvokeAsync(StateHasChanged); } }
+}

@@ -1,0 +1,26 @@
+﻿<CodeSnippetTabbed>
+    <CodeSnippetTabPage Text="Razor">@(@"<DxButton RenderStyle=""ButtonRenderStyle.Info"" Click=""@Like"" IconCssClass=""like"" Text=""Like"">
+    @context
+    <span style=""width: 0.8em; margin-left: 8px;"">@(likes < 10 ? likes.ToString() : ""9"")</span>
+</DxButton>
+
+@code {
+    int likes;
+    protected override void OnInitialized() {
+        likes = 1;
+    }
+    void Like(MouseEventArgs args) {
+        likes++;
+        InvokeAsync(StateHasChanged);
+    }
+}")</CodeSnippetTabPage>
+    <CodeSnippetTabPage Text="CSS">@(@".like {
+    height: 16px;
+    width: 16px;
+    background-image: url(""../images/like.svg"");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    margin-right: 8px;
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

@@ -1,0 +1,80 @@
+@page "/GridColumnTypes"
+@inject WeatherForecastService ForecastService
+
+<div class="demo-description mw-1100">
+    <h2>Data Grid - Column Types</h2>
+
+    <p>
+        This demo demonstrates the different column types supported by the DevExpress <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#columns">Data Grid</a> for Blazor.
+    </p>
+    <ul>
+        <li>
+            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridCommandColumn">DxDataGridCommandColumn</a> - Displays data management commands such as New, Edit, Delete, Update, and so on.
+        </li>
+        <li>
+            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridDateEditColumn">DxDataGridDateEditColumn</a> (Date) - Uses a drop-down calendar control to edit column values.
+        </li>
+        <li>
+            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn">DxDataGridColumn</a> (Forecast) - Default column type that displays strings and uses a text box to edit values.
+        </li>
+        <li>
+            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridSpinEditColumn">DxDataGridSpinEditColumn</a> (Temp. (&#x2103;)) - Uses a spin editor with up/down buttons to edit column values.
+        </li>
+        <li>
+            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridComboBoxColumn-1">DxDataGridComboBoxColumn</a> (Cloud Cover) - Uses a combobox control to edit column values.
+        </li>
+        <li>
+            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridCheckBoxColumn">DxDataGridCheckBoxColumn</a> (Precipitation) - Displays a disabled checkbox that is replaced with a combobox when users filter column values.
+        </li>
+    </ul>
+    <p>
+        Click the Edit command in any row to see the integrated data editors displayed by the columns listed above.
+    </p>
+</div>
+
+<DxDataGrid DataAsync="@ForecastService.GetForecastAsync"
+            PageSize="5"
+            ShowFilterRow="false"
+            RowRemovingAsync="@OnRowRemoving"
+            RowUpdatingAsync="@OnRowUpdating"
+            RowInsertingAsync="@OnRowInserting"
+            InitNewRow="@OnInitNewRow"
+            CssClass="mw-1100">
+
+    <DxDataGridCommandColumn Width="100px"></DxDataGridCommandColumn>
+
+    <DxDataGridDateEditColumn Field="@nameof(WeatherForecast.Date)" DisplayFormat="D" EditorFormat="d" EditorDisplayFormat="D"></DxDataGridDateEditColumn>
+
+    <DxDataGridColumn Field="@nameof(WeatherForecast.Forecast)" Caption="Forecast"></DxDataGridColumn>
+
+    <DxDataGridSpinEditColumn Field="@nameof(WeatherForecast.TemperatureC)" Caption="@("Temp. (\x2103)")" TextAlignment="@DataGridTextAlign.Left"></DxDataGridSpinEditColumn>
+
+    <DxDataGridComboBoxColumn Field="@nameof(WeatherForecast.CloudCover)" Caption="Cloud Cover" DataAsync="@ForecastService.GetCloudCoverAsync" TextAlignment="@DataGridTextAlign.Left"></DxDataGridComboBoxColumn>
+
+    <DxDataGridCheckBoxColumn Field="@nameof(WeatherForecast.Precipitation)" Caption="Precipitation"></DxDataGridCheckBoxColumn>
+</DxDataGrid>
+
+<CodeSnippet_GridColumnTypes></CodeSnippet_GridColumnTypes>
+
+@code {
+    async Task OnRowRemoving(WeatherForecast dataItem)
+    {
+        await ForecastService.Remove(dataItem);
+    }
+    async Task OnRowUpdating(WeatherForecast dataItem, IDictionary<string, object> newValue)
+    {
+        await ForecastService.Update(dataItem, newValue);
+    }
+    async Task OnRowInserting(IDictionary<string, object> newValue)
+    {
+        await ForecastService.Insert(newValue);
+    }
+    Task OnInitNewRow(Dictionary<string, object> values)
+    {
+        values.Add("Date", DateTime.Now);
+        values.Add("TemperatureC", 13);
+        values.Add("Forecast", "Warm");
+        values.Add("CloudCover", "Sunny");
+        return Task.CompletedTask;
+    }
+}

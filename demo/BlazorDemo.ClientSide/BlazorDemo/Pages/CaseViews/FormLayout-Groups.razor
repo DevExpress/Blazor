@@ -1,0 +1,94 @@
+﻿<div class="demo-description" id="Groups">
+    <h2><DemoNavLink Link="FormLayout#Groups" />Form Layout - Groups</h2>
+    <p>
+        A layout group (<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutGroup">DxFormLayoutGroup</a>) is a container for layout items (<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutItem">DxFormLayoutItem</a>) and other layout groups. Layout groups, just like individual items, allow you to specify their width using the same set of <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutGroup._members">ColSpanXX</a> properties.
+    </p>
+</div>
+
+<div class="card demo-card-wide demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar ShowSizeSelector="false">
+            <TitleTemplate>
+                @nameof(FirstName)=<b>@FirstName</b>, @nameof(LastName)=<b>@LastName</b>, @nameof(BirthDate)=<b>@BirthDate</b>
+            </TitleTemplate>
+        </DemoToolbar>
+    </div>
+    <div class="card-header">
+        <DemoToolbar ShowSizeSelector="false">
+            <TitleTemplate>
+                @nameof(Position)=<b>@Position</b>, @nameof(HireDate)=<b>@HireDate</b>, @nameof(Notes)=<b>@Notes</b>
+            </TitleTemplate>
+        </DemoToolbar>
+    </div>
+    <div class="card-body card-body-fl">
+        <DxFormLayout>
+            <DxFormLayoutGroup Caption="Personal Information" ColSpanMd="6">
+                <DxFormLayoutItem Caption="First Name:" ColSpanMd="12">
+                    <Template>
+                        <DxTextBox @bind-Text="@FirstName"></DxTextBox>
+                    </Template>
+                </DxFormLayoutItem>
+
+                <DxFormLayoutItem Caption="Last Name:" ColSpanMd="12">
+                    <Template>
+                        <DxTextBox @bind-Text="@LastName"></DxTextBox>
+                    </Template>
+                </DxFormLayoutItem>
+
+                <DxFormLayoutItem Caption="Birth Date:" ColSpanMd="12">
+                    <Template>
+                        <DxDateEdit @bind-Date="@BirthDate"></DxDateEdit>
+                    </Template>
+                </DxFormLayoutItem>
+            </DxFormLayoutGroup>
+
+            <DxFormLayoutGroup Caption="Work Information" ColSpanMd="6">
+                <DxFormLayoutItem Caption="Position:" ColSpanMd="12">
+                    <Template>
+                        <DxTextBox @bind-Text="@Position"></DxTextBox>
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Hire Date:" ColSpanMd="12">
+                    <Template>
+                        <DxDateEdit @bind-Date="@HireDate"></DxDateEdit>
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Notes:" ColSpanMd="12">
+                    <Template>
+                        <DxTextBox @bind-Text="@Notes"></DxTextBox>
+                    </Template>
+                </DxFormLayoutItem>
+            </DxFormLayoutGroup>
+        </DxFormLayout>
+
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_FormLayout_Default_Groups />
+    </div>
+</div>
+
+@code {
+    string firstName = "Nancy";
+    string FirstName { get => firstName; set { firstName = value; OnChanged(); } }
+
+    string lastName = "Davolio";
+    string LastName { get => lastName; set { lastName = value; OnChanged(); } }
+
+    DateTime birthDate = DateTime.Now.AddYears(-20);
+    DateTime BirthDate { get => birthDate; set { birthDate = value; OnChanged(); } }
+
+    string position = "Sales Representative";
+    string Position { get => position; set { position = value; OnChanged(); } }
+
+    DateTime hireDate = DateTime.Now.AddYears(-20);
+    DateTime HireDate { get => hireDate; set { hireDate = value; OnChanged(); } }
+
+    string notes = "Education includes a BA in psychology.";
+    string Notes { get => notes; set { notes = value; OnChanged(); } }
+
+    void OnChanged() { InvokeAsync(StateHasChanged); }
+}

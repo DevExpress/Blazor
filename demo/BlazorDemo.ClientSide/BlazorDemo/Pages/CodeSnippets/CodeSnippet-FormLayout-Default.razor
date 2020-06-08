@@ -1,0 +1,54 @@
+﻿<CodeSnippet>
+@(@"<DxFormLayout ItemSizeMode=""SizeMode"">
+    <DxFormLayoutItem Caption=""Contact Name:"" ColSpanMd=""6"">
+        <Template>
+            <DxTextBox @bind-Text=""@Name""></DxTextBox>
+        </Template>
+    </DxFormLayoutItem>
+
+    <DxFormLayoutItem Caption=""Email:"" ColSpanMd=""6"">
+        <Template>
+            <DxTextBox @bind-Text=""@Email""></DxTextBox>
+        </Template>
+    </DxFormLayoutItem>
+
+    <DxFormLayoutItem Caption=""Birth Date:"" ColSpanMd=""6"">
+        <Template>
+            <DxDateEdit @bind-Date=""@BirthDate""></DxDateEdit>
+        </Template>
+    </DxFormLayoutItem>
+
+    <DxFormLayoutItem Caption=""Years Worked:"" ColSpanMd=""6"">
+        <Template>
+            <DxSpinEdit @bind-Value=""@YearsWorked""></DxSpinEdit>
+        </Template>
+    </DxFormLayoutItem>
+
+    <DxFormLayoutItem Caption=""On Vacation:"">
+        <Template>
+            <DxCheckBox @bind-Checked=""@OnVacation""></DxCheckBox>
+        </Template>
+    </DxFormLayoutItem>
+</DxFormLayout>
+
+@code {
+    string name = ""Nancy Davolio"";
+    string Name { get => name; set { name = value; OnChanged(); } }
+
+    string email = ""NancyDavolio@sample.com"";
+    string Email { get => email; set { email = value; OnChanged(); } }
+
+    DateTime birthDate = DateTime.Now.AddYears(-20);
+    DateTime BirthDate { get => birthDate; set { birthDate = value; OnChanged(); } }
+
+    int yearsWorked = 3;
+    int YearsWorked { get => yearsWorked; set { yearsWorked = value; OnChanged(); } }
+
+    bool onVacation = true;
+    bool OnVacation { get => onVacation; set { onVacation = value; OnChanged(); } }
+
+    SizeMode SizeMode { get; set; }
+
+    void OnChanged() { InvokeAsync(StateHasChanged); }
+}")
+</CodeSnippet>

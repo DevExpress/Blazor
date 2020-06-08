@@ -1,0 +1,43 @@
+﻿<CodeSnippet>
+@(@"<DxFormLayout Data=""@editFormData""
+                  ItemUpdating=""@((fieldName, newValue) => OnItemUpdating(fieldName, newValue))"">
+    <DxFormLayoutItem Field=""@nameof(FormDataItem.Name)"" Caption=""Contact Name:"" ColSpanMd=""6"" />
+    <DxFormLayoutItem Field=""@nameof(FormDataItem.BirthDate)"" Caption=""Birth Date:"" ColSpanMd=""6"" />
+    <DxFormLayoutItem Field=""@nameof(FormDataItem.YearsWorked)"" Caption=""Years Worked:"" ColSpanMd=""6"" />
+    <DxFormLayoutItem Field=""@nameof(FormDataItem.Position)"" Caption=""Position:"" ColSpanMd=""6"">
+        <Template>
+            <DxComboBox Data=""@(new List<string>() { ""Sales Representative"", ""Designer"" })""
+                        SelectedItem=""@(((string)((ValueEditContext)context).Value))""
+                        SelectedItemChanged=""@(value => ((ValueEditContext)context).OnChanged(value))""></DxComboBox>
+        </Template>
+    </DxFormLayoutItem>
+    <DxFormLayoutItem Field=""@nameof(FormDataItem.OnVacation)"" Caption=""On Vacation:"" ColSpanMd=""6"" />
+</DxFormLayout>
+
+@code {
+    FormDataItem editFormData = new FormDataItem()
+    {
+        Name = ""Nancy Davolio"",
+        BirthDate = DateTime.Now.AddYears(-30),
+        YearsWorked = 3,
+        Position = ""Sales Representative""
+    };
+
+    void OnItemUpdating(string fieldName, object newValue)
+    {
+        if (fieldName == nameof(FormDataItem.Name)) {
+            editFormData.Name = newValue.ToString();
+        } else if (fieldName == nameof(FormDataItem.BirthDate)) {
+            editFormData.BirthDate = (DateTime)newValue;
+        } else if (fieldName == nameof(FormDataItem.YearsWorked)) {
+            editFormData.YearsWorked = (int)newValue;
+        } else if (fieldName == nameof(FormDataItem.Position)) {
+            editFormData.Position = newValue.ToString();
+        } else if (fieldName == nameof(FormDataItem.OnVacation)) {
+            editFormData.OnVacation = (bool)newValue;
+        }
+
+        InvokeAsync(StateHasChanged);
+    }
+}")
+</CodeSnippet>

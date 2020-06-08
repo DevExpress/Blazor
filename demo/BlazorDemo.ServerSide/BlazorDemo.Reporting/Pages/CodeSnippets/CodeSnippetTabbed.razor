@@ -1,0 +1,55 @@
+﻿@inherits ComponentBase
+
+<CascadingValue Value="this">
+    @ChildContent
+    <div class="code-snippet card demo-card-wide">
+        <div class="code-header card-footer p-0">
+            <div class="lang-group nav nav-code">
+                @foreach (var tabPage in tabPages) {
+                    <a @key="@tabPage" href="javascript:;" class="@GetTabCssClass(tabPage)" @onclick="@(() => OnTabClick(tabPage))">@tabPage.Text</a>
+                }
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            @foreach (var tabPage in tabPages) {
+                <CodeSnippet Visible="@IsActiveTabPage(tabPage)" ChildContent="@tabPage.ChildContent"></CodeSnippet>
+            }
+        </div>
+    </div>
+</CascadingValue>
+
+@code {
+    int activeTabIndex = 0;
+
+    int ActiveTabIndex {
+        get => activeTabIndex;
+        set {
+            activeTabIndex = value;
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    List<CodeSnippetTabPage> tabPages = new List<CodeSnippetTabPage>();
+
+    public void AddTabPage(ComponentBase tabPage) {
+        tabPages.Add((CodeSnippetTabPage)tabPage);
+        StateHasChanged();
+    }
+
+    bool IsActiveTabPage(CodeSnippetTabPage tabPage) {
+        return tabPages.IndexOf(tabPage) == ActiveTabIndex;
+    }
+
+    string GetTabCssClass(CodeSnippetTabPage tabPage) {
+        return string.Join(" ", "nav-link", IsActiveTabPage(tabPage) ? "active border-primary" : "").Trim();
+    }
+
+    void OnTabClick(CodeSnippetTabPage tabPage) {
+        int tabIndex = tabPages.IndexOf(tabPage);
+        if (tabIndex != ActiveTabIndex) {
+            ActiveTabIndex = tabIndex;
+        }
+    }
+}

@@ -1,0 +1,119 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Blazor.Reporting" Version="20.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.112" />    
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorDemo\BlazorDemo.csproj" />
+    <ProjectReference Include="..\..\..\tools\DevExpress.Blazor.DocumentMetadata\DevExpress.Blazor.DocumentMetadata.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="DataSources\Contacts.db" />
+    <None Remove="DataSources\devav.sqlite3" />
+    <None Remove="DataSources\homes.db" />
+    <None Remove="DataSources\nwind.db" />
+    <None Remove="DataSources\vehicles.db" />
+    <None Remove="Reports\AnchorVertical\Report.repx" />
+    <None Remove="Reports\BalanceSheetReport\Report.repx" />
+    <None Remove="Reports\BarCodes\BarCodeTypesReport.repx" />
+    <None Remove="Reports\BarCodes\ProductLabelsReport.repx" />
+    <None Remove="Reports\CachedDocumentSource\ReportWeb.repx" />
+    <None Remove="Reports\CalculatedFields\Report.repx" />
+    <None Remove="Reports\CharacterComb\Report.repx" />
+    <None Remove="Reports\Charts\Report.repx" />
+    <None Remove="Reports\CrossBandContent\Report.repx" />
+    <None Remove="Reports\CrossBandControls\Report.repx" />
+    <None Remove="Reports\DrillDown\Report.repx" />
+    <None Remove="Reports\EmployeePerformanceReview\Report.repx" />
+    <None Remove="Reports\FormattingRules\Report.repx" />
+    <None Remove="Reports\HierarchicalReport\Report.repx" />
+    <None Remove="Reports\HiddenColumnsReport\Report.repx" />
+    <None Remove="Reports\InteractiveSorting\Report.repx" />
+    <None Remove="Reports\MailMerge\Report.repx" />
+    <None Remove="Reports\MasterDetailReport\Report.repx" />
+    <None Remove="Reports\MultiColumnReport\Report.repx" />
+    <None Remove="Reports\NorthwindTraders\InvoiceReport.repx" />
+    <None Remove="Reports\PivotGridAndChart\Report.repx" />
+    <None Remove="Reports\ProfitAndLoss\Report.repx" />
+    <None Remove="Reports\ReportMergingWithPdf\Report.repx" />
+    <None Remove="Reports\ReportMerging\Report.repx" />
+    <None Remove="Reports\RestaurantMenu\Report.repx" />
+    <None Remove="Reports\RichText\Report.repx" />
+    <None Remove="Reports\RollPaper\Report.repx" />
+    <None Remove="Reports\SalesSummary\Report.repx" />
+    <None Remove="Reports\ShrinkGrow\Report.repx" />
+    <None Remove="Reports\SideBySideReports\EmployeeComparisonReport.repx" />
+    <None Remove="Reports\SideBySideReports\EmployeeOrdersReport.repx" />
+    <None Remove="Reports\Subreports\DetailReport.repx" />
+    <None Remove="Reports\Subreports\MasterReport.repx" />
+    <None Remove="Reports\SwissQRBill\SwissQRBill.repx" />
+    <None Remove="Reports\TableReport\Report.repx" />
+    <None Remove="Reports\VehicleInspectionReport\Report.repx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataSources\Contacts.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataSources\devav.sqlite3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataSources\homes.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataSources\nwind.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataSources\vehicles.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\AnchorVertical\Report.repx" />
+    <EmbeddedResource Include="Reports\BalanceSheetReport\Report.repx" />
+    <EmbeddedResource Include="Reports\BarCodes\BarCodeTypesReport.repx" />
+    <EmbeddedResource Include="Reports\CachedDocumentSource\ReportWeb.repx" />
+    <EmbeddedResource Include="Reports\CalculatedFields\Report.repx" />
+    <EmbeddedResource Include="Reports\CharacterComb\Report.repx" />
+    <EmbeddedResource Include="Reports\Charts\Report.repx" />
+    <EmbeddedResource Include="Reports\CrossBandControls\Report.repx" />
+    <EmbeddedResource Include="Reports\DrillDown\Report.repx" />
+    <EmbeddedResource Include="Reports\EmployeePerformanceReview\Report.repx" />
+    <EmbeddedResource Include="Reports\FormattingRules\Report.repx" />
+    <EmbeddedResource Include="Reports\HierarchicalReport\Report.repx" />
+    <EmbeddedResource Include="Reports\HiddenColumnsReport\Report.repx" />
+    <EmbeddedResource Include="Reports\InteractiveSorting\Report.repx" />
+    <EmbeddedResource Include="Reports\LabelReport\ProductLabelsReport.repx" />
+    <EmbeddedResource Include="Reports\CrossBandContent\Report.repx" />
+    <EmbeddedResource Include="Reports\MailMerge\Report.repx" />
+    <EmbeddedResource Include="Reports\MasterDetailReport\Report.repx" />
+    <EmbeddedResource Include="Reports\MultiColumnReport\Report.repx" />
+    <EmbeddedResource Include="Reports\NorthwindTraders\InvoiceReport.repx" />
+    <EmbeddedResource Include="Reports\PivotGridAndChart\Report.repx" />
+    <EmbeddedResource Include="Reports\ProfitAndLoss\Report.repx" />
+    <EmbeddedResource Include="Reports\ReportMergingWithPdf\Report.repx" />
+    <EmbeddedResource Include="Reports\ReportMerging\Report.repx" />
+    <EmbeddedResource Include="Reports\RestaurantMenu\Report.repx" />
+    <EmbeddedResource Include="Reports\RollPaper\Report.repx" />
+    <EmbeddedResource Include="Reports\SalesSummary\Report.repx" />
+    <EmbeddedResource Include="Reports\ShrinkGrow\Report.repx" />
+    <EmbeddedResource Include="Reports\SideBySideReports\EmployeeComparisonReport.repx" />
+    <EmbeddedResource Include="Reports\SideBySideReports\EmployeeOrdersReport.repx" />
+    <EmbeddedResource Include="Reports\Subreports\DetailReport.repx" />
+    <EmbeddedResource Include="Reports\Subreports\MasterReport.repx" />
+    <EmbeddedResource Include="Reports\SwissQRBill\SwissQRBill.repx" />
+    <EmbeddedResource Include="Reports\TableReport\Report.repx" />
+    <EmbeddedResource Include="Reports\VehicleInspectionReport\Report.repx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\RichText\Report.repx" />
+  </ItemGroup>
+</Project>

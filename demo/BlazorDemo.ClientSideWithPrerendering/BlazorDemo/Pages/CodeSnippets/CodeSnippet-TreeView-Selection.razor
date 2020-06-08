@@ -1,0 +1,41 @@
+﻿<CodeSnippetTabbed>
+<CodeSnippetTabPage Text="Razor">
+@(@"<DxTreeView AllowSelectNodes=""true"" 
+    SelectionChanged=""@SelectionChanged"">
+    <Nodes>
+        <DxTreeViewNode Text=""Metals"">
+            <Nodes>
+                <DxTreeViewNode Text=""Alkali metals"" />
+                <DxTreeViewNode Text=""Alkaline earth metals"" />
+                <DxTreeViewNode Text=""Inner transition elements"">
+                    <Nodes>
+                        <DxTreeViewNode Text=""Lanthanides"" />
+                        <DxTreeViewNode Text=""Actinides"" />
+                    </Nodes>
+                </DxTreeViewNode>
+                <DxTreeViewNode Text=""Transition elements"" />
+                <DxTreeViewNode Text=""Other metals"" />
+            </Nodes>
+        </DxTreeViewNode>
+        <DxTreeViewNode Text=""Metalloids"" />
+        <DxTreeViewNode Text=""Nonmetals"">
+            <Nodes>
+                <DxTreeViewNode Text=""Halogens"" />
+                <DxTreeViewNode Text=""Noble gases"" />
+                <DxTreeViewNode Text=""Other nonmetals"" />
+            </Nodes>
+        </DxTreeViewNode>
+    </Nodes>
+</DxTreeView>
+
+@code  {
+    string SelectedGroup = ""none"";
+
+    protected void SelectionChanged(TreeViewNodeEventArgs e)
+    {
+        SelectedGroup = e.NodeInfo.Text;
+        InvokeAsync(StateHasChanged);
+    }
+}")
+</CodeSnippetTabPage>
+</CodeSnippetTabbed>

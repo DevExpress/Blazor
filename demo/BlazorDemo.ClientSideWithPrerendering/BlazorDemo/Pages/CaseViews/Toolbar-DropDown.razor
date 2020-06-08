@@ -1,0 +1,41 @@
+﻿<div class="demo-description" id="DropDownItems">
+        <h2>
+            <DemoNavLink Link="Toolbar#DropDownItems" />Toolbar - Drop-Down Items
+        </h2>
+        <p>
+            Each <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem">Toolbar item</a> can have multiple child items which are specified as elements of the parent item’s <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarBase.Items">Items</a> collection.
+        </p>
+        <p>
+            A root-level toolbar item that has child items is rendered as a drop-down button that displays a hierarchical pop-up menu when clicked. You can handle this button as one button or split it into two buttons - a regular button and a drop-down button that invokes a pop-up window. To enable this behavior, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.SplitDropDownButton">SplitDropDownButton</a> property to <b>true</b>.
+        </p>
+    </div>
+
+<div class="card demo-card">
+    <div class="card-header border-0 p-2">
+        <DxToolbar>
+            <Items>
+                <DxToolbarItem Text="DropDown">
+                    <Items>
+                        <DxToolbarItem Text="Keep Formatting"></DxToolbarItem>
+                        <DxToolbarItem Text="Keep Text Only"></DxToolbarItem>
+                        <DxToolbarItem Text="Paste Special" BeginGroup="true">
+                            <Items>
+                                <DxToolbarItem Text="Option 1"></DxToolbarItem>
+                                <DxToolbarItem Text="Option 2"></DxToolbarItem>
+                            </Items>
+                        </DxToolbarItem>
+                    </Items>
+                </DxToolbarItem>
+                <DxToolbarItem Text="SplitDropDownButton=true" SplitDropDownButton="true" BeginGroup="true">
+                    <Items>
+                        <DxToolbarItem Text="Option 3"></DxToolbarItem>
+                        <DxToolbarItem Text="Option 4"></DxToolbarItem>
+                    </Items>
+                </DxToolbarItem>
+            </Items>
+        </DxToolbar>
+    </div>
+</div>
+
+<CodeSnippet_Toolbar_DropDown />
+

@@ -1,0 +1,106 @@
+﻿#themesMenu a.default:before {
+    background: #007bff;
+}
+
+#themesMenu a.blazing-berry:before {
+    background: #5c2d91;
+}
+
+#themesMenu a.cerulean:before {
+    background: #2fa4e7;
+}
+
+#themesMenu a.cosmo:before {
+    background: #2780e3;
+}
+
+#themesMenu a.cyborg:before {
+    background: #060606;
+}
+
+#themesMenu a.darkly:before {
+    background: #00bc8c;
+}
+
+#themesMenu a.flatly:before {
+    background: #dce4ec;
+}
+
+#themesMenu a.journal:before {
+    background: #eb6864;
+}
+
+#themesMenu a.litera:before {
+    background: #4582ec;
+}
+
+#themesMenu a.lumen:before {
+    background: #158cba;
+}
+
+#themesMenu a.lux:before {
+    background: #1a1a1a;
+}
+
+#themesMenu a.materia:before {
+    background: #2196f3;
+}
+
+#themesMenu a.minty:before {
+    background: #78c2ad;
+}
+
+#themesMenu a.pulse:before {
+    background: #593196;
+}
+
+#themesMenu a.sandstone:before {
+    background: #93c54b;
+}
+
+#themesMenu a.simplex:before {
+    background: #d9230f;
+}
+
+#themesMenu a.sketchy:before {
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 2px solid #333;
+    border-radius: 2px 8px 2px 4px/5px 3px 5px 3px;
+}
+
+#themesMenu li > a.active .image.sketchy:before {
+    border-color: #fff;
+}
+
+#themesMenu a.slate:before {
+    background: #484e55;
+}
+
+#themesMenu a.solar:before {
+    background: #b58900;
+}
+
+#themesMenu a.spacelab:before {
+    background: #446e9b;
+}
+
+#themesMenu a.superhero:before {
+    background: #df691a;
+}
+
+#themesMenu a.united:before {
+    background: #e95420;
+}
+
+#themesMenu a.yeti:before {
+    background: #008cba;
+}
+
+#themesMenu a.purple:before {
+    background: #7989ff;
+}
+
+#themesMenu a.office-white:before {
+    background: #fe7109;
+}

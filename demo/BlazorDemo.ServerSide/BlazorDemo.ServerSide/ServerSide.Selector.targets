@@ -1,0 +1,55 @@
+<Project>
+  <PropertyGroup>
+    <DxDemoEnvironmentName>$(MSBuildProjectName.Replace('BlazorDemo.', ''))</DxDemoEnvironmentName>
+    <DxDemoAppRoot>$([System.IO.Directory]::GetParent('$(MSBuildProjectFullPath)'))</DxDemoAppRoot>
+    <DxDemoRootDirName>$([System.IO.Directory]::GetParent('$(DxDemoAppRoot)'))</DxDemoRootDirName>
+    <DxDemosRoot>$([MSBuild]::NormalizeDirectory('$(DxDemoRootDirName)'))</DxDemosRoot>
+    <DxReportsDirectory>$([MSBuild]::NormalizeDirectory('$(DxDemosRoot)BlazorDemo.Reporting\'))</DxReportsDirectory>
+    <DxDemoImportModuleFallback>$(DxDemoEnvironmentName).Default.targets</DxDemoImportModuleFallback>
+    <DxDemoImportMainModule>$(DxDemoEnvironmentName).WithReports.targets</DxDemoImportMainModule>
+  </PropertyGroup>
+  <ItemGroup>
+    <_DemoLockResolve Include="_demo.dxdemo" Visible="false" />
+    <None Include="@(_DemoLockResolve)" />
+  </ItemGroup>
+  <Target Name="Restore" DependsOnTargets="DxResolveModulesCore"></Target>
+  <Target Name="DxResolveModules" BeforeTargets="ResolveProjectReferences" DependsOnTargets="DxResolveModulesCore"></Target>
+  <Target Name="DxResolveModulesCore" Condition="!Exists('_demo.dxdemo')">
+    <Touch Files="_demo.dxdemo" AlwaysCreate="true" ForceTouch="true" />
+    <Message Text="Demo: Restore modules root $(MSBuildProjectFullPath) $(DxDemoImportModuleFallback)" Importance="High"/>
+    <ItemGroup>
+      <_DxDemoHostingStartupAssemblies Include="BlazorDemo" />
+      <_DxRelatedSolution Include="$(DxDemosRoot)*.$(DxDemoEnvironmentName).sln"></_DxRelatedSolution>
+    </ItemGroup>
+    <Message Text="Demo: Restore modules root '@(_DxRelatedSolution)'" Importance="High"/>
+
+    <Exec Command="dotnet restore --no-dependencies --ignore-failed-sources &amp;&amp; dotnet sln @(_DxRelatedSolution) add BlazorDemo.Reporting.csproj" 
+          WorkingDirectory="$(DxReportsDirectory)" Outputs="$(DxDemoImportMainModule)" 
+          IgnoreStandardErrorWarningFormat="true" ContinueOnError="true">
+      <Output Condition="$(MSBuildLastTaskResult)" PropertyName="_DxDemoImportModule" TaskParameter="Outputs"/>
+    </Exec>
+    <ItemGroup>
+      <_DxDemoHostingStartupAssemblies Include="BlazorDemo.Reporting" Condition="'$(_DxDemoImportModule)' != ''" />
+    </ItemGroup>
+    <PropertyGroup>
+      <_DxDemoResolvedImportFile>
+        <Project  Sdk="Microsoft.NET.Sdk.Web">
+          <Import Project="$([MSBuild]::ValueOrDefault('$(_DxDemoImportModule)', '$(DxDemoImportModuleFallback)'))"/>
+          <PropertyGroup>
+            <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+            <RazorLangVersion>3.0</RazorLangVersion>
+            <LangVersion>8.0</LangVersion>
+          </PropertyGroup>
+        </Project>
+      </_DxDemoResolvedImportFile>
+      <_DxDemoAppsettings>
+environment="$(DxDemoEnvironmentName)"
+hostingStartupAssemblies="@(_DxDemoHostingStartupAssemblies -> '%(identity)', '%3B')"
+      </_DxDemoAppsettings>
+    </PropertyGroup>
+    <WriteLinesToFile File="appsettings.ini" Overwrite="true" Lines="$(_DxDemoAppsettings)" />
+    <WriteLinesToFile File="$(MSBuildProjectFullPath)" Lines="$(_DxDemoResolvedImportFile)" Overwrite="true" />
+    <Exec Command="dotnet restore --ignore-failed-sources $(MSBuildThisFileDirectory)BlazorDemo.ServerSide.csproj" ContinueOnError="true" />
+    <Exec Command="dotnet build --no-restore $(MSBuildThisFileDirectory)BlazorDemo.ServerSide.csproj" ContinueOnError="true" />
+  </Target>
+</Project>

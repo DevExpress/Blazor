@@ -1,0 +1,35 @@
+﻿<CodeSnippet>
+@(@"<DxFormLayout CaptionPosition=""@CaptionPosition.Vertical"">
+    <DxFormLayoutItem Caption=""Location:"" ColSpanLg=""4"" ColSpanMd=""12"">
+        <Template>
+            <DxTextBox @bind-Text=""@Location""></DxTextBox>
+        </Template>
+    </DxFormLayoutItem>
+
+    <DxFormLayoutItem Caption=""Check in:"" ColSpanLg=""4"" ColSpanMd=""6"">
+        <Template>
+            <DxDateEdit @bind-Date=""@CheckIn""></DxDateEdit>
+        </Template>
+    </DxFormLayoutItem>
+
+    <DxFormLayoutItem Caption=""Check out:"" ColSpanLg=""4"" ColSpanMd=""6"">
+        <Template>
+            <DxDateEdit @bind-Date=""@CheckOut""></DxDateEdit>
+        </Template>
+    </DxFormLayoutItem>
+</DxFormLayout>
+
+@code {
+    string location = ""London"";
+    string Location { get => location; set { location = value; OnChanged(); } }
+
+    DateTime checkIn = DateTime.Now;
+    DateTime CheckIn { get => checkIn; set { checkIn = value; OnChanged(); } }
+
+    DateTime checkOut = DateTime.Now;
+    DateTime CheckOut { get => checkOut; set { checkOut = value; OnChanged(); } }
+
+
+    void OnChanged() { InvokeAsync(StateHasChanged); }
+}")
+</CodeSnippet>

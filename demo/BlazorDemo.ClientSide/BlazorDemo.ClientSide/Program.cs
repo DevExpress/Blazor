@@ -1,38 +1,31 @@
-﻿using System.Threading.Tasks;
-using Demo.Blazor;
-using Demo.Blazor.Model;
-using Demo.Blazor.Services;
-using Microsoft.AspNetCore.Blazor.Hosting;
-using Microsoft.EntityFrameworkCore;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using BlazorDemo.Configuration;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
-namespace BlazorDemo.ClientSide
-{
-    public class Program
-    {
-        public static async Task Main(string[] args)
-        {
-            var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            
-            builder.Services.AddDevExpressBlazor();
-            builder.Services.AddScoped<WeatherForecastService>();
-            builder.Services.AddSingleton<IOptions<DemoConfiguration>, ClientSideDemoConfiguration>();
-            builder.Services.AddDbContext<FMRDemoContext>(options =>
-                options.UseSqlServer("YOUR CONNECTION STRING HERE", opt => opt.UseRowNumberForPaging()));
-            builder.Services.AddDbContext<ContosoRetailContext>(options =>
-                options.UseSqlServer("YOUR CONNECTION STRING HERE"));
-
-            //builder.Services.Configure<Demo.Blazor.DemoConfiguration>(Configuration.GetSection("DemoConfiguration"));
-            builder.Services.AddTransient<ProductService>();
-            builder.Services.AddSingleton<FlatProductService>();
-            builder.Services.AddTransient<EmployeeService>();
-            builder.Services.AddSingleton<CountryNamesService>();
-            builder.Services.AddSalesViewerService();
-
-            builder.RootComponents.Add<App>("app");
-
-            await builder.Build().RunAsync();
+namespace BlazorDemo.ServerSide {
+    public class Program {
+        public static async Task Main(string[] args) {
+            await CreateHostBuilder(args).Build().RunAsync();
         }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) {
+
+            return Host.CreateDefaultBuilder().ConfigureWebHostDefaults(Configure);
+        }
+
+        private static void Configure(IWebHostBuilder webHostBuilder) {
+            webHostBuilder.UseStaticWebAssets();
+            
+        }
+
     }
 }

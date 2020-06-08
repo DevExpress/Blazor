@@ -1,0 +1,50 @@
+﻿@inherits DemoWithResizableComponent
+
+<div class="demo-description" id="NullText">
+    <h2>
+        <DemoNavLink Link="ComboBox#NullText" />ComboBox - NullText
+    </h2>
+    <p>
+        This demo illustrates how to use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxComboBoxBase-1.NullText">NullText</a> property to display the placeholder text in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-1">ComboBox</a> when its value is null.
+    </p>
+    <p>
+        Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataEditorClearButtonDisplayMode.Auto">ClearButtonDisplayMode</a> property to <b>Auto</b> to display the <b>Clear</b> button when the ComboBox has a non-null value. Users can click this button to clear the editor's value (set it to null).
+    </p>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode" Title="Select a value"/>
+    </div>
+   
+    <div class="card-body mw-480">
+        <DxComboBox NullText="Select an option..."
+                    Data="@DataSource"
+                    @bind-SelectedItem="@SelectedOption"
+                    TextFieldName="Text"
+                    ClearButtonDisplayMode="@DataEditorClearButtonDisplayMode.Auto"
+                    SizeMode="SizeMode"></DxComboBox>
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_ComboBox_NullText></CodeSnippet_Editor_ComboBox_NullText>
+    </div>
+</div>
+
+@code {
+    class Options {
+        public int Id { get; set; }
+        public string Text { get; set; }
+    }
+    Options selectedOption;
+    Options SelectedOption { get => selectedOption; set { selectedOption = value; InvokeAsync(StateHasChanged); } }
+
+    List<Options> DataSource = new List<Options>() {
+        new Options() { Id = 0, Text = "Option 1" },
+        new Options() { Id = 0, Text = "Option 2" },
+        new Options() { Id = 0, Text = "Option 3" },
+    };
+}

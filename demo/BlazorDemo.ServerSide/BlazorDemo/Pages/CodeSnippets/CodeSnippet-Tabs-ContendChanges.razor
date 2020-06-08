@@ -1,0 +1,34 @@
+﻿<CodeSnippet>
+@(@"<DxTabs @bind-ActiveTabIndex=""@ActiveTabIndex"">
+    <DxTab Text=""Home""></DxTab>
+    <DxTab Text=""Products""></DxTab>
+    <DxTab Text=""Support""></DxTab>
+</DxTabs>
+<div class=""card dxbs-border-top-0 dxbs-border-radius-top-0"">
+    <div class=""card-body"">
+        @switch (ActiveTabIndex)
+        {
+            case 0:
+                <b>""Home"" tab is active.</b>
+                break;
+            case 1:
+                <i>""Products"" tab is active.</i>
+                break;
+            case 2:
+                <b><i>""Support"" tab is active.</i></b>
+                break;
+
+        }
+        </div>
+    </div>
+</div>
+
+@code {
+    int activeTabIndex = 1;
+    int ActiveTabIndex 
+    { 
+        get => activeTabIndex; 
+        set { activeTabIndex = value; InvokeAsync(StateHasChanged); } 
+    }
+}")
+</CodeSnippet>

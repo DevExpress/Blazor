@@ -1,0 +1,60 @@
+﻿@inherits DemoWithResizableComponent
+
+<div class="demo-description" id="CaptionPosition">
+    <h2><DemoNavLink Link="FormLayout#CaptionPosition" />Form Layout - Caption Position</h2>
+    <p>
+        The Form Layout’s <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxFormLayoutBase.CaptionPosition">CaptionPosition</a> property defines where to display caption labels. In this demo, the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxFormLayoutBase.CaptionPosition">CaptionPosition</a> property is set to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.CaptionPosition">CaptionPosition.Vertical</a> to stack captions above associated editors.
+    </p>
+</div>
+
+<div class="card demo-card-wide demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode">
+            <TitleTemplate>
+                @nameof(Location)=<b>@Location</b>, @nameof(CheckIn)=<b>@CheckIn</b>, @nameof(CheckOut)=<b>@CheckOut</b>
+            </TitleTemplate>
+        </DemoToolbar>
+    </div>
+    <div class="card-body card-body-fl">
+        <DxFormLayout CaptionPosition="@CaptionPosition.Vertical" ItemSizeMode="SizeMode">
+            <DxFormLayoutItem Caption="Location:" ColSpanLg="4" ColSpanMd="12">
+                <Template>
+                    <DxTextBox @bind-Text="@Location"></DxTextBox>
+                </Template>
+            </DxFormLayoutItem>
+
+            <DxFormLayoutItem Caption="Check in:" ColSpanLg="4" ColSpanMd="6">
+                <Template>
+                    <DxDateEdit @bind-Date="@CheckIn"></DxDateEdit>
+                </Template>
+            </DxFormLayoutItem>
+
+            <DxFormLayoutItem Caption="Check out:" ColSpanLg="4" ColSpanMd="6">
+                <Template>
+                    <DxDateEdit @bind-Date="@CheckOut"></DxDateEdit>
+                </Template>
+            </DxFormLayoutItem>
+        </DxFormLayout>
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_FormLayout_Default_Vertical />
+    </div>
+</div>
+
+@code {
+    string location = "London";
+    string Location { get => location; set { location = value; OnChanged(); } }
+
+    DateTime checkIn = DateTime.Now;
+    DateTime CheckIn { get => checkIn; set { checkIn = value; OnChanged(); } }
+
+    DateTime checkOut = DateTime.Now;
+    DateTime CheckOut { get => checkOut; set { checkOut = value; OnChanged(); } }
+
+
+    void OnChanged() { InvokeAsync(StateHasChanged); }
+}

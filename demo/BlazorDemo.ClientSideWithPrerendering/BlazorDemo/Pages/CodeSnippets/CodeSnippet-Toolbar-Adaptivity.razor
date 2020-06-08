@@ -1,0 +1,73 @@
+﻿<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
+        <CodeSnippet>
+@(@"<DxToolbar Title=""New Article"" ItemRenderStyleMode=""ToolbarRenderStyleMode.Plain"" ItemSizeMode=""SizeMode.Small"" 
+               AdaptivityMinRootItemCount=""2"" AdaptivityAutoHideRootItems=""true"" AdaptivityAutoCollapseItemsToIcons=""true"">
+    <Items>
+        <DxToolbarItem BeginGroup=""true"" Name=""Undo"" IconCssClass=""tb-icon tb-icon-undo"" AdaptiveText=""Undo"" />
+        <DxToolbarItem Name=""Redo"" IconCssClass=""tb-icon tb-icon-redo"" AdaptiveText=""Redo"" />
+        <DxToolbarItem Name=""FontFamily"" Text=""@currentFont.Name"" BeginGroup=""true"">
+            <Items>
+                @foreach(var font in FontInfo.DefaultFonts) {
+                    <DxToolbarItem Text=""@font.Name"" Style=""@font.GetCssString()"" Click=""(x) => { currentFont = font; }"" GroupName=""fontGroup"" />
+                }
+            </Items>
+        </DxToolbarItem>
+        <DxToolbarItem Name=""FontSize"" Text=""@currentSize.Size.ToString()"" BeginGroup=""true"">
+            <Items>
+                @foreach(var fontSize in FontSizeInfo.DefaultFontSizes) {
+                    <DxToolbarItem Text=""@fontSize.Size.ToString()"" Click=""(x) => { currentSize = fontSize; }"" GroupName=""fontSizeGroup"" />
+                }
+            </Items>
+        </DxToolbarItem>
+        <DxToolbarItem AdaptivePriority=""1"" GroupName=""font-bold"" BeginGroup=""true"" Name=""Bold"" IconCssClass=""tb-icon tb-icon-bold"" AdaptiveText=""Bold"" />
+        <DxToolbarItem AdaptivePriority=""1"" GroupName=""font-italic"" Name=""Italic"" IconCssClass=""tb-icon tb-icon-italic"" AdaptiveText=""Italic"" />
+        <DxToolbarItem AdaptivePriority=""1"" GroupName=""font-underline"" Name=""Underline"" IconCssClass=""tb-icon tb-icon-underline"" AdaptiveText=""Underline"" />
+        <DxToolbarItem AdaptivePriority=""1"" BeginGroup=""true"" GroupName=""align"" IconCssClass=""tb-icon tb-icon-align-left"" AdaptiveText=""Left"" />
+        <DxToolbarItem AdaptivePriority=""1"" GroupName=""align"" IconCssClass=""tb-icon tb-icon-align-center"" AdaptiveText=""Center"" />
+        <DxToolbarItem AdaptivePriority=""1"" GroupName=""align"" IconCssClass=""tb-icon tb-icon-align-right"" AdaptiveText=""Right"" />
+    </Items>
+</DxToolbar>
+
+@code {
+    FontInfo currentFont = FontInfo.DefaultFonts[0];
+    FontSizeInfo currentSize = FontSizeInfo.DefaultFontSizes[0];
+    public class FontInfo {
+        public string Name { get; private set; }
+        public string CssString { get; private set; }
+        public FontInfo(string name, string cssString) {
+            Name = name;
+            CssString = cssString;
+        }
+        public string GetCssString() {
+            return $""font-family:{CssString};"";
+        }
+        public static readonly FontInfo[] DefaultFonts = new FontInfo[] {
+            new FontInfo(""Arial"", ""Arial, Helvetica, sans-serif""),
+            new FontInfo(""Courier New"", ""'Courier New', Courier, monospace""),
+            new FontInfo(""Segoe UI"", ""'Segoe UI', sans-serif""),
+            new FontInfo(""Tahoma"", ""Tahoma, Geneva, sans-serif""),
+            new FontInfo(""Times New Roman"", ""'Times New Roman', Times, serif""),
+            new FontInfo(""Verdana"", ""Verdana, Geneva, sans-serif""),
+        };
+    }
+    public class FontSizeInfo {
+        public int Size { get; private set; }
+        public FontSizeInfo(int size) {
+            Size = size;
+        }
+        public static readonly FontSizeInfo[] DefaultFontSizes = new FontSizeInfo[] {
+            new FontSizeInfo(8),
+            new FontSizeInfo(10),
+            new FontSizeInfo(12),
+            new FontSizeInfo(14),
+            new FontSizeInfo(18),
+            new FontSizeInfo(24),
+            new FontSizeInfo(36),
+        };
+    }
+}")
+        </CodeSnippet>
+    </div>
+</div>

@@ -9,7 +9,7 @@
 * [Version Compatibility](#version-compatibility)
 * [Set Up Your Environment](#set-up-your-environment)
 * [Get NuGet Feed](#get-nuget-feed)
-* [Run This Demo Locally](#run-this-demo-locally)
+* [Run Demos Locally](#run-demos-locally)
 * [Create a New Project](#create-a-new-project)
 * [Themes](#themes)
 * [Localization](#localization)
@@ -40,6 +40,7 @@ The following table describes the version compatibility of .NET Core and the Dev
 
 | Supported frameworks | DevExpress.Blazor.nuget version |
 | ------------- | ------------- |
+| [.NET Core 3.1.4 Release](https://devblogs.microsoft.com/dotnet/net-core-may-2020/) <br /> [Blazor WebAssembly 3.2.0 Release](https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-now-available/) | **20.1.4-Release** |
 | [.NET Core 3.1.3 Release](https://github.com/dotnet/core/blob/master/release-notes/3.1/3.1.3/3.1.3.md) <br /> [Blazor WebAssembly 3.2.0 Preview 4](https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-4-release-now-available/) | **19.2.5-Preview** (make sure the [Include prerelease](#InstallPackage) option is enabled) |
 | [.NET Core 3.1.2 Release](https://devblogs.microsoft.com/dotnet/net-core-february-2020/) <br /> [Blazor WebAssembly 3.2.0 Preview 1](https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-1-release-now-available/) | **19.2.4-Release** |
 | [.NET Core 3.1.1 Release](https://devblogs.microsoft.com/dotnet/net-core-january-2020/) <br /> [Blazor WebAssembly 3.2.0 Preview 1](https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-1-release-now-available/) | **19.2.3 Release** |
@@ -62,13 +63,8 @@ The following table describes the version compatibility of .NET Core and the Dev
 
 ## Blazor WebAssembly
 
-1. Install the latest [Visual Studio 2019 Preview](https://visualstudio.microsoft.com/vs/preview/) version with the **ASP.NET and web development** workload.
-2. Install [.NET Core 3.1.201 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1) or later.
-3. Install the [Blazor WebAssembly template](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/). To do this, run the following command in a command shell:
-
-  > `dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview4.20210.8`
-
-
+1. Install the latest [Visual Studio 2019](https://visualstudio.microsoft.com/) version with the **ASP.NET and web development** workload.
+2. Install [.NET Core 3.1.300 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1) or later.
 
 # Get NuGet Feed
 
@@ -100,7 +96,7 @@ Go to the [Blazor Registration](https://www.devexpress.com/blazor-registration) 
 
 Open the message that was sent to your email address, and copy the NuGet Feed URL to clipboard. You can also access this NuGet Feed at [nuget.devexpress.com](https://nuget.devexpress.com/) or in the [Download Manager](https://www.devexpress.com/clientcenter/downloadmanager/).
 
-# Run This Demo Locally
+# Run Demos Locally
 
 The Blazor framework uses either WebAssembly-based .NET runtime (**Blazor WebAssembly**) or server-side ASP.NET Core (**Blazor Server**). Our Blazor components support both of these approaches. 
 
@@ -108,9 +104,11 @@ You can find appropriate demos in the repositories below:
 
 * demo/BlazorDemo.ServerSide
 * demo/BlazorDemo.ClientSide
-* demo/BlazorDemo.ClientSideWithPrerendering&#42; 
+* demo/BlazorDemo.ClientSideWithPrerendering - This project uses the DevExpress SEO Metadata Utility. For more information, refer to the following blog post: [Update Metadata at Runtime - Free SEO Tool](https://community.devexpress.com/blogs/aspnet/archive/2019/06/27/devexpress-blazor-update-metadata-at-runtime-free-seo-tool.aspx). Make sure that you [run this demo correctly](#ClientSideWithPrerendering).
 
-> &#42; For more information, see the [Update Metadata at Runtime - Free SEO Tool](https://community.devexpress.com/blogs/aspnet/archive/2019/06/27/devexpress-blazor-update-metadata-at-runtime-free-seo-tool.aspx) blog post. Make sure that you [run this demo correctly](#ClientSideWithPrerendering).
+> **Important Note**
+>
+> **Reporting Demos** are in the **BlazorDemo.ServerSide** folder. Note that DevExpress Reporting is not included in the *Blazor UI Component Subscription*. You should purchase the *Reporting Subscription*, *ASP.NET Subscription*, _DXperience_, or _Universal_. Refer to the [product matrix](https://www.devexpress.com/buy/net/) for more information.
 
 To open the required demo, do the following:
 
@@ -149,11 +147,7 @@ To open the required demo, do the following:
 
 6. Start the application.
 
-  > <a name="ClientSideWithPrerendering"/> For the **ClientSideWithPrerendering** demo, make sure that the **ServerSide** project is set as the solution's startup project.
-
-See also: 
-
-[Official Microsoft Blazor site](https://dotnet.microsoft.com/apps/aspnet/web-apps/client)
+> <a name="ClientSideWithPrerendering"/> For the **ClientSideWithPrerendering** demo, make sure that the **ServerSide** project is set as the solution's startup project.
 
 # Create a New Project
 
@@ -197,36 +191,36 @@ Follow the steps below to try our UI for Blazor in your own application.
 
     Add the following line to the `Pages/_Host.cshtml` file's HEAD section:
   
-        ```Razor
-        <head>
-            ...
-            <link href="_content/DevExpress.Blazor/dx-blazor.css" rel="stylesheet" />
-        </head>
-        ```
+    ```Razor
+    <head>
+        ...
+        <link href="_content/DevExpress.Blazor/dx-blazor.css" rel="stylesheet" />
+    </head>
+    ```
 
   * **Blazor WebAssembly** 
 
     7.1. Add the following line to the `wwwroot/index.html` file's HEAD section:
 
-        ```Razor
-        <head>
-            ...
-            <link href="_content/DevExpress.Blazor/dx-blazor.css" rel="stylesheet" />
-        </head>
-        ```
+    ```Razor
+    <head>
+        ...
+        <link href="_content/DevExpress.Blazor/dx-blazor.css" rel="stylesheet" />
+    </head>
+    ```
 
     7.2. Call the [AddDevExpressBlazor](https://docs.devexpress.com/Blazor/Microsoft.Extensions.DependencyInjection.DevExpressServiceCollectionExtensions.AddDevExpressBlazor(Microsoft.Extensions.DependencyInjection.IServiceCollection)) method from your project's  `Program.Main()` method:
-        ```csharp
-        using Microsoft.Extensions.DependencyInjection;
-        
-        public class Program {
-          public static async Task Main(string[] args) {
-            ...
-            builder.Services.AddDevExpressBlazor();
-            await builder.Build().RunAsync();
-          }
-        }
-        ```  
+    ```csharp
+    using Microsoft.Extensions.DependencyInjection;
+    
+    public class Program {
+      public static async Task Main(string[] args) {
+        ...
+        builder.Services.AddDevExpressBlazor();
+        await builder.Build().RunAsync();
+      }
+    }
+    ``` 
 
     7.3. Configure the linker as described in [Configure the Linker for ASP.NET Core Blazor](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker).
 
@@ -307,7 +301,7 @@ DevExpress Blazor components use a RCL ([Razor class library](https://docs.micro
 
 To fix the issue, review the [Consume content from a referenced RCL](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/ui-class#consume-content-from-a-referenced-rcl) topic.
 
-## 6. DxDataGrid in Blazor
+## 6. DxDataGrid: InvalidOperationException
 
 If you use Blazor WebAssemly (aka client-side Blazor) with DxDataGrid, you may see the following exception in a browser:
 
@@ -359,8 +353,34 @@ Do one of the following to resolve this issue:
 
 See [Configure the Linker for ASP.NET Core Blazor](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker?view=aspnetcore-3.0) for more information.
 
+## 7. DxDataGrid: The type arguments cannot be inferred from the usage
 
-## 7. DxScheduler in Blazor
+The [DataAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.DataAsync) property allows you to bind the Data Grid to an [IEnumerable](https://docs.microsoft.com/en-us/dotnet/api/system.collections.ienumerable) or [IQueryable](https://docs.microsoft.com/en-us/dotnet/api/system.linq.iqueryable) data source. This property specifies a function that loads data asynchronously. The following exception occurs if you declare a function with an incorrect signature:
+
+> "The type arguments for method 'TypeInference.CreateDxDataGrid_0\<T>' cannot be inferred from the usage. Try specifying the type arguments explicitly."
+
+To resolve the issue, ensure that the function signature meets the following requirements:
+* The type of the returned value is `Task<IEnumerable<T>>` or `Task<IQueryable<T>>`.
+* The function has a parameter of the [CancellationToken](https://docs.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) type.
+
+```
+@using System.Threading
+
+<DxDataGrid DataAsync="@GetForecastAsync">
+</DxDataGrid>
+
+@code {
+    public class WeatherForecast {
+        // ...
+    }
+
+    public Task<IEnumerable<WeatherForecast>> GetForecastAsync(CancellationToken ct = default) {
+        // ...
+    }
+}
+```
+
+## 8. DxScheduler in Blazor
 
 If you use Blazor WebAssembly with DxScheduler, you may see the following exception or a similar exception:
 
@@ -408,7 +428,7 @@ Do one of the following to resolve this issue:
 
 See [Configure the Linker for ASP.NET Core Blazor](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/blazor/configure-linker?view=aspnetcore-3.0) for more information.
 
-## 8. DxTabs are rendered incorrectly when the default Microsoft template is applied
+## 9. DxTabs are rendered incorrectly when the default Microsoft template is applied
 
 If you create a new Blazor project based on the default Microsoft project template, the first tab of the DxTabs component can be rendered incorrectly.
 
@@ -434,6 +454,8 @@ To resolve this issue, write more strict style rules in the *site.css* file so t
   * Large Data Source
   * Master-Detail View
   * HTML Decoration
+  * Toolbar
+  * Column Chooser
 * Pivot Grid
   * Overview
   * Templates
@@ -448,6 +470,9 @@ To resolve this issue, write more strict style rules in the *site.css* file so t
   * Axes
   * Customization
   * Series Customization
+* Reports
+  * Document Viewer
+  * Report Designer
 * Scheduler
   * View Types
   * Recurring Appointments
@@ -463,10 +488,12 @@ To resolve this issue, write more strict style rules in the *site.css* file so t
 * Buttons
   * Button
 * Navigation and Layout
+  * Context Menu
   * Form Layout
   * Pager
   * Popup
   * Tabs
+  * Toolbar
   * TreeView
 * File Management 
   * Upload

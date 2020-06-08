@@ -1,0 +1,30 @@
+﻿<CodeSnippet>
+@(@"<ul class=""list-group list-group-flush bg-white text-dark"" style=""border:none"">
+    <li class=""list-group-item"" style=""background-color:transparent;color:inherit;"">
+        <DxCheckBox CheckType=""CheckType.Switch"" LabelPosition =""@LabelPosition.Left"" style=""width:100%"" Checked=""@Checked"" 
+                    CheckedChanged=""@CheckedChanged"" Align=""CheckBoxContentAlignment.SpaceBetween"">Silent Mode</DxCheckBox>
+    </li>
+    <li class=""list-group-item"" style=""background-color:transparent;color:inherit;"">            
+        <DxCheckBox CheckType=""CheckType.Switch"" LabelPosition=""@LabelPosition.Left"" style=""width:100%"" @bind-Checked=""@SubChecked1"" 
+                    Enabled=""@Enabled"" Align=""CheckBoxContentAlignment.SpaceBetween"">Enable sound</DxCheckBox>
+    </li>
+    <li class=""list-group-item"" style=""background-color:transparent;color:inherit;"">            
+        <DxCheckBox CheckType=""CheckType.Switch"" LabelPosition=""@LabelPosition.Left"" style=""width:100%"" @bind-Checked=""@SubChecked2"" 
+                    Enabled=""@Enabled"" Align=""CheckBoxContentAlignment.SpaceBetween"">Enable vibration</DxCheckBox>
+    </li>
+</ul>
+
+@code {
+    bool Enabled { get; set; } = false;
+
+    bool SilentMode { get; set; } = true;
+    bool Sound { get; set; } = true;
+    bool Vibration { get; set; } = false;
+
+    void CheckedChanged(bool value) {
+        SilentMode = value;
+        Enabled = !value;
+        StateHasChanged();
+    }
+}")
+</CodeSnippet>
