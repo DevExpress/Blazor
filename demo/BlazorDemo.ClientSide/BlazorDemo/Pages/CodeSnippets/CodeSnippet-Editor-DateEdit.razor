@@ -1,0 +1,11 @@
+﻿<CodeSnippet>
+@(@"<DxDateEdit @bind-Date=""@DateTimeValue"" 
+            SizeMode=""@SizeMode""></DxDateEdit>
+
+@code {
+    DateTime dateTimeValue = DateTime.Now;
+    DateTime DateTimeValue { get => dateTimeValue; set { dateTimeValue = value; InvokeAsync(StateHasChanged); }  }
+
+    SizeMode SizeMode { get; set; }
+}")
+</CodeSnippet>

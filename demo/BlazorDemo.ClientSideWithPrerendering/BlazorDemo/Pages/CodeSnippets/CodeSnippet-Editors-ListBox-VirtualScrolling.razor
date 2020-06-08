@@ -1,0 +1,16 @@
+﻿<CodeSnippet>
+@(@"<DxListBox Data=""@Data""
+           ListRenderMode=""ListRenderMode.Virtual""
+           TextFieldName=""CountryName""
+           CssClass=""demo-listbox""
+           style=""height: 232px"">
+</DxListBox>
+
+@code {
+    IEnumerable<Country> Data { get; set; }
+
+    protected override async Task OnInitializedAsync() {
+        Data = await CountryNamesService.LoadAsync();
+    }
+}")
+</CodeSnippet>

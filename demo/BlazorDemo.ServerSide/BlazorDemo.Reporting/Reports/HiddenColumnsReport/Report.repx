@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="18.2.0.0" Ref="0" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v18.2, Version=18.2.0.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4" Name="HiddenColumnsReport" DisplayName="Hidden Columns" PageWidth="850" PageHeight="1100" Version="18.2" RequestParameters="false">
+  <Parameters>
+    <Item1 Ref="2" Description="Hide Specifications" ValueInfo="False" Name="hidePerformance" Type="#Ref-1" />
+  </Parameters>
+  <Bands>
+    <Item1 Ref="3" ControlType="TopMarginBand" Name="topMarginBand1" />
+    <Item2 Ref="4" ControlType="DetailBand" Name="detailBand1" HeightF="98.61111" KeepTogether="true">
+      <SubBands>
+        <Item1 Ref="5" ControlType="SubBand" Name="SubBand1" HeightF="153.8">
+          <Controls>
+            <Item1 Ref="6" ControlType="XRLine" Name="line1" SizeF="650,2" LocationFloat="0, 150" ForeColor="255,229,229,229">
+              <StylePriority Ref="7" UseForeColor="false" />
+            </Item1>
+            <Item2 Ref="8" ControlType="XRLabel" Name="label1" CanShrink="true" Text="The Ford Mustang is an automobile manufactured by the Ford Motor Company. It was initially based on the platform of the second generation North American Ford Falcon, a compact car. Introduced early on April 17, 1964, and thus dubbed as a &quot;1964½&quot; model by Mustang fans, the 1965 Mustang was the automaker's most successful launch since the Model A. The Mustang has undergone several transformations to its current fifth generation.&#xD;&#xA;The Mustang created the &quot;pony car&quot; class of American automobiles—sports car-like coupes with long hoods and short rear decks—and gave rise to competitors such as the Chevrolet Camaro, and Pontiac Firebird, AMC Javelin, as well as Chrysler's revamped Plymouth Barracuda and the first generation Dodge Challenger. The Mustang is also credited for inspiring the designs of coupés such as the Toyota Celica and Ford Capri, which were imported to the United States." SizeF="650,150" LocationFloat="0, 0" StyleName="DescriptionStyle" Padding="5,0,10,10,100">
+              <ExpressionBindings>
+                <Item1 Ref="9" Expression="[Description]" PropertyName="Text" EventName="BeforePrint" />
+              </ExpressionBindings>
+              <StylePriority Ref="10" UsePadding="false" />
+            </Item2>
+          </Controls>
+        </Item1>
+      </SubBands>
+      <Controls>
+        <Item1 Ref="11" ControlType="XRTable" Name="table2" ProcessHiddenCellMode="ResizeCellsProportionally" SizeF="650,98.61111" LocationFloat="0, 0">
+          <Rows>
+            <Item1 Ref="12" ControlType="XRTableRow" Name="tableRow1" Weight="0.6311111328125">
+              <Cells>
+                <Item1 Ref="13" ControlType="XRTableCell" Name="tableCell1" Weight="0.6108838360126202" Text="tableCell1" Padding="2,2,0,0,100">
+                  <Controls>
+                    <Item1 Ref="14" ControlType="XRTable" Name="table4" AnchorHorizontal="Both" SizeF="132.3582,98.61111" LocationFloat="0, 0" StyleName="DetailTableStyle">
+                      <Rows>
+                        <Item1 Ref="15" ControlType="XRTableRow" Name="tableRow6" Weight="1.2499986267090315">
+                          <Cells>
+                            <Item1 Ref="16" ControlType="XRTableCell" Name="tableCell17" Weight="1.6989348239966124" Text="Trademark" Borders="Top, Right, Bottom">
+                              <ExpressionBindings>
+                                <Item1 Ref="17" Expression="[TrademarkName]" PropertyName="Text" EventName="BeforePrint" />
+                              </ExpressionBindings>
+                              <StylePriority Ref="18" UsePadding="false" UseBorders="false" />
+                            </Item1>
+                          </Cells>
+                        </Item1>
+                        <Item2 Ref="19" ControlType="XRTableRow" Name="tableRow8" Weight="1.2429588664152294">
+                          <Cells>
+                            <Item1 Ref="20" ControlType="XRTableCell" Name="tableCell4" Weight="1.6989348239966124" Text="tableCell4" StyleName="DetailTableStyle" Padding="2,2,0,0,100">
+                              <ExpressionBindings>
+                                <Item1 Ref="21" Expression="[Name]" PropertyName="Text" EventName="BeforePrint" />
+                              </ExpressionBindings>
+                            </Item1>
+                          </Cells>
+                        </Item2>
+                        <Item3 Ref="22" ControlType="XRTableRow" Name="tableRow7" Weight="2.507042700297017">
+                          <Cells>
+                            <Item1 Ref="23" ControlType="XRTableCell" Name="tableCell25" Weight="1.6989348239966127" CanGrow="false" Text="Description" TextAlignment="BottomLeft" Padding="10,0,0,2,100">
+                              <ExpressionBindings>
+                                <Item1 Ref="24" Expression="[Modification]" PropertyName="Text" EventName="BeforePrint" />
+                              </ExpressionBindings>
+                              <StylePriority Ref="25" UsePadding="false" UseTextAlignment="false" />
+                            </Item1>
+                          </Cells>
+                        </Item3>
+                      </Rows>
+                    </Item1>
+                  </Controls>
+                </Item1>
+                <Item2 Ref="26" ControlType="XRTableCell" Name="tableCell2" Weight="1.2217676250751202" Text="tableCell2" Padding="2,2,0,0,100">
+                  <Controls>
+                    <Item1 Ref="27" ControlType="XRTable" Name="table5" SizeF="264.7163,98.61111" LocationFloat="0, 0" StyleName="DetailTableStyle">
+                      <Rows>
+                        <Item1 Ref="28" ControlType="XRTableRow" Name="tableRow14" Weight="1">
+                          <Cells>
+                            <Item1 Ref="29" ControlType="XRTableCell" Name="tableCell26" Weight="1.1088662716824693" Text="Horsepower" Borders="Top, Right, Bottom">
+                              <ExpressionBindings>
+                                <Item1 Ref="30" Expression="[Horsepower]" PropertyName="Text" EventName="BeforePrint" />
+                              </ExpressionBindings>
+                              <StylePriority Ref="31" UsePadding="false" UseBorders="false" />
+                            </Item1>
+                            <Item2 Ref="32" ControlType="XRTableCell" Name="tableCell28" Weight="1.108865563162565" Text="Torque" Borders="Top, Right, Bottom">
+                              <ExpressionBindings>
+                                <Item1 Ref="33" Expression="[Torque]" PropertyName="Text" EventName="BeforePrint" />
+                              </ExpressionBindings>
+                              <StylePriority Ref="34" UsePadding="false" UseBorders="false" />
+                            </Item2>
+                          </Cells>
+                        </Item1>
+                        <Item2 Ref="35" ControlType="XRTableRow" Name="tableRow15" Weight="1">
+                          <Cells>
+                            <Item1 Ref="36" ControlType="XRTableCell" Name="tableCell40" Weight="1.1088662716824698" Text="MPG @ City">
+                              <ExpressionBindings>
+                                <Item1 Ref="37" Expression="[MPGCity]" PropertyName="Text" EventName="BeforePrint" />
+                              </ExpressionBindings>
+                              <StylePriority Ref="38" UsePadding="false" />
+                            </Item1>
+                            <Item2 Ref="39" ControlType="XRTableCell" Name="tableCell45" Weight="1.1088655631625648" Text="MGP @ Highway">
+                              <ExpressionBindings>
+                                <Item1 Ref="40" Expression="[MPGHighway]" PropertyName="Text" EventName="BeforePrint" />
+                              </ExpressionBindings>
+                              <StylePriority Ref="41" UsePadding="false" />
+                            </Item2>
+                          </Cells>
+                        </Item2>
+                        <Item3 Ref="42" ControlType="XRTableRow" Name="tableRow16" Weight="1">
+                          <Cells>
+                            <Item1 Ref="43" ControlType="XRTableCell" Name="tableCell47" Weight="1.1088662716824698" Text="Doors">
+                              <ExpressionBindings>
+                                <Item1 Ref="44" Expression="[Doors]" PropertyName="Text" EventName="BeforePrint" />
+                              </ExpressionBindings>
+                              <StylePriority Ref="45" UsePadding="false" />
+                            </Item1>
+                            <Item2 Ref="46" ControlType="XRTableCell" Name="tableCell48" Weight="1.1088655631625648" Text="Cylinders">
+                              <ExpressionBindings>
+                                <Item1 Ref="47" Expression="[Cylinders]" PropertyName="Text" EventName="BeforePrint" />
+                              </ExpressionBindings>
+                              <StylePriority Ref="48" UsePadding="false" />
+                            </Item2>
+                          </Cells>
+                        </Item3>
+                        <Item4 Ref="49" ControlType="XRTableRow" Name="tableRow17" Weight="1">
+                          <Cells>
+                            <Item1 Ref="50" ControlType="XRTableCell" Name="tableCell50" Weight="1.1088662716824698" Text="Transmission Type">
+                              <ExpressionBindings>
+                                <Item1 Ref="51" Expression="[TransmissionType]" PropertyName="Text" EventName="BeforePrint" />
+                              </ExpressionBindings>
+                              <StylePriority Ref="52" UsePadding="false" />
+                            </Item1>
+                            <Item2 Ref="53" ControlType="XRTableCell" Name="tableCell51" Weight="1.1088655631625648" Text="Transmission Speeds">
+                              <ExpressionBindings>
+                                <Item1 Ref="54" Expression="[TransmissionSpeeds]" PropertyName="Text" EventName="BeforePrint" />
+                              </ExpressionBindings>
+                              <StylePriority Ref="55" UsePadding="false" />
+                            </Item2>
+                          </Cells>
+                        </Item4>
+                      </Rows>
+                    </Item1>
+                  </Controls>
+                  <ExpressionBindings>
+                    <Item1 Ref="56" Expression="Not ?hidePerformance" PropertyName="Visible" EventName="BeforePrint" />
+                  </ExpressionBindings>
+                </Item2>
+                <Item3 Ref="57" ControlType="XRTableCell" Name="tableCell3" Weight="1.1673485389122595" Text="tableCell3" Padding="2,2,0,0,100">
+                  <Controls>
+                    <Item1 Ref="58" ControlType="XRPictureBox" Name="pictureBox2" Sizing="Squeeze" ImageAlignment="MiddleCenter" AnchorVertical="Both" AnchorHorizontal="Both" SizeF="252.9255,98.61111" LocationFloat="0, 0" StyleName="DetailTableStyle" Borders="Top, Bottom">
+                      <ExpressionBindings>
+                        <Item1 Ref="59" Expression="[Photo]" PropertyName="ImageSource" EventName="BeforePrint" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="60" UseBorders="false" />
+                    </Item1>
+                  </Controls>
+                </Item3>
+              </Cells>
+            </Item1>
+          </Rows>
+        </Item1>
+      </Controls>
+    </Item2>
+    <Item3 Ref="61" ControlType="BottomMarginBand" Name="bottomMarginBand1">
+      <Controls>
+        <Item1 Ref="62" ControlType="XRPictureBox" Name="xrPictureBox4" Padding="0,0,0,0,100" ImageSource="img,iVBORw0KGgoAAAANSUhEUgAAAJ8AAAAdCAYAAAC0Y74zAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAFiklEQVR4Xu2bzY1cRRSFHQLOwCICJBJgwcZoJAiAhUNgx5YM7AzsDPDeCwgACRJAeIFgaWfQrm/kMzpz3q3X1W/6uUeeWnye6apb91bde+qnbfnR4XCYTC7C9R9XV98/bfzXOJwZfOKbGJPJDS6+PYQn8L0IPnnYuPgq0ZyTRfDJw2Zv8f3T+K3xS2MRPHjS+Kbgq0Zl/6lhHtX8kmrspOCc4kNoLxs/NU4twu+Nyqd433jVuKQQj81RVGMnBXcV358NxHZXUYwWFkZO0T2Y4jszW8T3rsEJtyY4+hDlrw1ORMZVdiILy2dExk9OPe8DfFd+9mSK78ycIj5EhyC+aCwcNRDc84bEllRjRBbW+4jHlev9wBvR7fZmbY6TPo8bfzf+aJDDLxtvGkPiWxMdbc8aPcE5OdYZKezrhtu8aFR2PzSYr8j3Z36xSRGzpqr/FPGxEd1H5i77afN56Vbhd19LteF8nPo1jtqkffokX2kjVF+3Z/yInfv9ufFtg7whPH4+PiY+vqlWCyYYARBmNa4ifTgjhWUebvO2kf1/NdxG4F8CICnex6nqfkii96uAp4iP3Litx8h1sKlyDLGq0x5SUD6OMT4OP7Jj/bkGt1N+BHmqnjzgc2Cj9Oz0PEJ8P378ifj4+XVPfIiq966i/RTRicqXGC1sikvtJA4xel+iIoMnK0WcRVdRRucocj7axO6feag9BbuGnz4+LkUg8bGG3sYUsgXm1BMUaM74XbPTCV5SiY9vsNUg2uhz56eQ/pzRwqadksAVrDaSQXFITAqpEoC3g4vGBZuxKxCC7JmD9xGTON7m9pX4iE97CseFUo0TsnMb5acaq7pnO6cgfRw8nhM+ux2fK7uSFB/i0k531hY4Svp0topPSfTdl9eSi4l10JZXr8akONzXqeIDCuD97iNP3MyxF4+a9E7SHOfiEp6fnGOVH/dJf6WJtIOeXYmLj78+ycF85t3nAbbifpOt4mN+ecIgLNqEnxpeUC+I2hGb2sDzsUV8CMTjOCmQLORof7Zz6vg4TqLsV27A18XvlU8EmJsa8uTr2ZW4+JK7XrNJFUOMiq9682UC1lById9e2ZbXxugckywkEOeYXYqPz96P/ZZxayg/vU2DuNw/m9NPTrfjEJBdSU98CG/Ll4o1MoYzUti8EhEi7VVxe7j48uplzZ7I3MFbxZenKdx38UHmw6HP7XpfZlYFWIlvD+GBx0hGCptJ1t/zZXHz2nU8aeC727+0QD5BtoivdzIA83HbYyKq1jkyjs/ejx/aKjI/gH2uIW8F2aUIdUCUpPg4XfYQHtwKHBwrLInxftCDm4R5O0nI8T38mvUEV8ndIj4XBkJ3sfspk7aQp0bGl1COiS9vjHwTjuLx9UypIHcer7K5xsXHLj3nGy9ZBDcysTp1SKQLROS/brhwSExVgGpX59UrKgHnHIlRobln0RFJCsXjZB9r0garHva9ccxBfSLzk+vL/PB72rioFJ9xaZf18r5buPj4d1kfdG4WwY0s7BrVe6kSEUnGr04bfs9xoH4nr1wYnaOK7/bEwCfF8ngUUbFSRGusibYSX2+TeX78itQThD5sXLygGvimwC6v3eoGucHF54P2YBHcGCksiSDR1XjIN1tFNS53ai9hI3MEip/F9nmnWNSX7T1y8+W4SnyAYN2uQra9LxBAnzbMWk6ol07ukvsiPoTDQnwxLJLPJJvEVadRQuKx953K7/jpvXUYo9iQby3hc1yDK4s5eJvPnd+9D2hPETFfv+rIR15xQJv7qp4X4lh+NE98EtvtiM8cfS34q+zI1dF6ufj2/A9E/zcWwSe3GD3BPhtcfN81EIkn4Bz828D3IvjkFg9afJPLMsU3uRhTfJOLccoXh8+CG/FNJp+ew6MPSicYoQIBT08AAAAASUVORK5CYII=" Sizing="AutoSize" NavigateUrl="http://www.devexpress.com/Products/NET/Reporting/" SizeF="165.625,30.208334" LocationFloat="275, 13" />
+      </Controls>
+    </Item3>
+    <Item4 Ref="63" ControlType="PageHeaderBand" Name="PageHeader">
+      <Controls>
+        <Item1 Ref="64" ControlType="XRTable" Name="table1" ProcessHiddenCellMode="ResizeCellsProportionally" SizeF="650,100" LocationFloat="0, 0">
+          <Rows>
+            <Item1 Ref="65" ControlType="XRTableRow" Name="tableRow2" Weight="1">
+              <Cells>
+                <Item1 Ref="66" ControlType="XRTableCell" Name="tableCell16" Weight="0.79754283441045715" Multiline="true" Text="TRADEMARK&#xD;&#xA;" StyleName="SimpleHeaderCellStyle">
+                  <StylePriority Ref="67" UsePadding="false" />
+                </Item1>
+                <Item2 Ref="68" ControlType="XRTableCell" Name="tableCell18" Weight="0.79754283441045715" Text="HORSEPOWER" StyleName="SimpleHeaderCellStyle">
+                  <ExpressionBindings>
+                    <Item1 Ref="69" Expression="Not ?hidePerformance" PropertyName="Visible" EventName="BeforePrint" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="70" UsePadding="false" />
+                </Item2>
+                <Item3 Ref="71" ControlType="XRTableCell" Name="tableCell5" Weight="0.79754283441045715" Text="TORQUE" StyleName="SimpleHeaderCellStyle">
+                  <ExpressionBindings>
+                    <Item1 Ref="72" Expression="Not ?hidePerformance" PropertyName="Visible" EventName="BeforePrint" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="73" UsePadding="false" />
+                </Item3>
+                <Item4 Ref="74" ControlType="XRTableCell" Name="tableCell6" Weight="1.5240381556102753" RowSpan="4" Text="PHOTO" StyleName="LargeHeaderCellStyle" Padding="2,2,0,0,100" BorderColor="White" Borders="Bottom" BorderWidth="0.8">
+                  <StylePriority Ref="75" UsePadding="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" />
+                </Item4>
+              </Cells>
+            </Item1>
+            <Item2 Ref="76" ControlType="XRTableRow" Name="tableRow3" Weight="1">
+              <Cells>
+                <Item1 Ref="77" ControlType="XRTableCell" Name="tableCell7" Weight="0.79754283441045726" Text="MODEL NAME" StyleName="SimpleHeaderCellStyle">
+                  <StylePriority Ref="78" UsePadding="false" />
+                </Item1>
+                <Item2 Ref="79" ControlType="XRTableCell" Name="tableCell19" Weight="0.79754283441045726" Multiline="true" Text="MPG @ CITY&#xD;&#xA;" StyleName="SimpleHeaderCellStyle">
+                  <ExpressionBindings>
+                    <Item1 Ref="80" Expression="Not ?hidePerformance" PropertyName="Visible" EventName="BeforePrint" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="81" UsePadding="false" />
+                </Item2>
+                <Item3 Ref="82" ControlType="XRTableCell" Name="tableCell8" Weight="0.79754283441045726" Text="MPG @ HIGHWAY" StyleName="SimpleHeaderCellStyle">
+                  <ExpressionBindings>
+                    <Item1 Ref="83" Expression="Not ?hidePerformance" PropertyName="Visible" EventName="BeforePrint" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="84" UsePadding="false" />
+                </Item3>
+                <Item4 Ref="85" ControlType="XRTableCell" Name="tableCell9" Weight="1.5240381556102753" Text="tableCell9" Padding="2,2,0,0,100">
+                  <StylePriority Ref="86" UsePadding="false" />
+                </Item4>
+              </Cells>
+            </Item2>
+            <Item3 Ref="87" ControlType="XRTableRow" Name="tableRow4" Weight="1">
+              <Cells>
+                <Item1 Ref="88" ControlType="XRTableCell" Name="tableCell10" Weight="0.79754283441045726" StyleName="SimpleHeaderCellStyle" Padding="2,2,0,0,100" Borders="Right">
+                  <StylePriority Ref="89" UsePadding="false" UseBorders="false" />
+                </Item1>
+                <Item2 Ref="90" ControlType="XRTableCell" Name="tableCell20" Weight="0.79754283441045726" Text="DOORS" StyleName="SimpleHeaderCellStyle">
+                  <ExpressionBindings>
+                    <Item1 Ref="91" Expression="Not ?hidePerformance" PropertyName="Visible" EventName="BeforePrint" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="92" UsePadding="false" />
+                </Item2>
+                <Item3 Ref="93" ControlType="XRTableCell" Name="tableCell11" Weight="0.79754283441045726" Text="CYLINDERS" StyleName="SimpleHeaderCellStyle">
+                  <ExpressionBindings>
+                    <Item1 Ref="94" Expression="Not ?hidePerformance" PropertyName="Visible" EventName="BeforePrint" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="95" UsePadding="false" />
+                </Item3>
+                <Item4 Ref="96" ControlType="XRTableCell" Name="tableCell12" Weight="1.5240381556102753" Text="tableCell12" Padding="2,2,0,0,100">
+                  <StylePriority Ref="97" UsePadding="false" />
+                </Item4>
+              </Cells>
+            </Item3>
+            <Item4 Ref="98" ControlType="XRTableRow" Name="tableRow5" Weight="1">
+              <Cells>
+                <Item1 Ref="99" ControlType="XRTableCell" Name="tableCell13" Weight="0.79754283441045726" Text="MODIFICATION" StyleName="SimpleHeaderCellStyle" Borders="Right, Bottom">
+                  <StylePriority Ref="100" UsePadding="false" UseBorders="false" />
+                </Item1>
+                <Item2 Ref="101" ControlType="XRTableCell" Name="tableCell21" Weight="0.79754283441045726" Multiline="true" Text="TRANSMISSION TYPE&#xD;&#xA;" StyleName="SimpleHeaderCellStyle">
+                  <ExpressionBindings>
+                    <Item1 Ref="102" Expression="Not ?hidePerformance" PropertyName="Visible" EventName="BeforePrint" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="103" UsePadding="false" />
+                </Item2>
+                <Item3 Ref="104" ControlType="XRTableCell" Name="tableCell14" Weight="0.79754283441045726" Text="TRANSMISSION SPEEDS" StyleName="SimpleHeaderCellStyle">
+                  <ExpressionBindings>
+                    <Item1 Ref="105" Expression="Not ?hidePerformance" PropertyName="Visible" EventName="BeforePrint" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="106" UsePadding="false" />
+                </Item3>
+                <Item4 Ref="107" ControlType="XRTableCell" Name="tableCell15" Weight="1.5240381556102753" Text="tableCell15" Padding="2,2,0,0,100">
+                  <StylePriority Ref="108" UsePadding="false" />
+                </Item4>
+              </Cells>
+            </Item4>
+          </Rows>
+        </Item1>
+      </Controls>
+    </Item4>
+  </Bands>
+  <StyleSheet>
+    <Item1 Ref="109" Name="LargeHeaderCellStyle" BorderStyle="Inset" Padding="10,0,0,0,100" Font="Segoe UI, 7pt, style=Bold" ForeColor="White" BackColor="255,127,127,127" StringFormat="Center;Center;0;None;Character;Default" TextAlignment="MiddleCenter" />
+    <Item2 Ref="110" Name="SimpleHeaderCellStyle" BorderStyle="Inset" Padding="10,0,0,0,100" Font="Segoe UI, 7pt, style=Bold" ForeColor="White" BackColor="255,127,127,127" BorderColor="White" Sides="Right, Bottom" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" BorderWidthSerializable="0.8" />
+    <Item3 Ref="111" Name="DetailTableStyle" BorderStyle="Inset" Padding="10,0,0,0,100" Font="Segoe UI, 9pt" ForeColor="Black" BorderColor="255,229,229,229" Sides="Right, Bottom" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" BorderWidthSerializable="0.8" />
+    <Item4 Ref="112" Name="DescriptionStyle" BorderStyle="Inset" Padding="5,0,0,0,100" Font="Segoe UI, 8pt" ForeColor="255,127,127,127" StringFormat="Near;Near;0;None;Character;Default" TextAlignment="TopLeft" />
+  </StyleSheet>
+  <ObjectStorage>
+    <Item1 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v18.2" Ref="1" Content="System.Boolean" Type="System.Type" />
+  </ObjectStorage>
+</XtraReportsLayoutSerializer>

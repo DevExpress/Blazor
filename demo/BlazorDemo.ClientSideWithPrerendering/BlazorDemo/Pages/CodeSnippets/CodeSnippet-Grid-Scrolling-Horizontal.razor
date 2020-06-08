@@ -1,0 +1,29 @@
+﻿<div class="code-snippet card demo-card-wide mw-1100">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
+        <CodeSnippet>
+@(@"<DxDataGrid Data=""@DataSource"" 
+        HorizontalScrollBarMode=""@ScrollBarMode.Visible""
+        PagerNavigationMode=""@PagerNavigationMode.NumericButtons""
+        CssClass=""mw-1100"">
+
+    <DxDataGridColumn Field=""@nameof(ProductFlat.Id)"" Caption=""Id"" Width=""50px"">
+    </DxDataGridColumn>
+
+    <DxDataGridColumn Field=""@nameof(ProductFlat.ProductName)"" Caption=""Product Name"" Width=""350px"">
+    </DxDataGridColumn>
+
+    <DxDataGridColumn Field=""@nameof(ProductFlat.Availability) Caption=""Availability"" Width=""85px"">
+        <DisplayTemplate>
+            ...
+        </DisplayTemplate>
+    </DxDataGridColumn>
+
+    <DxDataGridColumn Field=""@nameof(ProductFlat.Category)"" Caption=""Category"" Width=""350px""></DxDataGridColumn>
+    <DxDataGridColumn Field=""@nameof(ProductFlat.Subcategory)"" Caption=""Subcategory"" Width=""350px""></DxDataGridColumn>
+    <DxDataGridDateEditColumn Field=""@nameof(ProductFlat.LastUpdated)"" Caption=""Last Updated"" Width=""350px""></DxDataGridDateEditColumn>
+
+</DxDataGrid>")
+        </CodeSnippet>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@page "/SchedulerViewTypes"
+
+    <div class="demo-description" id="Overview">
+        <h2><DemoNavLink Link="SchedulerViewTypes#Overview" />Scheduler - View Types</h2>
+        <p>
+            The DevExpress <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler">Scheduler</a> for Blazor can display appointments in a Day, Work Week or Week View. This demo illustrates how to use and customize these views:
+        </p>
+        <ul>
+            <li>
+                Week View (<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerWeekView">DxSchedulerWeekView</a>) - Displays appointments for all the days in a specified week.
+            </li>
+            <li>
+                Work Week View (<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerWorkWeekView">DxSchedulerWorkWeekView</a>) - Displays appointments for work days in a week.
+            </li>
+            <li>
+                Day View (<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerDayView">DxSchedulerDayView</a>) - Displays appointments for specified days.
+            </li>
+        </ul>
+        <p>
+            You can use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSchedulerBase.ActiveViewType">ActiveViewType</a> property to specify the initial view, and the View Selector to switch between views.
+        </p>
+        <p>
+            Related API members:
+        </p>
+        <ul>
+            <li>
+                <a class="helplink" target="_blank" href="http://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSchedulerDayViewBase.DayCount">DayCount</a> - Specifies the number of days that are displayed within the view.
+            </li>
+            <li>
+                <a class="helplink" target="_blank" href="http://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSchedulerDayViewBase.VisibleTime">VisibleTime</a> - Specifies the visible time interval of the view.
+            </li>
+            <li>
+                <a class="helplink" target="_blank" href="http://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSchedulerDayViewBase.ShowWorkTimeOnly">ShowWorkTimeOnly</a> - Specifies  a value that indicates if Scheduler should show its data only for the working hours in the view.
+            </li>
+            <li>
+                <a class="helplink" target="_blank" href="http://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSchedulerDayViewBase.WorkTime">WorkTime</a> - Specifies the work time interval for the view.
+            </li>
+        </ul>
+    </div>
+
+<Scheduler_WeekView />
+<Scheduler_WorkWeekView />
+<Scheduler_DayView />

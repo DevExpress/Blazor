@@ -1,0 +1,46 @@
+﻿<CodeSnippet>
+@(@"<EditForm Model=""@starship"" OnValidSubmit=""@HandleValidSubmit"" OnInvalidSubmit=""@HandleInvalidSubmit"">
+    <DataAnnotationsValidator />
+    <div class=""row"">
+        <div class=""col-md-6"" style=""padding-bottom: 12px"">
+            <label for=""identifier"">Identifier: </label>
+            <DxTextBox Id=""identifier"" @bind-Text=""@starship.Identifier"" />
+            <ValidationMessage For=""@(() => starship.Identifier)"" />
+        </div>
+        <div class=""col-md-6"" style=""padding-bottom: 12px"">
+            <label for=""classification"">Primary Classification: </label>
+            <DxComboBox Id=""classification"" NullText=""Select classification ...""
+                        ClearButtonDisplayMode=""DataEditorClearButtonDisplayMode.Auto""
+                        Data=""@(new List<string>() { ""Defense"", ""Exploration"", ""Diplomacy"" })""
+                        @bind-SelectedItem=""@starship.Classification"" />
+            <ValidationMessage For=""@(() => starship.Classification)"" />
+        </div>
+        <div class=""col-md-6"" style=""padding-bottom: 12px"">
+            <label for=""accommodation"">Maximum Accommodation: </label>
+            <DxSpinEdit Id=""accommodation"" @bind-Value=""@starship.MaximumAccommodation"" />
+            <ValidationMessage For=""@(() => starship.MaximumAccommodation)"" />
+        </div>
+        <div class=""col-md-6"" style=""padding-bottom: 12px"">
+            <label for=""productionDate"">Production Date: </label>
+            <DxDateEdit @bind-Date=""@starship.ProductionDate"" />
+            <ValidationMessage For=""@(() => starship.ProductionDate)"" />
+        </div>
+        <div class=""col-md-12"">
+            <DxButton SubmitFormOnClick=""true"" Text=""Submit"" RenderStyle=""@ButtonRenderStyle.Secondary"" />
+        </div>
+    </div>
+</EditForm>
+    
+@code {
+    private Starship starship = new Starship();
+
+    private void HandleValidSubmit()
+    {
+        Console.WriteLine(""OnValidSubmit"");
+    }
+    private void HandleInvalidSubmit()
+    {
+        Console.WriteLine(""OnInvalidSubmit"");
+    }
+}")
+</CodeSnippet>

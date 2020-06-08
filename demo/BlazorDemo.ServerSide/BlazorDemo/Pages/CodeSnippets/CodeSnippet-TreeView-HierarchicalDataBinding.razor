@@ -1,0 +1,49 @@
+﻿<CodeSnippetTabbed>
+<CodeSnippetTabPage Text="Razor">
+@(@"<DxTreeView Data=""@ChemicalElements.Groups""
+    TextExpression=""@(dataItem => ((ChemicalElementGroup)dataItem).Name)""
+    ChildrenExpression=""@(dataItem => ((ChemicalElementGroup)dataItem).Groups)"">
+</DxTreeView>")
+</CodeSnippetTabPage>
+<CodeSnippetTabPage Text="ChemicalElements">
+@(@"public class ChemicalElementGroup { 
+    Lazy<List<ChemicalElementGroup>> groups = new Lazy<List<ChemicalElementGroup>>();
+
+    public ChemicalElementGroup(string name, List<ChemicalElementGroup> groups = null) {
+        Name = name;
+        if (groups != null)
+            Groups.AddRange(groups);
+    }
+
+    public string Name { get; set; }
+
+    public List<ChemicalElementGroup> Groups { get { return groups.Value; } }
+}
+
+public static class ChemicalElements {
+    private static readonly Lazy<List<ChemicalElementGroup>> chemicalElementGroups = new Lazy<List<ChemicalElementGroup>>(() => {
+        List<ChemicalElementGroup> groups = new List<ChemicalElementGroup>() {
+            new ChemicalElementGroup(""Metals"", new List<ChemicalElementGroup>() {
+                new ChemicalElementGroup(""Alkali metals""),
+                new ChemicalElementGroup(""Alkaline earth metals""),
+                new ChemicalElementGroup(""Inner transition elements"", new List<ChemicalElementGroup>() {
+                    new ChemicalElementGroup(""Lanthanides""),
+                    new ChemicalElementGroup(""Actinides"")
+                }),
+                new ChemicalElementGroup(""Transition elements""),
+                new ChemicalElementGroup(""Other metals"")
+            }),
+            new ChemicalElementGroup(""Metalloids""),
+            new ChemicalElementGroup(""Nonmetals"", new List<ChemicalElementGroup>() {
+                new ChemicalElementGroup(""Halogens""),
+                new ChemicalElementGroup(""Noble gases""),
+                new ChemicalElementGroup(""Other nonmetals"")
+            })
+        };
+        return groups;
+    });
+
+    public static List<ChemicalElementGroup> Groups { get { return chemicalElementGroups.Value; } }
+}")
+</CodeSnippetTabPage>
+</CodeSnippetTabbed>

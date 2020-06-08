@@ -1,0 +1,9 @@
+﻿<div class="@($"code-header card-footer p-0 {CssClass}")">
+    <div class="lang-group nav nav-code">
+        <a href="javascript:;" class="nav-link active border-primary">Razor</a>
+    </div>
+</div>
+
+@code {
+    [Parameter] public string CssClass { get; set; } = "";
+}

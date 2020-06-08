@@ -1,0 +1,10 @@
+﻿<CodeSnippet>
+@(@"<DxSpinEdit @bind-Value=""@NumericValue""
+            ClearButtonDisplayMode=""DataEditorClearButtonDisplayMode.Auto""
+            NullText=""Type a value..."">
+</DxSpinEdit>
+@code {
+    int? numericValue = 721;
+    int? NumericValue { get => numericValue; set { numericValue = value; InvokeAsync(StateHasChanged); } }
+}")
+</CodeSnippet>

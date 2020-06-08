@@ -1,0 +1,53 @@
+﻿<CodeSnippetTabbed>
+<CodeSnippetTabPage Text="Razor">
+@(@"<DxTagBox Data=""@DataSource""
+          TextFieldName =""Data""
+          AllowCustomTags =""true""
+          @bind-Tags=""@Tags"">
+            <TagTemplate Context=""tagInfo"">
+                @{
+                    var style = tagInfo.IsCustom ? ButtonRenderStyle.Secondary : tagInfo.DataItem.Style;
+                    var styleMode = tagInfo.IsCustom ? ButtonRenderStyleMode.Outline: ButtonRenderStyleMode.Contained;
+                    <DxButton RenderStyle=""@style"" 
+                              RenderStyleMode=""@styleMode"" 
+                              Text=""@tagInfo.Text"" 
+                              style=""display:inline-block"">
+                        @context
+                        <span @onclick=""@tagInfo.RemoveTagAction"">&times;</span>
+                    </DxButton>
+                }
+            </TagTemplate>
+</DxTagBox>
+
+@code {
+    Option[] DataSource { get; set; } = null;
+    
+    IEnumerable<string> Tags { get; set; }
+
+    protected override void OnInitialized() 
+    {
+        DataSource = new Option[] {
+            new Option(""Option 1"", ButtonRenderStyle.Primary),
+            new Option(""Option 2"", ButtonRenderStyle.Success),
+            new Option(""Option 3"", ButtonRenderStyle.Primary),
+            new Option(""Option 4"", ButtonRenderStyle.Success),
+            new Option(""Option 5"", ButtonRenderStyle.Primary),
+            new Option(""Option 6"", ButtonRenderStyle.Success),
+            new Option(""Option 7"", ButtonRenderStyle.Primary)
+        };
+        Tags = new List<string>() { ""Option 2"", ""Option 5"", ""Custom Option"" };
+    }
+}")
+</CodeSnippetTabPage>
+<CodeSnippetTabPage Text="Option">
+@(@"public class Option {
+    public Option(string data, ButtonRenderStyle style) {
+            Data = data;
+            Style = style;
+    }
+
+    public string Data { get; set; }
+    public ButtonRenderStyle Style { get; set; }
+}")
+</CodeSnippetTabPage>
+</CodeSnippetTabbed>

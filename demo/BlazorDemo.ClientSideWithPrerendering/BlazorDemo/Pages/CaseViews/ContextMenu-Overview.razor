@@ -1,0 +1,58 @@
+﻿<div class="demo-description" id="Overview">
+    <h2><DemoNavLink Link="ContextMenu#Overview" />Context Menu - Overview</h2>
+    <p>
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu">Context Menu</a> component allows you to add a context menu to your Blazor application. To invoke the context menu at runtime, users can right-click the area where they want to display the context menu. To display the context menu in code, call the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxContextMenuBase.Show">Show</a> method.
+    </p>
+    <p>
+        This demo illustrates how to add the Context Menu component to an application.
+    </p>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar ShowSizeSelector="false">
+            <TitleTemplate>
+                Clicked item: @(ClickedItem != null ? ClickedItem : "None")
+            </TitleTemplate>
+        </DemoToolbar>
+    </div>
+    <div class="card-body" style="padding: 0">
+        <div style="height: 200px; display: flex; align-items: center; justify-content: center; cursor: pointer;" class="dxbs-preventsel" @oncontextmenu="((e) => ContextMenu.Show(e))" @oncontextmenu:preventDefault>
+            <span style="font-weight: 600">RIGHT-CLICK TO SHOW THE CONTEXT MENU</span>
+        </div>
+        <DxContextMenu @ref="@ContextMenu" ItemClick="@OnItemClick">
+            <Items>
+                <DxContextMenuItem Text="Sort By" IconUrl="@(StaticAssetUtils.GetImagePath("Sort_by.svg"))">
+                    <Items>
+                        <DxContextMenuItem Text="Name"></DxContextMenuItem>
+                        <DxContextMenuItem Text="Size"></DxContextMenuItem>
+                        <DxContextMenuItem Text="Type"></DxContextMenuItem>
+                    </Items>
+                </DxContextMenuItem>
+                <DxContextMenuItem Text="Copy" IconUrl="@(StaticAssetUtils.GetImagePath("Copy.svg"))" BeginGroup="true"></DxContextMenuItem>
+                <DxContextMenuItem Text="Cut" IconUrl="@(StaticAssetUtils.GetImagePath("Cut.svg"))"></DxContextMenuItem>
+                <DxContextMenuItem Text="Remove" IconUrl="@(StaticAssetUtils.GetImagePath("Clear.svg"))"></DxContextMenuItem>
+                <DxContextMenuItem Text="Select All" BeginGroup="true"></DxContextMenuItem>
+            </Items>
+        </DxContextMenu>
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_ContextMenu_Overview />
+    </div>
+</div>
+
+
+@code {
+    DxContextMenu ContextMenu { get; set; }
+
+    string ClickedItem { get; set; }
+
+    void OnItemClick(ContextMenuItemClickEventArgs args) {
+        ClickedItem = args.ItemInfo.Text;
+        InvokeAsync(StateHasChanged);
+    }
+}

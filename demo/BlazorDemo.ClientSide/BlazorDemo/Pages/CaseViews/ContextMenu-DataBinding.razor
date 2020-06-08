@@ -1,0 +1,199 @@
+﻿<div class="demo-description" id="DataBinding">
+    <h2><DemoNavLink Link="ContextMenu#DataBinding" />Context Menu - Binding to Hierarchical Data</h2>
+    <p>
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu">Context Menu</a> can be bound to hierarchical data structures. Specify the following properties to bind the component to a hierarchical data structure:
+    </p>
+    <ul>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxContextMenuBase.Data">Data</a> - A Context Menu data source object.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxContextMenuBase.ChildrenExpression">ChildrenExpression</a> - A lambda expression that returns the data item’s children.</li>
+    </ul>
+    <p>The following properties specify expressions that return menu item information (text, name, and etc.):</p>
+    <ul>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxContextMenuBase.NameExpression">NameExpression</a> - A lambda expression that returns a menu item’s unique identifier (name).</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxContextMenuBase.ClickExpression">ClickExpression</a> - A lambda expression that returns a handler for a menu item’s Click event.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxContextMenuBase.TextExpression">TextExpression</a> - A lambda expression that returns a menu item’s text.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxContextMenuBase.IconUrlExpression">IconUrlExpression</a> - A lambda expression that returns the URL of a menu item icon.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxContextMenuBase.BeginGroupExpression">BeginGroupExpression</a> - A lambda expression that specifies the start of an item group.</li>
+    </ul>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar ShowSizeSelector="false" Title="Use the context menu to format the text below"/>
+    </div>
+    <div class="card-body" style="padding: 0; font-size: 12pt;">
+        <div style="@Formatting.GetStyleString() height: 300px; overflow-y: auto; padding: 0.75rem 1rem; display: flex;" class="dxbs-preventsel" @oncontextmenu="((e) => { ContextMenu.Show(e); } )" @oncontextmenu:preventDefault>
+            <span style="display: inline-block; text-align: center; margin: auto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</span>
+        </div>
+        <DxContextMenu Data="@MenuItems"
+                       ItemClick="((args) => { InvokeAsync(StateHasChanged); })"
+                       TextExpression="(item => (item as TextFormattingMenuItem).Text)"
+                       ClickExpression="(item => (item as TextFormattingMenuItem).Click)"
+                       ChildrenExpression="(item => (item as TextFormattingMenuItem).Children)"
+                       BeginGroupExpression="(item => (item as TextFormattingMenuItem).BeginGroup)"
+                       IconUrlExpression="(item => (item as TextFormattingMenuItem).IconUrl)"
+                       @ref="@ContextMenu">
+        </DxContextMenu>
+    </div>
+</div>
+
+<CodeSnippet_ContextMenu_DataBinding />
+
+
+@code {
+    List<TextFormattingMenuItem> menuItems;
+
+    DxContextMenu ContextMenu { get; set; }
+    TextFormatting Formatting { get; set; } = new TextFormatting();
+    List<TextFormattingMenuItem> MenuItems { 
+        get { 
+            if (menuItems == null) {
+                menuItems = new List<TextFormattingMenuItem>() {
+                    new TextFormattingParentMenuItem(Formatting, "Font", new List<TextFormattingMenuItem>() {
+                        new FontFamilyMenuItem(Formatting, "Times New Roman", "Times New Roman"),
+                        new FontFamilyMenuItem(Formatting, "Tahoma", "Tahoma"),
+                        new FontFamilyMenuItem(Formatting, "Verdana", "Verdana"),
+                        new FontFamilyMenuItem(Formatting, "Arial", "Arial"),
+                        new FontFamilyMenuItem(Formatting, "MS Sans Serif", "MS Sans Serif"),
+                        new FontFamilyMenuItem(Formatting, "Courier", "Courier"),
+                        new FontFamilyMenuItem(Formatting, "Segoe UI", "Segoe UI"),
+                        new FontFamilyMenuItem(Formatting, "Default", null) { BeginGroup = true }
+                    }),
+                    new TextFormattingParentMenuItem(Formatting, "Size", new List<TextFormattingMenuItem>() {
+                        new FontSizeMenuItem(Formatting, "8pt", 8),
+                        new FontSizeMenuItem(Formatting, "10pt", 10),
+                        new FontSizeMenuItem(Formatting, "12pt", 12),
+                        new FontSizeMenuItem(Formatting, "14pt", 14),
+                        new FontSizeMenuItem(Formatting, "18pt", 18),
+                        new FontSizeMenuItem(Formatting, "24pt", 24),
+                        new FontSizeMenuItem(Formatting, "36pt", 36)
+                    }),
+                    new TextFormattingParentMenuItem(Formatting, "Style", new List<TextFormattingMenuItem>() {
+                        new TextDecorationMenuItem(Formatting, "Bold", "Bold"),
+                        new TextDecorationMenuItem(Formatting, "Italic", "Italic"),
+                        new TextDecorationMenuItem(Formatting, "Underline", "Underline"),
+                        new TextDecorationMenuItem(Formatting, "Overline", "Overline"),
+                        new TextDecorationMenuItem(Formatting, "Strikethrough", "Strikethrough")
+                    }),
+                    new ClearFormattingMenuItem(Formatting) { BeginGroup = true } 
+                };
+            }
+            return menuItems;
+        }
+    }
+
+
+    public class TextFormatting {
+        public string FontFamily { get; set; }
+        public int FontSize { get; set; }
+        public Dictionary<string, bool> Decoration { get; } = new Dictionary<string, bool>() {
+            { "Bold", false },
+            { "Italic" , false },
+            { "Underline" , false },
+            { "Strikethrough" , false },
+            { "Overline" , false }
+        };
+
+        string GetTextDecoration() {
+            string textDecoration = "";
+            if (Decoration["Underline"])
+                textDecoration += "underline";
+            if (Decoration["Overline"])
+                textDecoration += " overline";
+            if (Decoration["Strikethrough"])
+                textDecoration += " line-through";
+            return textDecoration;
+        }
+
+        public string GetStyleString() {
+            string style = "";
+            if (!string.IsNullOrEmpty(FontFamily))
+                style += $"font-family: {FontFamily}; ";
+            if (FontSize > 0)
+                style += $"font-size: {FontSize}pt; ";
+            if (Decoration["Bold"])
+                style += "font-weight: bold; ";
+            if (Decoration["Italic"])
+                style += "font-style: italic; ";
+            string textDecoration = GetTextDecoration();
+            if(!string.IsNullOrEmpty(textDecoration))
+                style += $"text-decoration: {textDecoration};";
+            return !string.IsNullOrEmpty(style) ? style : null;
+        }
+
+        public void ClearFormatting() {
+            FontFamily = null;
+            FontSize = 0;
+            Decoration["Bold"] = false;
+            Decoration["Italic"] = false;
+            Decoration["Underline"] = false;
+            Decoration["Overline"] = false;
+            Decoration["Strikethrough"] = false;
+        }
+    }
+
+    abstract class TextFormattingMenuItem {
+        protected TextFormattingMenuItem(TextFormatting textFormatting, string text) {
+            TextFormatting = textFormatting;
+            Text = text;
+        }
+
+        public TextFormatting TextFormatting { get; }
+        public string Text { get; }
+        public virtual void Click() { }
+        public List<TextFormattingMenuItem> Children { get; set; }
+        public bool BeginGroup { get; set; }
+        public virtual string IconUrl { get { return null; } }
+    }
+
+    class TextFormattingParentMenuItem : TextFormattingMenuItem {
+        public TextFormattingParentMenuItem(TextFormatting textFormatting, string text, List<TextFormattingMenuItem> children) : base(textFormatting, text) {
+            Children = children;
+        }
+    }
+
+    class FontFamilyMenuItem : TextFormattingMenuItem {
+        public FontFamilyMenuItem(TextFormatting textFormatting, string text, string fontFamily) : base(textFormatting, text) {
+            FontFamily = fontFamily;
+        }
+
+        string FontFamily { get; }
+        public override void Click() {
+            TextFormatting.FontFamily = FontFamily;
+        }
+    }
+
+    class FontSizeMenuItem : TextFormattingMenuItem {
+        public FontSizeMenuItem(TextFormatting textFormatting, string text, int fontSize) : base(textFormatting, text) {
+            FontSize = fontSize;
+        }
+
+        int FontSize { get; }
+        public override void Click() {
+            TextFormatting.FontSize = FontSize;
+        }
+    }
+
+    class TextDecorationMenuItem : TextFormattingMenuItem {
+        public TextDecorationMenuItem(TextFormatting textFormatting, string text, string attributeName) : base(textFormatting, text) {
+            AttributeName = attributeName;
+        }
+
+        string AttributeName { get; }
+        bool Checked { get { return TextFormatting.Decoration[AttributeName]; } set { TextFormatting.Decoration[AttributeName] = value; } }
+
+        public override string IconUrl { get { return Checked ? StaticAssetUtils.GetImagePath("check.svg") : null; } }
+
+        public override void Click() {
+            Checked = !Checked;
+        }
+    }
+
+    class ClearFormattingMenuItem : TextFormattingMenuItem {
+        public ClearFormattingMenuItem(TextFormatting textFormatting) : base(textFormatting, "Clear Formatting") { }
+
+        public override void Click() {
+            TextFormatting.ClearFormatting();
+        }
+    }
+}

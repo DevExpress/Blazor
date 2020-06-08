@@ -1,0 +1,40 @@
+﻿<CodeSnippetTabbed>
+<CodeSnippetTabPage Text="Razor">
+@(@"<DxUpload Name=""myFile"" UploadUrl=""@GetUploadUrl(""api/Upload/UploadFile/"")""
+    AllowMultiFileUpload=""true"" MaxFileSize=""15000000"">
+</DxUpload>
+
+@code {
+    protected string GetUploadUrl(string url) {
+        return NavigationManager.ToAbsoluteUri(url).AbsoluteUri;
+    }
+}")
+</CodeSnippetTabPage>
+<CodeSnippetTabPage Text="UploadController">
+@(@"[Route(""api/[controller]"")]
+public class UploadController : ControllerBase {
+    private readonly IWebHostEnvironment _hostingEnvironment;
+
+    public UploadController(IWebHostEnvironment hostingEnvironment) {
+        _hostingEnvironment = hostingEnvironment;
+    }
+
+    [HttpPost]
+    public ActionResult UploadFile(IFormFile myFile) {
+        try {
+            var path = Path.Combine(_hostingEnvironment.WebRootPath, ""uploads"");
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            using (var fileStream = System.IO.File.Create(Path.Combine(path, myFile.FileName))) {
+                myFile.CopyTo(fileStream);
+            }
+        } catch {
+            Response.StatusCode = 400;
+        }
+
+        return new EmptyResult();
+    }
+}")
+</CodeSnippetTabPage>
+</CodeSnippetTabbed>

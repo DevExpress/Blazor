@@ -1,0 +1,10 @@
+﻿<CodeSnippet>
+@(@"<DxSpinEdit @bind-Value=""@NumericValue"" 
+            ReadOnly=""true"">
+</DxSpinEdit>
+
+@code {
+    int? numericValue = 180798;
+    int? NumericValue { get => numericValue; set { numericValue = value; InvokeAsync(StateHasChanged); } }
+}")
+</CodeSnippet>

@@ -1,0 +1,44 @@
+<a class="list-group-item list-group-item-action @Theme.CssClass @Theme.IconCssClass" href="#" 
+   @onclick:preventDefault 
+   @onclick=@OnLinkClick>
+    @Theme.Name
+</a>
+@if (Theme.InLoading)
+{
+    <link href="@Theme.ResourceUrl" as="style" rel="preload" crossorigin @onload=@OnPreloadCompleted />
+    <link href="@Theme.ResourceUrl" rel="stylesheet" media="screen and (min--moz-device-pixel-ratio:0)" @onload=@OnPreloadCompleted />
+}
+@code {
+    bool _allowRender;
+    [Parameter] public ThemeAttributes Theme { get; set; }
+    [Parameter] public EventCallback<ThemeAttributes> Apply { get; set; }
+    
+    protected override bool ShouldRender()
+    {
+        if (_allowRender)
+        {
+            _allowRender = false;
+            return true;
+        }
+        return false;
+    }
+    async Task OnPreloadCompleted()
+    {
+        if(!Theme.InLoading) return;
+
+        _allowRender = true;
+        Theme.InLoading = false;
+        Theme.IsLoaded = true;
+        await Apply.InvokeAsync(Theme);
+    }
+    async Task OnLinkClick()
+    {
+        if (Theme.InLoading || Theme.IsActive) return;
+
+        _allowRender = true;
+        if (!Theme.IsLoaded)
+            Theme.InLoading = true;
+        else
+            await Apply.InvokeAsync(Theme);
+    }
+}

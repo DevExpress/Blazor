@@ -1,0 +1,41 @@
+﻿<CodeSnippet>
+@(@"<div class=""card-header"">
+    @if (ClickedItem != null) {
+        <span>Clicked item: <b>@ClickedItem</b></span>
+    }
+    else {
+        <span>Clicked item: None</span>
+    }
+</div>
+<div class=""card-body"">
+    <div @oncontextmenu=""((e) => ContextMenu.Show(e))"" @oncontextmenu:preventDefault>
+        <span>RIGHT-CLICK TO SHOW THE CONTEXT MENU</span>
+    </div>
+    <DxContextMenu ItemClick=""@OnItemClick"" @ref=""@ContextMenu"">
+        <Items>
+            <DxContextMenuItem Text=""Sort By"" IconUrl=""Sort_by.svg"">
+                <Items>
+                    <DxContextMenuItem Text=""Name""></DxContextMenuItem>
+                    <DxContextMenuItem Text=""Size""></DxContextMenuItem>
+                    <DxContextMenuItem Text=""Type""></DxContextMenuItem>
+                </Items>
+            </DxContextMenuItem>
+            <DxContextMenuItem Text=""Copy"" IconUrl=""Copy.svg"" BeginGroup=""true""></DxContextMenuItem>
+            <DxContextMenuItem Text=""Cut"" IconUrl=""Cut.svg""></DxContextMenuItem>
+            <DxContextMenuItem Text=""Remove"" IconUrl=""Clear.svg""></DxContextMenuItem>
+            <DxContextMenuItem Text=""Select All"" BeginGroup=""true""></DxContextMenuItem>
+        </Items>
+    </DxContextMenu>
+</div>
+
+@code {
+    DxContextMenu ContextMenu { get; set; }
+
+    string ClickedItem { get; set; }
+
+    void OnItemClick(ContextMenuItemClickEventArgs args) {
+        ClickedItem = args.ItemInfo.Text;
+        InvokeAsync(StateHasChanged);
+    }
+}")
+</CodeSnippet>

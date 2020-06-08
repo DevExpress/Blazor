@@ -1,0 +1,53 @@
+﻿<DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" ItemSizeMode="SizeMode.Small" CssClass="demo-size-toolbar" AdaptivityMinRootItemCount="1" AdaptivityAutoHideRootItems="true">
+    <Items>
+        @if (!string.IsNullOrEmpty(Title) || TitleTemplate != null) {
+            <DxToolbarItem Alignment="ToolbarItemAlignment.Left">
+                <Template>
+                    <div class="demo-toolbar-title">
+                        @if (TitleTemplate != null)
+                            @TitleTemplate
+                        else
+                            @Title
+                    </div>
+                </Template>
+            </DxToolbarItem>
+        }
+        @if (ShowSizeSelector) {
+            <DxToolbarItem Text="@(SelectedSize.ToString() + " size")" Alignment="ToolbarItemAlignment.Right">
+                <Items>
+                    <DxToolbarItem Name="Small" Click="OnItemClick" Text="Small size"></DxToolbarItem>
+                    <DxToolbarItem Name="Medium" Click="OnItemClick" Text="Medium size"></DxToolbarItem>
+                    <DxToolbarItem Name="Large" Click="OnItemClick" Text="Large size"></DxToolbarItem>
+                </Items>
+            </DxToolbarItem>
+        }
+    </Items>
+</DxToolbar>
+@code {
+    [Parameter] public SizeMode SelectedSize { get; set; }
+    [Parameter] public EventCallback<SizeMode> SelectedSizeChanged { get; set; }
+    [Parameter] public RenderFragment TitleTemplate { get; set; }
+    [Parameter] public bool ShowSizeSelector { get; set; } = true;
+    [Parameter] public string Title { get; set; }
+
+    void OnItemClick(ToolbarItemClickEventArgs e) {
+        SizeMode result;
+        switch (e.ItemName) {
+            case "Small":
+                result = SizeMode.Small;
+                break;
+            case "Medium":
+                result = SizeMode.Medium;
+                break;
+            case "Large":
+                result = SizeMode.Large;
+                break;
+            default: throw new ArgumentException("Invalid ItemName:" + e.ItemName);
+        }
+        if (result != SelectedSize) {
+            SelectedSize = result;
+            SelectedSizeChanged.InvokeAsync(result);
+        }
+    }
+
+}

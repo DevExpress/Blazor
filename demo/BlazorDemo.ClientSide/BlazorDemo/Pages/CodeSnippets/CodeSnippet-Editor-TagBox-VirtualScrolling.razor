@@ -1,0 +1,19 @@
+﻿<CodeSnippet>
+@(@"<DxTagBox Data=""@Strings""
+          ListRenderMode=""@ListRenderMode.Virtual""
+          ClearButtonDisplayMode=""@DataEditorClearButtonDisplayMode.Auto""
+          @bind-SelectedItems=""@SelectedItems"">
+</DxTagBox>
+
+@code {
+    IEnumerable<string> SelectedItems { get; set; }
+
+    List<string> Strings { get; set; } = new List<string>();
+    protected override void OnInitialized()
+    {
+        for(int i = 0; i < 1000; i++ )
+            Strings.Add($""Option #{i}"");
+        SelectedItems = new List<string> { Strings[0], Strings[1] };
+    }
+}")
+</CodeSnippet>

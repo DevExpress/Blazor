@@ -1,0 +1,10 @@
+﻿<CodeSnippet>
+@(@"<DxDateEdit @bind-Date=""@DateTimeValue""
+            ClearButtonDisplayMode=""DataEditorClearButtonDisplayMode.Auto""
+            NullText=""Select a date..."">
+</DxDateEdit>
+@code {
+    DateTime? dateTimeValue = DateTime.Now;
+    DateTime? DateTimeValue { get => dateTimeValue; set { dateTimeValue = value; InvokeAsync(StateHasChanged); } }
+}")
+</CodeSnippet>

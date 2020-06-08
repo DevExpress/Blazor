@@ -1,0 +1,42 @@
+﻿@using DevExpress.Blazor
+@using System.Collections.Generic
+@inject FlatProductService FlatProductService
+
+<div class="demo-description mw-1100" id="ShowInColumnChooser">
+    <h2><DemoNavLink Link="GridColumnChooser#ShowInColumnChooser" />Data Grid - Hide a Column from the Column Chooser</h2>
+    <p>The Column Chooser window displays headers of all data columns (visible and hidden). Note that <a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridCommandColumn" target="_blank" rel="nofollow">command</a> and <a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridSelectionColumn" target="_blank" rel="nofollow">selection</a> columns are not shown in the Column Chooser. Use the <a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridColumnBase-1.ShowInColumnChooser" target="_blank" rel="nofollow">ShowInColumnChooser</a> property to change a default behavior and specify whether a column should be displayed in the Column Chooser window.</p>
+    <p>In this demo, the Column Chooser does not display the <strong>Product Name</strong> data column (its <strong>ShowInColumnChooser</strong> property is set to <strong>false</strong>), but displays the command column (its <strong>ShowInColumnChooser</strong> property is set to <strong>true</strong>).</p>
+</div>
+
+<DxDataGrid DataAsync="@FlatProductService.LoadProductsAsync" ShowFilterRow="false" AllowColumnDragDrop="false"
+            RowRemovingAsync="@OnRowRemoving"
+            RowUpdatingAsync="@OnRowUpdating"
+            RowInsertingAsync="@OnRowInserting"
+            CssClass="mw-1100">
+    <HeaderTemplate>
+        <DxToolbar>
+            <DxDataGridColumnChooserToolbarItem Alignment="ToolbarItemAlignment.Right" />
+        </DxToolbar>
+    </HeaderTemplate>
+    <Columns>
+        <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" ShowInColumnChooser="false" />
+        <DxDataGridComboBoxColumn Field="@nameof(ProductFlat.Category)" Data="@(new[] { "Bikes", "Components", "Clothing", "Accessories" })" />
+        <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)" />
+        <DxDataGridCheckBoxColumn Field="@nameof(ProductFlat.Availability)" />
+        <DxDataGridCommandColumn ShowInColumnChooser="true" />
+    </Columns>
+</DxDataGrid>
+
+<CodeSnippet_GridColumnChooserShowInColumnChooser />
+
+@code {
+    async Task OnRowRemoving(ProductFlat dataItem) {
+        await FlatProductService.Remove(dataItem);
+    }
+    async Task OnRowUpdating(ProductFlat dataItem, IDictionary<string, object> newValue) {
+        await FlatProductService.Update(dataItem, newValue);
+    }
+    async Task OnRowInserting(IDictionary<string, object> newValue) {
+        await FlatProductService.Add(newValue);
+    }
+}

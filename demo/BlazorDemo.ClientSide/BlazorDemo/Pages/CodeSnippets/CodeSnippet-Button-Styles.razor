@@ -1,0 +1,22 @@
+﻿<CodeSnippet @key=@_codeString>@_codeString</CodeSnippet>
+@code {
+
+    [Parameter]
+    public ButtonRenderStyle RenderStyle { get; set; }
+
+    [Parameter]
+    public ButtonRenderStyleMode RenderStyleMode { get; set; }
+
+    [Parameter]
+    public SizeMode SizeMode { get; set; }
+
+    [Parameter]
+    public string StyleName { get; set; }
+
+    string _codeString;
+    protected override void OnParametersSet()
+    {
+        _codeString = $"<DxButton RenderStyle=\"@ButtonRenderStyle.{RenderStyle}\" RenderStyleMode=\"@ButtonRenderStyleMode.{RenderStyleMode}\" Text=\"{StyleName}\" SizeMode=\"@SizeMode.{SizeMode}\" />";
+    }
+
+}

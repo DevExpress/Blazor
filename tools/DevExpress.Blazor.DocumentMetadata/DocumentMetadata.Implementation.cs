@@ -1,235 +1,193 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using DevExpress.Blazor.DocumentMetadata;
+using System.Reflection;
+using System.Text.Json;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Routing;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace DevExpress.Blazor.Internal
-{
-    public class MetadataEntity
-    {
-        public virtual string Key { get; }
-        public MetadataEntity(string name, List<KeyValuePair<string, string>> attributes)
-        {
-            Key = $"{name}.{string.Join("", attributes.Select(x => $"{x.Key}.{x.Value}"))}";
-            Name = name;
-            Attributes = new Dictionary<string, string>();
-            attributes.ForEach(x => Attributes.Add(x.Key, x.Value));
+namespace DevExpress.Blazor.DocumentMetadata {
+
+    sealed class DocumentMetadataSetup {
+        readonly Action<IServiceProvider, IDocumentMetadataCollection> _initialize;
+
+        internal DocumentMetadataSetup() : this(null) { }
+
+        internal DocumentMetadataSetup(Action<IServiceProvider, IDocumentMetadataCollection> initialize) {
+            _initialize = initialize;
         }
-        protected MetadataEntity() {}
-        public virtual string Name { get; }
-        public virtual string Content { get; set; }
-        public virtual Dictionary<string, string> Attributes { get; }
-
-        public virtual MetadataEntity Origin => this;
-    }
-    public class ActiveMetadataEntity : MetadataEntity
-    {
-        readonly MetadataEntity _metadataEntity;
-        public int Priority { get; set; }
-
-        public ActiveMetadataEntity(MetadataEntity src, int priority)
-        {
-            _metadataEntity = src;
-            Priority = priority;
-        }
-        public override string Name => _metadataEntity.Name;
-        public override string Content { get => _metadataEntity.Content; set {} }
-        public override string Key => _metadataEntity.Key;
-        public override Dictionary<string, string> Attributes => _metadataEntity.Attributes;
-
-        public override MetadataEntity Origin => _metadataEntity;
-    }
-    public class DocumentMetadataBuilderProvider : IDocumentMetadataSettingsProvider
-    {
-        readonly object _defaultSettingsKey = new object();
-        readonly Dictionary<object, IDocumentMetadataSettings> _metadataBuildersLookup = new Dictionary<object, IDocumentMetadataSettings>();
-        readonly IServiceProvider _serviceProvider;
-
-        public DocumentMetadataBuilderProvider(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
-
-        public IDocumentMetadataSettings GetDefault() => _metadataBuildersLookup.ContainsKey(_defaultSettingsKey) ? _metadataBuildersLookup[_defaultSettingsKey] : null;
-        public IDocumentMetadataSettings GetByPageName(string pageName) => _metadataBuildersLookup.ContainsKey(pageName) ? _metadataBuildersLookup[pageName] : null;
-        public IDocumentMetadataSettings CreateEmpty() => _serviceProvider.GetService<IDocumentMetadataSettings>();
-        public IDocumentMetadataBuilder Default() => GetBuilderByKey(_defaultSettingsKey);
-        public IDocumentMetadataBuilder Page(string pageName) => GetBuilderByKey(pageName);
-
-        IDocumentMetadataBuilder GetBuilderByKey(object key)
-        {
-            var builder = CreateEmpty();
-            _metadataBuildersLookup[key] = builder;
-            return builder;
+        internal void Initialize(IServiceProvider serviceProvider, IDocumentMetadataCollection registrator) {
+            _initialize?.Invoke(serviceProvider, registrator);
         }
     }
-    public class DocumentMetadataSettings : IDocumentMetadataSettings
-    {
-        readonly List<MetadataEntity> _entitiesToApply = new List<MetadataEntity>();
 
-        public IDocumentMetadataBuilder Base(string url)
-        {
-            GetOrAddElement("base").Attributes["href"] = url;
-            return this;
-        }
-        public IDocumentMetadataBuilder Title(string title)
-        {
-            GetOrAddElement("title").Content = title;
-            return this;
-        }
-        public IDocumentMetadataBuilder TitleFormat(string format)
-        {
-            GetOrAddElement("titleFormat").Content = format;
-            return this;
-        }
-        public IDocumentMetadataBuilder StyleSheet(string name, string styleSheetUrl)
-        {
-            GetOrAddElement("link", "rel", "stylesheet", "id", name).Attributes["href"] = styleSheetUrl;
-            return this;
-        }
-        public IDocumentMetadataBuilder Script(string name, string scriptUrl, bool async = false, bool defer = false)
-        {
-            var attributeTuples = new List<string>();
-            attributeTuples.Add("type");
-            attributeTuples.Add("text/javascript");
-            attributeTuples.Add("id");
-            attributeTuples.Add(name);
-            if (async)
-            {
-                attributeTuples.Add("async");
-                attributeTuples.Add(string.Empty);
-            }
-            if (defer)
-            {
-                attributeTuples.Add("defer");
-                attributeTuples.Add(string.Empty);
-            }
-            GetOrAddElement("script", attributeTuples.ToArray()).Attributes["src"] = scriptUrl;
-            return this;
-        }
-        public IDocumentMetadataBuilder Viewport(string value) => Meta("viewport", value);
-        public IDocumentMetadataBuilder Charset(string value) => MetaInfo("charset", value, null);
-        public IDocumentMetadataBuilder Meta(string name, string content) => MetaInfo("name", name, content);
-        public IDocumentMetadataBuilder OpenGraph(string property, string content) => MetaInfo("property", "og:" + property, content);
+    sealed class MetadataRendererSet : HashSet<Renderer> {
+        internal MetadataRendererSet() : base(MetadataRendererComparer.Default) { }
+    }
 
-
-        public Action Apply(DocumentMetadataContainer meta)
-        {
-            int nextPriority = meta.Entities.Any() ? meta.Entities.Max(x => x.Priority) + 1 : 0;
-            var appliedMetaElements = _entitiesToApply.Select(x => new ActiveMetadataEntity(x, nextPriority)).ToList();
-            meta.Entities.AddRange(appliedMetaElements);
-            return () => appliedMetaElements.ForEach(x => meta.Entities.Remove(x));
+    sealed class MetadataCache : ConcurrentDictionary<string, ISet<Renderer>> {
+        internal ISet<Renderer> GetPageRenderers(string pageName) {
+            return GetOrAdd(GetFixedPageName(pageName), (_) => new MetadataRendererSet());
         }
-
-        IDocumentMetadataBuilder MetaInfo(string key, string name, string value)
-        {
-            GetOrAddElement("meta", key, name).Attributes["content"] = value;
-            return this;
-        }
-        MetadataEntity GetOrAddElement(string name, params string[] attributePairs)
-        {
-            var attributes = new List<KeyValuePair<string, string>>();
-            for(int i = 0; i < attributePairs.Length; i+=2)
-                attributes.Add(new KeyValuePair<string, string>(attributePairs[i], attributePairs.ElementAtOrDefault(i + 1)));
-
-            MetadataEntity element = _entitiesToApply.FirstOrDefault(x => 
-                x.Name == name && 
-                attributes.All(a => x.Attributes.ContainsKey(a.Key) && (string.IsNullOrEmpty(a.Value) || x.Attributes[a.Key] == a.Value)));
-            if(element == null) {
-                element = new MetadataEntity(name, attributes);
-                _entitiesToApply.Add(element);
-            }
-            return element;
+        internal bool TryGetPageRenderers(string pageName, out ISet<Renderer> _) => TryGetValue(GetFixedPageName(pageName), out _);
+        static string GetFixedPageName(string route) {
+            if (route.Length == 0 || route[0] != '/')
+                return route.Insert(0, "/");
+            else
+                return route;
         }
     }
-    public class DocumentMetadataService : IDocumentMetadataService, IDocumentMetadataContainerOwner, IDisposable
-    {
-        public event EventHandler OnMetadataUpdated;
-        public DocumentMetadataContainer Metadata { get; } = new DocumentMetadataContainer();
 
-        protected IDocumentMetadataSettingsProvider MetadataProvider { get; private set; }
-        protected NavigationManager UriHelper { get; private set; }
+    sealed class DocumentMetadataService : IDocumentMetadataCollection, IDocumentMetadataService, IDisposable {
 
-        protected Action RevertPageSpecificMetaData { get; private set; }
-        protected string PageName { get; private set; }
-        protected List<MetadataEntity> RenderedScripts { get; private set; } = new List<MetadataEntity>();
+        static readonly string
+            DefaultMetadataCacheKey = $"default_{Guid.NewGuid()}",
+            OverrideMetadataCacheKey = $"override_{Guid.NewGuid()}",
+            RclBaseAssemblyName = typeof(ComponentBase).Assembly.GetName().Name;
 
-        public DocumentMetadataService(IDocumentMetadataSettingsProvider metadataProvider, NavigationManager uriHelper)
-        {
-            UriHelper = uriHelper;
-            MetadataProvider = metadataProvider;
-            UriHelper.LocationChanged += OnLocationChanged;
-            MetadataProvider.GetDefault()?.Apply(Metadata);
-            LoadMetadataForPage(GetPageNameByLocation(UriHelper.Uri));
+        readonly MetadataCache _cache = new MetadataCache();
+
+        public DocumentMetadataService(IServiceProvider serviceProvider, DocumentMetadataSetup setup) {
+            foreach (var VARIABLE in AppDomain.CurrentDomain.GetAssemblies()
+                .Where(IsAssemblyCanContainComponents)
+                .SelectMany(ExtractSeoInfoFromAssembly)) {
+                
+                RegisterSeoInfo(VARIABLE);
+            }
+            setup.Initialize(serviceProvider, this);
         }
 
-        public void Update(Action<IDocumentMetadataBuilder> update)
-        {
-            var settings = MetadataProvider.CreateEmpty();
-            update(settings);
-            settings.Apply(Metadata);
-            OnMetadataUpdated?.Invoke(this, EventArgs.Empty);
+        public Action UpdateCompleted { get; set; }
+
+        public void Update(Action<IDocumentMetadataBuilder> update) {
+            update(AddPage(OverrideMetadataCacheKey));
+            UpdateCompleted?.Invoke();
+        }
+        public IDocumentMetadataBuilder AddDefault() => AddPage(DefaultMetadataCacheKey);
+        public IDocumentMetadataBuilder AddPage(string pageName) => new DocumentMetadataBuilder(pageName, _cache.GetPageRenderers(pageName));
+
+        internal IEnumerable<Renderer> GetRenderers(string pageName) =>
+            GetRenderers(_cache, DefaultMetadataCacheKey, pageName, OverrideMetadataCacheKey).
+            Where(Enumerable.Any).
+            Aggregate(MergeRenderers);
+
+        IEnumerable<Renderer> MergeRenderers(
+                IEnumerable<Renderer> prev,
+                IEnumerable<Renderer> next) =>
+                    prev.Except(next, MetadataRendererComparer.Default).
+                    Concat(next.Except(prev, MetadataRendererComparer.Default));
+
+
+        void RegisterSeoInfo((string pageName, string moduleName, IEnumerable<IMetadataEntity> containers) tuple) {
+            var builder = AddPage(tuple.pageName);
+            foreach (var container in tuple.containers)
+                container.Instantiate(tuple.moduleName, builder);
         }
 
-        void OnLocationChanged(object sender, LocationChangedEventArgs e) => LoadMetadataForPage(GetPageNameByLocation(e.Location));
-        void LoadMetadataForPage(string pageName)
-        {
-            if (PageName != pageName)
-            {
-                PageName = pageName;
-                bool hasChanges = RevertPageSpecificMetaData != null;
-                if (hasChanges)
-                    RevertPageSpecificMetaData();
-                var builder = MetadataProvider.GetByPageName(PageName);
-                if (hasChanges = (hasChanges || builder != null))
-                    RevertPageSpecificMetaData = builder?.Apply(Metadata);
+        static IEnumerable<(string, string, IEnumerable<IMetadataEntity>)> ExtractSeoInfoFromAssembly(Assembly assembly) =>
+            assembly.GetTypes().Where(IsSeoRelatedPage).Select(ExtractSeoInfoFromType);
 
-                if (hasChanges)
-                    OnMetadataUpdated?.Invoke(this, EventArgs.Empty);
+        static (string, string, IEnumerable<IMetadataEntity>) ExtractSeoInfoFromType(Type type) {
+            return (
+                type.GetCustomAttribute<RouteAttribute>()?.Template ?? DefaultMetadataCacheKey,
+                type.Assembly.GetName().Name,
+                type.GetCustomAttributes(false).OfType<IMetadataEntity>()
+            );
+        }
+
+        static bool IsAssemblyCanContainComponents(Assembly assembly) {
+            return assembly.GetReferencedAssemblies().Any(r => r.Name == RclBaseAssemblyName);
+        }
+
+        static bool IsSeoRelatedPage(Type type) {
+            return type.IsClass && typeof(ComponentBase).IsAssignableFrom(type) &&
+                   type.GetCustomAttributes().OfType<IMetadataEntity>().Any();
+        }
+
+        static IEnumerable<IEnumerable<Renderer>> GetRenderers(MetadataCache cache, params string[] keys) => keys.Select(x => GetRenderers(cache, x));
+
+        static IEnumerable<Renderer> GetRenderers(MetadataCache cache, string key) =>
+            cache.TryGetPageRenderers(key, out ISet<Renderer> renderers) ? renderers : Enumerable.Empty<Renderer>();
+
+        void IDisposable.Dispose() => _cache.Clear();
+    }
+
+    sealed class DocumentMetadataObserver : IObservable<Renderer>, IDisposable {
+        readonly struct Unsubscribe : IDisposable {
+            readonly DocumentMetadataObserver _observable;
+            readonly Action<Renderer> _subscriber;
+            internal Unsubscribe(DocumentMetadataObserver observable, Action<Renderer> subscriber) {
+                _subscriber = subscriber;
+                _observable = observable;
+                _observable._listeners += subscriber;
+            }
+            public void Dispose() {
+                if (_observable._listeners != null) 
+                    _observable._listeners -= _subscriber;
             }
         }
 
-        string GetPageNameByLocation(string location)
-        {
-            var uriFragment = UriHelper.ToAbsoluteUri(location).Fragment;
-            if (!string.IsNullOrEmpty(uriFragment))
-                location = location.Replace(uriFragment, "");
-            return UriHelper.ToBaseRelativePath(location);
+        readonly DocumentMetadataService _metadataService;
+        readonly NavigationManager _navigationManager;
+
+        Action<Renderer> _listeners;
+        public DocumentMetadataObserver(DocumentMetadataService metadataService, NavigationManager navigationManager) {
+            _metadataService = metadataService;
+            _metadataService.UpdateCompleted += OnServiceUpdateCompleted;
+            _navigationManager = navigationManager;
+            _navigationManager.LocationChanged += OnLocationChanged;
         }
 
-        void IDisposable.Dispose()
-        {
-            if(UriHelper != null)
-                UriHelper.LocationChanged -= OnLocationChanged;
-            MetadataProvider = null;
-            UriHelper = null;
-            RevertPageSpecificMetaData = null;
-            RenderedScripts?.Clear();
-            RenderedScripts = null;
+
+        public IDisposable Subscribe(IObserver<Renderer> observer) => SubscribeListener(observer.OnNext, observer.OnCompleted);
+
+        IDisposable SubscribeListener(Action<Renderer> callback, Action onCompleted) {
+            NotifyListener(callback);
+            onCompleted();
+            return new Unsubscribe(this, callback);
         }
-        public bool CheckBeforeRender(MetadataEntity entity) {
-            MetadataEntity origin = entity.Origin;
-            if (origin.Name == "titleFormat")
-                return false;
-            if (origin.Name == "script") {
-                bool isRendered = RenderedScripts.Contains(origin);
-                if(!isRendered)
-                    RenderedScripts.Add(origin);
-                return !isRendered;
-            }
-            return true;
+
+        void OnLocationChanged(object sender, LocationChangedEventArgs e) => OnServiceUpdateCompleted();
+        void OnServiceUpdateCompleted() {
+            if (_listeners != null)
+                NotifyListener(_listeners);
         }
-        public string ResolveUrl(string url) {
-            if (url.StartsWith("~/")) {
-                string baseUrl = UriHelper.BaseUri;
-                string absoluteUrl = baseUrl + url.Substring(2);
-                url = UriHelper.ToBaseRelativePath(absoluteUrl);
-                url = UriHelper.ToAbsoluteUri(url).PathAndQuery;
-            }
-            return url;
+        void NotifyListener(Action<Renderer> callback) {
+            foreach (var renderer in _metadataService.GetRenderers(_navigationManager.GetCurrentPageName()))
+                callback(renderer);
         }
+
+        void IDisposable.Dispose() {
+            _metadataService.UpdateCompleted -= OnServiceUpdateCompleted;
+            _navigationManager.LocationChanged -= OnLocationChanged;
+        }
+    }
+
+    sealed class DocumentMetadataBuilder : IDocumentMetadataBuilder {
+        readonly ISet<Renderer> _renderers;
+        readonly string _pageName;
+        public override string ToString() {
+            return $"{_pageName}";
+        }
+        internal DocumentMetadataBuilder(string pageName, ISet<Renderer> renderers) {
+            _renderers = renderers;
+            _pageName = pageName;
+        }
+        IDocumentMetadataBuilder UpdateWith(ISet<Renderer> source, in Renderer update) {
+            source.Remove(update);
+            source.Add(update);
+            return this;
+        }
+        public IDocumentMetadataBuilder Base(string url) => UpdateWith(_renderers, Renderer.BaseHref(url));
+        public IDocumentMetadataBuilder Title(string title) => UpdateWith(_renderers, Renderer.Title(title));
+        public IDocumentMetadataBuilder TitleFormat(string format) => UpdateWith(_renderers, Renderer.TitleFormat(format));
+        public IDocumentMetadataBuilder StyleSheet(string name, string url) => UpdateWith(_renderers, Renderer.Stylesheet(name, url));
+        public IDocumentMetadataBuilder Script(string name, string url, bool async = false, bool defer = false) => UpdateWith(_renderers, Renderer.Script(url, async, defer));
+        public IDocumentMetadataBuilder Viewport(string value) => UpdateWith(_renderers, Renderer.Viewport(value));
+        public IDocumentMetadataBuilder Charset(string value) => UpdateWith(_renderers, Renderer.Charset(value));
+        public IDocumentMetadataBuilder Meta(string name, string content) => UpdateWith(_renderers, Renderer.Meta(name, content));
+        public IDocumentMetadataBuilder OpenGraph(string property, string content) => UpdateWith(_renderers, Renderer.OpenGraph(property, content));
     }
 }

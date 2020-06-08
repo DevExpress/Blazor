@@ -1,0 +1,43 @@
+﻿<CodeSnippet>
+@(@"<DxFormLayout>
+    <DxFormLayoutItem Caption=""Address:"" ColSpanMd=""12"">
+        <Template>
+            <DxTextBox @bind-Text=""@Address""></DxTextBox>
+        </Template>
+    </DxFormLayoutItem>
+
+    <DxFormLayoutItem Caption=""City:"">
+        <Template>
+            <DxTextBox @bind-Text=""@City""></DxTextBox>
+        </Template>
+    </DxFormLayoutItem>
+
+    <DxFormLayoutItem Caption=""Postal/ZIP Code:"" BeginRow=""true"">
+        <Template>
+            <DxTextBox @bind-Text=""@ZipCode""></DxTextBox>
+        </Template>
+    </DxFormLayoutItem>
+
+    <DxFormLayoutItem Caption=""Country"" BeginRow=""true"">
+        <Template>
+            <DxTextBox @bind-Text=""@Country""></DxTextBox>
+        </Template>
+    </DxFormLayoutItem>
+</DxFormLayout>
+
+@code {
+    string address = ""120 Hanover Sq."";
+    string Address { get => address; set { address = value; OnChanged(); } }
+
+    string city = ""London"";
+    string City { get => city; set { city = value; OnChanged(); } }
+
+    string zipCode = ""WA1 1DP"";
+    string ZipCode { get => zipCode; set { zipCode = value; OnChanged(); } }
+
+    string country = ""UK"";
+    string Country { get => country; set { country = value; OnChanged(); } }
+
+    void OnChanged() { InvokeAsync(StateHasChanged); }
+}")
+</CodeSnippet>

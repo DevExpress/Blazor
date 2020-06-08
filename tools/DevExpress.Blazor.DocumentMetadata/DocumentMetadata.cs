@@ -1,40 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using DevExpress.Blazor.Internal;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace DevExpress.Blazor.Internal
-{
-    using DevExpress.Blazor.DocumentMetadata;
+namespace DevExpress.Blazor.DocumentMetadata {
 
-    public class DocumentMetadataContainer
-    {
-        internal List<ActiveMetadataEntity> Entities { get; } = new List<ActiveMetadataEntity>();
+    interface IMetadataEntity {
+        void Instantiate(string moduleName, IDocumentMetadataBuilder builder);
     }
-    public interface IDocumentMetadataContainerOwner
-    {
-        DocumentMetadataContainer Metadata { get; }
-        event EventHandler OnMetadataUpdated;
-        bool CheckBeforeRender(MetadataEntity entity);
-        string ResolveUrl(string attrValue);
-    }
-    public interface IDocumentMetadataSettings : IDocumentMetadataBuilder
-    {
-        Action Apply(DocumentMetadataContainer metadata);
-    }
-    public interface IDocumentMetadataSettingsProvider : IDocumentMetadataRegistrator
-    {
-        IDocumentMetadataSettings GetDefault();
-        IDocumentMetadataSettings GetByPageName(string pageName);
-        IDocumentMetadataSettings CreateEmpty();
-    }
-}
 
-namespace DevExpress.Blazor.DocumentMetadata
-{
-
-    public interface IDocumentMetadataBuilder
-    {
+    public interface IDocumentMetadataBuilder {
         IDocumentMetadataBuilder Base(string url);
         IDocumentMetadataBuilder Title(string title);
         IDocumentMetadataBuilder TitleFormat(string format);
@@ -45,32 +19,22 @@ namespace DevExpress.Blazor.DocumentMetadata
         IDocumentMetadataBuilder StyleSheet(string name, string styleSheetUrl);
         IDocumentMetadataBuilder Script(string name, string scriptUrl, bool async = false, bool defer = false);
     }
-    public interface IDocumentMetadataService
-    {
+    public interface IDocumentMetadataService {
         void Update(Action<IDocumentMetadataBuilder> update);
     }
-    public interface IDocumentMetadataRegistrator
-    {
-        IDocumentMetadataBuilder Default();
-        IDocumentMetadataBuilder Page(string pageName);
+    public interface IDocumentMetadataCollection {
+        IDocumentMetadataBuilder AddDefault();
+        IDocumentMetadataBuilder AddPage(string pageName);
     }
-    public static class DocumentMetadataExtensions
-    {
-        public static IServiceCollection AddDocumentMetadata(this IServiceCollection services, Action<IServiceProvider, IDocumentMetadataRegistrator> initialize)
-        {
-            services.AddTransient<IDocumentMetadataSettings, DocumentMetadataSettings>();
-
+    public static partial class DocumentMetadataExtensions {
+        public static IServiceCollection AddDocumentMetadata(this IServiceCollection services) {
+            services.TryAddSingleton<DocumentMetadataSetup>(_ => new DocumentMetadataSetup());
             services.AddScoped<DocumentMetadataService>();
-            services.AddScoped<IDocumentMetadataService>(serviceProvider => serviceProvider.GetService<DocumentMetadataService>());
-            services.AddScoped<IDocumentMetadataContainerOwner>(serviceProvider => serviceProvider.GetService<DocumentMetadataService>());
-
-            services.AddSingleton<IDocumentMetadataSettingsProvider>((serviceProvider) =>
-            {
-                var provider = new DocumentMetadataBuilderProvider(serviceProvider);
-                initialize(serviceProvider, provider);
-                return provider;
-            });
+            services.AddScoped<IDocumentMetadataService>(sp => sp.GetService<DocumentMetadataService>());
+            services.AddScoped<IDocumentMetadataCollection>(sp => sp.GetService<DocumentMetadataService>());
+            services.AddScoped<IObservable<Renderer>, DocumentMetadataObserver>();
             return services;
         }
+
     }
 }

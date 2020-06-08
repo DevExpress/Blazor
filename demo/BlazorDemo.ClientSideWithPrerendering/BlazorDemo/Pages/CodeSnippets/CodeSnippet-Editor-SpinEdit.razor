@@ -1,0 +1,11 @@
+﻿<CodeSnippet>
+@(@"<DxSpinEdit @bind-Value=""@DecimalValue"" 
+            SizeMode=""@SizeMode""></DxSpinEdit>
+
+@code {
+    Decimal decimalValue = 15;
+    Decimal DecimalValue { get => decimalValue; set { decimalValue = value; InvokeAsync(StateHasChanged); } }
+
+    SizeMode SizeMode { get; set; }
+}")
+</CodeSnippet>

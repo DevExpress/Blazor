@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="19.1.0.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v19.1, Version=19.1.0.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4" Name="HierarchicalReport" DisplayName="Hierarchical Report" Landscape="true" Margins="100, 100, 85, 85" PageWidth="1100" PageHeight="850" Version="19.1" DataSource="#Ref-0" Font="Arial, 9pt, charSet=0">
+  <Bands>
+    <Item1 Ref="2" ControlType="TopMarginBand" Name="TopMargin" HeightF="85" />
+    <Item2 Ref="4" ControlType="DetailBand" Name="Detail" DrillDownControl="#Ref-3" HeightF="32" EvenStyleName="EvenStyle" Font="Arial, 9pt" ForeColor="255,74,81,87" Padding="10,10,5,5,100" BorderColor="255,215,220,229" BorderWidth="1">
+      <HierarchyPrintOptions Ref="5" KeyFieldName="ID" ParentFieldName="RegionID" Indent="30" />
+      <SortFields>
+        <Item1 Ref="6" FieldName="Region" />
+      </SortFields>
+      <Controls>
+        <Item1 Ref="3" ControlType="XRCheckBox" Name="xrCheckBox1" Text="xrCheckBox1" AnchorVertical="Both" SizeF="30.9984,32" LocationFloat="1.001602, 0">
+          <GlyphOptions Ref="7" Style="Toggle" Alignment="Center">
+            <CustomGlyphs Ref="8" Checked="svg,77u/PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAxNiAxNiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAxNiAxNiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgaWQ9IkxheWVyXzEiPg0KICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLkdyZXl7ZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7ZmlsbDojNDk1MDU3O30KPC9zdHlsZT4NCiAgPHBvbHlnb24gcG9pbnRzPSI4LDExLjMgMyw2LjMgNC4zLDUgOCw4LjggMTEuOCw1IDEzLDYuMyAiIGZpbGw9IiM0OTUwNTciIGNsYXNzPSJHcmV5IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtcnVsZT0iZXZlbm9kZCIgLz4NCjwvc3ZnPg==" Unchecked="svg,77u/PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAxNiAxNiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAxNiAxNiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgaWQ9IkxheWVyXzEiPg0KICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLkdyZXl7ZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7ZmlsbDojNDk1MDU3O30KPC9zdHlsZT4NCiAgPHBvbHlnb24gcG9pbnRzPSI1LDQuMyA4LjgsOCA1LDExLjggNi4zLDEzIDExLjMsOCA2LjMsMyAiIGZpbGw9IiM0OTUwNTciIGNsYXNzPSJHcmV5IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtcnVsZT0iZXZlbm9kZCIgLz4NCjwvc3ZnPg==" />
+          </GlyphOptions>
+          <ExpressionBindings>
+            <Item1 Ref="9" Expression="[ReportItems].[Detail].[DrillDownExpanded]" PropertyName="CheckState" EventName="BeforePrint" />
+          </ExpressionBindings>
+          <StylePriority Ref="10" UsePadding="false" />
+        </Item1>
+        <Item2 Ref="11" ControlType="XRLabel" Name="label6" TextFormatString="{0:0%}" Multiline="true" CanGrow="false" Text="label6" AnchorVertical="Both" AnchorHorizontal="Right" TextAlignment="MiddleRight" SizeF="165,31.99999" LocationFloat="735, 0" Font="Arial, 9pt" Borders="Right">
+          <ExpressionBindings>
+            <Item1 Ref="12" Expression="[MarketShare]" PropertyName="Text" EventName="BeforePrint" />
+            <Item2 Ref="13" Expression="[RegionID] == -1" PropertyName="Font.Bold" EventName="BeforePrint" />
+            <Item3 Ref="14" Expression="iif([MarketShare] &gt;= 0.85, Rgb(203,239,230),&#xA;iif([MarketShare] &lt;= 0.25, Rgb(245,220,225), ?))" PropertyName="BackColor" EventName="BeforePrint" />
+          </ExpressionBindings>
+          <StylePriority Ref="15" UseFont="false" UseForeColor="false" UseBackColor="false" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="16" ControlType="XRLabel" Name="label5" TextFormatString="{0:0.00%}" Multiline="true" CanGrow="false" Text="label5" AnchorVertical="Both" AnchorHorizontal="Right" TextAlignment="MiddleRight" SizeF="125,31.99999" LocationFloat="610, 0" Font="Arial, 9pt, style=Bold, charSet=0" Borders="Right">
+          <ExpressionBindings>
+            <Item1 Ref="17" Expression="([SeptemberSales] - [SeptemberSalesPrev]) / [SeptemberSales]" PropertyName="Text" EventName="BeforePrint" />
+            <Item2 Ref="18" Expression="iif(([SeptemberSales] - [SeptemberSalesPrev]) / [SeptemberSales] &gt; 0, Rgb(66,163,144),&#xA;iif(([SeptemberSales] - [SeptemberSalesPrev]) / [SeptemberSales]  &lt; 0, Rgb(223,50,87), ?))" PropertyName="ForeColor" EventName="BeforePrint" />
+          </ExpressionBindings>
+          <StylePriority Ref="19" UseFont="false" UseForeColor="false" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+        </Item3>
+        <Item4 Ref="20" ControlType="XRLabel" Name="label4" TextFormatString="{0:0.00%}" Multiline="true" CanGrow="false" Text="label4" AnchorVertical="Both" AnchorHorizontal="Right" TextAlignment="MiddleRight" SizeF="125,31.99999" LocationFloat="485, 0" Font="Arial, 9pt, style=Bold, charSet=0" Borders="Right">
+          <ExpressionBindings>
+            <Item1 Ref="21" Expression="([MarchSales] - [MarchSalesPrev]) / [MarchSales]" PropertyName="Text" EventName="BeforePrint" />
+            <Item2 Ref="22" Expression="iif(([MarchSales] - [MarchSalesPrev]) / [MarchSales] &gt; 0, Rgb(66,163,137),&#xA;iif(([MarchSales] - [MarchSalesPrev]) / [MarchSales]  &lt; 0, Rgb(202,87,112), ?))" PropertyName="ForeColor" EventName="BeforePrint" />
+          </ExpressionBindings>
+          <StylePriority Ref="23" UseFont="false" UseForeColor="false" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+        </Item4>
+        <Item5 Ref="24" ControlType="XRLabel" Name="label3" TextFormatString="{0:c2}" Multiline="true" CanGrow="false" Text="label3" AnchorVertical="Both" AnchorHorizontal="Right" TextAlignment="MiddleRight" SizeF="125,31.99999" LocationFloat="360, 0" Borders="Right">
+          <ExpressionBindings>
+            <Item1 Ref="25" Expression="[SeptemberSales]" PropertyName="Text" EventName="BeforePrint" />
+            <Item2 Ref="26" Expression="iif([SeptemberSales] &gt;= 28000, Rgb(203,239,230),&#xA;iif([SeptemberSales] &lt;= 6000, Rgb(245,220,225), ?))" PropertyName="BackColor" EventName="BeforePrint" />
+          </ExpressionBindings>
+          <StylePriority Ref="27" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+        </Item5>
+        <Item6 Ref="28" ControlType="XRLabel" Name="label2" TextFormatString="{0:c2}" Multiline="true" CanGrow="false" Text="label2" AnchorVertical="Both" AnchorHorizontal="Right" TextAlignment="MiddleRight" SizeF="125,31.99999" LocationFloat="235, 0" Borders="Right">
+          <ExpressionBindings>
+            <Item1 Ref="29" Expression="[MarchSales]" PropertyName="Text" EventName="BeforePrint" />
+            <Item2 Ref="30" Expression="iif([MarchSales] &gt;= 25000, Rgb(203,239,230),&#xA;iif([MarchSales] &lt;= 6000, Rgb(245,220,225), ?))" PropertyName="BackColor" EventName="BeforePrint" />
+          </ExpressionBindings>
+          <StylePriority Ref="31" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+        </Item6>
+        <Item7 Ref="32" ControlType="XRLabel" Name="label1" Multiline="true" CanGrow="false" Text="label1" AnchorVertical="Both" AnchorHorizontal="Both" TextAlignment="MiddleLeft" SizeF="203,32" LocationFloat="32, 0" Padding="10,10,5,5,100" Borders="Right">
+          <ExpressionBindings>
+            <Item1 Ref="33" Expression="[Region]" PropertyName="Text" EventName="BeforePrint" />
+            <Item2 Ref="34" Expression="iif([DataSource.CurrentRowHierarchyLevel] == 0, 0, ?)" PropertyName="Padding.Left" EventName="BeforePrint" />
+          </ExpressionBindings>
+          <StylePriority Ref="35" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+        </Item7>
+      </Controls>
+      <ExpressionBindings>
+        <Item1 Ref="36" Expression="[RegionID] == -1" PropertyName="Font.Bold" EventName="BeforePrint" />
+        <Item2 Ref="37" Expression="iif([DataSource.CurrentRowHierarchyLevel] == 0, Rgb(231,235,244), ?)" PropertyName="BackColor" EventName="BeforePrint" />
+      </ExpressionBindings>
+      <StylePriority Ref="38" UseFont="false" UseForeColor="false" UseBackColor="false" UsePadding="false" UseBorderColor="false" UseBorderWidth="false" />
+    </Item2>
+    <Item3 Ref="39" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="85" />
+    <Item4 Ref="40" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="95">
+      <Controls>
+        <Item1 Ref="41" ControlType="XRLabel" Name="label7" Multiline="true" Text="Market Share Report" TextAlignment="MiddleCenter" SizeF="900,95" LocationFloat="0, 0" Font="Arial, 26pt, style=Bold" ForeColor="255,73,80,87">
+          <StylePriority Ref="42" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+        </Item1>
+      </Controls>
+      <StylePriority Ref="43" UseFont="false" UseBackColor="false" UsePadding="false" UseBorderColor="false" UseBorderWidth="false" />
+    </Item4>
+    <Item5 Ref="44" ControlType="GroupHeaderBand" Name="GroupHeader" RepeatEveryPage="true" HeightF="66" Font="Arial, 9pt, style=Bold, charSet=0" Padding="10,10,5,5,100" BorderWidth="1">
+      <Controls>
+        <Item1 Ref="45" ControlType="XRTable" Name="table1" TextAlignment="MiddleLeft" SizeF="899.9999,66" LocationFloat="0, 0" BorderWidth="1">
+          <Rows>
+            <Item1 Ref="46" ControlType="XRTableRow" Name="tableRow2" Weight="6.4912228827233625" ForeColor="White" BackColor="255,110,116,128" BorderColor="255,141,147,157">
+              <Cells>
+                <Item1 Ref="47" ControlType="XRTableCell" Name="tableCell7" Weight="6.0560158592110644" Multiline="true" Text="Sales" Borders="Right">
+                  <StylePriority Ref="48" UseBorders="false" />
+                </Item1>
+                <Item2 Ref="49" ControlType="XRTableCell" Name="tableCell10" Weight="3.1216591210081677" Multiline="true" Text="Change From Prior Year" Borders="Right">
+                  <StylePriority Ref="50" UseBorders="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="51" ControlType="XRTableCell" Name="tableCell12" Weight="2.0602940017162554" Multiline="true" Text="Current Market Share">
+                  <StylePriority Ref="52" UseTextAlignment="false" />
+                </Item3>
+              </Cells>
+              <StylePriority Ref="53" UseForeColor="false" UseBackColor="false" UseBorderColor="false" UseBorderWidth="false" />
+            </Item1>
+            <Item2 Ref="54" ControlType="XRTableRow" Name="tableRow1" Weight="6.4912226244229609" ForeColor="255,148,154,172" BorderColor="255,215,220,229" Borders="None">
+              <Cells>
+                <Item1 Ref="55" ControlType="XRTableCell" Name="tableCell1" Weight="2.9343590482749389" Multiline="true" Text="Region" Borders="Left, Right">
+                  <StylePriority Ref="56" UseBorders="false" />
+                </Item1>
+                <Item2 Ref="57" ControlType="XRTableCell" Name="tableCell2" Weight="1.560829246522067" Multiline="true" Text="March" Borders="Right">
+                  <StylePriority Ref="58" UseBorders="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="59" ControlType="XRTableCell" Name="tableCell3" Weight="1.5608292471577983" Multiline="true" Text="September" Borders="Right">
+                  <StylePriority Ref="60" UseBorders="false" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="61" ControlType="XRTableCell" Name="tableCell4" Weight="1.5608292487471154" Multiline="true" Text="March" Borders="Right">
+                  <StylePriority Ref="62" UseBorders="false" UseTextAlignment="false" />
+                </Item4>
+                <Item5 Ref="63" ControlType="XRTableCell" Name="tableCell5" Weight="1.5608292566851554" Multiline="true" Text="September" Borders="Right">
+                  <StylePriority Ref="64" UseBorders="false" UseTextAlignment="false" />
+                </Item5>
+                <Item6 Ref="65" ControlType="XRTableCell" Name="tableCell6" Weight="2.0602929345484107" Multiline="true" Text="Market Share" Borders="Right">
+                  <StylePriority Ref="66" UseBorders="false" UseTextAlignment="false" />
+                </Item6>
+              </Cells>
+              <StylePriority Ref="67" UseForeColor="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" />
+            </Item2>
+            <Item3 Ref="68" ControlType="XRTableRow" Name="tableRow3" Weight="0.40570144920414519" BorderColor="255,110,116,128" Borders="Bottom" BorderWidth="2">
+              <Cells>
+                <Item1 Ref="69" ControlType="XRTableCell" Name="tableCell8" Weight="11.237968981935484" Multiline="true" />
+              </Cells>
+              <StylePriority Ref="70" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" />
+            </Item3>
+          </Rows>
+          <StylePriority Ref="71" UsePadding="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+        </Item1>
+      </Controls>
+      <StylePriority Ref="72" UseFont="false" UsePadding="false" UseBorderWidth="false" />
+    </Item5>
+    <Item6 Ref="73" ControlType="GroupFooterBand" Name="GroupFooter" RepeatEveryPage="true" HeightF="2" />
+  </Bands>
+  <CrossBandControls>
+    <Item1 Ref="74" ControlType="XRCrossBandLine" Name="xrCrossBandLine2" WidthF="899" StartBand="#Ref-73" EndBand="#Ref-73" StartPointFloat="0, 0" EndPointFloat="0, 1" ForeColor="255,215,220,229" />
+    <Item2 Ref="75" ControlType="XRCrossBandLine" Name="xrCrossBandLine1" WidthF="1" StartBand="#Ref-44" EndBand="#Ref-73" StartPointFloat="0, 66" EndPointFloat="0, 0" ForeColor="255,215,220,229" />
+  </CrossBandControls>
+  <StyleSheet>
+    <Item1 Ref="76" Name="EvenStyle" BorderStyle="Inset" BackColor="255,247,248,250" StringFormat="Near;Near;0;None;Character;Default" />
+  </StyleSheet>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.ObjectBinding.ObjectDataSource,DevExpress.DataAccess.v19.1" Name="objectDataSource1" Base64="PE9iamVjdERhdGFTb3VyY2UgTmFtZT0ib2JqZWN0RGF0YVNvdXJjZTEiPjxEYXRhU291cmNlIFR5cGU9IkRlbW8uQmxhem9yLlJlcG9ydHMuSGllcmFyY2hpY2FsUmVwb3J0LkRhdGFTb3VyY2UsIEJsYXpvckRlbW8uUmVwb3J0aW5nLCBWZXJzaW9uPTAuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbCIgLz48RGF0YU1lbWJlcj5HZXREYXRhPC9EYXRhTWVtYmVyPjxDb25zdHJ1Y3RvciAvPjwvT2JqZWN0RGF0YVNvdXJjZT4=" />
+  </ComponentStorage>
+</XtraReportsLayoutSerializer>

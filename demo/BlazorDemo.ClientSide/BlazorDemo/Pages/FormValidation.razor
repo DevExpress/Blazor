@@ -1,0 +1,52 @@
+﻿@page "/FormValidation"
+
+    <div class="demo-description" id="Overview">
+        <h1><DemoNavLink Link="FormValidation#Overview" />Form Validation - Overview</h1>
+        <p>
+            The DevExpress UI components support the Blazor's form validation.
+            You can read about the Blazor forms and validation in the <a class="helplink" target="_blank" href="https://docs.microsoft.com/aspnet/core/blazor/forms-validation?view=aspnetcore-3.0">official documentation</a>.
+        </p>
+        <p>
+            In the demo examples we will use the following class type that defines validation logic using <a class="helplink" target="_blank" href="https://docs.microsoft.com/aspnet/core/mvc/models/validation?view=aspnetcore-3.0">data annotations</a>:
+        </p>
+
+        <div class="code-snippet card demo-card">
+            <CodeSnippetHeader></CodeSnippetHeader>
+            <div class="card-footer text-muted ">
+<CodeSnippet>
+@(@"public class Starship
+{
+    [Required]
+    [StringLength(16,
+    ErrorMessage = ""The Identifier exceeds 16 characters."")]
+    public string Identifier { get; set; }
+
+    [Required]
+    public string Classification { get; set; }
+
+    [Range(1, 100000, ErrorMessage = ""The Maximum Accommodation value should be a number between 1 and 100,000."")]
+    public int MaximumAccommodation { get; set; }
+
+    [Required]
+    [DateInPastAttribute(ErrorMessage = ""The Production Date value cannot be later than today."")]
+    public DateTime ProductionDate { get; set; }
+}
+
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+public class DateInPastAttribute: ValidationAttribute
+{
+    public override bool IsValid(object value)
+    {
+        return (DateTime)value <= DateTime.Today;
+    }
+}")
+</CodeSnippet>
+            </div>
+        </div>
+        <p>
+            <i>The Starship class has been taken from the <a class="helplink" target="_blank" href="https://docs.microsoft.com/aspnet/core/blazor/forms-validation?view=aspnetcore-3.0">official documentation</a> with only slight modifications.</i>
+        </p>
+    </div>
+
+<FormValidation_FormLayout />
+<FormValidation_CustomForm />

@@ -1,0 +1,29 @@
+﻿@inherits DemoWithResizableComponent
+
+<div class="demo-description" id="CustomIncrement">
+    <h2><DemoNavLink Link="SpinEdit#CustomIncrement" />Spin Edit - Custom Increment<span class="demo-badge badge badge-success">New</span></h2>
+    <p>
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSpinEditBase-1.Increment">Increment</a> property to specify the step by which the editor's value changes when a user clicks the spin buttons. The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSpinEditBase-1.MinValue">MinValue</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSpinEditBase-1.MaxValue">MaxValue</a> properties allow you to limit the editor’s minimum and maximum values.
+    </p>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode" Title=" Use the spin button to change the value in increments of 0.1" />
+    </div>
+    <div class="card-body mw-480">
+        <DxSpinEdit @bind-Value="DecimalValue" BindValueMode="BindValueMode.OnInput" Increment="0.1M" MinValue="0M" MaxValue="1M" SizeMode="SizeMode" />
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_SpinEdit_Increment />
+    </div>
+</div>
+
+@code { 
+    Decimal decimalValue = (decimal)0.5;
+    Decimal DecimalValue { get => decimalValue; set { decimalValue = value; InvokeAsync(StateHasChanged); } }
+}

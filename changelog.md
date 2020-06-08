@@ -2,14 +2,45 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
-# 19.2.5-Preview
+# 20.1.4
 
-### .NET Core 3.1.3 and Blazor WebAssembly 3.2.0 Preview 4 Support
+### Support for .NET Core 3.1.4 and Blazor WebAssembly 3.2.0  
 
-In this version, we added support for the [.NET Core 3.1.3](https://github.com/dotnet/core/blob/master/release-notes/3.1/3.1.3/3.1.3.md) and [Blazor Web Assembly 3.2.0 Preview 4](https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-4-release-now-available/) updates.
+In this version, we added support for the [.NET Core 3.1.4](https://devblogs.microsoft.com/dotnet/net-core-may-2020/) and the [Blazor WebAssembly 3.2.0 Release](https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-now-available/).
+
+
+### New Reporting Components *
+
+With our 20.1.4 release, we added Blazor Reporting components with the following features:
+
+* Document Viewer
+  * Preview and print documents 		
+  * Export to different formats (PDF, XLS, XLSX, RTF, DOCX, MHT, HTML, TXT, CSV, Image) 		
+  * Navigation via buttons and bookmarks 		
+  * Search support 		
+  * Multi-page mode 		
+  * Full screen mode
+
+
+* Report Designer
+  * Support for different report types (Table Report, Master-Detail Report,   *   *   * Invoice Report, Vertical Report, and so on) 		
+  * Bind to data (SQL, JSON and Object data sources) 		
+  * 20+ report controls, including Charts and Pivot Tables 		
+  * Report Wizard 		
+  * Data Source Wizard and Query Builder 		
+  * Built-in Document Viewer 		
+  * Data shaping and analytics 		
+  * Parameters support 		
+  * Data navigation 		
+  * Appearance customization 	
+
+[Demo - Document Viewer](https://demos.devexpress.com/blazor/DocumentViewer) | [Demo - Report Designer](https://demos.devexpress.com/blazor/ReportDesigner) | [Documentation](https://docs.devexpress.com/Blazor/401706/reporting)
+
+\* **Important Note**: Though [DevExpress Reports](https://www.devexpress.devx/subscriptions/reporting/) supports Blazor, it is not included in our Blazor UI component distribution. To use DevExpress Reports in your Blazor project or to replicate the functionality described below, you must purchase a DevExpress Subscription (*Reporting Subscription*, *ASP.NET Subscription*, *DXperience*, or *Universal*). For more information on what is included in our product subscriptions, refer to the [product matrix](https://www.devexpress.devx/buy/net/).
 
 ### New Toolbar Component
-Our new Toolbar component for Blazor includes the following features:
+The new Toolbar component for Blazor has the following features:
+
 * Various button types 
   * Drop-down items
   * Checked/unchecked items 
@@ -18,44 +49,56 @@ Our new Toolbar component for Blazor includes the following features:
 * Button render and style customization
 * Adaptive mode
 
+[Demos](https://demos.devexpress.com/blazor/Toolbar) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar)
+
 ### New Context Menu Component
-Our new Context Menu component for Blazor includes the following features:
+The new Context Menu component for Blazor with the following features:
+
 * Data binding
 * Unbound mode
 * Item groups
 * Item appearance customization
 
+[Demos](https://demos.devexpress.com/blazor/ContextMenu) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu)
+
+### Size Modes
+The majority of DevExpress Blazor components now support three size modes defined in your Bootstrap theme: small, medium, and large. You can apply a size mode to an individual component (for example, a data editor or pager), all compatible components in a container (for example, Data Grid or Form Layout), or for the entire application. ([Documentation](https://docs.devexpress.com/Blazor/401784/common-concepts/customize-appearance/size-modes))
+
 ### Data Grid Enhancements
-* Column chooser
-* Header template
+* Column chooser ([Demo](https://demos.devexpress.com/blazor/GridColumnChooser) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumnChooserToolbarItem))
+* Header template ([Demo](https://demos.devexpress.com/blazor/GridToolbar) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.HeaderTemplate))
 
 ### Charts Enhancements
-* Axis data type customization
-* Handle a series' visibility changes
+* Axis data type customization ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartAxisDataType))
+* The VisibleChanged event for chart series ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeries.VisibleChanged))
+* Ability to hide overlapped point labels ([Demo](https://demos.devexpress.com/blazor/ChartDynamicSeries) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxChartBase-1.LabelOverlap))
 
 ### Data Editors Enhancements
-* Display format
-* CheckBox - Alignment
+* Display format ([Demo](https://demos.devexpress.com/blazor/DateEdit#DisplayFormat) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDateEditBase-1.DisplayFormat))
+* CheckBox - Alignment ([Demo](https://demos.devexpress.com/blazor/CheckBox#Alignment) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxCheckBoxBase-1.Alignment))
 * Spin Edit
-  * Touch device usability enhancements
-  * Custom increment values
-  * Update the value on input change
-  * Support for HTML attributes
+  * Touch device usability enhancements ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1))
+  * Custom increment values ([Demo](https://demos.devexpress.com/blazor/SpinEdit#CustomIncrement) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSpinEditBase-1.Increment))
+  * Update the value when the input changes ([Demo](https://demos.devexpress.com/blazor/SpinEdit#BindValueOnInputChange) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSpinEditBase-1.BindValueMode))
+  * Support for HTML attributes ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1#html-attributes))
 * Text Box 
-  * Update the value on input change
-  * Support for HTML attributes
-* ComboBox, Date Edit, TagBox - Support for HTML attributes
+  * Update the value when the input changes ([Demo](https://demos.devexpress.com/blazor/TextBox#BindValueOnInputChange) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTextBoxBase.BindValueMode))
+  * Support for HTML attributes ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextBox#html-attributes))
+* ComboBox, Date Edit, TagBox 
+  * Support for HTML attributes ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-1#html-attributes))
+  * Drop-down window direction ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDropDownBase-2.DropDownDirection))
 
 ### Resolved Issues
-Refer to [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=19.2.5&endBuildName=19.2.4&buildsMode=Single&hasPlatformsWithProducts=true
-) for a complete list of issues that were resolved in 19.2.5-Preview.
+Refer to [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=20.1.4&endBuildName=&buildsMode=Single&hasPlatformsWithProducts=true) for a complete list of issues resolved in 20.1.4.
 
 ### Breaking Changes
+* [The default size of some components has been changed](https://supportcenter.devexpress.com/ticket/details/t892888)
 * [Data Grid - Format-related properties of the Spin Edit and Date Edit columns have been renamed](https://supportcenter.devexpress.com/ticket/details/T874276)
+* [Date Edit - The default date format has become culture-dependent](https://supportcenter.devexpress.com/ticket/details/T874294)
 * TreeView 
   * [Click on a node's expand/collapse button no longer invokes an action associated with a click on the node itself](https://supportcenter.devexpress.com/ticket/details/t875624)
   * [The TreeViewNodeInfo class has been moved to an internal namespace](https://supportcenter.devexpress.com/ticket/details/T878784)
-* [Date Edit - The default date format is now culture-dependent](https://supportcenter.devexpress.com/ticket/details/T874294)
+* [Form Layout - The ValueEditingContext class has been renamed to ValueEditContext](https://supportcenter.devexpress.com/ticket/details/t882931)
 
 # 19.2.4 Release
 

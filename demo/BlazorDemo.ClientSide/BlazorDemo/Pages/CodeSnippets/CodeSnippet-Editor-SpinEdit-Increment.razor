@@ -1,0 +1,13 @@
+<CodeSnippet>
+@(@"<DxSpinEdit @bind-Value=""DecimalValue""
+            BindValueMode=""BindValueMode.OnInput""
+            Increment=""0.1m""
+            MinValue=""0m""
+            MaxValue=""1m"">
+</DxSpinEdit>
+
+@code {
+    Decimal decimalValue  = 0.5m;
+    Decimal DecimalValue { get => decimalValue; set { decimalValue = value; InvokeAsync(StateHasChanged); } }
+}")
+</CodeSnippet>

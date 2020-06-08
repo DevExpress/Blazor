@@ -1,0 +1,92 @@
+﻿@{
+    RenderFragment<string> GetLink = (propName) =>
+    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxCheckBoxBase-1.@propName">@propName</a>;
+}
+
+<div class="demo-description" id="Alignment">
+    <h2><DemoNavLink Link="CheckBox#Alignment" />CheckBox - Alignment</h2>
+    <p>Use the CheckBox’s @GetLink(nameof(DxCheckBox<bool>.Alignment)) and @GetLink(nameof(DxCheckBox<bool>.LabelPosition)) properties to define a component’s input and label positions.
+    Note that a CheckBox’s input and label are only aligned in the component's root element. 
+    This element behaves as a standard <code>block</code> container (or <code>flex</code> in the case of <i>SpaceBetween</i> and <i>SpaceAround</i> alignment variants) regarding outer styles a user applies.</p>
+
+    <p>Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.CheckBoxContentAlignment">CheckBoxContentAlignment</a> enumeration values to specify CheckBox alignment options. 
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.LabelPosition">LabelPosition</a> enumeration values specify the CheckBox label position.</p>
+</div>
+
+
+
+<div class="card demo-card demo-card-sm">
+    <div class="card-body p-0">
+        <div class="row m-0 p-0">
+            <div class="col p-0 border-right d-flex flex-column">
+                <div class="p-2 d-flex flex-grow-1 border-bottom align-items-center">
+                    <DxCheckBox CssClass="w-100" @bind-Checked="@MultimediaChecked" Alignment="@Alignment" LabelPosition="@LabelPosition">Multimedia</DxCheckBox>
+                </div>
+                <div class="p-2 d-flex flex-grow-1 border-bottom align-items-center">
+                    <DxCheckBox CssClass="w-100" @bind-Checked="@AirConditioningChecked" Alignment="@Alignment" LabelPosition="@LabelPosition">Air Conditioning</DxCheckBox>
+                </div>
+                <div class="p-2 d-flex flex-grow-1 border-bottom align-items-center">
+                    <DxCheckBox CssClass="w-100" @bind-Checked="@HeatedSeatsChecked" Alignment="@Alignment" LabelPosition="@LabelPosition">Heated Seats</DxCheckBox>
+                </div>
+                <div class="p-2 d-flex flex-grow-1 border-bottom align-items-center">
+                    <DxCheckBox CssClass="w-100" @bind-Checked="@ParkingCameraChecked" Alignment="@Alignment" LabelPosition="@LabelPosition">Parking Camera</DxCheckBox>
+                </div>
+                <div class="p-2 d-flex flex-grow-1 align-items-center">
+                    <DxCheckBox CssClass="w-100" @bind-Checked="@DroneChecked" Alignment="@Alignment" LabelPosition="@LabelPosition">Drone</DxCheckBox>
+                </div>
+            </div>
+            <div class="col pt-2 pb-2" style="font-size: 13px; flex-basis: 149px; flex-grow: 0">
+                <div class="font-weight-bold mb-2">Alignment</div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="alignment" id="align-left" value="Align left" @onclick="@(() => { Alignment = CheckBoxContentAlignment.Left; })" checked />
+                    <label class="form-check-label" for="align-left">Aligned Left</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="alignment" id="align-right" value="Align right" @onclick="@(() => { Alignment = CheckBoxContentAlignment.Right; })" />
+                    <label class="form-check-label" for="align-right">Aligned Right</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="alignment" id="align-center" value="Align center" @onclick="@(() => { Alignment = CheckBoxContentAlignment.Center; })" />
+                    <label class="form-check-label" for="align-center">Aligned Center</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="alignment" id="space-between" value="Space between" @onclick="@(() => { Alignment = CheckBoxContentAlignment.SpaceBetween; })" />
+                    <label class="form-check-label" for="space-between">Space Between</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="alignment" id="space-around" value="Space around" @onclick="@(() => { Alignment = CheckBoxContentAlignment.SpaceAround; })" />
+                    <label class="form-check-label" for="space-around">Space Around</label>
+                </div>
+
+                <div class="font-weight-bold mt-2 mb-2">Label Position</div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="label-position" id="label-right" value="Label right" @onclick="@(() => { LabelPosition = LabelPosition.Right; })" checked />
+                    <label class="form-check-label" for="label-right">Label right</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="label-position" id="label-left" value="Label left" @onclick="@(() => { LabelPosition = LabelPosition.Left; })" />
+                    <label class="form-check-label" for="label-left">Label left</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code  {
+    CheckBoxContentAlignment alignment;
+    LabelPosition labelPosition;
+
+    bool MultimediaChecked { get; set; }
+    bool AirConditioningChecked { get; set; }
+    bool ParkingCameraChecked { get; set; }
+    bool HeatedSeatsChecked { get; set; }
+    bool DroneChecked { get; set; }
+
+    CheckBoxContentAlignment Alignment { get { return alignment; } set { alignment = value; InvokeAsync(StateHasChanged); } }
+    LabelPosition LabelPosition { get { return labelPosition; } set { labelPosition = value; InvokeAsync(StateHasChanged); } }
+}
+
+
+<CodeSnippet_Editor_CheckBox_Alignment></CodeSnippet_Editor_CheckBox_Alignment>
+
+

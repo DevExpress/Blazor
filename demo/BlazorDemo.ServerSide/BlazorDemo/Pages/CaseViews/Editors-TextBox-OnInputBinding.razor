@@ -1,0 +1,36 @@
+﻿@inherits DemoWithResizableComponent
+
+<div class="demo-description" id="BindValueOnInputChange">
+    <h2><DemoNavLink Link="TextBox#BindValueOnInputChange" />Text Box - Bind Value On Input Change<span class="demo-badge badge badge-success">New</span></h2>
+    <p>
+        Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTextBoxBase.BindValueMode">BindValueMode</a> property to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.BindValueMode">BindValueMode.OnInput</a> to update the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTextBoxBase.Text">Text</a> property each time the input value changes.
+    </p>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode">
+            <TitleTemplate>
+                Text: <b>@TextValue</b>
+            </TitleTemplate>
+        </DemoToolbar>
+    </div>
+    <div class="card-body mw-480">
+        <DxTextBox @bind-Text="@TextValue" 
+                   BindValueMode="BindValueMode.OnInput" 
+                   NullText="Type text..." 
+                   SizeMode="SizeMode"/>
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_TextBox_OnInputBinding />
+    </div>
+</div>
+
+@code {
+    string textValue = null;
+    string TextValue { get => textValue; set { textValue = value; InvokeAsync(StateHasChanged); } }
+}

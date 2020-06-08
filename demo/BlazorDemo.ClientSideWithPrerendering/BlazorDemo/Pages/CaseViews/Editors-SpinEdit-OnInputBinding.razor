@@ -1,0 +1,34 @@
+﻿@inherits DemoWithResizableComponent
+
+<div class="demo-description" id="BindValueOnInputChange">
+    <h2><DemoNavLink Link="SpinEdit#BindValueOnInputChange" />Spin Edit - Bind Value On Input Change<span class="demo-badge badge badge-success">New</span></h2>
+    <p>
+        Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSpinEditBase-1.BindValueMode">BindValueMode</a> property to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.BindValueMode">BindValueMode.OnInput</a> to update the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSpinEditBase-1.Value">Value</a> property each time the input value changes.
+    </p>
+</div>
+
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode">
+            <TitleTemplate>
+                Value: <b>@Year</b>
+            </TitleTemplate>
+        </DemoToolbar>
+    </div>
+    <div class="card-body mw-480">
+        <DxSpinEdit @bind-Value="@Year" BindValueMode="BindValueMode.OnInput" NullText="Type a value..." SizeMode="@SizeMode" />
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_SpinEdit_OnInputBinding />
+    </div>
+</div>
+
+@code {
+    int? year = DateTime.Now.Year;
+    int? Year { get => year; set { year = value; InvokeAsync(StateHasChanged); } }
+}

@@ -1,0 +1,29 @@
+﻿<CodeSnippet>
+</CodeSnippet>
+<CodeSnippetTabbed>
+<CodeSnippetTabPage Text="Razor">
+@(@"<DxTagBox NullText=""Select an option...""
+          Data=""@DataSource""
+          @bind-SelectedItems=""@SelectedOptions""
+          TextFieldName=""Text""               
+          ClearButtonDisplayMode=""@DataEditorClearButtonDisplayMode.Auto"" />
+</DxTagBox>
+
+@code {
+    List<Options> DataSource { get; set; } = new List<Options>() {
+    {
+        new Options() { Id = 0, Text = ""Option 1"" },
+        new Options() { Id = 0, Text = ""Option 2"" },
+        new Options() { Id = 0, Text = ""Option 3"" },
+    };
+
+    IEnumerable<Options> SelectedOptions { get; set; }
+}")
+</CodeSnippetTabPage>
+<CodeSnippetTabPage Text="Options">
+@(@"public class Options {
+    public int Id { get; set; }
+    public string Text { get; set; }
+}")
+</CodeSnippetTabPage>
+</CodeSnippetTabbed>

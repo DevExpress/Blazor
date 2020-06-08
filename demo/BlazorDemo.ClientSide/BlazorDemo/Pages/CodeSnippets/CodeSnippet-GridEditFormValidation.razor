@@ -1,0 +1,148 @@
+﻿<div class="code-snippet card demo-card-wide mw-1100">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
+        <CodeSnippet>
+@(@"<DxDataGrid @ref=""@grid""
+            Data=""@Vacancies""
+            ShowFilterRow=""false""
+            ShowPager=""false""
+            RowRemoving=""@((dataItem) => OnRowRemoving(dataItem))""
+            RowEditStart=""@(dataItem => OnRowEditStarting(dataItem))""
+            RowInsertStart=""@(() => OnRowEditStarting(null))""
+            CssClass=""mw-1100"">
+    <Columns>
+        <DxDataGridCommandColumn Width=""150px""></DxDataGridCommandColumn>
+        <DxDataGridComboBoxColumn Field=""@nameof(Vacancy.Region)"" Data=""@VacancyRepository.Regions""></DxDataGridComboBoxColumn>
+        <DxDataGridColumn Field=""@nameof(Vacancy.City)""></DxDataGridColumn>
+        <DxDataGridColumn Field=""@nameof(Vacancy.Description)"" Caption=""Vacancy""></DxDataGridColumn>
+    </Columns>
+    <EditFormTemplate>
+        <EditForm Model=""@EditContext"" Context=""EditFormContext"" OnValidSubmit=""@HandleValidSubmit"">
+            <DataAnnotationsValidator />
+            <DxFormLayout>
+                <DxFormLayoutItem Caption=""Vacancy Description:"" ColSpanMd=""12"" Context=""FormLayoutContext"">
+                    <Template>
+                        <DxTextBox @bind-Text=""@EditContext.Description"" />
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption=""Region:"" ColSpanMd=""6"" Context=""FormLayoutContext"">
+                    <Template>
+                        <DxComboBox Data=""@VacancyRepository.Regions""
+                                    NullText=""Select Region...""
+                                    @bind-SelectedItem=""@EditContext.Region"">
+                        </DxComboBox>
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption=""City:"" ColSpanMd=""6"" Context=""FormLayoutContext"">
+                    <Template>
+                        <DxComboBox Data=""@EditContext.OfficeLocations""
+                                    NullText=""Select City...""
+                                    @bind-SelectedItem=""@EditContext.City"">
+                        </DxComboBox>
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd=""12"" Context=""FormLayoutContext"">
+                    <Template>
+                        <ValidationSummary />
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd=""12"" Context=""FormLayoutContext"">
+                    <Template>
+                        <div class=""text-right"">
+                            <DxButton RenderStyle=""@ButtonRenderStyle.Link"" SubmitFormOnClick=""true"" Text=""Update"" />
+                            <DxButton RenderStyle=""@ButtonRenderStyle.Link"" @onclick=""@OnCancelButtonClick"" Text=""Cancel"" />
+                        </div>
+                    </Template>
+                </DxFormLayoutItem>
+            </DxFormLayout>
+        </EditForm>
+    </EditFormTemplate>
+</DxDataGrid>
+
+
+@code {
+    DxDataGrid<Vacancy> grid;
+    IEnumerable<Vacancy> Vacancies;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Vacancies = await VacancyRepository.GetVacancies(3);
+    }
+
+    class FormEditContext
+    {
+        public FormEditContext(Vacancy dataItem)
+        {
+            DataItem = dataItem;
+            if (DataItem == null)
+            {
+                DataItem = new Vacancy();
+                IsNewRow = true;
+            }
+            Description = DataItem.Description;
+            Region = DataItem.Region;
+            City = DataItem.City;
+        }
+
+        public Vacancy DataItem { get; set; }
+        public bool IsNewRow { get; set; }
+
+        [Required]
+        [StringLength(maximumLength: 16, MinimumLength = 4,
+        ErrorMessage = ""The description should be 4 to 16 characters."")]
+        public string Description { get; set; }
+
+        string region;
+        [Required]
+        public string Region {
+            get => region;
+            set {
+                region = value;
+                City = null;
+                OfficeLocations = VacancyRepository.GetOfficeLocationsByRegion(value).Select(x => x.City);
+                StateHasChanged?.Invoke();
+            }
+        }
+
+        [Required]
+        public string City { get; set; }
+
+        public IEnumerable<string> OfficeLocations = null;
+
+        public Action StateHasChanged { get; set; }
+    }
+
+    FormEditContext EditContext = null;
+    void OnRowEditStarting(Vacancy vacancy)
+    {
+        EditContext = new FormEditContext(vacancy);
+        EditContext.StateHasChanged += () => { InvokeAsync(StateHasChanged); };
+    }
+    void OnCancelButtonClick()
+    {
+        EditContext = null;
+        grid.CancelRowEdit();
+    }
+    void HandleValidSubmit()
+    {
+        EditContext.DataItem.Description = EditContext.Description;
+        EditContext.DataItem.Region = EditContext.Region;
+        EditContext.DataItem.City = EditContext.City;
+        if(EditContext.IsNewRow)
+        {
+            Vacancies = (new Vacancy[] { EditContext.DataItem }).Concat(Vacancies);
+        }
+
+        EditContext = null;
+        grid.CancelRowEdit();
+    }
+
+    void OnRowRemoving(Vacancy vacancy)
+    {
+        Vacancies = Vacancies.Where(v => v != vacancy).ToArray();
+        InvokeAsync(StateHasChanged);
+    }
+}")
+        </CodeSnippet>
+    </div>
+</div>

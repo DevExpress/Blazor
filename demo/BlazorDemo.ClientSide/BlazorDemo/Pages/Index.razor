@@ -1,0 +1,64 @@
+@page "/"
+
+@using BlazorDemo.Configuration
+@inject DemoConfiguration Configuration
+@inject NavigationManager NavigationManager
+
+@{
+    RenderFragment<DemoProductInfo> DemoProduct = (info) =>
+    @<div class="col-xl-4 col-sm-6 col-xs-12">
+        <div class="jumbotron shadow-sm demo-product" @onclick="@(() => { NavigationManager.NavigateTo(info.PageUri); })">
+            <div class="media p-2">
+                <span class="mr-3 bg-primary demo-product-icon demo-product-icon-@info.IconName" title="@info.Title"></span>
+                <div class="media-body">
+                    <h5 class="mt-0 text-body">@info.Title</h5>
+                    <span class="demo-product-info text-muted">@info.Description</span>
+                </div>
+            </div>
+        </div>
+    </div>;
+}
+
+<div class="demo-description demo-products">
+    <h1 class="mb-4">DevExpress UI Components for Blazor</h1>
+
+    <p class="mb-5 mw-1100">The <a class="helplink" href="https://www.devexpress.com/blazor/" target="_blank">DevExpress UI for Blazor</a> ships with native user interface components (including a Data Grid, Pivot Grid, Charts, and Scheduler) so you can design rich user experiences in your business apps.</p>
+
+    <div class="row mb-3">
+        @foreach (var info in Configuration.Products)
+        {
+            @DemoProduct.Invoke(info)
+        }
+    </div>
+</div>
+
+<h2 class="mb-4">Getting Started</h2>
+
+<p class="mw-1100">
+    Our components come with extensive reference material, documentation, examples and step-by-step instructions. This material will help you not only start using our products from scratch, but also learn about all of their capabilities much faster.
+</p>
+
+<ul>
+    <li><a class="helplink" href="https://github.com/DevExpress/Blazor#set-up-your-environment" target="_blank">Set up your Environment</a></li>
+    <li><a class="helplink" href="https://github.com/DevExpress/Blazor#run-demos-locally" target="_blank">Run this demo on your machine</a></li>
+    <li><a class="helplink" href="https://github.com/DevExpress/Blazor#create-a-new-project" target="_blank">Create and configure a new project</a></li>
+</ul>
+
+<h2 class="my-4">Helpful Resources</h2>
+
+<p class="mw-1100">
+    Refer to the following online resources to get started with DevExpress Blazor components:
+</p>
+
+<ul>
+    <li><a class="helplink" href="https://docs.devexpress.com/Blazor/400725/blazor-components" target="_blank">Documentation</a></li>
+    <li><a class="helplink" href="https://github.com/DevExpress/Blazor/blob/master/examples.md" target="_blank">Examples</a></li>
+    <li><a class="helplink" href="https://www.devexpress.com/support/training/blazor/" target="_blank">Free Blazor training course</a></li>
+    <li><a class="helplink" href="https://dotnet.microsoft.com/apps/aspnet/web-apps/client" target="_blank">Official Blazor documentation</a></li>
+</ul>
+
+<h2 class="my-4">Troubleshooting</h2>
+
+<p class="mw-1100">
+    Need help or require more information? Explore the <a class="helplink" href="https://github.com/DevExpress/Blazor#troubleshooting" target="_blank">Troubleshooting</a> section in our GitHub repository or submit your support inquiries via the <a class="helplink" href="https://supportcenter.devexpress.com/" target="_blank">DevExpress Support Center</a> for assistance.
+</p>

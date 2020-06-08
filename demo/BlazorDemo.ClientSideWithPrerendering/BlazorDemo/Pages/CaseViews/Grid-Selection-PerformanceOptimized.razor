@@ -1,0 +1,82 @@
+﻿@inject IFlatProductsProvider FlatProductService
+
+<div class="demo-description mw-1100" id="OptimizedMultipleSelection">
+    <h2><DemoNavLink Link="GridSelection#OptimizedMultipleSelection" />Data Grid - Multiple Selection with Optimized Performance</h2>
+    <p>
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#row-selection">Data Grid</a> also provides the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.SelectionMode">DataGridSelectionMode.OptimizedMultipleSelection</a> selection mode. 
+        In this mode, the Data Grid stores information about the selection to improve performance. 
+        For example, when the number of selected rows exceeds the number of unselected rows, the grid stores information about unselected rows only.
+    </p>
+    <p>
+        To use this mode, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.KeyFieldName">KeyFieldName</a> property to the name of the data source key field. 
+        To track selection changes in this mode, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.OptimizedMultipleSelectionChanged">OptimizedMultipleSelectionChanged</a> event as demonstrated in this module.
+    </p>
+    <p>
+        The code below sets the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.SelectAllMode">SelectAllMode</a> property to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridSelectAllMode">DataGridSelectAllMode.AllPages</a>. 
+        It allows users to select all grid’s data rows simultaneously via the <b>Select All</b> checkbox in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridSelectionColumn">DxDataGridSelectionColumn</a> column.
+    </p>
+</div>
+
+@if (DataSource == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="card demo-card-wide border-bottom-0 mw-1100" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0">
+        <div class="card-header border-bottom-0">The total count of selected rows: <b>@SelectedCount</b> (stored selected rows: <b>@StoredSelectedCount</b>, stored unselected rows: <b>@StoredUnselectedCount</b>)</div>
+    </div>
+
+    <DxDataGrid Data="@DataSource" @ref="@grid"
+                KeyFieldName="Id"
+                SelectionMode="DataGridSelectionMode.OptimizedMultipleSelection"
+                SelectAllMode="DataGridSelectAllMode.AllPages"
+                OptimizedMultipleSelectionChanged="OnSelectionChanged"
+                ShowFilterRow="false"
+                CssClass="datagrid-border-radius-top-0 mw-1100">
+        <DxDataGridSelectionColumn Width="50px"></DxDataGridSelectionColumn>
+        <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name"></DxDataGridColumn>
+        <DxDataGridColumn Field="@nameof(ProductFlat.Category)"></DxDataGridColumn>
+        <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)"></DxDataGridColumn>
+    </DxDataGrid>
+
+    <CodeSnippet_Grid_Selection_PerformanceOptimized />
+}
+
+@code {
+    DxDataGrid<ProductFlat> grid;
+    bool gridInitialized;
+
+    IEnumerable<ProductFlat> DataSource;
+
+    int SelectedCount { get; set; }
+
+    int StoredSelectedCount { get; set; }
+
+    int StoredUnselectedCount { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        DataSource = await FlatProductService.LoadAsync();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (!gridInitialized && grid != null)
+        {
+            gridInitialized = true;
+            
+            foreach (var product in DataSource.Take(10).Where((p, i) => i % 2 != 0))
+                grid.SetDataRowSelected(product, true);
+        }
+    }
+
+    protected async Task OnSelectionChanged(DataGridSelection<ProductFlat> selection)
+    {
+        StoredSelectedCount = selection.SelectedKeysStored.Count();
+        StoredUnselectedCount = selection.UnselectedKeysStored.Count();
+        var selectedKeys = await selection.SelectedKeys;
+        SelectedCount = selectedKeys.Count();
+        await InvokeAsync(StateHasChanged);
+    }
+}

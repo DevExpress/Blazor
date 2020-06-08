@@ -1,0 +1,64 @@
+﻿<div class="demo-description" id="RenderStyle">
+    <h2>
+        <DemoNavLink Link="Toolbar#RenderStyle" />Toolbar - Render Style
+    </h2>
+    <p>
+        You can use the following API members to customize the appearance of the Toolbar’s root-level items:
+    </p>
+    <ul>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarBase.ItemRenderStyleMode">DxToolbar.ItemRenderStyleMode</a> - Specifies how to apply the render style to all Toolbar items.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarBase.ItemSizeMode">DxToolbar.ItemSizeMode</a> - Specifies the Toolbar item’s size.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.RenderStyle">DxToolbarItem.RenderStyle</a> - Specifies the processed item’s render style.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.RenderStyleMode">DxToolbarItem.RenderStyleMode</a> - Specifies how to apply the render style to the processed item (this property overrides the common <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarBase.ItemRenderStyleMode">ItemRenderStyleMode</a> property’s value).</li>
+    </ul>
+</div>
+
+<div class="card demo-card">
+    <div class="card-header p-2">
+        <DxToolbar ItemRenderStyleMode="@SelectedRenderMode" ItemSizeMode="@SelectedItemSize">
+            <Items>
+                <DxToolbarItem Text="Info" RenderStyle="ButtonRenderStyle.Info" />
+                <DxToolbarItem Text="Success" RenderStyle="ButtonRenderStyle.Success" />
+                <DxToolbarItem IconCssClass="tb-icon tb-icon-alert" BeginGroup="true" RenderStyle="ButtonRenderStyle.Danger" Text="Danger" />
+                <DxToolbarItem IconCssClass="tb-icon tb-icon-alert" Text="Auto" />
+                <DxToolbarItem IconCssClass="tb-icon tb-icon-alert" RenderStyle="ButtonRenderStyle.Warning" Text="Warning" />
+            </Items>
+        </DxToolbar>
+    </div>
+    <div class="card-body">
+        <DxFormLayout>
+            <DxFormLayoutItem Caption="Render Mode:" ColSpanMd="6">
+                <Template>
+                    <DxComboBox Data="@RenderModes" @bind-SelectedItem="@SelectedRenderMode" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Item Size Mode:" ColSpanMd="6">
+                <Template>
+                    <DxComboBox Data="@ItemSizes" @bind-SelectedItem="@SelectedItemSize" />
+                </Template>
+            </DxFormLayoutItem>
+        </DxFormLayout>
+    </div>
+</div>
+
+@code{
+    IList<ToolbarRenderStyleMode> RenderModes { get; set; }
+    ToolbarRenderStyleMode _selectedRenderMode;
+    ToolbarRenderStyleMode SelectedRenderMode { get => _selectedRenderMode; set { _selectedRenderMode = value; InvokeAsync(StateHasChanged); } }
+
+    IList<SizeMode> ItemSizes { get; set; }
+    SizeMode _selectedItemSize;
+    SizeMode SelectedItemSize { get => _selectedItemSize; set { _selectedItemSize = value; InvokeAsync(StateHasChanged); } }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        RenderModes = new List<ToolbarRenderStyleMode>() { ToolbarRenderStyleMode.Contained, ToolbarRenderStyleMode.Plain };
+        SelectedRenderMode = RenderModes[0];
+
+        ItemSizes = new List<SizeMode>() { SizeMode.Small, SizeMode.Medium, SizeMode.Large };
+        SelectedItemSize = ItemSizes[0];
+    }
+}
+
+<CodeSnippet_Toolbar_RenderStyle />

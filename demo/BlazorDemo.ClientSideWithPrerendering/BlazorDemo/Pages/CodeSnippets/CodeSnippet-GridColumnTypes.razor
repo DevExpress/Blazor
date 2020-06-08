@@ -1,0 +1,43 @@
+﻿<div class="code-snippet card demo-card-wide mw-1100">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
+        <CodeSnippet>
+@(@"<DxDataGrid DataAsync=""@ForecastService.GetForecastAsync""
+            PageSize=""5""
+            ShowFilterRow=""false""
+            RowRemovingAsync=""@OnRowRemoving""
+            RowUpdatingAsync=""@OnRowUpdating""
+            RowInsertingAsync=""@OnRowInserting""
+            InitNewRow=""@OnInitNewRow""
+            CssClass=""mw-1100"">
+    <DxDataGridCommandColumn Width=""150px"" />
+    <DxDataGridDateEditColumn Field=""@nameof(WeatherForecast.Date)"" DisplayFormat=""D"" EditorFormat=""d"" EditorDisplayFormat=""D"" />
+    <DxDataGridColumn Field=""@nameof(WeatherForecast.Forecast)"" Caption=""Forecast"" Width=""150px"" />
+    <DxDataGridSpinEditColumn Field=""@nameof(WeatherForecast.TemperatureC)"" Caption=""@(""Temp. (\x2103)"")"" TextAlignment=""@DataGridTextAlign.Left"" 
+                              Width=""150px"" />        
+    <DxDataGridComboBoxColumn Field=""@nameof(WeatherForecast.CloudCover)"" Caption=""Cloud Cover"" DataAsync=""@ForecastService.GetCloudCoverAsync"" 
+                              TextAlignment=""@DataGridTextAlign.Left"" Width=""150px"" />
+    <DxDataGridCheckBoxColumn Field=""@nameof(WeatherForecast.Precipitation)"" Caption=""Precipitation"" Width=""100px"" />
+</DxDataGrid>
+
+@code {
+    async Task OnRowRemoving(WeatherForecast dataItem) {
+        await ForecastService.Remove(dataItem);
+    }
+    async Task OnRowUpdating(WeatherForecast dataItem, IDictionary<string, object> newValue) {
+        await ForecastService.Update(dataItem, newValue);
+    }
+    async Task OnRowInserting(IDictionary<string, object> newValue) {
+        await ForecastService.Insert(newValue);
+    }
+    Task OnInitNewRow (Dictionary<string, object> values) {
+        values.Add(""Date"", DateTime.Now);
+        values.Add(""TemperatureC"", 13);
+        values.Add(""Forecast"", ""Warm"");
+        values.Add(""CloudCover"", ""Sunny"");
+        return Task.CompletedTask;
+    }
+}")
+        </CodeSnippet>
+    </div>
+</div>
