@@ -120,12 +120,10 @@
 @code {
     IEnumerable<SaleInfo> SalesData;
     WeatherForecast[] WeatherForecasts;
-    Random random;
 
     protected override async Task OnInitializedAsync() {
         SalesData = await Sales.GetSalesAsync();
         WeatherForecasts = await ForecastService.GetDetailedForecastAsync();
-        random = new Random();
     }
 
     List<DataPoint> GetData() {

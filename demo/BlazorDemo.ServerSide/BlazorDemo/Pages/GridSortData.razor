@@ -26,7 +26,7 @@
     </p>
 </div>
 
-<DxDataGrid DataAsync="@FlatProductService.LoadAsync" ShowFilterRow="false" CssClass="mw-1100">
+<DxDataGrid DataAsync="@FlatProductService.LoadAsync" CssClass="mw-1100">
     <DxDataGridColumn Field="@nameof(ProductFlat.Id)" Caption="ID" AllowSort="@DefaultBoolean.False" Width="50px"></DxDataGridColumn>
     <DxDataGridColumn Field="@nameof(ProductFlat.Category)" SortOrder="@DataGridColumnSortOrder.Descending" Width="350px" SortIndex="0"></DxDataGridColumn>
     <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)" SortOrder="@DataGridColumnSortOrder.Ascending" Width="350px" SortIndex="1"></DxDataGridColumn>

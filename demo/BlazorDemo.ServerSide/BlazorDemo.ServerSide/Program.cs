@@ -28,7 +28,7 @@ namespace BlazorDemo.ServerSide {
                     new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddIniFile("appsettings.ini", true)
-                    .AddJsonFile("ConnectionStrings.json", optional: true, reloadOnChange: false)
+                    .AddJsonFile("ConnectionStrings.json", false, false)
                     .Build()
                 )
                 .ConfigureAppConfiguration(ConfigureAppDelegate)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BlazorDemo.Data;
 
 namespace Demo.Blazor.Reports.CachedDocumentSource {
     class DeterministicRandom {
@@ -52,7 +53,7 @@ namespace Demo.Blazor.Reports.CachedDocumentSource {
         }
 
         static DeterministicRandom() {
-            Random random = new Random(randomCount);
+            IRandomWrapper random = RandomWrapperFactory.Create(randomCount);
             deterministicRandomNumbers = new int[randomCount];
             for(int i = 0; i < randomCount; i++)
                 deterministicRandomNumbers[i] = random.Next(randomCount);

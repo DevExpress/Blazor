@@ -34,7 +34,7 @@ namespace BlazorDemo.Services {
         };
 
         private List<WeatherForecast> CreateForecast() {
-            var rng = new Random();
+            var rng = RandomWrapperFactory.Create();
             DateTime startDate = DateTime.Now;
 
             int min = 0;
@@ -64,7 +64,7 @@ namespace BlazorDemo.Services {
             }).ToList();
         }
         private List<WeatherForecast> CreateDetailedForecast() {
-            var rng = new Random();
+            var rng = RandomWrapperFactory.Create();
             DateTime startDate = DateTime.Now.Date;
             return Enumerable.Range(1, 15).SelectMany(day => {
                 var dayDate = startDate.AddDays(day);

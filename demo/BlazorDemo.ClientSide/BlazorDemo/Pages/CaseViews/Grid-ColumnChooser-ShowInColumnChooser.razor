@@ -8,7 +8,7 @@
     <p>In this demo, the Column Chooser does not display the <strong>Product Name</strong> data column (its <strong>ShowInColumnChooser</strong> property is set to <strong>false</strong>), but displays the command column (its <strong>ShowInColumnChooser</strong> property is set to <strong>true</strong>).</p>
 </div>
 
-<DxDataGrid DataAsync="@FlatProductService.LoadProductsAsync" ShowFilterRow="false" AllowColumnDragDrop="false"
+<DxDataGrid DataAsync="@FlatProductService.LoadProductsAsync" AllowColumnDragDrop="false"
             RowRemovingAsync="@OnRowRemoving"
             RowUpdatingAsync="@OnRowUpdating"
             RowInsertingAsync="@OnRowInserting"

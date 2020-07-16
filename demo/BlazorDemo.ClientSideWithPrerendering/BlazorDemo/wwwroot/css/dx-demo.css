@@ -1290,3 +1290,7 @@ a.helplink {
 .demo-size-toolbar.dxbs-ta-nib > .btn-toolbar > .btn-group:not(:first-child):not(.dxbs-tb-begin-group):before {
     display: none !important;
 }
+
+.demo-toolbar-dropdown .dx-toolbar-popup .modal-body {
+    height: 180px;
+}

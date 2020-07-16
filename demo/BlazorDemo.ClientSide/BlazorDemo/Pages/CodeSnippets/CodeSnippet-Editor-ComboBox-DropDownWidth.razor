@@ -1,0 +1,18 @@
+﻿<CodeSnippet>
+@(@"<DxComboBox Data=""@Persons.DataSource""
+            TextFieldName=""Text""
+            @bind-SelectedItem=""@SelectedRealBusinessObject""
+            SizeMode=""SizeMode""
+            DropDownWidthMode=""DropDownWidthMode"">
+</DxComboBox>
+@code {
+    Person selectedRealBusinessObject = Persons.DataSource[0];
+    Person SelectedRealBusinessObject {
+        get => selectedRealBusinessObject;
+        set { selectedRealBusinessObject = value; InvokeAsync(StateHasChanged); }
+    }
+
+    DropDownWidthMode dropDownWidthMode = DropDownWidthMode.ContentOrEditorWidth;
+    DropDownWidthMode DropDownWidthMode { get => dropDownWidthMode; set { dropDownWidthMode = value; } }
+}")
+</CodeSnippet>

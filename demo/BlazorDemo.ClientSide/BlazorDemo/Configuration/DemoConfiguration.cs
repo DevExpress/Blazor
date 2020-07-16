@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,6 @@ namespace BlazorDemo.Configuration {
             AdditionalRoutingAssemblies = AppDomain.CurrentDomain.GetAssemblies().Where(IsReportsDemoModule).ToArray();
             Products = _seoConfig.Products ?? new DemoProductInfo[0];
         }
-
         public bool IsReportingModuleLoaded => AdditionalRoutingAssemblies.Any();
 
         public void ConfigureMetadata(IDocumentMetadataCollection metadataCollection) {

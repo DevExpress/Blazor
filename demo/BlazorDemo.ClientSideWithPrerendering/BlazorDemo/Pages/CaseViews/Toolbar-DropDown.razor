@@ -1,41 +1,115 @@
 ﻿<div class="demo-description" id="DropDownItems">
-        <h2>
-            <DemoNavLink Link="Toolbar#DropDownItems" />Toolbar - Drop-Down Items
-        </h2>
-        <p>
-            Each <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem">Toolbar item</a> can have multiple child items which are specified as elements of the parent item’s <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarBase.Items">Items</a> collection.
-        </p>
-        <p>
-            A root-level toolbar item that has child items is rendered as a drop-down button that displays a hierarchical pop-up menu when clicked. You can handle this button as one button or split it into two buttons - a regular button and a drop-down button that invokes a pop-up window. To enable this behavior, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.SplitDropDownButton">SplitDropDownButton</a> property to <b>true</b>.
-        </p>
-    </div>
+    <h2>
+        <DemoNavLink Link="Toolbar#DropDownItems" />Toolbar - Drop-Down Items
+        <span class="demo-badge badge badge-secondary">Upd</span>
+    </h2>
+    <p>
+        A toolbar item displays a drop-down list if you populate the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.Items">DxToolbarItem.Items</a> collection. The drop-down list can be displayed as a regular sub-menu, as a modal dialog, or as a modal bottom sheet. You can specify the type explicitly or let the component adapt to the device type. To specify the display mode, use the following properties:
+    </p>
+    <ul>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarBase.DropDownDisplayMode">DxToolbarBase.DropDownDisplayMode</a> - Applies to all menus in the toolbar.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarItemBase.DropDownDisplayMode">DxToolbarItemBase.DropDownDisplayMode</a> - Applies to an individual item.</li>
+    </ul>
+    <p>
+        You can turn a parent toolbar item into a split button where the drop-down action is separate from the main click area. To enable this behavior, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.SplitDropDownButton">SplitDropDownButton</a> property to <b>true</b>.
+    </p>
+</div>
 
 <div class="card demo-card">
-    <div class="card-header border-0 p-2">
-        <DxToolbar>
+    <div class="card-header p-2">
+        <DxToolbar DropDownDisplayMode="@SelectedDisplayMode" ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" CssClass="demo-toolbar-dropdown">
             <Items>
-                <DxToolbarItem Text="DropDown">
+                @foreach(var item in MenuItems) {
+                    @RenderItem(item)
+                }
+                <DxToolbarItem Text="Drop Down Display Mode" Alignment="ToolbarItemAlignment.Right" BeginGroup="true" DropDownDisplayMode="DropDownDisplayMode.DropDown">
                     <Items>
-                        <DxToolbarItem Text="Keep Formatting"></DxToolbarItem>
-                        <DxToolbarItem Text="Keep Text Only"></DxToolbarItem>
-                        <DxToolbarItem Text="Paste Special" BeginGroup="true">
-                            <Items>
-                                <DxToolbarItem Text="Option 1"></DxToolbarItem>
-                                <DxToolbarItem Text="Option 2"></DxToolbarItem>
-                            </Items>
-                        </DxToolbarItem>
-                    </Items>
-                </DxToolbarItem>
-                <DxToolbarItem Text="SplitDropDownButton=true" SplitDropDownButton="true" BeginGroup="true">
-                    <Items>
-                        <DxToolbarItem Text="Option 3"></DxToolbarItem>
-                        <DxToolbarItem Text="Option 4"></DxToolbarItem>
+                        @foreach(var displayMode in DisplayModes) {
+                            <DxToolbarItem Checked="@(displayMode == SelectedDisplayMode)" Text="@displayMode.ToString()" Click="() => SelectedDisplayMode = displayMode" />
+                        }
                     </Items>
                 </DxToolbarItem>
             </Items>
         </DxToolbar>
     </div>
+    <div class="card-body" style="padding: 0; font-size: 12pt;">
+        <div style="@Formatting.GetStyleString() height: 300px; overflow-y: auto; padding: 0.75rem 1rem; display: flex;" class="dxbs-preventsel">
+            <span style="display: inline-block; text-align: center; margin: auto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</span>
+        </div>
+    </div>
 </div>
 
+@code{
+    TextFormatting Formatting { get; set; } = new TextFormatting();
+    List<TextFormattingMenuItem> _menuItems;
+    List<TextFormattingMenuItem> MenuItems {
+        get {
+            if(_menuItems == null) {
+                _menuItems = new List<TextFormattingMenuItem>() {
+                    new TextFormattingParentMenuItem(Formatting, "Format", new List<TextFormattingMenuItem>() {
+                        new TextFormattingParentMenuItem(Formatting, "Family", new List<TextFormattingMenuItem>() {
+                            new FontFamilyMenuItem(Formatting, "Default", null),
+                            new FontFamilyMenuItem(Formatting, "Times New Roman", "Times New Roman") { BeginGroup = true },
+                            new FontFamilyMenuItem(Formatting, "Tahoma", "Tahoma"),
+                            new FontFamilyMenuItem(Formatting, "Verdana", "Verdana"),
+                            new FontFamilyMenuItem(Formatting, "Arial", "Arial"),
+                            new FontFamilyMenuItem(Formatting, "MS Sans Serif", "MS Sans Serif"),
+                            new FontFamilyMenuItem(Formatting, "Courier", "Courier"),
+                            new FontFamilyMenuItem(Formatting, "Segoe UI", "Segoe UI")
+                        }),
+                        new TextFormattingParentMenuItem(Formatting, "Size", new List<TextFormattingMenuItem>() {
+                            new FontSizeMenuItem(Formatting, "8pt", 8),
+                            new FontSizeMenuItem(Formatting, "10pt", 10),
+                            new FontSizeMenuItem(Formatting, "12pt", 12),
+                            new FontSizeMenuItem(Formatting, "14pt", 14),
+                            new FontSizeMenuItem(Formatting, "18pt", 18),
+                            new FontSizeMenuItem(Formatting, "24pt", 24),
+                            new FontSizeMenuItem(Formatting, "36pt", 36)
+                        }),
+                        new TextFormattingParentMenuItem(Formatting, "Change case", new List<TextFormattingMenuItem>() {
+                            new ChangeCaseMenuItem(Formatting, "Default", null),
+                            new ChangeCaseMenuItem(Formatting, "Capitalize", "capitalize") {BeginGroup = true },
+                            new ChangeCaseMenuItem(Formatting, "Lowercase ", "lowercase"),
+                            new ChangeCaseMenuItem(Formatting, "Uppercase ", "uppercase")
+                        })
+                    }),
+                    new TextDecorationMenuItem(Formatting, string.Empty, "Bold") {IconCss = "tb-icon tb-icon-bold", BeginGroup = true },
+                    new TextDecorationMenuItem(Formatting, string.Empty, "Italic"){ IconCss = "tb-icon tb-icon-italic" },
+                    new TextDecorationMenuItem(Formatting, string.Empty, "Underline") {
+                        Children = new List<TextFormattingMenuItem>() {
+                            new TextDecorationMenuItem(Formatting, "Overline", "Overline"),
+                            new TextDecorationMenuItem(Formatting, "Strikethrough", "Strikethrough")
+                        },
+                        SplitMenuButton = true,
+                        IconCss = "tb-icon tb-icon-underline",
+                        Category = "Text Decorations"
+                    },
+                    new ClearFormattingMenuItem(Formatting) { BeginGroup = true }
+                };
+            }
+            return _menuItems;
+        }
+    }
+    IList<DropDownDisplayMode> DisplayModes { get; set; }
+    DropDownDisplayMode SelectedDisplayMode { get; set; }
+
+    protected override void OnInitialized() {
+        base.OnInitialized();
+        DisplayModes = new List<DropDownDisplayMode>() { DropDownDisplayMode.Auto, DropDownDisplayMode.DropDown, DropDownDisplayMode.ModalDialog, DropDownDisplayMode.ModalBottomSheet };
+        SelectedDisplayMode = DisplayModes[1];
+    }
+    RenderFragment RenderItem(TextFormattingMenuItem item) {
+        return
+    @<DxToolbarItem Text="@item.Text" DropDownCaption="@item.Category" BeginGroup="@item.BeginGroup" Click="item.Click" Checked="@item.Checked" SplitDropDownButton="@item.SplitMenuButton" IconCssClass="@item.IconCss">
+        <Items>
+            @if(item.Children != null) {
+                @foreach(var child in item.Children) {
+                    @RenderItem(child)
+                }
+            }
+        </Items>
+    </DxToolbarItem>;
+    }
+}
 <CodeSnippet_Toolbar_DropDown />
 

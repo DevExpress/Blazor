@@ -1,0 +1,31 @@
+﻿<div class="demo-description" id="DateRange">
+    <h2><DemoNavLink Link="Calendar#DateRange" />Calendar - Date Range<span class="demo-badge badge badge-success">New</span></h2>
+    <p>Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxCalendarBase.MinDate">MinDate</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxCalendarBase.MaxDate">MaxDate</a> properties to specify a range of available dates. The calendar disables dates that are out of the range and hides navigation arrows for them.</p>
+    <p>In this demo, the Calendar component allows users to select dates from the current month.</p>
+</div>
+
+<div class="card demo-card border-0 bg-transparent">
+    <div class="card-body p-0">
+        <DxCalendar MinDate="@MinDate" MaxDate="@MaxDate">
+        </DxCalendar>
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
+        <CodeSnippet_Editor_Calendar_MinMaxDate></CodeSnippet_Editor_Calendar_MinMaxDate>
+    </div>
+</div>
+
+@code {
+    DateTime MinDate { get; set; }
+    DateTime MaxDate { get; set; }
+
+    protected override void OnInitialized() {
+        DateTime currentDateTime = DateTime.Now;
+
+        MinDate = new DateTime(currentDateTime.Year, currentDateTime.Month, 1);
+        MaxDate = new DateTime(currentDateTime.Year, currentDateTime.Month, DateTime.DaysInMonth(currentDateTime.Year, currentDateTime.Month));
+    }
+}

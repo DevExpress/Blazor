@@ -4,21 +4,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using DevExpress.Blazor.DocumentMetadata;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
 namespace BlazorDemo.Configuration {
     public class DemoConfiguration {
         private readonly SeoConfiguration _seoConfig;
 
-        public DemoConfiguration(IOptions<SeoConfiguration> seoOptions) {
+        public DemoConfiguration(IOptions<SeoConfiguration> seoOptions, IConfiguration configuration) {
             _seoConfig = seoOptions?.Value;
+            if(_seoConfig == null) return;
+            if (_seoConfig.RootDemoPages == null)
+                _seoConfig = configuration.GetSection("BlazorDemo")?.Get<SeoConfiguration>();
+
             if (_seoConfig == null) return;
             bool IsReportsDemoModule(Assembly x) => x.GetName().Name == "BlazorDemo.Reporting";
 
             AdditionalRoutingAssemblies = AppDomain.CurrentDomain.GetAssemblies().Where(IsReportsDemoModule).ToArray();
             Products = _seoConfig.Products ?? new DemoProductInfo[0];
         }
-
         public bool IsReportingModuleLoaded => AdditionalRoutingAssemblies.Any();
 
         public void ConfigureMetadata(IDocumentMetadataCollection metadataCollection) {

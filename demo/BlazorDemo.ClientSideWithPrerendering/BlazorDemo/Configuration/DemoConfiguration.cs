@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using DevExpress.Blazor.DocumentMetadata;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -19,13 +17,12 @@ namespace BlazorDemo.Configuration {
             if (_seoConfig.RootDemoPages == null)
                 _seoConfig = configuration.GetSection("BlazorDemo")?.Get<SeoConfiguration>();
 
-            
+            if (_seoConfig == null) return;
             bool IsReportsDemoModule(Assembly x) => x.GetName().Name == "BlazorDemo.Reporting";
 
             AdditionalRoutingAssemblies = AppDomain.CurrentDomain.GetAssemblies().Where(IsReportsDemoModule).ToArray();
             Products = _seoConfig.Products ?? new DemoProductInfo[0];
         }
-
         public bool IsReportingModuleLoaded => AdditionalRoutingAssemblies.Any();
 
         public void ConfigureMetadata(IDocumentMetadataCollection metadataCollection) {

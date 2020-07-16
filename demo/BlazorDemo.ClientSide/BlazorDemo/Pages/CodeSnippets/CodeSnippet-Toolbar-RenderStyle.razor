@@ -2,7 +2,7 @@
     <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted">
         <CodeSnippet>
-@(@"<DxToolbar ItemRenderStyleMode=""@SelectedRenderMode"" ItemSizeMode=""@SelectedItemSize"">
+@(@"<DxToolbar ItemRenderStyleMode=""@SelectedRenderMode"" ItemSizeMode=""@SelectedSizeMode"">
     <Items>
         <DxToolbarItem Text=""Info"" RenderStyle=""ButtonRenderStyle.Info"" />
         <DxToolbarItem Text=""Success"" RenderStyle=""ButtonRenderStyle.Success"" />
@@ -14,12 +14,9 @@
 
 @code{
     IList<ToolbarRenderStyleMode> RenderModes { get; set; }
-    ToolbarRenderStyleMode _selectedRenderMode;
-    ToolbarRenderStyleMode SelectedRenderMode { get => _selectedRenderMode; set { _selectedRenderMode = value; InvokeAsync(StateHasChanged); } }
-
-    IList<SizeMode> ItemSizes { get; set; }
-    SizeMode _selectedItemSize;
-    SizeMode SelectedItemSize { get => _selectedItemSize; set { _selectedItemSize = value; InvokeAsync(StateHasChanged); } }
+    ToolbarRenderStyleMode SelectedRenderMode { get; set; }
+    IList<SizeMode> SizeModes { get; set; }
+    SizeMode SelectedSizeMode { get; set; }
 
     protected override void OnInitialized()
     {
@@ -27,8 +24,8 @@
         RenderModes = new List<ToolbarRenderStyleMode>() { ToolbarRenderStyleMode.Contained, ToolbarRenderStyleMode.Plain };
         SelectedRenderMode = RenderModes[0];
 
-        ItemSizes = new List<SizeMode>() { SizeMode.Small, SizeMode.Medium, SizeMode.Large };
-        SelectedItemSize = ItemSizes[0];
+        SizeModes = new List<SizeMode>() { SizeMode.Small, SizeMode.Medium, SizeMode.Large };
+        SelectedSizeMode = SizeModes[0];
     }
 }
 ")

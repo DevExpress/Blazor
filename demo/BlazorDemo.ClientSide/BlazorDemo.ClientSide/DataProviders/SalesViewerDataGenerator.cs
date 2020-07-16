@@ -70,7 +70,7 @@ namespace BlazorDemo.DataProviders.Implementation {
             var endDate = GetSalesEndDate(today);
             var curDate = startDate;
             List<Sale> result = new List<Sale>();
-            var rnd = new Random(Environment.TickCount);
+            var rnd = BlazorDemo.Data.RandomWrapperFactory.Create(Environment.TickCount);
 
             var sectorsWeights = new int[] { 5, 3, 3, 2, 1, 1 };
             var productsWeights = new int[] { 12, 20, 17, 23, 15, 13 };
@@ -169,7 +169,7 @@ namespace BlazorDemo.DataProviders.Implementation {
             return res;
         }
 
-        public int GetRankRandom(Random rnd, int[] weights) {
+        public int GetRankRandom(BlazorDemo.Data.IRandomWrapper rnd, int[] weights) {
             var coords = new int[weights.Length];
             var summ = 0;
             for (var i = 0; i < weights.Length; i++) {

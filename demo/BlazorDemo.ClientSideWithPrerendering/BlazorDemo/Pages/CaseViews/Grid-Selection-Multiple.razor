@@ -25,7 +25,6 @@ else
                 <DxDataGrid Data="@DataSource"
                             SelectionMode="DataGridSelectionMode.MultipleSelectedDataRows"
                             @bind-MultipleSelectedDataRows="@SelectedProducts"
-                            ShowFilterRow="false"
                             CssClass="mw-1100">
                     <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name"></DxDataGridColumn>
                     <DxDataGridColumn Field="@nameof(ProductFlat.Category)"></DxDataGridColumn>
