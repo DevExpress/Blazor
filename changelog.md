@@ -2,6 +2,37 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 20.1.5
+
+### Support for .NET Core 3.1.5  
+
+In this version, we added support for [.NET Core 3.1.5](https://devblogs.microsoft.com/dotnet/net-core-june-2020-updates-2-1-19-and-3-1-5/).
+
+### Data Grid Enhancements
+* The ability to hide the Filter Row's editors for individual columns ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.AllowFilter))
+* New ComboBox column features:
+  * Filter modes ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridComboBoxColumnBase-1.FilteringMode))
+  * Virtual render mode ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridComboBoxColumnBase-1.ListRenderMode))
+
+### Data Editors Enhancements
+* ComboBox, TagBox - Drop-down window’s width modes ([Demo](https://demos.devexpress.com/blazor/ComboBox#DropDownListWidth) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxComboBoxBase-1.DropDownWidthMode))
+* Calendar, Date Edit - Min/max dates ([Demo](https://demos.devexpress.com/blazor/Calendar#DateRange) | [Documentation - MinDate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxCalendarBase.MinDate) | [Documentation - MaxDate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxCalendarBase.MaxDate))
+
+### Other Enhancements
+* Toolbar - Display a drop-down menu in a modal dialog 
+([Demo](https://demos.devexpress.com/blazor/Toolbar#DropDownItems) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarBase.DropDownDisplayMode))
+* Upload
+  * A response message received from the server ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.UploadHttpRequestInfo.ResponseTex))
+  * A file's last modified date ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.UploadFileInfo.LastModified))
+
+### Resolved Issues
+Refer to [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=20.1.5&endBuildName=&buildsMode=Single&hasPlatformsWithProducts=true) for a complete list of issues resolved in 20.1.5.
+
+### Breaking Changes
+* [Data Grid - The filter row has become hidden by default](https://supportcenter.devexpress.com/ticket/details/T903275)
+* [ComboBox and TagBox - The default width of the drop-down lists has been changed](https://supportcenter.devexpress.com/ticket/details/T899859)
+* [Date Edit - The first day of a week has become culture-dependent](https://supportcenter.devexpress.com/ticket/details/T899965)
+
 # 20.1.4
 
 ### Support for .NET Core 3.1.4 and Blazor WebAssembly 3.2.0  
