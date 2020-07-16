@@ -1,0 +1,16 @@
+﻿<CodeSnippet>
+@(@"<DxCalendar MinDate=""@MinDate"" MaxDate=""@MaxDate"">
+</DxCalendar>
+
+@code {
+    DateTime MinDate { get; set; }
+    DateTime MaxDate { get; set; }
+
+    protected override void OnInitialized() {
+        DateTime currentDateTime = DateTime.Now;
+
+        MinDate = new DateTime(currentDateTime.Year, currentDateTime.Month, 1);
+        MaxDate = new DateTime(currentDateTime.Year, currentDateTime.Month, DateTime.DaysInMonth(currentDateTime.Year, currentDateTime.Month));
+    }
+}")
+</CodeSnippet>

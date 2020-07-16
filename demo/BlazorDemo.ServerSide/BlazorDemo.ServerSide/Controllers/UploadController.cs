@@ -28,6 +28,7 @@ namespace BlazorDemo.AspNetCoreHost {
         [HttpPost]
         [Route("UploadFile")]
         public ActionResult UploadFile(IFormFile myFile) {
+#if DEBUG
             try {
                 var path = Path.Combine(_hostingEnvironment.ContentRootPath, "uploads");
                 if (!Directory.Exists(path))
@@ -39,13 +40,14 @@ namespace BlazorDemo.AspNetCoreHost {
             } catch {
                 Response.StatusCode = 400;
             }
-
+#endif
             return new EmptyResult();
         }
 
         [HttpPost]
         [Route("UploadImage")]
         public ActionResult UploadImage(IFormFile myFile) {
+ #if DEBUG
             try {
                 string[] imageExtensions = { ".jpg", ".jpeg", ".gif", ".png" };
 
@@ -66,13 +68,14 @@ namespace BlazorDemo.AspNetCoreHost {
             } catch {
                 Response.StatusCode = 400;
             }
-
+#endif
             return new EmptyResult();
         }
 
         [HttpPost]
         [Route("UploadChunkFile")]
         public ActionResult UploadChunkFile(IFormFile myFile) {
+#if DEBUG
             string chunkMetadata = Request.Form["chunkMetadata"];
             var tempPath = Path.Combine(_hostingEnvironment.ContentRootPath, "uploads");
             // Removes temporary files
@@ -94,6 +97,7 @@ namespace BlazorDemo.AspNetCoreHost {
             } catch {
                 return BadRequest();
             }
+#endif
             return Ok();
         }
         void AppendChunkToFile(string path, IFormFile content) {

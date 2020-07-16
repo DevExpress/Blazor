@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using BlazorDemo.Data;
 
 namespace Demo.Blazor.Reports.ProfitAndLoss {
     public class Data {
@@ -20,7 +21,7 @@ namespace Demo.Blazor.Reports.ProfitAndLoss {
         public decimal Repairs { get; set; }
         public decimal ToolsAndMachinery { get; set; }
 
-        static Random random = new Random(10041005);
+        static IRandomWrapper random = RandomWrapperFactory.Create(10041005);
 
         public static List<Data> GetData() {
             if(data == null)

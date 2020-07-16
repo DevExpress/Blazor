@@ -15,7 +15,27 @@
 
 <div class="card demo-card">
     <div class="card-header p-2">
-        <DxToolbar ItemRenderStyleMode="@SelectedRenderMode" ItemSizeMode="@SelectedItemSize">
+        <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
+            <Items>
+                <DxToolbarItem Text="Render Style Mode" Alignment="ToolbarItemAlignment.Right">
+                    <Items>
+                        @foreach(var renderMode in RenderModes) {
+                            <DxToolbarItem Checked="@(renderMode == SelectedRenderMode)" Text="@renderMode.ToString()" Click="()=>SelectedRenderMode = renderMode" />
+                        }
+                    </Items>
+                </DxToolbarItem>
+                <DxToolbarItem Text="Size Mode" Alignment="ToolbarItemAlignment.Right">
+                    <Items>
+                        @foreach(var sizeMode in SizeModes) {
+                            <DxToolbarItem Checked="@(sizeMode == SelectedSizeMode)" Text="@sizeMode.ToString()" Click="()=>SelectedSizeMode = sizeMode" />
+                        }
+                    </Items>
+                </DxToolbarItem>
+            </Items>
+        </DxToolbar>
+    </div>
+    <div class="card-body">
+        <DxToolbar ItemRenderStyleMode="@SelectedRenderMode" ItemSizeMode="@SelectedSizeMode">
             <Items>
                 <DxToolbarItem Text="Info" RenderStyle="ButtonRenderStyle.Info" />
                 <DxToolbarItem Text="Success" RenderStyle="ButtonRenderStyle.Success" />
@@ -25,30 +45,13 @@
             </Items>
         </DxToolbar>
     </div>
-    <div class="card-body">
-        <DxFormLayout>
-            <DxFormLayoutItem Caption="Render Mode:" ColSpanMd="6">
-                <Template>
-                    <DxComboBox Data="@RenderModes" @bind-SelectedItem="@SelectedRenderMode" />
-                </Template>
-            </DxFormLayoutItem>
-            <DxFormLayoutItem Caption="Item Size Mode:" ColSpanMd="6">
-                <Template>
-                    <DxComboBox Data="@ItemSizes" @bind-SelectedItem="@SelectedItemSize" />
-                </Template>
-            </DxFormLayoutItem>
-        </DxFormLayout>
-    </div>
 </div>
 
 @code{
     IList<ToolbarRenderStyleMode> RenderModes { get; set; }
-    ToolbarRenderStyleMode _selectedRenderMode;
-    ToolbarRenderStyleMode SelectedRenderMode { get => _selectedRenderMode; set { _selectedRenderMode = value; InvokeAsync(StateHasChanged); } }
-
-    IList<SizeMode> ItemSizes { get; set; }
-    SizeMode _selectedItemSize;
-    SizeMode SelectedItemSize { get => _selectedItemSize; set { _selectedItemSize = value; InvokeAsync(StateHasChanged); } }
+    ToolbarRenderStyleMode SelectedRenderMode { get; set; }
+    IList<SizeMode> SizeModes { get; set; }
+    SizeMode SelectedSizeMode { get; set; }
 
     protected override void OnInitialized()
     {
@@ -56,8 +59,8 @@
         RenderModes = new List<ToolbarRenderStyleMode>() { ToolbarRenderStyleMode.Contained, ToolbarRenderStyleMode.Plain };
         SelectedRenderMode = RenderModes[0];
 
-        ItemSizes = new List<SizeMode>() { SizeMode.Small, SizeMode.Medium, SizeMode.Large };
-        SelectedItemSize = ItemSizes[0];
+        SizeModes = new List<SizeMode>() { SizeMode.Small, SizeMode.Medium, SizeMode.Large };
+        SelectedSizeMode = SizeModes[0];
     }
 }
 

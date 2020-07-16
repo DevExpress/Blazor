@@ -25,7 +25,6 @@
 else
 {
     <DxDataGrid Data="@DataSource"
-                ShowFilterRow="false"
                 RowRemoving="@((dataItem) => OnRowRemoving(dataItem))"
                 RowUpdating="@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))"
                 RowInserting="@((newValues) => OnRowInserting(newValues))"

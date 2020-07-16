@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using BlazorDemo.Data;
 
 namespace Demo.Blazor.Reports.BalanceSheetReport {
     public class BalanceSheetDataItem {
@@ -25,12 +26,12 @@ namespace Demo.Blazor.Reports.BalanceSheetReport {
     [DisplayName("Balance Sheet Report Data Source")]
     public class BalanceSheetData {
         public static List<BalanceSheetDataItem> GetData() {
-            Random random = new Random(2147483);
+            IRandomWrapper random = RandomWrapperFactory.Create(2147483);
             List<BalanceSheetDataItem> items = new List<BalanceSheetDataItem>();
             items.AddRange(FillItems(random));
             return items;
         }
-        static IEnumerable<BalanceSheetDataItem> FillItems(Random random) {
+        static IEnumerable<BalanceSheetDataItem> FillItems(IRandomWrapper random) {
             List<BalanceSheetDataItem> items = new List<BalanceSheetDataItem>();
             for(int i = 0; i < 3; i++) {
                 int year = DateTime.Today.Year - i;
@@ -68,7 +69,7 @@ namespace Demo.Blazor.Reports.BalanceSheetReport {
         static void AddItem(List<BalanceSheetDataItem> items, int year, int month, ItemType type, string subType, string name, double? value) {
             items.Add(new BalanceSheetDataItem(new DateTime(year, month, 1), type, subType, name, value));
         }
-        static double GetRandomValue(Random random, int min, int max) {
+        static double GetRandomValue(IRandomWrapper random, int min, int max) {
             int intPart = random.Next(min, max);
             double floatPart = Math.Round(random.NextDouble(), 2);
             return intPart + floatPart;

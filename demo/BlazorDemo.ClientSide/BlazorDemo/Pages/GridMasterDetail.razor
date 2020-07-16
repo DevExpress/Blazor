@@ -34,7 +34,6 @@
             KeyFieldName="Id"
             AutoCollapseDetailRow="true" 
             ShowDetailRow="true"
-            ShowFilterRow="false"
             SelectionMode="DataGridSelectionMode.None" 
             PageSize="4"
             CssClass="mw-1100">
@@ -51,7 +50,7 @@
                 <div class="p-3">
                     <DxDataGrid DataAsync="@GetSalesDataByProductAsync(dataItem)" 
                                 SelectionMode="DataGridSelectionMode.None" 
-                                ShowFilterRow="false"
+                               
                                 LayoutRestoring="@GetDetailsGridLayoutRestoringDelegate(dataItem)"
                                 LayoutChanged="@GetDetailsGridLayoutChangedDelegate(dataItem)">
                         <DxDataGridDateEditColumn Field="@nameof(Sale.SaleDate)" />

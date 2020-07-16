@@ -1,0 +1,79 @@
+﻿@inherits DemoWithResizableComponent
+
+@{
+    RenderFragment<string> GetLink = (propName) =>
+    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxComboBoxBase-1.@propName">@propName</a>;
+}
+
+<div class="demo-description" id="DropDownListWidth">
+    <h2><DemoNavLink Link="ComboBox#DropDownListWidth" />ComboBox – Drop-Down List Width<span class="demo-badge badge badge-success">New</span></h2>
+    <p>
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxComboBoxBase-1.DropDownWidthMode">DropDownWidthMode</a> property to specify the width of a drop-down list.
+    </p>
+    <ul>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DropDownWidthMode">ContentOrEditorWidth</a> (Default) - The list's width is equal to the width of the longest list item or the editor's width (whichever is larger).</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DropDownWidthMode">ContentWidth</a> - The list's width is equal to the width of the longest list item.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DropDownWidthMode">EditorWidth</a> - The list's width is equal to the editor's width. List items are cut if they do not fit.</li>
+    </ul>
+    <p>
+        In this demo, <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DropDownWidthMode">ContentOrEditorWidth</a> mode is used for both ComboBox components. To change the width of their drop-down lists, use the <b>Drop Down Width Mode</b> option below.
+    </p>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode" Title="Select items" /> 
+    </div>
+    <div class="card-body">
+        <div class="d-inline-block" style="width: 200px;">
+        <DxComboBox Data="@Persons.DataSource" 
+                    TextFieldName="FirstName"
+                    @bind-SelectedItem="@SelectedRealBusinessObject"
+                    SizeMode="SizeMode"
+                    DropDownWidthMode="DropDownWidthMode"></DxComboBox>
+        </div>
+        <div class="d-inline-block" style="width: 200px;">
+        <DxComboBox Data="@Persons.DataSource"
+                    TextFieldName="Text"
+                    @bind-SelectedItem="@SelectedRealBusinessObject1"
+                    SizeMode="SizeMode"
+                    DropDownWidthMode="DropDownWidthMode"></DxComboBox>
+        </div>
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted">
+        <div style="margin: 1em 0 -1em .5em;">
+            <label class="d-inline-flex flex-nowrap align-items-center">
+                <b class="hljs-attr" style="white-space: nowrap; margin-right: .5em;">Drop Down Width Mode: </b>
+                <DxComboBox Data="@(Enum.GetNames(typeof(DropDownWidthMode)))"
+                            SelectedItem="@(DropDownWidthMode.ToString())"
+                            SelectedItemChanged="@((string selectedItem) => { DropDownWidthMode = Enum.Parse<DropDownWidthMode>(selectedItem); })">
+                </DxComboBox>
+            </label>
+        </div>
+        <CodeSnippet_Editor_ComboBox_DropDownWidth></CodeSnippet_Editor_ComboBox_DropDownWidth>
+    </div>
+</div>
+
+
+@code {
+
+    Person selectedRealBusinessObject = Persons.DataSource[0];
+    Person SelectedRealBusinessObject {
+        get => selectedRealBusinessObject;
+        set { selectedRealBusinessObject = value; InvokeAsync(StateHasChanged); }
+    }
+    Person selectedRealBusinessObject1 = Persons.DataSource[0];
+    Person SelectedRealBusinessObject1 {
+        get => selectedRealBusinessObject1;
+        set { selectedRealBusinessObject1 = value; InvokeAsync(StateHasChanged); }
+    }
+    DropDownWidthMode dropDownWidthMode = DropDownWidthMode.ContentOrEditorWidth;
+    DropDownWidthMode DropDownWidthMode { get => dropDownWidthMode; set { dropDownWidthMode = value; InvokeAsync(StateHasChanged); } }
+
+
+}
+

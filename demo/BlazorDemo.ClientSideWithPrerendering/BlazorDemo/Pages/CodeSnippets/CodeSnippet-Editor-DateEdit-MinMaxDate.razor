@@ -1,0 +1,18 @@
+﻿<CodeSnippet>
+@(@"<DxDateEdit @bind-Date=""@DateTimeValue"" MinDate=""@MinDate"" MaxDate=""@MaxDate""></DxDateEdit>
+
+@code {
+    DateTime MinDate { get; set; }
+    DateTime MaxDate { get; set; }
+
+    DateTime dateTimeValue;
+    DateTime DateTimeValue { get => dateTimeValue; set { dateTimeValue = value; InvokeAsync(StateHasChanged); } }
+
+    protected override void OnInitialized() {
+        dateTimeValue = DateTime.Now;
+
+        MinDate = new DateTime(dateTimeValue.Year, dateTimeValue.Month, 1);
+        MaxDate = new DateTime(dateTimeValue.Year, dateTimeValue.Month, DateTime.DaysInMonth(dateTimeValue.Year, dateTimeValue.Month));
+    }
+}")
+</CodeSnippet>

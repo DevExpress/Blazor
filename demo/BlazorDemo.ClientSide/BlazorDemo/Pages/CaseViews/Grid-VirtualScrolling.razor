@@ -30,7 +30,6 @@
     <p><em>Loading...</em></p>
 } else {
     <DxDataGrid Data="@DataSource"
-                ShowFilterRow="false"
                 DataNavigationMode="@DataGridNavigationMode.VirtualScrolling"
                 RowRemoving="@((dataItem) => OnRowRemoving(dataItem))"
                 RowUpdating="@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))"

@@ -1,0 +1,42 @@
+@inherits DemoWithResizableComponent
+
+<div class="demo-description" id="DateRange">
+    <h2><DemoNavLink Link="DateEdit#DateRange" />Date Edit - Date Range<span class="demo-badge badge badge-success">New</span></h2>
+    <p>Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDateEditBase-1.MinDate">MinDate</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDateEditBase-1.MaxDate">MaxDate</a> properties to specify a range of available dates. The Date Edit's calendar disables dates that are out of the range and hides navigation arrows for them. If a user types a date that is out of the range, the Date Edit keeps the previously selected date.</p>
+    <p>In this demo, the Date Edit component allows users to select dates from the current month.</p>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode">
+            <TitleTemplate>
+                Date: <b>@DateTimeValue.ToString("dddd, dd MMMM yyyy")</b>
+            </TitleTemplate>
+        </DemoToolbar>
+    </div>
+    <div class="card-body mw-480">
+        <DxDateEdit @bind-Date="@DateTimeValue" SizeMode="SizeMode" MinDate="@MinDate" MaxDate="@MaxDate"></DxDateEdit>
+    </div>
+</div>
+
+<div class="code-snippet card demo-card-wide">
+    <CodeSnippetHeader></CodeSnippetHeader>
+    <div class="card-footer text-muted ">
+        <CodeSnippet_Editor_DateEdit_MinMaxDate></CodeSnippet_Editor_DateEdit_MinMaxDate>
+    </div>
+</div>
+
+@code {
+    DateTime MinDate { get; set; }
+    DateTime MaxDate { get; set; }
+
+    DateTime dateTimeValue;
+    DateTime DateTimeValue { get => dateTimeValue; set { dateTimeValue = value; InvokeAsync(StateHasChanged); } }
+
+    protected override void OnInitialized() {
+        dateTimeValue = DateTime.Now;
+
+        MinDate = new DateTime(dateTimeValue.Year, dateTimeValue.Month, 1);
+        MaxDate = new DateTime(dateTimeValue.Year, dateTimeValue.Month, DateTime.DaysInMonth(dateTimeValue.Year, dateTimeValue.Month));
+    }
+}

@@ -21,7 +21,6 @@ else
 
     <DxDataGrid Data="@DataSource"
                 @bind-SingleSelectedDataRow="@SelectedProduct"
-                ShowFilterRow="false"
                 CssClass="datagrid-border-radius-top-0 mw-1100">
         <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name"></DxDataGridColumn>
         <DxDataGridColumn Field="@nameof(ProductFlat.Category)"></DxDataGridColumn>

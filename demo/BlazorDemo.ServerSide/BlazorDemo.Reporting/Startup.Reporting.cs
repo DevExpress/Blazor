@@ -37,8 +37,7 @@ namespace BlazorDemo.Reporting {
     }
 
     sealed class ReportingHostingStartup : IHostingStartup {
-        void IHostingStartup.Configure(IWebHostBuilder builder)
-        {
+        void IHostingStartup.Configure(IWebHostBuilder builder) {
             builder.ConfigureAppConfiguration(((context, configurationBuilder) =>
             {
                 var dictionary = new Dictionary<string, string>

@@ -1,7 +1,4 @@
 <Project>
-  <PropertyGroup>
-      <DxExtendStartupHost>False</DxExtendStartupHost>
-  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4"/>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4"/>
@@ -11,9 +8,24 @@
     <ProjectReference Include="..\..\..\tools\DevExpress.Blazor.DocumentMetadata\DevExpress.Blazor.DocumentMetadata.csproj"/>
     
   </ItemGroup>
-  
    <ItemGroup>
     <None Remove="appsettings.ini" />
-    <Content Include="appsettings.ini"/>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="appsettings.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <DemoModulesSeoConfigurations Include="..\Blazor*\SeoConfiguration.json">
+      <DestinationPath>$(MSBuildThisFileDirectory)$([System.IO.Directory]::GetParent('%(fullpath)').Name)Metadata.json</DestinationPath>
+    </DemoModulesSeoConfigurations>
+  </ItemGroup>
+  <Target Name="DxModuleCopyConfigs" 
+          Inputs="@(DemoModulesSeoConfigurations)" 
+          Outputs="@(DemoModulesSeoConfigurations -> '%(DestinationPath)')"
+          BeforeTargets="PreBuildEvent">
+    <Message Text="%(DemoModulesSeoConfigurations.DestinationPath)" Importance="High" />
+       <Copy SourceFiles="@(DemoModulesSeoConfigurations)" DestinationFiles="%(DemoModulesSeoConfigurations.DestinationPath)" UseHardlinksIfPossible="true" />
+  </Target>
 </Project>

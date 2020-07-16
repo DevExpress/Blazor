@@ -30,7 +30,6 @@ else
 {
     <DxDataGrid @ref="@grid"
                 Data="@Vacancies"
-                ShowFilterRow="false"
                 ShowPager="false"
                 RowRemoving="@((dataItem) => OnRowRemoving(dataItem))"
                 RowEditStart="@(dataItem => OnRowEditStarting(dataItem))"

@@ -1,15 +1,32 @@
 ﻿@page "/GridFilterRow"
 @inject WeatherForecastService ForecastService
 
-<div class="demo-description mw-1100">
-    <h2>Data Grid - Filter Row</h2>
-    <p>
-        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#filter-data">Filter Row</a> allows users to filter data as they type text in cells. An additional drop-down menu also displays a list of filter conditions.
-    </p>
-    <p>
-        Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.ShowFilterRow">ShowFilterRow</a> property to <b>true</b> to display the Filter Row in the Data Grid.
-    </p>
-</div>
+    <div class="demo-description mw-1100">
+        <h2>Data Grid - Filter Row</h2>
+        <p>
+            Enable the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.ShowFilterRow">ShowFilterRow</a> option to display a row that allows users to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#filter-data">filter grid data</a>. This row displays different in-place editors based on the column types. Users can filter data as follows:
+        </p>
+        <ul>
+            <li>
+                <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridDateEditColumn">DxDataGridDateEditColumn</a> (Order Date) - Select a date from the drop-down calendar or type a date in the editor and press Enter.
+            </li>
+            <li>
+                <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridComboBoxColumn-1">DxDataGridComboBoxColumn</a> (Ship Region) - Select an item from the drop-down list.
+            </li>
+            <li>
+                <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridSpinEditColumn">DxDataGridSpinEditColumn</a> (Unit Price) - Click spin buttons or type a value in the editor and press Enter.
+            </li>
+            <li>
+                <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn">DxDataGridColumn</a> (Product) - Type text in the editor and press Enter.
+            </li>
+            <li>
+                <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridCheckBoxColumn">DxDataGridCheckBoxColumn</a> (Order Status) - Select an item from the drop-down list. The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridCheckBoxColumnBase.FilterTextChecked">FilterTextChecked</a>, <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridCheckBoxColumnBase.FilterTextUnchecked">FilterTextUnchecked</a>, and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridCheckBoxColumnBase.FilterTextIndeterminate">FilterTextIndeterminate</a> properties specify item captions.
+            </li>
+        </ul>
+        <p>
+            Each editor contains a clear button. Use <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridCommandColumn">DxDataGridCommandColumn</a> to add a button that clears values from all the editors.
+        </p>
+    </div>
 
 @if (Orders == null)
 {

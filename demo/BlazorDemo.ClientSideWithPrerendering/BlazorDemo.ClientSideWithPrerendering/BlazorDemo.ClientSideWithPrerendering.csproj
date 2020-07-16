@@ -2,9 +2,6 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
-  <PropertyGroup>
-      <DxExtendStartupHost>False</DxExtendStartupHost>
-  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="DevExtreme.AspNet.Data" Version="2.6.1" />

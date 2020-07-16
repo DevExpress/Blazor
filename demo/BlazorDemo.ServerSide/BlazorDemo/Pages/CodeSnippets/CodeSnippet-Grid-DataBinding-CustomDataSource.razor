@@ -2,15 +2,15 @@
     <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted">
         <CodeSnippet>
-@(@"<DxDataGrid T=""@WebApiOrder"" CustomData=""@LoadOrderData"" CssClass=""mw-1100"">
+@(@"<DxDataGrid T=""@WebApiOrder"" CustomData=""@LoadOrderData"" ShowFilterRow=""true"" CssClass=""mw-1100"">
     <Columns>
         <DxDataGridComboBoxColumn T=""@(WebApiCustomerLookup)"" TextFieldName=""Text"" ValueFieldName=""Value""
-                                  CustomData=""@LoadCustomerData"" Field=""@nameof(WebApiOrder.CustomerID)"" />
-        <DxDataGridDateEditColumn Field=""@nameof(WebApiOrder.OrderDate)"" />
-        <DxDataGridSpinEditColumn Field=""@nameof(WebApiOrder.Freight)"" DisplayFormat=""c"" />
-        <DxDataGridColumn Field=""@nameof(WebApiOrder.ShipCountry)"" />
+                                  CustomData=""@LoadCustomerData"" Field=""@nameof(WebApiOrder.CustomerID)"" Width=""300px"" />
+        <DxDataGridDateEditColumn Field=""@nameof(WebApiOrder.OrderDate)"" Width=""180px"" />
+        <DxDataGridSpinEditColumn Field=""@nameof(WebApiOrder.Freight)"" DisplayFormat=""c"" Width=""180px"" />
+        <DxDataGridColumn Field=""@nameof(WebApiOrder.ShipCountry)"" Width=""210px"" />
         <DxDataGridComboBoxColumn T=""@(WebApiShipperLookup)"" TextFieldName=""Text"" ValueFieldName=""Value""
-                                  CustomData=""@LoadShipmentData"" Field=""@nameof(WebApiOrder.ShipVia)"" />
+                                  CustomData=""@LoadShipmentData"" Field=""@nameof(WebApiOrder.ShipVia)"" Width=""220px"" />
     </Columns>
 </DxDataGrid>
 @code {

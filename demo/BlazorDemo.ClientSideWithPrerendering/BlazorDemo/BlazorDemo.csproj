@@ -5,12 +5,16 @@
     <RazorLangVersion>3.0</RazorLangVersion>
     <LangVersion>8.0</LangVersion>
     <DxExtendStartupHost>False</DxExtendStartupHost>
+    <Configurations>Debug;Release;VisualTests</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor" Version="20.1.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.4" />
+    <PackageReference Include="DevExpress.Blazor" Version="20.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="SeoConfiguration.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\tools\DevExpress.Blazor.DocumentMetadata\DevExpress.Blazor.DocumentMetadata.csproj" />
