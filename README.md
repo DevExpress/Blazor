@@ -40,6 +40,7 @@ The following table describes the version compatibility of .NET Core and the Dev
 
 | Supported frameworks | DevExpress.Blazor.nuget version |
 | ------------- | ------------- |
+| [.NET Core 3.1.5 Release](https://devblogs.microsoft.com/dotnet/net-core-june-2020-updates-2-1-19-and-3-1-5/) <br /> [Blazor WebAssembly 3.2.0 Release](https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-now-available/) | **20.1.5-Release** |
 | [.NET Core 3.1.4 Release](https://devblogs.microsoft.com/dotnet/net-core-may-2020/) <br /> [Blazor WebAssembly 3.2.0 Release](https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-now-available/) | **20.1.4-Release** |
 | [.NET Core 3.1.3 Release](https://github.com/dotnet/core/blob/master/release-notes/3.1/3.1.3/3.1.3.md) <br /> [Blazor WebAssembly 3.2.0 Preview 4](https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-4-release-now-available/) | **19.2.5-Preview** (make sure the [Include prerelease](#InstallPackage) option is enabled) |
 | [.NET Core 3.1.2 Release](https://devblogs.microsoft.com/dotnet/net-core-february-2020/) <br /> [Blazor WebAssembly 3.2.0 Preview 1](https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-1-release-now-available/) | **19.2.4-Release** |
