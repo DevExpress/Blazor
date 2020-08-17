@@ -28,9 +28,9 @@ You can now edit row values in a pop-up Edit Form. ([Demo](https://demos.devexpr
 
 ### Scheduler Enhancements
 
-* Appointment Templates - Use templates to customize appointment appearance ([Demo](https://demos.devexpress.com/blazor/SchedulerAppointmentTemplates) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler#templates))
+* Appointment Templates - Use templates to customize appointment appearance ([Demo](https://demos.devexpress.com/blazor/SchedulerTemplates#AppointmentTemplates) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler#templates))
 
-* Custom Fields - Add custom data to Scheduler’s appointments, labels, and statuses ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerr#custom-fields))
+* Custom Fields - Add custom data to Scheduler’s appointments, labels, and statuses ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler#custom-fields))
 
 * New API properties that allow you to assign CSS classes to appointment labels and statuses ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerAppointmentLabelItem._members))
 
