@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <XtraReportsLayoutSerializer SerializerVersion="19.2.0.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v19.2, Version=19.2.0.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4" Name="Report" Margins="0, 0, 0, 0" PageWidth="850" PageHeight="1100" Version="19.2" RequestParameters="false" FilterString="[CustomerID] In (?paramCompany)" DataMember="Order_Details_Invoice" DataSource="#Ref-0" Font="Arial, 9.75pt">
   <Parameters>
     <Item1 Ref="4" Description="Company:" ValueSourceSettings="#Ref-2" MultiValue="true" ValueInfo="ALFKI" Name="paramCompany" />

@@ -1,11 +1,11 @@
 ﻿<div class="demo-description" id="DayCellCustomization">
     <h2><DemoNavLink Link="Calendar#DayCellCustomization" />Calendar - Day Cell Customization</h2>
-    <p>Use the calendar’s <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxCalendarBase.DayCellTemplate">DayCellTemplate</a> property to customize day cells.</p>
+    <p>Use the calendar’s <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1.DayCellTemplate">DayCellTemplate</a> property to customize day cells.</p>
 </div>
 
 <div class="card demo-card border-0 bg-transparent">
     <div class="card-body p-0">
-        <DxCalendar>
+        <DxCalendar T="DateTime">
             <DayCellTemplate>
                 <a class="@GetCssClassNames(context)">@context.Day.ToString()</a>
             </DayCellTemplate>
@@ -48,37 +48,37 @@
         public List<DateTime> BirthDates { get; }
 
         List<DateTime> GetPersonalDays(DateTime baseDate) {
-            return new List<DateTime>() { 
-                baseDate.AddDays(-7), 
-                baseDate.AddDays(-2), 
-                baseDate.AddDays(-1), 
-                baseDate.AddDays(3), 
-                baseDate.AddDays(4), 
-                baseDate.AddDays(9), 
-                baseDate.AddDays(10), 
-                baseDate.AddDays(12), 
-                baseDate.AddDays(15) 
+            return new List<DateTime>() {
+                baseDate.AddDays(-7),
+                baseDate.AddDays(-2),
+                baseDate.AddDays(-1),
+                baseDate.AddDays(3),
+                baseDate.AddDays(4),
+                baseDate.AddDays(9),
+                baseDate.AddDays(10),
+                baseDate.AddDays(12),
+                baseDate.AddDays(15)
             };
         }
 
         List<DateTime> GetHolidays(DateTime baseDate) {
-            return new List<DateTime>() { 
-                baseDate.AddDays(-14), 
-                baseDate.AddDays(-8), 
-                baseDate.AddDays(12), 
-                baseDate.AddDays(13) 
+            return new List<DateTime>() {
+                baseDate.AddDays(-14),
+                baseDate.AddDays(-8),
+                baseDate.AddDays(12),
+                baseDate.AddDays(13)
             };
         }
 
         List<DateTime> GetBirthDates(DateTime baseDate) {
-            return new List<DateTime>() { 
-                baseDate.AddDays(-20), 
-                baseDate.AddDays(-5), 
-                baseDate, 
-                baseDate.AddDays(1), 
-                baseDate.AddDays(6), 
-                baseDate.AddDays(7), 
-                baseDate.AddDays(17) 
+            return new List<DateTime>() {
+                baseDate.AddDays(-20),
+                baseDate.AddDays(-5),
+                baseDate,
+                baseDate.AddDays(1),
+                baseDate.AddDays(6),
+                baseDate.AddDays(7),
+                baseDate.AddDays(17)
             };
         }
     }

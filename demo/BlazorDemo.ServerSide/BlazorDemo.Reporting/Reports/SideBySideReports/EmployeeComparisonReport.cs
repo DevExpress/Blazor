@@ -18,6 +18,6 @@ namespace Demo.Blazor.Reports.SideBySideReports
             DisposeReportSource(xrSubreport1);
             DisposeReportSource(xrSubreport2);
             base.OnDisposing();
-        }        
+        }
     }
 }

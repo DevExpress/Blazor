@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <XtraReportsLayoutSerializer SerializerVersion="18.2.1.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v18.2, Version=18.2.1.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="ProfitAndLossReport" DisplayName="Profit and Loss Report" Landscape="true" Margins="100, 100, 92, 99" PageWidth="1100" PageHeight="850" Version="18.2" RequestParameters="false" FilterString="[Month] Between([StartDate], [EndDate])" DataSource="#Ref-0">
   <Parameters>
     <Item1 Ref="4" Description="Date Range" LookUpSettings="#Ref-2" ValueInfo="5" Name="Range" Type="#Ref-3" />

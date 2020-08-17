@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Components;
@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace DevExpress.Blazor.DocumentMetadata {
     public readonly partial struct Renderer {
-        
+
         public static Renderer Title(string value) {
             return  new Renderer(RendererFlag.Title | RendererFlag.UniqueByType, value);
         }
-        
+
         public static Renderer TitleFormat(string value) {
             return  new Renderer(RendererFlag.TitleFormat | RendererFlag.UniqueByType, value);
         }

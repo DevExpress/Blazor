@@ -1,5 +1,4 @@
-namespace BlazorDemo.Configuration
-{
+namespace BlazorDemo.Configuration {
     public class DemoProductInfo {
         public string Title { get; set; }
 

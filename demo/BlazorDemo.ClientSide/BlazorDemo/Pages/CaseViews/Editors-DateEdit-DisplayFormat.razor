@@ -1,16 +1,16 @@
 ﻿@inherits DemoWithResizableComponent
 
 <div class="demo-description" id="DisplayFormat">
-    <h2><DemoNavLink Link="DateEdit#DisplayFormat" />Date Edit - Display Format<span class="demo-badge badge badge-success">New</span></h2>
+    <h2><DemoNavLink Link="DateEdit#DisplayFormat" />Date Edit - Display Format</h2>
     <p>
-        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDateEditBase-1.DisplayFormat">DisplayFormat</a> property to format the 
-        <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1">Date Edit</a>’s display value when the editor is not focused, 
-        and use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDateEditBase-1.Format">Format</a> property to format 
-        the editor’s value in edit mode when the editor is focused. If the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDateEditBase-1.DisplayFormat">DisplayFormat</a> property is not set, 
-        the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDateEditBase-1.Format">Format</a> is applied both in display and edit modes.
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.DisplayFormat">DisplayFormat</a> property to format the
+        <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1">Date Edit</a>’s display value when the editor is not focused,
+        and use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.Format">Format</a> property to format
+        the editor’s value in edit mode when the editor is focused. If the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.DisplayFormat">DisplayFormat</a> property is not set,
+        the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.Format">Format</a> is applied both in display and edit modes.
     </p>
     <p>
-        Date Edit supports standard formats. See the <a class="helplink" target="_blank" href="https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings">Standard Date and Time Format Strings</a> and 
+        Date Edit supports standard formats. See the <a class="helplink" target="_blank" href="https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings">Standard Date and Time Format Strings</a> and
         <a class="helplink" target="_blank" href="https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings">Custom Date and Time Format Strings</a> help topics for more information.
     </p>
 </div>
@@ -32,6 +32,5 @@
 </div>
 
 @code {
-    DateTime dateTimeValue = DateTime.Now;
-    DateTime DateTimeValue { get => dateTimeValue; set { dateTimeValue = value; InvokeAsync(StateHasChanged); } }
+    DateTime DateTimeValue { get; set; } = DateTime.Now;
 }

@@ -8,22 +8,22 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
         int _value;
 
         public void Report(int value) {
-            if (_value != value) {
+            if(_value != value) {
                 _value = value;
                 var observers = _observers.ToArray();
-                if (_value == 100) {
+                if(_value == 100) {
                     _observers.Clear();
-                    foreach (var observer in observers)
+                    foreach(var observer in observers)
                         observer.OnCompleted();
                 } else {
-                    foreach (var observer in observers)
+                    foreach(var observer in observers)
                         observer.OnNext(_value);
                 }
             }
         }
 
         public IDisposable Subscribe(IObserver<int> observer) {
-            if (_value == 100) {
+            if(_value == 100) {
                 observer.OnCompleted();
                 return null;
             }

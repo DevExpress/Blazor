@@ -10,7 +10,7 @@
 
 namespace Demo.Blazor.Reports.NorthwindTraders
 {
-    
+
     public partial class InvoiceReport : DevExpress.XtraReports.UI.XtraReport {
         private void InitializeComponent() {
             DevExpress.XtraReports.ReportInitializer reportInitializer = new DevExpress.XtraReports.ReportInitializer(this, "BlazorDemo.Reporting.Reports.NorthwindTraders.InvoiceReport.repx");

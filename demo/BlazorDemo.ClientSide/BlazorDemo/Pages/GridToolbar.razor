@@ -5,16 +5,16 @@
     <h2>Data Grid - Toolbar</h2>
     <p>Follow the steps below to add a toolbar to a Data Grid component:</p>
     <ol>
-        <li>Add <a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.HeaderTemplate" target="_blank" rel="nofollow">HeaderTemplate</a> to the Data Grid’s markup.</li>
+        <li>Add <a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.HeaderTemplate" target="_blank" rel="nofollow">HeaderTemplate</a> to the Data Grid’s markup.</li>
         <li>Add buttons (<a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem" target="_blank" rel="nofollow">DxToolbarItem</a> objects) to the <a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar" target="_blank" rel="nofollow">Toolbar</a> component in this template. Each button can display an icon, text, or both.</li>
     </ol>
     <p>For more information on the Toolbar’s features, refer to the <a class="helplink" href="https://demos.devexpress.com/blazor/Toolbar#Overview" target="_blank" rel="nofollow">Toolbar's online demos</a> and <a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar" target="_blank" rel="nofollow">documentation</a>.</p>
 </div>
 
-<DxDataGrid @ref="grid" 
-            Data="@Data" 
-            ShowFilterRow="@ShowFilterRow" 
-            @bind-SingleSelectedDataRow="@SelectedRow" 
+<DxDataGrid @ref="grid"
+            Data="@Data"
+            ShowFilterRow="@ShowFilterRow"
+            @bind-SingleSelectedDataRow="@SelectedRow"
             RowInsertingAsync="@OnRowInserting"
             RowUpdatingAsync="@OnRowUpdating"
             InitNewRow="@OnInitNewRow"
@@ -24,8 +24,8 @@
             <DxToolbarItem Text="New" BeginGroup="true" Click="@OnAddNewClick" IconCssClass="grid-toolbar-new" />
             <DxToolbarItem Text="Edit" Click="@OnEditClick" IconCssClass="grid-toolbar-edit" Enabled="@Enabled" />
             <DxToolbarItem Text="Delete" Click="@OnDeleteClick" IconCssClass="grid-toolbar-delete" Enabled="@Enabled" />
-            <DxToolbarItem Text="Show Filter Row" BeginGroup="true" GroupName="GroupName" Click="@OnShowFilterRow" IconCssClass="grid-toolbar-filter-row" />
-            <DxToolbarItem Text="Documentation" NavigateUrl="https://docs.devexpress.com/Blazor/401086/data-grid" BeginGroup="true" 
+            <DxToolbarItem Text="Show Filter Row" BeginGroup="true" GroupName="FilterRow" Click="@OnShowFilterRow" IconCssClass="grid-toolbar-filter-row" />
+            <DxToolbarItem Text="Documentation" NavigateUrl="https://docs.devexpress.com/Blazor/401086/data-grid" BeginGroup="true"
                            Alignment="ToolbarItemAlignment.Right" IconCssClass="grid-toolbar-document" target="_blank" />
         </DxToolbar>
     </HeaderTemplate>

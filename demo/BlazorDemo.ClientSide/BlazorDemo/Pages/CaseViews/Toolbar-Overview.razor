@@ -2,10 +2,10 @@
     <h2>
         <DemoNavLink Link="Toolbar#Overview" />Toolbar - Overview
     </h2>
-    <p>The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar">Toolbar</a> component allows you to implement an adaptive button-based interface in your Blazor application. Toolbar buttons are stored in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarBase.Items">Items</a> collection, and each button is represented by a <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem">DxToolbarItem</a> object that can display an icon, text or both.</p>
+    <p>The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar">Toolbar</a> component allows you to implement an adaptive button-based interface in your Blazor application. Toolbar buttons are stored in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar.Items">Items</a> collection, and each button is represented by a <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem">DxToolbarItem</a> object that can display an icon, text or both.</p>
     <p>The main Toolbar item’s API members are listed below:</p>
     <ul>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarItemBase.Click">Click</a> - Fires when users click the toolbar item. Handle this event to specify different click handlers for different items. To specify a common click handler for all toolbar items, use the Toolbar’s <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarBase.ItemClick">ItemClick</a> event.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarItemBase.Click">Click</a> - Fires when users click the toolbar item. Handle this event to specify different click handlers for different items. To specify a common click handler for all toolbar items, use the Toolbar’s <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar.ItemClick">ItemClick</a> event.</li>
         <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.Text">Text</a> - Specifies the item’s text.</li>
         <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarItemBase.BeginGroup">BeginGroup</a> – Set this property to true to create a new item group.</li>
         <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.IconCssClass">IconCssClass</a> – Specifies the name of the CSS class applied to the toolbar item’s icon.</li>
@@ -36,9 +36,8 @@
 <CodeSnippet_Toolbar_Overview />
 
 @code {
-    IObserver<string> toasterRef; 
+    IObserver<string> toasterRef;
     void OnItemClick(ToolbarItemClickEventArgs e) {
         toasterRef.OnNext($"The '{e.ItemName}' button has been clicked");
     }
 }
-

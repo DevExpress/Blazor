@@ -1,7 +1,7 @@
 ﻿<CodeSnippetTabbed>
     <CodeSnippetTabPage Text="Razor">
 @(@"<div style=""@Formatting.GetStyleString()"" @oncontextmenu=""((e) => { ContextMenu.Show(e); } )"" @oncontextmenu:preventDefault>
-    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. 
+    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus.
         Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</span>
 </div>
 <DxContextMenu Data=""@MenuItems""
@@ -19,8 +19,8 @@
 
     DxContextMenu ContextMenu { get; set; }
     TextFormatting Formatting { get; set; } = new TextFormatting();
-    List<TextFormattingMenuItem> MenuItems { 
-        get { 
+    List<TextFormattingMenuItem> MenuItems {
+        get {
             if (menuItems == null) {
                 menuItems = new List<TextFormattingMenuItem>() {
                     new TextFormattingParentMenuItem(Formatting, ""Font"", new List<TextFormattingMenuItem>() {
@@ -49,7 +49,7 @@
                         new TextDecorationMenuItem(Formatting, ""Overline"", ""Overline""),
                         new TextDecorationMenuItem(Formatting, ""Strikethrough"", ""Strikethrough"")
                     }),
-                    new ClearFormattingMenuItem(Formatting) { BeginGroup = true } 
+                    new ClearFormattingMenuItem(Formatting) { BeginGroup = true }
                 };
             }
             return menuItems;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -43,7 +43,7 @@ namespace BlazorDemo.Services {
 
             return Enumerable.Range(1, 15).Select(index => {
                 var day = startDate.AddDays(index);
-                if (day.Month - startDate.AddDays(index - 1).Month != 0 || temperatureC == null) {
+                if(day.Month - startDate.AddDays(index - 1).Month != 0 || temperatureC == null) {
                     min = temperatureStatistic[day.Month - 1].Item1;
                     max = temperatureStatistic[day.Month - 1].Item2;
                     temperatureC = rng.Next(min, max);
@@ -116,8 +116,8 @@ namespace BlazorDemo.Services {
             return Task.FromResult(RemoveInternal(dataItem));
         }
         WeatherForecast[] UpdateInternal(WeatherForecast dataItem, IDictionary<string, object> newValue) {
-            foreach (var field in newValue.Keys) {
-                switch (field) {
+            foreach(var field in newValue.Keys) {
+                switch(field) {
                     case nameof(dataItem.Date):
                         dataItem.Date = (DateTime)newValue[field];
                         break;

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <XtraReportsLayoutSerializer SerializerVersion="18.2.0.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v18.2, Version=18.2.0.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4" Name="CalculatedFieldsReport" DisplayName="Calculated Fields" EventsInfo="|Report,BeforePrint,Report_BeforePrint" Margins="100, 96, 100, 75" PageWidth="850" PageHeight="1100" Version="18.2" RequestParameters="false" DataMember="OrderReports" DataSource="#Ref-0">
   <Parameters>
     <Item1 Ref="4" Description="Expression: " LookUpSettings="#Ref-2" ValueInfo="([UnitPrice] * [Quantity]) * (1 -  [Discount])" Name="ExpressionParameter" />

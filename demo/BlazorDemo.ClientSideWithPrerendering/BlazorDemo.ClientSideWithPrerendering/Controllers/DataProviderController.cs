@@ -26,13 +26,13 @@ namespace BlazorDemo.AspNetCoreHost {
             ISalesViewerDataProvider salesViewerDataProvider
         ) {
             var ct = _cancellationToken = _cts.Token;
-            
+
             InitializeEntities(countryNamesProvider, countryNamesProvider.LoadAsync, ct);
             InitializeEntities(flatProductsProvider, flatProductsProvider.LoadAsync, ct);
             InitializeEntities(productCategoriesProvider, productCategoriesProvider.GetProductCategoriesAsync, ct);
             InitializeEntities(productsProvider, productsProvider.LoadAsync, ct);
             InitializeEntities(salesInfoDataProvider, salesInfoDataProvider.GetSalesAsync, ct);
-            
+
             InitializeEntities(salesViewerDataProvider, salesViewerDataProvider.GetChannels, ct);
             InitializeEntities(salesViewerDataProvider, salesViewerDataProvider.GetCities, ct);
             InitializeEntities(salesViewerDataProvider, salesViewerDataProvider.GetContacts, ct);
@@ -42,26 +42,26 @@ namespace BlazorDemo.AspNetCoreHost {
             InitializeEntities(salesViewerDataProvider, salesViewerDataProvider.GetRegions, ct);
             InitializeEntities(salesViewerDataProvider, salesViewerDataProvider.GetSales, ct);
             InitializeEntities(salesViewerDataProvider, salesViewerDataProvider.GetSectors, ct);
-            
+
             _providersReadyToTransfer = Task.WhenAll(_lookup.Values);
         }
 
-        void InitializeEntities<TService, TEntity>(TService _, Func<CancellationToken, Task<IEnumerable<TEntity>>> @select, CancellationToken ct) 
+        void InitializeEntities<TService, TEntity>(TService _, Func<CancellationToken, Task<IEnumerable<TEntity>>> @select, CancellationToken ct)
             where TService : IDataProvider {
             _lookup.Add(EntityId.FromTypes<TService, TEntity>(), WrapEntitiesGetter(@select, ct));
         }
 
         Task<object[]> WrapEntitiesGetter<TEntity>(Func<CancellationToken, Task<IEnumerable<TEntity>>> select, in CancellationToken ct) {
-            return Task.Factory.StartNew( 
-                function: async (state) => (await select((CancellationToken)state)).Cast<object>().ToArray(), 
-                state: ct, 
+            return Task.Factory.StartNew(
+                function: async (state) => (await select((CancellationToken)state)).Cast<object>().ToArray(),
+                state: ct,
                 cancellationToken: ct
                 ).Unwrap();
         }
 
         [HttpGet, Route("Metadata")]
         public async IAsyncEnumerable<EntitySetMetadata> Metadata() {
-            foreach (var kvp in _lookup) {
+            foreach(var kvp in _lookup) {
                 var dataSet = await kvp.Value;
                 yield return new EntitySetMetadata(kvp.Key, dataSet.Length);
             }
@@ -69,8 +69,8 @@ namespace BlazorDemo.AspNetCoreHost {
 
         [HttpGet, Route("Batch")]
         public async IAsyncEnumerable<object> Batch(Guid provider, Guid entity, int skip, int take) {
-            if (_lookup.TryGetValue(new EntityId(provider, entity), out var dataSetTask)) {
-                foreach (var item in (await dataSetTask).Skip(skip).Take(take)) {
+            if(_lookup.TryGetValue(new EntityId(provider, entity), out var dataSetTask)) {
+                foreach(var item in (await dataSetTask).Skip(skip).Take(take)) {
                     yield return item;
                 }
             }

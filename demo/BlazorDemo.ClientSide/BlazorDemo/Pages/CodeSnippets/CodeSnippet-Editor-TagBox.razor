@@ -1,19 +1,13 @@
 ﻿<CodeSnippetTabbed>
 <CodeSnippetTabPage Text="Razor">
 @(@"<DxTagBox Data=""@Persons.DataSource""
-          TextFieldName=""Text""
-          @bind-SelectedItems=""@SelectedPersons""
+          TextFieldName=""@nameof(Person.Text)""
+          @bind-Values=""@SelectedPersons""
           SizeMode=""@SizeMode"">
 </DxTagBox>
 
 @code {
-    IEnumerable<Person> selectedPersons = new List<Person>() { Persons.DataSource[0] };
-    IEnumerable<Person> SelectedPersons 
-    {
-        get => selectedPersons;
-        set { selectedPersons = value; }
-    }
-
+    IEnumerable<Person> SelectedPersons { get; set; } = new List<Person>() { Persons.DataSource[0] };
     SizeMode SizeMode { get; set; }
 }")
 </CodeSnippetTabPage>

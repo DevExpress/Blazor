@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Components.Rendering;
 namespace DevExpress.Blazor.DocumentMetadata
 {
     public readonly partial struct Renderer {
-        
+
         public static Renderer Stylesheet(string id, string url) {
             if (string.IsNullOrEmpty(id))
                 id = url;
             return  new Renderer(RendererFlag.Stylesheet | RendererFlag.UniqueByName, url, id);
         }
-        
+
         public int StylesheetRender(RenderTreeBuilder renderTreeBuilder, int seq, NavigationManager navigationManager) {
             renderTreeBuilder.OpenElement(seq + 0, "link");
             renderTreeBuilder.AddAttribute(seq + 1, "href", navigationManager.ResolveUrl(_mainAttributeValue));

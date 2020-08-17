@@ -1,15 +1,15 @@
 ﻿@{
     RenderFragment<string> GetLink = (propName) =>
-    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxCheckBoxBase-1.@propName">@propName</a>;
+    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1.@propName">@propName</a>;
 }
 
 <div class="demo-description" id="Alignment">
     <h2><DemoNavLink Link="CheckBox#Alignment" />CheckBox - Alignment</h2>
     <p>Use the CheckBox’s @GetLink(nameof(DxCheckBox<bool>.Alignment)) and @GetLink(nameof(DxCheckBox<bool>.LabelPosition)) properties to define a component’s input and label positions.
-    Note that a CheckBox’s input and label are only aligned in the component's root element. 
+    Note that a CheckBox’s input and label are only aligned in the component's root element.
     This element behaves as a standard <code>block</code> container (or <code>flex</code> in the case of <i>SpaceBetween</i> and <i>SpaceAround</i> alignment variants) regarding outer styles a user applies.</p>
 
-    <p>Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.CheckBoxContentAlignment">CheckBoxContentAlignment</a> enumeration values to specify CheckBox alignment options. 
+    <p>Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.CheckBoxContentAlignment">CheckBoxContentAlignment</a> enumeration values to specify CheckBox alignment options.
         The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.LabelPosition">LabelPosition</a> enumeration values specify the CheckBox label position.</p>
 </div>
 
@@ -73,20 +73,15 @@
 </div>
 
 @code  {
-    CheckBoxContentAlignment alignment;
-    LabelPosition labelPosition;
-
     bool MultimediaChecked { get; set; }
     bool AirConditioningChecked { get; set; }
     bool ParkingCameraChecked { get; set; }
     bool HeatedSeatsChecked { get; set; }
     bool DroneChecked { get; set; }
 
-    CheckBoxContentAlignment Alignment { get { return alignment; } set { alignment = value; InvokeAsync(StateHasChanged); } }
-    LabelPosition LabelPosition { get { return labelPosition; } set { labelPosition = value; InvokeAsync(StateHasChanged); } }
+    CheckBoxContentAlignment Alignment { get; set; }
+    LabelPosition LabelPosition { get; set; }
 }
 
 
 <CodeSnippet_Editor_CheckBox_Alignment></CodeSnippet_Editor_CheckBox_Alignment>
-
-

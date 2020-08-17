@@ -72,23 +72,10 @@
 </div>
 
 @code {
-    string firstName = "Nancy";
-    string FirstName { get => firstName; set { firstName = value; OnChanged(); } }
-
-    string lastName = "Davolio";
-    string LastName { get => lastName; set { lastName = value; OnChanged(); } }
-
-    DateTime birthDate = DateTime.Now.AddYears(-20);
-    DateTime BirthDate { get => birthDate; set { birthDate = value; OnChanged(); } }
-
-    string position = "Sales Representative";
-    string Position { get => position; set { position = value; OnChanged(); } }
-
-    DateTime hireDate = DateTime.Now.AddYears(-20);
-    DateTime HireDate { get => hireDate; set { hireDate = value; OnChanged(); } }
-
-    string notes = "Education includes a BA in psychology.";
-    string Notes { get => notes; set { notes = value; OnChanged(); } }
-
-    void OnChanged() { InvokeAsync(StateHasChanged); }
+    string FirstName { get; set; } = "Nancy";
+    string LastName { get; set; } = "Davolio";
+    DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-20);
+    string Position { get; set; } = "Sales Representative";
+    DateTime HireDate { get; set; } = DateTime.Now.AddYears(-20);
+    string Notes { get; set; } = "Education includes a BA in psychology.";
 }

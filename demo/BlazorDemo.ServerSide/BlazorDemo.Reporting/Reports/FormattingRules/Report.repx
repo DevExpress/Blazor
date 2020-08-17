@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <XtraReportsLayoutSerializer SerializerVersion="18.2.0.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v18.2, Version=18.2.0.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4" Name="ConditionalFormattingReport" DisplayName="Conditional Formatting" PageWidth="850" PageHeight="1100" Version="18.2" EventsInfo="|Report,BeforePrint,Report_BeforePrint" RequestParameters="false" DataMember="Orders" DataSource="#Ref-0">
   <FormattingRuleSheet>
     <Item1 Ref="2" Name="formattingRule1" DataMember="Orders" Condition="[Extended Price] &gt; 1000">

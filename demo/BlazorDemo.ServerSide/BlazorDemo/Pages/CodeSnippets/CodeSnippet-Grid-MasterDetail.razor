@@ -2,11 +2,11 @@
     <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted ">
         <CodeSnippet>
-@(@"<DxDataGrid @ref=""@grid"" 
-            Data=""@ProductsDataSource"" 
-            AutoCollapseDetailRow=""true"" 
+@(@"<DxDataGrid @ref=""@grid""
+            Data=""@ProductsDataSource""
+            AutoCollapseDetailRow=""true""
             ShowDetailRow=""true""
-            SelectionMode=""DataGridSelectionMode.None"" 
+            SelectionMode=""DataGridSelectionMode.None""
             PageSize=""4""
             CssClass=""mw-1100"">
     <Columns>
@@ -22,7 +22,7 @@
                 <div class=""p-3"">
                     @if (SalesDataSource != null)
                     {
-                        <DxDataGrid Data=""@SalesDataSource.Where(x => x.ProductId == context.Id)"" 
+                        <DxDataGrid Data=""@SalesDataSource.Where(x => x.ProductId == context.Id)""
                                     SelectionMode=""DataGridSelectionMode.None"">
                             <DxDataGridDateEditColumn Field=""@nameof(Sale.SaleDate)"" />
                             <DxDataGridSpinEditColumn Field=""@nameof(Sale.Units)"" />

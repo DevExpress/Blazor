@@ -14,7 +14,7 @@ namespace BlazorDemo.Wasm.DataProviders.Implementation {
     }
 }
 
-namespace  Microsoft.Extensions.DependencyInjection {
+namespace Microsoft.Extensions.DependencyInjection {
     public static class NotSupportedProviderExtensions {
         public static IServiceCollection AddNotSupportedDemoServices(this IServiceCollection serviceCollection) {
             serviceCollection.AddSingleton<IRentInfoDataProvider, RentInfoDataProvider>();

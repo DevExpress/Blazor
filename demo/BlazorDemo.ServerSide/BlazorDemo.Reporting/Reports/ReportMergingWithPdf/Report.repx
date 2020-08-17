@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <XtraReportsLayoutSerializer SerializerVersion="20.1.0.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport DevExpress.XtraReports.20.1" Name="ReportMergingWithPdf" DisplayName="Report Merging with PDF" SnapGridSize="12.5" DrawWatermark="true" ReportUnit="Pixels" Margins="56, 43, 46, 60" PageWidth="816" PageHeight="1056" Version="20.1" RequestParameters="false" DataMember="Orders" DataSource="#Ref-0" Dpi="96" Font="Arial, 9.75pt, charSet=0">
   <Parameters>
     <Item1 Ref="3" Visible="false" Description="ParamShowHeader" ValueInfo="True" Name="paramShowHeader" Type="#Ref-2" />

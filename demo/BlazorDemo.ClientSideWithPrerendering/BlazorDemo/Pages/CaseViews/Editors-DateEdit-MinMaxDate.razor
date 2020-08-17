@@ -1,8 +1,8 @@
-@inherits DemoWithResizableComponent
+﻿@inherits DemoWithResizableComponent
 
 <div class="demo-description" id="DateRange">
-    <h2><DemoNavLink Link="DateEdit#DateRange" />Date Edit - Date Range<span class="demo-badge badge badge-success">New</span></h2>
-    <p>Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDateEditBase-1.MinDate">MinDate</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDateEditBase-1.MaxDate">MaxDate</a> properties to specify a range of available dates. The Date Edit's calendar disables dates that are out of the range and hides navigation arrows for them. If a user types a date that is out of the range, the Date Edit keeps the previously selected date.</p>
+    <h2><DemoNavLink Link="DateEdit#DateRange" />Date Edit - Date Range</h2>
+    <p>Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.MinDate">MinDate</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.MaxDate">MaxDate</a> properties to specify a range of available dates. The Date Edit's calendar disables dates that are out of the range and hides navigation arrows for them. If a user types a date that is out of the range, the Date Edit keeps the previously selected date.</p>
     <p>In this demo, the Date Edit component allows users to select dates from the current month.</p>
 </div>
 
@@ -27,16 +27,12 @@
 </div>
 
 @code {
+    DateTime DateTimeValue { get; set; } = DateTime.Now;
     DateTime MinDate { get; set; }
     DateTime MaxDate { get; set; }
 
-    DateTime dateTimeValue;
-    DateTime DateTimeValue { get => dateTimeValue; set { dateTimeValue = value; InvokeAsync(StateHasChanged); } }
-
     protected override void OnInitialized() {
-        dateTimeValue = DateTime.Now;
-
-        MinDate = new DateTime(dateTimeValue.Year, dateTimeValue.Month, 1);
-        MaxDate = new DateTime(dateTimeValue.Year, dateTimeValue.Month, DateTime.DaysInMonth(dateTimeValue.Year, dateTimeValue.Month));
+        MinDate = new DateTime(DateTimeValue.Year, DateTimeValue.Month, 1);
+        MaxDate = new DateTime(DateTimeValue.Year, DateTimeValue.Month, DateTime.DaysInMonth(DateTimeValue.Year, DateTimeValue.Month));
     }
 }

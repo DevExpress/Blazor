@@ -6,14 +6,14 @@
             This demo illustrates the DevExpress Blazor <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton">Button</a> component with different styles and options. The main Button API members are listed below.
         </p>
         <ul>
-            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxButtonBase.Text">Text</a> – Specifies the text within the button.</li>
-            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxButtonBase.RenderStyle">RenderStyle</a> – Specifies the button’s render style.</li>
-            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxButtonBase.RenderStyleMode">RenderStyleMode</a> – Specifies how to apply the render style to the button.</li>
-            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxButtonBase.Click">Click</a> - Occurs after the button is clicked.</li>
-            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxButtonBase.Enabled">Enabled</a> - Enables/disables the button. The disabled button (<b>Enabled</b> is set to <b>false</b>) does not respond to user actions.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton.Text">Text</a> – Specifies the text within the button.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton.RenderStyle">RenderStyle</a> – Specifies the button’s render style.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton.RenderStyleMode">RenderStyleMode</a> – Specifies how to apply the render style to the button.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton.Click">Click</a> - Occurs after the button is clicked.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton.Enabled">Enabled</a> - Enables/disables the button. The disabled button (<b>Enabled</b> is set to <b>false</b>) does not respond to user actions.</li>
         </ul>
         <p>
-            The Button component supports different size modes. To specify the component's size in code, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxButtonBase.SizeMode">SizeMode</a> property. To apply different size modes, use the drop-down list in the demo card's header.
+            The Button component supports different size modes. To specify the component's size in code, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton.SizeMode">SizeMode</a> property. To apply different size modes, use the drop-down list in the demo card's header.
         </p>
     </div>
 <div class="card demo-card demo-card-shadow">
@@ -91,7 +91,6 @@
         buttonRenderStyle = renderStyle;
         buttonRenderStyleMode = renderMode;
         styleName = buttonRenderStyle.ToString();
-        InvokeAsync(StateHasChanged);
     }
 }
 <br />
@@ -101,8 +100,8 @@
     <p>
         This demo illustrates how to display an icon in the Button component.
         <ul>
-            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxButtonBase.IconCssClass">IconCssClass</a> – Specifies the name of the icon’s CSS class.</li>
-            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxButtonBase.IconPosition">IconPosition</a> – Specifies the icon’s position relative to the text.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton.IconCssClass">IconCssClass</a> – Specifies the name of the icon’s CSS class.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton.IconPosition">IconPosition</a> – Specifies the icon’s position relative to the text.</li>
         </ul>
         The demo also shows how to use the <b>Title</b> HTML attribute to display a tooltip text when the mouse moves over the button.
     </p>
@@ -153,6 +152,5 @@
     }
     void Like(MouseEventArgs args) {
         likes++;
-        StateHasChanged();
     }
 }

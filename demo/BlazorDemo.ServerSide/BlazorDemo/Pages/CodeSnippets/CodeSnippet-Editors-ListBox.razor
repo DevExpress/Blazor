@@ -1,17 +1,13 @@
 ﻿<CodeSnippetTabbed>
 <CodeSnippetTabPage Text="Razor">
 @(@"<DxListBox Data=""@Persons.DataSource""
-           TextFieldName=""Text""
-           @bind-SelectedItems=""@SelectedItems""
+           TextFieldName=""@nameof(Person.Text)""
+           @bind-Values=""@Values""
            style=""height: 232px;"">
 </DxListBox>
 
 @code {
-    IEnumerable<Person> selectedItems = Persons.DataSource.Take(1);
-    IEnumerable<Person> SelectedItems {
-        get => selectedItems;
-        set { selectedItems = value; InvokeAsync(StateHasChanged); }
-    }
+    IEnumerable<Person> Values { get; set; } = Persons.DataSource.Take(1);
 }")
 </CodeSnippetTabPage>
 <CodeSnippetTabPage Text="Business Object">

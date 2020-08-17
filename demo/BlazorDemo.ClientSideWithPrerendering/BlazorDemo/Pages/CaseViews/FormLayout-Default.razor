@@ -9,14 +9,14 @@
         The Form Layout component uses the Bootstrap grid system markup: each layout item occupies between 1 and 12 virtual columns. This value can be defined separately for five different screen resolution types, as listed below:
     </p>
     <ol>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxFormLayoutItemBase.ColSpanXl">ColSpanXl</a> - Extra large screens (1200px or wider).</li>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxFormLayoutItemBase.ColSpanLg">ColSpanLg</a> - Large screens (992px or wider).</li>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxFormLayoutItemBase.ColSpanMd">ColSpanMd</a> - Medium screens (768px or wider).</li>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxFormLayoutItemBase.ColSpanSm">ColSpanSm</a> - Small screens (576px or wider).</li>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxFormLayoutItemBase.ColSpanXs">ColSpanXs</a> - Extra small screens (less than 576px).</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutItem.ColSpanXl">ColSpanXl</a> - Extra large screens (1200px or wider).</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutItem.ColSpanLg">ColSpanLg</a> - Large screens (992px or wider).</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutItem.ColSpanMd">ColSpanMd</a> - Medium screens (768px or wider).</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutItem.ColSpanSm">ColSpanSm</a> - Small screens (576px or wider).</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutItem.ColSpanXs">ColSpanXs</a> - Extra small screens (less than 576px).</li>
     </ol>
     <p>
-        Form Layout items support different size modes. To specify the item's size in code, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxFormLayoutBase.ItemSizeMode">ItemSizeMode</a> property. To apply different size modes, use the drop-down list in the demo card's header.
+        Form Layout items support different size modes. To specify the item's size in code, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayout.ItemSizeMode">ItemSizeMode</a> property. To apply different size modes, use the drop-down list in the demo card's header.
     </p>
 </div>
 
@@ -61,7 +61,7 @@
                 </Template>
             </DxFormLayoutItem>
         </DxFormLayout>
-        
+
     </div>
 </div>
 
@@ -73,20 +73,9 @@
 </div>
 
 @code {
-    string name = "Nancy Davolio";
-    string Name { get => name; set { name = value; OnChanged(); } }
-
-    string email = "NancyDavolio@sample.com";
-    string Email { get => email; set { email = value; OnChanged(); } }
-
-    DateTime birthDate = DateTime.Now.AddYears(-20);
-    DateTime BirthDate { get => birthDate; set { birthDate = value; OnChanged(); } }
-
-    int yearsWorked = 3;
-    int YearsWorked { get => yearsWorked; set { yearsWorked = value; OnChanged(); } }
-
-    bool onVacation = true;
-    bool OnVacation { get => onVacation; set { onVacation = value; OnChanged(); } }
-
-    void OnChanged() { InvokeAsync(StateHasChanged); }
+    string Name { get; set; } = "Nancy Davolio";
+    string Email { get; set; } = "NancyDavolio@sample.com";
+    DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-20);
+    int YearsWorked { get; set; } = 3;
+    bool OnVacation { get; set; } = true;
 }

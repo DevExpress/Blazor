@@ -1,6 +1,7 @@
 ﻿<CodeSnippet>
 @(@"<DxTreeView @ref=""@treeView""
             Data=""@ComponentsData.ComponentSets""
+            CssClass=""demo-treeview-template""
             ChildrenExpression=""@(dataItem => ((ComponentSet)dataItem).ComponentSets)"">
     <NodeTemplate>
         @{
@@ -8,15 +9,15 @@
         }
         @if (!context.IsLeaf)
         {
-            <h4 class=""my-0 p-2 d-flex align-items-center justify-content-between"">
-                <span class=""mr-3"">@dataItem.Title</span>
+            <h4 class=""my-0 p-2 d-flex align-items-center"">
                 <small class=""@GetExpandButtonCssClass(dataItem)"" style=""top: 0px""></small>
+                <span class=""ml-3"">@dataItem.Title</span>
             </h4>
         }
         else
         {
             <div class=""media p-2"">
-                <img src=""@dataItem.ImageUrl"" class=""bg-primary rounded mr-3"" style=""padding: 2px; width: 30px; height: 30px;"" alt=""@dataItem.Title"" />
+                <img class=""bg-primary rounded-circle mr-3 treeview-template-icon"" src=""@dataItem.ImageUrl"" alt=""@dataItem.Title"" />
                 <div class=""media-body"">
                     <h5 class=""mt-0"">@dataItem.Title</h5>
                     @dataItem.Description
@@ -31,7 +32,7 @@
 
     string GetExpandButtonCssClass(ComponentSet nodeDataItem)
     {
-        return String.Format(""oi oi-chevron-{0}"", treeView.GetNodeExpanded(n => n.DataItem == nodeDataItem) ? ""bottom"" : ""right"");
+        return String.Format(""demo-icon-{0}"", treeView.GetNodeExpanded(n => n.DataItem == nodeDataItem) ? ""collapse"" : ""expand"");
     }
 }")
 </CodeSnippet>

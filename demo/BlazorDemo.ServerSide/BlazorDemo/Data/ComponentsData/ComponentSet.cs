@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace BlazorDemo.Data {
@@ -9,7 +9,7 @@ namespace BlazorDemo.Data {
             Title = title;
             ImageUrl = imageUrl;
             Description = description;
-            if (componentSets != null)
+            if(componentSets != null)
                 ComponentSets.AddRange(componentSets);
         }
 

@@ -1,10 +1,23 @@
-﻿<DemoScriptLoader @ref=@scriptLoaderRef Src="_content/BlazorDemo/lib/scroll-view.js" />
+﻿<DemoScriptLoader @ref="@targetHelperRef"
+                  Code="function ensureNavigationTargetIsVisible() {
+                        var targetSelector = document.location.hash;
+                        if(targetSelector) {
+                            var targetElement = document.querySelector(targetSelector);
+                            if(targetElement)
+                                targetElement.scrollIntoView();
+                        }
+                  }">
+</DemoScriptLoader>
+
+<DemoScriptLoader @ref=@scriptLoaderRef Src="_content/BlazorDemo/lib/scroll-view.js" />
+
 <div @attributes=@Attributes class="blazor-scroll-view @CssClass" @ref=@elementRef>
     @ChildContent
 </div>
 @code {
     ElementReference elementRef;
     DemoScriptLoader scriptLoaderRef;
+    DemoScriptLoader targetHelperRef;
 
     [Parameter] public string CssClass { get; set; }
     [Parameter] public RenderFragment ChildContent { get; set; }
@@ -14,6 +27,8 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await scriptLoaderRef.InvokeVoidAsync("DevExpress.ui.ensureScrollView", elementRef);
+        if(firstRender)
+            await targetHelperRef.InvokeVoidAsync("ensureNavigationTargetIsVisible");
     }
 
     protected override bool ShouldRender() => false;

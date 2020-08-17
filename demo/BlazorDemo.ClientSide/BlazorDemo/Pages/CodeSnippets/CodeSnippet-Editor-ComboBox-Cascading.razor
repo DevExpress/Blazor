@@ -1,14 +1,13 @@
 ﻿<CodeSnippetTabbed>
 <CodeSnippetTabPage Text="Razor">
 @(@"<DxComboBox Data=""@Countries""
-            TextFieldName=""CountryName""
-            SelectedItem=""@CurrentCountry""
-            SelectedItemChanged=""@SelectedCountryChanged"">
+            TextFieldName=""@nameof(Country.CountryName)""
+            Value=""@CurrentCountry""
+            ValueChanged=""@((Country country) => SelectedCountryChanged(country))"">
 </DxComboBox>
 <DxComboBox Data=""@CurrentCountryCities""
-            TextFieldName=""CityName""
-            SelectedItem=""@CurrentCity""
-            SelectedItemChanged=""@SelectedCityChanged"">
+            TextFieldName=""@nameof(City.CityName)""
+            @bind-Value=""@CurrentCity"">
 </DxComboBox>
 
 @code {
@@ -17,23 +16,15 @@
     Country CurrentCountry { get; set; } = CountryCity.Countries[1];
     City CurrentCity { get; set; } = CountryCity.Cities[4];
 
-    void SelectedCountryChanged(Country country)
-    {
-        CurrentCountry = country;
-        CurrentCountryCities = Cities.FindAll(city => city.CountryId == CurrentCountry.Id);
-        CurrentCity = CurrentCountryCities[0];
-        InvokeAsync(StateHasChanged);
-    }
-
-    protected override void OnInitialized()
-    {
+    protected override void OnInitialized() {
+        base.OnInitialized();
         SelectedCountryChanged(CurrentCountry);
     }
 
-    void SelectedCityChanged(City city)
-    {
-        CurrentCity = city;
-        InvokeAsync(StateHasChanged);
+    void SelectedCountryChanged(Country country) {
+        CurrentCountry = country;
+        CurrentCountryCities = CountryCity.Cities.FindAll(city => city.CountryId == CurrentCountry.Id);
+        CurrentCity = CurrentCountryCities[0];
     }
 }")
 </CodeSnippetTabPage>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <XtraReportsLayoutSerializer SerializerVersion="18.2.0.0" Ref="1" ControlType="XtraReportsDemos.AnchorVertical.Report, DevExpress.DemoReports.v18.2, Version=18.2.0.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47" Name="AnchoringReport" DisplayName="Anchoring" Margins="50, 50, 75, 67" PageWidth="850" PageHeight="1100" Version="18.2" RequestParameters="false" DataMember="Homes" DataSource="#Ref-0">
   <Parameters>
     <Item1 Ref="3" Description="Landscape" ValueInfo="False" Name="LandscapeParameter" Type="#Ref-2" />

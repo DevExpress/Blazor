@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -13,8 +13,8 @@ namespace BlazorDemo.DataProviders.Implementation {
         private static readonly Lazy<IEnumerable<Country>> countries = new Lazy<IEnumerable<Country>>(() => {
             return names.Select((x, index) => new Country() { Id = index, CountryName = x }).ToList();
         });
-        private static readonly IEnumerable<string> names = 
-             new [] {
+        private static readonly IEnumerable<string> names =
+             new[] {
                 "Afghanistan",
                 "Albania",
                 "Algeria",
@@ -62,10 +62,8 @@ namespace BlazorDemo.DataProviders.Implementation {
                 "Costa Rica",
                 "Cote d'Ivoire",
                 "Croatia",
-                "Cuba",
                 "Cyprus",
                 "Czech Republic",
-                "Democratic People's Republic of Korea",
                 "Democratic Republic of the Congo",
                 "Denmark",
                 "Djibouti",
@@ -104,7 +102,6 @@ namespace BlazorDemo.DataProviders.Implementation {
                 "Iceland",
                 "India",
                 "Indonesia",
-                "Iran (Islamic Republic of)",
                 "Iraq",
                 "Ireland",
                 "Israel",
@@ -174,6 +171,7 @@ namespace BlazorDemo.DataProviders.Implementation {
                 "Qatar",
                 "Republic of Korea",
                 "Republic of Moldova",
+                "Republic of North Macedonia",
                 "Romania",
                 "Russian Federation",
                 "Rwanda",
@@ -196,16 +194,13 @@ namespace BlazorDemo.DataProviders.Implementation {
                 "South Africa",
                 "Spain",
                 "Sri Lanka",
-                "Sudan",
                 "Suriname",
                 "Swaziland",
                 "Sweden",
                 "Switzerland",
-                "Syrian Arab Republic",
                 "Taiwan Province of China",
                 "Tajikistan",
                 "Thailand",
-                "The former Yugoslav Republic of Maced",
                 "Togo",
                 "Tokelau",
                 "Tonga",
@@ -229,7 +224,6 @@ namespace BlazorDemo.DataProviders.Implementation {
                 "Viet Nam",
                 "Wallis and Futuna Islands",
                 "Yemen",
-                "Yugoslavia",
                 "Zambia",
                 "Zimbabwe",
                 "Holy See",

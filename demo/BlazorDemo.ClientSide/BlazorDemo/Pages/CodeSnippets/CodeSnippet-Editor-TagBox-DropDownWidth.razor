@@ -1,19 +1,14 @@
 ﻿<CodeSnippet>
 @(@"<DxTagBox Data=""@Persons.DataSource""
-          TextFieldName=""Text""
-          @bind-SelectedItems=""@SelectedPersons""
+          TextFieldName=""@nameof(Person.Text)""
+          @bind-Values=""@SelectedPersons""
+          NullText=""Long text""
           DropDownWidthMode=""DropDownWidthMode""
           SizeMode=""SizeMode"">
 </DxTagBox>
 
 @code {
-    IEnumerable<Person> selectedPersons = new List<Person>() { Persons.DataSource[0] };
-    IEnumerable<Person> SelectedPersons {
-        get => selectedPersons;
-        set { selectedPersons = value; }
-    }
-
-    DropDownWidthMode dropDownWidthMode = DropDownWidthMode.ContentOrEditorWidth;
-    DropDownWidthMode DropDownWidthMode { get => dropDownWidthMode; set { dropDownWidthMode = value; } }
+    IEnumerable<Person> SelectedPersons { get; set; }
+    DropDownWidthMode DropDownWidthMode { get; set; } = DropDownWidthMode.ContentOrEditorWidth;
 }")
 </CodeSnippet>

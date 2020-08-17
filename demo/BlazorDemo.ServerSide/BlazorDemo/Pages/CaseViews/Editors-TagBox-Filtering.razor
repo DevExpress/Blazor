@@ -5,7 +5,7 @@
 <div class="demo-description" id="FilterModes">
     <h2><DemoNavLink Link="TagBox#FilterModes" />TagBox - Filter Modes</h2>
     <p>
-        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTagBoxBase-1.FilteringMode">FilteringMode</a> property to specify whether and how the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-1">TagBox</a> filters list items when users type in the edit box.
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.FilteringMode">FilteringMode</a> property to specify whether and how the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2">TagBox</a> filters list items when users type in the edit box.
     </p>
     <ul>
         <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode">Contains</a> (Default) - The TagBox filters list items that contain the search string and highlights matches.</li>
@@ -27,8 +27,8 @@
         <DxTagBox Id="TagBox1"
                   Data="@Data"
                   FilteringMode="@FilteringMode"
-                  @bind-SelectedItems="@SelectedItems"
-                  TextFieldName="CountryName"
+                  @bind-Values="@Values"
+                  TextFieldName="@nameof(Country.CountryName)"
                   SizeMode="SizeMode"></DxTagBox>
     </div>
 </div>
@@ -40,8 +40,8 @@
                 <label class="d-inline-flex flex-nowrap align-items-center">
                     <b class="hljs-attr" style="white-space: nowrap; margin-right: .5em;">Filtering Mode: </b>
                     <DxComboBox Data="@(Enum.GetNames(typeof(DataGridFilteringMode)))"
-                                SelectedItem="@(FilteringMode.ToString())"
-                                SelectedItemChanged="@((string selectedItem) => { FilteringMode = Enum.Parse<DataGridFilteringMode>(selectedItem); })">
+                                Value="@(FilteringMode.ToString())"
+                                ValueChanged="@((string selectedItem) => { FilteringMode = Enum.Parse<DataGridFilteringMode>(selectedItem); })">
                     </DxComboBox>
                 </label>
             </div>
@@ -52,14 +52,11 @@
 
 @code {
     IEnumerable<Country> Data { get; set; }
+    IEnumerable<Country> Values { get; set; }
+    DataGridFilteringMode FilteringMode { get; set; } = DataGridFilteringMode.StartsWith;
 
     protected override async Task OnInitializedAsync() {
         Data = await CountryNamesService.LoadAsync();
-        SelectedItems = Data.Where(x => x.CountryName == "United Kingdom" || x.CountryName == "United States");
+        Values = Data.Where(x => x.CountryName == "United Kingdom" || x.CountryName == "United States");
     }
-
-    IEnumerable<Country> SelectedItems { get; set; }
-
-    DataGridFilteringMode filteringMode = DataGridFilteringMode.StartsWith;
-    DataGridFilteringMode FilteringMode { get => filteringMode; set { filteringMode = value; InvokeAsync(StateHasChanged); } }
 }

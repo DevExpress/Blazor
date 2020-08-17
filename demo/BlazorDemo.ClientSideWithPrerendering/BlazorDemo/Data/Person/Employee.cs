@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace BlazorDemo.Data {
     public class Employee {

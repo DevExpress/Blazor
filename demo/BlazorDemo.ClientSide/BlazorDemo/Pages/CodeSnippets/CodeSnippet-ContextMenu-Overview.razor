@@ -9,7 +9,7 @@
 </div>
 <div class=""card-body"">
     <div @oncontextmenu=""((e) => ContextMenu.Show(e))"" @oncontextmenu:preventDefault>
-        <span>RIGHT-CLICK TO SHOW THE CONTEXT MENU</span>
+        <div class=""target-container context-menu-container""></div>
     </div>
     <DxContextMenu ItemClick=""@OnItemClick"" @ref=""@ContextMenu"">
         <Items>
@@ -35,7 +35,6 @@
 
     void OnItemClick(ContextMenuItemClickEventArgs args) {
         ClickedItem = args.ItemInfo.Text;
-        InvokeAsync(StateHasChanged);
     }
 }")
 </CodeSnippet>

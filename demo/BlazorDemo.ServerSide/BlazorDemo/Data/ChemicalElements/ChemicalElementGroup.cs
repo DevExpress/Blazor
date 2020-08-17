@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace BlazorDemo.Data {
@@ -7,7 +7,7 @@ namespace BlazorDemo.Data {
 
         public ChemicalElementGroup(string name, List<ChemicalElementGroup> groups = null) {
             Name = name;
-            if (groups != null)
+            if(groups != null)
                 Groups.AddRange(groups);
         }
 

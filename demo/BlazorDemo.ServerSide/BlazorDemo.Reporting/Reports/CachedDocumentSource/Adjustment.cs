@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Demo.Blazor.Reports.CachedDocumentSource {
     public class Adjustment {

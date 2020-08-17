@@ -1,4 +1,4 @@
-﻿@keyframes show_theme_switcher {
+@keyframes show_theme_switcher {
     0% { transform: translateX(0); }
     100% { transform: translateX(-100%); }
 }

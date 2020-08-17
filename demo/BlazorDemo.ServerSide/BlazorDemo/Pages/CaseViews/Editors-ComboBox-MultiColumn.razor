@@ -1,0 +1,42 @@
+﻿@inherits DemoWithResizableComponent
+
+
+    <div class="demo-description" id="MultipleColumns">
+        <h2><DemoNavLink Link="ComboBox#MultipleColumns" />ComboBox – Multiple Columns<span class="demo-badge badge badge-success">New</span></h2>
+        <p>The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2">ComboBox</a> can display data across multiple columns. To create columns, use <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn">DxListEditorColumn</a> objects that include the following options for column customization:</p>
+        <ul>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.FieldName">FieldName</a> - Specifies the data source field that populates column items.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.Visible">Visible</a> - Specifies the column visibility.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.VisibleIndex">VisibleIndex</a> - Specifies the column display order.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.Width">Width</a> - Specifies the column width.</li>
+        </ul>
+        <p>To format an editor value, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.EditFormat">EditFormat</a> property. This property allows you to format values displayed in both ordinary and multi-column ComboBoxes. The <code>{1} {2}</code> format specifies that the editor value includes values of the following columns: <b>FirstName</b> (<code>VisibleIndex = 1</code>) and <b>LastName</b> (<code>VisibleIndex = 2</code>).</p>
+    </div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode">
+            <TitleTemplate>
+                Select item
+            </TitleTemplate>
+        </DemoToolbar>
+
+    </div>
+    <div class="card-body mw-480">
+        <DxComboBox Data="@Persons.DataSource"
+                    @bind-Value="@SelectedPerson"
+                    SizeMode="SizeMode"
+                    FilteringMode="@DataGridFilteringMode.Contains"
+                    EditFormat="{1} {2}">
+            <DxListEditorColumn FieldName="Id" Width="50px" />
+            <DxListEditorColumn FieldName="FirstName" />
+            <DxListEditorColumn FieldName="LastName" />
+        </DxComboBox>
+    </div>
+</div>
+<CodeSnippet_Editor_ComboBox_MultiColumn></CodeSnippet_Editor_ComboBox_MultiColumn>
+
+
+@code {
+    Person SelectedPerson { get; set; } = Persons.DataSource[0];
+}

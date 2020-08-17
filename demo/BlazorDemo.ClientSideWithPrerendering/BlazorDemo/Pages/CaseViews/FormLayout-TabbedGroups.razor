@@ -1,7 +1,7 @@
 ﻿<div class="demo-description" id="TabbedGroups">
     <h2><DemoNavLink Link="FormLayout#TabbedGroups" />Form Layout - Tabbed Groups</h2>
     <p>
-        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayout#tabs">Form Layout</a> component allows you to group layout items and layout groups into tabbed containers. A tab page collection (<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutTabPages">DxFormLayoutTabPages</a>) allows you to specify the active page using the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxFormLayoutTabPagesBase.ActiveTabIndex">ActiveTabIndex</a> property.
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayout#tabs">Form Layout</a> component allows you to group layout items and layout groups into tabbed containers. A tab page collection (<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutTabPages">DxFormLayoutTabPages</a>) allows you to specify the active page using the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutTabPages.ActiveTabIndex">ActiveTabIndex</a> property.
     </p>
 </div>
 
@@ -74,22 +74,10 @@
 
 @code {
     int ActiveTabIndex { get; set; } = 1;
-
-    string firstName = "Nancy";
-    string FirstName { get => firstName; set { firstName = value; InvokeAsync(StateHasChanged); } }
-
-    string lastName = "Davolio";
-    string LastName { get => lastName; set { lastName = value; InvokeAsync(StateHasChanged); } }
-
-    DateTime birthDate = DateTime.Now.AddYears(-20);
-    DateTime BirthDate { get => birthDate; set { birthDate = value; InvokeAsync(StateHasChanged); } }
-
-    string position = "Sales Representative";
-    string Position { get => position; set { position = value; InvokeAsync(StateHasChanged); } }
-
-    DateTime hireDate = DateTime.Now.AddYears(-20);
-    DateTime HireDate { get => hireDate; set { hireDate = value; InvokeAsync(StateHasChanged); } }
-
-    string notes = "Education includes a BA in psychology.";
-    string Notes { get => notes; set { notes = value; InvokeAsync(StateHasChanged); } }
+    string FirstName { get; set; } = "Nancy";
+    string LastName { get; set; } = "Davolio";
+    DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-20);
+    string Position { get; set; } = "Sales Representative";
+    DateTime HireDate { get; set; } = DateTime.Now.AddYears(-20);
+    string Notes { get; set; } = "Education includes a BA in psychology.";
 }

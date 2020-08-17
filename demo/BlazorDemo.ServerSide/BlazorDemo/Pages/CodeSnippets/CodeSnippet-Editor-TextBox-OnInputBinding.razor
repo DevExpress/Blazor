@@ -1,11 +1,10 @@
 ﻿<CodeSnippet>
 @(@"<DxTextBox @bind-Text=""@TextValue""
-           BindValueMode=""BindValueMode.OnInput"" 
+           BindValueMode=""BindValueMode.OnInput""
            NullText=""Type text..."">
 </DxTextBox>
 
 @code {
-    string textValue = null;
-    string TextValue { get => textValue; set { textValue = value; InvokeAsync(StateHasChanged); } }
+    string TextValue { get; set; } = null;
 }")
 </CodeSnippet>

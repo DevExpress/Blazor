@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <XtraReportsLayoutSerializer SerializerVersion="19.1.2.0" Ref="1" ControlType="Demo.Blazor.Reports.MailMerge.Report, DevExpress.DemoReports.v19.1" Name="MailMergeReport" DisplayName="Mail Merge" SnapGridSize="13.02083" Margins="0, 0, 312, 185" PageWidth="850" PageHeight="1100" Version="20.1" DataMember="Employees" DataSource="#Ref-0">
   <CalculatedFields>
     <Item1 Ref="2" Name="AddressWithoutLineBreaks" Expression="Replace([Address], Concat(Char(13), Char(10)), ' ')" DataMember="Employees" />

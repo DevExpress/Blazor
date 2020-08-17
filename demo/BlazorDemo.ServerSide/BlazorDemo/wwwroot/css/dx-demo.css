@@ -112,7 +112,7 @@ app {
         transform: translateX(100%);
         right: 0;
     }
-    
+
     .themeswitcher-container-shown,
     .mobile-sidebar-shown .sidebar {
         transform: translateX(0);
@@ -729,13 +729,19 @@ div.content > .card:last-child {
 .target-container:before {
     content: "Click to show a pop-up window";
     text-transform: uppercase;
-    line-height: 190px;
     font-weight: 600;
 }
 .target-container {
     height: 200px;
     text-align: center;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+}
+.target-container.context-menu-container:before {
+    content: "Right-click to show the context menu";
 }
 .custom-popup .modal-header {
     padding: 0;
@@ -1278,12 +1284,30 @@ a.helplink {
     padding-right: 0;
 }
 
+.demo-treeview-template .nav-pills .nav-pills {
+    margin-left: 0 !important;
+}
+
+.demo-treeview-template h5 {
+    margin-bottom: .1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+.demo-treeview-template .treeview-template-icon {
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+}
+.demo-tab-page-content {
+    padding-top: 12pt;
+}
 @media (min-width: 576px) {
     .demo-buttons-title {
         padding-top: 0;
         padding-bottom: 0;
         font-size: 0.9rem;
-        text-align:inherit;
+        text-align: inherit;
     }
 }
 
@@ -1291,6 +1315,23 @@ a.helplink {
     display: none !important;
 }
 
-.demo-toolbar-dropdown .dx-toolbar-popup .modal-body {
-    height: 180px;
+.grid-header-border-bottom-1 thead > tr > th {
+    border-bottom-width: 1px !important;
+}
+
+.option-container {
+    display: flex;
+    align-items: center;
+    margin-top: 1.25rem!important;
+    margin-bottom: 1.75rem;
+    width: 300px;
+}
+
+.option-container > span {
+    padding-right: 1em;
+    font-weight: 600;
+}
+
+.memo-max-width textarea.form-control {
+    max-width: 100%;
 }

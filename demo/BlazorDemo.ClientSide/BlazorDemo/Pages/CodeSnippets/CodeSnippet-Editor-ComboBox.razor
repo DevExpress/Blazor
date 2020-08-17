@@ -1,18 +1,13 @@
 ﻿<CodeSnippetTabbed>
 <CodeSnippetTabPage Text="Razor">
 @(@"<DxComboBox Data=""@Persons.DataSource""
-            TextFieldName=""Text""
-            @bind-SelectedItem=""@SelectedPerson""
+            TextFieldName=""@nameof(Person.Text)""
+            @bind-Value=""@SelectedPerson""
             SizeMode=""@SizeMode"">
 </DxComboBox>
 
 @code {
-    Person selectedPerson = Persons.DataSource[0];
-    Person SelectedPerson {
-        get => selectedPerson;
-        set { selectedPerson = value; InvokeAsync(StateHasChanged); }
-    }
-
+    Person SelectedPerson { get; set; } = Persons.DataSource[0];
     SizeMode SizeMode { get; set; }
 }")
 </CodeSnippetTabPage>

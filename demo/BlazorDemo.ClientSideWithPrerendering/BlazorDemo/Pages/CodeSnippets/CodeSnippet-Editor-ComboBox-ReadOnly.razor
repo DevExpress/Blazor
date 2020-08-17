@@ -1,18 +1,31 @@
-﻿<CodeSnippet>
-@(@"<DxComboBox Data=""@DataSource""
-            @bind-SelectedItem=""@Option""
+﻿<CodeSnippetTabbed>
+<CodeSnippetTabPage Text="Razor">
+@(@"<DxComboBox Data=""@CountryData.Countries""
+            @bind-Value=""@CurrentCountry""
+            TextFieldName=""@nameof(Country.CountryName)""
             ReadOnly=""true"">
 </DxComboBox>
 
 @code {
-    String[] DataSource { get; set; } = null;
-
-    string option;
-    string Option { get => option; set { option = value; InvokeAsync(StateHasChanged) ;} }
-
-    protected override void OnInitialized() { 
-        DataSource = new string[] { ""Option 1"", ""Option 2"", ""Option 3"" };
-        Option = DataSource[1];
-    }
+    Country CurrentCountry { get; set; } = CountryData.Countries[1];
 }")
-</CodeSnippet>
+</CodeSnippetTabPage>
+<CodeSnippetTabPage Text="Country">
+@(@"public class Country {
+    public int Id { get; set; }
+    public string CountryName { get; set; }
+}
+
+public static class CountryData {
+    private static readonly Lazy<List<Country>> countries = new Lazy<List<Country>>(() => {
+        return new List<Country>()
+        {
+            new Country() { Id = 0, CountryName = ""USA"" },
+            new Country() { Id = 1, CountryName = ""Germany"" },
+            new Country() { Id = 2, CountryName = ""Japan"" }
+        };
+    });
+    public static List<Country> Countries { get { return countries.Value; } }
+}")
+</CodeSnippetTabPage>
+</CodeSnippetTabbed>

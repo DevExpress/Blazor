@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,7 +11,7 @@ namespace BlazorDemo.Data {
             IList<Order> orders = new List<Order>();
             int startOrderId = 123;
 
-            foreach (var productName in productNames) {
+            foreach(var productName in productNames) {
                 var OrderDate = DateTime.Now.AddDays(-random.Next(0, 15));
                 var order = new Order() {
                     OrderID = startOrderId++,
@@ -19,7 +19,7 @@ namespace BlazorDemo.Data {
                     OrderDate = OrderDate,
                     ShippedDate = OrderDate.AddHours(random.Next(5, 55)),
                     UnitPrice = random.Next(1, 12),
-                    ShipRegionID = random.Next(1, 4),
+                    CountryId = random.Next(0, 212),
                     UnitsInOrder = random.Next(1, 43),
                     OrderStatus = random.Next(1, 100) < 70 ? OrderStatus.Processing : (random.Next(1, 100) < 50 ? OrderStatus.InTransit : OrderStatus.Delivered)
                 };
@@ -59,8 +59,8 @@ namespace BlazorDemo.Data {
             orders.Remove(order);
         }
         public void Update(Order order, IDictionary<string, object> newValue) {
-            foreach (var field in newValue.Keys)
-                switch (field) {
+            foreach(var field in newValue.Keys)
+                switch(field) {
                     case nameof(order.Product):
                         order.Product = (string)newValue[field];
                         break;

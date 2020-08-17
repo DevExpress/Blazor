@@ -38,20 +38,20 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
 
         public static Guid GetServiceId(Type type) {
             var providerContractType = GetProviderContractType(type);
-            if (providerContractType == null)
+            if(providerContractType == null)
                 throw new InvalidOperationException();
             return providerContractType.GUID;
         }
 
         public static string GetDataProviderContractTypeName(Type type) {
             var providerContractType = GetProviderContractType(type);
-            if (providerContractType == null)
+            if(providerContractType == null)
                 throw new InvalidOperationException();
             return providerContractType.Name;
         }
 
         static Type GetProviderContractType(Type type) {
-            if (IsDataProviderContract(type))
+            if(IsDataProviderContract(type))
                 return type;
             return type.GetInterfaces().FirstOrDefault(IsDataProviderContract);
         }

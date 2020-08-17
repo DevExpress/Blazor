@@ -3,7 +3,7 @@
 <div class="demo-description" id="CascadingLists">
     <h2><DemoNavLink Link="ComboBox#CascadingLists" />ComboBox - Cascading Lists</h2>
     <p>
-        This demo shows how to populate the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-1">ComboBox</a> with items based on the user selection in another ComboBox.
+        This demo shows how to populate the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2">ComboBox</a> with items based on the user selection in another ComboBox.
     </p>
 </div>
 
@@ -14,16 +14,15 @@
     <div class="card-body">
         <div class="d-inline-block">
             <DxComboBox Data="@Countries"
-                        TextFieldName="CountryName"
-                        SelectedItem="@CurrentCountry"
-                        SelectedItemChanged="@SelectedCountryChanged"
+                        TextFieldName="@nameof(Country.CountryName)"
+                        Value="@CurrentCountry"
+                        ValueChanged="@((Country country) => SelectedCountryChanged(country))"
                         SizeMode="SizeMode"></DxComboBox>
         </div>
         <div class="d-inline-block">
             <DxComboBox Data="@CurrentCountryCities"
-                        TextFieldName="CityName"
-                        SelectedItem="@CurrentCity"
-                        SelectedItemChanged="@SelectedCityChanged"
+                        TextFieldName="@nameof(City.CityName)"
+                        @bind-Value="@CurrentCity"
                         SizeMode="SizeMode"></DxComboBox>
         </div>
     </div>
@@ -33,10 +32,10 @@
 
 
 @code {
-    List<Country> Countries = CountryCity.Countries;
-    List<City> CurrentCountryCities = new List<City>();
-    Country CurrentCountry = CountryCity.Countries[1];
-    City CurrentCity = CountryCity.Cities[4];
+    List<Country> Countries { get; set; } = CountryCity.Countries;
+    List<City> CurrentCountryCities { get; set; } = new List<City>();
+    Country CurrentCountry { get; set; } = CountryCity.Countries[1];
+    City CurrentCity { get; set; } = CountryCity.Cities[4];
 
     protected override void OnInitialized() {
         base.OnInitialized();
@@ -47,10 +46,5 @@
         CurrentCountry = country;
         CurrentCountryCities = CountryCity.Cities.FindAll(city => city.CountryId == CurrentCountry.Id);
         CurrentCity = CurrentCountryCities[0];
-        InvokeAsync(StateHasChanged);
-    }
-    void SelectedCityChanged(City city) {
-        CurrentCity = city;
-        InvokeAsync(StateHasChanged);
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BlazorDemo.Configuration;
@@ -30,8 +30,7 @@ namespace BlazorDemo.Wasm {
             services.AddSingleton<ISalesViewerDataProvider, SalesViewerDataProvider>();
             services.AddNotSupportedDemoServices();
 
-             var client = new HttpClient()
-            {
+            var client = new HttpClient() {
                 BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
             };
 
@@ -41,10 +40,10 @@ namespace BlazorDemo.Wasm {
             using var stream = await response.Content.ReadAsStreamAsync();
 
             builder.Configuration.AddJsonStream(stream);
-            
+
             builder.RootComponents.AddDocumentMetadata();
             builder.RootComponents.Add<App>("app");
-            
+
 
             await builder.Build().RunAsync();
         }

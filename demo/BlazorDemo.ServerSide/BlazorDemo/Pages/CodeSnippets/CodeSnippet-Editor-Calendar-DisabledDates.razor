@@ -1,5 +1,6 @@
 ﻿<CodeSnippet>
-@(@"<DxCalendar CustomDisabledDate=""@OnCustomDisabledDate"">
+@(@"<DxCalendar T=""DateTime""
+            CustomDisabledDate=""@OnCustomDisabledDate"">
 </DxCalendar>
 
 @code {
@@ -11,14 +12,14 @@
     }
     List<DateTime> GetDisabledDates() {
         DateTime baseDate = DateTime.Today;
-        return new List<DateTime>() { 
-            baseDate.AddDays(-9), 
-            baseDate.AddDays(-4), 
-            baseDate.AddDays(-3), 
-            baseDate.AddDays(3), 
-            baseDate.AddDays(5), 
-            baseDate.AddDays(6), 
-            baseDate.AddDays(15) 
+        return new List<DateTime>() {
+            baseDate.AddDays(-9),
+            baseDate.AddDays(-4),
+            baseDate.AddDays(-3),
+            baseDate.AddDays(3),
+            baseDate.AddDays(5),
+            baseDate.AddDays(6),
+            baseDate.AddDays(15)
         };
     }
 }")

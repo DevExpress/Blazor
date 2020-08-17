@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 
 namespace BlazorDemo.Data {
     public static partial class AppointmentCollection {
 
         public class Appointment {
-            public Appointment() {}
+            public Appointment() { }
 
             public int AppointmentType { get; set; }
             public DateTime StartDate { get; set; }

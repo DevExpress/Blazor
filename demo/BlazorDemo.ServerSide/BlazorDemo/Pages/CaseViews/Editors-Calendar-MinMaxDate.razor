@@ -1,12 +1,12 @@
 ﻿<div class="demo-description" id="DateRange">
-    <h2><DemoNavLink Link="Calendar#DateRange" />Calendar - Date Range<span class="demo-badge badge badge-success">New</span></h2>
-    <p>Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxCalendarBase.MinDate">MinDate</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxCalendarBase.MaxDate">MaxDate</a> properties to specify a range of available dates. The calendar disables dates that are out of the range and hides navigation arrows for them.</p>
+    <h2><DemoNavLink Link="Calendar#DateRange" />Calendar - Date Range</h2>
+    <p>Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1.MinDate">MinDate</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1.MaxDate">MaxDate</a> properties to specify a range of available dates. The calendar disables dates that are out of the range and hides navigation arrows for them.</p>
     <p>In this demo, the Calendar component allows users to select dates from the current month.</p>
 </div>
 
 <div class="card demo-card border-0 bg-transparent">
     <div class="card-body p-0">
-        <DxCalendar MinDate="@MinDate" MaxDate="@MaxDate">
+        <DxCalendar T="DateTime" MinDate="@MinDate" MaxDate="@MaxDate">
         </DxCalendar>
     </div>
 </div>

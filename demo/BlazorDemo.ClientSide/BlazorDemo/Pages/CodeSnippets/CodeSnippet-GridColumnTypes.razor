@@ -12,9 +12,9 @@
     <DxDataGridCommandColumn Width=""150px"" />
     <DxDataGridDateEditColumn Field=""@nameof(WeatherForecast.Date)"" DisplayFormat=""D"" EditorFormat=""d"" EditorDisplayFormat=""D"" />
     <DxDataGridColumn Field=""@nameof(WeatherForecast.Forecast)"" Caption=""Forecast"" Width=""150px"" />
-    <DxDataGridSpinEditColumn Field=""@nameof(WeatherForecast.TemperatureC)"" Caption=""@(""Temp. (\x2103)"")"" TextAlignment=""@DataGridTextAlign.Left"" 
-                              Width=""150px"" />        
-    <DxDataGridComboBoxColumn Field=""@nameof(WeatherForecast.CloudCover)"" Caption=""Cloud Cover"" DataAsync=""@ForecastService.GetCloudCoverAsync"" 
+    <DxDataGridSpinEditColumn Field=""@nameof(WeatherForecast.TemperatureC)"" Caption=""@(""Temp. (\x2103)"")"" TextAlignment=""@DataGridTextAlign.Left""
+                              Width=""150px"" />
+    <DxDataGridComboBoxColumn Field=""@nameof(WeatherForecast.CloudCover)"" Caption=""Cloud Cover"" DataAsync=""@ForecastService.GetCloudCoverAsync""
                               TextAlignment=""@DataGridTextAlign.Left"" Width=""150px"" />
     <DxDataGridCheckBoxColumn Field=""@nameof(WeatherForecast.Precipitation)"" Caption=""Precipitation"" Width=""100px"" />
 </DxDataGrid>

@@ -1,4 +1,4 @@
-﻿using System.Drawing.Printing;
+using System.Drawing.Printing;
 using System.Linq;
 using DevExpress.XtraReports.Parameters;
 

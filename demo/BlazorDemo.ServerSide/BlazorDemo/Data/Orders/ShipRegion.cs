@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BlazorDemo.Data {
@@ -12,7 +12,7 @@ namespace BlazorDemo.Data {
                 new ShipRegion() { RegionID = 3, Name = "Asia/Pacific" },
             };
         }
-        public static Task<IEnumerable<ShipRegion>> Load() { 
+        public static Task<IEnumerable<ShipRegion>> Load() {
             return Task.FromResult<IEnumerable<ShipRegion>>(ShipRegions);
         }
     }

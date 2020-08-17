@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 
 namespace BlazorDemo.Data {
     [Guid("2133498E-06E3-471C-90DD-8983C185CEB9")]

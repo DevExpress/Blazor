@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace BlazorDemo.Data {
 
         public string Title {
             get {
-                switch (GroupType) {
+                switch(GroupType) {
                     case DateTimeGroupType.Year:
                         return DateTime.ToString("yyyy");
                     case DateTimeGroupType.Month:
@@ -26,7 +26,7 @@ namespace BlazorDemo.Data {
                     case DateTimeGroupType.Week:
                         var culture = CultureInfo.CurrentCulture;
                         var weekNumber = culture.Calendar.GetWeekOfYear(DateTime,
-                            culture.DateTimeFormat.CalendarWeekRule, 
+                            culture.DateTimeFormat.CalendarWeekRule,
                             culture.DateTimeFormat.FirstDayOfWeek);
                         var weekStartDate = DateTimeUtils.CreateWeekStart(DateTime);
                         var weekEndDate = weekStartDate.AddDays(6);
@@ -44,7 +44,7 @@ namespace BlazorDemo.Data {
         public bool HasSubGroups => GroupType < DateTimeGroupType.Day;
 
         public IEnumerable<DateTimeGroup> GetSubGroups() {
-            switch (GroupType) {
+            switch(GroupType) {
                 case DateTimeGroupType.Year:
                     return Enumerable.Range(1, 12)
                         .Select(m => new DateTimeGroup(new DateTime(DateTime.Year, m, 1), DateTimeGroupType.Month));
@@ -54,9 +54,9 @@ namespace BlazorDemo.Data {
                     var day = firstDayOfMonth.AddDays(-weekOffset);
                     var nextMonthFirstDay = DateTime.AddMonths(1);
                     var monthWeeks = new List<DateTimeGroup>();
-                    while (day < nextMonthFirstDay) {
+                    while(day < nextMonthFirstDay) {
                         monthWeeks.Add(new DateTimeGroup(day.Month == firstDayOfMonth.Month ? day : firstDayOfMonth, DateTimeGroupType.Week));
-                        for (int i = 0; i < 7; i++)
+                        for(int i = 0; i < 7; i++)
                             day = day.AddDays(1);
                     }
                     return monthWeeks;
@@ -64,8 +64,8 @@ namespace BlazorDemo.Data {
                     var firstDayOfWeek = DateTimeUtils.CreateWeekStart(DateTime);
                     var dayOfWeek = firstDayOfWeek;
                     var weekDays = new List<DateTimeGroup>();
-                    for (int i = 0; i < 7; i++) {
-                        if (dayOfWeek.Year == DateTime.Year && dayOfWeek.Month == DateTime.Month)
+                    for(int i = 0; i < 7; i++) {
+                        if(dayOfWeek.Year == DateTime.Year && dayOfWeek.Month == DateTime.Month)
                             weekDays.Add(new DateTimeGroup(dayOfWeek, DateTimeGroupType.Day));
                         dayOfWeek = dayOfWeek.AddDays(1);
                     }

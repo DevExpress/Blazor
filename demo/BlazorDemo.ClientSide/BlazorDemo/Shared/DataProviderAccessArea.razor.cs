@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Components;
 namespace BlazorDemo.Shared {
     public partial class DataProviderAccessArea<T> : IObserver<int>, IDisposable
         where T : IDataProvider {
-        
+
         private IDisposable[] _subscriptions;
         private int _dataProvidersCount;
         private int _progress;
@@ -21,7 +21,7 @@ namespace BlazorDemo.Shared {
         protected override async Task OnInitializedAsync() {
             var loadingStates = await GetLoadingStates();
             _notSupported = loadingStates.Any(x => x == null);
-            if (_notSupported)
+            if(_notSupported)
                 _onlineDemoUrl = $"https://demos.devexpress.com/blazor{NavigationManager.ToAbsoluteUri(NavigationManager.Uri).PathAndQuery}";
             else
                 _subscriptions = loadingStates.Select(x => x.Subscribe(this)).ToArray();
@@ -30,7 +30,7 @@ namespace BlazorDemo.Shared {
         async Task<IEnumerable<IObservable<int>>> GetLoadingStates() {
             var dataProviders = GetDataProviders();
             var states = new List<IObservable<int>>();
-            foreach (var dataProvider in dataProviders) {
+            foreach(var dataProvider in dataProviders) {
                 _dataProvidersCount++;
                 var loadingState = await dataProvider.GetLoadingStateAsync();
                 states.Add(loadingState);
@@ -41,8 +41,8 @@ namespace BlazorDemo.Shared {
             yield return DataProvider;
         }
         public void OnCompleted() {
-            if (--_dataProvidersCount == 0) {
-                if (!_ready) {
+            if(--_dataProvidersCount == 0) {
+                if(!_ready) {
                     _ready = true;
                     Unsubscribe();
                     InvokeAsync(StateHasChanged);
@@ -60,8 +60,8 @@ namespace BlazorDemo.Shared {
             try { Unsubscribe(); } catch { }
         }
         private void Unsubscribe() {
-            if (_subscriptions != null) {
-                foreach (var subscription in _subscriptions)
+            if(_subscriptions != null) {
+                foreach(var subscription in _subscriptions)
                     subscription?.Dispose();
 
                 _subscriptions = null;
@@ -69,22 +69,22 @@ namespace BlazorDemo.Shared {
         }
     }
 
-    public class DataProviderAccessArea<T1, T2> : DataProviderAccessArea<T1> 
+    public class DataProviderAccessArea<T1, T2> : DataProviderAccessArea<T1>
         where T1 : IDataProvider
         where T2 : IDataProvider {
-        
+
         [Inject] T2 DataProvider { get; set; }
         protected override IEnumerable<IDataProvider> GetDataProviders() {
             return base.GetDataProviders().Append(DataProvider);
         }
     }
-    
 
-    public class DataProviderAccessArea<T1, T2, T3> : DataProviderAccessArea<T1, T2> 
+
+    public class DataProviderAccessArea<T1, T2, T3> : DataProviderAccessArea<T1, T2>
         where T1 : IDataProvider
         where T2 : IDataProvider
-        where T3 : IDataProvider{
-        
+        where T3 : IDataProvider {
+
         [Inject] T3 DataProvider { get; set; }
         protected override IEnumerable<IDataProvider> GetDataProviders() {
             return base.GetDataProviders().Append(DataProvider);

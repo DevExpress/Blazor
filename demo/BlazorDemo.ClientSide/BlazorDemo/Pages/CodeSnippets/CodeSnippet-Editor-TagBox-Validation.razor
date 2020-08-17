@@ -7,6 +7,8 @@
         <DxTagBox Id=""emails""
                   NullText=""Select email recipients""
                   Data=""@Emails.DataSource""
+                  TData=""string""
+                  TValue=""string""
                   AllowCustomTags=""true""
                   ValidateBy=""@TagBoxValidateBy.Tags""
                   @bind-Tags=""@recipients.Data""/>
@@ -19,11 +21,12 @@
 @code {
     EmailRecipients recipients = new EmailRecipients();
 
-    private void HandleValidSubmit() 
+    private void HandleValidSubmit()
     {
         Console.WriteLine(""OnValidSubmit"");
     }
-    private void HandleInvalidSubmit() 
+
+    private void HandleInvalidSubmit()
     {
         Console.WriteLine(""OnInvalidSubmit"");
     }

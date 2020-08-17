@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-body d-flex flex-row">
             <h5 class="card-title mr-3">Line Series</h5>
-            <DxComboBox CssClass="ml-auto" Data="@LineSeriesTypes" @bind-SelectedItem="@LineSeriesType" TextFieldName="Text"></DxComboBox>
+            <DxComboBox CssClass="ml-auto" Data="@LineSeriesTypes" @bind-Value="@LineSeriesType" TextFieldName="Text"></DxComboBox>
         </div>
         <div class="card-body">
             <DxChart Data="@ChartsData">
@@ -28,7 +28,7 @@
     <div class="card">
         <div class="card-body d-flex flex-row">
             <h5 class="card-title mr-3">Area Series</h5>
-            <DxComboBox CssClass="ml-auto" Data="@AreaSeriesTypes" @bind-SelectedItem="@AreaSeriesType" TextFieldName="Text"></DxComboBox>
+            <DxComboBox CssClass="ml-auto" Data="@AreaSeriesTypes" @bind-Value="@AreaSeriesType" TextFieldName="Text"></DxComboBox>
         </div>
         <div class="card-body">
             <DxChart Data="@ChartsData">
@@ -51,7 +51,7 @@
     <div class="card">
         <div class="card-body d-flex flex-row">
             <h5 class="card-title mr-3">Bar Series</h5>
-            <DxComboBox CssClass="ml-auto" Data="@BarSeriesTypes" @bind-SelectedItem="@BarSeriesType" TextFieldName="Text"></DxComboBox>
+            <DxComboBox CssClass="ml-auto" Data="@BarSeriesTypes" @bind-Value="@BarSeriesType" TextFieldName="Text"></DxComboBox>
         </div>
         <div class="card-body">
             <DxChart Data="@ChartsData">
@@ -75,14 +75,14 @@
         </div>
         <div class="card-body">
             <DxChart Data="@ChartsData">
-                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Country)" Filter="@(s => s.Region == "North America")" 
-                                     ArgumentField="@(s => s.Date.DayOfWeek.ToString())" 
+                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Country)" Filter="@(s => s.Region == "North America")"
+                                     ArgumentField="@(s => s.Date.DayOfWeek.ToString())"
                                      ValueField="@(s => s.Date.Year)" SeriesType="@ChartSeriesType.Bubble" >
                     <SeriesTemplate>
-                        <DxChartBubbleSeries 
-                                             Settings="@context" 
+                        <DxChartBubbleSeries
+                                             Settings="@context"
                                              SizeField="@(s => s.Amount)"
-                                             Color="@(context.GroupKey == "Canada" ? Color.FromArgb(252, 58, 48) : Color.FromArgb(208, 208, 208))" 
+                                             Color="@(context.GroupKey == "Canada" ? Color.FromArgb(252, 58, 48) : Color.FromArgb(208, 208, 208))"
                                              AggregationMethod="@Enumerable.Max" />
                     </SeriesTemplate>
                 </DxChartCommonSeries>
@@ -102,21 +102,17 @@
 </div>
 @code {
 
-    static readonly IEnumerable<ChartSeriesTypeItem> LineSeriesTypes = ChartSeriesTypeItem.Create(ChartSeriesType.Line, ChartSeriesType.StepLine, 
+    static readonly IEnumerable<ChartSeriesTypeItem> LineSeriesTypes = ChartSeriesTypeItem.Create(ChartSeriesType.Line, ChartSeriesType.StepLine,
         ChartSeriesType.StackedLine, ChartSeriesType.FullStackedLine);
 
-    static readonly IEnumerable<ChartSeriesTypeItem> AreaSeriesTypes = ChartSeriesTypeItem.Create(ChartSeriesType.Area, ChartSeriesType.FullStackedArea, ChartSeriesType.FullStackedSplineArea, 
+    static readonly IEnumerable<ChartSeriesTypeItem> AreaSeriesTypes = ChartSeriesTypeItem.Create(ChartSeriesType.Area, ChartSeriesType.FullStackedArea, ChartSeriesType.FullStackedSplineArea,
         ChartSeriesType.SplineArea, ChartSeriesType.StackedArea, ChartSeriesType.StackedSplineArea, ChartSeriesType.StepArea);
 
     static readonly IEnumerable<ChartSeriesTypeItem> BarSeriesTypes = ChartSeriesTypeItem.Create(ChartSeriesType.Bar, ChartSeriesType.FullStackedBar, ChartSeriesType.StackedBar);
 
-    ChartSeriesTypeItem lineSeriesType = LineSeriesTypes.First();
-    ChartSeriesTypeItem areaSeriesType = AreaSeriesTypes.First();
-    ChartSeriesTypeItem barSeriesType = BarSeriesTypes.First();
-
-    ChartSeriesTypeItem LineSeriesType { get => lineSeriesType; set { lineSeriesType = value; InvokeAsync(StateHasChanged); } }
-    ChartSeriesTypeItem AreaSeriesType { get => areaSeriesType; set { areaSeriesType = value; InvokeAsync(StateHasChanged); } }
-    ChartSeriesTypeItem BarSeriesType { get => barSeriesType; set { barSeriesType = value; InvokeAsync(StateHasChanged); } }
+    ChartSeriesTypeItem LineSeriesType { get; set; } = LineSeriesTypes.First();
+    ChartSeriesTypeItem AreaSeriesType { get; set; } = AreaSeriesTypes.First();
+    ChartSeriesTypeItem BarSeriesType { get; set; } = BarSeriesTypes.First();
 
     IEnumerable<SaleInfo> ChartsData;
 
@@ -134,6 +130,6 @@
         public string Text { get; }
         public ChartSeriesType Value { get; }
 
-        public static IEnumerable<ChartSeriesTypeItem> Create(params ChartSeriesType[] itemValues) => itemValues.Select(x => new ChartSeriesTypeItem(x));
+        public static IEnumerable<ChartSeriesTypeItem> Create(params ChartSeriesType[] itemValues) => itemValues.Select(x => new ChartSeriesTypeItem(x)).ToList();
     }
 }

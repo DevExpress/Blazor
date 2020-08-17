@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using BlazorDemo.Reporting;
@@ -30,7 +30,7 @@ namespace BlazorDemo.Reporting {
                 app.UseSession();
                 app.UseDevExpressBlazorReporting();
                 DevExpress.DataAccess.DefaultConnectionStringProvider.AssignConnectionStrings(() => app.ApplicationServices.GetService<ReportingCustomConfigurationProvider>().GetGlobalConnectionStrings());
-                
+
                 next(app);
             }
         }

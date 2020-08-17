@@ -1,11 +1,10 @@
 ﻿<CodeSnippet>
-@(@"<DxSpinEdit @bind-Value=""@Year"" 
+@(@"<DxSpinEdit @bind-Value=""@Year""
             BindValueMode=""BindValueMode.OnInput""
             NullText=""Type a value..."">
 </DxSpinEdit>
 
 @code {
-    int? year = DateTime.Now.Year;
-    int? Year { get => year; set { year = value; InvokeAsync(StateHasChanged); } }
+    int? Year { get; set; } = DateTime.Now.Year;
 }")
 </CodeSnippet>

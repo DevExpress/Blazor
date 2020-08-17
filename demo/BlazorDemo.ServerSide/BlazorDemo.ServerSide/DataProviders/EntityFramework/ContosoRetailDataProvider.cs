@@ -10,8 +10,7 @@ namespace BlazorDemo.DataProviders {
         private readonly ContosoRetailContext _context;
         readonly IConfiguration _configuration;
 
-        public ContosoRetailDataProvider(ContosoRetailContext context, IConfiguration configuration)
-        {
+        public ContosoRetailDataProvider(ContosoRetailContext context, IConfiguration configuration) {
             _context = context;
             _configuration = configuration;
         }
@@ -20,10 +19,9 @@ namespace BlazorDemo.DataProviders {
             return Task.FromResult((IEnumerable<Sale>)_context.Sales);
         }
 
-        public override Task<IObservable<int>> GetLoadingStateAsync()
-        {
-            
-            if (_configuration.GetConnectionString("PivotGridLargeDataConnectionString") == "{Remote demo database connection string}")
+        public override Task<IObservable<int>> GetLoadingStateAsync() {
+
+            if(_configuration.GetConnectionString("PivotGridLargeDataConnectionString") == "{Remote demo database connection string}")
                 return Task.FromResult<IObservable<int>>(null);
             return base.GetLoadingStateAsync();
         }

@@ -6,11 +6,11 @@
     <h2><DemoNavLink Link="ChartSeriesCustomization#Point" />Charts - Series Point Customization</h2>
     <p>
         The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesPoint">DxChartSeriesPoint</a> component allows you to customize a point's color, size, symbol, and visibility.
-        You can use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxChartBase-1.CustomizeSeriesPoint">CustomizeSeriesPoint</a> event to change individual points' appearance.
+        You can use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.CustomizeSeriesPoint">CustomizeSeriesPoint</a> event to change individual points' appearance.
         In this demo, points are colored according to their values.
     </p>
 </div>
-<DxChart Data="@WeatherForecasts" 
+<DxChart Data="@WeatherForecasts"
          CustomizeSeriesPoint="@PreparePointColor"
          CssClass="mw-1100">
     <DxChartLineSeries AggregationMethod="@(i => (int)i.Average())"
@@ -27,10 +27,10 @@
     <h2><DemoNavLink Link="ChartSeriesCustomization#PointImage" />Charts - Series Point Image</h2>
     <p>
         This demo illustrates how to use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesPointImage">DxChartSeriesPointImage</a> component to provide custom images for points.
-        To do this, handle the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxChartBase-1.CustomizeSeriesPoint">CustomizeSeriesPoint</a> event and use the event argument's <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartSeriesPointImageModel">PointAppearance.Image</a> property to access a point's image settings.
+        To do this, handle the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.CustomizeSeriesPoint">CustomizeSeriesPoint</a> event and use the event argument's <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartSeriesPointImageModel">PointAppearance.Image</a> property to access a point's image settings.
     </p>
 </div>
-<DxChart Data="@WeatherForecasts" 
+<DxChart Data="@WeatherForecasts"
          CustomizeSeriesPoint="@PreparePointImage"
          CssClass="mw-1100">
     <DxChartLineSeries AggregationMethod="@(i => (int)i.Average())"
@@ -48,11 +48,11 @@
     <h2><DemoNavLink Link="ChartSeriesCustomization#Label" />Charts - Series Label Customization</h2>
     <p>
         The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesLabel">DxChartSeriesLabel</a> component allows you to customize a label's position, visibility, background color, and connector appearance.
-        Use the event argument's <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartSeriesLabelModel">PointLabel</a> property in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxChartBase-1.CustomizeSeriesPoint">CustomizeSeriesPoint</a> event handler to access a label's customization settings.
+        Use the event argument's <b>PointLabel</b> property in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.CustomizeSeriesPoint">CustomizeSeriesPoint</a> event handler to access a label's customization settings.
         In this demo, points' labels are visible if their values are between 25 and 75.
     </p>
 </div>
-<DxChart Data="@WeatherForecasts" 
+<DxChart Data="@WeatherForecasts"
          CustomizeSeriesPoint="@PreparePointLabel"
          CssClass="mw-1100">
     <DxChartLineSeries AggregationMethod="@(i => (int)i.Average())"

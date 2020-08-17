@@ -48,7 +48,7 @@ class TextDecorationMenuItem : TextFormattingMenuItem {
     public TextDecorationMenuItem(TextFormatting textFormatting, string text, string attributeName) : base(textFormatting, text) {
         AttributeName = attributeName;
     }
-        
+
     string AttributeName { get; }
     public override bool Checked { get { return TextFormatting.Decoration[AttributeName]; } protected set { TextFormatting.Decoration[AttributeName] = value; } }
 

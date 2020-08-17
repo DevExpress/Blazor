@@ -32,23 +32,11 @@
 </DxFormLayout>
 
 @code {
-    string name = ""Nancy Davolio"";
-    string Name { get => name; set { name = value; OnChanged(); } }
-
-    string email = ""NancyDavolio@sample.com"";
-    string Email { get => email; set { email = value; OnChanged(); } }
-
-    DateTime birthDate = DateTime.Now.AddYears(-20);
-    DateTime BirthDate { get => birthDate; set { birthDate = value; OnChanged(); } }
-
-    int yearsWorked = 3;
-    int YearsWorked { get => yearsWorked; set { yearsWorked = value; OnChanged(); } }
-
-    bool onVacation = true;
-    bool OnVacation { get => onVacation; set { onVacation = value; OnChanged(); } }
-
+    string Name { get; set; } = ""Nancy Davolio"";
+    string Email { get; set; } = ""NancyDavolio@sample.com"";
+    DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-20);
+    int YearsWorked { get; set; } = 3;
+    bool OnVacation { get; set; } = true;
     SizeMode SizeMode { get; set; }
-
-    void OnChanged() { InvokeAsync(StateHasChanged); }
 }")
 </CodeSnippet>

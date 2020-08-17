@@ -1,14 +1,14 @@
 ﻿<CodeSnippet>
 @(@"<DxFormLayout Data=""@editFormData""
-                  ItemUpdating=""@((fieldName, newValue) => OnItemUpdating(fieldName, newValue))"">
+              ItemUpdating=""@((pair) => OnItemUpdating(pair.Key, pair.Value))"">
     <DxFormLayoutItem Field=""@nameof(FormDataItem.Name)"" Caption=""Contact Name:"" ColSpanMd=""6"" />
     <DxFormLayoutItem Field=""@nameof(FormDataItem.BirthDate)"" Caption=""Birth Date:"" ColSpanMd=""6"" />
     <DxFormLayoutItem Field=""@nameof(FormDataItem.YearsWorked)"" Caption=""Years Worked:"" ColSpanMd=""6"" />
     <DxFormLayoutItem Field=""@nameof(FormDataItem.Position)"" Caption=""Position:"" ColSpanMd=""6"">
         <Template>
             <DxComboBox Data=""@(new List<string>() { ""Sales Representative"", ""Designer"" })""
-                        SelectedItem=""@(((string)((ValueEditContext)context).Value))""
-                        SelectedItemChanged=""@(value => ((ValueEditContext)context).OnChanged(value))""></DxComboBox>
+                        Value=""@(((string)((ValueEditContext)context).Value))""
+                        ValueChanged=""@(value => ((ValueEditContext)context).OnChanged(value))""></DxComboBox>
         </Template>
     </DxFormLayoutItem>
     <DxFormLayoutItem Field=""@nameof(FormDataItem.OnVacation)"" Caption=""On Vacation:"" ColSpanMd=""6"" />
@@ -36,8 +36,6 @@
         } else if (fieldName == nameof(FormDataItem.OnVacation)) {
             editFormData.OnVacation = (bool)newValue;
         }
-
-        InvokeAsync(StateHasChanged);
     }
 }")
 </CodeSnippet>

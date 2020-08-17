@@ -1,12 +1,12 @@
 <Project>
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4"/>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7"/>
     <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="2.2.0" />
 
     <ProjectReference Include="..\BlazorDemo\BlazorDemo.csproj"/>
     <ProjectReference Include="..\..\..\tools\DevExpress.Blazor.DocumentMetadata\DevExpress.Blazor.DocumentMetadata.csproj"/>
-    
+
   </ItemGroup>
    <ItemGroup>
     <None Remove="appsettings.ini" />
@@ -21,8 +21,8 @@
       <DestinationPath>$(MSBuildThisFileDirectory)$([System.IO.Directory]::GetParent('%(fullpath)').Name)Metadata.json</DestinationPath>
     </DemoModulesSeoConfigurations>
   </ItemGroup>
-  <Target Name="DxModuleCopyConfigs" 
-          Inputs="@(DemoModulesSeoConfigurations)" 
+  <Target Name="DxModuleCopyConfigs"
+          Inputs="@(DemoModulesSeoConfigurations)"
           Outputs="@(DemoModulesSeoConfigurations -> '%(DestinationPath)')"
           BeforeTargets="PreBuildEvent">
     <Message Text="%(DemoModulesSeoConfigurations.DestinationPath)" Importance="High" />

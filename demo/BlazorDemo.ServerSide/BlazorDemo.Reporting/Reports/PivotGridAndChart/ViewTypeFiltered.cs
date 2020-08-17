@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraCharts;
+using DevExpress.XtraCharts;
 
 namespace Demo.Blazor.Reports.PivotGridAndChart {
     public enum ViewTypeFiltered {

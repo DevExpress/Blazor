@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -30,11 +30,11 @@ namespace BlazorDemo.Services {
             return _provider.Remove(item);
         }
         static void UpdateItem(ProductFlat item, IDictionary<string, object> newValue) {
-            foreach (var field in newValue)
+            foreach(var field in newValue)
                 UpdateItem(item, field.Key, field.Value);
         }
         static void UpdateItem(ProductFlat item, string name, object value) {
-            switch (name) {
+            switch(name) {
                 case "Id":
                     item.Id = (string)value; return;
                 case "ProductName":
@@ -44,11 +44,11 @@ namespace BlazorDemo.Services {
                 case "ProductCategoryId":
                     item.ProductCategoryId = (int)value; return;
                 case "Category":
-                    if (item.CategoryItem == null) item.CategoryItem = new ProductCategory();
+                    if(item.CategoryItem == null) item.CategoryItem = new ProductCategory();
                     item.CategoryItem.Category = value is ProductCategoryMain ? (ProductCategoryMain)value : Enum.Parse<ProductCategoryMain>((string)value);
                     return;
                 case "Subcategory":
-                    if (item.CategoryItem == null) item.CategoryItem = new ProductCategory();
+                    if(item.CategoryItem == null) item.CategoryItem = new ProductCategory();
                     item.CategoryItem.Subcategory = (string)value; return;
             }
         }

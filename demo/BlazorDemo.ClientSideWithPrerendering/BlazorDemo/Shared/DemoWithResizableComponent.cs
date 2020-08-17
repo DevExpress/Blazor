@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.AspNetCore.Components;
 using DevExpress.Blazor;
+using Microsoft.AspNetCore.Components;
 
 namespace BlazorDemo.Shared {
     public abstract class DemoWithResizableComponent : ComponentBase {
-        
+
         protected SizeMode SizeMode { get; set; }
 
 

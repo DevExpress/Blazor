@@ -2,13 +2,13 @@
 
 @{
     RenderFragment<string> GetLink = (propName) =>
-    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTagBoxBase-1.@propName">@propName</a>;
+    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.@propName">@propName</a>;
 }
 
 <div class="demo-description" id="DropDownListWidth">
-    <h2><DemoNavLink Link="TagBox#DropDownListWidth" />TagBox – Drop-Down List Width<span class="demo-badge badge badge-success">New</span></h2>
+    <h2><DemoNavLink Link="TagBox#DropDownListWidth" />TagBox – Drop-Down List Width</h2>
     <p>
-        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTagBoxBase-1.DropDownWidthMode">DropDownWidthMode</a> property to specify the width of a drop-down list.
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.DropDownWidthMode">DropDownWidthMode</a> property to specify the width of a drop-down list.
     </p>
     <ul>
         <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DropDownWidthMode">ContentOrEditorWidth</a> (Default) - The list's width is equal to the width of the longest list item or the editor's width (whichever is larger).</li>
@@ -27,15 +27,17 @@
     <div class="card-body">
         <div class="d-inline-flex" style="width: 200px;">
             <DxTagBox Data="@Persons.DataSource" style="width: 150px;"
-                      TextFieldName="FirstName"
-                      @bind-SelectedItems="@SelectedPersons"
+                      TextFieldName="@nameof(Person.FirstName)"
+                      @bind-Values="@SelectedPersons"
                       DropDownWidthMode="DropDownWidthMode"
+                      NullText="Short text"
                       SizeMode="SizeMode"></DxTagBox>
         </div>
         <div class="d-inline-flex" style="width: 200px;">
             <DxTagBox Data="@Persons.DataSource" style="width: 200px;"
-                      TextFieldName="Text"
-                      @bind-SelectedItems="@SelectedPersons1"
+                      TextFieldName="@nameof(Person.Text)"
+                      @bind-Values="@SelectedPersons1"
+                      NullText="Long text"
                       DropDownWidthMode="DropDownWidthMode"
                       SizeMode="SizeMode"></DxTagBox>
         </div>
@@ -49,8 +51,8 @@
             <label class="d-inline-flex flex-nowrap align-items-center">
                 <b class="hljs-attr" style="white-space: nowrap; margin-right: .5em;">Drop Down Width Mode: </b>
                 <DxComboBox Data="@(Enum.GetNames(typeof(DropDownWidthMode)))"
-                            SelectedItem="@(DropDownWidthMode.ToString())"
-                            SelectedItemChanged="@((string selectedItem) => { DropDownWidthMode = Enum.Parse<DropDownWidthMode>(selectedItem); })">
+                            Value="@(DropDownWidthMode.ToString())"
+                            ValueChanged="@((string selectedItem) => { DropDownWidthMode = Enum.Parse<DropDownWidthMode>(selectedItem); })">
                 </DxComboBox>
             </label>
         </div>
@@ -60,20 +62,8 @@
 
 
 @code {
-    IEnumerable<Person> selectedPersons;
-    IEnumerable<Person> SelectedPersons {
-        get => selectedPersons;
-        set { selectedPersons = value; }
-    }
-    IEnumerable<Person> selectedPersons1;
-    IEnumerable<Person> SelectedPersons1 {
-        get => selectedPersons1;
-        set { selectedPersons1 = value; }
-    }
+    IEnumerable<Person> SelectedPersons { get; set; }
+    IEnumerable<Person> SelectedPersons1 { get; set; }
 
-    DropDownWidthMode dropDownWidthMode = DropDownWidthMode.ContentOrEditorWidth;
-    DropDownWidthMode DropDownWidthMode { get => dropDownWidthMode; set { dropDownWidthMode = value; InvokeAsync(StateHasChanged); } }
-
-
+    DropDownWidthMode DropDownWidthMode { get; set; } = DropDownWidthMode.ContentOrEditorWidth;
 }
-

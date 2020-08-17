@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -40,15 +40,14 @@ namespace BlazorDemo.ServerSide {
             static void ConfigureServices(WebHostBuilderContext context, IServiceCollection services) {
                 services.AddOptions();
 
-                foreach (var moduleSection in GetModules(context).Select(x => context.Configuration.GetSection(x))) {
-                    if (moduleSection.Exists())
+                foreach(var moduleSection in GetModules(context).Select(x => context.Configuration.GetSection(x))) {
+                    if(moduleSection.Exists())
                         services.Configure<SeoConfiguration>(moduleSection);
                 }
             }
 
             static void ConfigureAppDelegate(WebHostBuilderContext context, IConfigurationBuilder commonBuilder) {
-                commonBuilder.AddJsonFile("SeoConfiguration.json", true, true);
-                foreach (var moduleName in GetModules(context))
+                foreach(var moduleName in GetModules(context))
                     commonBuilder.AddJsonFile($"{moduleName}Metadata.json", true, true);
             }
 

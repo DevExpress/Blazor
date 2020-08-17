@@ -18,11 +18,11 @@
             <p>Amout: @context.Point.Value</p>
         </div>
     </DxChartTooltip>
-    <DxChartBarSeries Name="2017" Filter="@((SaleInfo s) => s.Date.Year == 2017)" AggregationMethod="@Enumerable.Sum" 
+    <DxChartBarSeries Name="2017" Filter="@((SaleInfo s) => s.Date.Year == 2017)" AggregationMethod="@Enumerable.Sum"
                       ArgumentField="@(s => s.City)" ValueField="@(s => s.Amount)" />
-    <DxChartBarSeries Name="2018" Filter="@((SaleInfo s) => s.Date.Year == 2018)" AggregationMethod="@Enumerable.Sum" 
+    <DxChartBarSeries Name="2018" Filter="@((SaleInfo s) => s.Date.Year == 2018)" AggregationMethod="@Enumerable.Sum"
                       ArgumentField="@(s => s.City)" ValueField="@(s => s.Amount)" />
-    <DxChartLineSeries Name="2019" Filter="@((SaleInfo s) => s.Date.Year == 2019)" AggregationMethod="@Enumerable.Sum" 
+    <DxChartLineSeries Name="2019" Filter="@((SaleInfo s) => s.Date.Year == 2019)" AggregationMethod="@Enumerable.Sum"
                        ArgumentField="@(s=> s.City)" ValueField="@(s => s.Amount)" />
 </DxChart>
 <CodeSnippet_Charts_TooltipCustomization />

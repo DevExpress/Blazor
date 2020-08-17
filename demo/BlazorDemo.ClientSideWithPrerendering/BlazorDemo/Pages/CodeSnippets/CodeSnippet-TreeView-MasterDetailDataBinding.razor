@@ -1,6 +1,6 @@
 ﻿<CodeSnippetTabbed>
 <CodeSnippetTabPage Text="Razor">
-@(@"<DxTreeView Data=""@Enum.GetValues(typeof(ProductCategoryMain))"" 
+@(@"<DxTreeView Data=""@Enum.GetValues(typeof(ProductCategoryMain))""
     TextExpression=""@(dataItem => GetNodeText(dataItem))""
     ChildrenExpression=""@(dataItem => GetNodeChildren(dataItem))"">
 </DxTreeView>
@@ -8,7 +8,7 @@
 @code {
     IQueryable<Product> products;
     IEnumerable<ProductCategory> productSubcategories;
-    
+
     System.Collections.IEnumerable GetNodeChildren(object dataItem) {
         if (dataItem is ProductCategoryMain) {
             return productSubcategories

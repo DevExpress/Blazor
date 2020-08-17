@@ -1,11 +1,11 @@
-@implements IDisposable
+﻿@implements IDisposable
 @inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
-<DemoScriptLoader @ref=@helperFuncLoaderRef 
-                   Code="function _demoMatchesQuery(mediaQuery, dotNetHelper) { 
+<DemoScriptLoader @ref=@helperFuncLoaderRef
+                   Code="function _demoMatchesQuery(mediaQuery, dotNetHelper) {
                        var query = window.matchMedia(mediaQuery), pendingCall;
                        handleQuery(query).then(function() {
-                            return query.addListener(handleQuery); 
+                            return query.addListener(handleQuery);
                        });
 
                        function handleQuery(queryMatch) {
@@ -36,7 +36,7 @@
             await helperFuncLoaderRef.InvokeVoidAsync("_demoMatchesQuery", "(min-width: 1200px)", DotNetObjectReference.Create(this));
     }
 
-    
+
     [JSInvokable]
     public async Task OnQueryChanged(bool isDesktop) {
         if(_isDesktop != isDesktop) {

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <XtraReportsLayoutSerializer SerializerVersion="18.2.0.0" Ref="1" ControlType="XtraReportsDemos.DrillDownReport.DrillDownReport, DevExpress.DemoReports.v18.2, Version=18.2.0.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47" Name="DrillDownReport" DisplayName="Drill-Down Report" Margins="49, 50, 49, 49" PageWidth="850" PageHeight="1100" Version="18.2" RequestParameters="false" DataMember="Categories" DataSource="#Ref-0">
   <Parameters>
     <Item1 Ref="3" Visible="false" Name="expandedValuesParameter" />

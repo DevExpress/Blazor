@@ -1,10 +1,9 @@
 ﻿<CodeSnippet>
-@(@"<DxSpinEdit @bind-Value=""@DecimalValue"" 
+@(@"<DxSpinEdit @bind-Value=""@DecimalValue""
             DisplayFormat=""C"">
 </DxSpinEdit>
 
 @code {
-    Decimal decimalValue = 320.5m;
-    Decimal DecimalValue { get => decimalValue; set { decimalValue = value; InvokeAsync(StateHasChanged); } }
+    Decimal DecimalValue { get; set; } = 320.5m;
 }")
 </CodeSnippet>

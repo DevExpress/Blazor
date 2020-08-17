@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,8 +16,7 @@ namespace BlazorDemo.DataProviders.Implementation {
             DataGenerated = new Lazy<Task>(() => GenerateData());
         }
 
-        protected virtual SalesViewerDataGenerator CreateGenerator()
-        {
+        protected virtual SalesViewerDataGenerator CreateGenerator() {
             return new SalesViewerDataGenerator(DataContext);
         }
 

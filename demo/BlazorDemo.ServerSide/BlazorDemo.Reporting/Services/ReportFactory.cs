@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BlazorDemo.Reporting.Reports;
@@ -35,8 +35,8 @@ namespace Demo.Blazor.Services {
             new ReportInfo() { DisplayName = ReportNames.LargeDataset, Name = ReportNames.LargeDatasetName, CreateAction = () => new Reports.CachedDocumentSource.ReportWeb() },
             new ReportInfo() { DisplayName = ReportNames.EmployeePerformanceReview, Name = ReportNames.EmployeePerformanceReviewName, CreateAction = () => new Reports.EmployeePerformanceReview.Report() },
             new ReportInfo() { DisplayName = ReportNames.VehicleInspectionReport, Name = ReportNames.VehicleInspectionReportName, CreateAction = () => new Reports.VehicleInspectionReport.Report() },
-            new ReportInfo() { DisplayName = ReportNames.FormattingRules, Name = ReportNames.FormattingRulesName, CreateAction = () => new Reports.FormattingRules.Report() },            
-            
+            new ReportInfo() { DisplayName = ReportNames.FormattingRules, Name = ReportNames.FormattingRulesName, CreateAction = () => new Reports.FormattingRules.Report() },
+
             new ReportInfo() { DisplayName = ReportNames.Anchor, Name = ReportNames.AnchorName, CreateAction = () => new Reports.AnchorVertical.Report() },
             new ReportInfo() { DisplayName = ReportNames.CalculatedFields, Name = ReportNames.CalculatedFieldsName, CreateAction = () => new Reports.CalculatedFields.Report() },
             new ReportInfo() { DisplayName = ReportNames.CrossBands, Name = ReportNames.CrossBandsName, CreateAction = () => new Reports.CrossBandControls.Report() },

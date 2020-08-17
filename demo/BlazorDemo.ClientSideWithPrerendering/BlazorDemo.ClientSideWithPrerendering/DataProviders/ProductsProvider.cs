@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using BlazorDemo.Data;
@@ -24,7 +24,7 @@ namespace BlazorDemo.DataProviders.Implementation {
             _products.Add(product);
             return Task.CompletedTask;
         }
-        
+
         static IList<Product> LoadInternal() {
             var dataSource = new List<Product>() {
                 new Product() { Id = "680", Availability = false, ProductCategoryId = 14, ProductName = "HL Road Frame - Black, 58" },

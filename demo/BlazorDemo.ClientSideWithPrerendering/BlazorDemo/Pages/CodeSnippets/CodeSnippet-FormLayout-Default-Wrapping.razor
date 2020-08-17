@@ -26,18 +26,9 @@
 </DxFormLayout>
 
 @code {
-    string address = ""120 Hanover Sq."";
-    string Address { get => address; set { address = value; OnChanged(); } }
-
-    string city = ""London"";
-    string City { get => city; set { city = value; OnChanged(); } }
-
-    string zipCode = ""WA1 1DP"";
-    string ZipCode { get => zipCode; set { zipCode = value; OnChanged(); } }
-
-    string country = ""UK"";
-    string Country { get => country; set { country = value; OnChanged(); } }
-
-    void OnChanged() { InvokeAsync(StateHasChanged); }
+    string Address { get; set; } = ""120 Hanover Sq."";
+    string City { get; set; } = ""London"";
+    string ZipCode { get; set; } = ""WA1 1DP"";
+    string Country { get; set; } = ""UK"";
 }")
 </CodeSnippet>

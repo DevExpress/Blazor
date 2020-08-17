@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace Demo.Blazor.Reports.ProfitAndLoss {
-    
+
     public partial class Report : DevExpress.XtraReports.UI.XtraReport {
         private void InitializeComponent() {
             DevExpress.XtraReports.ReportInitializer reportInitializer = new DevExpress.XtraReports.ReportInitializer(this, "BlazorDemo.Reporting.Reports.ProfitAndLoss.Report.repx");

@@ -31,6 +31,5 @@
 </div>
 
 @code {
-    string textValue = string.Empty;
-    string TextValue { get => textValue; set { textValue = value; InvokeAsync(StateHasChanged); } }
+    string TextValue { get; set; }
 }
