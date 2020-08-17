@@ -9,11 +9,12 @@
                               DisplayFormat=""D""
                               Width=""240px"">
     </DxDataGridDateEditColumn>
-    <DxDataGridComboBoxColumn Field=""@nameof(Order.ShipRegionID)""
-                              Caption=""Ship Region""
-                              Data=""@ShipRegions""
-                              ValueFieldName=""@nameof(ShipRegion.RegionID)""
-                              TextFieldName=""@nameof(ShipRegion.Name)""
+    <DxDataGridComboBoxColumn Field=""@nameof(Order.CountryId)""
+                              Caption=""Ship Country""
+                              Data=""@Countries""
+                              ValueFieldName=""@nameof(Country.Id)""
+                              TextFieldName=""@nameof(Country.CountryName)""
+                              FilteringMode=""DataGridFilteringMode.Contains""
                               Width=""250px"">
     </DxDataGridComboBoxColumn>
     <DxDataGridSpinEditColumn Field=""@nameof(Order.UnitPrice)""
@@ -36,7 +37,18 @@
                              DeleteButtonVisible=""false""
                              Width=""70px"">
     </DxDataGridCommandColumn>
-</DxDataGrid>")
+</DxDataGrid>
+
+@code {
+    IEnumerable<Order> Orders;
+    IEnumerable<Country> Countries;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Countries = await CountryNamesService.LoadAsync();
+        Orders = await OrderRepository.Load();
+    }
+}")
         </CodeSnippet>
     </div>
 </div>

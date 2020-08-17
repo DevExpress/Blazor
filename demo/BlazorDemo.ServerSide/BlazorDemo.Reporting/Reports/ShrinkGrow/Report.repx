@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <XtraReportsLayoutSerializer SerializerVersion="18.2.0.0" Ref="1" ControlType="XtraReportsDemos.ShrinkGrow.Report, DevExpress.DemoReports.v18.2, Version=18.2.0.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47" Name="ShrinkGrowReport" DisplayName="Shrink &amp; Grow" Margins="100, 100, 105, 75" PageWidth="850" PageHeight="1100" Version="18.2" DataMember="Employees" DataSource="#Ref-0">
   <Bands>
     <Item1 Ref="2" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="75" TextAlignment="TopLeft" Padding="0,0,0,0,100">

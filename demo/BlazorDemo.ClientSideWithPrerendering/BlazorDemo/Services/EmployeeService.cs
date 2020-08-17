@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,8 +15,8 @@ namespace BlazorDemo.Services {
             _dataSource.Remove(dataItem);
         }
         public void Update(Employee product, Dictionary<string, object> newValue) {
-            foreach (var field in newValue.Keys) {
-                switch (field) {
+            foreach(var field in newValue.Keys) {
+                switch(field) {
                     case "BirthDate":
                         product.BirthDate = (DateTime)newValue[field];
                         break;
@@ -48,8 +48,7 @@ namespace BlazorDemo.Services {
             return Task.FromResult(_dataSource.AsQueryable());
         }
 
-        public void Insert(Dictionary<string, object> newValue)
-        {
+        public void Insert(Dictionary<string, object> newValue) {
             if(!newValue.ContainsKey(nameof(Employee.LastName)))
                 newValue.Add(nameof(Employee.LastName), Guid.NewGuid().ToString());
 

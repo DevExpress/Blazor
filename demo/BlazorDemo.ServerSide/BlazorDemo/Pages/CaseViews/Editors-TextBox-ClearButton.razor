@@ -5,10 +5,10 @@
         <DemoNavLink Link="TextBox#ClearButton" />Text Box - Clear Button
     </h2>
     <p>
-        Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTextBoxBase.ClearButtonDisplayMode">ClearButtonDisplayMode</a> property to <b>Auto</b> to display the <b>Clear</b> button in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextBox">Text Box</a> when it is not empty.
+        Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTextEditorBase.ClearButtonDisplayMode">ClearButtonDisplayMode</a> property to <b>Auto</b> to display the <b>Clear</b> button in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextBox">Text Box</a> when it is not empty.
     </p>
     <p>
-        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTextBoxBase.NullText">NullText</a> property to display placeholder text in the Text Box when it is empty.
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTextEditorBase.NullText">NullText</a> property to display placeholder text in the Text Box when it is empty.
     </p>
 </div>
 
@@ -18,7 +18,8 @@
     </div>
     <div class="card-body mw-480">
         <DxTextBox @bind-Text="@TextValue"
-                   ClearButtonDisplayMode="@DataEditorClearButtonDisplayMode.Auto"
+                   ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                   BindValueMode="BindValueMode.OnInput"
                    NullText="Type text..."
                    SizeMode="SizeMode"></DxTextBox>
     </div>
@@ -32,6 +33,5 @@
 </div>
 
 @code {
-    string textValue = "Some text";
-    string TextValue { get => textValue; set { textValue = value; InvokeAsync(StateHasChanged); } }
+    string TextValue { get; set; } = "Some text";
 }

@@ -3,8 +3,8 @@
             ClearButtonDisplayMode=""DataEditorClearButtonDisplayMode.Auto""
             NullText=""Select a date..."">
 </DxDateEdit>
+
 @code {
-    DateTime? dateTimeValue = DateTime.Now;
-    DateTime? DateTimeValue { get => dateTimeValue; set { dateTimeValue = value; InvokeAsync(StateHasChanged); } }
+    DateTime? dateTimeValue { get; set; } = DateTime.Now;
 }")
 </CodeSnippet>

@@ -19,22 +19,22 @@
     </p>
     <ol>
         <li>Add two <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1">Data Grid</a> components to your application.</li>
-        <li>Bind the first grid (master) to a master data source and enable its <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.ShowDetailRow">ShowDetailRow</a> property.</li>
+        <li>Bind the first grid (master) to a master data source and enable its <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.ShowDetailRow">ShowDetailRow</a> property.</li>
         <li>Bind the second grid (detail) to a detail data source that uses the template's context object as a filter criterion.</li>
-        <li>(Optional) To automatically collapse an expanded detail row when a new detail row is displayed, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.AutoCollapseDetailRow">AutoCollapseDetailRow</a> property to <b>true</b>.</li>
+        <li>(Optional) To automatically collapse an expanded detail row when a new detail row is displayed, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.AutoCollapseDetailRow">AutoCollapseDetailRow</a> property to <b>true</b>.</li>
     </ol>
     <p>
-        Create a <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.DetailRowTemplate">DetailRowTemplate</a> template for the master grid and add the detail grid to this template.
+        Create a <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.DetailRowTemplate">DetailRowTemplate</a> template for the master grid and add the detail grid to this template.
     </p>
 </div>
 
 
-<DxDataGrid @ref="@grid" 
-            DataAsync="@SalesViewerDataProvider.GetProducts" 
+<DxDataGrid @ref="@grid"
+            DataAsync="@SalesViewerDataProvider.GetProducts"
             KeyFieldName="Id"
-            AutoCollapseDetailRow="true" 
+            AutoCollapseDetailRow="true"
             ShowDetailRow="true"
-            SelectionMode="DataGridSelectionMode.None" 
+            SelectionMode="DataGridSelectionMode.None"
             PageSize="4"
             CssClass="mw-1100">
     <Columns>
@@ -48,9 +48,9 @@
         <DxTabs>
             <DxTabPage Text="Sales">
                 <div class="p-3">
-                    <DxDataGrid DataAsync="@GetSalesDataByProductAsync(dataItem)" 
-                                SelectionMode="DataGridSelectionMode.None" 
-                               
+                    <DxDataGrid DataAsync="@GetSalesDataByProductAsync(dataItem)"
+                                SelectionMode="DataGridSelectionMode.None"
+
                                 LayoutRestoring="@GetDetailsGridLayoutRestoringDelegate(dataItem)"
                                 LayoutChanged="@GetDetailsGridLayoutChangedDelegate(dataItem)">
                         <DxDataGridDateEditColumn Field="@nameof(Sale.SaleDate)" />
@@ -107,7 +107,7 @@
             var allSales = await SalesViewerDataProvider.GetSales(cancellationToken);
             return allSales.Where(x => x.ProductId == product.Id);
         }
-    } 
+    }
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)

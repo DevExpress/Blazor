@@ -1,0 +1,43 @@
+﻿@inherits DemoWithResizableComponent
+
+<div class="demo-description" id="ItemValues">
+    <h2><DemoNavLink Link="ComboBox#ItemValues" />ComboBox - Item Values<span class="demo-badge badge badge-success">New</span></h2>
+    <p>
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2">ComboBox</a> component provides access to item values.
+        The value is assigned to the editor's edit value when a user selects an item from the drop-down list.
+        To enable this access, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.ValueFieldName">ValueFieldName</a> property to the name of the data source field that ships with values for the ComboBox items.
+    </p>
+    <p>
+        If the <b>ValueFieldName</b> property is not specified, the ComboBox component searches for a <b>Value</b> field in the data source and uses this field as a value field.
+        Otherwise, values are not assigned to editor items.
+    </p>
+    <p>
+        To access a selected item’s value, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.Value">Value</a> property.
+        To track selection changes, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.ValueChanged">ValueChanged</a> event or two-way synchronization as demonstrated in this module.
+    </p>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode">
+            <TitleTemplate>
+                Selected value: <b>@(Value.ToString())</b>
+            </TitleTemplate>
+        </DemoToolbar>
+
+    </div>
+    <div class="card-body mw-480">
+        <DxComboBox Data="@Persons.DataSource"
+                    TextFieldName="@nameof(Person.Text)"
+                    ValueFieldName="@nameof(Person.Id)"
+                    SizeMode="SizeMode"
+                    @bind-Value="@Value">
+        </DxComboBox>
+    </div>
+</div>
+
+<CodeSnippet_Editor_ComboBox_ValueFieldProperty></CodeSnippet_Editor_ComboBox_ValueFieldProperty>
+
+@code {
+    int Value { get; set; } = 1;
+}

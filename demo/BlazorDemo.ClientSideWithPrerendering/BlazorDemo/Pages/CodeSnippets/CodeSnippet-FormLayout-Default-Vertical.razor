@@ -20,16 +20,8 @@
 </DxFormLayout>
 
 @code {
-    string location = ""London"";
-    string Location { get => location; set { location = value; OnChanged(); } }
-
-    DateTime checkIn = DateTime.Now;
-    DateTime CheckIn { get => checkIn; set { checkIn = value; OnChanged(); } }
-
-    DateTime checkOut = DateTime.Now;
-    DateTime CheckOut { get => checkOut; set { checkOut = value; OnChanged(); } }
-
-
-    void OnChanged() { InvokeAsync(StateHasChanged); }
+    string Location { get; set; } = ""London"";
+    DateTime CheckIn { get; set; } = DateTime.Now;
+    DateTime CheckOut { get; set; } = DateTime.Now;
 }")
 </CodeSnippet>

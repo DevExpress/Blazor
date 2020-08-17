@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using BlazorDemo.Configuration;
 using BlazorDemo.Services;
 using DevExpress.Blazor.DocumentMetadata;
@@ -16,6 +16,7 @@ namespace BlazorDemo {
             services.AddScoped<ProductService>();
             services.AddScoped<RentInfoDataService>();
             services.AddScoped<WeatherForecastService>();
+            services.AddScoped<SupplierService>();
             services.AddDevExpressBlazor();
 
             services.AddDocumentMetadata(ConfigureMetadata);

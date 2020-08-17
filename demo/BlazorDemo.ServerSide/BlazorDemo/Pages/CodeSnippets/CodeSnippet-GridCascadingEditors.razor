@@ -19,8 +19,8 @@
             }
             <DxComboBox Data=""@VacancyRepository.Regions""
                         NullText=""Select Region...""
-                        SelectedItem=""@region""
-                        SelectedItemChanged=""@(newCellValue => {
+                        Value=""@region""
+                        ValueChanged=""@(newCellValue => {
                                             editingContext.OnChanged(newCellValue);
                                             editingContext.OnChanged(nameof(Vacancy.City), null);
                                             OnRegionChanged();
@@ -41,7 +41,7 @@
             <DxComboBox Data=""@cities""
                         NullText=""Select City...""
                         Text=""@city""
-                        SelectedItemChanged=""@(newCellValue => editingContext.OnChanged(newCellValue))"">
+                        ValueChanged=""@(newCellValue => editingContext.OnChanged(newCellValue))"">
             </DxComboBox>
         </EditTemplate>
     </DxDataGridColumn>
@@ -87,7 +87,7 @@
         var newVacancy = new Vacancy();
         OnRowUpdating(newVacancy, newValue);
         Vacancies = (new Vacancy[] { newVacancy }).Concat(Vacancies);
-        
+
         InvokeAsync(StateHasChanged);
     }
 }

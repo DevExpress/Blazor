@@ -27,7 +27,7 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
             in ReadOnlyMemory<EntityLoadingState> providerEntities) {
             int loaded = 0, total = 0;
             ReadOnlySpan<EntityLoadingState> span = providerEntities.Span;
-            for (var i = 0; i < providerEntities.Length; i++) {
+            for(var i = 0; i < providerEntities.Length; i++) {
                 ref readonly EntityLoadingState entity = ref span[i];
                 ref readonly EntitySetMetadata meta = ref entity.Entity;
                 loaded += entity.Loaded;

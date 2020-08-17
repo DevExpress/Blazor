@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using DevExpress.Utils;
 using DevExpress.XtraCharts;
 using DevExpress.XtraReports.UI;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
@@ -13,7 +13,7 @@ namespace BlazorDemo.Data.SalesViewer {
         public string Name { get; set; }
         public virtual ICollection<Sale> Sales { get; set; }
     }
-    
+
     [Guid("D5A69515-31AE-4CB1-BE9E-57261ECE6002")]
     public partial class City {
         public City() {
@@ -34,7 +34,7 @@ namespace BlazorDemo.Data.SalesViewer {
         public virtual ICollection<Customer> Customers { get; set; }
         public virtual ICollection<Plant> Plants { get; set; }
     }
-    
+
     [Guid("D5A69515-31AE-4CB1-BE9E-57261ECE6003")]
     public partial class Contact {
         public Contact() {
@@ -52,7 +52,7 @@ namespace BlazorDemo.Data.SalesViewer {
         public virtual City City { get; set; }
         public virtual ICollection<Product> Products { get; set; }
     }
-    
+
     [Guid("D5A69515-31AE-4CB1-BE9E-57261ECE6004")]
     public partial class Customer {
         public Customer() {
@@ -70,7 +70,7 @@ namespace BlazorDemo.Data.SalesViewer {
         public virtual City City { get; set; }
         public virtual ICollection<Sale> Sales { get; set; }
     }
-    
+
     [Guid("D5A69515-31AE-4CB1-BE9E-57261ECE6005")]
     public partial class Plant {
         public Plant() {
@@ -85,7 +85,7 @@ namespace BlazorDemo.Data.SalesViewer {
         public virtual City City { get; set; }
         public virtual ICollection<Product> Products { get; set; }
     }
-    
+
     [Guid("D5A69515-31AE-4CB1-BE9E-57261ECE6006")]
     public partial class Product {
         public Product() {
@@ -107,7 +107,7 @@ namespace BlazorDemo.Data.SalesViewer {
         public virtual Plant Plant { get; set; }
         public virtual ICollection<Sale> Sales { get; set; }
     }
-    
+
     [Guid("D5A69515-31AE-4CB1-BE9E-57261ECE6007")]
     public partial class Region {
         public Region() {
@@ -118,7 +118,7 @@ namespace BlazorDemo.Data.SalesViewer {
         public string Name { get; set; }
         public virtual ICollection<Sale> Sales { get; set; }
     }
-    
+
     [Guid("D5A69515-31AE-4CB1-BE9E-57261ECE6008")]
     public partial class Sale {
         public int Id { get; set; }
@@ -138,7 +138,7 @@ namespace BlazorDemo.Data.SalesViewer {
         public virtual Region Region { get; set; }
         public virtual Sector Sector { get; set; }
     }
-    
+
     [Guid("D5A69515-31AE-4CB1-BE9E-57261ECE6009")]
     public partial class Sector {
         public Sector() {

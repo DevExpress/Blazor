@@ -3,13 +3,13 @@
     <h2>Data Grid - Cascading Editors</h2>
 
     <p>
-        This module illustrates <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-1#cascading-combo-boxes">cascade comboboxes</a>: <b>City</b> and <b>Region</b>.
+        This module illustrates <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2#cascading-comboboxes">cascade comboboxes</a>: <b>City</b> and <b>Region</b>.
         These comboboxes are displayed when you <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#edit-data">edit a grid row</a>.
         The <b>City</b> combobox is dynamically populated with city names based on the value selected in the <b>Region</b> combobox.
     </p>
 
     <p>
-        Both the Region and City columns use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.EditTemplate#returns">EditTemplate context</a> cast to the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.CellEditContext">CellEditContext</a> type that contains:
+        Both the Region and City columns use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.EditTemplate">EditTemplate context</a> cast to the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.CellEditContext">CellEditContext</a> type that contains:
     </p>
 
     <ul>
@@ -57,12 +57,11 @@ else
                 }
                 <DxComboBox Data="@VacancyRepository.Regions"
                             NullText="Select Region..."
-                            SelectedItem="@region"
-                            SelectedItemChanged="@(newCellValue => {
+                            Value="@region"
+                            ValueChanged="@(EventCallback.Factory.Create(this, (string newCellValue) => {
                                                 editingContext.OnChanged(newCellValue);
                                                 editingContext.OnChanged(nameof(Vacancy.City), null);
-                                                OnRegionChanged();
-                                                })">
+                                                }))">
                 </DxComboBox>
             </EditTemplate>
         </DxDataGridComboBoxColumn>
@@ -79,7 +78,7 @@ else
                 <DxComboBox Data="@cities"
                             NullText="Select City..."
                             Text="@city"
-                            SelectedItemChanged="@(newCellValue => editingContext.OnChanged(newCellValue))">
+                            ValueChanged="@(EventCallback.Factory.Create(this, (string newCellValue) => editingContext.OnChanged(newCellValue)))">
                 </DxComboBox>
             </EditTemplate>
         </DxDataGridColumn>

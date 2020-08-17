@@ -1,11 +1,11 @@
 ﻿<CodeSnippet>
-@(@"<DxTextBox @bind-Text=""@TextValue"" 
-           ClearButtonDisplayMode=""@DataEditorClearButtonDisplayMode.Auto""
+@(@"<DxTextBox @bind-Text=""@TextValue""
+           ClearButtonDisplayMode=""DataEditorClearButtonDisplayMode.Auto""
+           BindValueMode=""BindValueMode.OnInput""
            NullText=""Type text..."">
 </DxTextBox>
 
 @code {
-    string textValue = ""Some text"";
-    string TextValue { get => textValue; set { textValue = value; InvokeAsync(StateHasChanged); } }
+    string TextValue { get; set; } = ""Some text"";
 }")
 </CodeSnippet>

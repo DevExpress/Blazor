@@ -17,8 +17,6 @@
 </div>
 
 @code  {
-    CheckBoxContentAlignment alignment;
-    LabelPosition labelPosition;
 
     bool MultimediaChecked { get; set; }
     bool AirConditioningChecked { get; set; }
@@ -26,8 +24,8 @@
     bool HeatedSeatsChecked { get; set; }
     bool DroneChecked { get; set; }
 
-    CheckBoxContentAlignment Alignment { get { return alignment; } set { alignment = value; InvokeAsync(StateHasChanged); } }
-    LabelPosition LabelPosition { get { return labelPosition; } set { labelPosition = value; InvokeAsync(StateHasChanged); } }
+    CheckBoxContentAlignment Alignment { get; set; }
+    LabelPosition LabelPosition { get; set; }
 }")
     </CodeSnippetTabPage>
     <CodeSnippetTabPage Text="Settings">

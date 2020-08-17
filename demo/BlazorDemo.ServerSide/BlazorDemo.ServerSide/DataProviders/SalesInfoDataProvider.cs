@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,11 +9,11 @@ namespace BlazorDemo.DataProviders.Implementation {
         public Task<IEnumerable<SaleInfo>> GetSalesAsync(CancellationToken ct = default) {
             return Task.FromResult(_dataSource.Value);
         }
-    
+
         static readonly Lazy<IEnumerable<SaleInfo>> _dataSource = new Lazy<IEnumerable<SaleInfo>>(CreateDataSource);
 
         static SaleInfo[] CreateDataSource() {
-            return new [] {
+            return new[] {
                 new SaleInfo {
                     OrderId = 10248,
                     Region = "North America",

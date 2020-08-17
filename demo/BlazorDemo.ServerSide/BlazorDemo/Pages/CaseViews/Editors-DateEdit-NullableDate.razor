@@ -1,4 +1,4 @@
-﻿@inherits DemoWithResizableComponent 
+﻿@inherits DemoWithResizableComponent
 
 <div class="demo-description" id="NullableDate">
     <h2>
@@ -12,11 +12,11 @@
             Delete the value in the editor.
         </li>
         <li>
-            Click the <b>Clear</b> button. To display this button, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDateEditBase-1.ClearButtonDisplayMode">ClearButtonDisplayMode</a> property to <b>Auto</b>.
+            Click the <b>Clear</b> button. To display this button, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.ClearButtonDisplayMode">ClearButtonDisplayMode</a> property to <b>Auto</b>.
         </li>
     </ul>
     <p>
-        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDateEdit-1.NullText">NullText</a> property to display placeholder text in the Date Edit when its value is null.
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.NullText">NullText</a> property to display placeholder text in the Date Edit when its value is null.
     </p>
 </div>
 
@@ -40,6 +40,5 @@
 </div>
 
 @code {
-    DateTime? dateTimeValue = DateTime.Now;
-    DateTime? DateTimeValue { get => dateTimeValue; set { dateTimeValue = value; InvokeAsync(StateHasChanged); } }
+    DateTime? DateTimeValue { get; set; } = DateTime.Now;
 }

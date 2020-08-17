@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,7 +10,7 @@ namespace BlazorDemo.DataProviders.Implementation {
             return Task.FromResult(_dataSource.Value);
         }
         internal static readonly Lazy<IEnumerable<ProductCategory>> _dataSource = new Lazy<IEnumerable<ProductCategory>>(() => {
-            return new [] {
+            return new[] {
                 new ProductCategory() { SubcategoryID = 1 ,   Category = ProductCategoryMain.Bikes      ,    Subcategory = "Mountain Bikes",  LastUpdated = DateTime.Parse("2019-06-01") },
                 new ProductCategory() { SubcategoryID = 2 ,   Category = ProductCategoryMain.Bikes      ,    Subcategory = "Road Bikes",  LastUpdated = DateTime.Parse("2019-06-01") },
                 new ProductCategory() { SubcategoryID = 3 ,   Category = ProductCategoryMain.Bikes      ,    Subcategory = "Touring Bikes",  LastUpdated = DateTime.Parse("2019-06-01") },

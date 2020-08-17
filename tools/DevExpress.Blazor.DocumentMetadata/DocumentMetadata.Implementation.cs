@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,7 +53,7 @@ namespace DevExpress.Blazor.DocumentMetadata {
             foreach (var VARIABLE in AppDomain.CurrentDomain.GetAssemblies()
                 .Where(IsAssemblyCanContainComponents)
                 .SelectMany(ExtractSeoInfoFromAssembly)) {
-                
+
                 RegisterSeoInfo(VARIABLE);
             }
             setup.Initialize(serviceProvider, this);
@@ -124,7 +124,7 @@ namespace DevExpress.Blazor.DocumentMetadata {
                 _observable._listeners += subscriber;
             }
             public void Dispose() {
-                if (_observable._listeners != null) 
+                if (_observable._listeners != null)
                     _observable._listeners -= _subscriber;
             }
         }

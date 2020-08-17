@@ -1,4 +1,4 @@
-﻿namespace Demo.Blazor.Reports.CachedDocumentSource {
+namespace Demo.Blazor.Reports.CachedDocumentSource {
     public struct Term {
         public static Term[] Terms = new Term[] {
             new Term("Payment seven days after invoice date" ),

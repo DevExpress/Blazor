@@ -36,6 +36,5 @@
 </div>
 
 @code {
-    Decimal decimalValue = 15;
-    Decimal DecimalValue { get => decimalValue; set { decimalValue = value; InvokeAsync(StateHasChanged); } }
+    Decimal DecimalValue { get; set; } = 15;
 }

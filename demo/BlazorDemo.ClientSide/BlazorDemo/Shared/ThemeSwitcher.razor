@@ -18,7 +18,7 @@
 @code {
     [Parameter] public bool Shown { get; set; }
     [Parameter] public EventCallback<bool> ShownChanged { get; set; }
-    
+
     [Inject] IDocumentMetadataService DocumentMetadataService { get; set; }
     [Inject] DemoService DemoService { get; set; }
 

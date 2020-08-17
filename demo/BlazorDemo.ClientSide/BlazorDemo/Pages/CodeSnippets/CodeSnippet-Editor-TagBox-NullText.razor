@@ -1,29 +1,32 @@
-﻿<CodeSnippet>
-</CodeSnippet>
-<CodeSnippetTabbed>
+﻿<CodeSnippetTabbed>
 <CodeSnippetTabPage Text="Razor">
-@(@"<DxTagBox NullText=""Select an option...""
-          Data=""@DataSource""
-          @bind-SelectedItems=""@SelectedOptions""
-          TextFieldName=""Text""               
+@(@"<DxTagBox NullText=""Select countries...""
+          Data=""@CountryData.Countries""
+          @bind-Values=""@SelectedCountries""
+          TextFieldName=""@nameof(Country.CountryName)""
           ClearButtonDisplayMode=""@DataEditorClearButtonDisplayMode.Auto"" />
 </DxTagBox>
 
 @code {
-    List<Options> DataSource { get; set; } = new List<Options>() {
-    {
-        new Options() { Id = 0, Text = ""Option 1"" },
-        new Options() { Id = 0, Text = ""Option 2"" },
-        new Options() { Id = 0, Text = ""Option 3"" },
-    };
-
-    IEnumerable<Options> SelectedOptions { get; set; }
+    IEnumerable<Country> SelectedCountries { get; set; }
 }")
 </CodeSnippetTabPage>
-<CodeSnippetTabPage Text="Options">
-@(@"public class Options {
+<CodeSnippetTabPage Text="Country">
+@(@"public class Country {
     public int Id { get; set; }
-    public string Text { get; set; }
+    public string CountryName { get; set; }
+}
+
+public static class CountryData {
+    private static readonly Lazy<List<Country>> countries = new Lazy<List<Country>>(() => {
+        return new List<Country>()
+        {
+            new Country() { Id = 0, CountryName = ""USA"" },
+            new Country() { Id = 1, CountryName = ""Germany"" },
+            new Country() { Id = 2, CountryName = ""Japan"" }
+        };
+    });
+    public static List<Country> Countries { get { return countries.Value; } }
 }")
 </CodeSnippetTabPage>
 </CodeSnippetTabbed>

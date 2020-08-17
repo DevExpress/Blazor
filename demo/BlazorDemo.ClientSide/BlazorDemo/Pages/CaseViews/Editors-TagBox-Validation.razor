@@ -4,14 +4,14 @@
 <div class="demo-description" id="Validation">
     <h2><DemoNavLink Link="TagBox#Validation" />TagBox - Validation</h2>
     <p>
-        This demo illustrates how to add the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-1">TagBox</a> to Blazor's standard 
+        This demo illustrates how to add the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2">TagBox</a> to Blazor's standard
         <a class="helplink" target="_blank" href="https://docs.microsoft.com/aspnet/core/blazor/forms-validation?view=aspnetcore-3.0">EditForm</a> component. This component allows data validation.
     </p>
     <p>
-        Use the TagBox’s <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTagBoxBase-1.ValidateBy">ValidateBy</a> property to specify whether to validate 
-        the editor’s tags or the drop-down list’s selected items. In this demo, this property is set to 
+        Use the TagBox’s <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.ValidateBy">ValidateBy</a> property to specify whether to validate
+        the editor’s tags or the drop-down list’s selected items. In this demo, this property is set to
         <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.TagBoxValidateBy">TagBoxValidateBy.Tags</a>.
-        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTagBoxBase-1.Tags">Tags</a> property’s bound field is marked with the Required 
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.Tags">Tags</a> property’s bound field is marked with the Required
         attribute and a custom <a class="helplink" target="_blank" href="https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-3.0">data annotation attribute</a> that validates email formats.
     </p>
     <p>
@@ -35,6 +35,8 @@
                           AllowCustomTags="true"
                           ValidateBy="@TagBoxValidateBy.Tags"
                           @bind-Tags="@recipients.Data"
+                          TData="string"
+                          TValue="string"
                           SizeMode="SizeMode">
                 </DxTagBox>
                 <ValidationMessage For="@(() => recipients.Data)" />

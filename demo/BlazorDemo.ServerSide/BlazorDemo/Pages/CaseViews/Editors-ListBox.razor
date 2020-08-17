@@ -1,7 +1,7 @@
 ﻿<div class="demo-description" id="Overview">
     <h2><DemoNavLink Link="ListBox#Overview" />List Box - Overview</h2>
     <p>
-        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-1">List Box</a> component allows users to select items from a list of predefined strings. The component can be bound to any IEnumerable data source. The list of selected items can be accessed and/or specified via the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxListBoxBase-1.SelectedItems">SelectedItems</a> property. To track selection changes, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxListBoxBase-1.SelectedItemsChanged">SelectedItemsChanged</a> event or the two-way synchronization as demonstrated in this module.
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2">List Box</a> component allows users to select items from a list of predefined strings. The component can be bound to any IEnumerable data source. The list of selected items can be accessed and/or specified via the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.Values">Values</a> property. To track selection changes, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.SelectedItemsChanged">SelectedItemsChanged</a> event or the two-way synchronization as demonstrated in this module.
     </p>
     <p>
         In this demo, the component allows users to select only one item at a time. Select an item to see the corresponding object's property values.
@@ -11,8 +11,8 @@
 <div class="card demo-card demo-listbox">
     <div class="card-header">Selected item: <b>@(SelectedPerson == null ? "(none)" : SelectedPerson.Text)</b></div>
     <DxListBox Data="@Persons.DataSource"
-               TextFieldName="Text"
-               @bind-SelectedItems="@SelectedItems"
+               TextFieldName="@nameof(Person.Text)"
+               @bind-Values="@Values"
                CssClass="border-0"
                style="height: 232px; border-top-left-radius: 0; border-top-right-radius: 0">
     </DxListBox>
@@ -21,11 +21,7 @@
 <CodeSnippet_Editors_ListBox></CodeSnippet_Editors_ListBox>
 
 @code {
-    IEnumerable<Person> selectedItems = Persons.DataSource.Take(1);
-    IEnumerable<Person> SelectedItems {
-        get => selectedItems;
-        set { selectedItems = value; InvokeAsync(StateHasChanged); }
-    }
+    IEnumerable<Person> Values { get; set; }  = Persons.DataSource.Take(1);
 
-    Person SelectedPerson => SelectedItems.First();
+    Person SelectedPerson => Values.First();
 }

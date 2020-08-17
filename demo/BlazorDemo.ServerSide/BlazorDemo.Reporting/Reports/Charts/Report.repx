@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <XtraReportsLayoutSerializer SerializerVersion="20.1.0.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v20.1" Name="ChartReport" DisplayName="Chart" Landscape="true" Margins="50, 50, 55, 55" PageWidth="1100" PageHeight="850" Version="20.1" RequestParameters="false" DataSource="#Ref-0">
   <CalculatedFields>
     <Item1 Ref="2" Name="Year" FieldType="Int32" Expression="GetYear([OrderDate])" DataMember="Orders" />

@@ -10,17 +10,17 @@
         <DxToolbarItem Name=""Center"" IconCssClass=""tb-icon tb-icon-align-center"" Tooltip=""Align Center"" />
         <DxToolbarItem Name=""Right"" IconCssClass=""tb-icon tb-icon-align-right"" Tooltip=""Align Right"" />
 
-        <DxToolbarItem Name=""Documentation"" Text=""Documentation"" BeginGroup=""true"" IconCssClass=""tb-icon tb-icon-info"" 
+        <DxToolbarItem Name=""Documentation"" Text=""Documentation"" BeginGroup=""true"" IconCssClass=""tb-icon tb-icon-info""
                         Tooltip=""Documentation (opened in a new tab)"" Alignment=""ToolbarItemAlignment.Right"" target=""_blank""
                         NavigateUrl=""https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar"" />
     </Items>
 </DxToolbar>
-<div id=""tb-overview-alert"" class=""alert alert-success"" @ref=""alertReference""></div>
+<DemoToaster Duration=""3000"" @ref=@toasterRef  />
 
 @code {
-    ElementReference alertReference;
-    async Task OnItemClick(ToolbarItemClickEventArgs e) {
-        await JSRuntime.InvokeAsync<string>(""ShowAlert"", alertReference, $""The '{e.ItemName}' button has been clicked"");
+    IObserver<string> toasterRef;
+    void OnItemClick(ToolbarItemClickEventArgs e) {
+        toasterRef.OnNext($""The '{e.ItemName}' button has been clicked"");
     }
 }
 ")

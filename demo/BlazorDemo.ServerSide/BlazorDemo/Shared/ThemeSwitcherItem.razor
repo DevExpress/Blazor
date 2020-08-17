@@ -1,5 +1,5 @@
-<a class="list-group-item list-group-item-action @Theme.CssClass @Theme.IconCssClass" href="#" 
-   @onclick:preventDefault 
+﻿<a class="list-group-item list-group-item-action @Theme.CssClass @Theme.IconCssClass" href="#"
+   @onclick:preventDefault
    @onclick=@OnLinkClick>
     @Theme.Name
 </a>
@@ -12,7 +12,7 @@
     bool _allowRender;
     [Parameter] public ThemeAttributes Theme { get; set; }
     [Parameter] public EventCallback<ThemeAttributes> Apply { get; set; }
-    
+
     protected override bool ShouldRender()
     {
         if (_allowRender)

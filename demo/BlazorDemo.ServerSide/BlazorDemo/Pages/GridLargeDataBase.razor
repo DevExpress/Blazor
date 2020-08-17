@@ -15,15 +15,15 @@
     </p>
 </div>
 
-<DxDataGrid DataAsync="@RentInfoDataService.GetQueryableAreaRentInfo" 
-            SelectionMode="DataGridSelectionMode.None" 
-            PageSize="10" 
-            KeyFieldName="Oid" 
+<DxDataGrid DataAsync="@RentInfoDataService.GetQueryableAreaRentInfo"
+            SelectionMode="DataGridSelectionMode.None"
+            PageSize="10"
+            KeyFieldName="Oid"
             CssClass="mw-1100">
-    <DxDataGridColumn Field="@nameof(AreaRentInfo.State)" AllowSort="DefaultBoolean.False"></DxDataGridColumn>
-    <DxDataGridColumn Field="@nameof(AreaRentInfo.Area)" AllowSort="DefaultBoolean.False"></DxDataGridColumn>
-    <DxDataGridColumn Field="@nameof(AreaRentInfo.City)" Caption="County" AllowSort="DefaultBoolean.False"></DxDataGridColumn>
-    <DxDataGridColumn Field="@nameof(AreaRentInfo.Name)" Caption="Location" AllowSort="DefaultBoolean.False"></DxDataGridColumn>
+    <DxDataGridColumn Field="@nameof(AreaRentInfo.State)" AllowSort="false"></DxDataGridColumn>
+    <DxDataGridColumn Field="@nameof(AreaRentInfo.Area)" AllowSort="false"></DxDataGridColumn>
+    <DxDataGridColumn Field="@nameof(AreaRentInfo.City)" Caption="County" AllowSort="false"></DxDataGridColumn>
+    <DxDataGridColumn Field="@nameof(AreaRentInfo.Name)" Caption="Location" AllowSort="false"></DxDataGridColumn>
     <DxDataGridSpinEditColumn Field="@nameof(AreaRentInfo.Year)"></DxDataGridSpinEditColumn>
     <DxDataGridSpinEditColumn Field="@nameof(AreaRentInfo.Bedrooms)"></DxDataGridSpinEditColumn>
     <DxDataGridSpinEditColumn Field="@nameof(AreaRentInfo.Rent)">
@@ -31,7 +31,7 @@
             @(((context as AreaRentInfo).Rent).ToString("C2"))
         </DisplayTemplate>
     </DxDataGridSpinEditColumn>
-    <DxDataGridSpinEditColumn Field="@nameof(AreaRentInfo.Population)" AllowSort="DefaultBoolean.False">
+    <DxDataGridSpinEditColumn Field="@nameof(AreaRentInfo.Population)" AllowSort="false">
         <DisplayTemplate>
             @(((context as AreaRentInfo).Population).ToString("#,0"))
         </DisplayTemplate>

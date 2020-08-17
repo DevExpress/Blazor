@@ -1,0 +1,25 @@
+﻿<CodeSnippetTabbed>
+<CodeSnippetTabPage Text="Razor">
+@(@"<DxComboBox Data=""@Data""
+            @bind-Value=""@Value""
+            FilteringMode=""@DataGridFilteringMode.Contains""
+            TextFieldName=""@nameof(Country.CountryName)"">
+</DxComboBox>
+
+@code {
+    IEnumerable<Country> Data;
+    Country Value { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Data = await CountryNamesService.LoadAsync();
+    }
+}")
+</CodeSnippetTabPage>
+<CodeSnippetTabPage Text="Country">
+@(@"public class Country {
+    public int Id { get; set; }
+    public string CountryName { get; set; }
+}")
+</CodeSnippetTabPage>
+</CodeSnippetTabbed>

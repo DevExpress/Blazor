@@ -3,11 +3,11 @@
 <div class="demo-description" id="NullText">
     <h2><DemoNavLink Link="TagBox#NullText" />TagBox - Null Text</h2>
     <p>
-        This demo illustrates how to use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTagBoxBase-1.NullText">NullText</a> property to display 
-        placeholder text in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-1">TagBox</a> when its value is null.
+        This demo illustrates how to use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.NullText">NullText</a> property to display
+        placeholder text in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2">TagBox</a> when its value is null.
     </p>
     <p>
-        Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTagBoxBase-1.ClearButtonDisplayMode">ClearButtonDisplayMode</a> property to <b>Auto</b> to display the <b>Clear</b> button when the 
+        Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.ClearButtonDisplayMode">ClearButtonDisplayMode</a> property to <b>Auto</b> to display the <b>Clear</b> button when the
         TagBox has a non-null value. Users can click this button to clear the editor's value (set it to null).
     </p>
 </div>
@@ -17,11 +17,11 @@
         <DemoToolbar @bind-SelectedSize="SizeMode" Title="Select items"/>
     </div>
     <div class="card-body mw-480">
-        <DxTagBox NullText="Select an option..."
-                  Data="@DataSource"
+        <DxTagBox NullText="Select countries..."
+                  Data="@CountryCity.Countries"
                   ClearButtonDisplayMode="@DataEditorClearButtonDisplayMode.Auto"
-                  TextFieldName="Text"
-                  @bind-SelectedItems="@SelectedOptions"
+                  TextFieldName="@nameof(Country.CountryName)"
+                  @bind-Values="@SelectedCountries"
                   SizeMode="SizeMode"></DxTagBox>
     </div>
 </div>
@@ -29,16 +29,5 @@
 <CodeSnippet_Editor_TagBox_NullText></CodeSnippet_Editor_TagBox_NullText>
 
 @code {
-    class Options {
-        public int Id { get; set; }
-        public string Text { get; set; }
-    }
-
-    IEnumerable<Options> SelectedOptions { get; set; }
-
-    List<Options> DataSource { get; set; } = new List<Options>() {
-        new Options() { Id = 0, Text = "Option 1" },
-        new Options() { Id = 0, Text = "Option 2" },
-        new Options() { Id = 0, Text = "Option 3" },
-    };
+    IEnumerable<Country> SelectedCountries { get; set; }
 }

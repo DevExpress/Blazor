@@ -7,7 +7,7 @@
     <h2>Data Grid - Edit Form Template with Validation</h2>
 
     <p>
-        This demo illustrates how to use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#edit-data">Data Grid</a>'s <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.EditFormTemplate">EditFormTemplate</a> with
+        This demo illustrates how to use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#edit-data">Data Grid</a>'s <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.EditFormTemplate">EditFormTemplate</a> with
         Blazor's standard <a class="helplink" target="_blank" href="https://docs.microsoft.com/aspnet/core/blazor/forms-validation?view=aspnetcore-3.0">EditForm</a> component to create a custom edit form with validation.
     </p>
 
@@ -26,7 +26,7 @@
 {
     <p><em>Loading...</em></p>
 }
-else 
+else
 {
     <DxDataGrid @ref="@grid"
                 Data="@Vacancies"
@@ -54,7 +54,7 @@ else
                         <Template>
                             <DxComboBox Data="@VacancyRepository.Regions"
                                         NullText="Select Region..."
-                                        @bind-SelectedItem="@EditContext.Region">
+                                        @bind-Value="@EditContext.Region">
                             </DxComboBox>
                         </Template>
                     </DxFormLayoutItem>
@@ -62,7 +62,7 @@ else
                         <Template>
                             <DxComboBox Data="@EditContext.OfficeLocations"
                                         NullText="Select City..."
-                                        @bind-SelectedItem="@EditContext.City">
+                                        @bind-Value="@EditContext.City">
                             </DxComboBox>
                         </Template>
                     </DxFormLayoutItem>

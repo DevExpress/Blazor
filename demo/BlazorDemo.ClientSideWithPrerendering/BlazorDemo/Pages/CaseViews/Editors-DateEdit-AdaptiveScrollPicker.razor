@@ -5,11 +5,11 @@
         <DemoNavLink Link="DateEdit#AdaptiveScrollPicker" />Date Edit - Adaptive Datepicker
     </h2>
     <p>
-        <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1">Date Edit</a> allows you to adapt a displayed datepicker to a device type. 
-        To specify a picker type, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDateEditBase-1.PickerDisplayMode">PickerDisplayMode</a> property that supports the following values:
+        <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1">Date Edit</a> allows you to adapt a displayed datepicker to a device type.
+        To specify a picker type, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.PickerDisplayMode">PickerDisplayMode</a> property that supports the following values:
         <ul>
             <li>
-                <b>Auto</b> (default) - Mobile and tablet devices display a datepicker as a scroll picker. 
+                <b>Auto</b> (default) - Mobile and tablet devices display a datepicker as a scroll picker.
                 Also, mobile devices show a modal window to display datepickers. Other device types display a datepicker as a calendar.
             </li>
             <li><b>Calendar</b> - All devices display a datepicker as a calendar.</li>
@@ -17,7 +17,7 @@
         </ul>
     </p>
     <p>
-        When the datepicker is displayed as a scroll picker (in Auto or ScrollPicker mode), use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDateEditBase-1.ScrollPickerFormat">ScrollPickerFormat</a> property to define a date format for each scroll picker part (a day, month, and year). The supported formats are:
+        When the datepicker is displayed as a scroll picker (in Auto or ScrollPicker mode), use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.ScrollPickerFormat">ScrollPickerFormat</a> property to define a date format for each scroll picker part (a day, month, and year). The supported formats are:
         <ul>
             <li><b>ddd</b> - A day is specified by the date and a short name of the day of the week, for example, <i>15 Fri</i>.</li>
             <li><b>dddd</b> - A day is specified by the date and a full name of the day of the week, for example, <i>15 Friday</i>. </li>
@@ -38,7 +38,7 @@
         <DxDateEdit @bind-Date="@DateTimeValue"
                     PickerDisplayMode="@DatePickerDisplayMode.ScrollPicker"
                     ScrollPickerFormat="dddd MMMM yyyy"
-                    DisplayFormat="dd dddd MMMM yyyy" 
+                    DisplayFormat="dd dddd MMMM yyyy"
                     SizeMode="SizeMode"/>
     </div>
 </div>
@@ -51,6 +51,5 @@
 </div>
 
 @code {
-    DateTime dateTimeValue = DateTime.Now;
-    DateTime DateTimeValue { get => dateTimeValue; set { dateTimeValue = value; InvokeAsync(StateHasChanged); }  }
+    DateTime DateTimeValue { get; set; } = DateTime.Now;
 }

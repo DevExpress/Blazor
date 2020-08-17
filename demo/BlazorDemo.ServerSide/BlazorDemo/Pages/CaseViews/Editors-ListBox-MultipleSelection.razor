@@ -1,12 +1,12 @@
 ﻿<div class="demo-description" id="MultipleSelection">
     <h2><DemoNavLink Link="ListBox#MultipleSelection" />List Box - Multiple Selection</h2>
     <p>
-        To enable multiple selection in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-1">List Box</a>, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxListBoxBase-1.SelectionMode">SelectionMode</a> property to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxListBoxBase-1.SelectionMode">ListBoxSelectionMode.Multiple</a>.
+        To enable multiple selection in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2">List Box</a>, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.SelectionMode">SelectionMode</a> property to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.SelectionMode">ListBoxSelectionMode.Multiple</a>.
     </p>
     <p>
         <ul>
-            <li>If the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxListBoxBase-1.ShowCheckboxes">ShowCheckboxes</a> option is enabled, users can click individual items and corresponding checkboxes or hold <kbd>Shift</kbd> to select a range of items.</li>
-            <li>If the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxListBoxBase-1.ShowCheckboxes">ShowCheckboxes</a> option is disabled, users can press <kbd>Ctrl</kbd> to select individual items or hold <kbd>Shift</kbd> to select a range of items.</li>
+            <li>If the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.ShowCheckboxes">ShowCheckboxes</a> option is enabled, users can click individual items and corresponding checkboxes or hold <kbd>Shift</kbd> to select a range of items.</li>
+            <li>If the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.ShowCheckboxes">ShowCheckboxes</a> option is disabled, users can press <kbd>Ctrl</kbd> to select individual items or hold <kbd>Shift</kbd> to select a range of items.</li>
         </ul>
     </p>
 </div>
@@ -14,10 +14,10 @@
 <div class="row" style="margin-left: -10px; margin-right: -10px; max-width: 1120px">
     <div class="col-12 col-md-6" style="padding-left: 10px; padding-right: 10px;">
         <DxListBox Data="@Persons.DataSource"
-                   TextFieldName="Text"
+                   TextFieldName="@nameof(Person.Text)"
                    SelectionMode="ListBoxSelectionMode.Multiple"
                    ShowCheckboxes="@ShowCheckboxes"
-                   @bind-SelectedItems="@SelectedItems"
+                   @bind-Values="@Values"
                    style="height: 232px;">
         </DxListBox>
     </div>
@@ -26,7 +26,7 @@
             <div class="card-header bg-transparent text-body py-1 border-bottom-0 font-weight-bold">Selected items:</div>
             <div class="card-body p-0 overflow-auto">
                 <ul class="list-group list-group-flush bg-transparent border-0">
-                    @foreach (var item in SelectedItems)
+                    @foreach (var item in Values)
                     {
                         <li class="list-group-item bg-transparent text-body py-1 border-0">@item.Text</li>
                     }
@@ -48,16 +48,6 @@
 </div>
 
 @code {
-    bool showCheckboxes = true;
-    bool ShowCheckboxes {
-        get => showCheckboxes;
-        set { showCheckboxes = value; InvokeAsync(StateHasChanged); }
-    }
-
-    IEnumerable<Person> selectedItems = Persons.DataSource.Take(2);
-    IEnumerable<Person> SelectedItems {
-        get => selectedItems;
-        set { selectedItems = value; InvokeAsync(StateHasChanged); }
-    }
+    bool ShowCheckboxes { get; set; } = true;
+    IEnumerable<Person> Values { get; set; } = Persons.DataSource.Take(2);
 }
-

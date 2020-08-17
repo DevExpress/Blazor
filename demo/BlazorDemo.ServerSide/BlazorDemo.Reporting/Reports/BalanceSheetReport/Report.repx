@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <XtraReportsLayoutSerializer SerializerVersion="19.2.0.0" Ref="0" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v19.2, Version=19.2.0.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4" Name="Report" DrawWatermark="true" Margins="72, 72, 42, 42" PageWidth="850" PageHeight="1100" Version="19.2" Font="Tahoma, 9.75pt">
   <CalculatedFields>
     <Item1 Ref="1" Name="AbsoluteValue" FieldType="Double" DisplayName="AbsoluteValue" Expression="Abs([Value])" />

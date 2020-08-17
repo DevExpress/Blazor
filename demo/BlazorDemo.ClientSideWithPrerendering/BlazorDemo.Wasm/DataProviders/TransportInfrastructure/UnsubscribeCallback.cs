@@ -12,14 +12,14 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
         }
 
         public static UnsubscribeCallback<T> Create(in ISet<T> container, in T target) {
-            if (!container.Contains(target))
+            if(!container.Contains(target))
                 container.Add(target);
             return new UnsubscribeCallback<T>((Func<T, bool>)container.Remove, target);
         }
 
         public void Dispose() {
             try {
-                switch (_delegate) {
+                switch(_delegate) {
                     case Func<T, bool> disposeFunc:
                         disposeFunc(_target);
                         break;

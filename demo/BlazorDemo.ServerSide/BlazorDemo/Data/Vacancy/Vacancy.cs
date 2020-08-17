@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,16 +14,16 @@ namespace BlazorDemo.Data {
         public string Region { get; set; }
     }
     public static class VacancyRepository {
-        public static string[] Regions;
-        public static Location[] Locations;
-        public static string[] VacancyNames;
+        public static IList<string> Regions;
+        public static IList<Location> Locations;
+        public static IList<string> VacancyNames;
         static VacancyRepository() {
-            Regions = new string[] {
+            Regions = new List<string>() {
                 "North America",
                 "Europe, Middle East, Africa",
                 "Asia/Pacific",
             };
-            Locations = new Location[] {
+            Locations = new List<Location>() {
                 new Location() { Region = Regions[0],  City = "Vancouver" },
                 new Location() { Region = Regions[0],  City = "Los Angeles" },
                 new Location() { Region = Regions[0],  City = "New York" },
@@ -40,7 +40,7 @@ namespace BlazorDemo.Data {
                 new Location() { Region = Regions[2],  City = "Sydney" },
                 new Location() { Region = Regions[2],  City = "Shanghai" },
             };
-            VacancyNames = new string[] {
+            VacancyNames = new List<string>() {
                 "Sales Manager",
                 "Junior Software Developer",
                 "Senior Software Developer",
@@ -78,7 +78,7 @@ namespace BlazorDemo.Data {
             var vacancies = new List<Vacancy>();
             var vacancyCount = VacancyNames.Count();
             var someBigNumber = 1000;
-            for (int i = someBigNumber; i < dataLength + someBigNumber; i++) {
+            for(int i = someBigNumber; i < dataLength + someBigNumber; i++) {
                 var region = Regions[i % Regions.Count()];
                 var locations = GetOfficeLocationsByRegion(region).ToArray();
                 var location = locations[i % locations.Count()].City;
@@ -94,8 +94,8 @@ namespace BlazorDemo.Data {
             return vacancies;
         }
 
-        public static Task<Vacancy[]> GetVacancies(int dataLength) {
-            return Task.FromResult(GenerateData(dataLength).ToArray());
+        public static Task<List<Vacancy>> GetVacancies(int dataLength) {
+            return Task.FromResult(GenerateData(dataLength));
         }
         public static IEnumerable<Location> GetOfficeLocationsByRegion(string region) {
             return Locations.Where(m => m.Region == region).ToList();

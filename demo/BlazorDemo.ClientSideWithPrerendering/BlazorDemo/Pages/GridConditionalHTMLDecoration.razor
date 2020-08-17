@@ -1,16 +1,10 @@
 ﻿@page "/GridHTMLDecoration"
 @inject WeatherForecastService ForecastService
 
-<style>
-    .grid-header-border-bottom-1 thead > tr > th {
-        border-bottom-width: 1px !important;
-    }
-</style>
-
 <div class="demo-description mw-1100">
     <h2>Data Grid - HTML Decoration</h2>
     <p>
-        HTML decoration allows you to color data grid cells, rows and columns according to their values. <br />The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1">Data Grid</a> provides the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.HtmlRowDecoration">HtmlRowDecoration</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.HtmlDataCellDecoration">HtmlDataCellDecoration</a> events that highlight grid rows and cells via the following arguments:
+        HTML decoration allows you to color data grid cells, rows and columns according to their values. <br />The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1">Data Grid</a> provides the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.HtmlRowDecoration">HtmlRowDecoration</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.HtmlDataCellDecoration">HtmlDataCellDecoration</a> events that highlight grid rows and cells via the following arguments:
     </p>
     <ul>
         <li><b>CssClass</b> - A name of a CSS class applied to a grid element.</li>
@@ -84,7 +78,7 @@ else
     {
         eventArgs.CssClass += " border-0";
 
-        if (eventArgs.Field == nameof(Order.Product))
+        if (eventArgs.FieldName == nameof(Order.Product))
         {
             if (eventArgs.RowVisibleIndex % 2 == 1)
                 eventArgs.Style += " background-color: rgb(169, 148, 200); color: black;";

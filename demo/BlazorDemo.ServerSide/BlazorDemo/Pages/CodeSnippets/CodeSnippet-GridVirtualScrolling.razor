@@ -33,8 +33,8 @@
         </DisplayTemplate>
         <EditTemplate>
             <DxComboBox Data=""@(new List<string>() { ""In stock"", ""Sold out"" })""
-                        SelectedItem=""@(((bool)((CellEditContext)context).CellValue) ? ""In stock"" : ""Sold out"" )""
-                        SelectedItemChanged=""@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue == ""In stock""))"">
+                        Value=""@(((bool)((CellEditContext)context).CellValue) ? ""In stock"" : ""Sold out"" )""
+                        ValueChanged=""@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue == ""In stock""))"">
             </DxComboBox>
         </EditTemplate>
     </DxDataGridColumn>
@@ -51,8 +51,8 @@
         <EditTemplate>
             <DxComboBox Data=""@NestedDataSource""
                         TextFieldName=""CategorySubcategory""
-                        SelectedItem=""@(NestedDataSource.Where(x => x.SubcategoryID == (int)((CellEditContext)context).CellValue).FirstOrDefault())""
-                        SelectedItemChanged=""@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue.SubcategoryID))"">
+                        Value=""@(NestedDataSource.Where(x => x.SubcategoryID == (int)((CellEditContext)context).CellValue).FirstOrDefault())""
+                        ValueChanged=""@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue.SubcategoryID))"">
             </DxComboBox>
         </EditTemplate>
     </DxDataGridColumn>

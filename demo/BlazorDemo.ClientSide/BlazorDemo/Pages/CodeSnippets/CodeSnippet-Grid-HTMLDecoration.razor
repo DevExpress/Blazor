@@ -25,7 +25,7 @@
     {
         eventArgs.CssClass += "" border-0"";
 
-        if (eventArgs.Field == nameof(Order.Product))
+        if (eventArgs.FieldName == nameof(Order.Product))
         {
             if (eventArgs.RowVisibleIndex % 2 == 1)
                 eventArgs.Style += "" background-color: rgb(115, 158, 170);"";

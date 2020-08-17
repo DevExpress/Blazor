@@ -2,13 +2,13 @@
 
 @{
     RenderFragment<string> GetLink = (propName) =>
-    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxComboBoxBase-1.@propName">@propName</a>;
+    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.@propName">@propName</a>;
 }
 
 <div class="demo-description" id="Overview">
     <h2><DemoNavLink Link="ComboBox#Overview" />ComboBox – Overview</h2>
     <p>
-        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-1">ComboBox</a> is an editor that allows users to select an item from a drop-down list.
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2">ComboBox</a> is an editor that allows users to select an item from a drop-down list.
     </p>
     <p>
         The main ComboBox API members are listed below.
@@ -18,8 +18,8 @@
         <li>@GetLink("TextFieldName") – Specifies the data source’s field that supplies text for items.</li>
         <li>@GetLink("Text") – Specifies the editor’s text.</li>
         <li>@GetLink("TextChanged") - Fires when the editor text was changed.</li>
-        <li>@GetLink("SelectedItem") – Specifies the drop-down list’s selected item.</li>
-        <li>@GetLink("SelectedItemChanged") – Fires when the selected item was changed.</li>
+        <li>@GetLink("Value") – Specifies the drop-down list’s selected value.</li>
+        <li>@GetLink("ValueChanged") – Fires when the selected value was changed.</li>
     </ul>
     <p>
         The ComboBox component supports different size modes. To specify the component's size in code, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxResizableEditorBase-2.SizeMode">SizeMode</a> property. To apply different size modes, use the drop-down list in the demo card's header.
@@ -40,8 +40,8 @@
     </div>
     <div class="card-body mw-480">
         <DxComboBox Data="@Persons.DataSource"
-                    TextFieldName="Text"
-                    @bind-SelectedItem="@SelectedRealBusinessObject"
+                    TextFieldName="@nameof(Person.Text)"
+                    @bind-Value="@SelectedRealBusinessObject"
                     SizeMode="SizeMode"></DxComboBox>
     </div>
 </div>
@@ -50,12 +50,5 @@
 
 
 @code {
-    Person selectedRealBusinessObject = Persons.DataSource[0];
-    Person SelectedRealBusinessObject {
-        get => selectedRealBusinessObject;
-        set { selectedRealBusinessObject = value; InvokeAsync(StateHasChanged); }
-    }
-
-
+    Person SelectedRealBusinessObject { get; set; } = Persons.DataSource[0];
 }
-

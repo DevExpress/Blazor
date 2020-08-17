@@ -2,6 +2,78 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 20.1.6
+
+### Support for .NET Core 3.1.7 and Blazor WebAssembly 3.2.1
+
+In this version, we added support for [.NET Core 3.1.7](https://devblogs.microsoft.com/dotnet/net-core-august-2020/) and Blazor WebAssembly 3.2.1.
+
+### New Memo Component
+
+The new Memo component for Blazor has the following features:
+ 
+* Data binding
+* Custom size
+* Resize modes
+* Clear button
+* Read-only state
+
+[Demo](https://demos.devexpress.com/blazor/Memo) | [Documentation]( http://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMemo)
+
+### Data Grid Enhancements
+
+#### New Popup Edit Form
+
+You can now edit row values in a pop-up Edit Form. ([Demo](https://demos.devexpress.com/blazor/GridEditData) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#edit-data))
+
+### Scheduler Enhancements
+
+* Appointment Templates - Use templates to customize appointment appearance ([Demo](https://demos.devexpress.com/blazor/SchedulerAppointmentTemplates) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler#templates))
+
+* Custom Fields - Add custom data to Scheduler’s appointments, labels, and statuses ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerr#custom-fields))
+
+* New API properties that allow you to assign CSS classes to appointment labels and statuses ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerAppointmentLabelItem._members))
+
+### Data Editors Enhancements
+
+* ComboBox, TagBox, ListBox - Support for multiple columns ([Demo](https://demos.devexpress.com/blazor/ComboBox#MultipleColumns) | 
+[Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn))
+
+* ComboBox, TagBox, ListBox - Binding to a data object field ([Demo](
+https://demos.devexpress.com/blazor/ComboBox#ItemValues))
+
+* Calendar enhancements
+    
+    * Validation support
+    * Nullable DateTime support 
+    * Binding to a single date ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1.SelectedDate))
+
+* CheckBox, ComboBox, DateEdit, SpinEdit, TagBox - New [InputId](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.InputId) property
+
+### Form Layout Enhancements
+
+You can now assign [CSS classes](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutItem.CssClass) to layout items and to captions of items, tab pages, and groups.
+
+### Processing Events
+
+Changed the delegate type from [Action](https://docs.microsoft.com/en-us/dotnet/api/system.action-1) to [EventCallback](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.eventcallback) in several components.
+
+### Resolved Issues
+
+Refer to [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=20.1.6&endBuildName=&buildsMode=Single&hasPlatformsWithProducts=true) for a complete list of issues resolved in 20.1.6.
+
+### Breaking Changes
+
+* [API members from the majority of base classes have been moved to descendant classes](https://supportcenter.devexpress.com/ticket/details/T921319)
+* [Specific events have changed their delegate type from Action to EventCallback](https://supportcenter.devexpress.com/ticket/details/T920147)
+* [Calendar - The DateExpression property has been replaced with the SelectedDateExpression and SelectedDatesExpression properties](https://supportcenter.devexpress.com/ticket/details/T900424)
+* [Calendar - The DxCalendar class and specific API members have become generic-typed](https://supportcenter.devexpress.com/ticket/details/T900084)
+* [The ComboBox, List Box, and TagBox components' API and declaration have been changed](https://supportcenter.devexpress.com/ticket/details/T921360)
+* [Data Grid field-related properties have been renamed](https://supportcenter.devexpress.com/ticket/details/T921348)
+* [Form Layout - The DxFormLayoutItem.CaptionFor property value is no longer assigned to the ID property of editors in the template](https://supportcenter.devexpress.com/ticket/details/T921344)
+* [Pivot Grid - The PivotGridSummaryType.NotSet enumeration value has been removed and the SummaryType default value has been changed to Sum](https://supportcenter.devexpress.com/ticket/details/T917294)
+* [The DxDataGridColumn.AllowSort and DxDataGridColumn.EditorVisible property's value type has been changed from DefaultBoolean to nullable Boolean](https://supportcenter.devexpress.com/ticket/details/T905067)
+
 # 20.1.5
 
 ### Support for .NET Core 3.1.5  
@@ -11,16 +83,16 @@ In this version, we added support for [.NET Core 3.1.5](https://devblogs.microso
 ### Data Grid Enhancements
 * The ability to hide the Filter Row's editors for individual columns ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.AllowFilter))
 * New ComboBox column features:
-  * Filter modes ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridComboBoxColumnBase-1.FilteringMode))
-  * Virtual render mode ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridComboBoxColumnBase-1.ListRenderMode))
+  * Filter modes ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridComboBoxColumn-1.FilteringMode))
+  * Virtual render mode ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridComboBoxColumn-1.ListRenderMode))
 
 ### Data Editors Enhancements
-* ComboBox, TagBox - Drop-down window’s width modes ([Demo](https://demos.devexpress.com/blazor/ComboBox#DropDownListWidth) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxComboBoxBase-1.DropDownWidthMode))
-* Calendar, Date Edit - Min/max dates ([Demo](https://demos.devexpress.com/blazor/Calendar#DateRange) | [Documentation - MinDate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxCalendarBase.MinDate) | [Documentation - MaxDate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxCalendarBase.MaxDate))
+* ComboBox, TagBox - Drop-down window’s width modes ([Demo](https://demos.devexpress.com/blazor/ComboBox#DropDownListWidth) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.DropDownWidthMode))
+* Calendar, Date Edit - Min/max dates ([Demo](https://demos.devexpress.com/blazor/Calendar#DateRange) | [Documentation - MinDate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1.MinDate) | [Documentation - MaxDate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1.MaxDate))
 
 ### Other Enhancements
 * Toolbar - Display a drop-down menu in a modal dialog 
-([Demo](https://demos.devexpress.com/blazor/Toolbar#DropDownItems) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarBase.DropDownDisplayMode))
+([Demo](https://demos.devexpress.com/blazor/Toolbar#DropDownItems) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar.DropDownDisplayMode))
 * Upload
   * A response message received from the server ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.UploadHttpRequestInfo.ResponseTex))
   * A file's last modified date ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.UploadFileInfo.LastModified))
@@ -67,7 +139,7 @@ With our 20.1.4 release, we added Blazor Reporting components with the following
 
 [Demo - Document Viewer](https://demos.devexpress.com/blazor/DocumentViewer) | [Demo - Report Designer](https://demos.devexpress.com/blazor/ReportDesigner) | [Documentation](https://docs.devexpress.com/Blazor/401706/reporting)
 
-\* **Important Note**: Though [DevExpress Reports](https://www.devexpress.devx/subscriptions/reporting/) supports Blazor, it is not included in our Blazor UI component distribution. To use DevExpress Reports in your Blazor project or to replicate the functionality described below, you must purchase a DevExpress Subscription (*Reporting Subscription*, *ASP.NET Subscription*, *DXperience*, or *Universal*). For more information on what is included in our product subscriptions, refer to the [product matrix](https://www.devexpress.devx/buy/net/).
+\* **Important Note**: Though [DevExpress Reports](https://www.devexpress.com/subscriptions/reporting/) supports Blazor, it is not included in our Blazor UI component distribution. To use DevExpress Reports in your Blazor project or to replicate the functionality described below, you must purchase a DevExpress Subscription (*Reporting Subscription*, *ASP.NET Subscription*, *DXperience*, or *Universal*). For more information on what is included in our product subscriptions, refer to the [product matrix](https://www.devexpress.com/buy/net/).
 
 ### New Toolbar Component
 The new Toolbar component for Blazor has the following features:
@@ -97,26 +169,26 @@ The majority of DevExpress Blazor components now support three size modes define
 
 ### Data Grid Enhancements
 * Column chooser ([Demo](https://demos.devexpress.com/blazor/GridColumnChooser) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumnChooserToolbarItem))
-* Header template ([Demo](https://demos.devexpress.com/blazor/GridToolbar) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.HeaderTemplate))
+* Header template ([Demo](https://demos.devexpress.com/blazor/GridToolbar) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.HeaderTemplate))
 
 ### Charts Enhancements
 * Axis data type customization ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartAxisDataType))
 * The VisibleChanged event for chart series ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeries.VisibleChanged))
-* Ability to hide overlapped point labels ([Demo](https://demos.devexpress.com/blazor/ChartDynamicSeries) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxChartBase-1.LabelOverlap))
+* Ability to hide overlapped point labels ([Demo](https://demos.devexpress.com/blazor/ChartDynamicSeries) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.LabelOverlap))
 
 ### Data Editors Enhancements
-* Display format ([Demo](https://demos.devexpress.com/blazor/DateEdit#DisplayFormat) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDateEditBase-1.DisplayFormat))
-* CheckBox - Alignment ([Demo](https://demos.devexpress.com/blazor/CheckBox#Alignment) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxCheckBoxBase-1.Alignment))
+* Display format ([Demo](https://demos.devexpress.com/blazor/DateEdit#DisplayFormat) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.DisplayFormat))
+* CheckBox - Alignment ([Demo](https://demos.devexpress.com/blazor/CheckBox#Alignment) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1.Alignment))
 * Spin Edit
   * Touch device usability enhancements ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1))
-  * Custom increment values ([Demo](https://demos.devexpress.com/blazor/SpinEdit#CustomIncrement) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSpinEditBase-1.Increment))
-  * Update the value when the input changes ([Demo](https://demos.devexpress.com/blazor/SpinEdit#BindValueOnInputChange) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSpinEditBase-1.BindValueMode))
+  * Custom increment values ([Demo](https://demos.devexpress.com/blazor/SpinEdit#CustomIncrement) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1.Increment))
+  * Update the value when the input changes ([Demo](https://demos.devexpress.com/blazor/SpinEdit#BindValueOnInputChange) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1.BindValueMode))
   * Support for HTML attributes ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1#html-attributes))
 * Text Box 
-  * Update the value when the input changes ([Demo](https://demos.devexpress.com/blazor/TextBox#BindValueOnInputChange) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTextBoxBase.BindValueMode))
+  * Update the value when the input changes ([Demo](https://demos.devexpress.com/blazor/TextBox#BindValueOnInputChange) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTextEditorBase.BindValueMode))
   * Support for HTML attributes ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextBox#html-attributes))
 * ComboBox, Date Edit, TagBox 
-  * Support for HTML attributes ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-1#html-attributes))
+  * Support for HTML attributes ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2#html-attributes))
   * Drop-down window direction ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDropDownBase-2.DropDownDirection))
 
 ### Resolved Issues
@@ -152,7 +224,7 @@ Our new Upload component for Blazor includes the following features:
 
 ### Added
 
-* Chart – Rotation ([Demo](https://demos.devexpress.com/blazor/ChartAxes#ChartRotation) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxChartBase-1.Rotated))
+* Chart – Rotation ([Demo](https://demos.devexpress.com/blazor/ChartAxes#ChartRotation) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.Rotated))
 * Calendar - Navigation through months, years, decades, and centuries ([Demo](https://demos.devexpress.com/blazor/Calendar) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar#select-dates))
 
 ### Fixed

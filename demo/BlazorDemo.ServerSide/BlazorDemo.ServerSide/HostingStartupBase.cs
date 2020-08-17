@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http;
 using BlazorDemo.DataProviders;
 using BlazorDemo.DataProviders.Implementation;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 [assembly: HostingStartup(typeof(BlazorDemo.ServerSide.Startup))]
 
@@ -21,38 +21,38 @@ namespace BlazorDemo.ServerSide {
         public abstract void ConfigureServices(WebHostBuilderContext context, IServiceCollection services);
 
         void IHostingStartup.Configure(IWebHostBuilder builder) {
-                builder.UseEnvironment(EnvironmentName);
-                builder.UseStaticWebAssets();
-                
-                builder.ConfigureServices(ConfigureServices);
-                builder.Configure(ConfigureApp);
-                
-                void ConfigureApp(WebHostBuilderContext context, IApplicationBuilder app) {
-                    app.UseResponseCompression();
-                    app.UseRouting();
+            builder.UseEnvironment(EnvironmentName);
+            builder.UseStaticWebAssets();
 
-                    app.UseStaticFiles();
-                    app.UseAuthorization();
+            builder.ConfigureServices(ConfigureServices);
+            builder.Configure(ConfigureApp);
 
-                    app.UseEndpoints(endpoints => {
-                        endpoints.MapControllers();
+            void ConfigureApp(WebHostBuilderContext context, IApplicationBuilder app) {
+                app.UseResponseCompression();
+                app.UseRouting();
 
-                        endpoints.MapFallbackToPage("/_Host");
-                    });
-                    Configure(app, context.HostingEnvironment);
-                };
+                app.UseStaticFiles();
+                app.UseAuthorization();
 
-                void ConfigureServices(WebHostBuilderContext context, IServiceCollection services) {
-                    Configuration = services.BuildServiceProvider().GetService<IConfiguration>();
+                app.UseEndpoints(endpoints => {
+                    endpoints.MapControllers();
 
-                    services.AddHttpClient<HttpClient>(ConfigureHttpClient);
-                    
-                    this.ConfigureServices(context, services);
-                    
-                    services.AddRazorPages();
-                    services.AddResponseCompression(options => {
-                        options.EnableForHttps = true;
-                        options.MimeTypes = new[] {
+                    endpoints.MapFallbackToPage("/_Host");
+                });
+                Configure(app, context.HostingEnvironment);
+            };
+
+            void ConfigureServices(WebHostBuilderContext context, IServiceCollection services) {
+                Configuration = services.BuildServiceProvider().GetService<IConfiguration>();
+
+                services.AddHttpClient<HttpClient>(ConfigureHttpClient);
+
+                this.ConfigureServices(context, services);
+
+                services.AddRazorPages();
+                services.AddResponseCompression(options => {
+                    options.EnableForHttps = true;
+                    options.MimeTypes = new[] {
                             "text/plain",
                             "text/css",
                             "application/javascript",
@@ -62,26 +62,26 @@ namespace BlazorDemo.ServerSide {
                             "application/json",
                             "text/json"
                         };
-                    });
-                    services.AddControllers().AddJsonOptions(ConfigureJsonOptions);
-                    services.AddDemoServices();
+                });
+                services.AddControllers().AddJsonOptions(ConfigureJsonOptions);
+                services.AddDemoServices();
 
-                    services.AddSingleton<ICountryNamesProvider, CountryNamesProvider>();
-                    services.AddSingleton<IFlatProductsProvider, FlatProductsProvider>();
-                    services.AddSingleton<IProductCategoriesProvider, ProductCategoriesProvider>();
-                    services.AddSingleton<IProductsProvider, ProductsProvider>();
-                    services.AddSingleton<ISalesInfoDataProvider, SalesInfoDataProvider>();
-                    services.AddSingleton<ISalesViewerDataProvider, SalesVieweDataProvider>();
+                services.AddSingleton<ICountryNamesProvider, CountryNamesProvider>();
+                services.AddSingleton<IFlatProductsProvider, FlatProductsProvider>();
+                services.AddSingleton<IProductCategoriesProvider, ProductCategoriesProvider>();
+                services.AddSingleton<IProductsProvider, ProductsProvider>();
+                services.AddSingleton<ISalesInfoDataProvider, SalesInfoDataProvider>();
+                services.AddSingleton<ISalesViewerDataProvider, SalesVieweDataProvider>();
 
-                    
-                    static void ConfigureHttpClient(HttpClient httpClient) {
-                        httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
-                    };
 
-                    static void ConfigureJsonOptions(JsonOptions options) {
-                        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-                    };
-                }
+                static void ConfigureHttpClient(HttpClient httpClient) {
+                    httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+                };
+
+                static void ConfigureJsonOptions(JsonOptions options) {
+                    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                };
+            }
         }
     }
 }

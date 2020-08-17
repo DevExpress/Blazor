@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Linq;
 using DevExpress.XtraCharts;
 using DevExpress.XtraReports.Parameters;

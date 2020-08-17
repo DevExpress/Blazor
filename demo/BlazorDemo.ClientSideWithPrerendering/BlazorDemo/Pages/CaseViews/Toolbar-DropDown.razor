@@ -1,13 +1,12 @@
 ﻿<div class="demo-description" id="DropDownItems">
     <h2>
         <DemoNavLink Link="Toolbar#DropDownItems" />Toolbar - Drop-Down Items
-        <span class="demo-badge badge badge-secondary">Upd</span>
     </h2>
     <p>
         A toolbar item displays a drop-down list if you populate the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.Items">DxToolbarItem.Items</a> collection. The drop-down list can be displayed as a regular sub-menu, as a modal dialog, or as a modal bottom sheet. You can specify the type explicitly or let the component adapt to the device type. To specify the display mode, use the following properties:
     </p>
     <ul>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarBase.DropDownDisplayMode">DxToolbarBase.DropDownDisplayMode</a> - Applies to all menus in the toolbar.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar.DropDownDisplayMode">DxToolbarBase.DropDownDisplayMode</a> - Applies to all menus in the toolbar.</li>
         <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarItemBase.DropDownDisplayMode">DxToolbarItemBase.DropDownDisplayMode</a> - Applies to an individual item.</li>
     </ul>
     <p>
@@ -17,7 +16,7 @@
 
 <div class="card demo-card">
     <div class="card-header p-2">
-        <DxToolbar DropDownDisplayMode="@SelectedDisplayMode" ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" CssClass="demo-toolbar-dropdown">
+        <DxToolbar DropDownDisplayMode="@SelectedDisplayMode" ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
             <Items>
                 @foreach(var item in MenuItems) {
                     @RenderItem(item)
@@ -112,4 +111,3 @@
     }
 }
 <CodeSnippet_Toolbar_DropDown />
-

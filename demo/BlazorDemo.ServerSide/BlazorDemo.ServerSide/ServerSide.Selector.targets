@@ -23,8 +23,8 @@
     </ItemGroup>
     <Message Text="Demo: Restore modules root '@(_DxRelatedSolution)'" Importance="High"/>
 
-    <Exec Command="dotnet restore --no-dependencies --ignore-failed-sources &amp;&amp; dotnet sln @(_DxRelatedSolution) add BlazorDemo.Reporting.csproj" 
-          WorkingDirectory="$(DxReportsDirectory)" Outputs="$(DxDemoImportMainModule)" 
+    <Exec Command="dotnet restore --no-dependencies --ignore-failed-sources &amp;&amp; dotnet sln @(_DxRelatedSolution) add BlazorDemo.Reporting.csproj"
+          WorkingDirectory="$(DxReportsDirectory)" Outputs="$(DxDemoImportMainModule)"
           IgnoreStandardErrorWarningFormat="true" ContinueOnError="true">
       <Output Condition="$(MSBuildLastTaskResult)" PropertyName="_DxDemoImportModule" TaskParameter="Outputs"/>
     </Exec>

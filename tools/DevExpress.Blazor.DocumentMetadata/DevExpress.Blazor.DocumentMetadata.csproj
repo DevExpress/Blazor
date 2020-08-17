@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
     <PropertyGroup>
         <TargetFrameworks>netcoreapp3.1;netstandard2.1</TargetFrameworks>
         <LangVersion>8.0</LangVersion>
@@ -6,16 +6,16 @@
     </PropertyGroup>
     <ItemGroup Condition="$(TargetFramework.Contains('netcoreapp3.'))">
       <FrameworkReference Include="Microsoft.AspNetCore.App" />
-      <FrameworkExcludedFiles Include="DocumentMetadata.Wasm.cs;Components\WasmMetadataManager.cs" />  
+      <FrameworkExcludedFiles Include="DocumentMetadata.Wasm.cs;Components\WasmMetadataManager.cs" />
     </ItemGroup>
     <ItemGroup Condition="$(TargetFramework.Contains('netstandard2.'))">
-      <FrameworkExcludedFiles Include="TagHelpers\*.cs;DocumentMetadata.AspNetCore.cs" />  
+      <FrameworkExcludedFiles Include="TagHelpers\*.cs;DocumentMetadata.AspNetCore.cs" />
     </ItemGroup>
     <ItemGroup>
         <Compile Remove="@(FrameworkExcludedFiles)" Visible="false" />
-        
-        <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.5" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.5" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.0" />
+
+        <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.7" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.7" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.1" />
     </ItemGroup>
 </Project>

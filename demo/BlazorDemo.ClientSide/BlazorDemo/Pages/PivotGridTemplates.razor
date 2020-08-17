@@ -11,13 +11,13 @@
     </p>
     <ul>
         <li>
-            <p><b>Quarter</b> - Uses a <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxPivotGridFieldBase.HeaderTemplate">HeaderTemplate</a> to format quarter numbers.</p>
+            <p><b>Quarter</b> - Uses a <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPivotGridField.HeaderTemplate">HeaderTemplate</a> to format quarter numbers.</p>
         </li>
         <li>
             <p><b>Month</b> - Uses a HeaderTemplate to transform month numbers into culture-specific month names.</p>
         </li>
         <li>
-            <p><b>Count</b> - Uses a <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxPivotGridFieldBase.DataTemplate">DataTemplate</a> to apply bold formatting to all values.</p>
+            <p><b>Count</b> - Uses a <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPivotGridField.DataTemplate">DataTemplate</a> to apply bold formatting to all values.</p>
         </li>
         <li>
             <p><b>Amount</b> - Uses a DataTemplate to apply conditional formatting to values.</p>
@@ -28,8 +28,8 @@
 @if(GridData == null) {
     <p><em>Loading...</em></p>
 } else {
-    <DxPivotGrid Data="@GridData" 
-                 ShowGrandTotals="@ShowGrandTotals" 
+    <DxPivotGrid Data="@GridData"
+                 ShowGrandTotals="@ShowGrandTotals"
                  ShowFieldHeaders="@ShowFieldHeaders"
                  CssClass="mw-1100">
         <DxPivotGridField Field="@nameof(SaleInfo.Region)" SortOrder="@PivotGridSortOrder.Ascending" Area="@PivotGridFieldArea.Row" />

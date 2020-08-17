@@ -1,11 +1,9 @@
 ﻿<CodeSnippet>
-@(@"<DxTextBox @bind-Text=""@TextValue"" 
+@(@"<DxTextBox @bind-Text=""@TextValue""
            SizeMode=""SizeMode""></DxTextBox>
 
 @code {
-    string textValue = string.Empty;
-    string TextValue { get => textValue; set { textValue = value; InvokeAsync(StateHasChanged); } }
-
+    string TextValue { get; set; }
     SizeMode SizeMode { get; set; }
 }")
 </CodeSnippet>

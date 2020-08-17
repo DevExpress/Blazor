@@ -1,10 +1,10 @@
-﻿@inherits DemoWithResizableComponent 
+﻿@inherits DemoWithResizableComponent
 
 <div class="demo-description" id="CustomTags">
     <h2><DemoNavLink Link="TagBox#CustomTags" />TagBox - Custom Tags</h2>
     <p>
-        In this demo, the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-1">TagBox</a> supports custom tags that are not stored in a bound data source
-        (the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTagBoxBase-1.AllowCustomTags">AllowCustomTags</a> property is set to <b>true</b>).
+        In this demo, the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2">TagBox</a> supports custom tags that are not stored in a bound data source
+        (the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.AllowCustomTags">AllowCustomTags</a> property is set to <b>true</b>).
     </p>
 </div>
 
@@ -15,6 +15,8 @@
     <div class="card-body mw-480">
         <DxTagBox Data="@Cities"
                   NullText="Select city..."
+                  TData="string"
+                  TValue="string"
                   AllowCustomTags="true"
                   @bind-Tags="@Tags"
                   ClearButtonDisplayMode="@DataEditorClearButtonDisplayMode.Auto"

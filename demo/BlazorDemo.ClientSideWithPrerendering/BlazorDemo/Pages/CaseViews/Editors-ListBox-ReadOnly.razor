@@ -1,14 +1,14 @@
 ﻿<div class="demo-description" id="ReadOnly">
     <h2><DemoNavLink Link="ListBox#ReadOnly" />List Box - Read-Only Mode</h2>
     <p>
-        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-1">List Box</a> component allows you to display selected items, but does not allow users to change the selection. Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxListBoxBase-1.ReadOnly">ReadOnly</a> property to <b>true</b> to activate the read-only mode.
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2">List Box</a> component allows you to display selected items, but does not allow users to change the selection. Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.ReadOnly">ReadOnly</a> property to <b>true</b> to activate the read-only mode.
     </p>
 </div>
 
-<DxListBox Data="@Persons.DataSource" 
-           TextFieldName="Text"
+<DxListBox Data="@Persons.DataSource"
+           TextFieldName="@nameof(Person.Text)"
            ReadOnly="true"
-           SelectedItems="@SelectedItems"
+           Values="@Values"
            CssClass="demo-listbox mb-2"
            style="height: 232px;">
 </DxListBox>
@@ -16,5 +16,5 @@
 <CodeSnippet_Editors_ListBox_ReadOnly></CodeSnippet_Editors_ListBox_ReadOnly>
 
 @code {
-    IEnumerable<Person> SelectedItems => Persons.DataSource.Take(1);
+    IEnumerable<Person> Values => Persons.DataSource.Take(1);
 }

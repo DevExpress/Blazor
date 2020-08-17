@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -31,10 +31,10 @@ namespace BlazorDemo.AspNetCoreHost {
 #if DEBUG
             try {
                 var path = Path.Combine(_hostingEnvironment.ContentRootPath, "uploads");
-                if (!Directory.Exists(path))
+                if(!Directory.Exists(path))
                     Directory.CreateDirectory(path);
 
-                using (var fileStream = System.IO.File.Create(Path.Combine(path, myFile.FileName))) {
+                using(var fileStream = System.IO.File.Create(Path.Combine(path, myFile.FileName))) {
                     myFile.CopyTo(fileStream);
                 }
             } catch {
@@ -47,7 +47,7 @@ namespace BlazorDemo.AspNetCoreHost {
         [HttpPost]
         [Route("UploadImage")]
         public ActionResult UploadImage(IFormFile myFile) {
- #if DEBUG
+#if DEBUG
             try {
                 string[] imageExtensions = { ".jpg", ".jpeg", ".gif", ".png" };
 
@@ -58,10 +58,10 @@ namespace BlazorDemo.AspNetCoreHost {
 
                 if(isValidExtenstion) {
                     var path = Path.Combine(_hostingEnvironment.ContentRootPath, "uploads");
-                    if (!Directory.Exists(path))
+                    if(!Directory.Exists(path))
                         Directory.CreateDirectory(path);
 
-                    using (var fileStream = System.IO.File.Create(Path.Combine(path, myFile.FileName))) {
+                    using(var fileStream = System.IO.File.Create(Path.Combine(path, myFile.FileName))) {
                         myFile.CopyTo(fileStream);
                     }
                 }
@@ -82,16 +82,16 @@ namespace BlazorDemo.AspNetCoreHost {
             RemoveTempFilesAfterDelay(tempPath, new TimeSpan(0, 5, 0));
 
             try {
-                if (!string.IsNullOrEmpty(chunkMetadata)) {
+                if(!string.IsNullOrEmpty(chunkMetadata)) {
                     var metaDataObject = JsonSerializer.Deserialize<ChunkMetadata>(chunkMetadata);
 
                     var tempFilePath = Path.Combine(tempPath, metaDataObject.FileGuid + ".tmp");
-                    if (!Directory.Exists(tempPath))
+                    if(!Directory.Exists(tempPath))
                         Directory.CreateDirectory(tempPath);
 
                     AppendChunkToFile(tempFilePath, myFile);
 
-                    if (metaDataObject.Index == (metaDataObject.TotalCount - 1))
+                    if(metaDataObject.Index == (metaDataObject.TotalCount - 1))
                         SaveUploadedFile(tempFilePath, metaDataObject.FileName);
                 }
             } catch {

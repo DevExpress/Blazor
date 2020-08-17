@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <XtraReportsLayoutSerializer SerializerVersion="18.2.0.0" Ref="1" ControlType="Demo.Blazor.Reports.SideBySideReports.EmployeeOrdersReport, DevExpress.DemoReports.v18.2, Version=18.2.0.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47" Name="SideBySideReport" DisplayName="Side-by-Side Report" Margins="100, 432, 100, 100" PageWidth="850" PageHeight="1100" Version="18.2" FilterString="[EmployeeID] = ?paramEmployeeID" DataMember="Employees" DataSource="#Ref-0">
   <Parameters>
     <Item1 Ref="3" Visible="false" ValueInfo="0" Name="paramEmployeeID" Type="#Ref-2" />

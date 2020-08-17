@@ -5,9 +5,9 @@
     <h2><DemoNavLink Link="FormLayout#DataBinding" />Form Layout - Data Binding</h2>
     <p>
         You can use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayout#bind-to-data">Form Layout</a> component to display and edit data from an external source.
-        In this demo, such data source is assigned to the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxFormLayoutBase.Data">Data</a> property.
-        Form Layout items must be declared and bound to data source fields using the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxFormLayoutItemBase.Field">Field</a> property.
-        Each item automatically displays a DevExpress data editor suitable for the target data type. 
+        In this demo, such data source is assigned to the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayout.Data">Data</a> property.
+        Form Layout items must be declared and bound to data source fields using the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutItem.Field">Field</a> property.
+        Each item automatically displays a DevExpress data editor suitable for the target data type.
     </p>
     <p>
         You can override the default behavior and assign a custom editor to a layout item. To see an example, review the code for the Position item below.
@@ -25,15 +25,15 @@
     <div class="card-body card-body-fl">
         <DxFormLayout Data="@editFormData"
                       ItemSizeMode="SizeMode"
-                      ItemUpdating="@((fieldName, newValue) => OnItemUpdating(fieldName, newValue))">
+                      ItemUpdating="@((pair) => OnItemUpdating(pair.Key, pair.Value))">
             <DxFormLayoutItem Field="@nameof(FormDataItem.Name)" Caption="Contact Name:" ColSpanMd="6" />
             <DxFormLayoutItem Field="@nameof(FormDataItem.BirthDate)" Caption="Birth Date:" ColSpanMd="6" />
             <DxFormLayoutItem Field="@nameof(FormDataItem.YearsWorked)" Caption="Years Worked:" ColSpanMd="6" />
             <DxFormLayoutItem Field="@nameof(FormDataItem.Position)" Caption="Position:" ColSpanMd="6">
                 <Template>
                     <DxComboBox Data="@(new List<string>() { "Sales Representative", "Designer" })"
-                                SelectedItem="@(((string)((ValueEditContext)context).Value))"
-                                SelectedItemChanged="@(value => ((ValueEditContext)context).OnChanged(value))"></DxComboBox>
+                                Value="@(((string)((ValueEditContext)context).Value))"
+                                ValueChanged="@((string value) => ((ValueEditContext)context).OnChanged(value))"></DxComboBox>
                 </Template>
             </DxFormLayoutItem>
             <DxFormLayoutItem Field="@nameof(FormDataItem.OnVacation)" Caption="On Vacation:" ColSpanMd="6" />
@@ -80,7 +80,5 @@
         {
             editFormData.OnVacation = (bool)newValue;
         }
-
-        InvokeAsync(StateHasChanged);
     }
 }

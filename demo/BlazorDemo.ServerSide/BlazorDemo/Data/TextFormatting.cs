@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,30 +18,30 @@ namespace BlazorDemo.Data {
 
         string GetTextDecoration() {
             string textDecoration = "";
-            if (Decoration["Underline"])
+            if(Decoration["Underline"])
                 textDecoration += "underline";
-            if (Decoration["Overline"])
+            if(Decoration["Overline"])
                 textDecoration += " overline";
-            if (Decoration["Strikethrough"])
+            if(Decoration["Strikethrough"])
                 textDecoration += " line-through";
             return textDecoration;
         }
 
         public string GetStyleString() {
             string style = "";
-            if (!string.IsNullOrEmpty(FontFamily))
+            if(!string.IsNullOrEmpty(FontFamily))
                 style += $"font-family: {FontFamily}; ";
-            if (FontSize > 0)
+            if(FontSize > 0)
                 style += $"font-size: {FontSize}pt; ";
-            if (Decoration["Bold"])
+            if(Decoration["Bold"])
                 style += "font-weight: bold; ";
-            if (Decoration["Italic"])
+            if(Decoration["Italic"])
                 style += "font-style: italic; ";
-            if (!string.IsNullOrEmpty(TextCase))
+            if(!string.IsNullOrEmpty(TextCase))
                 style += $"text-transform: {TextCase}; ";
 
             string textDecoration = GetTextDecoration();
-            if (!string.IsNullOrEmpty(textDecoration))
+            if(!string.IsNullOrEmpty(textDecoration))
                 style += $"text-decoration: {textDecoration};";
             return !string.IsNullOrEmpty(style) ? style : null;
         }
@@ -108,7 +108,7 @@ namespace BlazorDemo.Data {
         public TextDecorationMenuItem(TextFormatting textFormatting, string text, string attributeName) : base(textFormatting, text) {
             AttributeName = attributeName;
         }
-        
+
         string AttributeName { get; }
         public override bool Checked { get { return TextFormatting.Decoration[AttributeName]; } protected set { TextFormatting.Decoration[AttributeName] = value; } }
 

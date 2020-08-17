@@ -9,14 +9,16 @@
 </div>
 
 <div class="card demo-card demo-card-shadow">
-    <div class="card-body" style="padding: 1.5rem">
-        <div class="target-container" @onclick="@(() => PopupVisible = true)"></div>
-            <DxPopup HeaderText="Header"
-                     @bind-Visible="@PopupVisible">
-                    <Content>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</p>
-                    </Content>
-            </DxPopup>
+    <div class="card-body p-0">
+        <div @onclick="@(() => PopupVisible = true)">
+            <div class="target-container"></div>
+        </div>
+        <DxPopup HeaderText="Header"
+                 @bind-Visible="@PopupVisible">
+            <Content>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</p>
+            </Content>
+        </DxPopup>
     </div>
 </div>
 

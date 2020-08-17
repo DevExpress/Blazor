@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Demo.Blazor.Reports.HiddenColumnsReport;
 using DevExpress.DataAccess.ObjectBinding;
 using DevExpress.XtraReports.Native.Data;
@@ -14,8 +14,8 @@ namespace Demo.Blazor.Services {
 
         public override Action BuildStarting(string reportId, string reportUrl, XtraReport report, ReportBuildProperties buildProperties) {
             var dse = new UniqueDataSourceEnumerator();
-            foreach (var dataSource in dse.EnumerateDataSources(report, true)) {
-                if (dataSource is ObjectDataSource ods && ods.DataSource is Type dataSourceType && dataSourceType == typeof(VehiclesData.Vehicle)) {
+            foreach(var dataSource in dse.EnumerateDataSources(report, true)) {
+                if(dataSource is ObjectDataSource ods && ods.DataSource is Type dataSourceType && dataSourceType == typeof(VehiclesData.Vehicle)) {
                     report.DataSource = new ObjectDataSource() {
                         DataSource = new VehiclesData(ReportingCustomConfigurationProvider.GetGlobalConnectionStrings()["VehiclesConnection"]),
                         DataMember = nameof(VehiclesData.GetVehicles)

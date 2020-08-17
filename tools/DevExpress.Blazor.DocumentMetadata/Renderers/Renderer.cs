@@ -67,8 +67,8 @@ namespace DevExpress.Blazor.DocumentMetadata {
         static RendererFlag GetTypeFlagValue(RendererFlag flag) {
             return (RendererFlag)(byte)flag;
         }
-        
-        
+
+
         class RendererJsonConverter : JsonConverter<Renderer> {
             public override Renderer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {
                 return default;
@@ -86,5 +86,5 @@ namespace DevExpress.Blazor.DocumentMetadata {
             }
         }
     }
-    
+
 }

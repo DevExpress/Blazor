@@ -1,0 +1,19 @@
+﻿<CodeSnippet>
+@(@"<DxComboBox Data=""@Cities""
+            AllowUserInput=""true""
+            NullText=""Select City ...""
+            @bind-Value=""@Value""
+            @bind-Text=""@Text"">
+</DxComboBox>
+
+@code {
+    string Text { get; set; } = ""New York"";
+    string Value { get; set; }
+
+    IEnumerable<string> Cities = new List<string>() {
+        ""London"",
+        ""Berlin"",
+        ""Paris"",
+    };
+}")
+</CodeSnippet>

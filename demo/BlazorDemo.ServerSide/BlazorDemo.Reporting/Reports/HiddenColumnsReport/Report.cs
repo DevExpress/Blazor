@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using BlazorDemo.Reporting;
 using Demo.Blazor.Reports.HiddenColumnsReport;
 using DevExpress.Data.Entity;

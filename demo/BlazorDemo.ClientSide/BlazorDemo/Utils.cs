@@ -1,4 +1,4 @@
-﻿namespace BlazorDemo {
+namespace BlazorDemo {
     class StaticAssetUtils {
         static string libraryPath = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
 

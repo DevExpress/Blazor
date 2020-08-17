@@ -1,6 +1,6 @@
 ﻿<CodeSnippetTabbed>
     <CodeSnippetTabPage Text="Razor">
-@(@"<DxToolbar DropDownDisplayMode=""@SelectedDisplayMode"" ItemRenderStyleMode=""ToolbarRenderStyleMode.Plain"" CssClass=""demo-toolbar-dropdown"">
+@(@"<DxToolbar DropDownDisplayMode=""@SelectedDisplayMode"" ItemRenderStyleMode=""ToolbarRenderStyleMode.Plain"">
     <Items>
         @foreach(var item in MenuItems) {
             @RenderItem(item)
@@ -59,7 +59,7 @@
                             new TextDecorationMenuItem(Formatting, ""Overline"", ""Overline""),
                             new TextDecorationMenuItem(Formatting, ""Strikethrough"", ""Strikethrough"")
                         },
-                        SplitMenuButton = true, 
+                        SplitMenuButton = true,
                         IconCss = ""tb-icon tb-icon-underline"",
                         Category = ""Text Decorations""
                     },
@@ -97,10 +97,5 @@
     </CodeSnippetTabPage>
     <CodeSnippetTabPage Text="Menu Items">
 <CodeSnippet_TextFormatting_MenuItems />
-    </CodeSnippetTabPage>
-    <CodeSnippetTabPage Text="CSS">
-@(@".demo-toolbar-dropdown .dx-toolbar-popup .modal-body {
-    height: 180px;
-}")
     </CodeSnippetTabPage>
 </CodeSnippetTabbed>

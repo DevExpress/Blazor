@@ -8,7 +8,7 @@
 <div class="demo-description" id="IncrementalFiltering">
     <h2><DemoNavLink Link="ComboBox#IncrementalFiltering" />ComboBox - Incremental Filtering</h2>
     <p>
-        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxComboBoxBase-1.FilteringMode">FilteringMode</a> property to specify whether and how the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-1#filter-data">ComboBox</a> filters list items when users type in the edit box.
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.FilteringMode">FilteringMode</a> property to specify whether and how the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2#filter-data">ComboBox</a> filters list items when users type in the edit box.
     </p>
     <ul>
         <li>@GetLink("Contains") - The ComboBox filters list items that contain the search string and highlights matches.</li>
@@ -29,23 +29,19 @@
             <DxComboBox Id="ComboBox1"
                         Data="@Data"
                         FilteringMode="@DataGridFilteringMode.Contains"
-                        @bind-SelectedItem="@SelectedItem"
+                        @bind-Value="@Value"
                         @bind-Text="@Text"
-                        TextFieldName="CountryName"
+                        TextFieldName="@nameof(Country.CountryName)"
                         SizeMode="SizeMode"></DxComboBox>
         </div>
     </div>
 
-    <div class="code-snippet card demo-card-wide">
-        <CodeSnippetHeader></CodeSnippetHeader>
-        <div class="card-footer text-muted">
-            <CodeSnippet_Editors_ComboBox_Filtering></CodeSnippet_Editors_ComboBox_Filtering>
-        </div>
-    </div>
+<CodeSnippet_Editor_ComboBox_Filtering />
+
 }
 
 @code {
-    IEnumerable<Country> Data;
+        IEnumerable<Country> Data;
 
     protected override async Task OnInitializedAsync() {
         Data = await CountryNamesService.LoadAsync();
@@ -54,6 +50,5 @@
     string text = "";
     string Text { get => text; set { text = value; InvokeAsync(StateHasChanged); } }
 
-    Country selectedItem = null;
-    Country SelectedItem { get => selectedItem; set { selectedItem = value; InvokeAsync(StateHasChanged); } }
+    Country Value { get; set; }
 }

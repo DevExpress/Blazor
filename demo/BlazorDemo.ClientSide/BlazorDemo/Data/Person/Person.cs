@@ -1,4 +1,4 @@
-﻿namespace BlazorDemo.Data {
+namespace BlazorDemo.Data {
     public enum Department { Motors, Electronics, Software }
     public class Person {
         public int Id { get; set; }

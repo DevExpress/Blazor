@@ -1,12 +1,11 @@
 ﻿<CodeSnippet>
-@(@"<DxDateEdit @bind-Date=""@DateTimeValue"" 
+@(@"<DxDateEdit @bind-Date=""@DateTimeValue""
             PickerDisplayMode=""@DatePickerDisplayMode.ScrollPicker""
             ScrollPickerFormat=""dddd MMMM yyyy""
             DisplayFormat=""dd dddd MMMM yyyy"" >
 </DxDateEdit>
 
 @code {
-    DateTime dateTimeValue = DateTime.Now;
-    DateTime DateTimeValue { get => dateTimeValue; set { dateTimeValue = value; InvokeAsync(StateHasChanged); }  }
+    DateTime DateTimeValue { get; set; } = DateTime.Now;
 }")
 </CodeSnippet>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <XtraReportsLayoutSerializer SerializerVersion="18.2.0.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v18.2, Version=18.2.0.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4" Name="CrossBandControlsReport" DisplayName="Cross-Band Controls" Margins="100, 100, 100, 77" PageWidth="850" PageHeight="1100" Version="18.2" RequestParameters="false" EventsInfo="|Report1,BeforePrint,Report1_BeforePrint" DataMember="Products" DataSource="#Ref-0">
   <Parameters>
     <Item1 Ref="3" Description="Draw Z below the table" ValueInfo="False" Name="DrawZBelowTheTableParameter" Type="#Ref-2" />

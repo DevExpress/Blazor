@@ -3,7 +3,7 @@
 <div class="demo-description mw-1100" id="RowPreviewTemplate">
     <h2><DemoNavLink Link="GridTemplate#RowPreviewTemplate" />Data Grid - Row Preview Template</h2>
     <p>
-        This demo illustrates how to use the Data Grid’s <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridBase-1.RowPreviewTemplate">RowPreviewTemplate</a> property to show preview sections under each data row across all columns. These sections can display any content, such as tables, images, values from data source fields, custom text, and so on.
+        This demo illustrates how to use the Data Grid’s <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.RowPreviewTemplate">RowPreviewTemplate</a> property to show preview sections under each data row across all columns. These sections can display any content, such as tables, images, values from data source fields, custom text, and so on.
     </p>
 
 </div>
@@ -22,9 +22,9 @@ else {
         <Columns>
             <DxDataGridColumn Field="@nameof(Employee.FirstName)" SortOrder="@DataGridColumnSortOrder.Ascending"></DxDataGridColumn>
             <DxDataGridColumn Field="@nameof(Employee.LastName)"></DxDataGridColumn>
-            <DxDataGridColumn Field="@nameof(Employee.Position)" Caption="Position" EditorVisible="@DefaultBoolean.True"></DxDataGridColumn>
-            <DxDataGridDateEditColumn Field="@nameof(Employee.BirthDate)" DisplayFormat="D" Caption="Birth Date" EditorVisible="@DefaultBoolean.True"></DxDataGridDateEditColumn>
-            <DxDataGridDateEditColumn Field="@nameof(Employee.HireDate)" DisplayFormat="D" Caption="Hire Date" EditorVisible="@DefaultBoolean.True"></DxDataGridDateEditColumn>
+            <DxDataGridColumn Field="@nameof(Employee.Position)" Caption="Position" EditorVisible="@true"></DxDataGridColumn>
+            <DxDataGridDateEditColumn Field="@nameof(Employee.BirthDate)" DisplayFormat="D" Caption="Birth Date" EditorVisible="@true"></DxDataGridDateEditColumn>
+            <DxDataGridDateEditColumn Field="@nameof(Employee.HireDate)" DisplayFormat="D" Caption="Hire Date" EditorVisible="@true"></DxDataGridDateEditColumn>
         </Columns>
         <RowPreviewTemplate Context="ItemInfo">
             @{

@@ -1,4 +1,4 @@
-@inherits DemoWithResizableComponent
+﻿@inherits DemoWithResizableComponent
 
 <div class="demo-description" id="Overview">
     <h2><DemoNavLink Link="DateEdit#Overview" />Date Edit - Overview</h2>
@@ -31,6 +31,5 @@
 </div>
 
 @code {
-    DateTime dateTimeValue = DateTime.Now;
-    DateTime DateTimeValue { get => dateTimeValue; set { dateTimeValue = value; InvokeAsync(StateHasChanged); } }
+    DateTime DateTimeValue { get; set; } = DateTime.Now;
 }

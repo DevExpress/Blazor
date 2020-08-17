@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace BlazorDemo.Data {
     public class Order {
@@ -7,7 +7,7 @@ namespace BlazorDemo.Data {
         public decimal UnitPrice { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime ShippedDate { get; set; }
-        public int ShipRegionID { get; set; }
+        public int CountryId { get; set; }
         public int UnitsInOrder { get; set; }
 
         public OrderStatus OrderStatus { get; set; }

@@ -12,12 +12,12 @@
     </p>
     <ul>
         <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextBox">Text Box</a></li>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-1">ComboBox</a></li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2">ComboBox</a></li>
         <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1">Spin Edit</a></li>
         <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1">Date Edit</a></li>
     </ul>
     <p>
-        The <b>EditForm</b> also contains the DevExpress <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton">Button</a> component with the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxButtonBase.SubmitFormOnClick">SubmitFormOnClick</a> option set to <b>true</b>.
+        The <b>EditForm</b> also contains the DevExpress <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton">Button</a> component with the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton.SubmitFormOnClick">SubmitFormOnClick</a> option set to <b>true</b>.
         As in the previous demo, once you attempt to submit changes, editors become marked with colored outlines.
         <span class="invalid" style="color:red;">Red</span> indicates invalid values, while <span class="modified" style="outline: 1px solid #26b050; color:#26b050;">green</span> indicates values that were posted successfully.
     </p>
@@ -47,7 +47,7 @@
                         <DxComboBox NullText="Select classification ..."
                                     ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
                                     Data="@(new List<string>() { "Defense", "Exploration", "Diplomacy" })"
-                                    @bind-SelectedItem="@starship.Classification" />
+                                    @bind-Value="@starship.Classification" />
                         @*<ValidationMessage For="@(() => starship.Classification)" />*@
                     </Template>
                 </DxFormLayoutItem>

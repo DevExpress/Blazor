@@ -12,7 +12,7 @@
         <li>
             <p><b>Category column</b> - <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.DisplayTemplate">DisplayTemplate</a> builds a composite string and displays it in plain text. <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.EditTemplate">EditTemplate</a> embeds another Data Grid to enable lookup functionality.</p>
         </li>
-    </ul>  
+    </ul>
     <p>
         Review how values in the Availability and Category columns are formatted and try the Edit action to see the custom editors integrated into the edit form.
     </p>
@@ -51,8 +51,8 @@ else
             </DisplayTemplate>
             <EditTemplate>
                 <DxComboBox Data="@(new List<string>() { "In stock", "Sold out" })"
-                            SelectedItem="@(((bool)((CellEditContext)context).CellValue) ? "In stock" : "Sold out" )"
-                            SelectedItemChanged="@(newCellValue => ((CellEditContext)context).OnChanged(newCellValue == "In stock"))">
+                            Value="@(((bool)((CellEditContext)context).CellValue) ? "In stock" : "Sold out" )"
+                            ValueChanged="@((string newCellValue) => ((CellEditContext)context).OnChanged(newCellValue == "In stock"))">
                 </DxComboBox>
             </EditTemplate>
         </DxDataGridColumn>
@@ -69,7 +69,7 @@ else
                 }
             </DisplayTemplate>
             <EditTemplate>
-                @{ 
+                @{
                     var cellEditContext = (CellEditContext)context;
                     int currentCellValue = (int)cellEditContext.CellValue;
                     var nestedItem = NestedDataSource.Where(x => x.SubcategoryID == currentCellValue).FirstOrDefault();

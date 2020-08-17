@@ -5,7 +5,7 @@
 <div class="demo-description">
     <h2>Pivot Grid - Large Data Source</h2>
     <p>
-        This demo shows the performance of the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPivotGrid-1">Pivot Grid</a> when it is bound to a dataset that contains a million rows. Experiment with navigating between the pages and sorting the data to experience the responsiveness of the pivot grid in this situation. The pager is enabled by setting the Pivot Grid's <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxPivotGridBase.ShowPager">ShowPager</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxPivotGridBase.PageSize">PageSize</a> properties.
+        This demo shows the performance of the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPivotGrid-1">Pivot Grid</a> when it is bound to a dataset that contains a million rows. Experiment with navigating between the pages and sorting the data to experience the responsiveness of the pivot grid in this situation. The pager is enabled by setting the Pivot Grid's <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPivotGrid.ShowPager">ShowPager</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPivotGrid.PageSize">PageSize</a> properties.
     </p>
     <p>
         In this example, Entity Framework Core (version 3.0) provides the Pivot Grid with an IQueryable&lt;T&gt; source.
@@ -17,8 +17,8 @@
 }
 else
 {
-    <DxPivotGrid Data="@largeDataSource" 
-                 ShowPager="true" 
+    <DxPivotGrid Data="@largeDataSource"
+                 ShowPager="true"
                  PageSize="10"
                  CssClass="mw-1100">
         <DxPivotGridField Field="@nameof(Sale.StoreName)" Caption="Store" Area="@PivotGridFieldArea.Row" />

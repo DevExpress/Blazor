@@ -1,4 +1,4 @@
-﻿using BlazorDemo.Reporting;
+using BlazorDemo.Reporting;
 using DevExpress.XtraEditors.Controls;
 using System;
 using System.Collections.Generic;
@@ -11,17 +11,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Demo.Blazor.Reports.HiddenColumnsReport
-{
-    public class VehiclesData
-    {
-        class Trademark
-        {
+namespace Demo.Blazor.Reports.HiddenColumnsReport {
+    public class VehiclesData {
+        class Trademark {
             public string Name { get; set; }
             public int ID { get; set; }
         }
-        public class Vehicle
-        {
+        public class Vehicle {
             public int ID { get; set; }
             public int Trademark { get; set; }
             public string Name { get; set; }
@@ -53,8 +49,7 @@ namespace Demo.Blazor.Reports.HiddenColumnsReport
         public List<Vehicle> GetVehicles() {
             return InitMDBData(ConnectionString);
         }
-        static List<Vehicle> InitMDBData(string connectionString)
-        {
+        static List<Vehicle> InitMDBData(string connectionString) {
             string Model = "Model";
             string Trademark = "Trademark";
 
@@ -63,17 +58,15 @@ namespace Demo.Blazor.Reports.HiddenColumnsReport
             FillTable(Trademark, connectionString, ds);
 
             List<Trademark> listTrademarks = new List<Trademark>();
-            foreach (DataRow row in ds.Tables[Trademark].Rows)
-                listTrademarks.Add(new Trademark()
-                {
+            foreach(DataRow row in ds.Tables[Trademark].Rows)
+                listTrademarks.Add(new Trademark() {
                     ID = (int)(long)row["ID"],
                     Name = (string)row["Name"],
                 });
 
             var listModels = new List<Vehicle>();
-            foreach (DataRow row in ds.Tables[Model].Rows)
-                listModels.Add(new Vehicle()
-                {
+            foreach(DataRow row in ds.Tables[Model].Rows)
+                listModels.Add(new Vehicle() {
                     ID = (int)(long)row["ID"],
                     Name = (string)row["Name"],
                     Trademark = (int)(long)row["TrademarkID"],
@@ -92,18 +85,16 @@ namespace Demo.Blazor.Reports.HiddenColumnsReport
                 });
             return listModels;
         }
-        static string GetTrademarkName(DataTable dataTable, int tradeMarkId)
-        {
+        static string GetTrademarkName(DataTable dataTable, int tradeMarkId) {
             List<DataRow> listTrademarks = new List<DataRow>();
             foreach(DataRow row in dataTable.Rows) {
                 if((int)(long)row["ID"] == tradeMarkId)
                     listTrademarks.Add(row);
             }
             DataRow trademarkRow = listTrademarks.FirstOrDefault();
-            return trademarkRow["Name"].ToString();            
+            return trademarkRow["Name"].ToString();
         }
-        static void FillTable(string table, string connectionString, DataSet ds)
-        {
+        static void FillTable(string table, string connectionString, DataSet ds) {
             SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(string.Format("SELECT * FROM {0}", table), connectionString);
             dataAdapter.Fill(ds, table);
         }

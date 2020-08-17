@@ -1,0 +1,30 @@
+﻿<div class="demo-description" id="MultipleColumns">
+    <h2><DemoNavLink Link="ListBox#MultipleColumns" />List Box - Multiple Columns<span class="demo-badge badge badge-success">New</span></h2>
+    <p>The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2">List Box</a> can display data across multiple columns. To create columns, use <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn">DxListEditorColumn</a> objects that include the following options for column customization:</p>
+    <ul>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.FieldName">FieldName</a> - Specifies the data source field that populates column items.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.Visible">Visible</a> - Specifies the column visibility.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.VisibleIndex">VisibleIndex</a> - Specifies the column display order.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.Width">Width</a> - Specifies the column width.</li>
+    </ul>
+</div>
+
+<div class="card demo-card demo-listbox">
+    <div class="card-header">Selected item: <b>@(SelectedPerson == null ? "(none)" : SelectedPerson.Text)</b></div>
+    <DxListBox Data="@Persons.DataSource"
+               @bind-Values="@Values"
+               CssClass="border-0"
+               style="height: 232px; border-top-left-radius: 0; border-top-right-radius: 0">
+        <DxListEditorColumn FieldName="Id" Width="50px" />
+        <DxListEditorColumn FieldName="FirstName" />
+        <DxListEditorColumn FieldName="LastName" />
+    </DxListBox>
+</div>
+
+<CodeSnippet_Editors_ListBox_MultiColumn></CodeSnippet_Editors_ListBox_MultiColumn>
+
+@code {
+    IEnumerable<Person> Values { get; set; }  = Persons.DataSource.Take(1);
+
+    Person SelectedPerson => Values.First();
+}

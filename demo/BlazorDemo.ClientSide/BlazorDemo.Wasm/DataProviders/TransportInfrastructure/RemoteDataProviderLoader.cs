@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
@@ -13,8 +13,8 @@ using BlazorDemo.DataProviders;
 using DevExpress.Blazor.Scheduler.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
-using City = BlazorDemo.Data.SalesViewer.City;
 using Newtonsoft.Json;
+using City = BlazorDemo.Data.SalesViewer.City;
 using Product = BlazorDemo.Data.Product;
 
 namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
@@ -26,7 +26,7 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
             {typeof(ProductCategory).GUID, typeof(ProductCategory)},
             {typeof(Product).GUID, typeof(Product)},
             {typeof(SaleInfo).GUID, typeof(SaleInfo)},
-            
+
             {typeof(Channel).GUID, typeof(Channel)},
             {typeof(City).GUID, typeof(City)},
             {typeof(Contact).GUID, typeof(Contact)},
@@ -50,7 +50,7 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
 
         EntityLoadingState[] _metadataSnapshot;
         static readonly JsonSerializerOptions JSONOptions = new JsonSerializerOptions() {
-            PropertyNameCaseInsensitive = true, 
+            PropertyNameCaseInsensitive = true,
             IgnoreReadOnlyProperties = true
         };
 
@@ -67,17 +67,17 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
 
         public async Task<IEnumerable<TEntity>> LoadRemoteEntities<TService, TEntity>(TService provider,
             Func<CancellationToken, Task<IEnumerable<TEntity>>> _) where TService : IDataProvider {
-            
+
             await AssertInvokeUnderProtectedArea(provider);
-            
+
             return await GetEntityDataContainer(EntityId.FromTypes<TService, TEntity>()).GetData<TEntity>();
         }
 
-        public async Task DeleteEntity<TService, TEntity>(TService provider, TEntity entity) 
+        public async Task DeleteEntity<TService, TEntity>(TService provider, TEntity entity)
             where TService : IDataProvider {
-            
+
             await AssertInvokeUnderProtectedArea(provider);
-            
+
             await GetEntityDataContainer(EntityId.FromTypes<TService, TEntity>()).Delete(entity);
         }
 
@@ -90,7 +90,7 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
         }
 
         async ValueTask AssertInvokeUnderProtectedArea<TService>(TService provider) where TService : IDataProvider {
-            if (!_statesLookup.TryGetValue(EntityId.GetServiceId(provider.GetType()), out _)) {
+            if(!_statesLookup.TryGetValue(EntityId.GetServiceId(provider.GetType()), out _)) {
                 await _runtime.InvokeVoidAsync("alert",
                     _cancellationToken,
                     $"Page should use the @layout DataProviderAccessArea<{EntityId.GetDataProviderContractTypeName(provider.GetType())}>"
@@ -102,9 +102,9 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
         public async Task<IObservable<int>> GetDataProviderStateAsync<T>(T _) where T : IDataProvider {
             await _semaphoreSlim.WaitAsync(_cancellationToken);
 
-            if (_metadataSnapshot == null) {
+            if(_metadataSnapshot == null) {
                 var metadataSnapshot = new List<EntityLoadingState>();
-                await foreach (var metadata in LoadEntitiesMetadataAsync().WithCancellation(_cancellationToken))
+                await foreach(var metadata in LoadEntitiesMetadataAsync().WithCancellation(_cancellationToken))
                     metadataSnapshot.Add(metadata);
                 _metadataSnapshot = metadataSnapshot.ToArray();
             }
@@ -124,7 +124,7 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
             var start = _metadataSnapshot.FindIndex(Filter);
             var length = _metadataSnapshot.Count(Filter);
             return new ReadOnlyMemory<EntityLoadingState>(_metadataSnapshot, start, length);
-            
+
             bool Filter(EntityLoadingState x) {
                 return x.Entity.Id.Provider == providerId && x.Loaded < x.Entity.Total;
             }
@@ -137,14 +137,14 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
 
 
         async Task FetchRequiredDataAsync(DataProviderProgression progression) {
-            if (progression.HasMissingData()) {
+            if(progression.HasMissingData()) {
                 EntityLoadingState entityState = progression.RemainingEntities.Span[0];
                 int offset = entityState.Loaded;
                 var entityDataContainer = GetEntityDataContainer(entityState.Entity.Id);
 
                 var batchArray = await GetBatchAsync(entityState, offset);
 
-                while (batchArray.Length > 0 && offset < entityState.Entity.Total) {
+                while(batchArray.Length > 0 && offset < entityState.Entity.Total) {
                     entityDataContainer.Append(batchArray);
                     offset += batchArray.Length;
                     progression = progression.Update(batchArray.Length);
@@ -152,13 +152,13 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
                     batchArray = await GetBatchAsync(entityState, offset);
                 }
                 entityDataContainer.CompleteLoading();
-                
+
                 await FetchRequiredDataAsync(progression.StartNextEntity());
             }
         }
         async IAsyncEnumerable<EntityLoadingState> LoadEntitiesMetadataAsync() {
             await using var stream = await GetAllMetadataAsync().ConfigureAwait(false);
-            foreach (var metadata in await DeserializeCollectionAsync<EntitySetMetadata>(stream))
+            foreach(var metadata in await DeserializeCollectionAsync<EntitySetMetadata>(stream))
                 yield return EntityLoadingState.FromMetadata(metadata);
         }
 
@@ -174,14 +174,14 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
                     $"api/dataprovider/batch?provider={state.Entity.Id.Provider}&entity={state.Entity.Id.Entity}&skip={offset}&take={FetchBatchSize}"
                 )
                 .ConfigureAwait(false);
-            
+
             var collection = await System.Text.Json.JsonSerializer.DeserializeAsync(result, GetEntityArrayType(state), JSONOptions);
             return ((Array)collection).Cast<object>().ToArray();
         }
 
         static Type GetEntityArrayType(EntityLoadingState state) {
             Type entityType = EntityTypeLookup.GetValueOrDefault(state.Entity.Id.Entity);
-            if (entityType == null)
+            if(entityType == null)
                 entityType = typeof(string);
             return entityType.MakeArrayType();
         }

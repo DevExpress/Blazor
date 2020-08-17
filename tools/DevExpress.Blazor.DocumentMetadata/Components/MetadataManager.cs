@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -51,7 +51,7 @@ namespace DevExpress.Blazor.DocumentMetadata {
                 _renderers.Clear();
             }
         }
-        
+
         public void Dispose() {
             if (!_disposed) {
                 _disposed = true;
@@ -60,7 +60,7 @@ namespace DevExpress.Blazor.DocumentMetadata {
                 using (_dotnetRef) _dotnetRef = null;
             }
         }
-        
+
 
         void IObserver<Renderer>.OnNext(Renderer value) {
             _renderers.Enqueue(value);

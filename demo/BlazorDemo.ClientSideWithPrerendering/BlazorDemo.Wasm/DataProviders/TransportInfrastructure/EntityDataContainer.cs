@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Components.Routing;
 
 namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
     sealed class EntityDataContainer {
-        
+
         sealed class EntityWrapper<T> {
             public T DataObject { get; }
             public bool IsDeleted { get; set; }
@@ -18,10 +18,10 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
                 DataObject = dataObject;
             }
         }
-        
+
         readonly NavigationManager _navigationManager;
         readonly ReadOnlyCollectionBuilder<EntityWrapper<object>> _bufferBuilder;
-        readonly TaskCompletionSource<ReadOnlyCollection<EntityWrapper<object>>> _tcs = 
+        readonly TaskCompletionSource<ReadOnlyCollection<EntityWrapper<object>>> _tcs =
             new TaskCompletionSource<ReadOnlyCollection<EntityWrapper<object>>>();
         readonly IList<EntityWrapper<object>> _offlineData = new List<EntityWrapper<object>>();
         public EntityDataContainer(NavigationManager navigationManager) {
@@ -29,7 +29,7 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
             _bufferBuilder = new ReadOnlyCollectionBuilder<EntityWrapper<object>>();
         }
         public void Append(object[] items) {
-            for (int i = 0; i < items.Length; i++)
+            for(int i = 0; i < items.Length; i++)
                 _bufferBuilder.Add(new EntityWrapper<object>(items[i]));
         }
 
@@ -42,7 +42,7 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
         public async Task Delete<TEntity>(TEntity item) {
             var data = await _tcs.Task;
             var wrapper = _offlineData.Concat(data).FirstOrDefault(x => EqualityComparer<TEntity>.Default.Equals((TEntity)x.DataObject, item));
-            if (wrapper != null)
+            if(wrapper != null)
                 wrapper.IsDeleted = true;
         }
 
@@ -58,7 +58,7 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
 
         async void OnLocationChanged(object sender, LocationChangedEventArgs e) {
             var data = await _tcs.Task;
-            for (int i = 0; i < data.Count; i++)
+            for(int i = 0; i < data.Count; i++)
                 data[i].IsDeleted = false;
             _offlineData.Clear();
         }

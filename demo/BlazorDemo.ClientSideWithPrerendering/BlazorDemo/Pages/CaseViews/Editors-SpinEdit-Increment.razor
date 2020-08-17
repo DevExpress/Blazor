@@ -1,9 +1,9 @@
 ﻿@inherits DemoWithResizableComponent
 
 <div class="demo-description" id="CustomIncrement">
-    <h2><DemoNavLink Link="SpinEdit#CustomIncrement" />Spin Edit - Custom Increment<span class="demo-badge badge badge-success">New</span></h2>
+    <h2><DemoNavLink Link="SpinEdit#CustomIncrement" />Spin Edit - Custom Increment</h2>
     <p>
-        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSpinEditBase-1.Increment">Increment</a> property to specify the step by which the editor's value changes when a user clicks the spin buttons. The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSpinEditBase-1.MinValue">MinValue</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSpinEditBase-1.MaxValue">MaxValue</a> properties allow you to limit the editor’s minimum and maximum values.
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1.Increment">Increment</a> property to specify the step by which the editor's value changes when a user clicks the spin buttons. The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1.MinValue">MinValue</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1.MaxValue">MaxValue</a> properties allow you to limit the editor’s minimum and maximum values.
     </p>
 </div>
 
@@ -23,7 +23,6 @@
     </div>
 </div>
 
-@code { 
-    Decimal decimalValue = (decimal)0.5;
-    Decimal DecimalValue { get => decimalValue; set { decimalValue = value; InvokeAsync(StateHasChanged); } }
+@code {
+    Decimal DecimalValue { get; set; } = 0.5M;
 }

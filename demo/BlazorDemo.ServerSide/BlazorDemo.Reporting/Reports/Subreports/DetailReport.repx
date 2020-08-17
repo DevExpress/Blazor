@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <XtraReportsLayoutSerializer SerializerVersion="19.2.3.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v19.2, Version=19.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="DetailReport" PageWidth="850" PageHeight="1100" Version="19.2" RequestParameters="false" FilterString="[CustomerID] = ?customerIDParameter And [PurchaseDate] Between(?dateRangeParameter_Start, ?dateRangeParameter_End)" DataMember="Orders" DataSource="#Ref-0">
   <Parameters>
     <Item1 Ref="3" Visible="false" ValueInfo="12" Name="customerIDParameter" Type="#Ref-2" />

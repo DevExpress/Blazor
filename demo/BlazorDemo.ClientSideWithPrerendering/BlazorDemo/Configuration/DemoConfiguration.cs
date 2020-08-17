@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +14,10 @@ namespace BlazorDemo.Configuration {
         public DemoConfiguration(IOptions<SeoConfiguration> seoOptions, IConfiguration configuration) {
             _seoConfig = seoOptions?.Value;
             if(_seoConfig == null) return;
-            if (_seoConfig.RootDemoPages == null)
+            if(_seoConfig.RootDemoPages == null)
                 _seoConfig = configuration.GetSection("BlazorDemo")?.Get<SeoConfiguration>();
 
-            if (_seoConfig == null) return;
+            if(_seoConfig == null) return;
             bool IsReportsDemoModule(Assembly x) => x.GetName().Name == "BlazorDemo.Reporting";
 
             AdditionalRoutingAssemblies = AppDomain.CurrentDomain.GetAssemblies().Where(IsReportsDemoModule).ToArray();
@@ -26,15 +26,15 @@ namespace BlazorDemo.Configuration {
         public bool IsReportingModuleLoaded => AdditionalRoutingAssemblies.Any();
 
         public void ConfigureMetadata(IDocumentMetadataCollection metadataCollection) {
-            if (_seoConfig == null) return;
+            if(_seoConfig == null) return;
 
             metadataCollection.AddDefault()
                 .Base("~/")
                 .Charset("utf-8")
                 .Viewport("width=device-width, initial-scale=1.0");
 
-            if (_seoConfig.RootDemoPages != null) {
-                foreach (var page in _seoConfig.RootDemoPages) {
+            if(_seoConfig.RootDemoPages != null) {
+                foreach(var page in _seoConfig.RootDemoPages) {
                     ConfigurePage(metadataCollection, page, page.Title, _seoConfig.TitleFormat ?? "{0}");
                 }
             }
@@ -45,7 +45,7 @@ namespace BlazorDemo.Configuration {
 
 
         static void ConfigurePage(IDocumentMetadataCollection metadataCollection, DemoPage page, string title, string titleFormat) {
-            if (page.Url != null) {
+            if(page.Url != null) {
                 metadataCollection.AddPage(page.Url)
                     .OpenGraph("url", page.OG_Url)
                     .OpenGraph("type", page.OG_Type)
@@ -56,8 +56,8 @@ namespace BlazorDemo.Configuration {
                     .Meta("description", page.Description);
             }
 
-            if (page.DemoPages != null) {
-                foreach (var demoPage in page.DemoPages)
+            if(page.DemoPages != null) {
+                foreach(var demoPage in page.DemoPages)
                     ConfigurePage(metadataCollection, demoPage, string.Join('-', title, demoPage.Title), titleFormat);
             }
         }

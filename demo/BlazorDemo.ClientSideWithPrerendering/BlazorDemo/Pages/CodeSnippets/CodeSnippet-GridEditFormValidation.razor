@@ -28,7 +28,7 @@
                     <Template>
                         <DxComboBox Data=""@VacancyRepository.Regions""
                                     NullText=""Select Region...""
-                                    @bind-SelectedItem=""@EditContext.Region"">
+                                    @bind-Value=""@EditContext.Region"">
                         </DxComboBox>
                     </Template>
                 </DxFormLayoutItem>
@@ -36,7 +36,7 @@
                     <Template>
                         <DxComboBox Data=""@EditContext.OfficeLocations""
                                     NullText=""Select City...""
-                                    @bind-SelectedItem=""@EditContext.City"">
+                                    @bind-Value=""@EditContext.City"">
                         </DxComboBox>
                     </Template>
                 </DxFormLayoutItem>

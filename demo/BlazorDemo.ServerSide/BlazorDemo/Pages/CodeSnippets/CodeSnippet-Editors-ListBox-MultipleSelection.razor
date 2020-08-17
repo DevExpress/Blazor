@@ -1,24 +1,14 @@
 ﻿<CodeSnippet>
 @(@"<DxListBox Data=""@Persons.DataSource""
-           TextFieldName=""Text""
+           TextFieldName=""@nameof(Person.Text)""
            SelectionMode=""ListBoxSelectionMode.Multiple""
            ShowCheckboxes=""@ShowCheckboxes""
-           @bind-SelectedItems=""@SelectedItems""
+           @bind-Values=""@Values""
            style=""height: 232px;"">
 </DxListBox>
 
 @code {
-    IEnumerable<Person> selectedItems = Persons.DataSource.Take(2);
-    IEnumerable<Person> SelectedItems {
-        get => selectedItems;
-        set { selectedItems = value; InvokeAsync(StateHasChanged); }
-    }
-    
-    bool showCheckboxes = true;
-    bool ShowCheckboxes { 
-        get => showCheckboxes;
-        set { showCheckboxes = value; InvokeAsync(StateHasChanged); }
-    }
-}
-")
+    bool ShowCheckboxes { get; set; } = true;
+    IEnumerable<Person> Values { get; set; } = Persons.DataSource.Take(2);
+}")
 </CodeSnippet>

@@ -1,19 +1,26 @@
-﻿<CodeSnippet>
-@(@"<DxTagBox Data=""@Strings""
+﻿<CodeSnippetTabbed>
+<CodeSnippetTabPage Text="Razor">
+@(@"<DxTagBox Data=""@Data""
           ListRenderMode=""@ListRenderMode.Virtual""
+          TextFieldName=""@nameof(Country.CountryName)""
           ClearButtonDisplayMode=""@DataEditorClearButtonDisplayMode.Auto""
-          @bind-SelectedItems=""@SelectedItems"">
+          @bind-Values=""@Values"">
 </DxTagBox>
 
 @code {
-    IEnumerable<string> SelectedItems { get; set; }
+    IEnumerable<Country> Data { get; set; }
+    IEnumerable<Country> Values { get; set; }
 
-    List<string> Strings { get; set; } = new List<string>();
-    protected override void OnInitialized()
-    {
-        for(int i = 0; i < 1000; i++ )
-            Strings.Add($""Option #{i}"");
-        SelectedItems = new List<string> { Strings[0], Strings[1] };
+    protected override async Task OnInitializedAsync() {
+        Data = await CountryNamesService.LoadAsync();
+        Values = new List<Country>() { Data.First() };
     }
 }")
-</CodeSnippet>
+</CodeSnippetTabPage>
+<CodeSnippetTabPage Text="Country">
+@(@"public class Country {
+    public int Id { get; set; }
+    public string CountryName { get; set; }
+}")
+</CodeSnippetTabPage>
+</CodeSnippetTabbed>

@@ -1,15 +1,15 @@
 ﻿<CodeSnippetTabbed>
 <CodeSnippetTabPage Text="Razor">
 @(@"<DxListBox Data=""@Persons.DataSource""
-           TextFieldName=""Text""
+           TextFieldName=""@nameof(Person.Text)""
            ReadOnly=""true""
-           SelectedItems=""@SelectedItems""
+           Values=""@Values""
            CssClass=""demo-listbox mb-2""
            style=""height: 232px;"">
 </DxListBox>
 
 @code {
-    IEnumerable<Person> SelectedItems => Persons.DataSource.Take(1);
+    IEnumerable<Person> Values => Persons.DataSource.Take(1);
 }")
 </CodeSnippetTabPage>
 <CodeSnippetTabPage Text="Business Object">

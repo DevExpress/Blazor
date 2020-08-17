@@ -3,7 +3,7 @@
 <div class="demo-description" id="TagTemplate">
     <h2><DemoNavLink Link="TagBox#TagTemplate" />TagBox - Tag Template</h2>
     <p>
-        This demo illustrates how to use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTagBoxBase-1.TagTemplate">TagTemplate</a> property to customize tag's appearance.
+        This demo illustrates how to use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.TagTemplate">TagTemplate</a> property to customize tag's appearance.
     </p>
     <p>
         The template’s <b>Context</b> parameter has the following properties:
@@ -22,17 +22,19 @@
     </div>
     <div class="card-body mw-480">
         <DxTagBox Data="@DataSource"
-                  TextFieldName="Data"
+                  TextFieldName="@nameof(City.CityName)"
+                  TData="City"
+                  TValue="City"
                   AllowCustomTags="true"
                   @bind-Tags="@Tags"
                   SizeMode="SizeMode">
             <TagTemplate Context="tagInfo">
                 @{
-                    var style = tagInfo.IsCustom ? ButtonRenderStyle.Secondary : tagInfo.DataItem.Style;
-                    var styleMode = tagInfo.IsCustom ? ButtonRenderStyleMode.Outline: ButtonRenderStyleMode.Contained;
-                    <DxButton RenderStyle="@style" 
-                              RenderStyleMode="@styleMode" 
-                              Text="@tagInfo.Text" 
+                    var styleMode = tagInfo.IsCustom ? ButtonRenderStyleMode.Contained: GetModeByID(tagInfo.DataItem.CountryId);
+                    var style = tagInfo.IsCustom ? ButtonRenderStyle.Dark : ButtonRenderStyle.Primary;
+                    <DxButton RenderStyle="@style"
+                              RenderStyleMode="@styleMode"
+                              Text="@tagInfo.Text"
                               style="display:inline-block">
                         @context
                         <span @onclick="@tagInfo.RemoveTagAction">&times;</span>
@@ -48,32 +50,21 @@
 
 
 @code {
-    Option[] DataSource = null;
+    ButtonRenderStyleMode GetModeByID(int countryId) {
+        switch (countryId) {
+            case 0: return ButtonRenderStyleMode.Contained;
+            case 1: return ButtonRenderStyleMode.Outline;
+            default: return ButtonRenderStyleMode.Text;
+        }
+    }
+
+    List<City> DataSource { get; set; }
 
     IEnumerable<string> Tags { get; set; }
 
     protected override void OnInitialized() {
         base.OnInitialized();
-        DataSource = new Option[] {
-            new Option("Option 1", ButtonRenderStyle.Primary),
-            new Option("Option 2", ButtonRenderStyle.Success),
-            new Option("Option 3", ButtonRenderStyle.Primary),
-            new Option("Option 4", ButtonRenderStyle.Success),
-            new Option("Option 5", ButtonRenderStyle.Primary),
-            new Option("Option 6", ButtonRenderStyle.Success),
-            new Option("Option 7", ButtonRenderStyle.Primary)
-        };
-        Tags = new List<string>() { "Option 2", "Option 5", "Custom Option" };
-    }
-
-    public class Option {
-
-        public Option(string data, ButtonRenderStyle style) {
-            Data = data;
-            Style = style;
-        }
-
-        public string Data { get; set; }
-        public ButtonRenderStyle Style { get; set; }
+        DataSource = CountryCity.Cities;
+        Tags = new List<string>() { "Los Angeles", "Tokyo", "Moscow" };
     }
 }

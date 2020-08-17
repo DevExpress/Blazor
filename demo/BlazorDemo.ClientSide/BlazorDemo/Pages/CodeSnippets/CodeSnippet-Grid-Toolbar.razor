@@ -3,9 +3,9 @@
     <div class="card-footer text-muted">
         <CodeSnippet>
 @(@"<DxDataGrid @ref=""grid""
-            Data=""@Data"" 
-            ShowFilterRow=""@ShowFilterRow"" 
-            @bind-SingleSelectedDataRow=""@SelectedRow"" 
+            Data=""@Data""
+            ShowFilterRow=""@ShowFilterRow""
+            @bind-SingleSelectedDataRow=""@SelectedRow""
             RowInsertingAsync=""@OnRowInserting""
             RowUpdatingAsync=""@OnRowUpdating""
             InitNewRow=""@OnInitNewRow""
@@ -15,8 +15,8 @@
             <DxToolbarItem Text=""New"" BeginGroup=""true"" Click=""@OnAddNewClick"" IconCssClass=""grid-toolbar-new"" />
             <DxToolbarItem Text=""Edit"" Click=""@OnEditClick"" IconCssClass=""grid-toolbar-edit"" Enabled=""@Enabled"" />
             <DxToolbarItem Text=""Delete"" Click=""@OnDeleteClick"" IconCssClass=""grid-toolbar-delete"" Enabled=""@Enabled"" />
-            <DxToolbarItem Text=""Show Filter Row"" BeginGroup=""true"" GroupName=""GroupName"" Click=""@OnShowFilterRow"" IconCssClass=""grid-toolbar-filter-row"" />
-            <DxToolbarItem Text=""Documentation"" NavigateUrl=""https://docs.devexpress.com/Blazor/401086/data-grid"" BeginGroup=""true"" 
+            <DxToolbarItem Text=""Show Filter Row"" BeginGroup=""true"" GroupName=""FilterRow"" Click=""@OnShowFilterRow"" IconCssClass=""grid-toolbar-filter-row"" />
+            <DxToolbarItem Text=""Documentation"" NavigateUrl=""https://docs.devexpress.com/Blazor/401086/data-grid"" BeginGroup=""true""
                            Alignment=""ToolbarItemAlignment.Right"" IconCssClass=""grid-toolbar-document"" target=""_blank"" />
         </DxToolbar>
     </HeaderTemplate>

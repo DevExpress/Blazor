@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo.css">
     <link rel="stylesheet" href="_content/DevExpress.Blazor/dx-blazor.css">
 
-    
+
     <environment include="ServerSide">
         <link rel="preload" href="_framework/blazor.server.js" as="script">
     </environment>
@@ -33,15 +33,15 @@
             .mt-2 {
                 margin-top: .5rem
             }
-    
+
             .mt-4 {
                 margin-top: 1.5rem
             }
-    
+
             body {
                 margin: 0;
             }
-    
+
             .loading-font {
                 font-family: "Segoe UI",Roboto,"Helvetica Neue","-apple-system",BlinkMacSystemFont,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
                 font-size: .88rem;
@@ -49,22 +49,22 @@
                 line-height: 1.5;
                 text-align: left;
             }
-    
+
             .loading-items-center {
                 align-items: center;
                 justify-content: center;
                 display: flex;
             }
-    
+
             .loading-border-primary {
                 border-color: #bfbfbf;
             }
-    
+
             .loading {
                 width: 140px;
                 height: 140px;
             }
-    
+
             .loading-caption {
                 font-size: 1.5rem;
                 font-weight: 600;
@@ -73,7 +73,7 @@
                 border-width: 4px;
                 border-style: solid;
             }
-    
+
             .loading-image-wrapper {
                 width: 120px;
                 height: 120px;
@@ -81,14 +81,21 @@
             }
         </style>
     </environment>
-    <script type="text/javascript" src="_content/BlazorDemo/bootstrapper.js" defer></script>
 </head>
 <body>
-    <app>
-        <environment include="ServerSide,Wasm.AspNetCorePrerender">
-            <component type="typeof(BlazorDemo.App)" render-mode="ServerPrerendered"/>
-        </environment>
-        <environment include="Wasm.AspNetCoreHosted">
+    @{
+        var isInternetExplorer = Request.Headers["User-Agent"]
+            .Any(userAgent => userAgent.Contains("MSIE") || userAgent.Contains("Trident"));
+    }
+    @if (isInternetExplorer) {
+        <component type="typeof(BlazorDemo.Shared.IENotSupported)" render-mode="Static" />
+    } else {
+        <script type="text/javascript" src="_content/BlazorDemo/bootstrapper.js" defer></script>
+        <app>
+            <environment include="ServerSide,Wasm.AspNetCorePrerender">
+                <component type="typeof(BlazorDemo.App)" render-mode="ServerPrerendered" />
+            </environment>
+            <environment include="Wasm.AspNetCoreHosted">
                 <div id="applicationLoadingPanel" class="loading-items-center loading-font" style="height: 100vh; width: 100vw; background-color: #fff;">
                     <div class="loading-items-center" style="flex-direction: column">
                         <div class="loading position-relative loading-items-center" style="position: relative">
@@ -100,7 +107,8 @@
                         <div class="loading-sm-text text-muted mt-2" style="color: #a1a1a1">Loading...</div>
                     </div>
                 </div>
-        </environment>
-    </app>
+            </environment>
+        </app>
+    }
 </body>
 </html>

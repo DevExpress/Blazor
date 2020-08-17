@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -15,7 +15,7 @@ namespace BlazorDemo.Data {
 
         public Task Update(T item, IDictionary<string, object> newValue) {
             return TaskFromResult(() => {
-                foreach (var field in newValue.Keys)
+                foreach(var field in newValue.Keys)
                     updateFunc(item, field, newValue[field]);
             });
         }

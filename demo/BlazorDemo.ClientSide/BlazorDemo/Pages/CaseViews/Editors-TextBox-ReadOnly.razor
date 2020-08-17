@@ -4,13 +4,13 @@
     <h2><DemoNavLink Link="TextBox#ReadOnly" />Text Box - Read-Only Mode</h2>
     <p>
         The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextBox">Text Box</a> allows you to display the value, but does not allow users to change it.
-        Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTextBoxBase.ReadOnly">ReadOnly</a> property to <b>true</b> to activate the read-only mode.
+        Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTextEditorBase.ReadOnly">ReadOnly</a> property to <b>true</b> to activate the read-only mode.
     </p>
 </div>
 
 <div class="card demo-card demo-card-shadow">
     <div class="card-header">
-        <DemoToolbar @bind-SelectedSize="SizeMode" Title="The text cannot be changed"/>
+        <DemoToolbar @bind-SelectedSize="SizeMode" Title="Text cannot be changed"/>
     </div>
     <div class="card-body mw-480">
         <DxTextBox @bind-Text="@TextValue" ReadOnly="true" SizeMode="SizeMode"></DxTextBox>
@@ -25,6 +25,5 @@
 </div>
 
 @code {
-    string textValue = "Some text";
-    string TextValue { get => textValue; set { textValue = value; InvokeAsync(StateHasChanged); } }
+    string TextValue { get; set; } = "End users cannot change the Text Box value";
 }

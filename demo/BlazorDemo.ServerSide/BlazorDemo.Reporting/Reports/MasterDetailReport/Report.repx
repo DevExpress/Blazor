@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <XtraReportsLayoutSerializer SerializerVersion="18.2.1.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v18.2, Version=18.2.1.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="MasterDetailReport" DisplayName="Master-Detail Report" Margins="100, 80, 119, 142" PageWidth="850" PageHeight="1100" Version="18.2" DataMember="Suppliers" DataSource="#Ref-0">
   <CalculatedFields>
     <Item1 Ref="2" Name="OrderDetailsTotal" FieldType="Double" Expression="([UnitPrice] * [Quantity]) * (1- [Discount])" DataMember="Suppliers.SuppliersProducts.ProductsOrder_x0020_Details" />

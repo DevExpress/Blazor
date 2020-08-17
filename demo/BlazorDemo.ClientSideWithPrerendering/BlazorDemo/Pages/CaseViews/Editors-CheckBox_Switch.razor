@@ -1,6 +1,6 @@
 ﻿@{
     RenderFragment<string> GetLink = (propName) =>
-    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxCheckBoxBase-1.@propName">@propName</a>;
+    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1.@propName">@propName</a>;
 }
 
 <div class="demo-description" id="SwitchMode">
@@ -13,12 +13,12 @@
 <div class="card demo-card demo-card-sm">
     <ul class="list-group list-group-flush bg-white text-dark" style="border:none">
         <li class="list-group-item" style="background-color:transparent;color:inherit;">
-            <DxCheckBox CheckType="CheckType.Switch" LabelPosition ="@LabelPosition.Left" style="width:100%" Checked="@SilentMode" CheckedChanged="@CheckedChanged" Alignment="CheckBoxContentAlignment.SpaceBetween">Silent Mode</DxCheckBox>
+            <DxCheckBox CheckType="CheckType.Switch" LabelPosition ="@LabelPosition.Left" style="width:100%" Checked="@SilentMode" CheckedChanged="@((bool t) => CheckedChanged(t))" Alignment="CheckBoxContentAlignment.SpaceBetween">Silent Mode</DxCheckBox>
         </li>
-        <li class="list-group-item" style="background-color:transparent;color:inherit;">            
+        <li class="list-group-item" style="background-color:transparent;color:inherit;">
             <DxCheckBox CheckType="CheckType.Switch" LabelPosition="@LabelPosition.Left" style="width:100%" @bind-Checked="@Sound" Enabled="@Enabled" Alignment="CheckBoxContentAlignment.SpaceBetween">Enable sound</DxCheckBox>
         </li>
-        <li class="list-group-item" style="background-color:transparent;color:inherit;">            
+        <li class="list-group-item" style="background-color:transparent;color:inherit;">
             <DxCheckBox CheckType="CheckType.Switch" LabelPosition="@LabelPosition.Left" style="width:100%" @bind-Checked="@Vibration" Enabled="@Enabled" Alignment="CheckBoxContentAlignment.SpaceBetween">Enable vibration</DxCheckBox>
         </li>
     </ul>
@@ -34,7 +34,6 @@
     void CheckedChanged(bool value) {
         SilentMode = value;
         Enabled = !value;
-        StateHasChanged();
     }
 }
 
