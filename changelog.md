@@ -56,7 +56,7 @@ You can now assign [CSS classes](https://docs.devexpress.com/Blazor/DevExpress.B
 
 ### Processing Events
 
-Changed the delegate type from [Action](https://docs.microsoft.com/en-us/dotnet/api/system.action-1) to [EventCallback](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.eventcallback) in several components.
+Changed the delegate type from [Action](https://docs.microsoft.com/en-us/dotnet/api/system.action-1) to [EventCallback](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.eventcallback) in [multiple components](https://supportcenter.devexpress.com/ticket/details/T920147/specific-events-have-changed-their-delegate-type-from-action-to-eventcallback).
 
 ### Resolved Issues
 
