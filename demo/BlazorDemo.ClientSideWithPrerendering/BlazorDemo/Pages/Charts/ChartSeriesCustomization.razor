@@ -18,15 +18,15 @@
                        ValueField="@((WeatherForecast i) => i.TemperatureF)"
                        ArgumentField="@(i => i.Date.Date)"
                        Name="Temperature, F">
-        <DxChartSeriesPoint Symbol="@ChartPointSymbol.Polygon" Color="@System.Drawing.Color.Gray" Size="25" />
+        <DxChartSeriesPoint Symbol="ChartPointSymbol.Polygon" Color="@System.Drawing.Color.Gray" Size="25" />
     </DxChartLineSeries>
-    <DxChartLegend Position="@RelativePosition.Outside" />
+    <DxChartLegend Position="RelativePosition.Outside" />
 </DxChart>
 <CodeSnippet_Charts_SeriesPointCustomization />
 <div class="demo-description" id="PointImage">
     <h2><DemoNavLink Link="ChartSeriesCustomization#PointImage" />Charts - Series Point Image</h2>
     <p>
-        This demo illustrates how to use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesPointImage">DxChartSeriesPointImage</a> component to provide custom images for points.
+        This demo illustrates how to use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesPointImage">DxChartSeriesPointImage</a> component to specify custom images for points.
         To do this, handle the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.CustomizeSeriesPoint">CustomizeSeriesPoint</a> event and use the event argument's <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartSeriesPointImageModel">PointAppearance.Image</a> property to access a point's image settings.
     </p>
 </div>
@@ -41,7 +41,7 @@
             <DxChartSeriesPointImage Width="50" Height="50" />
         </DxChartSeriesPoint>
     </DxChartLineSeries>
-    <DxChartLegend Position="@RelativePosition.Outside" />
+    <DxChartLegend Position="RelativePosition.Outside" />
 </DxChart>
 <CodeSnippet_Charts_SeriesPointImage />
 <div class="demo-description" id="Label">
@@ -59,11 +59,11 @@
                        ValueField="@((WeatherForecast i) => i.TemperatureF)"
                        ArgumentField="@(i => i.Date.Date)"
                        Name="Temperature, F">
-        <DxChartSeriesLabel Position="@RelativePosition.Outside">
+        <DxChartSeriesLabel Position="RelativePosition.Outside">
             <DxChartSeriesLabelConnector Visible="true" Width="3" />
         </DxChartSeriesLabel>
     </DxChartLineSeries>
-    <DxChartLegend Position="@RelativePosition.Outside" />
+    <DxChartLegend Position="RelativePosition.Outside" />
 </DxChart>
 <CodeSnippet_Charts_SeriesLabelCustomization />
 @code {

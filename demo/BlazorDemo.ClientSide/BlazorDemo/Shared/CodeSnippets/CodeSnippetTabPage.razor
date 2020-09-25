@@ -7,6 +7,8 @@
 
     [Parameter] public RenderFragment ChildContent { get; set; }
 
+    [Parameter] public RenderFragment CodeSnippetTemplate { get; set; }
+
     protected override void OnInitialized() {
         base.OnInitialized();
         if (Parent != null) {

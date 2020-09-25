@@ -1,9 +1,5 @@
 ﻿@inherits DemoWithResizableComponent
 @inject ICountryNamesProvider CountryNamesService
-@{
-    RenderFragment<string> GetLink = (propName) =>
-    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode">@propName</a>;
-}
 
 <div class="demo-description" id="IncrementalFiltering">
     <h2><DemoNavLink Link="ComboBox#IncrementalFiltering" />ComboBox - Incremental Filtering</h2>
@@ -11,12 +7,12 @@
         Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.FilteringMode">FilteringMode</a> property to specify whether and how the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2#filter-data">ComboBox</a> filters list items when users type in the edit box.
     </p>
     <ul>
-        <li>@GetLink("Contains") - The ComboBox filters list items that contain the search string and highlights matches.</li>
-        <li>@GetLink("StartsWith") - The ComboBox filters list items that begin with the search string and highlights matches.</li>
-        <li>@GetLink("None") - The ComboBox does not filter list items.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode">Contains</a> - The ComboBox filters list items that contain the search string and highlights matches.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode">StartsWith</a> - The ComboBox filters list items that begin with the search string and highlights matches.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode">None</a> - The ComboBox does not filter list items.</li>
     </ul>
     <p>
-        In this demo, the filter mode is set to @GetLink("Contains").
+        In this demo, the filter mode is set to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode">Contains</a>.
     </p>
 </div>
 
@@ -28,7 +24,7 @@
         <div class="card-body mw-480">
             <DxComboBox Id="ComboBox1"
                         Data="@Data"
-                        FilteringMode="@DataGridFilteringMode.Contains"
+                        FilteringMode="DataGridFilteringMode.Contains"
                         @bind-Value="@Value"
                         @bind-Text="@Text"
                         TextFieldName="@nameof(Country.CountryName)"

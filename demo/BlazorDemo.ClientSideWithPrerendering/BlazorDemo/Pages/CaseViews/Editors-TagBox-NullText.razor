@@ -19,7 +19,7 @@
     <div class="card-body mw-480">
         <DxTagBox NullText="Select countries..."
                   Data="@CountryCity.Countries"
-                  ClearButtonDisplayMode="@DataEditorClearButtonDisplayMode.Auto"
+                  ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
                   TextFieldName="@nameof(Country.CountryName)"
                   @bind-Values="@SelectedCountries"
                   SizeMode="SizeMode"></DxTagBox>

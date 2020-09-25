@@ -1,10 +1,5 @@
 ﻿@inherits DemoWithResizableComponent
 
-@{
-    RenderFragment<string> GetLink = (propName) =>
-    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.@propName">@propName</a>;
-}
-
 <div class="demo-description" id="Overview">
     <h2><DemoNavLink Link="TagBox#Overview" />TagBox - Overview</h2>
     <p>
@@ -15,12 +10,12 @@
     </p>
     <p>
         <ul>
-            <li>@GetLink("Data") - Specifies the data source that populates the editor’s list items.</li>
-            <li>@GetLink("TextFieldName") - Specifies the data source’s field that supplies text for items.</li>
-            <li>@GetLink("Tags") - Specifies the editor’s tags.</li>
-            <li>@GetLink("TagsChanged") - Fires when the tag collection is changed.</li>
-            <li>@GetLink("Values") - Specifies the drop-down list’s selected values.</li>
-            <li>@GetLink("ValuesChanged") - Fires when the selected value collection is changed.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.Data">Data</a> - Specifies the data source that populates the editor’s list items.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.TextFieldName">TextFieldName</a> - Specifies the data source’s field that supplies text for items.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.Tags">Tags</a> - Specifies the editor’s tags.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.TagsChanged">TagsChanged</a> - Fires when the tag collection is changed.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.Values">Values</a> - Specifies the drop-down list’s selected values.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.ValuesChanged">ValuesChanged</a> - Fires when the selected value collection is changed.</li>
         </ul>
     </p>
     <p>
@@ -34,21 +29,15 @@
         <DemoToolbar @bind-SelectedSize="SizeMode" Title="Select items from the drop-down list"/>
     </div>
     <div class="card-body mw-480">
-        <DxTagBox Data="@Persons.DataSource"
+        <DxTagBox Data="@Staff.DataSource"
                   TextFieldName="@nameof(Person.Text)"
-                  @bind-Values="@SelectedPersons"
+                  @bind-Values="@SelectedStaff"
                   SizeMode="SizeMode"></DxTagBox>
     </div>
 </div>
 
-<CodeSnippet_Editor_TagBox></CodeSnippet_Editor_TagBox>
-<!--<div class="code-snippet card demo-card-wide">
-    <CodeSnippetHeader></CodeSnippetHeader>
-    <div class="card-footer text-muted ">
-        <CodeSnippet_Editor_TagBox></CodeSnippet_Editor_TagBox>
-    </div>
-</div>-->
+<CodeSnippet_Editor_TagBox/>
 
 @code {
-    IEnumerable<Person> SelectedPersons { get; set; } = new List<Person>() { Persons.DataSource[0] };
+    IEnumerable<Person> SelectedStaff { get; set; } = new List<Person>() { Staff.DataSource[0] };
 }

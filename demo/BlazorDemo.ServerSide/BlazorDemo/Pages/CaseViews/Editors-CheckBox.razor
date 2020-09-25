@@ -1,9 +1,4 @@
-﻿@{
-    RenderFragment<string> GetLink = (propName) =>
-    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1.@propName">@propName</a>;
-}
-
-<div class="demo-description" id="Overview">
+﻿<div class="demo-description" id="Overview">
     <h2><DemoNavLink Link="CheckBox#Overview" />CheckBox - Overview</h2>
     <p>
         The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1">CheckBox</a> component is a check editor that allows users to select yes/no or true/false. To change the editor’s state (check/uncheck/indeterminate), click it or press <b>SPACE</b> when the editor is focused.
@@ -17,16 +12,16 @@
     <p>
         <ul>
             <li>
-                @GetLink(nameof(DxCheckBox<bool>.Checked)) - Specifies whether the checkbox editor is checked.
+                <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1.Checked">Checked</a> - Specifies whether the checkbox editor is checked.
             </li>
             <li>
-                @GetLink(nameof(DxCheckBox<bool>.CheckedChanged)) - Fires when the editor’s state changes.
+                <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1.CheckedChanged">CheckedChanged</a> - Fires when the editor’s state changes.
             </li>
             <li>
-                @GetLink(nameof(DxCheckBox<bool>.LabelPosition)) - Specifies the position of an editor’s child content relative to the check mark.
+                <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1.LabelPosition">LabelPosition</a> - Specifies the position of an editor’s child content relative to the check mark.
             </li>
             <li>
-                @GetLink(nameof(DxCheckBox<bool>.Enabled)) - Specifies whether the editor is enabled.
+                <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataEditorBase-2.Enabled">Enabled</a> - Specifies whether the editor is enabled.
             </li>
         </ul>
     </p>
@@ -79,9 +74,4 @@
     }
 }
 
-<div class="code-snippet card demo-card-wide">
-    <CodeSnippetHeader></CodeSnippetHeader>
-    <div class="card-footer text-muted ">
-        <CodeSnippet_Editor_CheckBox></CodeSnippet_Editor_CheckBox>
-    </div>
-</div>
+<CodeSnippet_Editor_CheckBox/>

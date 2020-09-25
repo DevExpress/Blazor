@@ -1,0 +1,16 @@
+﻿<div class="code-toolbar">
+    <DxToolbar>
+        <Items>
+            @if(!string.IsNullOrEmpty(DocLink)) {
+                <DxToolbarItem Name="Documentation" Text="Documentation"
+                               BeginGroup="true" IconCssClass="tb-icon tb-icon-doc"
+                               Alignment="ToolbarItemAlignment.Right" RenderStyle="ButtonRenderStyle.Primary"
+                               NavigateUrl="@DocLink" target="_blank" />
+            }
+        </Items>
+    </DxToolbar>
+</div>
+
+@code {
+    [Parameter] public string DocLink { get; set; }
+}

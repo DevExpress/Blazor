@@ -1,5 +1,6 @@
-﻿<CodeSnippetTabbed>
-    <CodeSnippetTabPage Text="Razor">@(@"<DxChart Data=""@GetData()"">
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartArgumentAxis.Type">
+    <CodeSnippetTabPage Text="Razor">@(
+@"<DxChart Data=""@GetData()"">
     <DxChartTitle Text=""@($""The loudness of sounds (continuous value axis)"")"" />
     <DxChartLegend Visible=""false"" />
     <DxChartArgumentAxis Type=""ChartAxisType.Discrete"" />
@@ -12,8 +13,10 @@
     <DxChartArgumentAxis Type=""ChartAxisType.Discrete"" />
     <DxChartValueAxis Type=""ChartAxisType.Logarithmic"" LogarithmBase=""2"" />
     <DxChartLineSeries ArgumentField=""@((DataPoint s) => s.Argument)"" ValueField=""@((DataPoint s) => s.Value)"" />
-</DxChart>")</CodeSnippetTabPage>
-    <CodeSnippetTabPage Text="@("@code")">@(@"@code {
+</DxChart>"
+   )</CodeSnippetTabPage>
+    <CodeSnippetTabPage Text="@("@code")">@(
+@"@code {
     List<DataPoint> GetData() {
         List<DataPoint> result = new List<DataPoint>(9);
         result.Add(new DataPoint(""Whisper"", 0.15));
@@ -33,5 +36,6 @@
         public string Argument { get; set; }
         public double Value { get; set; }
     }
-}")</CodeSnippetTabPage>
+}"
+   )</CodeSnippetTabPage>
 </CodeSnippetTabbed>

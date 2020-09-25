@@ -26,7 +26,7 @@
 
 <div class="card demo-card">
     <div class="card-header border-0 p-2">
-        <DxToolbar>
+        <DxToolbar @key="@ThemeName">
             <Items>
                 <DxToolbarItem GroupName="align" IconCssClass="tb-icon tb-icon-align-left" />
                 <DxToolbarItem GroupName="align" IconCssClass="tb-icon tb-icon-align-center" />
@@ -43,3 +43,7 @@
     </div>
 </div>
 <CodeSnippet_Toolbar_ItemChecking />
+
+@code {
+    [CascadingParameter(Name = "ThemeName")] string ThemeName { get; set; }
+}

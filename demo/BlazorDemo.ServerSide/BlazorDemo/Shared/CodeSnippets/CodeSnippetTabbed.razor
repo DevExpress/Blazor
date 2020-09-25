@@ -3,22 +3,30 @@
 <CascadingValue Value="this">
     @ChildContent
     <div class="code-snippet card demo-card-wide">
-        <div class="code-header card-footer p-0">
+        <div class="code-header card-footer p-0 d-flex">
             <div class="lang-group nav nav-code">
-                @foreach (var tabPage in tabPages) {
+                @foreach(var tabPage in tabPages) {
                     <a @key="@tabPage" href="javascript:;" class="@GetTabCssClass(tabPage)" @onclick="@(() => OnTabClick(tabPage))">@tabPage.Text</a>
                 }
             </div>
+            <CodeSnippetToolbar DocLink=@DocLink />
         </div>
         <div class="card-footer text-muted">
-            @foreach (var tabPage in tabPages.Where(IsActiveTabPage)) {
-                <CodeSnippet @key="@tabPage" ChildContent="@tabPage.ChildContent"></CodeSnippet>
+            @foreach(var tabPage in tabPages.Where(IsActiveTabPage)) {
+                @if(tabPage.CodeSnippetTemplate != null) {
+                    @tabPage.CodeSnippetTemplate
+                }
+                else { 
+                    <CodeSnippet @key="@tabPage">@tabPage.ChildContent</CodeSnippet>
+                }
             }
         </div>
     </div>
 </CascadingValue>
 
 @code {
+    [Parameter] public string DocLink { get; set; }
+
     int activeTabIndex = 0;
 
     int ActiveTabIndex {
@@ -48,7 +56,7 @@
 
     void OnTabClick(CodeSnippetTabPage tabPage) {
         int tabIndex = tabPages.IndexOf(tabPage);
-        if (tabIndex != ActiveTabIndex) {
+        if(tabIndex != ActiveTabIndex) {
             ActiveTabIndex = tabIndex;
         }
     }

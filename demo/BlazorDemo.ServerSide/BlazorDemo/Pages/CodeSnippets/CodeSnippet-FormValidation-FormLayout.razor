@@ -1,5 +1,5 @@
-﻿<CodeSnippet>
-@(@"<EditForm Model=""@starship"" OnValidSubmit=""@HandleValidSubmit"" OnInvalidSubmit=""@HandleInvalidSubmit"" Context=""EditFormContext"">
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/402066/common-concepts/validate-input">
+    <CodeSnippetTabPage Text="Razor">@(@"<EditForm Model=""@starship"" OnValidSubmit=""@HandleValidSubmit"" OnInvalidSubmit=""@HandleInvalidSubmit"" Context=""EditFormContext"">
     <DataAnnotationsValidator />
     <DxFormLayout >
         <DxFormLayoutItem Caption=""Identifier:"" ColSpanMd=""6"" >
@@ -34,7 +34,7 @@
         </DxFormLayoutItem>
         <DxFormLayoutItem ColSpanMd=""12"">
             <Template>
-                <DxButton SubmitFormOnClick=""true"" Text=""Submit"" RenderStyle=""@ButtonRenderStyle.Secondary"" />
+                <DxButton SubmitFormOnClick=""true"" Text=""Submit"" RenderStyle=""ButtonRenderStyle.Secondary"" />
             </Template>
         </DxFormLayoutItem>
     </DxFormLayout>
@@ -51,5 +51,5 @@
     {
         Console.WriteLine(""OnInvalidSubmit"");
     }
-}")
-</CodeSnippet>
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

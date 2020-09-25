@@ -1,7 +1,7 @@
 <Project>
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7"/>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8"/>
     <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="2.2.0" />
 
     <ProjectReference Include="..\BlazorDemo\BlazorDemo.csproj"/>

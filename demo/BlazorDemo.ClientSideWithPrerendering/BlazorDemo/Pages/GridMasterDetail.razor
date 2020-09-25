@@ -48,7 +48,10 @@
         <DxTabs>
             <DxTabPage Text="Sales">
                 <div class="p-3">
-                    <DxDataGrid DataAsync="@GetSalesDataByProductAsync(dataItem)"
+                    <DxDataGrid DataAsync="@(async (cancellationToken) => {
+                            var allSales = await SalesViewerDataProvider.GetSales(cancellationToken);
+                            return allSales.Where(x => x.ProductId == dataItem.Id);
+                            })"
                                 SelectionMode="DataGridSelectionMode.None"
 
                                 LayoutRestoring="@GetDetailsGridLayoutRestoringDelegate(dataItem)"

@@ -25,8 +25,7 @@ namespace BlazorDemo.AspNetCoreHost {
             _hostingEnvironment = hostingEnvironment;
         }
 
-        [HttpPost]
-        [Route("UploadFile")]
+        [HttpPost("[action]")]
         public ActionResult UploadFile(IFormFile myFile) {
 #if DEBUG
             try {
@@ -44,8 +43,7 @@ namespace BlazorDemo.AspNetCoreHost {
             return new EmptyResult();
         }
 
-        [HttpPost]
-        [Route("UploadImage")]
+        [HttpPost("[action]")]
         public ActionResult UploadImage(IFormFile myFile) {
 #if DEBUG
             try {
@@ -72,8 +70,7 @@ namespace BlazorDemo.AspNetCoreHost {
             return new EmptyResult();
         }
 
-        [HttpPost]
-        [Route("UploadChunkFile")]
+        [HttpPost("[action]")]
         public ActionResult UploadChunkFile(IFormFile myFile) {
 #if DEBUG
             string chunkMetadata = Request.Form["chunkMetadata"];

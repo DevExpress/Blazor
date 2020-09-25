@@ -1,10 +1,5 @@
 ﻿@inherits DemoWithResizableComponent
 
-@{
-    RenderFragment<string> GetLink = (propName) =>
-    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.@propName">@propName</a>;
-}
-
 <div class="demo-description" id="DropDownListWidth">
     <h2><DemoNavLink Link="TagBox#DropDownListWidth" />TagBox – Drop-Down List Width</h2>
     <p>
@@ -26,17 +21,17 @@
     </div>
     <div class="card-body">
         <div class="d-inline-flex" style="width: 200px;">
-            <DxTagBox Data="@Persons.DataSource" style="width: 150px;"
+            <DxTagBox Data="@Staff.DataSource" style="width: 150px;"
                       TextFieldName="@nameof(Person.FirstName)"
-                      @bind-Values="@SelectedPersons"
+                      @bind-Values="@SelectedStaff"
                       DropDownWidthMode="DropDownWidthMode"
                       NullText="Short text"
                       SizeMode="SizeMode"></DxTagBox>
         </div>
         <div class="d-inline-flex" style="width: 200px;">
-            <DxTagBox Data="@Persons.DataSource" style="width: 200px;"
+            <DxTagBox Data="@Staff.DataSource" style="width: 200px;"
                       TextFieldName="@nameof(Person.Text)"
-                      @bind-Values="@SelectedPersons1"
+                      @bind-Values="@SelectedStaff1"
                       NullText="Long text"
                       DropDownWidthMode="DropDownWidthMode"
                       SizeMode="SizeMode"></DxTagBox>
@@ -45,7 +40,7 @@
 </div>
 
 <div class="code-snippet card demo-card-wide">
-    <CodeSnippetHeader></CodeSnippetHeader>
+    <CodeSnippetHeader DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2#drop-down-window-width"/>
     <div class="card-footer text-muted">
         <div style="margin: 1em 0 -1em .5em;">
             <label class="d-inline-flex flex-nowrap align-items-center">
@@ -62,8 +57,8 @@
 
 
 @code {
-    IEnumerable<Person> SelectedPersons { get; set; }
-    IEnumerable<Person> SelectedPersons1 { get; set; }
+    IEnumerable<Person> SelectedStaff { get; set; }
+    IEnumerable<Person> SelectedStaff1 { get; set; }
 
     DropDownWidthMode DropDownWidthMode { get; set; } = DropDownWidthMode.ContentOrEditorWidth;
 }

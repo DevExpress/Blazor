@@ -1,5 +1,5 @@
-﻿<CodeSnippet>
-@(@"<DxTreeView @ref=""@treeView""
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView#templates">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxTreeView @ref=""@treeView""
             Data=""@ComponentsData.ComponentSets""
             CssClass=""demo-treeview-template""
             ChildrenExpression=""@(dataItem => ((ComponentSet)dataItem).ComponentSets)"">
@@ -34,5 +34,5 @@
     {
         return String.Format(""demo-icon-{0}"", treeView.GetNodeExpanded(n => n.DataItem == nodeDataItem) ? ""collapse"" : ""expand"");
     }
-}")
-</CodeSnippet>
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

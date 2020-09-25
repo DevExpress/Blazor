@@ -1,5 +1,5 @@
 ﻿<CodeSnippet>
-@(@"<DxListBox Data=""@Persons.DataSource""
+@(@"<DxListBox Data=""@Staff.DataSource""
            TextFieldName=""@nameof(Person.Text)""
            SelectionMode=""ListBoxSelectionMode.Multiple""
            ShowCheckboxes=""@ShowCheckboxes""
@@ -9,6 +9,6 @@
 
 @code {
     bool ShowCheckboxes { get; set; } = true;
-    IEnumerable<Person> Values { get; set; } = Persons.DataSource.Take(2);
+    IEnumerable<Person> Values { get; set; } = Staff.DataSource.Take(2);
 }")
 </CodeSnippet>

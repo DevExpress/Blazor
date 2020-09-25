@@ -5,7 +5,7 @@
     </p>
 </div>
 
-<DxListBox Data="@Persons.DataSource"
+<DxListBox Data="@Staff.DataSource"
            TextFieldName="@nameof(Person.Text)"
            ReadOnly="true"
            Values="@Values"
@@ -16,5 +16,5 @@
 <CodeSnippet_Editors_ListBox_ReadOnly></CodeSnippet_Editors_ListBox_ReadOnly>
 
 @code {
-    IEnumerable<Person> Values => Persons.DataSource.Take(1);
+    IEnumerable<Person> Values => Staff.DataSource.Take(1);
 }

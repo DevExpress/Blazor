@@ -33,7 +33,7 @@
                           Data="@Emails.DataSource"
                           NullText="Select email recipients"
                           AllowCustomTags="true"
-                          ValidateBy="@TagBoxValidateBy.Tags"
+                          ValidateBy="TagBoxValidateBy.Tags"
                           @bind-Tags="@recipients.Data"
                           TData="string"
                           TValue="string"
@@ -41,7 +41,7 @@
                 </DxTagBox>
                 <ValidationMessage For="@(() => recipients.Data)" />
             </p>
-            <DxButton SubmitFormOnClick="true" Text="Submit" RenderStyle="@ButtonRenderStyle.Secondary" />
+            <DxButton SubmitFormOnClick="true" Text="Submit" RenderStyle="ButtonRenderStyle.Secondary" />
         </EditForm>
     </div>
 </div>

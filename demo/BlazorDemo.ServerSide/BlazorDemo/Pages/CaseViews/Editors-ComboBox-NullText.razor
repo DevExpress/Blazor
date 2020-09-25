@@ -18,11 +18,11 @@
     </div>
 
     <div class="card-body mw-480">
-        <DxComboBox NullText="Select country..."
+        <DxComboBox NullText="Select a country..."
                     Data="@CountryCity.Countries"
                     @bind-Value="@CurrentCountry"
                     TextFieldName="@nameof(Country.CountryName)"
-                    ClearButtonDisplayMode="@DataEditorClearButtonDisplayMode.Auto"
+                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
                     SizeMode="SizeMode"></DxComboBox>
     </div>
 </div>

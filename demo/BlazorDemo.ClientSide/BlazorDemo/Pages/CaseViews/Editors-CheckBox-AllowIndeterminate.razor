@@ -1,18 +1,13 @@
-﻿@{
-    RenderFragment<string> GetLink = (propName) =>
-    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1.@propName">@propName</a>;
-}
-
-<div class="demo-description" id="AllowUsersToSetIndeterminateState">
+﻿<div class="demo-description" id="AllowUsersToSetIndeterminateState">
     <h2><DemoNavLink Link="CheckBox#AllowUsersToSetIndeterminateState" />CheckBox - Allow Users to Set Indeterminate State</h2>
     <p>
-        Set the @GetLink(nameof(DxCheckBox<bool>.AllowIndeterminateStateByClick)) property to <b>true</b> to allow users to set the checkbox state to indeterminate.
+        Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1.AllowIndeterminateStateByClick">AllowIndeterminateStateByClick</a> property to <b>true</b> to allow users to set the checkbox state to indeterminate.
     </p>
     <p>
         The state changes each time a user clicks a CheckBox: Indeterminate -> Checked -> Unchecked -> Indeterminate, and so on.
     </p>
     <p>
-        This demo module also illustrates how to add custom content to the CheckBox’s <b>ChildContent</b> property and use the @GetLink(nameof(DxCheckBox<bool>.DisableDefaultRender)) property to hide the default check mark.
+        This demo module also illustrates how to add custom content to the CheckBox’s <b>ChildContent</b> property and use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1.DisableDefaultRender">DisableDefaultRender</a> property to hide the default check mark.
     </p>
 </div>
 
@@ -43,9 +38,4 @@
     int Angle { get { return Value == true ? 0 : Value == false ? 90 : 180; } }
 }
 
-<div class="code-snippet card demo-card-wide">
-    <CodeSnippetHeader></CodeSnippetHeader>
-    <div class="card-footer text-muted ">
-        <CodeSnippet_Editor_CheckBox_AllowIndeterminateState></CodeSnippet_Editor_CheckBox_AllowIndeterminateState>
-    </div>
-</div>
+<CodeSnippet_Editor_CheckBox_AllowIndeterminateState/>

@@ -13,7 +13,7 @@
 
 <div class="row" style="margin-left: -10px; margin-right: -10px; max-width: 1120px">
     <div class="col-12 col-md-6" style="padding-left: 10px; padding-right: 10px;">
-        <DxListBox Data="@Persons.DataSource"
+        <DxListBox Data="@Staff.DataSource"
                    TextFieldName="@nameof(Person.Text)"
                    SelectionMode="ListBoxSelectionMode.Multiple"
                    ShowCheckboxes="@ShowCheckboxes"
@@ -37,7 +37,7 @@
 </div>
 
 <div class="code-snippet card demo-card-wide">
-    <CodeSnippetHeader></CodeSnippetHeader>
+    <CodeSnippetHeader DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2#item-selection"/>
     <div class="card-footer text-muted">
         <div class="custom-control custom-checkbox" style="margin: 1em 0 -1em .5em">
             <input type="checkbox" class="custom-control-input" id="ShowCheckboxes" checked="@ShowCheckboxes" @bind-value="@ShowCheckboxes" />
@@ -49,5 +49,5 @@
 
 @code {
     bool ShowCheckboxes { get; set; } = true;
-    IEnumerable<Person> Values { get; set; } = Persons.DataSource.Take(2);
+    IEnumerable<Person> Values { get; set; } = Staff.DataSource.Take(2);
 }

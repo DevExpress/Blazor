@@ -8,13 +8,13 @@
         To do this, use the following settings available through the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4">DxChartCommonSeries</a> object:
     </p>
     <ul>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4.NameField">NameField</a> – A data field that provides series names.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4.NameField">NameField</a> – A data field that specifies series names.</li>
         <li>
             <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4.AggregationMethod">AggregationMethod</a> – A data aggregation method. You can use any function with the Func&lt;IEnumerable&lt;TValue&gt;, TValue&gt; signature as a value of this setting.
             A static <b>Enumerable.Sum</b> method is used in this demo.
         </li>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4.ArgumentField">ArgumentField</a> – A data field that provides series arguments.</li>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4.ValueField">ValueField</a> – Specifies a data field that provides series values.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4.ArgumentField">ArgumentField</a> – A data field that specifies series arguments.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4.ValueField">ValueField</a> – Specifies a data field that specifies series values.</li>
     </ul>
     <p>
         You can also use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCommonSeries-4.SeriesTemplate">SeriesTemplate</a> property to specify different templates for specific series types: <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartBarSeries-3">DxChartBarSeries</a>, <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartLineSeries-3">DxChartLineSeries</a>, and other type-specific series objects.
@@ -29,7 +29,7 @@
          CssClass="mw-1100">
     <DxChartTitle Text="Sales amount, $" />
     <DxChartCommonSeries
-            AggregationMethod="@Enumerable.Sum"
+            AggregationMethod="Enumerable.Sum"
             NameField="@((SaleInfo s) => s.Date.Year)"
             ArgumentField="@((SaleInfo s) => s.City)"
             ValueField="@((SaleInfo s) => s.Amount)">

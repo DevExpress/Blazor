@@ -1,8 +1,5 @@
-﻿<div class="code-snippet card demo-card-wide mw-1100">
-    <CodeSnippetHeader></CodeSnippetHeader>
-    <div class="card-footer text-muted">
-        <CodeSnippet>
-@(@"<DxDataGrid @ref=""grid""
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#toolbar">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxDataGrid @ref=""grid""
             Data=""@Data""
             ShowFilterRow=""@ShowFilterRow""
             @bind-SingleSelectedDataRow=""@SelectedRow""
@@ -81,7 +78,5 @@
     void OnShowFilterRow(ToolbarItemClickEventArgs e) {
         ShowFilterRow = !ShowFilterRow;
     }
-}")
-        </CodeSnippet>
-    </div>
-</div>
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

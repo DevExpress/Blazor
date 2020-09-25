@@ -1,13 +1,13 @@
-﻿<CodeSnippetTabbed>
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2">
 <CodeSnippetTabPage Text="Razor">
-@(@"<DxTagBox Data=""@Persons.DataSource""
+@(@"<DxTagBox Data=""@Staff.DataSource""
           TextFieldName=""@nameof(Person.Text)""
-          @bind-Values=""@SelectedPersons""
+          @bind-Values=""@SelectedStaff""
           SizeMode=""@SizeMode"">
 </DxTagBox>
 
 @code {
-    IEnumerable<Person> SelectedPersons { get; set; } = new List<Person>() { Persons.DataSource[0] };
+    IEnumerable<Person> SelectedStaff { get; set; } = new List<Person>() { Staff.DataSource[0] };
     SizeMode SizeMode { get; set; }
 }")
 </CodeSnippetTabPage>
@@ -22,7 +22,9 @@
     public string Text => $""{FirstName} {LastName} ({Department} Dept.)"";
 }
 
-public static class Persons {
+public enum Department { Motors, Electronics, Software }
+
+public static class Staff {
     private static readonly Lazy<List<Person>> dataSource = new Lazy<List<Person>>(() => {
         var dataSource = new List<Person>() {
             new Person() { Id= 0 , FirstName=""John"", LastName=""Heart"", Department=Department.Electronics },

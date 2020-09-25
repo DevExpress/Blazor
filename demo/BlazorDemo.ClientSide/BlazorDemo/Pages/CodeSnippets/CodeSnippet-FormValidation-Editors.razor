@@ -1,4 +1,4 @@
-﻿<CodeSnippetTabbed>
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/402066/common-concepts/validate-input">
 <CodeSnippetTabPage Text="Razor">
 @(@"<EditForm Model=""@starship"" OnValidSubmit=""@HandleValidSubmit"" OnInvalidSubmit=""@HandleInvalidSubmit"">
     <DataAnnotationsValidator />
@@ -31,7 +31,7 @@
             <ValidationMessage For=""@(() => starship.ProductionDate)"" />
         </div>
         <div class=""col-md-12"">
-            <DxButton SubmitFormOnClick=""true"" Text=""Submit"" RenderStyle=""@ButtonRenderStyle.Secondary"" />
+            <DxButton SubmitFormOnClick=""true"" Text=""Submit"" RenderStyle=""ButtonRenderStyle.Secondary"" />
         </div>
     </div>
 </EditForm>

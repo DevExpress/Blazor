@@ -9,7 +9,7 @@
 
 <div class="card demo-card">
     <div class="card-header border-0 p-2">
-        <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
+        <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" @key="@ThemeName">
             <Items>
                 <DxToolbarItem>
                     <Template>
@@ -31,3 +31,7 @@
 </div>
 
 <CodeSnippet_Toolbar_Templates />
+
+@code {
+    [CascadingParameter(Name = "ThemeName")] string ThemeName { get; set; }
+}

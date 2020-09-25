@@ -385,8 +385,8 @@ app {
     width: 100%;
 }
 
-.card.demo-card.demo-card-shadow .card-body,
-.card.demo-card-wide.demo-card-shadow .card-body {
+.card.demo-card.demo-card-shadow > .card-body,
+.card.demo-card-wide.demo-card-shadow > .card-body {
     padding: 1.5rem;
 }
 
@@ -502,6 +502,12 @@ app {
 }
 .code-header-tabs .nav-tabs {
     border-bottom-color: #d6d5d5;
+}
+
+.code-header .code-toolbar {
+    flex: 1;
+    display: flex;
+    align-items: center;
 }
 
 .hljs {
@@ -1022,6 +1028,12 @@ a.helplink {
     height: 16px;
     mask-image: url("../images/Alert.svg");
     -webkit-mask-image: url("../images/Alert.svg");
+}
+.tb-icon-doc {
+    width: 16px;
+    height: 16px;
+    mask-image: url("../images/Document.svg");
+    -webkit-mask-image: url("../images/Document.svg");
 }
 .mobile-view, .mobile-view-horizontal,
 .grid-toolbar-new, .grid-toolbar-edit,

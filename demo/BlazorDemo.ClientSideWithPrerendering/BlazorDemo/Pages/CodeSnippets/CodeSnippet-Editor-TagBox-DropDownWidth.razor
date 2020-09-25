@@ -1,14 +1,14 @@
 ﻿<CodeSnippet>
-@(@"<DxTagBox Data=""@Persons.DataSource""
+@(@"<DxTagBox Data=""@Staff.DataSource""
           TextFieldName=""@nameof(Person.Text)""
-          @bind-Values=""@SelectedPersons""
+          @bind-Values=""@SelectedStaff""
           NullText=""Long text""
           DropDownWidthMode=""DropDownWidthMode""
           SizeMode=""SizeMode"">
 </DxTagBox>
 
 @code {
-    IEnumerable<Person> SelectedPersons { get; set; }
+    IEnumerable<Person> SelectedStaff { get; set; }
     DropDownWidthMode DropDownWidthMode { get; set; } = DropDownWidthMode.ContentOrEditorWidth;
 }")
 </CodeSnippet>

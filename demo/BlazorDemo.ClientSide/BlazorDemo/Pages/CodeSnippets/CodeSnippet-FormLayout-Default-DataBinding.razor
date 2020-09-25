@@ -1,5 +1,5 @@
-﻿<CodeSnippet>
-@(@"<DxFormLayout Data=""@editFormData""
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayout#bind-to-data">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxFormLayout Data=""@editFormData""
               ItemUpdating=""@((pair) => OnItemUpdating(pair.Key, pair.Value))"">
     <DxFormLayoutItem Field=""@nameof(FormDataItem.Name)"" Caption=""Contact Name:"" ColSpanMd=""6"" />
     <DxFormLayoutItem Field=""@nameof(FormDataItem.BirthDate)"" Caption=""Birth Date:"" ColSpanMd=""6"" />
@@ -37,5 +37,5 @@
             editFormData.OnVacation = (bool)newValue;
         }
     }
-}")
-</CodeSnippet>
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

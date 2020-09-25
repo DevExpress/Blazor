@@ -46,9 +46,9 @@
 
     <DxDataGridColumn Field="@nameof(WeatherForecast.Forecast)" Caption="Forecast"></DxDataGridColumn>
 
-    <DxDataGridSpinEditColumn Field="@nameof(WeatherForecast.TemperatureC)" Caption="@("Temp. (\x2103)")" TextAlignment="@DataGridTextAlign.Left"></DxDataGridSpinEditColumn>
+    <DxDataGridSpinEditColumn Field="@nameof(WeatherForecast.TemperatureC)" Caption="@("Temp. (\x2103)")" TextAlignment="DataGridTextAlign.Left"></DxDataGridSpinEditColumn>
 
-    <DxDataGridComboBoxColumn Field="@nameof(WeatherForecast.CloudCover)" Caption="Cloud Cover" DataAsync="@ForecastService.GetCloudCoverAsync" TextAlignment="@DataGridTextAlign.Left"></DxDataGridComboBoxColumn>
+    <DxDataGridComboBoxColumn Field="@nameof(WeatherForecast.CloudCover)" Caption="Cloud Cover" DataAsync="@ForecastService.GetCloudCoverAsync" TextAlignment="DataGridTextAlign.Left"></DxDataGridComboBoxColumn>
 
     <DxDataGridCheckBoxColumn Field="@nameof(WeatherForecast.Precipitation)" Caption="Precipitation"></DxDataGridCheckBoxColumn>
 </DxDataGrid>

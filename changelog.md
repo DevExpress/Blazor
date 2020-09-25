@@ -2,6 +2,47 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 20.1.7
+
+### Support for .NET Core 3.1.8 
+In this version, we added support for [.NET Core 3.1.8](https://devblogs.microsoft.com/dotnet/net-core-september-2020/).
+
+### DevExpress Project Templates
+You can now create Blazor Server and WebAssembly apps based on DevExpress project templates that include:
+
+* References to the DevExpress Blazor NuGet package and DevExpress resources
+* The DevExpress Blazing Berry theme
+* Sidebar navigation based on the TreeView component
+* The Data Grid component
+
+[Documentation](https://docs.devexpress.com/Blazor/401057/getting-started/create-an-application#devexpress-templates)
+
+### Data Grid Enhancements
+You can customize text displayed in the pop-up Edit Form's header. ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PopupEditFormHeaderText))
+
+### Data Editors Enhancements
+
+* Date Edit
+    * The new [CustomDisabledDate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.CustomDisabledDate) event allows you to disable selection of specific dates in the component’s calendar. ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.CustomDisabledDate) | [Demo](https://demos.devexpress.com/blazor/DateEdit#DisabledDates))
+    * You can now specify a custom null value for the Date Edit. This value is applied to the editor each time a user clears the Date Edit's content. ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.NullValue))
+* Calendar - The new [VisibleDateChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1.VisibleDateChanged) event allows you to handle changes to the month and year in the component.
+* ComboBox, TagBox, ListBox - You can now specify custom column captions for multi-column editors. ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.Captio) | [Demo](https://demos.devexpress.com/blazor/ComboBox#MultipleColumns))
+* Disabled state. The new [Enabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataEditorBase-2.Enabled) property allows you to disable a data editor. The disabled editor does not respond to user interactions and users cannot change the editor's value/state. 
+
+### Form Layout Enhancements
+* Disabled state for DevExpress editors in Form Layout items. ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutItem.Enabled))
+* Read-only mode for DevExpress editors in Form Layout items. ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutItem.ReadOnly))
+
+### Toolbar Enhancements
+You can now control whether the Toolbar automatically closes the sub-menu after a user clicks this menu’s item. ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.CloseMenuOnClick))
+
+### Resolved Issues
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=20.1.7&endBuildName=&buildsMode=Single&hasPlatformsWithProducts=true) for a complete list of issues resolved in v20.1.7
+
+### Breaking Change
+[Date Edit - The DateEdit_AdaptiveDatePickerNotification localization string has been replaced with the DateEdit_DisabledDateNotification and DateEdit_OutOfRangeNotification strings](https://supportcenter.devexpress.com/ticket/details/t933584/)
+
+
 # 20.1.6
 
 ### Support for .NET Core 3.1.7 and Blazor WebAssembly 3.2.1
