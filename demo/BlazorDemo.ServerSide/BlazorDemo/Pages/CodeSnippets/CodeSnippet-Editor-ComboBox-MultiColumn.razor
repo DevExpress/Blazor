@@ -1,16 +1,16 @@
-﻿<CodeSnippetTabbed>
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2#multiple-columns">
 <CodeSnippetTabPage Text="Razor">
-@(@"<DxComboBox Data=""@Persons.DataSource""
+@(@"<DxComboBox Data=""@Staff.DataSource""
             @bind-Value=""@SelectedPerson""
-            FilteringMode=""@DataGridFilteringMode.Contains""
+            FilteringMode=""DataGridFilteringMode.Contains""
             EditFormat =""{1} {2}"">
     <DxListEditorColumn FieldName=""Id"" Width=""50px"" />
-    <DxListEditorColumn FieldName=""FirstName"" />
-    <DxListEditorColumn FieldName=""LastName"" />
+    <DxListEditorColumn FieldName=""FirstName"" Caption=""Name""/>
+    <DxListEditorColumn FieldName=""LastName"" Caption=""Surname""/>
 </DxComboBox>
 
 @code {
-    Person SelectedPerson { get; set; } = Persons.DataSource[0];
+    Person SelectedPerson { get; set; } = Staff.DataSource[0];
 }")
 </CodeSnippetTabPage>
 <CodeSnippetTabPage Text="Business Object">
@@ -24,7 +24,9 @@
     public string Text => $""{FirstName} {LastName} ({Department} Dept.)"";
 }
 
-public static class Persons {
+public enum Department { Motors, Electronics, Software }
+
+public static class Staff {
     private static readonly Lazy<List<Person>> dataSource = new Lazy<List<Person>>(() => {
         var dataSource = new List<Person>() {
             new Person() { Id= 0 , FirstName=""John"", LastName=""Heart"", Department=Department.Electronics },

@@ -1,6 +1,8 @@
-﻿<CodeSnippetTabbed>
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload">
 <CodeSnippetTabPage Text="Razor">
-@(@"<div id=""overviewDemoDropZone"" class=""card custom-drop-zone jumbotron"">
+@(@"@inject NavigationManager NavigationManager
+
+<div id=""overviewDemoDropZone"" class=""card custom-drop-zone jumbotron"">
     <svg class=""drop-file-icon mb-3"" role=""img"" style=""width: 42px; height: 42px;""><use href=""#drop-file-icon""></use></svg>
     <span>Drag and Drop File Here</span><span class=""m-1"">or</span>
     <button id=""overviewDemoSelectButton"" class=""btn border-primary btn-primary m-1"">Select File</button>
@@ -33,7 +35,7 @@ public class UploadController : ControllerBase {
         _hostingEnvironment = hostingEnvironment;
     }
 
-    [HttpPost]
+    [HttpPost(""[action]"")]
     public ActionResult UploadFile(IFormFile myFile) {
         try {
             var path = Path.Combine(_hostingEnvironment.WebRootPath, ""uploads"");

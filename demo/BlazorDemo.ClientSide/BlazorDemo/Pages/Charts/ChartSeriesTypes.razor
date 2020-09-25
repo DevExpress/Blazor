@@ -11,9 +11,9 @@
         </div>
         <div class="card-body">
             <DxChart Data="@ChartsData">
-                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@(s => s.City)" ValueField="@(s => s.Amount)"  AggregationMethod="@Enumerable.Sum" SeriesType="@LineSeriesType.Value">
+                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@(s => s.City)" ValueField="@(s => s.Amount)"  AggregationMethod="Enumerable.Sum" SeriesType="LineSeriesType.Value">
                 </DxChartCommonSeries>
-                <DxChartLegend Position="@RelativePosition.Outside" HorizontalAlignment="@HorizontalAlignment.Right" />
+                <DxChartLegend Position="RelativePosition.Outside" HorizontalAlignment="HorizontalAlignment.Right" />
             </DxChart>
         </div>
         <div class="card-body">
@@ -32,9 +32,9 @@
         </div>
         <div class="card-body">
             <DxChart Data="@ChartsData">
-                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@(s => s.City)" ValueField="@(s => s.Amount)" AggregationMethod="@Enumerable.Sum" SeriesType="@AreaSeriesType.Value">
+                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@(s => s.City)" ValueField="@(s => s.Amount)" AggregationMethod="Enumerable.Sum" SeriesType="AreaSeriesType.Value">
                 </DxChartCommonSeries>
-                <DxChartLegend Position="@RelativePosition.Outside" HorizontalAlignment="@HorizontalAlignment.Right" />
+                <DxChartLegend Position="RelativePosition.Outside" HorizontalAlignment="HorizontalAlignment.Right" />
             </DxChart>
         </div>
         <div class="card-body">
@@ -55,9 +55,9 @@
         </div>
         <div class="card-body">
             <DxChart Data="@ChartsData">
-                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@(s => s.City)" ValueField="@(s => s.Amount)" AggregationMethod="@Enumerable.Sum" SeriesType="@BarSeriesType.Value">
+                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)" ArgumentField="@(s => s.City)" ValueField="@(s => s.Amount)" AggregationMethod="Enumerable.Sum" SeriesType="BarSeriesType.Value">
                 </DxChartCommonSeries>
-                <DxChartLegend Position="@RelativePosition.Outside" HorizontalAlignment="@HorizontalAlignment.Right" />
+                <DxChartLegend Position="RelativePosition.Outside" HorizontalAlignment="HorizontalAlignment.Right" />
             </DxChart>
         </div>
         <div class="card-body">
@@ -77,16 +77,16 @@
             <DxChart Data="@ChartsData">
                 <DxChartCommonSeries NameField="@((SaleInfo s) => s.Country)" Filter="@(s => s.Region == "North America")"
                                      ArgumentField="@(s => s.Date.DayOfWeek.ToString())"
-                                     ValueField="@(s => s.Date.Year)" SeriesType="@ChartSeriesType.Bubble" >
+                                     ValueField="@(s => s.Date.Year)" SeriesType="ChartSeriesType.Bubble" >
                     <SeriesTemplate>
                         <DxChartBubbleSeries
                                              Settings="@context"
                                              SizeField="@(s => s.Amount)"
                                              Color="@(context.GroupKey == "Canada" ? Color.FromArgb(252, 58, 48) : Color.FromArgb(208, 208, 208))"
-                                             AggregationMethod="@Enumerable.Max" />
+                                             AggregationMethod="Enumerable.Max" />
                     </SeriesTemplate>
                 </DxChartCommonSeries>
-                <DxChartLegend Position="@RelativePosition.Outside" HorizontalAlignment="@HorizontalAlignment.Right" />
+                <DxChartLegend Position="RelativePosition.Outside" HorizontalAlignment="HorizontalAlignment.Right" />
                 <DxChartValueAxis Type="ChartAxisType.Discrete">
                     <DxChartAxisLabel Format="ChartAxisLabelFormat.Decimal"></DxChartAxisLabel>
                     @*<DxChartAxisLabel Format="Format.Decimal"></DxChartAxisLabel>*@

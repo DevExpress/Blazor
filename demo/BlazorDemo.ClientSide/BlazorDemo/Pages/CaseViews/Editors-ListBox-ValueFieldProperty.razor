@@ -17,7 +17,7 @@
 
 <div class="row" style="margin-left: -10px; margin-right: -10px; max-width: 1120px">
     <div class="col-12 col-md-6" style="padding-left: 10px; padding-right: 10px;">
-        <DxListBox Data="@Persons.DataSource" style="height: 232px;"
+        <DxListBox Data="@Staff.DataSource" style="height: 232px;"
                    TextFieldName="@nameof(Person.Text)"
                    ValueFieldName="@nameof(Person.Id)"
                    SelectionMode="ListBoxSelectionMode.Multiple"
@@ -45,6 +45,6 @@
 <CodeSnippet_Editors_ListBox_ValueFieldProperty></CodeSnippet_Editors_ListBox_ValueFieldProperty>
 
 @code {
-    IEnumerable<int> Values { get; set; } = Persons.DataSource.Take(2).Select(t => t.Id);
+    IEnumerable<int> Values { get; set; } = Staff.DataSource.Take(2).Select(t => t.Id);
 }
 

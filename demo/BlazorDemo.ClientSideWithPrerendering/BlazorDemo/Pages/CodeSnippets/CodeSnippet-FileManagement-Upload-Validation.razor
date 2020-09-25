@@ -1,6 +1,8 @@
-﻿<CodeSnippetTabbed>
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload#validation">
 <CodeSnippetTabPage Text="Razor">
-@(@"<DxUpload Name=""myFile"" UploadUrl=""@GetUploadUrl(""api/Upload/UploadImage/"")""
+@(@"@inject NavigationManager NavigationManager
+
+<DxUpload Name=""myFile"" UploadUrl=""@GetUploadUrl(""api/Upload/UploadImage/"")""
     AllowedFileExtensions=""@(new List<string> { "".jpg"", "".jpeg"", "".gif"", "".png"" })"" MaxFileSize=""4000000"">
 </DxUpload>
 
@@ -19,7 +21,7 @@ public class UploadController : ControllerBase {
         _hostingEnvironment = hostingEnvironment;
     }
 
-    [HttpPost]
+    [HttpPost(""[action]"")]
     public ActionResult UploadImage(IFormFile myFile) {
         try {
             string[] imageExtensions = { "".jpg"", "".jpeg"", "".gif"", "".png"" };

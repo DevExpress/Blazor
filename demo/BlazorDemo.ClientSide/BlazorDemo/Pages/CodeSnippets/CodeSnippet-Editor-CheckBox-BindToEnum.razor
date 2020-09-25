@@ -1,5 +1,5 @@
-﻿<CodeSnippet>
-@(@"<DxCheckBox @bind-Checked=""@Value"" AllowIndeterminateStateByClick
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1#bind-to-custom-data-types">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxCheckBox @bind-Checked=""@Value"" AllowIndeterminateStateByClick
             ValueChecked=""@Opinion.Yes"" ValueUnchecked=""@Opinion.No"" ValueIndeterminate=""@Opinion.Abstain"">@GetText()</DxCheckBox>
 <DxCheckBox Checked=""Opinion.Yes"" Enabled=""false""
             ValueChecked=""@Opinion.Yes"" ValueUnchecked=""@Opinion.No"" ValueIndeterminate=""@Opinion.Abstain"">Disabled Checked</DxCheckBox>
@@ -17,5 +17,5 @@
         if(Value == Opinion.No) return ""Unchecked"";
         return ""Indeterminate"";
     }
-}")
-</CodeSnippet>
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

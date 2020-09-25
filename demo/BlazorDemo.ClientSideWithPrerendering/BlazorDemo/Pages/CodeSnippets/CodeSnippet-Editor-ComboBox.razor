@@ -1,13 +1,13 @@
-﻿<CodeSnippetTabbed>
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2">
 <CodeSnippetTabPage Text="Razor">
-@(@"<DxComboBox Data=""@Persons.DataSource""
+@(@"<DxComboBox Data=""@Staff.DataSource""
             TextFieldName=""@nameof(Person.Text)""
             @bind-Value=""@SelectedPerson""
             SizeMode=""@SizeMode"">
 </DxComboBox>
 
 @code {
-    Person SelectedPerson { get; set; } = Persons.DataSource[0];
+    Person SelectedPerson { get; set; } = Staff.DataSource[0];
     SizeMode SizeMode { get; set; }
 }")
 </CodeSnippetTabPage>
@@ -22,7 +22,9 @@
     public string Text => $""{FirstName} {LastName} ({Department} Dept.)"";
 }
 
-public static class Persons {
+public enum Department { Motors, Electronics, Software }
+
+public static class Staff {
     private static readonly Lazy<List<Person>> dataSource = new Lazy<List<Person>>(() => {
         var dataSource = new List<Person>() {
             new Person() { Id= 0 , FirstName=""John"", LastName=""Heart"", Department=Department.Electronics },

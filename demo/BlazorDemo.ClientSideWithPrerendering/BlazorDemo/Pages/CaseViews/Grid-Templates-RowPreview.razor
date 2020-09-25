@@ -13,14 +13,14 @@
 }
 else {
     <DxDataGrid Data="@DataSource"
-                VerticalScrollBarMode="@ScrollBarMode.Auto"
+                VerticalScrollBarMode="ScrollBarMode.Auto"
                 VerticalScrollableHeight="400"
                 ShowPager="false"
                 ShowFilterRow="true"
                 CssClass="mw-1100">
 
         <Columns>
-            <DxDataGridColumn Field="@nameof(Employee.FirstName)" SortOrder="@DataGridColumnSortOrder.Ascending"></DxDataGridColumn>
+            <DxDataGridColumn Field="@nameof(Employee.FirstName)" SortOrder="DataGridColumnSortOrder.Ascending"></DxDataGridColumn>
             <DxDataGridColumn Field="@nameof(Employee.LastName)"></DxDataGridColumn>
             <DxDataGridColumn Field="@nameof(Employee.Position)" Caption="Position" EditorVisible="@true"></DxDataGridColumn>
             <DxDataGridDateEditColumn Field="@nameof(Employee.BirthDate)" DisplayFormat="D" Caption="Birth Date" EditorVisible="@true"></DxDataGridDateEditColumn>

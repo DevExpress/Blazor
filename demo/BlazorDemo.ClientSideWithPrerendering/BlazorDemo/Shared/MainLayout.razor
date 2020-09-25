@@ -14,7 +14,7 @@
 
 <nav class="logo-container p-0 navbar navbar-dark">
     <LayoutToggleButton @bind-StateCssClass="@LayoutStateCssClass" />
-    <NavLink class="logo-image text-body" href="/"/>
+    <NavLink class="logo-image text-body" href="" Match="NavLinkMatch.All"/>
     <div class="demo-btn-container d-flex">
         <a class="download-btn navbar-toggler d-inline-block bg-primary text-white border-0" href="https://nuget.devexpress.com/" target="_blank" title="Obtain your NuGet feed URL">
             <span class="demo-download-icon"></span>
@@ -34,11 +34,13 @@
     </div>
     <div @ref="@mainRef" class="main">
         <div class="content px-4">
-            @Body
+            <CascadingValue Value="@ThemeName" Name="ThemeName">
+                @Body
+            </CascadingValue>
         </div>
         <DemoFooter />
     </div>
-    <ThemeSwitcher @bind-Shown="@ThemeSwitcherShown"/>
+    <ThemeSwitcher @bind-Shown="@ThemeSwitcherShown" @bind-ThemeName="@ThemeName"/>
 </div>
 <DemoFooter />
 @code {
@@ -48,6 +50,7 @@
     [Inject] NavigationManager NavigationManager { get; set; }
     [Inject] IJSRuntime JsRuntime { get; set; }
 
+    string ThemeName { get; set; }
 
     protected override void OnInitialized()
     {

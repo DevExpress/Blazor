@@ -1,11 +1,6 @@
-﻿@{
-    RenderFragment<string> GetLink = (propName) =>
-    @<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1.@propName">@propName</a>;
-}
-
-<div class="demo-description" id="Alignment">
+﻿<div class="demo-description" id="Alignment">
     <h2><DemoNavLink Link="CheckBox#Alignment" />CheckBox - Alignment</h2>
-    <p>Use the CheckBox’s @GetLink(nameof(DxCheckBox<bool>.Alignment)) and @GetLink(nameof(DxCheckBox<bool>.LabelPosition)) properties to define a component’s input and label positions.
+    <p>Use the CheckBox’s <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1.Alignment">Alignment</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1.LabelPosition">LabelPosition</a> properties to define a component’s input and label positions.
     Note that a CheckBox’s input and label are only aligned in the component's root element.
     This element behaves as a standard <code>block</code> container (or <code>flex</code> in the case of <i>SpaceBetween</i> and <i>SpaceAround</i> alignment variants) regarding outer styles a user applies.</p>
 
@@ -38,7 +33,7 @@
             <div class="col pt-2 pb-2" style="font-size: 13px; flex-basis: 149px; flex-grow: 0">
                 <div class="font-weight-bold mb-2">Alignment</div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="alignment" id="align-left" value="Align left" @onclick="@(() => { Alignment = CheckBoxContentAlignment.Left; })" checked />
+                    <input class="form-check-input" type="radio" name="alignment" id="align-left" value="Align left" @onclick="@(() => { Alignment = CheckBoxContentAlignment.Left; })" checked="" />
                     <label class="form-check-label" for="align-left">Aligned Left</label>
                 </div>
                 <div class="form-check">
@@ -60,7 +55,7 @@
 
                 <div class="font-weight-bold mt-2 mb-2">Label Position</div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="label-position" id="label-right" value="Label right" @onclick="@(() => { LabelPosition = LabelPosition.Right; })" checked />
+                    <input class="form-check-input" type="radio" name="label-position" id="label-right" value="Label right" @onclick="@(() => { LabelPosition = LabelPosition.Right; })" checked="" />
                     <label class="form-check-label" for="label-right">Label right</label>
                 </div>
                 <div class="form-check">

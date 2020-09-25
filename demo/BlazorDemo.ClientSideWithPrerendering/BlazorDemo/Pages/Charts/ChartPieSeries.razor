@@ -9,8 +9,8 @@
 <DxChart Data="@SalesData"
          CssClass="mw-1100">
     <DxChartTitle Text="Total Sales" />
-    <DxChartLegend VerticalAlignment="@VerticalEdge.Bottom" Position="@RelativePosition.Outside" />
-    <DxChartPieSeries ValueField="@((SaleInfo i) => i.Amount)" ArgumentField="@(i => i.City)" AggregationMethod="@Enumerable.Sum">
+    <DxChartLegend VerticalAlignment="VerticalEdge.Bottom" Position="RelativePosition.Outside" />
+    <DxChartPieSeries ValueField="@((SaleInfo i) => i.Amount)" ArgumentField="@(i => i.City)" AggregationMethod="Enumerable.Sum">
         <DxChartSeriesLabel Visible="true" />
     </DxChartPieSeries>
 </DxChart>
@@ -25,8 +25,8 @@
 <DxChart Data="@SalesData"
          CssClass="mw-1100">
     <DxChartTitle Text="Total Sales" />
-    <DxChartLegend AllowToggleSeries="true" VerticalAlignment="@VerticalEdge.Bottom" Position="@RelativePosition.Outside" />
-    <DxChartDonutSeries ValueField="@((SaleInfo i) => i.Amount)" ArgumentField="@(i => i.City)" AggregationMethod="@Enumerable.Sum">
+    <DxChartLegend AllowToggleSeries="true" VerticalAlignment="VerticalEdge.Bottom" Position="RelativePosition.Outside" />
+    <DxChartDonutSeries ValueField="@((SaleInfo i) => i.Amount)" ArgumentField="@(i => i.City)" AggregationMethod="Enumerable.Sum">
         <DxChartSeriesLabel Visible="true" />
     </DxChartDonutSeries>
 </DxChart>

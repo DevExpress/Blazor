@@ -8,7 +8,7 @@
         This demo shows the performance of the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPivotGrid-1">Pivot Grid</a> when it is bound to a dataset that contains a million rows. Experiment with navigating between the pages and sorting the data to experience the responsiveness of the pivot grid in this situation. The pager is enabled by setting the Pivot Grid's <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPivotGrid.ShowPager">ShowPager</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPivotGrid.PageSize">PageSize</a> properties.
     </p>
     <p>
-        In this example, Entity Framework Core (version 3.0) provides the Pivot Grid with an IQueryable&lt;T&gt; source.
+        In this example, Entity Framework Core (version 3.0) supplies the Pivot Grid with an IQueryable&lt;T&gt; source.
     </p>
 </div>
 @if (largeDataSource == null)
@@ -21,22 +21,17 @@ else
                  ShowPager="true"
                  PageSize="10"
                  CssClass="mw-1100">
-        <DxPivotGridField Field="@nameof(Sale.StoreName)" Caption="Store" Area="@PivotGridFieldArea.Row" />
-        <DxPivotGridField Field="@nameof(Sale.DateKey)" GroupInterval="@PivotGridGroupInterval.Year" Caption="Year" Area="@PivotGridFieldArea.Column" />
-        <DxPivotGridField Field="@nameof(Sale.SalesAmount)" Caption="Amount" Area="@PivotGridFieldArea.Data" SummaryType="@PivotGridSummaryType.Sum">
+        <DxPivotGridField Field="@nameof(Sale.StoreName)" Caption="Store" Area="PivotGridFieldArea.Row" />
+        <DxPivotGridField Field="@nameof(Sale.DateKey)" GroupInterval="PivotGridGroupInterval.Year" Caption="Year" Area="PivotGridFieldArea.Column" />
+        <DxPivotGridField Field="@nameof(Sale.SalesAmount)" Caption="Amount" Area="PivotGridFieldArea.Data" SummaryType="PivotGridSummaryType.Sum">
             <DataTemplate>@string.Format("{0:c0}", context)</DataTemplate>
         </DxPivotGridField>
-        <DxPivotGridField Field="@nameof(Sale.Id)" Caption="Count" Area="@PivotGridFieldArea.Data" SummaryType="@PivotGridSummaryType.Count">
+        <DxPivotGridField Field="@nameof(Sale.Id)" Caption="Count" Area="PivotGridFieldArea.Data" SummaryType="PivotGridSummaryType.Count">
             <DataTemplate>@string.Format("{0:n0}", context)</DataTemplate>
         </DxPivotGridField>
     </DxPivotGrid>
 }
-<div class="code-snippet card demo-card-wide">
-    <CodeSnippetHeader></CodeSnippetHeader>
-    <div class="card-footer text-muted">
-        <CodeSnippet_Pivot_LargeDataSource></CodeSnippet_Pivot_LargeDataSource>
-    </div>
-</div>
+<CodeSnippet_Pivot_LargeDataSource/>
 @code {
 
     IEnumerable<Sale> largeDataSource;

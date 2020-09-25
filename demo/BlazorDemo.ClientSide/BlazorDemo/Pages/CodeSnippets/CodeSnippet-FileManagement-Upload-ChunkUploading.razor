@@ -1,6 +1,8 @@
-﻿<CodeSnippetTabbed>
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload#chunk-upload-for-large-files">
 <CodeSnippetTabPage Text="Razor">
-@(@"<DxUpload Name=""myFile"" UploadUrl=""@GetUploadUrl(""api/Upload/UploadChunkFile/"")""
+@(@"@inject NavigationManager NavigationManager
+
+<DxUpload Name=""myFile"" UploadUrl=""@GetUploadUrl(""api/Upload/UploadChunkFile/"")""
     ChunkSize=""200000"" MaxFileSize=""15000000"">
 </DxUpload>
 
@@ -28,7 +30,7 @@ public class UploadController : ControllerBase {
         _hostingEnvironment = hostingEnvironment;
     }
 
-    [HttpPost]
+    [HttpPost(""[action]"")]
     public ActionResult UploadChunkFile(IFormFile myFile, string chunkMetadata) {
         var tempPath = Path.Combine(_hostingEnvironment.WebRootPath, ""uploads"");
         // Removes temporary files

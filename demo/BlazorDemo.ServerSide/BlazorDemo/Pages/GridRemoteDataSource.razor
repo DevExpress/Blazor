@@ -34,19 +34,19 @@
 @code {
     [Inject] protected HttpClient Client { get; set; }
 
-    protected async Task<LoadResult> LoadOrderData(DataSourceLoadOptionsBase options, CancellationToken cancellationToken)
-        => await LoadCustomData("https://js.devexpress.com/Demos/NetCore/api/DataGridWebApi/Orders", options, cancellationToken);
-    protected async Task<LoadResult> LoadCustomerData(DataSourceLoadOptionsBase options, CancellationToken cancellationToken)
-        => await LoadCustomData("https://js.devexpress.com/Demos/NetCore/api/DataGridWebApi/CustomersLookup", options, cancellationToken);
-    protected async Task<LoadResult> LoadShipmentData(DataSourceLoadOptionsBase options, CancellationToken cancellationToken)
-        => await LoadCustomData("https://js.devexpress.com/Demos/NetCore/api/DataGridWebApi/ShippersLookup", options, cancellationToken);
+    protected async Task<LoadResult> LoadOrderData(DataSourceLoadOptionsBase options, CancellationToken ct)
+        => await LoadCustomData("https://js.devexpress.com/Demos/NetCore/api/DataGridWebApi/Orders", options, ct);
+    protected async Task<LoadResult> LoadCustomerData(DataSourceLoadOptionsBase options, CancellationToken ct)
+        => await LoadCustomData("https://js.devexpress.com/Demos/NetCore/api/DataGridWebApi/CustomersLookup", options, ct);
+    protected async Task<LoadResult> LoadShipmentData(DataSourceLoadOptionsBase options, CancellationToken ct)
+        => await LoadCustomData("https://js.devexpress.com/Demos/NetCore/api/DataGridWebApi/ShippersLookup", options, ct);
 
-    protected async Task<LoadResult> LoadCustomData(string dataEndpointUri, DataSourceLoadOptionsBase options, CancellationToken cancellationToken)
+    protected async Task<LoadResult> LoadCustomData(string dataEndpointUri, DataSourceLoadOptionsBase options, CancellationToken ct)
     {
-        using var response = await Client.GetAsync(options.ConvertToGetRequestUri(dataEndpointUri), cancellationToken);
+        using var response = await Client.GetAsync(options.ConvertToGetRequestUri(dataEndpointUri));
         response.EnsureSuccessStatusCode();
         using var responseStream = await response.Content.ReadAsStreamAsync();
-        return await JsonSerializer.DeserializeAsync<LoadResult>(responseStream, cancellationToken: cancellationToken);
+        return await JsonSerializer.DeserializeAsync<LoadResult>(responseStream);
     }
 }
 
@@ -83,8 +83,8 @@
     <DxDataGridCommandColumn Width="150px" />
     <DxDataGridDateEditColumn Field="@nameof(WeatherForecast.Date)" DisplayFormat="D" EditorFormat="D" />
     <DxDataGridColumn Field="@nameof(WeatherForecast.Forecast)" Caption="Forecast" Width="150px" />
-    <DxDataGridSpinEditColumn Field="@nameof(WeatherForecast.TemperatureC)" Caption="@("Temp. (\x2103)")" TextAlignment="@DataGridTextAlign.Left" Width="150px" />
-    <DxDataGridComboBoxColumn Field="@nameof(WeatherForecast.CloudCover)" Caption="Cloud Cover" DataAsync="@ForecastService.GetCloudCoverAsync" TextAlignment="@DataGridTextAlign.Left" Width="150px" />
+    <DxDataGridSpinEditColumn Field="@nameof(WeatherForecast.TemperatureC)" Caption="@("Temp. (\x2103)")" TextAlignment="DataGridTextAlign.Left" Width="150px" />
+    <DxDataGridComboBoxColumn Field="@nameof(WeatherForecast.CloudCover)" Caption="Cloud Cover" DataAsync="@ForecastService.GetCloudCoverAsync" TextAlignment="DataGridTextAlign.Left" Width="150px" />
     <DxDataGridCheckBoxColumn Field="@nameof(WeatherForecast.Precipitation)" Caption="Precipitation" Width="100px" />
 </DxDataGrid>
 <CodeSnippet_Grid_DataBinding_AsyncSupport />

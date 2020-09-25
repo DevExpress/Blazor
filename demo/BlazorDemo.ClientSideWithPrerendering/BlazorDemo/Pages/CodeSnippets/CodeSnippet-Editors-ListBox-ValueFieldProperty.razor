@@ -1,6 +1,6 @@
-﻿<CodeSnippetTabbed>
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.ValueFieldName">
 <CodeSnippetTabPage Text="Razor">
-@(@"<DxListBox Data=""@Persons.DataSource"" style=""width: 480px; max-width: 100%; height: 232px;""
+@(@"<DxListBox Data=""@Staff.DataSource"" style=""width: 480px; max-width: 100%; height: 232px;""
            TextFieldName=""@nameof(Person.Text)""
            ValueFieldName=""@nameof(Person.Id)""
            SelectionMode=""ListBoxSelectionMode.Multiple""
@@ -8,7 +8,7 @@
 </DxListBox>
 
 @code {
-    IEnumerable<int> Values { get; set; } = Persons.DataSource.Take(2).Select(t => t.Id);
+    IEnumerable<int> Values { get; set; } = Staff.DataSource.Take(2).Select(t => t.Id);
 }")
 </CodeSnippetTabPage>
 <CodeSnippetTabPage Text="Business Object">
@@ -22,7 +22,9 @@
     public string Text => $""{FirstName} {LastName} ({Department} Dept.)"";
 }
 
-public static class Persons {
+public enum Department { Motors, Electronics, Software }
+
+public static class Staff {
     private static readonly Lazy<List<Person>> dataSource = new Lazy<List<Person>>(() => {
         var dataSource = new List<Person>() {
             new Person() { Id= 0 , FirstName=""John"", LastName=""Heart"", Department=Department.Electronics },

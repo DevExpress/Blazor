@@ -5,7 +5,7 @@
 </a>
 @if (Theme.InLoading)
 {
-    <link href="@Theme.ResourceUrl" as="style" rel="preload" crossorigin @onload=@OnPreloadCompleted />
+    <link href="@Theme.ResourceUrl" as="style" rel="preload" crossorigin="" @onload=@OnPreloadCompleted />
     <link href="@Theme.ResourceUrl" rel="stylesheet" media="screen and (min--moz-device-pixel-ratio:0)" @onload=@OnPreloadCompleted />
 }
 @code {

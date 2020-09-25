@@ -60,7 +60,7 @@
             "Title": "Column Types",
             "Icon": "images/GridColumnType.svg",
             "Keywords": "blazor, components, data grid, datagrid, grid, column type, columns, devexpress, demo, sample, example",
-            "Description": "DevExpress Blazor Data Grid provides you with column objects to display and edit different data types: text, numbers, dates, and Boolean values."
+            "Description": "DevExpress Blazor Data Grid supports column objects that display and edit different data types: text, numbers, dates, and Boolean values."
           },
           {
             "Url": "GridSortData",
@@ -73,7 +73,7 @@
             "Title": "Data Filter Row",
             "IsNew": true,
             "Keywords": "blazor, components, data grid, datagrid, grid, grid filter, grid filtering, datagrid filter, datagrid filtering, data filter, devexpress, demo, sample, example",
-            "Description": "DevExpress Blazor Data Grid displays the Filter Row that allows users to filter data as they type text in cells. An additional drop-down menu also displays a list of filter conditions."
+            "Description": "DevExpress Blazor Data Grid supports the Filter Row that allows users to filter data."
           },
           {
             "Url": "GridTemplate",
@@ -117,7 +117,7 @@
           },
           {
             "Url": "GridGrouping",
-            "Title": "Grouping",
+            "Title": "Group Data",
             "Keywords": "blazor, components, data grid, datagrid, grid, grouping, groups, drag-and-drop, devexpress, demo, sample, example",
             "Description": "The DevExpress Data Grid for Blazor component enables you to drag-and-drop grid headers or use grouping API to group data against multiple data columns."
           },
@@ -150,6 +150,12 @@
             "Title": "Column Chooser",
             "Keywords": "blazor, components, data grid, datagrid, grid, column chooser, columnchooser, columns, devexpress, demo, sample, example",
             "Description": "DevExpress Blazor Data Grid can display a Column Chooser in a toolbar. The Column Chooser is a separate window that allows users to show, hide, and reorder Data Grid columns at runtime."
+          },
+          {
+            "Url": "GridEditData",
+            "Title": "Edit Data",
+            "Keywords": "blazor, components, data grid, datagrid, grid, data editing, edit data, edit form, popup edit form, add rows, add new row, insert row, remove rows, delete rows, edit row values, edit modes, edit options, command column, devexpress, demo, sample, example",
+            "Description": "DevExpress Blazor Data Grid allows users to edit data in the edit form or in the popup edit form."
           }
         ]
       },
@@ -231,7 +237,7 @@
             "Url": "ChartSeriesCustomization",
             "Title": "Series Customization",
             "Keywords": "Blazor, components, chart, series, label, point, customization, appearance, point color, custom text, devexpress, demo, sample, example",
-            "Description": "DevExpress Blazor Charts allow users to customize series points and their labels' appearance and provide custom images for points."
+            "Description": "DevExpress Blazor Charts allow users to customize series points and their labels' appearance and specify custom images for points."
           }
         ]
       },
@@ -249,6 +255,12 @@
             "Title": "Recurring Appointments",
             "Keywords": "Blazor, components, scheduler, recurring appointments, devexpress, demo, sample, example",
             "Description": "The Scheduler UI for Blazor can display regular and recurrent appointments in a Day, Work Week or Week View. The Scheduler also allows users to create, remove, and manage appointments."
+          },
+          {
+            "Url": "SchedulerTemplates",
+            "Title": "Templates",
+            "Keywords": "Blazor, components, scheduler, appointments, template, appointment template, customization, custom appointment appearance, appointment style, custom appointment UI, devexpress, demo, sample, example",
+            "Description": "The DevExpress Scheduler allows you to use templates to customize appointment appearance."
           }
         ]
       },
@@ -305,6 +317,13 @@
             "IsNew": true,
             "Keywords": "Blazor, components, tag box, tagbox, tags, custom tags, data binding, databinding, data source, virtual scrolling, scrolling, filtering, incremental filtering, starts with filtering, contains filtering, null text, nulltext, templates, validation, read-only tagbox, multiple tag selection, devexpress, demo, sample, example",
             "Description": "DevExpress Blazor TagBox allows users to select multiple tags from a drop-down list or type custom tags. TagBox supports incremental filtering, virtual scrolling, validation, and templates."
+          }, 
+          {
+            "Url": "Memo",
+            "Title": "Memo",
+            "IsNew": true,
+            "Keywords": "Blazor, components, memo, text area, multi-line text box, text in multiple lines, text in multiple rows, devexpress, demo, sample, example",
+            "Description": "DevExpress Blazor Memo is a multi-line text area that allows users to type and edit text in multiple rows."
           }
         ]
       },
@@ -315,7 +334,7 @@
             "Url": "Button",
             "Title": "Button",
             "Keywords": "Blazor, components, button, buttons, action, button styles, button with icon, button with image, Blazor button for bootstrap, submit button, button click, template, devexpress, demo, sample, example",
-            "Description": "DevExpress Blazor Button provides various render styles and can display icons. Button supports the disable state, form submission, templates, and HTML attributes. "
+            "Description": "DevExpress Blazor Button supports various render styles and can display icons. Button supports the disable state, form submission, templates, and HTML attributes. "
           }
         ]
       },

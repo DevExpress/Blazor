@@ -15,7 +15,7 @@
 
 <div class="card demo-card">
     <div class="card-header p-2">
-        <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
+        <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" @key="@ThemeName">
             <Items>
                 <DxToolbarItem Text="Render Style Mode" Alignment="ToolbarItemAlignment.Right">
                     <Items>
@@ -35,7 +35,7 @@
         </DxToolbar>
     </div>
     <div class="card-body">
-        <DxToolbar ItemRenderStyleMode="@SelectedRenderMode" ItemSizeMode="@SelectedSizeMode">
+        <DxToolbar ItemRenderStyleMode="@SelectedRenderMode" ItemSizeMode="@SelectedSizeMode" @key="@ThemeName">
             <Items>
                 <DxToolbarItem Text="Info" RenderStyle="ButtonRenderStyle.Info" />
                 <DxToolbarItem Text="Success" RenderStyle="ButtonRenderStyle.Success" />
@@ -48,6 +48,7 @@
 </div>
 
 @code{
+    [CascadingParameter(Name = "ThemeName")] string ThemeName { get; set; }
     IList<ToolbarRenderStyleMode> RenderModes { get; set; }
     ToolbarRenderStyleMode SelectedRenderMode { get; set; }
     IList<SizeMode> SizeModes { get; set; }

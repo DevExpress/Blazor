@@ -1,6 +1,8 @@
-﻿<CodeSnippetTabbed>
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload#multiple-file-upload">
 <CodeSnippetTabPage Text="Razor">
-@(@"<DxUpload Name=""myFile"" UploadUrl=""@GetUploadUrl(""api/Upload/UploadFile/"")""
+@(@"@inject NavigationManager NavigationManager
+
+<DxUpload Name=""myFile"" UploadUrl=""@GetUploadUrl(""api/Upload/UploadFile/"")""
     AllowMultiFileUpload=""true"" MaxFileSize=""15000000"">
 </DxUpload>
 
@@ -19,7 +21,7 @@ public class UploadController : ControllerBase {
         _hostingEnvironment = hostingEnvironment;
     }
 
-    [HttpPost]
+    [HttpPost(""[action]"")]
     public ActionResult UploadFile(IFormFile myFile) {
         try {
             var path = Path.Combine(_hostingEnvironment.WebRootPath, ""uploads"");

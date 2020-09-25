@@ -1,5 +1,5 @@
-﻿<CodeSnippet>
-@(@"<DxListBox Data=""@Data""
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2#virtual-scrolling">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxListBox Data=""@Data""
            TData=""Country""
            TValue=""Country""
            ListRenderMode=""ListRenderMode.Virtual""
@@ -14,5 +14,5 @@
     protected override async Task OnInitializedAsync() {
         Data = await CountryNamesService.LoadAsync();
     }
-}")
-</CodeSnippet>
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

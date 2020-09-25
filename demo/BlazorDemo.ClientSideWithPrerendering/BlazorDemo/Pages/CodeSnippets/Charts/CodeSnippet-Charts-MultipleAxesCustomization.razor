@@ -1,8 +1,5 @@
-﻿<div class="code-snippet card demo-card-wide">
-    <CodeSnippetHeader></CodeSnippetHeader>
-    <div class="card-footer text-muted ">
-        <CodeSnippet>
-@(@"<DxChart Data=""SalesData""
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1#axes">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxChart Data=""SalesData""
          CssClass=""mw-1100"">
     <DxChartTitle Text=""Sales amount"" />
     <DxChartLegend Position=""RelativePosition.Outside"" />
@@ -36,7 +33,5 @@
                          ArgumentField=""@((SaleInfo s)=> s.City)""
                          ValueField=""@(s => s.Amount)""
                          Axis=""TotalAxis"" />
-</DxChart>")
-        </CodeSnippet>
-    </div>
-</div>
+</DxChart>")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

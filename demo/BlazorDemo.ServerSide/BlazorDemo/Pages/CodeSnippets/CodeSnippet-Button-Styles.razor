@@ -1,6 +1,11 @@
-﻿<CodeSnippet @key=@_codeString>@_codeString</CodeSnippet>
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton#button-content-and-appearance">
+    <CodeSnippetTabPage Text="Razor">
+        <CodeSnippetTemplate>
+            <CodeSnippet @key="@_codeString">@_codeString</CodeSnippet>
+        </CodeSnippetTemplate>
+    </CodeSnippetTabPage>
+</CodeSnippetTabbed>
 @code {
-
     [Parameter]
     public ButtonRenderStyle RenderStyle { get; set; }
 
@@ -14,9 +19,7 @@
     public string StyleName { get; set; }
 
     string _codeString;
-    protected override void OnParametersSet()
-    {
-        _codeString = $"<DxButton RenderStyle=\"@ButtonRenderStyle.{RenderStyle}\" RenderStyleMode=\"@ButtonRenderStyleMode.{RenderStyleMode}\" Text=\"{StyleName}\" SizeMode=\"@SizeMode.{SizeMode}\" />";
+    protected override void OnParametersSet() {
+        _codeString = $"<DxButton RenderStyle=\"ButtonRenderStyle.{RenderStyle}\" RenderStyleMode=\"ButtonRenderStyleMode.{RenderStyleMode}\" Text=\"{StyleName}\" SizeMode=\"SizeMode.{SizeMode}\" />";
     }
-
 }

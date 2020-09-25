@@ -1,4 +1,4 @@
-﻿<CodeSnippetTabbed>
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2#input-validation">
     <CodeSnippetTabPage Text="Razor">
 @(@"<EditForm Model=""@recipients"" OnValidSubmit=""@HandleValidSubmit"" OnInvalidSubmit=""@HandleInvalidSubmit"">
     <DataAnnotationsValidator />
@@ -10,12 +10,12 @@
                   TData=""string""
                   TValue=""string""
                   AllowCustomTags=""true""
-                  ValidateBy=""@TagBoxValidateBy.Tags""
+                  ValidateBy=""TagBoxValidateBy.Tags""
                   @bind-Tags=""@recipients.Data""/>
         </DxTagBox>
         <ValidationMessage For=""@(() => recipients.Data)"" />
     </p>
-    <DxButton SubmitFormOnClick=""true"" Text=""Submit"" RenderStyle=""@ButtonRenderStyle.Secondary"" />
+    <DxButton SubmitFormOnClick=""true"" Text=""Submit"" RenderStyle=""ButtonRenderStyle.Secondary"" />
 </EditForm>
 
 @code {

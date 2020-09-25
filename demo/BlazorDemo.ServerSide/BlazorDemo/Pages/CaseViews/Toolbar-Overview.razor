@@ -16,7 +16,7 @@
 
 <div class="card demo-card">
     <div class="card-header border-0 p-2">
-        <DxToolbar ItemClick="@OnItemClick">
+        <DxToolbar ItemClick="@OnItemClick" @key="@ThemeName">
             <Items>
                 <DxToolbarItem Name="Item1" Text="Item1" Tooltip="Item1" />
                 <DxToolbarItem Name="Item2" Text="Item2" Tooltip="Item2" />
@@ -36,7 +36,9 @@
 <CodeSnippet_Toolbar_Overview />
 
 @code {
+    [CascadingParameter(Name = "ThemeName")] string ThemeName { get; set; }
     IObserver<string> toasterRef;
+
     void OnItemClick(ToolbarItemClickEventArgs e) {
         toasterRef.OnNext($"The '{e.ItemName}' button has been clicked");
     }

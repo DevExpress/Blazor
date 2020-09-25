@@ -1,5 +1,5 @@
-﻿<CodeSnippet>
-@(@"<DxCheckBox @bind-Checked=""@Value"" AllowIndeterminateStateByClick=""true"" DisableDefaultRender>
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1#indeterminate-state">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxCheckBox @bind-Checked=""@Value"" AllowIndeterminateStateByClick=""true"" DisableDefaultRender>
     <div class=""table position-relative"">
         <div class=""boxLabel"" style=""margin: 10px"">Medium</div>
         <div class=""row"">
@@ -34,5 +34,5 @@
 @code {
     bool? Value { get; set; } = true;
     int Angle { get { return Value == true ? 0 : Value == false ? 90 : 180; } }
-}")
-</CodeSnippet>
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

@@ -15,7 +15,7 @@
 </div>
 <DxChart Data="@ProductSalesData"
          CssClass="mw-1100">
-    <DxChartLegend Position="@RelativePosition.Outside" />
+    <DxChartLegend Position="RelativePosition.Outside" />
     <DxChartCandlestickSeries ValueField="@((Sale i) => i.TotalCost)" ArgumentField="@(i => i.SaleDate.Date)" Name="@($"{Product.Name} Sales")" />
     <DxChartArgumentAxis>
         <DxChartAxisLabel Format="ChartAxisLabelFormat.ShortDate" />
@@ -41,7 +41,7 @@
 </div>
 <DxChart Data="@ProductSalesData"
          CssClass="mw-1100">
-    <DxChartLegend Position="@RelativePosition.Outside" />
+    <DxChartLegend Position="RelativePosition.Outside" />
     <DxChartStockSeries ValueField="@((Sale i) => i.TotalCost)" ArgumentField="@(i => i.SaleDate.Date)" Name="@($"{Product.Name} Sales")" />
     <DxChartArgumentAxis>
         <DxChartAxisLabel Format="ChartAxisLabelFormat.ShortDate" />

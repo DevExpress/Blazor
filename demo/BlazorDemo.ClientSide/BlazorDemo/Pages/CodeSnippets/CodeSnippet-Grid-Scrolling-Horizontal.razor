@@ -1,10 +1,7 @@
-﻿<div class="code-snippet card demo-card-wide mw-1100">
-    <CodeSnippetHeader></CodeSnippetHeader>
-    <div class="card-footer text-muted">
-        <CodeSnippet>
-@(@"<DxDataGrid Data=""@DataSource""
-        HorizontalScrollBarMode=""@ScrollBarMode.Visible""
-        PagerNavigationMode=""@PagerNavigationMode.NumericButtons""
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#vertical-and-horizontal-scrollbars">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxDataGrid Data=""@DataSource""
+        HorizontalScrollBarMode=""ScrollBarMode.Visible""
+        PagerNavigationMode=""PagerNavigationMode.NumericButtons""
         CssClass=""mw-1100"">
 
     <DxDataGridColumn Field=""@nameof(ProductFlat.Id)"" Caption=""Id"" Width=""50px"">
@@ -23,7 +20,5 @@
     <DxDataGridColumn Field=""@nameof(ProductFlat.Subcategory)"" Caption=""Subcategory"" Width=""350px""></DxDataGridColumn>
     <DxDataGridDateEditColumn Field=""@nameof(ProductFlat.LastUpdated)"" Caption=""Last Updated"" Width=""350px""></DxDataGridDateEditColumn>
 
-</DxDataGrid>")
-        </CodeSnippet>
-    </div>
-</div>
+</DxDataGrid>")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

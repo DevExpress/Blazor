@@ -22,21 +22,18 @@
         <DemoToolbar @bind-SelectedSize="SizeMode">
             <TitleTemplate>
                 Selected values: {
-                @if (Values != null) {
-                    @foreach (var item in Values)
-                        @(item.ToString() + " ")
-                }
+                    @GetStringRepresentation()
                 }
             </TitleTemplate>
         </DemoToolbar>
     </div>
     <div class="card-body mw-480">
-        <DxTagBox Data="@Persons.DataSource"
+        <DxTagBox Data="@Staff.DataSource"
                   TextFieldName="@nameof(Person.Text)"
                   ValueFieldName="@nameof(Person.Id)"
                   SizeMode="SizeMode"
                   @bind-Values="Values"
-                  ClearButtonDisplayMode="@DataEditorClearButtonDisplayMode.Auto">
+                  ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto">
         </DxTagBox>
     </div>
 </div>
@@ -44,5 +41,15 @@
 <CodeSnippet_Editor_TagBox_ValueFieldProperty></CodeSnippet_Editor_TagBox_ValueFieldProperty>
 
 @code {
-    IEnumerable<int> Values { get; set; } = Persons.DataSource.Take(2).Select(t => t.Id);
+    IEnumerable<int> Values { get; set; } = Staff.DataSource.Take(2).Select(t => t.Id);
+
+    string GetStringRepresentation() {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        if (Values != null && Values.Any()) {
+            foreach (var value in Values)
+                sb.Append(value + ", ");
+            sb.Remove(sb.Length - 2, 2);
+        }
+        return sb.ToString();
+    }
 }

@@ -1,12 +1,12 @@
 ﻿<CodeSnippet>
-@(@"<DxComboBox Data=""@Persons.DataSource""
+@(@"<DxComboBox Data=""@Staff.DataSource""
             TextFieldName=""@nameof(Person.Text)""
-            @bind-Value=""@SelectedRealBusinessObject""
+            @bind-Value=""@SelectedPerson""
             SizeMode=""SizeMode""
             DropDownWidthMode=""DropDownWidthMode"">
 </DxComboBox>
 @code {
-    Person SelectedRealBusinessObject { get; set; } = Persons.DataSource[0];
+    Person SelectedPerson { get; set; } = Staff.DataSource[0];
     DropDownWidthMode DropDownWidthMode { get; set; } = DropDownWidthMode.ContentOrEditorWidth;
 }")
 </CodeSnippet>

@@ -9,7 +9,7 @@
     </p>
     <ul>
         <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ListRenderMode">Entire</a> - The ComboBox loads the entire item list. Use this option for small item lists where scrolling should work instantly.</li>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ListRenderMode">Virtual</a> - The ComboBox loads visible items only. Use this option to improve performance when the list contains to many items to load simultaneously.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ListRenderMode">Virtual</a> - The ComboBox loads visible items only. Use this option to improve performance when the list contains too many items to load simultaneously.</li>
     </ul>
     <p>
         In this demo, the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.ListRenderMode">ListRenderMode</a> property is set to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ListRenderMode">ListRenderMode.Virtual</a>.
@@ -27,8 +27,8 @@
 
     <div class="card-body mw-480">
         <DxComboBox Data="@Data"
-                    ListRenderMode="@ListRenderMode.Virtual"
-                    FilteringMode="@DataGridFilteringMode.Contains"
+                    ListRenderMode="ListRenderMode.Virtual"
+                    FilteringMode="DataGridFilteringMode.Contains"
                     TextFieldName="@nameof(Country.CountryName)"
                     @bind-Value="@Value"
                     SizeMode="SizeMode">

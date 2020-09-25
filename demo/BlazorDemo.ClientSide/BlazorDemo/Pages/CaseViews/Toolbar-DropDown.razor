@@ -16,7 +16,7 @@
 
 <div class="card demo-card">
     <div class="card-header p-2">
-        <DxToolbar DropDownDisplayMode="@SelectedDisplayMode" ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
+        <DxToolbar DropDownDisplayMode="@SelectedDisplayMode" ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" @key="@ThemeName">
             <Items>
                 @foreach(var item in MenuItems) {
                     @RenderItem(item)
@@ -39,6 +39,7 @@
 </div>
 
 @code{
+    [CascadingParameter(Name = "ThemeName")] string ThemeName { get; set; }
     TextFormatting Formatting { get; set; } = new TextFormatting();
     List<TextFormattingMenuItem> _menuItems;
     List<TextFormattingMenuItem> MenuItems {

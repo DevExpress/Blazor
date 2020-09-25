@@ -1,13 +1,13 @@
-﻿<CodeSnippetTabbed>
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2">
 <CodeSnippetTabPage Text="Razor">
-@(@"<DxListBox Data=""@Persons.DataSource""
+@(@"<DxListBox Data=""@Staff.DataSource""
            TextFieldName=""@nameof(Person.Text)""
            @bind-Values=""@Values""
            style=""height: 232px;"">
 </DxListBox>
 
 @code {
-    IEnumerable<Person> Values { get; set; } = Persons.DataSource.Take(1);
+    IEnumerable<Person> Values { get; set; } = Staff.DataSource.Take(1);
 }")
 </CodeSnippetTabPage>
 <CodeSnippetTabPage Text="Business Object">
@@ -21,7 +21,9 @@
     public string Text => $""{FirstName} {LastName} ({Department} Dept.)"";
 }
 
-public static class Persons {
+public enum Department { Motors, Electronics, Software }
+
+public static class Staff {
     private static readonly Lazy<List<Person>> dataSource = new Lazy<List<Person>>(() => {
         var dataSource = new List<Person>() {
             new Person() { Id= 0 , FirstName=""John"", LastName=""Heart"", Department=Department.Electronics },
