@@ -1,6 +1,6 @@
 # DevExpress UI for Blazor
 
-[DevExpress UI for Blazor](https://www.devexpress.com/blazor/) ships with over 15 UI components (including a Data Grid, Pivot Grid, Scheduler, and Charts) so you can design rich user experiences for both Blazor Server and Blazor WebAssembly.
+[DevExpress UI for Blazor](https://www.devexpress.com/blazor/) ships with native and high performance UI components including the Data Grid, Pivot Grid, Scheduler, Charts, and Data Editors. These components can help you create intuitive and refined user experiences for Blazor Server (ASP.NET Core) and Blazor WebAssembly hosting models. 
 
 * [Online Demos](#online-demos)
 * [Code Examples](#code-examples)
