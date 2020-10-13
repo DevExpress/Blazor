@@ -25,12 +25,16 @@ namespace BlazorDemo.ServerSide {
             services.AddScoped<IContosoRetailDataProvider, ContosoRetailDataProvider>();
             services.AddScoped<IRentInfoDataProvider, RentInfoDataProvider>();
 
-            services.AddDbContext<FMRDemoContext>(options => options.UseSqlServer(GetConnectionString("GridLargeDataConnectionString")));
+            services.AddDbContext<FMRDemoContext>(options => UseSqlServer(options, "GridLargeDataConnectionString"));
 
-            services.AddDbContext<ContosoRetailContext>(options => options.UseSqlServer(GetConnectionString("PivotGridLargeDataConnectionString")));
+            services.AddDbContext<ContosoRetailContext>(options => UseSqlServer(options, "PivotGridLargeDataConnectionString"));
 
             string GetConnectionString(string name) {
                 return context.Configuration.GetConnectionString(name);
+            }
+            void UseSqlServer(DbContextOptionsBuilder options, string connectionString) {
+                var cs = GetConnectionString("GridLargeDataConnectionString");
+                if(!string.IsNullOrEmpty(cs)) options.UseSqlServer(cs);
             }
         }
         public override void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
