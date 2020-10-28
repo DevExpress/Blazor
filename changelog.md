@@ -35,7 +35,7 @@ The new Stack Layout for Blazor allows you to stack UI elements vertically or ho
 The new Layout Breakpoint component for Blazor allows you to adapt a page layout to different screen sizes. 
 For example, you can use breakpoints to create responsive DxGridLayout, DxStackLayout, or any other components.
 
-[Demo](https://demos.devexpress.com/blazor/GridLayoutAdaptivity) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxLayoutBreakpoint)
+[Demo](https://demos.devexpress.com/blazor/GridLayout#Adaptivity) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxLayoutBreakpoint)
 
 ### New Time Editor
 
@@ -73,9 +73,9 @@ Users can now resize grid columns. To enable this feature, use the [ColumnResize
 
 #### Fixed Columns
 
-You can now use the new [FixedStyle](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn) property to anchor columns to the left or rightmost edge of the grid. These fixed columns are never scrolled horizontally.
+You can now use the new [FixedStyle](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridColumnBase-1.FixedStyle) property to anchor columns to the left or rightmost edge of the grid. These fixed columns are never scrolled horizontally.
 
-[Demo](https://demos.devexpress.com/blazor/GridFixedColumns) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#fixed-columns)
+[Demo](https://demos.devexpress.com/blazor/GridPagingAndScrolling#FixedColumns)
 
 ### Scheduler
 
