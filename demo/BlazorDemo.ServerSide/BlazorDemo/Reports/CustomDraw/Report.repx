@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="20.2.0.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v20.2, Version=20.2.0.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4" Name="CustomControlReport" Margins="100, 100, 100, 75" PageWidth="850" PageHeight="1100" Version="20.2" RequestParameters="false" DataMember="AboutRegions" DataSource="#Ref-0">
+  <Parameters>
+    <Item1 Ref="4" Description="Region:" ValueSourceSettings="#Ref-2" ValueInfo="1" Name="RegionIdParameter" Type="#Ref-3" />
+  </Parameters>
+  <Bands>
+    <Item1 Ref="5" ControlType="DetailBand" Name="Detail" HeightF="0" TextAlignment="TopLeft" Padding="0,0,0,0,100" />
+    <Item2 Ref="6" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="88" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+      <SubBands>
+        <Item1 Ref="7" ControlType="SubBand" Name="SubBand1" HeightF="404">
+          <Controls>
+            <Item1 Ref="8" ControlType="BlazorDemo.Reports.CustomDraw.CustomControl, DevExpress.DemoReports.v20.2, Version=20.2.0.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47" Name="customControl1" TextAlignment="TopLeft" SizeF="593,400" LocationFloat="28,4" Font="Tahoma, 8.25pt, style=Bold" BackColor="255,247,244,241" Padding="0,0,0,0,100" BorderColor="255,225,215,203" Borders="All" BorderWidth="2" />
+          </Controls>
+        </Item1>
+      </SubBands>
+      <Controls>
+        <Item1 Ref="9" ControlType="XRLabel" Name="lbTitle" Text="Top 10 countries selected by population in percentage terms" TextAlignment="MiddleCenter" SizeF="554,30" LocationFloat="45,8" Font="Tahoma, 14.25pt" Padding="2,2,0,0,100" BorderColor="255,173,148,116" Borders="Bottom" BorderWidth="2" />
+        <Item2 Ref="10" ControlType="XRLabel" Name="xrLabel1" Text="lbRegionName" TextAlignment="BottomRight" SizeF="110,29" LocationFloat="510,49" Font="Tahoma, 18pt" ForeColor="255,172,135,88" Padding="2,2,0,0,100">
+          <ExpressionBindings>
+            <Item1 Ref="11" EventName="BeforePrint" PropertyName="Text" Expression="[AboutRegions].[Region]" />
+          </ExpressionBindings>
+        </Item2>
+        <Item3 Ref="12" ControlType="XRLabel" Name="lbRegion" Text="Region:" TextAlignment="BottomRight" SizeF="58,33" LocationFloat="452,45" Font="Tahoma, 9pt, style=Bold" ForeColor="Black" BackColor="Transparent" Padding="2,2,0,0,100" />
+      </Controls>
+    </Item2>
+    <Item3 Ref="13" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="75" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+      <Controls>
+        <Item1 Ref="14" ControlType="XRPictureBox" Name="xrPictureBox4" Padding="0,0,0,0,100" ImageSource="img,iVBORw0KGgoAAAANSUhEUgAAAJ8AAAAdCAYAAAC0Y74zAAAABGdBTUEAALGPC/xhBQAABYpJREFUeF7tm82NXEUUhR0CzsAiAiQSYMHGaCQIgIVDYMeWDOwM7Azw3gsIAAkSQHiBYGln0K5v5DM6c96t19Vv+rlHnlp8numqW/dW3Xvqp2350eFwmEwuwvUfV1ffP2381zicGXzimxiTyQ0uvj2EJ/C9CD552Lj4KtGck0XwycNmb/H90/it8UtjETx40vim4KtGZf+pYR7V/JJq7KTgnOJDaC8bPzVOLcLvjcqneN941bikEI/NUVRjJwV3Fd+fDcR2V1GMFhZGTtE9mOI7M1vE967BCbcmOPoQ5a8NTkTGVXYiC8tnRMZPTj3vA3xXfvZkiu/MnCI+RIcgvmgsHDUQ3POGxJZUY0QW1vuIx5Xr/cAb0e32Zm2Okz6PG383/miQwy8bbxpD4lsTHW3PGj3BOTnWGSns64bbvGhUdj80mK/I92d+sUkRs6aq/xTxsRHdR+Yu+2nzeelW4XdfS7XhfJz6NY7apH36JF9pI1Rft2f8iJ37/bnxbYO8ITx+Pj4mPr6pVgsmGAEQZjWuIn04I4VlHm7ztpH9fzXcRuBfAiAp3sep6n5IovergKeIj9y4rcfIdbCpcgyxqtMeUlA+jjE+Dj+yY/25BrdTfgR5qp484HNgo/Ts9DxCfD9+/In4+Pl1T3yIqveuov0U0YnKlxgtbIpL7SQOMXpfoiKDJytFnEVXUUbnKHI+2sTun3moPQW7hp8+Pi5FIPGxht7GFLIF5tQTFGjO+F2z0wleUomPb7DVINroc+enkP6c0cKmnZLAFaw2kkFxSEwKqRKAt4OLxgWbsSsQguyZg/cRkzje5vaV+IhPewrHhVKNE7JzG+WnGqu6ZzunIH0cPJ4TPrsdnyu7khQf4tJOd9YWOEr6dLaKT0n03ZfXkouJddCWV6/GpDjc16niAwrg/e4jT9zMsRePmvRO0hzn4hKen5xjlR/3SX+libSDnl2Ji4+/PsnBfObd5wG24n6TreJjfnnCICzahJ8aXlAviNoRm9rA87FFfAjE4zgpkCzkaH+2c+r4OE6i7FduwNfF75VPBJibGvLk69mVuPiSu16zSRVDjIqvevNlAtZQciHfXtmW18boHJMsJBDnmF2Kj8/ej/2WcWsoP71Ng7jcP5vTT0634xCQXUlPfAhvy5eKNTKGM1LYvBIRIu1VcXu4+PLqZc2eyNzBW8WXpyncd/FB5sOhz+16X2ZWBViJbw/hgcdIRgqbSdbf82Vx89p1PGngu9u/tEA+QbaIr3cyAPNx22MiqtY5Mo7P3o8f2ioyP4B9riFvBdmlCHVAlKT4OF32EB7cChwcKyyJ8X7Qg5uEeTtJyPE9/Jr1BFfJ3SI+FwZCd7H7KZO2kKdGxpdQjokvb4x8E47i8fVMqSB3Hq+yucbFxy495xsvWQQ3MrE6dUikC0Tkv264cEhMVYBqV+fVKyoB5xyJUaG5Z9ERSQrF42Qfa9IGqx72vXHMQX0i85Pry/zwe9q4qBSfcWmX9fK+W7j4+HdZH3RuFsGNLOwa1XupEhFJxq9OG37PcaB+J69cGJ2jiu/2xMAnxfJ4FFGxUkRrrIm2El9vk3l+/IrUE4Q+bFy8oBr4psAur93qBrnBxeeD9mAR3BgpLIkg0dV4yDdbRTUud2ovYSNzBIqfxfZ5p1jUl+09cvPluEp8gGDdrkK2vS8QQJ82zFpOqJdO7pL7Ij6Ew0J8MSySzySbxFWnUULisfedyu/46b11GKPYkG8t4XNcgyuLOXibz53fvQ9oTxExX7/qyEdecUCb+6qeF+JYfjRPfBLb7YjPHH0t+KvsyNXRern49vwPRP83FsEntxg9wT4bXHzfNRCJJ+Ac/NvA9yL45BYPWnyTyzLFN7kYU3yTi3HKF4fPghvxTSafnsOjD0onGKECAU9PAAAAAElFTkSuQmCC" Sizing="AutoSize" UseImageResolution="false" NavigateUrl="http://www.devexpress.com/Products/NET/Reporting/" SizeF="165.625,30.208334" LocationFloat="249,13" />
+      </Controls>
+    </Item3>
+    <Item4 Ref="15" ControlType="TopMarginBand" Name="topMarginBand1" />
+  </Bands>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v20.2" Name="sqlDataSource1" Base64="PFNxbERhdGFTb3VyY2UgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxDb25uZWN0aW9uIE5hbWU9IkNvdW50cmllc0Nvbm5lY3Rpb25TdHJpbmciIEZyb21BcHBDb25maWc9InRydWUiIC8+PFF1ZXJ5IFR5cGU9IlNlbGVjdFF1ZXJ5IiBOYW1lPSJBYm91dFJlZ2lvbnMiPjxQYXJhbWV0ZXIgTmFtZT0iUGFyYW1ldGVySWQiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLkludDMyKSg/UmVnaW9uSWRQYXJhbWV0ZXIpPC9QYXJhbWV0ZXI+PFRhYmxlcz48VGFibGUgTmFtZT0iQWJvdXRSZWdpb25zIiBYPSIzMCIgWT0iMzAiIFdpZHRoPSIxMjUiIEhlaWdodD0iMTQzIiAvPjwvVGFibGVzPjxDb2x1bW5zPjxDb2x1bW4gVGFibGU9IkFib3V0UmVnaW9ucyIgTmFtZT0iSWQiIC8+PENvbHVtbiBUYWJsZT0iQWJvdXRSZWdpb25zIiBOYW1lPSJSZWdpb24iIC8+PENvbHVtbiBUYWJsZT0iQWJvdXRSZWdpb25zIiBOYW1lPSJDb3VudHJ5IiAvPjxDb2x1bW4gVGFibGU9IkFib3V0UmVnaW9ucyIgTmFtZT0iUG9wdWxhdGlvblBvcnRpb24iIC8+PC9Db2x1bW5zPjxGaWx0ZXI+W0Fib3V0UmVnaW9ucy5JZF0gPSA/UGFyYW1ldGVySWQ8L0ZpbHRlcj48R3JvdXBGaWx0ZXI+PC9Hcm91cEZpbHRlcj48TWV0YSBYPSIyMCIgWT0iMjAiIFdpZHRoPSIxMjQiIEhlaWdodD0iMTIxIiAvPjwvUXVlcnk+PFJlc3VsdFNjaGVtYT48RGF0YVNldCBOYW1lPSJzcWxEYXRhU291cmNlMSI+PFZpZXcgTmFtZT0iQWJvdXRSZWdpb25zIj48RmllbGQgTmFtZT0iSWQiIFR5cGU9IkludDY0IiAvPjxGaWVsZCBOYW1lPSJSZWdpb24iIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iQ291bnRyeSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJQb3B1bGF0aW9uUG9ydGlvbiIgVHlwZT0iVW5rbm93biIgLz48L1ZpZXc+PC9EYXRhU2V0PjwvUmVzdWx0U2NoZW1hPjxDb25uZWN0aW9uT3B0aW9ucyBDbG9zZUNvbm5lY3Rpb249InRydWUiIC8+PC9TcWxEYXRhU291cmNlPg==" />
+  </ComponentStorage>
+  <ObjectStorage>
+    <Item1 Ref="2" ObjectType="DevExpress.XtraReports.Parameters.StaticListLookUpSettings, DevExpress.Printing.v20.2.Core">
+      <LookUpValues>
+        <Item1 Ref="17" Value="#Ref-16" Description="Africa" />
+        <Item2 Ref="19" Value="#Ref-18" Description="Oceania" />
+        <Item3 Ref="21" Value="#Ref-20" Description="Americas" />
+        <Item4 Ref="23" Value="#Ref-22" Description="Asia" />
+        <Item5 Ref="25" Value="#Ref-24" Description="Europe" />
+      </LookUpValues>
+    </Item1>
+    <Item2 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.2" Ref="3" Content="System.Int32" Type="System.Type" />
+    <Item3 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.2" Ref="16" Content="1" Type="System.Int32" />
+    <Item4 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.2" Ref="18" Content="2" Type="System.Int32" />
+    <Item5 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.2" Ref="20" Content="3" Type="System.Int32" />
+    <Item6 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.2" Ref="22" Content="4" Type="System.Int32" />
+    <Item7 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.2" Ref="24" Content="5" Type="System.Int32" />
+  </ObjectStorage>
+</XtraReportsLayoutSerializer>

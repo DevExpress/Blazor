@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.1</TargetFrameworks>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <LangVersion>8.0</LangVersion>
+    <DxExtendStartupHost>False</DxExtendStartupHost>
+    <Configurations>Debug;Release;VisualTests</Configurations>
+    <EnableDefaultItems>False</EnableDefaultItems>
+    <AssemblyName>BlazorDemo</AssemblyName>
+    <RootNamespace>BlazorDemo</RootNamespace>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
+    <PackageReference Include="System.CodeDom" Version="4.7.0" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.112" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+  
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.1" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.6.1" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Blazor" Version="20.2.3" />
+    <PackageReference Include="DevExpress.Document.Processor" Version="20.2.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Utils.cs" />
+    <Compile Include="Configuration\**\*.cs" />
+    <Compile Include="DemoServiceCollectionExtensions.cs" />
+    <Compile Include="Data\**\*.cs" />
+    <Compile Include="DataProviders\**\*.cs" />
+    <Compile Include="Services\CustomersService.cs" />
+    <Compile Include="Services\DemoService.cs" />
+    <Compile Include="Services\EmployeeService.cs" />
+    <Compile Include="Services\FlatProductService.cs" />
+    <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\RentInfoDataService.cs" />
+    <Compile Include="Services\SupplierService.cs" />
+    <Compile Include="Services\WeatherForecastService.cs" />
+    
+    <Compile Include="Shared\**\*.cs" />
+    <Compile Include="DocumentMetadata\Components\MetadataManager.cs" />
+    <Compile Include="DocumentMetadata\Components\MetadataStaticRenderer.cs" />
+    <Compile Include="DocumentMetadata\Renderers\**\*.cs" />
+    <Compile Include="DocumentMetadata\DocumentAttributes.cs" />
+    <Compile Include="DocumentMetadata\DocumentMetadata.cs" />
+    <Compile Include="DocumentMetadata\DocumentMetadata.Implementation.cs" />
+    <Compile Include="DocumentMetadata\Utils.cs" />
+    <Compile Include="DocumentMetadata\Components\WasmMetadataManager.cs" />
+    <Compile Include="DocumentMetadata\DocumentMetadata.Wasm.cs" />
+    
+    <Content Include="wwwroot\**\*.*" />
+    <Content Include="**\*.razor" Exclude="Pages\DocumentViewer.razor;Pages\ReportDesigner.razor;Shared\NavMenuReporting.razor" />
+    <Content Include="SeoConfiguration.json" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Include="DataSources\Contacts.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataSources\devav.sqlite3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataSources\homes.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataSources\nwind.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataSources\vehicles.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

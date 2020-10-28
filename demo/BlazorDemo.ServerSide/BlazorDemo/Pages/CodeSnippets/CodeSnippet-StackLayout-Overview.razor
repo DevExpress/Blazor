@@ -1,0 +1,56 @@
+﻿<CodeSnippetTabbed>
+    <CodeSnippetTabPage Text="Razor">
+        <CodeSnippetTemplate>
+            <CodeSnippet @key="@_codeString">@_codeString</CodeSnippet>
+        </CodeSnippetTemplate>
+    </CodeSnippetTabPage>
+</CodeSnippetTabbed>
+
+@code {
+    [Parameter] public Orientation Orientation { get; set; }
+    string _codeString;
+    protected override void OnParametersSet() {
+        base.OnParametersSet();
+        _codeString = $@"<DxStackLayout CssClass=""mw-1100"" style=""height:500px"" Orientation=""Orientation.{Orientation}"">
+    <Items>
+        <DxStackLayoutItem>
+            <Template>
+                <div class=""stacklayout-header stacklayout-item"">
+                    Item 1
+                </div>
+            </Template>
+        </DxStackLayoutItem>
+        <DxStackLayoutItem Length=""2fr"">
+            <Template>
+                <div class=""stacklayout-content stacklayout-item"">
+                    Item 2
+                </div>
+            </Template>
+        </DxStackLayoutItem>
+        <DxStackLayoutItem>
+            <Template>
+                <div class=""stacklayout-left-side-bar stacklayout-item"">
+                    Item 3
+                </div>
+            </Template>
+        </DxStackLayoutItem>
+        <DxStackLayoutItem>
+            <Template>
+                <div class=""stacklayout-right-side-bar stacklayout-item"">
+                    Item 4
+                </div>
+            </Template>
+        </DxStackLayoutItem>
+        <DxStackLayoutItem>
+            <Template>
+                <div class=""stacklayout-footer stacklayout-item"">
+                    Item 5
+                </div>
+            </Template>
+        </DxStackLayoutItem>
+    </Items>
+</DxStackLayout>
+";
+
+    }
+}

@@ -1,0 +1,37 @@
+﻿@inherits DemoWithResizableComponent
+
+<div class="demo-description">
+    <h2><DemoNavLink Link="TimeEdit#NullableTime" />Null Time Values</h2>
+    <p>
+        To clear our Blazor <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1">Time Edit</a> and set its value to null, simply:
+    </p>
+    <ul>
+        <li>
+            Delete the time value within the Time editor.
+        </li>
+        <li>
+            Click the <b>Clear</b> button. To display this button, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1.ClearButtonDisplayMode">ClearButtonDisplayMode</a> property to <b>Auto</b>.
+        </li>
+    </ul>
+    <p>
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1.NullText">NullText</a> property to display placeholder text in the Blazor Time Edit when its value is null.
+    </p>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode" Title="Clear the time" />
+    </div>
+    <div class="card-body mw-480">
+        <DxTimeEdit @bind-Time="@TimeValue"
+                    NullText="Select time..."
+                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                    SizeMode="SizeMode"></DxTimeEdit>
+    </div>
+</div>
+
+<CodeSnippet_Editor_TimeEdit_NullableTime />
+
+@code {
+    TimeSpan? TimeValue { get; set; } = DateTime.Now.TimeOfDay;
+}

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="20.2.0.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v20.2, Version=20.2.0.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4" Name="ReportMergingWithPdf" Landscape="true" Margins="100, 80, 119, 89" PageWidth="1100" PageHeight="850" Version="20.2" RequestParameters="false" FilterString="[CategoryID] &gt;= ?LowCategory And [CategoryID] &lt;= ?HighCategory" DataMember="Categories" DataSource="#Ref-0">
+  <Parameters>
+    <Item1 Ref="4" Description="Chart Appearance:" ValueSourceSettings="#Ref-2" ValueInfo="Default" Name="AppearanceParameter" />
+    <Item2 Ref="6" Description="Color Each Bar:" ValueInfo="True" Name="ColorEachParameter" Type="#Ref-5" />
+    <Item3 Ref="7" Visible="false" Description="Show Title" ValueInfo="True" Name="ShowTitle" Type="#Ref-5" />
+    <Item4 Ref="9" Visible="false" Description="Low Category" ValueInfo="0" Name="LowCategory" Type="#Ref-8" />
+    <Item5 Ref="10" Visible="false" Description="High Category" ValueInfo="10000" Name="HighCategory" Type="#Ref-8" />
+  </Parameters>
+  <Bands>
+    <Item1 Ref="11" ControlType="DetailBand" Name="Detail" HeightF="592" KeepTogether="true" TextAlignment="TopLeft" Font="Verdana, 9.75pt" BackColor="Transparent" Padding="0,0,0,0,100">
+      <Controls>
+        <Item1 Ref="12" ControlType="XRChart" Name="xrChart1" TextAlignment="TopLeft" SizeF="917,548" LocationFloat="0,40" BorderColor="Black" Borders="None">
+          <Chart Ref="13">
+            <DataContainer Ref="14" DataMember="Categories.Products" ValidateDataMembers="true">
+              <SeriesSerializable>
+                <Item1 Ref="15" Name="Series 1" ArgumentDataMember="ProductName" ValueDataMembersSerializable="UnitPrice" SeriesPointsSorting="Descending" SeriesPointsSortingKey="Value_1">
+                  <View Ref="16" ColorEach="true" TypeNameSerializable="SideBySideBarSeriesView" />
+                  <Label Ref="17" Position="Top" TypeNameSerializable="SideBySideBarSeriesLabel" />
+                </Item1>
+              </SeriesSerializable>
+            </DataContainer>
+            <Legend Ref="18" Visibility="False" Name="Default Legend" />
+            <OptionsPrint Ref="19" ImageFormat="Metafile" />
+            <Diagram Ref="20" TypeNameSerializable="XYDiagram">
+              <AxisX Ref="21" VisibleInPanesSerializable="-1">
+                <Label Ref="22" Angle="45" />
+              </AxisX>
+              <AxisY Ref="23" VisibleInPanesSerializable="-1" />
+            </Diagram>
+          </Chart>
+          <StylePriority Ref="24" UseBackColor="false" />
+        </Item1>
+        <Item2 Ref="25" ControlType="XRLabel" Name="xrlblCategoryName" TextFormatString="Category: {0}" TextAlignment="MiddleCenter" SizeF="917,33" LocationFloat="0,0" StyleName="CategoryStyle" Padding="2,2,0,0,100">
+          <ExpressionBindings>
+            <Item1 Ref="26" EventName="BeforePrint" PropertyName="Text" Expression="CategoryName" />
+            <Item2 Ref="27" EventName="BeforePrint" PropertyName="Bookmark" Expression="[CategoryName] + ' Chart'" />
+          </ExpressionBindings>
+        </Item2>
+      </Controls>
+    </Item1>
+    <Item2 Ref="28" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="89" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+      <Controls>
+        <Item1 Ref="29" ControlType="XRPictureBox" Name="xrPictureBox4" Padding="0,0,0,0,100" ImageSource="img,iVBORw0KGgoAAAANSUhEUgAAAJ8AAAAdCAYAAAC0Y74zAAAABGdBTUEAALGPC/xhBQAABYpJREFUeF7tm82NXEUUhR0CzsAiAiQSYMHGaCQIgIVDYMeWDOwM7Azw3gsIAAkSQHiBYGln0K5v5DM6c96t19Vv+rlHnlp8numqW/dW3Xvqp2350eFwmEwuwvUfV1ffP2381zicGXzimxiTyQ0uvj2EJ/C9CD552Lj4KtGck0XwycNmb/H90/it8UtjETx40vim4KtGZf+pYR7V/JJq7KTgnOJDaC8bPzVOLcLvjcqneN941bikEI/NUVRjJwV3Fd+fDcR2V1GMFhZGTtE9mOI7M1vE967BCbcmOPoQ5a8NTkTGVXYiC8tnRMZPTj3vA3xXfvZkiu/MnCI+RIcgvmgsHDUQ3POGxJZUY0QW1vuIx5Xr/cAb0e32Zm2Okz6PG383/miQwy8bbxpD4lsTHW3PGj3BOTnWGSns64bbvGhUdj80mK/I92d+sUkRs6aq/xTxsRHdR+Yu+2nzeelW4XdfS7XhfJz6NY7apH36JF9pI1Rft2f8iJ37/bnxbYO8ITx+Pj4mPr6pVgsmGAEQZjWuIn04I4VlHm7ztpH9fzXcRuBfAiAp3sep6n5IovergKeIj9y4rcfIdbCpcgyxqtMeUlA+jjE+Dj+yY/25BrdTfgR5qp484HNgo/Ts9DxCfD9+/In4+Pl1T3yIqveuov0U0YnKlxgtbIpL7SQOMXpfoiKDJytFnEVXUUbnKHI+2sTun3moPQW7hp8+Pi5FIPGxht7GFLIF5tQTFGjO+F2z0wleUomPb7DVINroc+enkP6c0cKmnZLAFaw2kkFxSEwKqRKAt4OLxgWbsSsQguyZg/cRkzje5vaV+IhPewrHhVKNE7JzG+WnGqu6ZzunIH0cPJ4TPrsdnyu7khQf4tJOd9YWOEr6dLaKT0n03ZfXkouJddCWV6/GpDjc16niAwrg/e4jT9zMsRePmvRO0hzn4hKen5xjlR/3SX+libSDnl2Ji4+/PsnBfObd5wG24n6TreJjfnnCICzahJ8aXlAviNoRm9rA87FFfAjE4zgpkCzkaH+2c+r4OE6i7FduwNfF75VPBJibGvLk69mVuPiSu16zSRVDjIqvevNlAtZQciHfXtmW18boHJMsJBDnmF2Kj8/ej/2WcWsoP71Ng7jcP5vTT0634xCQXUlPfAhvy5eKNTKGM1LYvBIRIu1VcXu4+PLqZc2eyNzBW8WXpyncd/FB5sOhz+16X2ZWBViJbw/hgcdIRgqbSdbf82Vx89p1PGngu9u/tEA+QbaIr3cyAPNx22MiqtY5Mo7P3o8f2ioyP4B9riFvBdmlCHVAlKT4OF32EB7cChwcKyyJ8X7Qg5uEeTtJyPE9/Jr1BFfJ3SI+FwZCd7H7KZO2kKdGxpdQjokvb4x8E47i8fVMqSB3Hq+yucbFxy495xsvWQQ3MrE6dUikC0Tkv264cEhMVYBqV+fVKyoB5xyJUaG5Z9ERSQrF42Qfa9IGqx72vXHMQX0i85Pry/zwe9q4qBSfcWmX9fK+W7j4+HdZH3RuFsGNLOwa1XupEhFJxq9OG37PcaB+J69cGJ2jiu/2xMAnxfJ4FFGxUkRrrIm2El9vk3l+/IrUE4Q+bFy8oBr4psAur93qBrnBxeeD9mAR3BgpLIkg0dV4yDdbRTUud2ovYSNzBIqfxfZ5p1jUl+09cvPluEp8gGDdrkK2vS8QQJ82zFpOqJdO7pL7Ij6Ew0J8MSySzySbxFWnUULisfedyu/46b11GKPYkG8t4XNcgyuLOXibz53fvQ9oTxExX7/qyEdecUCb+6qeF+JYfjRPfBLb7YjPHH0t+KvsyNXRern49vwPRP83FsEntxg9wT4bXHzfNRCJJ+Ac/NvA9yL45BYPWnyTyzLFN7kYU3yTi3HKF4fPghvxTSafnsOjD0onGKECAU9PAAAAAElFTkSuQmCC" Sizing="AutoSize" UseImageResolution="false" NavigateUrl="http://www.devexpress.com/Products/NET/Reporting/" SizeF="165.625,30.208334" LocationFloat="382,22" />
+        <Item2 Ref="30" ControlType="XRPageInfo" Name="xrPageInfo1" TextFormatString="Page : {0} / {1}" TextAlignment="TopLeft" SizeF="98,17" LocationFloat="817,0" Font="Times New Roman, 9pt, style=Italic" Padding="2,2,0,0,100" />
+      </Controls>
+    </Item2>
+    <Item3 Ref="31" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="50" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+      <Controls>
+        <Item1 Ref="32" ControlType="XRLine" Name="xrLine1" LineWidth="2" SizeF="917,9" LocationFloat="0,41" ForeColor="255,84,132,213" Padding="0,0,0,0,100" />
+        <Item2 Ref="33" ControlType="XRLabel" Name="lbTitle" Text="Products by Prices" TextAlignment="BottomLeft" SizeF="225,38" LocationFloat="0,0" Font="Tahoma, 18pt" ForeColor="255,84,132,213" Padding="2,2,0,0,100" Borders="None" />
+        <Item3 Ref="34" ControlType="XRPageInfo" Name="xrPageInfo2" PageInfo="DateTime" TextFormatString="{0:&quot;Current Date: &quot; dddd, dd MMMM yyyy}" TextAlignment="BottomRight" SizeF="292,23" LocationFloat="625,17" Font="Tahoma, 8pt" ForeColor="255,84,132,213" Padding="2,2,0,0,100" />
+      </Controls>
+      <ExpressionBindings>
+        <Item1 Ref="35" EventName="BeforePrint" PropertyName="Visible" Expression="?ShowTitle" />
+      </ExpressionBindings>
+    </Item3>
+    <Item4 Ref="36" ControlType="TopMarginBand" Name="topMarginBand1" HeightF="119" />
+  </Bands>
+  <StyleSheet>
+    <Item1 Ref="37" Name="OddStyle" BorderStyle="Inset" Font="Tahoma, 8.25pt" ForeColor="Black" BackColor="Transparent" BorderColor="255,232,205,162" Sides="Left, Top" StringFormat="Near;Near;0;None;Character;Default" BorderWidthSerializable="1" />
+    <Item2 Ref="38" Name="GroupHeader" BorderStyle="Inset" Font="Tahoma, 8.25pt, style=Bold" ForeColor="255,139,139,139" BackColor="255,243,243,243" BorderColor="White" Sides="All" StringFormat="Near;Near;0;None;Character;Default" BorderWidthSerializable="1" />
+    <Item3 Ref="39" Name="EvenStyle" BorderStyle="Inset" Font="Tahoma, 8.25pt" ForeColor="Black" BackColor="255,255,237,196" BorderColor="255,232,205,162" Sides="Left, Top" StringFormat="Near;Near;0;None;Character;Default" BorderWidthSerializable="1" />
+    <Item4 Ref="40" Name="CategoryStyle" BorderStyle="Inset" Font="Tahoma, 14.25pt" ForeColor="255,243,120,0" BackColor="Transparent" BorderColor="Black" Sides="None" StringFormat="Near;Near;0;None;Character;Default" BorderWidthSerializable="1" />
+  </StyleSheet>
+  <ReportPrintOptions Ref="41" DetailCountAtDesignTime="1" />
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v20.2" Name="sqlDataSource1" Base64="PFNxbERhdGFTb3VyY2UgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxDb25uZWN0aW9uIE5hbWU9Ik5XaW5kQ29ubmVjdGlvblN0cmluZyIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz48UXVlcnkgVHlwZT0iU2VsZWN0UXVlcnkiIE5hbWU9IkNhdGVnb3JpZXMiPjxUYWJsZXM+PFRhYmxlIE5hbWU9IkNhdGVnb3JpZXMiIFg9IjMwIiBZPSIzMCIgV2lkdGg9IjEyNSIgSGVpZ2h0PSIxMzQiIC8+PC9UYWJsZXM+PENvbHVtbnM+PENvbHVtbiBUYWJsZT0iQ2F0ZWdvcmllcyIgTmFtZT0iQ2F0ZWdvcnlJRCIgLz48Q29sdW1uIFRhYmxlPSJDYXRlZ29yaWVzIiBOYW1lPSJDYXRlZ29yeU5hbWUiIC8+PENvbHVtbiBUYWJsZT0iQ2F0ZWdvcmllcyIgTmFtZT0iRGVzY3JpcHRpb24iIC8+PENvbHVtbiBUYWJsZT0iQ2F0ZWdvcmllcyIgTmFtZT0iUGljdHVyZSIgLz48L0NvbHVtbnM+PE1ldGEgWD0iMjAiIFk9IjIwIiBXaWR0aD0iMTAwIiBIZWlnaHQ9IjEwNSIgLz48L1F1ZXJ5PjxRdWVyeSBUeXBlPSJTZWxlY3RRdWVyeSIgTmFtZT0iUHJvZHVjdHMiPjxUYWJsZXM+PFRhYmxlIE5hbWU9IlByb2R1Y3RzIiBYPSIzMCIgWT0iMzAiIFdpZHRoPSIxMjUiIEhlaWdodD0iMjY3IiAvPjwvVGFibGVzPjxDb2x1bW5zPjxDb2x1bW4gVGFibGU9IlByb2R1Y3RzIiBOYW1lPSJQcm9kdWN0SUQiIC8+PENvbHVtbiBUYWJsZT0iUHJvZHVjdHMiIE5hbWU9IlByb2R1Y3ROYW1lIiAvPjxDb2x1bW4gVGFibGU9IlByb2R1Y3RzIiBOYW1lPSJTdXBwbGllcklEIiAvPjxDb2x1bW4gVGFibGU9IlByb2R1Y3RzIiBOYW1lPSJDYXRlZ29yeUlEIiAvPjxDb2x1bW4gVGFibGU9IlByb2R1Y3RzIiBOYW1lPSJRdWFudGl0eVBlclVuaXQiIC8+PENvbHVtbiBUYWJsZT0iUHJvZHVjdHMiIE5hbWU9IlVuaXRQcmljZSIgLz48Q29sdW1uIFRhYmxlPSJQcm9kdWN0cyIgTmFtZT0iVW5pdHNJblN0b2NrIiAvPjxDb2x1bW4gVGFibGU9IlByb2R1Y3RzIiBOYW1lPSJVbml0c09uT3JkZXIiIC8+PENvbHVtbiBUYWJsZT0iUHJvZHVjdHMiIE5hbWU9IlJlb3JkZXJMZXZlbCIgLz48Q29sdW1uIFRhYmxlPSJQcm9kdWN0cyIgTmFtZT0iRGlzY29udGludWVkIiAvPjxDb2x1bW4gVGFibGU9IlByb2R1Y3RzIiBOYW1lPSJFQU4xMyIgLz48L0NvbHVtbnM+PE1ldGEgWD0iMTQwIiBZPSIyMCIgV2lkdGg9IjEwMCIgSGVpZ2h0PSIyMjQiIC8+PC9RdWVyeT48UmVsYXRpb24gTWFzdGVyPSJDYXRlZ29yaWVzIiBEZXRhaWw9IlByb2R1Y3RzIiBOYW1lPSJQcm9kdWN0cyI+PEtleUNvbHVtbiBNYXN0ZXI9IkNhdGVnb3J5SUQiIERldGFpbD0iQ2F0ZWdvcnlJRCIgLz48L1JlbGF0aW9uPjxSZXN1bHRTY2hlbWE+PERhdGFTZXQgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxWaWV3IE5hbWU9IkNhdGVnb3JpZXMiPjxGaWVsZCBOYW1lPSJDYXRlZ29yeUlEIiBUeXBlPSJJbnQ2NCIgLz48RmllbGQgTmFtZT0iQ2F0ZWdvcnlOYW1lIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkRlc2NyaXB0aW9uIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IlBpY3R1cmUiIFR5cGU9IkJ5dGVBcnJheSIgLz48L1ZpZXc+PFZpZXcgTmFtZT0iUHJvZHVjdHMiPjxGaWVsZCBOYW1lPSJQcm9kdWN0SUQiIFR5cGU9IkludDY0IiAvPjxGaWVsZCBOYW1lPSJQcm9kdWN0TmFtZSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJTdXBwbGllcklEIiBUeXBlPSJJbnQ2NCIgLz48RmllbGQgTmFtZT0iQ2F0ZWdvcnlJRCIgVHlwZT0iSW50NjQiIC8+PEZpZWxkIE5hbWU9IlF1YW50aXR5UGVyVW5pdCIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJVbml0UHJpY2UiIFR5cGU9IkRlY2ltYWwiIC8+PEZpZWxkIE5hbWU9IlVuaXRzSW5TdG9jayIgVHlwZT0iSW50MTYiIC8+PEZpZWxkIE5hbWU9IlVuaXRzT25PcmRlciIgVHlwZT0iSW50MTYiIC8+PEZpZWxkIE5hbWU9IlJlb3JkZXJMZXZlbCIgVHlwZT0iSW50MTYiIC8+PEZpZWxkIE5hbWU9IkRpc2NvbnRpbnVlZCIgVHlwZT0iQm9vbGVhbiIgLz48RmllbGQgTmFtZT0iRUFOMTMiIFR5cGU9IlN0cmluZyIgLz48L1ZpZXc+PFJlbGF0aW9uIE5hbWU9IlByb2R1Y3RzIiBNYXN0ZXI9IkNhdGVnb3JpZXMiIERldGFpbD0iUHJvZHVjdHMiPjxLZXlDb2x1bW4gTWFzdGVyPSJDYXRlZ29yeUlEIiBEZXRhaWw9IkNhdGVnb3J5SUQiIC8+PC9SZWxhdGlvbj48L0RhdGFTZXQ+PC9SZXN1bHRTY2hlbWE+PENvbm5lY3Rpb25PcHRpb25zIENsb3NlQ29ubmVjdGlvbj0idHJ1ZSIgLz48L1NxbERhdGFTb3VyY2U+" />
+  </ComponentStorage>
+  <ObjectStorage>
+    <Item1 Ref="2" ObjectType="DevExpress.XtraReports.Parameters.StaticListLookUpSettings, DevExpress.Printing.v20.2.Core" />
+    <Item2 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.2" Ref="5" Content="System.Boolean" Type="System.Type" />
+    <Item3 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.2" Ref="8" Content="System.Int32" Type="System.Type" />
+  </ObjectStorage>
+</XtraReportsLayoutSerializer>

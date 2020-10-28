@@ -1,0 +1,28 @@
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#total-summary">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxDataGrid Data=""@Orders"">
+    <Columns>
+        <DxDataGridDateEditColumn Field=""@nameof(Order.OrderDate)"" Width=""240px"" />
+        <DxDataGridComboBoxColumn Field=""@nameof(Order.CountryId)""
+                                  Caption=""Ship Country""
+                                  Data=""@Countries""
+                                  ValueFieldName=""@nameof(Country.Id)""
+                                  TextFieldName=""@nameof(Country.CountryName)""
+                                  Width=""250px"" />
+        <DxDataGridColumn Field=""@nameof(Order.Product)"" />
+        <DxDataGridSpinEditColumn Field=""@nameof(Order.UnitPrice)""
+                                  DisplayFormat=""c""
+                                  Width=""120px"" />
+    </Columns>
+    <TotalSummary>
+        <DxDataGridSummaryItem Field=@nameof(Order.OrderDate)
+                               SummaryType=SummaryItemType.Min
+                               DisplayFormat=""First: {0:D}"" />
+        <DxDataGridSummaryItem Field=@nameof(Order.UnitPrice)
+                               SummaryType=SummaryItemType.Sum
+                               DisplayFormat=""Sum: {0:c}"" />
+        <DxDataGridSummaryItem ShowInColumn=@nameof(Order.CountryId)
+                               SummaryType=SummaryItemType.Count />
+    </TotalSummary>
+</DxDataGrid>
+")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

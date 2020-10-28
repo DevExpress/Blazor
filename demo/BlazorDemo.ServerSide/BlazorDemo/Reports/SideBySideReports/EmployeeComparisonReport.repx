@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="20.2.0.0" Ref="0" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v20.2, Version=20.2.0.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4" Name="SideBySideReport" DisplayName="Side-by-Side Report" Margins="100, 100, 100, 75" PageWidth="850" PageHeight="1100" Version="20.2" RequestParameters="false">
+  <Parameters>
+    <Item1 Ref="3" Description="Left Side:" ValueSourceSettings="#Ref-1" ValueInfo="5" Name="leftSideParameter" Type="#Ref-2" />
+    <Item2 Ref="5" Description="Right Side:" ValueSourceSettings="#Ref-4" ValueInfo="9" Name="rightSideParameter" Type="#Ref-2" />
+  </Parameters>
+  <Bands>
+    <Item1 Ref="6" ControlType="DetailBand" Name="Detail" HeightF="375" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+      <Controls>
+        <Item1 Ref="7" ControlType="XRSubreport" Name="xrSubreport2" SizeF="318,375" LocationFloat="332,0">
+          <ParameterBindings>
+            <Item1 Ref="9" ParameterName="paramEmployeeID" Parameter="#Ref-5" />
+          </ParameterBindings>
+        </Item1>
+        <Item2 Ref="10" ControlType="XRSubreport" Name="xrSubreport1" SizeF="318,375" LocationFloat="0,0">
+          <ParameterBindings>
+            <Item1 Ref="11" ParameterName="paramEmployeeID" Parameter="#Ref-3" />
+          </ParameterBindings>
+        </Item2>
+      </Controls>
+    </Item1>
+    <Item2 Ref="12" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="75" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+      <Controls>
+        <Item1 Ref="13" ControlType="XRLabel" Name="lbCaption" Text="Employee Comparison" TextAlignment="MiddleLeft" SizeF="650,50" LocationFloat="0,0" Font="Tahoma, 20.25pt" ForeColor="Black" BackColor="Transparent" Padding="2,2,0,0,100" Borders="Bottom" BorderWidth="2" />
+      </Controls>
+    </Item2>
+    <Item3 Ref="14" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="75" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+      <Controls>
+        <Item1 Ref="15" ControlType="XRPictureBox" Name="xrPictureBox4" Padding="0,0,0,0,100" ImageSource="img,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" Sizing="AutoSize" NavigateUrl="http://www.devexpress.com/Products/NET/Reporting/" SizeF="165.625,30.208334" LocationFloat="249,22" />
+      </Controls>
+    </Item3>
+    <Item4 Ref="16" ControlType="TopMarginBand" Name="topMarginBand1" />
+  </Bands>
+  <ObjectStorage>
+    <Item1 Ref="1" ObjectType="DevExpress.XtraReports.Parameters.DynamicListLookUpSettings, DevExpress.Printing.v20.2.Core" DataSource="#Ref-17" DataMember="SimpleEmployees" ValueMember="EmployeeID" DisplayMember="FullName" />
+    <Item2 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.2" Ref="2" Content="System.Int64" Type="System.Type" />
+    <Item3 Ref="4" ObjectType="DevExpress.XtraReports.Parameters.DynamicListLookUpSettings, DevExpress.Printing.v20.2.Core" DataSource="#Ref-17" DataMember="SimpleEmployees" ValueMember="EmployeeID" DisplayMember="FullName" FilterString="[EmployeeID] &lt;&gt; ?leftSideParameter" />
+    <Item4 Ref="17" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v20.2" Name="dsEmployee1" Base64="PFNxbERhdGFTb3VyY2UgTmFtZT0iZHNFbXBsb3llZTEiPjxDb25uZWN0aW9uIE5hbWU9Ik5XaW5kQ29ubmVjdGlvblN0cmluZyIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz48UXVlcnkgVHlwZT0iU2VsZWN0UXVlcnkiIE5hbWU9IlNpbXBsZUVtcGxveWVlcyI+PFRhYmxlcz48VGFibGUgTmFtZT0iRW1wbG95ZWVzIiBYPSIzMCIgWT0iMzAiIFdpZHRoPSIxMjUiIEhlaWdodD0iNDAwIiAvPjwvVGFibGVzPjxDb2x1bW5zPjxDb2x1bW4gVGFibGU9IkVtcGxveWVlcyIgTmFtZT0iRW1wbG95ZWVJRCIgLz48RXhwcmVzc2lvbiBBbGlhcz0iRnVsbE5hbWUiPkNPTkNBVChbRW1wbG95ZWVzLkZpcnN0TmFtZV0sICcgJywgW0VtcGxveWVlcy5MYXN0TmFtZV0pPC9FeHByZXNzaW9uPjwvQ29sdW1ucz48L1F1ZXJ5PjxSZXN1bHRTY2hlbWE+PERhdGFTZXQgTmFtZT0iZHNFbXBsb3llZTEiPjxWaWV3IE5hbWU9IlNpbXBsZUVtcGxveWVlcyI+PEZpZWxkIE5hbWU9IkVtcGxveWVlSUQiIFR5cGU9IkludDMyIiAvPjxGaWVsZCBOYW1lPSJGdWxsTmFtZSIgVHlwZT0iU3RyaW5nIiAvPjwvVmlldz48L0RhdGFTZXQ+PC9SZXN1bHRTY2hlbWE+PENvbm5lY3Rpb25PcHRpb25zIENsb3NlQ29ubmVjdGlvbj0idHJ1ZSIgLz48L1NxbERhdGFTb3VyY2U+" />
+  </ObjectStorage>
+</XtraReportsLayoutSerializer>

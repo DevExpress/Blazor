@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="20.2.0.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v20.2, Version=20.2.0.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4" Name="Report" Margins="0, 0, 0, 0" PageWidth="850" PageHeight="1100" Version="20.2" RequestParameters="false" FilterString="[CustomerID] In (?paramCompany)" DataMember="Order_Details_Invoice" DataSource="#Ref-0" Font="Arial, 9.75pt">
+  <Parameters>
+    <Item1 Ref="4" Description="Company:" ValueSourceSettings="#Ref-2" MultiValue="true" ValueInfo="ALFKI" Name="paramCompany" />
+  </Parameters>
+  <CalculatedFields>
+    <Item1 Ref="5" Name="NetPrice" Expression="[UnitPrice] * [Quantity]" DataMember="Order_Details_Invoice" />
+    <Item2 Ref="6" Name="SubTotal" DisplayName="SubTotal" Expression="[][[OrderID] == [^.OrderID]].Sum([UnitPrice]*[Quantity])" DataMember="Order_Details_Invoice" />
+    <Item3 Ref="7" Name="calculatedField1" FieldType="Double" DisplayName="DiscountTotal" Expression="[][[ContactName] == [^.ContactName] AND [OrderID] == [^.OrderID]].Sum([calculatedField3])" DataMember="Order_Details_Invoice" />
+    <Item4 Ref="8" Name="calculatedField2" FieldType="Double" DisplayName="GrandTotal" Expression="[SubTotal] - [calculatedField1]" DataMember="Order_Details_Invoice" />
+    <Item5 Ref="9" Name="calculatedField3" FieldType="Double" DisplayName="PosDiscount" Expression="[Quantity]* [Discount]" DataMember="Order_Details_Invoice" />
+  </CalculatedFields>
+  <Bands>
+    <Item1 Ref="10" ControlType="TopMarginBand" Name="TopMargin" HeightF="0" />
+    <Item2 Ref="11" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="0" />
+    <Item3 Ref="12" ControlType="DetailBand" Name="Detail" FillEmptySpace="true" HeightF="31.25">
+      <Controls>
+        <Item1 Ref="13" ControlType="XRTable" Name="xrTable1" SizeF="458.4579,31.25" LocationFloat="309.9536,0" Padding="5,5,5,5,100" BorderColor="255,229,231,235" Borders="Bottom" BorderWidth="1">
+          <Rows>
+            <Item1 Ref="14" ControlType="XRTableRow" Name="xrTableRow1" Weight="13.895833333333334">
+              <Cells>
+                <Item1 Ref="15" ControlType="XRTableCell" Name="xrTableCell11" Weight="0.30743619581260517" CanGrow="false" TextFormatString="{0:00}" TextAlignment="MiddleLeft" StyleName="DetailTableCellStyle">
+                  <Summary Ref="16" Running="Group" IgnoreNullValues="true" />
+                  <ExpressionBindings>
+                    <Item1 Ref="17" EventName="BeforePrint" PropertyName="Text" Expression="sumRecordNumber([ProductName])" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="18" UsePadding="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="19" ControlType="XRTableCell" Name="xrTableCell1" Weight="1.159824794670725" CanGrow="false" TextAlignment="MiddleLeft" StyleName="DetailTableCellStyle" Padding="5,0,0,1,100">
+                  <ExpressionBindings>
+                    <Item1 Ref="20" EventName="BeforePrint" PropertyName="Text" Expression="[ProductName]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="21" UsePadding="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="22" ControlType="XRTableCell" Name="xrTableCell2" Weight="0.46119086934664444" CanGrow="false" TextFormatString="{0:$0.00}" TextAlignment="MiddleRight" StyleName="DetailTableCellStyle">
+                  <ExpressionBindings>
+                    <Item1 Ref="23" EventName="BeforePrint" PropertyName="Text" Expression="[UnitPrice]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="24" UsePadding="false" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="25" ControlType="XRTableCell" Name="xrTableCell3" Weight="0.56358944254168186" CanGrow="false" TextAlignment="MiddleRight" StyleName="DetailTableCellStyle">
+                  <ExpressionBindings>
+                    <Item1 Ref="26" EventName="BeforePrint" PropertyName="Text" Expression="[Quantity]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="27" UsePadding="false" UseTextAlignment="false" />
+                </Item4>
+                <Item5 Ref="28" ControlType="XRTableCell" Name="xrTableCell5" Weight="0.65701634470818915" CanGrow="false" TextFormatString="{0:$0.00}" TextAlignment="MiddleRight" StyleName="DetailTableCellStyle">
+                  <ExpressionBindings>
+                    <Item1 Ref="29" EventName="BeforePrint" PropertyName="Text" Expression="NetPrice" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="30" UsePadding="false" UseTextAlignment="false" />
+                </Item5>
+              </Cells>
+              <StylePriority Ref="31" UsePadding="false" />
+            </Item1>
+          </Rows>
+          <StylePriority Ref="32" UsePadding="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" />
+        </Item1>
+      </Controls>
+    </Item3>
+    <Item4 Ref="33" ControlType="GroupHeaderBand" Name="GroupHeader1" PrintAcrossBands="true" Level="2" Expanded="false" HeightF="1100">
+      <GroupFields>
+        <Item1 Ref="34" FieldName="ContactName" />
+        <Item2 Ref="35" FieldName="OrderID" />
+      </GroupFields>
+      <Controls>
+        <Item1 Ref="36" ControlType="XRPanel" Name="panel1" SizeF="247.4327,1099.157" LocationFloat="0,0" BackColor="255,66,115,187">
+          <Controls>
+            <Item1 Ref="37" ControlType="XRTable" Name="table5" SizeF="144.9713,234.1133" LocationFloat="51.07282,664.0108" Padding="2,2,0,0,100">
+              <Rows>
+                <Item1 Ref="38" ControlType="XRTableRow" Name="tableRow23" Weight="1.8689700161975629">
+                  <Cells>
+                    <Item1 Ref="39" ControlType="XRTableCell" Name="tableCell23" Weight="3" Multiline="true" Text="PAYMENT METHOD:" StyleName="InvoiceHeaderBoldStyle" Padding="8,0,2,0,100">
+                      <StylePriority Ref="40" UsePadding="false" />
+                    </Item1>
+                  </Cells>
+                </Item1>
+                <Item2 Ref="41" ControlType="XRTableRow" Name="tableRow13" Weight="0.89875136663655564">
+                  <Cells>
+                    <Item1 Ref="42" ControlType="XRTableCell" Name="tableCell15" Weight="3" Multiline="true" Text="Account №:" StyleName="InvoiceHeaderBoldStyle" Padding="8,0,2,0,100">
+                      <StylePriority Ref="43" UsePadding="false" />
+                    </Item1>
+                  </Cells>
+                </Item2>
+                <Item3 Ref="44" ControlType="XRTableRow" Name="tableRow16" Weight="0.72504107601208823">
+                  <Cells>
+                    <Item1 Ref="45" ControlType="XRTableCell" Name="tableCell16" Weight="3" Multiline="true" Text="123-45-6789" TextAlignment="TopLeft" StyleName="InvoiceHeaderDetailStyle">
+                      <StylePriority Ref="46" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item3>
+                <Item4 Ref="47" ControlType="XRTableRow" Name="tableRow17" Weight="1.2749583375551772">
+                  <Cells>
+                    <Item1 Ref="48" ControlType="XRTableCell" Name="tableCell17" Weight="3" Multiline="true" Text="Bank:" TextAlignment="BottomLeft" StyleName="InvoiceHeaderBoldStyle" Padding="8,0,2,0,100">
+                      <StylePriority Ref="49" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item4>
+                <Item5 Ref="50" ControlType="XRTableRow" Name="tableRow18" Weight="0.79696494140129992">
+                  <Cells>
+                    <Item1 Ref="51" ControlType="XRTableCell" Name="tableCell18" Weight="3" Multiline="true" Text="1st Enterprise Bank" TextAlignment="TopLeft" StyleName="InvoiceHeaderDetailStyle" Padding="8,0,1,0,100">
+                      <StylePriority Ref="52" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item5>
+                <Item6 Ref="53" ControlType="XRTableRow" Name="tableRow19" Weight="1.2685576984647813">
+                  <Cells>
+                    <Item1 Ref="54" ControlType="XRTableCell" Name="tableCell19" Weight="3" Multiline="true" Text="Swift Code:" TextAlignment="BottomLeft" StyleName="InvoiceHeaderBoldStyle" Padding="8,0,2,0,100">
+                      <StylePriority Ref="55" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item6>
+                <Item7 Ref="56" ControlType="XRTableRow" Name="tableRow20" Weight="1.0751197621124016">
+                  <Cells>
+                    <Item1 Ref="57" ControlType="XRTableCell" Name="tableCell20" Weight="3" Multiline="true" Text="SWFTKUS6LXXX" TextAlignment="TopLeft" StyleName="InvoiceHeaderDetailStyle" Padding="8,0,2,0,100">
+                      <StylePriority Ref="58" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item7>
+                <Item8 Ref="59" ControlType="XRTableRow" Name="tableRow21" Weight="0.99135397592214081">
+                  <Cells>
+                    <Item1 Ref="60" ControlType="XRTableCell" Name="tableCell21" Weight="3" Multiline="true" Text="Card Payment:" TextAlignment="BottomLeft" StyleName="InvoiceHeaderBoldStyle" Padding="8,0,2,0,100">
+                      <StylePriority Ref="61" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item8>
+                <Item9 Ref="62" ControlType="XRTableRow" Name="tableRow22" Weight="1.4467637043944475">
+                  <Cells>
+                    <Item1 Ref="63" ControlType="XRTableCell" Name="tableCell22" Weight="3" Multiline="true" Text="Visa, MasterCard, American Express" TextAlignment="TopLeft" StyleName="InvoiceHeaderDetailStyle" Padding="8,0,2,0,100">
+                      <StylePriority Ref="64" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item9>
+              </Rows>
+            </Item1>
+            <Item2 Ref="65" ControlType="XRTable" Name="table4" SizeF="144.9713,155.4726" LocationFloat="51.07282,267.5371" Padding="2,2,0,0,100">
+              <Rows>
+                <Item1 Ref="66" ControlType="XRTableRow" Name="tableRow7" Weight="0.89875136663655564">
+                  <Cells>
+                    <Item1 Ref="67" ControlType="XRTableCell" Name="tableCell9" Weight="3" Multiline="true" Text="Address:" StyleName="InvoiceHeaderBoldStyle" Padding="8,0,2,0,100">
+                      <StylePriority Ref="68" UsePadding="false" />
+                    </Item1>
+                  </Cells>
+                </Item1>
+                <Item2 Ref="69" ControlType="XRTableRow" Name="tableRow8" Weight="1.8536609350924902">
+                  <Cells>
+                    <Item1 Ref="70" ControlType="XRTableCell" Name="tableCell10" Weight="3" Multiline="true" Text="One Portals Way, Twin Points WA, 98156" TextAlignment="TopLeft" StyleName="InvoiceHeaderDetailStyle">
+                      <StylePriority Ref="71" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item2>
+                <Item3 Ref="72" ControlType="XRTableRow" Name="tableRow9" Weight="0.89875277153706556">
+                  <Cells>
+                    <Item1 Ref="73" ControlType="XRTableCell" Name="tableCell11" Weight="3" Multiline="true" Text="Phone:" StyleName="InvoiceHeaderBoldStyle" Padding="8,0,2,0,100">
+                      <StylePriority Ref="74" UsePadding="false" />
+                    </Item1>
+                  </Cells>
+                </Item3>
+                <Item4 Ref="75" ControlType="XRTableRow" Name="tableRow10" Weight="0.752798909588049">
+                  <Cells>
+                    <Item1 Ref="76" ControlType="XRTableCell" Name="tableCell12" Weight="3" CanGrow="false" Multiline="true" Text="1-206-555-1417&#x9;" TextAlignment="TopLeft" StyleName="InvoiceHeaderDetailStyle">
+                      <StylePriority Ref="77" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item4>
+                <Item5 Ref="78" ControlType="XRTableRow" Name="tableRow11" Weight="1.1969302526990893">
+                  <Cells>
+                    <Item1 Ref="79" ControlType="XRTableCell" Name="tableCell13" Weight="3" CanGrow="false" Multiline="true" Text="Web:" TextAlignment="BottomLeft" StyleName="InvoiceHeaderBoldStyle" Padding="8,0,2,0,100">
+                      <StylePriority Ref="80" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item5>
+                <Item6 Ref="81" ControlType="XRTableRow" Name="tableRow12" Weight="1.2701143281899576">
+                  <Cells>
+                    <Item1 Ref="82" ControlType="XRTableCell" Name="tableCell14" Weight="3" Multiline="true" Text="www.northwind.com" TextAlignment="TopLeft" StyleName="InvoiceHeaderDetailStyle" Padding="8,0,2,0,100">
+                      <StylePriority Ref="83" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item6>
+              </Rows>
+            </Item2>
+            <Item3 Ref="84" ControlType="XRTable" Name="table3" SizeF="144.9713,186.8392" LocationFloat="51.07282,464.3613" Padding="2,2,0,0,100">
+              <Rows>
+                <Item1 Ref="85" ControlType="XRTableRow" Name="tableRow5" Weight="1">
+                  <Cells>
+                    <Item1 Ref="86" ControlType="XRTableCell" Name="tableCell6" Weight="3" Multiline="true" Text="TO:" StyleName="InvoiceHeaderBoldStyle" />
+                  </Cells>
+                </Item1>
+                <Item2 Ref="87" ControlType="XRTableRow" Name="tableRow6" Weight="1.7524123017290458">
+                  <Cells>
+                    <Item1 Ref="88" ControlType="XRTableCell" Name="tableCell7" Weight="3" Multiline="true" StyleName="InvoiceHeaderDetailStyle">
+                      <ExpressionBindings>
+                        <Item1 Ref="89" EventName="BeforePrint" PropertyName="Text" Expression="[CompanyName]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="90" UseForeColor="false" />
+                    </Item1>
+                  </Cells>
+                </Item2>
+                <Item3 Ref="91" ControlType="XRTableRow" Name="tableRow27" Weight="0.78219513574322919">
+                  <Cells>
+                    <Item1 Ref="92" ControlType="XRTableCell" Name="tableCell24" Weight="3" Multiline="true" Text="Address:" TextAlignment="BottomLeft" StyleName="InvoiceHeaderBoldStyle">
+                      <StylePriority Ref="93" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item3>
+                <Item4 Ref="94" ControlType="XRTableRow" Name="tableRow28" Weight="1.9702171659858168">
+                  <Cells>
+                    <Item1 Ref="95" ControlType="XRTableCell" Name="tableCell25" Weight="3" Multiline="true" TextAlignment="TopLeft" StyleName="InvoiceHeaderDetailStyle" Padding="8,0,2,0,100">
+                      <ExpressionBindings>
+                        <Item1 Ref="96" EventName="BeforePrint" PropertyName="Text" Expression="FormatString('{0}, {1}, {2}', [Address], [City], [Country])" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="97" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item4>
+                <Item5 Ref="98" ControlType="XRTableRow" Name="tableRow29" Weight="0.82179092401249076">
+                  <Cells>
+                    <Item1 Ref="99" ControlType="XRTableCell" Name="tableCell26" Weight="3" Multiline="true" Text="Phone:" TextAlignment="BottomLeft" StyleName="InvoiceHeaderBoldStyle">
+                      <StylePriority Ref="100" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item5>
+                <Item6 Ref="101" ControlType="XRTableRow" Name="tableRow30" Weight="1.9306213777165553">
+                  <Cells>
+                    <Item1 Ref="102" ControlType="XRTableCell" Name="tableCell27" Weight="3" Multiline="true" TextAlignment="TopLeft" StyleName="InvoiceHeaderDetailStyle" Padding="8,0,0,0,100">
+                      <ExpressionBindings>
+                        <Item1 Ref="103" EventName="BeforePrint" PropertyName="Text" Expression="[Phone]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="104" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item6>
+              </Rows>
+            </Item3>
+            <Item4 Ref="105" ControlType="XRTable" Name="table2" SizeF="115.2778,62.27972" LocationFloat="51.07282,205.2573" Padding="2,2,0,0,100">
+              <Rows>
+                <Item1 Ref="106" ControlType="XRTableRow" Name="tableRow4" Weight="1">
+                  <Cells>
+                    <Item1 Ref="107" ControlType="XRTableCell" Name="tableCell8" Weight="3" Multiline="true" Text="FROM:" StyleName="InvoiceHeaderBoldStyle" />
+                  </Cells>
+                </Item1>
+                <Item2 Ref="108" ControlType="XRTableRow" Name="tableRow3" Weight="1.7524123017290458">
+                  <Cells>
+                    <Item1 Ref="109" ControlType="XRTableCell" Name="tableCell5" Weight="3" Multiline="true" Text="Northwind Traders" StyleName="InvoiceHeaderDetailStyle" />
+                  </Cells>
+                </Item2>
+              </Rows>
+            </Item4>
+            <Item5 Ref="110" ControlType="XRPictureBox" Name="pictureBox1" Padding="16,0,5,0,100" ImageSource="svg,77u/PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAxMTIgNzIiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgaWQ9IkxheWVyXzEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDExMiA3MiI+DQogIDxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+CgkuV2hpdGV7ZmlsbDojRkZGRkZGO30KCS5zdDB7b3BhY2l0eTowLjU7fQo8L3N0eWxlPg0KICA8ZyBjbGFzcz0ic3QwIj4NCiAgICA8cG9seWdvbiBwb2ludHM9IjEwLDM4IDIzLDI1IDM2LDM4IDM2LDQ4IDIzLDM1IDEwLDQ4ICAiIGNsYXNzPSJXaGl0ZSIgLz4NCiAgICA8cGF0aCBkPSJNNjMuNywzNS44aC0yLjNsLTYtOS4zYy0wLjItMC4yLTAuMy0wLjUtMC40LTAuN2wwLDBjMCwwLjMsMC4xLDAuOCwwLjEsMS43djguM2gtMlYyMy4yaDIuNGw1LjgsOSAgIGMwLjIsMC40LDAuNCwwLjYsMC41LDAuOGwwLDBjLTAuMS0wLjMtMC4xLTAuOS0wLjEtMS43di04LjFoMlYzNS44eiBNNzIsMzZjLTEuOCwwLTMuMy0wLjYtNC40LTEuOFM2NiwzMS41LDY2LDI5LjYgICBjMC0yLDAuNi0zLjYsMS43LTQuOXMyLjYtMS44LDQuNS0xLjhjMS44LDAsMy4yLDAuNiw0LjMsMS44YzEuMSwxLjIsMS42LDIuNywxLjYsNC42YzAsMi4xLTAuNiwzLjctMS43LDQuOVM3My45LDM2LDcyLDM2eiAgICBNNzIuMSwyNC44Yy0xLjIsMC0yLjEsMC40LTIuOCwxLjNzLTEuMSwyLTEuMSwzLjRzMC40LDIuNSwxLjEsMy40YzAuNywwLjksMS42LDEuMywyLjgsMS4zYzEuMiwwLDIuMi0wLjQsMi45LTEuMnMxLTIsMS0zLjQgICBjMC0xLjUtMC4zLTIuNy0xLTMuNUM3NC4yLDI1LjIsNzMuMywyNC44LDcyLjEsMjQuOHogTTkwLjIsMzUuOGgtMi40bC0yLTMuNGMtMC4yLTAuMy0wLjQtMC42LTAuNS0wLjhjLTAuMi0wLjItMC4zLTAuNC0wLjUtMC41ICAgcy0wLjQtMC4yLTAuNi0wLjNzLTAuNC0wLjEtMC43LTAuMWgtMC44djUuMWgtMi4xVjIzLjJoNC4xYzAuNiwwLDEuMSwwLjEsMS42LDAuMnMwLjksMC40LDEuMywwLjZzMC43LDAuNiwwLjksMS4xICAgYzAuMiwwLjQsMC4zLDAuOSwwLjMsMS41YzAsMC40LTAuMSwwLjktMC4yLDEuMmMtMC4xLDAuNC0wLjMsMC43LTAuNiwxcy0wLjUsMC41LTAuOSwwLjdjLTAuMywwLjItMC43LDAuNC0xLjIsMC41bDAsMCAgIGMwLjIsMC4xLDAuNCwwLjMsMC42LDAuNHMwLjMsMC4zLDAuNSwwLjVzMC4zLDAuNCwwLjUsMC42YzAuMSwwLjIsMC4zLDAuNCwwLjUsMC43TDkwLjIsMzUuOHogTTgyLjUsMjQuOVYyOWgxLjcgICBjMC4zLDAsMC42LDAsMC45LTAuMXMwLjUtMC4yLDAuNy0wLjRzMC40LTAuNCwwLjUtMC43czAuMi0wLjYsMC4yLTAuOWMwLTAuNi0wLjItMS4xLTAuNi0xLjRTODUsMjUsODQuMywyNWgtMS44VjI0Ljl6IE05OS4zLDI1ICAgaC0zLjZ2MTAuOGgtMi4xVjI1SDkwdi0xLjhoOS4zVjI1eiBNMTExLjMsMzUuOGgtMi4xdi01LjVoLTUuOXY1LjVoLTIuMVYyMy4yaDIuMXY1LjNoNS45di01LjNoMi4xVjM1Ljh6IiBjbGFzcz0iV2hpdGUiIC8+DQogICAgPHBvbHlnb24gcG9pbnRzPSI2OCw1NSA2OCw2OCA0LDY4IDQsNCA2OCw0IDY4LDIwIDcyLDIwIDcyLDAgMCwwIDAsNzIgNzIsNzIgNzIsNTUgICIgY2xhc3M9IldoaXRlIiAvPg0KICAgIDxwYXRoIGQ9Ik02NC42LDUyaC0wLjdsLTIuOC05LjhjLTAuMS0wLjUtMC4yLTAuOS0wLjItMS4ybDAsMGMwLDAuMy0wLjEsMC43LTAuMywxLjJsLTMsOS44aC0wLjdMNTMsMzloMWwyLjksMTAuNCAgIGMwLjEsMC41LDAuMiwwLjksMC4zLDEuMmwwLDBjMC0wLjIsMC4xLTAuNiwwLjMtMS4yTDYwLjYsMzlINjFsMi45LDEwLjRjMC4xLDAuNSwwLjIsMC45LDAuMywxLjJsMCwwYzAtMC4yLDAuMS0wLjQsMC4xLTAuNmwzLTExICAgaDAuOUw2NC42LDUyeiBNNzAuNCw1MlYzOWgwLjl2MTNINzAuNHogTTgzLjUsNTJsLTcuNi0xMC41Yy0wLjItMC4yLTAuMy0wLjQtMC40LTAuNmwtMC4xLTAuMmwwLDBjMCwwLjIsMCwwLjMsMCwwLjZWNTJoLTAuOVYzOSAgIGgwLjdsNy41LDEwLjRjMC4yLDAuMiwwLjMsMC41LDAuNSwwLjhsMCwwYzAtMC40LDAtMC44LDAtMS4xVjM5aDAuOXYxM0g4My41eiBNODcuNCw1MlYzOWgzLjJjMi4xLDAsMy43LDAuNSw0LjgsMS42ICAgYzEuMSwxLjEsMS42LDIuNiwxLjYsNC43YzAsMi0wLjYsMy42LTEuOCw0LjhDOTQsNTEuMyw5Mi40LDUyLDkwLjMsNTJIODcuNHogTTg4LjIsMzkuOHYxMS40aDJjMS45LDAsMy4zLTAuNSw0LjMtMS41ICAgczEuNS0yLjQsMS41LTQuM2MwLTMuNy0xLjktNS41LTUuNy01LjVMODguMiwzOS44TDg4LjIsMzkuOHoiIGNsYXNzPSJXaGl0ZSIgLz4NCiAgPC9nPg0KPC9zdmc+" SizeF="148.3669,103.9839" LocationFloat="44.27083,54.6875">
+              <StylePriority Ref="111" UsePadding="false" />
+            </Item5>
+          </Controls>
+          <StylePriority Ref="112" UseBackColor="false" />
+        </Item1>
+      </Controls>
+    </Item4>
+    <Item5 Ref="113" ControlType="GroupHeaderBand" Name="GroupHeader2" HeightF="33.33333">
+      <Controls>
+        <Item1 Ref="114" ControlType="XRTable" Name="xrTable2" SizeF="458.4583,33.33333" LocationFloat="309.9538,0" StyleName="TableHeaderStyle" Font="Arial, 8pt, style=Bold" BorderColor="255,61,64,70" Borders="Top, Bottom">
+          <Rows>
+            <Item1 Ref="115" ControlType="XRTableRow" Name="xrTableRow2" Weight="11.236641221374045">
+              <Cells>
+                <Item1 Ref="116" ControlType="XRTableCell" Name="xrTableCell12" Weight="0.30522042045810632" Text="Pos.">
+                  <StylePriority Ref="117" UsePadding="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="118" ControlType="XRTableCell" Name="xrTableCell6" Weight="1.1514660692383285" Text="Product Name" Padding="5,0,0,0,100">
+                  <StylePriority Ref="119" UsePadding="false" />
+                </Item2>
+                <Item3 Ref="120" ControlType="XRTableCell" Name="xrTableCell7" Weight="0.45786681207803032" Text="Unit Price" TextAlignment="MiddleRight">
+                  <StylePriority Ref="121" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="122" ControlType="XRTableCell" Name="xrTableCell8" Weight="0.5595259129897151" Text="Quantity" TextAlignment="MiddleRight">
+                  <StylePriority Ref="123" UsePadding="false" UseTextAlignment="false" />
+                </Item4>
+                <Item5 Ref="124" ControlType="XRTableCell" Name="xrTableCell10" Weight="0.652284177027956" Text="Total" TextAlignment="MiddleRight">
+                  <StylePriority Ref="125" UsePadding="false" UseTextAlignment="false" />
+                </Item5>
+              </Cells>
+              <StylePriority Ref="126" UsePadding="false" />
+            </Item1>
+          </Rows>
+          <StylePriority Ref="127" UseFont="false" UseForeColor="false" UsePadding="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" />
+        </Item1>
+      </Controls>
+    </Item5>
+    <Item6 Ref="128" ControlType="GroupHeaderBand" Name="GroupHeader3" Level="1" HeightF="200">
+      <Controls>
+        <Item1 Ref="129" ControlType="XRTable" Name="table1" SizeF="123.5574,89.82597" LocationFloat="644.8574,75.69452" Padding="2,0,0,0,100">
+          <Rows>
+            <Item1 Ref="130" ControlType="XRTableRow" Name="tableRow1" Weight="0.91397862588205647">
+              <Cells>
+                <Item1 Ref="131" ControlType="XRTableCell" Name="tableCell1" Weight="1" Multiline="true" Text="Order №:" StyleName="GreyTextStyle">
+                  <StylePriority Ref="132" UseFont="false" />
+                </Item1>
+              </Cells>
+            </Item1>
+            <Item2 Ref="133" ControlType="XRTableRow" Name="tableRow2" Weight="1.3612903225806452">
+              <Cells>
+                <Item1 Ref="134" ControlType="XRTableCell" Name="tableCell2" Weight="1" Multiline="true" TextAlignment="TopRight" StyleName="HeaderBoldTextStyle" ForeColor="255,61,64,70">
+                  <ExpressionBindings>
+                    <Item1 Ref="135" EventName="BeforePrint" PropertyName="Text" Expression="[OrderID]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="136" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                </Item1>
+              </Cells>
+            </Item2>
+            <Item3 Ref="137" ControlType="XRTableRow" Name="tableRow14" Weight="0.81391444052419359">
+              <Cells>
+                <Item1 Ref="138" ControlType="XRTableCell" Name="tableCell3" Weight="1" Multiline="true" Text="Order Date:" StyleName="GreyTextStyle">
+                  <StylePriority Ref="139" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+              </Cells>
+            </Item3>
+            <Item4 Ref="140" ControlType="XRTableRow" Name="tableRow15" Weight="1.3615483437815019">
+              <Cells>
+                <Item1 Ref="141" ControlType="XRTableCell" Name="tableCell4" Weight="1" TextFormatString="{0:MMMM d, yyyy}" Multiline="true" TextAlignment="TopRight" StyleName="HeaderBoldTextStyle" ForeColor="255,61,64,70">
+                  <ExpressionBindings>
+                    <Item1 Ref="142" EventName="BeforePrint" PropertyName="Text" Expression="Now()" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="143" UseFont="false" UseForeColor="false" UseTextAlignment="false" />
+                </Item1>
+              </Cells>
+            </Item4>
+          </Rows>
+          <StylePriority Ref="144" UsePadding="false" />
+        </Item1>
+        <Item2 Ref="145" ControlType="XRLabel" Name="xrLabel17" CanGrow="false" Text="INVOICE" SizeF="211.6745,53.20831" LocationFloat="306.25,73.95834" StyleName="TitleStyle">
+          <StylePriority Ref="146" UseFont="false" UseForeColor="false" UseBackColor="false" UsePadding="false" UseTextAlignment="false" />
+        </Item2>
+      </Controls>
+    </Item6>
+    <Item7 Ref="147" ControlType="GroupFooterBand" Name="GroupFooter1" PrintAtBottom="true" Level="2" HeightF="429">
+      <Controls>
+        <Item1 Ref="148" ControlType="XRLine" Name="line2" LineWidth="2" SizeF="460.0484,2" LocationFloat="309.9538,0" ForeColor="255,61,64,70" BorderColor="255,92,100,118" BorderWidth="1">
+          <StylePriority Ref="149" UseForeColor="false" UseBorderColor="false" UseBorderWidth="false" />
+        </Item1>
+        <Item2 Ref="150" ControlType="XRTable" Name="table7" SizeF="214.0729,94.14556" LocationFloat="555.926,2" Padding="2,2,0,0,100">
+          <Rows>
+            <Item1 Ref="151" ControlType="XRTableRow" Name="tableRow24" Weight="0.31844500653974622" Borders="Bottom" BorderWidth="2.5">
+              <Cells>
+                <Item1 Ref="152" ControlType="XRTableCell" Name="tableCell37" Weight="1.5" Multiline="true" Text="Sub Total:" TextAlignment="MiddleLeft" StyleName="TotalCellStyle" ForeColor="255,61,64,70" BorderColor="255,229,231,235" BorderWidth="1">
+                  <StylePriority Ref="153" UseForeColor="false" UseBorderColor="false" UseBorderWidth="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="154" ControlType="XRTableCell" Name="tableCell39" Weight="1.5" TextFormatString="{0:$0.00}" Multiline="true" TextAlignment="MiddleRight" StyleName="TotalCellStyle" BorderColor="255,229,231,235" BorderWidth="1">
+                  <ExpressionBindings>
+                    <Item1 Ref="155" EventName="BeforePrint" PropertyName="Text" Expression="[SubTotal]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="156" UseBorderColor="false" UseBorderWidth="false" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+              <StylePriority Ref="157" UseBorders="false" UseBorderWidth="false" />
+            </Item1>
+            <Item2 Ref="158" ControlType="XRTableRow" Name="tableRow25" Weight="0.334263861744661">
+              <Cells>
+                <Item1 Ref="159" ControlType="XRTableCell" Name="tableCell40" Weight="1.5" Multiline="true" Text="Discount Total:" TextAlignment="MiddleLeft" StyleName="TotalCellStyle" ForeColor="255,167,174,187" BorderColor="255,61,64,70" Borders="Bottom">
+                  <StylePriority Ref="160" UseFont="false" UseForeColor="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="161" ControlType="XRTableCell" Name="tableCell41" Weight="1.5" TextFormatString="{0:$0.00}" Multiline="true" TextAlignment="MiddleRight" StyleName="TotalCellStyle" ForeColor="255,167,174,187" BorderColor="255,61,64,70" Borders="Bottom">
+                  <ExpressionBindings>
+                    <Item1 Ref="162" EventName="BeforePrint" PropertyName="Text" Expression="[calculatedField1]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="163" UseFont="false" UseForeColor="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item2>
+            <Item3 Ref="164" ControlType="XRTableRow" Name="tableRow26" Weight="0.32430194900068887" BorderWidth="2.5">
+              <Cells>
+                <Item1 Ref="165" ControlType="XRTableCell" Name="tableCell42" Weight="1.5" Multiline="true" Text="Grand Total:" TextAlignment="MiddleLeft" StyleName="TotalCellStyle" ForeColor="255,61,64,70" BorderColor="255,61,64,70" Borders="Bottom">
+                  <StylePriority Ref="166" UseForeColor="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="167" ControlType="XRTableCell" Name="tableCell43" Weight="1.5" TextFormatString="{0:$0.00}" Multiline="true" TextAlignment="MiddleRight" StyleName="TotalCellStyle" ForeColor="255,61,64,70" BorderColor="255,61,64,70" Borders="Bottom">
+                  <ExpressionBindings>
+                    <Item1 Ref="168" EventName="BeforePrint" PropertyName="Text" Expression="[calculatedField2]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="169" UseFont="false" UseForeColor="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+              <StylePriority Ref="170" UseBorderWidth="false" />
+            </Item3>
+          </Rows>
+        </Item2>
+        <Item3 Ref="171" ControlType="XRBarCode" Name="barCode2" AutoModule="true" Alignment="MiddleCenter" ShowText="false" Text="10634" SizeF="215.002,61.99999" LocationFloat="555,113.5417" StyleName="TitleStyle" Padding="0,0,12,12,100">
+          <Symbology Ref="172" Name="Code128" />
+          <ExpressionBindings>
+            <Item1 Ref="173" EventName="BeforePrint" PropertyName="Text" Expression="OrderID" />
+          </ExpressionBindings>
+          <StylePriority Ref="174" UsePadding="false" />
+        </Item3>
+        <Item4 Ref="175" ControlType="XRPictureBox" Name="pictureBox3" ImageSource="svg,77u/PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAxMjAgOTAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgaWQ9IkxheWVyXzEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDEyMCA5MCI+DQogIDxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+CgkuQmxhY2t7ZmlsbDojM0I0MjUxO30KPC9zdHlsZT4NCiAgPHBhdGggZD0iTTgxLjYsNDkuOGMwLjUtMC4yLDEuOS00LjUsMi41LTUuNmMwLjQtMC43LDAuNC0wLjcsMS4zLTFjMC4yLTEsMC41LTIsMS4xLTIuOGMwLjIsMCwwLjUtMC4xLDAuOC0wLjIgIGMwLjEtMC4yLDAuMy0wLjQsMC41LTAuN2MwLjMsMC4xLDAuNiwwLjEsMC45LDAuMmMwLDAuMywwLjEsMC41LDAuMSwwLjdjMC4yLTAuMSwwLDAuMiwwLjktMS44YzAuMywwLjEsMC42LDAuMSwwLjksMC4xICBjMC4xLDAuMywwLjIsMC41LDAuMywwLjdjMi4xLTAuNCwxLjUtNy4zLDguNC0yOS45YzAuMi0wLjUsMC40LTEsMC44LTEuM2M1LTAuMi0yLDIzLjQtNi40LDI5LjdjLTEsMS40LTIuMiwxMi45LTIuMiwxNC44ICBjMC4zLTAuMSwwLjEsMC41LDIuMS01LjVjMC41LTEuNSwwLjEtMS4yLDAuNC0yLjRjMC40LTAuMiwwLjgtMC4xLDEuMSwwLjFjMC40LDAuNS0wLjEsMS4xLDAuNCwxLjZjMS4xLTAuMSwyLjctMS44LDMuNC0zLjYgIGMtMS4xLTEuNi0wLjYtMy4xLDAuNy00LjFjMC40LTAuMSwwLjgsMCwxLjIsMC4zYzAuNCwxLjItMC4zLDIuNC0wLjQsMy43YzUuNCwwLjYsMTEuNS0xMC45LDkuOC0xMy42Yy0xLDAuNS0xLjksMS0zLjMsMS40ICBjLTgsMi4yLTQuMi04LjcsMS41LTYuMmMxLjcsMC44LDIuMywyLjIsMi41LDIuN2MwLjktMC4yLDEuNS0xLjMsMi41LTEuNmMwLjIsMC4xLDAuNiwwLjIsMC45LDAuM2MwLjEsMC43LTAuMiwxLjEtMC43LDEuMiAgYy0wLjksMC4yLTEuNSwwLjktMi4yLDEuNGMwLjEsMS44LDAuNSw0LTEuNCw3LjdjLTEuMywyLjUtMy4yLDUuMS01LjYsNi41Yy0xLjMsMC44LTIuNywxLjMtNC4zLDAuOWMtMS40LDItMi43LDQuMi01LjEsMy43ICBjLTEsMy4zLTIuMSw2LjQtMy40LDkuNGMtMC41LDAuMy0wLjksMC4yLTEuMy0wLjFjLTAuOS0xLjIsMS4yLTE0LjIsMS4zLTE1LjljLTAuNSwwLTEsMC0xLjQsMGMtMS4xLDEuNi0xLjEsMS42LTIuNCwxLjkgIGMtMC41LDIuMi0wLjMsMS41LTAuOCwyLjNjLTAuOCwwLjItMC44LDAuMi0xLjctMC4xYy0wLjYsMC44LTEuOCw0LjctMyw3LjNjLTAuNCwwLjktMS42LDAuNy0xLjgtMC4yYy0wLjQtMi0wLjQtMTIuNy00LjgtMTIuMSAgYy0wLjEsMC4yLTUuMywzNC4xLTE1LjUsNDMuNWMtMy40LDMuMS02LjQsMS41LTcuNC0wLjJDNDcuMiw3Myw2MS41LDQyLjksNzQuMywzOWMwLjUtMS40LDYuMy01MC4yLTExLjktMjguOSAgYy00LjYsNS41LTE0LjUsMjAuNS0xMiwzNGMtMC41LDAuMi0wLjUsMC4yLTEsMGMtMC42LTAuOS0xLTQuMi0wLjYtNy4zQzUwLjcsMTkuOCw3MC40LTguMiw3NS40LDkuNGMyLjksMTAuNSwwLjQsMjcuNiwwLjQsMjkuNCAgQzgwLjksNDAuMSw4MC44LDQzLjcsODEuNiw0OS44eiBNNzQuMiwzOS45Yy0xMC44LDIuNC0yNy4yLDM3LTE5LjQsNDMuOEM2MC44LDg5LDcyLjIsNTguNyw3NC4yLDM5Ljl6IE05NC40LDM0LjMgIGMzLjYtNiw3LjUtMjMuMiw2LjItMjQuM0M5OS42LDEyLDk1LjEsMjkuNCw5NC40LDM0LjN6IE0xMTAsMjhjLTAuNS0yLTIuMi00LjItNC4zLTIuOGMtMi40LDEuNi0zLjQsNS43LTAuNSw1LjEgIEMxMDcsMjkuOSwxMDguNiwyOS4xLDExMCwyOHogTTcuOSw2MC44YzAuNSwwLDAuOCwwLDAuOSwwLjRjLTAuMiwwLjUtMC44LDAuOC0xLDEuM2MwLjMsMC4yLDAuNSwwLDAuNy0wLjFjMTMtNi4yLDEwLjUtNSwxNi4yLTcuMiAgYzAuNi0xLjYsMy0xMSw3LjMtMjFjNy4yLTE2LjcsMTUuNi0yNC40LDEwLjYsNWMtMC4xLDAuOC0xLjgsMTAuNy0xLjgsMTIuMWMxLjYsMCw1LjktMC4yLDUuOSwyLjZjMCwwLjQtMC4xLDAuOC0wLjYsMSAgYy0wLjctMS4xLTAuMS0zLjktNS41LTIuOWMtMC42LDIuNy0xLjEsMTAuNi0xLjgsMTIuM2MtMC40LDAuMS0wLjgsMC0xLjEtMC4yYzAsMCwxLjMtOS40LDEuNC0xMS43Yy0wLjctMC43LTEyLDIuOC0xMy4zLDMuMyAgYy0yLjMsOC4zLTUuMSwxOS45LTguOSwyMy4xYy0yLjIsMS44LTQuOC0wLjctMy4zLTQuOWMwLjQtMC4yLDAuNy0wLjIsMS4xLDAuMmMtMC4yLDEuNS0wLjcsMy4xLDAuMyw0LjdjNC41LTEuNyw5LTIxLjEsOS4zLTIyLjMgIGMtMC42LTAuNy0xNCw2LjItMTYuOSw3LjNjLTAuNiwwLjItMC44LDAuMi0xLjUtMC4zQzUuOSw2Mi43LDcuNiw2MS4xLDcuOSw2MC44eiBNNDIuMiwyMC4yYy01LjIsMS0xNi42LDMzLjUtMTUuOCwzNC40ICBjOC0yLjIsNC41LTEuNCwxMy0zLjNjMC40LTIuMSwwLjYtNC4zLDEuMi03LjZDNDEuNCwzOC45LDQ0LjcsMjIuMiw0Mi4yLDIwLjJ6IE00Ni43LDYwLjNjLTAuNCwwLjktMC45LDIuMy0wLjYsMy4zICBjMS4xLTAuMiwxLTAuMywxLjYtMy4xQzQ3LjUsNjAuMSw0Ny4xLDYwLjEsNDYuNyw2MC4zeiIgY2xhc3M9IkJsYWNrIiAvPg0KPC9zdmc+" SizeF="119.4445,95.48613" LocationFloat="553.3149,205.866" />
+        <Item5 Ref="176" ControlType="XRTable" Name="table9" SizeF="117.5714,43.69208" LocationFloat="650.8401,301.3521" Padding="2,2,0,0,100">
+          <Rows>
+            <Item1 Ref="177" ControlType="XRTableRow" Name="tableRow32" Weight="0.80884953687274619">
+              <Cells>
+                <Item1 Ref="178" ControlType="XRTableCell" Name="tableCell53" Weight="2" Multiline="true" Text="Andrew Jacobson" TextAlignment="BottomRight" StyleName="HeaderBoldTextStyle">
+                  <StylePriority Ref="179" UsePadding="false" UseTextAlignment="false" />
+                </Item1>
+              </Cells>
+            </Item1>
+            <Item2 Ref="180" ControlType="XRTableRow" Name="tableRow33" Weight="0.52743325318822309">
+              <Cells>
+                <Item1 Ref="181" ControlType="XRTableCell" Name="tableCell54" Weight="2" Multiline="true" Text="Account Manager" StyleName="GreyTextStyle" Font="Arial, 7.5pt, style=Bold">
+                  <StylePriority Ref="182" UseFont="false" UsePadding="false" />
+                </Item1>
+              </Cells>
+            </Item2>
+          </Rows>
+        </Item5>
+      </Controls>
+    </Item7>
+  </Bands>
+  <StyleSheet>
+    <Item1 Ref="183" Name="GreyTextStyle" BorderStyle="Inset" Font="Arial, 8.5pt, style=Bold" ForeColor="255,167,174,187" StringFormat="Far;Center;0;None;Character;Default" TextAlignment="MiddleRight" />
+    <Item2 Ref="184" Name="HeaderBoldTextStyle" BorderStyle="Inset" Font="Arial, 8.5pt, style=Bold" ForeColor="255,67,73,86" StringFormat="Far;Center;0;None;Character;Default" TextAlignment="MiddleRight" />
+    <Item3 Ref="185" Name="TableHeaderStyle" BorderStyle="Inset" Padding="0,0,0,0,100" Font="Arial, 8.5pt, style=Bold" ForeColor="255,61,64,70" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" BorderWidthSerializable="2" />
+    <Item4 Ref="186" Name="DetailTableCellStyle" BorderStyle="Inset" Padding="0,0,0,1,100" Font="Arial, 8.5pt" ForeColor="255,67,73,86" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" />
+    <Item5 Ref="187" Name="TotalCellStyle" BorderStyle="Inset" Padding="0,2,0,0,100" Font="Arial, 8.5pt, style=Bold" ForeColor="255,61,64,70" BorderColor="255,61,64,70" Sides="Bottom" StringFormat="Near;Near;0;None;Character;Default" BorderWidthSerializable="2" />
+    <Item6 Ref="188" Name="InvoiceHeaderBoldStyle" BorderStyle="Inset" Padding="8,0,0,0,100" Font="Arial, 8.5pt, style=Bold" ForeColor="125,255,255,255" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" />
+    <Item7 Ref="189" Name="InvoiceHeaderDetailStyle" BorderStyle="Inset" Padding="8,0,0,0,100" Font="Arial, 8.5pt" ForeColor="White" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" />
+    <Item8 Ref="190" Name="TitleStyle" BorderStyle="Inset" Font="Arial, 36pt, style=Bold" ForeColor="255,61,64,70" StringFormat="Near;Near;0;None;Character;Default" />
+  </StyleSheet>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v20.2" Name="InvoiceDataSource" Base64="PFNxbERhdGFTb3VyY2UgTmFtZT0iSW52b2ljZURhdGFTb3VyY2UiPjxDb25uZWN0aW9uIE5hbWU9Ik5XaW5kQ29ubmVjdGlvblN0cmluZyIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz48UXVlcnkgVHlwZT0iU2VsZWN0UXVlcnkiIE5hbWU9Ik9yZGVyX0RldGFpbHNfSW52b2ljZSI+PFRhYmxlcz48VGFibGUgTmFtZT0iT3JkZXJzIiBYPSIzMCIgWT0iMzAiIFdpZHRoPSIxMjUiIEhlaWdodD0iNDc0IiAvPjxUYWJsZSBOYW1lPSJPcmRlckRldGFpbHNFeHRlbmRlZCIgWD0iMTg1IiBZPSIzMCIgV2lkdGg9IjEyNSIgSGVpZ2h0PSIzMTIiIC8+PFRhYmxlIE5hbWU9IkN1c3RvbWVycyIgWD0iMjcwIiBZPSIzNzAiIFdpZHRoPSIyNDAiIEhlaWdodD0iMzkzIiAvPjxSZWxhdGlvbiBUeXBlPSJJbm5lciIgUGFyZW50PSJPcmRlcnMiIE5lc3RlZD0iT3JkZXJEZXRhaWxzRXh0ZW5kZWQiPjxLZXlDb2x1bW4gUGFyZW50PSJPcmRlcklEIiBOZXN0ZWQ9Ik9yZGVySUQiIC8+PC9SZWxhdGlvbj48UmVsYXRpb24gVHlwZT0iSW5uZXIiIFBhcmVudD0iT3JkZXJzIiBOZXN0ZWQ9IkN1c3RvbWVycyI+PEtleUNvbHVtbiBQYXJlbnQ9IkN1c3RvbWVySUQiIE5lc3RlZD0iQ3VzdG9tZXJJRCIgLz48L1JlbGF0aW9uPjwvVGFibGVzPjxDb2x1bW5zPjxDb2x1bW4gVGFibGU9Ik9yZGVycyIgTmFtZT0iT3JkZXJJRCIgLz48Q29sdW1uIFRhYmxlPSJPcmRlcnMiIE5hbWU9Ik9yZGVyRGF0ZSIgLz48Q29sdW1uIFRhYmxlPSJPcmRlckRldGFpbHNFeHRlbmRlZCIgTmFtZT0iUHJvZHVjdE5hbWUiIC8+PENvbHVtbiBUYWJsZT0iT3JkZXJEZXRhaWxzRXh0ZW5kZWQiIE5hbWU9IlVuaXRQcmljZSIgLz48Q29sdW1uIFRhYmxlPSJPcmRlckRldGFpbHNFeHRlbmRlZCIgTmFtZT0iRGlzY291bnQiIC8+PENvbHVtbiBUYWJsZT0iT3JkZXJEZXRhaWxzRXh0ZW5kZWQiIE5hbWU9IlF1YW50aXR5IiAvPjxDb2x1bW4gVGFibGU9Ik9yZGVyRGV0YWlsc0V4dGVuZGVkIiBOYW1lPSJFeHRlbmRlZFByaWNlIiAvPjxDb2x1bW4gVGFibGU9IkN1c3RvbWVycyIgTmFtZT0iQ29tcGFueU5hbWUiIC8+PENvbHVtbiBUYWJsZT0iQ3VzdG9tZXJzIiBOYW1lPSJDb250YWN0TmFtZSIgLz48Q29sdW1uIFRhYmxlPSJDdXN0b21lcnMiIE5hbWU9IkFkZHJlc3MiIC8+PENvbHVtbiBUYWJsZT0iQ3VzdG9tZXJzIiBOYW1lPSJDaXR5IiAvPjxDb2x1bW4gVGFibGU9IkN1c3RvbWVycyIgTmFtZT0iUmVnaW9uIiAvPjxDb2x1bW4gVGFibGU9IkN1c3RvbWVycyIgTmFtZT0iUGhvbmUiIC8+PENvbHVtbiBUYWJsZT0iQ3VzdG9tZXJzIiBOYW1lPSJDb3VudHJ5IiAvPjxDb2x1bW4gVGFibGU9Ik9yZGVycyIgTmFtZT0iQ3VzdG9tZXJJRCIgLz48L0NvbHVtbnM+PC9RdWVyeT48UmVsYXRpb24gTWFzdGVyPSJPcmRlcnMiIERldGFpbD0iT3JkZXJEZXRhaWxzIj48S2V5Q29sdW1uIE1hc3Rlcj0iT3JkZXJJRCIgRGV0YWlsPSJPcmRlcklEIiAvPjwvUmVsYXRpb24+PFJlc3VsdFNjaGVtYT48RGF0YVNldCBOYW1lPSJJbnZvaWNlRGF0YVNvdXJjZSI+PFZpZXcgTmFtZT0iT3JkZXJfRGV0YWlsc19JbnZvaWNlIj48RmllbGQgTmFtZT0iT3JkZXJJRCIgVHlwZT0iSW50NjQiIC8+PEZpZWxkIE5hbWU9Ik9yZGVyRGF0ZSIgVHlwZT0iRGF0ZVRpbWUiIC8+PEZpZWxkIE5hbWU9IlByb2R1Y3ROYW1lIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IlVuaXRQcmljZSIgVHlwZT0iRGVjaW1hbCIgLz48RmllbGQgTmFtZT0iRGlzY291bnQiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUXVhbnRpdHkiIFR5cGU9IkludDE2IiAvPjxGaWVsZCBOYW1lPSJFeHRlbmRlZFByaWNlIiBUeXBlPSJVbmtub3duIiAvPjxGaWVsZCBOYW1lPSJDb21wYW55TmFtZSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJDb250YWN0TmFtZSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJBZGRyZXNzIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkNpdHkiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iUmVnaW9uIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IlBob25lIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkNvdW50cnkiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iQ3VzdG9tZXJJRCIgVHlwZT0iU3RyaW5nIiAvPjwvVmlldz48L0RhdGFTZXQ+PC9SZXN1bHRTY2hlbWE+PENvbm5lY3Rpb25PcHRpb25zIENsb3NlQ29ubmVjdGlvbj0idHJ1ZSIgLz48L1NxbERhdGFTb3VyY2U+" />
+  </ComponentStorage>
+  <ObjectStorage>
+    <Item1 Ref="2" ObjectType="DevExpress.XtraReports.Parameters.DynamicListLookUpSettings, DevExpress.Printing.v20.2.Core" DataSource="#Ref-0" DataMember="Order_Details_Invoice" ValueMember="CustomerID" DisplayMember="CompanyName" SortOrder="Ascending" />
+  </ObjectStorage>
+</XtraReportsLayoutSerializer>

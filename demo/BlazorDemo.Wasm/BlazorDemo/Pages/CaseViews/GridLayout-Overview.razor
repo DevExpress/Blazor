@@ -1,0 +1,67 @@
+﻿<div class="demo-description">
+    <h2>
+        <DemoNavLink Link="GridLayout#Overview" />Overview
+    </h2>
+    <p>
+        Our Blazor Grid Layout component allows you to arrange UI elements across a page. The component is based on a <a class="helplink" target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout">CSS Grid Layout</a>: layout items are organized into rows and columns. A single item can span multiple rows or columns.
+    </p>
+    <ol>
+        <li>Add the <b>@("<DxGridLayout>...</DxGridLayout>")</b> markup to your application.</li>
+        <li>Define both the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayout.Rows">Rows</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayout.Columns">Columns</a> collections.</li>
+        <li>Add <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayoutRow">DxGridLayoutRow</a> objects to the <b>Rows</b> collection. Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayoutRow.Height">Height</a> property to specify row height (auto, pixel, percentage, <a class="helplink" target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout#The_fr_Unit">fr</a>﻿, etc.).</li>
+        <li>Add <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayoutColumn">DxGridLayoutColumn</a> objects to the <b>Columns</b> collection. Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayoutColumn.Width">Width</a> property to specify column width (auto, pixel, percentage, <a class="helplink" target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout#The_fr_Unit">fr</a>﻿, etc.).</li>
+        <li>Define the <a class="helplink" target="_blank" href="http://docs.devexpress.devx/Blazor/DevExpress.Blazor.DxGridLayout#items">Items</a> collection and populate  it with <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayoutItem">DxGridLayoutItem</a> objects. Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayoutItem.Row">Row</a>, <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayoutItem.Column">Column</a>, <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayoutItem.RowSpan">RowSpan</a>, <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayoutItem.ColumnSpan">ColumnSpan</a> item properties to arrange items. The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayoutItem.Template">Template</a> property allows you to specify item content.</li>
+    </ol>
+</div>
+
+<DxGridLayout CssClass="mw-1100" style="height:500px">
+    <Rows>
+        <DxGridLayoutRow Height="100px" />
+        <DxGridLayoutRow />
+        <DxGridLayoutRow Height="auto" />
+    </Rows>
+    <Columns>
+        <DxGridLayoutColumn Width="2fr"/>
+        <DxGridLayoutColumn Width="60%" />
+        <DxGridLayoutColumn />
+    </Columns>
+    <Items>
+        <DxGridLayoutItem Row="0" Column="0" ColumnSpan="3">
+            <Template>
+                <div class="gridlayout-header gridlayout-item">
+                    Header
+                </div>
+            </Template>
+        </DxGridLayoutItem>
+        <DxGridLayoutItem Row="1" Column="1">
+            <Template>
+                <div class="gridlayout-content gridlayout-item">
+                    Content
+                </div>
+            </Template>
+        </DxGridLayoutItem>
+        <DxGridLayoutItem Row="1" Column="0">
+            <Template>
+                <div class="gridlayout-left-side-bar gridlayout-item">
+                    Left Bar
+                </div>
+            </Template>
+        </DxGridLayoutItem>
+        <DxGridLayoutItem Row="1" Column="2">
+            <Template>
+                <div class="gridlayout-right-side-bar gridlayout-item">
+                    Right Bar
+                </div>
+            </Template>
+        </DxGridLayoutItem>
+        <DxGridLayoutItem Row="2" Column="0" ColumnSpan="3">
+            <Template>
+                <div class="gridlayout-footer gridlayout-item">
+                    Footer
+                </div>
+            </Template>
+        </DxGridLayoutItem>
+    </Items>
+</DxGridLayout>
+
+<CodeSnippet_GridLayout_Overview />

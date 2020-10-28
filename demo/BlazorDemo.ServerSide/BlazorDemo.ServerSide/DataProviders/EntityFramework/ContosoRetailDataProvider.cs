@@ -20,8 +20,8 @@ namespace BlazorDemo.DataProviders {
         }
 
         public override Task<IObservable<int>> GetLoadingStateAsync() {
-            var connectionString = _configuration.GetConnectionString("PivotGridLargeDataConnectionString");
-            if(string.IsNullOrEmpty(connectionString) || connectionString == "{Remote demo database connection string}")
+
+            if(ConnectionStringUtils.GetPivotGridLargeDataConnectionString(_configuration) == null)
                 return Task.FromResult<IObservable<int>>(null);
             return base.GetLoadingStateAsync();
         }

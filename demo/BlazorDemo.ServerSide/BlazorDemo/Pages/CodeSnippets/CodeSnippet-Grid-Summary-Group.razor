@@ -1,0 +1,33 @@
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#group-summary">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxDataGrid Data=""@SalesData""
+            ShowGroupPanel=""true""
+            CssClass=""mw-1100"">
+    <Columns>
+        <DxDataGridSpinEditColumn Field=@nameof(SaleInfo.OrderId)
+                                  Width=""120px"" />
+        <DxDataGridColumn Field=@nameof(SaleInfo.Region)
+                          GroupIndex=""0""
+                          Width=""240px"" />
+        <DxDataGridColumn Field=@nameof(SaleInfo.Country)
+                          GroupIndex=""1"" />
+        <DxDataGridDateEditColumn Field=""@nameof(SaleInfo.Date)""
+                                  DisplayFormat=""D"" />
+        <DxDataGridColumn Field=@nameof(SaleInfo.City)/>
+        <DxDataGridSpinEditColumn Field=""@nameof(SaleInfo.Amount)""
+                                  DisplayFormat=""c""
+                                  Width=""120px"" />
+    </Columns>
+    <GroupSummary>
+        <DxDataGridSummaryItem SummaryType=SummaryItemType.Count
+                               GroupSummaryPosition=""GroupSummaryPosition.GroupRow"" />
+        <DxDataGridSummaryItem Field=@nameof(SaleInfo.Amount)
+                               SummaryType=SummaryItemType.Sum
+                               GroupSummaryPosition=""GroupSummaryPosition.GroupFooter""
+                               DisplayFormat=""Total: {0:c}"" />
+        <DxDataGridSummaryItem Field=@nameof(SaleInfo.Date)
+                               SummaryType=SummaryItemType.Min
+                               DisplayFormat=""First: {0:D}""
+                               GroupSummaryPosition=""GroupSummaryPosition.GroupFooter"" />
+    </GroupSummary>
+</DxDataGrid>")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

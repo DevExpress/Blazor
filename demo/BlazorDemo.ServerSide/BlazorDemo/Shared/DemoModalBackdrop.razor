@@ -1,0 +1,15 @@
+﻿<div class="demo-content-modal modal-backdrop@(Shown ? " modal-backdrop-shown show" : "")" @onclick="@OnClick"></div>
+
+@code {
+    [Parameter] public bool Shown { get; set; }
+    [Parameter] public EventCallback<bool> ShownChanged { get; set; }
+
+    async Task OnClick() => await Hide();
+
+    async Task Hide() {
+        if(Shown) {
+            Shown = false;
+            await ShownChanged.InvokeAsync(false);
+        }
+    }
+}

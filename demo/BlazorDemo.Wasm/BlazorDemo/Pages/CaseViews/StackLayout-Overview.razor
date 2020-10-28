@@ -1,0 +1,65 @@
+﻿<div class="demo-description" id="Overview">
+    <h2>
+        Overview
+    </h2>
+    <p>
+        Our Blazor Stack Layout component allows you to stack UI elements vertically or horizontally within your web application. To begin:
+    </p>
+    <ol>
+        <li>Add the <b>@("<DxStackLayout>...</DxStackLayout>")</b> markup to your application.</li>
+        <li>Define the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxStackLayout.Items">Items</a> collection.</li>
+        <li>Add <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxStackLayoutItem">DxStackLayoutItem</a> objects to the collection. Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxStackLayoutItem.Length">Length</a> property to specify item length (auto, pixel, percentage, <a class="helplink" target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout#The_fr_Unit">fr</a>﻿, etc.). The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxStackLayoutItem.Template">Template</a> property allows you to specify item content.</li>
+    </ol>
+</div>
+
+<div class="option-container">
+    <span>Orientation: </span>
+    <DxComboBox Data="@Orientations" @bind-Value="currentOrientation"></DxComboBox>
+</div>
+
+<DxStackLayout CssClass="mw-1100" style="height:500px" Orientation="@currentOrientation">
+    <Items>
+        <DxStackLayoutItem>
+            <Template>
+                <div class="stacklayout-header stacklayout-item">
+                    Item 1
+                </div>
+            </Template>
+        </DxStackLayoutItem>
+        <DxStackLayoutItem Length="2fr">
+            <Template>
+                <div class="stacklayout-content stacklayout-item">
+                    Item 2
+                </div>
+            </Template>
+        </DxStackLayoutItem>
+        <DxStackLayoutItem>
+            <Template>
+                <div class="stacklayout-left-side-bar stacklayout-item">
+                    Item 3
+                </div>
+            </Template>
+        </DxStackLayoutItem>
+        <DxStackLayoutItem>
+            <Template>
+                <div class="stacklayout-right-side-bar stacklayout-item">
+                    Item 4
+                </div>
+            </Template>
+        </DxStackLayoutItem>
+        <DxStackLayoutItem>
+            <Template>
+                <div class="stacklayout-footer stacklayout-item">
+                    Item 5
+                </div>
+            </Template>
+        </DxStackLayoutItem>
+    </Items>
+</DxStackLayout>
+
+<CodeSnippet_StackLayout_Overview Orientation="@currentOrientation" />
+
+@code {
+    Orientation currentOrientation;
+    IEnumerable<Orientation> Orientations { get; } = Enum.GetValues(typeof(Orientation)).Cast<Orientation>();
+}

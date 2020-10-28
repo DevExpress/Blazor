@@ -1,0 +1,125 @@
+﻿@using System.Collections
+@using DevExpress.Blazor
+
+<div class="demo-description">
+    <h2><DemoNavLink Link="SchedulerResources#CustomResourceNavigator" />Custom Resource Navigator</h2>
+    <p>This demo illustrates how you can hide our Blazor Scheduler component’s built-in <b>Resource Navigator</b> (set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.ResourceNavigatorVisible">ResourceNavigatorVisible</a> property to <b>false</b>) and implement a custom tree-like navigator instead.</p>
+    <p>Refer to the demo’s code snippet to see how we used the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.VisibleResourcesDataSource">VisibleResourcesDataSource</a> property to specify resources from the resource data source (<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerDataStorage.ResourcesSource">ResourcesSource</a>) to display within the navigator.</p>
+</div>
+
+<div class="demo-resnavigator">
+    <div class="demo-resnavigator-container card">
+        <div class="demo-resnavigator-title card-body">
+            <DxButton RenderStyle="ButtonRenderStyle.None" @onclick="@ToggleResourceNavigator">
+                <span class="demo-resnavigator-icon"></span>
+            </DxButton>
+            @if(ResourceNavigatorExpanded) {
+                <span style="">Resources</span>
+            }
+        </div>
+        @if(ResourceNavigatorExpanded) {
+            <div class="demo-resnavigator-tree card-body">
+                    <DxTreeView @ref="@TreeView"
+                                Data="@ResourceAppointmentCollection.GetResourceGroups()"
+                                TextExpression="@(dataItem => ((Resource)dataItem).Name)"
+                                ChildrenExpression="@(dataItem => GetNodeChildren(dataItem))">
+                        <NodeTextTemplate>
+                            @{
+                                Resource resource = (Resource)context.DataItem;
+                                if(resource.IsGroup) {
+                                    <span>@resource.Name</span>
+                                }
+                                else {
+                                    <DxCheckBox T="bool"
+                                                Checked="@GetIsVisible(resource)"
+                                                CheckedChanged="@(visible => UpdateResourceVisibilty(resource, visible))"
+                                                style="margin-left: -28px">
+                                        @resource.Name
+                                    </DxCheckBox>
+                                }
+                            }
+                        </NodeTextTemplate>
+                    </DxTreeView>
+            </div>
+        }
+    </div>
+    <div class="demo-resnavigator-sc-container">
+        <DxScheduler StartDate="@DateTime.Today"
+                     DataStorage="@DataStorage"
+                     @bind-VisibleResourcesDataSource="@VisibleResourcesSource"
+                     GroupType="SchedulerGroupType.Resource"
+                     ResourceNavigatorVisible="false"
+                     CssClass="demo-sc-docked mw-1100">
+            <DxSchedulerDayView DayCount="1" ShowWorkTimeOnly="true"></DxSchedulerDayView>
+        </DxScheduler>
+    </div>
+</div>
+
+<CodeSnippet_Scheduler_CustomResourceNavigator></CodeSnippet_Scheduler_CustomResourceNavigator>
+
+@code {
+    DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
+        AppointmentsSource = ResourceAppointmentCollection.GetAppointments(),
+        AppointmentMappings = new DxSchedulerAppointmentMappings() {
+            Type = "AppointmentType",
+            Start = "StartDate",
+            End = "EndDate",
+            Subject = "Caption",
+            AllDay = "AllDay",
+            Location = "Location",
+            Description = "Description",
+            LabelId = "Label",
+            StatusId = "Status",
+            RecurrenceInfo = "Recurrence",
+            ResourceId = "ResourceId"
+        },
+        ResourcesSource = ResourceAppointmentCollection.GetResources(),
+        ResourceMappings = new DxSchedulerResourceMappings() {
+            Id = "Id",
+            Caption = "Name",
+            BackgroundCssClass = "BackgroundCss",
+            TextCssClass = "TextCss"
+        }
+    };
+
+    List<Resource> VisibleResources = ResourceAppointmentCollection.GetResources().Take(2).ToList();
+
+    IEnumerable VisibleResourcesSource {
+        get => VisibleResources;
+        set => VisibleResources = value.Cast<Resource>().ToList();
+    }
+
+    bool ResourceNavigatorExpanded { get; set; } = true;
+
+    DxTreeView TreeView;
+
+    bool GetIsVisible(Resource resource) {
+        return VisibleResources.Contains(resource);
+    }
+
+    void UpdateResourceVisibilty(Resource resource, bool visible) {
+        if(visible) {
+            VisibleResources.Add(resource);
+            VisibleResources = VisibleResources.OrderBy(p => p.Id).ToList();
+        } else {
+            VisibleResources.Remove(resource);
+        }
+    }
+
+    IEnumerable GetNodeChildren(object dataItem) {
+        Resource resource = (Resource)dataItem;
+        if(resource.IsGroup) {
+            return ResourceAppointmentCollection.GetResources()
+                .Where(childResource => childResource.GroupId == resource.Id);
+        }
+        return null;
+    }
+
+    void ToggleResourceNavigator() {
+        ResourceNavigatorExpanded = !ResourceNavigatorExpanded;
+    }
+
+    protected override void OnAfterRender(bool firstRender) {
+        TreeView.ExpandAll();
+    }
+}
