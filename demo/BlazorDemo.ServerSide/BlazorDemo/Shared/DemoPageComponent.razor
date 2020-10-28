@@ -1,0 +1,11 @@
+﻿@inject DemoConfiguration Configuration
+<div class="demo-page">
+    <div class="demo-page-content" style="@(Configuration.ShowOnlyReporting ? "max-width: 100%" : "")">
+        @ChildContent
+    </div>
+    <DemoPageNavPanel />
+</div>
+
+@code {
+    [Parameter] public RenderFragment ChildContent { get; set; }
+}

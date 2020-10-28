@@ -1,0 +1,55 @@
+﻿@page "/GridLayoutAdaptivity"
+@inject NavigationManager NavigationManager
+
+<div class="demo-description">
+    <h2>
+        <DemoNavLink Link="GridLayout#Adaptivity" />Adaptivity
+    </h2>
+    <p>
+        You can use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxLayoutBreakpoint">DxLayoutBreakpoint</a> component to adapt a grid layout to different screen sizes.
+    </p>
+    <p>
+        The code below does the following:
+    </p>
+    <ul>
+        <li>Creates an <b>isXSmallScreen</b> data field.</li>
+        <li>Adds a <b>DxGridLayout</b> component and uses the <b>isXSmallScreen</b> field to adapt its layout.</li>
+        <li>Adds a <b>DxLayoutBreakpoint</b> component, binds it to the <b>isXSmallScreen</b> field, and specifies the device size when the breakpoint should be activated.</li>
+    </ul>
+</div>
+
+<div class="demo-device-container @GetOrientation() mw-1100">
+    <div class="demo-device-orientation-selector">
+        <div>
+            <button type="button" class="btn btn-secondary d-inline-flex align-items-center vertical @GetButtonOrientationSelector(Orientation.Vertical)" @onclick="() => ChangeOrientation(Orientation.Vertical)">
+                <span class="mobile-view"></span>
+            </button>
+            <button type="button" class="btn btn-secondary d-inline-flex align-items-center horizontal @GetButtonOrientationSelector(Orientation.Horizontal)" @onclick="() => ChangeOrientation(Orientation.Horizontal)">
+                <span class="mobile-view-horizontal"></span>
+            </button>
+        </div>
+    </div>
+    <div class="demo-device border border-secondary">
+        <div class="demo-display border border-secondary">
+            <iframe src="@NavigationManager.ToAbsoluteUri("GridLayout_AdaptivityIFrameContent")" title="GridLayout Adaptivity" />
+        </div>
+    </div>
+</div>
+
+<CodeSnippet_GridLayout_Adaptivity />
+
+@code {
+    Orientation orientation;
+
+    string GetOrientation() {
+        return orientation.ToString().ToLower();
+    }
+    void ChangeOrientation(Orientation orientation) {
+        if(this.orientation == orientation) return;
+        this.orientation = orientation;
+        InvokeAsync(StateHasChanged);
+    }
+    string GetButtonOrientationSelector(Orientation orientation) {
+        return this.orientation == orientation ? "active" : string.Empty;
+    }
+}

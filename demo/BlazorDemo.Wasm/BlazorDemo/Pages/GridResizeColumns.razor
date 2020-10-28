@@ -1,0 +1,42 @@
+﻿@page "/GridResizeColumns"
+@inject CustomersService CustomersService
+
+<div class="demo-description mw-1100">
+    <h2>Resize Columns</h2>
+    <p>The DevExpress Blazor <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1">Data Grid</a> allows users to resize columns as needed. Users can move the mouse pointer over the right border of a column to display a double-sided arrow. Users can drag column border to change column width.</p>
+    <p>To enable column resize operations, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.ColumnResizeMode">ColumnResizeMode</a> property to one of the following values:</p>
+    <ul>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridColumnResizeMode">DataGridColumnResizeMode.NextColumn</a> – The width of the column to the right changes, but the Data Grid's width does not change.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridColumnResizeMode">DataGridColumnResizeMode.Component</a> – The Data Grid's width changes, but the width of other columns does not change.</li>
+    </ul>
+</div>
+<div class="option-container">
+    <span>Column Resize Mode:</span>
+    <DxComboBox Data="@Modes" @bind-Value="@CurrentMode"></DxComboBox>
+</div>
+
+<div class="mwx-1100">
+    <DxDataGrid DataAsync="@CustomersService.Load"
+                ColumnResizeMode="@CurrentMode"
+                CssClass="mw-1100">
+        <Columns>
+            <DxDataGridColumn Field="@nameof(Customer.ContactName)" />
+            <DxDataGridColumn Field="@nameof(Customer.CompanyName)" />
+            <DxDataGridColumn Field="@nameof(Customer.City)" />
+            <DxDataGridColumn Field="@nameof(Customer.Region)" />
+            <DxDataGridColumn Field="@nameof(Customer.Country)" />
+        </Columns>
+    </DxDataGrid>
+</div>
+
+<CodeSnippet_GridResizeColumns></CodeSnippet_GridResizeColumns>
+
+@code {
+    List<Customer> Data { get; set; }
+
+    DataGridColumnResizeMode CurrentMode { get; set; } = DataGridColumnResizeMode.NextColumn;
+    DataGridColumnResizeMode[] Modes { get; } = new DataGridColumnResizeMode[] {
+        DataGridColumnResizeMode.NextColumn,
+        DataGridColumnResizeMode.Component
+    };
+}

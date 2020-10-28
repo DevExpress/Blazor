@@ -11,6 +11,8 @@ namespace BlazorDemo.DataProviders {
         private readonly FMRDemoContext _context;
         readonly IConfiguration _configuration;
 
+
+
         public RentInfoDataProvider(FMRDemoContext context, IConfiguration configuration) {
             _context = context;
             _configuration = configuration;
@@ -27,8 +29,7 @@ namespace BlazorDemo.DataProviders {
         }
 
         public override Task<IObservable<int>> GetLoadingStateAsync() {
-            var connectionString = _configuration.GetConnectionString("GridLargeDataConnectionString");
-            if(string.IsNullOrEmpty(connectionString) || connectionString == "{Remote demo database connection string}")
+            if(ConnectionStringUtils.GetGridLargeDataConnectionString(_configuration) == null)
                 return Task.FromResult<IObservable<int>>(null);
             return base.GetLoadingStateAsync();
         }

@@ -1,0 +1,22 @@
+﻿<div class="demo-description mw-1100">
+    <h2><DemoNavLink Link="BindGridtoData#Data" />Data Binding</h2>
+    <p>Our Blazor <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1">Data Grid</a> allows you to display, manage, and manipulate tabular data with absolute ease. You can use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.Data">Data</a> property to bind the grid to a strongly typed collection. Initialize this collection in the <a class="helplink" target="_blank" href="https://docs.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle#component-initialization-methods">OnInitialized</a> lifecycle method or before this method is invoked. To display data within our Blazor Grid, simply <a class="helplink" target="_blank" href="https://demos.devexpress.com/blazor/GridColumnTypes">add columns</a> to the markup and use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.Field">Field</a> property to assign data fields as needed.</p>
+</div>
+<DxDataGrid Data="@DataSource"
+            PageSize="5"
+            CssClass="mw-1100">
+    <DxDataGridDateEditColumn Field="@nameof(WeatherForecast.Date)" DisplayFormat="D" />
+    <DxDataGridColumn Field="@nameof(WeatherForecast.Forecast)" />
+    <DxDataGridSpinEditColumn Field="@nameof(WeatherForecast.TemperatureC)" Caption="@("Temp. (\x2103)")" TextAlignment="@DataGridTextAlign.Left" Width="150px" />
+    <DxDataGridSpinEditColumn Field="@nameof(WeatherForecast.TemperatureF)" Caption="@("Temp. (\x2109)")" TextAlignment="@DataGridTextAlign.Left" Width="150px" />
+</DxDataGrid>
+<CodeSnippet_Grid_DataBinding_Data />
+
+@code {
+    [Inject] protected WeatherForecastService ForecastService { get; set; }
+    IEnumerable<WeatherForecast> DataSource = Enumerable.Empty<WeatherForecast>();
+
+    protected override void OnInitialized() {
+        DataSource = ForecastService.GetForecast();
+    }
+}

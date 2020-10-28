@@ -1,0 +1,16 @@
+﻿<div class="nav-header @StateCssClass" @onclick="@ToggleState">
+    <span class="nav-header-text">@Title</span>
+    <span class="nav-header-btn"></span>
+</div>
+
+@code {
+    [Parameter] public string Title { get; set; }
+    [Parameter] public string StateCssClass { get; set; }
+    [Parameter] public EventCallback<string> StateCssClassChanged { get; set; }
+
+    async Task ToggleState() {
+        var stateCssClass = StateCssClass == "collapse" ? null : "collapse";
+        StateCssClass = stateCssClass;
+        await StateCssClassChanged.InvokeAsync(StateCssClass);
+    }
+}

@@ -1,0 +1,26 @@
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#bind-to-data-synchronously">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxDataGrid ...
+            Data=""@DataSource"">
+    <DxDataGridDateEditColumn Field=""@nameof(WeatherForecast.Date)"" DisplayFormat=""D"" />
+    <DxDataGridColumn Field=""@nameof(WeatherForecast.Forecast)"" />
+    <DxDataGridSpinEditColumn Field=""@nameof(WeatherForecast.TemperatureC)"" Caption=""@(""Temp. (\x2103)"")""
+                              TextAlignment=""DataGridTextAlign.Left"" Width=""150px"" />
+    <DxDataGridSpinEditColumn Field=""@nameof(WeatherForecast.TemperatureF)"" Caption=""@(""Temp. (\x2109)"")""
+                              TextAlignment=""DataGridTextAlign.Left"" Width=""150px"" />
+</DxDataGrid>
+@code {
+    [Inject] protected WeatherForecastService ForecastService { get; set; }
+    IEnumerable<WeatherForecast> DataSource = Enumerable.Empty<WeatherForecast>();
+
+    protected override void OnInitialized() {
+        DataSource = ForecastService.GetForecast();
+    }
+}")</CodeSnippetTabPage>
+    <CodeSnippetTabPage Text="Data Source" Language="csharp">@(@"public class WeatherForecastService {
+    ...
+    private List<WeatherForecast> Forecasts { get; set; }
+    public IEnumerable<WeatherForecast> GetForecast() {
+        return Forecasts;
+    }
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

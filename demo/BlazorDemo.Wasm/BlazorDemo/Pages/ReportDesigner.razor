@@ -1,0 +1,21 @@
+﻿@page "/ReportDesigner"
+@page "/ReportDesigner/{reportName}"
+
+<div class="demo-description">
+    <h2>Report Designer</h2>
+    <p>
+        This demo illustrates the DevExpress Blazor <a class="helplink" target="_blank" href="https://docs.devexpress.com/XtraReports/DevExpress.Blazor.Reporting.DxReportDesigner">Report Designer</a> that allows end users to create and edit reports.
+    </p>
+</div>
+
+<DxReportDesigner ReportName=@ReportName Height="770px" Width="100%">
+</DxReportDesigner>
+<CodeSnippet_ReportDesigner></CodeSnippet_ReportDesigner>
+@code {
+    [Parameter]
+    public string ReportName { get; set; }
+
+    protected override void OnInitialized() {
+        ReportName = ReportName ?? "InvoiceReport";
+    }
+}

@@ -1,0 +1,75 @@
+﻿@page "/GridLayout_AdaptivityIFrameContent"
+@layout IFrameLayout
+
+<DxLayoutBreakpoint DeviceSize="DeviceSize.XSmall" @bind-IsActive="@isXSmallScreen" />
+
+<div class="h-100 overflow-auto p-2">
+    <DxGridLayout CssClass="h-100" ColumnSpacing="8px" RowSpacing="8px">
+        <Rows>
+            <DxGridLayoutRow />
+            <DxGridLayoutRow />
+            <DxGridLayoutRow />
+            @if(isXSmallScreen) {
+                <DxGridLayoutRow />
+                <DxGridLayoutRow />
+                <DxGridLayoutRow />
+            }
+        </Rows>
+        <Columns>
+            <DxGridLayoutColumn />
+            @if(!isXSmallScreen) {
+                <DxGridLayoutColumn />
+                <DxGridLayoutColumn />
+                <DxGridLayoutColumn />
+            }
+        </Columns>
+        <Items>
+            <DxGridLayoutItem Row="0" Column="0" ColumnSpan="2" RowSpan="isXSmallScreen ? 0 : 2">
+                <Template>
+                    <div class="center gridlayout-header gridlayout-item">
+                        Item 1
+                    </div>
+                </Template>
+            </DxGridLayoutItem>
+            <DxGridLayoutItem Row="isXSmallScreen ? 1 : 2" Column="0" ColumnSpan="2">
+                <Template>
+                    <div class="center gridlayout-content gridlayout-item">
+                        Item 2
+                    </div>
+                </Template>
+            </DxGridLayoutItem>
+            <DxGridLayoutItem Row="isXSmallScreen ? 2 : 0" Column="isXSmallScreen ? 0 : 2">
+                <Template>
+                    <div class="center gridlayout-left-side-bar gridlayout-item">
+                        Item 3
+                    </div>
+                </Template>
+            </DxGridLayoutItem>
+            <DxGridLayoutItem Row="isXSmallScreen ? 3 : 1" Column="isXSmallScreen ? 0 : 2">
+                <Template>
+                    <div class="center gridlayout-right-side-bar gridlayout-item">
+                        Item 4
+                    </div>
+                </Template>
+            </DxGridLayoutItem>
+            <DxGridLayoutItem Row="isXSmallScreen ? 4 : 0" Column="isXSmallScreen ? 0 : 3" RowSpan="isXSmallScreen ? 0 : 2">
+                <Template>
+                    <div class="center gridlayout-footer gridlayout-item">
+                        Item 5
+                    </div>
+                </Template>
+            </DxGridLayoutItem>
+            <DxGridLayoutItem Row="isXSmallScreen ? 5 : 2" Column="isXSmallScreen ? 0 : 2" ColumnSpan="2">
+                <Template>
+                    <div class="center gridlayout-left-side-bar gridlayout-item">
+                        Item 6
+                    </div>
+                </Template>
+            </DxGridLayoutItem>
+        </Items>
+    </DxGridLayout>
+</div>
+
+@code {
+    bool isXSmallScreen;
+}

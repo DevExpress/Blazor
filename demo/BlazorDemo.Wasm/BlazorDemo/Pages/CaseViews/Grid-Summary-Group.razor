@@ -1,0 +1,60 @@
+﻿@inject ISalesInfoDataProvider Sales
+
+<div class="demo-description">
+    <h2><DemoNavLink Link="GridSummary#GroupSummary" />Group Summary Computations</h2>
+    <p>Group summaries (using aggregate functions such as SUM, MIN, MAX, AVG, etc) are calculated across all rows within a group and displayed in the group row or group footer. To create group summaries, add <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridSummaryItem">DxDataGridSummaryItem</a> objects to the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.GroupSummary">GroupSummary</a> collection.</p>
+    <p>Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSummaryItemBase-1.GroupSummaryPosition">GroupSummaryPosition</a> property to position group summaries. The following values are available:</p>
+    <ul>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.GroupSummaryPosition">GroupSummaryPosition.GroupRow</a> (Default) - The summary is displayed in parentheses after the group header.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.GroupSummaryPosition">GroupSummaryPosition.GroupFooter</a> - The summary is displayed in the group footer below the target column.</li>
+    </ul>
+</div>
+
+@if (Sales == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <DxDataGrid Data="@SalesData"
+                ShowGroupPanel="true"
+                CssClass="mw-1100">
+        <Columns>
+            <DxDataGridSpinEditColumn Field=@nameof(SaleInfo.OrderId)
+                                      Width="120px" />
+            <DxDataGridColumn Field=@nameof(SaleInfo.Region)
+                              GroupIndex="0"
+                              Width="240px" />
+            <DxDataGridColumn Field=@nameof(SaleInfo.Country)
+                              GroupIndex="1" />
+            <DxDataGridDateEditColumn Field="@nameof(SaleInfo.Date)"
+                                      DisplayFormat="D" />
+            <DxDataGridColumn Field=@nameof(SaleInfo.City) />
+            <DxDataGridSpinEditColumn Field="@nameof(SaleInfo.Amount)"
+                                      DisplayFormat="c"
+                                      Width="120px" />
+        </Columns>
+        <GroupSummary>
+            <DxDataGridSummaryItem SummaryType=SummaryItemType.Count
+                                   GroupSummaryPosition="GroupSummaryPosition.GroupRow" />
+            <DxDataGridSummaryItem Field=@nameof(SaleInfo.Amount)
+                                   SummaryType=SummaryItemType.Sum
+                                   GroupSummaryPosition="GroupSummaryPosition.GroupFooter"
+                                   DisplayFormat="Total: {0:c}" />
+            <DxDataGridSummaryItem Field=@nameof(SaleInfo.Date)
+                                   SummaryType=SummaryItemType.Min
+                                   DisplayFormat="First: {0:D}"
+                                   GroupSummaryPosition="GroupSummaryPosition.GroupFooter" />
+        </GroupSummary>
+    </DxDataGrid>
+}
+<CodeSnippet_Grid_Summary_Group />
+
+@code {
+    IEnumerable<SaleInfo> SalesData;
+
+    protected override async Task OnInitializedAsync()
+    {
+        SalesData = await Sales.GetReducedSalesAsync();
+    }
+}

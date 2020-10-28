@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="20.2.0.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v20.2, Version=20.2.0.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4" Name="AnchoringReport" DisplayName="Anchoring" Margins="50, 50, 75, 67" PageWidth="850" PageHeight="1100" Version="20.2" RequestParameters="false" DataMember="Homes" DataSource="#Ref-0">
+  <Parameters>
+    <Item1 Ref="3" Description="Landscape" ValueInfo="False" Name="LandscapeParameter" Type="#Ref-2" />
+  </Parameters>
+  <Bands>
+    <Item1 Ref="4" ControlType="DetailBand" Name="Detail" HeightF="310" KeepTogether="true" Borders="None">
+      <Controls>
+        <Item1 Ref="5" ControlType="XRLabel" Name="xrLabel11" CanGrow="false" Text="Year Built:" AnchorVertical="Top" AnchorHorizontal="Left" TextAlignment="TopLeft" SizeF="93.25732,30" LocationFloat="325,151" Font="Tahoma, 9pt" ForeColor="Black" BackColor="255,242,242,242" Padding="25,0,5,0,100" BorderColor="255,160,160,160" BorderWidth="0">
+          <StylePriority Ref="6" UseFont="false" UseForeColor="false" UseBackColor="false" UsePadding="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="7" ControlType="XRLabel" Name="xrLabel10" CanGrow="false" Text="Baths:" AnchorVertical="Top" AnchorHorizontal="Left" TextAlignment="TopLeft" SizeF="93.25732,29.99999" LocationFloat="325.0002,121" Font="Tahoma, 9pt" ForeColor="Black" BackColor="255,242,242,242" Padding="25,0,5,0,100" BorderColor="255,160,160,160" BorderWidth="0">
+          <StylePriority Ref="8" UseFont="false" UseForeColor="false" UseBackColor="false" UsePadding="false" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="9" ControlType="XRLabel" Name="xrLabel9" CanGrow="false" Text="Beds:" AnchorVertical="Top" AnchorHorizontal="Left" TextAlignment="TopLeft" SizeF="93.25729,30" LocationFloat="325.0005,91" Font="Tahoma, 9pt" ForeColor="Black" BackColor="255,242,242,242" Padding="25,0,5,0,100" BorderColor="255,160,160,160" BorderWidth="0">
+          <StylePriority Ref="10" UseFont="false" UseForeColor="false" UseBackColor="false" UsePadding="false" UseTextAlignment="false" />
+        </Item3>
+        <Item4 Ref="11" ControlType="XRLabel" Name="xrLabel8" CanGrow="false" Text="House Size:" AnchorVertical="Top" AnchorHorizontal="Left" TextAlignment="TopLeft" SizeF="93.2576,50" LocationFloat="324.9998,41.00002" Font="Tahoma, 9pt" ForeColor="Black" BackColor="255,242,242,242" Padding="25,0,25,0,100" BorderColor="255,160,160,160" BorderWidth="0">
+          <StylePriority Ref="12" UseFont="false" UseForeColor="false" UseBackColor="false" UsePadding="false" UseTextAlignment="false" />
+        </Item4>
+        <Item5 Ref="13" ControlType="XRLabel" Name="xrLabel7" CanGrow="false" AnchorVertical="Top" AnchorHorizontal="Both" TextAlignment="TopLeft" SizeF="331.7423,29.99998" LocationFloat="418.2578,151" Font="Tahoma, 9pt, style=Bold" ForeColor="Black" BackColor="255,242,242,242" Padding="5,2,5,0,100" BorderColor="255,160,160,160" BorderWidth="0">
+          <ExpressionBindings>
+            <Item1 Ref="14" EventName="BeforePrint" PropertyName="Text" Expression="YearBuilt" />
+          </ExpressionBindings>
+          <StylePriority Ref="15" UseFont="false" UseForeColor="false" UseBackColor="false" UsePadding="false" UseTextAlignment="false" />
+        </Item5>
+        <Item6 Ref="16" ControlType="XRLabel" Name="xrLabel6" CanGrow="false" AnchorVertical="Top" AnchorHorizontal="Both" TextAlignment="TopLeft" SizeF="331.7423,29.99999" LocationFloat="418.2577,121" Font="Tahoma, 9pt, style=Bold" ForeColor="Black" BackColor="255,242,242,242" Padding="5,2,5,0,100" BorderColor="255,160,160,160" BorderWidth="0">
+          <ExpressionBindings>
+            <Item1 Ref="17" EventName="BeforePrint" PropertyName="Text" Expression="Baths" />
+          </ExpressionBindings>
+          <StylePriority Ref="18" UseFont="false" UseForeColor="false" UseBackColor="false" UsePadding="false" UseTextAlignment="false" />
+        </Item6>
+        <Item7 Ref="19" ControlType="XRLabel" Name="xrLabel5" CanGrow="false" AnchorVertical="Top" AnchorHorizontal="Both" TextAlignment="TopLeft" SizeF="331.7423,29.99999" LocationFloat="418.2578,91" Font="Tahoma, 9pt, style=Bold" ForeColor="Black" BackColor="255,242,242,242" Padding="5,2,5,0,100" BorderColor="255,160,160,160" BorderWidth="0">
+          <ExpressionBindings>
+            <Item1 Ref="20" EventName="BeforePrint" PropertyName="Text" Expression="Beds" />
+          </ExpressionBindings>
+          <StylePriority Ref="21" UseFont="false" UseForeColor="false" UseBackColor="false" UsePadding="false" UseTextAlignment="false" />
+        </Item7>
+        <Item8 Ref="22" ControlType="XRLabel" Name="xrLabel4" CanGrow="false" AnchorVertical="Top" AnchorHorizontal="Both" TextAlignment="TopLeft" SizeF="331.7423,50" LocationFloat="418.2578,41.00002" Font="Tahoma, 9pt, style=Bold" ForeColor="Black" BackColor="255,242,242,242" Padding="5,0,25,0,100" BorderColor="255,160,160,160" BorderWidth="0">
+          <ExpressionBindings>
+            <Item1 Ref="23" EventName="BeforePrint" PropertyName="Text" Expression="HouseSize" />
+          </ExpressionBindings>
+          <StylePriority Ref="24" UseFont="false" UseForeColor="false" UseBackColor="false" UsePadding="false" UseTextAlignment="false" />
+        </Item8>
+        <Item9 Ref="25" ControlType="XRLabel" Name="xrLabel3" TextFormatString="{0:c0}" CanGrow="false" AnchorVertical="Both" AnchorHorizontal="Left" XlsxFormatString="&quot;Price: &quot;$#,##0.00" TextAlignment="TopLeft" SizeF="325,38.99994" LocationFloat="0,271.0001" Font="Tahoma, 16pt" ForeColor="255,84,84,84" BackColor="255,242,242,242" Padding="25,0,0,20,100" BorderColor="255,160,160,160" BorderWidth="0">
+          <ExpressionBindings>
+            <Item1 Ref="26" EventName="BeforePrint" PropertyName="Text" Expression="[Price]" />
+          </ExpressionBindings>
+          <StylePriority Ref="27" UseFont="false" UseForeColor="false" UseBackColor="false" UsePadding="false" UseTextAlignment="false" />
+        </Item9>
+        <Item10 Ref="28" ControlType="XRLabel" Name="xrLabel2" AnchorHorizontal="Both" TextAlignment="MiddleLeft" SizeF="750.0001,32" LocationFloat="0,7.999992" Font="Tahoma, 10pt, style=Bold" ForeColor="White" BackColor="255,51,135,206" Padding="10,2,0,0,100" BorderColor="255,160,160,160" BorderWidth="0">
+          <ExpressionBindings>
+            <Item1 Ref="29" EventName="BeforePrint" PropertyName="Text" Expression="Address" />
+          </ExpressionBindings>
+          <StylePriority Ref="30" UseFont="false" UseForeColor="false" UseBackColor="false" />
+        </Item10>
+        <Item11 Ref="31" ControlType="XRLabel" Name="xrLabel1" AnchorVertical="Top" AnchorHorizontal="Both" TextAlignment="TopLeft" SizeF="425,129" LocationFloat="325,181" Font="Tahoma, 9pt" BackColor="255,242,242,242" Padding="25,25,5,20,100" BorderColor="255,160,160,160" Borders="None" BorderWidth="1">
+          <ExpressionBindings>
+            <Item1 Ref="32" EventName="BeforePrint" PropertyName="Text" Expression="Features" />
+          </ExpressionBindings>
+          <StylePriority Ref="33" UseFont="false" UseBackColor="false" UsePadding="false" UseTextAlignment="false" />
+        </Item11>
+        <Item12 Ref="34" ControlType="XRPictureBox" Name="xrPictureBox1" Padding="25,0,25,5,100" Sizing="Squeeze" ImageAlignment="TopLeft" AnchorVertical="Top" AnchorHorizontal="Left" SizeF="325,230" LocationFloat="0,41.00002" BackColor="255,242,242,242" BorderColor="Black" BorderWidth="0">
+          <ExpressionBindings>
+            <Item1 Ref="35" EventName="BeforePrint" PropertyName="Image" Expression="Photo" />
+          </ExpressionBindings>
+          <StylePriority Ref="36" UseBackColor="false" UsePadding="false" />
+        </Item12>
+      </Controls>
+    </Item1>
+    <Item2 Ref="37" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="67">
+      <Controls>
+        <Item1 Ref="38" ControlType="XRPageInfo" Name="xrPageInfo1" TextFormatString="Page : {0} / {1}" AnchorHorizontal="Right" SizeF="98,17" LocationFloat="633,8" Font="Tahoma, 8.25pt" Padding="2,2,0,0,100" />
+        <Item2 Ref="39" ControlType="XRPictureBox" Name="xrPictureBox2" ImageSource="img,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" ImageAlignment="MiddleCenter" AnchorHorizontal="Both" NavigateUrl="http://www.devexpress.com/Products/NET/Reporting/" SizeF="365.625,30.20833" LocationFloat="191,22" />
+      </Controls>
+    </Item2>
+    <Item3 Ref="40" ControlType="TopMarginBand" Name="topMarginBand1" HeightF="75" />
+  </Bands>
+  <ReportPrintOptions Ref="41" DetailCountAtDesignTime="2" />
+  <ExpressionBindings>
+    <Item1 Ref="42" EventName="BeforePrint" PropertyName="Landscape" Expression="[Parameters.LandscapeParameter]" />
+  </ExpressionBindings>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v20.2" Name="dsHomes" Base64="PFNxbERhdGFTb3VyY2UgTmFtZT0iZHNIb21lcyI+PENvbm5lY3Rpb24gTmFtZT0iSG9tZXNDb25uZWN0aW9uU3RyaW5nIiBGcm9tQXBwQ29uZmlnPSJ0cnVlIiAvPjxRdWVyeSBUeXBlPSJTZWxlY3RRdWVyeSIgTmFtZT0iSG9tZXMiPjxUYWJsZXM+PFRhYmxlIE5hbWU9IkhvbWVzIiAvPjwvVGFibGVzPjxDb2x1bW5zPjxDb2x1bW4gVGFibGU9IkhvbWVzIiBOYW1lPSJBZGRyZXNzIiAvPjxDb2x1bW4gVGFibGU9IkhvbWVzIiBOYW1lPSJCZWRzIiAvPjxDb2x1bW4gVGFibGU9IkhvbWVzIiBOYW1lPSJCYXRocyIgLz48Q29sdW1uIFRhYmxlPSJIb21lcyIgTmFtZT0iSG91c2VTaXplIiAvPjxDb2x1bW4gVGFibGU9IkhvbWVzIiBOYW1lPSJQcmljZSIgLz48Q29sdW1uIFRhYmxlPSJIb21lcyIgTmFtZT0iRmVhdHVyZXMiIC8+PENvbHVtbiBUYWJsZT0iSG9tZXMiIE5hbWU9IlllYXJCdWlsdCIgLz48Q29sdW1uIFRhYmxlPSJIb21lcyIgTmFtZT0iUGhvdG8iIC8+PENvbHVtbiBUYWJsZT0iSG9tZXMiIE5hbWU9IlJ0ZkNvbnRlbnQiIC8+PC9Db2x1bW5zPjwvUXVlcnk+PFJlc3VsdFNjaGVtYT48RGF0YVNldCBOYW1lPSJkc0hvbWVzIj48VmlldyBOYW1lPSJIb21lcyI+PEZpZWxkIE5hbWU9IkFkZHJlc3MiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iQmVkcyIgVHlwZT0iSW50NjQiIC8+PEZpZWxkIE5hbWU9IkJhdGhzIiBUeXBlPSJJbnQ2NCIgLz48RmllbGQgTmFtZT0iSG91c2VTaXplIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlByaWNlIiBUeXBlPSJEZWNpbWFsIiAvPjxGaWVsZCBOYW1lPSJGZWF0dXJlcyIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJZZWFyQnVpbHQiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iUGhvdG8iIFR5cGU9IkJ5dGVBcnJheSIgLz48RmllbGQgTmFtZT0iUnRmQ29udGVudCIgVHlwZT0iU3RyaW5nIiAvPjwvVmlldz48L0RhdGFTZXQ+PC9SZXN1bHRTY2hlbWE+PENvbm5lY3Rpb25PcHRpb25zIENsb3NlQ29ubmVjdGlvbj0idHJ1ZSIgLz48L1NxbERhdGFTb3VyY2U+" />
+  </ComponentStorage>
+  <ObjectStorage>
+    <Item1 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.2" Ref="2" Content="System.Boolean" Type="System.Type" />
+  </ObjectStorage>
+</XtraReportsLayoutSerializer>

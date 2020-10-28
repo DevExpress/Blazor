@@ -4,7 +4,6 @@ using BlazorDemo.DataProviders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -17,7 +16,6 @@ namespace BlazorDemo.ServerSide {
 
             var optionsBuilder = services.AddOptions();
             optionsBuilder.AddOptions<SeoConfiguration>("BlazorDemo");
-            optionsBuilder.AddOptions<SeoConfiguration>("BlazorDemo.Reporting");
 
 
             services.AddScoped<HttpClient>(serviceProvider => serviceProvider.GetService<IHttpClientFactory>().CreateClient());
@@ -25,17 +23,17 @@ namespace BlazorDemo.ServerSide {
             services.AddScoped<IContosoRetailDataProvider, ContosoRetailDataProvider>();
             services.AddScoped<IRentInfoDataProvider, RentInfoDataProvider>();
 
-            services.AddDbContext<FMRDemoContext>(options => UseSqlServer(options, "GridLargeDataConnectionString"));
+            services.AddDbContext<FMRDemoContext>(options => {
+                var connectionString = ConnectionStringUtils.GetGridLargeDataConnectionString(context.Configuration);
+                if(connectionString != null)
+                    options.UseSqlServer(connectionString);
+            });
 
-            services.AddDbContext<ContosoRetailContext>(options => UseSqlServer(options, "PivotGridLargeDataConnectionString"));
-
-            string GetConnectionString(string name) {
-                return context.Configuration.GetConnectionString(name);
-            }
-            void UseSqlServer(DbContextOptionsBuilder options, string connectionString) {
-                var cs = GetConnectionString("GridLargeDataConnectionString");
-                if(!string.IsNullOrEmpty(cs)) options.UseSqlServer(cs);
-            }
+            services.AddDbContext<ContosoRetailContext>(options => {
+                var connectionString = ConnectionStringUtils.GetPivotGridLargeDataConnectionString(context.Configuration);
+                if(connectionString != null)
+                    options.UseSqlServer(connectionString);
+            });
         }
         public override void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
             if(env.IsDevelopment()) {

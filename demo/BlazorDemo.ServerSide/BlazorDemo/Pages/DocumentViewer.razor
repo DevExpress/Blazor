@@ -1,0 +1,69 @@
+﻿@inject IDemoReportSource DemoReportSource
+@inject DemoConfiguration Configuration
+@inject NavigationManager NavigationManager
+
+@page "/DocumentViewer"
+@page "/DocumentViewer/{reportName}"
+
+@using BlazorDemo.Services
+@using System.Linq;
+
+<div class="demo-description">
+    <h2>Document Viewer</h2>
+    <p>
+        This demo illustrates the DevExpress Blazor <a class="helplink" target="_blank" href="https://docs.devexpress.com/XtraReports/DevExpress.Blazor.Reporting.DxDocumentViewer">Document Viewer</a> that allows end users to preview, print, and export documents.
+    </p>
+</div>
+
+<div class="row dxbs-fl">
+    <div class="col-lg-3 col-sm-5 col-6">
+        <div class="form-group">
+            @if(!Configuration.ShowOnlyReporting) {
+                <div class="col-form-label dxbs-fl-cpt">
+                    Report Name:
+                </div>
+                <DxComboBox Data="@ReportList"
+                            @bind-Value="@SelectedReportName"
+                            TextFieldName="Value">
+                </DxComboBox>
+            } else {
+                <DxButton Text="Show in Report Designer" Click="@NavigateToReportDesinger">
+                </DxButton>
+            }
+        </div>
+    </div>
+</div>
+
+<DxDocumentViewer ReportName=@ReportName Height="700px" Width="100%">
+</DxDocumentViewer>
+<CodeSnippet_DocumentViewer></CodeSnippet_DocumentViewer>
+
+@code {
+    [Parameter]
+    public string ReportName { get; set; }
+
+    KeyValuePair<string, string> selectedReportName;
+    KeyValuePair<string, string> SelectedReportName {
+        get => selectedReportName;
+        set {
+            selectedReportName = value;
+            ReportName = selectedReportName.Key;
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    Dictionary<string, string> ReportList;
+
+    protected void NavigateToReportDesinger() {
+        NavigationManager.NavigateTo($"ReportDesigner/{ReportName}");
+    }
+
+    protected override void OnInitialized() {
+        if(!Configuration.ShowOnlyReporting) {
+            ReportList = DemoReportSource.GetReportList();
+            SelectedReportName = ReportList.First();
+        } else {
+            ReportName = ReportName ?? "InvoiceReport";
+        }
+    }
+}

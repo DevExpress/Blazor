@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <LangVersion>8.0</LangVersion>
+    <EnableDefaultItems>False</EnableDefaultItems>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.6.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="3.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="2.2.0" />
+    <ProjectReference Include="..\BlazorDemo.Wasm.Client\BlazorDemo.Wasm.Client.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\**\*.cs" />
+    <Compile Include="DataProviders\*.cs" />
+    <Compile Include="HostingStartupBase.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Startup.Wasm.AspNetCoreHosted.cs" />
+    
+    <Content Include="Pages\*.razor" />
+    <Content Include="Pages\*.cshtml" />
+    
+    <Content Include="appsettings.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="*.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <DemoModulesSeoConfigurations Include="..\Blazor*\SeoConfiguration.json">
+      <DestinationPath>$(MSBuildThisFileDirectory)$([System.IO.Directory]::GetParent('%(fullpath)').Name)Metadata.json</DestinationPath>
+    </DemoModulesSeoConfigurations>
+  </ItemGroup>
+  <ItemGroup>
+    <DotnetPublishFiles Include="wwwroot/**;*.json;BlazorDemoMetadata.json">
+      <DestinationRelativePath>%(RelativeDir)%(Filename)%(Extension)</DestinationRelativePath>
+    </DotnetPublishFiles>
+  </ItemGroup>
+  <Target Name="DxModuleCopyConfigs" Inputs="@(DemoModulesSeoConfigurations)" Outputs="@(DemoModulesSeoConfigurations -&gt; '%(DestinationPath)')" BeforeTargets="PreBuildEvent">
+    <Message Text="%(DemoModulesSeoConfigurations.DestinationPath)" Importance="High" />
+    <Copy SourceFiles="@(DemoModulesSeoConfigurations)" DestinationFiles="%(DemoModulesSeoConfigurations.DestinationPath)" />
+  </Target>
+</Project>

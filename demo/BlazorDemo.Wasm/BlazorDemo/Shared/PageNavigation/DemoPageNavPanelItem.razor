@@ -1,0 +1,10 @@
+﻿@inject NavigationManager NavigationManager
+
+<NavLink ActiveClass="nav-target" class="@($"nav-link {CssClass}")" href="@Url"><span class="text">@Text</span><span class="badge">@Badge</span></NavLink>
+
+@code {
+    [Parameter] public string Url { get; set; }
+    [Parameter] public string Text { get; set; }
+    [Parameter] public string CssClass { get; set; }
+    [Parameter] public RenderFragment Badge { get; set; }
+}

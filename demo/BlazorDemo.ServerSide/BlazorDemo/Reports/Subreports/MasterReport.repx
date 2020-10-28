@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="20.2.0.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v20.2, Version=20.2.0.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4" Name="MasterReport" Margins="100, 100, 100, 75" PageWidth="850" PageHeight="1100" Version="20.2" RequestParameters="false" EventsInfo="|MasterReport,BeforePrint,Report1_BeforePrint;Detail,BeforePrint,Detail_BeforePrint" DataMember="Customers" DataSource="#Ref-0">
+  <Parameters>
+    <Item1 Ref="4" Description="Date range:" ValueSourceSettings="#Ref-2" Name="dateRangeParameter" Type="#Ref-3" />
+  </Parameters>
+  <Bands>
+    <Item1 Ref="5" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="88" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+      <Controls>
+        <Item1 Ref="6" ControlType="XRLabel" Name="lbDate" Text="Orders with purchase dates from [?dateRangeParameter_Start!d] to [?dateRangeParameter_End!d]" TextAlignment="MiddleRight" SizeF="628,16" LocationFloat="17,48" Font="Tahoma, 8.25pt" ForeColor="255,129,142,158" Padding="2,2,0,0,100" />
+        <Item2 Ref="7" ControlType="XRLabel" Name="lbTitle" Text="Customer list with order information" TextAlignment="BottomLeft" SizeF="628,28" LocationFloat="17,20" Font="Tahoma, 14.25pt" ForeColor="255,129,142,158" Padding="2,2,0,0,100" BorderColor="255,129,142,158" Borders="Bottom" BorderWidth="2" />
+      </Controls>
+    </Item1>
+    <Item2 Ref="8" ControlType="DetailBand" Name="Detail" HeightF="112" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+      <Controls>
+        <Item1 Ref="9" ControlType="XRTable" Name="xrTable1" TextAlignment="TopLeft" SizeF="628,60" LocationFloat="15,0" BackColor="255,244,242,237" Padding="0,0,0,0,100" BorderColor="255,219,214,200">
+          <Rows>
+            <Item1 Ref="10" ControlType="XRTableRow" Name="xrTableRow1" Weight="1" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+              <Cells>
+                <Item1 Ref="11" ControlType="XRTableCell" Name="xrTableCell1" Weight="0.39331210191082805" Text="xrTableCell1" TextAlignment="TopLeft" Padding="2,2,0,0,100" Borders="Left, Top">
+                  <Controls>
+                    <Item1 Ref="12" ControlType="XRLabel" Name="lbPersonName" Text="lbPersonName" TextAlignment="TopLeft" SizeF="106,25" LocationFloat="80,8" Font="Tahoma, 8pt" Padding="2,2,0,0,100" BorderColor="Black" Borders="None">
+                      <ExpressionBindings>
+                        <Item1 Ref="13" EventName="BeforePrint" PropertyName="Text" Expression="PersonName" />
+                      </ExpressionBindings>
+                    </Item1>
+                    <Item2 Ref="14" ControlType="XRLabel" Name="lbCustomer" Text="Customer:" TextAlignment="TopLeft" SizeF="70,25" LocationFloat="8,8" Font="Tahoma, 8.25pt, style=Bold" ForeColor="255,167,157,134" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" />
+                  </Controls>
+                </Item1>
+                <Item2 Ref="15" ControlType="XRTableCell" Name="xrTableCell2" Weight="0.606687898089172" Text="xrTableCell2" TextAlignment="TopLeft" Padding="2,2,0,0,100" Borders="Top, Right">
+                  <Controls>
+                    <Item1 Ref="16" ControlType="XRLabel" Name="lbOccupation1" Text="xrLabel4" TextAlignment="TopLeft" SizeF="150,20" LocationFloat="104,28" Font="Tahoma, 8pt" Padding="2,2,0,0,100" BorderColor="Black" Borders="None">
+                      <ExpressionBindings>
+                        <Item1 Ref="17" EventName="BeforePrint" PropertyName="Text" Expression="Occupation" />
+                      </ExpressionBindings>
+                    </Item1>
+                    <Item2 Ref="18" ControlType="XRLabel" Name="lbOccupation" Text="Occupation:" TextAlignment="TopLeft" SizeF="91,20" LocationFloat="12,28" Font="Tahoma, 8.25pt, style=Bold" ForeColor="255,167,157,134" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" />
+                    <Item3 Ref="19" ControlType="XRLabel" Name="lbCompany1" Text="xrLabel3" TextAlignment="TopLeft" SizeF="150,17" LocationFloat="104,8" Font="Tahoma, 8pt" Padding="2,2,0,0,100" BorderColor="Black" Borders="None">
+                      <ExpressionBindings>
+                        <Item1 Ref="20" EventName="BeforePrint" PropertyName="Text" Expression="Company" />
+                      </ExpressionBindings>
+                    </Item3>
+                    <Item4 Ref="21" ControlType="XRLabel" Name="lbCompany" Text="Company:" TextAlignment="TopLeft" SizeF="83,17" LocationFloat="12,8" Font="Tahoma, 8.25pt, style=Bold" ForeColor="255,167,157,134" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" />
+                  </Controls>
+                </Item2>
+              </Cells>
+            </Item1>
+          </Rows>
+          <ExpressionBindings>
+            <Item1 Ref="22" EventName="BeforePrint" PropertyName="Bookmark" Expression="PersonName" />
+          </ExpressionBindings>
+        </Item1>
+        <Item2 Ref="23" ControlType="XRSubreport" Name="subreport1" SizeF="628,52" LocationFloat="15,60">
+          <ParameterBindings>
+            <Item1 Ref="24" ParameterName="customerIDParameter" DataMember="Customers.ID" />
+            <Item2 Ref="27" ParameterName="dateRangeParameter_Start" Parameter="#Ref-25" />
+            <Item3 Ref="29" ParameterName="dateRangeParameter_End" Parameter="#Ref-28" />
+          </ParameterBindings>
+        </Item2>
+      </Controls>
+    </Item2>
+    <Item3 Ref="30" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="75" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+      <Controls>
+        <Item1 Ref="31" ControlType="XRPictureBox" Name="xrPictureBox4" Padding="0,0,0,0,100" ImageSource="img,iVBORw0KGgoAAAANSUhEUgAAAJ8AAAAdCAYAAAC0Y74zAAAABGdBTUEAALGPC/xhBQAABYpJREFUeF7tm82NXEUUhR0CzsAiAiQSYMHGaCQIgIVDYMeWDOwM7Azw3gsIAAkSQHiBYGln0K5v5DM6c96t19Vv+rlHnlp8numqW/dW3Xvqp2350eFwmEwuwvUfV1ffP2381zicGXzimxiTyQ0uvj2EJ/C9CD552Lj4KtGck0XwycNmb/H90/it8UtjETx40vim4KtGZf+pYR7V/JJq7KTgnOJDaC8bPzVOLcLvjcqneN941bikEI/NUVRjJwV3Fd+fDcR2V1GMFhZGTtE9mOI7M1vE967BCbcmOPoQ5a8NTkTGVXYiC8tnRMZPTj3vA3xXfvZkiu/MnCI+RIcgvmgsHDUQ3POGxJZUY0QW1vuIx5Xr/cAb0e32Zm2Okz6PG383/miQwy8bbxpD4lsTHW3PGj3BOTnWGSns64bbvGhUdj80mK/I92d+sUkRs6aq/xTxsRHdR+Yu+2nzeelW4XdfS7XhfJz6NY7apH36JF9pI1Rft2f8iJ37/bnxbYO8ITx+Pj4mPr6pVgsmGAEQZjWuIn04I4VlHm7ztpH9fzXcRuBfAiAp3sep6n5IovergKeIj9y4rcfIdbCpcgyxqtMeUlA+jjE+Dj+yY/25BrdTfgR5qp484HNgo/Ts9DxCfD9+/In4+Pl1T3yIqveuov0U0YnKlxgtbIpL7SQOMXpfoiKDJytFnEVXUUbnKHI+2sTun3moPQW7hp8+Pi5FIPGxht7GFLIF5tQTFGjO+F2z0wleUomPb7DVINroc+enkP6c0cKmnZLAFaw2kkFxSEwKqRKAt4OLxgWbsSsQguyZg/cRkzje5vaV+IhPewrHhVKNE7JzG+WnGqu6ZzunIH0cPJ4TPrsdnyu7khQf4tJOd9YWOEr6dLaKT0n03ZfXkouJddCWV6/GpDjc16niAwrg/e4jT9zMsRePmvRO0hzn4hKen5xjlR/3SX+libSDnl2Ji4+/PsnBfObd5wG24n6TreJjfnnCICzahJ8aXlAviNoRm9rA87FFfAjE4zgpkCzkaH+2c+r4OE6i7FduwNfF75VPBJibGvLk69mVuPiSu16zSRVDjIqvevNlAtZQciHfXtmW18boHJMsJBDnmF2Kj8/ej/2WcWsoP71Ng7jcP5vTT0634xCQXUlPfAhvy5eKNTKGM1LYvBIRIu1VcXu4+PLqZc2eyNzBW8WXpyncd/FB5sOhz+16X2ZWBViJbw/hgcdIRgqbSdbf82Vx89p1PGngu9u/tEA+QbaIr3cyAPNx22MiqtY5Mo7P3o8f2ioyP4B9riFvBdmlCHVAlKT4OF32EB7cChwcKyyJ8X7Qg5uEeTtJyPE9/Jr1BFfJ3SI+FwZCd7H7KZO2kKdGxpdQjokvb4x8E47i8fVMqSB3Hq+yucbFxy495xsvWQQ3MrE6dUikC0Tkv264cEhMVYBqV+fVKyoB5xyJUaG5Z9ERSQrF42Qfa9IGqx72vXHMQX0i85Pry/zwe9q4qBSfcWmX9fK+W7j4+HdZH3RuFsGNLOwa1XupEhFJxq9OG37PcaB+J69cGJ2jiu/2xMAnxfJ4FFGxUkRrrIm2El9vk3l+/IrUE4Q+bFy8oBr4psAur93qBrnBxeeD9mAR3BgpLIkg0dV4yDdbRTUud2ovYSNzBIqfxfZ5p1jUl+09cvPluEp8gGDdrkK2vS8QQJ82zFpOqJdO7pL7Ij6Ew0J8MSySzySbxFWnUULisfedyu/46b11GKPYkG8t4XNcgyuLOXibz53fvQ9oTxExX7/qyEdecUCb+6qeF+JYfjRPfBLb7YjPHH0t+KvsyNXRern49vwPRP83FsEntxg9wT4bXHzfNRCJJ+Ac/NvA9yL45BYPWnyTyzLFN7kYU3yTi3HKF4fPghvxTSafnsOjD0onGKECAU9PAAAAAElFTkSuQmCC" Sizing="AutoSize" UseImageResolution="false" NavigateUrl="http://www.devexpress.com/Products/NET/Reporting/" SizeF="165.625,30.208334" LocationFloat="249,13" />
+      </Controls>
+    </Item3>
+    <Item4 Ref="32" ControlType="TopMarginBand" Name="topMarginBand1" />
+  </Bands>
+  <ReportPrintOptions Ref="33" DetailCountAtDesignTime="2" />
+  <ObjectStorage>
+    <Item1 Ref="2" ObjectType="DevExpress.XtraReports.Parameters.RangeParametersSettings, DevExpress.Printing.v20.2.Core" StartParameter="#Ref-25" EndParameter="#Ref-28" />
+    <Item2 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.2" Ref="3" Content="System.DateTime" Type="System.Type" />
+    <Item3 Ref="25" ObjectType="DevExpress.XtraReports.Parameters.RangeStartParameter, DevExpress.Printing.v20.2.Core" ValueInfo="2016-11-20" Name="dateRangeParameter_Start" />
+    <Item4 Ref="28" ObjectType="DevExpress.XtraReports.Parameters.RangeEndParameter, DevExpress.Printing.v20.2.Core" ValueInfo="2016-12-20" Name="dateRangeParameter_End" />
+    <Item5 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v20.2" Name="dsCust1" Base64="PFNxbERhdGFTb3VyY2UgTmFtZT0iZHNDdXN0MSI+PENvbm5lY3Rpb24gTmFtZT0iSG9tZXNDb25uZWN0aW9uU3RyaW5nIiBGcm9tQXBwQ29uZmlnPSJ0cnVlIiAvPjxRdWVyeSBUeXBlPSJTZWxlY3RRdWVyeSIgTmFtZT0iQ3VzdG9tZXJzIj48VGFibGVzPjxUYWJsZSBOYW1lPSJDdXN0b21lcnMiIC8+PC9UYWJsZXM+PENvbHVtbnM+PENvbHVtbiBUYWJsZT0iQ3VzdG9tZXJzIiBOYW1lPSJJRCIgLz48Q29sdW1uIFRhYmxlPSJDdXN0b21lcnMiIE5hbWU9IkNvbXBhbnkiIC8+PENvbHVtbiBUYWJsZT0iQ3VzdG9tZXJzIiBOYW1lPSJPY2N1cGF0aW9uIiAvPjxFeHByZXNzaW9uIEFsaWFzPSJQZXJzb25OYW1lIj5Db25jYXQoW0N1c3RvbWVyc10uW0ZpcnN0TmFtZV0sICcgJywgW0N1c3RvbWVyc10uW0xhc3ROYW1lXSk8L0V4cHJlc3Npb24+PC9Db2x1bW5zPjwvUXVlcnk+PFJlc3VsdFNjaGVtYT48RGF0YVNldCBOYW1lPSJkc0N1c3QxIj48VmlldyBOYW1lPSJDdXN0b21lcnMiPjxGaWVsZCBOYW1lPSJJRCIgVHlwZT0iSW50NjQiIC8+PEZpZWxkIE5hbWU9IkNvbXBhbnkiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iT2NjdXBhdGlvbiIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJQZXJzb25OYW1lIiBUeXBlPSJTdHJpbmciIC8+PC9WaWV3PjwvRGF0YVNldD48L1Jlc3VsdFNjaGVtYT48Q29ubmVjdGlvbk9wdGlvbnMgQ2xvc2VDb25uZWN0aW9uPSJ0cnVlIiAvPjwvU3FsRGF0YVNvdXJjZT4=" />
+  </ObjectStorage>
+</XtraReportsLayoutSerializer>
