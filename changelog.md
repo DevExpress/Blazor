@@ -2,6 +2,116 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 20.2.3
+
+### Support for .NET 5.0
+
+In this version, we added support for [.NET 5.0 Release Candidate 2](https://devblogs.microsoft.com/dotnet/announcing-net-5-0-rc-2/).
+
+### Blazor Components in the DevExpress Installer
+
+You can now use the DevExpress .NET Product Installer to install DevExpress Blazor components.([Documentation](https://docs.devexpress.com/Blazor/401057/getting-started/install-components-and-create-an-application))
+
+### Visual Studio Integration
+
+#### Blazor Project Templates
+
+The DevExpress Template Gallery now includes Blazor project templates. ([Documentation](https://docs.devexpress.com/Blazor/401057#devexpress-templates))
+
+### New Grid Layout
+
+The new Grid Layout for Blazor allows you to arrange UI elements on a page. The component is based on a CSS Grid Layout: layout items are organized into rows and columns. 
+
+[Demo](https://demos.devexpress.com/blazor/GridLayout) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayout)
+
+### New Stack Layout
+
+The new Stack Layout for Blazor allows you to stack UI elements vertically or horizontally. 
+
+[Demo](https://demos.devexpress.com/blazor/StackLayout) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxStackLayout)
+
+### New Layout Breakpoint
+
+The new Layout Breakpoint component for Blazor allows you to adapt a page layout to different screen sizes. 
+For example, you can use breakpoints to create responsive DxGridLayout, DxStackLayout, or any other components.
+
+[Demo](https://demos.devexpress.com/blazor/GridLayoutAdaptivity) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxLayoutBreakpoint)
+
+### New Time Editor
+
+The new Time Edit component for Blazor has the following features:
+
+* DateTime / TimeSpan binding
+* Integrated drop-down Time Picker
+* 12 / 24 Hour Format support
+* Min / Max Time support
+* Read-Only and Disabled States
+* Null Text
+* Clear Button
+
+[Demo](https://demos.devexpress.com/blazor/TimeEdit) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1)
+
+### Data Grid Enhancements
+
+#### Total and Group Summaries
+
+The Data Grid can now compute summaries across all data rows or individual groups. Predefined aggregate functions include:
+
+* Sum
+* Min
+* Max
+* Avg
+* Count
+
+[Demo](https://demos.devexpress.com/blazor/GridSummary) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#summary)
+
+#### Column Resize
+
+Users can now resize grid columns. To enable this feature, use the [ColumnResizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.ColumnResizeMode) property.
+
+[Demo](https://demos.devexpress.com/blazor/GridResizeColumns) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#resize-columns)
+
+#### Fixed Columns
+
+You can now use the new [FixedStyle](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn) property to anchor columns to the left or rightmost edge of the grid. These fixed columns are never scrolled horizontally.
+
+[Demo](https://demos.devexpress.com/blazor/GridFixedColumns) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#fixed-columns)
+
+### Scheduler
+
+#### Custom Appointment Form
+
+Our new [AppointmentFormLayout](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.AppointmentFormLayout) and [AppointmentCompactFormLayout](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.AppointmentCompactFormLayout) properties allow you to create a custom appointment form.
+
+[Demo](https://demos.devexpress.com/blazor/SchedulerCustomization#CustomAppointmentForm) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler#custom-appointment-form) 
+ 
+#### Resources
+
+With this release, you can associate Scheduler appointments with resources (such as employees, locations, and so on). 
+Then, you can use the new [GroupType](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.GroupType) property to group appointments by resources or dates. 
+The Scheduler also ships with a Resource Navigator that allows you to filter resource groups.
+
+[Demo](https://demos.devexpress.com/blazor/SchedulerResources) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler#resources)
+ 
+### Data Editors
+
+#### Date Edit - Display Time
+
+The new [TimeSectionVisible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.TimeSectionVisible) property allows you to display time values in the Date Edit component.
+
+#### Long Mouse Click / Long Key Press Support
+
+Users can now long click or long key press to modify the Spin Edit value. In the ComboBox and TagBox components, users can use a long key press to navigate through items.
+
+### Resolved Issues
+
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=20.2.3&endBuildName=&buildsMode=Single&hasPlatformsWithProducts=true) for a complete list of issues resolved in v20.2.
+
+### Breaking Changes
+
+* [Scheduler - Renamed API members](https://supportcenter.devexpress.com/ticket/details/t939823)
+* [Reporting for Blazor - Renamed API members](https://supportcenter.devexpress.com/ticket/details/T934943)
+
 # 20.1.7
 
 ### Support for .NET Core 3.1.8 
