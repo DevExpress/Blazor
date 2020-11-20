@@ -25,8 +25,8 @@ DevExpress Blazor components also ship with [online demos](https://demos.devexpr
 
 The **tools** folder contains the DevExpress Blazor products available free-of-charge:
 
-* [Document metadata tool](https://github.com/DevExpress/Blazor.DevX/tree/master/tools/DevExpress.Blazor.DocumentMetadata)
-* [Anchor navigation tool](https://github.com/DevExpress/Blazor.DevX/tree/master/tools/DevExpress.Blazor.AnchorUtils)
+* [Document metadata tool](https://github.com/DevExpress/Blazor/tree/master/tools/DevExpress.Blazor.DocumentMetadata)
+* [Anchor navigation tool](https://github.com/DevExpress/Blazor/tree/master/tools/DevExpress.Blazor.AnchorUtils)
 
 # Get Started
 
