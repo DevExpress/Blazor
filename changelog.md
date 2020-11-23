@@ -112,6 +112,16 @@ See our [Version History](https://supportcenter.devexpress.com/versionhistory?pl
 * [Scheduler - Renamed API members](https://supportcenter.devexpress.com/ticket/details/t939823)
 * [Reporting for Blazor - Renamed API members](https://supportcenter.devexpress.com/ticket/details/T934943)
 
+# 20.1.8
+
+### Support for .NET 5.0
+ 
+In this version, we added support for [.NET 5.0](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/). 
+
+### Resolved Issues 
+
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=20.1.8&endBuildName=null&buildsMode=Single&hasPlatformsWithProducts=true) for a complete list of issues resolved in v20.1.8.
+
 # 20.1.7
 
 ### Support for .NET Core 3.1.8 
