@@ -112,6 +112,14 @@ See our [Version History](https://supportcenter.devexpress.com/versionhistory?pl
 * [Scheduler - Renamed API members](https://supportcenter.devexpress.com/ticket/details/t939823)
 * [Reporting for Blazor - Renamed API members](https://supportcenter.devexpress.com/ticket/details/T934943)
 
+# 20.1.9
+
+### Resolved Issue
+
+In this version, we resolved the following issue:
+ 
+* [T951686](https://supportcenter.devexpress.com/ticket/details/t951686) - .NET 5.0: The "Microsoft.WebTools.Shared.Exceptions.WebToolsException: Build failed." error occurs while publishing a project with v20.1.8
+
 # 20.1.8
 
 ### Support for .NET 5.0
