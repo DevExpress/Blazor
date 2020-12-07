@@ -2,6 +2,38 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 20.2.4 
+
+### Grid Layout 
+#### Named Areas for Responsive Layouts 
+You can now create named areas, assign them to layout items, and place these areas in grid rows to create responsive layouts. ([Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayout#use-named-areas) | [Demo](https://demos.devexpress.com/blazor/GridLayout#Areas)) 
+
+### Data Editors 
+#### Input CSS Classes 
+The new [InputCssClass](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.InputCssClass) property allows you to apply predefined or custom CSS classes to the input element of the ComboBox, Date Edit, Spin Edit, Text Box, and Time Edit.  
+
+#### Memo – Text Area CSS Class 
+The new [TextAreaCssClass](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMemo.TextAreaCssClass) property allows you to apply a predefined or custom CSS class to the Memo’s text area. 
+
+#### Date Edit and Calendar – First Week of the Year 
+Use the [WeekNumberRule](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1.WeekNumberRule) property to specify the first week of the year in the calendar. 
+
+### Upload 
+
+#### Authentication and Cancel Upload 
+Handle the new [FileUploadStart](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload.FileUploadStart) event to add authentication information to upload requests, cancel an upload based on a condition or change the upload URL. 
+
+### Blazor Project Templates  
+
+#### .NET 5.0 Support 
+
+The DevExpress Template Gallery now allows you to create a Blazor application that targets .NET 5.0. 
+
+
+### Resolved Issues 
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=20.2.4&endBuildName=null&buildsMode=Single&hasPlatformsWithProducts=true) for a complete list of issues resolved in v20.2.4. 
+
+
 # 20.2.3
 
 ### Support for .NET 5.0
