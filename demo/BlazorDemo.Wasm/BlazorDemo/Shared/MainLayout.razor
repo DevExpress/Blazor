@@ -15,7 +15,7 @@
                         var targetSelector = document.location.hash;
                         if(targetSelector) {
                             var demoAnchorLinks = Array.from(document.querySelectorAll('.demo-anchor'));
-                            var targetElement = demoAnchorLinks.filter(function(l) { return l.href === document.location.href; })[0];
+                            var targetElement = demoAnchorLinks.filter(function(l) { return l.href.toLowerCase() === document.location.href.toLowerCase() && l.href.endsWith(targetSelector); })[0];
                             if(targetElement)
                                 targetElement.scrollIntoView();
                         }
@@ -26,7 +26,7 @@
     <LayoutToggleButton @ref="@toggleButton" @bind-StateCssClass="@LayoutStateCssClass" />
     <NavLink class="logo-image text-body" href="" Match="NavLinkMatch.All" />
     <div class="demo-btn-container d-flex">
-        <a class="download-btn navbar-toggler d-inline-block bg-primary text-white border-0" href="https://nuget.devexpress.com/" target="_blank" title="Obtain your NuGet feed URL">
+        <a class="download-btn navbar-toggler d-inline-block bg-primary text-white border-0" href="https://go.devexpress.com/DevexpressDownload_UniversalTrial.aspx" target="_blank" title="Free Trial">
             <span class="demo-download-icon"></span>
         </a>
         @if(!Configuration.ShowOnlyReporting) {

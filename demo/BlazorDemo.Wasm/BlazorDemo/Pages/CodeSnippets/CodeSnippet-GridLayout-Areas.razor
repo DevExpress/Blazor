@@ -1,45 +1,45 @@
-﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayout">
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayout#use-named-areas">
     <CodeSnippetTabPage Text="Razor">@(@"<DxGridLayout CssClass=""mw-1100"" style=""height:500px"">
     <Rows>
-        <DxGridLayoutRow Height=""100px"" />
-        <DxGridLayoutRow />
-        <DxGridLayoutRow Height=""auto"" />
+        <DxGridLayoutRow Areas=""header header header"" Height=""100px"" />
+        <DxGridLayoutRow Areas=""left-bar content right-bar"" />
+        <DxGridLayoutRow Areas=""footer footer footer"" Height=""auto"" />
     </Rows>
     <Columns>
-        <DxGridLayoutColumn Width=""2fr""/>
+        <DxGridLayoutColumn Width=""2fr"" />
         <DxGridLayoutColumn Width=""60%"" />
         <DxGridLayoutColumn />
     </Columns>
     <Items>
-        <DxGridLayoutItem Row=""0"" Column=""0"" ColumnSpan=""3"">
+        <DxGridLayoutItem Area=""header"">
             <Template>
                 <div class=""gridlayout-header gridlayout-item"">
                     Header
                 </div>
             </Template>
         </DxGridLayoutItem>
-        <DxGridLayoutItem Row=""1"" Column=""1"">
+        <DxGridLayoutItem Area=""content"">
             <Template>
                 <div class=""gridlayout-content gridlayout-item"">
                     Content
                 </div>
             </Template>
         </DxGridLayoutItem>
-        <DxGridLayoutItem Row=""1"" Column=""0"">
+        <DxGridLayoutItem Area=""left-bar"">
             <Template>
                 <div class=""gridlayout-left-side-bar gridlayout-item"">
                     Left Bar
                 </div>
             </Template>
         </DxGridLayoutItem>
-        <DxGridLayoutItem Row=""1"" Column=""2"">
+        <DxGridLayoutItem Area=""right-bar"">
             <Template>
                 <div class=""gridlayout-right-side-bar gridlayout-item"">
                     Right Bar
                 </div>
             </Template>
         </DxGridLayoutItem>
-        <DxGridLayoutItem Row=""2"" Column=""0"" ColumnSpan=""3"">
+        <DxGridLayoutItem Area=""footer"">
             <Template>
                 <div class=""gridlayout-footer gridlayout-item"">
                     Footer

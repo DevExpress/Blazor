@@ -24,6 +24,16 @@
         Try the demo below - use the drop-down list in the demo card's header to apply different size modes. To navigate between pages via two-way synchronization, use the Pager component or linked Spin Edit components.
     </p>
 </div>
+<div class="many-options-container">
+    <div>
+        <span>Page Count: </span>
+        <DxSpinEdit CssClass="mr-1 my-1 option-editor" @bind-Value="@PageCount" MinValue="0" MaxValue="int.MaxValue"></DxSpinEdit>
+    </div>
+    <div class="ml-576">
+        <span>Active Page Index: </span>
+        <DxSpinEdit CssClass="mr-1 my-1 option-editor" @bind-Value="@ActivePageIndex" MinValue="0" MaxValue="@(Math.Max(0,PageCount - 1))"></DxSpinEdit>
+    </div>
+</div>
 
 <div class="card demo-card demo-card-shadow">
     <div class="card-header">
@@ -41,14 +51,6 @@
     <CodeSnippetHeader DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPager"/>
     <div class="card-footer text-muted ">
         <CodeSnippet_Pager></CodeSnippet_Pager>
-        <div class="d-flex align-items-center">
-            <DxSpinEdit @bind-Value="@PageCount" MinValue="0" MaxValue="int.MaxValue" CssClass="mr-1 my-1 flex-shrink-0"></DxSpinEdit>
-            <span class="hljs-attr" style="white-space: nowrap;overflow: hidden;"> // PageCount</span>
-        </div>
-        <div class="d-flex align-items-center">
-            <DxSpinEdit @bind-Value="@ActivePageIndex" MinValue="0" MaxValue="@(Math.Max(0,PageCount - 1))" CssClass="mr-1 my-1 flex-shrink-0"></DxSpinEdit>
-            <span class="hljs-attr" style="white-space: nowrap;overflow: hidden;"> // ActivePageIndex</span>
-        </div>
     </div>
 </div>
 

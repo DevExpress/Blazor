@@ -547,7 +547,7 @@
               },
               {
                 "Id": "NullText",
-                "Title": "NullText"
+                "Title": "Clear Button and Placeholder"
               },
               {
                 "Id": "ItemValues",
@@ -584,7 +584,7 @@
               },
               {
                 "Id": "NullableValue",
-                "Title": "Nullable Value"
+                "Title": "Nullable Value and Placeholder"
               },
               {
                 "Id": "DisplayFormat",
@@ -642,7 +642,7 @@
               },
               {
                 "Id": "NullableDate",
-                "Title": "Null Date Values"
+                "Title": "Null Date Values and Placeholder"
               },
               {
                 "Id": "DisplayFormat",
@@ -679,7 +679,7 @@
               },
               {
                 "Id": "NullableTime",
-                "Title": "Null Time Values"
+                "Title": "Null Time Values and Placeholder"
               },
               {
                 "Id": "DisplayFormat",
@@ -711,7 +711,7 @@
               },
               {
                 "Id": "ClearButton",
-                "Title": "Clear Button"
+                "Title": "Clear Button and Placeholder"
               },
               {
                 "Id": "Password",
@@ -812,7 +812,7 @@
               },
               {
                 "Id": "NullText",
-                "Title": "Null Text"
+                "Title": "Clear Button and Placeholder"
               },
               {
                 "Id": "VirtualScrolling",
@@ -866,7 +866,7 @@
               },
               {
                 "Id": "ClearButton",
-                "Title": "Clear Button"
+                "Title": "Clear Button and Placeholder"
               },
               {
                 "Id": "ReadOnly",
@@ -1083,12 +1083,16 @@
             "Url": "GridLayout",
             "Title": "Grid Layout",
             "IsNew": true,
-            "Keywords": "Blazor, components, page layout, grid layout, layout, layout breakpoints, breakpoint, adaptive UI, adaptivity, adaptive layout, responsive layout, responsive UI, arrange UI elements, layout items, rows, columns, devexpress, demo, sample, example",
-            "Description": "The DevExpress Grid Layout component allows you to arrange UI elements on a page. The component is based on a CSS Grid Layout﻿: layout items are organized into rows and columns. DxLayoutBreakpoint allows you to adapt a page layout to different screen sizes. For example, you can use breakpoints to create responsive DxGridLayout, DxStackLayout, or other components.",
+            "Keywords": "Blazor, components, page layout, grid layout, layout, layout breakpoints, breakpoint, adaptive UI, adaptivity, adaptive layout, responsive layout, responsive UI, arrange UI elements, layout items, rows, columns, areas, template areas, layout areas, grid areas, devexpress, demo, sample, example",
+            "Description": "The DevExpress Grid Layout component allows you to arrange UI elements on a page. The component is based on a CSS Grid Layout: layout items are organized into rows and columns. DxLayoutBreakpoint allows you to adapt a page layout to different screen sizes. For example, you can use breakpoints to create responsive DxGridLayout, DxStackLayout, or other components.",
             "DemoPageSections": [
               {
                 "Id": "Overview",
                 "Title": "Overview"
+              },
+              {
+                "Id": "Areas",
+                "Title": "Areas"
               },
               {
                 "Id": "Adaptivity",

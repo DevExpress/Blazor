@@ -36,8 +36,11 @@
 
     async Task ScrollToIfNeeded(string uri)
     {
-        if (!ScrollLocked && uri.EndsWith(Link))
-            await JsRuntime.InvokeVoidAsync("Element.prototype.scrollIntoView.call", linkRef);
+        if(!ScrollLocked && uri.EndsWith(Link, StringComparison.OrdinalIgnoreCase)) {
+            var uriFragment = NavigationManager.ToAbsoluteUri(uri).Fragment;
+            if(!string.IsNullOrEmpty(uriFragment) && Link.EndsWith(uriFragment))
+                await JsRuntime.InvokeVoidAsync("Element.prototype.scrollIntoView.call", linkRef);
+        }
     }
 
     string GetId() {

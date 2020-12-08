@@ -22,12 +22,12 @@ var DemoPageNavPanel = (function() {
 
 	function demoAnchorIntersectionHandler(entries) {
 		entries.forEach(entry => {
-			var demoAnchorLinkUrl = entry.target.href;
+			var demoAnchorLinkUrl = entry.target.href.toLowerCase();
 			var demoNavPanelItems = Array.from(document.querySelectorAll('.demo-page-nav .nav-pills .nav-link'));
 			var demoNavTargetItem = document.querySelector('.nav-target');
 			if(entry.isIntersecting) {
 				demoNavPanelItems.forEach(item => {
-					if(item.href === demoAnchorLinkUrl) {
+					if(item.href.toLowerCase() === demoAnchorLinkUrl) {
 						if(!demoNavTargetItem || item.classList.contains('nav-target'))
 							setDemoNavPanelItemActive(item, true);
 					}
@@ -38,7 +38,7 @@ var DemoPageNavPanel = (function() {
 			else {
 				var targetElementBottom = entry.boundingClientRect.bottom;
 				if(targetElementBottom >= entry.rootBounds.bottom && targetElementBottom <= document.documentElement.clientHeight) {
-					var demoNavPanelItem = demoNavPanelItems.filter(item => item.href === demoAnchorLinkUrl)[0];
+					var demoNavPanelItem = demoNavPanelItems.filter(item => item.href.toLowerCase() === demoAnchorLinkUrl)[0];
 					var prevIndex = demoNavPanelItems.indexOf(demoNavPanelItem) - 1;
 					if(prevIndex > -1) {
 						setDemoNavPanelItemActive(demoNavPanelItem, false);

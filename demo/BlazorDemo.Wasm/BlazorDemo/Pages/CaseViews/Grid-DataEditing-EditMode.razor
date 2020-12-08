@@ -34,16 +34,16 @@
 
 <DxDataGrid @ref="@grid"
             Data="@SupplierService.Suppliers"
-            RowRemovingAsync="@OnRowRemoving"
-            RowUpdatingAsync="@OnRowUpdating"
-            RowInsertingAsync="@OnRowInserting"
-            InitNewRow="@OnInitNewRow"
+            RowRemovingAsync="@OnRowRemovingAsync"
+            RowUpdatingAsync="@OnRowUpdatingAsync"
+            RowInsertingAsync="@OnRowInsertingAsync"
+            InitNewRow="@OnInitNewRowAsync"
             CssClass="mw-1100"
             PageSize="100"
             ShowPager="false"
             KeyFieldName="SupplierID"
             EditMode="@CurrentEditMode">
-    <DxDataGridCommandColumn Width="100px"></DxDataGridCommandColumn>
+    <DxDataGridCommandColumn Width="100px" />
     <DxDataGridColumn Field="@nameof(Supplier.SupplierName)" />
     <DxDataGridComboBoxColumn Field="@nameof(Supplier.SupplierCategoryID)" Caption="Category" Data="@SupplierService.SupplierCategories"
                               ValueFieldName="@nameof(SupplierCategory.SupplierCategoryID)" TextFieldName="@nameof(SupplierCategory.SupplierCategoryName)" />
@@ -54,37 +54,48 @@
     <DxDataGridColumn Field="@nameof(Supplier.BankAccountNumber)" />
 </DxDataGrid>
 
-<CodeSnippet_Grid_DataEditing_EditMode></CodeSnippet_Grid_DataEditing_EditMode>
+<CodeSnippet_Grid_DataEditing_EditMode />
 
 @code {
+    DxDataGrid<Supplier> grid;
+
     IEnumerable<DataGridEditMode> EditModes { get; } = Enum.GetValues(typeof(DataGridEditMode)).Cast<DataGridEditMode>();
-    private DataGridEditMode currentEditMode { get; set; } = DataGridEditMode.EditForm;
-    public DataGridEditMode CurrentEditMode {
+
+    DataGridEditMode currentEditMode = DataGridEditMode.EditForm;
+    DataGridEditMode CurrentEditMode {
         get => currentEditMode;
         set {
-            currentEditMode = value;
-            grid.CancelRowEdit();
+            if(currentEditMode != value) {
+                currentEditMode = value;
+                CancelEdit();
+            }
         }
     }
-    DxDataGrid<Supplier> grid;
+
     protected override async Task OnAfterRenderAsync(bool firstRender) {
-        if (firstRender)
-            await grid.StartRowEdit(await SupplierService.GetSupplierByIdAsync(2));
+        if (firstRender) {
+            var editableSupplier = await SupplierService.GetSupplierByIdAsync(2);
+            await grid.StartRowEdit(editableSupplier);
+        }
     }
-    Task OnRowRemoving(Supplier dataItem) {
+    Task OnRowRemovingAsync(Supplier dataItem) {
         return SupplierService.Remove(dataItem);
     }
-    Task OnRowUpdating(Supplier dataItem, IDictionary<string, object> newValue) {
+    Task OnRowUpdatingAsync(Supplier dataItem, IDictionary<string, object> newValue) {
         return SupplierService.Update(dataItem, newValue);
     }
-    Task OnRowInserting(IDictionary<string, object> newValue) {
+    Task OnRowInsertingAsync(IDictionary<string, object> newValue) {
         return SupplierService.Insert(newValue);
     }
-    Task OnInitNewRow(Dictionary<string, object> values) {
+    async Task OnInitNewRowAsync(Dictionary<string, object> values) {
         values.Add("SupplierCategoryID", 1);
         values.Add("DeliveryMethodID", 1);
         values.Add("PhoneNumber", "(000) 000-0000");
         values.Add("BankAccountNumber", "0000000000");
-        return Task.CompletedTask;
+        await Task.CompletedTask;
+    }
+    void CancelEdit() {
+        var cancelTask = Task.Run(async () => await grid.CancelRowEdit());
+        cancelTask.GetAwaiter().GetResult();
     }
 }

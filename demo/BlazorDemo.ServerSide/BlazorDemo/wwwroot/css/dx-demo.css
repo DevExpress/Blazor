@@ -1547,6 +1547,22 @@ a.helplink {
         font-size: 0.9rem;
         text-align: inherit;
     }
+
+    .ml-576 {
+        margin-left: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .many-options-container {
+        flex-direction: column;
+    }
+    .many-options-container > div > span {
+        flex-basis: 131px;
+    }
+    .many-options-container > div {
+        justify-content: space-between;
+    }
 }
 
 .demo-size-toolbar.dxbs-ta-nib > .btn-toolbar > .btn-group:not(:first-child):not(.dxbs-tb-begin-group):before {
@@ -1563,6 +1579,35 @@ a.helplink {
     margin-top: 1.25rem!important;
     margin-bottom: 1.75rem;
     width: 300px;
+}
+
+.option-container.editors-options {
+    margin-top: 2.25rem !important;
+    margin-bottom: 2rem;
+    width: 400px;
+}
+
+.many-options-container {
+    display: flex;
+    margin-top: 2.25rem !important;
+    margin-bottom: 2rem;
+}
+
+.many-options-container > div  {
+    display: flex;
+    align-items: center;
+}
+
+.many-options-container .option-editor {
+    display: inline-block;
+    min-width: 120px;
+}
+
+.many-options-container > div > span {
+    flex-shrink: 0;
+    padding-right: 1em;
+    font-weight: 600;
+    white-space: nowrap;
 }
 
 .option-container > span {
