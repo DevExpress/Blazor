@@ -75,7 +75,7 @@ else
                         <Template>
                             <div class="text-right">
                                 <DxButton RenderStyle="ButtonRenderStyle.Link" SubmitFormOnClick="true" Text="Update" />
-                                <DxButton RenderStyle="ButtonRenderStyle.Link" @onclick="@OnCancelButtonClick" Text="Cancel" />
+                                <DxButton RenderStyle="ButtonRenderStyle.Link" Click="OnCancelButtonClick" Text="Cancel" />
                             </div>
                         </Template>
                     </DxFormLayoutItem>
@@ -145,12 +145,12 @@ else
         EditContext = new FormEditContext(vacancy);
         EditContext.StateHasChanged += () => { InvokeAsync(StateHasChanged); };
     }
-    async void OnCancelButtonClick()
+    async Task OnCancelButtonClick()
     {
-        EditContext = null;
         await grid.CancelRowEdit();
+        EditContext = null;
     }
-    async void HandleValidSubmit()
+    async Task HandleValidSubmit()
     {
         EditContext.DataItem.Description = EditContext.Description;
         EditContext.DataItem.Region = EditContext.Region;
@@ -160,9 +160,8 @@ else
             Vacancies = (new Vacancy[] { EditContext.DataItem }).Concat(Vacancies);
         }
 
-        EditContext = null;
         await grid.CancelRowEdit();
-        await grid.Refresh();
+        EditContext = null;
     }
 
     void OnRowRemoving(Vacancy vacancy)

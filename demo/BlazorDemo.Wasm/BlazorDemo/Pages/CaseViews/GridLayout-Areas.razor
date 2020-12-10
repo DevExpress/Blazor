@@ -1,0 +1,65 @@
+﻿<div class="demo-description">
+    <h2>
+        <DemoNavLink Link="GridLayout#Areas" />Areas
+    </h2>
+    <p>
+        You can use <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayout#use-named-areas">named areas</a> to arrange grid layout items:
+    </p>
+    <ol>
+        <li>Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayoutItem.Area">DxGridLayoutItem.Area</a> property to assign an area name to a grid layout's item.</li>
+        <li>Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridLayoutRow.Areas">DxGridLayoutRow.Areas</a> property to specify how to position areas within grid rows. If you need to leave a grid cell empty, use a period character ( <b>.</b> ).</li>
+    </ol>
+</div>
+
+
+<DxGridLayout CssClass="mw-1100" style="height:500px">
+    <Rows>
+        <DxGridLayoutRow Areas="header header header" Height="100px" />
+        <DxGridLayoutRow Areas="left-bar content right-bar" />
+        <DxGridLayoutRow Areas="footer footer footer" Height="auto" />
+    </Rows>
+    <Columns>
+        <DxGridLayoutColumn Width="2fr" />
+        <DxGridLayoutColumn Width="60%" />
+        <DxGridLayoutColumn />
+    </Columns>
+    <Items>
+        <DxGridLayoutItem Area="header">
+            <Template>
+                <div class="gridlayout-header gridlayout-item">
+                    Header
+                </div>
+            </Template>
+        </DxGridLayoutItem>
+        <DxGridLayoutItem Area="content">
+            <Template>
+                <div class="gridlayout-content gridlayout-item">
+                    Content
+                </div>
+            </Template>
+        </DxGridLayoutItem>
+        <DxGridLayoutItem Area="left-bar">
+            <Template>
+                <div class="gridlayout-left-side-bar gridlayout-item">
+                    Left Bar
+                </div>
+            </Template>
+        </DxGridLayoutItem>
+        <DxGridLayoutItem Area="right-bar">
+            <Template>
+                <div class="gridlayout-right-side-bar gridlayout-item">
+                    Right Bar
+                </div>
+            </Template>
+        </DxGridLayoutItem>
+        <DxGridLayoutItem Area="footer">
+            <Template>
+                <div class="gridlayout-footer gridlayout-item">
+                    Footer
+                </div>
+            </Template>
+        </DxGridLayoutItem>
+    </Items>
+</DxGridLayout>
+
+<CodeSnippet_GridLayout_Areas />

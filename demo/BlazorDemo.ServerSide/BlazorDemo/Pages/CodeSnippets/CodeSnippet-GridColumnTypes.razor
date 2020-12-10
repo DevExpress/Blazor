@@ -6,14 +6,13 @@
             RowInsertingAsync=""@OnRowInserting""
             InitNewRow=""@OnInitNewRow""
             CssClass=""mw-1100"">
-    <DxDataGridCommandColumn Width=""150px"" />
+    <DxDataGridCommandColumn Width=""100px"" />
     <DxDataGridDateEditColumn Field=""@nameof(WeatherForecast.Date)"" DisplayFormat=""D"" EditorFormat=""d"" EditorDisplayFormat=""D"" />
-    <DxDataGridColumn Field=""@nameof(WeatherForecast.Forecast)"" Caption=""Forecast"" Width=""150px"" />
-    <DxDataGridSpinEditColumn Field=""@nameof(WeatherForecast.TemperatureC)"" Caption=""@(""Temp. (\x2103)"")"" TextAlignment=""DataGridTextAlign.Left""
-                              Width=""150px"" />
+    <DxDataGridColumn Field=""@nameof(WeatherForecast.Forecast)"" Caption=""Forecast"" />
+    <DxDataGridSpinEditColumn Field=""@nameof(WeatherForecast.TemperatureC)"" Caption=""@(""Temp. (\x2103)"")"" TextAlignment=""DataGridTextAlign.Left"" />
     <DxDataGridComboBoxColumn Field=""@nameof(WeatherForecast.CloudCover)"" Caption=""Cloud Cover"" DataAsync=""@ForecastService.GetCloudCoverAsync""
-                              TextAlignment=""DataGridTextAlign.Left"" Width=""150px"" />
-    <DxDataGridCheckBoxColumn Field=""@nameof(WeatherForecast.Precipitation)"" Caption=""Precipitation"" Width=""100px"" />
+                              TextAlignment=""DataGridTextAlign.Left"" />
+    <DxDataGridCheckBoxColumn Field=""@nameof(WeatherForecast.Precipitation)"" Caption=""Precipitation"" />
 </DxDataGrid>
 
 @code {

@@ -11,6 +11,13 @@
     </p>
 </div>
 
+<div class="option-container editors-options">
+    <div class="custom-control custom-checkbox" style="margin-left:1rem">
+        <input type="checkbox" class="custom-control-input" id="ShowCheckboxes" checked="@ShowCheckboxes" @bind-value="@ShowCheckboxes" />
+        <label class="custom-control-label" style="white-space: nowrap; font-weight:600" for="ShowCheckboxes">ShowCheckboxes</label>
+    </div>
+</div>
+
 <div class="row" style="margin-left: -10px; margin-right: -10px; max-width: 1120px">
     <div class="col-12 col-md-6" style="padding-left: 10px; padding-right: 10px;">
         <DxListBox Data="@Staff.DataSource"
@@ -26,8 +33,7 @@
             <div class="card-header bg-transparent text-body py-1 border-bottom-0 font-weight-bold">Selected items:</div>
             <div class="card-body p-0 overflow-auto">
                 <ul class="list-group list-group-flush bg-transparent border-0">
-                    @foreach (var item in Values)
-                    {
+                    @foreach(var item in Values) {
                         <li class="list-group-item bg-transparent text-body py-1 border-0">@item.Text</li>
                     }
                 </ul>
@@ -37,12 +43,8 @@
 </div>
 
 <div class="code-snippet card demo-card-wide">
-    <CodeSnippetHeader DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2#item-selection"/>
+    <CodeSnippetHeader DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2#item-selection" />
     <div class="card-footer text-muted">
-        <div class="custom-control custom-checkbox" style="margin-left:.5em">
-            <input type="checkbox" class="custom-control-input" id="ShowCheckboxes" checked="@ShowCheckboxes" @bind-value="@ShowCheckboxes" />
-            <label class="custom-control-label" for="ShowCheckboxes"><b class="hljs-attr" style="white-space: nowrap;"> ShowCheckboxes</b></label>
-        </div>
         <CodeSnippet_Editors_ListBox_MultipleSelection></CodeSnippet_Editors_ListBox_MultipleSelection>
     </div>
 </div>

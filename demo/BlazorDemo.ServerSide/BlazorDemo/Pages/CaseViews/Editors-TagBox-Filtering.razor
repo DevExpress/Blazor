@@ -18,6 +18,14 @@
     </p>
 </div>
 
+<div class="option-container editors-options">
+    <span>Filtering Mode: </span>
+    <DxComboBox Data="@(Enum.GetNames(typeof(DataGridFilteringMode)))"
+                Value="@(FilteringMode.ToString())"
+                ValueChanged="@((string selectedItem) => { FilteringMode = Enum.Parse<DataGridFilteringMode>(selectedItem); })">
+    </DxComboBox>
+</div>
+
 @if (Data != null) {
 <div class="card demo-card demo-card-shadow">
     <div class="card-header">
@@ -36,15 +44,6 @@
     <div class="code-snippet card demo-card-wide">
         <CodeSnippetHeader DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2#filter-data"/>
         <div class="card-footer text-muted">
-            <div style="margin-left:.5em;">
-                <label class="d-inline-flex flex-nowrap align-items-center">
-                    <b class="hljs-attr" style="white-space: nowrap; margin-right: .5em;">Filtering Mode: </b>
-                    <DxComboBox Data="@(Enum.GetNames(typeof(DataGridFilteringMode)))"
-                                Value="@(FilteringMode.ToString())"
-                                ValueChanged="@((string selectedItem) => { FilteringMode = Enum.Parse<DataGridFilteringMode>(selectedItem); })">
-                    </DxComboBox>
-                </label>
-            </div>
             <CodeSnippet_Editor_TagBox_Filtering></CodeSnippet_Editor_TagBox_Filtering>
         </div>
     </div>

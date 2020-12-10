@@ -71,7 +71,8 @@ namespace BlazorDemo.Configuration {
                     .OpenGraph("description", page.OG_Description)
                     .OpenGraph("image", page.OG_Image)
                     .Title(string.Format(titleFormat, title))
-                    .Meta("description", page.Description);
+                    .Meta("description", page.Description)
+                    .Meta("keywords", page.Keywords);
             }
 
             if(page.DemoPages != null) {

@@ -3,17 +3,16 @@
 <div class="demo-description mw-1100">
     <h2><DemoNavLink Link="GridSelection#OptimizedMultipleSelection" />Multiple Selection with Optimized Performance</h2>
     <p>
-        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#row-selection">Data Grid</a> also supports the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.SelectionMode">DataGridSelectionMode.OptimizedMultipleSelection</a> selection mode.
-        In this mode, the Data Grid stores information about the selection to improve performance.
-        For example, when the number of selected rows exceeds the number of unselected rows, the grid stores information about unselected rows only.
+        Enable selection mode with optimized performance if the Data Grid contains a significant number of rows. To do this, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.SelectionMode">SelectionMode</a> property to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridSelectionMode">OptimizedMultipleSelection</a> and specify the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.KeyFieldName">KeyFieldName</a> property.
     </p>
     <p>
-        To use this mode, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.KeyFieldName">KeyFieldName</a> property to the name of the data source key field.
-        To track selection changes in this mode, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.OptimizedMultipleSelectionChanged">OptimizedMultipleSelectionChanged</a> event as demonstrated in this module.
+        In this mode, the Data Grid does not store row data objects and information about all the selected rows. The Data Grid stores row key values instead. If you select all rows in the Data Grid UI or in code, and then unselect rows, the component stores keys of unselected rows only (and vice versa).
+
+        This mode reduces the amount of stored data and increases performance, but may corrupt database integrity.
     </p>
     <p>
-        The code below sets the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.SelectAllMode">SelectAllMode</a> property to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridSelectAllMode">DataGridSelectAllMode.AllPages</a>.
-        It allows users to select all grid’s data rows simultaneously via the <b>Select All</b> checkbox in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridSelectionColumn">DxDataGridSelectionColumn</a> column.
+        Add the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridSelectionColumn">DxDataGridSelectionColumn</a> to select data rows with checkboxes. Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.SelectAllMode">SelectAllMode</a> property to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridSelectAllMode">AllPages</a> to select all data rows simultaneously with the <b>Select All</b> checkbox.
+        To track selection changes in this mode, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.OptimizedMultipleSelectionChanged">OptimizedMultipleSelectionChanged</a> event.
     </p>
 </div>
 

@@ -6,60 +6,63 @@
 <div class="h-100 overflow-auto p-2">
     <DxGridLayout CssClass="h-100" ColumnSpacing="8px" RowSpacing="8px">
         <Rows>
-            <DxGridLayoutRow />
-            <DxGridLayoutRow />
-            <DxGridLayoutRow />
             @if(isXSmallScreen) {
-                <DxGridLayoutRow />
-                <DxGridLayoutRow />
-                <DxGridLayoutRow />
+                <DxGridLayoutRow Areas="item1" />
+                <DxGridLayoutRow Areas="item2" />
+                <DxGridLayoutRow Areas="item3" />
+                <DxGridLayoutRow Areas="item4" />
+                <DxGridLayoutRow Areas="item5" />
+                <DxGridLayoutRow Areas="item6" />
+            } else {
+                <DxGridLayoutRow Areas="item1 item3 item5" />
+                <DxGridLayoutRow Areas="item1 item4 item5"/>
+                <DxGridLayoutRow Areas="item2 item6 item6"/>
             }
         </Rows>
         <Columns>
-            <DxGridLayoutColumn />
+            <DxGridLayoutColumn Width="2fr" />
             @if(!isXSmallScreen) {
-                <DxGridLayoutColumn />
                 <DxGridLayoutColumn />
                 <DxGridLayoutColumn />
             }
         </Columns>
         <Items>
-            <DxGridLayoutItem Row="0" Column="0" ColumnSpan="2" RowSpan="isXSmallScreen ? 0 : 2">
+            <DxGridLayoutItem Area="item1">
                 <Template>
                     <div class="center gridlayout-header gridlayout-item">
                         Item 1
                     </div>
                 </Template>
             </DxGridLayoutItem>
-            <DxGridLayoutItem Row="isXSmallScreen ? 1 : 2" Column="0" ColumnSpan="2">
+            <DxGridLayoutItem Area="item2">
                 <Template>
                     <div class="center gridlayout-content gridlayout-item">
                         Item 2
                     </div>
                 </Template>
             </DxGridLayoutItem>
-            <DxGridLayoutItem Row="isXSmallScreen ? 2 : 0" Column="isXSmallScreen ? 0 : 2">
+            <DxGridLayoutItem Area="item3">
                 <Template>
                     <div class="center gridlayout-left-side-bar gridlayout-item">
                         Item 3
                     </div>
                 </Template>
             </DxGridLayoutItem>
-            <DxGridLayoutItem Row="isXSmallScreen ? 3 : 1" Column="isXSmallScreen ? 0 : 2">
+            <DxGridLayoutItem Area="item4">
                 <Template>
                     <div class="center gridlayout-right-side-bar gridlayout-item">
                         Item 4
                     </div>
                 </Template>
             </DxGridLayoutItem>
-            <DxGridLayoutItem Row="isXSmallScreen ? 4 : 0" Column="isXSmallScreen ? 0 : 3" RowSpan="isXSmallScreen ? 0 : 2">
+            <DxGridLayoutItem Area="item5">
                 <Template>
                     <div class="center gridlayout-footer gridlayout-item">
                         Item 5
                     </div>
                 </Template>
             </DxGridLayoutItem>
-            <DxGridLayoutItem Row="isXSmallScreen ? 5 : 2" Column="isXSmallScreen ? 0 : 2" ColumnSpan="2">
+            <DxGridLayoutItem Area="item6">
                 <Template>
                     <div class="center gridlayout-left-side-bar gridlayout-item">
                         Item 6

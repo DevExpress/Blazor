@@ -61,6 +61,7 @@ namespace BlazorDemo.Reporting {
                         viewer.UseCachedReportSourceBuilder();
                     });
                 });
+                services.AddTransient<DevExpress.DataAccess.Wizard.Services.ICustomQueryValidator, DevExpress.DataAccess.Wizard.Services.CustomQueryValidator>();
                 services.AddSingleton<IDemoReportSource, DemoReportSource>();
                 services.AddScoped<ReportStorageWebExtension, DemoReportStorageWebExtension>();
 
