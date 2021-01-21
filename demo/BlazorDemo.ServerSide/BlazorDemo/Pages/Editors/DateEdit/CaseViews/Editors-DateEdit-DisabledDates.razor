@@ -1,0 +1,43 @@
+﻿@namespace BlazorDemo.Pages.CaseViews
+@inherits DemoWithResizableComponent
+
+<div class="demo-description">
+    <h2><DemoNavLink Link="DateEdit#DisabledDates" />Disabled Dates</h2>
+    <p>
+        In this demo, several dates within the Blazor <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1">Date Edit</a>'s calendar are grayed out (disabled) and cannot be selected.
+        If a user clicks one a disabled date, the Blazor Date Edit’s selected date does not change.
+    </p>
+    <p>
+        To disable selection of specific dates based on custom logic, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.CustomDisabledDate">CustomDisabledDate</a> event.
+    </p>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode">
+            <TitleTemplate>
+                Date: <b>@DateTimeValue.ToString("dddd, dd MMMM yyyy")</b>
+            </TitleTemplate>
+        </DemoToolbar>
+    </div>
+    <div class="card-body mw-480">
+        <DxDateEdit @bind-Date="@DateTimeValue" SizeMode="SizeMode" CustomDisabledDate="@OnCustomDisabledDate"></DxDateEdit>
+    </div>
+</div>
+
+<CodeSnippet_Editor_DateEdit_DisabledDates />
+
+@code {
+    DateTime DateTimeValue { get; set; } = DateTime.Today;
+
+    void OnCustomDisabledDate(CalendarCustomDisabledDateEventArgs args) {
+        args.IsDisabled = args.Date < DateTime.Today.AddDays(-20) || GetDisabledDates().Exists(d => DaysEqual(d, args.Date));
+    }
+    bool DaysEqual(DateTime date1, DateTime date2) {
+        return (date1.Year == date2.Year && date1.DayOfYear == date2.DayOfYear);
+    }
+    List<DateTime> GetDisabledDates() {
+        DateTime baseDate = DateTime.Today;
+        return new List<DateTime>() { baseDate.AddDays(-9), baseDate.AddDays(-4), baseDate.AddDays(-3), baseDate.AddDays(3), baseDate.AddDays(5), baseDate.AddDays(6), baseDate.AddDays(15) };
+    }
+}

@@ -1,0 +1,44 @@
+﻿@namespace BlazorDemo.Pages.CaseViews
+@inherits DemoWithResizableComponent
+@inject ICountryNamesProvider CountryNamesService
+
+<div class="demo-description">
+    <h2><DemoNavLink Link="TagBox#VirtualScrolling" />Virtual Scrolling</h2>
+    <p>
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.ListRenderMode">ListRenderMode</a> property to specify how the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2">TagBox</a> loads the item list.
+    </p>
+    <ul>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ListRenderMode">Entire</a> - The TagBox loads the entire item list. Use this option for small item lists where scrolling should work instantly.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ListRenderMode">Virtual</a> - The TagBox loads visible items only. Use this option to improve performance when the list contains to many items to load simultaneously.</li>
+    </ul>
+    <p>
+        In this demo, the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.ListRenderMode">ListRenderMode</a> property is set to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.ListRenderMode">ListRenderMode.Virtual</a>.
+    </p>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode" Title="Select items"/>
+    </div>
+    <div class="card-body mw-480">
+        <DxTagBox Data="@Data"
+                  ListRenderMode="ListRenderMode.Virtual"
+                  @bind-Values="@Values"
+                  TextFieldName="@nameof(Country.CountryName)"
+                  ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                  SizeMode="SizeMode">
+        </DxTagBox>
+    </div>
+</div>
+
+<CodeSnippet_Editor_TagBox_VirtualScrolling />
+
+@code {
+    IEnumerable<Country> Data { get; set; }
+    IEnumerable<Country> Values { get; set; }
+
+    protected override async Task OnInitializedAsync() {
+        Data = await CountryNamesService.LoadAsync();
+        Values = new List<Country>() { Data.First() };
+    }
+}

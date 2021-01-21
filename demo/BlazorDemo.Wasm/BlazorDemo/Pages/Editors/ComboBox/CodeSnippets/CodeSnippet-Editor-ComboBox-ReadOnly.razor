@@ -1,0 +1,37 @@
+﻿@namespace BlazorDemo.Pages.CodeSnippets
+
+<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2#read-only-state">
+<CodeSnippetTabPage Text="Razor">@(@"<DxComboBox Data=""@CountryData.Countries""
+            @bind-Value=""@CurrentCountry""
+            TextFieldName=""@nameof(Country.CountryName)""
+            ReadOnly=""true"">
+</DxComboBox>
+
+<DxComboBox Data=""@CountryData.Countries""
+            @bind-Value=""@CurrentCountry""
+            TextFieldName=""@nameof(Country.CountryName)""
+            Enabled=""false"">
+</DxComboBox>
+
+@code {
+    Country CurrentCountry { get; set; } = CountryData.Countries[1];
+}")
+</CodeSnippetTabPage>
+<CodeSnippetTabPage Text="Country" Language="csharp">@(@"public class Country {
+    public int Id { get; set; }
+    public string CountryName { get; set; }
+}
+
+public static class CountryData {
+    private static readonly Lazy<List<Country>> countries = new Lazy<List<Country>>(() => {
+        return new List<Country>()
+        {
+            new Country() { Id = 0, CountryName = ""USA"" },
+            new Country() { Id = 1, CountryName = ""Germany"" },
+            new Country() { Id = 2, CountryName = ""Japan"" }
+        };
+    });
+    public static List<Country> Countries { get { return countries.Value; } }
+}")
+</CodeSnippetTabPage>
+</CodeSnippetTabbed>

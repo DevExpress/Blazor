@@ -1,0 +1,24 @@
+﻿@namespace BlazorDemo.Pages.CodeSnippets
+
+<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2#tags-custom-tags-and-list-items">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxTagBox Data=""@Cities""
+          TData=""string""
+          TValue=""string""
+          AllowCustomTags=""true""
+          @bind-Tags=""Tags"">
+</DxTagBox>
+
+@code {
+    IEnumerable<string> Cities { get; set; } = new List<string>() {
+    {
+        ""London"",
+        ""Berlin"",
+        ""Paris"",
+    };
+
+    IEnumerable<string> Tags { get; set; } = new List<string>() {
+        ""London"",
+        ""New York""
+    };
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

@@ -10,6 +10,9 @@ namespace BlazorDemo.Configuration {
     public class DemoConfiguration {
         private readonly SeoConfiguration _seoConfig;
 
+        protected DemoConfiguration() {
+        }
+
         public DemoConfiguration(IOptions<SeoConfiguration> seoOptions, IConfiguration configuration) {
             _seoConfig = seoOptions?.Value;
             if(_seoConfig == null) return;
@@ -29,8 +32,8 @@ namespace BlazorDemo.Configuration {
 #else
             false;
 #endif
-        public bool ShowOnlyReporting => false;
-        public void ConfigureMetadata(IDocumentMetadataCollection metadataCollection) {
+        public virtual bool ShowOnlyReporting => false;
+        public virtual void ConfigureMetadata(IDocumentMetadataCollection metadataCollection) {
             if(_seoConfig == null) return;
 
             metadataCollection.AddDefault()
@@ -45,10 +48,10 @@ namespace BlazorDemo.Configuration {
             }
         }
 
-        public IEnumerable<Assembly> AdditionalRoutingAssemblies { get; }
-        public IEnumerable<DemoProductInfo> Products { get; }
+        public virtual IEnumerable<Assembly> AdditionalRoutingAssemblies { get; }
+        public virtual IEnumerable<DemoProductInfo> Products { get; }
 
-        public IEnumerable<DemoPageSection> GetDemoPageSections(string pageUrl, out DemoPage demoPage) {
+        public virtual IEnumerable<DemoPageSection> GetDemoPageSections(string pageUrl, out DemoPage demoPage) {
             demoPage = null;
             foreach(var rootPage in _seoConfig.RootDemoPages) {
                 if(rootPage.DemoPages != null)
@@ -58,7 +61,7 @@ namespace BlazorDemo.Configuration {
                 if(demoPage != null)
                     return demoPage.DemoPageSections ?? new DemoPageSection[0];
             }
-            
+
             return new DemoPageSection[0];
         }
 

@@ -7,7 +7,10 @@
     </p>
     <p>
         <ol>
-            <li>Add <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridCommandColumn">DxDataGridCommandColumn</a> to the Data Grid. This column displays the <strong>New</strong>, <strong>Edit</strong>, and <strong>Delete</strong> command buttons.</li>
+            <li>
+                Add <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridCommandColumn">DxDataGridCommandColumn</a> to the Data Grid. This column displays the <strong>New</strong>, <strong>Edit</strong>, and <strong>Delete</strong> command buttons.
+                To hide unnecessary buttons, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridCommandColumn.NewButtonVisible">NewButtonVisible</a>, <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridCommandColumn.EditButtonVisible">EditButtonVisible</a>, and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridCommandColumn.DeleteButtonVisible">DeleteButtonVisible</a> properties.
+            </li>
             <li>
                 Handle the following events to post changes to an underlying data source:
                 <ul>
@@ -17,15 +20,19 @@
                 </ul>
             </li>
             <li>Handle the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.InitNewRow">InitNewRow</a> event to initialize new data rows.</li>
+            <li>Specify the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.KeyFieldName">key data field</a> to enable the Data Grid to identify individual data items.</li>
         </ol>
     </p>
     <p>
         The Data Grid supports different edit modes. Use the <strong>Edit Mode</strong> option below (corresponds to the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.EditMode">EditMode</a> property) to switch between available modes.
     </p>
     <ul>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridEditMode">DataGridEditMode.EditForm</a> – The Data Grid displays the edit form instead of the edited row.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridEditMode">DataGridEditMode.EditForm</a> (Default) – The Data Grid displays the edit form instead of the edited row.</li>
         <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridEditMode">DataGridEditMode.PopupEditForm</a> – The Data Grid displays the edit form in a pop-up window.</li>
     </ul>
+    <p>
+        When a user clicks <b>New</b> or <b>Edit</b>, the Data Grid displays the Edit Form. This form consists of data editors for each visible column. The editor type depends on the corresponding column's type.
+    </p>
 </div>
 <div class="option-container">
     <span>Edit Mode: </span>

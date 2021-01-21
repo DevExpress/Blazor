@@ -1,8 +1,16 @@
-﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#bind-to-custom-data">
-    <CodeSnippetTabPage Text="Razor">@(@"<DxDataGrid ...
-            T=""@WebApiOrder""
+﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.CustomData">
+    <CodeSnippetTabPage Text="Razor">
+        @(@"@using DevExtreme.AspNet.Data
+@using DevExtreme.AspNet.Data.ResponseModel
+@using System.Threading
+@using System.Threading.Tasks
+@using System.Net.Http
+@using System.Text.Json
+
+<DxDataGrid T=""@WebApiOrder""
             CustomData=""@LoadOrderData""
             ShowFilterRow=""true"">
+
     <Columns>
         <DxDataGridComboBoxColumn T=""@(WebApiCustomerLookup)"" TextFieldName=""Text"" ValueFieldName=""Value""
                                   CustomData=""@LoadCustomerData"" Field=""@nameof(WebApiOrder.CustomerID)"" Width=""300px"" />
@@ -30,10 +38,50 @@
         using var responseStream = await response.Content.ReadAsStreamAsync();
         return await JsonSerializer.DeserializeAsync<LoadResult>(responseStream, cancellationToken: cancellationToken);
     }
-}")</CodeSnippetTabPage>
-    <CodeSnippetTabPage Text="Data Source (Web API Controller)" Language="csharp">@(@"using DevExtreme.AspNet.Data;
+}")
+    </CodeSnippetTabPage>
+    <CodeSnippetTabPage Text="Data Objects" Language="csharp">
+        @(@"using System;
+
+public class WebApiOrder {
+    public string CustomerID { get; set; }
+    public DateTime OrderDate { get; set; }
+    public decimal Freight { get; set; }
+    public string ShipCountry { get; set; }
+    public int ShipVia { get; set; }
+}
+
+public class WebApiCustomerLookup {
+    public string Text { get; set; }
+    public string Value { get; set; }
+}
+
+public class WebApiShipperLookup {
+    public string Text { get; set; }
+    public int Value { get; set; }
+}
+")
+    </CodeSnippetTabPage>
+    <CodeSnippetTabPage Text="Startup" Language="csharp">
+        @(@"using System.Net.Http;
+
+public class Startup {
+    // ...
+    public void ConfigureServices(IServiceCollection services) {
+        // ...
+        services.AddHttpClient<HttpClient>(ConfigureHttpClient);
+        services.AddScoped<HttpClient>(serviceProvider => serviceProvider.GetService<IHttpClientFactory>().CreateClient());
+
+        static void ConfigureHttpClient(HttpClient httpClient) {
+            httpClient.DefaultRequestHeaders.Add(""Accept"", ""application / json"");
+        };
+    }
+}")
+    </CodeSnippetTabPage>
+    <CodeSnippetTabPage Text="Web API Controller" Language="csharp">
+        @(@"using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
-...
+// ...
 
 [Route(""api /[controller] /[action]"")]
 public class DataGridWebApiController : Controller
@@ -44,6 +92,8 @@ public class DataGridWebApiController : Controller
     public object Orders(DataSourceLoadOptions loadOptions) {
         return DataSourceLoader.Load(_nwind.Orders, loadOptions);
     }
-    ...
-}")</CodeSnippetTabPage>
+    // ...
+}
+")
+    </CodeSnippetTabPage>
 </CodeSnippetTabbed>

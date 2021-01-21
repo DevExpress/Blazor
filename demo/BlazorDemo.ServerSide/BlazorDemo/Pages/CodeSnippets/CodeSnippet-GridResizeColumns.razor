@@ -1,8 +1,34 @@
-﻿<div class="code-snippet card demo-card-wide mw-1100">
+﻿<CodeSnippetTabbed>
+    <CodeSnippetTabPage Text="Razor">
+        @(@"<DxDataGrid DataAsync=""@CustomersService.Load""
+            ColumnResizeMode =""@CurrentMode""
+            CssClass=""mw-1100"">
+    <Columns>
+        <DxDataGridColumn Field=""@nameof(Customer.ContactName)"" />
+        <DxDataGridColumn Field=""@nameof(Customer.CompanyName)"" />
+        <DxDataGridColumn Field=""@nameof(Customer.City)"" />
+        <DxDataGridColumn Field=""@nameof(Customer.Region)"" />
+        <DxDataGridColumn Field=""@nameof(Customer.Country)"" />
+    </Columns>
+</DxDataGrid>
+
+@code {
+    DataGridColumnResizeMode CurrentMode { get; set; } = DataGridColumnResizeMode.NextColumn;
+    DataGridColumnResizeMode[] Modes { get; } = new DataGridColumnResizeMode[] {
+        DataGridColumnResizeMode.NextColumn,
+        DataGridColumnResizeMode.Component
+    };
+}")
+    </CodeSnippetTabPage>
+</CodeSnippetTabbed>
+
+
+
+@*<div class="code-snippet card demo-card-wide mw-1100">
     <CodeSnippetHeader></CodeSnippetHeader>
     <div class="card-footer text-muted">
         <CodeSnippet>
-@(@"<DxDataGrid DataAsync=""@CustomersService.Load""
+            @(@"<DxDataGrid DataAsync=""@CustomersService.Load""
             ColumnResizeMode =""@CurrentMode""
             CssClass=""mw-1100"">
     <Columns>
@@ -23,4 +49,4 @@
 }")
         </CodeSnippet>
     </div>
-</div>
+</div>*@

@@ -28,6 +28,8 @@ namespace DevExpress.Blazor.DocumentMetadata {
     }
 
     sealed class MetadataCache : ConcurrentDictionary<string, ISet<Renderer>> {
+        public MetadataCache() : base(StringComparer.InvariantCultureIgnoreCase) {
+        }
         internal ISet<Renderer> GetPageRenderers(string pageName) {
             return GetOrAdd(GetFixedPageName(pageName), (_) => new MetadataRendererSet());
         }

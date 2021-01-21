@@ -1,0 +1,33 @@
+﻿@namespace BlazorDemo.Pages.CaseViews
+@inherits DemoWithResizableComponent
+
+<div class="demo-description">
+    <h2><DemoNavLink Link="TimeEdit#DisplayFormat" />Display Format</h2>
+    <p>
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1.DisplayFormat">DisplayFormat</a> property to format
+        the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1">Time Edit</a>’s display value when the editor is not focused,
+        and the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1.Format">Format</a> property to format the editor’s value in edit mode when the editor is focused.
+        If the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1.DisplayFormat">DisplayFormat</a> property is not set,
+        the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1.Format">Format</a> is applied for both display and edit modes.
+    </p>
+    <p>
+        Our Blazor Time Edit supports standard formats. See the <a class="helplink" target="_blank" href="https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings">Standard Date and Time Format Strings</a>
+        and <a class="helplink" target="_blank" href="https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings">Custom Date and Time Format Strings</a> MSDN articles for more information.
+    </p>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode" Title="Enter a time" />
+    </div>
+    <div class="card-body mw-480">
+        <DxTimeEdit @bind-Time="@TimeValue" Format="HH:mm" DisplayFormat="@DisplayFormat" SizeMode="SizeMode"></DxTimeEdit>
+    </div>
+</div>
+
+<CodeSnippet_Editor_TimeEdit_DisplayFormat />
+
+@code {
+    TimeSpan TimeValue { get; set; } = DateTime.Now.TimeOfDay;
+    string DisplayFormat { get; } = string.IsNullOrEmpty(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.AMDesignator) ? "HH:mm" : "h:mm tt";
+}

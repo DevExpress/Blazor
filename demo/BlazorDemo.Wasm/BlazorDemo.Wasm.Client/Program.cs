@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using BlazorDemo.Configuration;
 using BlazorDemo.DataProviders;
+using BlazorDemo.DataProviders.Implementation;
 using BlazorDemo.Wasm.DataProviders.Implementation;
 using BlazorDemo.Wasm.DataProviders.TransportInfrastructure;
 using DevExpress.Blazor.DocumentMetadata;
@@ -28,6 +29,7 @@ namespace BlazorDemo.Wasm {
             services.AddSingleton<IProductsProvider, ProductsProvider>();
             services.AddSingleton<ISalesInfoDataProvider, SalesInfoDataProvider>();
             services.AddSingleton<ISalesViewerDataProvider, SalesViewerDataProvider>();
+            services.AddSingleton<IFinancialSeriesDataProvider, FinancialSeriesDataProvider>();
             services.AddNotSupportedDemoServices();
 
             var client = new HttpClient() {

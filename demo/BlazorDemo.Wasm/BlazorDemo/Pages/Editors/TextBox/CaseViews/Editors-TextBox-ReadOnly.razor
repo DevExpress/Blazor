@@ -1,0 +1,39 @@
+﻿@namespace BlazorDemo.Pages.CaseViews
+@inherits DemoWithResizableComponent
+
+<div class="demo-description">
+    <h2><DemoNavLink Link="TextBox#ReadOnly" />Read-Only and Disabled Modes</h2>
+    <p>In this demo, the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextBox">Text Box</a> displays values but does not allow users to change them. To implement this behavior, you can use any of the following modes:</p>
+    <ul>
+        <li>Read-only mode. In this mode, you can use the keyboard to focus and navigate the component. Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTextEditorBase.ReadOnly">ReadOnly</a> property to <b>true</b> to activate this mode.</li>
+        <li>Disabled mode. In this mode, the component cannot be focused or navigated. Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataEditorBase-2.Enabled">Enabled</a> property to <b>false</b> to activate this mode.</li>
+    </ul>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode" Title="Text cannot be changed"/>
+    </div>
+    <div class="card-body mw-480">
+        <DxFormLayout ItemSizeMode="SizeMode" @key="@ThemeName">
+            <DxFormLayoutItem ColSpanMd="12" Caption="Read Only">
+                <Template>
+                    <DxTextBox @bind-Text="@TextValue" ReadOnly="true" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem ColSpanMd="12" Caption="Disabled" BeginRow="true">
+                <Template>
+                    <DxTextBox @bind-Text="@TextValue" Enabled="false" />
+                </Template>
+            </DxFormLayoutItem>
+        </DxFormLayout>
+    </div>
+</div>
+
+<CodeSnippet_Editor_TextBox_ReadOnly/>
+
+@code {
+    [CascadingParameter(Name = "ThemeName")] string ThemeName { get; set; }
+
+    string TextValue { get; set; } = "End users cannot change the Text Box value";
+}

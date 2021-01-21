@@ -1,0 +1,68 @@
+﻿<div class="demo-description">
+    <h2>
+        <DemoNavLink Link="Menu#Adaptivity" />Adaptivity
+    </h2>
+    <p>The Menu component supports adaptive mode. The following properties specify how the menu responds when the width of the browser window changes and there is not enough space to display all the items:</p>
+    <ul>
+        <li>
+            <p><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu.CollapseItemToIconMode" >CollapseItemToIconMode</a> - Specifies whether the menu hides item text and displays icons instead. You can also use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenuItem.AdaptivePriority" >AdaptivePriority</a> property to specify the order in which menu items are hidden.</p>
+        </li>
+        <li>
+            <p><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu.CollapseItemsToHamburgerMenu" >CollapseItemsToHamburgerMenu</a> - Specifies whether menu items are collapsed into a hamburger menu. You can use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu.HamburgerButtonPosition" >HamburgerButtonPosition</a> property to specify the hamburger button's position.</p>
+        </li>
+    </ul>
+</div>
+<div class="card demo-card menu-resizable-card" id="menu-adaptivity-bar">
+    <DxMenu Title="DevExpress"
+            CollapseItemsToHamburgerMenu="true"
+            CollapseItemToIconMode="MenuCollapseItemToIconMode.Sequentially"
+            DisplayMode="MenuDisplayMode.Desktop"
+            @key="@ThemeName">
+        <Items>
+            <DxMenuItem Text="Home" IconCssClass="menu-icon-home menu-icon">
+                <Items>
+                    <DxMenuItem Text="News">
+                        <Items>
+                            <DxMenuItem Text="Explore our newest features" />
+                            <DxMenuItem Text="Website news" />
+                        </Items>
+                    </DxMenuItem>
+                    <DxMenuItem Text="Our Mission" />
+                    <DxMenuItem Text="Our Customers" />
+                </Items>
+            </DxMenuItem>
+            <DxMenuItem Text="Components" IconCssClass="menu-icon-products menu-icon">
+                <Items>
+                    <DxMenuItem Text="Blazor" />
+                    <DxMenuItem Text="ASP.NET MVC" />
+                    <DxMenuItem Text="ASP.NET Web Forms" />
+                    <DxMenuItem Text="ASP.NET Core" />
+                    <DxMenuItem Text="Bootstrap Web Forms" />
+                </Items>
+            </DxMenuItem>
+            <DxMenuItem Text="Support" IconCssClass="menu-icon-support menu-icon">
+                <Items>
+                    <DxMenuItem Text="Getting Started" />
+                    <DxMenuItem Text="Documentation" />
+                    <DxMenuItem Text="Support Center" />
+                    <DxMenuItem Text="Code Examples" />
+                    <DxMenuItem Text="Blogs" />
+                </Items>
+            </DxMenuItem>
+            <DxMenuItem Text="Contacts" IconCssClass="menu-icon-contacts menu-icon" />
+            <DxMenuItem Text="About" IconCssClass="menu-icon-about menu-icon" />
+        </Items>
+    </DxMenu>
+    <div class="menu-resize-handler">
+        <div class="menu-img-resize" />
+    </div>
+</div>
+<CodeSnippet_Menu_Adaptivity />
+<DemoScriptLoader @ref=@menuResizer Src="_content/BlazorDemo/lib/menu-resizer.js" />
+@code {
+     [CascadingParameter(Name = "ThemeName")] string ThemeName { get; set; }
+    DemoScriptLoader menuResizer;
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        await menuResizer.InvokeVoidAsync("initResizeHandler", "menu-adaptivity-bar");
+    }
+}

@@ -1,0 +1,14 @@
+﻿@namespace BlazorDemo.Pages.CodeSnippets
+
+<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1#increment-value">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxSpinEdit @bind-Value=""DecimalValue""
+            BindValueMode=""BindValueMode.OnInput""
+            Increment=""0.1m""
+            MinValue=""0m""
+            MaxValue=""1m"">
+</DxSpinEdit>
+
+@code {
+    Decimal DecimalValue { get; set; } = 0.5M;
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

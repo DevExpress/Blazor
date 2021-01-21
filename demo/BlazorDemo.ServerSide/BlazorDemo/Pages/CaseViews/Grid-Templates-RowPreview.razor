@@ -5,7 +5,18 @@
     <p>
         This demo illustrates how to use the Data Grid’s <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.RowPreviewTemplate">RowPreviewTemplate</a> property to show preview sections under each data row across all columns. These sections can display any content, such as tables, images, values from data source fields, custom text, and so on.
     </p>
-
+    <p>The template's <b>Context</b> parameter has the following properties:</p>
+    <ul>
+        <li>
+            <a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataRowInfo-1.RowIndex" target="_blank" rel="nofollow">RowIndex</a> - Returns a zero-based row index.
+        </li>
+        <li>
+            <a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataRowInfo-1.DataItem" target="_blank" rel="nofollow">DataItem</a> - Returns a data item that corresponds to the row.
+        </li>
+    </ul>
+    <p>
+        When you define the row preview template, use the <a class="helplink" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.Columns" target="_blank" rel="nofollow">Columns</a> property to add Data Grid columns.
+    </p>
 </div>
 
 @if (DataSource == null) {

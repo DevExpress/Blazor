@@ -1,0 +1,30 @@
+﻿@namespace BlazorDemo.Pages.CaseViews
+@inherits DemoWithResizableComponent
+
+<div class="demo-description">
+    <h2><DemoNavLink Link="Memo#Overview" />Overview</h2>
+    <p>
+        <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMemo">Memo</a> is a multi-line text editor that supports different size modes.
+        To specify the component's size in code, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxResizableEditorBase-2.SizeMode">SizeMode</a> property.
+    </p>
+    <p>
+        To apply different size modes, use the drop-down list in the demo card's header.
+    </p>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode" Title="Resize the component to see all the text" />
+    </div>
+    <div class="card-body mw-480">
+        <DxMemo @bind-Text="TextValue" SizeMode="SizeMode" ></DxMemo>
+    </div>
+</div>
+
+<CodeSnippet_Editor_Memo />
+
+@code {
+    string TextValue { get; set; } = "Prepare 2020 Marketing Plan: We need to double revenues in 2020 and our marketing strategy is going to be key here. " +
+            "R&D is improving existing products and creating new products so we can deliver great AV equipment to our customers. " +
+            "Robert, please make certain to create a PowerPoint presentation for the members of the executive team.";
+}

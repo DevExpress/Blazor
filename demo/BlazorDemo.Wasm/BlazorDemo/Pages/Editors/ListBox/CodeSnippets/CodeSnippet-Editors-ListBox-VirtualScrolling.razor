@@ -1,0 +1,20 @@
+﻿@namespace BlazorDemo.Pages.CodeSnippets
+
+<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2#virtual-scrolling">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxListBox Data=""@Data""
+           TData=""Country""
+           TValue=""Country""
+           ListRenderMode=""ListRenderMode.Virtual""
+           TextFieldName=""@nameof(Country.CountryName)""
+           CssClass=""demo-listbox""
+           style=""height: 232px"">
+</DxListBox>
+
+@code {
+    IEnumerable<Country> Data { get; set; }
+
+    protected override async Task OnInitializedAsync() {
+        Data = await CountryNamesService.LoadAsync();
+    }
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

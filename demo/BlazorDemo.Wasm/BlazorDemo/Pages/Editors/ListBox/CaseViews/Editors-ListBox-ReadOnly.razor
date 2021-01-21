@@ -1,0 +1,40 @@
+﻿@namespace BlazorDemo.Pages.CaseViews
+
+<div class="demo-description">
+    <h2><DemoNavLink Link="ListBox#ReadOnly" />Read-Only and Disabled Modes</h2>
+    <p>In this demo, the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2">List Box</a> displays values but does not allow users to change them. To implement this behavior, you can use any of the following modes:</p>
+    <ul>
+        <li>Read-only mode. Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.ReadOnly">ReadOnly</a> property to <b>true</b> to activate this mode.</li>
+        <li>Disabled mode. Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataEditorBase-2.Enabled">Enabled</a> property to <b>false</b> to activate this mode.</li>
+    </ul>
+</div>
+<div class="row" style="margin-left: -10px; margin-right: -10px; max-width: 1120px">
+    <div class="col-12 col-md-6" style="padding-left: 10px; padding-right: 10px;">
+        <div class="col-form-label-sm" style="font-weight:600">Read Only</div>
+        <DxListBox Data="@Staff.DataSource"
+                   TextFieldName="@nameof(Person.Text)"
+                   ReadOnly="true"
+                   Values="@Values"
+                   CssClass="demo-listbox mb-2"
+                   style="height: 232px; width:100% !important">
+        </DxListBox>
+    </div>
+    <div class="col-12 col-md-6 mt-3 m-md-0" style="padding-left: 10px; padding-right: 10px;">
+        <div class="col-form-label-sm" style="font-weight:600">Disabled</div>
+        <DxListBox Data="@Staff.DataSource"
+                   TextFieldName="@nameof(Person.Text)"
+                   Enabled="false"
+                   Values="@Values"
+                   CssClass="demo-listbox mb-2"
+                   style="height: 232px; width:100% !important">
+        </DxListBox>
+    </div>
+</div>
+
+
+
+<CodeSnippet_Editors_ListBox_ReadOnly></CodeSnippet_Editors_ListBox_ReadOnly>
+
+@code {
+    IEnumerable<Person> Values => Staff.DataSource.Take(1);
+}

@@ -1,0 +1,48 @@
+﻿@namespace BlazorDemo.Pages.CaseViews
+@inherits DemoWithResizableComponent
+
+<div class="demo-description">
+    <h2><DemoNavLink Link="ComboBox#AllowInput" />Allow Input</h2>
+    <p>
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.AllowUserInput">AllowUserInput</a> property specifies whether users are allowed to input values into an editor's edit box. The following property values are available:
+    </p>
+    <ul>
+        <li><b>true</b> - A user can either select an item from the drop-down list or enter new values into the edit box (without the need to invoke the drop-down list).</li>
+        <li><b>false</b> - A user can only select an item from the drop-down list.</li>
+    </ul>
+    <p>
+        In this demo, the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.AllowUserInput">AllowUserInput</a> property is set to <b>true</b>.
+    </p>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode">
+            <TitleTemplate>
+                Selected item: <b>@(Value == null ? "null" : Value)</b>, Text = <b>@Text</b>
+            </TitleTemplate>
+        </DemoToolbar>
+    </div>
+    <div class="card-body mw-480">
+        <DxComboBox Data="@Cities"
+                    AllowUserInput="true"
+                    NullText="Select City ..."
+                    @bind-Value="@Value"
+                    @bind-Text="@Text"
+                    SizeMode="SizeMode">
+        </DxComboBox>
+    </div>
+</div>
+
+<CodeSnippet_Editor_ComboBox_AllowUserInput/>
+
+@code {
+    string Text { get; set; } = "New York";
+    string Value { get; set; }
+
+    IEnumerable<string> Cities = new List<string>() {
+        "London",
+        "Berlin",
+        "Paris",
+    };
+}

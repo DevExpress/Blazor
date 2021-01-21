@@ -1,19 +1,21 @@
 ﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartCandlestickSeries-3">
-    <CodeSnippetTabPage Text="Razor">@(@"<DxChart Data=""@ProductSalesData""
+    <CodeSnippetTabPage Text="Razor">
+        @(@"<DxChart Data=""@StockData""
          CssClass=""mw-1100"">
-    <DxChartCandlestickSeries ValueField=""@((Sale i) => i.TotalCost)"" ArgumentField=""@(i => i.SaleDate.Date)"" Name=""@($""{Product.Name} Sales"")"" />
-    <DxChartArgumentAxis>
-        <DxChartAxisLabel Format=""ChartAxisLabelFormat.ShortDate"" />
-    </DxChartArgumentAxis>
+    <DxChartLegend Position=""RelativePosition.Outside"" />
+    <DxChartCandlestickSeries ValueField=""@((BargainDataPoint i) => i.Price)""
+                              ArgumentField=""@(i => new DateTime(i.DateTimeStamp.Year, i.DateTimeStamp.Month, i.DateTimeStamp.Day, i.DateTimeStamp.Hour, i.DateTimeStamp.Minute, 0) )""
+                              Name=""Eco Supreme"" />
     <DxChartTooltip>
         @context.GetFinancialPoint().Render((financialPoint) =>
             @<div class=""p-3"">
-                <p>Open: @financialPoint.OpenValue</p>
-                <p>Close: @financialPoint.CloseValue</p>
-                <p>High: @financialPoint.HighValue</p>
-                <p>Low: @financialPoint.LowValue</p>
+                <p>Open: <span>@($""{financialPoint.OpenValue: 0.00}"")</span></p>
+                <p>Close: <span>@($""{financialPoint.CloseValue: 0.00}"")</span></p>
+                <p>High: <span>@($""{financialPoint.HighValue: 0.00}"") </span></p>
+                <p>Low: <span>@($""{financialPoint.LowValue: 0.00}"") </span></p>
             </div>
-        )
-    </DxChartTooltip>
-</DxChart>")</CodeSnippetTabPage>
+            )
+        </DxChartTooltip>
+        </DxChart>")
+    </CodeSnippetTabPage>
 </CodeSnippetTabbed>

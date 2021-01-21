@@ -1,0 +1,38 @@
+﻿@namespace BlazorDemo.Pages.CaseViews
+@inherits DemoWithResizableComponent
+
+    <div class="demo-description">
+        <h2><DemoNavLink Link="TagBox#MultipleColumns" />Multiple Columns</h2>
+        <p>The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2" rel="nofollow">TagBox</a> can display data across multiple columns. To create columns, use <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn">DxListEditorColumn</a> objects that include the following options for column customization:</p>
+        <ul>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.Caption">Caption</a> - Specifies the column caption.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.FieldName">FieldName</a> - Specifies the data source field that populates column items.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.Visible">Visible</a> - Specifies the column visibility.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.VisibleIndex">VisibleIndex</a> - Specifies the column display order.</li>
+            <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.Width">Width</a> - Specifies the column width.</li>
+        </ul>
+        <p>To format an editor value, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.EditFormat">EditFormat</a> property. This property allows you to format values displayed in both ordinary and multi-column TagBoxes. The <code>{1} {2}</code> format specifies that the editor value includes values of the following columns: <b>Name</b> (<code>VisibleIndex = 1</code>) and <b>Surname</b> (<code>VisibleIndex = 2</code>).</p>
+    </div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode" Title="Select items from the drop-down list"/>
+    </div>
+    <div class="card-body mw-480">
+        <DxTagBox Data="@Staff.DataSource"
+                  @bind-Values="@SelectedStaff"
+                  SizeMode="SizeMode"
+                  EditFormat="{1} {2}">
+            <DxListEditorColumn FieldName="Id" Width="50px" />
+            <DxListEditorColumn FieldName="FirstName" Caption="Name"/>
+            <DxListEditorColumn FieldName="LastName" Caption="Surname"/>
+        </DxTagBox>
+    </div>
+</div>
+
+<CodeSnippet_Editor_TagBox_MultiColumn></CodeSnippet_Editor_TagBox_MultiColumn>
+
+
+@code {
+    IEnumerable<Person> SelectedStaff { get; set; } = new List<Person>() { Staff.DataSource[0] };
+    }

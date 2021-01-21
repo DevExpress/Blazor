@@ -6,22 +6,32 @@
     <h2><DemoNavLink Link="GridPagingAndScrolling#Paging" />Paging</h2>
     <p>
         The DevExpress <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1">Data Grid</a> for Blazor splits large amount of data rows across multiple pages and displays a pager for data navigation.
-        Use the following properties to set up the pager:
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PagerNavigationMode">PagerNavigationMode</a> to specify how users navigate between pages. The following values are available:
     </p>
     <ul>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.ShowPager">ShowPager</a> - Specifies whether the pager is displayed.</li>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PagerPageSizeSelectorVisible">PagerPageSizeSelectorVisible</a>
-            - Specifies whether the page size selector is displayed. The selector consists of the predefined page sizes
-            (<a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PagerAllowedPageSizes">PagerAllowedPageSizes</a>) and the All item (if
-            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PagerAllDataRowsItemVisible">PagerAllDataRowsItemVisible</a> is set to <b>true</b>).
-        </li>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PageSize">PageSize</a> - Specifies the page size.</li>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PagerNavigationMode">PagerNavigationMode</a> – Specifies how users navigate between pages.</li>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PageIndex">PageIndex</a>
-            - Specifies the active page's index. To get the total number of pages in the pager, use the
-            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PageCount">PageCount</a> property.
-        </li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.PagerNavigationMode">InputBox</a> - Users can type a page number in the Go to Page input box to navigate to the corresponding page.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.PagerNavigationMode">NumericButtons</a> - Users can click numeric buttons to navigate between pages.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.PagerNavigationMode">Auto</a> (Default) - If the number of pages is greater or equal to the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PagerSwitchToInputBoxButtonCount">PagerSwitchToInputBoxButtonCount</a> value or the Data Grid is shown on small devices, the Go to Page input box is displayed. Otherwise, numeric buttons are displayed.</li>
     </ul>
+    <p>
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PageSize">PageSize</a> property to specify the maximum number of rows that the Data Grid can display on a page.
+        If <b>PageSize</b> is less than or equal to 0, all Data Grid rows are displayed on one page, and the pager is hidden.
+    </p>
+    <p>
+        Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PagerPageSizeSelectorVisible">PagerPageSizeSelectorVisible</a> property to <b>true</b> to display the page size selector.
+        Once a user selects a new size in this selector, the <b>PageSize</b> property value is updated, and the Data Grid is redrawn. The selector consists of two parts:
+    </p>
+    <ul>
+        <li>A list of predefined page sizes. To fill this list, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PagerAllowedPageSizes">PagerAllowedPageSizes</a> property.
+        If the <b>PageSize</b> property value is not added to this list, the value is displayed in the selector's editor but not available in the selector's list.</li>
+        <li>The <b>All</b> item. To show it, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PagerAllDataRowsItemVisible">PagerAllDataRowsItemVisible</a> property to <b>true</b>.
+        When a user selects this item, all grid rows are displayed on one page, and the pager is hidden.</li>
+    </ul>
+    <p>
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PageIndex">PageIndex</a> property allows you to switch between Data Grid pages in code.
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PageCount">PageCount</a> property specifies the total number of pages.
+        To show or hide the pager, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.ShowPager">ShowPager</a> property.
+    </p>
 </div>
 
 @if (DataSource == null)

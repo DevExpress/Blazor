@@ -19,12 +19,14 @@ function _bulkUpdateMetadata(_dotnetRef, data) {
     function applyStyleSheet(name, src) {
         if(name) {
             var stylesheet = document.getElementById(name);
-            stylesheet.href = src;
-            setTimeout(() => updateDefaultStyle(), 500);
+            if(!stylesheet.href.endsWith(src)) {
+                stylesheet.href = src;
+                setTimeout(() => updateAccentColorStyle(), 500);
+            }
         }
     }
-    function updateDefaultStyle() {
-        if(window.dxDefaultStyle)
-            window.dxDefaultStyle.update();
+    function updateAccentColorStyle() {
+        if(window.dxAccentColorStyle)
+            window.dxAccentColorStyle.update();
     }
 }

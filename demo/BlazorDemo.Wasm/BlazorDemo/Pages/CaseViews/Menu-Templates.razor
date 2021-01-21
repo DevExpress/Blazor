@@ -1,0 +1,99 @@
+﻿<div class="demo-description">
+    <h2>
+        <DemoNavLink Link="Menu#Templates" />Templates
+    </h2>
+    <p>The Menu component allows you to use templates to customize the layout and appearance of menu items and their parts.</p>
+    <p>Use the following properties to specify common templates for all items:</p>
+    <ul>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu.ItemTemplate">DxMenu.ItemTemplate</a></li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu.ItemTextTemplate">DxMenu.ItemTextTemplate</a></li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu.SubMenuTemplate">DxMenu.SubMenuTemplate</a></li>
+    </ul>
+    <p>Use the following properties to specify templates for an individual item:</p>
+    <ul>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenuItem.Template">DxMenuItem.Template</a></li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenuItem.TextTemplate">DxMenuItem.TextTemplate</a></li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenuItem.SubMenuTemplate">DxMenuItem.SubMenuTemplate</a></li>
+    </ul>
+    <p>Note that individual templates override common templates.</p>
+    <p>The following example demonstrates how to use templates to create the <strong>Search</strong> and <strong>User Profile</strong> menu items.</p>
+</div>
+<div class="card demo-card">
+    <div class="card-body p-0">
+        <DxMenu Orientation="Orientation.Horizontal"
+                DropDownActionMode="MenuDropDownActionMode.Click"
+                DisplayMode="MenuDisplayMode.Desktop"
+                CollapseItemToIconMode="MenuCollapseItemToIconMode.All"
+                @key="@ThemeName">
+            <Items>
+                <DxMenuItem Text="Home" IconCssClass="menu-icon-home menu-icon">
+                    <Items>
+                        <DxMenuItem Text="News">
+                            <Items>
+                                <DxMenuItem Text="Explore our newest features" />
+                                <DxMenuItem Text="Website news" />
+                            </Items>
+                        </DxMenuItem>
+                        <DxMenuItem Text="Our Mission" />
+                        <DxMenuItem Text="Our Customers" />
+                    </Items>
+                </DxMenuItem>
+                <DxMenuItem Text="Components" IconCssClass="menu-icon-products menu-icon">
+                    <Items>
+                        <DxMenuItem Text="Blazor" />
+                        <DxMenuItem Text="ASP.NET MVC" />
+                        <DxMenuItem Text="ASP.NET Web Forms" />
+                        <DxMenuItem Text="ASP.NET Core" />
+                        <DxMenuItem Text="Bootstrap Web Forms" />
+                    </Items>
+                </DxMenuItem>
+                <DxMenuItem Text="Support" IconCssClass="menu-icon-support menu-icon">
+                    <Items>
+                        <DxMenuItem Text="Getting Started" />
+                        <DxMenuItem Text="Documentation" />
+                        <DxMenuItem Text="Support Center" />
+                        <DxMenuItem Text="Code Examples" />
+                        <DxMenuItem Text="Blogs" />
+                    </Items>
+                </DxMenuItem>
+                <DxMenuItem Text="text" CssClass="ml-auto">
+                    <Template>
+                        <div class="search dxbs-textbox">
+                            <input type="text" class="dx-demo-menu-input form-control form-control-sm" placeholder="Search...">
+                            <span class="dx-demo-menu-search-button dxbs-feedback">
+                                <span class="d-flex pl-2 pr-2" role="button" style="color:gray">
+                                    <span class="tb-icon tb-icon-search"></span>
+                                </span>
+                            </span>
+                        </div>
+                    </Template>
+                </DxMenuItem>
+                <DxMenuItem Text="User Profile" CssClass="notoggle">
+                    <TextTemplate>
+                        <div class="menu-icon-user-profile menu-icon" />
+                    </TextTemplate>
+                    <SubMenuTemplate>
+                        <div class="w-100 user-profile">
+                            <div class="flex-column align-items-center justify-content-center">
+                                <div class="logo-container d-flex align-items-center justify-content-center">
+                                    <div class="menu-icon-user-profile menu-icon menu-icon-large" />
+                                </div>
+                                <div class="user-name-container bm-3 mb-2">
+                                    <div class="user-name-title text-muted text-center">User Name</div>
+                                    <div class="user-name text-center">John Heart</div>
+                                </div>
+                                <div class="d-flex justify-content-center log-off-btn">
+                                    <DxButton Text="Log Off" RenderStyle="@ButtonRenderStyle.Secondary"></DxButton>
+                                </div>
+                            </div>
+                        </div>
+                    </SubMenuTemplate>
+                </DxMenuItem>
+            </Items>
+        </DxMenu>
+    </div>
+</div>
+<CodeSnippet_Menu_Templates />
+@code {
+    [CascadingParameter(Name = "ThemeName")] string ThemeName { get; set; }
+}

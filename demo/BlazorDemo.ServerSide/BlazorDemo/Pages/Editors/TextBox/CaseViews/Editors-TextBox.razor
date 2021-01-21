@@ -1,0 +1,31 @@
+﻿@namespace BlazorDemo.Pages.CaseViews
+@inherits DemoWithResizableComponent
+
+<div class="demo-description">
+    <h2><DemoNavLink Link="TextBox#Overview" />Overview</h2>
+    <p>
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextBox">Text Box</a> is a UI component that enables a user to enter and edit a single line of text.
+    </p>
+    <p>
+        The Text Box component supports different size modes. To specify the component's size in code, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxResizableEditorBase-2.SizeMode">SizeMode</a> property. To apply different size modes, use the drop-down list in the demo card's header.
+    </p>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode">
+            <TitleTemplate>
+                Text: <b>@TextValue</b>
+            </TitleTemplate>
+        </DemoToolbar>
+    </div>
+    <div class="card-body mw-480">
+        <DxTextBox @bind-Text="@TextValue" SizeMode="SizeMode"></DxTextBox>
+    </div>
+</div>
+
+<CodeSnippet_Editor_TextBox/>
+
+@code {
+    string TextValue { get; set; }
+}

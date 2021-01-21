@@ -6,23 +6,11 @@
     <h2><DemoNavLink Link="GridPagingAndScrolling#VirtualScrolling" />Virtual Scrolling</h2>
 
     <p>
-        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#virtual-scrolling">Data Grid</a> supports virtual scrolling that allows end-users to navigate through grid rows using the vertical scrollbar much faster.
-        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.DataNavigationMode">DataNavigationMode</a> property to activate virtual scrolling.
+        Set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.DataNavigationMode">DataNavigationMode</a> property to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridNavigationMode">VirtualScrolling</a> to enable virtual scrolling our Data Grid.
+        The Data Grid loads and renders only the data rows that become visible. Note that this mode requires that all rows have the same height.
     </p>
     <p>
-        This property accepts the following values:
-    </p>
-    <ul>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridNavigationMode">Paging</a> - Users navigate through the data rows with the help of a pager.</li>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridNavigationMode">ShowAllDataRows</a> – All grid rows are displayed on one page. In this mode, the grid does not display the pager.</li>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridNavigationMode">VirtualScrolling</a> - Enables virtual scrolling.
-                Users navigate through data rows using the vertical scrollbar.
-                When a user scrolls, the Data Grid fetches and renders data rows that become visible.
-                In this mode, the Data Grid uses popup windows for data edit and insertion.
-        </li>
-    </ul>
-    <p>
-        In this demo, the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.DataNavigationMode">DataNavigationMode</a> property is set to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridNavigationMode">DataGridNavigationMode.VirtualScrolling</a>.
+        In this mode, the Data Grid does not display the pager and opens the Edit Form in a pop-up window.
     </p>
 </div>
 
