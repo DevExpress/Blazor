@@ -1,0 +1,14 @@
+﻿@namespace BlazorDemo.Pages.CodeSnippets
+
+<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMemo#size">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxMemo @bind-Text=""@TextValue""
+        Rows=""8""
+        Columns=""50"">
+</DxMemo>
+
+@code {
+    string TextValue { get; set; } = ""Prepare 2020 Marketing Plan: We need to double revenues in 2020 and our marketing strategy is going to be key here. "" +
+            ""R&D is improving existing products and creating new products so we can deliver great AV equipment to our customers. "" +
+            ""Robert, please make certain to create a PowerPoint presentation for the members of the executive team."";
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

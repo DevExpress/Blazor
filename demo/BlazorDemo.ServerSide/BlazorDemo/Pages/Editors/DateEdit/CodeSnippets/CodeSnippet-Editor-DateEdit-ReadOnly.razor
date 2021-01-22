@@ -1,0 +1,15 @@
+﻿@namespace BlazorDemo.Pages.CodeSnippets
+
+<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1#read-only-state">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxDateEdit @bind-Date=""@DateTimeValue""
+            ReadOnly=""true"">
+</DxDateEdit>
+
+<DxDateEdit @bind-Date=""@DateTimeValue""
+            Enabled=""false"">
+</DxDateEdit>
+
+@code {
+    DateTime DateTimeValue { get; set; } = DateTime.Now;
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

@@ -1,0 +1,28 @@
+﻿@namespace BlazorDemo.Pages.CaseViews
+
+<div class="demo-description">
+    <h2><DemoNavLink Link="Calendar#DisabledDates" />Disabled Dates</h2>
+    <p>In this demo module, a few <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1">Calendar</a> dates are grayed out (disabled) and cannot be selected. The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1.CustomDisabledDate">CustomDisabledDate</a> event allows you to disable selection of specific dates based on custom logic.</p>
+</div>
+
+<div class="card demo-card border-0 bg-transparent">
+    <div class="card-body p-0">
+        <DxCalendar T="DateTime" CustomDisabledDate="@OnCustomDisabledDate">
+        </DxCalendar>
+    </div>
+</div>
+
+<CodeSnippet_Editor_Calendar_DisabledDates/>
+
+@code {
+    void OnCustomDisabledDate(CalendarCustomDisabledDateEventArgs args) {
+        args.IsDisabled = args.Date < DateTime.Today.AddDays(-20) || GetDisabledDates().Exists(d => DaysEqual(d, args.Date));
+    }
+    bool DaysEqual(DateTime date1, DateTime date2) {
+        return (date1.Year == date2.Year && date1.DayOfYear == date2.DayOfYear);
+    }
+    List<DateTime> GetDisabledDates() {
+        DateTime baseDate = DateTime.Today;
+        return new List<DateTime>() { baseDate.AddDays(-9), baseDate.AddDays(-4), baseDate.AddDays(-3), baseDate.AddDays(3), baseDate.AddDays(5), baseDate.AddDays(6), baseDate.AddDays(15) };
+    }
+}

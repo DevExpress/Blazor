@@ -1,0 +1,12 @@
+﻿@namespace BlazorDemo.Pages.CodeSnippets
+
+<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTextEditorBase.BindValueMode">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxTextBox @bind-Text=""@TextValue""
+           BindValueMode=""BindValueMode.OnInput""
+           NullText=""Type text..."">
+</DxTextBox>
+
+@code {
+    string TextValue { get; set; } = null;
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

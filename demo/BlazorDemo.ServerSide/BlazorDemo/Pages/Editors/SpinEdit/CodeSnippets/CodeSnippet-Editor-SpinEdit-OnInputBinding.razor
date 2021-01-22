@@ -1,0 +1,12 @@
+﻿@namespace BlazorDemo.Pages.CodeSnippets
+
+<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1.BindValueMode">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxSpinEdit @bind-Value=""@Year""
+            BindValueMode=""BindValueMode.OnInput""
+            NullText=""Type a value..."">
+</DxSpinEdit>
+
+@code {
+    int? Year { get; set; } = DateTime.Now.Year;
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

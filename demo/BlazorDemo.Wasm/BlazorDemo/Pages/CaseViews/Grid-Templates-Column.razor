@@ -4,13 +4,20 @@
 <div class="demo-description mw-1100">
     <h2><DemoNavLink Link="GridTemplate#ColumnTemplates" />Column Templates</h2>
 
-    <p>This module illustrates how you can use <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#templates">column templates</a> to format cell values and specify custom data editors.</p>
+    <p>
+        You can use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.DisplayTemplate">DisplayTemplate</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.EditTemplate">EditTemplate</a> properties to specify custom content for the column and its editor.
+        Use the template's <b>context</b> parameter to access a data object and its fields.
+    </p>
+    <p>
+        When you use an edit template, you should call the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.CellEditContext.OnChanged.overloads">CellEditContext.OnChanged</a> method to inform the Data Grid about changes and save new cell values to the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.CellEditContext.EditedValues">EditedValues</a> collection.
+        Then, pass this collection to the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.RowInserting">RowInserting</a> and <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.RowUpdating">RowUpdating</a> events.
+    </p>
     <ul>
         <li>
-            <p><b>Availability column</b> - <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.DisplayTemplate">DisplayTemplate</a> formats cell values using check boxes and colored text. <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.EditTemplate">EditTemplate</a> embeds a ComboBox control into the edit form.</p>
+            <p><b>Availability column</b> - The display template uses checkboxes and colored text to visualize column values. The edit template embeds a ComboBox into the edit form.</p>
         </li>
         <li>
-            <p><b>Category column</b> - <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.DisplayTemplate">DisplayTemplate</a> builds a composite string and displays it in plain text. <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.EditTemplate">EditTemplate</a> embeds another Data Grid to enable lookup functionality.</p>
+            <p><b>Category column</b> - The display template builds a composite string and displays it in plain text. The edit template embeds another Data Grid to enable lookup functionality.</p>
         </li>
     </ul>
     <p>

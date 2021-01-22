@@ -12,19 +12,19 @@
 <div class="demo-description mw-1100">
     <h2>Master-Detail View</h2>
     <p>
-        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1">Data Grid</a> component allows you to build master-detail layouts of any complexity and depth with a detail row template. This template defines the way detail data is presented.
-    </p>
-    <p>
-        This demo module illustrates how to use a nested grid component to visualize a master-detail relationship between two data tables. To do this, follow the steps below.
+        The <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1">Data Grid</a> component allows you to build hierarchical layouts of any complexity and depth. This demo module illustrates how to use a nested grid component to visualize a master-detail relationship between two data tables. To do this, follow the steps below.
     </p>
     <ol>
-        <li>Add two <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1">Data Grid</a> components to your application.</li>
-        <li>Bind the first grid (master) to a master data source and enable its <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.ShowDetailRow">ShowDetailRow</a> property.</li>
-        <li>Bind the second grid (detail) to a detail data source that uses the template's context object as a filter criterion.</li>
-        <li>(Optional) To automatically collapse an expanded detail row when a new detail row is displayed, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.AutoCollapseDetailRow">AutoCollapseDetailRow</a> property to <b>true</b>.</li>
+        <li>Add the master grid to your application.</li>
+        <li>Bind the master grid to data and enable its <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.ShowDetailRow">ShowDetailRow</a> property to display detail rows.</li>
+        <li>Add the master grid's columns to the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.Columns">Columns</a> collection.</li>
+        <li>Create the detailed view. Add the second data grid to the master grid's <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.DetailRowTemplate">DetailRowTemplate</a> and bind this grid to a detail data source that uses the template's <b>context</b> object as a filter criterion.</li>
+        <li>(Optional) To collapse an expanded detail row when a new detail row is displayed, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.AutoCollapseDetailRow">AutoCollapseDetailRow</a> property to <b>true</b>.</li>
+        <li>Specify the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.KeyFieldName">key data field</a> to enable the Data Grid to identify individual data items.</li>
     </ol>
+
     <p>
-        Create a <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.DetailRowTemplate">DetailRowTemplate</a> template for the master grid and add the detail grid to this template.
+        YouTube Video: <a class="helplink" target="_blank" href="https://www.youtube.com/watch?v=dndSUsg1i7U&feature=youtu.be">Master-Detail Layout</a>
     </p>
 </div>
 

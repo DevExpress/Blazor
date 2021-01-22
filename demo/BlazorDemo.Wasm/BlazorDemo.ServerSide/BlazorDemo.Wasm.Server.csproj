@@ -7,7 +7,7 @@
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.7.2" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="3.2.1" />
     <ProjectReference Include="..\BlazorDemo.Wasm.Client\BlazorDemo.Wasm.Client.csproj" />
   </ItemGroup>

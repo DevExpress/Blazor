@@ -72,6 +72,7 @@ namespace BlazorDemo.ServerSide {
                 services.AddSingleton<IProductsProvider, ProductsProvider>();
                 services.AddSingleton<ISalesInfoDataProvider, SalesInfoDataProvider>();
                 services.AddSingleton<ISalesViewerDataProvider, SalesViewerDataProvider>();
+                services.AddScoped<IFinancialSeriesDataProvider, FinancialSeriesDataProvider>();
 
 
                 static void ConfigureHttpClient(HttpClient httpClient) {

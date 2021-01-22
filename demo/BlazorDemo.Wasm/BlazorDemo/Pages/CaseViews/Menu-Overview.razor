@@ -1,0 +1,50 @@
+﻿<div class="demo-description">
+    <h2>
+        <DemoNavLink Link="Menu#Overview" />Overview
+    </h2>
+    <p>Our Blazor <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu">Menu</a> component allows you to add an adaptive menu to your Blazor application. Menu items are stored in the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu.Items">Items</a> collection. Each item is a <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenuItem">DxMenuItem</a> object that can display a text, an icon, or both.</p>
+    <p>Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu.ItemsPosition">ItemsPosition</a> property to align items in the menu. To customize item content and appearance, use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenuItem.Text" >Text</a>, <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenuItem.IconCssClass" >IconCssClass</a>, <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenuItem.CssClass" >CssClass</a> properties.</p>
+</div>
+<div class="card demo-card">
+    <div class="card-body p-0">
+        <DxMenu Title="DevExpress" ItemsPosition="MenuItemsPosition.End" @key="@ThemeName">
+            <Items>
+                <DxMenuItem Text="Home" IconCssClass="menu-icon-home menu-icon">
+                    <Items>
+                        <DxMenuItem Text="News">
+                            <Items>
+                                <DxMenuItem Text="Explore our newest features" NavigateUrl="https://www.devexpress.com/support/versions.xml#version-history" target="_blank"/>
+                                <DxMenuItem Text="Website news" NavigateUrl="https://www.devexpress.com/aboutus/newsreviews/" target="_blank"/>
+                            </Items>
+                        </DxMenuItem>
+                        <DxMenuItem Text="Our Mission" NavigateUrl="https://www.devexpress.com/aboutus/" target="_blank"/>
+                        <DxMenuItem Text="Our Customers" NavigateUrl="https://www.devexpress.com/aboutus/testimonials/" target="_blank"/>
+                    </Items>
+                </DxMenuItem>
+                <DxMenuItem Text="Components" IconCssClass="menu-icon-products menu-icon">
+                    <Items>
+                        <DxMenuItem Text="Blazor" NavigateUrl="https://www.devexpress.com/blazor/" target="_blank" />
+                        <DxMenuItem Text="ASP.NET MVC" NavigateUrl="https://www.devexpress.com/products/net/controls/asp/mvc/" target="_blank" />
+                        <DxMenuItem Text="ASP.NET Web Forms" NavigateUrl="https://www.devexpress.com/products/net/controls/asp/" target="_blank" />
+                        <DxMenuItem Text="ASP.NET Core" NavigateUrl="https://www.devexpress.com/products/net/controls/asp/core.xml" target="_blank" />
+                        <DxMenuItem Text="Bootstrap Web Forms" NavigateUrl="https://www.devexpress.com/products/net/controls/asp/bootstrap-webforms.xml" target="_blank" />
+                    </Items>
+                </DxMenuItem>
+                <DxMenuItem Text="Support" IconCssClass="menu-icon-support menu-icon">
+                    <Items>
+                        <DxMenuItem Text="Getting Started" NavigateUrl="https://www.devexpress.com/support/demos/" target="_blank" />
+                        <DxMenuItem Text="Documentation" NavigateUrl="https://docs.devexpress.com/" target="_blank" />
+                        <DxMenuItem Text="Support Center" NavigateUrl="https://supportcenter.devexpress.com/ticket/list" target="_blank" />
+                        <DxMenuItem Text="Code Examples" NavigateUrl="https://supportcenter.devexpress.com/ticket/list?preset=examples" target="_blank" />
+                        <DxMenuItem Text="Blogs" NavigateUrl="https://community.devexpress.com/blogs/" target="_blank" />
+                    </Items>
+                </DxMenuItem>
+            </Items>
+        </DxMenu>
+    </div>
+</div>
+<CodeSnippet_Menu_Overview />
+
+@code {
+    [CascadingParameter(Name = "ThemeName")] string ThemeName { get; set; }
+} 

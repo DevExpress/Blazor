@@ -7,7 +7,7 @@
 <div class="demo-description mw-1100">
     <h2>Filter Row</h2>
     <p>
-        Enable the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.ShowFilterRow">ShowFilterRow</a> option to display a row that allows users to <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#filter-data">filter grid data</a>. This row displays different in-place editors based on the column types. Users can filter data as follows:
+        Enable the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.ShowFilterRow">ShowFilterRow</a> option to display a row that allows users to filter grid data. This row displays different in-place editors based on the column types. Users can filter data as follows:
     </p>
     <ul>
         <li>
@@ -27,7 +27,8 @@
         </li>
     </ul>
     <p>
-        Each editor contains a clear button. Use <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridCommandColumn">DxDataGridCommandColumn</a> to add a button that clears values from all the editors.
+        Each editor contains a clear button that resets the filter by the corresponding column. Use <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridCommandColumn">DxDataGridCommandColumn</a> to display the common clear button that resets the entire filter.
+        You can also use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.AllowFilter">AllowFilter</a> property to prevent users from filtering data by individual columns.
     </p>
 </div>
 

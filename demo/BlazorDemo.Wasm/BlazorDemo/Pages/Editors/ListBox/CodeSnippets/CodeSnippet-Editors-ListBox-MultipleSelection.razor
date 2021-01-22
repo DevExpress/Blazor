@@ -1,0 +1,15 @@
+﻿@namespace BlazorDemo.Pages.CodeSnippets
+
+<CodeSnippet>@(@"<DxListBox Data=""@Staff.DataSource""
+           TextFieldName=""@nameof(Person.Text)""
+           SelectionMode=""ListBoxSelectionMode.Multiple""
+           ShowCheckboxes=""@ShowCheckboxes""
+           @bind-Values=""@Values""
+           style=""height: 232px;"">
+</DxListBox>
+
+@code {
+    bool ShowCheckboxes { get; set; } = true;
+    IEnumerable<Person> Values { get; set; } = Staff.DataSource.Take(2);
+}")
+</CodeSnippet>

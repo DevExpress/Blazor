@@ -1,0 +1,32 @@
+﻿@namespace BlazorDemo.Pages.CaseViews
+@inherits DemoWithResizableComponent
+
+<div class="demo-description">
+    <h2><DemoNavLink Link="DateEdit#TimeSection"/>Time Section</h2>
+    <p>
+        Our Blazor <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1">Date Edit</a> allows you to edit date-time values.
+        Users can select values via the component’s built-in time picker or enter the desired value within the component’s edit box.
+    </p>
+    <p>
+        To add a time section to our Blazor Date Edit component, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.TimeSectionVisible">TimeSectionVisible</a> property to <b>true</b>.
+    </p>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode">
+            <TitleTemplate>
+                Date and time: <b>@DateTimeValue.ToString("dddd, dd MMMM yyyy HH:mm:ss")</b>
+            </TitleTemplate>
+        </DemoToolbar>
+    </div>
+    <div class="card-body mw-480">
+        <DxDateEdit @bind-Date="@DateTimeValue" TimeSectionVisible="true" SizeMode="SizeMode"></DxDateEdit>
+    </div>
+</div>
+
+<CodeSnippet_Editor_DateEdit_TimeSection/>
+
+@code {
+    DateTime DateTimeValue { get; set; } = DateTime.Now;
+}

@@ -1,0 +1,45 @@
+﻿@namespace BlazorDemo.Pages.CodeSnippets
+
+<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1">
+    <CodeSnippetTabPage Text="Razor">@(@"<div class=""container overflow-auto"">
+    <label class=""mb-2 pb-1"">Choose your new car options:</label>
+    <div class=""row"">
+        <div class=""col col-auto"">
+            <DxCheckBox @bind-Checked=""@Multimedia"">Multimedia</DxCheckBox>
+            <DxCheckBox @bind-Checked=""@AirConditioning"">Air conditioning</DxCheckBox>
+            <DxCheckBox @bind-Checked=""@ParkingSensors"">Parking camera</DxCheckBox>
+            <DxCheckBox @bind-Checked=""@HeatedSeats"">Heated seats</DxCheckBox>
+            <b class=""mt-3"">Total price:</b>
+        </div>
+        <div class=""col"">
+            <div style=""@GetStyle(Multimedia)"">$130</div>
+            <div style=""@GetStyle(AirConditioning)"">$800</div>
+            <div style=""@GetStyle(ParkingSensors)"">$400</div>
+            <div style=""@GetStyle(HeatedSeats)"">$230</div>
+            <div style=""@GetStyle(true)"">
+                <b class=""mt-3"">$@GetTotalPrice()</b>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code{
+    bool AirConditioning { get; set; } = true;
+    bool Multimedia { get; set; } = false;
+    bool ParkingSensors { get; set; } = false;
+    bool HeatedSeats { get; set; } = true;
+
+    decimal GetTotalPrice() {
+        decimal price = 0;
+        price += Multimedia ? 130 : 0;
+        price += AirConditioning ? 800 : 0;
+        price += ParkingSensors ? 400 : 0;
+        price += HeatedSeats ? 230 : 0;
+        return price;
+    }
+    string GetStyle(bool selected) {
+        return ""text-align:center;"" + (selected ? """" : ""text-decoration:line-through;"");
+    }
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

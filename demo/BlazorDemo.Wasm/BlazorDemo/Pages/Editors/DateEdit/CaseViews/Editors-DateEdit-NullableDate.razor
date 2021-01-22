@@ -1,0 +1,40 @@
+﻿@namespace BlazorDemo.Pages.CaseViews
+@inherits DemoWithResizableComponent
+
+<div class="demo-description">
+    <h2>
+        <DemoNavLink Link="DateEdit#NullableDate" />Null Date Values and Placeholder
+    </h2>
+    <p>
+        Use any of the following to clear the Blazor <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1">Date Edit</a> and set its value to null:
+    </p>
+    <ul>
+        <li>
+            Delete the value within the Blazor Date Edit’s editor.
+        </li>
+        <li>
+            Click the <b>Clear</b> button. To display this button, set the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.ClearButtonDisplayMode">ClearButtonDisplayMode</a> property to <b>Auto</b>.
+        </li>
+    </ul>
+    <p>
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.NullText">NullText</a> property to display placeholder text in the Date Edit when its value is null.
+    </p>
+</div>
+
+<div class="card demo-card demo-card-shadow">
+    <div class="card-header">
+        <DemoToolbar @bind-SelectedSize="SizeMode" Title="Clear the date" />
+    </div>
+    <div class="card-body mw-480">
+        <DxDateEdit @bind-Date="@DateTimeValue"
+                    NullText="Select a date..."
+                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                    SizeMode="SizeMode"></DxDateEdit>
+    </div>
+</div>
+
+<CodeSnippet_Editor_DateEdit_NullableDate/>
+
+@code {
+    DateTime? DateTimeValue { get; set; } = DateTime.Now;
+}

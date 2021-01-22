@@ -1,0 +1,15 @@
+﻿@namespace BlazorDemo.Pages.CodeSnippets
+
+<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMemo#read-only-state">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxMemo Text=""@TextValue""
+        ReadOnly=""true"">
+</DxMemo>
+
+<DxMemo Text=""@TextValue""
+        Enabled=""false"">
+</DxMemo>
+
+@code {
+    string TextValue { get; set; } = ""End users cannot change the Memo value"";
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

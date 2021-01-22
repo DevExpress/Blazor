@@ -1,7 +1,7 @@
 ﻿@page "/ChartFinancialSeries"
-@using System.Linq
-@inject ISalesViewerDataProvider SalesViewerDataProvider
+@inject IFinancialSeriesDataProvider FinancialSeriesDataProvider
 @layout DataProviderAccessArea<ISalesViewerDataProvider>
+
 <div class="demo-description">
     <h2><DemoNavLink Link="ChartFinancialSeries#Candlestick" />Candlestick Series</h2>
     <p>
@@ -13,25 +13,27 @@
         If the stock closes lower than its open price, the corresponding body is filled.
     </p>
 </div>
-<DxChart Data="@ProductSalesData"
+
+<DxChart Data="@StockData"
          CssClass="mw-1100">
     <DxChartLegend Position="RelativePosition.Outside" />
-    <DxChartCandlestickSeries ValueField="@((Sale i) => i.TotalCost)" ArgumentField="@(i => i.SaleDate.Date)" Name="@($"{Product.Name} Sales")" />
-    <DxChartArgumentAxis>
-        <DxChartAxisLabel Format="ChartAxisLabelFormat.ShortDate" />
-    </DxChartArgumentAxis>
+    <DxChartCandlestickSeries ValueField="@((BargainDataPoint i) => i.Price)"
+                              ArgumentField="@(i => new DateTime(i.DateTimeStamp.Year, i.DateTimeStamp.Month, i.DateTimeStamp.Day, i.DateTimeStamp.Hour, i.DateTimeStamp.Minute, 0) )"
+                              Name="Eco Supreme" />
     <DxChartTooltip>
         @context.GetFinancialPoint().Render((financialPoint) =>
             @<div class="p-3">
-                <p>Open: @financialPoint.OpenValue</p>
-                <p>Close: @financialPoint.CloseValue</p>
-                <p>High: @financialPoint.HighValue</p>
-                <p>Low: @financialPoint.LowValue</p>
+                <p>Open: <span>@($"{financialPoint.OpenValue: 0.0000}")</span></p>
+                <p>Close: <span>@($"{financialPoint.CloseValue: 0.0000}")</span></p>
+                <p>High: <span>@($"{financialPoint.HighValue: 0.0000}")</span></p>
+                <p>Low: <span>@($"{financialPoint.LowValue: 0.0000}")</span></p>
             </div>
-        )
+            )
     </DxChartTooltip>
 </DxChart>
+
 <CodeSnippet_Charts_CandlestickSeries />
+
 <div class="demo-description">
     <h2><DemoNavLink Link="ChartFinancialSeries#Stock" />Stock Series</h2>
     <p>
@@ -39,32 +41,31 @@
         The vertical line’s bottom and top values represent the high and low prices. The left and right tick marks represent the open and close prices.
     </p>
 </div>
-<DxChart Data="@ProductSalesData"
+
+<DxChart Data="@StockData"
          CssClass="mw-1100">
     <DxChartLegend Position="RelativePosition.Outside" />
-    <DxChartStockSeries ValueField="@((Sale i) => i.TotalCost)" ArgumentField="@(i => i.SaleDate.Date)" Name="@($"{Product.Name} Sales")" />
-    <DxChartArgumentAxis>
-        <DxChartAxisLabel Format="ChartAxisLabelFormat.ShortDate" />
-    </DxChartArgumentAxis>
+    <DxChartStockSeries ValueField="@((BargainDataPoint i) => i.Price)"
+                        ArgumentField="@(i => new DateTime(i.DateTimeStamp.Year, i.DateTimeStamp.Month, i.DateTimeStamp.Day, i.DateTimeStamp.Hour, i.DateTimeStamp.Minute, 0) )"
+                        Name="Eco Supreme" />
     <DxChartTooltip>
         @context.GetFinancialPoint().Render((financialPoint) =>
-                @<div class="p-3">
-                    <p>Open: @financialPoint.OpenValue</p>
-                    <p>Close: @financialPoint.CloseValue</p>
-                    <p>High: @financialPoint.HighValue</p>
-                    <p>Low: @financialPoint.LowValue</p>
-                </div>
-)
+            @<div class="p-3">
+                <p>Open: <span>@($"{financialPoint.OpenValue: 0.0000}")</span></p>
+                <p>Close: <span>@($"{financialPoint.CloseValue: 0.0000}")</span></p>
+                <p>High: <span>@($"{financialPoint.HighValue: 0.0000}")</span></p>
+                <p>Low: <span>@($"{financialPoint.LowValue: 0.0000}")</span></p>
+            </div>
+            )
     </DxChartTooltip>
 </DxChart>
-<CodeSnippet_Charts_StockSeries />
-@code {
-    Product Product;
-    IEnumerable<Sale> ProductSalesData;
 
-    protected override async Task OnInitializedAsync()
-    {
-        Product = (await SalesViewerDataProvider.GetProducts()).FirstOrDefault(x => x.Name == "Eco Supreme");
-        ProductSalesData = (await SalesViewerDataProvider.GetSales()).Where(x => x.ProductId == Product.Id);
+<CodeSnippet_Charts_StockSeries />
+
+@code {
+    IEnumerable<BargainDataPoint> StockData;
+
+    protected override async Task OnInitializedAsync() {
+        StockData = await FinancialSeriesDataProvider.Generate();
     }
 }

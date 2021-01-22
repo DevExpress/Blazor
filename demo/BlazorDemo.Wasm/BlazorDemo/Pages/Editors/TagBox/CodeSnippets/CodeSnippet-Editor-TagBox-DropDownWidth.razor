@@ -1,0 +1,15 @@
+﻿@namespace BlazorDemo.Pages.CodeSnippets
+
+<CodeSnippet>@(@"<DxTagBox Data=""@Staff.DataSource""
+          TextFieldName=""@nameof(Person.Text)""
+          @bind-Values=""@SelectedStaff""
+          NullText=""Long text""
+          DropDownWidthMode=""DropDownWidthMode""
+          SizeMode=""SizeMode"">
+</DxTagBox>
+
+@code {
+    IEnumerable<Person> SelectedStaff { get; set; }
+    DropDownWidthMode DropDownWidthMode { get; set; } = DropDownWidthMode.ContentOrEditorWidth;
+}")
+</CodeSnippet>

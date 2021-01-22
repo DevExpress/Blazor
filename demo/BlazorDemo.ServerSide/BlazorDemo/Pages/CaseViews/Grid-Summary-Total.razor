@@ -3,14 +3,15 @@
 <div class="demo-description">
     <h2><DemoNavLink Link="GridSummary#TotalSummary" />Total Summary Computation</h2>
     <p>
-        Our Blazor <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1">Data Grid</a> can compute summaries (using aggregate functions such as SUM, MIN, MAX, etc) for both the entire contents of the grid and at each individual group level. “Total” summaries are calculated across all grid records and displayed within the grid’s footer. To create total summaries, add <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridSummaryItem">DxDataGridSummaryItem</a> objects to the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.TotalSummary">TotalSummary</a> collection.
+        Our Blazor <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1">Data Grid</a> can compute summaries (using aggregate functions such as Sum, Min, Max, etc) for both the entire contents of the grid and at each individual group level. “Total” summaries are calculated across all grid records and displayed within the grid’s footer. To create total summaries, add <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridSummaryItem">DxDataGridSummaryItem</a> objects to the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.TotalSummary">TotalSummary</a> collection.
     </p>
     <p>Key DxDataGridSummaryItem properties are summarized below.</p>
     <ul>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSummaryItemBase-1.Field">Field</a> – Specifies the name of the data field whose values are used to calculate the summary.</li>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSummaryItemBase-1.SummaryType">SummaryType</a> – Specifies the aggregate function (SUM, MIN, MAX, AVG, etc) used.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSummaryItemBase-1.SummaryType">SummaryType</a> – Specifies the aggregate function (Sum, Min, Max, Avg, and Count) used.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSummaryItemBase-1.Field">Field</a> – Specifies the name of the data field whose values are used to calculate the summary.
+        The Min and Max functions require a numeric or date-time data field. The Avg and Sum functions work with numeric fields only. For the Count function, you do not need to set this property.</li>
         <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridSummaryItem.ShowInColumn">ShowInColumn</a> – Specifies the name of the column used to display the summary.</li>
-        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSummaryItemBase-1.DisplayFormat">DisplayFormat</a> – Specifies summary display format. The ‘{0}’ placeholder returns the summary value and ‘{1}’ returns the parent column’s caption.</li>
+        <li><a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSummaryItemBase-1.DisplayFormat">DisplayFormat</a> – Specifies summary display format. The ‘{0}’ placeholder returns the summary value and ‘{1}’ returns the parent column’s caption. If you do not specify this property, the following format is applied: ‘{Summary function}: {summary value}’.</li>
     </ul>
 </div>
 

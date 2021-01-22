@@ -1,0 +1,11 @@
+﻿@namespace BlazorDemo.Pages.CodeSnippets
+
+<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxTimeEdit @bind-Time=""@TimeValue""
+            SizeMode=""@SizeMode""></DxTimeEdit>
+
+@code {
+    TimeSpan TimeValue { get; set; } = DateTime.Now.TimeOfDay;
+    SizeMode SizeMode { get; set; }
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

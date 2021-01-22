@@ -832,7 +832,7 @@
                 "Title": "Validation"
               }
             ]
-          }, 
+          },
           {
             "Url": "Memo",
             "Title": "Memo",
@@ -1094,6 +1094,39 @@
             "IsNew": true,
             "Keywords": "Blazor, components, page layout, stack layout, layout, arrange UI elements, layout items, devexpress, demo, sample, example",
             "Description": "The DevExpress Stack Layout component allows you to stack UI elements vertically or horizontally."
+          }
+        ]
+      },
+      {
+        "Url": "Menu",
+        "Title": "Menu",
+        "IsNew": true,
+        "Keywords": "blazor, components, menu, drop-down menu, devexpress, demo, sample, example",
+        "Description": "DevExpress Blazor Menu allows you to add an adaptive menu to your Blazor application. You can populate the Menu items collection, specify the component's orientation, adaptivity settings, display modes, and item templates.",
+        "DemoPageSections": [
+          {
+            "Id": "Overview",
+            "Title": "Overview"
+          },
+          {
+            "Id": "Orientation",
+            "Title": "Orientation"
+          },
+          {
+            "Id": "MobileHorizontal",
+            "Title": "Mobile Horizontal Menu"
+          },
+          {
+            "Id": "MobileVertical",
+            "Title": "Mobile Vertical Menu"
+          },
+          {
+            "Id": "Adaptivity",
+            "Title": "Adaptivity"
+          },
+          {
+            "Id": "Templates",
+            "Title": "Templates"
           }
         ]
       },

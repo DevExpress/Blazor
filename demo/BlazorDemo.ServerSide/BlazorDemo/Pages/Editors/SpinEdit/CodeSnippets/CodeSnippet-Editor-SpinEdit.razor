@@ -1,0 +1,12 @@
+﻿@namespace BlazorDemo.Pages.CodeSnippets
+
+<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxSpinEdit @bind-Value=""@DecimalValue""
+            SizeMode=""@SizeMode"">
+</DxSpinEdit>
+
+@code {
+    Decimal DecimalValue { get; set; } = 15;
+    SizeMode SizeMode { get; set; }
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>

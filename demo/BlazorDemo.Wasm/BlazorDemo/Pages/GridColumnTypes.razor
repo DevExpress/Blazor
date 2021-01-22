@@ -3,32 +3,35 @@
 
 <div class="demo-description mw-1100">
     <h2>Column Types</h2>
-
     <p>
-        This demo demonstrates the different column types supported by the DevExpress <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1#columns">Data Grid</a> for Blazor.
+        To display data in our Blazor <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1">Data Grid</a>, <a class="helplink" target="_blank" href="BindGridtoData">bind</a> it to a data collection and add columns. You can define columns in the Data Grid's markup and cannot change the column collection at runtime. The Data Grid suppors the following predefined data column types:
     </p>
+
     <ul>
         <li>
-            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridCommandColumn">DxDataGridCommandColumn</a> - Displays data management commands such as New, Edit, Delete, Update, and so on.
+            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridDateEditColumn">DxDataGridDateEditColumn</a> (Date) - Displays date-time values and uses a drop-down calendar to edit these values.
         </li>
         <li>
-            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridDateEditColumn">DxDataGridDateEditColumn</a> (Date) - Uses a drop-down calendar control to edit column values.
+            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn">DxDataGridColumn</a> (Forecast) - Displays strings and uses a text box to edit values.
         </li>
         <li>
-            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn">DxDataGridColumn</a> (Forecast) - Default column type that displays strings and uses a text box to edit values.
+            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridSpinEditColumn">DxDataGridSpinEditColumn</a> (Temp. (&#x2103;)) - Displays numeric values and uses a spin editor to edit these values.
         </li>
         <li>
-            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridSpinEditColumn">DxDataGridSpinEditColumn</a> (Temp. (&#x2103;)) - Uses a spin editor with up/down buttons to edit column values.
+            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridComboBoxColumn-1">DxDataGridComboBoxColumn</a> (Cloud Cover) - Displays any values and uses a combobox editor to edit values.
         </li>
         <li>
-            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridComboBoxColumn-1">DxDataGridComboBoxColumn</a> (Cloud Cover) - Uses a combobox control to edit column values.
-        </li>
-        <li>
-            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridCheckBoxColumn">DxDataGridCheckBoxColumn</a> (Precipitation) - Displays a disabled checkbox that is replaced with a combobox when users filter column values.
+            <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridCheckBoxColumn">DxDataGridCheckBoxColumn</a> (Precipitation) - Displays disabled checkboxes and allows a user to change their states in the Edit Form.
         </li>
     </ul>
     <p>
-        Click the Edit command in any row to see the integrated data editors displayed by the columns listed above.
+        Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.Field">Field</a> property to bind a column to a field from the Data Grid's data collection. The Data Grid generates a user-friendly column caption based on the field name. Use the <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.Caption">Caption</a> property to specify a custom column name.
+    </p>
+    <p>
+        Declare a <a class="helplink" target="_blank" href="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridCommandColumn">DxDataGridCommandColumn</a> object to add a command column. This columns contains data management buttons that allow users to create, edit, and remove rows. Click the <b>Edit</b> button in any row to see the integrated data editors displayed by the columns listed above.
+    </p>
+    <p>
+        YouTube Video: <a class="helplink" target="_blank" href="https://www.youtube.com/watch?v=FadGrIOBrrs&feature=youtu.be">Column Customization</a>
     </p>
 </div>
 

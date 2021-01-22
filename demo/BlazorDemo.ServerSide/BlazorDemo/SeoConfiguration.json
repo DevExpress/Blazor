@@ -105,15 +105,8 @@
             ]
           },
           {
-            "Url": "GridCascadingEditors",
-            "Title": "Cascading Editors",
-            "Icon": "images/GridCascadingEditors.svg",
-            "Keywords": "blazor, components, data grid, datagrid, grid, cascade editors, cascading combobox, devexpress, demo, sample, example",
-            "Description": "DevExpress Blazor Data Grid allows you to implement cascade logic within grid's edit form using DevExpress ComboBox for Blazor components."
-          },
-          {
             "Url": "GridEditFormTemplateValidation",
-            "Title": "Edit Form Validation",
+            "Title": "Validate Input",
             "Icon": "images/GridEditFormTemplate.svg",
             "Keywords": "blazor, components, data grid, datagrid, grid, template, form validation, form template, form template validation, devexpress, demo, sample, example",
             "Description": "DevExpress Blazor Data Grid allows you to implement a custom edit form with built-in data validation."
@@ -138,6 +131,10 @@
             "Description": "DevExpress Blazor Data Grid supports horizontal scrolling, vertical scrolling, and virtual scrolling (loading data on demand). The Data Grid displays a pager that enables data navigation. ",
             "DemoPageSections": [
               {
+                "Id": "Paging",
+                "Title": "Paging"
+              },
+              {
                 "Id": "VerticalScrolling",
                 "Title": "Vertical Scrolling"
               },
@@ -155,10 +152,6 @@
               {
                 "Id": "VirtualScrolling",
                 "Title": "Virtual Scrolling"
-              },
-              {
-                "Id": "Paging",
-                "Title": "Paging"
               }
             ]
           },
@@ -257,8 +250,18 @@
           {
             "Url": "GridEditData",
             "Title": "Edit Data",
-            "Keywords": "blazor, components, data grid, datagrid, grid, data editing, edit data, edit form, popup edit form, add rows, add new row, insert row, remove rows, delete rows, edit row values, edit modes, edit options, command column, devexpress, demo, sample, example",
-            "Description": "DevExpress Blazor Data Grid allows users to edit data in the edit form or in the popup edit form."
+            "Keywords": "blazor, components, data grid, datagrid, grid, data editing, edit data, edit form, popup edit form, add rows, add new row, insert row, remove rows, delete rows, edit row values, edit modes, edit options, command column, cascade editors, cascading combobox, cascade logic, devexpress, demo, sample, example",
+            "Description": "DevExpress Blazor Data Grid allows users to edit data in the edit form or in the popup edit form.",
+            "DemoPageSections": [
+              {
+                "Id": "EditModes",
+                "Title": "Edit Modes"
+              },
+              {
+                "Id": "CascadingEditors",
+                "Title": "Cascading Editors"
+              }
+            ]
           },
           {
             "Url": "BindGridToData",
@@ -844,7 +847,7 @@
                 "Title": "Validation"
               }
             ]
-          }, 
+          },
           {
             "Url": "Memo",
             "Title": "Memo",
@@ -1106,6 +1109,39 @@
             "IsNew": true,
             "Keywords": "Blazor, components, page layout, stack layout, layout, arrange UI elements, layout items, devexpress, demo, sample, example",
             "Description": "The DevExpress Stack Layout component allows you to stack UI elements vertically or horizontally."
+          }
+        ]
+      },
+      {
+        "Url": "Menu",
+        "Title": "Menu",
+        "IsNew": true,
+        "Keywords": "blazor, components, menu, drop-down menu, devexpress, demo, sample, example",
+        "Description": "DevExpress Blazor Menu allows you to add an adaptive menu to your Blazor application. You can populate the Menu items collection, specify the component's orientation, adaptivity settings, display modes, and item templates.",
+        "DemoPageSections": [
+          {
+            "Id": "Overview",
+            "Title": "Overview"
+          },
+          {
+            "Id": "Orientation",
+            "Title": "Orientation"
+          },
+          {
+            "Id": "MobileHorizontal",
+            "Title": "Mobile Horizontal Menu"
+          },
+          {
+            "Id": "MobileVertical",
+            "Title": "Mobile Vertical Menu"
+          },
+          {
+            "Id": "Adaptivity",
+            "Title": "Adaptivity"
+          },
+          {
+            "Id": "Templates",
+            "Title": "Templates"
           }
         ]
       },

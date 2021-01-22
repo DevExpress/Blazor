@@ -1,0 +1,12 @@
+﻿@namespace BlazorDemo.Pages.CodeSnippets
+
+<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1#time-format">
+    <CodeSnippetTabPage Text="Razor">@(@"<DxTimeEdit @bind-Time=""@TimeValue""
+            Format=""HH:mm""
+            DisplayFormat=""@DisplayFormat""></DxTimeEdit>
+
+@code {
+    TimeSpan TimeValue { get; set; } = DateTime.Now.TimeOfDay;
+    string DisplayFormat { get; } = string.IsNullOrEmpty(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.AMDesignator) ? ""HH:mm"" : ""h:mm tt"";
+}")</CodeSnippetTabPage>
+</CodeSnippetTabbed>
