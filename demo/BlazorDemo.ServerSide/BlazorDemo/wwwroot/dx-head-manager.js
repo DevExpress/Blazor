@@ -19,8 +19,9 @@ function _bulkUpdateMetadata(_dotnetRef, data) {
     function applyStyleSheet(name, src) {
         if(name) {
             var stylesheet = document.getElementById(name);
-            if(!stylesheet.href.endsWith(src)) {
-                stylesheet.href = src;
+            var uri = encodeURI(src);
+            if(!stylesheet.href.endsWith(uri)) {
+                stylesheet.href = uri;
                 setTimeout(() => updateAccentColorStyle(), 500);
             }
         }
