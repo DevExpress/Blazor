@@ -2,6 +2,30 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 20.2.5
+
+### New Menu Component
+Our new Menu component for Blazor includes the following features:
+
+* Horizontal/vertical orientation 
+* Display modes (Auto, Desktop, and Mobile)
+* Adaptive layout
+* Templates for menu items, item text, and item submenu
+
+[Demo](https://demos.devexpress.com/blazor/menu) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu)
+
+### Chart Enhancements
+Grid lines visibility. To add vertical grid lines or hide both vertical and horizontal grid lines to/from the Chart component, use the axis’s [Visible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartAxisGridLines.Visible) property.
+
+### Scheduler Enhancements
+Handle the new [StartDateChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.StartDateChanged) event to synchronize the range of visible dates in the Scheduler with external components or labels.
+
+### Resolved Issues
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=20.2.5&endBuildName=null&buildsMode=Single&hasPlatformsWithProducts=true) for a complete list of issues resolved in v20.2.5.
+
+### Breaking Change
+[T958401](https://supportcenter.devexpress.com/ticket/details/t958401/popup-the-closebuttonclick-event-changed-the-delegate-type-from-action-to-eventcallback) - Popup - The CloseButtonClick event changed the delegate type from Action to EventCallback
+
 # 20.2.4 
 
 ### Grid Layout 
