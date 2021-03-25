@@ -173,7 +173,7 @@ Users can now resize grid columns. To enable this feature, use the [ColumnResize
 
 You can now use the new [FixedStyle](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridColumnBase-1.FixedStyle) property to anchor columns to the left or rightmost edge of the grid. These fixed columns are never scrolled horizontally.
 
-[Demo](https://demos.devexpress.com/blazor/PagingAndScrolling#FixedColumns) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridColumnBase-1.FixedStyle)
+[Demo](https://demos.devexpress.com/blazor/GridPagingAndScrolling#FixedColumns) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridColumnBase-1.FixedStyle)
 
 ### Scheduler
 
