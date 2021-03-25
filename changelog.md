@@ -133,7 +133,7 @@ The new Stack Layout for Blazor allows you to stack UI elements vertically or ho
 The new Layout Breakpoint component for Blazor allows you to adapt a page layout to different screen sizes. 
 For example, you can use breakpoints to create responsive DxGridLayout, DxStackLayout, or any other components.
 
-[Demo](https://demos.devexpress.com/blazor/GridLayoutAdaptivity) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxLayoutBreakpoint)
+[Demo](https://demos.devexpress.com/blazor/GridLayout#Adaptivity) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxLayoutBreakpoint)
 
 ### New Time Editor
 
