@@ -26,6 +26,7 @@
 </div>
 <DxChart Data="@chartData"
          LabelOverlap="ChartLabelOverlap.Hide"
+         @key="@ThemeName"
          CssClass="mw-1100">
     <DxChartTitle Text="Sales amount, $" />
     <DxChartCommonSeries
@@ -47,6 +48,7 @@
 </DxChart>
 <CodeSnippet_Charts_DynamicSeries />
 @code {
+    [CascadingParameter(Name = "ThemeName")] string ThemeName { get; set; }
     IEnumerable<SaleInfo> chartData;
 
     protected override async Task OnInitializedAsync() {

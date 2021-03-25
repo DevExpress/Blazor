@@ -1,6 +1,7 @@
 ﻿<CodeSnippetTabbed DocLink="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu#templates">
     <CodeSnippetTabPage Text="Razor">@(
-    @"<DxMenu Orientation=""Orientation.Horizontal""
+    @"
+<DxMenu Orientation=""Orientation.Horizontal""
         DropDownActionMode=""MenuDropDownActionMode.Click""
         DisplayMode=""MenuDisplayMode.Desktop""
         CollapseItemToIconMode=""MenuCollapseItemToIconMode.All"">
@@ -35,11 +36,11 @@
                 <DxMenuItem Text=""Blogs"" />
             </Items>
         </DxMenuItem>
-        <DxMenuItem Text=""text"" CssClass=""ml-auto"">
+        <DxMenuItem CssClass=""ml-auto"">
             <Template>
                 <div class=""search dxbs-textbox"">
                     <input type=""text"" class=""dx-demo-menu-input form-control form-control-sm"" placeholder=""Search..."">
-                    <span class=""dxbs-feedback"">
+                    <span class=""dx-demo-menu-search-button dxbs-feedback"">
                         <span class=""d-flex pl-2 pr-2"" role=""button"" style=""color:gray"">
                             <span class=""tb-icon tb-icon-search""></span>
                         </span>
@@ -47,7 +48,7 @@
                 </div>
             </Template>
         </DxMenuItem>
-        <DxMenuItem Text=""User Profile"" CssClass=""notoggle"">
+        <DxMenuItem CssClass=""notoggle"">
             <TextTemplate>
                 <div class=""menu-icon-user-profile menu-icon"" />
             </TextTemplate>
@@ -69,10 +70,10 @@
             </SubMenuTemplate>
         </DxMenuItem>
     </Items>
-</DxMenu>
-    ")
+</DxMenu>")
     </CodeSnippetTabPage>
-    <CodeSnippetTabPage Language="CSS" Text="CSS">@(
+    <CodeSnippetTabPage Language="CSS" Text="CSS">
+        @(
     @".dx-menu-item.notoggle > a > .dropdown-toggle {
     display: none;
 }
@@ -81,21 +82,28 @@
     transform: matrix(1, 0, 0, 1, -112, -1) !important;
 }
 
-.dx-menu-item > .search {
+.dxbs-menu-item-tmpl > .search {
     padding: 0.25rem;
     position: relative;
 }
-.dx-menu-item .user-profile .logo-container {
+
+.dxbs-menu-item-tmpl .user-profile .logo-container {
     margin-top: 1.25rem;
     margin-bottom: 1.25rem;
 }
-
+.dxbs-menu-item-tmpl .user-profile .log-off-btn {
+    padding-top: 0.815rem;
+    padding-bottom: 0.815rem;
+    border-top: 1px solid #e5e5e5;
+}
+.dxdemo-color-gray {
+    color: gray;
+}
 @media (max-width: 655px) {
     .dx-menu-item > .search {
         width: 135px
     }
-}
-")
+}")
     </CodeSnippetTabPage>
 
 </CodeSnippetTabbed>

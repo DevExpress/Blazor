@@ -32,6 +32,7 @@
 </DxChart>
 <CodeSnippet_Charts_DonutSeries />
 @code {
+    [CascadingParameter(Name = "ThemeName")] string ThemeName { get; set; }
     IEnumerable<SaleInfo> SalesData;
 
     protected override async Task OnInitializedAsync()
