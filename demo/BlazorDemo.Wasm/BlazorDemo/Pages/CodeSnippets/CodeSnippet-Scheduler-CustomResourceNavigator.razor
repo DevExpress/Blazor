@@ -88,12 +88,11 @@
     }
 
     void UpdateResourceVisibilty(Resource resource, bool visible) {
-        if(visible) {
+        if(visible)
             VisibleResources.Add(resource);
-            VisibleResources = VisibleResources.OrderBy(p => p.Id).ToList();
-        } else {
+        else
             VisibleResources.Remove(resource);
-        }
+        VisibleResources = VisibleResources.OrderBy(p => p.Id).ToList();
     }
 
     IEnumerable GetNodeChildren(object dataItem) {

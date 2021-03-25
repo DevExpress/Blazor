@@ -2,6 +2,48 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 20.2.6
+
+### Data Grid
+
+Drop-down width modes for Combobox columns: 
+
+* Content or editor width
+* Content width
+* Editor width
+
+[Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridComboBoxColumn-1.DropDownWidthMode)
+
+### Data Editors
+
+#### HTML events 
+
+Data editors based on the standard HTML input element now apply popular event handlers to the input element directly. For a complete list of data editors and supported event handlers, refer to the following help topic: [HTML Attributes and Events](https://docs.devexpress.com/Blazor/401918/common-concepts/html-attributes-and-events).
+
+#### Spin Edit
+ 
+You can now use the mouse wheel to change an editor’s value.
+
+### Chart Enhancements
+
+The new [DxChartToooltip.Position](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartTooltip.Position) property specifies whether the component displays tooltips inside or outside the series.
+
+### Scheduler Enhancements
+
+Use the new [DxSchedulerDataStorage.RecurrenceSettings](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerDataStorage.RecurrenceSettings) property to define common settings for all recurrent appointments displayed in the Scheduler.
+
+### CodeRush
+
+[CodeRush](https://www.devexpress.com/products/coderush/) now includes templates that allow you to quickly create popular DevExpress components for Blazor in Visual Studio. For more information, refer to the following help topic: [Templates for DevExpress Components](https://docs.devexpress.com/CodeRushForRoslyn/402947/coding-assistance/code-templates/templates-for-blazor/templates-for-devexpress-components).
+
+### Resolved Issues
+
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=20.2.6&endBuildName=null&buildsMode=Single&hasPlatformsWithProducts=true) for a complete list of issues resolved in v20.2.6.
+
+### Breaking Change
+
+[T971305](https://supportcenter.devexpress.com/ticket/details/t971305/charts-the-dxcharttooltip-enabled-property-should-be-set-to-true-to-display-tooltips) - Charts - The DxChartTooltip.Enabled property should be set to true to display tooltips with templates.
+
 # 20.2.5
 
 ### New Menu Component
@@ -131,7 +173,7 @@ Users can now resize grid columns. To enable this feature, use the [ColumnResize
 
 You can now use the new [FixedStyle](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridColumnBase-1.FixedStyle) property to anchor columns to the left or rightmost edge of the grid. These fixed columns are never scrolled horizontally.
 
-[Demo](https://demos.devexpress.com/blazor/GridPagingAndScrolling#FixedColumns)
+[Demo](https://demos.devexpress.com/blazor/GridPagingAndScrolling#FixedColumns) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataGridColumnBase-1.FixedStyle)
 
 ### Scheduler
 

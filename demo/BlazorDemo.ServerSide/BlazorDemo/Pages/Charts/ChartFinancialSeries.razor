@@ -20,13 +20,13 @@
     <DxChartCandlestickSeries ValueField="@((BargainDataPoint i) => i.Price)"
                               ArgumentField="@(i => new DateTime(i.DateTimeStamp.Year, i.DateTimeStamp.Month, i.DateTimeStamp.Day, i.DateTimeStamp.Hour, i.DateTimeStamp.Minute, 0) )"
                               Name="Eco Supreme" />
-    <DxChartTooltip>
+    <DxChartTooltip Enabled="true">
         @context.GetFinancialPoint().Render((financialPoint) =>
-            @<div class="p-3">
-                <p>Open: <span>@($"{financialPoint.OpenValue: 0.0000}")</span></p>
-                <p>Close: <span>@($"{financialPoint.CloseValue: 0.0000}")</span></p>
-                <p>High: <span>@($"{financialPoint.HighValue: 0.0000}")</span></p>
-                <p>Low: <span>@($"{financialPoint.LowValue: 0.0000}")</span></p>
+            @<div style="margin: 0.75rem">
+                <div>Open: @($"{financialPoint.OpenValue: 0.0000}")</div>
+                <div>Close: @($"{financialPoint.CloseValue: 0.0000}")</div>
+                <div>High: @($"{financialPoint.HighValue: 0.0000}")</div>
+                <div>Low: @($"{financialPoint.LowValue: 0.0000}")</div>
             </div>
             )
     </DxChartTooltip>
@@ -48,13 +48,13 @@
     <DxChartStockSeries ValueField="@((BargainDataPoint i) => i.Price)"
                         ArgumentField="@(i => new DateTime(i.DateTimeStamp.Year, i.DateTimeStamp.Month, i.DateTimeStamp.Day, i.DateTimeStamp.Hour, i.DateTimeStamp.Minute, 0) )"
                         Name="Eco Supreme" />
-    <DxChartTooltip>
+    <DxChartTooltip Enabled="true">
         @context.GetFinancialPoint().Render((financialPoint) =>
-            @<div class="p-3">
-                <p>Open: <span>@($"{financialPoint.OpenValue: 0.0000}")</span></p>
-                <p>Close: <span>@($"{financialPoint.CloseValue: 0.0000}")</span></p>
-                <p>High: <span>@($"{financialPoint.HighValue: 0.0000}")</span></p>
-                <p>Low: <span>@($"{financialPoint.LowValue: 0.0000}")</span></p>
+            @<div style="margin: 0.75rem">
+                <div>Open: @($"{financialPoint.OpenValue: 0.0000}")</div>
+                <div>Close: @($"{financialPoint.CloseValue: 0.0000}")</div>
+                <div>High: @($"{financialPoint.HighValue: 0.0000}")</div>
+                <div>Low: @($"{financialPoint.LowValue: 0.0000}")</div>
             </div>
             )
     </DxChartTooltip>
@@ -63,6 +63,7 @@
 <CodeSnippet_Charts_StockSeries />
 
 @code {
+    [CascadingParameter(Name = "ThemeName")] string ThemeName { get; set; }
     IEnumerable<BargainDataPoint> StockData;
 
     protected override async Task OnInitializedAsync() {

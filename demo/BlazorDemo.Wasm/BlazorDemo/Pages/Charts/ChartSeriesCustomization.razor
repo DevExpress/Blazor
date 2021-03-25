@@ -67,6 +67,7 @@
 </DxChart>
 <CodeSnippet_Charts_SeriesLabelCustomization />
 @code {
+    [CascadingParameter(Name = "ThemeName")] string ThemeName { get; set; }
     WeatherForecast[] WeatherForecasts;
 
     protected override async Task OnInitializedAsync() {

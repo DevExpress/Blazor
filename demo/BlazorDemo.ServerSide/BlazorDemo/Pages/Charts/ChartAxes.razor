@@ -118,6 +118,7 @@
 <CodeSnippet_Charts_AxesTypes />
 
 @code {
+    [CascadingParameter(Name = "ThemeName")] string ThemeName { get; set; }
     IEnumerable<SaleInfo> SalesData;
     WeatherForecast[] WeatherForecasts;
 
@@ -130,7 +131,7 @@
         List<DataPoint> result = new List<DataPoint>(9);
         result.Add(new DataPoint("Whisper", 0.15));
         result.Add(new DataPoint("Street noise", 8));
-        result.Add(new DataPoint("Jackhummer", 32));
+        result.Add(new DataPoint("Jackhammer", 32));
         result.Add(new DataPoint("Subway train", 64));
         result.Add(new DataPoint("Loud music", 128));
         result.Add(new DataPoint("Pain threshold", 256));

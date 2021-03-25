@@ -101,7 +101,7 @@
     </div>
 </div>
 @code {
-
+    [CascadingParameter(Name = "ThemeName")] string ThemeName { get; set; }
     static readonly IEnumerable<ChartSeriesTypeItem> LineSeriesTypes = ChartSeriesTypeItem.Create(ChartSeriesType.Line, ChartSeriesType.StepLine,
         ChartSeriesType.StackedLine, ChartSeriesType.FullStackedLine);
 

@@ -2,12 +2,12 @@
     <CodeSnippetTabPage Text="Razor">@(@"<DxChart Data=""@SalesData""
          CssClass=""mw-1100"">
     <DxChartTitle Text=""Sales amount"" />
-    <DxChartTooltip>
-        <div class=""p-3"">
-            <p class=""text-align-center""><b>@context.Point.SeriesName</b></p>
-            <p>City: @context.Point.Argument</p>
-            <p>Amout: @context.Point.Value</p>
-        </div>
+    <DxChartTooltip Enabled=""true"" Position=""RelativePosition.Outside"">
+       <div style=""margin: 0.75rem"">
+            <div class=""font-weight-bold"">@context.Point.SeriesName</div>
+            <div>City: @context.Point.Argument</div>
+            <div>Amount: @context.Point.Value</div>
+       </div>
     </DxChartTooltip>
     <DxChartBarSeries  Name=""2017"" Filter=""@((SaleInfo s) => s.Date.Year == 2017)"" AggregationMethod=""Enumerable.Sum"" ArgumentField=""@(s => s.City)""
                        ValueField=""@(s => s.Amount)"" />

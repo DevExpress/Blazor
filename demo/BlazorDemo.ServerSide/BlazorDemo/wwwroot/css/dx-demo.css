@@ -1372,9 +1372,12 @@ a.helplink {
 }
 
 .dx-chart {
-    margin: 0 15px;
+    margin: 0;
 }
-
+.dx-chart-wrapper .card-body {
+    padding: 0.75rem 0;
+}
+    
 .rotated-chart .dx-chart {
     margin-bottom: 50px;
 }
@@ -1498,6 +1501,11 @@ a.helplink {
 .demo-card-wide .card-header {
     font-size: 0.95rem;
     font-weight: 500;
+}
+
+.demo-size-toolbar.dxbs-loading .demo-toolbar-title {
+    white-space: nowrap;
+    width: 1px;
 }
 
 .demo-size-toolbar .demo-toolbar-title {
