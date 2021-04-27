@@ -210,6 +210,12 @@ See our [Version History](https://supportcenter.devexpress.com/versionhistory?pl
 * [Scheduler - Renamed API members](https://supportcenter.devexpress.com/ticket/details/t939823)
 * [Reporting for Blazor - Renamed API members](https://supportcenter.devexpress.com/ticket/details/T934943)
 
+# 20.1.11
+
+### Resolved Issues
+
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=20.1.11&endBuildName=null&buildsMode=Single&hasPlatformsWithProducts=true) for a complete list of issues resolved in v20.1.11.
+
 # 20.1.10
 
 ### Resolved Issues
