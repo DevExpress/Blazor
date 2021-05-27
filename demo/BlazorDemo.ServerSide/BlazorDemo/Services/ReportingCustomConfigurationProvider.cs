@@ -1,4 +1,4 @@
-#if NETCOREAPP3
+#if SERVER_BLAZOR
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Hosting;
@@ -11,14 +11,14 @@ namespace BlazorDemo.Services {
 
         public ReportingCustomConfigurationProvider(IWebHostEnvironment hostingEnvironment, IConfiguration config) {
             this.hostingEnvironment = hostingEnvironment;
-            var dirPath = config.GetValue<string>("DataSourcesDir");
+            var dirPath = config.GetValue<string>("DataSourcesFolder");
             connectionStrings = new Dictionary<string, string> {
-                [$"ConnectionStrings:NWindConnectionString"] = $"XpoProvider=SQLite;Data Source={dirPath}nwind.db",
-                [$"ConnectionStrings:VehiclesDBConnectionString"] = $"XpoProvider=SQLite;Data Source={dirPath}vehicles.db",
-                [$"ConnectionStrings:HomesConnectionString"] = $"XpoProvider=SQLite;Data Source={dirPath}homes.db",
-                [$"ConnectionStrings:ContactsConnectionString"] = $"XpoProvider=SQLite;Data Source={dirPath}Contacts.db",
-                [$"ConnectionStrings:DevAvConnectionString"] = $"XpoProvider=SQLite;Data Source={dirPath}devav.sqlite3",
-                [$"ConnectionStrings:CountriesConnectionString"] = $"XpoProvider=SQLite;Data Source={dirPath}Countries.db"
+                [$"ConnectionStrings:NWindConnectionString"] = $"XpoProvider=SQLite;Data Source={dirPath}/nwind.db",
+                [$"ConnectionStrings:VehiclesDBConnectionString"] = $"XpoProvider=SQLite;Data Source={dirPath}/vehicles.db",
+                [$"ConnectionStrings:HomesConnectionString"] = $"XpoProvider=SQLite;Data Source={dirPath}/homes.db",
+                [$"ConnectionStrings:ContactsConnectionString"] = $"XpoProvider=SQLite;Data Source={dirPath}/Contacts.db",
+                [$"ConnectionStrings:DevAvConnectionString"] = $"XpoProvider=SQLite;Data Source={dirPath}/devav.sqlite3",
+                [$"ConnectionStrings:CountriesConnectionString"] = $"XpoProvider=SQLite;Data Source={dirPath}/Countries.db"
             };
         }
         public IDictionary<string, string> GetGlobalConnectionStrings() {

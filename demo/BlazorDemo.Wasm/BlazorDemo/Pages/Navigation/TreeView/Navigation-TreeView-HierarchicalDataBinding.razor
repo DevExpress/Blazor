@@ -1,0 +1,9 @@
+﻿<DemoPageSectionComponent Id="Navigation-TreeView-HierarchicalDataBinding">
+    <div class="cw-240">
+        <h5 class="card-title">Chemical elements</h5>
+        <DxTreeView Data="@ChemicalElements.Groups"
+                    TextExpression="@(dataItem => ((ChemicalElementGroup)dataItem).Name)"
+                    ChildrenExpression="@(dataItem => ((ChemicalElementGroup)dataItem).Groups)">
+        </DxTreeView>
+    </div>
+</DemoPageSectionComponent>

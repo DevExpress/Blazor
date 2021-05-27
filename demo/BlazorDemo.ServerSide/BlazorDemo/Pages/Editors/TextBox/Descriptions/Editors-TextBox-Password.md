@@ -1,0 +1,1 @@
+The [Text Box](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextBox) allows you to mask all characters typed into the editor. Set the [Password](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextBox.Password) property to **true** to activate the password mode.

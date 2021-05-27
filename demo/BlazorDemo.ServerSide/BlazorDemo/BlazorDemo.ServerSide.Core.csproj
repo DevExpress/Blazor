@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <DxExtendStartupHost>False</DxExtendStartupHost>
+    <Configurations>Debug;Release;VisualTests</Configurations>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <OutputType>Library</OutputType>
+    <DefineConstants>SERVER_BLAZOR</DefineConstants>
+    <RootNamespace>BlazorDemo</RootNamespace>
+    <AssemblyName>BlazorDemo</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Markdig" Version="0.23.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.CodeDom" Version="5.0.0" />    
+    <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.2" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.2" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.112" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="21.1.3" />
+    <PackageReference Include="DevExpress.Blazor.Reporting" Version="21.1.3" />
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="**" />
+    <Content Remove="**" />
+    <EmbeddedResource Remove="**" />
+    <None Remove="**" />
+    <Compile Include="**\*.cs" Exclude="obj\**\*.cs;obj.WASM\**\*.cs;Pages\**\CodeSnippets\*.cs;DocumentMetadata\**\*.cs;wwwroot\_code\**\*.*;Controllers\**\*.cs" />
+    <Compile Include="DocumentMetadata\Components\MetadataManager.cs" />
+    <Compile Include="DocumentMetadata\Components\MetadataStaticRenderer.cs" />
+    <Compile Include="DocumentMetadata\DocumentMetadata.AspNetCore.cs" />
+    <Compile Include="DocumentMetadata\Renderers\**\*.cs" />
+    <Compile Include="DocumentMetadata\DocumentAttributes.cs" />
+    <Compile Include="DocumentMetadata\DocumentMetadata.cs" />
+    <Compile Include="DocumentMetadata\DocumentMetadata.Implementation.cs" />
+    <Compile Include="DocumentMetadata\TagHelpers\DocumentHead.cs" />
+    <Compile Include="DocumentMetadata\Utils.cs" />
+    <Content Include="wwwroot\**\*.*" Exclude="wwwroot\_code\**\*.*" />
+    <Content Include="**\*.razor" Exclude="wwwroot\_code\**\*.razor" />
+    <Content Include="Pages\**\*.md" />
+    <Content Include="Pages\**\*.razor.css" />
+    <Content Include="Shared\**\*.razor.css" />
+  
+    <Content Include="NOTICE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataSources\Contacts.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>      
+	  <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+    <Content Include="DataSources\devav.sqlite3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+    <Content Include="DataSources\homes.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+    <Content Include="DataSources\nwind.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+    <Content Include="DataSources\vehicles.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\**\*.repx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataSources\USDJPY.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Documents\Example.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Documents\AynRand.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+    <Content Include="DataSources\Countries.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+    <Content Include="DataSources\issue-list.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+    <Content Include="DataSources\worldcities.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\CodeSnippets\*.cs" />
+  </ItemGroup>
+  <Target Name="ControllersCreate" BeforeTargets="PreBuildEvent" Condition="!Exists('Controllers')">
+    <Exec Command="mklink /J &quot;Controllers&quot; &quot;..//BlazorDemo.ServerSide//Controllers&quot;" />
+  </Target>
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent">
+    <ItemGroup>
+      <EmbeddedResource Include="Pages\**\*.*" Exclude="Pages\CodeSnippets\**\*.*" />
+      <EmbeddedResource Include="Data\**\*.*" />
+      <EmbeddedResource Include="DataProviders\**\*.*" />
+      <EmbeddedResource Include="Services\**\*.*" />
+      <EmbeddedResource Include="wwwroot\css\*.css" />
+      <EmbeddedResource Include="wwwroot\demo-metadata.json" />
+      <EmbeddedResource Include="Controllers\**\*.*" />
+    </ItemGroup>
+  </Target>
+</Project>

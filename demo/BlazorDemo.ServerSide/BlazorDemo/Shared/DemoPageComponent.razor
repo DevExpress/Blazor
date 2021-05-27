@@ -1,8 +1,8 @@
 ﻿@inject DemoConfiguration Configuration
-@inject NavigationManager navigationManager
+@inject DemoThemesConfiguration Themes
 
 <div class="demo-page">
-    <div class="demo-page-content" style="@((Configuration.ShowOnlyReporting || isReportsPage()) ? "max-width: 100%" : "")">
+    <div class="demo-page-content theme-@Themes.ActiveTheme.Name.Replace(" ", "-")">
         @ChildContent
     </div>
     <DemoPageNavPanel />
@@ -10,11 +10,7 @@
 
 @code {
     [Parameter] public RenderFragment ChildContent { get; set; }
-
-    bool isReportsPage() {
-        return
-            navigationManager.Uri.Contains("DocumentViewer") ||
-            navigationManager.Uri.EndsWith("ReportDesigner");
+    protected override Task OnInitializedAsync() {
+        return base.OnInitializedAsync();
     }
-
 }

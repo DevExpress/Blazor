@@ -1,0 +1,30 @@
+.search {
+    padding: 0.25rem;
+    position: relative;
+    min-width: 123px;
+}
+
+ .search .search-input {
+     padding-right: calc(24px+0.5rem);
+ }
+
+ .search .search-button {
+     right: 0px;
+     top: 0px;
+     pointer-events: auto;
+     z-index: 3;
+     width: auto;
+     display: flex;
+     align-items: center;
+     height: 100%;
+     position: absolute;
+     color: gray;
+ }
+
+ .search .search-button .search-icon {
+     background-color: currentColor;
+     width: 24px;
+     height: 24px;
+     mask-image: url("images/search.svg");
+     -webkit-mask-image: url("images/search.svg");
+ }

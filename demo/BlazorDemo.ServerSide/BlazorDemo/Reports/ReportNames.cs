@@ -3,6 +3,9 @@ namespace BlazorDemo.Reports {
         public static string GenerateUrl(string reportName) {
             return $"DocumentViewer/{reportName}";
         }
+        public static string GeneraterReportViewerUrl(string reportName) {
+            return $"ReportViewer/{reportName}";
+        }
         public const string
             BalanceSheetReportName = "BalanceSheetReport",
             BalanceSheetReport = "Balance Sheet",

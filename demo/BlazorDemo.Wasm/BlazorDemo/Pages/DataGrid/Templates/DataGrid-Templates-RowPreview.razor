@@ -1,0 +1,39 @@
+﻿<DemoPageSectionComponent Id="DataGrid-Templates-RowPreview" ShowHorizontalScrollBar="true">
+    @inject NwindDataService NwindDataService
+
+    @if(DataSource == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <DxDataGrid Data="@DataSource"
+                    VerticalScrollBarMode="ScrollBarMode.Auto"
+                    VerticalScrollableHeight="400"
+                    ShowPager="false"
+                    ShowFilterRow="true">
+
+            <Columns>
+                <DxDataGridColumn Field="@nameof(Employee.FirstName)" SortOrder="DataGridColumnSortOrder.Ascending"></DxDataGridColumn>
+                <DxDataGridColumn Field="@nameof(Employee.LastName)"></DxDataGridColumn>
+                <DxDataGridColumn Field="@nameof(Employee.Title)" Caption="Position" EditorVisible="@true"></DxDataGridColumn>
+                <DxDataGridDateEditColumn Field="@nameof(Employee.BirthDate)" DisplayFormat="D" Caption="Birth Date" EditorVisible="@true"></DxDataGridDateEditColumn>
+                <DxDataGridDateEditColumn Field="@nameof(Employee.HireDate)" DisplayFormat="D" Caption="Hire Date" EditorVisible="@true"></DxDataGridDateEditColumn>
+            </Columns>
+            <RowPreviewTemplate Context="ItemInfo">
+                @{
+                    Employee employee = ItemInfo.DataItem;
+                    <div class="d-flex p-1">
+                        <img src="@(StaticAssetUtils.GetImagePath($"Employees/{employee.FileName}.jpg"))" width="76" />
+                        <div class="pl-2 text-wrap">@employee.Notes</div>
+                    </div>
+                }
+            </RowPreviewTemplate>
+        </DxDataGrid>
+    }
+
+    @code {
+        IEnumerable<Employee> DataSource;
+
+        protected override async Task OnInitializedAsync() {
+            DataSource = await NwindDataService.GetEmployeesAsync();
+        }
+    }
+</DemoPageSectionComponent>

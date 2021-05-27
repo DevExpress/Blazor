@@ -1,4 +1,4 @@
-#if NETCOREAPP3
+#if SERVER_BLAZOR
 using System;
 using System.Collections.Generic;
 using System.IO;

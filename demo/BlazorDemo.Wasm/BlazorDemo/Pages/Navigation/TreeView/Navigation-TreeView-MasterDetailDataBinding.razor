@@ -1,0 +1,46 @@
+﻿<DemoPageSectionComponent Id="Navigation-TreeView-MasterDetailDataBinding">
+    @inject ProductsFlatService ProductsFlatService;
+
+    @if(Products == null || Categories == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <div class="cw-320">
+            <DxTreeView Data="@Enum.GetValues(typeof(ProductCategoryMain))"
+                        TextExpression="@(dataItem => GetNodeText(dataItem))"
+                        ChildrenExpression="@(dataItem => GetNodeChildren(dataItem))">
+            </DxTreeView>
+        </div>
+    }
+
+    @code {
+        IEnumerable<ProductFlat> Products;
+        IEnumerable<ProductCategory> Categories;
+
+        protected override async Task OnInitializedAsync() {
+            Products = await ProductsFlatService.LoadAsync();
+            Categories = await ProductsFlatService.LoadCategoriesAsync();
+        }
+
+        IEnumerable<object> GetNodeChildren(object nodeDataObject) {
+            if(nodeDataObject is ProductCategoryMain) {
+                return Categories
+                    .Where(c => c.Category.Equals((ProductCategoryMain)nodeDataObject));
+            } else if(nodeDataObject is ProductCategory) {
+                return Products
+                    .Where(p => p.ProductCategoryId == ((ProductCategory)nodeDataObject).SubcategoryID);
+            }
+            return null;
+        }
+
+        string GetNodeText(object dataItem) {
+            if(dataItem is ProductCategoryMain) {
+                return dataItem.ToString();
+            } else if(dataItem is ProductCategory) {
+                return ((ProductCategory)dataItem).Subcategory;
+            } else if(dataItem is ProductFlat) {
+                return ((ProductFlat)dataItem).ProductName;
+            }
+            return "";
+        }
+    }
+</DemoPageSectionComponent>

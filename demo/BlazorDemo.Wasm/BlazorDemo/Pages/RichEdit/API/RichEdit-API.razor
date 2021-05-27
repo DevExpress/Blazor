@@ -1,0 +1,64 @@
+﻿@page "/RichEditAPI"
+@using DevExpress.Office.Utils
+
+@inject NavigationManager NavigationManager
+
+<DemoPageSectionComponent Id="RichEdit-API">
+    <DxRichEdit @ref="richEdit" Id="richEdit" CssClass="w-100 ch-720" />
+
+    @code {
+        DxRichEdit richEdit;
+
+        protected override Task OnAfterRenderAsync(bool firstRender) {
+            if (firstRender)
+                InitializeDocument();
+            return base.OnAfterRenderAsync(firstRender);
+        }
+        async void InitializeDocument() {
+            Document documentAPI = richEdit.DocumentAPI;
+            documentAPI.BeginUpdate();
+            Paragraph bodyParagraph = await documentAPI.Paragraphs.CreateAsync(0);
+            await bodyParagraph.ChangePropertiesAsync(properties => {
+                properties.FirstLineIndentType = FirstLineIndentType.Indented;
+                properties.FirstLineIndent = 500;
+            });
+            string bodyParagraphText = "Ayn Rand (born Alisa Zinov'yevna Rosenbaum; February 2, 1905 – March 6, 1982) was a Russian-American novelist, philosopher, playwright, and screenwriter. She is known for her two best-selling novels, The Fountainhead and Atlas Shrugged, and for developing a philosophical system she called Objectivism.";
+            TextSpan bodyParagraphTextSpan = await documentAPI.AddTextAsync(0, bodyParagraphText);
+            await bodyParagraphTextSpan.ChangePropertiesAsync(properties => {
+                properties.FontName = "Segoe UI";
+                properties.FontSize = 12;
+            });
+            TextSpan boldTextSpan = await documentAPI.GetTextSpanAsync(0, 8);
+            await boldTextSpan.ChangePropertiesAsync(properties => {
+                properties.FontBold = true;
+            });
+            TextSpan italicTextSpan = await documentAPI.GetTextSpanAsync(9, 68);
+            await italicTextSpan.ChangePropertiesAsync(properties => {
+                properties.FontItalic = true;
+            });
+            await documentAPI.Hyperlinks.CreateAsync(bodyParagraphText.IndexOf("Objectivism"), "Objectivism".Length, url: "https://en.wikipedia.org/wiki/Objectivism");
+            await documentAPI.Hyperlinks.CreateAsync(bodyParagraphText.IndexOf("Atlas Shrugged"), "Atlas Shrugged".Length, url: "https://en.wikipedia.org/wiki/Atlas_Shrugged");
+            await documentAPI.Hyperlinks.CreateAsync(bodyParagraphText.IndexOf("The Fountainhead"), "The Fountainhead".Length, url: "https://en.wikipedia.org/wiki/The_Fountainhead");
+
+            Paragraph pictureParagraph = await documentAPI.Paragraphs.CreateAsync(0);
+            await pictureParagraph.ChangePropertiesAsync(properties => {
+                properties.Alignment = ParagraphAlignment.Center;
+            });
+            await documentAPI.InlineImages.CreateAsync(0, DocumentImageSource.LoadFromUri(NavigationManager.BaseUri + "_content/BlazorDemo/images/AynRand.jpg", Units.PixelsToTwips(288, 96), Units.PixelsToTwips(358, 96)));
+            Paragraph titleParagraph = await documentAPI.Paragraphs.CreateAsync(0);
+            await titleParagraph.ChangePropertiesAsync(properties => {
+                properties.SpacingAfter = 400;
+            });
+            TextSpan titleParagraphTextSpan = await documentAPI.AddTextAsync(0, "Ayn Rand");
+            await titleParagraphTextSpan.ChangePropertiesAsync(properties => {
+                properties.FontName = "Arial";
+                properties.FontSize = 24;
+                properties.FontBold = true;
+            });
+            Section section = await documentAPI.Sections.GetAsync(0);
+            SubDocument footer = await section.GetFooterAsync(createIfNotExist: true);
+            await footer.AddTextAsync(0, "From Wikipedia, the free encyclopedia");
+            documentAPI.EndUpdate();
+        }
+    }
+</DemoPageSectionComponent>

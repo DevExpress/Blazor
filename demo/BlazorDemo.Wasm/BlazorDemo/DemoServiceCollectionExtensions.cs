@@ -10,14 +10,12 @@ namespace BlazorDemo {
 
     public static class DemoServiceCollectionExtensions {
         public static void AddDemoServices(this IServiceCollection services) {
-            services.AddScoped<DemoService>();
-            services.AddScoped<EmployeeService>();
-            services.AddScoped<FlatProductService>();
-            services.AddScoped<ProductService>();
+            services.AddScoped<ProductsFlatService>();
             services.AddScoped<RentInfoDataService>();
             services.AddScoped<WeatherForecastService>();
-            services.AddScoped<SupplierService>();
-            services.AddScoped<CustomersService>();
+            services.AddScoped<NwindDataService>();
+            services.AddScoped<IssuesDataService>();
+            services.AddScoped<WorldcitiesDataService>();
             services.AddDevExpressBlazor();
 
             services.AddDocumentMetadata(ConfigureMetadata);

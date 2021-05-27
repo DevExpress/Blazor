@@ -1,0 +1,38 @@
+﻿@using System.Text
+
+<DemoPageSectionComponent Id="Editors-TagBox-ValueFieldProperty" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <DxTagBox Data="@Data"
+                  TextFieldName="@nameof(Employee.Text)"
+                  ValueFieldName="@nameof(Employee.EmployeeId)"
+                  SizeMode="Params.SizeMode"
+                  CssClass="cw-480"
+                  @bind-Values="Values"
+                  ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+        <p class="demo-text cw-480 mt-2 text-muted">
+            Selected values: { @GetStringRepresentation() }
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        IEnumerable<Employee> Data { get; set; }
+        IEnumerable<int> Values { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetEmployeesAsync();
+            Values = Data.Take(2).Select(e => e.EmployeeId);
+        }
+
+        string GetStringRepresentation() {
+            StringBuilder sb = new StringBuilder();
+            if(Values != null && Values.Any()) {
+                foreach(var value in Values)
+                    sb.Append(value + ", ");
+                sb.Remove(sb.Length - 2, 2);
+            }
+            return sb.ToString();
+        }
+    }
+</DemoPageSectionComponent>

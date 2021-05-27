@@ -1,0 +1,43 @@
+﻿<DemoPageSectionComponent Id="Editors-TagBox-DropDownWidth" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <div class="d-flex flex-row cw-480">
+            <DxTagBox Data="@Data"
+                      TextFieldName="@nameof(Employee.FirstName)"
+                      @bind-Values="@Values"
+                      DropDownWidthMode="DropDownWidthMode"
+                      NullText="Short text"
+                      SizeMode="Params.SizeMode"
+                      CssClass="cw-240" />
+            <DxTagBox Data="@Data"
+                      TextFieldName="@nameof(Employee.Text)"
+                      @bind-Values="@Values1"
+                      NullText="Long text"
+                      DropDownWidthMode="DropDownWidthMode"
+                      SizeMode="Params.SizeMode"
+                      CssClass="cw-240 ml-2" />
+        </div>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionComboBox Label="Drop Down Width Mode:"
+                        Data="@(Enum.GetNames(typeof(DropDownWidthMode)))"
+                        Value="@(DropDownWidthMode.ToString())"
+                        ValueChanged="@((string selectedItem) =>
+                            { DropDownWidthMode = Enum.Parse<DropDownWidthMode>(selectedItem); })" />
+    </OptionsContent>
+
+    @code {
+        DropDownWidthMode DropDownWidthMode { get; set; } = DropDownWidthMode.ContentOrEditorWidth;
+        IEnumerable<Employee> Data { get; set; }
+        IEnumerable<Employee> Values { get; set; }
+        IEnumerable<Employee> Values1 { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetEmployeesAsync();
+            Values = Data.Take(1);
+            Values1 = Data.Take(1);
+        }
+    }
+</DemoPageSectionComponent>

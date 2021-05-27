@@ -5,22 +5,23 @@
 <DemoScriptLoader @ref=@navPanelHelper Src="_content/BlazorDemo/lib/page-nav.js">
 </DemoScriptLoader>
 
-<div class="demo-page-nav @(!visible ? "d-none" : "")">
-    @if(visible) { 
-        <DemoPageNavHeader Title="@demoPageSections.First().Title" @bind-StateCssClass="@HeaderCssClass"></DemoPageNavHeader>
-        <div class="nav-pills">
-            <div class="nav-title">@demoPage.Title</div>
-            @foreach(var(demoPageSection, i) in demoPageSections.Select((s, index) => (s, index))) {
-                <DemoPageNavPanelItem @key="@($"{demoPage.Url}|{i}")"
-                                      Text="@demoPageSection.Title"
-                                      Url="@($"{demoPage.Url}#{demoPageSection.Id}")"
-                                      CssClass="@GetItemCssClass(i)">
-                    <Badge>@GetBadgeText(demoPageSection)</Badge>
-                </DemoPageNavPanelItem>
-            }
+@if(visible) {
+    <div class="demo-page-nav-container">
+        <div class="demo-page-nav">
+            <DemoPageNavHeader Title="@demoPageSections.First().Title" @bind-StateCssClass="@HeaderStateCssClass"></DemoPageNavHeader>
+            <div class="nav-pills">
+                @foreach(var (demoPageSection, i) in demoPageSections.Select((s, index) => (s, index))) {
+                    <DemoPageNavPanelItem @key="@($"{demoPage.Url}|{i}")"
+                                          Text="@demoPageSection.Title"
+                                          Url="@($"{demoPage.Url}#{demoPageSection.Id}")"
+                                          CssClass="@GetItemCssClass(i)">
+                        <Badge>@GetBadgeText(demoPageSection)</Badge>
+                    </DemoPageNavPanelItem>
+                }
+            </div>
         </div>
-    }
-</div>
+    </div>
+}
 
 @code {
     DemoScriptLoader navPanelHelper;
@@ -30,7 +31,7 @@
 
     bool visible;
 
-    public string HeaderCssClass { get; set; } = "collapse";
+    public string HeaderStateCssClass { get; set; } = "collapse";
 
     protected override void OnInitialized() {
         NavigationManager.LocationChanged += OnLocationChanged;
@@ -59,17 +60,16 @@
     }
 
     void OnLocationChanged(object sender, LocationChangedEventArgs args) {
-        HeaderCssClass = "collapse";
+        HeaderStateCssClass = "collapse";
         UpdateVisibility(args.Location);
         InvokeAsync(StateHasChanged);
     }
 
     void UpdateVisibility(string currentUri) {
         var demoPageUrl = NavigationManager.ToAbsoluteUri(currentUri).GetLeftPart(UriPartial.Path).Replace(NavigationManager.BaseUri, "");
-        if(demoPageUrl.EndsWith('/'))
-            demoPageUrl = demoPageUrl.Substring(0, demoPageUrl.LastIndexOf('/'));
-        demoPageSections = Configuration.GetDemoPageSections(demoPageUrl, out demoPage);
-        visible = demoPageSections.Any();
+        demoPage = Configuration.GetDemoPageByUrl(demoPageUrl) as DemoPage;
+        demoPageSections = demoPage != null ? demoPage.PageSections : new DemoPageSection[0];
+        visible = demoPageSections.Count() > 1;
     }
 
     public void Dispose() {

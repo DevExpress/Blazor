@@ -1,135 +1,221 @@
 ﻿@inherits LayoutComponentBase
 @implements IDisposable
 @inject DemoConfiguration Configuration
-<DemoScriptLoader @ref="@scrollHelperFuncLoader"
-                  Code="function scrollToElementTop(element) {
-                        if (element.scroll)
-                            element.scroll(0, 0);
-                        else {
-                            element.scrollTop = 0;
-                            element.scrollLeft = 0;
-                        }
-                  }
+@inject DemoThemesConfiguration Themes
 
-                  function ensureNavigationTargetIsVisible() {
-                        var targetSelector = document.location.hash;
-                        if(targetSelector) {
-                            var demoAnchorLinks = Array.from(document.querySelectorAll('.demo-anchor'));
-                            var targetElement = demoAnchorLinks.filter(function(l) { return l.href.toLowerCase() === document.location.href.toLowerCase() && l.href.endsWith(targetSelector); })[0];
-                            if(targetElement)
-                                targetElement.scrollIntoView();
-                        }
-                  }">
-</DemoScriptLoader>
+<DemoScriptLoader @ref=@pageHelper Src="_content/BlazorDemo/lib/page-helper.js" />
 
-<nav class="logo-container p-0 navbar navbar-dark">
-    <LayoutToggleButton @ref="@toggleButton" @bind-StateCssClass="@LayoutStateCssClass" />
-    <NavLink class="logo-image text-body" href="" Match="NavLinkMatch.All" />
-    <div class="demo-btn-container d-flex">
-        <a class="download-btn navbar-toggler d-inline-block bg-primary text-white border-0" href="https://go.devexpress.com/DevexpressDownload_UniversalTrial.aspx" target="_blank" title="Free Trial">
-            <span class="demo-download-icon"></span>
-        </a>
-        @if(!Configuration.ShowOnlyReporting) {
+<div class="demo-header-container">
+    <nav class="demo-header p-0 navbar navbar-dark">
+        <DemoLayoutToggleButton @bind-Toggled="@LayoutToggled" />
+        <NavLink class="logo-image text-body" href="" Match="NavLinkMatch.All" />
+        <div class="demo-btn-container d-flex">
+            <a class="download-btn navbar-toggler d-inline-block bg-primary text-white border-0" href="https://go.devexpress.com/DevexpressDownload_UniversalTrial.aspx" target="_blank" title="Free Trial">
+                <span class="demo-download-icon"></span>
+            </a>
             <div class="@($"bg-light text-dark d-inline-block theme-settings {ThemeSwitcherShown}")">
                 <a class="nav-item nav-link" @onclick="@ToggleThemeSwitcherPanel" @onclick:preventDefault href="#">
                     <span class="demo-theme-icon"></span>
                 </a>
             </div>
+        </div>
+        <ThemeSwitcher @bind-Shown="@ThemeSwitcherShown" @bind-ThemeName="@ThemeName" />
+    </nav>
+</div>
+<div class="demo-breadcrumbs-container bg-light">
+    <div class="demo-breadcrumbs @LayoutStateCssClass">
+        <DemoBreadcrumbs></DemoBreadcrumbs>
+    </div>
+</div>
+<div class="demo-content-container @(IsFirstTimeRendered ? "animated" : "")" @ref="@contentContainerRef">
+    <div class="demo-content @LayoutStateCssClass">
+        <div class="sidebar">
+            <DemoSearchEditor @bind-SearchString="@SearchString" />
+            <DxScrollView ScriptLoaded="@ScrollViewScriptLoaded">
+                <DemoSearchResultList SearchString="@SearchString" SearchResults="@SearchResults" />
+                <NavMenuFactoryComponent />
+            </DxScrollView>
+            <div class="info-wrapper">
+                <div class="version">Version: @DemoVersion.Version</div>
+                <div class="copyright">
+                    <span>Copyright &copy; 2000-</span><span>@DateTimeNowYear</span>
+                    Developer Express Inc
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="content">
+                <CascadingValue Value="@ScrollToTargetLocked" Name="ScrollToTargetLocked">
+                    <CascadingValue Value="@ThemeName" Name="ThemeName">
+                        @Body
+                    </CascadingValue>
+                </CascadingValue>
+            </div>
+            <div class="content-footer"></div>
+        </div>
+        @if(!_isDesktop) {
+            <DemoModalBackdrop Shown="@ModalBackgroundShown" ShownChanged="@ModalBackdropShownChanged" />
         }
     </div>
-</nav>
-<div class="demo-content @LayoutStateCssClass">
-    <div class="sidebar">
-        <DxScrollView ScriptLoaded="@ScrollToTargetIfNeeded">
-            <NavMenuFactoryComponent />
-        </DxScrollView>
-    </div>
-    <div @ref="@mainRef" class="main">
-        <div class="content px-4">
-            <CascadingValue Value="@ScrollToTargetLocked" Name="ScrollToTargetLocked">
-                <CascadingValue Value="@ThemeName" Name="ThemeName">
-                    @Body
-                </CascadingValue>
-            </CascadingValue>
-        </div>
-        <DemoFooter />
-    </div>
-    @if(!Configuration.ShowOnlyReporting) {
-        <ThemeSwitcher @bind-Shown="@ThemeSwitcherShown" @bind-ThemeName="@ThemeName" />
-        <DemoModalBackdrop Shown="@(ThemeSwitcherShown || LayoutStateCssClass == "mobile-sidebar-shown")"
-                           ShownChanged="@ModalBackdropShownChanged">
-        </DemoModalBackdrop>
-    }
 </div>
-<DemoFooter />
+
 @code {
-    DemoScriptLoader scrollHelperFuncLoader;
-    LayoutToggleButton toggleButton;
-    ElementReference mainRef;
+    static readonly int DateTimeNowYear = DateTime.Now.Year;
 
-    [Inject] NavigationManager NavigationManager { get; set; }
-    [Inject] IJSRuntime JsRuntime { get; set; }
+    string _themeName;
+    bool _layoutToggled;
+    bool _themeSwitcherShown;
+    bool _isDesktop = true;
+    string _searchString = "";
+    ElementReference contentContainerRef;
 
-    string ThemeName { get; set; }
+    DemoScriptLoader pageHelper;
 
-    protected override void OnInitialized()
-    {
-        NavigationManager.LocationChanged += OnLocationChanged;
-    }
+    [Inject]
+    IDemoVersion DemoVersion { get; set; }
+    [Inject]
+    NavigationManager NavigationManager { get; set; }
+    [Inject]
+    IJSRuntime JsRuntime { get; set; }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-            await ScrollToMainTopIfNeeded(NavigationManager.Uri);
-    }
 
-    async void OnLocationChanged(object sender, LocationChangedEventArgs args)
-    {
-        ThemeSwitcherShown = false;
-        await ScrollToMainTopIfNeeded(args.Location);
-        await InvokeAsync(StateHasChanged);
-    }
-
-    string _layoutStateCssClass;
-
-    string LayoutStateCssClass
-    {
-        get => _layoutStateCssClass;
-        set
-        {
-            if (_layoutStateCssClass != value)
-            {
-                _layoutStateCssClass = value;
-                ThemeSwitcherShown = false;
+    protected string ThemeName {
+        get { return _themeName; }
+        set {
+            if(_themeName != value) {
+                _themeName = value;
+                Themes.SetActiveThemeByName(value);
             }
         }
     }
 
-    async void ModalBackdropShownChanged(bool shown) {
-        if(!shown) {
-            await toggleButton.ToggleState(false);
+    protected override void OnInitialized() {
+        ThemeName = Themes.ActiveTheme.Name;
+        NavigationManager.LocationChanged += OnLocationChanged;
+    }
+    void TryRedirect(string url) {
+        if(Configuration.Redirect.TryGetValue(url.Substring(NavigationManager.BaseUri.Length), out var uri)) {
+            NavigationManager.NavigateTo(uri, true);
+        };
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        TryRedirect(NavigationManager.Uri);
+        if(firstRender) {
+            await ScrollToMainTopIfNeeded(NavigationManager.Uri);
+
+            var themeName = await pageHelper.InvokeAsync<string>("DemoPageHelper.cookie.getThemeName");
+            if(!string.IsNullOrEmpty(themeName))
+                ThemeName = themeName;
+            await pageHelper.InvokeVoidAsync("DemoPageHelper.demoMatchesQuery", "(min-width: 1200px)", DotNetObjectReference.Create(this));
+            await pageHelper.InvokeVoidAsync("DemoPageHelper.patchAppElement");
+        } else {
+            await pageHelper.InvokeVoidAsync("DemoPageHelper.cookie.setThemeName", ThemeName);
+            if(_isDesktop && SavedLayoutToggled != LayoutToggled)
+                await pageHelper.InvokeVoidAsync("DemoPageHelper.raiseWindowOnResize");
+        }
+        if(!ScrollToTargetLocked)
+            await ScrollToTargetIfNeeded(NavigationManager.Uri);
+        SavedLayoutToggled = LayoutToggled;
+        IsFirstTimeRendered = true;
+    }
+    protected override Task OnInitializedAsync() {
+        return base.OnInitializedAsync();
+    }
+    protected override bool ShouldRender() {
+        return base.ShouldRender();
+    }
+    async void OnLocationChanged(object sender, LocationChangedEventArgs args) {
+        TryRedirect(args.Location);
+        ThemeSwitcherShown = false;
+        if(!_isDesktop) {
+            LayoutToggled = false;
+        }
+        await ScrollToMainTopIfNeeded(args.Location);
+        await InvokeAsync(StateHasChanged);
+    }
+
+    [JSInvokable]
+    public async Task OnQueryChanged(bool isDesktop) {
+        if(_isDesktop != isDesktop) {
+            _isDesktop = isDesktop;
+            LayoutToggled = false;
             ThemeSwitcherShown = false;
+            await InvokeAsync(StateHasChanged);
         }
     }
 
-    bool ThemeSwitcherShown { get; set; }
+    bool LayoutToggled {
+        get { return _layoutToggled; }
+        set {
+            if(_layoutToggled != value) {
+                _layoutToggled = value;
+                if(!_isDesktop && _layoutToggled)
+                    ThemeSwitcherShown = false;
+            }
+        }
+    }
+    string LayoutStateCssClass { get { return IsFirstTimeRendered ? ((_isDesktop && LayoutToggled || !_isDesktop && !LayoutToggled) ? "sidebar-hidden" : "sidebar-shown") : ""; } }
+    bool SavedLayoutToggled { get; set; }
+    bool ModalBackgroundShown { get { return !_isDesktop && (ThemeSwitcherShown || LayoutToggled); } }
+    bool IsFirstTimeRendered { get; set; }
 
-    void ToggleThemeSwitcherPanel()
-    {
+    bool ThemeSwitcherShown {
+        get { return _themeSwitcherShown; }
+        set {
+            if(_themeSwitcherShown != value) {
+                _themeSwitcherShown = value;
+                if(!_isDesktop && _themeSwitcherShown)
+                    LayoutToggled = false;
+            }
+        }
+    }
+
+    void ToggleThemeSwitcherPanel() {
         ThemeSwitcherShown = !ThemeSwitcherShown;
     }
 
-    async Task ScrollToMainTopIfNeeded(string uri)
-    {
-        if (string.IsNullOrEmpty(NavigationManager.ToAbsoluteUri(uri).Fragment.Replace("#", "")))
-            await scrollHelperFuncLoader.InvokeVoidAsync("scrollToElementTop", mainRef);
+    void ModalBackdropShownChanged(bool shown) {
+        if(!shown) {
+            ThemeSwitcherShown = false;
+            LayoutToggled = false;
+        }
+    }
+
+
+    public string SearchString {
+        get { return _searchString; }
+        set {
+            if(_searchString != value) {
+                _searchString = value;
+                InvokeAsync(UpdateSearchResults);
+            }
+        }
+    }
+    public List<DemoSearchResult> SearchResults { get; set; }
+    async Task UpdateSearchResults() {
+        var searchResults = (SearchString != null && SearchString.Length > 2) ? Configuration.DoSearch(SearchString) : null;
+        if(SearchResults != searchResults) {
+            SearchResults = searchResults;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    bool HasAnchorInUrl(string uri) {
+        return !string.IsNullOrEmpty(NavigationManager.ToAbsoluteUri(uri).Fragment.Replace("#", ""));
+    }
+    async Task ScrollToMainTopIfNeeded(string uri) {
+        if(!HasAnchorInUrl(uri))
+            await pageHelper.InvokeVoidAsync("DemoPageHelper.scroll.toElementTop", contentContainerRef);
     }
 
     bool ScrollToTargetLocked { get; set; } = true;
-    async Task ScrollToTargetIfNeeded() {
-        await scrollHelperFuncLoader.InvokeVoidAsync("ensureNavigationTargetIsVisible");
+    async Task ScrollViewScriptLoaded() {
         ScrollToTargetLocked = false;
-        await InvokeAsync(StateHasChanged);
+        await ScrollToTargetIfNeeded(NavigationManager.Uri);
+    }
+    async Task ScrollToTargetIfNeeded(string uri) {
+        if(HasAnchorInUrl(uri))
+            await pageHelper.InvokeVoidAsync("DemoPageHelper.scroll.ensureNavigationTargetIsVisible");
     }
 
     public void Dispose() {

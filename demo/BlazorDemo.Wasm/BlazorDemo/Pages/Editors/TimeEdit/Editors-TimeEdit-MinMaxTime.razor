@@ -1,0 +1,23 @@
+﻿<DemoPageSectionComponent Id="Editors-TimeEdit-MinMaxTime" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxTimeEdit @bind-Time="@TimeValue"
+                    CssClass="cw-320"
+                    SizeMode="Params.SizeMode"
+                    MinTime="@MinTime"
+                    MaxTime="@MaxTime" />
+        <p class="demo-text cw-320 mt-2 text-muted">
+            Time: <b>@TimeValue.ToString(@"hh\:mm\:ss")</b>
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        TimeSpan TimeValue { get; set; } = DateTime.Now.TimeOfDay;
+        TimeSpan MinTime { get; set; }
+        TimeSpan MaxTime { get; set; }
+
+        protected override void OnInitialized() {
+            MinTime = new TimeSpan(TimeValue.Hours, 0, 0);
+            MaxTime = new TimeSpan(TimeValue.Hours, 59, 59);
+        }
+    }
+</DemoPageSectionComponent>

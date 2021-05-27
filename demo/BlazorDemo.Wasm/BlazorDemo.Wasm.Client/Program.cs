@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BlazorDemo.Configuration;
@@ -23,31 +24,40 @@ namespace BlazorDemo.Wasm {
 
             services.AddTransient<RemoteDataProviderLoader>();
 
-            services.AddSingleton<ICountryNamesProvider, CountryNamesProvider>();
-            services.AddSingleton<IFlatProductsProvider, FlatProductsProvider>();
+            services.AddSingleton<IProductsFlatProvider, ProductsFlatProvider>();
             services.AddSingleton<IProductCategoriesProvider, ProductCategoriesProvider>();
-            services.AddSingleton<IProductsProvider, ProductsProvider>();
             services.AddSingleton<ISalesInfoDataProvider, SalesInfoDataProvider>();
             services.AddSingleton<ISalesViewerDataProvider, SalesViewerDataProvider>();
             services.AddSingleton<IFinancialSeriesDataProvider, FinancialSeriesDataProvider>();
+            services.AddSingleton<ICurrencyExchangeDataProvider, UsdJpyDataProviderWasm>();
+            services.AddSingleton<INwindDataProvider, NwindDataProvider>();
+            services.AddSingleton<IIssuesDataProvider, IssuesDataProvider>();
+            services.AddSingleton<IWorldcitiesDataProvider, WorldcitiesDataProvider>();
+
             services.AddNotSupportedDemoServices();
 
-            var client = new HttpClient() {
-                BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
-            };
+            var client = new HttpClient() { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) };
+            builder.Services.AddScoped(sp => client);
 
-            builder.Services.AddTransient(sp => client);
-
-            using var response = await client.GetAsync("SeoConfiguration.json");
-            using var stream = await response.Content.ReadAsStreamAsync();
-
-            builder.Configuration.AddJsonStream(stream);
+            services.AddSingleton<IDemoVersion, DemoVersion>(x => {
+                var dxVersion = new Version(AssemblyInfo.Version);
+                return new DemoVersion(new Version(dxVersion.Major, dxVersion.Minor, dxVersion.Build).ToString());
+            });
+            services.AddSingleton<DemoConfiguration>();
+            services.AddScoped<IDemoThemesConfigurationCookieAccessor, DemoThemesConfigurationCookieAccessor>();
+            services.AddScoped<DemoThemesConfiguration>();
 
             builder.RootComponents.AddDocumentMetadata();
-            builder.RootComponents.Add<App>("app");
+            builder.RootComponents.Add<App>("#app");
 
 
             await builder.Build().RunAsync();
+        }
+    }
+
+    class DemoThemesConfigurationCookieAccessor : IDemoThemesConfigurationCookieAccessor {
+        public string GetCookie(string name) {
+            return null;
         }
     }
 }

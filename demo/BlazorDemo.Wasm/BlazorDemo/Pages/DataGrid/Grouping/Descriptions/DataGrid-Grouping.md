@@ -1,0 +1,7 @@
+Enable the Data Grid's [ShowGroupPanel](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.ShowGroupPanel) property to display the Group Panel. Users can drag and drop a column header onto the Group Panel to group data by this column. They can also drag headers within this panel to change the group order. To ungroup data by a column, users should drag the column header from the Group Panel back to the Column Header Panel.
+
+To prevent users from changing the group options in the entire component, disable the [DxDataGrid.AllowColumnDragDrop](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.AllowColumnDragDrop) property. To disable grouping by individual columns, use their [AllowGroup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.AllowGroup) property.
+
+To group grid data in code, set a column's [GroupIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.GroupIndex) property to a zero-based integer value. If you group data by multiple columns, this property specifies the group level. The lower the value, the higher a column's group level. To ungroup grid data, set the **GroupIndex** property to -1.
+
+Use the [ShowGroupedColumns](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.ShowGroupedColumns) property to specify whether to display grouped columns among other columns in the Data Grid.

@@ -1,0 +1,40 @@
+﻿<div class="demo-device-container @GetOrientation() w-100">
+    <div class="demo-device-orientation-selector">
+        <div>
+            <button type="button" class="btn btn-secondary d-inline-flex align-items-center vertical
+                        @GetButtonOrientationSelector(Orientation.Vertical)"
+                    @onclick="() => ChangeOrientation(Orientation.Vertical)">
+                <span class="mobile-view"></span>
+            </button>
+            <button type="button" class="btn btn-secondary d-inline-flex align-items-center horizontal
+                        @GetButtonOrientationSelector(Orientation.Horizontal)"
+                    @onclick="() => ChangeOrientation(Orientation.Horizontal)">
+                <span class="mobile-view-horizontal"></span>
+            </button>
+        </div>
+    </div>
+    <div class="demo-device border border-secondary">
+        <div class="demo-display border border-secondary">
+            @ChildContent
+        </div>
+    </div>
+</div>
+@code{
+    Orientation orientation;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    string GetOrientation() {
+        return orientation.ToString().ToLower();
+    }
+    void ChangeOrientation(Orientation orientation) {
+        if(this.orientation == orientation)
+            return;
+        this.orientation = orientation;
+        InvokeAsync(StateHasChanged);
+    }
+    string GetButtonOrientationSelector(Orientation orientation) {
+        return this.orientation == orientation ? "active" : string.Empty;
+    }
+}

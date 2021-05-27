@@ -1,0 +1,14 @@
+﻿<DemoPageSectionComponent Id="Editors-DateEdit-NullableDate" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxDateEdit @bind-Date="@DateTimeValue"
+                    NullText="Select a date..."
+                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                    SizeMode="Params.SizeMode"
+                    CssClass="cw-320">
+        </DxDateEdit>
+    </ChildContentWithParameters>
+
+    @code {
+        DateTime? DateTimeValue { get; set; } = DateTime.Now;
+    }
+</DemoPageSectionComponent>

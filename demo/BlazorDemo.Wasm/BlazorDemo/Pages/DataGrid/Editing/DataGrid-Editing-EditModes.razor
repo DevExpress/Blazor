@@ -1,0 +1,75 @@
+﻿<DemoPageSectionComponent Id="DataGrid-Editing-EditModes" ShowHorizontalScrollBar="true">
+    <ChildContent>
+        @inject NwindDataService NwindDataService
+
+        <DxDataGrid @ref="@grid"
+                    Data="@Data"
+                    RowRemovingAsync="@OnRowRemovingAsync"
+                    RowUpdatingAsync="@OnRowUpdatingAsync"
+                    RowInsertingAsync="@OnRowInsertingAsync"
+                    InitNewRow="@OnInitNewRowAsync"
+                    CssClass="w-100"
+                    PageSize="100"
+                    ShowPager="false"
+                    KeyFieldName="@nameof(Employee.EmployeeId)"
+                    EditMode="@CurrentEditMode">
+            <DxDataGridCommandColumn Width="100px" />
+            <DxDataGridColumn Field="@nameof(Employee.FirstName)" />
+            <DxDataGridColumn Field="@nameof(Employee.LastName)" />
+            <DxDataGridColumn Field="@nameof(Employee.Title)" />
+            <DxDataGridColumn Field="@nameof(Employee.TitleOfCourtesy)" />
+            <DxDataGridDateEditColumn Field="@nameof(Employee.BirthDate)" />
+            <DxDataGridDateEditColumn Field="@nameof(Employee.HireDate)" />
+        </DxDataGrid>
+    </ChildContent>
+    <OptionsContent>
+        <OptionComboBox Label="Edit Mode:" Data="@EditModes" @bind-Value="CurrentEditMode" />
+    </OptionsContent>
+
+    @code {
+        IEnumerable<Employee> Data { get; set; }
+        DxDataGrid<Employee> grid;
+
+        IEnumerable<DataGridEditMode> EditModes { get; } = Enum.GetValues(typeof(DataGridEditMode)).Cast<DataGridEditMode>();
+
+        DataGridEditMode currentEditMode = DataGridEditMode.EditForm;
+        DataGridEditMode CurrentEditMode {
+            get => currentEditMode;
+            set {
+                if(currentEditMode != value) {
+                    currentEditMode = value;
+                    CancelEdit();
+                }
+            }
+        }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetEmployeesAsync();
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender) {
+            if(firstRender) {
+                var editableSupplier = Data.FirstOrDefault();
+                await grid.StartRowEdit(editableSupplier);
+            }
+        }
+        Task OnRowRemovingAsync(Employee dataItem) {
+            return NwindDataService.RemoveEmployeeAsync(dataItem);
+        }
+        Task OnRowUpdatingAsync(Employee dataItem, IDictionary<string, object> newValues) {
+            return NwindDataService.UpdateEmployeeAsync(dataItem, newValues);
+        }
+        Task OnRowInsertingAsync(IDictionary<string, object> newValues) {
+            return NwindDataService.InsertEmployeeAsync(newValues);
+        }
+        async Task OnInitNewRowAsync(Dictionary<string, object> values) {
+            values.Add("FirstName", "First Name");
+            values.Add("LastName", "Last Name");
+            await Task.CompletedTask;
+        }
+        void CancelEdit() {
+            var cancelTask = Task.Run(async () => await grid.CancelRowEdit());
+            cancelTask.GetAwaiter().GetResult();
+        }
+    }
+</DemoPageSectionComponent>

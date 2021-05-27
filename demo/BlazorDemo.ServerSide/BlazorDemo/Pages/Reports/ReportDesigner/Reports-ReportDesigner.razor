@@ -1,0 +1,16 @@
+﻿@page "/ReportDesigner"
+@page "/ReportDesigner/{reportName}"
+<link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-reporting-pages.css">
+
+<DemoPageSectionComponent Id="Reports-ReportDesigner">
+    <DxReportDesigner ReportName=@ReportName Height="770px" CssClass="w-100"></DxReportDesigner>
+
+    @code {
+        [Parameter]
+        public string ReportName { get; set; }
+
+        protected override void OnInitialized() {
+            ReportName = ReportName ?? "InvoiceReport";
+        }
+    }
+</DemoPageSectionComponent>

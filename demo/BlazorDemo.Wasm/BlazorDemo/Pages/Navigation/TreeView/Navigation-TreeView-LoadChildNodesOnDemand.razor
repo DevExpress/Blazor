@@ -1,0 +1,26 @@
+﻿<DemoPageSectionComponent Id="Navigation-TreeView-LoadChildNodesOnDemand">
+    <DxTreeView @ref="@treeView"
+                CssClass="cw-480"
+                Data="@DataSource"
+                LoadChildNodesOnDemand="true"
+                HasChildrenExpression="@(dataItem => ((DateTimeGroup)dataItem).HasSubGroups)"
+                ChildrenExpression="@(dataItem => ((DateTimeGroup)dataItem).GetSubGroups())"
+                TextExpression="@(dataItem => ((DateTimeGroup)dataItem).Title)">
+    </DxTreeView>
+
+    @code {
+        DxTreeView treeView;
+
+        IEnumerable<DateTimeGroup> DataSource = new List<DateTimeGroup>() {
+            new DateTimeGroup(new DateTime(DateTime.Now.Year, 1, 1), DateTimeGroupType.Year)
+        };
+
+        protected override void OnAfterRender(bool firstRender) {
+            if(firstRender) {
+                var todayDate = DateTime.Now;
+                treeView.SetNodeExpanded(n => n.Text == todayDate.Year.ToString(), true);
+            }
+            base.OnAfterRender(firstRender);
+        }
+    }
+</DemoPageSectionComponent>

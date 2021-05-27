@@ -1,0 +1,39 @@
+﻿<DemoPageSectionComponent Id="Scheduler-ViewTypes-TimelineView">
+    <DxScheduler StartDate="@DateTime.Today"
+                 DataStorage="@DataStorage"
+                 ResourceNavigatorVisible="false"
+                 CssClass="w-100">
+        <DxSchedulerTimelineView Duration="@TimeSpan.FromHours(48)" CellMinWidth="80">
+            <Scales>
+                <DxSchedulerTimeScale Unit="@SchedulerTimeScaleUnit.Day" UnitCount="1"></DxSchedulerTimeScale>
+                <DxSchedulerTimeScale Unit="@SchedulerTimeScaleUnit.Hour" UnitCount="2"></DxSchedulerTimeScale>
+            </Scales>
+        </DxSchedulerTimelineView>
+    </DxScheduler>
+
+    @code {
+        DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
+            AppointmentsSource = ResourceAppointmentCollection.GetAppointments(),
+            AppointmentMappings = new DxSchedulerAppointmentMappings() {
+                Type = "AppointmentType",
+                Start = "StartDate",
+                End = "EndDate",
+                Subject = "Caption",
+                AllDay = "AllDay",
+                Location = "Location",
+                Description = "Description",
+                LabelId = "Label",
+                StatusId = "Status",
+                RecurrenceInfo = "Recurrence",
+                ResourceId = "ResourceId"
+            },
+            ResourcesSource = ResourceCollection.GetResourcesForGrouping(),
+            ResourceMappings = new DxSchedulerResourceMappings() {
+                Id = "Id",
+                Caption = "Name",
+                BackgroundCssClass = "BackgroundCss",
+                TextCssClass = "TextCss"
+            }
+        };
+    }
+</DemoPageSectionComponent>

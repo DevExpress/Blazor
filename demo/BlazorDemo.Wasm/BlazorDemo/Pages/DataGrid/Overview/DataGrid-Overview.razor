@@ -1,0 +1,23 @@
+﻿@page "/DataGrid"
+@layout DataProviderAccessArea<IIssuesDataProvider>
+
+<DemoPageSectionComponent Id="DataGrid-Overview" ShowCode="false">
+    @using BlazorDemo.Data.Issues
+
+    @if(SelectedIssue != null) {
+        <DataGrid_Overview_Details GotoListView="@ShowIssueList" SelectedIssue="@SelectedIssue" />
+    } else {
+        <DataGrid_Overview_List GotoDetailsView="@ShowIssueDetails" />
+    }
+
+    @code {
+        Issue SelectedIssue { get; set; }
+
+        void ShowIssueDetails(Issue issue) {
+            SelectedIssue = issue;
+        }
+        void ShowIssueList() {
+            SelectedIssue = null;
+        }
+    }
+</DemoPageSectionComponent>

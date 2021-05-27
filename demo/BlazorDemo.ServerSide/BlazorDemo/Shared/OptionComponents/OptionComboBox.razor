@@ -1,0 +1,33 @@
+﻿@typeparam T
+@typeparam TData
+<OptionComponent Id="@id"
+                 Label="@Label">
+    <DxComboBox CssClass="@CssClass"
+                Data="Data"
+                TValue="@T"
+                TData="@TData"
+                TextFieldName="@TextField"
+                ValueFieldName="@ValueField"
+                Value="@Value"
+                ValueChanged="OnValueChange"
+                InputId="@id" />
+</OptionComponent>
+
+@code {
+    readonly string id = Guid.NewGuid().ToString();
+
+    [Parameter] public string CssClass { get; set; }
+    [Parameter] public IEnumerable<TData> Data { get; set; }
+    [Parameter] public string Label { get; set; }
+    [Parameter] public T Value { get; set; }
+    [Parameter] public EventCallback<T> ValueChanged { get; set; }
+    [Parameter] public string ValueField { get; set; }
+    [Parameter] public string TextField { get; set; }
+    protected void OnValueChange(T newValue) {
+        if(!Equals(Value, newValue)) {
+            Value = newValue;
+            ValueChanged.InvokeAsync(newValue);
+        }
+    }
+
+}

@@ -1,0 +1,1 @@
+[Step Area](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartStepAreaSeries-3) displays data as a region between the argument axis and series values that are joined by horizontal and vertical line segments.

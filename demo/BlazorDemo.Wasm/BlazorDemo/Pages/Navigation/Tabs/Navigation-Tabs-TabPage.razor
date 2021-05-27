@@ -1,0 +1,32 @@
+﻿<DemoPageSectionComponent Id="Navigation-Tabs-TabPage">
+    @inject NwindDataService NwindDataService
+
+    @if(Employees == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <div class="w-100 ch-220">
+            <DxTabs>
+                @foreach(var employee in Employees) {
+                    <DxTabPage Text="@(employee.FirstName + ' ' +  employee.LastName)">
+                        <div class="media pt-2">
+                            <img src="@(StaticAssetUtils.GetImagePath($"Employees/{employee.FileName}.jpg"))" width="125" />
+                            <div class="media-body pl-3">
+                                <h5 class="mt-0">@employee.Title @employee.FirstName @employee.LastName</h5>
+                                <p><b>Birthday:</b> @employee.BirthDate.Value.ToShortDateString()</p>
+                                <p>@employee.Notes</p>
+                            </div>
+                        </div>
+                    </DxTabPage>
+                }
+            </DxTabs>
+        </div>
+    }
+
+    @code {
+        IEnumerable<Employee> Employees;
+
+        protected override async Task OnInitializedAsync() {
+            Employees = (await NwindDataService.GetEmployeesAsync()).Skip(5).Take(3);
+        }
+    }
+</DemoPageSectionComponent>

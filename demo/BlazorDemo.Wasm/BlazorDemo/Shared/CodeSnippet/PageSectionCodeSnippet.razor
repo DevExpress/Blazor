@@ -1,0 +1,26 @@
+﻿<DemoScriptLoader @ref=@highlightLoaderRef Src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js" />
+<DemoScriptLoader @ref=@cshtml Src="//cdn.jsdelivr.net/npm/highlightjs-cshtml-razor@2.0.1/cshtml-razor.js" />
+<DemoScriptLoader @ref=@initCshtmlLoaderRef Code="function registerHighlightLanguages() { hljs.registerLanguage('cshtml-razor', window.hljsDefineCshtmlRazor); }" />
+
+<code @ref=@codeBlockRef class="hljs @Language">@ChildContent</code>
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public string Language { get; set; } = "cshtml-razor";
+
+    ElementReference codeBlockRef;
+    DemoScriptLoader highlightLoaderRef;
+    DemoScriptLoader cshtml;
+    DemoScriptLoader initCshtmlLoaderRef;
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if(firstRender) {
+            try {
+                await Task.WhenAll(highlightLoaderRef.Loaded, cshtml.Loaded);
+                await initCshtmlLoaderRef.InvokeVoidAsync("registerHighlightLanguages");
+                await highlightLoaderRef.InvokeVoidAsync("hljs.highlightBlock", codeBlockRef);
+            } catch { }
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}

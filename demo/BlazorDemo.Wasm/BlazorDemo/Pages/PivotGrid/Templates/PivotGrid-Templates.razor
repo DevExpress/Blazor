@@ -1,0 +1,50 @@
+﻿@page "/PivotGridTemplates"
+
+<DemoPageSectionComponent Id="PivotGrid-Templates">
+    @inject ISalesInfoDataProvider SaleInfoDataProvider
+    @layout DataProviderAccessArea<ISalesInfoDataProvider>
+
+    @if(GridData == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <DxPivotGrid Data="@GridData"
+                     ShowGrandTotals="@ShowGrandTotals"
+                     ShowFieldHeaders="@ShowFieldHeaders"
+                     CssClass="w-100">
+            <DxPivotGridField Field="@nameof(SaleInfo.Region)" SortOrder="PivotGridSortOrder.Ascending" Area="PivotGridFieldArea.Row" />
+            <DxPivotGridField Field="@nameof(SaleInfo.Country)" Area="PivotGridFieldArea.Row" />
+            <DxPivotGridField Field="@nameof(SaleInfo.City)" Area="PivotGridFieldArea.Row" />
+            <DxPivotGridField Field="@nameof(SaleInfo.Date)" GroupInterval="PivotGridGroupInterval.Year" Area="PivotGridFieldArea.Column" Caption="Year" />
+            <DxPivotGridField Field="@nameof(SaleInfo.Date)" GroupInterval="PivotGridGroupInterval.Quarter" Area="PivotGridFieldArea.Column" Caption="Quarter">
+                <HeaderTemplate>
+                    @($"Q{context}")
+                </HeaderTemplate>
+            </DxPivotGridField>
+            <DxPivotGridField Field="@nameof(SaleInfo.Date)" GroupInterval="PivotGridGroupInterval.Month" Area="PivotGridFieldArea.Column" Caption="Month">
+                <HeaderTemplate>
+                    @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName((int)context)
+                </HeaderTemplate>
+            </DxPivotGridField>
+            <DxPivotGridField Field="@nameof(SaleInfo.Amount)" Area="PivotGridFieldArea.Data" SummaryType="PivotGridSummaryType.Sum">
+                <DataTemplate>
+                    <span class="@((decimal)context > 100000 ? "text-success" : "text-danger")">
+                        @string.Format("{0:c0}", context)
+                    </span>
+                </DataTemplate>
+            </DxPivotGridField>
+            <DxPivotGridField Field="@nameof(SaleInfo.OrderId)" Caption="Count" Area="PivotGridFieldArea.Data" SummaryType="PivotGridSummaryType.Count">
+                <DataTemplate>
+                    <span class="font-weight-bold">@context</span>
+                </DataTemplate>
+            </DxPivotGridField>
+        </DxPivotGrid>
+    }
+    @code {
+        IEnumerable<SaleInfo> GridData;
+        bool ShowGrandTotals = true, ShowFieldHeaders = true;
+
+        protected override async Task OnInitializedAsync() {
+            GridData = await SaleInfoDataProvider.GetSalesAsync();
+        }
+    }
+</DemoPageSectionComponent>

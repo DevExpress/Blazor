@@ -1,0 +1,35 @@
+﻿<DemoPageSectionComponent Id="Editors-DateEdit-DisabledDates" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxDateEdit @bind-Date="@DateTimeValue"
+                    SizeMode="Params.SizeMode"
+                    CssClass="cw-320"
+                    CustomDisabledDate="@OnCustomDisabledDate" />
+        <p class="demo-text cw-320 mt-2 text-muted">
+            Date: <b>@DateTimeValue.ToString("dddd, dd MMMM yyyy")</b>
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        DateTime DateTimeValue { get; set; } = DateTime.Today;
+
+        void OnCustomDisabledDate(CalendarCustomDisabledDateEventArgs args) {
+            args.IsDisabled = args.Date < DateTime.Today.AddDays(-20)
+                || GetDisabledDates().Exists(d => DaysEqual(d, args.Date));
+        }
+        bool DaysEqual(DateTime date1, DateTime date2) {
+            return (date1.Year == date2.Year && date1.DayOfYear == date2.DayOfYear);
+        }
+        List<DateTime> GetDisabledDates() {
+            DateTime baseDate = DateTime.Today;
+            return new List<DateTime>() {
+                baseDate.AddDays(-9),
+                baseDate.AddDays(-4),
+                baseDate.AddDays(-3),
+                baseDate.AddDays(3),
+                baseDate.AddDays(5),
+                baseDate.AddDays(6),
+                baseDate.AddDays(15)
+            };
+        }
+    }
+</DemoPageSectionComponent>

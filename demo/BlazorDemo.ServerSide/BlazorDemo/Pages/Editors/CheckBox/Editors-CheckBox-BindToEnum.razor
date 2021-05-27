@@ -1,0 +1,52 @@
+﻿<DemoPageSectionComponent Id="Editors-CheckBox-BindToEnum">
+    <div>
+        <DxCheckBox @bind-Checked="@Value"
+                    AllowIndeterminateStateByClick
+                    CssClass="mb-1"
+                    ValueChecked="@Opinion.Yes"
+                    ValueUnchecked="@Opinion.No"
+                    ValueIndeterminate="@Opinion.Abstain">
+            @GetText()
+        </DxCheckBox>
+
+        <DxCheckBox Checked="Opinion.Yes"
+                    Enabled="false"
+                    CssClass="mb-1"
+                    ValueChecked="@Opinion.Yes"
+                    ValueUnchecked="@Opinion.No"
+                    ValueIndeterminate="@Opinion.Abstain">
+            Disabled Checked
+        </DxCheckBox>
+
+        <DxCheckBox Checked="Opinion.No"
+                    Enabled="false"
+                    CssClass="mb-1"
+                    ValueChecked="@Opinion.Yes"
+                    ValueUnchecked="@Opinion.No"
+                    ValueIndeterminate="@Opinion.Abstain">
+            Disabled Unchecked
+        </DxCheckBox>
+
+        <DxCheckBox Checked="Opinion.Abstain"
+                    Enabled="false"
+                    CssClass="mb-1"
+                    ValueChecked="@Opinion.Yes"
+                    ValueUnchecked="@Opinion.No"
+                    ValueIndeterminate="@Opinion.Abstain">
+            Disabled Indeterminate
+        </DxCheckBox>
+    </div>
+
+    @code{
+        enum Opinion { Yes, No, Abstain }
+        Opinion Value = Opinion.Abstain;
+
+        string GetText() {
+            if (Value == Opinion.Yes)
+                return "Checked";
+            if (Value == Opinion.No)
+                return "Unchecked";
+            return "Indeterminate";
+        }
+    }
+</DemoPageSectionComponent>

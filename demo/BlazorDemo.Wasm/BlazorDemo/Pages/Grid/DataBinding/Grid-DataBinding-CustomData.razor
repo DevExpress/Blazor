@@ -1,0 +1,33 @@
+﻿<DemoPageSectionComponent Id="Grid-DataBinding-CustomData" ShowHorizontalScrollBar="true">
+    @inject NavigationManager NavigationManager
+    @inject HttpClient HttpClient
+
+    @if(Data == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <DxGrid Data="@Data" CssClass="w-100">
+            <Columns>
+                <DxGridColumn FieldName="ProductName" />
+                <DxGridColumn FieldName="QuantityPerUnit" />
+                <DxGridColumn FieldName="UnitPrice" DisplayFormat="c" Width="120px" />
+                <DxGridColumn FieldName="UnitsInStock" Width="120px" />
+                <DxGridColumn FieldName="Discontinued" Width="90px">
+                    <CellDisplayTemplate>
+                        @if((bool)context.Value == true) {
+                            <span class="grid-icon grid-icon-check"></span>
+                        }
+                    </CellDisplayTemplate>
+                </DxGridColumn>
+            </Columns>
+        </DxGrid>
+    }
+
+    @code {
+        object Data { get; set; }
+
+        protected override void OnInitialized() {
+            var uri = NavigationManager.ToAbsoluteUri("api/nwind/getproducts");
+            Data = new GridDevExtremeDataSource<BlazorDemo.Data.Northwind.Product>(HttpClient, uri);
+        }
+    }
+</DemoPageSectionComponent>

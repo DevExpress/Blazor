@@ -1,4 +1,4 @@
-#if NETCOREAPP3
+#if SERVER_BLAZOR
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,7 +14,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-[assembly:HostingStartup(typeof(ReportingHostingStartup))]
 namespace BlazorDemo.Reporting {
     class StartupFilter : IStartupFilter {
         public Action<IApplicationBuilder> Configure(Action<IApplicationBuilder> next) {
@@ -30,6 +29,7 @@ namespace BlazorDemo.Reporting {
 
                 app.UseSession();
                 app.UseDevExpressBlazorReporting();
+                app.UseDevExpressServerSideBlazorReportViewer();
                 DevExpress.DataAccess.DefaultConnectionStringProvider.AssignConnectionStrings(() => app.ApplicationServices.GetService<ReportingCustomConfigurationProvider>().GetGlobalConnectionStrings());
 
                 next(app);
@@ -37,20 +37,13 @@ namespace BlazorDemo.Reporting {
         }
     }
 
-    sealed class ReportingHostingStartup : IHostingStartup {
-        void IHostingStartup.Configure(IWebHostBuilder builder) {
-            builder.ConfigureAppConfiguration(((context, configurationBuilder) =>
-            {
-                var dictionary = new Dictionary<string, string>
-                {
-                    ["DataSourcesDir"] = Path.Combine(System.AppContext.BaseDirectory, "DataSources/")
-                };
-                configurationBuilder.AddInMemoryCollection(dictionary);
-            }));
+    public sealed class ReportingHostingStartup {
+        public static void Configure(IWebHostBuilder builder) {
             builder.ConfigureServices((webHostBuilderContext, services) => {
                 var configurationProvider = new ReportingCustomConfigurationProvider(webHostBuilderContext.HostingEnvironment, webHostBuilderContext.Configuration);
                 services.AddTransient<IStartupFilter, StartupFilter>();
                 services.AddSession();
+                services.AddDevExpressServerSideBlazorReportViewer();
                 services.AddDevExpressBlazorReporting();
                 services.AddSingleton<ReportingCustomConfigurationProvider, ReportingCustomConfigurationProvider>();
                 services.ConfigureReportingServices((builder) => {
@@ -65,7 +58,9 @@ namespace BlazorDemo.Reporting {
                 services.AddSingleton<IDemoReportSource, DemoReportSource>();
                 services.AddScoped<ReportStorageWebExtension, DemoReportStorageWebExtension>();
 
-                services.AddControllers(options => options.EnableEndpointRouting = false).AddDefaultReportingControllers();
+                services.AddControllers(options => options.EnableEndpointRouting = false)
+                .AddDefaultReportingControllers()
+                .AddDevExpressServerSideBlazorReportViewerControllers();
             });
 
         }

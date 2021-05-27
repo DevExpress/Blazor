@@ -1,0 +1,42 @@
+﻿<DemoPageSectionComponent Id="Editors-ComboBox-DropDownWidth" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <div class="d-flex flex-row cw-480">
+            <DxComboBox Data="@Data"
+                        TextFieldName="@nameof(Employee.FirstName)"
+                        @bind-Value="@SelectedEmployee"
+                        SizeMode="Params.SizeMode"
+                        CssClass="cw-240"
+                        DropDownWidthMode="DropDownWidthMode" />
+            <DxComboBox Data="@Data"
+                        TextFieldName="@nameof(Employee.Text)"
+                        @bind-Value="@SelectedEmployee1"
+                        SizeMode="Params.SizeMode"
+                        CssClass="cw-240 ml-2"
+                        DropDownWidthMode="DropDownWidthMode" />
+        </div>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionComboBox Label="Drop Down Width Mode:"
+                         Data="@(Enum.GetNames(typeof(DropDownWidthMode)))"
+                         Value="@(DropDownWidthMode.ToString())"
+                         ValueChanged="@((string selectedItem) => { DropDownWidthMode = Enum.Parse<DropDownWidthMode>(selectedItem); })" />
+    </OptionsContent>
+
+
+    @code {
+        IEnumerable<Employee> Data { get; set; }
+
+        Employee SelectedEmployee { get; set; }
+        Employee SelectedEmployee1 { get; set; }
+        DropDownWidthMode DropDownWidthMode { get; set; } = DropDownWidthMode.ContentOrEditorWidth;
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetEmployeesAsync();
+            SelectedEmployee = Data.FirstOrDefault();
+            SelectedEmployee1 = Data.FirstOrDefault();
+        }
+    }
+</DemoPageSectionComponent>

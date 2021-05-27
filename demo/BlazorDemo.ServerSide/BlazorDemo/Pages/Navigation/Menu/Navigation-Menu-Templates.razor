@@ -1,0 +1,77 @@
+﻿<DemoPageSectionComponent Id="Navigation-Menu-Templates">
+    <ChildContentWithParameters Context="Params">
+        <div class="card w-100">
+            <div class="card-body p-0">
+                <DxMenu Orientation="Orientation.Horizontal"
+                        DropDownActionMode="MenuDropDownActionMode.Click"
+                        DisplayMode="MenuDisplayMode.Desktop" @key="@Params.ThemeName"
+                        Title="DevExpress Logo"
+                        CollapseItemsToHamburgerMenu="true"
+                        CollapseItemToIconMode="MenuCollapseItemToIconMode.All">
+                    <TitleTemplate>
+                        <img class="menu-title-template-img" src="_content/BlazorDemo/images/Logo-Monochrome.svg" alt="@context" />
+                    </TitleTemplate>
+
+                    <Items>
+                        <DxMenuItem Text="Home" IconCssClass="menu-icon-home menu-icon">
+                            <Items>
+                                <DxMenuItem Text="News">
+                                    <Items>
+                                        <DxMenuItem Text="Explore our newest features" />
+                                        <DxMenuItem Text="Website news" />
+                                    </Items>
+                                </DxMenuItem>
+                                <DxMenuItem Text="Our Mission" />
+                                <DxMenuItem Text="Our Customers" />
+                            </Items>
+                        </DxMenuItem>
+                        <DxMenuItem Text="Components" IconCssClass="menu-icon-products menu-icon">
+                            <Items>
+                                <DxMenuItem Text="Blazor" />
+                                <DxMenuItem Text="ASP.NET MVC" />
+                                <DxMenuItem Text="ASP.NET Web Forms" />
+                                <DxMenuItem Text="ASP.NET Core" />
+                                <DxMenuItem Text="Bootstrap Web Forms" />
+                            </Items>
+                        </DxMenuItem>
+                        <DxMenuItem Text="Support" IconCssClass="menu-icon-support menu-icon">
+                            <Items>
+                                <DxMenuItem Text="Getting Started" />
+                                <DxMenuItem Text="Documentation" />
+                                <DxMenuItem Text="Support Center" />
+                                <DxMenuItem Text="Code Examples" />
+                                <DxMenuItem Text="Blogs" />
+                            </Items>
+                        </DxMenuItem>
+                        <DxMenuItem CssClass="search-menu-item" BeginGroup="true" Position="ItemPosition.End">
+                            <Template>
+                                <SearchItem />
+                            </Template>
+                        </DxMenuItem>
+                        <DxMenuItem CssClass="notoggle" Position="ItemPosition.End">
+                            <TextTemplate>
+                                <div class="menu-icon-user-profile menu-icon" />
+                            </TextTemplate>
+                            <SubMenuTemplate>
+                                <div class="w-100 user-profile">
+                                    <div class="flex-column align-items-center justify-content-center">
+                                        <div class="logo-container d-flex align-items-center justify-content-center">
+                                            <div class="menu-icon-user-profile menu-icon menu-icon-large" />
+                                        </div>
+                                        <div class="user-name-container bm-3 mb-2">
+                                            <div class="user-name-title text-muted text-center">User Name</div>
+                                            <div class="user-name text-center">John Heart</div>
+                                        </div>
+                                        <div class="d-flex justify-content-center log-off-btn">
+                                            <DxButton Text="Log Off" RenderStyle="@ButtonRenderStyle.Secondary"></DxButton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </SubMenuTemplate>
+                        </DxMenuItem>
+                    </Items>
+                </DxMenu>
+            </div>
+        </div>
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

@@ -1,0 +1,22 @@
+﻿<DemoPageSectionComponent Id="Editors-TagBox-NullText" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject WorldcitiesDataService WorldcitiesDataService
+
+        <DxTagBox NullText="Select countries..."
+                  Data="@Data"
+                  ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                  TextFieldName="@nameof(Country.CountryName)"
+                  @bind-Values="@SelectedCountries"
+                  SizeMode="Params.SizeMode"
+                  CssClass="cw-480" />
+    </ChildContentWithParameters>
+
+    @code {
+        IEnumerable<Country> Data { get; set; }
+        IEnumerable<Country> SelectedCountries { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await WorldcitiesDataService.GetCountriesAsync();
+        }
+    }
+</DemoPageSectionComponent>

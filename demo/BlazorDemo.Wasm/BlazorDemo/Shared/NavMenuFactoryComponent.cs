@@ -12,8 +12,8 @@ namespace BlazorDemo.Shared {
         public DemoConfiguration Configuration { get; set; }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder) {
-#if NETCOREAPP3
-            if (Configuration.ShowOnlyReporting) {
+#if SERVER_BLAZOR
+            if(Configuration.ShowOnlyReporting) {
                 builder.OpenComponent<NavMenuReporting>(0);
                 builder.CloseComponent();
             } else {

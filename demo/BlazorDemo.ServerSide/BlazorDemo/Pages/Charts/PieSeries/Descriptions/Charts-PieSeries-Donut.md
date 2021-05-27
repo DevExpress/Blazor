@@ -1,0 +1,1 @@
+This demo illustrates how to use [Donut](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartDonutSeries-3) series within the [Chart](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1) component. The Donut series displays data as a Pie series (see above) with a hole in the center.

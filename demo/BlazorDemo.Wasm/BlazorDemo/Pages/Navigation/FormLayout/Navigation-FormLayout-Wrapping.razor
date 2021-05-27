@@ -1,0 +1,42 @@
+﻿<DemoPageSectionComponent Id="Navigation-FormLayout-Wrapping" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxFormLayout ItemSizeMode="Params.SizeMode" @key="@Params.ThemeName" CssClass="w-100">
+            <DxFormLayoutItem Caption="Address:" ColSpanMd="12">
+                <Template>
+                    <DxTextBox @bind-Text="@Address" />
+                </Template>
+            </DxFormLayoutItem>
+
+            <DxFormLayoutItem Caption="City:">
+                <Template>
+                    <DxTextBox @bind-Text="@City" />
+                </Template>
+            </DxFormLayoutItem>
+
+            <DxFormLayoutItem Caption="Postal/ZIP Code:" BeginRow="true">
+                <Template>
+                    <DxTextBox @bind-Text="@ZipCode" />
+                </Template>
+            </DxFormLayoutItem>
+
+            <DxFormLayoutItem Caption="Country:" BeginRow="true">
+                <Template>
+                    <DxTextBox @bind-Text="@Country" />
+                </Template>
+            </DxFormLayoutItem>
+        </DxFormLayout>
+        <p class="demo-text w-100 mt-2 text-center text-muted">
+            @nameof(Address)=<b>@Address</b>,
+            @nameof(City)=<b>@City</b>,
+            @nameof(ZipCode)=<b>@ZipCode</b>,
+            @nameof(Country)=<b>@Country</b>
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        string Address { get; set; } = "120 Hanover Sq.";
+        string City { get; set; } = "London";
+        string ZipCode { get; set; } = "WA1 1DP";
+        string Country { get; set; } = "UK";
+    }
+</DemoPageSectionComponent>

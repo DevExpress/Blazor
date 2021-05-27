@@ -1,0 +1,44 @@
+﻿<DemoPageSectionComponent Id="Charts-SeriesCustomization-SeriesPointImage">
+    <ChildContentWithParameters Context="Params">
+        @inject WeatherForecastService ForecastService
+
+        <DxChart Data="@WeatherForecasts"
+                 @key="Params.ThemeName"
+                 CustomizeSeriesPoint="@PreparePointImage"
+                 CssClass="w-100">
+
+            <DxChartLineSeries SummaryMethod="@(i => (int)i.Average())"
+                               ValueField="@((WeatherForecast i) => i.TemperatureF)"
+                               ArgumentField="@(i => i.Date.Date)"
+                               Name="Temperature, F">
+                <DxChartSeriesPoint>
+                    <DxChartSeriesPointImage Width="50"
+                                             Height="50" />
+                </DxChartSeriesPoint>
+            </DxChartLineSeries>
+
+            <DxChartLegend Position="RelativePosition.Outside" />
+
+        </DxChart>
+    </ChildContentWithParameters>
+
+
+    @code {
+        WeatherForecast[] WeatherForecasts;
+
+        protected override async Task OnInitializedAsync() {
+            WeatherForecasts = await ForecastService.GetDetailedForecastAsync();
+        }
+
+        protected void PreparePointImage(ChartSeriesPointCustomizationSettings pointSettings) {
+            IEnumerable<WeatherForecast> dataItems = pointSettings.Point.DataItems
+                .Cast<WeatherForecast>();
+            var weatherType = dataItems.GroupBy(x => x.CloudCover)
+                .OrderByDescending(x => x.Count())
+                .First()
+                .Key;
+            pointSettings.PointAppearance.Image.Url =
+                StaticAssetUtils.GetImagePath($"{weatherType}.png");
+        }
+    }
+</DemoPageSectionComponent>

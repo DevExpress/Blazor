@@ -1,0 +1,34 @@
+﻿<DemoPageSectionComponent Id="DataGrid-ColumnChooser-ShowInColumnChooser" ShowHorizontalScrollBar="true">
+    @using System.Collections.Generic
+    @inject ProductsFlatService ProductsFlatService
+
+    <DxDataGrid DataAsync="@ProductsFlatService.LoadAsync" AllowColumnDragDrop="false"
+                RowRemovingAsync="@OnRowRemoving"
+                RowUpdatingAsync="@OnRowUpdating"
+                RowInsertingAsync="@OnRowInserting">
+        <HeaderTemplate>
+            <DxToolbar>
+                <DxDataGridColumnChooserToolbarItem Alignment="ToolbarItemAlignment.Right" />
+            </DxToolbar>
+        </HeaderTemplate>
+        <Columns>
+            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" ShowInColumnChooser="false" />
+            <DxDataGridComboBoxColumn Field="@nameof(ProductFlat.Category)" Data="@(new[] { "Bikes", "Components", "Clothing", "Accessories" })" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)" />
+            <DxDataGridCheckBoxColumn Field="@nameof(ProductFlat.Availability)" />
+            <DxDataGridCommandColumn ShowInColumnChooser="true" />
+        </Columns>
+    </DxDataGrid>
+
+    @code {
+        async Task OnRowRemoving(ProductFlat dataItem) {
+            await ProductsFlatService.RemoveAsync(dataItem);
+        }
+        async Task OnRowUpdating(ProductFlat dataItem, IDictionary<string, object> newValue) {
+            await ProductsFlatService.UpdateAsync(dataItem, newValue);
+        }
+        async Task OnRowInserting(IDictionary<string, object> newValue) {
+            await ProductsFlatService.AddAsync(newValue);
+        }
+    }
+</DemoPageSectionComponent>

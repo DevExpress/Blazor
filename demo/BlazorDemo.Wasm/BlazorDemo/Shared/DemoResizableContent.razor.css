@@ -1,0 +1,54 @@
+.demo-resizable-container {
+    width: 100%;
+    justify-self: flex-start
+}
+
+.demo-resizable-card {
+    position: relative !important;
+    display: block;
+    width: 100%;
+    justify-self: flex-start;
+}
+
+    .demo-resizable-card > .demo-resizable-content {
+        margin-right: 1rem;
+    }
+
+::deep .demo-img-resize {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: currentColor;
+    transform: translate(-50%, -50%);
+    -webkit-mask-image: url("images/Resize.svg");
+    mask-image: url("images/Resize.svg");
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    width: 6px;
+    height: 15px;
+}
+
+.demo-resize-handler {
+    position: absolute;
+    overflow: hidden;
+    width: 14px;
+    height: 100%;
+    cursor: w-resize;
+    border-radius: 3px;
+    right: 0;
+    top: 0;
+}
+
+@media (max-width: 400px) {
+    .demo-resizable-card {
+        min-width: 0px !important;
+    }
+
+    .demo-resize-handler {
+        display: none;
+    }
+
+    .demo-resizable-card > .demo-resizable-content {
+        margin-right: initial;
+    }
+}

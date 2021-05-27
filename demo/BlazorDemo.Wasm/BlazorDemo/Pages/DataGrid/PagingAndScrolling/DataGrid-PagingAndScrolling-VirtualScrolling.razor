@@ -1,0 +1,77 @@
+﻿<DemoPageSectionComponent Id="DataGrid-PagingAndScrolling-VirtualScrolling" ShowHorizontalScrollBar="true">
+    @inject ProductsFlatService ProductsFlatService
+
+    @if(DataSource == null || NestedDataSource == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <DxDataGrid Data="@DataSource"
+                    DataNavigationMode="DataGridNavigationMode.VirtualScrolling"
+                    RowRemoving="@((dataItem) => OnRowRemoving(dataItem))"
+                    RowUpdating="@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))"
+                    RowInserting="@((newValues) => OnRowInserting(newValues))">
+
+            <DxDataGridCommandColumn Width="150px" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.Id)" Caption="ID" Width="50px" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name" />
+
+            <DxDataGridColumn Field="@nameof(ProductFlat.ProductCategoryId)" Caption="Category">
+                <DisplayTemplate>
+                    @{
+                        var item = NestedDataSource.Where(x => x.SubcategoryID == (int)((context as ProductFlat).ProductCategoryId)).FirstOrDefault();
+                        string category = item != null ? item.Category.ToString() : "none";
+                        string subcategory = item != null ? item.Subcategory : "none";
+                        <span>@category/@subcategory</span>
+                    }
+                </DisplayTemplate>
+                <EditTemplate>
+                    <DxComboBox Data="@NestedDataSource"
+                                TextFieldName="CategorySubcategory"
+                                Value="@(NestedDataSource.Where(x => x.SubcategoryID == (int)((CellEditContext)context).CellValue).FirstOrDefault())"
+                                ValueChanged="@((ProductCategory newCellValue) => ((CellEditContext)context).OnChanged(newCellValue.SubcategoryID))">
+                    </DxComboBox>
+                </EditTemplate>
+            </DxDataGridColumn>
+            <DxDataGridColumn Field="@nameof(ProductFlat.Availability)" Caption="Availability" Width="100px">
+                <DisplayTemplate>
+                    @{
+                        var id = Guid.NewGuid().ToString();
+                        var inStock = (context as ProductFlat).Availability;
+                        <DxCheckBox Id="@id" Checked="@inStock" Enabled="false">
+                            @if(inStock) {
+                                <label class="form-check-label text-success" for="@id"><span>In stock</span></label>
+                            } else {
+                                <label class="form-check-label text-danger" for="@id"><span>Sold out</span></label>
+                            }
+                        </DxCheckBox>
+                    }
+                </DisplayTemplate>
+                <EditTemplate>
+                    <DxComboBox Data="@(new List<string>() { "In stock", "Sold out" })"
+                                Value="@(((bool)((CellEditContext)context).CellValue) ? "In stock" : "Sold out" )"
+                                ValueChanged="@((string newCellValue) => ((CellEditContext)context).OnChanged(newCellValue == "In stock"))">
+                    </DxComboBox>
+                </EditTemplate>
+            </DxDataGridColumn>
+        </DxDataGrid>
+    }
+
+    @code {
+        IEnumerable<ProductFlat> DataSource;
+        IEnumerable<ProductCategory> NestedDataSource;
+
+        protected override async Task OnInitializedAsync() {
+            DataSource = await ProductsFlatService.LoadAsync();
+            NestedDataSource = await ProductsFlatService.LoadCategoriesAsync();
+        }
+
+        void OnRowRemoving(ProductFlat dataItem) {
+            ProductsFlatService.RemoveAsync(dataItem);
+        }
+        void OnRowUpdating(ProductFlat dataItem, Dictionary<string, object> newValue) {
+            ProductsFlatService.UpdateAsync(dataItem, newValue);
+        }
+        void OnRowInserting(Dictionary<string, object> newValue) {
+            ProductsFlatService.AddAsync(newValue);
+        }
+    }
+</DemoPageSectionComponent>

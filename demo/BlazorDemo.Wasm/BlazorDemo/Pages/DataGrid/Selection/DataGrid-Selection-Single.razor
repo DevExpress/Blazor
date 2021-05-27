@@ -1,0 +1,35 @@
+﻿<DemoPageSectionComponent Id="DataGrid-Selection-Single" ShowHorizontalScrollBar="true">
+    @inject IProductsFlatProvider ProductsFlatService
+
+    @if(DataSource == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <DxDataGrid Data="@DataSource"
+                    @bind-SingleSelectedDataRow="@SelectedProduct">
+            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name"></DxDataGridColumn>
+            <DxDataGridColumn Field="@nameof(ProductFlat.Category)"></DxDataGridColumn>
+            <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)"></DxDataGridColumn>
+        </DxDataGrid>
+        <p class="demo-text w-100 mt-2 text-muted">Selected Product: <b>@(SelectedProduct == null ? "(none)" : SelectedProduct.ProductName)</b></p>
+    }
+
+    @code {
+        IEnumerable<ProductFlat> DataSource;
+
+        ProductFlat selectedProduct;
+        public ProductFlat SelectedProduct {
+            get {
+                return selectedProduct;
+            }
+            set {
+                selectedProduct = value;
+                InvokeAsync(StateHasChanged);
+            }
+        }
+
+        protected override async Task OnInitializedAsync() {
+            DataSource = await ProductsFlatService.LoadAsync();
+            SelectedProduct = DataSource.First();
+        }
+    }
+</DemoPageSectionComponent>

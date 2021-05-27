@@ -1,0 +1,17 @@
+﻿<div class="option-component @CssClass">
+    @if(!string.IsNullOrEmpty(Label)) {
+        <label class="col-form-label col-form-label-sm mr-2" @attributes="LabelAttributes()">@Label</label>
+    }
+    @ChildContent
+</div>
+@code {
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public string Id { get; set; }
+    [Parameter] public string CssClass { get; set; }
+    [Parameter] public string Label { get; set; }
+
+    IEnumerable<KeyValuePair<string, object>> LabelAttributes() {
+        if(!string.IsNullOrEmpty(Id))
+            yield return new KeyValuePair<string, object>("for", Id);
+    }
+}

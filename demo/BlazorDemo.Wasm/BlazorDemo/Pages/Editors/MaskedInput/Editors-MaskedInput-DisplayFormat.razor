@@ -1,0 +1,13 @@
+﻿<DemoPageSectionComponent Id="Editors-MaskedInput-DisplayFormat" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxMaskedInput @bind-Value="@DecimalValue"
+                       Mask="@DateTimeMask.ShortDate"
+                       DisplayFormat="@DateTimeMask.LongDate"
+                       SizeMode="Params.SizeMode"
+                       CssClass="cw-320" />
+    </ChildContentWithParameters>
+
+    @code {
+        DateTime DecimalValue { get; set; } = DateTime.Now;
+    }
+</DemoPageSectionComponent>

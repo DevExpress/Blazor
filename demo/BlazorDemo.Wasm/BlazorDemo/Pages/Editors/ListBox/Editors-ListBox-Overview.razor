@@ -1,0 +1,22 @@
+﻿<DemoPageSectionComponent Id="Editors-ListBox-Overview">
+    @inject NwindDataService NwindDataService
+
+    <DxListBox Data="@Data"
+               TextFieldName="@nameof(Employee.Text)"
+               @bind-Values="@Values"
+               CssClass="cw-400 chi-220">
+    </DxListBox>
+    <p class="demo-text cw-320 mt-2 text-muted">
+        Selected item: <b>@Values.FirstOrDefault().Text</b>
+    </p>
+
+    @code {
+        IEnumerable<Employee> Data { get; set; }
+        IEnumerable<Employee> Values { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetEmployeesAsync();
+            Values = Data.Take(2);
+        }
+    }
+</DemoPageSectionComponent>

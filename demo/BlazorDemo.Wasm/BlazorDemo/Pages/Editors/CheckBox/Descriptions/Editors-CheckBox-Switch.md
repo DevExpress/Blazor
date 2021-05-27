@@ -1,0 +1,1 @@
+To activate Switch mode in the [CheckBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1), set the [CheckType](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1.CheckType) property to **Switch**.

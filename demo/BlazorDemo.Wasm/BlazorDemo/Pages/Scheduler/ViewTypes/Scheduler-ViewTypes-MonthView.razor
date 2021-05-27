@@ -1,0 +1,25 @@
+﻿<DemoPageSectionComponent Id="Scheduler-ViewTypes-MonthView">
+    <DxScheduler StartDate="@DateTime.Today"
+                    DataStorage="@DataStorage"
+                    CssClass="w-100" ActiveViewType="SchedulerViewType.Month">
+        <DxSchedulerMonthView MonthCount="1" ShowWorkDaysOnly="false" CellMinWidth="120"></DxSchedulerMonthView>
+    </DxScheduler>
+
+    @code {
+        DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
+            AppointmentsSource = RecurringAppointmentCollection.GetAppointments(),
+            AppointmentMappings = new DxSchedulerAppointmentMappings() {
+                Type = "AppointmentType",
+                Start = "StartDate",
+                End = "EndDate",
+                Subject = "Caption",
+                AllDay = "AllDay",
+                Location = "Location",
+                Description = "Description",
+                LabelId = "Label",
+                StatusId = "Status",
+                RecurrenceInfo = "Recurrence"
+            }
+        };
+    }
+</DemoPageSectionComponent>

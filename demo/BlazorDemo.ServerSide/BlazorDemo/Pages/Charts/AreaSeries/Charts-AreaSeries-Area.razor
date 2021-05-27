@@ -1,0 +1,37 @@
+﻿<DemoPageSectionComponent Id="Charts-AreaSeries-Area">
+    <ChildContent>
+        @switch (AreaSeriesType)
+        {
+            case ChartSeriesType.Area:
+                <AreaChart />
+                break;
+            case ChartSeriesType.StackedArea:
+                <StackedAreaChart />
+                break;
+            case ChartSeriesType.FullStackedArea:
+                <FullStackedAreaChart />
+                break;
+
+        }
+    </ChildContent>
+
+    <OptionsContent>
+        <OptionComboBox Label="Series Type:"
+                        T="ChartSeriesType"
+                        TData="KeyValuePair<string, ChartSeriesType>"
+                        Data="@AreaSeriesTypes"
+                        ValueField="Value"
+                        TextField="Key"
+                        @bind-Value="@AreaSeriesType" />
+    </OptionsContent>
+
+    @code {
+        ChartSeriesType AreaSeriesType = AreaSeriesTypes.First().Value;
+        static readonly Dictionary<string,ChartSeriesType> AreaSeriesTypes = new Dictionary<string, ChartSeriesType>()
+        {
+            { "Area", ChartSeriesType.Area },
+            { "Stacked Area" , ChartSeriesType.StackedArea},
+            { "Full Stacked Area", ChartSeriesType.FullStackedArea}
+        };
+    }
+</DemoPageSectionComponent>

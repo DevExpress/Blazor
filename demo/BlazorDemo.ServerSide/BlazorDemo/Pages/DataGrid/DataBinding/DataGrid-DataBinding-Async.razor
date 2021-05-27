@@ -1,0 +1,13 @@
+﻿<DemoPageSectionComponent Id="DataGrid-DataBinding-Async" ShowHorizontalScrollBar="true">
+    @inject NwindDataService NwindDataService
+
+    <DxDataGrid DataAsync="@NwindDataService.GetSuppliersAsync" PageSize="5">
+        <DxDataGridColumn Field="CompanyName" />
+        <DxDataGridColumn Field="ContactName" />
+        <DxDataGridColumn Field="ContactTitle" />
+        <DxDataGridColumn Field="Country" />
+        <DxDataGridColumn Field="City" />
+        <DxDataGridColumn Field="Address" />
+        <DxDataGridColumn Field="Phone" />
+    </DxDataGrid>
+</DemoPageSectionComponent>

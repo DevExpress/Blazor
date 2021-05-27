@@ -1,7 +1,8 @@
 ﻿@using BlazorDemo.Configuration
 @inject DemoConfiguration Configuration
+@inject IDemoReportSource DemoReportSource
 <DxTreeView @ref="@treeView"
-            CssClass="app-sidebar"
+            CssClass="sidebar-tree"
             ExpandButtonIconCssClass="demo-icon-expand"
             CollapseButtonIconCssClass="demo-icon-collapse"
             AllowSelectNodes="true"
@@ -9,68 +10,22 @@
             BeforeExpand="@BeforeExpand"
             SelectionChanged="@SelectionChanged">
     <Nodes>
-        <DxTreeViewNode Text="Interaction">
+        <DxTreeViewNode Expanded="true" Text="Report Viewer (Native)">
             <Nodes>
-                <DxTreeViewNode Text="@ReportNames.DrillDown" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.DrillDownName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.EmployeePerformanceReview" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.EmployeePerformanceReviewName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.InteractiveSorting" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.InteractiveSortingName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.CharacterComb" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.CharacterCombName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.VehicleInspectionReport" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.VehicleInspectionReportName)"></DxTreeViewNode>
+                @foreach(KeyValuePair<string, string> report in DemoReportSource.GetReportViewerList()) {
+                    <DxTreeViewNode Text=@report.Value NavigateUrl="@ReportNames.GeneraterReportViewerUrl(report.Key)"></DxTreeViewNode>
+                }
+               
             </Nodes>
         </DxTreeViewNode>
-        <DxTreeViewNode Text="Report Types">
+        <DxTreeViewNode Text="Report Viewer (JavaScript based)">
             <Nodes>
-                <DxTreeViewNode Text="@ReportNames.HierarchicalReport" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.HierarchicalReportName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.TableReport" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.TableReportName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.MasterDetailReport" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.MasterDetailReportName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.Subreports" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.SubreportsName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.MultiColumn" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.MultiColumnName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.ProductLabels" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.ProductLabelsName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.ReportMerging" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.ReportMergingName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.ReportMergingWithPdf" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.ReportMergingWithPdfName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.SideBySideReports" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.SideBySideReportsName)"></DxTreeViewNode>
+                @foreach(KeyValuePair<string, string> report in DemoReportSource.GetReportList()) {
+                    <DxTreeViewNode Text=@report.Value NavigateUrl="@ReportNames.GenerateUrl(report.Key)"></DxTreeViewNode>
+                }
             </Nodes>
         </DxTreeViewNode>
-        <DxTreeViewNode Text="Data binding">
-            <Nodes>
-                <DxTreeViewNode Text="@ReportNames.PivotGridAndChart" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.PivotGridAndChartName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.CalculatedFields" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.CalculatedFieldsName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.LargeDataset" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.LargeDatasetName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.MailMerge" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.MailMergeName)"></DxTreeViewNode>
-            </Nodes>
-        </DxTreeViewNode>
-        <DxTreeViewNode Text="Real-life Reports">
-            <Nodes>
-                <DxTreeViewNode Text="@ReportNames.BalanceSheetReport" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.BalanceSheetReportName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.NorthwindTraders_Products" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.NorthwindTraders_ProductsName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.NorthwindTraders_Catalog" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.NorthwindTraders_CatalogName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.NorthwindTraders_Invoice" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.NorthwindTraders_InvoiceName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.SwissQRBill" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.SwissQRBillName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.ProfitAndLoss" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.ProfitAndLossName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.RollPaper" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.RollPaperName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.RestaurantMenu" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.RestaurantMenuName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.SalesSummary" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.SalesSummaryName)"></DxTreeViewNode>
-            </Nodes>
-        </DxTreeViewNode>
-        <DxTreeViewNode Text="Layout Features">
-            <Nodes>
-                <DxTreeViewNode Text="@ReportNames.CrossBandContent" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.CrossBandContentName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.ShrinkGrow" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.ShrinkGrowName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.Anchor" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.AnchorName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.HiddenColumns" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.HiddenColumnsName)"></DxTreeViewNode>
-            </Nodes>
-        </DxTreeViewNode>
-        <DxTreeViewNode Text="Report Controls">
-            <Nodes>
-                <DxTreeViewNode Text="@ReportNames.Sparkline" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.SparklineName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.BarCodes_BarcodeTypes" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.BarCodes_BarcodeTypesName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.PdfSignature" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.PdfSignatureName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.Shape" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.ShapeName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.Chart" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.ChartName)"></DxTreeViewNode>
-                <DxTreeViewNode Text="@ReportNames.CrossBands" NavigateUrl="@ReportNames.GenerateUrl(ReportNames.CrossBandsName)"></DxTreeViewNode>
-            </Nodes>
-        </DxTreeViewNode>
-        <DxTreeViewNode Text="Report Designer" NavigateUrl="ReportDesigner">
+        <DxTreeViewNode Text="Report Designer (JavaScript based)" NavigateUrl="ReportDesigner">
         </DxTreeViewNode>
     </Nodes>
 </DxTreeView>
@@ -79,28 +34,27 @@
     DxTreeView treeView;
 
     protected void SelectionChanged(TreeViewNodeEventArgs e) {
-        if (e.NodeInfo.IsLeaf) {
+        if(e.NodeInfo.IsLeaf) {
             var parentInfo = e.NodeInfo.Parent;
-            if (parentInfo != null) {
+            if(parentInfo != null) {
                 var parentSiblingNodesInfo = treeView.GetNodesInfo(n => !n.IsLeaf && n.Level == parentInfo.Level && !string.Equals(n.Text, parentInfo.Text));
-                foreach (var nodeInfo in parentSiblingNodesInfo)
+                foreach(var nodeInfo in parentSiblingNodesInfo)
                     treeView.SetNodeExpanded(n => string.Equals(n.Text, nodeInfo.Text), false);
-            }
-            else
+            } else
                 treeView.CollapseAll();
         }
     }
 
     protected void BeforeExpand(TreeViewNodeCancelEventArgs e) {
-        if (!e.CausedByAPI)
+        if(!e.CausedByAPI)
             treeView.CollapseAll();
     }
 
-     bool IsDebug() {
+    bool IsDebug() {
 #if DEBUG
-            return true;
+        return true;
 #else
-            return false;
+    return false;
 #endif
     }
 

@@ -1,0 +1,16 @@
+﻿<DemoPageSectionComponent Id="Navigation-Popup-Overview">
+    <div class="target-container" @onclick="@(() => PopupVisible = true)">
+        <p class="target-caption">CLICK TO SHOW A POP-UP WINDOW</p>
+    </div>
+
+    <DxPopup
+        HeaderText="Header"
+        @bind-Visible="@PopupVisible"
+        BodyText="@Constants.Content">
+    </DxPopup>
+
+    @code {
+        bool PopupVisible { get; set; } = false;
+    }
+
+</DemoPageSectionComponent>

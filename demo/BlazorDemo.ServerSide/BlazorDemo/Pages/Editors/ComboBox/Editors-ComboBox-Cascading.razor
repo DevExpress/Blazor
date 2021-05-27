@@ -1,0 +1,41 @@
+﻿<DemoPageSectionComponent Id="Editors-ComboBox-Cascading" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject WorldcitiesDataService WorldcitiesDataService
+
+        <div class="d-flex flex-row cw-480">
+            <DxComboBox Data="@Countries"
+                        TextFieldName="@nameof(Country.CountryName)"
+                        Value="@CurrentCountry"
+                        ValueChanged="@((Country country) => SelectedCountryChanged(country))"
+                        SizeMode="Params.SizeMode"
+                        CssClass="cw-240" />
+            <DxComboBox Data="@CurrentCountryCities"
+                        TextFieldName="@nameof(City.CityName)"
+                        @bind-Value="@CurrentCity"
+                        SizeMode="Params.SizeMode"
+                        CssClass="cw-240 ml-1" />
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        IEnumerable<Country> Countries { get; set; }
+        IEnumerable<City> Cities { get; set; }
+        IEnumerable<City> CurrentCountryCities { get; set; }
+        Country CurrentCountry { get; set; }
+        City CurrentCity { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Countries = await WorldcitiesDataService.GetCountriesAsync();
+            Cities = await WorldcitiesDataService.GetCitiesAsync();
+            CurrentCountry = Countries.Where(c => c.CountryName == "USA").FirstOrDefault();
+            CurrentCountryCities = Cities.Where(c => c.CountryId == CurrentCountry.CountryId);
+            CurrentCity = CurrentCountryCities.FirstOrDefault();
+        }
+
+        void SelectedCountryChanged(Country country) {
+            CurrentCountry = country;
+            CurrentCountryCities = Cities.Where(c => c.CountryId == CurrentCountry.CountryId);
+            CurrentCity = CurrentCountryCities.FirstOrDefault();
+        }
+    }
+</DemoPageSectionComponent>

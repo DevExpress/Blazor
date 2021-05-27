@@ -1,0 +1,26 @@
+﻿@typeparam T
+<OptionComponent Id="@id" Label="@Label">
+    <DxSpinEdit CssClass="@CssClass"
+                T="@T"
+                Value="@Value"
+                MinValue="MinValue"
+                MaxValue="MaxValue"
+                InputId="@id"
+                ValueChanged="OnValueChange"></DxSpinEdit>
+</OptionComponent>
+@code {
+    readonly string id = Guid.NewGuid().ToString();
+    [Parameter] public string CssClass { get; set; }
+    [Parameter] public string Label { get; set; }
+    [Parameter] public T Value { get; set; }
+    [Parameter] public EventCallback<T> ValueChanged { get; set; }
+    [Parameter] public T MinValue { get; set; }
+    [Parameter] public T MaxValue { get; set; }
+    protected void OnValueChange(T newValue) {
+        if(!Equals(Value, newValue)) {
+            Value = newValue;
+            ValueChanged.InvokeAsync(newValue);
+        }
+    }
+
+}

@@ -1,0 +1,4 @@
+To enable multiple selection in the [List Box](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2), set the [SelectionMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.SelectionMode) property to [ListBoxSelectionMode.Multiple](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.SelectionMode).
+
+*   If the [ShowCheckboxes](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.ShowCheckboxes) option is enabled, users can click individual items and corresponding checkboxes or hold **Shift** to select a range of items.
+*   If the [ShowCheckboxes](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.ShowCheckboxes) option is disabled, users can press **Ctrl** to select individual items or hold **Shift** to select a range of items.

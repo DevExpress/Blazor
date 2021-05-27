@@ -1,0 +1,44 @@
+﻿<DemoPageSectionComponent Id="Navigation-Toolbar-RenderStyle">
+    <ChildContentWithParameters Context="Params">
+        <div class="card w-100">
+            <div class="card-body">
+                <DxToolbar ItemRenderStyleMode="@SelectedRenderMode" ItemSizeMode="@SizeMode" @key="@Params.ThemeName">
+                    <Items>
+                        <DxToolbarItem Text="Info"
+                                       RenderStyle="ButtonRenderStyle.Info" />
+                        <DxToolbarItem Text="Success"
+                                       RenderStyle="ButtonRenderStyle.Success" />
+                        <DxToolbarItem Text="Danger"
+                                       RenderStyle="ButtonRenderStyle.Danger" 
+                                       IconCssClass="tb-icon tb-icon-alert" BeginGroup="true"/>
+                        <DxToolbarItem Text="Auto" IconCssClass="tb-icon tb-icon-alert" />
+                        <DxToolbarItem Text="Warning" 
+                                       RenderStyle="ButtonRenderStyle.Warning"
+                                       IconCssClass="tb-icon tb-icon-alert"/>
+                    </Items>
+                </DxToolbar>
+            </div>
+        </div>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionComboBox Label="Render Style Mode:"
+                        Data="@(Enum.GetNames(typeof(ToolbarRenderStyleMode)))"
+                        Value="@(SelectedRenderMode.ToString())"
+                        ValueChanged="@((string selectedItem) => { SelectedRenderMode = Enum.Parse<ToolbarRenderStyleMode>(selectedItem); })" />
+        <OptionComboBox Label="Size Mode:"
+                        Data="@(Enum.GetNames(typeof(SizeMode)))"
+                        Value="@SizeMode.ToString()"
+                        ValueChanged="@((string selectedItem) => { SizeMode = Enum.Parse<SizeMode>(selectedItem); })"/>
+    </OptionsContent>
+
+    @code{
+        ToolbarRenderStyleMode SelectedRenderMode { get; set; }
+        SizeMode SizeMode { get; set; }
+
+        protected override void OnInitialized() {
+            base.OnInitialized();
+            SelectedRenderMode = ToolbarRenderStyleMode.Contained;
+            SizeMode = SizeMode.Small;
+        }
+    }
+</DemoPageSectionComponent>

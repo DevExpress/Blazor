@@ -1,0 +1,12 @@
+﻿<OptionComponent Id="@id" Label=" " CssClass="option-component-button">
+    <div><DxButton CssClass="@CssClass" Text="@Text" Click="@OnClick" /></div>
+</OptionComponent>
+
+@code {
+    readonly string id = Guid.NewGuid().ToString();
+
+    [Parameter] public string CssClass { get; set; }
+    [Parameter] public string Label { get; set; }
+    [Parameter] public string Text { get; set; }
+    [Parameter] public EventCallback OnClick { get; set; }
+}

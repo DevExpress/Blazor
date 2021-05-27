@@ -1,5 +1,9 @@
-﻿@using System.Net.Http
-@using System
+﻿@using System
+@using System.ComponentModel.DataAnnotations
+@using System.Globalization
+@using System.Linq
+@using System.Net.Http
+
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Routing
@@ -10,14 +14,16 @@
 @using BlazorDemo.Configuration
 @using BlazorDemo.DataProviders
 @using BlazorDemo.Data
+@using BlazorDemo.Data.Worldcities
+@using BlazorDemo.Data.Northwind
 @using BlazorDemo.Services
 @using BlazorDemo.Reports
 @using BlazorDemo.Shared
-@using BlazorDemo.Shared.CodeSnippets
+@using BlazorDemo.Shared.CodeSnippet
 @using BlazorDemo.Shared.PageNavigation
-@using BlazorDemo.Pages.CodeSnippets
-@using BlazorDemo.Pages.CodeSnippets.Charts
-@using BlazorDemo.Pages.CaseViews
+@using BlazorDemo.Shared.ThemeSwitcher
+@using BlazorDemo.Shared.OptionComponents
+@using BlazorDemo.Pages
 
 
 @using DevExpress.Blazor
@@ -25,3 +31,4 @@
 @using DevExpress.Blazor.Reporting;
 @using DevExpress.XtraReports.Web;
 @using DevExpress.XtraReports.Web.WebDocumentViewer;
+@using DevExpress.Blazor.RichEdit

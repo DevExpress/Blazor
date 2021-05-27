@@ -1,0 +1,51 @@
+﻿<DemoPageSectionComponent Id="DataGrid-PagingAndScrolling-FixedColumns">
+    @inject IProductsFlatProvider ProductsFlatService
+
+    @if(DataSource == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <DxDataGrid Data="@DataSource"
+                    HorizontalScrollBarMode="ScrollBarMode.Visible"
+                    PagerNavigationMode="PagerNavigationMode.NumericButtons"
+                    RowRemovingAsync="@OnRowRemoving"
+                    RowUpdatingAsync="@OnRowUpdating">
+
+            <DxDataGridCommandColumn NewButtonVisible="false" Width="120px" FixedStyle="DataGridFixedStyle.Left" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name"  FixedStyle="DataGridFixedStyle.Left" Width="300px" />
+            <DxDataGridCheckBoxColumn Field="@nameof(ProductFlat.Availability)" Caption="Availability" Width="120px"  FixedStyle="DataGridFixedStyle.Left">
+                <DisplayTemplate>
+                    @{
+                        var id = Guid.NewGuid().ToString();
+                        var inStock = (context as ProductFlat).Availability;
+                        <DxCheckBox Id="@id" Checked="@inStock" Enabled="false">
+                            @if(inStock) {
+                                <label class="form-check-label text-success" for="@id"><span>In stock</span></label>
+                            } else {
+                                <label class="form-check-label text-danger" for="@id"><span>Sold out</span></label>
+                            }
+                        </DxCheckBox>
+                    }
+                </DisplayTemplate>
+            </DxDataGridCheckBoxColumn>
+
+            <DxDataGridColumn Field="@nameof(ProductFlat.Category)" Caption="Category" Width="250px" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)" Caption="Subcategory" Width="250px" />
+            <DxDataGridDateEditColumn Field="@nameof(ProductFlat.LastUpdated)" Caption="Last Updated" Width="250px" />
+
+        </DxDataGrid>
+    }
+
+    @code {
+        IEnumerable<ProductFlat> DataSource;
+
+        protected override async Task OnInitializedAsync() {
+            DataSource = await ProductsFlatService.LoadAsync();
+        }
+        Task OnRowRemoving(ProductFlat dataItem) {
+            return ProductsFlatService.Remove(dataItem);
+        }
+        Task OnRowUpdating(ProductFlat dataItem, IDictionary<string, object> newValue) {
+            return ProductsFlatService.Update(dataItem, newValue);
+        }
+    }
+</DemoPageSectionComponent>

@@ -1,0 +1,27 @@
+﻿@inject DemoConfiguration Configuration
+
+<div class="search-editor bg-light text-dark">
+    <DxTextBox NullText="Search" Text="@SearchString" BindValueMode="BindValueMode.OnInput" TextChanged="@TextChanged" InputId="txtSearch" />
+    <span class="icon icon-cancel-search @ClearButtonCssClass" @onclick="@ClearClick"></span>
+    <label for="txtSearch" class="icon icon-search"></label>
+</div>
+
+@code {
+    [Parameter]
+    public string SearchString { get; set; }
+    [Parameter]
+    public EventCallback<string> SearchStringChanged { get; set; }
+
+    public string ClearButtonCssClass { get { return string.IsNullOrEmpty(SearchString) ? "d-none" : ""; } }
+
+    async Task ClearClick() {
+        SearchString = null;
+        await SearchStringChanged.InvokeAsync(SearchString);
+    }
+    async Task TextChanged(string text) {
+        if(SearchString != text) {
+            SearchString = text;
+            await SearchStringChanged.InvokeAsync(SearchString);
+        }
+    }
+}

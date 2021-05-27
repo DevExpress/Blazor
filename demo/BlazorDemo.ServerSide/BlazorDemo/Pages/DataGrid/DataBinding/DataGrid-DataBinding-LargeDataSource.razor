@@ -1,0 +1,28 @@
+﻿<DemoPageSectionComponent Id="DataGrid-DataBinding-LargeDataSource" ShowHorizontalScrollBar="true">
+    @inject RentInfoDataService RentInfoDataService
+    @inject IRentInfoDataProvider RentInfoDataProvider
+
+    <DataProviderAccessAreaContainer DataProvider="@RentInfoDataProvider">
+        <DxDataGrid DataAsync="@RentInfoDataService.GetQueryableAreaRentInfo"
+                    PageSize="10"
+                    ShowFilterRow="true"
+                    KeyFieldName="Oid">
+            <DxDataGridColumn Field="@nameof(AreaRentInfo.State)"></DxDataGridColumn>
+            <DxDataGridColumn Field="@nameof(AreaRentInfo.Area)"></DxDataGridColumn>
+            <DxDataGridColumn Field="@nameof(AreaRentInfo.City)" Caption="County"></DxDataGridColumn>
+            <DxDataGridColumn Field="@nameof(AreaRentInfo.Name)" Caption="Location"></DxDataGridColumn>
+            <DxDataGridSpinEditColumn Field="@nameof(AreaRentInfo.Year)"></DxDataGridSpinEditColumn>
+            <DxDataGridSpinEditColumn Field="@nameof(AreaRentInfo.Bedrooms)"></DxDataGridSpinEditColumn>
+            <DxDataGridSpinEditColumn Field="@nameof(AreaRentInfo.Rent)">
+                <DisplayTemplate>
+                    @(((context as AreaRentInfo).Rent).ToString("C2"))
+                </DisplayTemplate>
+            </DxDataGridSpinEditColumn>
+            <DxDataGridSpinEditColumn Field="@nameof(AreaRentInfo.Population)">
+                <DisplayTemplate>
+                    @(((context as AreaRentInfo).Population).ToString("#,0"))
+                </DisplayTemplate>
+            </DxDataGridSpinEditColumn>
+        </DxDataGrid>
+    </DataProviderAccessAreaContainer>
+</DemoPageSectionComponent>

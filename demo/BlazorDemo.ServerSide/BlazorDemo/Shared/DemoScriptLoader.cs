@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using BlazorDemo.Services;
+using BlazorDemo.Configuration;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.JSInterop;
@@ -10,7 +10,7 @@ namespace BlazorDemo.Shared {
         [Parameter] public string Src { get; set; }
         [Parameter] public string Code { get; set; }
         public Task Loaded => _scriptTcs.Task;
-        [Inject] DemoService DemoService { get; set; }
+        [Inject] DemoThemesConfiguration Themes { get; set; }
         [Inject] IJSRuntime JSRuntime { get; set; }
 
         bool _canLoadScript, _jsAttached, _isInlinedMethod;
@@ -28,7 +28,7 @@ namespace BlazorDemo.Shared {
 
         protected override void OnInitialized() {
             _isInlinedMethod = string.IsNullOrEmpty(Src) && !string.IsNullOrEmpty(Code);
-            _scriptTcs = DemoService.ResourcesReadyState.GetOrAdd(_isInlinedMethod ? Code : Src, CreateScriptReadyTcs);
+            _scriptTcs = Themes.ResourcesReadyState.GetOrAdd(_isInlinedMethod ? Code : Src, CreateScriptReadyTcs);
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder) {

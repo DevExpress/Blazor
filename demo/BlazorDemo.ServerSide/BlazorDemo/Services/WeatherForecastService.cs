@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BlazorDemo.Data;
 
 namespace BlazorDemo.Services {
-    public class WeatherForecastService {
+    public partial class WeatherForecastService {
         Tuple<int, int>[] temperatureStatistic = new Tuple<int, int>[] {
             Tuple.Create(-15, -1),
             Tuple.Create(-12, -2),
@@ -63,85 +63,27 @@ namespace BlazorDemo.Services {
                 };
             }).ToList();
         }
-        private List<WeatherForecast> CreateDetailedForecast() {
-            var rng = RandomWrapperFactory.Create();
-            DateTime startDate = DateTime.Now.Date;
-            return Enumerable.Range(1, 15).SelectMany(day => {
-                var dayDate = startDate.AddDays(day);
-                int avgTemp = rng.Next(-20, 55);
-                int minTemp = Math.Max(-20, avgTemp - 10);
-                int maxTemp = Math.Min(55, avgTemp + 10);
-                return Enumerable.Range(0, 24).Select(hour => new WeatherForecast {
-                    Date = dayDate.AddHours(hour),
-                    TemperatureC = rng.Next(minTemp, maxTemp),
-                    Forecast = ConditionsForForecast[rng.Next(ConditionsForForecast.Length)].Item2,
-                    CloudCover = CloudCover[rng.Next(CloudCover.Length)],
-                    Precipitation = rng.Next(100) < 30
-                });
-            }).ToList();
+
+        private List<WeatherForecast> _forecasts;
+        protected List<WeatherForecast> Forecasts {
+            get {
+                if(_forecasts == null)
+                    _forecasts = CreateForecast();
+                return _forecasts;
+            }
         }
 
-        private List<WeatherForecast> Forecasts { get; set; }
-        private List<WeatherForecast> DetailedForecast { get; set; }
-        public WeatherForecastService() {
-            Forecasts = CreateForecast();
-            DetailedForecast = CreateDetailedForecast();
-        }
         public Task<IEnumerable<WeatherForecast>> GetForecastAsync(CancellationToken ct = default) {
             return Task.FromResult(Forecasts.AsEnumerable());
         }
         public IEnumerable<WeatherForecast> GetForecast() {
             return Forecasts;
         }
-        public Task<WeatherForecast[]> GetDetailedForecastAsync(CancellationToken ct = default) {
-            return Task.FromResult(DetailedForecast.ToArray());
-        }
         public Task<string[]> GetSummariesAsync(CancellationToken ct = default) {
             return Task.FromResult(ConditionsForForecast.Select(v => v.Item2).ToArray());
         }
         public Task<IEnumerable<string>> GetCloudCoverAsync(CancellationToken ct = default) {
             return Task.FromResult(CloudCover.AsEnumerable());
-        }
-        WeatherForecast[] InsertInternal(IDictionary<string, object> newValue) {
-            var dataItem = new WeatherForecast();
-            Update(dataItem, newValue);
-            Forecasts.Insert(0, dataItem);
-            return Forecasts.ToArray();
-        }
-        public Task<WeatherForecast[]> Insert(IDictionary<string, object> newValue) {
-            return Task.FromResult(InsertInternal(newValue));
-        }
-        WeatherForecast[] RemoveInternal(WeatherForecast dataItem) {
-            Forecasts.Remove(dataItem);
-            return Forecasts.ToArray();
-        }
-        public Task<WeatherForecast[]> Remove(WeatherForecast dataItem) {
-            return Task.FromResult(RemoveInternal(dataItem));
-        }
-        WeatherForecast[] UpdateInternal(WeatherForecast dataItem, IDictionary<string, object> newValue) {
-            foreach(var field in newValue.Keys) {
-                switch(field) {
-                    case nameof(dataItem.Date):
-                        dataItem.Date = (DateTime)newValue[field];
-                        break;
-                    case nameof(dataItem.Forecast):
-                        dataItem.Forecast = (string)newValue[field];
-                        break;
-                    case nameof(dataItem.TemperatureC):
-                        dataItem.TemperatureC = (int)newValue[field];
-                        break;
-                    case nameof(dataItem.Precipitation):
-                        dataItem.Precipitation = (bool)newValue[field];
-                        break;
-                    case nameof(dataItem.CloudCover):
-                        dataItem.CloudCover = (string)newValue[field];
-                        break;
-                }
-            }
-            return Forecasts.ToArray();
-        }
-        public Task<WeatherForecast[]> Update(WeatherForecast dataItem, IDictionary<string, object> newValue) {
-            return Task.FromResult(UpdateInternal(dataItem, newValue));
         }
     }
 }

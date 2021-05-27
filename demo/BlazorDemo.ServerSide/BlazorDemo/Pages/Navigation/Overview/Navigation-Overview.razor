@@ -1,0 +1,180 @@
+﻿@page "/Navigation"
+
+<DemoPageSectionComponent Id="Navigation-Overview" ShowCode="false">
+    <div class="overview-navigation card cw-880">
+        <div class="card-body p-0 border-light border-bottom">
+            <DxMenu Orientation="Orientation.Horizontal"
+                    DropDownActionMode="MenuDropDownActionMode.Click"
+                    DisplayMode="MenuDisplayMode.Desktop"
+                    Title="DevExpress Logo"
+                    CollapseItemToIconMode="MenuCollapseItemToIconMode.All"
+                    CollapseItemsToHamburgerMenu="true"
+                    CssClass="w-100"
+                    ItemClick="@((args) => { if(args.ItemInfo.Name == "LogIn") PopupVisible = true; })">
+                <TitleTemplate>
+                    <img class="menu-title-template-img" src="_content/BlazorDemo/images/Logo-Monochrome.svg" alt="@context" />
+                </TitleTemplate>
+
+                <Items>
+                    <DxMenuItem Text="Home" IconCssClass="menu-icon-home menu-icon">
+                        <Items>
+                            <DxMenuItem Text="News">
+                                <Items>
+                                    <DxMenuItem Text="Explore our newest features" />
+                                    <DxMenuItem Text="Website news" />
+                                </Items>
+                            </DxMenuItem>
+                            <DxMenuItem Text="Our Mission" />
+                            <DxMenuItem Text="Our Customers" />
+                        </Items>
+                    </DxMenuItem>
+                    <DxMenuItem Text="Components" IconCssClass="menu-icon-products menu-icon">
+                        <Items>
+                            <DxMenuItem Text="Blazor" />
+                            <DxMenuItem Text="ASP.NET MVC" />
+                            <DxMenuItem Text="ASP.NET Web Forms" />
+                            <DxMenuItem Text="ASP.NET Core" />
+                            <DxMenuItem Text="Blazor" />
+                            <DxMenuItem Text="Bootstrap Web Forms" />
+                        </Items>
+                    </DxMenuItem>
+                    <DxMenuItem Text="Support" IconCssClass="menu-icon-support menu-icon">
+                        <Items>
+                            <DxMenuItem Text="Getting Started" />
+                            <DxMenuItem Text="Documentation" />
+                            <DxMenuItem Text="Support Center" />
+                            <DxMenuItem Text="Code Examples" />
+                            <DxMenuItem Text="Blogs" />
+                        </Items>
+                    </DxMenuItem>
+                    <DxMenuItem Position="ItemPosition.End">
+                        <Template>
+                            <SearchItem />
+                        </Template>
+                    </DxMenuItem>
+                    <DxMenuItem title="Log In" Text="Log In" IconCssClass="menu-icon-user-profile menu-icon" Name="LogIn" Position="ItemPosition.End">
+                    </DxMenuItem>
+                </Items>
+            </DxMenu>
+        </div>
+        <div class="card-body pt-0 d-flex flex-row">
+            <div class="pr-3 pt-4" style="min-width: 180px">
+                <h5 class="d-block pl-2">Controls</h5>
+                <DxTreeView>
+                    <Nodes>
+                        <DxTreeViewNode Text="Office Inspired" Expanded="true">
+                            <Nodes>
+                                <DxTreeViewNode Text="Grid View" Sel>
+                                </DxTreeViewNode>
+                                <DxTreeViewNode Text="Spreadsheet">
+                                </DxTreeViewNode>
+                                <DxTreeViewNode Text="Rich Text Editor">
+                                </DxTreeViewNode>
+                                <DxTreeViewNode Text="Scheduler">
+                                </DxTreeViewNode>
+                            </Nodes>
+                        </DxTreeViewNode>
+                        <DxTreeViewNode Text="Analitics">
+                            <Nodes>
+                                <DxTreeViewNode Text="Charting">
+                                </DxTreeViewNode>
+                                <DxTreeViewNode Text="Gauges">
+                                </DxTreeViewNode>
+                                <DxTreeViewNode Text="PivotGrid">
+                                </DxTreeViewNode>
+                            </Nodes>
+                        </DxTreeViewNode>
+                        <DxTreeViewNode Text="Navigation">
+                            <Nodes>
+                                <DxTreeViewNode Text="Menu">
+                                </DxTreeViewNode>
+                                <DxTreeViewNode Text="Navigation Bar">
+                                </DxTreeViewNode>
+                                <DxTreeViewNode Text="Tab Control">
+                                </DxTreeViewNode>
+                                <DxTreeViewNode Text="TreeView">
+                                </DxTreeViewNode>
+                            </Nodes>
+                        </DxTreeViewNode>
+                    </Nodes>
+                </DxTreeView>
+            </div>
+            <div class="pt-4 pl-2 d-flex flex-column align-items-end justify-content-between flex-grow-1">
+                <div class="w-100">
+                    <h5 class="mb-3">@Data[ActivePageIndex].Title</h5>
+                    @{
+                        var descriptionParts = Data[ActivePageIndex].Description.Split("\n");
+                        @foreach(var descriptionPart in descriptionParts) {
+                            <p class="text-muted">@descriptionPart</p>
+                        }
+                    }
+                </div>
+                <div class="w-100 border-top border-light pt-3 d-flex flex-column align-items-end">
+                    <DxPager PageCount="10" VisibleNumericButtonCount="5" @bind-ActivePageIndex="@ActivePageIndex">
+                    </DxPager>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <DxPopup Width="420px" HorizontalAlignment="HorizontalAlignment.Center" VerticalAlignment="VerticalAlignment.Center"
+             @bind-Visible="@PopupVisible">
+        <HeaderContentTemplate>
+            <h3>Welcome to DevExpress</h3>
+        </HeaderContentTemplate>
+        <BodyContentTemplate Context="PopupContext">
+            <EditForm Model="@UserData" OnValidSubmit="@HandleValidSubmit" Context="EditFormContext">
+                <DataAnnotationsValidator />
+                <DxFormLayout>
+                    <DxFormLayoutItem ColSpanMd="12">
+                        <Template>
+                            <DxTextBox @bind-Text="@UserData.Username" NullText="Username" ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto">
+                            </DxTextBox>
+                            <div class="text-danger"><ValidationMessage For="@(() => UserData.Username)" /></div>
+                        </Template>
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem ColSpanMd="12">
+                        <Template>
+                            <DxTextBox @bind-Text="@UserData.Password" NullText="Password" Password="true" ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto">
+                            </DxTextBox>
+                            <div class="text-danger"><ValidationMessage For="@(() => UserData.Password)" /></div>
+                        </Template>
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem ColSpanMd="12">
+                        <Template>
+                            <DxButton CssClass="w-100" Text="Login" RenderStyle="ButtonRenderStyle.Primary" SubmitFormOnClick="true">
+                            </DxButton>
+                        </Template>
+                    </DxFormLayoutItem>
+                </DxFormLayout>
+            </EditForm>
+        </BodyContentTemplate>
+    </DxPopup>
+
+    @code {
+        public class NewsData {
+            public string Title { get; set; }
+            public string Description { get; set; }
+        }
+        public bool PopupVisible { get; set; }
+        public int ActivePageIndex { get; set; }
+        public int PageSize { get; set; } = 2;
+        public NewsData[] Data = new NewsData[] {
+            new NewsData() { Title="Vestibulum ut dignissim erat", Description="Nulla eget consequat nulla. Mauris feugiat nisi sem, feugiat ornare nisi bibendum ac. Fusce quis nisi ut massa iaculis maximus et et magna. Fusce at lacus interdum, tempus metus vel, bibendum nunc. Pellentesque vulputate sodales mi, vitae faucibus leo laoreet sit amet. Cras iaculis, purus vestibulum dignissim faucibus, nunc ex eleifend mauris, ut lacinia massa lorem eu sapien. Pellentesque porttitor vehicula ornare.\nEtiam sit amet elit nisi. Cras a pulvinar eros, at semper eros. Vivamus aliquam scelerisque velit, et sodales ex hendrerit ut. Pellentesque egestas enim suscipit erat facilisis, eu accumsan eros porta. Nam pretium arcu semper est euismod maximus. Cras quis lacus libero. Nunc rhoncus mauris ut pharetra lobortis. Nulla risus sapien, semper non vehicula ac, viverra in nisi posuere."},
+            new NewsData() { Title="Quisque quis dolor finibus", Description="Vivamus quis nulla sit amet neque ullamcorper fringilla. Donec feugiat elit nulla, et efficitur nulla hendrerit aliquam. Vestibulum dictum quam sit amet sagittis sodales. Integer sed risus odio. Nulla accumsan viverra lacus ut porta. Sed pulvinar dui in felis lacinia, vel ultricies metus rutrum. Ut diam lacus, accumsan lobortis feugiat id, consectetur ut tortor. Integer ultricies rhoncus dapibus. Morbi a mi vel neque laoreet fermentum quis a nibh. Nulla a ante sollicitudin, aliquam quam in, faucibus massa. Quisque egestas posuere felis, eu tincidunt tortor. Proin ullamcorper nulla vitae sem convallis bibendum.\nCurabitur sodales eleifend est, efficitur vestibulum ligula. Praesent viverra ultrices enim, sit amet pretium lorem eleifend sed. Proin nibh felis, lacinia ut eleifend vel, dictum id."},
+            new NewsData() { Title="Cras tincidunt mauris nisi", Description="Vivamus congue arcu et est euismod dignissim. Proin fermentum dui nulla, ac elementum felis convallis ut. Nulla ut dapibus orci. Nam blandit elit id malesuada tempor. Suspendisse potenti. Fusce pretium, tortor non feugiat aliquam, lacus purus feugiat magna, a imperdiet lorem lacus ultrices elit. Sed sodales lacinia tellus, laoreet faucibus justo efficitur in. Nam et commodo ligula. Maecenas cursus justo vel libero gravida, sed lacinia enim fringilla. Etiam euismod, dui vel iaculis lobortis, velit enim pretium lorem, eget ultricies augue lorem nec neque. Cras vel molestie felis, non laoreet ex. Duis enim nisi, eleifend non rhoncus eget, tincidunt ac velit. Phasellus id pulvinar est. Aliquam feugiat, ante eget scelerisque laoreet, tellus arcu finibus metus, vel porta purus nisi vel volutpat."},
+            new NewsData() { Title="Mauris et dolor ipsum", Description="Quisque malesuada magna sed massa faucibus, tempus mollis risus accumsan. Ut posuere velit sem, ut hendrerit tortor dignissim sed. Phasellus commodo, lectus vitae varius hendrerit, diam enim sagittis massa, ac eleifend tellus sapien vitae lorem. Phasellus euismod varius nisl. In hac habitasse platea dictumst. Aliquam aliquam velit odio, quis elementum quam dapibus nec. Quisque sed massa vitae nunc porttitor sagittis. Aenean nec nisl et nisl pharetra euismod at ut lacus. Cras porttitor ex eu lacinia scelerisque. Quisque facilisis maximus tempus. Pellentesque sem lorem, pulvinar sed commodo sed, lacinia sagittis dui. Phasellus vestibulum dolor eget consectetur placerat.\nQuisque tincidunt metus in scelerisque hendrerit. Ut bibendum nulla eget odio faucibus, id molestie lectus dignissim nullam."},
+            new NewsData() { Title="Nam vitae mi efficitur", Description="Sed semper eu velit auctor sodales. Aliquam mattis erat eu justo ullamcorper scelerisque. In ut ante vitae dolor hendrerit ultrices condimentum quis velit. Curabitur lobortis erat ligula, ac luctus dui blandit sit amet. Sed vestibulum aliquet nibh in ultrices. Nulla mattis varius est, vitae vehicula massa. Nam non tellus lobortis, ullamcorper quam vel, varius nisl. Cras iaculis tincidunt justo, et bibendum orci commodo sed. Integer nec cursus leo. Sed a tristique mi, vel dictum enim.\nProin odio sapien, posuere non diam ut, vehicula consequat mauris. Aliquam in ultricies orci. Ut ex magna, aliquam gravida tellus sed, interdum semper nibh. Suspendisse at placerat eros. Praesent gravida pharetra velit, vitae tincidunt metus gravida quis. Sed nisl nulla, placerat sit amet pretium sit amet amet."},
+            new NewsData() { Title="Ut vel finibus arcu", Description="Cras volutpat erat at sagittis bibendum. Ut vel mollis ipsum. Morbi sit amet viverra ante. Praesent vulputate nisi sed nunc mollis iaculis sit amet eu nibh. Sed vel mi sed ante interdum cursus sit amet et leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, enim sed venenatis euismod, neque massa porttitor nisi, ut tincidunt nulla ante ut purus. Pellentesque sed luctus dui, vel consequat metus. Vivamus tristique fermentum nulla, vel finibus nisl egestas dictum.\nNunc vitae est diam. Nullam odio quam, pellentesque vitae velit ac, vehicula semper lorem. Nulla vitae imperdiet turpis. Donec consectetur, mauris ut luctus porttitor, nisl mi facilisis mauris, quis faucibus sem elit vitae libero. Aliquam dapibus lacus sed diam hendrerit volutpat."},
+            new NewsData() { Title="Suspendisse molestie dictum accumsan", Description="Sed nec tellus et nisi bibendum convallis ut at massa. Praesent maximus mi a fringilla tincidunt. Vivamus vestibulum egestas lectus at ultricies. Etiam in finibus ipsum. Suspendisse mauris sapien, feugiat eu nulla vel, dapibus commodo nisi. Cras laoreet, tellus rhoncus auctor hendrerit, lectus massa faucibus dolor, sed faucibus nisi lorem a nisi. Ut dictum dolor elit, laoreet gravida elit dignissim tristique. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.\nVivamus vestibulum iaculis pellentesque. Morbi auctor ultricies eros, eu laoreet lacus dapibus sit amet. Vivamus ultrices a augue posuere rhoncus. Suspendisse justo nisi, viverra in facilisis vel, laoreet nec lorem. Donec lacus nibh, pharetra fermentum ultricies sed, scelerisque ac libero metus."},
+            new NewsData() { Title="Cras sollicitudin condimentum orci", Description="Praesent iaculis ex ut odio consequat molestie non eget velit. In sodales nulla sit amet arcu tincidunt vulputate. Praesent sodales libero sit amet nisi dignissim consequat. Praesent massa urna, dapibus at efficitur non, dapibus ut eros. Quisque mattis neque vitae metus tristique efficitur. Donec vulputate sapien sit amet diam pretium, accumsan varius ex pretium. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus eu tellus at mi dictum iaculis. Quisque imperdiet tempor ante nec elementum. Ut nec interdum purus. Proin at leo malesuada, pharetra lectus ac, interdum dolor. Duis mollis lectus ante, sed molestie est fermentum in. Quisque cursus pharetra ex. Pellentesque ut felis elit. Vivamus vitae tristique nisl, eget porttitor sapien cras amet."},
+            new NewsData() { Title="Sed turpis sapien, semper", Description="Nulla sit amet felis fringilla, convallis ipsum in, rutrum purus. Donec non dui eu ante tempor dictum. Integer maximus feugiat odio euismod tincidunt. Sed porta elit libero, in rhoncus metus suscipit ac. Morbi ullamcorper neque risus, vulputate molestie velit elementum in. Cras ullamcorper elit ac vehicula porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fringilla velit ac dictum convallis. Suspendisse feugiat ligula tincidunt ipsum aliquet, in congue erat accumsan. Sed ac lacus sit amet purus aliquet laoreet et vitae odio. Nam gravida elit eget arcu efficitur, in pharetra tellus dapibus. Nam ut laoreet mauris. Nullam tempus tempor leo, eget tincidunt est suscipit sed. Morbi varius, augue quis ornare imperdiet, tellus sapien ultricies metus, hendrerit scelerisque posuere."},
+            new NewsData() { Title="Morbi eu tincidunt magna", Description="Donec eu nibh fermentum, commodo magna dictum, rhoncus orci. Suspendisse convallis malesuada tortor eget luctus. Donec lobortis porta blandit. In venenatis massa id consectetur ornare. Mauris et sem sem. Etiam at urna id nulla ornare finibus. In imperdiet enim non neque congue, ac luctus diam lacinia. Mauris sagittis eget nisi nec viverra. Nullam viverra rutrum tellus sed pretium. Quisque consequat magna diam, in imperdiet tellus faucibus eget. Proin ultrices gravida justo, eu imperdiet tellus dapibus et. Quisque posuere lacus quis consequat rhoncus. In non sollicitudin ex. Quisque pharetra, tortor vitae malesuada pharetra, est enim facilisis mi, vitae aliquet erat velit ac erat. Aenean sagittis, risus nec eleifend mollis, metus sapien rhoncus diam, eget facilisis ipsum ligula eu volutpat."}
+        };
+        UserDataBase UserData { get; set; } = new UserDataBase();
+
+        void HandleValidSubmit() {
+            PopupVisible = false;
+        }
+    }
+</DemoPageSectionComponent>

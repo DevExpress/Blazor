@@ -1,0 +1,75 @@
+﻿@inherits ComponentBase
+
+<CascadingValue Value="this">
+    @ChildContent
+    <div class="card">
+        <div class="card-header border-light">
+            <ul class="nav nav-pills">
+                @for(var i = 0; i < tabPages.Count; i++) {
+                    var index = i;
+                    <li class="nav-item">
+                        <a href="#"
+                           class="@GetTabCssClass(index)"
+                           @key="@index"
+                           @onclick="@(() => OnTabClick(index))"
+                           @onclick:preventDefault="true">
+                            @tabPages[i].Text
+                        </a>
+                    </li>
+                }
+            </ul>
+            <button class="btn btn-sm btn-secondary copy-code"><span class="icon icon-copy"></span><span>Copy</span></button>
+            @if(!string.IsNullOrEmpty(DocUrl)) {
+                <NavLink href="@(DemoConfiguration.DocBaseUrl + DocUrl)" target="_blank" class="btn btn-sm btn-secondary doc-link"><span class="icon icon-doc"></span><span>Documentation</span></NavLink>
+            }
+        </div>
+        <div class="card-body code-container" data-active-index="@ActiveTabIndex">
+            @for(var i = 0; i < tabPages.Count; i++) {
+                if(loadedTabPageIndexes.ContainsKey(i)) {
+                    <pre class="@(i != ActiveTabIndex ? "d-none" : "")" data-index="@i">
+                    <PageSectionCodeSnippet @key="@i" Language="@tabPages[i].Language" ChildContent="@tabPages[i].ChildContent"></PageSectionCodeSnippet>
+                    </pre>
+                }
+            }
+        </div>
+    </div>
+</CascadingValue>
+
+@code {
+    int activeTabIndex = 0;
+    List<PageSectionCodeSnippetTabPage> tabPages = new List<PageSectionCodeSnippetTabPage>();
+    Dictionary<int, bool> loadedTabPageIndexes = new Dictionary<int, bool>();
+
+    [Parameter]
+    public string DocUrl { get; set; }
+
+    int ActiveTabIndex {
+        get => activeTabIndex;
+        set {
+            activeTabIndex = value;
+            loadedTabPageIndexes[value] = true;
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+
+    public void AddTabPage(ComponentBase tabPage) {
+        tabPages.Add((PageSectionCodeSnippetTabPage)tabPage);
+        if(tabPages.Count == 1)
+            loadedTabPageIndexes[0] = true;
+        StateHasChanged();
+    }
+
+    string GetTabCssClass(int index) {
+        return string.Join(" ", "nav-link", index == ActiveTabIndex ? "bg-light text-dark" : "").Trim();
+    }
+
+    void OnTabClick(int index) {
+        if(index != ActiveTabIndex) {
+            ActiveTabIndex = index;
+        }
+    }
+}

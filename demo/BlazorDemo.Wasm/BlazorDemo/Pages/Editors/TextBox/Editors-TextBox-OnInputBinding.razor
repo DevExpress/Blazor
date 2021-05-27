@@ -1,0 +1,16 @@
+﻿<DemoPageSectionComponent Id="Editors-TextBox-OnInputBinding" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxTextBox @bind-Text="@TextValue"
+                   BindValueMode="BindValueMode.OnInput"
+                   NullText="Type text..."
+                   CssClass="cw-320"
+                   SizeMode="Params.SizeMode" />
+        <p class="demo-text cw-320 mt-2 text-muted">
+            Text: <b>@TextValue</b>
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        string TextValue { get; set; } = null;
+    }
+</DemoPageSectionComponent>

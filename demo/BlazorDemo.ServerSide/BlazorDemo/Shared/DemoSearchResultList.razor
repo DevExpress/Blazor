@@ -1,0 +1,43 @@
+﻿@inject DemoConfiguration Configuration
+
+<div class="search-results @ListCssClass">
+    @if(SearchResults != null) {
+        @if(SearchResults.Count > 0) {
+            <ul class="nav nav-pills">
+                @for(var i = 0; i < SearchResults.Count; i++) {
+                    <li class="nav-item">
+                        <a class="nav-link" href="@GetMainLinkUrl(SearchResults[i])">@GetMainLinkText(SearchResults[i])</a>
+                        @if(!(SearchResults[i].Page is DemoRootPage)) {
+                            var rootDemoPage = (DemoRootPage)SearchResults[i].Page.ParentPage;
+                            <a class="nav-link" href="@DemoConfiguration.GetRootDemoPageUrl(rootDemoPage)">@rootDemoPage.Title</a>
+                            <span class="nav-link link-separator"></span>
+                            <a class="nav-link" href="@SearchResults[i].Page.Url">@SearchResults[i].Page.Title</a>
+                        }
+                    </li>
+                }
+            </ul>
+        } else {
+            <span>No results found for <b>@SearchString</b></span>
+        }
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string SearchString { get; set; }
+    [Parameter]
+    public List<DemoSearchResult> SearchResults { get; set; }
+
+    public string ListCssClass { get { return SearchResults != null ? "shown" : ""; } }
+
+    public string GetMainLinkUrl(DemoSearchResult result) {
+        if(result.Section != null)
+            return result.Page.Url + "#" + result.Section.Id;
+        else if(result.Page is DemoRootPage)
+            return DemoConfiguration.GetRootDemoPageUrl((DemoRootPage)result.Page);
+        return result.Page.Url;
+    }
+    public MarkupString GetMainLinkText(DemoSearchResult result) {
+        return new MarkupString(result.Text);
+    }
+}

@@ -1,0 +1,106 @@
+.demo-device-container .demo-device-orientation-selector > div {
+    margin: 0 auto;
+    width: 520px;
+    text-align: right;
+}
+
+.demo-device-container.horizontal .demo-device-orientation-selector > div {
+    width: 830px;
+}
+
+.demo-device-orientation-selector button {
+    display: block;
+    float: right;
+    clear: both;
+    font-size: 2.5em;
+    margin-bottom: 0.4em;
+    margin-right: -2.2em;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    padding: 0;
+    justify-content: center;
+}
+
+.demo-device-container .demo-device {
+    height: 830px;
+    width: 520px;
+    margin: 0 auto;
+    border-width: 30px 20px !important;
+    border-radius: 15px;
+}
+
+.demo-device-container.horizontal .demo-device {
+    width: 830px;
+    height: 520px;
+    border-width: 20px 30px !important;
+}
+
+.demo-device-container .demo-display {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    border-radius: 0px;
+    position: relative;
+}
+
+
+@media (max-width: 1679.98px) {
+    .demo-device-container .demo-device-orientation-selector {
+        display: none;
+    }
+
+    .demo-device-container.horizontal .demo-device {
+        height: 830px;
+        width: 520px;
+        border-width: 30px 20px !important;
+    }
+}
+
+@media (max-width: 600px), (hover: none) {
+    .demo-device-container .demo-device-orientation-selector {
+        display: none;
+    }
+
+    .demo-device.border-secondary,
+    .demo-device .demo-display.border-secondary {
+        border: none !important;
+    }
+
+    .demo-device.bg-secondary {
+        background: none !important;
+    }
+
+    .demo-device {
+        border-width: 0 !important;
+        padding: 0 !important;
+        min-width: 0 !important;
+        width: auto !important;
+        height: auto !important;
+    }
+
+    .demo-device .demo-display .card.m-3 {
+        margin: 0 !important;
+    }
+}
+
+.mobile-view,
+.mobile-view-horizontal {
+    background-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    background-position: center center;
+    background-color: currentColor;
+    height: 32px;
+    width: 32px;
+}
+
+.mobile-view {
+    -webkit-mask-image: url("images/mobile_view.svg");
+    mask-image: url("images/mobile_view.svg");
+}
+
+.mobile-view-horizontal {
+    -webkit-mask-image: url("images/mobile_view_horizontal.svg");
+    mask-image: url("images/mobile_view_horizontal.svg");
+}

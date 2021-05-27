@@ -1,0 +1,1 @@
+Set the [BindValueMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1.BindValueMode) property to [BindValueMode.OnInput](https://docs.devexpress.com/Blazor/DevExpress.Blazor.BindValueMode) to update the [Value](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1.Value) property each time the input value changes.

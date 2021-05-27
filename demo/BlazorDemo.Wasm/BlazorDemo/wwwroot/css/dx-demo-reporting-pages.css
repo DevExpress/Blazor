@@ -1,0 +1,39 @@
+.demo-page .demo-page-content {
+    max-width: 100%;
+    margin-right: 0;
+}
+
+.demo-page-section-component-area .options-container {
+    margin: 0;
+    width: calc(100%);
+    padding-left: 0.5rem;
+}
+
+.dx-options-reporting-choozer {
+    width: 100%;
+    max-width: 30rem;
+}
+
+.demo-page-section-component-area {
+    padding: 0;
+}
+
+.dxbrd-wrapper {
+    width: 100%;
+}
+
+.dx-blazor-reporting {
+    display: contents;
+}
+
+.demo-page-section-component-area .component-container {
+    width: 100%;
+}
+
+.demo-page-section > .card {
+    box-shadow: none;
+}
+
+#section-ReportViewer .dx-listbox-scrollable.dxbs-dm.dropdown-menu {
+    max-height: 292px;
+}

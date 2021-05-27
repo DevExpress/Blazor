@@ -1,0 +1,64 @@
+﻿@using System.Text.RegularExpressions
+
+<DemoPageSectionComponent Id="Charts-PointSeries-Bubble">
+    <ChildContent>
+
+        @inject ISalesInfoDataProvider Sales
+
+        @if (ChartsData != null) {
+            <DxChart Data="@ChartsData" CssClass="w-100">
+                <DxChartBubbleSeries Name="United States"
+                                     T="SaleInfo"
+                                     TArgument="string"
+                                     TValue="int"
+                                     TSize="int"
+                                     ArgumentField="si => si.Date.DayOfWeek.ToString()"
+                                     ValueField="si => si.Date.Year"
+                                     SizeField="si => si.Amount"
+                                     Color="System.Drawing.Color.FromArgb(208, 208, 208)"
+                                     SummaryMethod="Enumerable.Max"
+                                     Filter='si => si.Country == "United States"' />
+                <DxChartBubbleSeries Name="Canada"
+                                     T="SaleInfo"
+                                     TArgument="string"
+                                     TValue="int"
+                                     TSize="int"
+                                     ArgumentField="si => si.Date.DayOfWeek.ToString()"
+                                     ValueField="si => si.Date.Year"
+                                     SizeField="si => si.Amount"
+                                     Color="System.Drawing.Color.FromArgb(252, 58, 48)"
+                                     SummaryMethod="Enumerable.Max"
+                                     Filter='si => si.Country == "Canada"' />
+                <DxChartLegend Position="RelativePosition.Outside" HorizontalAlignment="HorizontalAlignment.Right" />
+
+                <DxChartValueAxis Type="ChartAxisType.Discrete">
+                    <DxChartAxisLabel Format="ChartElementFormat.Decimal()"></DxChartAxisLabel>
+                </DxChartValueAxis>
+
+            </DxChart>
+        }
+    </ChildContent>
+
+
+    @code {
+        IEnumerable<SaleInfo> ChartsData;
+
+        protected override async Task OnInitializedAsync() {
+            ChartsData = await Sales.GetSalesAsync();
+        }
+
+
+        class ChartSeriesTypeItem {
+            public static IEnumerable<ChartSeriesTypeItem> Create(params ChartSeriesType[] itemValues) =>
+                itemValues.Select(x => new ChartSeriesTypeItem(x)).ToList();
+
+            public string Text { get; }
+            public ChartSeriesType Value { get; }
+
+            public ChartSeriesTypeItem(ChartSeriesType value) {
+                Value = value;
+                Text = Regex.Replace(value.ToString(), "[a-z][A-Z]", m => m.Value[0] + " " + m.Value[1]);
+            }
+        }
+    }
+</DemoPageSectionComponent>

@@ -1,0 +1,3 @@
+This demo shows the performance of the [Pivot Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPivotGrid-1) when it is bound to a dataset that contains a million rows. Experiment with navigating between the pages and sorting the data to experience the responsiveness of the pivot grid in this situation. The pager is enabled by setting the Pivot Grid's [ShowPager](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPivotGrid.ShowPager) and [PageSize](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPivotGrid.PageSize) properties.
+
+In this example, Entity Framework Core (version 3.0) supplies the Pivot Grid with an IQueryable<T> source.

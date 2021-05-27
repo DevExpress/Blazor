@@ -1,0 +1,23 @@
+.overview-chart .chart-item {
+    min-width: 25%;
+    flex-basis: 25%;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+@media (max-width: 1899.98px) {
+    .overview-chart .chart-item {
+        min-width: 50%;
+        flex-basis: 50%;
+    }
+}
+
+@media (max-width: 899.98px) {
+    .overview-chart .chart-item {
+        min-width: 100%;
+        flex-basis: 100%;
+    }
+}

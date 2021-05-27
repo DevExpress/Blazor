@@ -1,0 +1,1 @@
+In this demo, the [TagBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2) supports custom tags that are not stored in a bound data source (the [AllowCustomTags](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.AllowCustomTags) property is set to **true**).

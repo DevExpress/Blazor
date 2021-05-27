@@ -1,0 +1,39 @@
+﻿<DemoPageSectionComponent Id="Grid-DataBinding-LargeDataSource" ShowHorizontalScrollBar="true">
+    @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+    @inject RentInfoDataService RentInfoDataService
+    @inject IRentInfoDataProvider RentInfoDataProvider
+
+    <DataProviderAccessAreaContainer DataProvider="@RentInfoDataProvider">
+        <DxGrid Data="@Data" PageSize="10" CssClass="w-100">
+            <Columns>
+                <DxGridColumn FieldName="State" />
+                <DxGridColumn FieldName="Area" />
+                <DxGridColumn FieldName="City" Caption="County" />
+                <DxGridColumn FieldName="Name" Caption="Location" />
+                <DxGridColumn FieldName="Year" DisplayFormat="0" Width="120px" />
+                <DxGridColumn FieldName="Bedrooms" Width="120px" />
+                <DxGridColumn FieldName="Population" DisplayFormat="#,0" Width="120px" />
+            </Columns>
+        </DxGrid>
+    </DataProviderAccessAreaContainer>
+    @code {
+        object Data { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            var connectionString = ConnectionStringUtils.GetGridLargeDataConnectionString(Configuration);
+            if(string.IsNullOrEmpty(connectionString)) return;
+
+            var areaRentInfo = await RentInfoDataService.GetQueryableAreaRentInfo();
+
+            var dataSource = new GridDevExtremeDataSource<AreaRentInfo>(areaRentInfo.AsQueryable());
+            dataSource.CustomizeLoadOptions = (loadOptions) => {
+                // If underlying data is a large SQL table, specify PrimaryKey and PaginateViaPrimaryKey.
+                // This can make SQL execution plans more efficient.
+                loadOptions.PrimaryKey = new[] { "Oid" };
+                loadOptions.PaginateViaPrimaryKey = true;
+            };
+
+            Data = dataSource;
+        }
+    }
+</DemoPageSectionComponent>

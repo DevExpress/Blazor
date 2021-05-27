@@ -3,8 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using BlazorDemo.Configuration;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
 namespace BlazorDemo.ServerSide {
@@ -15,41 +17,45 @@ namespace BlazorDemo.ServerSide {
 
         public static IHostBuilder CreateHostBuilder(string[] args) {
 
-            return Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(Configure);
+            return Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(x => Configure(x, args));
         }
 
-        private static void Configure(IWebHostBuilder webHostBuilder) {
+        private static void Configure(IWebHostBuilder webHostBuilder, string[] args) {
             webHostBuilder
                 .UseConfiguration(
                     new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddIniFile("appsettings.ini", true)
-                    .AddJsonFile("ConnectionStrings.json", false, false)
-                    .Build()
+                        .AddCommandLine(args)
+                        .SetBasePath(Directory.GetCurrentDirectory())
+                        .AddJsonFile("ConnectionStrings.json", false, false)
+                        .Build()
                 )
-                .ConfigureAppConfiguration(ConfigureAppDelegate)
                 .ConfigureServices(ConfigureServices)
-                .UseStaticWebAssets();
 
+                .UseStaticWebAssets();
 
 
             static void ConfigureServices(WebHostBuilderContext context, IServiceCollection services) {
                 services.AddOptions();
+                services.AddHttpContextAccessor();
 
-                foreach(var moduleSection in GetModules(context).Select(x => context.Configuration.GetSection(x))) {
-                    if(moduleSection.Exists())
-                        services.Configure<SeoConfiguration>(moduleSection);
-                }
+                services.AddSingleton<DemoConfiguration>();
+                services.AddScoped<IDemoThemesConfigurationCookieAccessor, DemoThemesConfigurationCookieAccessor>();
+                services.AddScoped<DemoThemesConfiguration>();
             }
+        }
+    }
 
-            static void ConfigureAppDelegate(WebHostBuilderContext context, IConfigurationBuilder commonBuilder) {
-                foreach(var moduleName in GetModules(context))
-                    commonBuilder.AddJsonFile($"{moduleName}Metadata.json", true, true);
-            }
-
-            static string[] GetModules(WebHostBuilderContext context) =>
-                context.Configuration.GetValue<string>(WebHostDefaults.HostingStartupAssembliesKey).Split(';');
+    class DemoThemesConfigurationCookieAccessor: IDemoThemesConfigurationCookieAccessor {
+        public DemoThemesConfigurationCookieAccessor(IHttpContextAccessor httpContextAccessor) {
+            HttpContextAccessor = httpContextAccessor;
         }
 
+        protected IHttpContextAccessor HttpContextAccessor { get; }
+        protected HttpContext HttpContext { get { return HttpContextAccessor.HttpContext; } }
+
+        public string GetCookie(string name) {
+            return HttpContext != null ? HttpContext.Request.Cookies[name] : "";
+        }
     }
+
 }

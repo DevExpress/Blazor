@@ -1,0 +1,46 @@
+﻿<DemoPageSectionComponent Id="Editors-CheckBox-Switch">
+    <div class="card">
+        <ul class="list-group list-group-flush bg-white text-dark" style="border:none">
+            <li class="list-group-item" style="background-color:transparent;color:inherit;">
+                <DxCheckBox CheckType="CheckType.Switch"
+                            LabelPosition="LabelPosition.Left" style="width:100%"
+                            Checked="@SilentMode"
+                            CheckedChanged="@((bool t) => CheckedChanged(t))"
+                            Alignment="CheckBoxContentAlignment.SpaceBetween">
+                    Silent Mode
+                </DxCheckBox>
+            </li>
+            <li class="list-group-item" style="background-color:transparent;color:inherit;">
+                <DxCheckBox CheckType="CheckType.Switch"
+                            LabelPosition="LabelPosition.Left" style="width:100%"
+                            @bind-Checked="@Sound"
+                            Enabled="@Enabled"
+                            Alignment="CheckBoxContentAlignment.SpaceBetween">
+                    Enable sound
+                </DxCheckBox>
+            </li>
+            <li class="list-group-item" style="background-color:transparent;color:inherit;">
+                <DxCheckBox CheckType="CheckType.Switch"
+                            LabelPosition="LabelPosition.Left" style="width:100%"
+                            @bind-Checked="@Vibration"
+                            Enabled="@Enabled"
+                            Alignment="CheckBoxContentAlignment.SpaceBetween">
+                    Enable vibration
+                </DxCheckBox>
+            </li>
+        </ul>
+    </div>
+
+    @code {
+        bool Enabled { get; set; } = false;
+
+        bool SilentMode { get; set; } = true;
+        bool Sound { get; set; } = true;
+        bool Vibration { get; set; } = false;
+
+        void CheckedChanged(bool value) {
+            SilentMode = value;
+            Enabled = !value;
+        }
+    }
+</DemoPageSectionComponent>

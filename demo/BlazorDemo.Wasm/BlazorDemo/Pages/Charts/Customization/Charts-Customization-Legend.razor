@@ -1,0 +1,53 @@
+﻿<DemoPageSectionComponent Id="Charts-Customization-Legend">
+    <ChildContentWithParameters Context="Params">
+        @inject ISalesInfoDataProvider Sales
+        @if (SalesData != null) {
+            <DxChart Data="@SalesData"
+                     @key="@Params.ThemeName"
+                     CssClass="w-100">
+
+                <DxChartTitle Text="Sales amount">
+                    <DxChartSubTitle Text="by cities" />
+                </DxChartTitle>
+
+                <DxChartLegend AllowToggleSeries="true"
+                               Orientation="Orientation.Vertical"
+                               HorizontalAlignment="HorizontalAlignment.Right">
+                    <DxChartTitle Text="Years">
+                        <DxChartSubTitle Text="(2017-2019)"> </DxChartSubTitle>
+                    </DxChartTitle>
+                </DxChartLegend>
+
+                <DxChartBarSeries Name="2017"
+                                  Filter="@((SaleInfo si) => si.Date.Year == 2017)"
+                                  SummaryMethod="Enumerable.Sum"
+                                  ArgumentField="@(si => si.City)"
+                                  ValueField="@(si => si.Amount)" />
+
+                <DxChartBarSeries Name="2018"
+                                  Filter="@((SaleInfo si) => si.Date.Year == 2018)"
+                                  SummaryMethod="Enumerable.Sum"
+                                  ArgumentField="@(si => si.City)"
+                                  ValueField="@(si => si.Amount)" />
+                <DxChartLineSeries Name="2019"
+                                   Filter="@((SaleInfo s) => s.Date.Year == 2019)"
+                                   SummaryMethod="Enumerable.Sum"
+                                   ArgumentField="@(si => si.City)"
+                                   ValueField="@(si => si.Amount)">
+                    <DxChartSeriesLegendItem IconCssClass="chart-icon chart-icon-calendar">
+                        <TextTemplate> Last year</TextTemplate>
+                    </DxChartSeriesLegendItem>
+                </DxChartLineSeries>
+            </DxChart>
+        }
+    </ChildContentWithParameters>
+
+
+    @code {
+        IEnumerable<SaleInfo> SalesData;
+
+        protected override async Task OnInitializedAsync() {
+            SalesData = await Sales.GetSalesAsync();
+        }
+    }
+</DemoPageSectionComponent>

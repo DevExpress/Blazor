@@ -11,6 +11,8 @@ namespace BlazorDemo.Data {
         public ProductCategory CategoryItem { get; set; }
         public string Category => CategoryItem?.Category.ToString();
         public string Subcategory => CategoryItem?.Subcategory;
+
         public DateTime LastUpdated => CategoryItem != null ? CategoryItem.LastUpdated : DateTime.Now;
+        public string TextField => $"Id{Id}: {ProductName} ({ (Availability ? "In stock" : "Sold out") })";
     }
 }

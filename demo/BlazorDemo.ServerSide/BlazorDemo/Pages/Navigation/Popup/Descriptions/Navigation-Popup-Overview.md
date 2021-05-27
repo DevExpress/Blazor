@@ -1,0 +1,3 @@
+Our Blazor [Popup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup) component allows you to display a modal window that overlays the current view. Use the [HeaderText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.HeaderText) and [BodyText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.BodyText) properties to specify text displayed in the header and body. 
+
+To show or close the Popup in code, implement two-way binding for the [Visible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.Visible) property. Users can choose from the following options to close the Popup: click the Close button in the header, click outside the Popup’s boundaries, or press Escape.

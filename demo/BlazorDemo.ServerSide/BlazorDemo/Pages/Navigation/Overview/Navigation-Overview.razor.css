@@ -1,0 +1,28 @@
+.overview-navigation > .card-body:last-child {
+    flex-wrap: nowrap;
+}
+
+.menu-title-template-img {
+    display: flex;
+    width: 120px;
+}
+
+::deep .menu-icon-user-profile {
+    mask-image: url("images/UserProfile.svg");
+    -webkit-mask-image: url("images/UserProfile.svg");
+}
+
+.dx-menu-item .search {
+    min-width: 123px
+}
+
+.dxbs-menu-item-tmpl > .search {
+    padding: 0.25rem;
+    position: relative;
+}
+
+@media (max-width: 599.98px) {
+    .overview-navigation > .card-body:last-child > :first-child {
+        display: none;
+    }
+}

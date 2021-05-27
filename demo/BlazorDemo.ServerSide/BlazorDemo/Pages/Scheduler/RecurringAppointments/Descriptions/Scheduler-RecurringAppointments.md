@@ -1,0 +1,1 @@
+This module demonstrates how to set up recurring appointments for the [Scheduler](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler) component. Note that the appointment object should contain the [DxSchedulerRecurrenceInfo](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerRecurrenceInfo) field (see the code above) to use this functionality.

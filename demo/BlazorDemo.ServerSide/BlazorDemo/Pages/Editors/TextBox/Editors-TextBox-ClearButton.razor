@@ -1,0 +1,14 @@
+﻿<DemoPageSectionComponent Id="Editors-TextBox-ClearButton" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxTextBox @bind-Text="@TextValue"
+                   ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                   BindValueMode="BindValueMode.OnInput"
+                   NullText="Type text..."
+                   SizeMode="Params.SizeMode"
+                   CssClass="cw-320" />
+    </ChildContentWithParameters>
+
+    @code {
+        string TextValue { get; set; } = "Some text";
+    }
+</DemoPageSectionComponent>

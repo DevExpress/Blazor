@@ -1,0 +1,53 @@
+.menu-title-template-img {
+    display: flex;
+    width: 120px;
+}
+
+.menu-icon-user-profile {
+    mask-image: url("images/UserProfile.svg");
+    -webkit-mask-image: url("images/UserProfile.svg");
+}
+
+
+.dx-menu-item.notoggle > a > .dropdown-toggle {
+    display: none;
+}
+
+.dx-menu-item.notoggle > .dropdown-menu {
+    transform: matrix(1, 0, 0, 1, -112, -1) !important;
+}
+/*BeginHide*/ ::deep /*EndHide*/ .dxbs-menu > .nav .dx-menu-item.notoggle {
+    display: none;
+}
+/*BeginHide*/ ::deep /*EndHide*/ .dxbs-menu > .nav .dx-menu-item.search-menu-item {
+    display: none;
+}
+/*BeginHide*/ ::deep /*EndHide*/ .dxbs-menu > .nav .separator {
+    display: none;
+}
+
+.dx-menu-item .search {
+    min-width: 123px
+}
+
+.dxbs-menu-item-tmpl > .search {
+    padding: 0.25rem;
+    position: relative;
+}
+
+.user-profile .logo-container {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.user-profile .log-off-btn {
+    padding-top: 0.815rem;
+    padding-bottom: 0.815rem;
+    border-top: 1px solid #e5e5e5;
+}
+
+.user-profile .menu-icon-user-profile {
+    opacity: 0.25;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+}

@@ -1,0 +1,32 @@
+﻿<DemoPageSectionComponent Id="Editors-Memo-ResizeMode"
+                          ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxMemo @key="@ForceRerender()"
+                @bind-Text="TextValue"
+                SizeMode="Params.SizeMode"
+                ResizeMode="MemoResizeMode"
+                CssClass="cw-480"
+                Rows="5" />
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionComboBox Label="Resize Mode:"
+                        Data="@(Enum.GetNames(typeof(MemoResizeMode)))"
+                        Value="@(MemoResizeMode.ToString())"
+                        ValueChanged="@((string selectedItem) =>
+                                        { MemoResizeMode = Enum.Parse<MemoResizeMode>(selectedItem); })" />
+    </OptionsContent>
+
+    @code {
+        public object ForceRerender() => new object(); // this fixes a bug in chrome layout.
+        MemoResizeMode MemoResizeMode { get; set; } = MemoResizeMode.VerticalAndHorizontal;
+
+        string TextValue { get; set; } =
+            "Prepare 2020 Marketing Plan: We need to double revenues in 2020 "+
+            "and our marketing strategy is going to be key here. " +
+            "R&D is improving existing products and creating new products so we can "+
+            "deliver great AV equipment to our customers. " +
+            "Robert, please make certain to create a PowerPoint presentation "+"" +
+            "for the members of the executive team.";
+    }
+</DemoPageSectionComponent>

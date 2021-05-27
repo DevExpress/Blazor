@@ -1,0 +1,60 @@
+﻿@inject DemoThemesConfiguration Themes
+
+<div class="themeswitcher-container shadow @StateCssClass">
+    @if(IsLoaded) {
+        <DxScrollView id="themesMenu">
+            <div class="list-group list-group-flush">
+                @foreach(var themeSet in Themes.ThemeSets) {
+                    <span class="card-header list-group-item">@themeSet.Title</span>
+                    @foreach(var theme in themeSet.Themes) {
+                        <ThemeSwitcherItem @key=@theme.GetRenderKey(Themes.ActiveTheme == theme) Theme="@theme" Apply="@OnApply" />
+                    }
+                }
+            </div>
+        </DxScrollView>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public bool Shown { get; set; }
+    [Parameter]
+    public EventCallback<bool> ShownChanged { get; set; }
+    [Parameter]
+    public string ThemeName { get; set; }
+    [Parameter]
+    public EventCallback<string> ThemeNameChanged { get; set; }
+
+    string StateCssClass { get { return IsLoaded ? ((Shown? "themeswitcher-container-shown" : "themeswitcher-container-hidden")) : ""; } }
+    bool IsLoaded { get; set; }
+
+    [Inject]
+    IDocumentMetadataService DocumentMetadataService { get; set; }
+
+    async Task OnApply(DemoTheme theme) {
+        if(ThemeName != theme.Name) {
+            ThemeName = theme.Name;
+            await ThemeNameChanged.InvokeAsync(ThemeName);
+            await ToggleThemeSwitcherPanel(false);
+            DocumentMetadataService.Update((m) => {
+                m.StyleSheet("currentThemeCss", Themes.GetThemeCssUrl(theme));
+                m.StyleSheet("currentThemeCodeCss", Themes.GetThemeCodeCssUrl(theme));
+            });
+        }
+    }
+
+    async Task ToggleThemeSwitcherPanel(bool shown) {
+        if(shown != Shown) {
+            Shown = shown;
+            await ShownChanged.InvokeAsync(shown);
+        }
+    }
+
+    protected override void OnAfterRender(bool firstRender) {
+        if(firstRender) {
+            IsLoaded = true;
+            if(Shown)
+                StateHasChanged();
+        }
+    }
+}

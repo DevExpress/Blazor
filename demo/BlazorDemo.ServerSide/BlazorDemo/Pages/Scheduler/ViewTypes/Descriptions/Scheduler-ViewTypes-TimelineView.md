@@ -1,0 +1,1 @@
+This module demonstrates how to configure the Timeline View ([DxSchedulerTimelineView](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerTimelineView)).

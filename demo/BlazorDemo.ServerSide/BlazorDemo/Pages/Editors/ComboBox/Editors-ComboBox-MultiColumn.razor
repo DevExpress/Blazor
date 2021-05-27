@@ -1,0 +1,31 @@
+﻿<DemoPageSectionComponent Id="Editors-ComboBox-MultiColumn" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <DxComboBox Data="@Data"
+                    @bind-Value="@SelectedEmployee"
+                    CssClass="cw-480"
+                    SizeMode="Params.SizeMode"
+                    FilteringMode="DataGridFilteringMode.Contains"
+                    EditFormat="{1} {2}">
+            <DxListEditorColumn FieldName="@nameof(Employee.EmployeeId)"
+                                Caption="Id"
+                                Width="50px" />
+            <DxListEditorColumn FieldName="@nameof(Employee.FirstName)"
+                                Caption="Name" />
+            <DxListEditorColumn FieldName="@nameof(Employee.LastName)"
+                                Caption="Surname" />
+        </DxComboBox>
+    </ChildContentWithParameters>
+
+
+    @code {
+        IEnumerable<Employee> Data { get; set; }
+        Employee SelectedEmployee { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetEmployeesAsync();
+            SelectedEmployee = Data.FirstOrDefault();
+        }
+    }
+</DemoPageSectionComponent>

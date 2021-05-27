@@ -1,0 +1,47 @@
+﻿@*BeginHide*@
+@namespace BlazorDemo
+@*EndHide*@
+
+@inject ISalesInfoDataProvider Sales
+
+@if (ChartsData != null) {
+    <DxChart Data="@ChartsData"
+             CssClass="w-100">
+        <DxChartSplineSeries Name="2017"
+                             T="SaleInfo"
+                             TArgument="string"
+                             TValue="int"
+                             ArgumentField="si => si.City"
+                             ValueField="si => si.Amount"
+                             SummaryMethod="Enumerable.Sum"
+                             Filter="si => si.Date.Year == 2017" />
+        <DxChartSplineSeries Name="2018"
+                             T="SaleInfo"
+                             TArgument="string"
+                             TValue="int"
+                             ArgumentField="si => si.City"
+                             ValueField="si => si.Amount"
+                             SummaryMethod="Enumerable.Sum"
+                             Filter="si => si.Date.Year == 2018" />
+        <DxChartSplineSeries Name="2019"
+                             T="SaleInfo"
+                             TArgument="string"
+                             TValue="int"
+                             ArgumentField="si => si.City"
+                             ValueField="si => si.Amount"
+                             SummaryMethod="Enumerable.Sum"
+                             Filter="si => si.Date.Year == 2019" />
+        <DxChartLegend Position="RelativePosition.Outside"
+                       HorizontalAlignment="HorizontalAlignment.Right" />
+    </DxChart>
+}
+
+
+
+    @code {
+        IEnumerable<SaleInfo> ChartsData;
+
+protected override async Task OnInitializedAsync() {
+        ChartsData = await Sales.GetSalesAsync();
+    }
+    }

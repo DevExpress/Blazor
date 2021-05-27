@@ -5,7 +5,7 @@ namespace BlazorDemo.Data {
 
     public static partial class AppointmentCollection {
         public static List<Appointment> GetAppointments() {
-            DateTime date = DateTimeUtils.CreateWeekStart(DateTime.Now);
+            DateTime date = DateTimeUtils.GetWeekStart(DateTime.Now);
             var dataSource = new List<Appointment>() {
                 new Appointment {
                     Caption = "Install New Router in Dev Room",

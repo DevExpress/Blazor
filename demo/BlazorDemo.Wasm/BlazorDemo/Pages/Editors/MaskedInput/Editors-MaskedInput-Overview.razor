@@ -1,0 +1,46 @@
+﻿<DemoPageSectionComponent Id="Editors-MaskedInput-Overview" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="d-flex flex-column cw-320">
+            <p class="demo-text text-muted mb-1">
+                Text Mask:
+            </p>
+            <DxMaskedInput @bind-Value="@Telephone"
+                           SizeMode="Params.SizeMode"
+                           CssClass="cw-320"
+                           Mask="(999)000-0000" />
+
+            <p class="demo-text mt-4 text-muted mb-1 ">
+                Numeric Mask:
+            </p>
+            <DxMaskedInput @bind-Value="@Price"
+                           SizeMode="Params.SizeMode"
+                           CssClass="cw-320"
+                           Mask="@NumericMask.Currency" />
+
+            <p class="demo-text cw-320 mt-4 text-muted mb-1">
+                Date-Time Mask:
+            </p>
+            <DxMaskedInput @bind-Value="@Date"
+                           SizeMode="Params.SizeMode"
+                           CssClass="cw-320"
+                           Mask="@DateTimeMask.LongDate" />
+
+            <p class="demo-text mt-4 text-muted mb-1">
+                Regular Expression Mask:
+            </p>
+            <DxMaskedInput @bind-Value="@Email"
+                           SizeMode="Params.SizeMode"
+                           CssClass="cw-320"
+                           Mask="@EmailMask"
+                           MaskMode="MaskMode.RegEx" />
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        double Price { get; set; }
+        DateTime Date { get; set; } = DateTime.Today;
+        string EmailMask { get; set; } = @"(\w|[.-])+@(\w|-)+\.(\w|-){2,4}";
+        string Email { get; set; }
+        string Telephone { get; set; }
+    }
+</DemoPageSectionComponent>

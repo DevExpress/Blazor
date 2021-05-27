@@ -1,0 +1,119 @@
+﻿<DemoPageSectionComponent Id="Scheduler-Resources-CustomResourceNavigator">
+    @using System.Collections
+
+    <div class="demo-resnavigator">
+        <div class="demo-resnavigator-container card">
+            <div class="demo-resnavigator-title card-body">
+                <DxButton RenderStyle="ButtonRenderStyle.None" @onclick="@ToggleResourceNavigator">
+                    <span class="demo-resnavigator-icon"></span>
+                </DxButton>
+                @if(ResourceNavigatorExpanded) {
+                    <span style="">Resources</span>
+                }
+            </div>
+            @if(ResourceNavigatorExpanded) {
+                <div class="demo-resnavigator-tree card-body">
+                    <DxTreeView AfterCollapse="@(e => UpdateExpandedState(e, false))" AfterExpand="@(e => UpdateExpandedState(e, true))">
+                        <Nodes>
+                            @foreach(Resource group in Groups) {
+                                <DxTreeViewNode Text="@group.Name" Name="@group.Id.ToString()" Expanded="@IsExpanded(group)">
+                                    <Nodes>
+                                        @foreach(Resource resource in GetResources(group)) {
+                                            <DxTreeViewNode Text="@resource.Name">
+                                                <Template>
+                                                    <div class="demo-resnavigator-item">
+                                                        <DxCheckBox T="bool"
+                                                                    Checked="@IsVisible(resource)"
+                                                                    CheckedChanged="@(visible => UpdateVisibilty(resource, visible))">
+                                                            @resource.Name
+                                                        </DxCheckBox>
+                                                    </div>
+                                                </Template>
+                                            </DxTreeViewNode>
+                                        }
+                                    </Nodes>
+                                </DxTreeViewNode>
+                            }
+                        </Nodes>
+                    </DxTreeView>
+                </div>
+            }
+        </div>
+        <div class="demo-resnavigator-sc-container">
+            <DxScheduler @bind-StartDate="@StartDate"
+                         DataStorage="@DataStorage"
+                         VisibleResourcesDataSource="@VisibleResources"
+                         GroupType="SchedulerGroupType.Resource"
+                         ResourceNavigatorVisible="false"
+                         CssClass="demo-sc-docked w-100">
+                <DxSchedulerDayView DayCount="1" ShowWorkTimeOnly="true"></DxSchedulerDayView>
+            </DxScheduler>
+        </div>
+    </div>
+
+    @code {
+        List<Resource> Groups = ResourceCollection.GetResourceGroups();
+
+        List<Resource> VisibleResources = ResourceCollection.GetResources().Take(2).ToList();
+
+        bool ResourceNavigatorExpanded { get; set; } = true;
+
+        DateTime StartDate = DateTime.Today;
+
+        DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
+            AppointmentsSource = ResourceAppointmentCollection.GetAppointments(),
+            AppointmentMappings = new DxSchedulerAppointmentMappings() {
+                Type = "AppointmentType",
+                Start = "StartDate",
+                End = "EndDate",
+                Subject = "Caption",
+                AllDay = "AllDay",
+                Location = "Location",
+                Description = "Description",
+                LabelId = "Label",
+                StatusId = "Status",
+                RecurrenceInfo = "Recurrence",
+                ResourceId = "ResourceId"
+            },
+            ResourcesSource = ResourceCollection.GetResources(),
+            ResourceMappings = new DxSchedulerResourceMappings() {
+                Id = "Id",
+                Caption = "Name",
+                BackgroundCssClass = "BackgroundCss",
+                TextCssClass = "TextCss"
+            }
+        };
+
+        Dictionary<int, bool> ExpandedState = new Dictionary<int, bool>();
+
+        bool IsVisible(Resource resource) {
+            return VisibleResources.Contains(resource);
+        }
+
+        void UpdateVisibilty(Resource resource, bool visible) {
+            if(visible)
+                VisibleResources.Add(resource);
+            else
+                VisibleResources.Remove(resource);
+            VisibleResources = VisibleResources.OrderBy(p => p.Id).ToList();
+        }
+
+        bool IsExpanded(Resource resource) {
+            return ExpandedState.ContainsKey(resource.Id) ? ExpandedState[resource.Id] : true;
+        }
+
+        void UpdateExpandedState(TreeViewNodeEventArgs args, bool expanded) {
+            int resourceId = int.Parse(args.NodeInfo.Name);
+            ExpandedState[resourceId] = expanded;
+        }
+
+        void ToggleResourceNavigator() {
+            ResourceNavigatorExpanded = !ResourceNavigatorExpanded;
+        }
+
+        IEnumerable<Resource> GetResources(Resource group) {
+            return ResourceCollection.GetResources()
+                .Where(resource => resource.GroupId == group.Id);
+        }
+    }
+</DemoPageSectionComponent>

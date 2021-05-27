@@ -1,0 +1,17 @@
+.buttons-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons-group-title {
+    font-weight: 500;
+}
+
+@media (max-width: 479.98px) {
+    .buttons-group > :last-child > div {
+        width: calc(50% - 0.5rem);
+    }
+    .buttons-group-title {
+        text-align: center;
+    }
+}

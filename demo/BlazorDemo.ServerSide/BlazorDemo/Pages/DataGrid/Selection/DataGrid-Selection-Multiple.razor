@@ -1,0 +1,46 @@
+﻿<DemoPageSectionComponent Id="DataGrid-Selection-Multiple" ShowHorizontalScrollBar="true">
+    @inject IProductsFlatProvider ProductsFlatService
+
+    @if(DataSource == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <div class="d-flex flex-wrap w-100">
+            <DxDataGrid Data="@DataSource"
+                        SelectionMode="DataGridSelectionMode.MultipleSelectedDataRows"
+                        @bind-MultipleSelectedDataRows="@SelectedProducts"
+                        CssClass="w-auto mt-1 mr-1 flex-grow-1" style="flex-basis: 500px">
+                <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name"></DxDataGridColumn>
+                <DxDataGridColumn Field="@nameof(ProductFlat.Category)"></DxDataGridColumn>
+                <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)"></DxDataGridColumn>
+            </DxDataGrid>
+            <div class="card mt-1 mr-1 flex-grow-1" style="flex-basis: 220px">
+                <div class="card-header bg-transparent text-body py-1 border-bottom-0 font-weight-bold">Selected products:</div>
+                <div class="card-body p-0 overflow-auto">
+                    <ul class="list-group list-group-flush bg-transparent border-0">
+                        @foreach(var product in SelectedProducts) {
+                            <li class="list-group-item bg-transparent text-body py-1 border-0">@product.ProductName</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+
+    @code {
+        IEnumerable<ProductFlat> DataSource;
+
+        IEnumerable<ProductFlat> selectedProducts;
+        IEnumerable<ProductFlat> SelectedProducts {
+            get { return selectedProducts; }
+            set {
+                selectedProducts = value;
+                InvokeAsync(StateHasChanged);
+            }
+        }
+
+        protected override async Task OnInitializedAsync() {
+            DataSource = await ProductsFlatService.LoadAsync();
+            SelectedProducts = DataSource.Take(4).AsEnumerable();
+        }
+    }
+</DemoPageSectionComponent>

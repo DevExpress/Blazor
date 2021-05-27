@@ -1,0 +1,49 @@
+﻿<DemoPageSectionComponent Id="Charts-Customization-Tooltip">
+    <ChildContentWithParameters Context="Params">
+        @inject ISalesInfoDataProvider Sales
+        @if (SalesData != null) {
+            <DxChart Data="@SalesData"
+                     @key="@Params.ThemeName"
+                     CssClass="w-100">
+
+                <DxChartTitle Text="Sales amount" />
+
+                <DxChartTooltip Enabled="true"
+                                Position="RelativePosition.Outside">
+                    <div style="margin: 0.75rem">
+                        <div class="font-weight-bold">@context.Point.SeriesName</div>
+                        <div>City: @context.Point.Argument</div>
+                        <div>Amount: @context.Point.Value</div>
+                    </div>
+                </DxChartTooltip>
+
+                <DxChartBarSeries Name="2017"
+                                  Filter="@((SaleInfo s) => s.Date.Year == 2017)"
+                                  SummaryMethod="Enumerable.Sum"
+                                  ArgumentField="@(s => s.City)"
+                                  ValueField="@(s => s.Amount)" />
+
+                <DxChartBarSeries Name="2018"
+                                  Filter="@((SaleInfo s) => s.Date.Year == 2018)"
+                                  SummaryMethod="Enumerable.Sum"
+                                  ArgumentField="@(s => s.City)"
+                                  ValueField="@(s => s.Amount)" />
+
+                <DxChartLineSeries Name="2019"
+                                   Filter="@((SaleInfo s) => s.Date.Year == 2019)"
+                                   SummaryMethod="Enumerable.Sum"
+                                   ArgumentField="@(s => s.City)"
+                                   ValueField="@(s => s.Amount)" />
+            </DxChart>
+        }
+    </ChildContentWithParameters>
+
+
+    @code {
+        IEnumerable<SaleInfo> SalesData;
+
+        protected override async Task OnInitializedAsync() {
+            SalesData = await Sales.GetSalesAsync();
+        }
+    }
+</DemoPageSectionComponent>

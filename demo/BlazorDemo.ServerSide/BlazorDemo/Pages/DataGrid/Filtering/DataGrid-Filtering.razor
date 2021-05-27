@@ -1,0 +1,46 @@
+﻿@page "/GridFilterRow"
+
+<DemoPageSectionComponent Id="DataGrid-Filtering" ShowHorizontalScrollBar="true">
+    @layout DataProviderAccessArea<IWorldcitiesDataProvider, INwindDataProvider>
+    @inject NwindDataService NwindDataService
+    @inject WorldcitiesDataService WorldcitiesDataService
+
+    @if(Data == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <DxDataGrid Data="@Data" ShowFilterRow="true">
+            <DxDataGridDateEditColumn Field="@nameof(Invoice.OrderDate)"
+                                      DisplayFormat="D"
+                                      Width="240px" />
+            <DxDataGridComboBoxColumn Field="@nameof(Invoice.ShipCountry)"
+                                      Caption="Ship Country"
+                                      Data="@Countries"
+                                      ValueFieldName="@nameof(Country.CountryName)"
+                                      TextFieldName="@nameof(Country.CountryName)"
+                                      FilteringMode="DataGridFilteringMode.Contains"
+                                      Width="250px" />
+            <DxDataGridColumn Field="@nameof(Invoice.ProductName)" />
+            <DxDataGridSpinEditColumn Field="@nameof(Invoice.UnitPrice)"
+                                      DisplayFormat="c"
+                                      Width="120px" />
+
+            <DxDataGridSpinEditColumn Field="@nameof(Invoice.Quantity)"
+                                      Caption="Quantity"
+                                      Width="100px" />
+            <DxDataGridCommandColumn NewButtonVisible="false"
+                                     EditButtonVisible="false"
+                                     DeleteButtonVisible="false"
+                                     Width="70px" />
+        </DxDataGrid>
+    }
+
+    @code {
+        IEnumerable<Invoice> Data;
+        IEnumerable<Country> Countries;
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetInvoicesAsync();
+            Countries = await WorldcitiesDataService.GetCountriesAsync();
+        }
+    }
+</DemoPageSectionComponent>

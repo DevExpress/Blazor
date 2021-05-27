@@ -1,0 +1,24 @@
+﻿<DemoPageSectionComponent Id="Editors-DateEdit-MinMaxDate" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxDateEdit @bind-Date="@DateTimeValue"
+                    SizeMode="Params.SizeMode"
+                    CssClass="cw-320"
+                    MinDate="@MinDate"
+                    MaxDate="@MaxDate" />
+        <p class="demo-text cw-320 mt-2 text-muted">
+            Date: <b>@DateTimeValue.ToString("dddd, dd MMMM yyyy")</b>
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        DateTime DateTimeValue { get; set; } = DateTime.Now;
+        DateTime MinDate { get; set; }
+        DateTime MaxDate { get; set; }
+
+        protected override void OnInitialized() {
+            MinDate = new DateTime(DateTimeValue.Year, DateTimeValue.Month, 1);
+            int days = DateTime.DaysInMonth(DateTimeValue.Year, DateTimeValue.Month);
+            MaxDate = new DateTime(DateTimeValue.Year, DateTimeValue.Month, days);
+        }
+    }
+</DemoPageSectionComponent>
