@@ -1,0 +1,3 @@
+The [List Box](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2) component allows users to select items from a list of predefined strings. The component can be bound to any IEnumerable data source. The list of selected items can be accessed and/or specified via the [Values](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.Values) property. To track selection changes, use the [SelectedItemsChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.SelectedItemsChanged) event or the two-way synchronization as demonstrated in this module.
+
+In this demo, the component allows users to select only one item at a time. Select an item to see the corresponding object's property values.

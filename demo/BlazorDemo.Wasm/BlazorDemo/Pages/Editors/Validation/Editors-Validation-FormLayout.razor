@@ -1,0 +1,98 @@
+﻿<DemoPageSectionComponent Id="Editors-Validation-FormLayout">
+
+    <EditForm Model="@starship"
+              OnValidSubmit="@HandleValidSubmit"
+              OnInvalidSubmit="@HandleInvalidSubmit"
+              Context="EditFormContext">
+
+        <DataAnnotationsValidator />
+
+        <DxFormLayout>
+            <DxFormLayoutItem Caption="Identifier:" ColSpanMd="6">
+                <Template>
+                    <DxTextBox @bind-Text="@starship.Identifier" />
+                </Template>
+            </DxFormLayoutItem>
+
+            <DxFormLayoutItem Caption="Primary Classification:" ColSpanMd="6">
+                <Template>
+                    <DxComboBox NullText="Select classification ..."
+                                ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                                Data="classifications"
+                                @bind-Value="@starship.Classification" />
+                </Template>
+            </DxFormLayoutItem>
+
+            <DxFormLayoutItem Caption="Maximum Accommodation:"
+                              ColSpanMd="6">
+                <Template>
+                    <DxSpinEdit Id="accommodation"
+                                @bind-Value="@starship.MaximumAccommodation" />
+                </Template>
+            </DxFormLayoutItem>
+
+            <DxFormLayoutItem Caption="Production Date:"
+                              ColSpanMd="6">
+                <Template>
+                    <DxDateEdit @bind-Date="@starship.ProductionDate" />
+                </Template>
+            </DxFormLayoutItem>
+
+            <DxFormLayoutItem ColSpanMd="12">
+                <Template>
+                    <DxButton SubmitFormOnClick="true"
+                              Text="Submit"
+                              RenderStyle="ButtonRenderStyle.Secondary" />
+                </Template>
+            </DxFormLayoutItem>
+
+            <DxFormLayoutItem ColSpanMd="12">
+                <Template>
+                    <ValidationSummary />
+                </Template>
+            </DxFormLayoutItem>
+
+        </DxFormLayout>
+
+        <p class="demo-text w-100 mt-4 text-muted">
+            Form Validation State: <b>@FormValidationState</b>
+        </p>
+    </EditForm>
+
+    @code {
+        string FormValidationState = @"Press the ""Submit"" button to validate the form.";
+        Starship starship = new Starship() { ProductionDate = DateTime.Now + TimeSpan.FromDays(1) };
+        List<string> classifications = new List<string>() { "Defense", "Exploration", "Diplomacy" };
+
+        void HandleValidSubmit() {
+            FormValidationState = @"Form data is valid";
+        }
+        void HandleInvalidSubmit() {
+            FormValidationState = @"Form data is invalid";
+        }
+
+        [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+        public class DateInPastAttribute : ValidationAttribute {
+            public override bool IsValid(object value) {
+                return (DateTime)value <= DateTime.Today;
+            }
+        }
+
+        public class Starship {
+            [Required(ErrorMessage = "The Identifier value should be specified.")]
+            [StringLength(16,
+            ErrorMessage = "The Identifier exceeds 16 characters.")]
+            public string Identifier { get; set; }
+
+            [Required(ErrorMessage = "The Primary Classification value should be specified.")]
+            public string Classification { get; set; }
+
+            [Range(1, 100000, ErrorMessage = "The Maximum Accommodation value should be a number between 1 and 100,000.")]
+            public int MaximumAccommodation { get; set; }
+
+            [Required]
+            [DateInPastAttribute(ErrorMessage = "The Production Date value cannot be later than today.")]
+            public DateTime ProductionDate { get; set; }
+        }
+    }
+</DemoPageSectionComponent>

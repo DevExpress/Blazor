@@ -1,0 +1,37 @@
+﻿<DemoPageSectionComponent Id="Charts-LineSeries-Line">
+    <ChildContent>
+        @switch (LineSeriesType)
+        {
+            case ChartSeriesType.Line:
+                <LineChart />
+                break;
+            case ChartSeriesType.StackedLine:
+                <StackedLineChart />
+                break;
+            case ChartSeriesType.FullStackedLine:
+                <FullStackedLineChart />
+                break;
+
+        }
+    </ChildContent>
+
+    <OptionsContent>
+        <OptionComboBox Label="Series Type:"
+                        T="ChartSeriesType"
+                        TData="KeyValuePair<string, ChartSeriesType>"
+                        Data="@LineSeriesTypes"
+                        ValueField="Value"
+                        TextField="Key"
+                        @bind-Value="@LineSeriesType" />
+    </OptionsContent>
+
+    @code {
+        ChartSeriesType LineSeriesType = LineSeriesTypes.First().Value;
+        static readonly Dictionary<string,ChartSeriesType> LineSeriesTypes = new Dictionary<string, ChartSeriesType>()
+        {
+            { "Line", ChartSeriesType.Line },
+            { "Stacked Line" , ChartSeriesType.StackedLine},
+            { "Full Stacked Line", ChartSeriesType.FullStackedLine}
+        };
+    }
+</DemoPageSectionComponent>

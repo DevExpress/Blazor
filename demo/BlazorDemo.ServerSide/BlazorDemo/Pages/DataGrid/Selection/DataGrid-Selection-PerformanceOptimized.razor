@@ -1,0 +1,53 @@
+﻿<DemoPageSectionComponent Id="DataGrid-Selection-PerformanceOptimized" ShowHorizontalScrollBar="true">
+    @inject IProductsFlatProvider ProductsFlatService
+
+    @if(DataSource == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <DxDataGrid Data="@DataSource" @ref="@grid"
+                    KeyFieldName="Id"
+                    SelectionMode="DataGridSelectionMode.OptimizedMultipleSelection"
+                    SelectAllMode="DataGridSelectAllMode.AllPages"
+                    OptimizedMultipleSelectionChanged="OnSelectionChanged">
+            <DxDataGridSelectionColumn Width="50px"></DxDataGridSelectionColumn>
+            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name"></DxDataGridColumn>
+            <DxDataGridColumn Field="@nameof(ProductFlat.Category)"></DxDataGridColumn>
+            <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)"></DxDataGridColumn>
+        </DxDataGrid>
+        <p class="demo-text w-100 mt-2 text-muted">The total count of selected rows: <b>@SelectedCount</b> (stored selected rows: <b>@StoredSelectedCount</b>, stored unselected rows: <b>@StoredUnselectedCount</b>)</p>
+    }
+
+    @code {
+        DxDataGrid<ProductFlat> grid;
+        bool gridInitialized;
+
+        IEnumerable<ProductFlat> DataSource;
+
+        int SelectedCount { get; set; }
+
+        int StoredSelectedCount { get; set; }
+
+        int StoredUnselectedCount { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            DataSource = await ProductsFlatService.LoadAsync();
+        }
+
+        protected override void OnAfterRender(bool firstRender) {
+            if(!gridInitialized && grid != null) {
+                gridInitialized = true;
+
+                foreach(var product in DataSource.Take(10).Where((p, i) => i % 2 != 0))
+                    grid.SetDataRowSelected(product, true);
+            }
+        }
+
+        protected async Task OnSelectionChanged(DataGridSelection<ProductFlat> selection) {
+            StoredSelectedCount = selection.SelectedKeysStored.Count();
+            StoredUnselectedCount = selection.UnselectedKeysStored.Count();
+            var selectedKeys = await selection.SelectedKeys;
+            SelectedCount = selectedKeys.Count();
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+</DemoPageSectionComponent>

@@ -13,23 +13,12 @@ namespace BlazorDemo.DataProviders {
             modelBuilder.HasAnnotation("ProductVersion", "3.0.0-preview3.19153.1");
 
             modelBuilder.Entity<Sale>(entity => {
-                entity.HasIndex(e => e.DateKey)
-                    .HasName("I_DateKey");
-
-                entity.HasIndex(e => e.ProductCategoryName)
-                    .HasName("I_ProductCategoryName");
-
-                entity.HasIndex(e => e.ProductName)
-                    .HasName("I_ProductName");
-
-                entity.HasIndex(e => e.ProductSubcategoryName)
-                    .HasName("I_ProductSubcategoryName");
-
-                entity.HasIndex(e => e.SalesAmount)
-                    .HasName("I-SalesAmount");
-
-                entity.HasIndex(e => e.StoreName)
-                    .HasName("I_StoreName");
+                entity.HasIndex(e => e.DateKey).HasDatabaseName("I_DateKey");
+                entity.HasIndex(e => e.ProductCategoryName).HasDatabaseName("I_ProductCategoryName");
+                entity.HasIndex(e => e.ProductName).HasDatabaseName("I_ProductName");
+                entity.HasIndex(e => e.ProductSubcategoryName).HasDatabaseName("I_ProductSubcategoryName");
+                entity.HasIndex(e => e.SalesAmount).HasDatabaseName("I-SalesAmount");
+                entity.HasIndex(e => e.StoreName).HasDatabaseName("I_StoreName");
 
                 entity.Property(e => e.DateKey).HasColumnType("datetime");
 

@@ -1,0 +1,110 @@
+﻿@page "/GridMasterDetail"
+
+<DemoPageSectionComponent Id="DataGrid-MasterDetail" ShowHorizontalScrollBar="true">
+    @using BlazorDemo.Data.SalesViewer
+    @using Sale = BlazorDemo.Data.SalesViewer.Sale
+    @using Product = BlazorDemo.Data.SalesViewer.Product
+    @using System.Collections.Concurrent
+    @using System.Threading
+
+    @implements IDisposable
+    @inject ISalesViewerDataProvider SalesViewerDataProvider
+    @layout DataProviderAccessArea<ISalesViewerDataProvider>
+
+    <DxDataGrid @ref="@grid"
+                DataAsync="@SalesViewerDataProvider.GetProducts"
+                KeyFieldName="Id"
+                AutoCollapseDetailRow="true"
+                ShowDetailRow="true"
+                SelectionMode="DataGridSelectionMode.None"
+                PageSize="4">
+        <Columns>
+            <DxDataGridColumn Field="@nameof(Product.Name)" />
+            <DxDataGridColumn Field="@nameof(Product.Description)" />
+            <DxDataGridSpinEditColumn Field="@nameof(Product.ListPrice)" DisplayFormat="c" />
+            <DxDataGridSpinEditColumn Field="@nameof(Product.UnitsInInventory)" />
+            <DxDataGridSpinEditColumn Field="@nameof(Product.UnitsInManufacturing)" />
+        </Columns>
+        <DetailRowTemplate Context="dataItem">
+            <DxTabs>
+                <DxTabPage Text="Sales">
+                    <div class="p-3">
+                        <DxDataGrid DataAsync="@GetSalesDataByProductAsync(dataItem)"
+                                    SelectionMode="DataGridSelectionMode.None"
+                                    LayoutRestoring="@GetDetailsGridLayoutRestoringDelegate(dataItem)"
+                                    LayoutChanged="@GetDetailsGridLayoutChangedDelegate(dataItem)">
+                            <DxDataGridDateEditColumn Field="@nameof(Sale.SaleDate)" />
+                            <DxDataGridSpinEditColumn Field="@nameof(Sale.Units)" />
+                            <DxDataGridSpinEditColumn Field="@nameof(Sale.TotalCost)" DisplayFormat="c" />
+                            <DxDataGridSpinEditColumn Field="@nameof(Sale.Discount)" DisplayFormat="c" />
+                        </DxDataGrid>
+                    </div>
+                </DxTabPage>
+                <DxTabPage Text="Plant Info">
+                    @{
+                        var plantInfo = PlantsDataSource?.FirstOrDefault(x => x.Id == dataItem.PlantId);
+                    }
+                    <div class="p-3">
+                        <b>Name:</b>
+                        <p>
+                            @plantInfo.Name
+                        </p>
+                        <b>Address:</b>
+                        <p>
+                            @plantInfo.Address
+                        </p>
+                        <b>Zip:</b>
+                        <p>
+                            @plantInfo.Zip
+                        </p>
+                    </div>
+                </DxTabPage>
+            </DxTabs>
+        </DetailRowTemplate>
+    </DxDataGrid>
+
+    @code {
+        IEnumerable<Plant> PlantsDataSource;
+
+        DxDataGrid<Product> grid;
+
+        readonly ConcurrentDictionary<int, string> detailGridsLayoutCache = new ConcurrentDictionary<int, string>();
+        protected override async Task OnInitializedAsync() {
+            PlantsDataSource = await SalesViewerDataProvider.GetPlants();
+        }
+
+        protected Func<CancellationToken, Task<IEnumerable<Sale>>> GetSalesDataByProductAsync(Product product) {
+            return GetProductSalesAsync;
+
+            async Task<IEnumerable<Sale>> GetProductSalesAsync(CancellationToken cancellationToken) {
+                var allSales = await SalesViewerDataProvider.GetSales(cancellationToken);
+                return allSales.Where(x => x.ProductId == product.Id);
+            }
+        }
+        protected override async Task OnAfterRenderAsync(bool firstRender) {
+            if(firstRender) {
+                var products = await @SalesViewerDataProvider.GetProducts();
+                var firstProduct = products.First();
+                grid.DetailRows.ExpandRow(firstProduct.Id);
+            }
+        }
+        protected Action<IDataGridLayout> GetDetailsGridLayoutRestoringDelegate(Product product) {
+            return (layout) => {
+                if(detailGridsLayoutCache.TryGetValue(product.Id, out string previousLayoutJson))
+                    layout.LoadLayout(previousLayoutJson);
+            };
+        }
+
+        protected Action<IDataGridLayout> GetDetailsGridLayoutChangedDelegate(Product product) {
+            return (layout) => {
+                var layoutJson = layout.SaveLayout();
+                detailGridsLayoutCache.AddOrUpdate(product.Id, layoutJson, (id, layout) => {
+                    return layoutJson;
+                });
+            };
+        }
+        void IDisposable.Dispose() {
+            detailGridsLayoutCache.Clear();
+        }
+    }
+</DemoPageSectionComponent>

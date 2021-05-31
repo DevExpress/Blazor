@@ -1,0 +1,1 @@
+Set the [BindValueMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTextEditorBase.BindValueMode) property to [BindValueMode.OnInput](https://docs.devexpress.com/Blazor/DevExpress.Blazor.BindValueMode) to update the [Text](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTextEditorBase.Text) property each time the input value changes.

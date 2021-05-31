@@ -1,0 +1,63 @@
+﻿<DemoPageSectionComponent Id="Navigation-Toolbar-Adaptivity">
+    <ChildContentWithParameters Context="Params">
+        <DemoResizableContent>
+            @*BeginHide*@
+            <div class="card border-0">
+                <div class="card-header border-0 p-2 rounded">
+                    @*EndHide*@
+                    <DxToolbar Title="New Article" ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" ItemSizeMode="SizeMode.Small"
+                               AdaptivityMinRootItemCount="2" AdaptivityAutoHideRootItems="true" AdaptivityAutoCollapseItemsToIcons="true" @key="@Params.ThemeName">
+                        <Items>
+                            <DxToolbarItem BeginGroup="true" Name="Undo" IconCssClass="tb-icon tb-icon-undo" AdaptiveText="Undo" />
+                            <DxToolbarItem Name="Redo" IconCssClass="tb-icon tb-icon-redo" AdaptiveText="Redo" />
+                            <DxToolbarItem Name="FontFamily" Text="@currentFont.Name" BeginGroup="true" AdaptiveText="Font Family">
+                                <Items>
+                                    @foreach(var font in FontInfo.DefaultFonts) {
+                                        <DxToolbarItem Text="@font.Name" Click="(x) => { currentFont = font; }" GroupName="fontGroup"
+                                                       Style="@font.GetCssString()" />
+                                    }
+                                </Items>
+                            </DxToolbarItem>
+                            <DxToolbarItem Name="FontSize" Text="@currentSize.Size.ToString()" BeginGroup="true" AdaptiveText="Font Size">
+                                <Items>
+                                    @foreach(var fontSize in FontSizeInfo.DefaultFontSizes) {
+                                        <DxToolbarItem Text="@fontSize.Size.ToString()" Click="(x) => { currentSize = fontSize; }" GroupName="fontSizeGroup" />
+                                    }
+                                </Items>
+                            </DxToolbarItem>
+                            <DxToolbarItem AdaptivePriority="1" GroupName="font-bold" BeginGroup="true" Name="Bold"
+                                           IconCssClass="tb-icon tb-icon-bold" AdaptiveText="Bold" />
+                            <DxToolbarItem AdaptivePriority="1" GroupName="font-italic" Name="Italic"
+                                           IconCssClass="tb-icon tb-icon-italic" AdaptiveText="Italic" />
+                            <DxToolbarItem AdaptivePriority="1" GroupName="font-underline" Name="Underline"
+                                           IconCssClass="tb-icon tb-icon-underline" AdaptiveText="Underline" />
+                            <DxToolbarItem AdaptivePriority="1" BeginGroup="true" GroupName="align"
+                                           IconCssClass="tb-icon tb-icon-align-left" AdaptiveText="Left" />
+                            <DxToolbarItem AdaptivePriority="1" GroupName="align" IconCssClass="tb-icon tb-icon-align-center" AdaptiveText="Center" />
+                            <DxToolbarItem AdaptivePriority="1" GroupName="align" IconCssClass="tb-icon tb-icon-align-right" AdaptiveText="Right" />
+                        </Items>
+                    </DxToolbar>
+                    @*BeginHide*@
+                </div>
+            </div>
+            @*EndHide*@
+        </DemoResizableContent>
+    </ChildContentWithParameters>
+    @code {
+        Orientation orientation;
+        FontInfo currentFont = FontInfo.DefaultFonts[0];
+        FontSizeInfo currentSize = FontSizeInfo.DefaultFontSizes[0];
+        string GetOrientation() {
+            return orientation.ToString().ToLower();
+        }
+        void ChangeOrientation(Orientation orientation) {
+            if(this.orientation == orientation)
+                return;
+            this.orientation = orientation;
+            InvokeAsync(StateHasChanged);
+        }
+        string GetButtonOrientationSelector(Orientation orientation) {
+            return this.orientation == orientation ? "active" : string.Empty;
+        }
+    }
+</DemoPageSectionComponent>

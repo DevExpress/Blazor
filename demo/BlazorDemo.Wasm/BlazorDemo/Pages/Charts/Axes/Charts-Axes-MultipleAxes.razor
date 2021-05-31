@@ -1,0 +1,64 @@
+﻿<DemoPageSectionComponent Id="Charts-Axes-MultipleAxes">
+    <ChildContentWithParameters Context="Params">
+        @inject ISalesInfoDataProvider Sales
+
+        @if (SalesData != null) {
+            <DxChart Data="SalesData"
+                     @key="@Params.ThemeName"
+                     CssClass="w-100">
+
+                <DxChartTitle Text="Sales amount" />
+
+                <DxChartLegend Position="RelativePosition.Outside" />
+
+                <DxChartArgumentAxis>
+                    <DxChartAxisTitle Text="Cities" />
+                </DxChartArgumentAxis>
+
+                <DxChartValueAxis>
+                    <DxChartAxisLabel Format="ChartElementFormat.Percent()" />
+                    <DxChartAxisTitle Text="Amount" />
+                </DxChartValueAxis>
+
+                <DxChartValueAxis Name="TotalAxis" Position="HorizontalEdge.Right">
+                    <DxChartAxisTitle Text="Total Amount" />
+                </DxChartValueAxis>
+
+                <DxChartFullStackedBarSeries Name="2017"
+                                             Filter="@((SaleInfo s) => s.Date.Year == 2017)"
+                                             SummaryMethod="Enumerable.Sum"
+                                             ArgumentField="@(s => s.City)"
+                                             ValueField="@(s => s.Amount)" />
+
+                <DxChartFullStackedBarSeries Name="2018"
+                                             Filter="@((SaleInfo s) => s.Date.Year == 2018)"
+                                             SummaryMethod="Enumerable.Sum"
+                                             ArgumentField="@(s => s.City)"
+                                             ValueField="@(s => s.Amount)" />
+
+                <DxChartFullStackedBarSeries Name="2019"
+                                             Filter="@((SaleInfo s) => s.Date.Year == 2019)"
+                                             SummaryMethod="Enumerable.Sum"
+                                             ArgumentField="@(s => s.City)"
+                                             ValueField="@(s => s.Amount)" />
+
+                <DxChartSplineSeries Name="Total"
+                                     SummaryMethod="Enumerable.Sum"
+                                     ArgumentField="@((SaleInfo s) => s.City)"
+                                     ValueField="@(s => s.Amount)"
+                                     Axis="TotalAxis" />
+            </DxChart>
+        }
+
+        </ChildContentWithParameters>
+
+
+    @code {
+        IEnumerable<SaleInfo> SalesData;
+
+        protected override async Task OnInitializedAsync() {
+            SalesData = await Sales.GetSalesAsync();
+        }
+    }
+
+</DemoPageSectionComponent>

@@ -1,0 +1,53 @@
+﻿@implements IDisposable
+@inject DemoConfiguration Configuration
+@inject NavigationManager NavigationManager
+
+<div class="breadcrumbs-items">
+    @foreach(var key in Items.Keys) {
+        @if(!string.IsNullOrEmpty(Items[key])) {
+            <a class="text-dark" href="@Items[key]">@key</a>
+        } else {
+            <span class="text-dark">@key</span>
+        }
+        <span class="separator border border-dark"></span>
+    }
+</div>
+
+@code {
+    const string HomePageTitle = "Home";
+    Dictionary<string, string> Items { get; set; } = new Dictionary<string, string>();
+
+    protected override void OnInitialized() {
+        NavigationManager.LocationChanged += OnLocationChanged;
+        UpdateItems(NavigationManager.Uri);
+    }
+    void OnLocationChanged(object sender, LocationChangedEventArgs args) {
+        UpdateItems(args.Location);
+    }
+    void UpdateItems(string currentUri) {
+        Items.Clear();
+
+        var demoPageUrl = NavigationManager.ToAbsoluteUri(currentUri).GetLeftPart(UriPartial.Path).Replace(NavigationManager.BaseUri, "");
+        var demoPage = Configuration.GetDemoPageByUrl(demoPageUrl);
+        DemoRootPage rootDemoPage = null;
+        if(demoPage is DemoRootPage)
+            rootDemoPage = (DemoRootPage)demoPage;
+        else if(demoPage is DemoPage && demoPage.ParentPage is DemoRootPage)
+            rootDemoPage = (DemoRootPage)demoPage.ParentPage;
+        if(rootDemoPage != null) {
+            Items.Add(HomePageTitle, "./");
+            if(demoPage != null) {
+                var rootDemoPageUrl = DemoConfiguration.GetRootDemoPageUrl(rootDemoPage);
+                Items.Add(rootDemoPage.Title, rootDemoPageUrl != demoPage.Url ? rootDemoPageUrl : "");
+                Items.Add(demoPage.Title, "");
+            }
+        } else {
+            Items.Add(HomePageTitle, "");
+        }
+        StateHasChanged();
+    }
+
+    public void Dispose() {
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+}

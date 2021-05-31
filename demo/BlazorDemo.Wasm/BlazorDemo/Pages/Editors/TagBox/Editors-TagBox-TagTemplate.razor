@@ -1,0 +1,56 @@
+﻿<DemoPageSectionComponent Id="Editors-TagBox-TagTemplate" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject WorldcitiesDataService WorldcitiesDataService
+
+        <DxTagBox Data="@Data"
+                  TextFieldName="@nameof(City.CityName)"
+                  TData="City"
+                  TValue="City"
+                  AllowCustomTags="true"
+                  @bind-Tags="@Tags"
+                  ListRenderMode="ListRenderMode.Virtual"
+                  SizeMode="Params.SizeMode"
+                  CssClass="cw-480">
+            <TagTemplate Context="tagInfo">
+                @{
+                    var styleMode = tagInfo.IsCustom ?
+                        ButtonRenderStyleMode.Contained :
+                        GetModeByID(tagInfo.DataItem.CityName);
+                    var style = tagInfo.IsCustom ?
+                        ButtonRenderStyle.Dark :
+                        ButtonRenderStyle.Primary;
+                    <DxButton RenderStyle="@style"
+                              RenderStyleMode="@styleMode"
+                              Text="@tagInfo.Text"
+                              style="display:inline-block; padding-right: 0">
+                        @context
+                        <span @onclick="@tagInfo.RemoveTagAction" style="display:inline-block; width: 1.5rem">
+                            &times;
+                        </span>
+                    </DxButton>
+                }
+            </TagTemplate>
+        </DxTagBox>
+    </ChildContentWithParameters>
+
+    @code {
+        IEnumerable<City> Data { get; set; }
+        IEnumerable<string> Tags { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await WorldcitiesDataService.GetCitiesAsync();
+            Tags = Data.Where(c => c.CityName == "New York" || c.CityName == "Los Angeles" || c.CityName == "Tokyo").Select(c => c.CityName);
+        }
+
+        ButtonRenderStyleMode GetModeByID(string cityName) {
+            switch(cityName) {
+                case "New York":
+                    return ButtonRenderStyleMode.Contained;
+                case "Los Angeles":
+                    return ButtonRenderStyleMode.Outline;
+                default:
+                    return ButtonRenderStyleMode.Text;
+            }
+        }
+    }
+</DemoPageSectionComponent>

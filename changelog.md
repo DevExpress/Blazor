@@ -2,6 +2,261 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 21.1.3
+
+### New Grid (CTP)
+
+Our new Blazor Grid component includes the following features:
+
+* Data Binding
+* Custom Data Source Support
+* Large Datasets
+* Unbound Columns
+* Sorting by Value
+* Sorting by Display Text
+* Custom Sorting
+* Grouping
+* Group Intervals
+* Custom Grouping
+* Paging
+* Total and Group Summary
+* Custom Summary
+* Cell, Column Header, Group Row, and Footer Templates
+* Custom Display Text
+
+[Demo](https://demos.devexpress.com/blazor/Grid/DataBinding)
+
+### New Rich Text Editor (CTP)
+
+Our new Blazor Rich Text Editor (Word Processor) allows you to quickly incorporate advanced text editing functionality into your next Blazor app. You can create, open, edit, convert, save, and print rich-formatted text files (DOCX, RTF, TXT). Its features include:
+
+* Ribbon UI
+* Print Layout / Simple View
+* Horizontal Ruler
+* Character & Paragraph Formatting
+* Bullets & Numbering
+* Header & Footer
+* Document Sections
+* Table of Contents
+* Bookmarks & Links
+* Page Numbers
+* Fields
+* Pictures & Text Inputs
+* Undo / Redo
+
+[Demo](https://demos.devexpress.com/blazor/RichEdit) | [Documentation](https://docs.devexpress.com/Blazor/401891/rich-text-editor) | [Get Started](https://docs.devexpress.com/Blazor/403121/rich-edit/get-started-with-rich-text-editor)
+
+### New Masked Input
+
+Our new Blazor Masked Input component includes the following integrated features:
+
+* Text, Numeric, Date-Time, and Regular Expression Mask support
+* Read-only and Disabled States
+* Null Text
+* Clear Button
+
+[Demo](https://demos.devexpress.com/blazor/MaskedInput) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMaskedInput-1)
+
+### New Report Viewer
+
+v21.1 ships with the first-ever native Blazor Report Viewer component. The new component targets the Blazor Server platform and features the following built-in features/capabilities:
+
+* C# Public API
+* Print / Export
+* Toolbar UI
+* Bootstrap Theme support
+* Parameters Panel
+* Drill-Down support
+* Interactive Sorting
+* Zoom support
+
+[Get Started](https://docs.devexpress.com/XtraReports/403069)
+
+### New Project Wizard
+
+v21.1 ships with a new Blazor Project Wizard. This wizard allows you to choose a theme and specify localization settings for your Blazor application.
+
+### Bootstrap 5 Support
+
+DevExpress Blazor UI components now support Bootstrap 5. Set the global [BootstrapVersion](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Configuration.GlobalOptions.BootstrapVersion) option to `v5` and follow the [migration guide](https://getbootstrap.com/docs/5.0/migration/) to get started.
+
+### Migration to .NET 5.0
+
+DevExpress Blazor UI components now support .NET 5.0 (exclusively). All Project Templates in the DevExpress Template Gallery have been updated to reflect this change.
+
+### Charts
+
+#### Pan and Zoom
+
+Users can now zoom and pan the chart area with the mouse wheel or touch gestures. To enable this feature, add the [DxChartZoomAndPanSettings](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartZoomAndPanSettings) component to the Chart's markup and specify its [ArgumentAxisZoomAndPanMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartZoomAndPanSettings.ArgumentAxisZoomAndPanMode) and [ValueAxisZoomAndPanMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartZoomAndPanSettings.ValueAxisZoomAndPanMode) properties.
+
+[Demo](https://demos.devexpress.com/blazor/ZoomAndPan) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartZoomAndPanSettings)
+
+#### Axis Label Format
+The new [ChartElementFormat](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartElementFormat) class defines format settings for axis labels. You can specify various numeric and date-time formats along with format specific settings like precision. You can also use the [FromLdmlString](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ChartElementFormat.FromLdmlString(System.String)) method to create the desired custom format.
+
+#### Add/Remove Extra Margins to Outermost Series Points
+
+The new [EndOnTick](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartAxis-1.EndOnTick) option determines whether Chart axes begin and end on ticks. The [SideMarginsEnabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartAxis-1.SideMarginsEnabled) option adds extra margin space between outermost series points and chart boundaries.
+
+#### Custom Chart Size
+
+Use the [Width](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.Width) and [Height](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.Height) properties to specify the Chart's size.
+
+#### Disable Chart Animation
+To disable chart animation, add the [DxChartAnimationSettings](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartAnimationSettings) component into the Chart's markup and disable the [Enabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartAnimationSettings.Enabled) option.
+
+#### Data Aggregation
+
+The DevExpress Blazor Chart component now offers data aggregation support. Data aggregation significantly improves rendering performance (when rendering a chart against an extremely large set of data points). Aggregation methods include: Auto, Average, Count, Financial, Max, Min, Range, and Sum.
+
+[Demo](https://demos.devexpress.com/blazor/ZoomAndPan) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1#data-aggregation)
+
+### Data Editors
+
+#### Input Masks
+
+DevExpress Blazor data input UI components allow you to apply input masks with ease. Masks define data entry constraints and help ensure data consistency and information integrity.
+
+Our Blazor data input UI components support the following mask types:
+
+* Date-Time 
+* Numeric (e.g. currency, percentage, etc.) 
+
+[Demo - Date-Time Masks](https://demos.devexpress.com/blazor/DateEdit#Mask) | [Demo - Numeric Masks](https://demos.devexpress.com/blazor/SpinEdit#Mask) | [Documentation](https://docs.devexpress.com/Blazor/402513/data-editors/masks)
+
+#### Move Focus to an Editor in Code
+
+Our Blazor Data Editors include a new `FocusAsync` method that allows you to focus the input field in code.
+
+### Navigation and Layout
+
+#### Popup - Header, Body, and Footer Customization
+
+Our Blazor Popup API now offers extended customization options for the following UI elements:
+
+* [HeaderText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.HeaderText)
+* [BodyText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.BodyText)
+* [FooterText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.FooterText)
+* [HeaderContentTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.HeaderContentTemplate)
+* [BodyContentTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.BodyContentTemplate)
+* [FooterContentTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.FooterContentTemplate)
+* [HeaderTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.HeaderTemplate)
+* [BodyTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.BodyTemplate)
+* [FooterTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.FooterTemplate)
+* [ShowHeader](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.ShowHeader)
+* [ShowFooter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.ShowFooter)
+
+[Demo](https://demos.devexpress.com/blazor/Popup#Customization)
+
+#### Popup Size
+
+Our new [MinHeight](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.MinHeight), [MaxHeight](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.MaxHeight), [MinWidth](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.MinWidth), and [MaxWidth](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.MaxWidth) properties allow you to explicitly define a popup's size constraints whenever a popup adapts itself to content.
+
+You can also use the [Height](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.Height) and [Width](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.Width) properties to manually specify Popup size.
+
+ [Demo](https://demos.devexpress.com/blazor/Popup#Alignment)
+ 
+ #### Popup Position
+
+Use our new [HorizontalAlignment](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.HorizontalAlignment) and [VerticalAlignment](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.VerticalAlignment) properties to position a Popup on screen. ([Demo](https://demos.devexpress.com/blazor/Popup#Alignment))
+
+#### Show Multiple Popups
+
+You can now display multiple Popups simultaneously. Popup Z-indices are updated automatically (based on display order). This release also includes a new [ZIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.ZIndex) property. You can use this new property to specify a popup's Z-index manually. ([Demo](https://demos.devexpress.com/blazor/Popup#Events))
+
+#### Popup - Show and Close Actions
+
+In addition to the Close button, you can now press Escape or click outside the Popup's boundaries to close a Popup. This release includes two customization options - [CloseOnEscape](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.CloseOnEscape) and [CloseOnOutsideClick](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.CloseOnOutsideClick). These options can be used to disable this functionality.
+
+Our new [ShowAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.ShowAsync(System.Threading.CancellationToken)) and [CloseAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.CloseAsync(System.Threading.CancellationToken)) methods allow you to asynchronously display and hide a Popup in code.
+
+We've also implemented the following new events:
+
+* [Showing](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.Showing) - Fires before the Popup is displayed and allows you to cancel this action.
+* [Shown](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.Shown) - Fires after the Popup is displayed.
+* [Closing](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.Closing) - Fires before the Popup is closed and allows you to cancel this action.
+* [Closed](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.Closed) - Fires after the Popup is closed.
+
+[Demo](https://demos.devexpress.com/blazor/Popup#Events)
+
+#### Tabs - Tab Content Render Modes
+
+Use the new [DxTabs.RenderMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTabs.RenderMode) property to specify how the DevExpress Blazor Tab component loads tab content. Render modes are as follows:
+
+* Default. Adds tab content to the DOM each time a tab is activated (replaces the content of the previously active tab).
+* All Tabs. Renders all tab content on initial load and persists it within the DOM. This mode should only be used for apps with a few tabs in its layout (as it can increase page load time).
+* On Demand. Renders tab content when a tab is activated and persists it in the DOM.
+
+#### API Enhancements
+
+* [DxToolbar.TitleTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar.TitleTemplate) - Used to define the template for a toolbar's caption/title.
+* [DxTabs.TabClick](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTabs.TabClick) / [DxTabBase.Click](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTabBase.Click) - Used to specify the click event handler for all/individual tabs.
+
+### Scheduler
+
+#### New Month View
+
+Our Blazor Scheduler ships with a new Month View option. The Month View includes a [MonthCount](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerMonthView.MonthCount) property. 
+
+[Demo](https://demos.devexpress.com/blazor/SchedulerViewTypes#MonthView) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerMonthView)
+
+#### New Timeline View
+
+Our new Blazor Timeline View arranges events and appointments across an easy-to-read horizontal timeline. Thanks to its flexible design, our Timeline View allows you to display multiple time rulers with different scales. 
+
+[Demo](https://demos.devexpress.com/blazor/SchedulerViewTypes#TimelineView) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerTimelineView)
+
+#### Appointment Tooltip Customization
+
+You can now customize appointment/event tooltips as needed. Use the new [AppointmentTooltipTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.AppointmentTooltipTemplate) property to specify custom layouts and custom appearance settings for your tooltip. ([Demo](https://demos.devexpress.com/blazor/SchedulerCustomization#CustomAppointmentTooltip))
+
+#### Restrict User Actions
+
+The following new options allow you to configure/control Scheduler-related actions available to end users:
+
+* [AllowCreateAppointment](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.AllowCreateAppointment)
+* [AllowEditAppointment](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.AllowEditAppointment)
+* [AllowDeleteAppointment](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.AllowDeleteAppointment)
+
+[Demo](https://demos.devexpress.com/blazor/SchedulerCustomization#RestrictUserActions)
+
+#### API Enhancements
+* [StartDate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.StartDate) and [ActiveViewType](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.ActiveViewType) properties now support two-way binding to a data field.
+* [StartDateChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.StartDateChanged) / [ActiveViewTypeChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.ActiveViewTypeChanged) - Allow you to track changes to `StartDate` and `ActiveViewType`properties.
+* [AppointmentFormMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.AppointmentFormMode) - Specifies the form used to create and edit appointments/events: compact, popup, or both.
+* [ShowAppointmentTooltip](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.ShowAppointmentTooltip) - Specifies whether to display a tooltip when a user clicks an appointment/event.
+* [SelectedAppointment](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.SelectedAppointment) - Gets the selected appointment.
+* [SelectedAppointmentChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.SelectedAppointmentChanged) - Allows you to track changes to the `SelectedAppointment`property.
+
+### Resolved Issues
+
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=20.2.8&endBuildName=21.1.3&buildsMode=Range&hasPlatformsWithProducts=true) for a complete list of issues resolved in v20.1.3.
+
+### Breaking Changes
+
+* [T982678](https://supportcenter.devexpress.com/ticket/details/T982678/devexpress-blazor-components-no-longer-support-net-core-3-1): DevExpress Blazor components no longer support .NET Core 3.1
+* [T999135](https://supportcenter.devexpress.com/ticket/details/T999135/data-grid-localization-strings-have-changed-their-prefix-from-grid-to-datagrid-): Data Grid - Localization strings have changed their prefix from `Grid_` to `DataGrid_`
+* [T999158](https://supportcenter.devexpress.com/ticket/details/T999158/changed-alignment-of-data-editors-in-css-containers-): Data Editors - Changed alignment of data editors in CSS containers
+* [T986360](https://supportcenter.devexpress.com/ticket/details/T986360/charts-the-dxchartcommonseries-aggregationmethod-and-dxchartseries-aggregationmethod): Charts - The `DxChartCommonSeries.AggregationMethod` and `DxChartSeries.AggregationMethod` properties have become obsolete
+* Scheduler
+	* [T990675](https://supportcenter.devexpress.com/ticket/details/T990675/scheduler-behavior-of-appointment-edit-forms-has-changed): Behavior of appointment edit forms has changed
+	* [T990618](https://supportcenter.devexpress.com/ticket/details/T990618/scheduler-horizontal-appointments-now-display-their-status-): Horizontal appointments now display their status
+	* [T990650](https://supportcenter.devexpress.com/ticket/details/T990650/scheduler-the-rendering-of-horizontal-appointments-was-changed): The rendering of horizontal appointments was changed
+* Popup
+	* [T986662](https://supportcenter.devexpress.com/ticket/details/T986662/popup-the-popup-has-changed-its-rendering): The Popup has changed its rendering
+	* [T986363](https://supportcenter.devexpress.com/ticket/details/T986363/popup-the-closebuttonclick-event-has-become-obsolete): The `CloseButtonClick` event has become obsolete
+	* [T972514](https://supportcenter.devexpress.com/ticket/details/T972514/popup-the-content-property-has-become-obsolete): The `Content` property has become obsolete
+	* [T972521](https://supportcenter.devexpress.com/ticket/details/T972521/popup-the-footertemplate-property-has-changed-its-behavior-and-signature-): The `FooterTemplate` property has changed its behavior and signature
+	* [T972518](https://supportcenter.devexpress.com/ticket/details/T972518/popup-the-headertemplate-property-has-changed-its-signature): The HeaderTemplate property has changed its signature
+	* [T985590](https://supportcenter.devexpress.com/ticket/details/T985590/popup-the-visible-property-has-changed-its-default-value): The `Visible` property has changed its default value
+	* [T986380](https://supportcenter.devexpress.com/ticket/details/T986380/popup-the-popup-has-changed-its-default-position-on-the-screen): The Popup has changed its default position on the screen
+* [T975366](https://supportcenter.devexpress.com/ticket/details/T975366/context-menu-renamed-api-members): Context Menu - Renamed API members
+* [T975628](https://supportcenter.devexpress.com/ticket/details/T975628/the-menuitemsposition-enum-has-been-replaced-with-the-itemposition-enum): The `MenuItemsPosition` enum has been replaced with the `ItemPosition` enum
+* [T980276](https://supportcenter.devexpress.com/ticket/details/T980276/treeview-the-dxtreeviewnode-navigateurl-property-set-to-a-non-empty-url-no-longer-has-an): TreeView - The `DxTreeViewNode.NavigateUrl` property set to a non-empty URL no longer has an effect.
+* [T999452](https://supportcenter.devexpress.com/ticket/details/T999452/dxtabs-the-markup-of-the-tab-content-area-has-been-changed): DxTabs - The markup of the tab content area has been changed
+* [T995722](https://supportcenter.devexpress.com/ticket/details/T995722/form-layout-changed-the-default-approach-used-to-calculate-caption-paddings): Form Layout - Changed the default approach used to calculate caption paddings
+
 # 20.2.6
 
 ### Data Grid

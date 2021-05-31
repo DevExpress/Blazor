@@ -1,0 +1,62 @@
+﻿@page "/GridHTMLDecoration"
+
+<DemoPageSectionComponent Id="DataGrid-HTMLDecoration" ShowHorizontalScrollBar="true">
+    @layout DataProviderAccessArea<INwindDataProvider>
+    @inject NwindDataService NwindDataService
+
+    @if(Data == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <DxDataGrid Data="@Data"
+                    ShowPager="false"
+                    ShowGroupPanel="false"
+                    HtmlRowDecoration="@OnHtmlRowDecoration"
+                    HtmlDataCellDecoration="@OnHtmlDataCellDecoration">
+            <DxDataGridColumn Field="@nameof(Invoice.OrderId)" />
+            <DxDataGridDateEditColumn Field="@nameof(Invoice.OrderDate)"
+                                      DisplayFormat="D"
+                                      Width="240px" />
+            <DxDataGridColumn Field="@nameof(Invoice.ProductName)" />
+            <DxDataGridDateEditColumn Field="@nameof(Invoice.ShippedDate)"
+                                      DisplayFormat="D"
+                                      Width="240px" />
+            <DxDataGridSpinEditColumn Field="@nameof(Invoice.UnitPrice)"
+                                      DisplayFormat="c"
+                                      Width="120px" />
+            <DxDataGridSpinEditColumn Field="@nameof(Invoice.Quantity)"
+                                      Width="140px" />
+        </DxDataGrid>
+
+    }
+    @code {
+        IEnumerable<Invoice> Data;
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetInvoicesAsync();
+        }
+
+        const decimal largeOrder = 10;
+        void OnHtmlRowDecoration(DataGridHtmlRowDecorationEventArgs<Invoice> eventArgs) {
+            if(eventArgs.VisibleIndex % 2 == 1)
+                eventArgs.CssClass = " table-dark";
+            if(eventArgs.DataItem != null && eventArgs.DataItem.Quantity > largeOrder)
+                eventArgs.CssClass = " table-warning font-weight-bold";
+            else
+                eventArgs.Attributes.Add("data-low-price", "");
+        }
+        void OnHtmlDataCellDecoration(DataGridHtmlDataCellDecorationEventArgs<Invoice> eventArgs) {
+            eventArgs.CssClass += " border-0";
+
+            if(eventArgs.FieldName == nameof(Invoice.OrderId)) {
+                if(eventArgs.RowVisibleIndex % 2 == 1)
+                    eventArgs.Style += " background-color: rgb(169, 148, 200); color: black;";
+                else
+                    eventArgs.Style += " background-color: rgb(210, 198, 233); color: black;";
+
+                if(eventArgs.DataItem.Quantity > largeOrder) {
+                    eventArgs.CssClass += " font-weight-bold";
+                }
+            }
+        }
+    }
+</DemoPageSectionComponent>

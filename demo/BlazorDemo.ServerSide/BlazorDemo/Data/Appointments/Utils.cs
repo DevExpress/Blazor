@@ -3,8 +3,11 @@ using System;
 namespace BlazorDemo.Data {
 
     public static class DateTimeUtils {
-        public static DateTime CreateWeekStart(DateTime date) {
+        public static DateTime GetWeekStart(DateTime date) {
             return date.DayOfWeek == DayOfWeek.Sunday ? ValidWeekStart(date.Date) : ValidWeekStart(date.Date - CreateWeekOffset(date, DayOfWeek.Sunday));
+        }
+        public static DateTime GetBeginOfMonth(DateTime date) {
+            return new DateTime(date.Year, date.Month, 1);
         }
 
         static DateTime ValidWeekStart(DateTime date) {
@@ -22,6 +25,7 @@ namespace BlazorDemo.Data {
                 result = TimeSpan.FromDays(offset - 7);
             return result;
         }
+
     }
 
 }

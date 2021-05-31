@@ -1,0 +1,26 @@
+﻿<DemoPageSectionComponent Id="Editors-ComboBox-VirtualScrolling" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject WorldcitiesDataService WorldcitiesDataService
+
+        <DxComboBox Data="@Data"
+                    ListRenderMode="ListRenderMode.Virtual"
+                    FilteringMode="DataGridFilteringMode.Contains"
+                    TextFieldName="@nameof(Country.CountryName)"
+                    @bind-Value="@Value"
+                    SizeMode="Params.SizeMode"
+                    CssClass="cw-480" />
+        <p class="demo-text cw-480 mt-2 text-muted">
+            Selected item: <b>@(Value != null ? Value.CountryName : "null")</b>
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        IEnumerable<Country> Data { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await WorldcitiesDataService.GetCountriesAsync();
+        }
+
+        Country Value { get; set; }
+    }
+</DemoPageSectionComponent>

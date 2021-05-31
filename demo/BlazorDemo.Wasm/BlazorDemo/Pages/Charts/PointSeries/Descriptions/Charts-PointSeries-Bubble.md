@@ -1,0 +1,1 @@
+[Bubble](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartBubbleSeries-4) series allow you to visualize a data set with three dimensions: coordinates on the axes specify the first two dimensions; the size of the bubble the third.

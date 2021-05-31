@@ -1,0 +1,70 @@
+﻿<DemoPageSectionComponent Id="Navigation-FormLayout-DataBinding"
+                          ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxFormLayout Data="@editFormData"
+                      ItemSizeMode="Params.SizeMode"
+                      ItemUpdating="@((pair) => OnItemUpdating(pair.Key, pair.Value))"
+                      @key="@Params.ThemeName" CssClass="w-100">
+            <DxFormLayoutItem Field="@nameof(FormDataItem.Name)"
+                              Caption="Contact Name:"
+                              ColSpanMd="6" />
+            <DxFormLayoutItem Field="@nameof(FormDataItem.BirthDate)"
+                              Caption="Birth Date:"
+                              ColSpanMd="6" />
+            <DxFormLayoutItem Field="@nameof(FormDataItem.YearsWorked)"
+                              Caption="Years Worked:"
+                              ColSpanMd="6" />
+            <DxFormLayoutItem Field="@nameof(FormDataItem.Position)"
+                              Caption="Position:"
+                              ColSpanMd="6">
+                <Template>
+                    <DxComboBox Data="@(new List<string>() {
+                                            "Sales Representative",
+                                            "Designer" })"
+                                Value="@(((string)((ValueEditContext)context).Value))"
+                                ValueChanged="@((string value) =>
+                                    ((ValueEditContext)context).OnChanged(value))" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Field="@nameof(FormDataItem.OnVacation)"
+                              Caption="On Vacation:"
+                              ColSpanMd="6" />
+        </DxFormLayout>
+        <p class="demo-text w-100 mt-2 text-center text-muted">
+            DataObject = {
+                @nameof(FormDataItem.Name)=<b>@editFormData.Name</b>,
+                @nameof(FormDataItem.BirthDate)=<b>@editFormData.BirthDate</b>,
+                @nameof(FormDataItem.YearsWorked)=<b>@editFormData.YearsWorked</b>,
+                @nameof(FormDataItem.Position)=<b>@editFormData.Position</b>,
+                @nameof(FormDataItem.OnVacation)=<b>@editFormData.OnVacation</b>
+            }
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        FormDataItem editFormData = new FormDataItem() {
+            Name = "Nancy Davolio",
+            BirthDate = DateTime.Now.AddYears(-30),
+            YearsWorked = 3,
+            Position = "Sales Representative"
+        };
+
+        void OnItemUpdating(string fieldName, object newValue) {
+            if (fieldName == nameof(FormDataItem.Name)) {
+                editFormData.Name = newValue.ToString();
+            }
+            else if (fieldName == nameof(FormDataItem.BirthDate)) {
+                editFormData.BirthDate = (DateTime)newValue;
+            }
+            else if (fieldName == nameof(FormDataItem.YearsWorked)) {
+                editFormData.YearsWorked = (int)newValue;
+            }
+            else if (fieldName == nameof(FormDataItem.Position)) {
+                editFormData.Position = newValue.ToString();
+            }
+            else if (fieldName == nameof(FormDataItem.OnVacation)) {
+                editFormData.OnVacation = (bool)newValue;
+            }
+        }
+    }
+</DemoPageSectionComponent>

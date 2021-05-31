@@ -1,0 +1,38 @@
+﻿<DemoPageSectionComponent Id="Grid-DataBinding-Async" ShowHorizontalScrollBar="true">
+    @inject NwindDataService NwindDataService
+
+    @if(Data == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <DxGrid Data="@Data" CssClass="w-100">
+            <Columns>
+                <DxGridColumn FieldName="CompanyName" />
+                <DxGridColumn FieldName="ContactName" />
+                <DxGridColumn FieldName="ContactTitle" />
+                <DxGridColumn FieldName="Country" />
+                <DxGridColumn FieldName="City" />
+                <DxGridColumn FieldName="Address" />
+                <DxGridColumn FieldName="Phone" />
+            </Columns>
+        </DxGrid>
+    }
+
+    @code {
+        object Data { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            var suppliers = await NwindDataService.GetSuppliersAsync();
+            Data = suppliers.Select(s => {
+                return new {
+                    CompanyName = s.CompanyName,
+                    ContactName = s.ContactName,
+                    ContactTitle = s.ContactTitle,
+                    Country = s.Country,
+                    City = s.City,
+                    Address = s.Address,
+                    Phone = s.Phone
+                };
+            });
+        }
+    }
+</DemoPageSectionComponent>

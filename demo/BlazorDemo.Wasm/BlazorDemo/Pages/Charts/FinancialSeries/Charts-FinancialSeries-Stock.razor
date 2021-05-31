@@ -1,0 +1,44 @@
+﻿<DemoPageSectionComponent Id="Charts-FinancialSeries-Stock">
+    <ChildContentWithParameters Context="Params">
+        @inject IFinancialSeriesDataProvider FinancialSeriesDataProvider
+        @layout DataProviderAccessArea<ISalesViewerDataProvider>
+
+        <DxChart Data="@StockData"
+                 @key="Params.ThemeName"
+                 CssClass="w-100">
+
+            <DxChartLegend Position="RelativePosition.Outside" />
+
+            <DxChartStockSeries ValueField="@((BargainDataPoint i) => i.Price)"
+                                ArgumentField="@(i => new DateTime(
+                                                     i.DateTimeStamp.Year,
+                                                     i.DateTimeStamp.Month,
+                                                     i.DateTimeStamp.Day,
+                                                     i.DateTimeStamp.Hour,
+                                                     i.DateTimeStamp.Minute,
+                                                     0) )"
+                                Name="Eco Supreme" />
+
+            <DxChartTooltip Enabled="true">
+                @context.GetFinancialPoint().Render((financialPoint) =>
+                    @<div style="margin: 0.75rem">
+                        <div>Open: @($"{financialPoint.OpenValue: 0.0000}")</div>
+                        <div>Close: @($"{financialPoint.CloseValue: 0.0000}")</div>
+                        <div>High: @($"{financialPoint.HighValue: 0.0000}")</div>
+                        <div>Low: @($"{financialPoint.LowValue: 0.0000}")</div>
+                    </div>
+            )
+            </DxChartTooltip>
+
+        </DxChart>
+    </ChildContentWithParameters>
+
+
+    @code {
+        IEnumerable<BargainDataPoint> StockData;
+
+        protected override async Task OnInitializedAsync() {
+            StockData = await FinancialSeriesDataProvider.Generate();
+        }
+    }
+</DemoPageSectionComponent>

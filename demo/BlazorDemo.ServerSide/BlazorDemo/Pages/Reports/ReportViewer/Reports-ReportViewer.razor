@@ -1,0 +1,88 @@
+﻿@page "/ReportViewer"
+@page "/ReportViewer/{ReportName?}"
+
+
+<link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-reporting-pages.css">
+<link rel="stylesheet" href="_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.css">
+
+<DemoPageSectionComponent Id="Reports-ReportViewer" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @using BlazorDemo.Services
+        @using DevExpress.XtraPrinting.Caching;
+        @inject IDemoReportSource DemoReportSource
+        @inject DemoConfiguration Configuration
+        @inject NavigationManager NavigationManager
+        @using DevExpress.XtraReports;
+        @using DevExpress.XtraReports.UI;
+        @using DevExpress.Blazor.Reporting.EditingFields;
+
+        <DxReportViewer Report="@Report" RootCssClasses="w-100" @ref="Viewer" SizeMode="Params.SizeMode"></DxReportViewer>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        @if(!Configuration.ShowOnlyReporting) {
+            <DxFormLayout CssClass="dx-options-reporting-choozer">
+                <DxFormLayoutItem Caption="Report Name:" ColSpanMd="12">
+                    <Template>
+                        <DxComboBox Data="@ReportList" ValueFieldName="Key" TextFieldName="Value" Value="@ReportName" ValueChanged="@((string x) => ReportNameChanged(x))" DropDownWidthMode="DropDownWidthMode.EditorWidth" />
+                    </Template>
+                </DxFormLayoutItem>
+            </DxFormLayout>
+        } else {
+            <DxButton CssClass="ml-3" Text="Show in Report Designer" Click="@NavigateToReportDesigner" />
+        }
+    </OptionsContent>
+
+    @code {
+        Dictionary<string, string> ReportList;
+        DxReportViewer Viewer { get; set; }
+        IReport Report { get; set; }
+        [Parameter] public string ReportName { get; set; }
+        [Inject] public EditingFieldModelFactory EditingFieldModelFactory { get; set; }
+
+        void ReportNameChanged(string reportName) {
+            ReportName = reportName;
+            AssignReport();
+        }
+
+        protected void NavigateToReportDesigner() {
+            NavigationManager.NavigateTo($"ReportDesigner/{ReportName}");
+        }
+
+        void AssignReport() {
+            XtraReport report = DemoReportSource.GetReport(ReportName);
+            if(report == null) {
+                throw new Exception($"{ReportName} not found");
+            }
+            if(ReportName == ReportNames.LargeDatasetName)
+                Report = new CachedReportSource(report, new MemoryDocumentStorage());
+            else
+                Report = report;
+        }
+        protected override async Task OnAfterRenderAsync(bool firstRender) {
+            if(firstRender) {
+                EditingFieldModelFactory.RegisterMaskEditor("Name", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"[A-Z -.]+" });
+                EditingFieldModelFactory.RegisterMaskEditor("UppercaseLatinLetters", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"[A-Z]+" });
+                EditingFieldModelFactory.RegisterMaskEditor("NumbersAndUppercaseLatinLetters", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"[A-Z0-9]+" });
+                EditingFieldModelFactory.RegisterMaskEditor("UppercaseText", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"[A-Z0-9 ,-/]+" });
+                EditingFieldModelFactory.RegisterMaskEditor("Day", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"(0[1-9])|([1-2][0-9])|(3[0-1])" });
+                EditingFieldModelFactory.RegisterMaskEditor("Month", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"(0[1-9])|(1[0-2])" });
+                EditingFieldModelFactory.RegisterMaskEditor("Year", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"[0-2]([0-9]{3})" });
+            }
+            await base.OnAfterRenderAsync(firstRender);
+        }
+
+        protected override void OnInitialized() {
+            if(!Configuration.ShowOnlyReporting) {
+                ReportList = DemoReportSource.GetReportViewerList();
+                ReportName = ReportList.First().Key;
+            } else {
+                ReportName = ReportName ?? "InvoiceReport";
+            }
+        }
+
+        protected override async Task OnParametersSetAsync() {
+            await base.OnParametersSetAsync();
+            AssignReport();
+        }
+    }
+</DemoPageSectionComponent>

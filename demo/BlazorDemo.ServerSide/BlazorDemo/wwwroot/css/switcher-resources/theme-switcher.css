@@ -2,15 +2,12 @@
     0% { transform: translateX(0); }
     100% { transform: translateX(-100%); }
 }
-.themeswitcher-container {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
 
 #themesMenu.card {
     border-radius: 0;
     border: none;
 }
-#themesMenu.card,
+#themesMenu,
 #themesMenu div,
 #themesMenu .list-group,
 #themesMenu .card-header {

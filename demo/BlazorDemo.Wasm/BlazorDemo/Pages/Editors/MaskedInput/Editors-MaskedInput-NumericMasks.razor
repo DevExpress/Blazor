@@ -1,0 +1,71 @@
+﻿<DemoPageSectionComponent Id="Editors-MaskedInput-NumericMasks" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxMaskedInput @bind-Value="@Price"
+                       SizeMode="Params.SizeMode"
+                       CssClass="cw-320"
+                       Mask="@NumericMaskValue">
+            <DxNumericMaskProperties Culture="MaskCultureInfo.Value" />
+        </DxMaskedInput>
+        <p class="demo-text cw-320 mt-2 text-muted">
+        Price: <b>@Price</b>
+        </p>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionComboBox Label="Mask:"
+                        Data="PredefinedNumericMasks"
+                        Value="NumericMaskName"
+                        ValueChanged="@((string mask) =>ChangeNumericMaskType(mask))" />
+        <OptionComboBox Label="Culture:"
+                        Data="@CultureInfoItems"
+                        @bind-Value="MaskCultureInfo" />
+    </OptionsContent>
+
+
+    @code {
+        class CultureInfoItem {
+            public CultureInfo Value { get; set; }
+            public string Text { get; set; }
+            public override string ToString() { return Text; }
+        }
+
+        static CultureInfoItem[] CultureInfoItems { get; set; } = new CultureInfoItem[] {
+            new CultureInfoItem() {
+                Value = CultureInfo.GetCultureInfo("en-US"),
+                Text = "American English"
+            },
+            new CultureInfoItem() {
+                Value = CultureInfo.GetCultureInfo("de-DE"),
+                Text = "German"
+            },
+        };
+
+        IEnumerable<string> PredefinedNumericMasks = new List<string>() {
+            "Currency",
+            "Percentage",
+            "PercentageMultipliedBy100",
+            "RealNumber",
+            "RealNumberWithThousandSeparator",
+            "WholeNumber"
+        };
+
+
+        double Price { get; set; }
+        CultureInfoItem MaskCultureInfo { get; set; } = CultureInfoItems.FirstOrDefault();
+        string NumericMaskValue { get; set; } = NumericMask.Currency;
+        string NumericMaskName { get; set; } = "Currency";
+
+        void ChangeNumericMaskType(string mask) {
+            NumericMaskValue = mask switch {
+                "Currency" => NumericMask.Currency,
+                "Percentage" => NumericMask.Percentage,
+                "PercentageMultipliedBy100" => NumericMask.PercentageMultipliedBy100,
+                "RealNumber" => NumericMask.RealNumber,
+                "RealNumberWithThousandSeparator" => NumericMask.RealNumberWithThousandSeparator,
+                "WholeNumber" => NumericMask.WholeNumber,
+                _ => throw new ArgumentException()
+            };
+            NumericMaskName = mask;
+        }
+    }
+</DemoPageSectionComponent>

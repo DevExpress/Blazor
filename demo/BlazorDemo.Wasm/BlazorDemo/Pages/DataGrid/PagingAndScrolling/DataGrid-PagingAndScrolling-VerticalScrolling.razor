@@ -1,0 +1,48 @@
+﻿<DemoPageSectionComponent Id="DataGrid-PagingAndScrolling-VerticalScrolling" ShowHorizontalScrollBar="true">
+    @inject IProductsFlatProvider ProductsFlatService
+
+    @if(DataSource == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <DxDataGrid Data="@DataSource"
+                    VerticalScrollBarMode="ScrollBarMode.Auto"
+                    VerticalScrollableHeight="300"
+                    PageSize="30">
+
+            <DxDataGridColumn Field="@nameof(ProductFlat.Id)" Caption="ID" Width="50px">
+            </DxDataGridColumn>
+
+            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name">
+            </DxDataGridColumn>
+
+            <DxDataGridColumn Field="@nameof(ProductFlat.Availability)" Caption="Availability" Width="110px">
+                <DisplayTemplate>
+                    @{
+                        var id = Guid.NewGuid().ToString();
+                        var inStock = (context as ProductFlat).Availability;
+                        <DxCheckBox Id="@id" Checked="@inStock" Enabled="false">
+                            @if(inStock) {
+                                <label class="form-check-label text-success" for="@id"><span>In stock</span></label>
+                            } else {
+                                <label class="form-check-label text-danger" for="@id"><span>Sold out</span></label>
+                            }
+                        </DxCheckBox>
+                    }
+                </DisplayTemplate>
+            </DxDataGridColumn>
+
+            <DxDataGridColumn Field="@nameof(ProductFlat.Category)" Caption="Category"></DxDataGridColumn>
+            <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)" Caption="Subcategory"></DxDataGridColumn>
+            <DxDataGridDateEditColumn Field="@nameof(ProductFlat.LastUpdated)" Caption="Last Updated"></DxDataGridDateEditColumn>
+
+        </DxDataGrid>
+    }
+
+    @code {
+        IEnumerable<ProductFlat> DataSource;
+
+        protected override async Task OnInitializedAsync() {
+            DataSource = await ProductsFlatService.LoadAsync();
+        }
+    }
+</DemoPageSectionComponent>

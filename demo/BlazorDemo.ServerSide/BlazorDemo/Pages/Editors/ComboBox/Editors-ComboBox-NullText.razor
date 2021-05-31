@@ -1,0 +1,23 @@
+﻿<DemoPageSectionComponent Id="Editors-ComboBox-NullText" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject WorldcitiesDataService WorldcitiesDataService
+
+        <DxComboBox NullText="Select a country..."
+                    Data="@Data"
+                    @bind-Value="@CurrentCountry"
+                    TextFieldName="@nameof(Country.CountryName)"
+                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                    SizeMode="Params.SizeMode"
+                    CssClass="cw-480" />
+    </ChildContentWithParameters>
+
+    @code {
+        IEnumerable<Country> Data { get; set; }
+        Country CurrentCountry { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await WorldcitiesDataService.GetCountriesAsync();
+            CurrentCountry = Data.FirstOrDefault();
+        }
+    }
+</DemoPageSectionComponent>

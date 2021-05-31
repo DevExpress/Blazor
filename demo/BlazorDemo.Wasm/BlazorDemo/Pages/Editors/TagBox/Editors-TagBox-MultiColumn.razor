@@ -1,0 +1,29 @@
+﻿<DemoPageSectionComponent Id="Editors-TagBox-MultiColumn" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <DxTagBox Data="@Data"
+                  @bind-Values="@Values"
+                  SizeMode="Params.SizeMode"
+                  CssClass="cw-480"
+                  EditFormat="{1} {2}">
+            <DxListEditorColumn FieldName="@nameof(Employee.EmployeeId)"
+                                Caption="Id"
+                                Width="50px" />
+            <DxListEditorColumn FieldName="@nameof(Employee.FirstName)"
+                                Caption="Name" />
+            <DxListEditorColumn FieldName="@nameof(Employee.LastName)"
+                                Caption="Surname" />
+        </DxTagBox>
+    </ChildContentWithParameters>
+
+    @code {
+        IEnumerable<Employee> Data { get; set; }
+        IEnumerable<Employee> Values { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetEmployeesAsync();
+            Values = Data.Take(1);
+        }
+    }
+</DemoPageSectionComponent>

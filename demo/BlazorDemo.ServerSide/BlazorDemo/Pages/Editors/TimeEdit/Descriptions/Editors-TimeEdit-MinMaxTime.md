@@ -1,0 +1,3 @@
+Use the [MinTime](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1.MinTime) and [MaxTime](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1.MaxTime) properties to specify an available time range. Our Blazor Time Edit's drop-down will automatically disable (gray out) values that are outside a specified range. If a user tries to select an unavailable time value via the roller, the component displays a notification message. If a user enters a value outside the range within the edit box, our Blazor Time Edit retains the previously selected time.
+
+In this demo, the DevExpress Blazor Time Edit component only allows users to select time values for the current hour.

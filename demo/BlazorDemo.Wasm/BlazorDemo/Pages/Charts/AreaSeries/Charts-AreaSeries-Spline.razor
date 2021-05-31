@@ -1,0 +1,39 @@
+﻿@using System.Text.RegularExpressions
+
+<DemoPageSectionComponent Id="Charts-AreaSeries-Spline">
+    <ChildContent>
+        @switch (SplineAreaSeriesType)
+        {
+            case ChartSeriesType.SplineArea:
+                <SplineAreaChart />
+                break;
+            case ChartSeriesType.StackedSplineArea:
+                <StackedSplineAreaChart />
+                break;
+            case ChartSeriesType.FullStackedSplineArea:
+                <FullStackedSplineAreaChart />
+                break;
+
+        }
+    </ChildContent>
+
+    <OptionsContent>
+        <OptionComboBox Label="Series Type:"
+                        T="ChartSeriesType"
+                        TData="KeyValuePair<string, ChartSeriesType>"
+                        Data="@SplineAreaSeriesTypes"
+                        ValueField="Value"
+                        TextField="Key"
+                        @bind-Value="@SplineAreaSeriesType" />
+    </OptionsContent>
+
+    @code {
+        ChartSeriesType SplineAreaSeriesType = SplineAreaSeriesTypes.First().Value;
+        static readonly Dictionary<string, ChartSeriesType> SplineAreaSeriesTypes = new Dictionary<string, ChartSeriesType>()
+        {
+            { "Spline Area", ChartSeriesType.SplineArea },
+            { "Stacked Spline Area" , ChartSeriesType.StackedSplineArea},
+            { "Full Stacked Spline Area", ChartSeriesType.FullStackedSplineArea}
+        };
+    }
+</DemoPageSectionComponent>

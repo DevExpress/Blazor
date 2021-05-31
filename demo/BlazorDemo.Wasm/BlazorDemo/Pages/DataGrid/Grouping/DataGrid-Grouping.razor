@@ -1,0 +1,22 @@
+﻿@page "/GridGrouping"
+
+<DemoPageSectionComponent Id="DataGrid-Grouping" ShowHorizontalScrollBar="true">
+    @if(Vacancies == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <DxDataGrid Data="@Vacancies" ShowPager="true" ShowGroupPanel="true">
+            <DxDataGridColumn Field="@nameof(Vacancy.Id)" Width="70px" AllowGroup="false" />
+            <DxDataGridColumn Field="@nameof(Vacancy.Description)" Caption="Vacancy" />
+            <DxDataGridComboBoxColumn Field="@nameof(Vacancy.Region)" Data="@VacancyRepository.Regions" GroupIndex="0" />
+            <DxDataGridColumn Field="@nameof(Vacancy.City)" GroupIndex="1" />
+        </DxDataGrid>
+    }
+
+    @code {
+        IEnumerable<Vacancy> Vacancies;
+
+        protected override async Task OnInitializedAsync() {
+            Vacancies = await VacancyRepository.GetVacancies(100);
+        }
+    }
+</DemoPageSectionComponent>

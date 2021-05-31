@@ -1,9 +1,13 @@
+using System.IO;
 using System.Net.Http;
+using BlazorDemo.Configuration;
 using BlazorDemo.DataProviders;
 using BlazorDemo.DataProviders.Implementation;
+using BlazorDemo.Wasm.Server.DataProviders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,8 +23,7 @@ namespace BlazorDemo.ServerSide {
 
         public abstract void Configure(IApplicationBuilder app, IWebHostEnvironment env);
         public abstract void ConfigureServices(WebHostBuilderContext context, IServiceCollection services);
-
-        void IHostingStartup.Configure(IWebHostBuilder builder) {
+        public virtual void Configure(IWebHostBuilder builder) {
             builder.UseEnvironment(EnvironmentName);
             builder.UseStaticWebAssets();
 
@@ -28,10 +31,21 @@ namespace BlazorDemo.ServerSide {
             builder.Configure(ConfigureApp);
 
             void ConfigureApp(WebHostBuilderContext context, IApplicationBuilder app) {
+                string pathBase = Configuration.GetValue<string>("pathBase");
+                if (!string.IsNullOrEmpty(pathBase))
+                    app.UsePathBase(pathBase);
+
+                app.UseRequestLocalization(new RequestLocalizationOptions().SetDefaultCulture("en-US"));
+
                 app.UseResponseCompression();
                 app.UseRouting();
 
-                app.UseStaticFiles();
+                var provider = new FileExtensionContentTypeProvider();
+                provider.Mappings[".razor"] = "text/plain";
+                provider.Mappings[".cshtml"] = "text/plain";
+                provider.Mappings[".cs"] = "text/plain";
+                app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = provider });
+
                 app.UseAuthorization();
 
                 app.UseEndpoints(endpoints => {
@@ -66,14 +80,16 @@ namespace BlazorDemo.ServerSide {
                 services.AddControllers().AddJsonOptions(ConfigureJsonOptions);
                 services.AddDemoServices();
 
-                services.AddSingleton<ICountryNamesProvider, CountryNamesProvider>();
-                services.AddSingleton<IFlatProductsProvider, FlatProductsProvider>();
+                services.AddSingleton<IProductsFlatProvider, ProductsFlatProvider>();
                 services.AddSingleton<IProductCategoriesProvider, ProductCategoriesProvider>();
-                services.AddSingleton<IProductsProvider, ProductsProvider>();
                 services.AddSingleton<ISalesInfoDataProvider, SalesInfoDataProvider>();
                 services.AddSingleton<ISalesViewerDataProvider, SalesViewerDataProvider>();
-                services.AddScoped<IFinancialSeriesDataProvider, FinancialSeriesDataProvider>();
-
+                services.AddSingleton<IFinancialSeriesDataProvider, FinancialSeriesDataProvider>();
+                services.AddSingleton<ICurrencyExchangeDataProvider, UsdJpyDataProvider>();
+                services.AddSingleton<IUsdJpyCsvFileContentProvider, UsdJpyCsvFileContentProvider>();
+                services.AddSingleton<INwindDataProvider, NwindDataProvider>();
+                services.AddSingleton<IIssuesDataProvider, IssuesDataProvider>();
+                services.AddSingleton<IWorldcitiesDataProvider, WorldcitiesDataProvider>();
 
                 static void ConfigureHttpClient(HttpClient httpClient) {
                     httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
@@ -83,6 +99,10 @@ namespace BlazorDemo.ServerSide {
                     options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                 };
             }
+        }
+
+        void IHostingStartup.Configure(IWebHostBuilder builder) {
+            Configure(builder);
         }
     }
 }

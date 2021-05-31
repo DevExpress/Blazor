@@ -1,0 +1,1 @@
+In this demo, the [TagBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2) displays selected items in the drop-down list. Set the [HideSelectedItems](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.HideSelectedItems) property to **false** to enable this behavior.

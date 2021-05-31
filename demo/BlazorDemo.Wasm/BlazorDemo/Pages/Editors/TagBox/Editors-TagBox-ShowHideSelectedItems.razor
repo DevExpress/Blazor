@@ -1,0 +1,23 @@
+﻿<DemoPageSectionComponent Id="Editors-TagBox-ShowHideSelectedItems" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject WorldcitiesDataService WorldcitiesDataService
+
+        <DxTagBox Data="@Data"
+                  @bind-Values="@Values"
+                  TextFieldName="@nameof(City.CityName)"
+                  HideSelectedItems="false"
+                  CssClass="cw-480"
+                  SizeMode="Params.SizeMode"
+                  ListRenderMode="ListRenderMode.Virtual" />
+    </ChildContentWithParameters>
+
+    @code {
+        IEnumerable<City> Data { get; set; }
+        IEnumerable<City> Values { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await WorldcitiesDataService.GetCitiesAsync();
+            Values = Data.Where(c => c.CityName == "New York" || c.CityName == "Los Angeles");
+        }
+    }
+</DemoPageSectionComponent>

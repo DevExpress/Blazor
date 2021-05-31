@@ -1,0 +1,27 @@
+﻿<DemoPageSectionComponent Id="Navigation-Toolbar-CheckedAndRadioButtons">
+    <ChildContentWithParameters Context="Params">
+        @*BeginHide*@
+
+        <div class="card w-100">
+            <div class="card-header border-0 p-2 rounded">
+                @*EndHide*@
+                <DxToolbar @key="@Params.ThemeName">
+                    <Items>
+                        <DxToolbarItem GroupName="align" IconCssClass="tb-icon tb-icon-align-left" />
+                        <DxToolbarItem GroupName="align" IconCssClass="tb-icon tb-icon-align-center" />
+                        <DxToolbarItem GroupName="align" IconCssClass="tb-icon tb-icon-align-right" />
+                        <DxToolbarItem Text="Font Style" BeginGroup="true">
+                            <Items>
+                                <DxToolbarItem IconCssClass="tb-icon tb-icon-bold" Text="Bold" GroupName="bold" />
+                                <DxToolbarItem IconCssClass="tb-icon tb-icon-italic" Text="Italic" GroupName="italic" />
+                                <DxToolbarItem IconCssClass="tb-icon tb-icon-underline" Text="Underline" GroupName="underline" />
+                            </Items>
+                        </DxToolbarItem>
+                    </Items>
+                </DxToolbar>
+                @*BeginHide*@
+            </div>
+        </div>
+        @*EndHide*@
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

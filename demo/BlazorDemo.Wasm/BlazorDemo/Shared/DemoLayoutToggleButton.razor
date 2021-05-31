@@ -1,0 +1,27 @@
+﻿@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+
+<button class="navbar-toggler d-block bg-primary border-0" @onclick="@OnToggleButtonClick">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+@code {
+    bool _canToggle;
+    [Parameter]
+    public bool Toggled { get; set; }
+    [Parameter]
+    public EventCallback<bool> ToggledChanged { get; set; }
+
+    async Task OnToggleButtonClick() => await ToggleState(!Toggled);
+    public async Task ToggleState(bool isToggled) {
+        if(_canToggle && Toggled != isToggled) {
+            Toggled = isToggled;
+            await ToggledChanged.InvokeAsync(Toggled);
+        }
+    }
+
+    protected override void OnAfterRender(bool firstRender) {
+        base.OnAfterRender(firstRender);
+        _canToggle = true;
+    }
+}

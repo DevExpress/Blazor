@@ -1,0 +1,38 @@
+﻿<DemoPageSectionComponent Id="Editors-ListBox-ReadOnly">
+    @inject NwindDataService NwindDataService
+
+    <div class="d-flex flex-wrap cw-800">
+        <div class="mr-2 mt-1 flex-grow-1">
+            <div class="col-form-label-sm" style="font-weight:600">
+                Read-Only
+            </div>
+            <DxListBox Data="@Data"
+                       TextFieldName="@nameof(Employee.Text)"
+                       ReadOnly="true"
+                       Values="@Values"
+                       CssClass="w-100 chi-220">
+            </DxListBox>
+        </div>
+        <div class="mt-1 flex-grow-1">
+            <div class="col-form-label-sm" style="font-weight:600">
+                Disabled
+            </div>
+            <DxListBox Data="@Data"
+                       TextFieldName="@nameof(Employee.Text)"
+                       Enabled="false"
+                       Values="@Values"
+                       CssClass="w-100 chi-220 ">
+            </DxListBox>
+        </div>
+    </div>
+
+    @code {
+        IEnumerable<Employee> Data { get; set; }
+        IEnumerable<Employee> Values { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetEmployeesAsync();
+            Values = Data.Take(2);
+        }
+    }
+</DemoPageSectionComponent>

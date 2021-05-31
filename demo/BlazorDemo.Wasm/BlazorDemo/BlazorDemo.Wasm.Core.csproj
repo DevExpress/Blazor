@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <DxExtendStartupHost>False</DxExtendStartupHost>
+    <Configurations>Debug;Release;VisualTests</Configurations>
+    <EnableDefaultItems>False</EnableDefaultItems>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <AssemblyName>BlazorDemo</AssemblyName>
+    <RootNamespace>BlazorDemo</RootNamespace>
+    <OutputType>Library</OutputType>
+    <IntermediateOutputPath>obj.WASM</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Markdig" Version="0.23.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Blazor" Version="21.1.3" />
+    
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Utils.cs" />
+    <Compile Include="Configuration\**\*.cs" />
+    <Compile Include="DemoServiceCollectionExtensions.cs" />
+    <Compile Include="Data\**\*.cs" />
+    <Compile Include="DataProviders\**\*.cs" />
+    <Compile Include="Services\ProductsFlatService*.cs" />
+    <Compile Include="Services\RentInfoDataService.cs" />
+    <Compile Include="Services\WeatherForecastService*.cs" />
+    <Compile Include="Services\NwindDataService*.cs" />
+    <Compile Include="Services\IssuesDataService*.cs" />
+    <Compile Include="Services\WorldcitiesDataService*.cs" />
+    <Compile Include="Shared\**\*.cs" />
+    <Compile Include="DocumentMetadata\Components\MetadataManager.cs" />
+    <Compile Include="DocumentMetadata\Components\MetadataStaticRenderer.cs" />
+    <Compile Include="DocumentMetadata\Renderers\**\*.cs" />
+    <Compile Include="DocumentMetadata\DocumentAttributes.cs" />
+    <Compile Include="DocumentMetadata\DocumentMetadata.cs" />
+    <Compile Include="DocumentMetadata\DocumentMetadata.Implementation.cs" />
+    <Compile Include="DocumentMetadata\Utils.cs" />
+    <Compile Include="DocumentMetadata\Components\WasmMetadataManager.cs" />
+    <Compile Include="DocumentMetadata\DocumentMetadata.Wasm.cs" />
+    <Content Include="wwwroot\**\*.*" Exclude="wwwroot\_code\**\*.*" />
+    <Content Include="**\*.razor" Exclude="Pages\Reports\**;Pages\RichEdit\**;Shared\NavMenuReporting.razor;wwwroot\_code\**\*.razor" />
+    <Content Include="Pages\**\*.md" />
+    <Content Include="Pages\**\*.razor.css" />
+    <Content Include="Shared\**\*.razor.css" />
+    
+    <Content Include="NOTICE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataSources\Contacts.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataSources\devav.sqlite3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataSources\homes.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataSources\nwind.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataSources\vehicles.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataSources\Countries.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataSources\issue-list.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataSources\worldcities.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataSources\USDJPY.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\CodeSnippets\*.cs" />
+  </ItemGroup>
+  <Target Name="ControllersCreate" BeforeTargets="PreBuildEvent" Condition="!Exists('Controllers')">
+    <Exec Command="mklink /J &quot;Controllers&quot; &quot;..//BlazorDemo.ServerSide//Controllers&quot;" />
+  </Target>
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent">
+    <ItemGroup>
+      <EmbeddedResource Include="Pages\**\*.*" Exclude="Pages\CodeSnippets\**\*.*" />
+      <EmbeddedResource Include="Data\**\*.*" />
+      <EmbeddedResource Include="DataProviders\**\*.*" />
+      <EmbeddedResource Include="Services\**\*.*" />
+      <EmbeddedResource Include="wwwroot\css\*.css" />
+      <EmbeddedResource Include="wwwroot\demo-metadata.json" />
+      <EmbeddedResource Include="Controllers\**\*.*" />
+    </ItemGroup>
+  </Target>
+</Project>

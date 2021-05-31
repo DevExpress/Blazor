@@ -1,0 +1,13 @@
+﻿@page "/GridSortData"
+
+<DemoPageSectionComponent Id="DataGrid-Sorting" ShowHorizontalScrollBar="true">
+    @layout DataProviderAccessArea<IProductsFlatProvider>
+    @inject IProductsFlatProvider ProductsFlatService
+
+    <DxDataGrid DataAsync="@ProductsFlatService.LoadAsync">
+        <DxDataGridColumn Field="@nameof(ProductFlat.Id)" Caption="ID" AllowSort="false" Width="50px" />
+        <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name" Width="350px" />
+        <DxDataGridColumn Field="@nameof(ProductFlat.Category)" SortOrder="DataGridColumnSortOrder.Descending" Width="350px" SortIndex="0" />
+        <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)" SortOrder="DataGridColumnSortOrder.Ascending" Width="350px" SortIndex="1" />
+    </DxDataGrid>
+</DemoPageSectionComponent>

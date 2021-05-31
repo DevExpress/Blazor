@@ -1,0 +1,1 @@
+This demo illustrates how to use [Range Bar](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartRangeBarSeries-3) series within the [Chart](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1) component. Range Bar series display value ranges that correspond to argument values. Chart data is represented as rectangles between a specified start and end value.

@@ -1,0 +1,43 @@
+﻿<DemoPageSectionComponent Id="DataGrid-PagingAndScrolling-Paging" ShowHorizontalScrollBar="true">
+    @inject IProductsFlatProvider ProductsFlatService
+
+    @if(DataSource == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <DxDataGrid Data="@DataSource"
+                    ShowPager="true"
+                    PagerNavigationMode=@PagerNavigationMode.InputBox
+                    PagerPageSizeSelectorVisible="true"
+                    PagerAllDataRowsItemVisible="true"
+                    PagerAllowedPageSizes=@(new int[] {2,10,20,40})>
+            <DxDataGridColumn Field="@nameof(ProductFlat.Id)" Caption="ID" Width="50px" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name" Width="330px" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.Availability)" Caption="Availability" Width="110px">
+                <DisplayTemplate>
+                    @{
+                        var id = Guid.NewGuid().ToString();
+                        var inStock = (context as ProductFlat).Availability;
+                        <DxCheckBox Id="@id" Checked="@inStock" Enabled="false">
+                            @if(inStock) {
+                                <label class="form-check-label text-success" for="@id"><span>In stock</span></label>
+                            } else {
+                                <label class="form-check-label text-danger" for="@id"><span>Sold out</span></label>
+                            }
+                        </DxCheckBox>
+                    }
+                </DisplayTemplate>
+            </DxDataGridColumn>
+            <DxDataGridColumn Field="@nameof(ProductFlat.Category)" Caption="Category" Width="150px" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)" Caption="Subcategory" Width="150px" />
+            <DxDataGridDateEditColumn Field="@nameof(ProductFlat.LastUpdated)" Caption="Last Updated" Width="200px" />
+        </DxDataGrid>
+    }
+
+    @code {
+        IEnumerable<ProductFlat> DataSource { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            DataSource = await ProductsFlatService.LoadAsync();
+        }
+    }
+</DemoPageSectionComponent>

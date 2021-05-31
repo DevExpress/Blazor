@@ -1,0 +1,30 @@
+﻿@page "/GridResizeColumns"
+
+<DemoPageSectionComponent Id="DataGrid-ResizeColumns" ShowHorizontalScrollBar="true">
+    <ChildContent>
+        @inject NwindDataService NwindDataService
+
+        <div class="w-100 overflow-auto">
+            <DxDataGrid DataAsync="@NwindDataService.GetCustomersAsync" ColumnResizeMode="@CurrentMode">
+                <Columns>
+                    <DxDataGridColumn Field="@nameof(Customer.ContactName)" />
+                    <DxDataGridColumn Field="@nameof(Customer.CompanyName)" />
+                    <DxDataGridColumn Field="@nameof(Customer.City)" />
+                    <DxDataGridColumn Field="@nameof(Customer.Region)" />
+                    <DxDataGridColumn Field="@nameof(Customer.Country)" />
+                </Columns>
+            </DxDataGrid>
+        </div>
+    </ChildContent>
+    <OptionsContent>
+        <OptionComboBox Label="Column Resize Mode:" Data="@Modes" @bind-Value="@CurrentMode" />
+    </OptionsContent>
+
+    @code {
+        DataGridColumnResizeMode CurrentMode { get; set; } = DataGridColumnResizeMode.NextColumn;
+        DataGridColumnResizeMode[] Modes { get; } = new DataGridColumnResizeMode[] {
+            DataGridColumnResizeMode.NextColumn,
+            DataGridColumnResizeMode.Component
+        };
+    }
+</DemoPageSectionComponent>

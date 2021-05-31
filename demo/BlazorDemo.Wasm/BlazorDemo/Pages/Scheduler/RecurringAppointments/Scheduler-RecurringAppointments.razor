@@ -1,0 +1,39 @@
+﻿@page "/SchedulerRecurringAppointments"
+
+<DemoPageSectionComponent Id="Scheduler-RecurringAppointments">
+    <DxScheduler StartDate="@DateTime.Today"
+                 DataStorage="@DataStorage"
+                 ActiveViewType="SchedulerViewType.WorkWeek"
+                 CssClass="w-100">
+        <DxSchedulerDayView VisibleTime="@VisibleTime"></DxSchedulerDayView>
+        <DxSchedulerWorkWeekView VisibleTime="@VisibleTime"></DxSchedulerWorkWeekView>
+        <DxSchedulerWeekView VisibleTime="@VisibleTime"></DxSchedulerWeekView>
+        <DxSchedulerMonthView CellMinWidth="120"></DxSchedulerMonthView>
+        <DxSchedulerTimelineView Duration="@(TimeSpan.FromDays(7))" CellMinWidth="100">
+            <Scales>
+                <DxSchedulerTimeScale Unit="@SchedulerTimeScaleUnit.Week"></DxSchedulerTimeScale>
+                <DxSchedulerTimeScale Unit="@SchedulerTimeScaleUnit.Day"></DxSchedulerTimeScale>
+            </Scales>
+        </DxSchedulerTimelineView>
+    </DxScheduler>
+
+    @code {
+        DxSchedulerTimeSpanRange VisibleTime = new DxSchedulerTimeSpanRange(TimeSpan.FromHours(8), TimeSpan.FromHours(19));
+
+        DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
+            AppointmentsSource = RecurringAppointmentCollection.GetAppointments(),
+            AppointmentMappings = new DxSchedulerAppointmentMappings() {
+                Type = "AppointmentType",
+                Start = "StartDate",
+                End = "EndDate",
+                Subject = "Caption",
+                AllDay = "AllDay",
+                Location = "Location",
+                Description = "Description",
+                LabelId = "Label",
+                StatusId = "Status",
+                RecurrenceInfo = "Recurrence"
+            }
+        };
+    }
+</DemoPageSectionComponent>

@@ -1,0 +1,3 @@
+The DevExpress UI components support Blazor's form validation. You can read about the Blazor forms and validation in the [official documentation](https://docs.microsoft.com/aspnet/core/blazor/forms-validation?view=aspnetcore-3.0).
+
+In the demo examples we will use the Starship class that defines validation logic based on [data annotations](https://docs.microsoft.com/aspnet/core/mvc/models/validation?view=aspnetcore-3.0). This class has been taken from the [official documentation](https://docs.microsoft.com/aspnet/core/blazor/forms-validation?view=aspnetcore-3.0) with only slight modifications.

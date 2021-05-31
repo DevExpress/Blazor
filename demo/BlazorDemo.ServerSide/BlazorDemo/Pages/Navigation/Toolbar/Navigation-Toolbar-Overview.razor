@@ -1,0 +1,37 @@
+﻿<DemoPageSectionComponent Id="Navigation-Toolbar-Overview">
+    <ChildContentWithParameters Context="Params">
+        @*BeginHide*@
+        <div class="card w-100">
+            <div class="card-header border-0 p-2 rounded">
+                @*EndHide*@
+                <DxToolbar ItemClick="@OnItemClick" @key="@Params.ThemeName">
+                    <Items>
+                        <DxToolbarItem Name="Item1" Text="Item1" Tooltip="Item1" />
+                        <DxToolbarItem Name="Item2" Text="Item2" Tooltip="Item2" />
+                        <DxToolbarItem Name="Left" BeginGroup="true" IconCssClass="tb-icon tb-icon-align-left"
+                                       Tooltip="Align Left" />
+                        <DxToolbarItem Name="Center" IconCssClass="tb-icon tb-icon-align-center"
+                                       Tooltip="Align Center" />
+                        <DxToolbarItem Name="Right" IconCssClass="tb-icon tb-icon-align-right"
+                                       Tooltip="Align Right" />
+                        <DxToolbarItem Name="Documentation" Text="Documentation" BeginGroup="true"
+                                       IconCssClass="tb-icon tb-icon-info"
+                                       Tooltip="Documentation (opened in a new tab)"
+                                       Alignment="ToolbarItemAlignment.Right"
+                                       NavigateUrl="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar"
+                                       target="_blank" />
+                    </Items>
+                </DxToolbar>
+                <DemoToaster Duration="3000" @ref=@toasterRef />
+                @*BeginHide*@
+            </div>
+        </div>@*EndHide*@
+    </ChildContentWithParameters>
+    @code {
+        IObserver<string> toasterRef;
+
+        void OnItemClick(ToolbarItemClickEventArgs e) {
+            toasterRef.OnNext($"The '{e.ItemName}' button has been clicked");
+        }
+    }
+</DemoPageSectionComponent>

@@ -1,0 +1,5 @@
+@media (max-width:400px) {
+    /*BeginHide*/::deep /*EndHide*/.dxbs-toolbar .dxbs-ta-title {
+        display: none!important;
+    }
+}

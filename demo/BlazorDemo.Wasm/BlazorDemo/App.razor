@@ -1,6 +1,6 @@
 ﻿@using BlazorDemo.Configuration
 @inject DemoConfiguration DemoConfiguration
-<Router AppAssembly="@typeof(App).Assembly" AdditionalAssemblies="@DemoConfiguration.AdditionalRoutingAssemblies">
+<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@(typeof(MainLayout))"  />
     </Found>

@@ -1,0 +1,40 @@
+﻿@page "/PivotGridChartIntegration"
+
+<DemoPageSectionComponent Id="PivotGrid-ChartIntegration">
+    @inject ISalesInfoDataProvider Sales
+    @layout DataProviderAccessArea<ISalesInfoDataProvider>
+
+    <div class="w-100">
+        <div>
+            <DxChart Data="@(PivotGridDataProvider.ChartDataSource)" CssClass="w-100">
+                <DxChartLegend Position="RelativePosition.Outside" VerticalAlignment="VerticalEdge.Bottom"
+                               CssClass="shadow border justify-content-around" />
+                <DxChartCommonSeries NameField="@((IChartDataItem s) => s.SeriesName)"
+                                     ArgumentField="@(s => s.Argument)"
+                                     ValueField="@(s => s.Value)"
+                                     PaneField="@(s => s.ValueFieldName)"
+                                     SeriesType="ChartSeriesType.Bar" />
+            </DxChart>
+        </div>
+        <div class="mt-4">
+            <DxPivotGrid Data="@(PivotGridDataProvider.PivotGridDataSource)" CssClass="m-100">
+                <DxPivotGridField Field="@nameof(SaleInfo.Region)" SortOrder="PivotGridSortOrder.Ascending" Area="PivotGridFieldArea.Row" />
+                <DxPivotGridField Field="@nameof(SaleInfo.Country)" Area="PivotGridFieldArea.Row" />
+                <DxPivotGridField Field="@nameof(SaleInfo.City)" Area="PivotGridFieldArea.Row" />
+                <DxPivotGridField Field="@nameof(SaleInfo.Date)" GroupInterval="PivotGridGroupInterval.Year" Area="PivotGridFieldArea.Column" Caption="Year" />
+                <DxPivotGridField Field="@nameof(SaleInfo.Date)" GroupInterval="PivotGridGroupInterval.Quarter" Area="PivotGridFieldArea.Column" Caption="Quarter">
+                    <HeaderTemplate>@string.Format("Q{0}", context)</HeaderTemplate>
+                </DxPivotGridField>
+                <DxPivotGridField Field="@nameof(SaleInfo.Amount)" Area="PivotGridFieldArea.Data" SummaryType="PivotGridSummaryType.Sum" />
+                <DxPivotGridField Field="@nameof(SaleInfo.OrderId)" Caption="Count" Area="PivotGridFieldArea.Data" SummaryType="PivotGridSummaryType.Count" />
+            </DxPivotGrid>
+        </div>
+    </div>
+    @code {
+        DxPivotGridDataProvider<SaleInfo> PivotGridDataProvider;
+        protected override void OnInitialized() {
+            base.OnInitialized();
+            PivotGridDataProvider = DxPivotGridDataProvider<SaleInfo>.Create(Sales.GetSalesAsync());
+        }
+    }
+</DemoPageSectionComponent>

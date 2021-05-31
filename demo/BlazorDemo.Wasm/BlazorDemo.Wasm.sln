@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDemo.ServerSide", "Bl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDemo.Wasm.Client", "BlazorDemo.Wasm.Client\BlazorDemo.Wasm.Client.csproj", "{B1AEE868-82C3-4C34-B347-8EFF07D97310}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDemo", "BlazorDemo\BlazorDemo.NetStandard.csproj", "{43396FF8-638D-4E41-B4A9-69CAA96354EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDemo", "BlazorDemo\BlazorDemo.Wasm.Core.csproj", "{43396FF8-638D-4E41-B4A9-69CAA96354EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

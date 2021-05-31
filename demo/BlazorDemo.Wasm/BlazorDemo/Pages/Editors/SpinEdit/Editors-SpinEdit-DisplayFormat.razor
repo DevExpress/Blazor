@@ -1,0 +1,12 @@
+﻿<DemoPageSectionComponent Id="Editors-SpinEdit-DisplayFormat" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxSpinEdit @bind-Value="@DecimalValue"
+                    DisplayFormat="C"
+                    CssClass="cw-320"
+                    SizeMode="Params.SizeMode" />
+    </ChildContentWithParameters>
+
+    @code {
+        Decimal DecimalValue { get; set; } = 320.5m;
+    }
+</DemoPageSectionComponent>

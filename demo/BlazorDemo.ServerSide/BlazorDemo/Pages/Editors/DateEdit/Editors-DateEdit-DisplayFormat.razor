@@ -1,0 +1,13 @@
+﻿<DemoPageSectionComponent Id="Editors-DateEdit-DisplayFormat" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxDateEdit @bind-Date="@DateTimeValue"
+                    DisplayFormat="D"
+                    Format="d"
+                    CssClass="cw-320"
+                    SizeMode="Params.SizeMode" />
+    </ChildContentWithParameters>
+
+    @code {
+        DateTime DateTimeValue { get; set; } = DateTime.Now;
+    }
+</DemoPageSectionComponent>

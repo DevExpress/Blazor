@@ -1,0 +1,1 @@
+The [Chart](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1) component allows you to create charts with multiple panes located under each other. A pane can display one or more series and can share the argument axis with other panes.

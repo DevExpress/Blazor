@@ -1,0 +1,33 @@
+﻿<DemoPageSectionComponent Id="Charts-RangeSeries-Bar">
+    <ChildContentWithParameters Context="Params">
+        @inject WeatherForecastService ForecastService
+
+        <DxChart Data="@WeatherForecasts"
+                 @key="Params.ThemeName"
+                 CssClass="w-100">
+
+            <DxChartRangeBarSeries ValueField="@((WeatherForecast i) => i.TemperatureF)"
+                                   ArgumentField="@(i => i.Date.Date)"
+                                   Name="Temperature, F" />
+
+            <DxChartTooltip Enabled="true">
+                @context.GetRangePoint().Render((rangePoint) =>
+                    @<div style="margin: 0.75rem">
+                        <div>Max: @rangePoint.EndValue</div>
+                        <div>Min: @rangePoint.StartValue</div>
+                    </div>
+            )
+            </DxChartTooltip>
+
+        </DxChart>
+    </ChildContentWithParameters>
+
+
+    @code {
+        WeatherForecast[] WeatherForecasts;
+
+        protected override async Task OnInitializedAsync() {
+            WeatherForecasts = await ForecastService.GetDetailedForecastAsync();
+        }
+    }
+</DemoPageSectionComponent>

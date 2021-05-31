@@ -1,0 +1,29 @@
+﻿<DemoPageSectionComponent Id="Editors-MaskedInput-TextMasks" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxMaskedInput @bind-Value="@Telephone"
+                       SizeMode="Params.SizeMode"
+                       CssClass="cw-320"
+                       Mask="(999)000-0000">
+            <DxTextMaskProperties Placeholder="Placeholder" SaveLiteral="SaveLiterals" />
+        </DxMaskedInput>
+        <p class="demo-text cw-320 mt-2 text-muted">
+            Telephone: <b>@Telephone</b>
+        </p>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionComboBox CssClass="ow-100"
+                        Label="Placeholder:"
+                        Data="PredefinedPlaceholders"
+                        @bind-Value="Placeholder" />
+        <OptionCheckBox Label="Save Literals:"
+                        @bind-Checked="@SaveLiterals" />
+    </OptionsContent>
+
+    @code {
+        IEnumerable<char> PredefinedPlaceholders = new List<char>() { '_', '#' };
+        string Telephone { get; set; }
+        char Placeholder { get; set; } = '_';
+        bool SaveLiterals { get; set; } = true;
+    }
+</DemoPageSectionComponent>

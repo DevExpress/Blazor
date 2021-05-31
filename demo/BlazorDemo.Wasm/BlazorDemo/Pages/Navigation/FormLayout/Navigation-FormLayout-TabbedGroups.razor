@@ -1,0 +1,66 @@
+﻿<DemoPageSectionComponent Id="Navigation-FormLayout-TabbedGroups"
+                          ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxFormLayout @key="@Params.ThemeName" ItemSizeMode="Params.SizeMode" CssClass="w-100">
+            <DxFormLayoutTabPages @bind-ActiveTabIndex="@ActiveTabIndex">
+                <DxFormLayoutTabPage Caption="Personal Information">
+                    <DxFormLayoutItem Caption="First Name:" ColSpanMd="6">
+                        <Template>
+                            <DxTextBox @bind-Text="@FirstName" />
+                        </Template>
+                    </DxFormLayoutItem>
+
+                    <DxFormLayoutItem Caption="Last Name:" ColSpanMd="6">
+                        <Template>
+                            <DxTextBox @bind-Text="@LastName" />
+                        </Template>
+                    </DxFormLayoutItem>
+
+                    <DxFormLayoutItem Caption="Birth Date:" ColSpanMd="6">
+                        <Template>
+                            <DxDateEdit @bind-Date="@BirthDate" />
+                        </Template>
+                    </DxFormLayoutItem>
+                </DxFormLayoutTabPage>
+
+                <DxFormLayoutTabPage Caption="Work Information">
+                    <DxFormLayoutItem Caption="Position:" ColSpanMd="6">
+                        <Template>
+                            <DxTextBox @bind-Text="@Position"/>
+                        </Template>
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Hire Date:" ColSpanMd="6">
+                        <Template>
+                            <DxDateEdit @bind-Date="@HireDate" />
+                        </Template>
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Notes:" ColSpanMd="6">
+                        <Template>
+                            <DxTextBox @bind-Text="@Notes" />
+                        </Template>
+                    </DxFormLayoutItem>
+                </DxFormLayoutTabPage>
+            </DxFormLayoutTabPages>
+        </DxFormLayout>
+        <p class="demo-text w-100 mt-2 text-center text-muted">
+            @nameof(FirstName)=<b>@FirstName</b>,
+            @nameof(LastName)=<b>@LastName</b>,
+            @nameof(BirthDate)=<b>@BirthDate</b>
+        </p>
+        <p class="demo-text w-100 mt-2 text-center text-muted">
+            @nameof(Position)=<b>@Position</b>,
+            @nameof(HireDate)=<b>@HireDate</b>,
+            @nameof(Notes)=<b>@Notes</b>
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        int ActiveTabIndex { get; set; } = 1;
+        string FirstName { get; set; } = "Nancy";
+        string LastName { get; set; } = "Davolio";
+        DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-20);
+        string Position { get; set; } = "Sales Representative";
+        DateTime HireDate { get; set; } = DateTime.Now.AddYears(-20);
+        string Notes { get; set; } = "Education includes a BA in psychology.";
+    }
+</DemoPageSectionComponent>

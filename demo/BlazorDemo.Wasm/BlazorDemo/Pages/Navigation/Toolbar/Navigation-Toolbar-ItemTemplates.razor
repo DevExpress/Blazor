@@ -1,0 +1,29 @@
+﻿<DemoPageSectionComponent Id="Navigation-Toolbar-ItemTemplates">
+    <ChildContentWithParameters Context="Params">
+        @*BeginHide*@
+        <div class="card w-100">
+            <div class="card-header border-0 p-2 rounded">
+                @*EndHide*@
+                <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain"
+                           Title="DevExpress Logo" @key="@Params.ThemeName">
+                    <Items>
+                        <DxToolbarItem IconCssClass="tb-icon tb-icon-refresh"
+                                       Tooltip="Refresh"
+                                       Alignment="ToolbarItemAlignment.Right"
+                                       BeginGroup="true" />
+                        <DxToolbarItem IconCssClass="tb-icon tb-icon-settings"
+                                       Tooltip="Settings" />
+                        <DxToolbarItem BeginGroup="true"
+                                       Alignment="ToolbarItemAlignment.Right">
+                            <Template>
+                                <SearchItem />
+                            </Template>
+                        </DxToolbarItem>
+                    </Items>
+                </DxToolbar>
+                @*BeginHide*@
+            </div>
+        </div>
+        @*EndHide*@
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

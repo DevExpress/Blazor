@@ -13,9 +13,7 @@ namespace BlazorDemo.Data {
         }
 
         public DateTime DateTime { get; private set; }
-
         public DateTimeGroupType GroupType { get; private set; }
-
         public string Title {
             get {
                 switch(GroupType) {
@@ -28,7 +26,7 @@ namespace BlazorDemo.Data {
                         var weekNumber = culture.Calendar.GetWeekOfYear(DateTime,
                             culture.DateTimeFormat.CalendarWeekRule,
                             culture.DateTimeFormat.FirstDayOfWeek);
-                        var weekStartDate = DateTimeUtils.CreateWeekStart(DateTime);
+                        var weekStartDate = DateTimeUtils.GetWeekStart(DateTime);
                         var weekEndDate = weekStartDate.AddDays(6);
                         var formatString = weekStartDate.Year == weekEndDate.Year ? "MMMM d" : "MMMM d, yyyy";
                         return String.Format("Week {0} ({1} - {2})", weekNumber,
@@ -40,7 +38,6 @@ namespace BlazorDemo.Data {
                 }
             }
         }
-
         public bool HasSubGroups => GroupType < DateTimeGroupType.Day;
 
         public IEnumerable<DateTimeGroup> GetSubGroups() {
@@ -61,7 +58,7 @@ namespace BlazorDemo.Data {
                     }
                     return monthWeeks;
                 case DateTimeGroupType.Week:
-                    var firstDayOfWeek = DateTimeUtils.CreateWeekStart(DateTime);
+                    var firstDayOfWeek = DateTimeUtils.GetWeekStart(DateTime);
                     var dayOfWeek = firstDayOfWeek;
                     var weekDays = new List<DateTimeGroup>();
                     for(int i = 0; i < 7; i++) {

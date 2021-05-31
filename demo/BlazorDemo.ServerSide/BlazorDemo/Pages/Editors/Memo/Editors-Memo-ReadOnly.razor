@@ -1,0 +1,23 @@
+﻿<DemoPageSectionComponent Id="Editors-Memo-ReadOnly"
+                          ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxFormLayout ItemSizeMode="Params.SizeMode"
+                      CssClass="cw-480"
+                      @key="@Params.ThemeName">
+            <DxFormLayoutItem ColSpanMd="12" Caption="Read-Only">
+                <Template>
+                    <DxMemo Text="@TextValue" ReadOnly="true" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem ColSpanMd="12" Caption="Disabled" BeginRow="true">
+                <Template>
+                    <DxMemo Text="@TextValue" Enabled="false" />
+                </Template>
+            </DxFormLayoutItem>
+        </DxFormLayout>
+    </ChildContentWithParameters>
+
+    @code {
+        string TextValue { get; set; } = "End users cannot change the Memo value";
+    }
+</DemoPageSectionComponent>

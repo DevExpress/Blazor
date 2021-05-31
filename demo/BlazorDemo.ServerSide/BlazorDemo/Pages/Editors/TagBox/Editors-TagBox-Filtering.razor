@@ -1,0 +1,34 @@
+﻿<DemoPageSectionComponent Id="Editors-TagBox-Filtering" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject WorldcitiesDataService WorldcitiesDataService
+
+        @if(Data != null) {
+            <DxTagBox Id="TagBox1"
+                      Data="@Data"
+                      FilteringMode="@FilteringMode"
+                      @bind-Values="@Values"
+                      TextFieldName="@nameof(Country.CountryName)"
+                      SizeMode="Params.SizeMode"
+                      CssClass="cw-480" />
+        }
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionComboBox Label="Filtering Mode:"
+                        Data="@(Enum.GetNames(typeof(DataGridFilteringMode)))"
+                        Value="@(FilteringMode.ToString())"
+                        ValueChanged="@((string selectedItem) =>
+                            { FilteringMode = Enum.Parse<DataGridFilteringMode>(selectedItem); })" />
+    </OptionsContent>
+
+    @code {
+        IEnumerable<Country> Data { get; set; }
+        IEnumerable<Country> Values { get; set; }
+        DataGridFilteringMode FilteringMode { get; set; } = DataGridFilteringMode.StartsWith;
+
+        protected override async Task OnInitializedAsync() {
+            Data = await WorldcitiesDataService.GetCountriesAsync();
+            Values = Data.Where(c => c.CountryName == "UK" || c.CountryName == "USA");
+        }
+    }
+</DemoPageSectionComponent>

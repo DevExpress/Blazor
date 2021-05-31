@@ -1,0 +1,46 @@
+﻿@page "/Scheduler"
+
+<DemoPageSectionComponent Id="Scheduler-Overview" ShowCode="false">
+    <DxScheduler StartDate="@DateTime.Today"
+                 DataStorage="@DataStorage"
+                 GroupType="SchedulerGroupType.Resource"
+                 VisibleResourcesDataSource="VisibleResources"
+                 CssClass="w-100">
+        <DxSchedulerDayView DayCount="1"  ShowWorkTimeOnly="true"></DxSchedulerDayView>
+        <DxSchedulerWeekView ShowWorkTimeOnly="true"></DxSchedulerWeekView>
+        <DxSchedulerWorkWeekView ShowWorkTimeOnly="true"></DxSchedulerWorkWeekView>
+        <DxSchedulerMonthView ShowWorkDaysOnly="true" MonthCount="1"></DxSchedulerMonthView>
+        <DxSchedulerTimelineView Duration="@TimeSpan.FromHours(48)" CellMinWidth="80">
+            <Scales>
+                <DxSchedulerTimeScale Unit="@SchedulerTimeScaleUnit.Day" UnitCount="1"></DxSchedulerTimeScale>
+                <DxSchedulerTimeScale Unit="@SchedulerTimeScaleUnit.Hour" UnitCount="2"></DxSchedulerTimeScale>
+            </Scales>
+        </DxSchedulerTimelineView>
+    </DxScheduler>
+
+    @code {
+        DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
+            AppointmentsSource = RecurringAppointmentCollection.GetAppointments(),
+            AppointmentMappings = new DxSchedulerAppointmentMappings() {
+                Type = "AppointmentType",
+                Start = "StartDate",
+                End = "EndDate",
+                Subject = "Caption",
+                AllDay = "AllDay",
+                Location = "Location",
+                Description = "Description",
+                LabelId = "Label",
+                StatusId = "Status",
+                RecurrenceInfo = "Recurrence"
+            },
+            ResourcesSource = ResourceCollection.GetResourcesForGrouping(),
+            ResourceMappings = new DxSchedulerResourceMappings() {
+                Id = "Id",
+                Caption = "Name",
+                BackgroundCssClass = "BackgroundCss",
+                TextCssClass = "TextCss"
+            }
+        };
+        List<Resource> VisibleResources = ResourceCollection.GetResources().Take(2).ToList();
+    }
+</DemoPageSectionComponent>

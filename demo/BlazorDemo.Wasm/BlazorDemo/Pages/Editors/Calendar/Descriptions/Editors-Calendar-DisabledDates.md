@@ -1,0 +1,1 @@
+In this demo module, a few [Calendar](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1) dates are grayed out (disabled) and cannot be selected. The [CustomDisabledDate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1.CustomDisabledDate) event allows you to disable selection of specific dates based on custom logic.

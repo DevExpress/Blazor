@@ -1,0 +1,23 @@
+﻿<DemoPageSectionComponent Id="Charts-RangeSeries-Area">
+    <ChildContentWithParameters Context="Params">
+        @inject WeatherForecastService ForecastService
+
+        <DxChart Data="@WeatherForecasts"
+                 @key="Params.ThemeName"
+                 CssClass="w-100">
+            <DxChartRangeAreaSeries ValueField="@((WeatherForecast i) => i.TemperatureF)"
+                                    ArgumentField="@(i => i.Date.Date)"
+                                    Name="Temperature, F" />
+        </DxChart>
+
+    </ChildContentWithParameters>
+
+
+    @code {
+        WeatherForecast[] WeatherForecasts;
+
+        protected override async Task OnInitializedAsync() {
+            WeatherForecasts = await ForecastService.GetDetailedForecastAsync();
+        }
+    }
+</DemoPageSectionComponent>

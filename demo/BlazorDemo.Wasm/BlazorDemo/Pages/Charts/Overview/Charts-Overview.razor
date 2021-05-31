@@ -1,0 +1,95 @@
+﻿@page "/Charts"
+@inject ISalesInfoDataProvider Sales
+
+<DemoPageSectionComponent Id="Charts-Overview"
+                          ShowCode="false">
+    <div class="w-100 overview-chart">
+        <div class="row">
+            <DxChart Data="@WWSalesData" CssClass="w-100">
+
+                <DxChartTitle Text="World Wide Sales" />
+
+                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)"
+                                     ArgumentField="@(s => s.City)"
+                                     ValueField="@(s => s.Amount)"
+                                     SummaryMethod="Enumerable.Sum"
+                                     SeriesType="ChartSeriesType.Bar" />
+
+                <DxChartLegend Position="RelativePosition.Outside"
+                               HorizontalAlignment="HorizontalAlignment.Right" />
+
+                <DxChartTooltip Enabled="true" Position="RelativePosition.Outside">
+                    <div class="m-2">
+                        <div class="font-weight-bold text-center">
+                            Year @context.Point.SeriesName
+                        </div>
+                        <div>
+                            @context.Point.Argument: @string.Format("{0:$0,.#K}", (int)context.Point.Value)
+                        </div>
+                    </div>
+                </DxChartTooltip>
+            </DxChart>
+        </div>
+
+        <div class="row mt-4">
+            @{ DrawDonutChart(NYSalesData, "New York Sales");
+                DrawDonutChart(LSalesData, "London Sales");
+                DrawDonutChart(BSalesData, "Berlin Sales");
+                DrawDonutChart(MSalesData, "Moscow Sales"); }
+        </div>
+    </div>
+
+
+    @{ void DrawDonutChart<T>(IEnumerable<T> data, string titleText) {
+            <div class="chart-item">
+                <DxChart Data="data" CssClass="w-100">
+                    <DxChartTitle Text="@titleText" />
+
+                    <DxChartDonutSeries T="DonutDataItem"
+                                        TArgument="int"
+                                        TValue="double"
+                                        ArgumentField="s => s.Year"
+                                        ValueField="s => s.Amount"
+                                        SummaryMethod="Enumerable.Sum">
+                        <DxChartSeriesLabel Visible="true"
+                                            Position="RelativePosition.Inside"
+                                            Format='ChartElementFormat.FromLdmlString("$#K")' />
+                    </DxChartDonutSeries>
+
+                    <DxChartLegend VerticalAlignment="VerticalEdge.Bottom"
+                                   Position="RelativePosition.Outside" />
+
+                    <DxChartTooltip Enabled="true" Position="RelativePosition.Outside">
+                        <div class="m-2">
+                            <div>
+                                @($"{context.Point.Argument}: ${(double)context.Point.Value * 1000d:0.}")
+                            </div>
+                        </div>
+                    </DxChartTooltip>
+                </DxChart>
+            </div>
+        } }
+
+
+    @code { class DonutDataItem {
+            public int Year { get; }
+            public double Amount { get; }
+            public DonutDataItem(int year, double amount) {
+                (Year, Amount) = (year, amount);
+            }
+        }
+        IEnumerable<SaleInfo> WWSalesData;
+        IEnumerable<DonutDataItem> NYSalesData;
+        IEnumerable<DonutDataItem> LSalesData;
+        IEnumerable<DonutDataItem> BSalesData;
+        IEnumerable<DonutDataItem> MSalesData;
+        protected override async Task OnInitializedAsync() {
+            WWSalesData = await Sales.GetSalesAsync();
+            Func<SaleInfo, DonutDataItem> selector = si => new(si.Date.Year, si.Amount / 1000d);
+            NYSalesData = WWSalesData.Where(s => s.City == "New York").Select(selector);
+            LSalesData = WWSalesData.Where(s => s.City == "London").Select(selector);
+            BSalesData = WWSalesData.Where(s => s.City == "Berlin").Select(selector);
+            MSalesData = WWSalesData.Where(s => s.City == "Moscow").Select(selector);
+        } }
+
+</DemoPageSectionComponent>

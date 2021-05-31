@@ -1,0 +1,30 @@
+﻿<DemoPageSectionComponent Id="Buttons-Button-Template"
+                          ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @*BeginHide*@
+        <div>
+        @*EndHide*@
+        <DxButton RenderStyle="ButtonRenderStyle.Info"
+                  Click="@Like"
+                  IconCssClass="btn-icon-like"
+                  Text="Like"
+                  SizeMode="Params.SizeMode">
+            @context
+            <span class="ml-1">@likes</span>
+        </DxButton>
+        @*BeginHide*@
+        </div>
+        @*EndHide*@
+    </ChildContentWithParameters>
+
+    @code {
+        int likes;
+
+        void Like(MouseEventArgs args) {
+            likes++;
+        }
+        protected override void OnInitialized() {
+            likes = 1;
+        }
+    }
+</DemoPageSectionComponent>

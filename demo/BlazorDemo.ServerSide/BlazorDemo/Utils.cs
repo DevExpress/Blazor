@@ -15,6 +15,21 @@ namespace BlazorDemo {
 
     public static class ConnectionStringUtils {
 
+        public static string GetNorthwindConnectionString(IConfiguration config) {
+            var dirPath = config.GetValue<string>("DataSourcesFolder");
+            return string.Format("Data Source={0}\\nwind.db", dirPath);
+        }
+
+        public static string GetIssuesConnectionString(IConfiguration config) {
+            var dirPath = config.GetValue<string>("DataSourcesFolder");
+            return string.Format("Data Source={0}\\issue-list.db", dirPath);
+        }
+
+        public static string GetWorlcitiesConnectionString(IConfiguration config) {
+            var dirPath = config.GetValue<string>("DataSourcesFolder");
+            return string.Format("Data Source={0}\\worldcities.db", dirPath);
+        }
+
         public static string GetGridLargeDataConnectionString(IConfiguration config) {
             return GetConnectionString(config, "GridLargeDataConnectionString");
         }
@@ -34,10 +49,11 @@ namespace BlazorDemo {
     }
 }
 
-#if !NETCOREAPP3
+#if !SERVER_BLAZOR
 namespace BlazorDemo.Reports { }
 namespace BlazorDemo.Reporting.Reports { }
 namespace DevExpress.Blazor.Reporting { }
 namespace DevExpress.XtraReports.Web { }
 namespace DevExpress.XtraReports.Web.WebDocumentViewer { }
+namespace DevExpress.Blazor.RichEdit { }
 #endif

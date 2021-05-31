@@ -1,0 +1,40 @@
+﻿@page "/ChartBarSeries"
+
+<DemoPageSectionComponent Id="Charts-BarSeries">
+    <ChildContent>
+        @switch (BarSeriesType)
+        {
+            case ChartSeriesType.Bar:
+                <BarChart />
+                break;
+            case ChartSeriesType.StackedBar:
+                <StackedBarChart />
+                break;
+            case ChartSeriesType.FullStackedBar:
+                <FullStackedBarChart />
+                break;
+
+        }
+    </ChildContent>
+
+    <OptionsContent>
+        <OptionComboBox Label="Series Type:"
+                        T="ChartSeriesType"
+                        TData="KeyValuePair<string, ChartSeriesType>"
+                        Data="@BarSeriesTypes"
+                        ValueField="Value"
+                        TextField="Key"
+                        @bind-Value="@BarSeriesType" />
+    </OptionsContent>
+
+    @code {
+        ChartSeriesType BarSeriesType = BarSeriesTypes.First().Value;
+        static readonly Dictionary<string, ChartSeriesType> BarSeriesTypes = new Dictionary<string, ChartSeriesType>()
+        {
+            { "Bar", ChartSeriesType.Bar },
+            { "Stacked Bar" , ChartSeriesType.StackedBar},
+            { "Full Stacked Bar", ChartSeriesType.FullStackedBar}
+        };
+    }
+</DemoPageSectionComponent>
+

@@ -1,0 +1,14 @@
+﻿<DemoPageSectionComponent Id="Editors-DateEdit-AdaptiveScrollPicker" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxDateEdit @bind-Date="@DateTimeValue"
+                    PickerDisplayMode="DatePickerDisplayMode.ScrollPicker"
+                    ScrollPickerFormat="dddd MMMM yyyy"
+                    DisplayFormat="dd dddd MMMM yyyy"
+                    CssClass="cw-320"
+                    SizeMode="Params.SizeMode" />
+    </ChildContentWithParameters>
+
+    @code {
+        DateTime DateTimeValue { get; set; } = DateTime.Now;
+    }
+</DemoPageSectionComponent>

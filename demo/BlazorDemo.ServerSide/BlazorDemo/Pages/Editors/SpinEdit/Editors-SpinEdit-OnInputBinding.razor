@@ -1,0 +1,16 @@
+﻿<DemoPageSectionComponent Id="Editors-SpinEdit-OnInputBinding" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxSpinEdit @bind-Value="@Year"
+                    BindValueMode="BindValueMode.OnInput"
+                    NullText="Type a value..."
+                    CssClass="cw-320"
+                    SizeMode="@Params.SizeMode" />
+        <p class="demo-text cw-320 mt-2 text-muted">
+            Value: <b>@Year</b>
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        int? Year { get; set; } = DateTime.Now.Year;
+    }
+</DemoPageSectionComponent>

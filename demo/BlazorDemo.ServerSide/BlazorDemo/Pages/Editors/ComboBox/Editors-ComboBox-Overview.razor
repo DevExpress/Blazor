@@ -1,0 +1,26 @@
+﻿<DemoPageSectionComponent Id="Editors-ComboBox-Overview" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <DxComboBox Data="@Data"
+                    TextFieldName="@nameof(Employee.Text)"
+                    @bind-Value="@SelectedEmployee"
+                    SizeMode="@Params.SizeMode"
+                    CssClass="cw-480" />
+        <p class="demo-text cw-480 mt-2 text-muted">
+            Selected item: { FirstName=<b>@SelectedEmployee.FirstName</b>,
+            LastName=<b>@SelectedEmployee.LastName</b>,
+            Title=<b>@SelectedEmployee.Title</b> }
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        IEnumerable<Employee> Data { get; set; }
+        Employee SelectedEmployee { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetEmployeesAsync();
+            SelectedEmployee = Data.FirstOrDefault();
+        }
+    }
+</DemoPageSectionComponent>

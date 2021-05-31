@@ -1,0 +1,23 @@
+﻿<DemoPageSectionComponent Id="Navigation-Popup-Customization">
+    <div class="target-container" @onclick="@(() => PopupVisible = true)">
+        <p class="target-caption">CLICK TO SHOW A POP-UP WINDOW</p>
+    </div>
+
+    <DxPopup
+        @bind-Visible="@PopupVisible"
+        ShowFooter="true"
+        HeaderText="Edit Contact">
+        <BodyTemplate>
+            <CustomPopupContent/>
+        </BodyTemplate>
+        <FooterContentTemplate>
+            <DxButton CssClass="popup-button" RenderStyle="ButtonRenderStyle.Primary" Text="OK" Click="@(() => PopupVisible = false)"/>
+            <DxButton CssClass="popup-button" RenderStyle="ButtonRenderStyle.Secondary" Text="Cancel" Click="@(() => PopupVisible = false)"/>
+        </FooterContentTemplate>
+    </DxPopup>
+
+    @code {
+        bool PopupVisible { get; set; }
+    }
+
+</DemoPageSectionComponent>

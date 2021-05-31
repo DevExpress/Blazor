@@ -1,0 +1,112 @@
+﻿<DemoPageSectionComponent Id="Navigation-Toolbar-DropDown">
+    <ChildContentWithParameters Context="Params">
+        <div class="card w-100">
+            <div class="card-header border-0 p-2">
+                <DxToolbar DropDownDisplayMode="@SelectedDisplayMode"
+                           ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" @key="@Params.ThemeName">
+                    <Items>
+                        @foreach(var item in MenuItems) {
+                            @RenderItem(item)
+                        }
+                    </Items>
+                </DxToolbar>
+            </div>
+            <div class="card-body">
+                <div style="@Formatting.GetStyleString()">
+                    @*BeginHide*@
+                    <span class="dxbs-preventsel">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</span>
+                    @*EndHide*@
+                </div>
+            </div>
+        </div>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionComboBox Label="Drop Down Display Mode:"
+                        Data="@(Enum.GetNames(typeof(DropDownDisplayMode)))"
+                        Value="@(SelectedDisplayMode.ToString())"
+                        ValueChanged="@((string selectedItem) => { SelectedDisplayMode = Enum.Parse<DropDownDisplayMode>(selectedItem); })" />
+    </OptionsContent>
+
+    @code{
+        TextFormatting Formatting { get; set; } = new TextFormatting();
+        List<TextFormattingMenuItem> _menuItems;
+        List<TextFormattingMenuItem> MenuItems {
+            get {
+                if(_menuItems == null) {
+                    _menuItems = new List<TextFormattingMenuItem>() {
+                        @*BeginCollapse*@
+                        new TextFormattingParentMenuItem(Formatting, "Format", new List<TextFormattingMenuItem>() {
+                            new TextFormattingParentMenuItem(Formatting, "Family", new List<TextFormattingMenuItem>() {
+                                new FontFamilyMenuItem(Formatting, "Default", null),
+                                new FontFamilyMenuItem(Formatting, "Times New Roman", "Times New Roman") { BeginGroup = true },
+                                new FontFamilyMenuItem(Formatting, "Tahoma", "Tahoma"),
+                                new FontFamilyMenuItem(Formatting, "Verdana", "Verdana"),
+                                new FontFamilyMenuItem(Formatting, "Arial", "Arial"),
+                                new FontFamilyMenuItem(Formatting, "MS Sans Serif", "MS Sans Serif"),
+                                new FontFamilyMenuItem(Formatting, "Courier", "Courier"),
+                                new FontFamilyMenuItem(Formatting, "Segoe UI", "Segoe UI")
+                            }),
+                            new TextFormattingParentMenuItem(Formatting, "Size", new List<TextFormattingMenuItem>() {
+                                new FontSizeMenuItem(Formatting, "8pt", 8),
+                                new FontSizeMenuItem(Formatting, "10pt", 10),
+                                new FontSizeMenuItem(Formatting, "12pt", 12),
+                                new FontSizeMenuItem(Formatting, "14pt", 14),
+                                new FontSizeMenuItem(Formatting, "18pt", 18),
+                                new FontSizeMenuItem(Formatting, "24pt", 24),
+                                new FontSizeMenuItem(Formatting, "36pt", 36)
+                            }),
+                            new TextFormattingParentMenuItem(Formatting, "Change case", new List<TextFormattingMenuItem>() {
+                                new ChangeCaseMenuItem(Formatting, "Default", null),
+                                new ChangeCaseMenuItem(Formatting, "Capitalize", "capitalize") { BeginGroup = true },
+                                new ChangeCaseMenuItem(Formatting, "Lowercase ", "lowercase"),
+                                new ChangeCaseMenuItem(Formatting, "Uppercase ", "uppercase")
+                            })
+                        }),
+                        new TextDecorationMenuItem(Formatting, string.Empty, "Bold") {
+                            IconCss = "tb-icon tb-icon-bold",
+                            BeginGroup = true
+                        },
+                        new TextDecorationMenuItem(Formatting, string.Empty, "Italic"){ IconCss = "tb-icon tb-icon-italic" },
+                        new TextDecorationMenuItem(Formatting, string.Empty, "Underline") {
+                            Children = new List<TextFormattingMenuItem>() {
+                                new TextDecorationMenuItem(Formatting, "Overline", "Overline"),
+                                new TextDecorationMenuItem(Formatting, "Strikethrough", "Strikethrough")
+                            },
+                            SplitMenuButton = true,
+                            IconCss = "tb-icon tb-icon-underline",
+                            Category = "Text Decorations"
+                        },
+                        new ClearFormattingMenuItem(Formatting) { BeginGroup = true }
+                        @*EndCollapse*@
+                    };
+                }
+                return _menuItems;
+            }
+        }
+        DropDownDisplayMode SelectedDisplayMode { get; set; }
+        @*BeginCollapse*@
+        protected override void OnInitialized() {
+            base.OnInitialized();
+            SelectedDisplayMode = DropDownDisplayMode.DropDown;
+        }
+        @*EndCollapse*@
+        RenderFragment RenderItem(TextFormattingMenuItem item) {
+            return
+                @<DxToolbarItem Text="@item.Text"
+                                DropDownCaption="@item.Category"
+                                BeginGroup="@item.BeginGroup"
+                                Click="item.Click"
+                                Checked="@item.Checked"
+                                SplitDropDownButton="@item.SplitMenuButton"
+                                IconCssClass="@item.IconCss">
+                    <Items>
+                        @if(item.Children != null) {
+                            @foreach(var child in item.Children) {
+                                @RenderItem(child)
+                            }
+                        }
+                    </Items>
+                </DxToolbarItem>;
+        }
+    }
+</DemoPageSectionComponent>

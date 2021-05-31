@@ -1,0 +1,53 @@
+﻿@page "/StackLayout"
+
+<DemoPageSectionComponent Id="Navigation-StackLayout">
+    <ChildContent>
+        <DxStackLayout CssClass="w-100 ch-480" Orientation="@currentOrientation">
+            <Items>
+                <DxStackLayoutItem>
+                    <Template>
+                        <div class="stacklayout-header stacklayout-item">
+                            Item 1
+                        </div>
+                    </Template>
+                </DxStackLayoutItem>
+                <DxStackLayoutItem Length="2fr">
+                    <Template>
+                        <div class="stacklayout-content stacklayout-item">
+                            Item 2
+                        </div>
+                    </Template>
+                </DxStackLayoutItem>
+                <DxStackLayoutItem>
+                    <Template>
+                        <div class="stacklayout-left-side-bar stacklayout-item">
+                            Item 3
+                        </div>
+                    </Template>
+                </DxStackLayoutItem>
+                <DxStackLayoutItem>
+                    <Template>
+                        <div class="stacklayout-right-side-bar stacklayout-item">
+                            Item 4
+                        </div>
+                    </Template>
+                </DxStackLayoutItem>
+                <DxStackLayoutItem>
+                    <Template>
+                        <div class="stacklayout-footer stacklayout-item">
+                            Item 5
+                        </div>
+                    </Template>
+                </DxStackLayoutItem>
+            </Items>
+        </DxStackLayout>
+    </ChildContent>
+    <OptionsContent>
+        <OptionComboBox Label="Orientation:" Data="@Orientations" @bind-Value="currentOrientation" />
+    </OptionsContent>
+
+    @code {
+        Orientation currentOrientation;
+        IEnumerable<Orientation> Orientations { get; } = Enum.GetValues(typeof(Orientation)).Cast<Orientation>();
+    }
+</DemoPageSectionComponent>

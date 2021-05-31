@@ -1,0 +1,50 @@
+﻿@using DevExpress.Blazor.Internal;
+@typeparam TItem
+<OptionComponent Label="@Label">
+    <div>
+        @foreach(var item in Data) {
+            <div class="@Utils.CombineCssClasses(CssClasses())">
+                <input type="radio"
+                       class="custom-control-input"
+                       id="@(Id(item))"
+                       name="@(Name??id_prefix)"
+                       @onchange="()=> ValueChanged.InvokeAsync(item)"
+                       @attributes="Attributes(item)">
+                <label class="custom-control-label"
+                       for="@(Id(item))">
+                    @if(ChildContent == null) {
+                        @item.ToString()
+                    } else {
+                        @ChildContent(item)
+                    }
+                </label>
+            </div>
+        }
+    </div>
+</OptionComponent>
+@code{
+    readonly string id_prefix = Guid.NewGuid().ToString();
+    [Parameter] public RenderFragment<TItem> ChildContent { get; set; }
+    [Parameter] public IEnumerable<TItem> Data { get; set; }
+    [Parameter] public TItem Value { get; set; }
+    [Parameter] public string Name { get; set; }
+    [Parameter] public bool Inline { get; set; } = true;
+    [Parameter] public string CssClass { get; set; }
+    [Parameter] public EventCallback<TItem> ValueChanged { get; set; }
+    [Parameter] public string Label { get; set; }
+    IEnumerable<string> CssClasses() {
+        yield return "custom-control custom-radio";
+        yield return CssClass;
+        if(Inline) {
+            yield return "custom-control-inline";
+            yield return "mr-3";
+        } else {
+            yield return "mb-2";
+        }
+    }
+    string Id(TItem item) => id_prefix + item.ToString();
+    IEnumerable<KeyValuePair<string, object>> Attributes(TItem item) {
+        if(object.Equals(item, Value))
+            yield return new KeyValuePair<string, object>("checked", "");
+    }
+}

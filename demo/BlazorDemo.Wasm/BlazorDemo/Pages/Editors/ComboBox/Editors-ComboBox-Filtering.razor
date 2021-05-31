@@ -1,0 +1,30 @@
+﻿<DemoPageSectionComponent Id="Editors-ComboBox-Filtering" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject WorldcitiesDataService WorldcitiesDataService
+
+        @if(Data != null) {
+            <DxComboBox Id="ComboBox1"
+                        Data="@Data"
+                        FilteringMode="DataGridFilteringMode.Contains"
+                        @bind-Value="@Value"
+                        @bind-Text="@Text"
+                        TextFieldName="@nameof(Country.CountryName)"
+                        SizeMode="Params.SizeMode"
+                        CssClass="cw-480" />
+        }
+    </ChildContentWithParameters>
+
+
+    @code {
+        IEnumerable<Country> Data;
+
+        protected override async Task OnInitializedAsync() {
+            Data = await WorldcitiesDataService.GetCountriesAsync();
+        }
+
+        string text = "";
+        string Text { get => text; set { text = value; InvokeAsync(StateHasChanged); } }
+
+        Country Value { get; set; }
+    }
+</DemoPageSectionComponent>

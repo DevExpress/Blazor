@@ -1,0 +1,42 @@
+﻿<DemoPageSectionComponent Id="Editors-MaskedInput-RegExMask" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxMaskedInput @bind-Value="@Email"
+                       SizeMode="Params.SizeMode"
+                       CssClass="cw-320"
+                       Mask="@EmailMask"
+                       MaskMode="MaskMode.RegEx">
+            <DxRegExMaskProperties MaskAutoCompleteMode="@((MaskAutoCompleteMode)AutoCompleteMode)"
+                                   Placeholder="Placeholder"
+                                   PlaceholdersVisible="PlaceholderVisible" />
+        </DxMaskedInput>
+        <p class="demo-text cw-320 mt-2 text-muted">Email : <b>@Email</b></p>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionComboBox CssClass="ow-120"
+                        Label="Autocomplete Mode:"
+                        Data="@(Enum.GetNames(typeof(MaskAutoCompleteMode)))"
+                        Value="AutoCompleteMode.ToString()"
+                        ValueChanged="@((string selectedItem) => {
+                                            AutoCompleteMode = Enum.Parse<MaskAutoCompleteMode>(selectedItem);
+                                        })" />
+        <OptionComboBox CssClass="ow-120"
+                        Label="Placeholder:"
+                        Data="PredefinedPlaceholders"
+                        @bind-Value="Placeholder" />
+        <OptionCheckBox Label="Placeholders Visible:"
+                        @bind-Checked="@PlaceholderVisible" />
+    </OptionsContent>
+
+    @code {
+        IEnumerable<char> PredefinedPlaceholders { get; set; } = new List<char>() { '_', '#' };
+
+        string Email { get; set; }
+        string EmailMask { get; set; } = @"(\w|[.-])+@(\w|-)+\.(\w|-){2,4}";
+
+        MaskAutoCompleteMode AutoCompleteMode { get; set; } = MaskAutoCompleteMode.Strong;
+        char Placeholder { get; set; } = '_';
+        bool PlaceholderVisible { get; set; } = true;
+
+    }
+</DemoPageSectionComponent>

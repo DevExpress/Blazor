@@ -1,0 +1,21 @@
+﻿<DemoPageSectionComponent Id="Editors-ListBox-VirtualScrolling">
+    @inject WorldcitiesDataService WorldcitiesDataService
+
+    @if(Data != null) {
+        <DxListBox Data="@Data"
+                   ListRenderMode="ListRenderMode.Virtual"
+                   TData="Country"
+                   TValue="Country"
+                   TextFieldName="@nameof(Country.CountryName)"
+                   CssClass="cw-400 chi-220">
+        </DxListBox>
+    }
+
+    @code {
+        IEnumerable<Country> Data { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await WorldcitiesDataService.GetCountriesAsync();
+        }
+    }
+</DemoPageSectionComponent>

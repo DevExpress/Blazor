@@ -1,0 +1,1 @@
+This demo illustrates how to upload large files in chunks and process these chunks on the server. The [ChunkSize](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload.ChunkSize) property specifies their size in bytes.

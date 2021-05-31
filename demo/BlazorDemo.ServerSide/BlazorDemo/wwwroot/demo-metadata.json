@@ -1,0 +1,3553 @@
+{
+  "TitleFormat": "Blazor: {0} | DevExpress",
+  "AssemblyName": "BlazorDemo",
+  "Products": [
+    {
+      "Title": "Blazor Data Grid",
+      "PageUri": "DataGrid",
+      "IconName": "grid",
+      "Description": "A fast and responsive grid component with unlimited master-detail levels and unmatched data shaping capabilities."
+    },
+    {
+      "Title": "Blazor Charts",
+      "PageUri": "Charts",
+      "IconName": "charts",
+      "Description": "Fast and lightweight chart component with 20+ data presentation types."
+    },
+    {
+      "Title": "Blazor Scheduler",
+      "PageUri": "Scheduler",
+      "IconName": "scheduler",
+      "Description": "A fully-featured scheduling solution that easily displays a detailed snapshot of events/appointments in your web application across a single day or a week."
+    },
+    {
+      "Title": "Blazor Data Editors",
+      "PageUri": "Editors",
+      "IconName": "editors",
+      "Description": "An extensive suite of data editors to be used standalone or within container components."
+    },
+    {
+      "Title": "Blazor Navigation and Layout",
+      "PageUri": "Navigation",
+      "IconName": "navigation",
+      "Description": "A suite of navigation components including TreeView and Pager, in conjunction with layout components that are designed to make your UI adaptive."
+    },
+    {
+      "Title": "Blazor Reports",
+      "PageUri": "ReportViewer",
+      "IconName": "reports",
+      "Description": "A feature-complete reporting suite for Blazor-powered web applications. DevExpress Reports for Blazor ships with an intuitive Visual Studio Report Designer and a comprehensive suite of report elements such as tables, labels, objects, charts, pivot tables, etc.",
+      "IsServerSideOnly": true
+    },
+    {
+      "Title": "Blazor Rich Text Editor (CTP)",
+      "PageUri": "RichEdit",
+      "IconName": "richedit",
+      "Description": "A Microsoft Word-inspired component that allows you to display and edit text documents with rich formatting.",
+      "IsServerSideOnly": true
+    },
+    {
+      "Title": "Blazor Pivot Grid",
+      "PageUri": "PivotGrid",
+      "IconName": "pivot",
+      "Description": "An Excel-inspired pivot table control engineered for multi-dimensional data analysis and cross-tab reporting."
+    },
+    {
+      "Title": "Blazor Upload",
+      "PageUri": "Upload",
+      "IconName": "upload",
+      "Description": "An easy-to-use Blazor UI component designed to monitor and manage the file upload process at runtime."
+    }
+  ],
+  "RootPages": [
+    {
+      "Url": "./",
+      "Title": "Overview",
+      "SeoTitle": "UI Components",
+      "Icon": "images/Overview.svg",
+      "Keywords": "Blazor, components, overview, getting started, devexpress, demo",
+      "Description": "DevExpress UI for Blazor ships with native user interface components (including a Data Grid, Pivot Grid, Charts and Scheduler) so you can design rich user experiences with both Blazor.",
+      "OG_Title": "Native Blazor Components powered by DevExpress",
+      "OG_Image": "https://static.devexpress.com/Products/Blazor/blazor-components-grid-pivot-scheduler-charts-editor-devexpress.jpg",
+      "OG_Description": "DevExpress UI for Blazor ships with native user interface components (including a Data Grid, Pivot Grid, Charts and Scheduler) so you can design rich user experiences with both Blazor.",
+      "OG_Url": "https://dxpr.es/2WogLq7"
+    },
+    {
+      "Id": "DataGrid",
+      "Title": "Data Grid",
+      "Pages": [
+        {
+          "Id": "Overview",
+          "Url": "DataGrid",
+          "Title": "Overview",
+          "Keywords": "Blazor, components, data grid, datagrid, grid, data, devexpress, demo, sample, example"
+        },
+        {
+          "Id": "DataBinding",
+          "Url": "BindGridToData",
+          "Title": "Data Binding",
+          "Keywords": "blazor, components, data grid, datagrid, grid, data bind, data binding, bind to data, asynchronous data binding, bind to data asynchronously, async support, custom data source, custom data binding, web api support, bind to web api, remote data source, large data source, devexpress, demo, sample, example",
+          "Description": "The DevExpress Data Grid for Blazor supports synchronous and asynchronous data binding to various data sources (including custom and large data sources).",
+          "PageSections": [
+            {
+              "Id": "Data",
+              "Title": "Data Binding",
+              "DocUrl": "DevExpress.Blazor.DxDataGrid-1.Data",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "WeatherForecast.cs",
+                  "Path": "Data\\WeatherForecast.cs"
+                },
+                {
+                  "Title": "WeatherForecastService.cs",
+                  "Path": "Services\\WeatherForecastService.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\WeatherForecast.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Async",
+              "Title": "Asynchronous Data Binding",
+              "DocUrl": "DevExpress.Blazor.DxDataGrid-1.DataAsync",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Supplier.cs",
+                  "Path": "Data\\Northwind\\Supplier.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Suppliers.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "CustomData",
+              "Title": "Custom Data Binding",
+              "DocUrl": "DevExpress.Blazor.DxDataGrid-1.CustomData",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "RemoteWebApiEntities.cs",
+                  "Path": "Data\\RemoteWebApiEntities.cs"
+                }
+              ]
+            },
+            {
+              "Id": "LargeDataSource",
+              "Title": "Large Datasets",
+              "DocUrl": "DevExpress.Blazor.DxDataGrid-1.Data",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "AreaRentInfo.cs",
+                  "Path": "Data\\AreaRentInfo\\AreaRentInfo.cs"
+                },
+                {
+                  "Title": "RentInfoDataService.cs",
+                  "Path": "Services\\RentInfoDataService.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\RentInfo.Startup.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "ColumnTypes",
+          "Url": "GridColumnTypes",
+          "Title": "Column Types",
+          "Icon": "images/GridColumnType.svg",
+          "Keywords": "blazor, components, data grid, datagrid, grid, column type, columns, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Data Grid supports column objects that display and edit different data types: text, numbers, dates, and Boolean values.",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "WeatherForecast.cs",
+              "Path": "Data\\WeatherForecast.cs"
+            },
+            {
+              "Title": "WeatherForecastService.cs",
+              "Path": "Services\\WeatherForecastService.cs"
+            },
+            {
+              "Title": "WeatherForecastService.Editable.cs",
+              "Path": "Services\\WeatherForecastService.Editable.cs"
+            },
+            {
+              "Title": "Startup.cs",
+              "Path": "Pages\\CodeSnippets\\WeatherForecast.Startup.cs"
+            }
+          ]
+        },
+        {
+          "Id": "Sorting",
+          "Url": "GridSortData",
+          "Title": "Sort Data",
+          "Keywords": "blazor, components, data grid, datagrid, grid, grid sort, grid sorting, datagrid sort, datagrid sorting, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Data Grid supports sorting data against multiple columns. A column's current sort order is indicated by a sort glyph displayed in the column header.",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "ProductFlat.cs",
+              "Path": "Data\\Products\\ProductFlat.cs"
+            },
+            {
+              "Title": "ProductsFlatService.cs",
+              "Path": "Services\\ProductsFlatService.Data.cs"
+            },
+            {
+              "Title": "Startup.cs",
+              "Path": "Pages\\CodeSnippets\\ProductFlat.Startup.cs"
+            }
+          ]
+        },
+        {
+          "Id": "Grouping",
+          "Url": "GridGrouping",
+          "Title": "Group Data",
+          "Keywords": "blazor, components, data grid, datagrid, grid, grouping, groups, drag-and-drop, devexpress, demo, sample, example",
+          "Description": "The DevExpress Data Grid for Blazor component enables you to drag-and-drop grid headers or use grouping API to group data against multiple data columns.",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "Vacancy.cs",
+              "Path": "Data\\Vacancy\\Vacancy.cs"
+            },
+            {
+              "Title": "Vacancies.cs",
+              "Path": "Data\\Vacancy\\Vacancies.cs"
+            }
+          ]
+        },
+        {
+          "Id": "Editing",
+          "Url": "GridEditData",
+          "Title": "Edit Data",
+          "Keywords": "blazor, components, data grid, datagrid, grid, data editing, edit data, edit form, popup edit form, add rows, add new row, insert row, remove rows, delete rows, edit row values, edit modes, edit options, command column, cascade editors, cascading combobox, cascade logic, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Data Grid allows users to edit data in the edit form or in the popup edit form.",
+          "PageSections": [
+            {
+              "Id": "EditModes",
+              "Title": "Edit Modes",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "NwindDataService.Editable.cs",
+                  "Path": "Services\\NwindDataService.Employees.Editable.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "CascadingEditors",
+              "Title": "Cascading Editors",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Vacancy.cs",
+                  "Path": "Data\\Vacancy\\Vacancy.cs"
+                },
+                {
+                  "Title": "Vacancies.cs",
+                  "Path": "Data\\Vacancy\\Vacancies.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "Validation",
+          "Url": "GridEditFormTemplateValidation",
+          "Title": "Validate Input",
+          "Icon": "images/GridEditFormTemplate.svg",
+          "Keywords": "blazor, components, data grid, datagrid, grid, template, form validation, form template, form template validation, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Data Grid allows you to implement a custom edit form with built-in data validation.",
+          "DocUrl": "DevExpress.Blazor.DxDataGrid-1.EditFormTemplate",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "Vacancy.cs",
+              "Path": "Data\\Vacancy\\Vacancy.cs"
+            },
+            {
+              "Title": "Vacancies.cs",
+              "Path": "Data\\Vacancy\\Vacancies.cs"
+            }
+          ]
+        },
+        {
+          "Id": "Filtering",
+          "Url": "GridFilterRow",
+          "Title": "Filter Row",
+          "Keywords": "blazor, components, data grid, datagrid, grid, grid filter, grid filtering, datagrid filter, datagrid filtering, data filter, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Data Grid supports the Filter Row that allows users to filter data.",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "Invoice.cs",
+              "Path": "Data\\Northwind\\Invoice.cs"
+            },
+            {
+              "Title": "NwindDataService.cs",
+              "Path": "Services\\NwindDataService.Invoices.cs"
+            },
+            {
+              "Title": "Nwind.Startup.cs",
+              "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+            },
+            {
+              "Title": "Country.cs",
+              "Path": "Data\\Worldcities\\Country.cs"
+            },
+            {
+              "Title": "WorldcitiesDataService.cs",
+              "Path": "Services\\WorldcitiesDataService.Countries.cs"
+            },
+            {
+              "Title": "Worldcities.Startup.cs",
+              "Path": "Pages\\CodeSnippets\\Worldcities.Startup.cs"
+            }
+          ]
+        },
+        {
+          "Id": "Summary",
+          "Url": "GridSummary",
+          "Title": "Summary",
+          "Keywords": "blazor, components, data grid, datagrid, grid, summary, summaries, totals, total values, total summary, total summaries, group summary, group summaries, data summaries, aggregates, aggregate functions, devexpress, demo, sample, example",
+          "Description": "The DevExpress Data Grid for Blazor supports total and group summaries.",
+          "PageSections": [
+            {
+              "Id": "Total",
+              "Title": "Total Summary",
+              "DocUrl": "DevExpress.Blazor.DxDataGrid-1.TotalSummary",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Invoice.cs",
+                  "Path": "Data\\Northwind\\Invoice.cs"
+                },
+                {
+                  "Title": "NwindDataService.Invoices.cs",
+                  "Path": "Services\\NwindDataService.Invoices.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Group",
+              "Title": "Group Summary",
+              "DocUrl": "DevExpress.Blazor.DxDataGrid-1.GroupSummary",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SalesInfo.cs",
+                  "Path": "Data\\Sales\\SaleInfo.cs"
+                },
+                {
+                  "Title": "ISalesInfoDataProvider.cs",
+                  "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "Selection",
+          "Url": "GridSelection",
+          "Title": "Selection",
+          "Keywords": "blazor, components, data grid, datagrid, grid, selection, multi-selection, multiple-selection, devexpress, demo, sample, example",
+          "Description": "The DevExpress Data Grid for Blazor component supports Single Row, Multiple Rows, and Multiple Rows with Optimized Performance selection modes.",
+          "PageSections": [
+            {
+              "Id": "Single",
+              "Title": "Single Row Selection",
+              "DocUrl": "DevExpress.Blazor.DxDataGrid-1.SelectionMode#single-selection",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "ProductFlat.cs",
+                  "Path": "Data\\Products\\ProductFlat.cs"
+                },
+                {
+                  "Title": "IProductsFlatProvider.cs",
+                  "Path": "DataProviders\\IProductsFlatProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Multiple",
+              "Title": "Multiple Row Selection",
+              "DocUrl": "DevExpress.Blazor.DxDataGrid-1.SelectionMode#multiple-selection",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "ProductFlat.cs",
+                  "Path": "Data\\Products\\ProductFlat.cs"
+                },
+                {
+                  "Title": "IProductsFlatProvider.cs",
+                  "Path": "DataProviders\\IProductsFlatProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "PerformanceOptimized",
+              "Title": "Multiple Selection with Optimized Performance",
+              "DocUrl": "DevExpress.Blazor.DxDataGrid-1.SelectionMode#multiple-selection-with-optimized-performance",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "ProductFlat.cs",
+                  "Path": "Data\\Products\\ProductFlat.cs"
+                },
+                {
+                  "Title": "IProductsFlatProvider.cs",
+                  "Path": "DataProviders\\IProductsFlatProvider.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "PagingAndScrolling",
+          "Url": "GridPagingAndScrolling",
+          "Title": "Paging and Scrolling",
+          "Keywords": "blazor, components, data grid, datagrid, grid, scrolling, vertical scrolling, horizontal scrolling, virtual scrolling, load records on demand, paging, pager, pages, go to page, page size selection, custom page size, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Data Grid supports horizontal scrolling, vertical scrolling, and virtual scrolling (loading data on demand). The Data Grid displays a pager that enables data navigation. ",
+          "PageSections": [
+            {
+              "Id": "Paging",
+              "Title": "Paging",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "ProductFlat.cs",
+                  "Path": "Data\\Products\\ProductFlat.cs"
+                },
+                {
+                  "Title": "IProductsFlatProvider.cs",
+                  "Path": "DataProviders\\IProductsFlatProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "VerticalScrolling",
+              "Title": "Vertical Scrolling",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "ProductFlat.cs",
+                  "Path": "Data\\Products\\ProductFlat.cs"
+                },
+                {
+                  "Title": "IProductsFlatProvider.cs",
+                  "Path": "DataProviders\\IProductsFlatProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "HorizontalScrolling",
+              "Title": "Horizontal Scrolling",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "ProductFlat.cs",
+                  "Path": "Data\\Products\\ProductFlat.cs"
+                },
+                {
+                  "Title": "IProductsFlatProvider.cs",
+                  "Path": "DataProviders\\IProductsFlatProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "FixedColumns",
+              "Title": "Fixed Columns",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "ProductFlat.cs",
+                  "Path": "Data\\Products\\ProductFlat.cs"
+                },
+                {
+                  "Title": "IProductsFlatProvider.cs",
+                  "Path": "DataProviders\\IProductsFlatProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "VirtualScrolling",
+              "Title": "Virtual Scrolling",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "ProductFlat.cs",
+                  "Path": "Data\\Products\\ProductFlat.cs"
+                },
+                {
+                  "Title": "ProductCategory.cs",
+                  "Path": "Data\\Products\\ProductCategory.cs"
+                },
+                {
+                  "Title": "ProductsFlatService.cs",
+                  "Path": "Services\\ProductsFlatService.Data.cs"
+                },
+                {
+                  "Title": "ProductsFlatService.Editable.cs",
+                  "Path": "Services\\ProductsFlatService.Editable.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\ProductFlat.Startup.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "MasterDetail",
+          "Url": "GridMasterDetail",
+          "Title": "Master-Detail View",
+          "Keywords": "blazor, components, data grid, datagrid, grid, master grid, detail grid, master-detail relationship, master-detail view, detail row, devexpress, demo, sample, example",
+          "Description": "The DevExpress Data Grid for Blazor component allows you to build master-detail layouts and relationships of any complexity and depth with a detail row template.",
+          "DocUrl": "Blazor/DevExpress.Blazor.DxDataGrid-1.DetailRowTemplate",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "SalesViewerEntities.cs",
+              "Path": "Data\\SalesViewer\\SalesViewerEntities.cs"
+            },
+            {
+              "Title": "ISalesViewerDataProvider.cs",
+              "Path": "DataProviders\\ISalesViewerDataProvider.cs"
+            }
+          ]
+        },
+        {
+          "Id": "ResizeColumns",
+          "Url": "GridResizeColumns",
+          "Title": "Resize Columns",
+          "Keywords": "blazor, components, data grid, datagrid, grid, column, columns, resizing, resize, column resizing, column resize, resizing columns, column width, column size, devexpress, demo, sample, example",
+          "Description": "The DevExpress Blazor Data Grid allows users to resize columns in two modes: change the width of the column to the right or the width of the entire grid.",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "Customer.cs",
+              "Path": "Data\\Northwind\\Customer.cs"
+            },
+            {
+              "Title": "NwindDataService.cs",
+              "Path": "Services\\NwindDataService.Customers.cs"
+            },
+            {
+              "Title": "Startup.cs",
+              "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+            }
+          ]
+        },
+        {
+          "Id": "ColumnChooser",
+          "Url": "GridColumnChooser",
+          "Title": "Column Chooser",
+          "Keywords": "blazor, components, data grid, datagrid, grid, column chooser, columnchooser, columns, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Data Grid can display a Column Chooser in a toolbar. The Column Chooser is a separate window that allows users to show, hide, and reorder Data Grid columns at runtime.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxDataGridColumnChooserToolbarItem",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "ShowInColumnChooser",
+              "Title": "Hide a Column from the Column Chooser",
+              "DocUrl": "DevExpress.Blazor.Base.DxDataGridColumnBase-1.ShowInColumnChooser",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "ProductFlat.cs",
+                  "Path": "Data\\Products\\ProductFlat.cs"
+                },
+                {
+                  "Title": "IProductsFlatProvider.cs",
+                  "Path": "DataProviders\\IProductsFlatProvider.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "Toolbar",
+          "Url": "GridToolbar",
+          "Title": "Toolbar",
+          "Keywords": "blazor, components, data grid, datagrid, grid, toolbar, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor  Data Grid can display a toolbar that aggregates buttons and commands related to the Data Grid and its data.",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "Employee.cs",
+              "Path": "Data\\Northwind\\Employee.cs"
+            },
+            {
+              "Title": "NwindDataService.cs",
+              "Path": "Services\\NwindDataService.Employees.cs"
+            },
+            {
+              "Title": "Startup.cs",
+              "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+            }
+          ]
+        },
+        {
+          "Id": "Templates",
+          "Url": "GridTemplate",
+          "Title": "Templates",
+          "Icon": "images/GridTemplates.svg",
+          "Keywords": "blazor, components, data grid, datagrid, grid, template, cell template, cell editor template, row preview template, preview sections, custom row appearance, custom cell appearance, custom content in rows, custom content in cells, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Data Grid supports templates that allow you to customize cell appearance, the edit form’s layout, and row preview sections.",
+          "PageSections": [
+            {
+              "Id": "Column",
+              "Title": "Column Templates",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "ProductFlat.cs",
+                  "Path": "Data\\Products\\ProductFlat.cs"
+                },
+                {
+                  "Title": "ProductCategory.cs",
+                  "Path": "Data\\Products\\ProductCategory.cs"
+                },
+                {
+                  "Title": "ProductsFlatService.cs",
+                  "Path": "Services\\ProductsFlatService.Data.cs"
+                },
+                {
+                  "Title": "ProductsFlatService.Editable.cs",
+                  "Path": "Services\\ProductsFlatService.Editable.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\ProductFlat.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "RowPreview",
+              "Title": "Row Preview Template",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "HTMLDecoration",
+          "Url": "GridHTMLDecoration",
+          "Title": "HTML Decoration",
+          "Keywords": "blazor, components, data grid, datagrid, grid, conditional formating, conditional data highlighting, alternative row, row style, row color, column style, cell style, custom style, html decoration, html row decoration, html cell decoration, html attributes, devexpress, demo, sample, example",
+          "Description": "HTML decoration in DevExpress Data Grid for Blazor allows you to color data grid cells, rows and columns according to their values.",
+          "DocUrl": "DevExpress.Blazor.DxDataGrid-1.HtmlRowDecoration",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "Invoice.cs",
+              "Path": "Data\\Northwind\\Invoice.cs"
+            },
+            {
+              "Title": "NwindDataService.cs",
+              "Path": "Services\\NwindDataService.Invoices.cs"
+            },
+            {
+              "Title": "Startup.cs",
+              "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "Grid",
+      "Title": "Grid",
+      "IsPreview": true,
+      "Pages": [
+        {
+          "Id": "DataBinding",
+          "Url": "Grid/DataBinding",
+          "Title": "Data Binding",
+          "Keywords": "blazor, components, data grid, datagrid, grid, data bind, data binding, bind to data, asynchronous data binding, bind to data asynchronously, async support, custom data source, custom data binding, web api support, bind to web api, remote data source, large data source, devexpress, demo, sample, example",
+          "Description": "The DevExpress Data Grid for Blazor supports synchronous and asynchronous data binding to various data sources (including custom and large data sources).",
+          "PageSections": [
+            {
+              "Id": "Data",
+              "Title": "Data Binding",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "WeatherForecast.cs",
+                  "Path": "Data\\WeatherForecast.cs"
+                },
+                {
+                  "Title": "WeatherForecastService.cs",
+                  "Path": "Services\\WeatherForecastService.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\WeatherForecast.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Async",
+              "Title": "Asynchronous Data Binding",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Supplier.cs",
+                  "Path": "Data\\Northwind\\Supplier.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Suppliers.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "LargeDataSource",
+              "Title": "Large Datasets",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "AreaRentInfo.cs",
+                  "Path": "Data\\AreaRentInfo\\AreaRentInfo.cs"
+                },
+                {
+                  "Title": "RentInfoDataService.cs",
+                  "Path": "Services\\RentInfoDataService.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\RentInfo.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "CustomData",
+              "Title": "Large Datasets from an HTTP Service",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Product.cs",
+                  "Path": "Data\\Northwind\\Product.cs"
+                },
+                {
+                  "Title": "NwindController.cs",
+                  "Path": "Controllers\\NwindController.Products.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "Sorting",
+          "Url": "Grid/Sorting",
+          "Title": "Sort Data",
+          "Keywords": "blazor, components, data grid, datagrid, grid, grid sort, grid sorting, datagrid sort, datagrid sorting, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Data Grid supports sorting data against multiple columns. A column's current sort order is indicated by a sort glyph displayed in the column header.",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "Customer.cs",
+              "Path": "Data\\Northwind\\Customer.cs"
+            },
+            {
+              "Title": "NwindDataService.cs",
+              "Path": "Services\\NwindDataService.Customers.cs"
+            },
+            {
+              "Title": "Startup.cs",
+              "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+            }
+          ]
+        },
+        {
+          "Id": "Grouping",
+          "Url": "Grid/Grouping",
+          "Title": "Group Data",
+          "Keywords": "blazor, components, data grid, datagrid, grid, grouping, groups, drag-and-drop, devexpress, demo, sample, example",
+          "Description": "The DevExpress Data Grid for Blazor component enables you to drag-and-drop grid headers or use grouping API to group data against multiple data columns.",
+          "PageSections": [
+            {
+              "Id": "GroupData",
+              "Title": "Group Data",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Customer.cs",
+                  "Path": "Data\\Northwind\\Customer.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Customers.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "IntervalGrouping",
+              "Title": "Interval Grouping",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Product.cs",
+                  "Path": "Data\\Northwind\\Product.cs"
+                },
+                {
+                  "Title": "Invoice.cs",
+                  "Path": "Data\\Northwind\\Invoice.cs"
+                },
+                {
+                  "Title": "Category.cs",
+                  "Path": "Data\\Northwind\\Category.cs"
+                },
+                {
+                  "Title": "NwindDataService.Products.cs",
+                  "Path": "Services\\NwindDataService.Products.cs"
+                },
+                {
+                  "Title": "NwindDataService.Invoices.cs",
+                  "Path": "Services\\NwindDataService.Invoices.cs"
+                },
+                {
+                  "Title": "NwindDataService.Categories.cs",
+                  "Path": "Services\\NwindDataService.Categories.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "CustomGrouping",
+              "Title": "Custom Grouping",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Product.cs",
+                  "Path": "Data\\Northwind\\Product.cs"
+                },
+                {
+                  "Title": "Invoice.cs",
+                  "Path": "Data\\Northwind\\Invoice.cs"
+                },
+                {
+                  "Title": "Category.cs",
+                  "Path": "Data\\Northwind\\Category.cs"
+                },
+                {
+                  "Title": "NwindDataService.Products.cs",
+                  "Path": "Services\\NwindDataService.Products.cs"
+                },
+                {
+                  "Title": "NwindDataService.Invoices.cs",
+                  "Path": "Services\\NwindDataService.Invoices.cs"
+                },
+                {
+                  "Title": "NwindDataService.Categories.cs",
+                  "Path": "Services\\NwindDataService.Categories.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "Summary",
+          "Url": "Grid/Summary",
+          "Title": "Summary",
+          "Keywords": "blazor, components, data grid, datagrid, grid, summary, summaries, totals, total values, total summary, total summaries, group summary, group summaries, data summaries, aggregates, aggregate functions, devexpress, demo, sample, example",
+          "Description": "The DevExpress Data Grid for Blazor supports total and group summaries.",
+          "PageSections": [
+            {
+              "Id": "Total",
+              "Title": "Total Summary",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Invoice.cs",
+                  "Path": "Data\\Northwind\\Invoice.cs"
+                },
+                {
+                  "Title": "Customer.cs",
+                  "Path": "Data\\Northwind\\Customer.cs"
+                },
+                {
+                  "Title": "NwindDataService.Invoices.cs",
+                  "Path": "Services\\NwindDataService.Invoices.cs"
+                },
+                {
+                  "Title": "NwindDataService.Customers.cs",
+                  "Path": "Services\\NwindDataService.Customers.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Group",
+              "Title": "Group Summary",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Invoice.cs",
+                  "Path": "Data\\Northwind\\Invoice.cs"
+                },
+                {
+                  "Title": "Customer.cs",
+                  "Path": "Data\\Northwind\\Customer.cs"
+                },
+                {
+                  "Title": "NwindDataService.Invoices.cs",
+                  "Path": "Services\\NwindDataService.Invoices.cs"
+                },
+                {
+                  "Title": "NwindDataService.Customers.cs",
+                  "Path": "Services\\NwindDataService.Customers.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Custom",
+              "Title": "Custom Summary",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Invoice.cs",
+                  "Path": "Data\\Northwind\\Invoice.cs"
+                },
+                {
+                  "Title": "Customer.cs",
+                  "Path": "Data\\Northwind\\Customer.cs"
+                },
+                {
+                  "Title": "NwindDataService.Invoices.cs",
+                  "Path": "Services\\NwindDataService.Invoices.cs"
+                },
+                {
+                  "Title": "NwindDataService.Customers.cs",
+                  "Path": "Services\\NwindDataService.Customers.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "Templates",
+          "Url": "Grid/Templates",
+          "Title": "Templates",
+          "Keywords": "blazor, components, data grid, datagrid, grid, template, cell template, cell editor template, row preview template, preview sections, custom row appearance, custom cell appearance, custom content in rows, custom content in cells, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Data Grid supports templates that allow you to customize cell appearance, the edit form’s layout, and row preview sections.",
+          "PageSections": [
+            {
+              "Id": "Column",
+              "Title": "Column Templates",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "GroupRow",
+              "Title": "Group Row Template",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Invoice.cs",
+                  "Path": "Data\\Northwind\\Invoice.cs"
+                },
+                {
+                  "Title": "Customer.cs",
+                  "Path": "Data\\Northwind\\Customer.cs"
+                },
+                {
+                  "Title": "NwindDataService.Invoices.cs",
+                  "Path": "Services\\NwindDataService.Invoices.cs"
+                },
+                {
+                  "Title": "NwindDataService.Customers.cs",
+                  "Path": "Services\\NwindDataService.Customers.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "PivotGrid",
+      "Title": "Pivot Grid",
+      "Pages": [
+        {
+          "Id": "Overview",
+          "Url": "PivotGrid",
+          "Title": "Overview",
+          "Keywords": "Blazor, components, pivot grid, pivot table, sorting, grouping, sub-totals, grand-totals, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Pivot Grid summarizes data from the underlying data source and presents the results in cross-tabulated format. ",
+          "DocUrl": "DevExpress.Blazor.DxPivotGrid-1"
+        },
+        {
+          "Id": "Templates",
+          "Url": "PivotGridTemplates",
+          "Title": "Templates",
+          "Keywords": "Blazor, components, pivot grid, pivot table, customization, cell templates, formatting, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Pivot Grid allows you to use native Razor markup to define custom templates for grid fields.",
+          "DocUrl": "DevExpress.Blazor.DxPivotGrid-1#templates",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "SalesInfo.cs",
+              "Path": "Data\\Sales\\SaleInfo.cs"
+            },
+            {
+              "Title": "ISalesInfoDataProvider.cs",
+              "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+            }
+          ]
+        },
+        {
+          "Id": "LargeDataSources",
+          "Url": "PivotGridLargeDataBase",
+          "Title": "Large Data Source",
+          "Keywords": "Blazor, components, pivot grid, pivot table, data binding, entity framework bind, paging, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Pivot Grid delivers high performance when the component is bound to a large data source.",
+          "DocUrl": "DevExpress.Blazor.DxPivotGrid-1#bind-to-data",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "Sale.cs",
+              "Path": "Data\\ContosoRetail\\Sale.cs"
+            },
+            {
+              "Title": "IContosoRetailDataProvider.cs",
+              "Path": "DataProviders\\IContosoRetailDataProvider.cs"
+            }
+          ]
+        },
+        {
+          "Id": "ChartIntegration",
+          "Url": "PivotGridChartIntegration",
+          "Title": "Chart Integration",
+          "Keywords": "Blazor, components, pivot grid, pivot table, chart, pivot grid and chart integration, data visualization, devexpress, demo, sample, example",
+          "Description": "The DevExpress Pivot Grid for Blazor can be easily integrated with DevExpress Charts for Blazor. This allows you to visualize grid's data on a chart.",
+          "DocUrl": "DevExpress.Blazor.DxPivotGrid-1#visualize-data",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "SalesInfo.cs",
+              "Path": "Data\\Sales\\SaleInfo.cs"
+            },
+            {
+              "Title": "ISalesInfoDataProvider.cs",
+              "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "Charts",
+      "Title": "Charts",
+      "Pages": [
+        {
+          "Id": "Overview",
+          "Url": "Charts",
+          "Title": "Overview",
+          "Keywords": "Blazor, components, chart, bar, line, area, bubble, series, devexpress, demo, sample, example",
+          "Description": "",
+          "DocUrl": ""
+        },
+        {
+          "Id": "LineSeries",
+          "Url": "ChartLineSeries",
+          "Title": "Line Series",
+          "Keywords": "Blazor, components, chart, line, series, devexpress, demo, sample, example",
+          "PageSections": [
+            {
+              "Id": "Line",
+              "Title": "Line",
+              "ShowRazorFile": false,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Line",
+                  "Path": "Pages\\Charts\\LineSeries\\Charts\\LineChart.razor"
+                },
+                {
+                  "Title": "StackedLine",
+                  "Path": "Pages\\Charts\\LineSeries\\Charts\\StackedLineChart.razor"
+                },
+                {
+                  "Title": "FullStackedLine",
+                  "Path": "Pages\\Charts\\LineSeries\\Charts\\FullStackedLineChart.razor"
+                },
+                {
+                  "Title": "SaleInfo.cs",
+                  "Path": "Data\\Sales\\SaleInfo.cs"
+                },
+                {
+                  "Title": "ISalesInfoDataProvider.cs",
+                  "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Spline",
+              "Title": "Spline",
+              "ShowRazorFile": false,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Spline",
+                  "Path": "Pages\\Charts\\LineSeries\\Charts\\SplineChart.razor"
+                },
+                {
+                  "Title": "StackedSpline",
+                  "Path": "Pages\\Charts\\LineSeries\\Charts\\StackedSplineChart.razor"
+                },
+                {
+                  "Title": "FullStackedSpline",
+                  "Path": "Pages\\Charts\\LineSeries\\Charts\\FullStackedSplineChart.razor"
+                },
+                {
+                  "Title": "SaleInfo.cs",
+                  "Path": "Data\\Sales\\SaleInfo.cs"
+                },
+                {
+                  "Title": "ISalesInfoDataProvider.cs",
+                  "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Step",
+              "Title": "Step",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SaleInfo.cs",
+                  "Path": "Data\\Sales\\SaleInfo.cs"
+                },
+                {
+                  "Title": "ISalesInfoDataProvider.cs",
+                  "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+                }
+              ]
+            }
+          ],
+          "RedirectFrom": [ "ChartSeriesTypes#Line", "ChartSeriesTypes" ]
+        },
+        {
+          "Id": "AreaSeries",
+          "Url": "ChartAreaSeries",
+          "Title": "Area Series",
+          "Keywords": "Blazor, components, chart, area, series, devexpress, demo, sample, example",
+          "PageSections": [
+            {
+              "Id": "Area",
+              "Title": "Area",
+              "ShowRazorFile": false,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Area",
+                  "Path": "Pages\\Charts\\AreaSeries\\Charts\\AreaChart.razor"
+                },
+                {
+                  "Title": "StackedArea",
+                  "Path": "Pages\\Charts\\AreaSeries\\Charts\\StackedAreaChart.razor"
+                },
+                {
+                  "Title": "FullStackedArea",
+                  "Path": "Pages\\Charts\\AreaSeries\\Charts\\FullStackedAreaChart.razor"
+                },
+                {
+                  "Title": "SaleInfo.cs",
+                  "Path": "Data\\Sales\\SaleInfo.cs"
+                },
+                {
+                  "Title": "ISalesInfoDataProvider.cs",
+                  "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Spline",
+              "Title": "Spline",
+              "ShowRazorFile": false,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SplineArea",
+                  "Path": "Pages\\Charts\\AreaSeries\\Charts\\SplineAreaChart.razor"
+                },
+                {
+                  "Title": "StackedSplineArea",
+                  "Path": "Pages\\Charts\\AreaSeries\\Charts\\StackedSplineAreaChart.razor"
+                },
+                {
+                  "Title": "FullStackedSplineArea",
+                  "Path": "Pages\\Charts\\AreaSeries\\Charts\\FullStackedSplineAreaChart.razor"
+                },
+                {
+                  "Title": "SaleInfo.cs",
+                  "Path": "Data\\Sales\\SaleInfo.cs"
+                },
+                {
+                  "Title": "ISalesInfoDataProvider.cs",
+                  "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Step",
+              "Title": "Step",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SaleInfo.cs",
+                  "Path": "Data\\Sales\\SaleInfo.cs"
+                },
+                {
+                  "Title": "ISalesInfoDataProvider.cs",
+                  "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+                }
+              ]
+            }
+          ],
+          "Description": "",
+          "DocUrl": "",
+          "RedirectFrom": [ "ChartSeriesTypes#Area" ]
+        },
+        {
+          "Id": "BarSeries",
+          "Url": "ChartBarSeries",
+          "Title": "Bar Series",
+          "TitleOnPage": "Bar",
+          "Keywords": "Blazor, components, chart, bar, series, devexpress, demo, sample, example",
+          "ShowRazorFile": false,
+          "AdditionalCodeFiles": [
+            {
+              "Title": "Bar",
+              "Path": "Pages\\Charts\\BarSeries\\Charts\\BarChart.razor"
+            },
+            {
+              "Title": "StackedBar",
+              "Path": "Pages\\Charts\\BarSeries\\Charts\\StackedBarChart.razor"
+            },
+            {
+              "Title": "FullStackedBar",
+              "Path": "Pages\\Charts\\BarSeries\\Charts\\FullStackedBarChart.razor"
+            },
+            {
+              "Title": "SaleInfo.cs",
+              "Path": "Data\\Sales\\SaleInfo.cs"
+            },
+            {
+              "Title": "ISalesInfoDataProvider.cs",
+              "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+            }
+          ],
+          "RedirectFrom": [ "ChartSeriesTypes#Bar" ]
+        },
+        {
+          "Id": "PointSeries",
+          "Url": "ChartPointSeries",
+          "Title": "Point Series",
+          "Keywords": "Blazor, components, chart, point, bubble, series, devexpress, demo, sample, example",
+          "PageSections": [
+            {
+              "Id": "Bubble",
+              "Title": "Bubble",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SaleInfo.cs",
+                  "Path": "Data\\Sales\\SaleInfo.cs"
+                },
+                {
+                  "Title": "ISalesInfoDataProvider.cs",
+                  "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+                }
+              ],
+              "RedirectFrom": [ "ChartSeriesTypes#Bubble" ]
+            },
+            {
+              "Id": "Scatter",
+              "Title": "Scatter",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SaleInfo.cs",
+                  "Path": "Data\\Sales\\SaleInfo.cs"
+                },
+                {
+                  "Title": "ISalesInfoDataProvider.cs",
+                  "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+                }
+              ]
+            }
+          ],
+          "Description": "",
+          "DocUrl": ""
+        },
+        {
+          "Id": "RangeSeries",
+          "Url": "ChartRangeSeries",
+          "Title": "Range Series",
+          "Keywords": "Blazor, components, chart, range series, range area, range bar, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Charts supports Range Bar and Range Area series that display value ranges corresponding to argument values.",
+          "PageSections": [
+            {
+              "Id": "Bar",
+              "Title": "Range Bar",
+              "DocUrl": "DevExpress.Blazor.DxChartRangeBarSeries-3",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "WeatherForecast.cs",
+                  "Path": "Data\\WeatherForecast.cs"
+                },
+                {
+                  "Title": "WeatherForecastService.cs",
+                  "Path": "Services\\WeatherForecastService.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\WeatherForecast.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Area",
+              "Title": "Range Area",
+              "DocUrl": "DevExpress.Blazor.DxChartRangeAreaSeries-3",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "WeatherForecast.cs",
+                  "Path": "Data\\WeatherForecast.cs"
+                },
+                {
+                  "Title": "WeatherForecastService.cs",
+                  "Path": "Services\\WeatherForecastService.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\WeatherForecast.Startup.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "FinancialSeries",
+          "Url": "ChartFinancialSeries",
+          "Title": "Financial Series",
+          "Keywords": "Blazor, components, chart, candlestick, stock, financial, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Charts supports Candlestick and Stock series that display how financial indicators change in time.",
+          "PageSections": [
+            {
+              "Id": "Candlestick",
+              "Title": "Candlestick",
+              "DocUrl": "DevExpress.Blazor.DxChartCandlestickSeries-3",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "BargainDataPoint.cs",
+                  "Path": "Data\\BargainDataPoint.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Stock",
+              "Title": "Stock",
+              "DocUrl": "DevExpress.Blazor.DxChartStockSeries-3",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "BargainDataPoint.cs",
+                  "Path": "Data\\BargainDataPoint.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "PieSeries",
+          "Url": "ChartPieSeries",
+          "Title": "Pie Series",
+          "Keywords": "Blazor, components, chart, pie, donut, doughnut, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Charts supports Pie and Donut series that allow you to compare the percentage values of different point arguments and illustrate these values as pie slices.",
+          "PageSections": [
+            {
+              "Id": "Pie",
+              "Title": "Pie",
+              "DocUrl": "DevExpress.Blazor.DxChartPieSeries-3",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SaleInfo.cs",
+                  "Path": "Data\\Sales\\SaleInfo.cs"
+                },
+                {
+                  "Title": "ISalesInfoDataProvider.cs",
+                  "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Donut",
+              "Title": "Donut",
+              "DocUrl": "DevExpress.Blazor.DxChartDonutSeries-3",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SaleInfo.cs",
+                  "Path": "Data\\Sales\\SaleInfo.cs"
+                },
+                {
+                  "Title": "ISalesInfoDataProvider.cs",
+                  "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "DynamicSeries",
+          "Url": "ChartDynamicSeries",
+          "Title": "Dynamic Series",
+          "Keywords": "Blazor, components, chart, dynamic series, series template, aggregation, grouping, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Charts allows you to dynamically select data that matches the specified criterion from a data source and display chart series based on this data.",
+          "DocUrl": "DevExpress.Blazor.DxChartCommonSeries-4",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "SaleInfo.cs",
+              "Path": "Data\\Sales\\SaleInfo.cs"
+            },
+            {
+              "Title": "ISalesInfoDataProvider.cs",
+              "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+            }
+          ]
+        },
+        {
+          "Id": "ZoomAndPan",
+          "Url": "ZoomAndPan",
+          "Title": "Zoom and Pan",
+          "Keywords": "Blazor, components, chart, scrolling, pan, zoom, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Charts supports pan and zoom functionality.",
+          "IsNew": true,
+          "AdditionalCodeFiles": [
+            {
+              "Title": "BargainDataPoint.cs",
+              "Path": "Data\\BargainDataPoint.cs"
+            }
+          ]
+        },
+        {
+          "Id": "Axes",
+          "Url": "ChartAxes",
+          "Title": "Axes",
+          "Keywords": "Blazor, chart, chart, customization, axes, multiple axes, chart rotation, rotating chart, swap axes, horizontal bars, continuous axis, discrete axis, logarithmic axis, axis types, argument types, value types, string values, date-time values, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Charts allow users to display multiple axes, swap axes (rotate the chart), and choose axis types",
+          "PageSections": [
+            {
+              "Id": "MultipleAxes",
+              "Title": "Multiple Axes",
+              "DocUrl": "DevExpress.Blazor.DxChart-1#axes",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SaleInfo.cs",
+                  "Path": "Data\\Sales\\SaleInfo.cs"
+                },
+                {
+                  "Title": "ISalesInfoDataProvider.cs",
+                  "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Rotation",
+              "Title": "Rotation",
+              "DocUrl": "DevExpress.Blazor.DxChart-1.Rotated"
+            },
+            {
+              "Id": "Types",
+              "Title": "Axis Types",
+              "DocUrl": "DevExpress.Blazor.DxChartArgumentAxis.Type"
+            }
+          ]
+        },
+        {
+          "Id": "Customization",
+          "Url": "ChartCustomization",
+          "Title": "Customization",
+          "Keywords": "Blazor, components, chart, customization, tooltips, legend, toggle series, multiple axes, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Charts allows users to customize tooltips and legend items. Additionally, the component supports displaying chart with multiple axes that help to combine several chart. ",
+          "PageSections": [
+            {
+              "Id": "Tooltip",
+              "Title": "Tooltip Customization",
+              "DocUrl": "DevExpress.Blazor.DxChart-1#tooltips",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SaleInfo.cs",
+                  "Path": "Data\\Sales\\SaleInfo.cs"
+                },
+                {
+                  "Title": "ISalesInfoDataProvider.cs",
+                  "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Legend",
+              "Title": "Legend Customization",
+              "DocUrl": "DevExpress.Blazor.DxChart-1#legend",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SaleInfo.cs",
+                  "Path": "Data\\Sales\\SaleInfo.cs"
+                },
+                {
+                  "Title": "ISalesInfoDataProvider.cs",
+                  "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "MultiplePanes",
+              "Title": "Multiple Panes Customization",
+              "DocUrl": "DevExpress.Blazor.DxChart-1#multiple-panes",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "WeatherForecast.cs",
+                  "Path": "Data\\WeatherForecast.cs"
+                },
+                {
+                  "Title": "WeatherForecastService.cs",
+                  "Path": "Services\\WeatherForecastService.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\WeatherForecast.Startup.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "SeriesCustomization",
+          "Url": "ChartSeriesCustomization",
+          "Title": "Series Customization",
+          "Keywords": "Blazor, components, chart, series, label, point, customization, appearance, point color, custom text, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Charts allow users to customize series points and their labels' appearance and specify custom images for points.",
+          "PageSections": [
+            {
+              "Id": "SeriesPoint",
+              "Title": "Series Point Customization",
+              "DocUrl": "DevExpress.Blazor.DxChartSeriesPoint",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "WeatherForecast.cs",
+                  "Path": "Data\\WeatherForecast.cs"
+                },
+                {
+                  "Title": "WeatherForecastService.cs",
+                  "Path": "Services\\WeatherForecastService.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\WeatherForecast.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "SeriesPointImage",
+              "Title": "Series Point Image",
+              "DocUrl": "DevExpress.Blazor.DxChartSeriesPointImage",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "WeatherForecast.cs",
+                  "Path": "Data\\WeatherForecast.cs"
+                },
+                {
+                  "Title": "WeatherForecastService.cs",
+                  "Path": "Services\\WeatherForecastService.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\WeatherForecast.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "SeriesLabel",
+              "Title": "Series Label Customization",
+              "DocUrl": "DevExpress.Blazor.DxChart-1#labels",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "WeatherForecast.cs",
+                  "Path": "Data\\WeatherForecast.cs"
+                },
+                {
+                  "Title": "WeatherForecastService.cs",
+                  "Path": "Services\\WeatherForecastService.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\WeatherForecast.Startup.cs"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "Reports",
+      "Title": "Reports",
+      "IsUpdated": true,
+      "IsServerSideOnly": true,
+      "Pages": [
+        {
+          "Id": "ReportViewer",
+          "Url": "ReportViewer",
+          "Title": "Report Viewer (Native)",
+          "IsNew": true,
+          "Keywords": "blazor, components, reports, reporting tool, devexpress reports, report preview, report viewer, document viewer, reportviewer, documentviewer, devexpress, demo, example",
+          "Description": "The DevExpress Blazor Report Viewer is a native Blazor control that allows users to preview, print, and export reports to various formats."
+        },
+        {
+          "Id": "DocumentViewer",
+          "Url": "DocumentViewer",
+          "Title": "Report Viewer (JavaScript based)",
+          "Keywords": "blazor, components, reports, reporting tool, devexpress reports, report preview, report viewer, document viewer, reportviewer, documentviewer, devexpress, demo, example",
+          "Description": "The DevExpress Blazor Document Viewer is a JavaScript control integrated in Blazor framework that allows users to preview, print, and export reports to various formats."
+        },
+        {
+          "Id": "ReportDesigner",
+          "Url": "ReportDesigner",
+          "Title": "Report Designer (JavaScript based)",
+          "Keywords": "blazor, components, reports, reporting tool, devexpress reports, report designer, reportdesigner, report preview, report viewer, document viewer, reportviewer, documentviewer, devexpress, demo, example",
+          "Description": "The DevExpress Blazor Report Designer is a JavaScript control integrated in Blazor framework that allows users to create and edit reports. Its preview functionality can be used to preview, print, and export reports."
+        }
+      ]
+    },
+    {
+      "Id": "Scheduler",
+      "Title": "Scheduler",
+      "IsUpdated": true,
+      "Pages": [
+        {
+          "Id": "Overview",
+          "Url": "Scheduler",
+          "Title": "Overview",
+          "Keywords": "Blazor, components, scheduler, day view, work week view, week view, appointment, resource, devexpress, demo, sample, example",
+          "Description": "",
+          "DocUrl": ""
+        },
+        {
+          "Id": "ViewTypes",
+          "Url": "SchedulerViewTypes",
+          "Title": "View Types",
+          "Keywords": "Blazor, components, scheduler, day view, work week view, week view, devexpress, demo, sample, example",
+          "Description": "The Scheduler UI for Blazor can display regular and recurrent appointments in a Day, Work Week or Week View. The Scheduler also allows users to create, remove, and manage appointments.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview"
+            },
+            {
+              "Id": "WeekView",
+              "Title": "Week View",
+              "DocUrl": "DevExpress.Blazor.DxSchedulerWeekView",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Appointment.cs",
+                  "Path": "Data\\Appointments\\Appointment.cs"
+                },
+                {
+                  "Title": "AppointmentCollection.cs",
+                  "Path": "Data\\Appointments\\AppointmentCollection.cs"
+                }
+              ]
+            },
+            {
+              "Id": "WorkWeekView",
+              "Title": "Work Week View",
+              "DocUrl": "DevExpress.Blazor.DxSchedulerWorkWeekView",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Appointment.cs",
+                  "Path": "Data\\Appointments\\Appointment.cs"
+                },
+                {
+                  "Title": "AppointmentCollection.cs",
+                  "Path": "Data\\Appointments\\AppointmentCollection.cs"
+                }
+              ]
+            },
+            {
+              "Id": "DayView",
+              "Title": "Day View",
+              "DocUrl": "DevExpress.Blazor.DxSchedulerDayView",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Appointment.cs",
+                  "Path": "Data\\Appointments\\Appointment.cs"
+                },
+                {
+                  "Title": "AppointmentCollection.cs",
+                  "Path": "Data\\Appointments\\AppointmentCollection.cs"
+                }
+              ]
+            },
+            {
+              "Id": "MonthView",
+              "Title": "Month View",
+              "DocUrl": "DevExpress.Blazor.DxSchedulerMonthView",
+              "IsNew": true,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Appointment.cs",
+                  "Path": "Data\\Appointments\\Appointment.cs"
+                },
+                {
+                  "Title": "Resource.cs",
+                  "Path": "Data\\Appointments\\Resource.cs"
+                },
+                {
+                  "Title": "ResourceAppointmentCollection.cs",
+                  "Path": "Data\\Appointments\\ResourceAppointmentCollection.cs"
+                }
+              ]
+            },
+            {
+              "Id": "TimelineView",
+              "Title": "Timeline View",
+              "DocUrl": "DevExpress.Blazor.DxSchedulerTimelineView",
+              "IsNew": true,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Appointment.cs",
+                  "Path": "Data\\Appointments\\Appointment.cs"
+                },
+                {
+                  "Title": "Resource.cs",
+                  "Path": "Data\\Appointments\\Resource.cs"
+                },
+                {
+                  "Title": "ResourceAppointmentCollection.cs",
+                  "Path": "Data\\Appointments\\ResourceAppointmentCollection.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "RecurringAppointments",
+          "Url": "SchedulerRecurringAppointments",
+          "Title": "Recurring Appointments",
+          "Keywords": "Blazor, components, scheduler, recurring appointments, devexpress, demo, sample, example",
+          "Description": "The Scheduler UI for Blazor can display regular and recurrent appointments in a Day, Work Week or Week View. The Scheduler also allows users to create, remove, and manage appointments.",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "Appointment.cs",
+              "Path": "Data\\Appointments\\Appointment.cs"
+            },
+            {
+              "Title": "RecurringAppointmentCollection.cs",
+              "Path": "Data\\Appointments\\RecurringAppointmentCollection.cs"
+            }
+          ]
+        },
+        {
+          "Id": "Resources",
+          "Url": "SchedulerResources",
+          "Title": "Resources",
+          "Keywords": "Blazor, components, scheduler, resources, devexpress, demo, sample, example",
+          "Description": "The DevExpress Scheduler for Blazor allows you to assign resources to appointments. You can also use this feature to group appointments by resource or by date.",
+          "PageSections": [
+            {
+              "Id": "GroupByResource",
+              "Title": "Group by Resource",
+              "DocUrl": "DevExpress.Blazor.DxScheduler#resources",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Appointment.cs",
+                  "Path": "Data\\Appointments\\Appointment.cs"
+                },
+                {
+                  "Title": "Resource.cs",
+                  "Path": "Data\\Appointments\\Resource.cs"
+                },
+                {
+                  "Title": "ResourceAppointmentCollection.cs",
+                  "Path": "Data\\Appointments\\ResourceAppointmentCollection.cs"
+                },
+                {
+                  "Title": "ResourceCollection.cs",
+                  "Path": "Data\\Appointments\\ResourceCollection.cs"
+                }
+              ]
+            },
+            {
+              "Id": "GroupByDate",
+              "Title": "Group by Date",
+              "DocUrl": "DevExpress.Blazor.DxScheduler.GroupType",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Appointment.cs",
+                  "Path": "Data\\Appointments\\Appointment.cs"
+                },
+                {
+                  "Title": "Resource.cs",
+                  "Path": "Data\\Appointments\\Resource.cs"
+                },
+                {
+                  "Title": "ResourceAppointmentCollection.cs",
+                  "Path": "Data\\Appointments\\ResourceAppointmentCollection.cs"
+                },
+                {
+                  "Title": "ResourceCollection.cs",
+                  "Path": "Data\\Appointments\\ResourceCollection.cs"
+                }
+              ]
+            },
+            {
+              "Id": "CustomResourceNavigator",
+              "Title": "Custom Resource Navigator",
+              "DocUrl": "DevExpress.Blazor.DxScheduler.VisibleResourcesDataSource",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Appointment.cs",
+                  "Path": "Data\\Appointments\\Appointment.cs"
+                },
+                {
+                  "Title": "Resource.cs",
+                  "Path": "Data\\Appointments\\Resource.cs"
+                },
+                {
+                  "Title": "ResourceAppointmentCollection.cs",
+                  "Path": "Data\\Appointments\\ResourceAppointmentCollection.cs"
+                },
+                {
+                  "Title": "ResourceCollection.cs",
+                  "Path": "Data\\Appointments\\ResourceCollection.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "Customization",
+          "Url": "SchedulerCustomization",
+          "Title": "Customization",
+          "Keywords": "Blazor, components, scheduler, appointments, template, appointment template, customization, custom appointment appearance, appointment style, custom appointment UI, custom fields, custom field, custom properties, custom property, appointment custom field, customize appointment, appointment customization, appointment form, appointment edit form, customize edit form, custom appointment form, devexpress, demo, sample, example",
+          "Description": "The DevExpress Scheduler allows you to use templates to customize appointment appearance.",
+          "PageSections": [
+            {
+              "Id": "AppointmentTemplates",
+              "Title": "Appointment Templates",
+              "DocUrl": "DevExpress.Blazor.DxScheduler#appointment-templates",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Appointment.cs",
+                  "Path": "Data\\Appointments\\Appointment.cs"
+                },
+                {
+                  "Title": "AppointmentCollection.cs",
+                  "Path": "Data\\Appointments\\AppointmentCollection.cs"
+                }
+              ]
+            },
+            {
+              "Id": "CustomAppointmentForm",
+              "Title": "Custom Fields and Appointment Form",
+              "DocUrl": "DevExpress.Blazor.DxScheduler#custom-fields",
+              "IsUpdated": true,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Appointment.cs",
+                  "Path": "Data\\Appointments\\Appointment.cs"
+                },
+                {
+                  "Title": "AppointmentCollection.cs",
+                  "Path": "Data\\Appointments\\AppointmentCollection.cs"
+                }
+              ]
+            },
+            {
+              "Id": "CustomAppointmentTooltip",
+              "Title": "Custom Appointment Tooltip",
+              "IsNew": true,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Appointment.cs",
+                  "Path": "Data\\Appointments\\Appointment.cs"
+                },
+                {
+                  "Title": "ResourceAppointmentCollection.cs",
+                  "Path": "Data\\Appointments\\ResourceAppointmentCollection.cs"
+                }
+              ]
+            },
+            {
+              "Id": "RestrictUserActions",
+              "Title": "Restrict User Actions",
+              "IsNew": true,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Appointment.cs",
+                  "Path": "Data\\Appointments\\Appointment.cs"
+                },
+                {
+                  "Title": "AppointmentCollection.cs",
+                  "Path": "Data\\Appointments\\AppointmentCollection.cs"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "RichEdit",
+      "Title": "Rich Text Editor",
+      "IsServerSideOnly": true,
+      "IsPreview": true,
+      "Pages": [
+        {
+          "Id": "Overview",
+          "Url": "RichEdit",
+          "Title": "Overview",
+          "Keywords": "Blazor, component, text editor, docx, txt, rtf, rich format",
+          "Description": "The DevExpress Rich Text Editor allows users you to create, open, modify, print, save, and convert rich-formatted text files."
+        },
+        {
+          "Id": "API",
+          "Url": "RichEditAPI",
+          "Title": "Document API",
+          "Keywords": "Blazor, component, text editor, rich format, modify document, programmatically, in code",
+          "Description": "With our Blazor Rich Text Editor, you can modify the open document programmatically."
+        },
+        {
+          "Id": "SimpleView",
+          "Url": "RichEditSimpleView",
+          "Title": "Simple View",
+          "Keywords": "Blazor, component, text editor, rich format, simple view, web layout",
+          "Description": "The DevExpress Rich Text Editor for Blazor can display a document in Simple View mode (Web Layout)."
+        }
+      ]
+    },
+    {
+      "Id": "Editors",
+      "Title": "Data Editors",
+      "Pages": [
+        {
+          "Id": "Overview",
+          "Url": "Editors",
+          "Title": "Overview",
+          "Keywords": "Blazor, components, editors, data, devexpress, demo, sample, example",
+          "Description": "",
+          "DocUrl": "",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "Editors-Overview-Register.razor",
+              "Path": "Pages\\Editors\\Overview\\Editors-Overview-Register.razor"
+            },
+            {
+              "Title": "Editors-Overview-Login.razor",
+              "Path": "Pages\\Editors\\Overview\\Editors-Overview-Login.razor"
+            }
+          ]
+        },
+        {
+          "Id": "Calendar",
+          "Url": "Calendar",
+          "Title": "Calendar",
+          "Keywords": "blazor, components, calendar, date, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Calendar allows users to select dates and navigate through months and years. The component supports multiple date selection and cell customization.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxCalendar-1"
+            },
+            {
+              "Id": "MultiSelect",
+              "Title": "Multiple Selection",
+              "DocUrl": "DevExpress.Blazor.DxCalendar-1#select-multiple-dates"
+            },
+            {
+              "Id": "MinMaxDate",
+              "Title": "Date Range",
+              "DocUrl": "DevExpress.Blazor.DxCalendar-1#set-a-date-range"
+            },
+            {
+              "Id": "DisabledDates",
+              "Title": "Disabled Dates",
+              "DocUrl": "DevExpress.Blazor.DxCalendar-1#disable-dates"
+            },
+            {
+              "Id": "DayCellCustomization",
+              "Title": "Day Cell Customization",
+              "DocUrl": "DevExpress.Blazor.DxCalendar-1#customize-day-cells"
+            }
+          ]
+        },
+        {
+          "Id": "CheckBox",
+          "Url": "CheckBox",
+          "Title": "CheckBox",
+          "Keywords": "blazor, components, checkbox, check box, indeterminate checkbox, image in checkbox, switch, toggle, custom text, customization, label, data binding, databinding, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor CheckBox is a check editor that allows users to select yes/no or true/false. The component supports the indeterminate state, binding to custom data types, and the Switch mode.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxCheckBox-1"
+            },
+            {
+              "Id": "Alignment",
+              "Title": "Alignment",
+              "DocUrl": "DevExpress.Blazor.DxCheckBox-1#content-position"
+            },
+            {
+              "Id": "AllowIndeterminate",
+              "Title": "Allow Users to Set Indeterminate State",
+              "DocUrl": "DevExpress.Blazor.DxCheckBox-1#indeterminate-state"
+            },
+            {
+              "Id": "BindToEnum",
+              "Title": "Bind to Custom Data Types",
+              "DocUrl": "DevExpress.Blazor.DxCheckBox-1#bind-to-custom-data-types"
+            },
+            {
+              "Id": "Switch",
+              "Title": "Switch Mode",
+              "DocUrl": "DevExpress.Blazor.DxCheckBox-1#switch-mode"
+            }
+          ]
+        },
+        {
+          "Id": "ComboBox",
+          "Url": "ComboBox",
+          "Title": "ComboBox",
+          "Keywords": "Blazor, components, combo box, combobox, data binding, databinding, data source, virtual scrolling, scrolling, custom input, filtering, data filtering, incremental filtering, null text, nulltext, cascading lists,  devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor ComboBox is a drop-down list editor that supports virtual scrolling, incremental filtering, and cascade logic.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxComboBox-2",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "VirtualScrolling",
+              "Title": "Virtual Scrolling",
+              "DocUrl": "DevExpress.Blazor.DxComboBox-2#virtual-scrolling",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Country.cs",
+                  "Path": "Data\\Worldcities\\Country.cs"
+                },
+                {
+                  "Title": "WorldcitiesDataService.cs",
+                  "Path": "Services\\WorldcitiesDataService.Countries.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Worldcities.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "MultiColumn",
+              "Title": "Multiple Columns",
+              "DocUrl": "DevExpress.Blazor.DxComboBox-2#multiple-columns",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "AllowUserInput",
+              "Title": "Allow Input",
+              "DocUrl": "DevExpress.Blazor.DxComboBox-2#items"
+            },
+            {
+              "Id": "Filtering",
+              "Title": "Incremental Filtering",
+              "DocUrl": "DevExpress.Blazor.DxComboBox-2#filter-data",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Country.cs",
+                  "Path": "Data\\Worldcities\\Country.cs"
+                },
+                {
+                  "Title": "WorldcitiesDataService.cs",
+                  "Path": "Services\\WorldcitiesDataService.Countries.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Worldcities.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "DropDownWidth",
+              "Title": "Drop-Down List Width",
+              "DocUrl": "DevExpress.Blazor.DxComboBox-2#drop-down-window-width",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "NullText",
+              "Title": "Clear Button and Placeholder",
+              "DocUrl": "DevExpress.Blazor.DxComboBox-2#clear-button-and-placeholder",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Country.cs",
+                  "Path": "Data\\Worldcities\\Country.cs"
+                },
+                {
+                  "Title": "WorldcitiesDataService.cs",
+                  "Path": "Services\\WorldcitiesDataService.Countries.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Worldcities.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "ValueFieldProperty",
+              "Title": "Item Values",
+              "DocUrl": "DevExpress.Blazor.DxComboBox-2.ValueFieldName",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Cascading",
+              "Title": "Cascading Lists",
+              "DocUrl": "DevExpress.Blazor.DxComboBox-2#cascading-comboboxes",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Country.cs",
+                  "Path": "Data\\Worldcities\\Country.cs"
+                },
+                {
+                  "Title": "City.cs",
+                  "Path": "Data\\Worldcities\\City.cs"
+                },
+                {
+                  "Title": "WorldcitiesDataService.Countries.cs",
+                  "Path": "Services\\WorldcitiesDataService.Countries.cs"
+                },
+                {
+                  "Title": "WorldcitiesDataService.Cities.cs",
+                  "Path": "Services\\WorldcitiesDataService.Cities.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Worldcities.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "ReadOnly",
+              "Title": "Read-Only and Disabled Modes",
+              "DocUrl": "DevExpress.Blazor.DxComboBox-2#read-only-state",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Country.cs",
+                  "Path": "Data\\Worldcities\\Country.cs"
+                },
+                {
+                  "Title": "WorldcitiesDataService.cs",
+                  "Path": "Services\\WorldcitiesDataService.Countries.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Worldcities.Startup.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "DateEdit",
+          "Url": "DateEdit",
+          "Title": "Date Edit",
+          "Keywords": "blazor, components, date edit, dateedit, date, date and time, calendar, null text, prompt text, devexpress, demo, sample, example, mask, date mask",
+          "Description": "DevExpress Blazor Date Edit is a date editor with a drop-down calendar or an adaptive scroll picker. The component allows you to enter a date into the text box or pick one from the drop-down window.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxDateEdit-1"
+            },
+            {
+              "Id": "TimeSection",
+              "Title": "Time Section",
+              "DocUrl": "DevExpress.Blazor.DxDateEdit-1#time-section"
+            },
+            {
+              "Id": "NullableDate",
+              "Title": "Null Date Values and Placeholder",
+              "DocUrl": "DevExpress.Blazor.DxDateEdit-1#nullable-date-and-placeholder"
+            },
+            {
+              "Id": "DisplayFormat",
+              "Title": "Display Format",
+              "DocUrl": "DevExpress.Blazor.DxDateEdit-1#date-format"
+            },
+            {
+              "Id": "Mask",
+              "Title": "Mask",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DxDateEdit-1"
+            },
+            {
+              "Id": "MinMaxDate",
+              "Title": "Date Range",
+              "DocUrl": "DevExpress.Blazor.DxDateEdit-1#set-a-date-range"
+            },
+            {
+              "Id": "DisabledDates",
+              "Title": "Disabled Dates",
+              "DocUrl": "DevExpress.Blazor.DxDateEdit-1#disable-dates"
+            },
+            {
+              "Id": "AdaptiveScrollPicker",
+              "Title": "Adaptive Datepicker",
+              "DocUrl": "DevExpress.Blazor.DxDateEdit-1#datepicker-modes"
+            },
+            {
+              "Id": "ReadOnly",
+              "Title": "Read-Only and Disabled Modes",
+              "DocUrl": "DevExpress.Blazor.DxDateEdit-1#read-only-state"
+            }
+          ]
+        },
+        {
+
+          "Id": "ListBox",
+          "Url": "ListBox",
+          "Title": "List Box",
+          "Keywords": "Blazor, components, list box, listbox, list editor, readonly list, read-only list, data binding, databinding, data source, virtual scrolling, scrolling, select, select multiple, select option checkbox, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor List Box allows users to select items from a list of predefined strings. The component supports multiple item selection, virtual scrolling and read-only mode.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxListBox-2",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "MultiColumn",
+              "Title": "Multiple Columns",
+              "DocUrl": "DevExpress.Blazor.DxListBox-2#multiple-columns",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "MultipleSelection",
+              "Title": "Multiple Selection",
+              "DocUrl": "DevExpress.Blazor.DxListBox-2#item-selection",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "ValueFieldProperty",
+              "Title": "Item Values",
+              "DocUrl": "DevExpress.Blazor.DxListBox-2.ValueFieldName",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "VirtualScrolling",
+              "Title": "Virtual Scrolling",
+              "DocUrl": "DevExpress.Blazor.DxListBox-2#virtual-scrolling",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Country.cs",
+                  "Path": "Data\\Worldcities\\Country.cs"
+                },
+                {
+                  "Title": "WorldcitiesDataService.cs",
+                  "Path": "Services\\WorldcitiesDataService.Countries.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Worldcities.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "ReadOnly",
+              "Title": "Read-Only and Disabled Modes",
+              "DocUrl": "DevExpress.Blazor.DxListBox-2#read-only-state",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "MaskedInput",
+          "Url": "MaskedInput",
+          "Title": "Masked Input",
+          "IsNew": true,
+          "Keywords": "Blazor, components, masked input, maskedinput, null text, prompt text, mask, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Masked Input is a text editor that supports text, numeric, date-time, and regular expression masks.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxMaskedInput"
+            },
+            {
+              "Id": "TextMasks",
+              "Title": "Text Masks",
+              "DocUrl": "DevExpress.Blazor.DxMaskedInput"
+            },
+            {
+              "Id": "NumericMasks",
+              "Title": "Numeric Masks",
+              "DocUrl": "DevExpress.Blazor.DxMaskedInput"
+            },
+            {
+              "Id": "DateTimeMasks",
+              "Title": "Date-Time Masks",
+              "DocUrl": "DevExpress.Blazor.DxMaskedInput"
+            },
+            {
+              "Id": "RegExMask",
+              "Title": "Regular Expression Masks",
+              "DocUrl": "DevExpress.Blazor.DxMaskedInput"
+            },
+            {
+              "Id": "OnInputBinding",
+              "Title": "Bind Value On Input Change",
+              "DocUrl": "DevExpress.Blazor.Base.DxTextEditorBase.BindValueMode"
+            },
+            {
+              "Id": "ClearButton",
+              "Title": "Clear Button And Placeholder",
+              "DocUrl": "DevExpress.Blazor.DxMaskedInput"
+            },
+            {
+              "Id": "DisplayFormat",
+              "Title": "Display Format",
+              "DocUrl": "DevExpress.Blazor.DxMaskedInput"
+            },
+            {
+              "Id": "ReadOnly",
+              "Title": "Read-Only and Disabled Modes",
+              "DocUrl": "DevExpress.Blazor.DxMaskedInput"
+            }
+          ]
+        },
+        {
+          "Id": "Memo",
+          "Url": "Memo",
+          "Title": "Memo",
+          "Keywords": "Blazor, components, memo, text area, multi-line text box, text in multiple lines, text in multiple rows, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Memo is a multi-line text area that allows users to type and edit text in multiple rows.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxMemo"
+            },
+            {
+              "Id": "CustomSize",
+              "Title": "Custom Size",
+              "DocUrl": "DevExpress.Blazor.DxMemo#size"
+            },
+            {
+              "Id": "ResizeMode",
+              "Title": "Resize Modes",
+              "DocUrl": "DevExpress.Blazor.DxMemo#resize-modes"
+            },
+            {
+              "Id": "ClearButton",
+              "Title": "Clear Button and Placeholder",
+              "DocUrl": "DevExpress.Blazor.DxMemo#clear-button-and-placeholder"
+            },
+            {
+              "Id": "ReadOnly",
+              "Title": "Read-Only and Disabled Modes",
+              "DocUrl": "DevExpress.Blazor.DxMemo#read-only-state"
+            }
+          ]
+        },
+        {
+          "Id": "SpinEdit",
+          "Url": "SpinEdit",
+          "Title": "Spin Edit",
+          "Keywords": "blazor, components, spinedit, spin edit, number editor, null text, prompt text, devexpress, demo, sample, example, mask, numeric mask",
+          "Description": "DevExpress Blazor Spin Edit allows the user to modify numeric data by typing a new value into the text box or by using the up/down spin buttons to increment/decrement the value.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor..DxSpinEdit-1"
+            },
+            {
+              "Id": "OnInputBinding",
+              "Title": "Bind Value On Input Change",
+              "DocUrl": "DevExpress.Blazor..DxSpinEdit-1.BindValueMode"
+            },
+            {
+              "Id": "Increment",
+              "Title": "Custom Increment",
+              "DocUrl": "DevExpress.Blazor..DxSpinEdit-1#increment-value"
+            },
+            {
+              "Id": "NullableValue",
+              "Title": "Nullable Value and Placeholder",
+              "DocUrl": "DevExpress.Blazor..DxSpinEdit-1#nullable-value-and-placeholder"
+            },
+            {
+              "Id": "DisplayFormat",
+              "Title": "Display Format",
+              "DocUrl": "DevExpress.Blazor..DxSpinEdit-1#display-format"
+            },
+            {
+              "Id": "Mask",
+              "Title": "Mask",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor..DxSpinEdit-1"
+            },
+            {
+              "Id": "ReadOnly",
+              "Title": "Read-Only and Disabled Modes",
+              "DocUrl": "DevExpress.Blazor..DxSpinEdit-1#read-only-state"
+            }
+          ]
+        },
+        {
+          "Id": "TagBox",
+          "Url": "TagBox",
+          "Title": "TagBox",
+          "Keywords": "Blazor, components, tag box, tagbox, tags, custom tags, data binding, databinding, data source, virtual scrolling, scrolling, filtering, incremental filtering, starts with filtering, contains filtering, null text, nulltext, templates, validation, read-only tagbox, multiple tag selection, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor TagBox allows users to select multiple tags from a drop-down list or type custom tags. TagBox supports incremental filtering, virtual scrolling, validation, and templates.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxTagBox-2",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "AllowCustomTags",
+              "Title": "Custom Tags",
+              "DocUrl": "DevExpress.Blazor.DxTagBox-2#tags-custom-tags-and-list-items"
+            },
+            {
+              "Id": "ValueFieldProperty",
+              "Title": "Item Values",
+              "DocUrl": "DevExpress.Blazor.DxTagBox-2.ValueFieldName",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "MultiColumn",
+              "Title": "Multiple Columns",
+              "DocUrl": "DevExpress.Blazor.DxTagBox-2#multiple-columns",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "NullText",
+              "Title": "Clear Button and Placeholder",
+              "DocUrl": "DevExpress.Blazor.DxTagBox-2#clear-button-and-placeholder",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Country.cs",
+                  "Path": "Data\\Worldcities\\Country.cs"
+                },
+                {
+                  "Title": "WorldcitiesDataService.Countries.cs",
+                  "Path": "Services\\WorldcitiesDataService.Countries.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Worldcities.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "VirtualScrolling",
+              "Title": "Virtual Scrolling",
+              "DocUrl": "DevExpress.Blazor.DxTagBox-2#virtual-scrolling",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "City.cs",
+                  "Path": "Data\\Worldcities\\City.cs"
+                },
+                {
+                  "Title": "WorldcitiesDataService.cs",
+                  "Path": "Services\\WorldcitiesDataService.Cities.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Worldcities.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Filtering",
+              "Title": "Filter Modes",
+              "DocUrl": "DevExpress.Blazor.DxTagBox-2#filter-data",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Country.cs",
+                  "Path": "Data\\Worldcities\\Country.cs"
+                },
+                {
+                  "Title": "WorldcitiesDataService.cs",
+                  "Path": "Services\\WorldcitiesDataService.Countries.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Worldcities.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "DropDownWidth",
+              "Title": "Drop-Down List Width",
+              "DocUrl": "DevExpress.Blazor.DxTagBox-2#drop-down-window-width",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "ShowHideSelectedItems",
+              "Title": "Show Selected Items",
+              "DocUrl": "DevExpress.Blazor.DxTagBox-2.HideSelectedItems",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Country.cs",
+                  "Path": "Data\\Worldcities\\Country.cs"
+                },
+                {
+                  "Title": "City.cs",
+                  "Path": "Data\\Worldcities\\City.cs"
+                },
+                {
+                  "Title": "WorldcitiesDataService.cs",
+                  "Path": "Services\\WorldcitiesDataService.Cities.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Worldcities.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "ReadOnly",
+              "Title": "Read-Only and Disabled Modes",
+              "DocUrl": "DevExpress.Blazor.DxTagBox-2#read-only-state"
+            },
+            {
+              "Id": "TagTemplate",
+              "Title": "Tag Template",
+              "DocUrl": "DevExpress.Blazor.DxTagBox-2#tag-template",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "City.cs",
+                  "Path": "Data\\Worldcities\\City.cs"
+                },
+                {
+                  "Title": "WorldcitiesDataService.cs",
+                  "Path": "Services\\WorldcitiesDataService.Cities.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Worldcities.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Validation",
+              "Title": "Validation",
+              "DocUrl": "DevExpress.Blazor.DxTagBox-2#input-validation"
+            }
+          ]
+        },
+        {
+          "Id": "TextBox",
+          "Url": "TextBox",
+          "Title": "Text Box",
+          "Keywords": "blazor, components, text box, textbox, memo, null text, prompt text, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Text Box is a single-line editor that enables a user to enter and edit text. The component also supports binding to a data source and password mode.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxTextBox"
+            },
+            {
+              "Id": "OnInputBinding",
+              "Title": "Bind Value On Input Change",
+              "DocUrl": "DevExpress.Blazor.DxTextBox.BindValueMode"
+            },
+            {
+              "Id": "ClearButton",
+              "Title": "Clear Button and Placeholder",
+              "DocUrl": "DevExpress.Blazor.DxTextBox#clear-button-and-placeholder"
+            },
+            {
+              "Id": "Password",
+              "Title": "Password",
+              "DocUrl": "DevExpress.Blazor.DxTextBox#password"
+            },
+            {
+              "Id": "ReadOnly",
+              "Title": "Read-Only and Disabled Modes",
+              "DocUrl": "DevExpress.Blazor.DxTextBox#read-only-state"
+            }
+          ]
+        },
+        {
+          "Id": "TimeEdit",
+          "Url": "TimeEdit",
+          "Title": "Time Edit",
+          "Keywords": "blazor, components, time edit, timeedit, time, null text, prompt text, devexpress, demo, sample, example, mask, time mask",
+          "Description": "DevExpress Blazor Time Edit is a time editor with a drop-down time picker. A user can enter the time into the text box or pick it in the drop-down window.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxTimeEdit-1"
+            },
+            {
+              "Id": "NullableTime",
+              "Title": "Null Time Values and Placeholder",
+              "DocUrl": "DevExpress.Blazor.DxTimeEdit-1#null-time-values-and-placeholder"
+            },
+            {
+              "Id": "DisplayFormat",
+              "Title": "Display Format",
+              "DocUrl": "DevExpress.Blazor.DxTimeEdit-1#time-format"
+            },
+            {
+              "Id": "Mask",
+              "Title": "Mask",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DxTimeEdit-1"
+            },
+            {
+              "Id": "MinMaxTime",
+              "Title": "Time Range",
+              "DocUrl": "DevExpress.Blazor.DxTimeEdit-1#set-a-time-range"
+            },
+            {
+              "Id": "ReadOnly",
+              "Title": "Read-Only and Disabled Modes",
+              "DocUrl": "DevExpress.Blazor.DxTimeEdit-1#read-only-state"
+            }
+          ]
+        },
+        {
+          "Id": "Validation",
+          "Url": "FormValidation",
+          "Title": "Validate Input",
+          "Icon": "images/GridColumnType.svg",
+          "Keywords": "blazor, components, form, form validation, data validation, devexpress, demo, sample, example",
+          "Description": "The DevExpress UI components for Blazor support the built-in form validation. You can validate DevExpress Blazor data editors, Form Layout, or  your custom edit form.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview"
+            },
+            {
+              "Id": "FormLayout",
+              "Title": "Form Layout",
+              "DocUrl": "402066/common-concepts/validate-input"
+            },
+            {
+              "Id": "CustomForm",
+              "Title": "Custom Form",
+              "DocUrl": "402066/common-concepts/validate-input"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "Buttons",
+      "Title": "Buttons",
+      "Pages": [
+        {
+          "Id": "Button",
+          "Url": "Button",
+          "Title": "Button",
+          "Keywords": "Blazor, components, button, buttons, action, button styles, button with icon, button with image, Blazor button for bootstrap, submit button, button click, template, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Button supports various render styles and can display icons. Button supports the disable state, form submission, templates, and HTML attributes. ",
+          "PageSections": [
+            {
+              "Id": "Styles",
+              "Title": "Styles",
+              "DocUrl": "DevExpress.Blazor.DxButton#button-content-and-appearance"
+            },
+            {
+              "Id": "Picture",
+              "Title": "Icons",
+              "DocUrl": "DevExpress.Blazor.DxButton#button-content-and-appearance",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Buttons\\Button\\Buttons-Button-Picture.razor.css"
+                }
+              ]
+            },
+            {
+              "Id": "Template",
+              "Title": "Custom Content",
+              "DocUrl": "DevExpress.Blazor.DxButton#custom-content",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Buttons\\Button\\Buttons-Button-Template.razor.css"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "Navigation",
+      "Title": "Navigation and Layout",
+      "Pages": [
+        {
+          "Id": "Overview",
+          "Url": "Navigation",
+          "Title": "Overview",
+          "Keywords": "Blazor, components, menu, treeview, pager, popup, layout, toolbar, tabs, devexpress, demo, sample, example",
+          "Description": "",
+          "DocUrl": ""
+        },
+        {
+          "Id": "ContextMenu",
+          "Url": "ContextMenu",
+          "Title": "Context Menu",
+          "Keywords": "blazor, components, menu, context menu, contextmenu, popup menu,  devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Context Menu allows you to add a context menu to your Blazor application. You can populate the Context Menu items manually or bound the component to a hierarchical data structure.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxContextMenu"
+            },
+            {
+              "Id": "DataBinding",
+              "Title": "Bind to Hierarchical Data",
+              "DocUrl": "DevExpress.Blazor.DxContextMenu#bound-mode",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "TextFormatting.cs",
+                  "Path": "Data\\TextFormatting.cs"
+                },
+                {
+                  "Title": "TextFormattingMenuItems.cs",
+                  "Path": "Data\\TextFormattingMenuItems.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "FormLayout",
+          "Url": "FormLayout",
+          "Title": "Form Layout",
+          "Keywords": "blazor, components, form, form editor, form layout, formlayout, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Form Layout allows you to construct responsive and automatically-aligned edit forms. Form Layout can group items, display UI elements in tabs. You can also bind the component to a data source.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxFormLayout"
+            },
+            {
+              "Id": "Vertical",
+              "Title": "Caption Position",
+              "DocUrl": "DevExpress.Blazor.DxFormLayout.CaptionPosition"
+            },
+            {
+              "Id": "Wrapping",
+              "Title": "Item Wrapping",
+              "DocUrl": "DevExpress.Blazor.DxFormLayoutItem.BeginRow"
+            },
+            {
+              "Id": "Groups",
+              "Title": "Groups",
+              "DocUrl": "DevExpress.Blazor.DxFormLayout#groups"
+            },
+            {
+              "Id": "TabbedGroups",
+              "Title": "Tabbed Groups",
+              "DocUrl": "DevExpress.Blazor.DxFormLayout#tabs"
+            },
+            {
+              "Id": "DataBinding",
+              "Title": "Bind to Data",
+              "DocUrl": "DevExpress.Blazor.DxFormLayout#bind-to-data",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "FormDataItem.cs",
+                  "Path": "Data\\FormDataItem\\FormDataItem.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "GridLayout",
+          "Url": "GridLayout",
+          "Title": "Grid Layout",
+          "IsUpdated": true,
+          "Keywords": "Blazor, components, page layout, grid layout, layout, layout breakpoints, breakpoint, adaptive UI, adaptivity, adaptive layout, responsive layout, responsive UI, arrange UI elements, layout items, rows, columns, areas, template areas, layout areas, grid areas, devexpress, demo, sample, example",
+          "Description": "The DevExpress Grid Layout component allows you to arrange UI elements on a page. The component is based on a CSS Grid Layout: layout items are organized into rows and columns. DxLayoutBreakpoint allows you to adapt a page layout to different screen sizes. For example, you can use breakpoints to create responsive DxGridLayout, DxStackLayout, or other components.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxGridLayout",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CSS",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "((?<Media>@media[^{]+{\\s+)(?:[\\s\\S])*)*(?<Selector>\\.gridlayout-(?:item|header|content|left-side-bar|right-side-bar|footer)(?::before)*)[^{}]*(?<DeclarationBlock>\\s+{[^}]+}(?:\\s*})*)",
+                  "ExtractRegexGroups": [ "Media", "Selector", "DeclarationBlock" ]
+                }
+              ]
+            },
+            {
+              "Id": "Areas",
+              "Title": "Areas",
+              "DocUrl": "DevExpress.Blazor.DxGridLayout#use-named-areas",
+              "IsNew": true,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CSS",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "((?<Media>@media[^{]+{\\s+)(?:[\\s\\S])*)*(?<Selector>\\.gridlayout-(?:item|header|content|left-side-bar|right-side-bar|footer)(?::before)*)[^{}]*(?<DeclarationBlock>\\s+{[^}]+}(?:\\s*})*)",
+                  "ExtractRegexGroups": [ "Media", "Selector", "DeclarationBlock" ]
+                }
+              ]
+            },
+            {
+              "Id": "Adaptivity",
+              "Title": "Adaptivity",
+              "DocUrl": "DevExpress.Blazor.DxGridLayout#adaptivity",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Razor",
+                  "Path": "Pages\\Navigation\\GridLayout\\Navigation-GridLayout-AdaptivityIFrameContent.razor"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "((?<Media>@media[^{]+{\\s+)(?:[\\s\\S])*)*(?<Selector>\\.gridlayout-(?:item|header|content|left-side-bar|right-side-bar|footer)(?::before)*)[^{}]*(?<DeclarationBlock>\\s+{[^}]+}(?:\\s*})*)",
+                  "ExtractRegexGroups": [ "Media", "Selector", "DeclarationBlock" ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "Menu",
+          "Url": "Menu",
+          "Title": "Menu",
+          "IsNew": true,
+          "Keywords": "blazor, components, menu, drop-down menu, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Menu allows you to add an adaptive menu to your Blazor application. You can populate the Menu items collection, specify the component's orientation, adaptivity settings, display modes, and item templates.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxMenu",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "\\.menu-icon(()|(-home)|(-product)|(-support)) {[^}]+}"
+                }
+              ]
+            },
+            {
+              "Id": "Orientation",
+              "Title": "Orientation",
+              "DocUrl": "DevExpress.Blazor.DxMenu#orientation",
+              "RedirectFrom": [ "Menu#MobileVertical" ],
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "\\.menu-icon(()|(-home)|(-product)|(-support)|(-contacts)|(-about)) {[^}]+}"
+                }
+              ]
+            },
+            {
+              "Id": "MobileHorizontal",
+              "Title": "Display Mode",
+              "DocUrl": "DevExpress.Blazor.DxMenu#display-modes",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "\\.menu-icon(()|(-home)|(-product)|(-support)) {[^}]+}"
+                }
+              ]
+            },
+            {
+              "Id": "Adaptivity",
+              "Title": "Adaptivity",
+              "DocUrl": "DevExpress.Blazor.DxMenu#adaptivity",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "\\.menu-icon(()|(-home)|(-product)|(-support)|(-contacts)|(-about)) {[^}]+}"
+                }
+              ]
+            },
+            {
+              "Id": "Templates",
+              "Title": "Templates",
+              "DocUrl": "DevExpress.Blazor.DxMenu#templates",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Navigation\\Menu\\Navigation-Menu-Templates.razor.css"
+                },
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "\\.menu-icon(()|(-home)|(-product)|(-support)) {[^}]+}"
+                },
+                {
+                  "Title": "SearchItem.razor",
+                  "Path": "Pages\\Navigation\\Shared\\SearchItem.razor"
+                },
+                {
+                  "Title": "SearchItem.razor.css",
+                  "Path": "Pages\\Navigation\\Shared\\SearchItem.razor.css"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "Pager",
+          "Url": "Pager",
+          "Title": "Pager",
+          "Keywords": "blazor, components, pager, pages, pager component, pages component, go to page, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Pager enables data navigation and helps visualize a current position within a bound data source. The component allows you to set up the total number of pages and the number of visible page numbers.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxPager"
+            },
+            {
+              "Id": "GotoPage",
+              "Title": "Go to Page",
+              "DocUrl": "DevExpress.Blazor.DxPager#numeric-button-count"
+            },
+            {
+              "Id": "AllPages",
+              "Title": "All Page Numbers Visible",
+              "DocUrl": "DevExpress.Blazor.DxPager#numeric-button-count"
+            },
+            {
+              "Id": "LimitedPageNumber",
+              "Title": "Limit the Number of Page Buttons",
+              "DocUrl": "DevExpress.Blazor.DxPager#numeric-button-count"
+            }
+          ]
+        },
+        {
+          "Id": "Popup",
+          "Url": "Popup",
+          "Title": "Popup",
+          "Keywords": "blazor, components, popup, window, dialog, popup dialog, popup window, modal popup, modal dialog, modal window, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Popup is a pop-up window that overlays the current view. The component consists of a customizable header, pop-up body, and footer.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxPopup"
+            },
+            {
+              "Id": "Customization",
+              "Title": "Customization",
+              "IsUpdated": true,
+              "DocUrl": "DevExpress.Blazor.DxPopup#content-and-appearance",
+              "RedirectFrom": [ "Popup#HeaderCustomization", "Popup#DisplayFooter" ],
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CustomPopupContent.razor",
+                  "Path": "Pages\\Navigation\\Popup\\CustomPopupContent.razor"
+                }
+              ]
+            },
+            {
+              "Id": "Alignment",
+              "Title": "Alignment and Size",
+              "DocUrl": "DevExpress.Blazor.DxPopup#alignment",
+              "IsNew":  true
+            },
+            {
+              "Id": "Events",
+              "Title": "Response to Show and Close Actions",
+              "DocUrl": "DevExpress.Blazor.DxPopup#respond-to-show-and-close-actions",
+              "IsNew": true
+            }
+          ]
+        },
+        {
+          "Id": "StackLayout",
+          "Url": "StackLayout",
+          "Title": "Stack Layout",
+          "Keywords": "Blazor, components, page layout, stack layout, layout, arrange UI elements, layout items, devexpress, demo, sample, example",
+          "Description": "The DevExpress Stack Layout component allows you to stack UI elements vertically or horizontally.",
+          "DocUrl": "DevExpress.Blazor.DxStackLayout",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "CSS",
+              "Path": "wwwroot\\css\\dx-demo-pages.css",
+              "ExtractRegex": "((?<Media>@media[^{]+{\\s+)(?:[\\s\\S])*)*(?<Selector>\\.stacklayout-(?:item|header|content|left-side-bar|right-side-bar|footer)(?::before)*)[^{}]*(?<DeclarationBlock>\\s+{[^}]+}(?:\\s*})*)",
+              "ExtractRegexGroups": [ "Media", "Selector", "DeclarationBlock" ]
+            }
+          ]
+        },
+        {
+          "Id": "Tabs",
+          "Url": "Tabs",
+          "Title": "Tabs",
+          "Keywords": "blazor, components, tab, tabs, tabcontrol, tab control, pagecontrol, page control, page component, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Tabs allows you to implement tabbed layout and control an active tab from code. You can also use this component to emulate a Page control in your Blazor application.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxTabs"
+            },
+            {
+              "Id": "TabPage",
+              "Title": "Tab Pages",
+              "DocUrl": "DevExpress.Blazor.DxTabs#tab-pages",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "CustomContent",
+              "Title": "Active Tab",
+              "DocUrl": "DevExpress.Blazor.DxTabs#active-tab"
+            }
+          ]
+        },
+        {
+          "Id": "Toolbar",
+          "Url": "Toolbar",
+          "Title": "Toolbar",
+          "Keywords": "blazor, components, toolbar, toolbar component, button, adaptivity, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Toolbar allows you to implement an adaptive button-based interface in your web application. The component supports drop-down, checked, and radio buttons and allows you to define item templates.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxToolbar",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "\\.tb-icon(()|(-info)|(-align-left)|(-align-center)|(-align-right)) {[^}]+}"
+                }
+              ]
+            },
+            {
+              "Id": "DropDown",
+              "Title": "Drop-Down Items",
+              "DocUrl": "DevExpress.Blazor.DxToolbarItem#drop-down-items",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "\\.tb-icon(()|(-bold)|(-italic)|(-underline)) {[^}]+}"
+                },
+                {
+                  "Title": "TextFormatting.cs",
+                  "Path": "Data\\TextFormatting.cs"
+                },
+                {
+                  "Title": "TextFormattingMenuItems.cs",
+                  "Path": "Data\\TextFormattingMenuItems.cs"
+                }
+              ]
+            },
+            {
+              "Id": "RenderStyle",
+              "Title": "Render Style",
+              "DocUrl": "DevExpress.Blazor.DxToolbar#render-style",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "\\.tb-icon(()|(-alert)) {[^}]+}"
+                }
+              ]
+            },
+            {
+              "Id": "CheckedAndRadioButtons",
+              "Title": "Checked and Radio Buttons",
+              "DocUrl": "DevExpress.Blazor.DxToolbarItem#checked-and-radio-buttons",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "\\.tb-icon(()|(-bold)|(-italic)|(-underline)|(-align-left)|(-align-center)|(-align-right)) {[^}]+}"
+                }
+              ]
+            },
+            {
+              "Id": "ItemTemplates",
+              "Title": "Templates",
+              "DocUrl": "DevExpress.Blazor.DxToolbarItem#item-templates",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "\\.tb-icon(()|(-refresh)|(-settings)) {[^}]+}"
+                },
+                {
+                  "Title": "SearchItem.razor",
+                  "Path": "Pages\\Navigation\\Shared\\SearchItem.razor"
+                },
+                {
+                  "Title": "SearchItem.razor.css",
+                  "Path": "Pages\\Navigation\\Shared\\SearchItem.razor.css"
+                }
+              ]
+            },
+            {
+              "Id": "Adaptivity",
+              "Title": "Adaptivity",
+              "DocUrl": "DevExpress.Blazor.DxToolbar#adaptivity",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Navigation\\Toolbar\\Navigation-Toolbar-Adaptivity.razor.css"
+                },
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "\\.tb-icon(()|(-undo)|(-redo)|(-bold)|(-italic)|(-underline)|(-align-left)|(-align-center)|(-align-right)) {[^}]+}"
+                },
+                {
+                  "Title": "FontInfo.cs",
+                  "Path": "Data\\FontInfo\\FontInfo.cs"
+                },
+                {
+                  "Title": "FontSizeInfo.cs",
+                  "Path": "Data\\FontInfo\\FontSizeInfo.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "TreeView",
+          "Url": "TreeView",
+          "Title": "TreeView",
+          "Keywords": "Blazor, components, treeview, tree view, tree component, navigation, tree navigation, selection, node selection, hierarchical data binding, hierarchical databinding, binding to hierarchical data, hierarchical data source, hierarchy, nodes, display master-detail data, display master-detail object, display master-detail objects, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor TreeView displays hierarchical data structures within a tree-like UI. The component supports data binding and master-detail relationships.",
+          "PageSections": [
+            {
+              "Id": "Selection",
+              "Title": "Node Selection",
+              "DocUrl": "DevExpress.Blazor.DxTreeView#node-selection"
+            },
+            {
+              "Id": "HierarchicalDataBinding",
+              "Title": "Bind to Hierarchical Data",
+              "DocUrl": "DevExpress.Blazor.DxTreeView#bind-to-data",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "ChemicalElements.cs",
+                  "Path": "Data\\ChemicalElements\\DataSource.cs"
+                },
+                {
+                  "Title": "ChemicalElementGroup.cs",
+                  "Path": "Data\\ChemicalElements\\ChemicalElementGroup.cs"
+                }
+              ]
+
+            },
+            {
+              "Id": "MasterDetailDataBinding",
+              "Title": "Bind to Master-Detail Data",
+              "DocUrl": "DevExpress.Blazor.DxTreeView#bind-to-data",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "ProductFlat.cs",
+                  "Path": "Data\\Products\\ProductFlat.cs"
+                },
+                {
+                  "Title": "ProductCategory.cs",
+                  "Path": "Data\\Products\\ProductCategory.cs"
+                },
+                {
+                  "Title": "ProductsFlatService.cs",
+                  "Path": "Services\\ProductsFlatService.Data.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\ProductFlat.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "LoadChildNodesOnDemand",
+              "Title": "Load Child Nodes on Demand Mode",
+              "DocUrl": "DevExpress.Blazor.DxTreeView#load-child-nodes-on-demand",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "DateTimeGroup.cs",
+                  "Path": "Data\\DateTimeGroups\\DateTimeGroup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Templates",
+              "Title": "Templates",
+              "DocUrl": "DevExpress.Blazor.DxTreeView#templates",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Navigation\\TreeView\\Navigation-TreeView-Templates.razor.css"
+                },
+                {
+                  "Title": "ComponentSet.cs",
+                  "Path": "Data\\ComponentsData\\ComponentSet.cs"
+                },
+                {
+                  "Title": "ComponentSets.cs",
+                  "Path": "Data\\ComponentsData\\DataSource.cs"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "FileManagement",
+      "Title": "File Management",
+      "Pages": [
+        {
+          "Id": "Upload",
+          "Url": "Upload",
+          "Title": "Upload",
+          "Keywords": "blazor, components, upload, upload control, file upload, file upload control, upload files, blazor upload, chunk upload, large files upload, large files, delayed upload, delay file upload, multi-file selection, drag and drop, external drop zone, validation, limit uploaded file size, validate uploaded file extension, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Upload allows users to upload files to the server. It supports drag and drop, chunk upload for large files, multi-file selection, and validation.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxUpload",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "UploadController.cs",
+                  "Path": "Controllers\\UploadController.cs"
+                }
+              ]
+            },
+            {
+              "Id": "ChunkUpload",
+              "Title": "Chunk Upload",
+              "DocUrl": "DevExpress.Blazor.DxUpload#chunk-upload-for-large-files",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "UploadController.cs",
+                  "Path": "Controllers\\UploadController.cs"
+                },
+                {
+                  "Title": "UploadController.Chunks.cs",
+                  "Path": "Controllers\\UploadController.Chunks.cs"
+                }
+              ]
+            },
+            {
+              "Id": "MultiFileSelection",
+              "Title": "Multiple File Selection",
+              "DocUrl": "DevExpress.Blazor.DxUpload#multiple-file-upload",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "UploadController.cs",
+                  "Path": "Controllers\\UploadController.cs"
+                }
+              ]
+            },
+            {
+              "Id": "UploadModes",
+              "Title": "Upload Modes",
+              "DocUrl": "DevExpress.Blazor.DxUpload#upload-modes",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "UploadController.cs",
+                  "Path": "Controllers\\UploadController.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Validation",
+              "Title": "Validation",
+              "DocUrl": "DevExpress.Blazor.DxUpload#validation",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "UploadController.cs",
+                  "Path": "Controllers\\UploadController.cs"
+                },
+                {
+                  "Title": "UploadController.Validation.cs",
+                  "Path": "Controllers\\UploadController.Validation.cs"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "Search": {
+    "Synonyms": {
+      "Groups": [
+        "datasource, databinding, binding, database, databind",
+        "grid, gridview, gridviewcontrol, aspxgridview",
+        "eXpress, Persistent, xpo"
+      ]
+    },
+    "Exclusions": {
+      "Words": "devexpress, dx, asp, devex, asp.net, demo, demos, web",
+      "Prefixes": "aspx, asp, xtra, client, dx, web",
+      "Postfixes": "s, ing, control, e, ies"
+    }
+  }
+}

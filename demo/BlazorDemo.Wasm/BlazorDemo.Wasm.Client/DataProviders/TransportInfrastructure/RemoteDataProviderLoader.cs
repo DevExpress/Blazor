@@ -8,13 +8,10 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using BlazorDemo.Data;
-using BlazorDemo.Data.SalesViewer;
 using BlazorDemo.DataProviders;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
 using Newtonsoft.Json;
-using City = BlazorDemo.Data.SalesViewer.City;
-using Product = BlazorDemo.Data.Product;
 
 namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
     sealed class RemoteDataProviderLoader {
@@ -23,19 +20,34 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
         static readonly Dictionary<Guid, Type> EntityTypeLookup = new Dictionary<Guid, Type>() {
             {typeof(ProductFlat).GUID, typeof(ProductFlat)},
             {typeof(ProductCategory).GUID, typeof(ProductCategory)},
-            {typeof(Product).GUID, typeof(Product)},
             {typeof(SaleInfo).GUID, typeof(SaleInfo)},
 
-            {typeof(Channel).GUID, typeof(Channel)},
-            {typeof(City).GUID, typeof(City)},
-            {typeof(Contact).GUID, typeof(Contact)},
-            {typeof(Customer).GUID, typeof(Customer)},
-            {typeof(Plant).GUID, typeof(Plant)},
+            {typeof(BlazorDemo.Data.SalesViewer.City).GUID, typeof(BlazorDemo.Data.SalesViewer.City)},
+            {typeof(BlazorDemo.Data.SalesViewer.Customer).GUID, typeof(BlazorDemo.Data.SalesViewer.Customer)},
             {typeof(BlazorDemo.Data.SalesViewer.Product).GUID, typeof(BlazorDemo.Data.SalesViewer.Product)},
-            {typeof(Region).GUID, typeof(Region)},
             {typeof(BlazorDemo.Data.SalesViewer.Sale).GUID, typeof(BlazorDemo.Data.SalesViewer.Sale)},
-            {typeof(Sector).GUID, typeof(Sector)},
-            {typeof(Country).GUID, typeof(Country)}
+            {typeof(BlazorDemo.Data.SalesViewer.Channel).GUID, typeof(BlazorDemo.Data.SalesViewer.Channel)},
+            {typeof(BlazorDemo.Data.SalesViewer.Contact).GUID, typeof(BlazorDemo.Data.SalesViewer.Contact)},
+            {typeof(BlazorDemo.Data.SalesViewer.Plant).GUID, typeof(BlazorDemo.Data.SalesViewer.Plant)},
+            {typeof(BlazorDemo.Data.SalesViewer.Region).GUID, typeof(BlazorDemo.Data.SalesViewer.Region)},
+            {typeof(BlazorDemo.Data.SalesViewer.Sector).GUID, typeof(BlazorDemo.Data.SalesViewer.Sector)},
+
+            {typeof(BlazorDemo.Data.Northwind.Category).GUID, typeof(BlazorDemo.Data.Northwind.Category)},
+            {typeof(BlazorDemo.Data.Northwind.Customer).GUID, typeof(BlazorDemo.Data.Northwind.Customer)},
+            {typeof(BlazorDemo.Data.Northwind.Employee).GUID, typeof(BlazorDemo.Data.Northwind.Employee)},
+            {typeof(BlazorDemo.Data.Northwind.Invoice).GUID, typeof(BlazorDemo.Data.Northwind.Invoice)},
+            {typeof(BlazorDemo.Data.Northwind.Order).GUID, typeof(BlazorDemo.Data.Northwind.Order)},
+            {typeof(BlazorDemo.Data.Northwind.OrderDetail).GUID, typeof(BlazorDemo.Data.Northwind.OrderDetail)},
+            {typeof(BlazorDemo.Data.Northwind.Product).GUID, typeof(BlazorDemo.Data.Northwind.Product)},
+            {typeof(BlazorDemo.Data.Northwind.Supplier).GUID, typeof(BlazorDemo.Data.Northwind.Supplier)},
+            {typeof(BlazorDemo.Data.Northwind.Shipper).GUID, typeof(BlazorDemo.Data.Northwind.Shipper)},
+
+            {typeof(BlazorDemo.Data.Issues.Issue).GUID, typeof(BlazorDemo.Data.Issues.Issue)},
+            {typeof(BlazorDemo.Data.Issues.Project).GUID, typeof(BlazorDemo.Data.Issues.Project)},
+            {typeof(BlazorDemo.Data.Issues.User).GUID, typeof(BlazorDemo.Data.Issues.User)},
+
+            {typeof(BlazorDemo.Data.Worldcities.Country).GUID, typeof(BlazorDemo.Data.Worldcities.Country)},
+            {typeof(BlazorDemo.Data.Worldcities.City).GUID, typeof(BlazorDemo.Data.Worldcities.City)}
         };
 
         readonly CancellationTokenSource _cts;

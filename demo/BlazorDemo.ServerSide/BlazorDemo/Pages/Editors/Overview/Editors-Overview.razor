@@ -1,0 +1,20 @@
+﻿@page "/Editors"
+
+<DemoPageSectionComponent Id="Editors-Overview" ShowCode="false">
+    @if(IsRegisterFormActive) {
+        <Editors_Overview_Register GotoLoginForm="@GotoLoginForm" />
+    } else {
+        <Editors_Overview_Login GotoRegistrationForm="@GotoRegistrationForm"/>
+    }
+
+    @code {
+        bool IsRegisterFormActive { get; set; } = true;
+
+        void GotoLoginForm() {
+            IsRegisterFormActive = false;
+        }
+        void GotoRegistrationForm() {
+            IsRegisterFormActive = true;
+        }
+    }
+</DemoPageSectionComponent>

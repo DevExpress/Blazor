@@ -1,0 +1,47 @@
+﻿<DemoPageSectionComponent Id="Editors-TagBox-ReadOnly" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxFormLayout ItemSizeMode="Params.SizeMode"
+                      @key="@Params.ThemeName"
+                      CssClass="cw-480">
+
+            <DxFormLayoutItem ColSpanMd="12" Caption="Read-Only">
+                <Template>
+                    <DxTagBox Data="@DataSource"
+                              @bind-Values="@Options"
+                              ReadOnly="true" />
+                </Template>
+            </DxFormLayoutItem>
+
+            <DxFormLayoutItem ColSpanMd="12" Caption="Disabled" BeginRow="true">
+                <Template>
+                    <DxTagBox Data="@DataSource"
+                              @bind-Values="@Options"
+                              Enabled="false" />
+                </Template>
+            </DxFormLayoutItem>
+
+        </DxFormLayout>
+    </ChildContentWithParameters>
+
+    @code {
+        String[] DataSource = null;
+        IEnumerable<string> Options { get; set; }
+
+        protected override void OnInitialized() {
+            base.OnInitialized();
+            DataSource = new string[] {
+                "Apple",
+                "Banana",
+                "Lemon",
+                "Orange",
+                "Pear",
+                "Pinapple",
+                "Peach"
+            };
+            Options = new List<string>() {
+                DataSource[1],
+                DataSource[4]
+            };
+        }
+    }
+</DemoPageSectionComponent>

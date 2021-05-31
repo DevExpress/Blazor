@@ -1,0 +1,1 @@
+The DevExpress Blazor [Report Designer](https://docs.devexpress.com/XtraReports/DevExpress.Blazor.Reporting.DxReportDesigner) is a JavaScript control integrated in Blazor framework that allows users to create and edit reports. Its preview functionality can be used to preview, print, and export reports.

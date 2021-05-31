@@ -1,0 +1,25 @@
+﻿<DemoPageSectionComponent Id="DataGrid-DataBinding-Data" ShowHorizontalScrollBar="true">
+    @inject WeatherForecastService ForecastService
+
+    <DxDataGrid Data="@DataSource" PageSize="5">
+        <DxDataGridDateEditColumn Field="Date" DisplayFormat="D" />
+        <DxDataGridColumn Field="Forecast" />
+        <DxDataGridColumn Field="CloudCover" />
+        <DxDataGridSpinEditColumn Field="TemperatureC"
+                                  Caption="@("Temp. (\x2103)")"
+                                  TextAlignment="@DataGridTextAlign.Left"
+                                  Width="150px" />
+        <DxDataGridSpinEditColumn Field="TemperatureF"
+                                  Caption="@("Temp. (\x2109)")"
+                                  TextAlignment="@DataGridTextAlign.Left"
+                                  Width="150px" />
+    </DxDataGrid>
+
+    @code {
+        IEnumerable<WeatherForecast> DataSource = Enumerable.Empty<WeatherForecast>();
+
+        protected override void OnInitialized() {
+            DataSource = ForecastService.GetForecast();
+        }
+    }
+</DemoPageSectionComponent>

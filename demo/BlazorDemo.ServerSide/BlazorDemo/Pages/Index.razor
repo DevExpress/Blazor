@@ -8,7 +8,7 @@
 @{
     RenderFragment<DemoProductInfo> DemoProduct = (info) =>
     @<div class="col-xl-4 col-sm-6 col-xs-12">
-        <div class="jumbotron shadow-sm demo-product" @onclick="@(() => { NavigationManager.NavigateTo(info.PageUri); })">
+        <a class="jumbotron shadow-sm demo-product" href="@info.PageUri">
             <div class="media p-2">
                 <span class="mr-3 bg-primary demo-product-icon demo-product-icon-@info.IconName" title="@info.Title"></span>
                 <div class="media-body">
@@ -16,18 +16,19 @@
                     <span class="demo-product-info text-muted">@info.Description</span>
                 </div>
             </div>
-        </div>
+        </a>
     </div>;
 }
 
-<div class="demo-description demo-products">
+<div class="demo-products demo-products-description">
     <h1 class="mb-4">DevExpress UI Components for Blazor</h1>
 
-    <p class="mb-5 mw-1100">The <a class="helplink" href="https://www.devexpress.com/blazor/" target="_blank">DevExpress UI for Blazor</a> ships with native user interface components (including a Data Grid, Pivot Grid, Charts, and Scheduler) so you can design rich user experiences in your business apps.</p>
+    <p class="mb-5">Our <a href="https://www.devexpress.com/blazor/" target="_blank">Blazor UI component suite</a> includes a broad range of high-impact user interface controls (including a Blazor Data Grid, Blazor Pivot Grid, Blazor Charts, and Blazor Scheduler). We are fully committed to Blazor as a platform and are continually adding new controls to our Blazor product line up. If you are new to DevExpress Blazor UI controls and want to learn more about our upcoming plans, be sure to check out our 2021 development roadmap. Oh and don’t forget to explore the capabiliteis our next-gen Blazor Data Grid. While it is currently available as a Community Tech Preview, we think you’ll be surprised as to its long-term potential. Go Blazor!</p>
 
     <div class="row mb-3">
-        @foreach (var info in Configuration.Products)
-        {
+        @foreach(var info in Configuration.Products) {
+            @if(!Configuration.IsServerSide && info.IsServerSideOnly)
+                continue;
             @DemoProduct.Invoke(info)
         }
     </div>
@@ -35,42 +36,44 @@
 
 <h2 class="mb-4">Getting Started</h2>
 
-<p class="mw-1100">
+<p>
     Refer to the following online resources to get started with DevExpress Blazor components:
 </p>
 
 <ul>
-    <li><a class="helplink" href="https://docs.devexpress.com/Blazor/401055/getting-started/prerequisites" target="_blank">Set up your Environment</a></li>
-    <li><a class="helplink" href="https://docs.devexpress.com/Blazor/401058/demos#run-demos-locally" target="_blank">Run this demo on your machine</a></li>
-    <li><a class="helplink" href="https://docs.devexpress.com/Blazor/401057/getting-started/install-components-and-create-an-application" target="_blank">Create and configure a new project</a></li>
+    <li><a href="https://docs.devexpress.com/Blazor/401055/getting-started/prerequisites" target="_blank">Set up your Environment</a></li>
+    <li><a href="https://docs.devexpress.com/Blazor/401058/demos#run-demos-locally" target="_blank">Run this demo on your machine</a></li>
+    <li><a href="https://docs.devexpress.com/Blazor/401057/getting-started/install-components-and-create-an-application" target="_blank">Create and configure a new project</a></li>
 </ul>
 
 <h2 class="my-4">Helpful Resources</h2>
 
-<p class="mw-1100">
+<p>
     Our components come with extensive reference material, documentation, examples and step-by-step instructions. This material will help you not only start using our products from scratch, but also learn about all of their capabilities much faster.
 </p>
 
 <ul>
-    <li><a class="helplink" href="https://docs.devexpress.com/Blazor/400725/blazor-components" target="_blank">Documentation</a></li>
-    <li><a class="helplink" href="https://github.com/DevExpress/Blazor/blob/master/examples.md" target="_blank">Examples</a></li>
-    <li><a class="helplink" href="https://www.youtube.com/playlist?list=PL8h4jt35t1wiA7rjbbJQ0sYpsSghc7XYJ" target="_blank">Videos</a></li>
-    <li><a class="helplink" href="https://github.com/DevExpress/Blazor/" target="_blank">GitHub repository</a></li>
-    <li><a class="helplink" href="https://github.com/DevExpress/Blazor/tree/master/tools/DevExpress.Blazor.DocumentMetadata" target="_blank">Document metadata tool</a></li>
-    <li><a class="helplink" href="https://github.com/DevExpress/Blazor/tree/master/tools/DevExpress.Blazor.AnchorUtils" target="_blank">Anchor navigation tool</a></li>
-    <li><a class="helplink" href="https://www.devexpress.com/support/training/blazor/" target="_blank">Free Blazor training course</a></li>
-    <li><a class="helplink" href="https://docs.microsoft.com/en-us/aspnet/core/blazor/" target="_blank">Official Blazor documentation</a></li>
+    <li><a href="https://docs.devexpress.com/Blazor/400725/blazor-components" target="_blank">Documentation</a></li>
+    <li><a href="https://github.com/DevExpress/Blazor/blob/master/examples.md" target="_blank">Examples</a></li>
+    <li><a href="https://www.youtube.com/playlist?list=PL8h4jt35t1wiA7rjbbJQ0sYpsSghc7XYJ" target="_blank">Videos</a></li>
+    <li><a href="https://github.com/DevExpress/Blazor/" target="_blank">GitHub repository</a></li>
+    <li><a href="https://github.com/DevExpress/Blazor/tree/master/tools/DevExpress.Blazor.DocumentMetadata" target="_blank">Document metadata tool</a></li>
+    <li><a href="https://github.com/DevExpress/Blazor/tree/master/tools/DevExpress.Blazor.AnchorUtils" target="_blank">Anchor navigation tool</a></li>
+    <li><a href="https://www.devexpress.com/support/training/blazor/" target="_blank">Free Blazor training course</a></li>
+    <li><a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/" target="_blank">Official Blazor documentation</a></li>
 </ul>
 
 <h2 class="my-4">Troubleshooting</h2>
 
-<p class="mw-1100">
-    Need help or require more information? Explore the <a class="helplink" href="https://docs.devexpress.com/Blazor/401608/common-concepts/troubleshooting" target="_blank">Troubleshooting</a> help topic or submit your support inquiries via the <a class="helplink" href="https://supportcenter.devexpress.com/" target="_blank">DevExpress Support Center</a> for assistance.
+<p>
+    Need help or require more information? Explore the <a href="https://docs.devexpress.com/Blazor/401608/common-concepts/troubleshooting" target="_blank">Troubleshooting</a> help topic or submit your support inquiries via the <a href="https://supportcenter.devexpress.com/" target="_blank">DevExpress Support Center</a> for assistance.
 </p>
 
 @code {
     public override async Task SetParametersAsync(ParameterView parameters) {
-        if(Configuration.ShowOnlyReporting) NavigationManager.NavigateTo("DocumentViewer");
-        else await base.SetParametersAsync(parameters);
+        if(Configuration.ShowOnlyReporting)
+            NavigationManager.NavigateTo("ReportViewer");
+        else
+            await base.SetParametersAsync(parameters);
     }
 }

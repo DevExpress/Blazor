@@ -1,0 +1,15 @@
+.demo-alert-notifications {
+    position: fixed;
+    z-index: 1040;
+    right: 10px;
+    top: calc(7rem + 10px);
+    font-size: 1rem;
+}
+@keyframes demo-alert-notify {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+.demo-alert-notifications .alert:last-of-type {
+    animation: demo-alert-notify 0.3s linear;
+    animation-fill-mode: forwards;
+}

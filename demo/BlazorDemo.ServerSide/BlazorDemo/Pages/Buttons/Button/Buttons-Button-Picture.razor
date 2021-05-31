@@ -1,0 +1,23 @@
+﻿<DemoPageSectionComponent Id="Buttons-Button-Picture"
+                          ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @*BeginHide*@
+        <div>
+        @*EndHide*@
+        <DxButton RenderStyle="ButtonRenderStyle.Dark"
+                    Text="Undo"
+                    Title="Undo the last action."
+                    IconCssClass="btn-icon-undo"
+                    CssClass="mr-1"
+                    SizeMode="Params.SizeMode" />
+        <DxButton RenderStyle="ButtonRenderStyle.Dark"
+                    Text="Redo"
+                    Title="Restore the previously undone action."
+                    IconCssClass="btn-icon-redo"
+                    IconPosition="ButtonIconPosition.AfterText"
+                    SizeMode="Params.SizeMode" />
+        @*BeginHide*@
+        </div>
+        @*EndHide*@
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

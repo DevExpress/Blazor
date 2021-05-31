@@ -1,0 +1,86 @@
+﻿<div class="card cw-480">
+    <EditForm Model="@Data"
+              OnValidSubmit="@HandleValidSubmit"
+              OnInvalidSubmit="@HandleInvalidSubmit"
+              Context="EditFormContext">
+        <DataAnnotationsValidator />
+        <div class="card-header text-center pt-3 pb-2">
+            <h4>
+                Welcome to DevExpress
+            </h4>
+            <p class="mb-0 text-muted font-weight-normal fs-825">
+                Log in to see it in action
+            </p>
+        </div>
+        <div class="card-body">
+            <DxFormLayout>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <Template>
+                        <DxTextBox @bind-Text="@Data.Username"
+                                   NullText="Username"
+                                   ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"/>
+                        <div class="text-danger">
+                            <ValidationMessage For="@(() => Data.Username)" />
+                        </div>
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <Template>
+                        <DxTextBox @bind-Text="@Data.Password"
+                                   NullText="Password"
+                                   Password="true"
+                                   ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"/>
+                        <div class="text-danger">
+                            <ValidationMessage For="@(() => Data.Password)" />
+                        </div>
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <Template>
+                        <DxButton CssClass="w-100"
+                                  Text="Login"
+                                  RenderStyle="ButtonRenderStyle.Primary"
+                                  SubmitFormOnClick="true"/>
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <Template>
+                        <div class="text-center pt-2">
+                            <div class="text-muted fs-825">
+                                Do not have an account?
+                            </div>
+                            <DxButton Text="Create an account"
+                                      RenderStyle="ButtonRenderStyle.Link"
+                                      @onclick="GotoRegistrationFormClick"/>
+                        </div>
+                    </Template>
+                </DxFormLayoutItem>
+            </DxFormLayout>
+        </div>
+    </EditForm>
+</div>
+<p class="demo-text cw-480 mt-2 text-muted">
+    @FormSubmitResult
+</p>
+
+
+@code {
+    [Parameter]
+    public EventCallback GotoRegistrationForm { get; set; }
+
+    string FormSubmitResult = "";
+
+    UserDataBase Data { get; set; } = new UserDataBase();
+
+    async Task GotoRegistrationFormClick() {
+        FormSubmitResult = "";
+        await GotoRegistrationForm.InvokeAsync();
+    }
+    void HandleValidSubmit() {
+        FormSubmitResult = "You have been logged in successully.";
+    }
+    void HandleInvalidSubmit() {
+        FormSubmitResult = "";
+    }
+}
+

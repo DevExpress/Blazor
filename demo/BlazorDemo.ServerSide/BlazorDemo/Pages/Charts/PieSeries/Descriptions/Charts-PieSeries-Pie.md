@@ -1,0 +1,1 @@
+This demo illustrates how to use the [Pie](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartPieSeries-3) series within the [Chart](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1) component. You can use the Pie series to compare the percentage values of different point arguments in the same series and illustrate these values as pie slices.

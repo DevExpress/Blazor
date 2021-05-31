@@ -1,8 +1,13 @@
-﻿<div class="demo-content-modal modal-backdrop@(Shown ? " modal-backdrop-shown show" : "")" @onclick="@OnClick"></div>
+﻿<div class="demo-content-modal modal-backdrop @StateCssClass" @onclick="@OnClick"></div>
 
 @code {
-    [Parameter] public bool Shown { get; set; }
-    [Parameter] public EventCallback<bool> ShownChanged { get; set; }
+    [Parameter]
+    public bool Shown { get; set; }
+    [Parameter]
+    public EventCallback<bool> ShownChanged { get; set; }
+
+    bool IsLoaded { get; set; }
+    string StateCssClass { get { return IsLoaded ? (Shown ? "modal-backdrop-shown show" : "modal-backdrop-hidden") : ""; } }
 
     async Task OnClick() => await Hide();
 
@@ -10,6 +15,13 @@
         if(Shown) {
             Shown = false;
             await ShownChanged.InvokeAsync(false);
+        }
+    }
+
+    protected override void OnAfterRender(bool firstRender) {
+        base.OnAfterRender(firstRender);
+        if(firstRender) {
+            IsLoaded = true;
         }
     }
 }

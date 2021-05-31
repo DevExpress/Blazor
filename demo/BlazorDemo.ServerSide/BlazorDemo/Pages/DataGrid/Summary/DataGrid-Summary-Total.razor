@@ -1,0 +1,37 @@
+﻿<DemoPageSectionComponent Id="DataGrid-Summary-Total" ShowHorizontalScrollBar="true">
+    @inject NwindDataService NwindDataService
+
+    @if(Data == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <DxDataGrid Data="@Data" CssClass="w-100">
+            <Columns>
+                <DxDataGridDateEditColumn Field="@nameof(Invoice.OrderDate)" Width="240px" />
+                <DxDataGridColumn Field="@nameof(Invoice.ShipCountry)"
+                                  Caption="Ship Country"
+                                  Width="250px" />
+                <DxDataGridColumn Field="@nameof(Invoice.ProductName)" />
+                <DxDataGridSpinEditColumn Field="@nameof(Invoice.UnitPrice)"
+                                          DisplayFormat="c"
+                                          Width="120px" />
+                <DxDataGridSpinEditColumn Field="@nameof(Invoice.Quantity)"
+                                          Width="100px" />
+            </Columns>
+            <TotalSummary>
+                <DxDataGridSummaryItem Field=@nameof(Invoice.OrderDate)
+                                       SummaryType=SummaryItemType.Count />
+                <DxDataGridSummaryItem Field=@nameof(Invoice.UnitPrice)
+                                       SummaryType=SummaryItemType.Sum
+                                       DisplayFormat="Sum: {0:c}" />
+            </TotalSummary>
+        </DxDataGrid>
+    }
+
+    @code {
+        IEnumerable<Invoice> Data;
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetInvoicesAsync();
+        }
+    }
+</DemoPageSectionComponent>

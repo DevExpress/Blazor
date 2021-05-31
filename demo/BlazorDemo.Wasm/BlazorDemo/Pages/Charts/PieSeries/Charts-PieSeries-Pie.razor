@@ -1,0 +1,30 @@
+﻿<DemoPageSectionComponent Id="Charts-PieSeries-Pie">
+    <ChildContentWithParameters Context="Params">
+        @inject ISalesInfoDataProvider Sales
+
+        <DxChart Data="@SalesData"
+                 @key="Params.ThemeName"
+                 CssClass="w-100">
+            <DxChartTitle Text="Total Sales" />
+
+            <DxChartLegend VerticalAlignment="VerticalEdge.Bottom"
+                           Position="RelativePosition.Outside" />
+
+            <DxChartPieSeries ValueField="@((SaleInfo i) => i.Amount)"
+                              ArgumentField="@(i => i.City)"
+                              SummaryMethod="Enumerable.Sum">
+                <DxChartSeriesLabel Visible="true" />
+            </DxChartPieSeries>
+
+        </DxChart>
+    </ChildContentWithParameters>
+
+
+    @code {
+        IEnumerable<SaleInfo> SalesData;
+
+        protected override async Task OnInitializedAsync() {
+            SalesData = (await Sales.GetSalesAsync()).Where(x => x.Country == "United States");
+        }
+    }
+</DemoPageSectionComponent>

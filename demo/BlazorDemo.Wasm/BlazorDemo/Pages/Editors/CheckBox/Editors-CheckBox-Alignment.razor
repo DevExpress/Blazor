@@ -1,0 +1,82 @@
+﻿<DemoPageSectionComponent Id="Editors-CheckBox-Alignment">
+    <ChildContent>
+        <div class="card cw-320">
+            <div class="card-body p-2">
+                <div class="row m-0 p-0">
+                    <div class="col p-0 d-flex flex-column">
+
+                        <div class="p-1 d-flex flex-grow-1 align-items-center">
+                            <DxCheckBox CssClass="w-100"
+                                        @bind-Checked="@MultimediaChecked"
+                                        Alignment="@Alignment"
+                                        LabelPosition="@LabelPosition">
+                                Multimedia
+                            </DxCheckBox>
+                        </div>
+
+                        <div class="p-1 d-flex flex-grow-1 align-items-center">
+                            <DxCheckBox CssClass="w-100"
+                                        @bind-Checked="@AirConditioningChecked"
+                                        Alignment="@Alignment"
+                                        LabelPosition="@LabelPosition">
+                                Air Conditioning
+                            </DxCheckBox>
+                        </div>
+
+                        <div class="p-1 d-flex flex-grow-1 align-items-center">
+                            <DxCheckBox CssClass="w-100"
+                                        @bind-Checked="@HeatedSeatsChecked"
+                                        Alignment="@Alignment"
+                                        LabelPosition="@LabelPosition">
+                                Heated Seats
+                            </DxCheckBox>
+                        </div>
+
+                        <div class="p-1 d-flex flex-grow-1 align-items-center">
+                            <DxCheckBox CssClass="w-100"
+                                        @bind-Checked="@ParkingCameraChecked"
+                                        Alignment="@Alignment"
+                                        LabelPosition="@LabelPosition">
+                                Parking Camera
+                            </DxCheckBox>
+                        </div>
+
+                        <div class="p-1 d-flex flex-grow-1 align-items-center">
+                            <DxCheckBox CssClass="w-100"
+                                        @bind-Checked="@DroneChecked"
+                                        Alignment="@Alignment"
+                                        LabelPosition="@LabelPosition">
+                                Drone
+                            </DxCheckBox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ChildContent>
+
+    <OptionsContent>
+        <OptionComboBox CssClass="ow-150"
+                        Label="Alignment:"
+                        Data="@(Enum.GetNames(typeof(CheckBoxContentAlignment)))"
+                        Value="@(Alignment.ToString())"
+                        ValueChanged="@((string selectedItem) => { Alignment = Enum.Parse<CheckBoxContentAlignment>(selectedItem); })" />
+        <OptionComboBox CssClass="ow-150"
+                        Label="Label Position:"
+                        Data="@(Enum.GetNames(typeof(LabelPosition)))"
+                        Value="@(LabelPosition.ToString())"
+                        ValueChanged="@((string selectedItem) => { LabelPosition = Enum.Parse<LabelPosition>(selectedItem); })" />
+    </OptionsContent>
+
+
+    @code  {
+        bool MultimediaChecked { get; set; }
+        bool AirConditioningChecked { get; set; }
+        bool ParkingCameraChecked { get; set; }
+        bool HeatedSeatsChecked { get; set; }
+        bool DroneChecked { get; set; }
+
+        CheckBoxContentAlignment Alignment { get; set; }
+        LabelPosition LabelPosition { get; set; }
+    }
+</DemoPageSectionComponent>

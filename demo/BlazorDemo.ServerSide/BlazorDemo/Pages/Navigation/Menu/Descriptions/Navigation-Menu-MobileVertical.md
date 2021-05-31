@@ -1,0 +1,1 @@
+This demo demonstrates how to create a vertical menu for mobile devices. The [DisplayMode]( https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu.DisplayMode) property is set to **Mobile**, the [Orientation]( https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu.Orientation) property is set to **Vertical**.

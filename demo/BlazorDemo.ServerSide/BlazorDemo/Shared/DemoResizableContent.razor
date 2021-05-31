@@ -1,0 +1,24 @@
+﻿@using DevExpress.Blazor.Internal
+<div class="demo-resizable-container">
+    <div class="card demo-resizable-card" id="@id" style="min-width:@(MinWidth)px;">
+        <div class="demo-resizable-content">
+            @ChildContent
+        </div>
+        <div class="demo-resize-handler btn-secondary">
+            <div class="demo-img-resize" />
+        </div>
+    </div>
+</div>
+<DemoScriptLoader @ref=@demoResizer Src="_content/BlazorDemo/lib/demo-resizer.js" />
+
+@code{
+    readonly string id = Guid.NewGuid().ToString();
+    DemoScriptLoader demoResizer;
+
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public int MinWidth { get; set; } = 260;
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        await demoResizer.InvokeVoidAsync("initResizeHandler", id);
+    }
+
+}

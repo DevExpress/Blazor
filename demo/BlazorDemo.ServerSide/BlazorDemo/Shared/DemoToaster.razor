@@ -2,53 +2,44 @@
 @using System.Data
 @using System.Threading
 @implements IObserver<string>
+
 <div class="demo-alert-notifications">
-    @foreach (var msg in _messages.Keys)
-    {
+    @foreach(var msg in _messages.Keys) {
         <div @key=@msg class="alert alert-success">@msg</div>
     }
 </div>
 
 @code {
-
     [Parameter]
     public int Duration { get; set; }
 
     readonly ConcurrentDictionary<string, CancellationTokenSource> _messages = new ConcurrentDictionary<string, CancellationTokenSource>();
 
-    protected override void OnAfterRender(bool firstRender)
-    {
-        foreach (var kvp in _messages)
+    protected override void OnAfterRender(bool firstRender) {
+        foreach(var kvp in _messages)
             RemoveMessageAsync(kvp.Key, kvp.Value.Token);
     }
 
-    async void RemoveMessageAsync(string message, CancellationToken ct)
-    {
+    async void RemoveMessageAsync(string message, CancellationToken ct) {
         await Task.Yield();
-        try
-        {
+        try {
             await Task.Delay(Duration, ct);
-            await InvokeAsync(() =>
-            {
-                if (_messages.TryRemove(message, out var cts))
-                {
+            await InvokeAsync(() => {
+                if(_messages.TryRemove(message, out var cts)) {
                     cts.Dispose();
                     StateHasChanged();
                 }
             });
-        }
-        catch (Exception) { }
+        } catch(Exception) { }
     }
 
-    CancellationTokenSource AddValueFactory(string key)
-    {
+    CancellationTokenSource AddValueFactory(string key) {
         InvokeAsync(StateHasChanged);
         return new CancellationTokenSource();
     }
 
-    CancellationTokenSource UpdateValueFactory(string key, CancellationTokenSource cts)
-    {
-        using (cts)
+    CancellationTokenSource UpdateValueFactory(string key, CancellationTokenSource cts) {
+        using(cts)
             cts.Cancel();
         cts = new CancellationTokenSource();
         RemoveMessageAsync(key, cts.Token);

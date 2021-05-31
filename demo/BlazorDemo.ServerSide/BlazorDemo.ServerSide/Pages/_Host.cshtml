@@ -1,44 +1,45 @@
 ﻿@page "/"
+@using BlazorDemo.Configuration
 @namespace BlazorDemo.ServerSide.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject BlazorDemo.Configuration.DemoThemesConfiguration Themes
+@inject DemoConfiguration DemoConfiguration
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta data-dxmetadatamanager />
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="/"/>
+    <base href="@Url.Content("~/")" />
 
-    <meta property="og:url" content="https://dxpr.es/2WogLq7"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:title" content="Native Blazor Components powered by DevExpress"/>
-    <meta property="og:description" content="DevExpress UI for Blazor ships with native user interface components (including a Data Grid, Pivot Grid, Charts and Scheduler) so you can design rich user experiences with both Blazor."/>
-    <meta property="og:image" content="https://static.devexpress.com/Products/Blazor/blazor-components-grid-pivot-scheduler-charts-editor-devexpress.jpg"/>
+    <meta property="og:url" content="https://dxpr.es/2WogLq7" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Native Blazor Components powered by DevExpress" />
+    <meta property="og:description" content="DevExpress UI for Blazor ships with native user interface components (including a Data Grid, Pivot Grid, Charts and Scheduler) so you can design rich user experiences with both Blazor." />
+    <meta property="og:image" content="https://static.devexpress.com/Products/Blazor/blazor-components-grid-pivot-scheduler-charts-editor-devexpress.jpg" />
 
-    <link rel="stylesheet" href="_content/BlazorDemo/css/switcher-resources/themes/blazing berry/bootstrap.min.css" id="currentTheme">
-    <link rel="prefetch" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css" as="style">
+    <link rel="stylesheet" href="@Themes.GetActiveThemeCssUrl()" id="currentThemeCss">
+    <link rel="stylesheet" href="@Themes.GetActiveThemeCodeCssUrl()" id="currentThemeCodeCss">
     <link rel="prefetch" href="_content/BlazorDemo/css/scroll-view.css" as="style">
 
     <link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo.css">
+    <link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-pages.css">
     <link rel="stylesheet" href="_content/DevExpress.Blazor/dx-blazor.css">
-
+    @if (DemoConfiguration.IsServerSide) {
+        <link rel="stylesheet" href="_content/DevExpress.Blazor.RichEdit/dx-richedit.css">
+    }
 
     <environment include="ServerSide">
         <link rel="preload" href="_framework/blazor.server.js" as="script">
+        <link href="BlazorDemo.ServerSide.styles.css" rel="stylesheet">
     </environment>
     <environment include="Wasm.AspNetCoreHosted">
         <link rel="preload" href="_framework/blazor.webassembly.js" as="script">
+        <link href="BlazorDemo.Wasm.Server.styles.css" rel="stylesheet">
     </environment>
     <environment include="Wasm.AspNetCoreHosted">
         <style>
-            .mt-2 {
-                margin-top: .5rem
-            }
-
-            .mt-4 {
-                margin-top: 1.5rem
-            }
-
             body {
                 margin: 0;
             }
@@ -70,6 +71,7 @@
                 font-size: 1.5rem;
                 font-weight: 600;
             }
+
             .loading-border {
                 border-width: 4px;
                 border-style: solid;
@@ -85,14 +87,14 @@
 </head>
 <body>
     @{
-        var isInternetExplorer = Request.Headers["User-Agent"]
-            .Any(userAgent => userAgent.Contains("MSIE") || userAgent.Contains("Trident"));
+        var isIEOrEdgeLegacy = Request.Headers["User-Agent"].Any(userAgent => userAgent.Contains("MSIE") || userAgent.Contains("Trident"));
     }
-    @if (isInternetExplorer) {
-        <component type="typeof(BlazorDemo.Shared.IENotSupported)" render-mode="Static" />
-    } else {
+    @if (isIEOrEdgeLegacy) {
+        <component type="typeof(BlazorDemo.Shared.BrowserNotSupported)" render-mode="Static" />
+    }
+    else {
         <script type="text/javascript" src="_content/BlazorDemo/bootstrapper.js" defer></script>
-        <app>
+        <div id="app">
             <environment include="ServerSide,Wasm.AspNetCorePrerender">
                 <component type="typeof(BlazorDemo.App)" render-mode="ServerPrerendered" />
             </environment>
@@ -104,12 +106,12 @@
                             <div class="spinner-border loading-boarder border-primary loading-border-primary" style="position: absolute; height: 100%; width: 100%; border-radius: 50%; border-left-color: transparent !important; border-right-color: transparent !important; border-bottom-color: transparent !important"></div>
                             <div id="loadingBackground" class="loading-image-wrapper text-white bg-primary loading-items-center" style="color: #fff; border-radius: 50%"></div>
                         </div>
-                        <div class="loading-caption mt-4">DevExpress UI for Blazor</div>
-                        <div class="loading-sm-text text-muted mt-2" style="color: #a1a1a1">Loading...</div>
+                        <div class="loading-caption mt-3">DevExpress UI for Blazor</div>
+                        <div class="loading-sm-text text-muted mt-1" style="color: #a1a1a1">Loading...</div>
                     </div>
                 </div>
             </environment>
-        </app>
+        </div>
     }
 </body>
 </html>

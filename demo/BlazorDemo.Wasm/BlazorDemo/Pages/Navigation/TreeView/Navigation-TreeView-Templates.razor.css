@@ -1,0 +1,16 @@
+/*BeginHide*/::deep /*EndHide*/.demo-treeview-template .nav-pills .nav-pills {
+    margin-left: 0 !important;
+}
+
+.demo-treeview-template h5 {
+    margin-bottom: .1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.demo-treeview-template .treeview-template-icon {
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+}

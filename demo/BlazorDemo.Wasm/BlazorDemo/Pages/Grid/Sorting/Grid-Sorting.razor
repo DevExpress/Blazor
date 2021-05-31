@@ -1,0 +1,51 @@
+﻿@page "/Grid/Sorting"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Sorting" ShowHorizontalScrollBar="true">
+    <ChildContent>
+        @inject NwindDataService NwindDataService
+
+        @if(Data == null) {
+            <p><em>Loading...</em></p>
+        } else {
+            <DxGrid @ref="Grid"
+                    Data="@Data"
+                    CssClass="w-100">
+                <Columns>
+                    <DxGridColumn FieldName="ContactName" />
+                    <DxGridColumn FieldName="CompanyName" />
+                    <DxGridColumn FieldName="City" Width="200px" />
+                    <DxGridColumn FieldName="Region" Width="120px" />
+                    <DxGridColumn FieldName="Country" SortIndex="0" SortOrder="GridColumnSortOrder.Ascending" Width="200px" />
+                </Columns>
+            </DxGrid>
+        }
+
+        @code {
+            object Data { get; set; }
+            Dictionary<string, string[]> SortInfo { get; } = new Dictionary<string, string[]> {
+                { "Country", new string[] { "Country" } },
+                { "Country, City", new string[] { "Country", "City" } },
+                { "Company Name", new string[] { "CompanyName" } }
+            };
+            string CurrentSortInfoKey { get; set; } = "Country";
+            IGrid Grid { get; set; }
+
+            protected override async Task OnInitializedAsync() {
+                Data = await NwindDataService.GetCustomersAsync();
+            }
+            protected void OnSortingChanged(string key) {
+                CurrentSortInfoKey = key;
+                var currentSortInfo = SortInfo[key];
+                Grid.BeginUpdate();
+                Grid.ClearSort();
+                foreach(var columnName in currentSortInfo)
+                    Grid.SortBy(columnName);
+                Grid.EndUpdate();
+            }
+        }
+    </ChildContent>
+    <OptionsContent>
+        <OptionComboBox Label="Sort by:" Data="@SortInfo.Keys" Value="@CurrentSortInfoKey" ValueChanged="@((string value) => OnSortingChanged(value))" />
+    </OptionsContent>
+</DemoPageSectionComponent>

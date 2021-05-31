@@ -1,0 +1,51 @@
+﻿<DemoPageSectionComponent Id="Scheduler-Customization-RestrictUserActions">
+    <ChildContent>
+        <style>
+            .caption-item {
+                opacity: 1 !important;
+                padding-right: 12px;
+            }
+        </style>
+
+        <DxScheduler StartDate="@DateTime.Today"
+                     DataStorage="@DataStorage"
+                     @bind-AllowCreateAppointment="@AllowCreateAppointment"
+                     @bind-AllowDeleteAppointment="@AllowDeleteAppointment"
+                     @bind-AllowEditAppointment="@AllowEditAppointment"
+                     CssClass="w-100">
+            <DxSchedulerWeekView ShowWorkTimeOnly="true"></DxSchedulerWeekView>
+        </DxScheduler>
+    </ChildContent>
+    <OptionsContent>
+        <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
+            <Items>
+                <DxToolbarItem CssClass="caption-item" Text="Allow Options:" Enabled="false" />
+                <DxToolbarItem CssClass="mr-2 p-0" GroupName="Edit" @bind-Checked="@AllowEditAppointment" Tooltip="Allow Editing" IconCssClass="dx-icon-toolbar icon-edit" />
+                <DxToolbarItem CssClass="mr-2 p-0" GroupName="Create" @bind-Checked="@AllowCreateAppointment" Tooltip="Allow Creating" IconCssClass="dx-icon-toolbar icon-add" />
+                <DxToolbarItem CssClass="mr-2 p-0" GroupName="Delete" @bind-Checked="@AllowDeleteAppointment" Tooltip="Allow Deleting" IconCssClass="dx-icon-toolbar icon-delete" />
+            </Items>
+        </DxToolbar>
+    </OptionsContent>
+
+    @code {
+        bool AllowCreateAppointment { get; set; } = false;
+        bool AllowEditAppointment { get; set; } = false;
+        bool AllowDeleteAppointment { get; set; } = false;
+
+        DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
+            AppointmentsSource = AppointmentCollection.GetAppointments(),
+            AppointmentMappings = new DxSchedulerAppointmentMappings() {
+                Type = "AppointmentType",
+                Start = "StartDate",
+                End = "EndDate",
+                Subject = "Caption",
+                AllDay = "AllDay",
+                Location = "Location",
+                Description = "Description",
+                LabelId = "Label",
+                StatusId = "Status",
+                RecurrenceInfo = "Recurrence"
+            }
+        };
+    }
+</DemoPageSectionComponent>

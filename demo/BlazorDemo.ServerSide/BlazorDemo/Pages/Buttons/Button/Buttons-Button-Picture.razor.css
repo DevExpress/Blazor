@@ -1,0 +1,13 @@
+/*BeginHide*/::deep /*EndHide*/.btn-icon-undo {
+    width: 16px;
+    height: 16px;
+    background-image: url("images/undo.svg");
+    margin: 0 8px 0 0;
+}
+
+/*BeginHide*/::deep /*EndHide*/.btn-icon-redo {
+    width: 16px;
+    height: 16px;
+    background-image: url("images/redo.svg");
+    margin: 0 0 0 8px;
+}

@@ -1,0 +1,58 @@
+﻿@page "/ZoomAndPan"
+
+<DemoPageSectionComponent Id="Charts-ZoomAndPan">
+    <ChildContentWithParameters Context="Params">
+        <DxChart T="BargainDataPoint"
+                 Data="@UsdJpyData"
+                 @key="@Params.ThemeName"
+                 CssClass="w-100">
+
+            <DxChartLegend Position="RelativePosition.Inside"
+                           VerticalAlignment="VerticalEdge.Top"
+                           HorizontalAlignment="HorizontalAlignment.Right" />
+
+            <DxChartLineSeries T="BargainDataPoint"
+                               TArgument="DateTime"
+                               TValue="double"
+                               ArgumentField="i => i.DateTimeStamp"
+                               ValueField="i => i.Price"
+                               Name="USDJPY">
+                <DxChartSeriesPoint Visible="false" />
+                <DxChartAggregationSettings Enabled="true"
+                                            Method="ChartAggregationMethod.Average" />
+            </DxChartLineSeries>
+
+            <DxChartArgumentAxis>
+                <DxChartAxisRange StartValue="new DateTime(2020, 01, 01)"
+                                  EndValue="new DateTime(2021, 01, 29)" />
+            </DxChartArgumentAxis>
+
+            <DxChartZoomAndPanSettings ArgumentAxisZoomAndPanMode="ChartAxisZoomAndPanMode.Both" />
+
+            <DxChartScrollBarSettings ArgumentAxisScrollBarVisible="true"
+                                      ArgumentAxisScrollBarPosition="ChartScrollBarPosition.Bottom" />
+
+            <DxChartTooltip Enabled="true" Position="RelativePosition.Outside">
+                <div style="margin: 0.75rem">
+                    <div class="font-weight-bold">
+                        @(((DateTime)context.Point.Argument).ToString("d"))
+                    </div>
+                    <div>
+                        1$=@(context.Point.Value)¥
+                    </div>
+                </div>
+            </DxChartTooltip>
+
+        </DxChart>
+    </ChildContentWithParameters>
+
+
+    @code {
+        IEnumerable<BargainDataPoint> UsdJpyData;
+        @inject ICurrencyExchangeDataProvider UsdJpyDataProvider
+
+        protected override async Task OnInitializedAsync() {
+            UsdJpyData = await UsdJpyDataProvider.GetDataAsync();
+        }
+    }
+</DemoPageSectionComponent>

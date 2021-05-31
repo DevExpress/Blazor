@@ -1,0 +1,170 @@
+﻿@using BlazorDemo.Data.Annotations
+
+<div class="card cw-480">
+    <EditForm Model="@Data"
+              OnValidSubmit="@HandleValidSubmit"
+              OnInvalidSubmit="@HandleInvalidSubmit"
+              Context="EditFormContext">
+
+        <DataAnnotationsValidator />
+
+        <div class="card-header text-center">
+            <h3>
+                Register to DevExpress
+            </h3>
+            <p class="text-muted">
+                Create a new account to see it in action
+            </p>
+        </div>
+
+        <div class="card-body">
+            <DxFormLayout>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <Template>
+                        <DxTextBox @bind-Text="@Data.Username"
+                                   NullText="Username"
+                                   ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                        <div class="text-danger">
+                            <ValidationMessage For="@(() => Data.Username)" />
+                        </div>
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <Template>
+                        <DxTextBox @bind-Text="@Data.Password"
+                                   NullText="Password"
+                                   Password="true"
+                                   ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                        <div class="text-danger">
+                            <ValidationMessage For="@(() => Data.Password)" />
+                        </div>
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <Template>
+                        <DxTextBox @bind-Text="@Data.Email"
+                                   NullText="E-mail"
+                                   ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                        <div class="text-danger">
+                            <ValidationMessage For="@(() => Data.Email)" />
+                        </div>
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <Template>
+                        <DxMaskedInput @bind-Value="@Data.Phone"
+                                       NullText="Phone Number"
+                                       Mask="@PhoneMask"
+                                       ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                        <div class="text-danger">
+                            <ValidationMessage For="@(() => Data.Phone)" />
+                        </div>
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <Template>
+                        <DxDateEdit @bind-Date="@Data.BirthDate"
+                                    NullText="Birthday"
+                                    NullValue="@BirthDateNullValue"
+                                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                                    Mask="@DateTimeMask.ShortDate" />
+                        <div class="text-danger">
+                            <ValidationMessage For="@(() => Data.BirthDate)" />
+                        </div>
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <Template>
+                        <DxComboBox Data="@Ocupations"
+                                    @bind-Value="@Data.Occupation"
+                                    AllowUserInput="false"
+                                    NullText="Occupation"
+                                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <Template>
+                        <DxMemo @bind-Text="@Data.Notes"
+                                NullText="Notes"
+                                Rows="4"
+                                ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <Template>
+                        <DxButton CssClass="w-100"
+                                  RenderStyle="ButtonRenderStyle.Primary"
+                                  SubmitFormOnClick="true"
+                                  Text="Register" />
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <Template>
+                        <div class="text-center pt-2">
+                            <div class="text-muted">
+                                Already have an account?
+                            </div>
+                            <DxButton RenderStyle="ButtonRenderStyle.Link"
+                                      Text="Login"
+                                      @onclick="GotoLoginForm" />
+                        </div>
+                    </Template>
+                </DxFormLayoutItem>
+            </DxFormLayout>
+        </div>
+    </EditForm>
+</div>
+
+<p class="demo-text cw-480 mt-2 text-muted">
+    @FormSubmitResult
+</p>
+
+@code {
+    [Parameter]
+    public EventCallback GotoLoginForm { get; set; }
+
+    string FormSubmitResult = "";
+
+    UserData Data { get; set; } = new UserData();
+    IEnumerable<string> Ocupations { get; set; } = new List<string>() {
+        "Academic",
+        "Administrative",
+        "Art/Entertainment",
+        "College Student",
+        "Community & Social",
+        "Computers",
+        "Education",
+        "Engineering",
+        "Financial Services",
+        "Government",
+        "High School Student",
+        "Law",
+        "Managerial",
+        "Manufacturing",
+        "Medical/Health",
+        "Military",
+        "Non-government Organization",
+        "Other Services",
+        "Professional",
+        "Retail",
+        "Science & Research",
+        "Sports",
+        "Technical",
+        "University Student",
+        "Web Building",
+    };
+    string PhoneMask { get; set; } = "(999)000-0000";
+    DateTime BirthDateNullValue { get; set; } = UserData.BirthDateNullValue;
+
+    async Task GotoLoginFormClick() {
+        FormSubmitResult = "";
+        await GotoLoginForm.InvokeAsync();
+    }
+    void HandleValidSubmit() {
+        FormSubmitResult = "You have been registred successully.";
+    }
+    void HandleInvalidSubmit() {
+        FormSubmitResult = "";
+    }
+}
+

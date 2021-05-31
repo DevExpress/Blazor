@@ -1,0 +1,16 @@
+﻿@using System.Globalization 
+
+<DemoPageSectionComponent Id="Editors-TimeEdit-DisplayFormat" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxTimeEdit @bind-Time="@TimeValue"
+                    Format="HH:mm"
+                    DisplayFormat="@DisplayFormat"
+                    CssClass="cw-320"
+                    SizeMode="Params.SizeMode" />
+    </ChildContentWithParameters>
+
+    @code {
+        TimeSpan TimeValue { get; set; } = DateTime.Now.TimeOfDay;
+        string DisplayFormat { get; } = string.IsNullOrEmpty(CultureInfo.CurrentCulture.DateTimeFormat.AMDesignator) ? "HH:mm" : "h:mm tt";
+    }
+</DemoPageSectionComponent>

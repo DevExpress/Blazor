@@ -1,0 +1,21 @@
+﻿<DemoPageSectionComponent Id="Editors-Memo-ClearButton" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxMemo @bind-Text="@TextValue"
+                ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                BindValueMode="BindValueMode.OnInput"
+                NullText="Type text..."
+                Rows="5"
+                SizeMode="Params.SizeMode"
+                CssClass="cw-480" />
+    </ChildContentWithParameters>
+
+    @code {
+        string TextValue { get; set; } =
+            "Prepare 2020 Marketing Plan: We need to double revenues in 2020 "+
+            "and our marketing strategy is going to be key here. " +
+            "R&D is improving existing products and creating new products so we "+
+            "can deliver great AV equipment to our customers. " +
+            "Robert, please make certain to create a PowerPoint presentation "+
+            "for the members of the executive team.";
+    }
+</DemoPageSectionComponent>
