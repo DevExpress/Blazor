@@ -2,6 +2,76 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 21.1.4
+
+### Navigation and Layout
+
+#### Menu - Data Binding
+
+You can now bind the Menu component to a data source. In this mode, items from the data source automatically populate menu items. To do this, use the component’s [Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu.Data) and [DataMappings](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu.DataMappings) properties.
+
+[Demo](https://demos.devexpress.com/blazor/Menu#DataBinding) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu#data-binding) 
+
+#### Context Menu, TreeView - Binding to Flat Data
+
+You can now bind the Context Menu and TreeView components to flat data (a collection of items that are available at one level). Use the following properties to enable this feature:
+* Context Menu - [DxContextMenu.Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu.Data) and [DxContextMenu.DataMappings](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu.DataMappings) 
+  
+  [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu#bound-mode)
+* TreeView - [DxTreeView.Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.Data) and [DxTreeView.DataMappings](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.DataMappings) 
+  
+  [Demo](https://demos.devexpress.com/blazor/TreeView#MasterDetailDataBinding) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView#flat-data)
+
+#### Popup - Close Reason
+
+The [DxPopup.Closing](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.Closing) event’s arguments now include a new property - [CloseReason](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PopupClosingEventArgs.CloseReason). This property identifies an action that closes the Popup. The available actions are: 
+* Programmatically 
+* EscapePress 
+* CloseButtonClick
+* OutsideClick 
+
+#### Form Layout
+
+##### Disabled and Read-Only Modes at Various Component Levels
+
+You can now activate disabled/read-only mode for all auto-generated editors at the following Form Layout levels:
+* An entire component
+* A layout group, tab, or tab page
+* A layout item
+
+The Form Layout and its elements apply values of the corresponding properties ([Enabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayout.Enabled) and [ReadOnly](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayout.ReadOnly)) to nested elements. If you specify the corresponding property for a nested element, this value overrides the common value.
+
+##### Omit the Template Tag for Form Layout Items
+
+When you specify a [template](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutItem.Template) for a Form Layout item, you can now omit the `<Template>...</Template>` tag and specify the template’s content in the item’s markup. This improves the readability of the page layout code.
+
+### Data Editors
+
+#### CheckBox
+
+##### Allow/Restrict Indeterminate State
+
+Use the new [AllowIndeterminateState](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1.AllowIndeterminateState) property to specify whether the CheckBox component supports the indeterminate state.
+##### Wrap Mode for Long Labels
+
+If the CheckBox label is too long to fit the parent component, use the new [LabelWrapMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCheckBox-1.LabelWrapMode) property to specify whether the label’s text should be wrapped or cropped.
+
+### Charts
+
+#### The Maximum Number of Automatic Scale Breaks
+
+The new [MaxAutoBreakCount](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartValueAxis.MaxAutoBreakCount) property allows you to limit the number of auto-created scale breaks.
+
+### Resolved Issues
+
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=21.1.4&endBuildName=21.1.3&buildsMode=Single&hasPlatformsWithProducts=true) for a complete list of issues resolved in v21.1.4.
+
+### Breaking Changes
+
+* [T1001744](https://supportcenter.devexpress.com/ticket/details/t1001744/treeview-contextmenu-some-api-members-related-to-data-binding-are-now-obsolete-a-newme-api-members-related-to-data-binding-have-become-obsolete-a-new): TreeView, ContextMenu - Some API members related to data binding are now obsolete. A new data binding approach was introduced
+* [T1007681](https://supportcenter.devexpress.com/ticket/details/t1007681/scheduler-crud-events-changed-their-delegate-type-from-action-to-eventcallback): Scheduler - CRUD events changed their delegate type from Action to EventCallback
+* [T1003629](https://supportcenter.devexpress.com/ticket/details/t1003629/charts-the-dxchartvaluebreaks-class-is-now-obsolete): The DxChartValueBreaks class is now obsolete
+
 # 21.1.3
 
 ### New Grid (CTP)
