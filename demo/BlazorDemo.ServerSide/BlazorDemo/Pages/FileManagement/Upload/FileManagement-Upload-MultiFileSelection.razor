@@ -3,7 +3,7 @@
 
     <div class="upload-container">
         <div style="@(SelectedFilesCount > 0 ? "display: none" : string.Empty)">
-            <span class="drop-file-icon mb-3"</span>
+            <span class="drop-file-icon mb-3"></span>
             <span class="mb-3">Click the Select Files button to select a file</span>
         </div>
         <DxUpload Name="myFile" UploadUrl="@GetUploadUrl("api/Upload/UploadFile/")" SelectedFilesChanged="SelectedFilesChanged"

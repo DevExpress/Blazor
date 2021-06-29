@@ -15,47 +15,16 @@ namespace BlazorDemo.DataProviders.Implementation {
             _productCategoriesProvider = productCategoriesProvider;
         }
 
-        public async Task<IEnumerable<ProductFlat>> LoadAsync(CancellationToken ct = default) {
+        public async Task<IEnumerable<ProductFlat>> GetProductsAsync(CancellationToken ct = default) {
             await _lock.WaitAsync();
             if(wrapper == null) {
                 var categories = await _productCategoriesProvider.GetProductCategoriesAsync(ct);
                 IEnumerable<ProductFlat> _productFlats = LoadInternal(categories);
-                wrapper = new DataWrapper<ProductFlat>(_productFlats.ToList(), UpdateItem);
+                wrapper = new DataWrapper<ProductFlat>(_productFlats.ToList());
             }
 
             _lock.Release();
-            return wrapper.Data;
-        }
-        public Task Add(ProductFlat product) {
-            return wrapper.Add(product);
-        }
-
-        public Task Remove(ProductFlat item) {
-            return wrapper.Remove(item);
-        }
-
-        public Task Update(ProductFlat item, IDictionary<string, object> newValue) {
-            return wrapper.Update(item, newValue);
-        }
-
-        static void UpdateItem(ProductFlat item, string name, object value) {
-            switch(name) {
-                case "Id":
-                    item.Id = (string)value; return;
-                case "ProductName":
-                    item.ProductName = (string)value; return;
-                case "Availability":
-                    item.Availability = (bool)value; return;
-                case "ProductCategoryId":
-                    item.ProductCategoryId = (int)value; return;
-                case "Category":
-                    if(item.CategoryItem == null) item.CategoryItem = new ProductCategory();
-                    item.CategoryItem.Category = value is ProductCategoryMain ? (ProductCategoryMain)value : Enum.Parse<ProductCategoryMain>((string)value);
-                    return;
-                case "Subcategory":
-                    if(item.CategoryItem == null) item.CategoryItem = new ProductCategory();
-                    item.CategoryItem.Subcategory = (string)value; return;
-            }
+            return await wrapper.GetData();
         }
 
         static IEnumerable<ProductFlat> WithCategoryItemSet(IEnumerable<ProductCategory> categories, params ProductFlat[] products) {

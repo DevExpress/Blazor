@@ -1,104 +1,129 @@
 ﻿@page "/GridMasterDetail"
+@layout DataProviderAccessArea<INwindDataProvider>
 
 <DemoPageSectionComponent Id="DataGrid-MasterDetail" ShowHorizontalScrollBar="true">
-    @using BlazorDemo.Data.SalesViewer
-    @using Sale = BlazorDemo.Data.SalesViewer.Sale
-    @using Product = BlazorDemo.Data.SalesViewer.Product
     @using System.Collections.Concurrent
     @using System.Threading
-
+    @inject NwindDataService NwindDataService
     @implements IDisposable
-    @inject ISalesViewerDataProvider SalesViewerDataProvider
-    @layout DataProviderAccessArea<ISalesViewerDataProvider>
 
-    <DxDataGrid @ref="@grid"
-                DataAsync="@SalesViewerDataProvider.GetProducts"
-                KeyFieldName="Id"
-                AutoCollapseDetailRow="true"
-                ShowDetailRow="true"
-                SelectionMode="DataGridSelectionMode.None"
-                PageSize="4">
-        <Columns>
-            <DxDataGridColumn Field="@nameof(Product.Name)" />
-            <DxDataGridColumn Field="@nameof(Product.Description)" />
-            <DxDataGridSpinEditColumn Field="@nameof(Product.ListPrice)" DisplayFormat="c" />
-            <DxDataGridSpinEditColumn Field="@nameof(Product.UnitsInInventory)" />
-            <DxDataGridSpinEditColumn Field="@nameof(Product.UnitsInManufacturing)" />
-        </Columns>
-        <DetailRowTemplate Context="dataItem">
-            <DxTabs>
-                <DxTabPage Text="Sales">
-                    <div class="p-3">
-                        <DxDataGrid DataAsync="@GetSalesDataByProductAsync(dataItem)"
-                                    SelectionMode="DataGridSelectionMode.None"
-                                    LayoutRestoring="@GetDetailsGridLayoutRestoringDelegate(dataItem)"
-                                    LayoutChanged="@GetDetailsGridLayoutChangedDelegate(dataItem)">
-                            <DxDataGridDateEditColumn Field="@nameof(Sale.SaleDate)" />
-                            <DxDataGridSpinEditColumn Field="@nameof(Sale.Units)" />
-                            <DxDataGridSpinEditColumn Field="@nameof(Sale.TotalCost)" DisplayFormat="c" />
-                            <DxDataGridSpinEditColumn Field="@nameof(Sale.Discount)" DisplayFormat="c" />
-                        </DxDataGrid>
-                    </div>
-                </DxTabPage>
-                <DxTabPage Text="Plant Info">
-                    @{
-                        var plantInfo = PlantsDataSource?.FirstOrDefault(x => x.Id == dataItem.PlantId);
-                    }
-                    <div class="p-3">
-                        <b>Name:</b>
-                        <p>
-                            @plantInfo.Name
-                        </p>
-                        <b>Address:</b>
-                        <p>
-                            @plantInfo.Address
-                        </p>
-                        <b>Zip:</b>
-                        <p>
-                            @plantInfo.Zip
-                        </p>
-                    </div>
-                </DxTabPage>
-            </DxTabs>
-        </DetailRowTemplate>
-    </DxDataGrid>
-
+    @if(DataSource == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <DxDataGrid @ref="@grid"
+                    Data="@DataSource"
+                    KeyFieldName="@nameof(Customer.CustomerId)"
+                    AutoCollapseDetailRow="true"
+                    ShowDetailRow="true"
+                    SelectionMode="DataGridSelectionMode.None"
+                    PageSize="4">
+            <Columns>
+                <DxDataGridColumn Field="@nameof(Customer.ContactName)" />
+                <DxDataGridColumn Field="@nameof(Customer.CompanyName)" />
+                <DxDataGridColumn Field="@nameof(Customer.City)" />
+                <DxDataGridColumn Field="@nameof(Customer.Country)" />
+            </Columns>
+            <DetailRowTemplate Context="dataItem">
+                <DxTabs>
+                    <DxTabPage Text="Invoices">
+                        <div class="p-3">
+                            <DxDataGrid DataAsync="@GetInvoicesByCustomerAsync(dataItem)"
+                                        SelectionMode="DataGridSelectionMode.None"
+                                        LayoutRestoring="@GetDetailsGridLayoutRestoringDelegate(dataItem)"
+                                        LayoutChanged="@GetDetailsGridLayoutChangedDelegate(dataItem)"
+                                        PageSize="5">
+                                <DxDataGridColumn Field="@nameof(Invoice.OrderId)" />
+                                <DxDataGridDateEditColumn Field="@nameof(Invoice.OrderDate)"
+                                                          DisplayFormat="d" />
+                                <DxDataGridDateEditColumn Field="@nameof(Invoice.ShipName)" />
+                                <DxDataGridDateEditColumn Field="@nameof(Invoice.ShippedDate)"
+                                                          DisplayFormat="d" />
+                                <DxDataGridSpinEditColumn Field="@nameof(Invoice.UnitPrice)"
+                                                          DisplayFormat="c" />
+                                <DxDataGridSpinEditColumn Field="@nameof(Invoice.Quantity)" />
+                            </DxDataGrid>
+                        </div>
+                    </DxTabPage>
+                    <DxTabPage Text="Contact Info">
+                        <div class="p-3">
+                            <DxFormLayout>
+                                <DxFormLayoutItem Caption="Address:" ColSpanMd="12">
+                                    <Template>
+                                        @dataItem.Address
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Caption="Postal Code:" ColSpanMd="6">
+                                    <Template>
+                                        @dataItem.PostalCode
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Caption="Region:" ColSpanMd="6">
+                                    <Template>
+                                        @dataItem.Region
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Caption="City:" ColSpanMd="6">
+                                    <Template>
+                                        @dataItem.City
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Caption="Country:" ColSpanMd="6">
+                                    <Template>
+                                        @dataItem.Country
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Caption="Phone:" ColSpanMd="6">
+                                    <Template>
+                                        @dataItem.Phone
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Caption="Fax:" ColSpanMd="6">
+                                    <Template>
+                                        @dataItem.Fax
+                                    </Template>
+                                </DxFormLayoutItem>
+                            </DxFormLayout>
+                        </div>
+                    </DxTabPage>
+                </DxTabs>
+            </DetailRowTemplate>
+        </DxDataGrid>
+    }
     @code {
-        IEnumerable<Plant> PlantsDataSource;
+        IEnumerable<Customer> DataSource;
+        DxDataGrid<Customer> grid;
 
-        DxDataGrid<Product> grid;
+        readonly ConcurrentDictionary<string, string> detailGridsLayoutCache = new ConcurrentDictionary<string, string>();
 
-        readonly ConcurrentDictionary<int, string> detailGridsLayoutCache = new ConcurrentDictionary<int, string>();
         protected override async Task OnInitializedAsync() {
-            PlantsDataSource = await SalesViewerDataProvider.GetPlants();
+            DataSource = await NwindDataService.GetCustomersAsync();
         }
 
-        protected Func<CancellationToken, Task<IEnumerable<Sale>>> GetSalesDataByProductAsync(Product product) {
-            return GetProductSalesAsync;
+        protected Func<CancellationToken, Task<IEnumerable<Invoice>>> GetInvoicesByCustomerAsync(Customer customer) {
+            return GetCustomerInviocesAsync;
 
-            async Task<IEnumerable<Sale>> GetProductSalesAsync(CancellationToken cancellationToken) {
-                var allSales = await SalesViewerDataProvider.GetSales(cancellationToken);
-                return allSales.Where(x => x.ProductId == product.Id);
+            async Task<IEnumerable<Invoice>> GetCustomerInviocesAsync(CancellationToken cancellationToken) {
+                var invoices = await NwindDataService.GetInvoicesAsync(cancellationToken);
+                return invoices.Where(i => i.CustomerId == customer.CustomerId);
             }
         }
-        protected override async Task OnAfterRenderAsync(bool firstRender) {
+        protected override void OnAfterRender(bool firstRender) {
             if(firstRender) {
-                var products = await @SalesViewerDataProvider.GetProducts();
-                var firstProduct = products.First();
-                grid.DetailRows.ExpandRow(firstProduct.Id);
+                var firstCustomer = DataSource.FirstOrDefault();
+                grid.DetailRows.ExpandRow(firstCustomer?.CustomerId);
             }
         }
-        protected Action<IDataGridLayout> GetDetailsGridLayoutRestoringDelegate(Product product) {
+        protected Action<IDataGridLayout> GetDetailsGridLayoutRestoringDelegate(Customer customer) {
             return (layout) => {
-                if(detailGridsLayoutCache.TryGetValue(product.Id, out string previousLayoutJson))
+                if(detailGridsLayoutCache.TryGetValue(customer.CustomerId, out string previousLayoutJson))
                     layout.LoadLayout(previousLayoutJson);
             };
         }
 
-        protected Action<IDataGridLayout> GetDetailsGridLayoutChangedDelegate(Product product) {
+        protected Action<IDataGridLayout> GetDetailsGridLayoutChangedDelegate(Customer customer) {
             return (layout) => {
                 var layoutJson = layout.SaveLayout();
-                detailGridsLayoutCache.AddOrUpdate(product.Id, layoutJson, (id, layout) => {
+                detailGridsLayoutCache.AddOrUpdate(customer.CustomerId, layoutJson, (id, layout) => {
                     return layoutJson;
                 });
             };

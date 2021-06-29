@@ -39,7 +39,7 @@ namespace BlazorDemo.Data {
             }
         }
         public bool HasSubGroups => GroupType < DateTimeGroupType.Day;
-
+        public IEnumerable<DateTimeGroup> SubGroups => GetSubGroups();
         public IEnumerable<DateTimeGroup> GetSubGroups() {
             switch(GroupType) {
                 case DateTimeGroupType.Year:

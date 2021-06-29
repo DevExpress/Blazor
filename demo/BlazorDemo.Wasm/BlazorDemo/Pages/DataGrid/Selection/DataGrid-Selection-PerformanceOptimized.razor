@@ -1,48 +1,52 @@
 ﻿<DemoPageSectionComponent Id="DataGrid-Selection-PerformanceOptimized" ShowHorizontalScrollBar="true">
-    @inject IProductsFlatProvider ProductsFlatService
+    @inject NwindDataService NwindDataService
 
-    @if(DataSource == null) {
+    @if(Products == null) {
         <p><em>Loading...</em></p>
     } else {
-        <DxDataGrid Data="@DataSource" @ref="@grid"
-                    KeyFieldName="Id"
+        <DxDataGrid Data="@Products" @ref="@grid"
+                    KeyFieldName="@nameof(Product.ProductId)"
                     SelectionMode="DataGridSelectionMode.OptimizedMultipleSelection"
                     SelectAllMode="DataGridSelectAllMode.AllPages"
                     OptimizedMultipleSelectionChanged="OnSelectionChanged">
             <DxDataGridSelectionColumn Width="50px"></DxDataGridSelectionColumn>
-            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name"></DxDataGridColumn>
-            <DxDataGridColumn Field="@nameof(ProductFlat.Category)"></DxDataGridColumn>
-            <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)"></DxDataGridColumn>
+            <DxDataGridColumn Field="@nameof(Product.ProductName)" />
+            <DxDataGridComboBoxColumn Field="@nameof(Product.CategoryId)" Caption="Category"
+                                      Data="@Categories" TextFieldName="@nameof(Category.CategoryName)" ValueFieldName="@nameof(Category.CategoryId)" />
+            <DxDataGridSpinEditColumn Field="@nameof(Product.UnitPrice)" DisplayFormat="c" Width="120px" />
+            <DxDataGridSpinEditColumn Field="@nameof(Product.UnitsInStock)" Width="120px" />
+            <DxDataGridColumn Field="@nameof(Product.QuantityPerUnit)" />
+            <DxDataGridCheckBoxColumn Field="@nameof(Product.Discontinued)" Width="120px" />
         </DxDataGrid>
         <p class="demo-text w-100 mt-2 text-muted">The total count of selected rows: <b>@SelectedCount</b> (stored selected rows: <b>@StoredSelectedCount</b>, stored unselected rows: <b>@StoredUnselectedCount</b>)</p>
     }
 
     @code {
-        DxDataGrid<ProductFlat> grid;
+        DxDataGrid<Product> grid;
         bool gridInitialized;
 
-        IEnumerable<ProductFlat> DataSource;
+        IEnumerable<Product> Products { get; set; }
+        IEnumerable<Category> Categories { get; set; }
 
         int SelectedCount { get; set; }
-
         int StoredSelectedCount { get; set; }
-
         int StoredUnselectedCount { get; set; }
 
         protected override async Task OnInitializedAsync() {
-            DataSource = await ProductsFlatService.LoadAsync();
+            Products = await NwindDataService.GetProductsAsync();
+            Categories = await NwindDataService.GetCategoriesAsync();
         }
 
         protected override void OnAfterRender(bool firstRender) {
             if(!gridInitialized && grid != null) {
                 gridInitialized = true;
 
-                foreach(var product in DataSource.Take(10).Where((p, i) => i % 2 != 0))
+                foreach(var product in Products.Take(10).Where((p, i) => i % 2 != 0))
                     grid.SetDataRowSelected(product, true);
             }
         }
 
-        protected async Task OnSelectionChanged(DataGridSelection<ProductFlat> selection) {
+        protected async Task OnSelectionChanged(DataGridSelection<Product> selection) {
             StoredSelectedCount = selection.SelectedKeysStored.Count();
             StoredUnselectedCount = selection.UnselectedKeysStored.Count();
             var selectedKeys = await selection.SelectedKeys;

@@ -2,41 +2,46 @@
 
 <DemoPageSectionComponent Id="Charts-SeriesCustomization-SeriesPoint">
     <ChildContentWithParameters Context="Params">
-        @inject WeatherForecastService ForecastService
-
+        @inject IWeatherSummaryDataProvider WeatherSummaryDataProvider
         <DxChart Data="@WeatherForecasts"
                  @key="Params.ThemeName"
                  CustomizeSeriesPoint="@PreparePointColor"
                  CssClass="w-100">
-
-            <DxChartLineSeries SummaryMethod="@(i => (int)i.Average())"
-                               Color="@System.Drawing.Color.Gray"
-                               ValueField="@((WeatherForecast i) => i.TemperatureF)"
-                               ArgumentField="@(i => i.Date.Date)"
-                               Name="Temperature, F">
+            <DxChartTitle Text="Annual Weather in New York" />
+            <DxChartLineSeries SummaryMethod="@(i => i.Average())"
+                               Color="@Color.Gray"
+                               ValueField="@((DetailedWeatherSummary i) => i.AverageTemperatureF)"
+                               ArgumentField="@(i => new DateTime(2000, i.Date.Month, 1))"
+                               Name="Temperature, °F"
+                               Filter="@((DetailedWeatherSummary  i) => i.City == "NEW YORK")">
                 <DxChartSeriesPoint Symbol="ChartPointSymbol.Polygon"
-                                    Color="@System.Drawing.Color.Gray"
+                                    Color="@Color.Gray"
                                     Size="25" />
             </DxChartLineSeries>
-
-            <DxChartLegend Position="RelativePosition.Outside" />
-
+            <DxChartLegend Visible="false" />
+            <DxChartValueAxis>
+                <DxChartAxisTitle Text="Temperature, °F" />
+            </DxChartValueAxis>
+            <DxChartArgumentAxis>
+                <DxChartAxisLabel Format="ChartElementFormat.Month"/>
+            </DxChartArgumentAxis>
         </DxChart>
     </ChildContentWithParameters>
 
 
     @code {
-        WeatherForecast[] WeatherForecasts;
+        IEnumerable<DetailedWeatherSummary> WeatherForecasts;
 
-        protected override async Task OnInitializedAsync() {
-            WeatherForecasts = await ForecastService.GetDetailedForecastAsync();
+        protected override async Task OnInitializedAsync()
+        {
+            WeatherForecasts = await WeatherSummaryDataProvider.GetDataAsync();
         }
 
         protected void PreparePointColor(ChartSeriesPointCustomizationSettings pointSettings) {
             double value = (double)pointSettings.Point.Value;
-            if(value > 75)
+            if(value > 70)
                 pointSettings.PointAppearance.Color = Color.Red;
-            else if(value < 25)
+            else if(value < 40)
                 pointSettings.PointAppearance.Color = Color.Blue;
         }
     }

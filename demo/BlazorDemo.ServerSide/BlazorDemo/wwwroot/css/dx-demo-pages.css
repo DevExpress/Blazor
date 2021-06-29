@@ -43,8 +43,8 @@
 .tb-icon-info {
     width: 18px;
     height: 18px;
-    mask-image: url("../images/Info-16x16.svg");
-    -webkit-mask-image: url("../images/Info-16x16.svg");
+    mask-image: url("../images/Info.svg");
+    -webkit-mask-image: url("../images/Info.svg");
 }
 .tb-icon-settings {
     width: 16px;
@@ -400,15 +400,15 @@ body.modal-open .main {
     min-width: 1rem;
     min-height: 1rem;
     background-size: contain;
-    mask-repeat: no-repeat;
     -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
     background-position: center center;
     background-color: currentColor;
 }
 
 .chart-icon-calendar {
-    mask-image: url("../images/Calendar.svg");
     -webkit-mask-image: url("../images/Calendar.svg");
+    mask-image: url("../images/Calendar.svg");
 }
 
 /*Grid*/

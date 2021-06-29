@@ -9,7 +9,7 @@
                 @foreach(var employee in Employees) {
                     <DxTabPage Text="@(employee.FirstName + ' ' +  employee.LastName)">
                         <div class="media pt-2">
-                            <img src="@(StaticAssetUtils.GetImagePath($"Employees/{employee.FileName}.jpg"))" width="125" />
+                            <img src="@(StaticAssetUtils.GetImagePath(employee.ImageFileName))" width="125" />
                             <div class="media-body pl-3">
                                 <h5 class="mt-0">@employee.Title @employee.FirstName @employee.LastName</h5>
                                 <p><b>Birthday:</b> @employee.BirthDate.Value.ToShortDateString()</p>

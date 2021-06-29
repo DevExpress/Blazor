@@ -1,0 +1,61 @@
+﻿@page "/MultiplePanes"
+@using System.Drawing 
+<DemoPageSectionComponent Id="Charts-MultiplePanes">
+    <ChildContentWithParameters Context="Params">
+        @inject IWeatherSummaryDataProvider WeatherSummaryDataProvider
+
+        <DxChart Data="WeatherForecasts"
+                 @key="@Params.ThemeName"
+                 CssClass="w-100"
+                 Height="500px">
+            <DxChartTitle Text="Annual Weather in Hilo, Hawaii" />
+            <DxChartLegend HorizontalAlignment="HorizontalAlignment.Center" VerticalAlignment="VerticalEdge.Bottom" Position="RelativePosition.Outside" />
+
+            <DxChartPane Name="TopPane" />
+            <DxChartPane Name="BottomPane" />
+
+            <DxChartRangeAreaSeries Pane="TopPane"
+                                    Name="Temperature Range, °F"
+                                    ArgumentField="@(i => new DateTime(2000, i.Date.Month, 1))"
+                                    ValueField="@((DetailedWeatherSummary  s) => s.AverageTemperatureF)"
+                                    Color="@(Color.FromArgb(176, 218, 255))">
+            </DxChartRangeAreaSeries>
+            <DxChartSplineSeries Pane="TopPane"
+                                 Name="Average Temperature, °F"
+                                 SummaryMethod="Enumerable.Average"
+                                 ArgumentField="@(i => new DateTime(2000, i.Date.Month, 1))"
+                                 ValueField="@((DetailedWeatherSummary  s) => s.AverageTemperatureF)"
+                                 Color="@(Color.FromArgb(0x00a9e6))">
+                <DxChartSeriesLabel Visible="true" Format="@(ChartElementFormat.FromLdmlString("0#.## °F"))" />
+            </DxChartSplineSeries>
+            <DxChartBarSeries Pane="BottomPane"
+                              Name="Precipitation, inch"
+                              ArgumentField="@(i => new DateTime(2000, i.Date.Month, 1))"
+                              SummaryMethod="Enumerable.Average"
+                              ValueField="@((DetailedWeatherSummary  s) => s.PrecipitationInch)"
+                              Color="@(Color.FromArgb(0xdc3545))">
+                <DxChartSeriesLabel Visible="true" Format="@(ChartElementFormat.FromLdmlString("0#.## inch"))" />
+            </DxChartBarSeries>
+            <DxChartValueAxis Pane="TopPane">
+                <DxChartAxisTitle Text="Temperature, °F" />
+            </DxChartValueAxis>
+            <DxChartValueAxis Pane="BottomPane" SideMarginsEnabled="true">
+                <DxChartAxisTitle Text="Precipitation, inch" />
+            </DxChartValueAxis>
+            <DxChartArgumentAxis >
+                <DxChartAxisLabel Format="ChartElementFormat.Month"/>
+            </DxChartArgumentAxis>
+        </DxChart>
+    </ChildContentWithParameters>
+
+
+    @code {
+        IEnumerable<DetailedWeatherSummary> WeatherForecasts;
+
+        protected override async Task OnInitializedAsync()
+        {
+            var weatherForecasts = await WeatherSummaryDataProvider.GetDataAsync();
+            WeatherForecasts = weatherForecasts.Where((DetailedWeatherSummary i) => i.City == "HILO");
+        }
+    }
+</DemoPageSectionComponent>

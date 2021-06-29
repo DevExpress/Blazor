@@ -1,34 +1,33 @@
 ﻿<DemoPageSectionComponent Id="DataGrid-ColumnChooser-ShowInColumnChooser" ShowHorizontalScrollBar="true">
-    @using System.Collections.Generic
-    @inject ProductsFlatService ProductsFlatService
+    @inject NwindDataService NwindDataService
 
-    <DxDataGrid DataAsync="@ProductsFlatService.LoadAsync" AllowColumnDragDrop="false"
-                RowRemovingAsync="@OnRowRemoving"
-                RowUpdatingAsync="@OnRowUpdating"
-                RowInsertingAsync="@OnRowInserting">
-        <HeaderTemplate>
-            <DxToolbar>
-                <DxDataGridColumnChooserToolbarItem Alignment="ToolbarItemAlignment.Right" />
-            </DxToolbar>
-        </HeaderTemplate>
-        <Columns>
-            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" ShowInColumnChooser="false" />
-            <DxDataGridComboBoxColumn Field="@nameof(ProductFlat.Category)" Data="@(new[] { "Bikes", "Components", "Clothing", "Accessories" })" />
-            <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)" />
-            <DxDataGridCheckBoxColumn Field="@nameof(ProductFlat.Availability)" />
-            <DxDataGridCommandColumn ShowInColumnChooser="true" />
-        </Columns>
-    </DxDataGrid>
-
-    @code {
-        async Task OnRowRemoving(ProductFlat dataItem) {
-            await ProductsFlatService.RemoveAsync(dataItem);
-        }
-        async Task OnRowUpdating(ProductFlat dataItem, IDictionary<string, object> newValue) {
-            await ProductsFlatService.UpdateAsync(dataItem, newValue);
-        }
-        async Task OnRowInserting(IDictionary<string, object> newValue) {
-            await ProductsFlatService.AddAsync(newValue);
-        }
+    @if(Products == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <DxDataGrid Data="@Products" AllowColumnDragDrop="false">
+            <HeaderTemplate>
+                <DxToolbar>
+                    <DxDataGridColumnChooserToolbarItem Alignment="ToolbarItemAlignment.Right" />
+                </DxToolbar>
+            </HeaderTemplate>
+            <Columns>
+                <DxDataGridColumn Field="@nameof(Product.ProductName)" ShowInColumnChooser="false" />
+                <DxDataGridComboBoxColumn Field="@nameof(Product.CategoryId)" Caption="Category"
+                                          Data="@Categories" TextFieldName="@nameof(Category.CategoryName)" ValueFieldName="@nameof(Category.CategoryId)" />
+                <DxDataGridSpinEditColumn Field="@nameof(Product.UnitPrice)" DisplayFormat="c" Width="120px" />
+                <DxDataGridSpinEditColumn Field="@nameof(Product.UnitsInStock)" Width="120px" />
+                <DxDataGridColumn Field="@nameof(Product.QuantityPerUnit)" />
+                <DxDataGridCheckBoxColumn Field="@nameof(Product.Discontinued)" Width="120px" />
+            </Columns>
+        </DxDataGrid>
     }
+    @code {
+        IEnumerable<Product> Products { get; set; }
+        IEnumerable<Category> Categories { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Products = await NwindDataService.GetProductsAsync();
+            Categories = await NwindDataService.GetCategoriesAsync();
+        }
+}
 </DemoPageSectionComponent>

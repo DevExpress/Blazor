@@ -1,0 +1,149 @@
+﻿@inject DemoConfiguration Configuration
+@inject NavigationManager NavigationManager
+@implements IDisposable
+
+<DemoScriptLoader @ref=@feedbackHelper Src="_content/BlazorDemo/lib/page-feedback.js">
+</DemoScriptLoader>
+
+@if(Enabled && CurrentDemoPage != null) {
+    <div class="demo-feedback-panel">
+        @if(State != FeedbackPanelState.Completed && State != FeedbackPanelState.Error) {
+            <span class="feedback-text">Did this demo address your needs?</span>
+            <div class="feedback-btns">
+                <button class="btn btn-link @(State == FeedbackPanelState.PositiveFeedbackForm ? "feedback-selected" : "")" @onclick="ShowPositiveFeedbackForm"><span class="icon icon-thumb-up"></span><span>Yes</span></button>
+                <button class="btn btn-link @(State == FeedbackPanelState.NegativeFeedbackForm ? "feedback-selected" : "")" @onclick="ShowNegativeFeedbackForm"><span class="icon icon-thumb-down"></span><span>No</span></button>
+            </div>
+        }
+        @if(IsFeedbackFormVisible()) {
+            <div class="feedback-form">
+                @GetFeedbackFormTextMarkup()
+                <DxMemo @bind-Text="@FeedbackText" Rows="5" ResizeMode="MemoResizeMode.Disabled" Enabled="@IsFeedbackFormTextAreaEnabled()" NullText="Additional feedback" BindValueMode="BindValueMode.OnInput"></DxMemo>
+                <div class="feedback-form-btns">
+                    <DxButton Enabled="@IsFeedbackFormButtonEnabled()" Text="Submit" RenderStyle="ButtonRenderStyle.Secondary" SizeMode="SizeMode.Small" @onclick="@OnSendFeedbackButtonClick"></DxButton>
+                    <DxButton Text="Skip" RenderStyle="ButtonRenderStyle.Link" SizeMode="SizeMode.Small" @onclick="@OnSkipSendFeedbackButtonClick"></DxButton>
+                </div>
+            </div>
+        }
+        @if(State == FeedbackPanelState.Completed) {
+            <span class="feedback-text">We appreciate your feedback!</span>
+        }
+        @if(State == FeedbackPanelState.Error) {
+            <span class="feedback-text">Oops! Something went wrong.</span>
+        }
+    </div>
+}
+
+@code {
+    DemoScriptLoader feedbackHelper;
+
+    protected DemoPageBase CurrentDemoPage { get; set; }
+    public bool Enabled { get; set; }
+    public FeedbackPanelState State { get; set; } = FeedbackPanelState.Normal;
+    public string FeedbackText { get; set; }
+
+    protected override void OnInitialized() {
+        Enabled = Configuration.GetConfigurationValue<bool>("FeedbackEnabled");
+        NavigationManager.LocationChanged += OnLocationChanged;
+        UpdateCurrentDemoPage(NavigationManager.Uri);
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if(firstRender) {
+            var dotNetReference = DotNetObjectReference.Create(this);
+            await feedbackHelper.InvokeVoidAsync("DemoFeedbackHelper.setDotNetReference", dotNetReference);
+        }
+    }
+    void OnLocationChanged(object sender, LocationChangedEventArgs args) {
+        UpdateCurrentDemoPage(args.Location);
+        State = FeedbackPanelState.Normal;
+        StateHasChanged();
+    }
+    void UpdateCurrentDemoPage(string currentUri) {
+        var demoPageUrl = NavigationManager.ToAbsoluteUri(NavigationManager.Uri).GetLeftPart(UriPartial.Path).Replace(NavigationManager.BaseUri, "");
+        CurrentDemoPage = Configuration.GetDemoPageByUrl(demoPageUrl);
+    }
+
+    public string GetSupportForumUrl() {
+        var rootDemoPage = CurrentDemoPage.ParentPage != null ? CurrentDemoPage.ParentPage : CurrentDemoPage;
+        var currentProductID = ((DemoRootPage)rootDemoPage).AnalyticsId;
+        var currentProductFilter = "filters=%5B%7B%22filterName%22:%22PlatformedProductId%22,%22selectedValues%22:%5B%22" + currentProductID + "%22%5D%7D%5D";
+        var searchString = rootDemoPage != CurrentDemoPage && CurrentDemoPage.Title != "Overview" ? rootDemoPage.Title + " " + CurrentDemoPage.Title : rootDemoPage.Title;
+        return string.Format("https://supportcenter.devexpress.com/ticket/list?{0}&searchString={1}&sorting=Relevance", currentProductFilter, searchString);
+    }
+    public bool IsFeedbackFormVisible() {
+        return State == FeedbackPanelState.PositiveFeedbackForm ||
+               State == FeedbackPanelState.PositiveFeedbackFormSending ||
+               State == FeedbackPanelState.NegativeFeedbackForm ||
+               State == FeedbackPanelState.NegativeFeedbackFormSending;
+    }
+    public bool IsFeedbackFormTextAreaEnabled() {
+        return State == FeedbackPanelState.PositiveFeedbackForm || State == FeedbackPanelState.NegativeFeedbackForm;
+    }
+    public bool IsFeedbackFormButtonEnabled() {
+        return (State == FeedbackPanelState.PositiveFeedbackForm || State == FeedbackPanelState.NegativeFeedbackForm) && !string.IsNullOrEmpty(FeedbackText);
+    }
+    async Task OnSendFeedbackButtonClick() {
+        if(State == FeedbackPanelState.PositiveFeedbackForm)
+            await SubmitPositiveFeedback();
+        if(State == FeedbackPanelState.NegativeFeedbackForm)
+            await SubmitNegativeFeedback();
+    }
+    void OnSkipSendFeedbackButtonClick() {
+        State = FeedbackPanelState.Completed;
+    }
+
+    async Task ShowPositiveFeedbackForm() {
+        await SendPositiveFeedback("", false);
+        State = FeedbackPanelState.PositiveFeedbackForm;
+    }
+    async Task ShowNegativeFeedbackForm() {
+        await SendNegativeFeedback("", false);
+        State = FeedbackPanelState.NegativeFeedbackForm;
+    }
+    async Task SubmitPositiveFeedback() {
+        await SendPositiveFeedback(FeedbackText, true);
+        State = FeedbackPanelState.PositiveFeedbackFormSending;
+    }
+    async Task SubmitNegativeFeedback() {
+        await SendNegativeFeedback(FeedbackText, true);
+        State = FeedbackPanelState.NegativeFeedbackFormSending;
+    }
+
+    async Task SendPositiveFeedback(string message, bool completed) {
+        await feedbackHelper.InvokeVoidAsync("DemoFeedbackHelper.sendFeedback", 1, message, completed);
+    }
+    async Task SendNegativeFeedback(string message, bool completed) {
+        await feedbackHelper.InvokeVoidAsync("DemoFeedbackHelper.sendFeedback", -1, message, completed);
+    }
+    [JSInvokable("FeedbackCompleted")]
+    public void FeedbackCompleted() {
+        State = FeedbackPanelState.Completed;
+        StateHasChanged();
+    }
+    [JSInvokable("FeedbackFailed")]
+    public void FeedbackFailed() {
+        State = FeedbackPanelState.Error;
+        StateHasChanged();
+    }
+
+    public RenderFragment GetFeedbackFormTextMarkup() {
+        if(State == FeedbackPanelState.PositiveFeedbackForm || State == FeedbackPanelState.PositiveFeedbackFormSending) {
+            return
+                @<div>
+                    <p>If you’d like us to extend this demo further, please describe your needs below.</p>
+                    <p>Thank you in advance for your cooperation.</p>
+                </div>;
+        }
+        if(State == FeedbackPanelState.NegativeFeedbackForm || State == FeedbackPanelState.NegativeFeedbackFormSending) {
+            return
+                @<div>
+                    <p>Please describe your use-case below and we’ll be happy to extend this demo to better server your needs.</p>
+                    <p>If you need immediate help, please submit a support ticket on <a href="@GetSupportForumUrl()" target="_blank">the DevExpress Support Forum</a>. We are here to help.</p>
+                </div>;
+        }
+        return null;
+    }
+
+    public void Dispose() {
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+}

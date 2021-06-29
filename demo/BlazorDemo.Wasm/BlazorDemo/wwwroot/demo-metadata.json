@@ -64,7 +64,7 @@
       "Url": "./",
       "Title": "Overview",
       "SeoTitle": "UI Components",
-      "Icon": "images/Overview.svg",
+      "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7",
       "Keywords": "Blazor, components, overview, getting started, devexpress, demo",
       "Description": "DevExpress UI for Blazor ships with native user interface components (including a Data Grid, Pivot Grid, Charts and Scheduler) so you can design rich user experiences with both Blazor.",
       "OG_Title": "Native Blazor Components powered by DevExpress",
@@ -75,6 +75,7 @@
     {
       "Id": "DataGrid",
       "Title": "Data Grid",
+      "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7:5a1ee13f-3d06-4eb2-8d64-b24f28bae08d",
       "Pages": [
         {
           "Id": "Overview",
@@ -112,6 +113,7 @@
               "Id": "Async",
               "Title": "Asynchronous Data Binding",
               "DocUrl": "DevExpress.Blazor.DxDataGrid-1.DataAsync",
+              "RedirectFrom": [ "BindGridToData#DataAsync" ],
               "AdditionalCodeFiles": [
                 {
                   "Title": "Supplier.cs",
@@ -142,6 +144,7 @@
               "Id": "LargeDataSource",
               "Title": "Large Datasets",
               "DocUrl": "DevExpress.Blazor.DxDataGrid-1.Data",
+              "RedirectFrom": [ "BindGridToData#LargeData" ],
               "AdditionalCodeFiles": [
                 {
                   "Title": "AreaRentInfo.cs",
@@ -149,7 +152,7 @@
                 },
                 {
                   "Title": "RentInfoDataService.cs",
-                  "Path": "Services\\RentInfoDataService.cs"
+                  "Path": "Services\\RentInfoDataService.AreaRentInfo.cs"
                 },
                 {
                   "Title": "Startup.cs",
@@ -163,7 +166,6 @@
           "Id": "ColumnTypes",
           "Url": "GridColumnTypes",
           "Title": "Column Types",
-          "Icon": "images/GridColumnType.svg",
           "Keywords": "blazor, components, data grid, datagrid, grid, column type, columns, devexpress, demo, sample, example",
           "Description": "DevExpress Blazor Data Grid supports column objects that display and edit different data types: text, numbers, dates, and Boolean values.",
           "AdditionalCodeFiles": [
@@ -193,16 +195,16 @@
           "Description": "DevExpress Blazor Data Grid supports sorting data against multiple columns. A column's current sort order is indicated by a sort glyph displayed in the column header.",
           "AdditionalCodeFiles": [
             {
-              "Title": "ProductFlat.cs",
-              "Path": "Data\\Products\\ProductFlat.cs"
+              "Title": "Customer.cs",
+              "Path": "Data\\Northwind\\Customer.cs"
             },
             {
-              "Title": "ProductsFlatService.cs",
-              "Path": "Services\\ProductsFlatService.Data.cs"
+              "Title": "NwindDataService.cs",
+              "Path": "Services\\NwindDataService.Customers.cs"
             },
             {
               "Title": "Startup.cs",
-              "Path": "Pages\\CodeSnippets\\ProductFlat.Startup.cs"
+              "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
             }
           ]
         },
@@ -214,12 +216,16 @@
           "Description": "The DevExpress Data Grid for Blazor component enables you to drag-and-drop grid headers or use grouping API to group data against multiple data columns.",
           "AdditionalCodeFiles": [
             {
-              "Title": "Vacancy.cs",
-              "Path": "Data\\Vacancy\\Vacancy.cs"
+              "Title": "Customer.cs",
+              "Path": "Data\\Northwind\\Customer.cs"
             },
             {
-              "Title": "Vacancies.cs",
-              "Path": "Data\\Vacancy\\Vacancies.cs"
+              "Title": "NwindDataService.cs",
+              "Path": "Services\\NwindDataService.Customers.cs"
+            },
+            {
+              "Title": "Startup.cs",
+              "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
             }
           ]
         },
@@ -240,10 +246,6 @@
                 },
                 {
                   "Title": "NwindDataService.cs",
-                  "Path": "Services\\NwindDataService.Employees.cs"
-                },
-                {
-                  "Title": "NwindDataService.Editable.cs",
                   "Path": "Services\\NwindDataService.Employees.Editable.cs"
                 },
                 {
@@ -257,12 +259,36 @@
               "Title": "Cascading Editors",
               "AdditionalCodeFiles": [
                 {
-                  "Title": "Vacancy.cs",
-                  "Path": "Data\\Vacancy\\Vacancy.cs"
+                  "Title": "Supplier.cs",
+                  "Path": "Data\\Northwind\\Supplier.cs"
                 },
                 {
-                  "Title": "Vacancies.cs",
-                  "Path": "Data\\Vacancy\\Vacancies.cs"
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Suppliers.cs"
+                },
+                {
+                  "Title": "Nwind.Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "Country.cs",
+                  "Path": "Data\\Worldcities\\Country.cs"
+                },
+                {
+                  "Title": "City.cs",
+                  "Path": "Data\\Worldcities\\City.cs"
+                },
+                {
+                  "Title": "WorldcitiesDataService.Countries.cs",
+                  "Path": "Services\\WorldcitiesDataService.Countries.cs"
+                },
+                {
+                  "Title": "WorldcitiesDataService.Cities.cs",
+                  "Path": "Services\\WorldcitiesDataService.Cities.cs"
+                },
+                {
+                  "Title": "Worldcities.Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Worldcities.Startup.cs"
                 }
               ]
             }
@@ -272,18 +298,21 @@
           "Id": "Validation",
           "Url": "GridEditFormTemplateValidation",
           "Title": "Validate Input",
-          "Icon": "images/GridEditFormTemplate.svg",
           "Keywords": "blazor, components, data grid, datagrid, grid, template, form validation, form template, form template validation, devexpress, demo, sample, example",
           "Description": "DevExpress Blazor Data Grid allows you to implement a custom edit form with built-in data validation.",
           "DocUrl": "DevExpress.Blazor.DxDataGrid-1.EditFormTemplate",
           "AdditionalCodeFiles": [
             {
-              "Title": "Vacancy.cs",
-              "Path": "Data\\Vacancy\\Vacancy.cs"
+              "Title": "Employee.cs",
+              "Path": "Data\\Northwind\\Employee.cs"
             },
             {
-              "Title": "Vacancies.cs",
-              "Path": "Data\\Vacancy\\Vacancies.cs"
+              "Title": "NwindDataService.cs",
+              "Path": "Services\\NwindDataService.Employees.Editable.cs"
+            },
+            {
+              "Title": "Startup.cs",
+              "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
             }
           ]
         },
@@ -337,7 +366,7 @@
                   "Path": "Data\\Northwind\\Invoice.cs"
                 },
                 {
-                  "Title": "NwindDataService.Invoices.cs",
+                  "Title": "NwindDataService.cs",
                   "Path": "Services\\NwindDataService.Invoices.cs"
                 },
                 {
@@ -352,12 +381,16 @@
               "DocUrl": "DevExpress.Blazor.DxDataGrid-1.GroupSummary",
               "AdditionalCodeFiles": [
                 {
-                  "Title": "SalesInfo.cs",
-                  "Path": "Data\\Sales\\SaleInfo.cs"
+                  "Title": "Invoice.cs",
+                  "Path": "Data\\Northwind\\Invoice.cs"
                 },
                 {
-                  "Title": "ISalesInfoDataProvider.cs",
-                  "Path": "DataProviders\\ISalesInfoDataProvider.cs"
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Invoices.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
               ]
             }
@@ -376,12 +409,24 @@
               "DocUrl": "DevExpress.Blazor.DxDataGrid-1.SelectionMode#single-selection",
               "AdditionalCodeFiles": [
                 {
-                  "Title": "ProductFlat.cs",
-                  "Path": "Data\\Products\\ProductFlat.cs"
+                  "Title": "Product.cs",
+                  "Path": "Data\\Northwind\\Product.cs"
                 },
                 {
-                  "Title": "IProductsFlatProvider.cs",
-                  "Path": "DataProviders\\IProductsFlatProvider.cs"
+                  "Title": "Category.cs",
+                  "Path": "Data\\Northwind\\Category.cs"
+                },
+                {
+                  "Title": "NwindDataService.Products.cs",
+                  "Path": "Services\\NwindDataService.Products.cs"
+                },
+                {
+                  "Title": "NwindDataService.Categories.cs",
+                  "Path": "Services\\NwindDataService.Categories.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
               ]
             },
@@ -391,12 +436,24 @@
               "DocUrl": "DevExpress.Blazor.DxDataGrid-1.SelectionMode#multiple-selection",
               "AdditionalCodeFiles": [
                 {
-                  "Title": "ProductFlat.cs",
-                  "Path": "Data\\Products\\ProductFlat.cs"
+                  "Title": "Product.cs",
+                  "Path": "Data\\Northwind\\Product.cs"
                 },
                 {
-                  "Title": "IProductsFlatProvider.cs",
-                  "Path": "DataProviders\\IProductsFlatProvider.cs"
+                  "Title": "Category.cs",
+                  "Path": "Data\\Northwind\\Category.cs"
+                },
+                {
+                  "Title": "NwindDataService.Products.cs",
+                  "Path": "Services\\NwindDataService.Products.cs"
+                },
+                {
+                  "Title": "NwindDataService.Categories.cs",
+                  "Path": "Services\\NwindDataService.Categories.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
               ]
             },
@@ -406,12 +463,24 @@
               "DocUrl": "DevExpress.Blazor.DxDataGrid-1.SelectionMode#multiple-selection-with-optimized-performance",
               "AdditionalCodeFiles": [
                 {
-                  "Title": "ProductFlat.cs",
-                  "Path": "Data\\Products\\ProductFlat.cs"
+                  "Title": "Product.cs",
+                  "Path": "Data\\Northwind\\Product.cs"
                 },
                 {
-                  "Title": "IProductsFlatProvider.cs",
-                  "Path": "DataProviders\\IProductsFlatProvider.cs"
+                  "Title": "Category.cs",
+                  "Path": "Data\\Northwind\\Category.cs"
+                },
+                {
+                  "Title": "NwindDataService.Products.cs",
+                  "Path": "Services\\NwindDataService.Products.cs"
+                },
+                {
+                  "Title": "NwindDataService.Categories.cs",
+                  "Path": "Services\\NwindDataService.Categories.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
               ]
             }
@@ -433,8 +502,8 @@
                   "Path": "Data\\Products\\ProductFlat.cs"
                 },
                 {
-                  "Title": "IProductsFlatProvider.cs",
-                  "Path": "DataProviders\\IProductsFlatProvider.cs"
+                  "Title": "ProductsFlatService.cs",
+                  "Path": "Services\\ProductsFlatService.Data.cs"
                 }
               ]
             },
@@ -447,8 +516,8 @@
                   "Path": "Data\\Products\\ProductFlat.cs"
                 },
                 {
-                  "Title": "IProductsFlatProvider.cs",
-                  "Path": "DataProviders\\IProductsFlatProvider.cs"
+                  "Title": "ProductsFlatService.cs",
+                  "Path": "Services\\ProductsFlatService.Data.cs"
                 }
               ]
             },
@@ -461,8 +530,8 @@
                   "Path": "Data\\Products\\ProductFlat.cs"
                 },
                 {
-                  "Title": "IProductsFlatProvider.cs",
-                  "Path": "DataProviders\\IProductsFlatProvider.cs"
+                  "Title": "ProductsFlatService.cs",
+                  "Path": "Services\\ProductsFlatService.Data.cs"
                 }
               ]
             },
@@ -475,8 +544,8 @@
                   "Path": "Data\\Products\\ProductFlat.cs"
                 },
                 {
-                  "Title": "IProductsFlatProvider.cs",
-                  "Path": "DataProviders\\IProductsFlatProvider.cs"
+                  "Title": "ProductsFlatService.cs",
+                  "Path": "Services\\ProductsFlatService.Data.cs"
                 }
               ]
             },
@@ -489,16 +558,8 @@
                   "Path": "Data\\Products\\ProductFlat.cs"
                 },
                 {
-                  "Title": "ProductCategory.cs",
-                  "Path": "Data\\Products\\ProductCategory.cs"
-                },
-                {
                   "Title": "ProductsFlatService.cs",
                   "Path": "Services\\ProductsFlatService.Data.cs"
-                },
-                {
-                  "Title": "ProductsFlatService.Editable.cs",
-                  "Path": "Services\\ProductsFlatService.Editable.cs"
                 },
                 {
                   "Title": "Startup.cs",
@@ -517,12 +578,24 @@
           "DocUrl": "Blazor/DevExpress.Blazor.DxDataGrid-1.DetailRowTemplate",
           "AdditionalCodeFiles": [
             {
-              "Title": "SalesViewerEntities.cs",
-              "Path": "Data\\SalesViewer\\SalesViewerEntities.cs"
+              "Title": "Customer.cs",
+              "Path": "Data\\Northwind\\Customer.cs"
             },
             {
-              "Title": "ISalesViewerDataProvider.cs",
-              "Path": "DataProviders\\ISalesViewerDataProvider.cs"
+              "Title": "Invoice.cs",
+              "Path": "Data\\Northwind\\Invoice.cs"
+            },
+            {
+              "Title": "NwindDataService.Invoices.cs",
+              "Path": "Services\\NwindDataService.Invoices.cs"
+            },
+            {
+              "Title": "NwindDataService.Customers.cs",
+              "Path": "Services\\NwindDataService.Customers.cs"
+            },
+            {
+              "Title": "Startup.cs",
+              "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
             }
           ]
         },
@@ -579,12 +652,24 @@
               "DocUrl": "DevExpress.Blazor.Base.DxDataGridColumnBase-1.ShowInColumnChooser",
               "AdditionalCodeFiles": [
                 {
-                  "Title": "ProductFlat.cs",
-                  "Path": "Data\\Products\\ProductFlat.cs"
+                  "Title": "Product.cs",
+                  "Path": "Data\\Northwind\\Product.cs"
                 },
                 {
-                  "Title": "IProductsFlatProvider.cs",
-                  "Path": "DataProviders\\IProductsFlatProvider.cs"
+                  "Title": "Category.cs",
+                  "Path": "Data\\Northwind\\Category.cs"
+                },
+                {
+                  "Title": "NwindDataService.Products.cs",
+                  "Path": "Services\\NwindDataService.Products.cs"
+                },
+                {
+                  "Title": "NwindDataService.Categories.cs",
+                  "Path": "Services\\NwindDataService.Categories.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
               ]
             }
@@ -615,7 +700,6 @@
           "Id": "Templates",
           "Url": "GridTemplate",
           "Title": "Templates",
-          "Icon": "images/GridTemplates.svg",
           "Keywords": "blazor, components, data grid, datagrid, grid, template, cell template, cell editor template, row preview template, preview sections, custom row appearance, custom cell appearance, custom content in rows, custom content in cells, devexpress, demo, sample, example",
           "Description": "DevExpress Blazor Data Grid supports templates that allow you to customize cell appearance, the edit form’s layout, and row preview sections.",
           "PageSections": [
@@ -692,6 +776,7 @@
     {
       "Id": "Grid",
       "Title": "Grid",
+      "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7",
       "IsPreview": true,
       "Pages": [
         {
@@ -747,7 +832,7 @@
                 },
                 {
                   "Title": "RentInfoDataService.cs",
-                  "Path": "Services\\RentInfoDataService.cs"
+                  "Path": "Services\\RentInfoDataService.AreaRentInfo.cs"
                 },
                 {
                   "Title": "Startup.cs",
@@ -1032,6 +1117,7 @@
     {
       "Id": "PivotGrid",
       "Title": "Pivot Grid",
+      "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7:a66317f9-3abf-4178-abfc-336c43eb98af",
       "Pages": [
         {
           "Id": "Overview",
@@ -1072,8 +1158,8 @@
               "Path": "Data\\ContosoRetail\\Sale.cs"
             },
             {
-              "Title": "IContosoRetailDataProvider.cs",
-              "Path": "DataProviders\\IContosoRetailDataProvider.cs"
+              "Title": "ContosoRetailDataService.cs",
+              "Path": "Services\\ContosoRetailDataService.Sales.cs"
             }
           ]
         },
@@ -1100,6 +1186,7 @@
     {
       "Id": "Charts",
       "Title": "Charts",
+      "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7:8fb17fad-dd05-420a-a384-018d8366adb4",
       "Pages": [
         {
           "Id": "Overview",
@@ -1348,16 +1435,12 @@
               "DocUrl": "DevExpress.Blazor.DxChartRangeBarSeries-3",
               "AdditionalCodeFiles": [
                 {
-                  "Title": "WeatherForecast.cs",
-                  "Path": "Data\\WeatherForecast.cs"
+                  "Title": "DetailedWeatherSummary.cs",
+                  "Path": "Data\\DetailedWeatherSummary.cs"
                 },
                 {
-                  "Title": "WeatherForecastService.cs",
-                  "Path": "Services\\WeatherForecastService.cs"
-                },
-                {
-                  "Title": "Startup.cs",
-                  "Path": "Pages\\CodeSnippets\\WeatherForecast.Startup.cs"
+                  "Title": "IWeatherSummaryDataProvider.cs",
+                  "Path": "DataProviders\\IWeatherSummaryDataProvider.cs"
                 }
               ]
             },
@@ -1367,16 +1450,12 @@
               "DocUrl": "DevExpress.Blazor.DxChartRangeAreaSeries-3",
               "AdditionalCodeFiles": [
                 {
-                  "Title": "WeatherForecast.cs",
-                  "Path": "Data\\WeatherForecast.cs"
+                  "Title": "DetailedWeatherSummary.cs",
+                  "Path": "Data\\DetailedWeatherSummary.cs"
                 },
                 {
-                  "Title": "WeatherForecastService.cs",
-                  "Path": "Services\\WeatherForecastService.cs"
-                },
-                {
-                  "Title": "Startup.cs",
-                  "Path": "Pages\\CodeSnippets\\WeatherForecast.Startup.cs"
+                  "Title": "IWeatherSummaryDataProvider.cs",
+                  "Path": "DataProviders\\IWeatherSummaryDataProvider.cs"
                 }
               ]
             }
@@ -1515,6 +1594,12 @@
               "Id": "Types",
               "Title": "Axis Types",
               "DocUrl": "DevExpress.Blazor.DxChartArgumentAxis.Type"
+            },
+            {
+              "Id": "ScaleBreaks",
+              "Title": "Scale Breaks",
+              "DocUrl": "DevExpress.Blazor.DxChartScaleBreaks",
+              "IsUpdated":  true
             }
           ]
         },
@@ -1554,25 +1639,6 @@
                   "Path": "DataProviders\\ISalesInfoDataProvider.cs"
                 }
               ]
-            },
-            {
-              "Id": "MultiplePanes",
-              "Title": "Multiple Panes Customization",
-              "DocUrl": "DevExpress.Blazor.DxChart-1#multiple-panes",
-              "AdditionalCodeFiles": [
-                {
-                  "Title": "WeatherForecast.cs",
-                  "Path": "Data\\WeatherForecast.cs"
-                },
-                {
-                  "Title": "WeatherForecastService.cs",
-                  "Path": "Services\\WeatherForecastService.cs"
-                },
-                {
-                  "Title": "Startup.cs",
-                  "Path": "Pages\\CodeSnippets\\WeatherForecast.Startup.cs"
-                }
-              ]
             }
           ]
         },
@@ -1589,16 +1655,12 @@
               "DocUrl": "DevExpress.Blazor.DxChartSeriesPoint",
               "AdditionalCodeFiles": [
                 {
-                  "Title": "WeatherForecast.cs",
-                  "Path": "Data\\WeatherForecast.cs"
+                  "Title": "DetailedWeatherSummary.cs",
+                  "Path": "Data\\DetailedWeatherSummary.cs"
                 },
                 {
-                  "Title": "WeatherForecastService.cs",
-                  "Path": "Services\\WeatherForecastService.cs"
-                },
-                {
-                  "Title": "Startup.cs",
-                  "Path": "Pages\\CodeSnippets\\WeatherForecast.Startup.cs"
+                  "Title": "IWeatherSummaryDataProvider.cs",
+                  "Path": "DataProviders\\IWeatherSummaryDataProvider.cs"
                 }
               ]
             },
@@ -1627,18 +1689,32 @@
               "DocUrl": "DevExpress.Blazor.DxChart-1#labels",
               "AdditionalCodeFiles": [
                 {
-                  "Title": "WeatherForecast.cs",
-                  "Path": "Data\\WeatherForecast.cs"
+                  "Title": "DetailedWeatherSummary.cs",
+                  "Path": "Data\\DetailedWeatherSummary.cs"
                 },
                 {
-                  "Title": "WeatherForecastService.cs",
-                  "Path": "Services\\WeatherForecastService.cs"
-                },
-                {
-                  "Title": "Startup.cs",
-                  "Path": "Pages\\CodeSnippets\\WeatherForecast.Startup.cs"
+                  "Title": "IWeatherSummaryDataProvider.cs",
+                  "Path": "DataProviders\\IWeatherSummaryDataProvider.cs"
                 }
               ]
+            }
+          ]
+        },
+        {
+          "Id": "MultiplePanes",
+          "Url": "MultiplePanes",
+          "Title": "Multiple Panes",
+          "RedirectFrom": [ "ChartCustomization#MultiplePanes" ],
+          "DocUrl": "DevExpress.Blazor.DxChart-1#multiple-panes",
+          "Keywords": "Blazor, components, chart, customization, multiple panes, devexpress, demo, sample, example",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "DetailedWeatherSummary.cs",
+              "Path": "Data\\DetailedWeatherSummary.cs"
+            },
+            {
+              "Title": "IWeatherSummaryDataProvider.cs",
+              "Path": "DataProviders\\IWeatherSummaryDataProvider.cs"
             }
           ]
         }
@@ -1647,6 +1723,7 @@
     {
       "Id": "Reports",
       "Title": "Reports",
+      "AnalyticsId": "f9b92ec7-7007-49c0-99fc-5a2a8df485f1:a115bea8-1dd8-49c6-95fd-a4ff848d95fe",
       "IsUpdated": true,
       "IsServerSideOnly": true,
       "Pages": [
@@ -1677,6 +1754,7 @@
     {
       "Id": "Scheduler",
       "Title": "Scheduler",
+      "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7:b2a5ae6f-023a-4cfc-a280-26d4b801eea8",
       "IsUpdated": true,
       "Pages": [
         {
@@ -1955,6 +2033,7 @@
     {
       "Id": "RichEdit",
       "Title": "Rich Text Editor",
+      "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7",
       "IsServerSideOnly": true,
       "IsPreview": true,
       "Pages": [
@@ -1984,6 +2063,7 @@
     {
       "Id": "Editors",
       "Title": "Data Editors",
+      "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7:d2def247-370a-4a20-9edd-78715fd9963b",
       "Pages": [
         {
           "Id": "Overview",
@@ -2055,9 +2135,16 @@
               "DocUrl": "DevExpress.Blazor.DxCheckBox-1#content-position"
             },
             {
-              "Id": "AllowIndeterminate",
-              "Title": "Allow Users to Set Indeterminate State",
-              "DocUrl": "DevExpress.Blazor.DxCheckBox-1#indeterminate-state"
+              "Id": "CustomizeLayout",
+              "Title": "Customize Layout",
+              "DocUrl": "DevExpress.Blazor.DxCheckBox-1#custom-appearance",
+              "RedirectFrom": [ "CheckBox#AllowIndeterminate" ],
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Editors\\CheckBox\\Editors-CheckBox-CustomizeLayout.razor.css"
+                }
+              ]
             },
             {
               "Id": "BindToEnum",
@@ -2222,6 +2309,18 @@
               "DocUrl": "DevExpress.Blazor.DxComboBox-2#cascading-comboboxes",
               "AdditionalCodeFiles": [
                 {
+                  "Title": "Supplier.cs",
+                  "Path": "Data\\Northwind\\Supplier.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Suppliers.cs"
+                },
+                {
+                  "Title": "Nwind.Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
                   "Title": "Country.cs",
                   "Path": "Data\\Worldcities\\Country.cs"
                 },
@@ -2230,15 +2329,11 @@
                   "Path": "Data\\Worldcities\\City.cs"
                 },
                 {
-                  "Title": "WorldcitiesDataService.Countries.cs",
+                  "Title": "WorldcitiesDataService.cs",
                   "Path": "Services\\WorldcitiesDataService.Countries.cs"
                 },
                 {
-                  "Title": "WorldcitiesDataService.Cities.cs",
-                  "Path": "Services\\WorldcitiesDataService.Cities.cs"
-                },
-                {
-                  "Title": "Startup.cs",
+                  "Title": "Worldcities.Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Worldcities.Startup.cs"
                 }
               ]
@@ -2295,7 +2390,7 @@
               "Id": "Mask",
               "Title": "Mask",
               "IsNew": true,
-              "DocUrl": "DevExpress.Blazor.DxDateEdit-1"
+              "DocUrl": "402515/data-editors/masked-input/date-time-masks"
             },
             {
               "Id": "MinMaxDate",
@@ -2454,47 +2549,48 @@
             {
               "Id": "Overview",
               "Title": "Overview",
-              "DocUrl": "DevExpress.Blazor.DxMaskedInput"
+              "DocUrl": "DevExpress.Blazor.DxMaskedInput-1"
             },
             {
               "Id": "TextMasks",
               "Title": "Text Masks",
-              "DocUrl": "DevExpress.Blazor.DxMaskedInput"
+              "DocUrl": "402516/data-editors/masks/text-masks"
             },
             {
               "Id": "NumericMasks",
               "Title": "Numeric Masks",
-              "DocUrl": "DevExpress.Blazor.DxMaskedInput"
+              "DocUrl": "402514/data-editors/masks/numeric-masks"
             },
             {
               "Id": "DateTimeMasks",
               "Title": "Date-Time Masks",
-              "DocUrl": "DevExpress.Blazor.DxMaskedInput"
+              "DocUrl": "402515/data-editors/masks/date-time-masks"
             },
             {
-              "Id": "RegExMask",
+              "Id": "RegExMasks",
               "Title": "Regular Expression Masks",
-              "DocUrl": "DevExpress.Blazor.DxMaskedInput"
+              "DocUrl": "402517/data-editors/masks/regular-expression-masks",
+              "RedirectFrom": [ "MaskedInput#RegExMask" ]
             },
             {
               "Id": "OnInputBinding",
               "Title": "Bind Value On Input Change",
-              "DocUrl": "DevExpress.Blazor.Base.DxTextEditorBase.BindValueMode"
+              "DocUrl": "DevExpress.Blazor.DxMaskedInput-1.BindValueMode"
             },
             {
               "Id": "ClearButton",
               "Title": "Clear Button And Placeholder",
-              "DocUrl": "DevExpress.Blazor.DxMaskedInput"
+              "DocUrl": "DevExpress.Blazor.DxMaskedInput-1.ClearButtonDisplayMode"
             },
             {
               "Id": "DisplayFormat",
               "Title": "Display Format",
-              "DocUrl": "DevExpress.Blazor.DxMaskedInput"
+              "DocUrl": "DevExpress.Blazor.DxMaskedInput-1.DisplayFormat"
             },
             {
               "Id": "ReadOnly",
               "Title": "Read-Only and Disabled Modes",
-              "DocUrl": "DevExpress.Blazor.DxMaskedInput"
+              "DocUrl": "DevExpress.Blazor.DxMaskedInput-1.ReadOnly"
             }
           ]
         },
@@ -2568,7 +2664,7 @@
               "Id": "Mask",
               "Title": "Mask",
               "IsNew": true,
-              "DocUrl": "DevExpress.Blazor..DxSpinEdit-1"
+              "DocUrl": "402514/data-editors/masks/numeric-masks"
             },
             {
               "Id": "ReadOnly",
@@ -2836,7 +2932,7 @@
               "Id": "Mask",
               "Title": "Mask",
               "IsNew": true,
-              "DocUrl": "DevExpress.Blazor.DxTimeEdit-1"
+              "DocUrl": "402515/data-editors/masks/date-time-masks"
             },
             {
               "Id": "MinMaxTime",
@@ -2854,7 +2950,6 @@
           "Id": "Validation",
           "Url": "FormValidation",
           "Title": "Validate Input",
-          "Icon": "images/GridColumnType.svg",
           "Keywords": "blazor, components, form, form validation, data validation, devexpress, demo, sample, example",
           "Description": "The DevExpress UI components for Blazor support the built-in form validation. You can validate DevExpress Blazor data editors, Form Layout, or  your custom edit form.",
           "PageSections": [
@@ -2879,6 +2974,7 @@
     {
       "Id": "Buttons",
       "Title": "Buttons",
+      "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7:d2def247-370a-4a20-9edd-78715fd9963b",
       "Pages": [
         {
           "Id": "Button",
@@ -2921,6 +3017,7 @@
     {
       "Id": "Navigation",
       "Title": "Navigation and Layout",
+      "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7:e33ea808-c07a-42c7-9850-a34380eb5133",
       "Pages": [
         {
           "Id": "Overview",
@@ -2944,7 +3041,8 @@
             },
             {
               "Id": "DataBinding",
-              "Title": "Bind to Hierarchical Data",
+              "Title": "Data Binding",
+              "IsUpdated": true,
               "DocUrl": "DevExpress.Blazor.DxContextMenu#bound-mode",
               "AdditionalCodeFiles": [
                 {
@@ -2952,8 +3050,8 @@
                   "Path": "Data\\TextFormatting.cs"
                 },
                 {
-                  "Title": "TextFormattingMenuItems.cs",
-                  "Path": "Data\\TextFormattingMenuItems.cs"
+                  "Title": "TextFormattingMenuData.cs",
+                  "Path": "Data\\TextFormattingMenuData.cs"
                 }
               ]
             }
@@ -3104,6 +3202,30 @@
               ]
             },
             {
+              "Id": "DataBinding",
+              "Title": "Data Binding",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DxMenu#data-binding",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Navigation\\Menu\\Navigation-Menu-DataBinding.razor.css"
+                },
+                {
+                  "Title": "TextFormatting.cs",
+                  "Path": "Data\\TextFormatting.cs"
+                },
+                {
+                  "Title": "TextFormattingMenuItems.cs",
+                  "Path": "Data\\TextFormattingMenuItems.cs"
+                },
+                {
+                  "Title": "TextFormattingMenuData.cs",
+                  "Path": "Data\\TextFormattingMenuData.cs"
+                }
+              ]
+            },
+            {
               "Id": "Adaptivity",
               "Title": "Adaptivity",
               "DocUrl": "DevExpress.Blazor.DxMenu#adaptivity",
@@ -3199,7 +3321,7 @@
               "Id": "Alignment",
               "Title": "Alignment and Size",
               "DocUrl": "DevExpress.Blazor.DxPopup#alignment",
-              "IsNew":  true
+              "IsNew": true
             },
             {
               "Id": "Events",
@@ -3386,36 +3508,25 @@
             },
             {
               "Id": "HierarchicalDataBinding",
-              "Title": "Bind to Hierarchical Data",
-              "DocUrl": "DevExpress.Blazor.DxTreeView#bind-to-data",
+              "Title": "Binding to Hierarchical Data",
+              "IsUpdated": true,
+              "DocUrl": "DevExpress.Blazor.DxTreeView#data-binding",
               "AdditionalCodeFiles": [
                 {
                   "Title": "ChemicalElements.cs",
-                  "Path": "Data\\ChemicalElements\\DataSource.cs"
-                },
-                {
-                  "Title": "ChemicalElementGroup.cs",
-                  "Path": "Data\\ChemicalElements\\ChemicalElementGroup.cs"
+                  "Path": "Data\\ChemicalElements\\ChemicalElements.cs"
                 }
               ]
-
             },
             {
               "Id": "MasterDetailDataBinding",
-              "Title": "Bind to Master-Detail Data",
-              "DocUrl": "DevExpress.Blazor.DxTreeView#bind-to-data",
+              "Title": "Binding to Flat Data",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DxTreeView#data-binding",
               "AdditionalCodeFiles": [
                 {
-                  "Title": "ProductFlat.cs",
-                  "Path": "Data\\Products\\ProductFlat.cs"
-                },
-                {
-                  "Title": "ProductCategory.cs",
-                  "Path": "Data\\Products\\ProductCategory.cs"
-                },
-                {
-                  "Title": "ProductsFlatService.cs",
-                  "Path": "Services\\ProductsFlatService.Data.cs"
+                  "Title": "FlatDataItem.cs",
+                  "Path": "Data\\FlatDataItem.cs"
                 },
                 {
                   "Title": "Startup.cs",
@@ -3426,6 +3537,7 @@
             {
               "Id": "LoadChildNodesOnDemand",
               "Title": "Load Child Nodes on Demand Mode",
+              "IsUpdated": true,
               "DocUrl": "DevExpress.Blazor.DxTreeView#load-child-nodes-on-demand",
               "AdditionalCodeFiles": [
                 {
@@ -3460,6 +3572,7 @@
     {
       "Id": "FileManagement",
       "Title": "File Management",
+      "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7:900fa932-f4a8-42cc-81d4-386edae78ebd",
       "Pages": [
         {
           "Id": "Upload",
@@ -3476,6 +3589,10 @@
                 {
                   "Title": "UploadController.cs",
                   "Path": "Controllers\\UploadController.cs"
+                },
+                {
+                  "Title": "UploadController.Common.cs",
+                  "Path": "Controllers\\UploadController.Common.cs"
                 }
               ]
             },
@@ -3502,6 +3619,10 @@
                 {
                   "Title": "UploadController.cs",
                   "Path": "Controllers\\UploadController.cs"
+                },
+                {
+                  "Title": "UploadController.Common.cs",
+                  "Path": "Controllers\\UploadController.Common.cs"
                 }
               ]
             },
@@ -3513,6 +3634,10 @@
                 {
                   "Title": "UploadController.cs",
                   "Path": "Controllers\\UploadController.cs"
+                },
+                {
+                  "Title": "UploadController.Common.cs",
+                  "Path": "Controllers\\UploadController.Common.cs"
                 }
               ]
             },

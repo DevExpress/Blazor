@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BlazorDemo.Data {
     abstract class TextFormattingMenuItem {
@@ -8,14 +9,17 @@ namespace BlazorDemo.Data {
         }
 
         public TextFormatting TextFormatting { get; }
-        public string Text { get; }
+        public virtual string Text { get; }
         public virtual string IconUrl { get { return null; } }
-        public virtual bool Checked { get; protected set; }
+        public virtual bool Checked { get; }
+        public virtual bool HasValue { get { return Checked; } }
         public List<TextFormattingMenuItem> Children { get; set; }
         public bool BeginGroup { get; set; }
         public string IconCss { get; set; }
+        public string CssClass { get { return Checked ? "checked-item" : ""; } }
         public bool SplitMenuButton { get; set; }
         public string Category { get; set; }
+        public string Tooltip { get; set; }
         public virtual void Click() { }
     }
 
@@ -25,14 +29,26 @@ namespace BlazorDemo.Data {
             Children = children;
         }
     }
+    class FontFormattingParentMenuItem : TextFormattingParentMenuItem {
+        public FontFormattingParentMenuItem(TextFormatting textFormatting, string text, List<TextFormattingMenuItem> children)
+            : base(textFormatting, text, children) {
+        }
+        public override string Text {
+            get {
+                var child = Children.FirstOrDefault(c => c.HasValue && c.Checked);
+                return string.IsNullOrWhiteSpace(child?.Text) ? base.Text : child.Text;
+            }
+        }
+    }
 
     class FontFamilyMenuItem : TextFormattingMenuItem {
         public FontFamilyMenuItem(TextFormatting textFormatting, string text, string fontFamily)
             : base(textFormatting, text) {
             FontFamily = fontFamily;
         }
-
+        public override bool Checked { get => TextFormatting.FontFamily == FontFamily; }
         string FontFamily { get; }
+        public override bool HasValue => !string.IsNullOrWhiteSpace(FontFamily);
         public override void Click() {
             TextFormatting.FontFamily = FontFamily;
         }
@@ -43,7 +59,8 @@ namespace BlazorDemo.Data {
             : base(textFormatting, text) {
             FontSize = fontSize;
         }
-
+        public override bool Checked { get => TextFormatting.FontSize == FontSize; }
+        public override bool HasValue => true;
         int FontSize { get; }
         public override void Click() {
             TextFormatting.FontSize = FontSize;
@@ -59,13 +76,12 @@ namespace BlazorDemo.Data {
         string AttributeName { get; }
         public override bool Checked {
             get { return TextFormatting.Decoration[AttributeName]; }
-            protected set { TextFormatting.Decoration[AttributeName] = value; }
         }
 
         public override string IconUrl { get { return Checked ? StaticAssetUtils.GetImagePath("check.svg") : null; } }
 
         public override void Click() {
-            Checked = !Checked;
+            TextFormatting.Decoration[AttributeName] = !Checked;
         }
     }
 

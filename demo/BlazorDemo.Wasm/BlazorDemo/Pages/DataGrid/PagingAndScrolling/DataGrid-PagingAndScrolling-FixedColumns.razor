@@ -1,18 +1,17 @@
 ﻿<DemoPageSectionComponent Id="DataGrid-PagingAndScrolling-FixedColumns">
-    @inject IProductsFlatProvider ProductsFlatService
+    @inject ProductsFlatService ProductsFlatService
 
     @if(DataSource == null) {
         <p><em>Loading...</em></p>
     } else {
         <DxDataGrid Data="@DataSource"
-                    HorizontalScrollBarMode="ScrollBarMode.Visible"
-                    PagerNavigationMode="PagerNavigationMode.NumericButtons"
-                    RowRemovingAsync="@OnRowRemoving"
-                    RowUpdatingAsync="@OnRowUpdating">
-
-            <DxDataGridCommandColumn NewButtonVisible="false" Width="120px" FixedStyle="DataGridFixedStyle.Left" />
-            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name"  FixedStyle="DataGridFixedStyle.Left" Width="300px" />
-            <DxDataGridCheckBoxColumn Field="@nameof(ProductFlat.Availability)" Caption="Availability" Width="120px"  FixedStyle="DataGridFixedStyle.Left">
+                    HorizontalScrollBarMode="ScrollBarMode.Visible">
+            <DxDataGridColumn Field="@nameof(ProductFlat.Id)" Caption="ID" Width="100px" FixedStyle="DataGridFixedStyle.Left" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name" Width="450px" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.Category)" Caption="Category" Width="250px" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)" Caption="Subcategory" Width="250px" />
+            <DxDataGridDateEditColumn Field="@nameof(ProductFlat.LastUpdated)" Caption="Last Updated" Width="200px" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.Availability)" Caption="Availability" Width="150px" FixedStyle="DataGridFixedStyle.Right">
                 <DisplayTemplate>
                     @{
                         var id = Guid.NewGuid().ToString();
@@ -26,12 +25,7 @@
                         </DxCheckBox>
                     }
                 </DisplayTemplate>
-            </DxDataGridCheckBoxColumn>
-
-            <DxDataGridColumn Field="@nameof(ProductFlat.Category)" Caption="Category" Width="250px" />
-            <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)" Caption="Subcategory" Width="250px" />
-            <DxDataGridDateEditColumn Field="@nameof(ProductFlat.LastUpdated)" Caption="Last Updated" Width="250px" />
-
+            </DxDataGridColumn>
         </DxDataGrid>
     }
 
@@ -39,13 +33,7 @@
         IEnumerable<ProductFlat> DataSource;
 
         protected override async Task OnInitializedAsync() {
-            DataSource = await ProductsFlatService.LoadAsync();
-        }
-        Task OnRowRemoving(ProductFlat dataItem) {
-            return ProductsFlatService.Remove(dataItem);
-        }
-        Task OnRowUpdating(ProductFlat dataItem, IDictionary<string, object> newValue) {
-            return ProductsFlatService.Update(dataItem, newValue);
+            DataSource = await ProductsFlatService.GetProductsAsync();
         }
     }
 </DemoPageSectionComponent>

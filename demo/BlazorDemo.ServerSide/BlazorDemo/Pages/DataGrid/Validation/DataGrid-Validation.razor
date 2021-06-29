@@ -1,58 +1,74 @@
 ﻿@page "/GridEditFormTemplateValidation"
+@layout DataProviderAccessArea<INwindDataProvider>
 
 <DemoPageSectionComponent Id="DataGrid-Validation" ShowHorizontalScrollBar="true">
-    @if(Vacancies == null) {
+    @inject NwindDataService NwindDataService
+
+    @if(Data == null) {
         <p><em>Loading...</em></p>
     } else {
         <DxDataGrid @ref="@grid"
-                    Data="@Vacancies"
+                    Data="@Data"
                     ShowPager="false"
-                    RowRemoving="@((dataItem) => OnRowRemoving(dataItem))"
+                    RowRemovingAsync="@OnRowRemovingAsync"
                     RowEditStart="@(dataItem => OnRowEditStarting(dataItem))"
                     RowInsertStart="@(() => OnRowEditStarting(null))">
             <Columns>
                 <DxDataGridCommandColumn Width="150px" />
-                <DxDataGridColumn Field="@nameof(Vacancy.Description)" Caption="Vacancy" />
-                <DxDataGridComboBoxColumn Field="@nameof(Vacancy.Region)" Data="@VacancyRepository.Regions" />
-                <DxDataGridColumn Field="@nameof(Vacancy.City)" />
+                <DxDataGridColumn Field="@nameof(Employee.FirstName)" />
+                <DxDataGridColumn Field="@nameof(Employee.LastName)" />
+                <DxDataGridColumn Field="@nameof(Employee.Title)" />
+                <DxDataGridColumn Field="@nameof(Employee.TitleOfCourtesy)" Width="150px" />
+                <DxDataGridDateEditColumn Field="@nameof(Employee.BirthDate)" Width="150px" />
+                <DxDataGridDateEditColumn Field="@nameof(Employee.HireDate)" Width="150px" />
             </Columns>
             <EditFormTemplate>
                 <EditForm Model="@EditContext" Context="EditFormContext" OnValidSubmit="@HandleValidSubmit">
                     <DataAnnotationsValidator />
                     <DxFormLayout>
-                        <DxFormLayoutItem Caption="Vacancy Description:" ColSpanMd="12" Context="FormLayoutContext">
+                        <DxFormLayoutItem Caption="First Name:" ColSpanMd="6" Context="FormLayoutContext">
                             <Template>
-                                <DxTextBox @bind-Text="@EditContext.Description" />
+                                <DxTextBox @bind-Text="@EditContext.FirstName" />
                             </Template>
                         </DxFormLayoutItem>
-                        <DxFormLayoutItem Caption="Region:" ColSpanMd="6" Context="FormLayoutContext">
+                        <DxFormLayoutItem Caption="Last Name:" ColSpanMd="6" Context="FormLayoutContext">
                             <Template>
-                                <DxComboBox Data="@VacancyRepository.Regions"
-                                            NullText="Select Region..."
-                                            @bind-Value="@EditContext.Region">
-                                </DxComboBox>
+                                <DxTextBox @bind-Text="@EditContext.LastName" />
                             </Template>
                         </DxFormLayoutItem>
-                        <DxFormLayoutItem Caption="City:" ColSpanMd="6" Context="FormLayoutContext">
+                        <DxFormLayoutItem Caption="Title:" ColSpanMd="6" Context="FormLayoutContext">
                             <Template>
-                                <DxComboBox Data="@EditContext.OfficeLocations"
-                                            NullText="Select City..."
-                                            @bind-Value="@EditContext.City">
-                                </DxComboBox>
+                                <DxTextBox @bind-Text="@EditContext.Title" />
+                            </Template>
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Title of Courtesy:" ColSpanMd="6" Context="FormLayoutContext">
+                            <Template>
+                                <DxTextBox @bind-Text="@EditContext.TitleOfCourtesy" />
+                            </Template>
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Birth Date:" ColSpanMd="6" Context="FormLayoutContext">
+                            <Template>
+                                <DxDateEdit @bind-Date="@EditContext.BirthDate" />
+                            </Template>
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Hire Date:" ColSpanMd="6" Context="FormLayoutContext">
+                            <Template>
+                                <DxDateEdit @bind-Date="@EditContext.HireDate" />
+                            </Template>
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Notes:" ColSpanMd="12" Context="FormLayoutContext">
+                            <Template>
+                                <DxMemo @bind-Text="@EditContext.Notes" Rows="5" />
                             </Template>
                         </DxFormLayoutItem>
                         <DxFormLayoutItem ColSpanMd="12" Context="FormLayoutContext">
-                            <Template>
                                 <ValidationSummary />
-                            </Template>
                         </DxFormLayoutItem>
                         <DxFormLayoutItem ColSpanMd="12" Context="FormLayoutContext">
-                            <Template>
                                 <div class="text-right">
-                                    <DxButton RenderStyle="ButtonRenderStyle.Link" SubmitFormOnClick="true" Text="Update" />
+                                    <DxButton RenderStyle="ButtonRenderStyle.Primary" SubmitFormOnClick="true" Text="Update" />
                                     <DxButton RenderStyle="ButtonRenderStyle.Link" Click="OnCancelButtonClick" Text="Cancel" />
                                 </div>
-                            </Template>
                         </DxFormLayoutItem>
                     </DxFormLayout>
                 </EditForm>
@@ -61,56 +77,63 @@
     }
 
     @code {
-        DxDataGrid<Vacancy> grid;
-        IEnumerable<Vacancy> Vacancies;
+        DxDataGrid<Employee> grid;
+        IEnumerable<Employee> Data { get; set; }
 
         protected override async Task OnInitializedAsync() {
-            Vacancies = await VacancyRepository.GetVacancies(3);
+            Data = await NwindDataService.GetEmployeesEditableAsync();
+        }
+        protected override async Task OnAfterRenderAsync(bool firstRender) {
+            if(firstRender) {
+                await grid.StartRowEdit(null);
+            }
         }
 
         class FormEditContext {
-            public FormEditContext(Vacancy dataItem) {
+            public FormEditContext(Employee dataItem) {
                 DataItem = dataItem;
                 if(DataItem == null) {
-                    DataItem = new Vacancy();
+                    DataItem = new Employee();
                     IsNewRow = true;
                 }
-                Description = DataItem.Description;
-                Region = DataItem.Region;
-                City = DataItem.City;
+                FirstName = DataItem.FirstName;
+                LastName = DataItem.LastName;
+                Title = DataItem.Title;
+                TitleOfCourtesy = DataItem.TitleOfCourtesy;
+                BirthDate = DataItem.BirthDate;
+                HireDate = DataItem.HireDate;
+                Notes = DataItem.Notes;
             }
 
-            public Vacancy DataItem { get; set; }
+            public Employee DataItem { get; set; }
             public bool IsNewRow { get; set; }
 
             [Required]
-            [StringLength(maximumLength: 32, MinimumLength = 4,
-            ErrorMessage = "The description should be 4 to 32 characters.")]
-            public string Description { get; set; }
-
-            string region;
+            public string FirstName { get; set; }
             [Required]
-            public string Region {
-                get => region;
-                set {
-                    region = value;
-                    City = null;
-                    OfficeLocations = VacancyRepository.GetOfficeLocationsByRegion(value).Select(x => x.City);
-                    StateHasChanged?.Invoke();
-                }
-            }
-
+            public string LastName { get; set; }
             [Required]
-            public string City { get; set; }
-
-            public IEnumerable<string> OfficeLocations = null;
+            public string Title { get; set; }
+            public string TitleOfCourtesy { get; set; }
+            [Required]
+            [Range(typeof(DateTime), "1/1/1970", "1/1/2020",
+            ErrorMessage = "BirthDate must be between {1:d} and {2:d}")]
+            public DateTime? BirthDate { get; set; }
+            [Required]
+            [Range(typeof(DateTime), "1/1/2000", "1/1/2020",
+            ErrorMessage = "HireDate must be between {1:d} and {2:d}")]
+            public DateTime? HireDate { get; set; }
+            [Required]
+            [StringLength(maximumLength: 256, MinimumLength = 4,
+            ErrorMessage = "The Notes should be 4 to 256 characters.")]
+            public string Notes { get; set; }
 
             public Action StateHasChanged { get; set; }
         }
 
         FormEditContext EditContext = null;
-        void OnRowEditStarting(Vacancy vacancy) {
-            EditContext = new FormEditContext(vacancy);
+        void OnRowEditStarting(Employee employee) {
+            EditContext = new FormEditContext(employee);
             EditContext.StateHasChanged += () => { InvokeAsync(StateHasChanged); };
         }
         async Task OnCancelButtonClick() {
@@ -118,20 +141,28 @@
             EditContext = null;
         }
         async Task HandleValidSubmit() {
-            EditContext.DataItem.Description = EditContext.Description;
-            EditContext.DataItem.Region = EditContext.Region;
-            EditContext.DataItem.City = EditContext.City;
+            EditContext.DataItem.FirstName = EditContext.FirstName;
+            EditContext.DataItem.LastName = EditContext.LastName;
+            EditContext.DataItem.Title = EditContext.Title;
+            EditContext.DataItem.TitleOfCourtesy = EditContext.TitleOfCourtesy;
+            EditContext.DataItem.BirthDate = EditContext.BirthDate;
+            EditContext.DataItem.HireDate = EditContext.HireDate;
+            EditContext.DataItem.Notes = EditContext.Notes;
+
             if(EditContext.IsNewRow) {
-                Vacancies = (new Vacancy[] { EditContext.DataItem }).Concat(Vacancies);
+                await NwindDataService.InsertEmployeeAsync(EditContext.DataItem);
+            } else {
+                await NwindDataService.UpdateEmployeeAsync(EditContext.DataItem, new Dictionary<string, object>());
             }
 
             await grid.CancelRowEdit();
-            await grid.Refresh();
+            Data = await NwindDataService.GetEmployeesEditableAsync();
+            StateHasChanged();
         }
-
-        void OnRowRemoving(Vacancy vacancy) {
-            Vacancies = Vacancies.Where(v => v != vacancy).ToArray();
-            InvokeAsync(StateHasChanged);
+        async Task OnRowRemovingAsync(Employee dataItem) {
+            await NwindDataService.RemoveEmployeeAsync(dataItem);
+            Data = await NwindDataService.GetEmployeesEditableAsync();
+            StateHasChanged();
         }
     }
 </DemoPageSectionComponent>

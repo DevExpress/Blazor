@@ -6,57 +6,42 @@
                       CssClass="w-100">
             <DxFormLayoutGroup Caption="Personal Information" ColSpanMd="6">
                 <DxFormLayoutItem Caption="First Name:" ColSpanMd="12">
-                    <Template>
-                        <DxTextBox @bind-Text="@FirstName" />
-                    </Template>
+                    <DxTextBox @bind-Text="@FirstName" />
                 </DxFormLayoutItem>
-
                 <DxFormLayoutItem Caption="Last Name:" ColSpanMd="12">
-                    <Template>
-                        <DxTextBox @bind-Text="@LastName" />
-                    </Template>
+                    <DxTextBox @bind-Text="@LastName" />
                 </DxFormLayoutItem>
-
                 <DxFormLayoutItem Caption="Birth Date:" ColSpanMd="12">
-                    <Template>
-                        <DxDateEdit @bind-Date="@BirthDate" />
-                    </Template>
+                    <DxDateEdit @bind-Date="@BirthDate" />
                 </DxFormLayoutItem>
             </DxFormLayoutGroup>
-
             <DxFormLayoutGroup Caption="Work Information" ColSpanMd="6">
                 <DxFormLayoutItem Caption="Position:" ColSpanMd="12">
-                    <Template>
-                        <DxTextBox @bind-Text="@Position" />
-                    </Template>
+                    <DxTextBox @bind-Text="@Position" />
                 </DxFormLayoutItem>
-
                 <DxFormLayoutItem Caption="Hire Date:" ColSpanMd="12">
-                    <Template>
-                        <DxDateEdit @bind-Date="@HireDate"/>
-                    </Template>
+                    <DxDateEdit @bind-Date="@HireDate" />
                 </DxFormLayoutItem>
-
                 <DxFormLayoutItem Caption="Notes:" ColSpanMd="12">
-                    <Template>
-                        <DxTextBox @bind-Text="@Notes" />
-                    </Template>
+                    <DxTextBox @bind-Text="@Notes" />
                 </DxFormLayoutItem>
             </DxFormLayoutGroup>
-
         </DxFormLayout>
 
-        <p class="demo-text w-100 mt-2 text-center text-muted">
-            @nameof(FirstName)=<b>@FirstName</b>,
-            @nameof(LastName)=<b>@LastName</b>,
-            @nameof(BirthDate)=<b>@BirthDate</b>
-        </p>
-
-        <p class="demo-text w-100 mt-2 text-center text-muted">
-            @nameof(Position)=<b>@Position</b>,
-            @nameof(HireDate)=<b>@HireDate</b>,
-            @nameof(Notes)=<b>@Notes</b>
-        </p>
+        <div class="row w-100 mx-0">
+            <p class="demo-text col-12 mt-2 text-muted">
+                @nameof(FirstName)=<b>@FirstName</b>,
+                @nameof(LastName)=<b>@LastName</b>,
+                @nameof(BirthDate)=<b>@BirthDate</b>
+            </p>
+        </div>
+        <div class="row w-100 mx-0">
+            <p class="demo-text col-12 mt-2 text-muted">
+                @nameof(Position)=<b>@Position</b>,
+                @nameof(HireDate)=<b>@HireDate</b>,
+                @nameof(Notes)=<b>@Notes</b>
+            </p>
+        </div>
     </ChildContentWithParameters>
 
     @code {

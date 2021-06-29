@@ -27,7 +27,7 @@
 
         protected override void OnInitialized() {
             var uri = NavigationManager.ToAbsoluteUri("api/nwind/getproducts");
-            Data = new GridDevExtremeDataSource<BlazorDemo.Data.Northwind.Product>(HttpClient, uri);
+            Data = new GridDevExtremeDataSource<Product>(HttpClient, uri);
         }
     }
 </DemoPageSectionComponent>

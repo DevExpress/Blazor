@@ -1,33 +1,47 @@
 ﻿<DemoPageSectionComponent Id="Charts-RangeSeries-Bar">
     <ChildContentWithParameters Context="Params">
-        @inject WeatherForecastService ForecastService
+        @inject IWeatherSummaryDataProvider WeatherSummaryDataProvider
 
         <DxChart Data="@WeatherForecasts"
                  @key="Params.ThemeName"
                  CssClass="w-100">
-
-            <DxChartRangeBarSeries ValueField="@((WeatherForecast i) => i.TemperatureF)"
-                                   ArgumentField="@(i => i.Date.Date)"
-                                   Name="Temperature, F" />
+            <DxChartTitle Text="Annual Temperature" />
+            <DxChartRangeBarSeries ValueField="@((DetailedWeatherSummary  i) => i.AverageTemperatureF)"
+                                   ArgumentField="@(i => new DateTime(2000, i.Date.Month, 1))"
+                                   Name="New York"
+                                   Filter="@((DetailedWeatherSummary  i) => i.City == "NEW YORK")" />
+            <DxChartRangeBarSeries ValueField="@((DetailedWeatherSummary  i) => i.AverageTemperatureF)"
+                                   ArgumentField="@(i => new DateTime(2000, i.Date.Month, 1))"
+                                   Name="Los Angeles"
+                                   Filter="@((DetailedWeatherSummary  i) => i.City == "LOS ANGELES")" />
 
             <DxChartTooltip Enabled="true">
                 @context.GetRangePoint().Render((rangePoint) =>
                     @<div style="margin: 0.75rem">
-                        <div>Max: @rangePoint.EndValue</div>
-                        <div>Min: @rangePoint.StartValue</div>
+                        <div>Max: @rangePoint.EndValue °F</div>
+                        <div>Min: @rangePoint.StartValue °F</div>
                     </div>
-            )
+                )
             </DxChartTooltip>
-
+            <DxChartLegend HorizontalAlignment="HorizontalAlignment.Center"
+                           VerticalAlignment="VerticalEdge.Bottom"
+                           Position="RelativePosition.Outside" />
+            <DxChartValueAxis>
+                <DxChartAxisTitle Text="Temperature, °F" />
+            </DxChartValueAxis>
+            <DxChartArgumentAxis>
+                <DxChartAxisLabel Format="ChartElementFormat.Month" />
+            </DxChartArgumentAxis>
         </DxChart>
     </ChildContentWithParameters>
 
 
     @code {
-        WeatherForecast[] WeatherForecasts;
+        IEnumerable<DetailedWeatherSummary> WeatherForecasts;
 
-        protected override async Task OnInitializedAsync() {
-            WeatherForecasts = await ForecastService.GetDetailedForecastAsync();
+        protected override async Task OnInitializedAsync()
+        {
+            WeatherForecasts = await WeatherSummaryDataProvider.GetDataAsync();
         }
     }
 </DemoPageSectionComponent>

@@ -1,7 +1,7 @@
 ﻿@page "/GridFilterRow"
+@layout DataProviderAccessArea<IWorldcitiesDataProvider, INwindDataProvider>
 
 <DemoPageSectionComponent Id="DataGrid-Filtering" ShowHorizontalScrollBar="true">
-    @layout DataProviderAccessArea<IWorldcitiesDataProvider, INwindDataProvider>
     @inject NwindDataService NwindDataService
     @inject WorldcitiesDataService WorldcitiesDataService
 

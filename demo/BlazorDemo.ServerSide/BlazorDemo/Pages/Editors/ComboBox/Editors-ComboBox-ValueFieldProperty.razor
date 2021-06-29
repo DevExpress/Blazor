@@ -15,11 +15,11 @@
 
     @code {
         IEnumerable<Employee> Data { get; set; }
-        int Value { get; set; }
+        int? Value { get; set; }
 
         protected override async Task OnInitializedAsync() {
             Data = await NwindDataService.GetEmployeesAsync();
-            Value = Data.FirstOrDefault().EmployeeId;
+            Value = Data.FirstOrDefault()?.EmployeeId;
         }
     }
 </DemoPageSectionComponent>

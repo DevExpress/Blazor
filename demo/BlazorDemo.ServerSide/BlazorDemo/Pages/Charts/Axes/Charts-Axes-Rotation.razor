@@ -1,29 +1,28 @@
 ﻿<DemoPageSectionComponent Id="Charts-Axes-Rotation">
     <ChildContentWithParameters Context="Params">
         <div class="d-flex flex-wrap justify-content-center">
-            <div class="cw-400">
-                <DxChart Data="@GetData()"
-                         @key="@Params.ThemeName">
-                    <DxChartTitle Text="@($"The loudness of sounds (no changes)")" />
-                    <DxChartLegend Visible="false" />
-                    <DxChartArgumentAxis Type="ChartAxisType.Discrete" />
-                    <DxChartValueAxis Type="ChartAxisType.Logarithmic"
-                                      LogarithmBase="2" />
-                    <DxChartLineSeries ArgumentField="@((DataPoint s) => s.Argument)"
-                                       ValueField="@((DataPoint s) => s.Value)" />
-                </DxChart>
-            </div>
-            <div class="cw-400">
-                <DxChart Data="@GetData()" Rotated="true">
-                    <DxChartTitle Text="@($"The loudness of sounds (swapped axes)")" />
-                    <DxChartLegend Visible="false" />
-                    <DxChartArgumentAxis Type="ChartAxisType.Discrete" />
-                    <DxChartValueAxis Type="ChartAxisType.Logarithmic"
-                                      LogarithmBase="2" />
-                    <DxChartLineSeries ArgumentField="@((DataPoint s) => s.Argument)"
-                                       ValueField="@((DataPoint s) => s.Value)" />
-                </DxChart>
-            </div>
+            <DxChart Data="@GetData()"
+                     Width="400px"
+                     @key="@Params.ThemeName">
+                <DxChartTitle Text="@($"The loudness of sounds (no changes)")" />
+                <DxChartLegend Visible="false" />
+                <DxChartArgumentAxis Type="ChartAxisType.Discrete" />
+                <DxChartValueAxis Type="ChartAxisType.Logarithmic"
+                                  LogarithmBase="2" />
+                <DxChartLineSeries ArgumentField="@((DataPoint s) => s.Argument)"
+                                   ValueField="@((DataPoint s) => s.Value)" />
+            </DxChart>
+            <DxChart Data="@GetData()"
+                     Rotated="true"
+                     Width="400px">
+                <DxChartTitle Text="@($"The loudness of sounds (swapped axes)")" />
+                <DxChartLegend Visible="false" />
+                <DxChartArgumentAxis Type="ChartAxisType.Discrete" />
+                <DxChartValueAxis Type="ChartAxisType.Logarithmic"
+                                  LogarithmBase="2" />
+                <DxChartLineSeries ArgumentField="@((DataPoint s) => s.Argument)"
+                                   ValueField="@((DataPoint s) => s.Value)" />
+            </DxChart>
         </div>
     </ChildContentWithParameters>
 

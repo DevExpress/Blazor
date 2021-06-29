@@ -21,26 +21,16 @@ namespace BlazorDemo.AspNetCoreHost {
             IProductsFlatProvider productsFlatProvider,
             IProductCategoriesProvider productCategoriesProvider,
             ISalesInfoDataProvider salesInfoDataProvider,
-            ISalesViewerDataProvider salesViewerDataProvider,
             INwindDataProvider nwindDataProvider,
             IIssuesDataProvider issuesDataProvider,
             IWorldcitiesDataProvider worldcitiesDataProvider
         ) {
             var ct = _cancellationToken = _cts.Token;
 
-            InitializeEntities(productsFlatProvider, productsFlatProvider.LoadAsync, ct);
+            InitializeEntities(productsFlatProvider, productsFlatProvider.GetProductsAsync, ct);
             InitializeEntities(productCategoriesProvider, productCategoriesProvider.GetProductCategoriesAsync, ct);
-            InitializeEntities(salesInfoDataProvider, salesInfoDataProvider.GetSalesAsync, ct);
 
-            InitializeEntities(salesViewerDataProvider, salesViewerDataProvider.GetChannels, ct);
-            InitializeEntities(salesViewerDataProvider, salesViewerDataProvider.GetCities, ct);
-            InitializeEntities(salesViewerDataProvider, salesViewerDataProvider.GetContacts, ct);
-            InitializeEntities(salesViewerDataProvider, salesViewerDataProvider.GetCustomers, ct);
-            InitializeEntities(salesViewerDataProvider, salesViewerDataProvider.GetPlants, ct);
-            InitializeEntities(salesViewerDataProvider, salesViewerDataProvider.GetProducts, ct);
-            InitializeEntities(salesViewerDataProvider, salesViewerDataProvider.GetRegions, ct);
-            InitializeEntities(salesViewerDataProvider, salesViewerDataProvider.GetSales, ct);
-            InitializeEntities(salesViewerDataProvider, salesViewerDataProvider.GetSectors, ct);
+            InitializeEntities(salesInfoDataProvider, salesInfoDataProvider.GetSalesAsync, ct);
 
             InitializeEntities(nwindDataProvider, nwindDataProvider.GetCategoriesAsync, ct);
             InitializeEntities(nwindDataProvider, nwindDataProvider.GetCustomersAsync, ct);

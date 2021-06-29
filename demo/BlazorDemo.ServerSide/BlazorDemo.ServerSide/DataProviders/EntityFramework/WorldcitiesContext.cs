@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace BlazorDemo.DataProviders {
     public partial class WorldcitiesContext : DbContext {
-        public WorldcitiesContext() {
-        }
         public WorldcitiesContext(DbContextOptions<WorldcitiesContext> options)
             : base(options) {
         }

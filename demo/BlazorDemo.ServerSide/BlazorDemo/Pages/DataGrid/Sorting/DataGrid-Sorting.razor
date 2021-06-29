@@ -1,13 +1,26 @@
 ﻿@page "/GridSortData"
+@layout DataProviderAccessArea<INwindDataProvider>
 
 <DemoPageSectionComponent Id="DataGrid-Sorting" ShowHorizontalScrollBar="true">
-    @layout DataProviderAccessArea<IProductsFlatProvider>
-    @inject IProductsFlatProvider ProductsFlatService
+    @inject NwindDataService NwindDataService
 
-    <DxDataGrid DataAsync="@ProductsFlatService.LoadAsync">
-        <DxDataGridColumn Field="@nameof(ProductFlat.Id)" Caption="ID" AllowSort="false" Width="50px" />
-        <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name" Width="350px" />
-        <DxDataGridColumn Field="@nameof(ProductFlat.Category)" SortOrder="DataGridColumnSortOrder.Descending" Width="350px" SortIndex="0" />
-        <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)" SortOrder="DataGridColumnSortOrder.Ascending" Width="350px" SortIndex="1" />
-    </DxDataGrid>
+    @if(Data == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <DxDataGrid Data="@Data">
+            <DxDataGridColumn Field="@nameof(Customer.CustomerId)" Caption="ID" AllowSort="false" Width="80px" />
+            <DxDataGridColumn Field="@nameof(Customer.ContactName)" />
+            <DxDataGridColumn Field="@nameof(Customer.CompanyName)" />
+            <DxDataGridColumn Field="@nameof(Customer.City)" SortIndex="1" SortOrder="DataGridColumnSortOrder.Ascending" Width="200px" />
+            <DxDataGridColumn Field="@nameof(Customer.Country)" SortIndex="0" SortOrder="DataGridColumnSortOrder.Ascending" Width="200px" />
+        </DxDataGrid>
+    }
+
+    @code {
+        IEnumerable<Customer> Data { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetCustomersAsync();
+        }
+    }
 </DemoPageSectionComponent>

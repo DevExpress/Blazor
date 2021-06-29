@@ -1,5 +1,5 @@
 ﻿<DemoPageSectionComponent Id="DataGrid-PagingAndScrolling-HorizontalScrolling">
-    @inject IProductsFlatProvider ProductsFlatService
+    @inject ProductsFlatService ProductsFlatService
 
     @if(DataSource == null) {
         <p><em>Loading...</em></p>
@@ -7,14 +7,12 @@
         <DxDataGrid Data="@DataSource"
                     HorizontalScrollBarMode="ScrollBarMode.Visible"
                     PagerNavigationMode="PagerNavigationMode.NumericButtons">
-
-            <DxDataGridColumn Field="@nameof(ProductFlat.Id)" Caption="ID" Width="50px">
-            </DxDataGridColumn>
-
-            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name" Width="350px">
-            </DxDataGridColumn>
-
-            <DxDataGridColumn Field="@nameof(ProductFlat.Availability)" Caption="Availability" Width="110px">
+            <DxDataGridColumn Field="@nameof(ProductFlat.Id)" Caption="ID" Width="100px" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name" Width="450px" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.Category)" Caption="Category" Width="250px" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)" Caption="Subcategory" Width="250px" />
+            <DxDataGridDateEditColumn Field="@nameof(ProductFlat.LastUpdated)" Caption="Last Updated" Width="200px" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.Availability)" Caption="Availability" Width="150px">
                 <DisplayTemplate>
                     @{
                         var id = Guid.NewGuid().ToString();
@@ -29,11 +27,6 @@
                     }
                 </DisplayTemplate>
             </DxDataGridColumn>
-
-            <DxDataGridColumn Field="@nameof(ProductFlat.Category)" Caption="Category" Width="350px"></DxDataGridColumn>
-            <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)" Caption="Subcategory" Width="350px"></DxDataGridColumn>
-            <DxDataGridDateEditColumn Field="@nameof(ProductFlat.LastUpdated)" Caption="Last Updated" Width="350px"></DxDataGridDateEditColumn>
-
         </DxDataGrid>
     }
 
@@ -41,7 +34,7 @@
         IEnumerable<ProductFlat> DataSource;
 
         protected override async Task OnInitializedAsync() {
-            DataSource = await ProductsFlatService.LoadAsync();
+            DataSource = await ProductsFlatService.GetProductsAsync();
         }
     }
 </DemoPageSectionComponent>

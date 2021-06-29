@@ -12,8 +12,8 @@ namespace BlazorDemo.Wasm.DataProviders.Implementation {
         public ProductsFlatProvider(RemoteDataProviderLoader loader) : base(loader) {
         }
 
-        public Task<IEnumerable<ProductFlat>> LoadAsync(CancellationToken ct = default) {
-            return Loader.LoadRemoteEntities(this, LoadAsync);
+        public Task<IEnumerable<ProductFlat>> GetProductsAsync(CancellationToken ct = default) {
+            return Loader.LoadRemoteEntities(this, GetProductsAsync);
         }
 
         public Task Add(ProductFlat product) {

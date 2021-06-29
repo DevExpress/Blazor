@@ -13,14 +13,14 @@
   <ItemGroup>
     <PackageReference Include="Markdig" Version="0.23.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.2" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.5" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor" Version="21.1.3" />
+    <PackageReference Include="DevExpress.Blazor" Version="21.1.4" />
     
   </ItemGroup>
   <ItemGroup>
@@ -30,7 +30,8 @@
     <Compile Include="Data\**\*.cs" />
     <Compile Include="DataProviders\**\*.cs" />
     <Compile Include="Services\ProductsFlatService*.cs" />
-    <Compile Include="Services\RentInfoDataService.cs" />
+    <Compile Include="Services\RentInfoDataService*.cs" />
+    <Compile Include="Services\ContosoRetailDataService*.cs" />
     <Compile Include="Services\WeatherForecastService*.cs" />
     <Compile Include="Services\NwindDataService*.cs" />
     <Compile Include="Services\IssuesDataService*.cs" />
@@ -81,6 +82,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DataSources\USDJPY.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataSources\AnnualWeather.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

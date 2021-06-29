@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace BlazorDemo.DataProviders {
     public partial class IssuesContext : DbContext {
-        public IssuesContext() {
-        }
         public IssuesContext(DbContextOptions<IssuesContext> options)
             : base(options) {
         }

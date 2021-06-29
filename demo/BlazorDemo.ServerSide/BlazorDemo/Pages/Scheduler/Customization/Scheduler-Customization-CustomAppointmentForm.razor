@@ -1,6 +1,6 @@
 ﻿<DemoPageSectionComponent Id="Scheduler-Customization-CustomAppointmentForm">
     <ChildContent>
-        <DxScheduler StartDate="@DateTime.Today" DataStorage="@DataStorage"
+        <DxScheduler @bind-StartDate="@StartDate" DataStorage="@DataStorage"
                      ActiveViewType="SchedulerViewType.WorkWeek"
                      AppointmentFormShowing="OnAppointmentFormShowing"
                      ValidateEditForm="true" CssClass="w-100"
@@ -103,6 +103,8 @@
         void OnAppointmentFormShowing(SchedulerAppointmentFormEventArgs args) {
             args.FormInfo = new CustomAppointmentFormInfo(args.Appointment, DataStorage);
         }
+
+        DateTime StartDate { get; set; } = DateTime.Today;
 
         DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
             AppointmentsSource = AppointmentCollection.GetAppointments(),

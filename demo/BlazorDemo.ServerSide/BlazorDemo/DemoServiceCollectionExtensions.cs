@@ -10,9 +10,10 @@ namespace BlazorDemo {
 
     public static class DemoServiceCollectionExtensions {
         public static void AddDemoServices(this IServiceCollection services) {
+            services.AddScoped<WeatherForecastService>();
             services.AddScoped<ProductsFlatService>();
             services.AddScoped<RentInfoDataService>();
-            services.AddScoped<WeatherForecastService>();
+            services.AddScoped<ContosoRetailDataService>();
             services.AddScoped<NwindDataService>();
             services.AddScoped<IssuesDataService>();
             services.AddScoped<WorldcitiesDataService>();

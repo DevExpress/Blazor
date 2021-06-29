@@ -16,8 +16,8 @@ body,
 .demo-content > div:not(.modal-backdrop),
 .main > .content,
 .content > .demo-page,
-.demo-page > .demo-page-nav-container,
-.demo-page-nav-container > .demo-page-nav {
+.demo-page > .demo-page-right-container,
+.demo-page-right-container > .demo-page-nav {
     background-color: inherit;
 }
 #app.root {
@@ -524,6 +524,15 @@ body,
     height: 1em;
 }
 
+@media (min-width: 1920.98px) {
+    .demo-content-container {
+        padding-left: 20px;
+    }
+    .demo-content {
+        max-width: 1920px;
+    }
+}
+
 @media (max-width: 1199.98px) {
     .demo-content .main {
         margin-left: 0;
@@ -607,8 +616,8 @@ body,
     overflow: hidden;
     padding-right: 2rem;
     padding-left: 2rem;
-    max-width: 1370px;
-    margin-right: 200px;
+    max-width: 1330px;
+    margin-right: 240px;
 }
 .sidebar-shown .demo-page .demo-page-content,
 .sidebar-hidden .demo-page .demo-page-content {
@@ -622,12 +631,19 @@ body,
     scroll-snap-margin-top: 2rem;
 }
 
+@media (min-width: 1920.98px) {
+    .demo-page .demo-page-content {
+        max-width: 1370px;
+        margin-right: 220px;
+    }
+}
+
 /* Page NavPanel */
-.demo-page-nav-container {
+.demo-page-right-container {
     flex: 1 0 auto;
-    width: 200px;
+    width: 220px;
     position: fixed;
-    right: calc((100% - 1900px + 20px) / 2);
+    right: calc((100% - 1900px - 20px) / 2);
     top: 7rem;
     bottom: 0;
     pointer-events: none;
@@ -700,12 +716,12 @@ body,
     font-weight: 600;
     padding: .5rem .75rem;
 }
-@media (min-width: 1199.98px) and (max-width: 1900px) {
-    .demo-page-nav-container {
-        right: 20px;
+@media (min-width: 899.98px) and (max-width: 1920px) {
+    .demo-page-right-container {
+        right: 40px;
     }
 }
-@media (max-width: 1199.98px) {
+@media (max-width: 899.98px) {
     .demo-page {
         flex-flow: column nowrap;
         margin: 0;
@@ -725,7 +741,7 @@ body,
         scroll-margin-top: calc(2.875rem + 2rem);
         scroll-snap-margin-top: calc(2.875rem + 2rem);
     }
-    .demo-page-nav-container {
+    .demo-page-right-container {
         position: fixed;
         z-index: 1020;
         top: 7rem;
@@ -737,7 +753,7 @@ body,
         flex-direction: row;
         visibility: hidden;
     }
-    .demo-page-nav-container:after {
+    .demo-page-right-container:after {
         content: '';
         height: 100%;
         overflow-y: scroll;
@@ -1256,6 +1272,7 @@ body,
 }
 
 .demo-page-section-status-text {
+    font-style: italic;
     margin-top: 0.5rem;
 }
 
@@ -1373,52 +1390,6 @@ body,
 .demo-icon-expand {
     mask-image: url("../images/ExpandButton.svg");
     -webkit-mask-image: url("../images/ExpandButton.svg");
-}
-.demo-icon-overview {
-    mask-image: url("../images/Overview.svg");
-    -webkit-mask-image: url("../images/Overview.svg");
-}
-.demo-icon-grid {
-    mask-image: url("../images/GridView.svg");
-    -webkit-mask-image: url("../images/GridView.svg");
-}
-.demo-icon-pivotgrid {
-    mask-image: url("../images/PivotGrid.svg");
-    -webkit-mask-image: url("../images/PivotGrid.svg");
-}
-.demo-icon-treeview {
-    mask-image: url("../images/TreeView.svg");
-    -webkit-mask-image: url("../images/TreeView.svg");
-}
-.demo-icon-formlayout {
-    mask-image: url("../images/FormLayout.svg");
-    -webkit-mask-image: url("../images/FormLayout.svg");
-}
-.demo-icon-editform-validation {
-    mask-image: url("../images/EditFormValidation.svg");
-    -webkit-mask-image: url("../images/EditFormValidation.svg");
-}
-.demo-icon-toolbar {
-    mask-image: url("../images/Toolbar.svg");
-    -webkit-mask-image: url("../images/Toolbar.svg");
-}
-.demo-icon-tabs {
-    mask-image: url("../images/Tabs.svg");
-    -webkit-mask-image: url("../images/Tabs.svg");
-}
-.demo-icon-editors {
-    mask-image: url("../images/Editors.svg");
-    -webkit-mask-image: url("../images/Editors.svg");
-}
-.demo-icon-pager {
-    mask-image: url("../images/Pager.svg");
-    -webkit-mask-image: url("../images/Pager.svg");
-}
-.demo-icon-info {
-    width: 20px;
-    height: 20px;
-    mask-image: url("../images/Info.svg");
-    -webkit-mask-image: url("../images/Info.svg");
 }
 
 /* Target Container */

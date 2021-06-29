@@ -6,7 +6,8 @@
                 MinValue="MinValue"
                 MaxValue="MaxValue"
                 InputId="@id"
-                ValueChanged="OnValueChange"></DxSpinEdit>
+                Enabled="Enabled"
+                ValueChanged="OnValueChange" />
 </OptionComponent>
 @code {
     readonly string id = Guid.NewGuid().ToString();
@@ -16,6 +17,7 @@
     [Parameter] public EventCallback<T> ValueChanged { get; set; }
     [Parameter] public T MinValue { get; set; }
     [Parameter] public T MaxValue { get; set; }
+    [Parameter] public bool Enabled { get; set; } = true;
     protected void OnValueChange(T newValue) {
         if(!Equals(Value, newValue)) {
             Value = newValue;

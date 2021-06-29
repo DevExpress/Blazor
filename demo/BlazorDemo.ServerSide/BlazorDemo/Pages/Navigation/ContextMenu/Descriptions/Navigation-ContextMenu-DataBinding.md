@@ -1,12 +1,5 @@
-The [Context Menu](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu) can be bound to hierarchical data structures. Specify the following properties to bind the component to a hierarchical data structure:
+You can bind the Context Menu to hierarchical data structures to populate menu items. Follow the steps below: 
 
-*   [Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu.Data) - A Context Menu data source object.
-*   [ChildrenExpression](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu.ChildrenExpression) - A lambda expression that returns the data item’s children.
-
-The following properties specify expressions that return menu item information (text, name, and so on):
-
-*   [NameExpression](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu.NameExpression) - A lambda expression that returns a menu item’s unique identifier (name).
-*   [ClickExpression](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu.ClickExpression) - A lambda expression that returns a handler for a menu item’s Click event.
-*   [TextExpression](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu.TextExpression) - A lambda expression that returns a menu item’s text.
-*   [IconUrlExpression](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu.IconUrlExpression) - A lambda expression that returns the URL of a menu item icon.
-*   [BeginGroupExpression](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu.BeginGroupExpression) - A lambda expression that specifies the start of an item group.
+1. Use the Context Menu's [Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu.Data) property to specify a data source. 
+2. Add the [\<DataMappings>](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu.DataMappings) tag to the component markup. 
+3. In the `<DataMappings>` tags, create the [DxContextMenuDataMapping](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenuDataMapping) instance and map [item properties](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenuDataMapping._members#properties) to data source fields. Mappings are used to adjust the Context Menu's data model to the data source. For hierarchical data, the [Children](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataMappingBase-1.Children) property is required.  

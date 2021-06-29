@@ -6,7 +6,7 @@ using System.Web;
 
 namespace BlazorDemo.Configuration {
     public static class DemoPageSectionCodeProcessor {
-        const RegexOptions options = RegexOptions.Singleline | RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.Compiled;
+        const RegexOptions options = RegexOptions.Singleline | RegexOptions.Multiline | RegexOptions.Compiled;
         static readonly string[] DemoContainersToExtractCode = new string[] {
             "DemoResizableContent",
             "DemoMobileContent"
@@ -18,6 +18,7 @@ namespace BlazorDemo.Configuration {
         static readonly Regex DemoPageSectionComponentOptionsContentRegex = new Regex(@"\s*<OptionsContent[^>]*>(?<Code>.*?)<\/OptionsContent>", options);
         static readonly Regex DemoPageSectionBaseClassSizeModeAttributeRegex = new Regex("\\s?@?(Item)?SizeMode=\"[^\"]*\"", options);
         static readonly Regex DemoPageSectionBaseClassThemeAttributeRegex = new Regex("\\s?@key=\"[^\"]*\"", options);
+        static readonly Regex DemoDataProviderAccessAreaRegex = new Regex(@"<DataProviderAccessAreaContainer[^>]*>(?<Code>.*?)<\/DataProviderAccessAreaContainer>", options);
         static readonly Regex RandomWrapperRegex = new Regex(@"RandomWrapperFactory.Create\((?<Parameter>[^)]*?)\)", options);
         static readonly Regex IDataProviderRegex = new Regex(@"\:\s+IDataProvider", options);
         static readonly Regex GuidAttributeRegEx = new Regex("\\[Guid\\(\"[0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12}\"\\)\\]");
@@ -57,6 +58,8 @@ namespace BlazorDemo.Configuration {
             var codeParts = SplitAndReplaceCode(code, DemoPageSectionComponentChildContentRegex,
                 match => match.Groups["Code"]?.Value ?? "");
             codeParts = codeParts.SelectMany(p => SplitAndReplaceCode(p, DemoPageSectionComponentChildContentWithParametersRegex,
+                match => match.Groups["Code"]?.Value ?? ""));
+            codeParts = codeParts.SelectMany(p => SplitAndReplaceCode(p, DemoDataProviderAccessAreaRegex,
                 match => match.Groups["Code"]?.Value ?? ""));
             return string.Join("\r\n", codeParts.Select(p => ProcessCodeLines(TrimCode(p), RemoveWhitespaces)));
         }

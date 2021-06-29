@@ -1,38 +1,44 @@
 ﻿<DemoPageSectionComponent Id="Charts-SeriesCustomization-SeriesLabel">
     <ChildContentWithParameters Context="Params">
-        @inject WeatherForecastService ForecastService
+        @inject IWeatherSummaryDataProvider WeatherSummaryDataProvider
 
         <DxChart Data="@WeatherForecasts"
                  @key="Params.ThemeName"
                  CustomizeSeriesPoint="@PreparePointLabel"
                  CssClass="w-100">
-
-            <DxChartLineSeries SummaryMethod="@(i => (int)i.Average())"
-                               ValueField="@((WeatherForecast i) => i.TemperatureF)"
-                               ArgumentField="@(i => i.Date.Date)"
-                               Name="Temperature, F">
-                <DxChartSeriesLabel Position="RelativePosition.Outside">
+            <DxChartTitle Text="Annual Weather in New York" />
+            <DxChartLineSeries SummaryMethod="@(i => i.Average())"
+                               ValueField="@((DetailedWeatherSummary i) => i.AverageTemperatureF)"
+                               ArgumentField="@(i => new DateTime(2000, i.Date.Month, 1))"
+                               Name="Temperature, F"
+                               Filter="@((DetailedWeatherSummary  i) => i.City == "NEW YORK")">
+                <DxChartSeriesLabel Position="RelativePosition.Outside" Format="@(ChartElementFormat.FromLdmlString("0#.## °F"))">
                     <DxChartSeriesLabelConnector Visible="true"
                                                  Width="3" />
                 </DxChartSeriesLabel>
             </DxChartLineSeries>
-
-            <DxChartLegend Position="RelativePosition.Outside" />
-
+            <DxChartLegend Visible="false" />
+            <DxChartValueAxis>
+                <DxChartAxisTitle Text="Temperature, °F" />
+            </DxChartValueAxis>
+            <DxChartArgumentAxis>
+                <DxChartAxisLabel Format="ChartElementFormat.Month" />
+            </DxChartArgumentAxis>
         </DxChart>
     </ChildContentWithParameters>
 
 
     @code {
-        WeatherForecast[] WeatherForecasts;
+        IEnumerable<DetailedWeatherSummary> WeatherForecasts;
 
-        protected override async Task OnInitializedAsync() {
-            WeatherForecasts = await ForecastService.GetDetailedForecastAsync();
+        protected override async Task OnInitializedAsync()
+        {
+            WeatherForecasts = await WeatherSummaryDataProvider.GetDataAsync();
         }
 
         protected void PreparePointLabel(ChartSeriesPointCustomizationSettings pointSettings) {
             double value = (double)pointSettings.Point.Value;
-            if(value > 25 && value < 75)
+            if(value > 50 && value < 70)
                 pointSettings.PointLabel.Visible = true;
         }
     }

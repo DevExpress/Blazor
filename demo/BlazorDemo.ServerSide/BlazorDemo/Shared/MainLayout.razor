@@ -93,6 +93,7 @@
         ThemeName = Themes.ActiveTheme.Name;
         NavigationManager.LocationChanged += OnLocationChanged;
     }
+
     void TryRedirect(string url) {
         if(Configuration.Redirect.TryGetValue(url.Substring(NavigationManager.BaseUri.Length), out var uri)) {
             NavigationManager.NavigateTo(uri, true);
@@ -103,13 +104,13 @@
         if(firstRender) {
             await ScrollToMainTopIfNeeded(NavigationManager.Uri);
 
-            var themeName = await pageHelper.InvokeAsync<string>("DemoPageHelper.cookie.getThemeName");
+            var themeName = await pageHelper.InvokeAsync<string>("DemoPageHelper.themes.getThemeName");
             if(!string.IsNullOrEmpty(themeName))
                 ThemeName = themeName;
             await pageHelper.InvokeVoidAsync("DemoPageHelper.demoMatchesQuery", "(min-width: 1200px)", DotNetObjectReference.Create(this));
             await pageHelper.InvokeVoidAsync("DemoPageHelper.patchAppElement");
         } else {
-            await pageHelper.InvokeVoidAsync("DemoPageHelper.cookie.setThemeName", ThemeName);
+            await pageHelper.InvokeVoidAsync("DemoPageHelper.themes.setThemeName", ThemeName);
             if(_isDesktop && SavedLayoutToggled != LayoutToggled)
                 await pageHelper.InvokeVoidAsync("DemoPageHelper.raiseWindowOnResize");
         }
@@ -117,12 +118,6 @@
             await ScrollToTargetIfNeeded(NavigationManager.Uri);
         SavedLayoutToggled = LayoutToggled;
         IsFirstTimeRendered = true;
-    }
-    protected override Task OnInitializedAsync() {
-        return base.OnInitializedAsync();
-    }
-    protected override bool ShouldRender() {
-        return base.ShouldRender();
     }
     async void OnLocationChanged(object sender, LocationChangedEventArgs args) {
         TryRedirect(args.Location);

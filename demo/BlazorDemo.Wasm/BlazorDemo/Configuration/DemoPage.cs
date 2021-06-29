@@ -5,7 +5,6 @@ namespace BlazorDemo.Configuration {
     public class DemoPageBase : DemoPageSection {
         public string Url { get; set; }
         public string SeoTitle { get; set; }
-        public string Icon { get; set; }
         public string Keywords { get; set; }
         public string Description { get; set; }
 
@@ -19,6 +18,7 @@ namespace BlazorDemo.Configuration {
     public class DemoRootPage : DemoPageBase {
         public DemoPage[] Pages { get; set; }
         public bool IsServerSideOnly { get; set; }
+        public string AnalyticsId { get; set; }
         public override string Uri => DemoConfiguration.GetRootDemoPageUrl(this);
     }
 

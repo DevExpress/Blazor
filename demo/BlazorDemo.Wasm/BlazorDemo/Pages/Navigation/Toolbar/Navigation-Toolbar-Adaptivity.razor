@@ -8,9 +8,12 @@
                     <DxToolbar Title="New Article" ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" ItemSizeMode="SizeMode.Small"
                                AdaptivityMinRootItemCount="2" AdaptivityAutoHideRootItems="true" AdaptivityAutoCollapseItemsToIcons="true" @key="@Params.ThemeName">
                         <Items>
-                            <DxToolbarItem BeginGroup="true" Name="Undo" IconCssClass="tb-icon tb-icon-undo" AdaptiveText="Undo" />
-                            <DxToolbarItem Name="Redo" IconCssClass="tb-icon tb-icon-redo" AdaptiveText="Redo" />
-                            <DxToolbarItem Name="FontFamily" Text="@currentFont.Name" BeginGroup="true" AdaptiveText="Font Family">
+                            <DxToolbarItem BeginGroup="true" Name="Undo" IconCssClass="tb-icon tb-icon-undo" AdaptiveText="Undo"
+                                           Tooltip="Undo"/>
+                            <DxToolbarItem Name="Redo" IconCssClass="tb-icon tb-icon-redo" AdaptiveText="Redo"
+                                           Tooltip="Redo"/>
+                            <DxToolbarItem Name="FontFamily" Text="@currentFont.Name" BeginGroup="true" AdaptiveText="Font Family"
+                                           Tooltip="Font Family">
                                 <Items>
                                     @foreach(var font in FontInfo.DefaultFonts) {
                                         <DxToolbarItem Text="@font.Name" Click="(x) => { currentFont = font; }" GroupName="fontGroup"
@@ -18,7 +21,8 @@
                                     }
                                 </Items>
                             </DxToolbarItem>
-                            <DxToolbarItem Name="FontSize" Text="@currentSize.Size.ToString()" BeginGroup="true" AdaptiveText="Font Size">
+                            <DxToolbarItem Name="FontSize" Text="@currentSize.Size.ToString()" BeginGroup="true" AdaptiveText="Font Size"
+                                           Tooltip="Font Size">
                                 <Items>
                                     @foreach(var fontSize in FontSizeInfo.DefaultFontSizes) {
                                         <DxToolbarItem Text="@fontSize.Size.ToString()" Click="(x) => { currentSize = fontSize; }" GroupName="fontSizeGroup" />
@@ -26,15 +30,17 @@
                                 </Items>
                             </DxToolbarItem>
                             <DxToolbarItem AdaptivePriority="1" GroupName="font-bold" BeginGroup="true" Name="Bold"
-                                           IconCssClass="tb-icon tb-icon-bold" AdaptiveText="Bold" />
+                                           IconCssClass="tb-icon tb-icon-bold" AdaptiveText="Bold" Tooltip="Bold"/>
                             <DxToolbarItem AdaptivePriority="1" GroupName="font-italic" Name="Italic"
-                                           IconCssClass="tb-icon tb-icon-italic" AdaptiveText="Italic" />
+                                           IconCssClass="tb-icon tb-icon-italic" AdaptiveText="Italic" Tooltip="Italic" />
                             <DxToolbarItem AdaptivePriority="1" GroupName="font-underline" Name="Underline"
-                                           IconCssClass="tb-icon tb-icon-underline" AdaptiveText="Underline" />
+                                           IconCssClass="tb-icon tb-icon-underline" AdaptiveText="Underline" Tooltip="Underline" />
                             <DxToolbarItem AdaptivePriority="1" BeginGroup="true" GroupName="align"
-                                           IconCssClass="tb-icon tb-icon-align-left" AdaptiveText="Left" />
-                            <DxToolbarItem AdaptivePriority="1" GroupName="align" IconCssClass="tb-icon tb-icon-align-center" AdaptiveText="Center" />
-                            <DxToolbarItem AdaptivePriority="1" GroupName="align" IconCssClass="tb-icon tb-icon-align-right" AdaptiveText="Right" />
+                                           IconCssClass="tb-icon tb-icon-align-left" AdaptiveText="Left" Tooltip="Align Left" />
+                            <DxToolbarItem AdaptivePriority="1" GroupName="align" IconCssClass="tb-icon tb-icon-align-center" AdaptiveText="Center"
+                                           Tooltip="Align Center"/>
+                            <DxToolbarItem AdaptivePriority="1" GroupName="align" IconCssClass="tb-icon tb-icon-align-right" AdaptiveText="Right"
+                                           Tooltip="Align Right"/>
                         </Items>
                     </DxToolbar>
                     @*BeginHide*@

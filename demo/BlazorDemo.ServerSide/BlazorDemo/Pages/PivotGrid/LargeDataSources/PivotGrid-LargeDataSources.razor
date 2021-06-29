@@ -1,31 +1,37 @@
 ﻿@page "/PivotGridLargeDataBase"
 
 <DemoPageSectionComponent Id="PivotGrid-LargeDataSources">
-    @inject IContosoRetailDataProvider ContosoRetailContext
-    @layout DataProviderAccessArea<IContosoRetailDataProvider>
+    @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+    @inject ContosoRetailDataService ContosoRetailDataService
+    @inject IContosoRetailDataProvider ContosoRetailDataProvider
 
-    @if(largeDataSource == null) {
-        <p><em>Loading...</em></p>
-    } else {
-        <DxPivotGrid Data="@largeDataSource"
-                     ShowPager="true"
-                     PageSize="10"
-                     CssClass="w-100">
-            <DxPivotGridField Field="@nameof(Sale.StoreName)" Caption="Store" Area="PivotGridFieldArea.Row" />
-            <DxPivotGridField Field="@nameof(Sale.DateKey)" GroupInterval="PivotGridGroupInterval.Year" Caption="Year" Area="PivotGridFieldArea.Column" />
-            <DxPivotGridField Field="@nameof(Sale.SalesAmount)" Caption="Amount" Area="PivotGridFieldArea.Data" SummaryType="PivotGridSummaryType.Sum">
-                <DataTemplate>@string.Format("{0:c0}", context)</DataTemplate>
-            </DxPivotGridField>
-            <DxPivotGridField Field="@nameof(Sale.Id)" Caption="Count" Area="PivotGridFieldArea.Data" SummaryType="PivotGridSummaryType.Count">
-                <DataTemplate>@string.Format("{0:n0}", context)</DataTemplate>
-            </DxPivotGridField>
-        </DxPivotGrid>
-    }
+    <DataProviderAccessAreaContainer DataProvider="@ContosoRetailDataProvider">
+        @if(DataSource == null) {
+            <p><em>Loading...</em></p>
+        } else {
+            <DxPivotGrid Data="@DataSource"
+                         ShowPager="true"
+                         PageSize="10"
+                         CssClass="w-100">
+                <DxPivotGridField Field="@nameof(Sale.StoreName)" Caption="Store" Area="PivotGridFieldArea.Row" />
+                <DxPivotGridField Field="@nameof(Sale.DateKey)" GroupInterval="PivotGridGroupInterval.Year" Caption="Year" Area="PivotGridFieldArea.Column" />
+                <DxPivotGridField Field="@nameof(Sale.SalesAmount)" Caption="Amount" Area="PivotGridFieldArea.Data" SummaryType="PivotGridSummaryType.Sum">
+                    <DataTemplate>@string.Format("{0:c0}", context)</DataTemplate>
+                </DxPivotGridField>
+                <DxPivotGridField Field="@nameof(Sale.Id)" Caption="Count" Area="PivotGridFieldArea.Data" SummaryType="PivotGridSummaryType.Count">
+                    <DataTemplate>@string.Format("{0:n0}", context)</DataTemplate>
+                </DxPivotGridField>
+            </DxPivotGrid>
+        }
+    </DataProviderAccessAreaContainer>
     @code {
-        IEnumerable<Sale> largeDataSource;
+        IEnumerable<Sale> DataSource;
 
         protected override async Task OnInitializedAsync() {
-            largeDataSource = await ContosoRetailContext.GetSalesAsync();
+            var connectionString = ConnectionStringUtils.GetPivotGridLargeDataConnectionString(Configuration);
+            if(string.IsNullOrEmpty(connectionString)) return;
+
+            DataSource = await ContosoRetailDataService.GetSalesAsync();
         }
     }
 </DemoPageSectionComponent>

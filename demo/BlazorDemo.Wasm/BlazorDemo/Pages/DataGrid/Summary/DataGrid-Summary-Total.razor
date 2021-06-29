@@ -6,32 +6,28 @@
     } else {
         <DxDataGrid Data="@Data" CssClass="w-100">
             <Columns>
-                <DxDataGridDateEditColumn Field="@nameof(Invoice.OrderDate)" Width="240px" />
-                <DxDataGridColumn Field="@nameof(Invoice.ShipCountry)"
-                                  Caption="Ship Country"
-                                  Width="250px" />
-                <DxDataGridColumn Field="@nameof(Invoice.ProductName)" />
-                <DxDataGridSpinEditColumn Field="@nameof(Invoice.UnitPrice)"
-                                          DisplayFormat="c"
-                                          Width="120px" />
-                <DxDataGridSpinEditColumn Field="@nameof(Invoice.Quantity)"
-                                          Width="100px" />
+                <DxDataGridColumn Field="@nameof(Invoice.CustomerName)" />
+                <DxDataGridColumn Field="@nameof(Invoice.City)" Width="200px" />
+                <DxDataGridColumn Field="@nameof(Invoice.Region)" Width="120px" />
+                <DxDataGridColumn Field="@nameof(Invoice.Country)" Width="200px" />
+                <DxDataGridSpinEditColumn Field="@nameof(Invoice.UnitPrice)" DisplayFormat="c" Width="120px" />
+                <DxDataGridSpinEditColumn Field="@nameof(Invoice.Quantity)" Width="120px" />
             </Columns>
             <TotalSummary>
-                <DxDataGridSummaryItem Field=@nameof(Invoice.OrderDate)
-                                       SummaryType=SummaryItemType.Count />
-                <DxDataGridSummaryItem Field=@nameof(Invoice.UnitPrice)
-                                       SummaryType=SummaryItemType.Sum
-                                       DisplayFormat="Sum: {0:c}" />
+                <DxDataGridSummaryItem SummaryType="SummaryItemType.Count" Field="@nameof(Invoice.CustomerName)" />
+                <DxDataGridSummaryItem SummaryType="SummaryItemType.Min" Field="@nameof(Invoice.Quantity)" DisplayFormat="Min: {0:0.##}"/>
+                <DxDataGridSummaryItem SummaryType="SummaryItemType.Avg" Field="@nameof(Invoice.Quantity)" DisplayFormat="Avg: {0:0.##}" />
+                <DxDataGridSummaryItem SummaryType="SummaryItemType.Max" Field="@nameof(Invoice.Quantity)" DisplayFormat="Max: {0:0.##}"/>
             </TotalSummary>
         </DxDataGrid>
     }
 
     @code {
-        IEnumerable<Invoice> Data;
+        IEnumerable<dynamic> Data;
 
         protected override async Task OnInitializedAsync() {
-            Data = await NwindDataService.GetInvoicesAsync();
+            var invoices = await NwindDataService.GetInvoicesAsync();
+            Data = invoices.OrderBy(i => i.OrderDate);
         }
     }
 </DemoPageSectionComponent>

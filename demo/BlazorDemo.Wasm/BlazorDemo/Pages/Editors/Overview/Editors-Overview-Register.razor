@@ -75,7 +75,7 @@
                 </DxFormLayoutItem>
                 <DxFormLayoutItem ColSpanMd="12">
                     <Template>
-                        <DxComboBox Data="@Ocupations"
+                        <DxComboBox Data="@Occupations"
                                     @bind-Value="@Data.Occupation"
                                     AllowUserInput="false"
                                     NullText="Occupation"
@@ -126,7 +126,7 @@
     string FormSubmitResult = "";
 
     UserData Data { get; set; } = new UserData();
-    IEnumerable<string> Ocupations { get; set; } = new List<string>() {
+    IEnumerable<string> Occupations { get; set; } = new List<string>() {
         "Academic",
         "Administrative",
         "Art/Entertainment",

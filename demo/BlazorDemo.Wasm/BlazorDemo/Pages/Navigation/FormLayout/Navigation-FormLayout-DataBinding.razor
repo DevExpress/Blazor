@@ -17,28 +17,28 @@
             <DxFormLayoutItem Field="@nameof(FormDataItem.Position)"
                               Caption="Position:"
                               ColSpanMd="6">
-                <Template>
-                    <DxComboBox Data="@(new List<string>() {
+                <DxComboBox Data="@(new List<string>() {
                                             "Sales Representative",
                                             "Designer" })"
-                                Value="@(((string)((ValueEditContext)context).Value))"
-                                ValueChanged="@((string value) =>
+                            Value="@(((string)((ValueEditContext)context).Value))"
+                            ValueChanged="@((string value) =>
                                     ((ValueEditContext)context).OnChanged(value))" />
-                </Template>
             </DxFormLayoutItem>
             <DxFormLayoutItem Field="@nameof(FormDataItem.OnVacation)"
                               Caption="On Vacation:"
                               ColSpanMd="6" />
         </DxFormLayout>
-        <p class="demo-text w-100 mt-2 text-center text-muted">
-            DataObject = {
+        <div class="row w-100 mx-0">
+            <p class="demo-text col-12 mt-2 text-muted">
+                DataObject = {
                 @nameof(FormDataItem.Name)=<b>@editFormData.Name</b>,
                 @nameof(FormDataItem.BirthDate)=<b>@editFormData.BirthDate</b>,
                 @nameof(FormDataItem.YearsWorked)=<b>@editFormData.YearsWorked</b>,
                 @nameof(FormDataItem.Position)=<b>@editFormData.Position</b>,
                 @nameof(FormDataItem.OnVacation)=<b>@editFormData.OnVacation</b>
-            }
-        </p>
+                }
+            </p>
+        </div>
     </ChildContentWithParameters>
 
     @code {

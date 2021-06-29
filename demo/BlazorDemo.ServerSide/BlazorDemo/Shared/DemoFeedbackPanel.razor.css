@@ -1,0 +1,80 @@
+.demo-feedback-panel {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 1.5rem 0.75rem;
+    pointer-events: initial;
+}
+.demo-feedback-panel:not(:first-child):after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    border-top: 1px solid currentColor;
+    opacity: 0.15;
+}
+.demo-feedback-panel .feedback-text {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+.demo-feedback-panel .feedback-btns {
+    padding: 0.5rem 0;
+}
+.demo-feedback-panel .feedback-btns .btn {
+    color: var(--secondary);
+    padding: 0.2rem;
+}
+.demo-feedback-panel .feedback-btns .btn:not(:last-child) {
+    margin-right: 0.4rem;
+}
+.demo-feedback-panel .feedback-btns .btn:hover,
+.demo-feedback-panel .feedback-btns .btn.feedback-selected {
+    color: var(--primary);
+}
+.demo-feedback-panel .feedback-btns .btn span {
+    display: inline-block;
+    vertical-align: middle;
+}
+.demo-feedback-panel .feedback-btns .btn span:not(:last-child) {
+    margin-right: 0.4rem;
+}
+.demo-feedback-panel .feedback-form {
+    padding: 0.5rem 0;
+}
+.demo-feedback-panel .feedback-form-btns {
+    padding: 1rem 0 0;
+}
+.demo-feedback-panel .icon {
+    background-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    background-position: center center;
+    background-color: currentColor;
+    height: 20px;
+    width: 20px;
+}
+.demo-feedback-panel .icon-thumb-up {
+    -webkit-mask-image: url("images/feedback/feedback-thumb-up.svg");
+    mask-image: url("images/feedback/feedback-thumb-up.svg");
+}
+.demo-feedback-panel .btn:hover .icon-thumb-up,
+.demo-feedback-panel .btn.feedback-selected .icon-thumb-up {
+    -webkit-mask-image: url("images/feedback/feedback-thumb-up-selected.svg");
+    mask-image: url("images/feedback/feedback-thumb-up-selected.svg");
+}
+.demo-feedback-panel .icon-thumb-down {
+    -webkit-mask-image: url("images/feedback/feedback-thumb-down.svg");
+    mask-image: url("images/feedback/feedback-thumb-down.svg");
+}
+.demo-feedback-panel .btn:hover .icon-thumb-down,
+.demo-feedback-panel .btn.feedback-selected .icon-thumb-down {
+    -webkit-mask-image: url("images/feedback/feedback-thumb-down-selected.svg");
+    mask-image: url("images/feedback/feedback-thumb-down-selected.svg");
+}
+
+@media (max-width: 899.98px) {
+    .demo-feedback-panel {
+        display: none;
+    }
+}
