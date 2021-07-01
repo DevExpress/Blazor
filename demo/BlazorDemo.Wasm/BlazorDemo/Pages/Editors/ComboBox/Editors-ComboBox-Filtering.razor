@@ -2,10 +2,11 @@
     <ChildContentWithParameters Context="Params">
         @inject WorldcitiesDataService WorldcitiesDataService
 
-        @if(Data != null) {
+        @if (Data != null)
+        {
             <DxComboBox Id="ComboBox1"
                         Data="@Data"
-                        FilteringMode="DataGridFilteringMode.Contains"
+                        FilteringMode="@FilteringMode"
                         @bind-Value="@Value"
                         @bind-Text="@Text"
                         TextFieldName="@nameof(Country.CountryName)"
@@ -14,11 +15,22 @@
         }
     </ChildContentWithParameters>
 
+    <OptionsContent>
+        <OptionComboBox Label="Filtering Mode:"
+                        Data="@(Enum.GetNames(typeof(DataGridFilteringMode)))"
+                        Value="@(FilteringMode.ToString())"
+                        ValueChanged="@((string selectedItem) =>
+                            { FilteringMode = Enum.Parse<DataGridFilteringMode>(selectedItem); })" />
+    </OptionsContent>
+
 
     @code {
         IEnumerable<Country> Data;
 
-        protected override async Task OnInitializedAsync() {
+        DataGridFilteringMode FilteringMode { get; set; } = DataGridFilteringMode.StartsWith;
+
+        protected override async Task OnInitializedAsync()
+        {
             Data = await WorldcitiesDataService.GetCountriesAsync();
         }
 

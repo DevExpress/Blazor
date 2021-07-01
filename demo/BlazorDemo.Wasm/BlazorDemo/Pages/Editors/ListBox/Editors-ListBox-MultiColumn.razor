@@ -12,8 +12,8 @@
         <DxListEditorColumn FieldName="@nameof(Employee.LastName)"
                             Caption="Surname" />
     </DxListBox>
-    <p class="demo-text cw-320 mt-2 text-muted">
-        Selected item: <b>@Values.FirstOrDefault().Text</b>
+    <p class="demo-text cw-400 mt-2 text-muted">
+        Selected item: <b>@Values.FirstOrDefault()?.Text</b>
     </p>
 
     @code {

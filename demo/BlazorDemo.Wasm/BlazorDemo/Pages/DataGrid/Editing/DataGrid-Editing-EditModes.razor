@@ -2,25 +2,29 @@
     <ChildContent>
         @inject NwindDataService NwindDataService
 
-        <DxDataGrid @ref="@grid"
-                    Data="@Data"
-                    RowRemovingAsync="@OnRowRemovingAsync"
-                    RowUpdatingAsync="@OnRowUpdatingAsync"
-                    RowInsertingAsync="@OnRowInsertingAsync"
-                    InitNewRow="@OnInitNewRowAsync"
-                    CssClass="w-100"
-                    PageSize="100"
-                    ShowPager="false"
-                    KeyFieldName="@nameof(Employee.EmployeeId)"
-                    EditMode="@CurrentEditMode">
-            <DxDataGridCommandColumn Width="100px" />
-            <DxDataGridColumn Field="@nameof(Employee.FirstName)" />
-            <DxDataGridColumn Field="@nameof(Employee.LastName)" />
-            <DxDataGridColumn Field="@nameof(Employee.Title)" />
-            <DxDataGridColumn Field="@nameof(Employee.TitleOfCourtesy)" />
-            <DxDataGridDateEditColumn Field="@nameof(Employee.BirthDate)" />
-            <DxDataGridDateEditColumn Field="@nameof(Employee.HireDate)" />
-        </DxDataGrid>
+        @if(Data == null) {
+            <p><em>Loading...</em></p>
+        } else {
+            <DxDataGrid @ref="@grid"
+                        Data="@Data"
+                        RowRemovingAsync="@OnRowRemovingAsync"
+                        RowUpdatingAsync="@OnRowUpdatingAsync"
+                        RowInsertingAsync="@OnRowInsertingAsync"
+                        InitNewRow="@OnInitNewRowAsync"
+                        CssClass="w-100"
+                        PageSize="100"
+                        ShowPager="false"
+                        KeyFieldName="@nameof(Employee.EmployeeId)"
+                        EditMode="@CurrentEditMode">
+                <DxDataGridCommandColumn Width="120px" />
+                <DxDataGridColumn Field="@nameof(Employee.FirstName)" />
+                <DxDataGridColumn Field="@nameof(Employee.LastName)" />
+                <DxDataGridColumn Field="@nameof(Employee.Title)" />
+                <DxDataGridColumn Field="@nameof(Employee.TitleOfCourtesy)" Width="150px" />
+                <DxDataGridDateEditColumn Field="@nameof(Employee.BirthDate)" Width="150px" />
+                <DxDataGridDateEditColumn Field="@nameof(Employee.HireDate)" Width="150px" />
+            </DxDataGrid>
+        }
     </ChildContent>
     <OptionsContent>
         <OptionComboBox Label="Edit Mode:" Data="@EditModes" @bind-Value="CurrentEditMode" />
@@ -44,27 +48,32 @@
         }
 
         protected override async Task OnInitializedAsync() {
-            Data = await NwindDataService.GetEmployeesAsync();
+            Data = await NwindDataService.GetEmployeesEditableAsync();
         }
-
         protected override async Task OnAfterRenderAsync(bool firstRender) {
             if(firstRender) {
                 var editableSupplier = Data.FirstOrDefault();
                 await grid.StartRowEdit(editableSupplier);
             }
         }
-        Task OnRowRemovingAsync(Employee dataItem) {
-            return NwindDataService.RemoveEmployeeAsync(dataItem);
+        async Task OnRowRemovingAsync(Employee dataItem) {
+            await NwindDataService.RemoveEmployeeAsync(dataItem);
+            Data = await NwindDataService.GetEmployeesEditableAsync();
+            StateHasChanged();
         }
-        Task OnRowUpdatingAsync(Employee dataItem, IDictionary<string, object> newValues) {
-            return NwindDataService.UpdateEmployeeAsync(dataItem, newValues);
+        async Task OnRowUpdatingAsync(Employee dataItem, IDictionary<string, object> newValues) {
+            await NwindDataService.UpdateEmployeeAsync(dataItem, newValues);
+            Data = await NwindDataService.GetEmployeesEditableAsync();
+            StateHasChanged();
         }
-        Task OnRowInsertingAsync(IDictionary<string, object> newValues) {
-            return NwindDataService.InsertEmployeeAsync(newValues);
+        async Task OnRowInsertingAsync(IDictionary<string, object> newValues) {
+            await NwindDataService.InsertEmployeeAsync(newValues);
+            Data = await NwindDataService.GetEmployeesEditableAsync();
+            StateHasChanged();
         }
         async Task OnInitNewRowAsync(Dictionary<string, object> values) {
-            values.Add("FirstName", "First Name");
-            values.Add("LastName", "Last Name");
+            values.Add(nameof(Employee.FirstName), "John");
+            values.Add(nameof(Employee.LastName), "Doe");
             await Task.CompletedTask;
         }
         void CancelEdit() {

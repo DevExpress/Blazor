@@ -1,5 +1,5 @@
 ﻿<DemoPageSectionComponent Id="DataGrid-PagingAndScrolling-Paging" ShowHorizontalScrollBar="true">
-    @inject IProductsFlatProvider ProductsFlatService
+    @inject ProductsFlatService ProductsFlatService
 
     @if(DataSource == null) {
         <p><em>Loading...</em></p>
@@ -11,7 +11,10 @@
                     PagerAllDataRowsItemVisible="true"
                     PagerAllowedPageSizes=@(new int[] {2,10,20,40})>
             <DxDataGridColumn Field="@nameof(ProductFlat.Id)" Caption="ID" Width="50px" />
-            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name" Width="330px" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.Category)" Caption="Category" Width="180px" />
+            <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)" Caption="Subcategory" Width="180px" />
+            <DxDataGridDateEditColumn Field="@nameof(ProductFlat.LastUpdated)" Caption="Last Updated" Width="150px" />
             <DxDataGridColumn Field="@nameof(ProductFlat.Availability)" Caption="Availability" Width="110px">
                 <DisplayTemplate>
                     @{
@@ -27,9 +30,6 @@
                     }
                 </DisplayTemplate>
             </DxDataGridColumn>
-            <DxDataGridColumn Field="@nameof(ProductFlat.Category)" Caption="Category" Width="150px" />
-            <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)" Caption="Subcategory" Width="150px" />
-            <DxDataGridDateEditColumn Field="@nameof(ProductFlat.LastUpdated)" Caption="Last Updated" Width="200px" />
         </DxDataGrid>
     }
 
@@ -37,7 +37,7 @@
         IEnumerable<ProductFlat> DataSource { get; set; }
 
         protected override async Task OnInitializedAsync() {
-            DataSource = await ProductsFlatService.LoadAsync();
+            DataSource = await ProductsFlatService.GetProductsAsync();
         }
     }
 </DemoPageSectionComponent>

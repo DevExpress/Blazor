@@ -1,17 +1,20 @@
 ﻿<DemoPageSectionComponent Id="DataGrid-Selection-Multiple" ShowHorizontalScrollBar="true">
-    @inject IProductsFlatProvider ProductsFlatService
+    @inject NwindDataService NwindDataService
 
-    @if(DataSource == null) {
+    @if(Products == null) {
         <p><em>Loading...</em></p>
     } else {
         <div class="d-flex flex-wrap w-100">
-            <DxDataGrid Data="@DataSource"
+            <DxDataGrid Data="@Products"
                         SelectionMode="DataGridSelectionMode.MultipleSelectedDataRows"
                         @bind-MultipleSelectedDataRows="@SelectedProducts"
+                        KeyFieldName="@nameof(Product.ProductId)"
                         CssClass="w-auto mt-1 mr-1 flex-grow-1" style="flex-basis: 500px">
-                <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name"></DxDataGridColumn>
-                <DxDataGridColumn Field="@nameof(ProductFlat.Category)"></DxDataGridColumn>
-                <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)"></DxDataGridColumn>
+                <DxDataGridColumn Field="@nameof(Product.ProductName)" />
+                <DxDataGridComboBoxColumn Field="@nameof(Product.CategoryId)" Caption="Category"
+                                          Data="@Categories" TextFieldName="@nameof(Category.CategoryName)" ValueFieldName="@nameof(Category.CategoryId)" />
+                <DxDataGridSpinEditColumn Field="@nameof(Product.UnitPrice)" DisplayFormat="c" Width="120px" />
+                <DxDataGridSpinEditColumn Field="@nameof(Product.UnitsInStock)" Width="120px" />
             </DxDataGrid>
             <div class="card mt-1 mr-1 flex-grow-1" style="flex-basis: 220px">
                 <div class="card-header bg-transparent text-body py-1 border-bottom-0 font-weight-bold">Selected products:</div>
@@ -27,10 +30,11 @@
     }
 
     @code {
-        IEnumerable<ProductFlat> DataSource;
+        IEnumerable<Product> Products { get; set; }
+        IEnumerable<Category> Categories { get; set; }
 
-        IEnumerable<ProductFlat> selectedProducts;
-        IEnumerable<ProductFlat> SelectedProducts {
+        IEnumerable<Product> selectedProducts;
+        IEnumerable<Product> SelectedProducts {
             get { return selectedProducts; }
             set {
                 selectedProducts = value;
@@ -39,8 +43,9 @@
         }
 
         protected override async Task OnInitializedAsync() {
-            DataSource = await ProductsFlatService.LoadAsync();
-            SelectedProducts = DataSource.Take(4).AsEnumerable();
+            Products = await NwindDataService.GetProductsAsync();
+            Categories = await NwindDataService.GetCategoriesAsync();
+            SelectedProducts = Products.Take(4).AsEnumerable();
         }
     }
 </DemoPageSectionComponent>

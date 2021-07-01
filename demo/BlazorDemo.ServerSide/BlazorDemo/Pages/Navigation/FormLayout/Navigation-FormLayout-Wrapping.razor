@@ -2,35 +2,26 @@
     <ChildContentWithParameters Context="Params">
         <DxFormLayout ItemSizeMode="Params.SizeMode" @key="@Params.ThemeName" CssClass="w-100">
             <DxFormLayoutItem Caption="Address:" ColSpanMd="12">
-                <Template>
-                    <DxTextBox @bind-Text="@Address" />
-                </Template>
+                <DxTextBox @bind-Text="@Address" />
             </DxFormLayoutItem>
-
             <DxFormLayoutItem Caption="City:">
-                <Template>
-                    <DxTextBox @bind-Text="@City" />
-                </Template>
+                <DxTextBox @bind-Text="@City" />
             </DxFormLayoutItem>
-
             <DxFormLayoutItem Caption="Postal/ZIP Code:" BeginRow="true">
-                <Template>
-                    <DxTextBox @bind-Text="@ZipCode" />
-                </Template>
+                <DxTextBox @bind-Text="@ZipCode" />
             </DxFormLayoutItem>
-
             <DxFormLayoutItem Caption="Country:" BeginRow="true">
-                <Template>
-                    <DxTextBox @bind-Text="@Country" />
-                </Template>
+                <DxTextBox @bind-Text="@Country" />
             </DxFormLayoutItem>
         </DxFormLayout>
-        <p class="demo-text w-100 mt-2 text-center text-muted">
-            @nameof(Address)=<b>@Address</b>,
-            @nameof(City)=<b>@City</b>,
-            @nameof(ZipCode)=<b>@ZipCode</b>,
-            @nameof(Country)=<b>@Country</b>
-        </p>
+        <div class="row w-100 mx-0">
+            <p class="demo-text col-12 mt-2 text-muted">
+                @nameof(Address)=<b>@Address</b>,
+                @nameof(City)=<b>@City</b>,
+                @nameof(ZipCode)=<b>@ZipCode</b>,
+                @nameof(Country)=<b>@Country</b>
+            </p>
+        </div>
     </ChildContentWithParameters>
 
     @code {

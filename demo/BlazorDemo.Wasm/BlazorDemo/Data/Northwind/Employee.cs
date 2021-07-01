@@ -31,6 +31,6 @@ namespace BlazorDemo.Data.Northwind {
         public virtual ICollection<Order> Orders { get; set; }
 
         public string Text => $"{FirstName} {LastName} ({Title})";
-        public string FileName => $"{FirstName}{LastName}";
+        public string ImageFileName => $"Employees/{EmployeeId}.jpg";
     }
 }

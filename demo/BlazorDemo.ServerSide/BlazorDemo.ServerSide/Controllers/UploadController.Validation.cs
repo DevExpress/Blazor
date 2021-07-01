@@ -8,9 +8,6 @@ namespace BlazorDemo.AspNetCoreHost {
     public partial class UploadController : ControllerBase {
         [HttpPost("[action]")]
         public ActionResult UploadImage(IFormFile myFile) {
-            /*BeginHide*/
-            if(!Configuration.SiteMode) {
-            /*EndHide*/
             try {
                 string[] imageExtensions = { ".jpg", ".jpeg", ".gif", ".png" };
 
@@ -20,10 +17,7 @@ namespace BlazorDemo.AspNetCoreHost {
                 });
 
                 if(isValidExtenstion) {
-                    var path = Path.Combine(HostingEnvironment.ContentRootPath, "uploads");
-                    if(!Directory.Exists(path))
-                        Directory.CreateDirectory(path);
-
+                    var path = GetOrCreateUploadFolder();
                     using(var fileStream = System.IO.File.Create(Path.Combine(path, myFile.FileName))) {
                         myFile.CopyTo(fileStream);
                     }
@@ -31,9 +25,6 @@ namespace BlazorDemo.AspNetCoreHost {
             } catch {
                 Response.StatusCode = 400;
             }
-            /*BeginHide*/
-            }
-            /*EndHide*/
             return new EmptyResult();
         }
     }

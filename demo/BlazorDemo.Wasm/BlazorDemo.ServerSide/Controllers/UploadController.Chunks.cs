@@ -18,11 +18,8 @@ namespace BlazorDemo.AspNetCoreHost {
     public partial class UploadController : ControllerBase {
         [HttpPost("[action]")]
         public ActionResult UploadChunkFile(IFormFile myFile) {
-            /*BeginHide*/
-            if(!Configuration.SiteMode) {
-            /*EndHide*/
             string chunkMetadata = Request.Form["chunkMetadata"];
-            var tempPath = Path.Combine(HostingEnvironment.ContentRootPath, "uploads");
+            var tempPath = Path.Combine(ContentRootPath, "uploads");
             // Removes temporary files
             RemoveTempFilesAfterDelay(tempPath, new TimeSpan(0, 5, 0));
 
@@ -42,9 +39,6 @@ namespace BlazorDemo.AspNetCoreHost {
             } catch {
                 return BadRequest();
             }
-            /*BeginHide*/
-            }
-            /*EndHide*/
             return Ok();
         }
         void AppendChunkToFile(string path, IFormFile content) {
@@ -53,14 +47,15 @@ namespace BlazorDemo.AspNetCoreHost {
             }
         }
         void SaveUploadedFile(string tempFilePath, string fileName) {
-            var path = Path.Combine(HostingEnvironment.ContentRootPath, "uploads");
+            var path = GetOrCreateUploadFolder();
             System.IO.File.Copy(tempFilePath, Path.Combine(path, fileName));
         }
         void RemoveTempFilesAfterDelay(string path, TimeSpan delay) {
             var dir = new DirectoryInfo(path);
-            if(dir.Exists)
+            if(dir.Exists) {
                 foreach(var file in dir.GetFiles("*.tmp").Where(f => f.LastWriteTimeUtc.Add(delay) < DateTime.UtcNow))
                     file.Delete();
+            }
         }
     }
 }

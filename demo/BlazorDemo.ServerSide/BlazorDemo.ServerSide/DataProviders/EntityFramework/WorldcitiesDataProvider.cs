@@ -5,20 +5,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using BlazorDemo.Data.Worldcities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace BlazorDemo.DataProviders {
-    class WorldcitiesDataProvider : DataProviderBase, IWorldcitiesDataProvider {
-        private readonly WorldcitiesContext _context;
-
-        public WorldcitiesDataProvider(WorldcitiesContext context) {
-            _context = context;
-        }
+    class WorldcitiesDataProvider : EntityDataProvider<WorldcitiesContext>, IWorldcitiesDataProvider {
+        public WorldcitiesDataProvider(IDbContextFactory<WorldcitiesContext> contextFactory, IConfiguration configuration) : base(contextFactory, configuration) { }
 
         public async Task<IEnumerable<Country>> GetCountriesAsync(CancellationToken ct = default) {
-            return await LoadDataAsync("Countries", () => _context.Countries, null, ct);
+            return await LoadDataAsync<Country>("Countries", ct);
         }
         public async Task<IEnumerable<City>> GetCitiesAsync(CancellationToken ct = default) {
-            return await LoadDataAsync("Cities", () => _context.Cities, null, ct);
+            return await LoadDataAsync<City>("Cities", ct);
         }
     }
 }

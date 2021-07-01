@@ -1,23 +1,27 @@
 ﻿<DemoPageSectionComponent Id="DataGrid-Selection-Single" ShowHorizontalScrollBar="true">
-    @inject IProductsFlatProvider ProductsFlatService
+    @inject NwindDataService NwindDataService
 
-    @if(DataSource == null) {
+    @if(Products == null) {
         <p><em>Loading...</em></p>
     } else {
-        <DxDataGrid Data="@DataSource"
-                    @bind-SingleSelectedDataRow="@SelectedProduct">
-            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name"></DxDataGridColumn>
-            <DxDataGridColumn Field="@nameof(ProductFlat.Category)"></DxDataGridColumn>
-            <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)"></DxDataGridColumn>
+        <DxDataGrid Data="@Products" @bind-SingleSelectedDataRow="@SelectedProduct" KeyFieldName="@nameof(Product.ProductId)">
+            <DxDataGridColumn Field="@nameof(Product.ProductName)" />
+            <DxDataGridComboBoxColumn Field="@nameof(Product.CategoryId)" Caption="Category"
+                                      Data="@Categories" TextFieldName="@nameof(Category.CategoryName)" ValueFieldName="@nameof(Category.CategoryId)" />
+            <DxDataGridSpinEditColumn Field="@nameof(Product.UnitPrice)" DisplayFormat="c" Width="120px" />
+            <DxDataGridSpinEditColumn Field="@nameof(Product.UnitsInStock)" Width="120px" />
+            <DxDataGridColumn Field="@nameof(Product.QuantityPerUnit)" />
+            <DxDataGridCheckBoxColumn Field="@nameof(Product.Discontinued)" Width="120px" />
         </DxDataGrid>
         <p class="demo-text w-100 mt-2 text-muted">Selected Product: <b>@(SelectedProduct == null ? "(none)" : SelectedProduct.ProductName)</b></p>
     }
 
     @code {
-        IEnumerable<ProductFlat> DataSource;
+        IEnumerable<Product> Products { get; set; }
+        IEnumerable<Category> Categories { get; set; }
 
-        ProductFlat selectedProduct;
-        public ProductFlat SelectedProduct {
+        Product selectedProduct;
+        public Product SelectedProduct {
             get {
                 return selectedProduct;
             }
@@ -28,8 +32,9 @@
         }
 
         protected override async Task OnInitializedAsync() {
-            DataSource = await ProductsFlatService.LoadAsync();
-            SelectedProduct = DataSource.First();
+            Products = await NwindDataService.GetProductsAsync();
+            Categories = await NwindDataService.GetCategoriesAsync();
+            SelectedProduct = Products.FirstOrDefault();
         }
     }
 </DemoPageSectionComponent>

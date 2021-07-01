@@ -1,46 +1,29 @@
 ﻿<DemoPageSectionComponent Id="DataGrid-Summary-Group" ShowHorizontalScrollBar="true">
-    @inject ISalesInfoDataProvider Sales
+    @inject NwindDataService NwindDataService
 
-    @if(Sales == null) {
+    @if(Data == null) {
         <p><em>Loading...</em></p>
     } else {
-        <DxDataGrid Data="@SalesData"
-                    ShowGroupPanel="true">
+        <DxDataGrid Data="@Data" ShowGroupPanel="true">
             <Columns>
-                <DxDataGridSpinEditColumn Field=@nameof(SaleInfo.OrderId)
-                                          Width="120px" />
-                <DxDataGridColumn Field=@nameof(SaleInfo.Region)
-                                  GroupIndex="0"
-                                  Width="240px" />
-                <DxDataGridColumn Field=@nameof(SaleInfo.Country)
-                                  GroupIndex="1" />
-                <DxDataGridDateEditColumn Field="@nameof(SaleInfo.Date)"
-                                          DisplayFormat="D" />
-                <DxDataGridColumn Field=@nameof(SaleInfo.City) />
-                <DxDataGridSpinEditColumn Field="@nameof(SaleInfo.Amount)"
-                                          DisplayFormat="c"
-                                          Width="120px" />
+                <DxDataGridColumn Field="@nameof(Invoice.Country)" GroupIndex="0" Width="200px" />
+                <DxDataGridColumn Field="@nameof(Invoice.City)" GroupIndex="1" Width="200px" />
+                <DxDataGridColumn Field="@nameof(Invoice.CustomerName)" />
+                <DxDataGridSpinEditColumn Field="@nameof(Invoice.UnitPrice)" DisplayFormat="c" Width="120px" />
+                <DxDataGridSpinEditColumn Field="@nameof(Invoice.Quantity)" Width="120px" />
             </Columns>
             <GroupSummary>
-                <DxDataGridSummaryItem SummaryType=SummaryItemType.Count
-                                       GroupSummaryPosition="GroupSummaryPosition.GroupRow" />
-                <DxDataGridSummaryItem Field=@nameof(SaleInfo.Amount)
-                                       SummaryType=SummaryItemType.Sum
-                                       GroupSummaryPosition="GroupSummaryPosition.GroupFooter"
-                                       DisplayFormat="Total: {0:c}" />
-                <DxDataGridSummaryItem Field=@nameof(SaleInfo.Date)
-                                       SummaryType=SummaryItemType.Min
-                                       DisplayFormat="First: {0:D}"
-                                       GroupSummaryPosition="GroupSummaryPosition.GroupFooter" />
+                <DxDataGridSummaryItem SummaryType="SummaryItemType.Count" Field="@nameof(Invoice.CustomerName)" DisplayFormat="Count is {0}" />
+                <DxDataGridSummaryItem SummaryType="SummaryItemType.Avg" Field="@nameof(Invoice.Quantity)" DisplayFormat="Avg of Quantity is {0:0.##}" />
             </GroupSummary>
         </DxDataGrid>
     }
 
     @code {
-        IEnumerable<SaleInfo> SalesData;
+        IEnumerable<Invoice> Data { get; set; }
 
         protected override async Task OnInitializedAsync() {
-            SalesData = await Sales.GetReducedSalesAsync();
+            Data = await NwindDataService.GetInvoicesAsync();
         }
     }
 </DemoPageSectionComponent>

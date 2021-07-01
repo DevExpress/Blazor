@@ -6,28 +6,29 @@
                  @key="Params.ThemeName"
                  CustomizeSeriesPoint="@PreparePointImage"
                  CssClass="w-100">
-
+            <DxChartTitle Text="15-Day Weather Forecast" />
             <DxChartLineSeries SummaryMethod="@(i => (int)i.Average())"
                                ValueField="@((WeatherForecast i) => i.TemperatureF)"
                                ArgumentField="@(i => i.Date.Date)"
-                               Name="Temperature, F">
+                               Name="Temperature, °F">
                 <DxChartSeriesPoint>
                     <DxChartSeriesPointImage Width="50"
                                              Height="50" />
                 </DxChartSeriesPoint>
             </DxChartLineSeries>
-
-            <DxChartLegend Position="RelativePosition.Outside" />
-
+            <DxChartLegend Visible="false" />
+            <DxChartValueAxis>
+                <DxChartAxisTitle Text="Temperature, °F" />
+            </DxChartValueAxis>
         </DxChart>
     </ChildContentWithParameters>
 
 
     @code {
-        WeatherForecast[] WeatherForecasts;
+        IEnumerable<WeatherForecast> WeatherForecasts;
 
         protected override async Task OnInitializedAsync() {
-            WeatherForecasts = await ForecastService.GetDetailedForecastAsync();
+            WeatherForecasts = await ForecastService.GetForecastAsync();
         }
 
         protected void PreparePointImage(ChartSeriesPointCustomizationSettings pointSettings) {

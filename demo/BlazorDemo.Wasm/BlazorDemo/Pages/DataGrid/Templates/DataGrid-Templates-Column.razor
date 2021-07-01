@@ -1,84 +1,79 @@
 ﻿<DemoPageSectionComponent Id="DataGrid-Templates-Column" ShowHorizontalScrollBar="true">
-    @inject ProductsFlatService ProductsFlatService
+    @inject NwindDataService NwindDataService
 
-    @if(DataSource == null || NestedDataSource == null) {
+    @if(DataSource == null) {
         <p><em>Loading...</em></p>
     } else {
         <DxDataGrid Data="@DataSource"
-                    RowRemoving="@((dataItem) => OnRowRemoving(dataItem))"
-                    RowUpdating="@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))"
-                    RowInserting="@((newValues) => OnRowInserting(newValues))">
-
-            <DxDataGridCommandColumn Width="150px" />
-            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name" />
-            <DxDataGridColumn Field="@nameof(ProductFlat.ProductCategoryId)" Caption="Category">
-                <DisplayTemplate>
-                    @{
-                        var product = context as ProductFlat;
-                        int currentCellValue = (int)product.ProductCategoryId;
-                        var nestedItem = NestedDataSource.Where(x => x.SubcategoryID == currentCellValue).FirstOrDefault();
-                        string category = nestedItem != null ? nestedItem.Category.ToString() : "none";
-                        string subcategory = nestedItem != null ? nestedItem.Subcategory : "none";
-                        <span>@category/@subcategory</span>
-                    }
-                </DisplayTemplate>
-                <EditTemplate>
-                    @{
-                        var cellEditContext = (CellEditContext)context;
-                        int currentCellValue = (int)cellEditContext.CellValue;
-                        var nestedItem = NestedDataSource.Where(x => x.SubcategoryID == currentCellValue).FirstOrDefault();
-                    }
-                    <DxDataGrid Data="@NestedDataSource"
-                                PageSize="5"
-                                SingleSelectedDataRow="@nestedItem"
-                                SingleSelectedDataRowChanged="@(newCellValue => cellEditContext.OnChanged(newCellValue.SubcategoryID))">
-                        <DxDataGridColumn Field="@nameof(ProductCategory.Category)"></DxDataGridColumn>
-                        <DxDataGridColumn Field="@nameof(ProductCategory.Subcategory)"></DxDataGridColumn>
-                        <DxDataGridDateEditColumn Field="@nameof(ProductCategory.LastUpdated)" DisplayFormat="D" EditorFormat="d" EditorDisplayFormat="D"></DxDataGridDateEditColumn>
-                    </DxDataGrid>
-                </EditTemplate>
-            </DxDataGridColumn>
-            <DxDataGridColumn Field="@nameof(ProductFlat.Availability)" Caption="Availability" Width="150px">
-                <DisplayTemplate>
-                    @{
-                        var id = Guid.NewGuid().ToString();
-                        var inStock = (context as ProductFlat).Availability;
-                        <DxCheckBox Id="@id" Checked="@inStock" Enabled="false">
-                            @if(inStock) {
-                                <label class="form-check-label text-success" for="@id"><span>In stock</span></label>
-                            } else {
-                                <label class="form-check-label text-danger" for="@id"><span>Sold out</span></label>
-                            }
-                        </DxCheckBox>
-                    }
-                </DisplayTemplate>
-                <EditTemplate>
-                    <DxComboBox Data="@(new List<string>() { "In stock", "Sold out" })"
-                                Value="@(((bool)((CellEditContext)context).CellValue) ? "In stock" : "Sold out" )"
-                                ValueChanged="@((string newCellValue) => ((CellEditContext)context).OnChanged(newCellValue == "In stock"))">
-                    </DxComboBox>
-                </EditTemplate>
-            </DxDataGridColumn>
+                    RowRemovingAsync="@OnRowRemovingAsync"
+                    RowUpdatingAsync="@OnRowUpdatingAsync"
+                    RowInsertingAsync="@OnRowInsertingAsync"
+                    RowEditStart="@(dataItem => OnRowEditStarting(dataItem))"
+                    RowInsertStart="@(() => OnRowEditStarting(null))">
+            <Columns>
+                <DxDataGridCommandColumn Width="120px" />
+                <DxDataGridColumn Field="FirstName" />
+                <DxDataGridColumn Field="LastName" />
+                <DxDataGridColumn Field="Title" />
+                <DxDataGridColumn Field="@nameof(Employee.TitleOfCourtesy)" Width="150px" />
+                <DxDataGridDateEditColumn Field="BirthDate" Width="150px" />
+                <DxDataGridDateEditColumn Field="HireDate" Width="150px" />
+                <DxDataGridColumn Field="Details" AllowSort="false" Width="90px">
+                    <DisplayTemplate><a class="d-block text-left" href="javascript:;" @onclick="() => ShowDetails(context as Employee)">More Info...</a></DisplayTemplate>
+                    <EditTemplate>
+                        <DxMemo @bind-Text="@EditEmployeeNotes" Rows="5" />
+                        <div class="text-muted pt-1" style="font-size:0.8em">Details should be 4 to 256 characters</div>
+                    </EditTemplate>
+                </DxDataGridColumn>
+            </Columns>
         </DxDataGrid>
+        <DxPopup @bind-Visible="@PopupVisible"
+                 HeaderText="@PopupHeaderText"
+                 HorizontalAlignment="HorizontalAlignment.Center"
+                 VerticalAlignment="VerticalAlignment.Center">@PopupContent</DxPopup>
     }
 
     @code {
-        IEnumerable<ProductFlat> DataSource;
-        IEnumerable<ProductCategory> NestedDataSource;
+        IEnumerable<Employee> DataSource { get; set; }
+        string EditEmployeeNotes { get; set; }
+        Employee CurrentEmployee { get; set; }
+        bool PopupVisible {
+            get { return CurrentEmployee != null; }
+            set { if(!value) CurrentEmployee = null; }
+        }
+        string PopupHeaderText {
+            get { return CurrentEmployee != null ? CurrentEmployee.FirstName + " " + CurrentEmployee.LastName : ""; }
+        }
+        string PopupContent {
+            get { return CurrentEmployee != null ? CurrentEmployee.Notes : ""; }
+        }
 
         protected override async Task OnInitializedAsync() {
-            DataSource = await ProductsFlatService.LoadAsync();
-            NestedDataSource = await ProductsFlatService.LoadCategoriesAsync();
+            DataSource = await NwindDataService.GetEmployeesAsync();
+        }
+        public void ShowDetails(Employee context) {
+            CurrentEmployee = context;
         }
 
-        void OnRowRemoving(ProductFlat dataItem) {
-            ProductsFlatService.RemoveAsync(dataItem);
+        void OnRowEditStarting(Employee employee) {
+            EditEmployeeNotes = employee?.Notes;
         }
-        void OnRowUpdating(ProductFlat dataItem, Dictionary<string, object> newValue) {
-            ProductsFlatService.UpdateAsync(dataItem, newValue);
+        async Task OnRowRemovingAsync(Employee dataItem) {
+            await NwindDataService.RemoveEmployeeAsync(dataItem);
+            DataSource = await NwindDataService.GetEmployeesEditableAsync();
+            StateHasChanged();
         }
-        void OnRowInserting(Dictionary<string, object> newValue) {
-            ProductsFlatService.AddAsync(newValue);
+        async Task OnRowUpdatingAsync(Employee dataItem, IDictionary<string, object> newValues) {
+            newValues.Add(nameof(Employee.Notes), EditEmployeeNotes);
+            await NwindDataService.UpdateEmployeeAsync(dataItem, newValues);
+            DataSource = await NwindDataService.GetEmployeesEditableAsync();
+            StateHasChanged();
+        }
+        async Task OnRowInsertingAsync(IDictionary<string, object> newValues) {
+            newValues.Add(nameof(Employee.Notes), EditEmployeeNotes);
+            await NwindDataService.InsertEmployeeAsync(newValues);
+            DataSource = await NwindDataService.GetEmployeesEditableAsync();
+            StateHasChanged();
         }
     }
 </DemoPageSectionComponent>

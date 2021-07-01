@@ -1,7 +1,7 @@
-The DevExpress [TreeView](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView#bind-to-data) for Blazor allows you to load data from several data sources and display the master-detail relationships within the component.
+You can populate the DevExpress TreeView's nodes with data from a source. This demo demonstrates how to bind the TreeView to the collection of flat data items. Data are loaded from a `IFlatProductsWithCategoryProvider` data provider.  
 
-This demo module binds the TreeView to three data sources and populates component nodes as follows:
+The code above does the following: 
 
-*   First-level nodes are bound to an array of _ProductCategoryMain_ items via the component's [Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.Data) property.
-*   Second-level nodes are obtained from the second data source. Each node is represented by the _ProductCategory_ object and depends on a parent value (the corresponding first-level node).
-*   Third-level nodes are obtained from the third data source. Each node is represented by the _Product_ object based on a master-detail relationship between the second and third data sources. This relationship is established through the _ProductCategory.SubcategoryID_ and _Product.ProductCategoryId_ properties.
+1. Uses the TreeView's [Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.Data) property to specify a data source. 
+2. Adds the [\<DataMappings>](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.DataMappings) tag to the component markup. 
+3. Creates the [DxTreeViewDataMapping](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeViewDataMapping) instance and maps [node properties](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeViewDataMapping._members#properties) to data source fields. Mappings are used to adjust the TreeView's data model to the data source. For flat data, the [Key](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataMappingBase-1.Key) and [ParentKey](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataMappingBase-1.ParentKey) property is required. 

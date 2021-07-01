@@ -1,23 +1,26 @@
 ﻿<DemoPageSectionComponent Id="DataGrid-ColumnChooser-Overview" ShowHorizontalScrollBar="true">
     @inject NwindDataService NwindDataService
 
-    <DxDataGrid Data="@DataSource">
-        <HeaderTemplate>
-            <DxToolbar>
-                <DxDataGridColumnChooserToolbarItem Alignment="ToolbarItemAlignment.Right" />
-            </DxToolbar>
-        </HeaderTemplate>
-        <Columns>
-            <DxDataGridColumn Field="@nameof(Employee.FirstName)" />
-            <DxDataGridColumn Field="@nameof(Employee.LastName)" />
-            <DxDataGridColumn Field="@nameof(Employee.Title)" />
-            <DxDataGridDateEditColumn Field="@nameof(Employee.HireDate)" />
-            <DxDataGridDateEditColumn Field="@nameof(Employee.BirthDate)" Visible="false" />
-            <DxDataGridColumn Field="@nameof(Employee.FileName)" Visible="false" />
-            <DxDataGridColumn Field="@nameof(Employee.Notes)" Visible="false" />
-        </Columns>
-    </DxDataGrid>
-
+    @if(DataSource == null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <DxDataGrid Data="@DataSource">
+            <HeaderTemplate>
+                <DxToolbar>
+                    <DxDataGridColumnChooserToolbarItem Alignment="ToolbarItemAlignment.Right" />
+                </DxToolbar>
+            </HeaderTemplate>
+            <Columns>
+                <DxDataGridColumn Field="@nameof(Employee.FirstName)" />
+                <DxDataGridColumn Field="@nameof(Employee.LastName)" />
+                <DxDataGridColumn Field="@nameof(Employee.Title)" />
+                <DxDataGridDateEditColumn Field="@nameof(Employee.HireDate)" />
+                <DxDataGridDateEditColumn Field="@nameof(Employee.BirthDate)" Visible="false" />
+                <DxDataGridColumn Field="@nameof(Employee.ImageFileName)" Visible="false" />
+                <DxDataGridColumn Field="@nameof(Employee.Notes)" Visible="false" />
+            </Columns>
+        </DxDataGrid>
+    }
     @code {
         IEnumerable<Employee> DataSource;
 

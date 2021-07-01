@@ -1,63 +1,54 @@
 ﻿<DemoPageSectionComponent Id="Editors-Validation-FormLayout">
+    <div class="cw-880">
+        <EditForm Model="@starship"
+                  OnValidSubmit="@HandleValidSubmit"
+                  OnInvalidSubmit="@HandleInvalidSubmit"
+                  Context="EditFormContext">
 
-    <EditForm Model="@starship"
-              OnValidSubmit="@HandleValidSubmit"
-              OnInvalidSubmit="@HandleInvalidSubmit"
-              Context="EditFormContext">
+            <DataAnnotationsValidator />
 
-        <DataAnnotationsValidator />
-
-        <DxFormLayout>
-            <DxFormLayoutItem Caption="Identifier:" ColSpanMd="6">
-                <Template>
+            <DxFormLayout>
+                <DxFormLayoutItem Caption="Identifier:" ColSpanMd="6">
                     <DxTextBox @bind-Text="@starship.Identifier" />
-                </Template>
-            </DxFormLayoutItem>
+                </DxFormLayoutItem>
 
-            <DxFormLayoutItem Caption="Primary Classification:" ColSpanMd="6">
-                <Template>
+                <DxFormLayoutItem Caption="Primary Classification:" ColSpanMd="6">
                     <DxComboBox NullText="Select classification ..."
                                 ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
                                 Data="classifications"
                                 @bind-Value="@starship.Classification" />
-                </Template>
-            </DxFormLayoutItem>
+                </DxFormLayoutItem>
 
-            <DxFormLayoutItem Caption="Maximum Accommodation:"
-                              ColSpanMd="6">
-                <Template>
+                <DxFormLayoutItem Caption="Maximum Accommodation:"
+                                  ColSpanMd="6">
                     <DxSpinEdit Id="accommodation"
                                 @bind-Value="@starship.MaximumAccommodation" />
-                </Template>
-            </DxFormLayoutItem>
+                </DxFormLayoutItem>
 
-            <DxFormLayoutItem Caption="Production Date:"
-                              ColSpanMd="6">
-                <Template>
+                <DxFormLayoutItem Caption="Production Date:"
+                                  ColSpanMd="6">
                     <DxDateEdit @bind-Date="@starship.ProductionDate" />
-                </Template>
-            </DxFormLayoutItem>
+                </DxFormLayoutItem>
 
-            <DxFormLayoutItem ColSpanMd="12">
-                <Template>
+                <DxFormLayoutItem ColSpanMd="12">
                     <DxButton SubmitFormOnClick="true"
                               Text="Submit"
                               RenderStyle="ButtonRenderStyle.Secondary" />
-                </Template>
-            </DxFormLayoutItem>
+                </DxFormLayoutItem>
 
-            <DxFormLayoutItem ColSpanMd="12">
-                <Template>
+                <DxFormLayoutItem ColSpanMd="12">
                     <ValidationSummary />
-                </Template>
-            </DxFormLayoutItem>
+                </DxFormLayoutItem>
 
-        </DxFormLayout>
+            </DxFormLayout>
 
-        <p class="demo-text w-100 mt-4 text-muted">
-            Form Validation State: <b>@FormValidationState</b>
-        </p>
-    </EditForm>
+            <div class="row w-100 mx-0">
+                <p class="demo-text col-12 mt-2 text-muted">
+                    Form Validation State: <b>@FormValidationState</b>
+                </p>
+            </div>
+        </EditForm>
+    </div>
 
     @code {
         string FormValidationState = @"Press the ""Submit"" button to validate the form.";

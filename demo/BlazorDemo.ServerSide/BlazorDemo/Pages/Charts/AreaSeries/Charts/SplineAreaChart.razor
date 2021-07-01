@@ -4,37 +4,35 @@
 
 @inject ISalesInfoDataProvider Sales
 
-@if (ChartsData != null) {
-    <DxChart Data="@ChartsData" CssClass="w-100">
-        <DxChartSplineAreaSeries Name="2017"
-                                 T="SaleInfo"
-                                 TArgument="string"
-                                 TValue="int"
-                                 ArgumentField="si => si.City"
-                                 ValueField="si => si.Amount"
-                                 SummaryMethod="Enumerable.Sum"
-                                 Filter="si => si.Date.Year == 2017" />
-        <DxChartSplineAreaSeries Name="2018"
-                                 T="SaleInfo"
-                                 TArgument="string"
-                                 TValue="int"
-                                 ArgumentField="si => si.City"
-                                 ValueField="si => si.Amount"
-                                 SummaryMethod="Enumerable.Sum"
-                                 Filter="si => si.Date.Year == 2018" />
-        <DxChartSplineAreaSeries Name="2019"
-                                 T="SaleInfo"
-                                 TArgument="string"
-                                 TValue="int"
-                                 ArgumentField="si => si.City"
-                                 ValueField="si => si.Amount"
-                                 SummaryMethod="Enumerable.Sum"
-                                 Filter="si => si.Date.Year == 2019" />
-        <DxChartArgumentAxis SideMarginsEnabled="false" />
-        <DxChartLegend Position="RelativePosition.Outside"
-                       HorizontalAlignment="HorizontalAlignment.Right" />
-    </DxChart>
-}
+<DxChart Data="@ChartsData" CssClass="w-100">
+    <DxChartSplineAreaSeries Name="2017"
+                             T="SaleInfo"
+                             TArgument="string"
+                             TValue="int"
+                             ArgumentField="si => si.City"
+                             ValueField="si => si.Amount"
+                             SummaryMethod="Enumerable.Sum"
+                             Filter="si => si.Date.Year == 2017" />
+    <DxChartSplineAreaSeries Name="2018"
+                             T="SaleInfo"
+                             TArgument="string"
+                             TValue="int"
+                             ArgumentField="si => si.City"
+                             ValueField="si => si.Amount"
+                             SummaryMethod="Enumerable.Sum"
+                             Filter="si => si.Date.Year == 2018" />
+    <DxChartSplineAreaSeries Name="2019"
+                             T="SaleInfo"
+                             TArgument="string"
+                             TValue="int"
+                             ArgumentField="si => si.City"
+                             ValueField="si => si.Amount"
+                             SummaryMethod="Enumerable.Sum"
+                             Filter="si => si.Date.Year == 2019" />
+    <DxChartArgumentAxis SideMarginsEnabled="false" />
+    <DxChartLegend Position="RelativePosition.Outside"
+                   HorizontalAlignment="HorizontalAlignment.Right" />
+</DxChart>
 
 @code {
     IEnumerable<SaleInfo> ChartsData;

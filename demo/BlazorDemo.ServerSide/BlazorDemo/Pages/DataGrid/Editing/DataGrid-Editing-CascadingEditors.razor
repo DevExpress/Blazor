@@ -1,86 +1,96 @@
 ﻿<DemoPageSectionComponent Id="DataGrid-Editing-CascadingEditors" ShowHorizontalScrollBar="true">
-    @if(Vacancies == null) {
+    @inject NwindDataService NwindDataService
+    @inject WorldcitiesDataService WorldcitiesDataService
+
+    @if(Data == null) {
         <p><em>Loading...</em></p>
     } else {
-        <DxDataGrid Data="@Vacancies"
+        <DxDataGrid Data="@Data"
+                    @ref="@grid"
                     ShowPager="false"
-                    RowRemoving="@((dataItem) => OnRowRemoving(dataItem))"
-                    RowInserting="@((newValues) => OnRowInserting(newValues))"
-                    RowUpdating="@((updatingDataItem, newValues) => OnRowUpdating(updatingDataItem, newValues))">
+                    RowRemovingAsync="@((dataItem) => OnRowRemoving(dataItem))"
+                    RowInsertingAsync="@((newValues) => OnRowInserting(newValues))"
+                    RowUpdatingAsync="@((dataItem, newValues) => OnRowUpdating(dataItem, newValues))">
             <DxDataGridCommandColumn Width="150px"></DxDataGridCommandColumn>
-
-            <DxDataGridComboBoxColumn Field="@nameof(Vacancy.Region)" Data="@VacancyRepository.Regions">
+            <DxDataGridColumn Field="CompanyName" />
+            <DxDataGridColumn Field="ContactName" />
+            <DxDataGridColumn Field="ContactTitle" />
+            <DxDataGridColumn Field="Phone" />
+            <DxDataGridComboBoxColumn Field="@nameof(Supplier.Country)" Data="@Countries">
                 <EditTemplate>
                     @{
                         var editingContext = (CellEditContext)context;
-                        var region = (string)editingContext.GetEditorValue(nameof(Vacancy.Region));
+                        var country = (string)editingContext.GetEditorValue(nameof(Supplier.Country));
                     }
-                    <DxComboBox Data="@VacancyRepository.Regions"
-                                NullText="Select Region..."
-                                Value="@region"
+                    <DxComboBox Data="@Countries"
+                                NullText="Select Country..."
+                                TextFieldName="@nameof(Country.CountryName)"
+                                ValueFieldName="@nameof(Country.CountryName)"
+                                Value="@country"
                                 ValueChanged="@(EventCallback.Factory.Create(this, (string newCellValue) => {
                                                     editingContext.OnChanged(newCellValue);
-                                                    editingContext.OnChanged(nameof(Vacancy.City), null);
+                                                    editingContext.OnChanged(nameof(Supplier.City), null);
                                                     }))">
                     </DxComboBox>
                 </EditTemplate>
             </DxDataGridComboBoxColumn>
-            <DxDataGridColumn Field="@nameof(Vacancy.City)">
+            <DxDataGridColumn Field="@nameof(Supplier.City)">
                 <EditTemplate>
                     @{
                         var editingContext = (CellEditContext)context;
 
-                        var region = (string)editingContext.GetEditorValue(nameof(Vacancy.Region));
-                        var city = ((string)(editingContext.GetEditorValue(nameof(Vacancy.City))));
-
-                        var cities = VacancyRepository.GetOfficeLocationsByRegion(region).Select(x => x.City);
+                        var country = (string)editingContext.GetEditorValue(nameof(Supplier.Country));
+                        var city = ((string)(editingContext.GetEditorValue(nameof(Supplier.City))));
+                        var countryId = Countries.Where(c => c.CountryName == country).FirstOrDefault()?.CountryId;
+                        var cities = Cities.Where(x => x.CountryId == countryId);
                     }
                     <DxComboBox Data="@cities"
                                 NullText="Select City..."
                                 Text="@city"
+                                TextFieldName="@nameof(City.CityName)"
+                                ValueFieldName="@nameof(City.CityName)"
                                 ValueChanged="@(EventCallback.Factory.Create(this, (string newCellValue) => editingContext.OnChanged(newCellValue)))">
                     </DxComboBox>
                 </EditTemplate>
             </DxDataGridColumn>
-            <DxDataGridColumn Field="@nameof(Vacancy.Description)" Caption="Vacancy"></DxDataGridColumn>
         </DxDataGrid>
     }
 
     @code {
-        IEnumerable<Vacancy> Vacancies;
+        IEnumerable<Supplier> Data;
+        IEnumerable<Country> Countries;
+        IEnumerable<City> Cities;
+        DxDataGrid<Supplier> grid;
 
         protected override async Task OnInitializedAsync() {
-            Vacancies = await VacancyRepository.GetVacancies(3);
+            Data = await NwindDataService.GetSuppliersEditableAsync();
+            Countries = await WorldcitiesDataService.GetCountriesAsync();
+            Cities = await WorldcitiesDataService.GetCitiesAsync();
+        }
+        protected override async Task OnAfterRenderAsync(bool firstRender) {
+            if(firstRender) {
+                var editableSupplier = Data.FirstOrDefault();
+                await grid.StartRowEdit(editableSupplier);
+            }
         }
 
         public void OnRegionChanged() {
             InvokeAsync(StateHasChanged);
         }
-        void OnRowUpdating(Vacancy vacancy, Dictionary<string, object> newValue) {
-            foreach(var field in newValue.Keys) {
-                switch(field) {
-                    case "Description":
-                        vacancy.Description = (string)newValue[field];
-                        break;
-                    case "Region":
-                        vacancy.Region = (string)newValue[field];
-                        break;
-                    case "City":
-                        vacancy.City = (string)newValue[field];
-                        break;
-                }
-            }
+        async Task OnRowUpdating(Supplier supplier, IDictionary<string, object> newValues) {
+            await NwindDataService.UpdateSupplierAsync(supplier, newValues);
+            Data = await NwindDataService.GetSuppliersEditableAsync();
+            StateHasChanged();
         }
-        void OnRowRemoving(Vacancy vacancy) {
-            Vacancies = Vacancies.Where(v => v != vacancy).ToArray();
-            InvokeAsync(StateHasChanged);
+        async Task OnRowRemoving(Supplier supplier) {
+            await NwindDataService.RemoveSupplierAsync(supplier);
+            Data = await NwindDataService.GetSuppliersEditableAsync();
+            StateHasChanged();
         }
-        void OnRowInserting(Dictionary<string, object> newValue) {
-            var newVacancy = new Vacancy();
-            OnRowUpdating(newVacancy, newValue);
-            Vacancies = (new Vacancy[] { newVacancy }).Concat(Vacancies);
-
-            InvokeAsync(StateHasChanged);
+        async Task OnRowInserting(IDictionary<string, object> newValues) {
+            await NwindDataService.InsertSupplierAsync(newValues);
+            Data = await NwindDataService.GetSuppliersEditableAsync();
+            StateHasChanged();
         }
     }
 </DemoPageSectionComponent>

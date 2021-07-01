@@ -9,12 +9,16 @@
     @code {
         DxRichEdit richEdit;
 
-        protected override Task OnAfterRenderAsync(bool firstRender) {
-            if (firstRender)
-                InitializeDocument();
-            return base.OnAfterRenderAsync(firstRender);
+        protected override async Task OnAfterRenderAsync(bool firstRender) {
+            if (firstRender) {
+                try {
+                    await InitializeDocument();
+                }
+                catch (TaskCanceledException) { }
+            }
+            await base.OnAfterRenderAsync(firstRender);
         }
-        async void InitializeDocument() {
+        async Task InitializeDocument() {
             Document documentAPI = richEdit.DocumentAPI;
             documentAPI.BeginUpdate();
             Paragraph bodyParagraph = await documentAPI.Paragraphs.CreateAsync(0);
@@ -44,7 +48,7 @@
             await pictureParagraph.ChangePropertiesAsync(properties => {
                 properties.Alignment = ParagraphAlignment.Center;
             });
-            await documentAPI.InlineImages.CreateAsync(0, DocumentImageSource.LoadFromUri(NavigationManager.BaseUri + "_content/BlazorDemo/images/AynRand.jpg", Units.PixelsToTwips(288, 96), Units.PixelsToTwips(358, 96)));
+            await documentAPI.InlineImages.CreateAsync(0, DocumentImageSource.LoadFromUrl(NavigationManager.BaseUri + "_content/BlazorDemo/images/AynRand.jpg", Units.PixelsToTwips(288, 96), Units.PixelsToTwips(358, 96)));
             Paragraph titleParagraph = await documentAPI.Paragraphs.CreateAsync(0);
             await titleParagraph.ChangePropertiesAsync(properties => {
                 properties.SpacingAfter = 400;

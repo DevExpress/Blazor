@@ -1,45 +1,32 @@
 ﻿<DemoPageSectionComponent Id="Navigation-FormLayout-Overview"
-                          ShowSizeMode="true"
-                          ShowCode="false">
+                          ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         <DxFormLayout ItemSizeMode="Params.SizeMode" @key="@Params.ThemeName" CssClass="w-100">
             <DxFormLayoutItem Caption="Contact Name:" ColSpanMd="6">
-                <Template>
                     <DxTextBox @bind-Text="@Name" />
-                </Template>
             </DxFormLayoutItem>
-
             <DxFormLayoutItem Caption="Email:" ColSpanMd="6">
-                <Template>
                     <DxTextBox @bind-Text="@Email" />
-                </Template>
             </DxFormLayoutItem>
-
             <DxFormLayoutItem Caption="Birth Date:" ColSpanMd="6">
-                <Template>
                     <DxDateEdit @bind-Date="@BirthDate" Mask="@DateTimeMask.ShortDate" />
-                </Template>
             </DxFormLayoutItem>
-
             <DxFormLayoutItem Caption="Years Worked:" ColSpanMd="6">
-                <Template>
                     <DxSpinEdit @bind-Value="@YearsWorked" />
-                </Template>
             </DxFormLayoutItem>
-
             <DxFormLayoutItem Caption="On Vacation:">
-                <Template>
                     <DxCheckBox @bind-Checked="@OnVacation" />
-                </Template>
             </DxFormLayoutItem>
         </DxFormLayout>
-        <p class="demo-text w-100 mt-2 text-center text-muted">
-            @nameof(Name)=<b>@Name</b>,
-            @nameof(Email)=<b>@Email</b>,
-            @nameof(BirthDate)=<b>@BirthDate</b>,
-            @nameof(YearsWorked)=<b>@YearsWorked</b>,
-            @nameof(OnVacation)=<b>@OnVacation</b>
-        </p>
+        <div class="row w-100 mx-0">
+            <p class="demo-text col-12 mt-2 text-muted">
+                @nameof(Name)=<b>@Name</b>,
+                @nameof(Email)=<b>@Email</b>,
+                @nameof(BirthDate)=<b>@BirthDate</b>,
+                @nameof(YearsWorked)=<b>@YearsWorked</b>,
+                @nameof(OnVacation)=<b>@OnVacation</b>
+            </p>
+        </div>
     </ChildContentWithParameters>
 
 

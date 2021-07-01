@@ -4,4 +4,4 @@ Use the [FilteringMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxC
 *   [StartsWith](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode) - The ComboBox filters list items that begin with the search string and highlights matches.
 *   [None](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode) - The ComboBox does not filter list items.
 
-In this demo, the filter mode is set to [Contains](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode).
+In this demo, the filter mode is set to [DataGridFilteringMode.StartsWith](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode). To change the filter mode or disable filtering, use the **Filtering Mode** drop-down list.

@@ -24,15 +24,16 @@ namespace BlazorDemo.Wasm {
 
             services.AddTransient<RemoteDataProviderLoader>();
 
-            services.AddSingleton<IProductsFlatProvider, ProductsFlatProvider>();
             services.AddSingleton<IProductCategoriesProvider, ProductCategoriesProvider>();
             services.AddSingleton<ISalesInfoDataProvider, SalesInfoDataProvider>();
-            services.AddSingleton<ISalesViewerDataProvider, SalesViewerDataProvider>();
             services.AddSingleton<IFinancialSeriesDataProvider, FinancialSeriesDataProvider>();
             services.AddSingleton<ICurrencyExchangeDataProvider, UsdJpyDataProviderWasm>();
-            services.AddSingleton<INwindDataProvider, NwindDataProvider>();
             services.AddSingleton<IIssuesDataProvider, IssuesDataProvider>();
+            services.AddSingleton<IWeatherSummaryDataProvider, WeatherSummaryDataProviderWasm>();
             services.AddSingleton<IWorldcitiesDataProvider, WorldcitiesDataProvider>();
+            // Editable should be scoped
+            services.AddScoped<IProductsFlatProvider, ProductsFlatProvider>();
+            services.AddScoped<INwindDataProvider, NwindDataProvider>();
 
             services.AddNotSupportedDemoServices();
 

@@ -6,6 +6,9 @@
                 @*EndHide*@
                 <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain"
                            Title="DevExpress Logo" @key="@Params.ThemeName">
+                    <TitleTemplate>
+                        <img src="_content/BlazorDemo/images/Logo-Monochrome.svg" width="120" alt="@context" />
+                    </TitleTemplate>
                     <Items>
                         <DxToolbarItem IconCssClass="tb-icon tb-icon-refresh"
                                        Tooltip="Refresh"

@@ -18,20 +18,26 @@ namespace BlazorDemo.ServerSide {
         public override void ConfigureServices(WebHostBuilderContext context, IServiceCollection services) {
             services.AddNotSupportedDemoServices();
 
-            services.AddDbContext<NorthwindContext>(options => {
+            services.AddDbContextFactory<NorthwindContext>(opt => {
                 var connectionString = ConnectionStringUtils.GetNorthwindConnectionString(context.Configuration);
-                if(connectionString != null)
-                    options.UseSqlite(connectionString);
+                if(!string.IsNullOrEmpty(connectionString))
+                    opt.UseSqlServer(connectionString);
+                else
+                    opt.UseSqlite(ConnectionStringUtils.GetNorthwindSqliteConnectionString(context.Configuration));
             });
-            services.AddDbContext<IssuesContext>(options => {
+            services.AddDbContextFactory<IssuesContext>(opt => {
                 var connectionString = ConnectionStringUtils.GetIssuesConnectionString(context.Configuration);
-                if(connectionString != null)
-                    options.UseSqlite(connectionString);
+                if(!string.IsNullOrEmpty(connectionString))
+                    opt.UseSqlServer(connectionString);
+                else
+                    opt.UseSqlite(ConnectionStringUtils.GetIssuesSqliteConnectionString(context.Configuration));
             });
-            services.AddDbContext<WorldcitiesContext>(options => {
+            services.AddDbContextFactory<WorldcitiesContext>(opt => {
                 var connectionString = ConnectionStringUtils.GetWorlcitiesConnectionString(context.Configuration);
-                if(connectionString != null)
-                    options.UseSqlite(connectionString);
+                if(!string.IsNullOrEmpty(connectionString))
+                    opt.UseSqlServer(connectionString);
+                else
+                    opt.UseSqlite(ConnectionStringUtils.GetWorlcitiesSqliteConnectionString(context.Configuration));
             });
         }
 

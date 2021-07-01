@@ -14,6 +14,7 @@ namespace BlazorDemo.Configuration {
         public static readonly string ConfigJsonPath = "wwwroot.demo-metadata.json";
         public static readonly string PagesFolderName = "Pages";
         public static readonly string DescriptionsFolderName = "Descriptions";
+
         public static string GetRootDemoPageUrl(DemoRootPage rootPage) {
             return !string.IsNullOrEmpty(rootPage.Url) ? rootPage.Url : rootPage.Pages.Select(p => p.Url).FirstOrDefault();
         }
@@ -21,6 +22,8 @@ namespace BlazorDemo.Configuration {
         protected DemoConfiguration() {
         }
         public DemoConfiguration(IConfiguration configuration) {
+            Configuration = configuration;
+
             var jsonContent = GetDemoFileContent(ConfigJsonPath);
             Data = JsonConvert.DeserializeObject<DemoConfigurationData>(jsonContent);
             if(Data == null)
@@ -43,7 +46,6 @@ namespace BlazorDemo.Configuration {
                 AddRedirect(rootPage);
             }
             Search = new DemoSearchHelper(Data.Search, RootPages);
-            SiteMode = configuration.GetValue<bool>("SiteMode");
             void AddRedirect(DemoPageSection section) {
                 if(section.RedirectFrom?.Length > 0)
                     foreach(var redirect in section.RedirectFrom)
@@ -51,9 +53,9 @@ namespace BlazorDemo.Configuration {
             }
         }
 
+        private IConfiguration Configuration { get; set; }
         public DemoConfigurationData Data { get; private set; }
         public DemoSearchHelper Search { get; private set; }
-        public bool SiteMode { get; private set; }
 
         public bool IsServerSide =>
 #if SERVER_BLAZOR
@@ -67,6 +69,9 @@ namespace BlazorDemo.Configuration {
         public virtual IEnumerable<DemoRootPage> RootPages { get; }
         public Dictionary<string, string> Redirect { get; private set; }
 
+        public T GetConfigurationValue<T>(string key) {
+            return Configuration.GetValue<T>(key);
+        }
 
         public DemoPageBase GetDemoPageByUrl(string pageUrl) {
             pageUrl = pageUrl.Trim('/');
@@ -184,12 +189,13 @@ namespace BlazorDemo.Configuration {
                 var title = rootPage.SeoTitle ?? rootPage.Title;
                 ConfigurePage(metadataCollection, rootPage, title, titleFormat);
                 foreach(var page in rootPage.Pages)
-                    ConfigurePage(metadataCollection, page, string.Join('-', title, page.Title), titleFormat);
+                    ConfigurePage(metadataCollection, page, string.Join(" - ", title, page.Title), titleFormat);
             }
         }
         static void ConfigurePage(IDocumentMetadataCollection metadataCollection, DemoPageBase page, string title, string titleFormat) {
             if(page.Url != null) {
-                metadataCollection.AddPage(page.Url)
+                var pageUrl = page.Url == "./" ? "" : page.Url;
+                metadataCollection.AddPage(pageUrl)
                     .OpenGraph("url", page.OG_Url)
                     .OpenGraph("type", page.OG_Type)
                     .OpenGraph("title", page.OG_Title)

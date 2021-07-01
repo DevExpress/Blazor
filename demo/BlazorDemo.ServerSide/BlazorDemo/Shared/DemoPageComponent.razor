@@ -5,7 +5,10 @@
     <div class="demo-page-content theme-@Themes.ActiveTheme.Name.Replace(" ", "-")">
         @ChildContent
     </div>
-    <DemoPageNavPanel />
+    <div class="demo-page-right-container">
+        <DemoPageNavPanel />
+        <DemoFeedbackPanel />
+    </div>
 </div>
 
 @code {

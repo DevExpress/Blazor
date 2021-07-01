@@ -24,8 +24,8 @@
     }
 
     @code {
-        IEnumerable<BlazorDemo.Data.Northwind.Employee> Data { get; set; }
-        BlazorDemo.Data.Northwind.Employee CurrentEmployee { get; set; }
+        IEnumerable<Employee> Data { get; set; }
+        Employee CurrentEmployee { get; set; }
         bool PopupVisible {
             get { return CurrentEmployee != null; }
             set { if(!value) CurrentEmployee = null; }

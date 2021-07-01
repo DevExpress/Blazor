@@ -8,9 +8,9 @@
                     SizeMode="@Params.SizeMode"
                     CssClass="cw-480" />
         <p class="demo-text cw-480 mt-2 text-muted">
-            Selected item: { FirstName=<b>@SelectedEmployee.FirstName</b>,
-            LastName=<b>@SelectedEmployee.LastName</b>,
-            Title=<b>@SelectedEmployee.Title</b> }
+            Selected item: { FirstName=<b>@SelectedEmployee?.FirstName</b>,
+            LastName=<b>@SelectedEmployee?.LastName</b>,
+            Title=<b>@SelectedEmployee?.Title</b> }
         </p>
     </ChildContentWithParameters>
 

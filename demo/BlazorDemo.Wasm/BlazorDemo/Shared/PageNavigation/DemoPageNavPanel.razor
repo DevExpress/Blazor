@@ -5,20 +5,18 @@
 <DemoScriptLoader @ref=@navPanelHelper Src="_content/BlazorDemo/lib/page-nav.js">
 </DemoScriptLoader>
 
-@if(visible) {
-    <div class="demo-page-nav-container">
-        <div class="demo-page-nav">
-            <DemoPageNavHeader Title="@demoPageSections.First().Title" @bind-StateCssClass="@HeaderStateCssClass"></DemoPageNavHeader>
-            <div class="nav-pills">
-                @foreach(var (demoPageSection, i) in demoPageSections.Select((s, index) => (s, index))) {
-                    <DemoPageNavPanelItem @key="@($"{demoPage.Url}|{i}")"
-                                          Text="@demoPageSection.Title"
-                                          Url="@($"{demoPage.Url}#{demoPageSection.Id}")"
-                                          CssClass="@GetItemCssClass(i)">
-                        <Badge>@GetBadgeText(demoPageSection)</Badge>
-                    </DemoPageNavPanelItem>
-                }
-            </div>
+@if(Visible) {
+    <div class="demo-page-nav">
+        <DemoPageNavHeader Title="@demoPageSections.First().Title" @bind-StateCssClass="@HeaderStateCssClass"></DemoPageNavHeader>
+        <div class="nav-pills">
+            @foreach(var (demoPageSection, i) in demoPageSections.Select((s, index) => (s, index))) {
+                <DemoPageNavPanelItem @key="@($"{demoPage.Url}|{i}")"
+                                        Text="@demoPageSection.Title"
+                                        Url="@($"{demoPage.Url}#{demoPageSection.Id}")"
+                                        CssClass="@GetItemCssClass(i)">
+                    <Badge>@GetBadgeText(demoPageSection)</Badge>
+                </DemoPageNavPanelItem>
+            }
         </div>
     </div>
 }
@@ -29,8 +27,7 @@
     IEnumerable<DemoPageSection> demoPageSections;
     DemoPage demoPage;
 
-    bool visible;
-
+    public bool Visible { get; set; }
     public string HeaderStateCssClass { get; set; } = "collapse";
 
     protected override void OnInitialized() {
@@ -69,7 +66,7 @@
         var demoPageUrl = NavigationManager.ToAbsoluteUri(currentUri).GetLeftPart(UriPartial.Path).Replace(NavigationManager.BaseUri, "");
         demoPage = Configuration.GetDemoPageByUrl(demoPageUrl) as DemoPage;
         demoPageSections = demoPage != null ? demoPage.PageSections : new DemoPageSection[0];
-        visible = demoPageSections.Count() > 1;
+        Visible = demoPageSections.Count() > 1;
     }
 
     public void Dispose() {

@@ -16,16 +16,25 @@ namespace BlazorDemo {
     public static class ConnectionStringUtils {
 
         public static string GetNorthwindConnectionString(IConfiguration config) {
+            return GetConnectionString(config, "NorthwindConnectionString");
+        }
+        public static string GetNorthwindSqliteConnectionString(IConfiguration config) {
             var dirPath = config.GetValue<string>("DataSourcesFolder");
             return string.Format("Data Source={0}\\nwind.db", dirPath);
         }
 
         public static string GetIssuesConnectionString(IConfiguration config) {
+            return GetConnectionString(config, "IssuesConnectionString");
+        }
+        public static string GetIssuesSqliteConnectionString(IConfiguration config) {
             var dirPath = config.GetValue<string>("DataSourcesFolder");
             return string.Format("Data Source={0}\\issue-list.db", dirPath);
         }
 
         public static string GetWorlcitiesConnectionString(IConfiguration config) {
+            return GetConnectionString(config, "WorldcitiesConnectionString");
+        }
+        public static string GetWorlcitiesSqliteConnectionString(IConfiguration config) {
             var dirPath = config.GetValue<string>("DataSourcesFolder");
             return string.Format("Data Source={0}\\worldcities.db", dirPath);
         }

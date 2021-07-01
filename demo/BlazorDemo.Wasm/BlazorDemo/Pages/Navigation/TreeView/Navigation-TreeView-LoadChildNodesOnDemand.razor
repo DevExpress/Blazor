@@ -2,10 +2,12 @@
     <DxTreeView @ref="@treeView"
                 CssClass="cw-480"
                 Data="@DataSource"
-                LoadChildNodesOnDemand="true"
-                HasChildrenExpression="@(dataItem => ((DateTimeGroup)dataItem).HasSubGroups)"
-                ChildrenExpression="@(dataItem => ((DateTimeGroup)dataItem).GetSubGroups())"
-                TextExpression="@(dataItem => ((DateTimeGroup)dataItem).Title)">
+                LoadChildNodesOnDemand="true">
+        <DataMappings>
+            <DxTreeViewDataMapping HasChildren="HasSubGroups"
+                                   Children="SubGroups"
+                                   Text="Title"/>
+        </DataMappings>
     </DxTreeView>
 
     @code {
@@ -24,3 +26,4 @@
         }
     }
 </DemoPageSectionComponent>
+

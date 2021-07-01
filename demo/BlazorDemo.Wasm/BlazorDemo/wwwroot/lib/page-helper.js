@@ -29,16 +29,18 @@ var DemoPageHelper = (function() {
         }
         return null;
     }
-    function getThemeNameCookie() {
-        return getCookie('DXBS4CurrentTheme');
-    }
     function setCookie(name, value, date) {
         document.cookie = escape(name) + '=' + escape(value.toString()) + '; expires=' + date.toGMTString() + '; path=/';
+    }
+
+    var _currentThemeCookieName = "DXBS4CurrentTheme";
+    function getThemeNameCookie() {
+        return getCookie(_currentThemeCookieName);
     }
     function setThemeNameCookie(theme) {
         var date = new Date();
         date.setFullYear(date.getFullYear() + 1);
-        setCookie('DXBS4CurrentTheme', theme, date);
+        setCookie(_currentThemeCookieName, theme, date);
     }
 
     function demoMatchesQuery(mediaQuery, dotNetHelper) {
@@ -75,7 +77,7 @@ var DemoPageHelper = (function() {
             toElementTop: scrollToElementTop,
             ensureNavigationTargetIsVisible: ensureNavigationTargetIsVisible
         },
-        cookie: {
+        themes: {
             getThemeName: getThemeNameCookie,
             setThemeName: setThemeNameCookie
         },

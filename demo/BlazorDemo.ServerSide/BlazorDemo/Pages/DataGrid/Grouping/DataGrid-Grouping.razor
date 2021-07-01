@@ -1,22 +1,26 @@
 ﻿@page "/GridGrouping"
+@layout DataProviderAccessArea<INwindDataProvider>
 
 <DemoPageSectionComponent Id="DataGrid-Grouping" ShowHorizontalScrollBar="true">
-    @if(Vacancies == null) {
+    @inject NwindDataService NwindDataService
+
+    @if(Data == null) {
         <p><em>Loading...</em></p>
     } else {
-        <DxDataGrid Data="@Vacancies" ShowPager="true" ShowGroupPanel="true">
-            <DxDataGridColumn Field="@nameof(Vacancy.Id)" Width="70px" AllowGroup="false" />
-            <DxDataGridColumn Field="@nameof(Vacancy.Description)" Caption="Vacancy" />
-            <DxDataGridComboBoxColumn Field="@nameof(Vacancy.Region)" Data="@VacancyRepository.Regions" GroupIndex="0" />
-            <DxDataGridColumn Field="@nameof(Vacancy.City)" GroupIndex="1" />
+        <DxDataGrid Data="@Data" ShowPager="true" ShowGroupPanel="true">
+            <DxDataGridColumn Field="@nameof(Customer.ContactName)" />
+            <DxDataGridColumn Field="@nameof(Customer.CompanyName)" />
+            <DxDataGridColumn Field="@nameof(Customer.City)" Width="200px" />
+            <DxDataGridColumn Field="@nameof(Customer.Region)" Width="120px" />
+            <DxDataGridColumn Field="@nameof(Customer.Country)" GroupIndex="0" Width="200px" />
         </DxDataGrid>
     }
 
     @code {
-        IEnumerable<Vacancy> Vacancies;
+        IEnumerable<Customer> Data;
 
         protected override async Task OnInitializedAsync() {
-            Vacancies = await VacancyRepository.GetVacancies(100);
+            Data = await NwindDataService.GetCustomersAsync();
         }
     }
 </DemoPageSectionComponent>

@@ -13,9 +13,12 @@ namespace BlazorDemo.DataProviders {
         Task<IEnumerable<Customer>> GetCustomersAsync(CancellationToken ct = default);
 
         Task<IEnumerable<Employee>> GetEmployeesAsync(CancellationToken ct = default);
-        Task<IEnumerable<Employee>> InsertEmployeeAsync(IDictionary<string, object> newValues, CancellationToken ct = default);
-        Task<IEnumerable<Employee>> RemoveEmployeeAsync(Employee dataItem, CancellationToken ct = default);
-        Task<IEnumerable<Employee>> UpdateEmployeeAsync(Employee dataItem, IDictionary<string, object> newValues, CancellationToken ct = default);
+
+        Task<IEnumerable<Employee>> GetEmployeesEditableAsync(CancellationToken ct = default);
+        Task InsertEmployeeAsync(IDictionary<string, object> newValues, CancellationToken ct = default);
+        Task InsertEmployeeAsync(Employee dataItem, CancellationToken ct = default);
+        Task RemoveEmployeeAsync(Employee dataItem, CancellationToken ct = default);
+        Task UpdateEmployeeAsync(Employee dataItem, IDictionary<string, object> newValues, CancellationToken ct = default);
 
         Task<IEnumerable<Invoice>> GetInvoicesAsync(CancellationToken ct = default);
 
@@ -28,5 +31,11 @@ namespace BlazorDemo.DataProviders {
         Task<IEnumerable<Shipper>> GetShippersAsync(CancellationToken ct = default);
 
         Task<IEnumerable<Supplier>> GetSuppliersAsync(CancellationToken ct = default);
+
+        Task<IEnumerable<Supplier>> GetSuppliersEditableAsync(CancellationToken ct = default);
+        Task InsertSupplierAsync(IDictionary<string, object> newValues, CancellationToken ct = default);
+        Task InsertSupplierAsync(Supplier dateItem, CancellationToken ct = default);
+        Task RemoveSupplierAsync(Supplier dataItem, CancellationToken ct = default);
+        Task UpdateSupplierAsync(Supplier dataItem, IDictionary<string, object> newValues, CancellationToken ct = default);
     }
 }

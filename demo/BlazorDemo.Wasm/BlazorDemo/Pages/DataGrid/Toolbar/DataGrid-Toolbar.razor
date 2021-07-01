@@ -11,8 +11,9 @@
                     Data="@Data"
                     ShowFilterRow="@ShowFilterRow"
                     @bind-SingleSelectedDataRow="@SelectedRow"
-                    RowInsertingAsync="@OnRowInserting"
-                    RowUpdatingAsync="@OnRowUpdating"
+                    RowInsertingAsync="@OnRowInsertingAsync"
+                    RowUpdatingAsync="@OnRowUpdatingAsync"
+                    RowRemovingAsync="@OnRowRemovingAsync"
                     InitNewRow="@OnInitNewRow">
             <HeaderTemplate>
                 <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
@@ -45,7 +46,7 @@
         bool ShowFilterRow = false;
 
         protected override async Task OnInitializedAsync() {
-            Data = await NwindDataService.GetEmployeesAsync();
+            Data = await NwindDataService.GetEmployeesEditableAsync();
             SetSelection();
         }
         async Task OnAddNewClick() {
@@ -58,17 +59,28 @@
         }
         async Task OnDeleteClick() {
             await NwindDataService.RemoveEmployeeAsync(SelectedRow);
-            await grid.Refresh();
+            Data = await NwindDataService.GetEmployeesEditableAsync();
+
             if(Data.Count() == 0)
                 ChangeToolbarEnabled(false);
             else
                 SetSelection();
+            StateHasChanged();
         }
-        async Task OnRowInserting(IDictionary<string, object> newValues) {
+        async Task OnRowRemovingAsync(Employee dataItem) {
+            await NwindDataService.RemoveEmployeeAsync(dataItem);
+            Data = await NwindDataService.GetEmployeesEditableAsync();
+            StateHasChanged();
+        }
+        async Task OnRowInsertingAsync(IDictionary<string, object> newValues) {
             await NwindDataService.InsertEmployeeAsync(newValues);
+            Data = await NwindDataService.GetEmployeesEditableAsync();
+            StateHasChanged();
         }
-        async Task OnRowUpdating(Employee dataItem, IDictionary<string, object> newValues) {
+        async Task OnRowUpdatingAsync(Employee dataItem, IDictionary<string, object> newValues) {
             await NwindDataService.UpdateEmployeeAsync(dataItem, newValues);
+            Data = await NwindDataService.GetEmployeesEditableAsync();
+            StateHasChanged();
         }
         Task OnInitNewRow(Dictionary<string, object> values) {
             values.Add("FirstName", "First Name");
@@ -76,7 +88,7 @@
             return Task.CompletedTask;
         }
         void SetSelection() {
-            SelectedRow = Data.First();
+            SelectedRow = Data.FirstOrDefault();
         }
         void ChangeToolbarEnabled(bool enabled) {
             Enabled = enabled;

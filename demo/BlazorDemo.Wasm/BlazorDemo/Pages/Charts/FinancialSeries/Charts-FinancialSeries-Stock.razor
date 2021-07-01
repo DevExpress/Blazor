@@ -1,7 +1,6 @@
 ﻿<DemoPageSectionComponent Id="Charts-FinancialSeries-Stock">
     <ChildContentWithParameters Context="Params">
         @inject IFinancialSeriesDataProvider FinancialSeriesDataProvider
-        @layout DataProviderAccessArea<ISalesViewerDataProvider>
 
         <DxChart Data="@StockData"
                  @key="Params.ThemeName"

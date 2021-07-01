@@ -33,43 +33,46 @@ namespace BlazorDemo.ServerSide {
 
             services.AddSingleton<IDemoVersion, DemoVersion>(x => {
                 string customVersion = Configuration.GetValue<string>("dxversion");
-                if (!string.IsNullOrEmpty(customVersion))
+                if(!string.IsNullOrEmpty(customVersion))
                     customVersion = " " + customVersion.TrimStart();
                 var dxVersion = new Version(AssemblyInfo.Version);
                 return new DemoVersion(new Version(dxVersion.Major, dxVersion.Minor, dxVersion.Build) + customVersion);
             });
             services.AddScoped<HttpClient>(serviceProvider => serviceProvider.GetService<IHttpClientFactory>().CreateClient());
 
-            services.AddScoped<IContosoRetailDataProvider, ContosoRetailDataProvider>();
-            services.AddScoped<IRentInfoDataProvider, RentInfoDataProvider>();
-            services.AddScoped<INwindDataProvider, NwindDataProvider>();
-            services.AddScoped<IIssuesDataProvider, IssuesDataProvider>();
-            services.AddScoped<IWorldcitiesDataProvider, WorldcitiesDataProvider>();
+            services.AddSingleton<IContosoRetailDataProvider, ContosoRetailDataProvider>();
+            services.AddSingleton<IRentInfoDataProvider, RentInfoDataProvider>();
 
-            services.AddDbContext<NorthwindContext>(options => {
+            services.AddDbContextFactory<NorthwindContext>(opt => {
                 var connectionString = ConnectionStringUtils.GetNorthwindConnectionString(context.Configuration);
-                if(connectionString != null)
-                    options.UseSqlite(connectionString);
+                if(!string.IsNullOrEmpty(connectionString))
+                    opt.UseSqlServer(connectionString);
+                else
+                    opt.UseSqlite(ConnectionStringUtils.GetNorthwindSqliteConnectionString(context.Configuration));
             });
-            services.AddDbContext<IssuesContext>(options => {
+            services.AddDbContextFactory<IssuesContext>(opt => {
                 var connectionString = ConnectionStringUtils.GetIssuesConnectionString(context.Configuration);
-                if(connectionString != null)
-                    options.UseSqlite(connectionString);
+                if(!string.IsNullOrEmpty(connectionString))
+                    opt.UseSqlServer(connectionString);
+                else
+                    opt.UseSqlite(ConnectionStringUtils.GetIssuesSqliteConnectionString(context.Configuration));
             });
-            services.AddDbContext<WorldcitiesContext>(options => {
+            services.AddDbContextFactory<WorldcitiesContext>(opt => {
                 var connectionString = ConnectionStringUtils.GetWorlcitiesConnectionString(context.Configuration);
-                if(connectionString != null)
-                    options.UseSqlite(connectionString);
+                if(!string.IsNullOrEmpty(connectionString))
+                    opt.UseSqlServer(connectionString);
+                else
+                    opt.UseSqlite(ConnectionStringUtils.GetWorlcitiesSqliteConnectionString(context.Configuration));
             });
-            services.AddDbContext<FMRDemoContext>(options => {
+            services.AddDbContextFactory<RentInfoContext>(opt => {
                 var connectionString = ConnectionStringUtils.GetGridLargeDataConnectionString(context.Configuration);
-                if(connectionString != null)
-                    options.UseSqlServer(connectionString);
+                if(!string.IsNullOrEmpty(connectionString))
+                    opt.UseSqlServer(connectionString);
             });
-            services.AddDbContext<ContosoRetailContext>(options => {
+            services.AddDbContextFactory<ContosoRetailContext>(opt => {
                 var connectionString = ConnectionStringUtils.GetPivotGridLargeDataConnectionString(context.Configuration);
-                if(connectionString != null)
-                    options.UseSqlServer(connectionString);
+                if(!string.IsNullOrEmpty(connectionString))
+                    opt.UseSqlServer(connectionString);
             });
         }
         public override void Configure(IApplicationBuilder app, IWebHostEnvironment env) {

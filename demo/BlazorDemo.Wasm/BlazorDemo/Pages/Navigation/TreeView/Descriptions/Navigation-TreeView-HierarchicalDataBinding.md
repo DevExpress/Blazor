@@ -1,13 +1,7 @@
-The DevExpress [TreeView](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView#bind-to-data) supports binding to hierarchical data structures. A bound TreeView creates a node for each data item.
+You can bind the DevExpress TreeView to hierarchical data structures. This demo demonstrates how to bind the TreeView to the collection of `ChemicalElementGroup` objects. Each object can have child objects. 
 
-The following properties should be specified to bind TreeView to a hierarchical data structure:
+The code above does the following: 
 
-*   [Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.Data) - A TreeView data source object.
-*   [ChildrenExpression](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.ChildrenExpression) - A lambda expression that returns the data item’s children.
-
-The following properties specify expressions that return node information (text, name, and so on):
-
-*   [TextExpression](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.TextExpression) - A lambda expression that returns the node’s text.
-*   [NameExpression](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.NameExpression) - A lambda expression that returns the node’s unique identifier (name).
-*   [IconCssClassExpression](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.IconCssClassExpression) - A lambda expression that returns the name of a CSS class applied to the node’s icon.
-*   [NavigateUrlExpression](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.NavigateUrlExpression) - A lambda expression that returns the node’s target URL.
+1. Uses the TreeView's [Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.Data) property to specify a data source. 
+2. Adds the [\<DataMappings>](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.DataMappings) tag to the component markup. 
+3. Creates the [DxTreeViewDataMapping](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeViewDataMapping) instance and maps [node properties](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeViewDataMapping._members#properties) to data source fields. Mappings are used to adjust the TreeView's data model to the data source. For hierarchical data, the [Children](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataMappingBase-1.Children) property is required.

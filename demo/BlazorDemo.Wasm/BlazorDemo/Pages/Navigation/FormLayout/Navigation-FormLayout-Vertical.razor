@@ -3,28 +3,22 @@
     <ChildContentWithParameters Context="Params">
         <DxFormLayout CaptionPosition="CaptionPosition.Vertical" ItemSizeMode="Params.SizeMode" CssClass="w-100">
             <DxFormLayoutItem Caption="Location:" ColSpanLg="4" ColSpanMd="12">
-                <Template>
-                    <DxTextBox @bind-Text="@Location" />
-                </Template>
+                <DxTextBox @bind-Text="@Location" />
             </DxFormLayoutItem>
-
             <DxFormLayoutItem Caption="Check in:" ColSpanLg="4" ColSpanMd="6">
-                <Template>
-                    <DxDateEdit @bind-Date="@CheckIn" />
-                </Template>
+                <DxDateEdit @bind-Date="@CheckIn" />
             </DxFormLayoutItem>
-
             <DxFormLayoutItem Caption="Check out:" ColSpanLg="4" ColSpanMd="6">
-                <Template>
-                    <DxDateEdit @bind-Date="@CheckOut" />
-                </Template>
+                <DxDateEdit @bind-Date="@CheckOut" />
             </DxFormLayoutItem>
         </DxFormLayout>
-        <p class="demo-text w-100 mt-2 text-center text-muted">
-            @nameof(Location)=<b>@Location</b>,
-            @nameof(CheckIn)=<b>@CheckIn</b>,
-            @nameof(CheckOut)=<b>@CheckOut</b>
-        </p>
+        <div class="row w-100 mx-0">
+            <p class="demo-text col-12 mt-2 text-muted">
+                @nameof(Location)=<b>@Location</b>,
+                @nameof(CheckIn)=<b>@CheckIn</b>,
+                @nameof(CheckOut)=<b>@CheckOut</b>
+            </p>
+        </div>
     </ChildContentWithParameters>
 
     @code {

@@ -1,0 +1,46 @@
+﻿<DemoPageSectionComponent Id="Editors-CheckBox-CustomizeLayout">
+    <DxCheckBox @bind-Checked="@Value"
+                AllowIndeterminateStateByClick="true"
+                DisableDefaultRender>
+        <div class="table position-relative">
+            <div class="boxLabel" style="margin: 10px">
+                Medium
+            </div>
+            <div class="row">
+                <div class="boxLabel" style="margin: 10px">
+                    Low
+                </div>
+                <div class="flexBox checkBox">
+                    <div class="borderContainer">
+                        <div class="gradientCircle" />
+                        <div class="markerContainer">
+                            <div class="roundMarkerHigh" />
+                        </div>
+                        <div class="markerContainer" style="transform: rotate(-90deg)">
+                            <div class="roundMarkerMedium" />
+                        </div>
+                        <div class="markerContainer" style="transform: rotate(-180deg)">
+                            <div class="roundMarkerLow" />
+                        </div>
+                        <div class="flexBox @($"rotation-{Angle}")" style="width:100%;">
+                            <div class="light" />
+                        </div>
+                        <div class="centerCircle" />
+                        <div class="markerContainer @($"rotation-{Angle}")">
+                            <div class="marker" />
+                        </div>
+                    </div>
+                    <div class="borderCyrcle" />
+                </div>
+                <div class="boxLabel" style="margin: 10px">
+                    High
+                </div>
+            </div>
+        </div>
+    </DxCheckBox>
+
+    @code {
+        bool? Value { get; set; } = true;
+        int Angle { get { return Value == true ? 0 : Value == false ? 90 : 180; } }
+    }
+</DemoPageSectionComponent>

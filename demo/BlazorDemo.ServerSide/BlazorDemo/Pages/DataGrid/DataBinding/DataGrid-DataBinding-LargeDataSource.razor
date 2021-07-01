@@ -3,10 +3,10 @@
     @inject IRentInfoDataProvider RentInfoDataProvider
 
     <DataProviderAccessAreaContainer DataProvider="@RentInfoDataProvider">
-        <DxDataGrid DataAsync="@RentInfoDataService.GetQueryableAreaRentInfo"
+        <DxDataGrid DataAsync="@RentInfoDataService.GetAreaRentInfoAsync"
                     PageSize="10"
                     ShowFilterRow="true"
-                    KeyFieldName="Oid">
+                    KeyFieldName="@nameof(AreaRentInfo.Oid)">
             <DxDataGridColumn Field="@nameof(AreaRentInfo.State)"></DxDataGridColumn>
             <DxDataGridColumn Field="@nameof(AreaRentInfo.Area)"></DxDataGridColumn>
             <DxDataGridColumn Field="@nameof(AreaRentInfo.City)" Caption="County"></DxDataGridColumn>

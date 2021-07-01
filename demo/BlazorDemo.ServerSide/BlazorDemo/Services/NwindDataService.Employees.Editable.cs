@@ -7,19 +7,31 @@ using BlazorDemo.DataProviders;
 
 namespace BlazorDemo.Services {
     public partial class NwindDataService {
-        public Task<IEnumerable<Employee>> InsertEmployeeAsync(IDictionary<string, object> newValues) {
+        public Task<IEnumerable<Employee>> GetEmployeesEditableAsync(CancellationToken ct = default) {
+            // Return your data here
+            /*BeginHide*/
+            return _dataProvider.GetEmployeesEditableAsync(ct);
+            /*EndHide*/
+        }
+        public Task InsertEmployeeAsync(IDictionary<string, object> newValues) {
             // Change your data here
             /*BeginHide*/
             return _dataProvider.InsertEmployeeAsync(newValues);
             /*EndHide*/
         }
-        public Task<IEnumerable<Employee>> RemoveEmployeeAsync(Employee dataItem) {
+        public Task InsertEmployeeAsync(Employee dataItem) {
+            // Change your data here
+            /*BeginHide*/
+            return _dataProvider.InsertEmployeeAsync(dataItem);
+            /*EndHide*/
+        }
+        public Task RemoveEmployeeAsync(Employee dataItem) {
             // Change your data here
             /*BeginHide*/
             return _dataProvider.RemoveEmployeeAsync(dataItem);
             /*EndHide*/
         }
-        public Task<IEnumerable<Employee>> UpdateEmployeeAsync(Employee dataItem, IDictionary<string, object> newValues) {
+        public Task UpdateEmployeeAsync(Employee dataItem, IDictionary<string, object> newValues) {
             // Change your data here
             /*BeginHide*/
             return _dataProvider.UpdateEmployeeAsync(dataItem, newValues);

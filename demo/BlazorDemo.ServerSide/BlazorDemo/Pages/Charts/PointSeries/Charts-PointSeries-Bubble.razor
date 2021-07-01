@@ -1,42 +1,40 @@
 ﻿@using System.Text.RegularExpressions
-
+@using System.Drawing;
 <DemoPageSectionComponent Id="Charts-PointSeries-Bubble">
     <ChildContent>
 
         @inject ISalesInfoDataProvider Sales
 
-        @if (ChartsData != null) {
-            <DxChart Data="@ChartsData" CssClass="w-100">
-                <DxChartBubbleSeries Name="United States"
-                                     T="SaleInfo"
-                                     TArgument="string"
-                                     TValue="int"
-                                     TSize="int"
-                                     ArgumentField="si => si.Date.DayOfWeek.ToString()"
-                                     ValueField="si => si.Date.Year"
-                                     SizeField="si => si.Amount"
-                                     Color="System.Drawing.Color.FromArgb(208, 208, 208)"
-                                     SummaryMethod="Enumerable.Max"
-                                     Filter='si => si.Country == "United States"' />
-                <DxChartBubbleSeries Name="Canada"
-                                     T="SaleInfo"
-                                     TArgument="string"
-                                     TValue="int"
-                                     TSize="int"
-                                     ArgumentField="si => si.Date.DayOfWeek.ToString()"
-                                     ValueField="si => si.Date.Year"
-                                     SizeField="si => si.Amount"
-                                     Color="System.Drawing.Color.FromArgb(252, 58, 48)"
-                                     SummaryMethod="Enumerable.Max"
-                                     Filter='si => si.Country == "Canada"' />
-                <DxChartLegend Position="RelativePosition.Outside" HorizontalAlignment="HorizontalAlignment.Right" />
+        <DxChart Data="@ChartsData" CssClass="w-100">
+            <DxChartBubbleSeries Name="United States"
+                                 T="SaleInfo"
+                                 TArgument="string"
+                                 TValue="int"
+                                 TSize="int"
+                                 ArgumentField="si => si.Date.DayOfWeek.ToString()"
+                                 ValueField="si => si.Date.Year"
+                                 SizeField="si => si.Amount"
+                                 Color="Color.FromArgb(208, 208, 208)"
+                                 SummaryMethod="Enumerable.Max"
+                                 Filter='si => si.Country == "United States"' />
+            <DxChartBubbleSeries Name="Canada"
+                                 T="SaleInfo"
+                                 TArgument="string"
+                                 TValue="int"
+                                 TSize="int"
+                                 ArgumentField="si => si.Date.DayOfWeek.ToString()"
+                                 ValueField="si => si.Date.Year"
+                                 SizeField="si => si.Amount"
+                                 Color="Color.FromArgb(252, 58, 48)"
+                                 SummaryMethod="Enumerable.Max"
+                                 Filter='si => si.Country == "Canada"' />
+            <DxChartLegend Position="RelativePosition.Outside" HorizontalAlignment="HorizontalAlignment.Right" />
 
-                <DxChartValueAxis Type="ChartAxisType.Discrete">
-                    <DxChartAxisLabel Format="ChartElementFormat.Decimal()"></DxChartAxisLabel>
-                </DxChartValueAxis>
+            <DxChartValueAxis Type="ChartAxisType.Discrete">
+                <DxChartAxisLabel Format="ChartElementFormat.Decimal()"></DxChartAxisLabel>
+            </DxChartValueAxis>
 
-            </DxChart>
-        }
+        </DxChart>
     </ChildContent>
 
 

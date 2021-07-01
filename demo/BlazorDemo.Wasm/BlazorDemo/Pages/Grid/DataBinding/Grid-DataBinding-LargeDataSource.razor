@@ -23,7 +23,7 @@
             var connectionString = ConnectionStringUtils.GetGridLargeDataConnectionString(Configuration);
             if(string.IsNullOrEmpty(connectionString)) return;
 
-            var areaRentInfo = await RentInfoDataService.GetQueryableAreaRentInfo();
+            var areaRentInfo = await RentInfoDataService.GetAreaRentInfoAsync();
 
             var dataSource = new GridDevExtremeDataSource<AreaRentInfo>(areaRentInfo.AsQueryable());
             dataSource.CustomizeLoadOptions = (loadOptions) => {

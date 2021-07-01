@@ -1,11 +1,8 @@
 using BlazorDemo.Data.Northwind;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace BlazorDemo.DataProviders {
     public partial class NorthwindContext : DbContext {
-        public NorthwindContext() {
-        }
         public NorthwindContext(DbContextOptions<NorthwindContext> options)
             : base(options) {
         }
@@ -78,7 +75,9 @@ namespace BlazorDemo.DataProviders {
                 entity.HasKey(e => e.EmployeeId);
 
                 entity.Property(e => e.EmployeeId)
-                    .HasColumnName("EmployeeID");
+                    .HasColumnName("EmployeeID")
+                    .IsRequired()
+                    .ValueGeneratedOnAdd();
 
                 // Properties
                 entity.Property(e => e.LastName)
