@@ -1,4 +1,4 @@
-To display data in our Blazor [Data Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1), [bind](BindGridtoData) it to a data collection and add columns. You can define columns in the Data Grid's markup and cannot change the column collection at runtime. The Data Grid suppors the following predefined data column types:
+To display data in our Blazor [Data Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1), [bind](BindGridtoData) it to a data collection and add columns. You can define columns in the Data Grid's markup and cannot change the column collection at runtime. The Data Grid supports the following predefined data column types:
 
 *   [DxDataGridDateEditColumn](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridDateEditColumn) (Date) - Displays date-time values and uses a drop-down calendar to edit these values.
 *   [DxDataGridColumn](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn) (Forecast) - Displays strings and uses a text box to edit values.
