@@ -6,10 +6,10 @@ using BlazorDemo.Data;
 
 namespace BlazorDemo.Services {
     public partial class ContosoRetailDataService {
-        public Task<IEnumerable<Sale>> GetSalesAsync(CancellationToken ct = default) {
+        public IQueryable<Sale> GetSales() {
             // Return your data here
             /*BeginHide*/
-            return _dataProvider.GetSalesAsync(ct);
+            return _dataProvider.GetSales();
             /*EndHide*/
         }
     }

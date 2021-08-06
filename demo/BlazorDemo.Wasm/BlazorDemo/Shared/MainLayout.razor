@@ -1,7 +1,7 @@
 ﻿@inherits LayoutComponentBase
 @implements IDisposable
 @inject DemoConfiguration Configuration
-@inject DemoThemesConfiguration Themes
+@inject DemoThemeService Themes
 
 <DemoScriptLoader @ref=@pageHelper Src="_content/BlazorDemo/lib/page-helper.js" />
 
@@ -27,7 +27,7 @@
         <DemoBreadcrumbs></DemoBreadcrumbs>
     </div>
 </div>
-<div class="demo-content-container @(IsFirstTimeRendered ? "animated" : "")" @ref="@contentContainerRef">
+<div class="demo-content-container @GetDemoContentContainerCss()" @ref="@contentContainerRef">
     <div class="demo-content @LayoutStateCssClass">
         <div class="sidebar">
             <DemoSearchEditor @bind-SearchString="@SearchString" />
@@ -138,7 +138,7 @@
             await InvokeAsync(StateHasChanged);
         }
     }
-
+    
     bool LayoutToggled {
         get { return _layoutToggled; }
         set {
@@ -212,7 +212,13 @@
         if(HasAnchorInUrl(uri))
             await pageHelper.InvokeVoidAsync("DemoPageHelper.scroll.ensureNavigationTargetIsVisible");
     }
-
+    string GetDemoContentContainerCss() {
+#if VISUALTESTS
+        return String.Empty;
+#else
+        return (IsFirstTimeRendered ? "animated" : "");
+#endif
+    }
     public void Dispose() {
         NavigationManager.LocationChanged -= OnLocationChanged;
     }

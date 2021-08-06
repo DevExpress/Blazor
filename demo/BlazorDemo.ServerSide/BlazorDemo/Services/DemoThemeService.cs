@@ -2,13 +2,25 @@ using System.Linq;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System;
+using BlazorDemo.Shared;
+using BlazorDemo.Shared.ThemeSwitcher;
+using BlazorDemo.Configuration;
 
-namespace BlazorDemo.Configuration {
+namespace BlazorDemo.Services {
     public interface IDemoThemesConfigurationCookieAccessor {
         string GetCookie(string name);
     }
 
-    public class DemoThemesConfiguration {
+    public interface IDemoThemeChangeRequestDispatcher {
+        void RequestThemeChange(DemoTheme theme);
+    }
+
+    public interface IDemoThemeLoadNotifier {
+        Task NotifyThemeLoadedAsync(DemoTheme theme);
+    }
+
+    public class DemoThemeService {
         private DemoTheme _activeTheme;
 #if SERVER_BLAZOR
         const string ThemeCookieKey = "DXBS4CurrentTheme";
@@ -23,7 +35,11 @@ namespace BlazorDemo.Configuration {
             { "slate", "atom-one-dark" }
         };
 
-        public DemoThemesConfiguration(IDemoThemesConfigurationCookieAccessor cookieAccessor) {
+        public IDemoThemeChangeRequestDispatcher ThemeChangeRequestDispatcher { get; set; }
+
+        public IDemoThemeLoadNotifier ThemeLoadNotifier { get; set; }
+
+        public DemoThemeService(IDemoThemesConfigurationCookieAccessor cookieAccessor) {
             ResourcesReadyState = new ConcurrentDictionary<string, TaskCompletionSource<bool>>();
             ThemeSets = CreateSets(this);
             CookieAccessor = cookieAccessor;
@@ -52,14 +68,14 @@ namespace BlazorDemo.Configuration {
         public string GetActiveThemeCssUrl() {
             return GetThemeCssUrl(ActiveTheme);
         }
-        public string GetThemeCodeCssUrl(DemoTheme theme) {
+        public string GetHighlightJSThemeCssUrl(DemoTheme theme) {
             var highlightjsTheme = HighlightJSThemes[DefaultThemeName];
             if(HighlightJSThemes.ContainsKey(theme.Name))
                 highlightjsTheme = HighlightJSThemes[theme.Name];
             return $"//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/{highlightjsTheme}.min.css";
         }
-        public string GetActiveThemeCodeCssUrl() {
-            return GetThemeCodeCssUrl(ActiveTheme);
+        public string GetActiveHighlightJSThemeCssUrl() {
+            return GetHighlightJSThemeCssUrl(ActiveTheme);
         }
 
         public void SetActiveThemeByName(string themeName) {
@@ -78,11 +94,11 @@ namespace BlazorDemo.Configuration {
             return null;
         }
 
-        private static List<DemoThemeSet> CreateSets(DemoThemesConfiguration config) {
+        private static List<DemoThemeSet> CreateSets(DemoThemeService config) {
             return new List<DemoThemeSet>() {
-                new DemoThemeSet(config, "Color Themes",  "default"),
-                new DemoThemeSet(config, "DevExpress Themes", "blazing-berry", "purple", "office-white"),
-                new DemoThemeSet(config, "Bootswatch Themes", "cerulean", "cosmo", "cyborg", "darkly", "flatly", "journal", "litera", "lumen", "lux", "materia", "minty", "pulse",
+                new DemoThemeSet("Color Themes",  "default"),
+                new DemoThemeSet("DevExpress Themes", "blazing-berry", "purple", "office-white"),
+                new DemoThemeSet("Bootswatch Themes", "cerulean", "cosmo", "cyborg", "darkly", "flatly", "journal", "litera", "lumen", "lux", "materia", "minty", "pulse",
                     "sandstone", "simplex", "sketchy", "slate", "solar", "spacelab", "superhero", "united", "yeti")
             };
         }

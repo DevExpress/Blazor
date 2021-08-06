@@ -1,0 +1,62 @@
+﻿<DemoPageSectionComponent Id="Grid-Summary-GroupFooter" ShowHorizontalScrollBar="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <DxGrid @ref="Grid"
+                Data="@Data"
+                ShowGroupPanel="true"
+                GroupFooterDisplayMode="@CurrentDisplayMode"
+                UnboundColumnData="Grid_UnboundColumnData"
+                CssClass="w-100">
+            <Columns>
+                <DxGridDataColumn FieldName="OrderDate" GroupIndex="0" Width="120px" />
+                <DxGridDataColumn FieldName="CompanyName" />
+                <DxGridDataColumn FieldName="Country" Width="200px" />
+                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="120px" />
+                <DxGridDataColumn FieldName="Quantity" Width="120px" />
+                <DxGridDataColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" Width="200px" />
+            </Columns>
+            <GroupSummary>
+                <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="CompanyName" FooterColumnName="CompanyName" />
+                <DxGridSummaryItem SummaryType="GridSummaryItemType.Sum" FieldName="Total" FooterColumnName="Total" />
+            </GroupSummary>
+        </DxGrid>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionComboBox Label="Group Footer Display Mode:" Data="@DisplayModes" @bind-Value="CurrentDisplayMode" />
+    </OptionsContent>
+    @code {
+        object Data { get; set; }
+        IGrid Grid { get; set; }
+
+        IEnumerable<GridGroupFooterDisplayMode> DisplayModes { get; } = Enum.GetValues(typeof(GridGroupFooterDisplayMode)).Cast<GridGroupFooterDisplayMode>();
+        GridGroupFooterDisplayMode CurrentDisplayMode { get; set; } = GridGroupFooterDisplayMode.Auto;
+
+        protected override async Task OnInitializedAsync() {
+            var invoices = await NwindDataService.GetInvoicesAsync();
+            var customers = await NwindDataService.GetCustomersAsync();
+            Data = invoices.OrderBy(i => i.OrderDate).Join(customers, i => i.CustomerId, c => c.CustomerId, (i, c) => {
+                return new {
+                    OrderDate = i.OrderDate,
+                    CompanyName = c.CompanyName,
+                    City = i.City,
+                    Region = i.Region,
+                    Country = i.Country,
+                    UnitPrice = i.UnitPrice,
+                    Quantity = i.Quantity
+                };
+            });
+        }
+        void Grid_UnboundColumnData(GridUnboundColumnDataEventArgs e) {
+            if(e.FieldName == "Total") {
+                decimal price = (decimal)e.GetRowValue("UnitPrice");
+                short quantity = (short)e.GetRowValue("Quantity");
+                e.Value = price * quantity;
+            }
+        }
+        protected override void OnAfterRender(bool firstRender) {
+            if(firstRender)
+                Grid.ExpandGroupRow(1);
+        }
+    }
+</DemoPageSectionComponent>

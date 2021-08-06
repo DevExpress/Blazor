@@ -1,35 +1,31 @@
 ﻿<DemoPageSectionComponent Id="Grid-Grouping-IntervalGrouping" ShowHorizontalScrollBar="true">
-    <ChildContent>
+    <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        @if(Data == null) {
-            <p><em>Loading...</em></p>
-        } else {
-            <DxGrid @ref="Grid"
-                    Data="@Data"
-                    ShowGroupPanel="true"
-                    UnboundColumnData="Grid_UnboundColumnData"
-                    CssClass="w-100">
-                <Columns>
-                    <DxGridColumn FieldName="ProductName" />
-                    <DxGridColumn FieldName="CategoryName" />
-                    <DxGridColumn FieldName="Country" Width="200px" />
-                    <DxGridColumn FieldName="OrderDate" GroupIndex="0" GroupInterval="GridColumnGroupInterval.DateYear" />
-                    <DxGridColumn FieldName="UnitPrice" DisplayFormat="c" Width="120px" />
-                    <DxGridColumn FieldName="Quantity" Width="120px" />
-                    <DxGridColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" Width="200px" />
-                </Columns>
-                <TotalSummary>
-                    <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="ProductName" />
-                    <DxGridSummaryItem SummaryType="GridSummaryItemType.Sum" FieldName="Total" />
-                </TotalSummary>
-                <GroupSummary>
-                    <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="Country" />
-                    <DxGridSummaryItem SummaryType="GridSummaryItemType.Sum" FieldName="Quantity" />
-                    <DxGridSummaryItem SummaryType="GridSummaryItemType.Sum" FieldName="Total" />
-                </GroupSummary>
-            </DxGrid>
-        }
+        <DxGrid @ref="Grid"
+                Data="@Data"
+                ShowGroupPanel="true"
+                UnboundColumnData="Grid_UnboundColumnData"
+                CssClass="w-100">
+            <Columns>
+                <DxGridDataColumn FieldName="ProductName" />
+                <DxGridDataColumn FieldName="CategoryName" />
+                <DxGridDataColumn FieldName="Country" Width="200px" />
+                <DxGridDataColumn FieldName="OrderDate" GroupIndex="0" GroupInterval="GridColumnGroupInterval.DateYear" />
+                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="120px" />
+                <DxGridDataColumn FieldName="Quantity" Width="120px" />
+                <DxGridDataColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" Width="200px" />
+            </Columns>
+            <TotalSummary>
+                <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="ProductName" />
+                <DxGridSummaryItem SummaryType="GridSummaryItemType.Sum" FieldName="Total" />
+            </TotalSummary>
+            <GroupSummary>
+                <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="Country" />
+                <DxGridSummaryItem SummaryType="GridSummaryItemType.Sum" FieldName="Quantity" />
+                <DxGridSummaryItem SummaryType="GridSummaryItemType.Sum" FieldName="Total" />
+            </GroupSummary>
+        </DxGrid>
         @code {
             object Data { get; set; }
             Dictionary<string, GridColumnGroupInterval> GroupIntervals { get; } = new Dictionary<string, GridColumnGroupInterval> {
@@ -78,12 +74,12 @@
             protected void OnGroupingChanged(string key) {
                 CurrentGroupIntervalKey = key;
                 Grid.BeginUpdate();
-                var column = Grid.GetColumns().First(c => c.FieldName == "OrderDate");
+                var column = Grid.GetDataColumns().First(c => c.FieldName == "OrderDate");
                 column.GroupInterval = GroupIntervals[key];
                 Grid.EndUpdate();
             }
         }
-    </ChildContent>
+    </ChildContentWithParameters>
     <OptionsContent>
         <OptionComboBox Label="Date Group Interval:" Data="@GroupIntervals.Keys" Value="@CurrentGroupIntervalKey" ValueChanged="@((string value) => OnGroupingChanged(value))" />
     </OptionsContent>

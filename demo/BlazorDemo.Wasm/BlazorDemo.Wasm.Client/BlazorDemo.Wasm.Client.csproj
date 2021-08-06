@@ -9,7 +9,7 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
     <PackageReference Include="System.Net.Http.Json" Version="3.2.1" />
     <PackageReference Include="System.Security.Permissions" Version="5.0.0" />
-    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.5" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.6" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.2" />
@@ -18,7 +18,7 @@
     <ProjectReference Include="..\BlazorDemo\BlazorDemo.Wasm.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor" Version="21.1.4" />
+    <PackageReference Include="DevExpress.Blazor" Version="21.1.5" />
     
   </ItemGroup>
   <ItemGroup>

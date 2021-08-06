@@ -1,1 +1,1 @@
-This module demonstrates how to configure the Month View ([DxSchedulerMonthView](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerMonthView)).
+This module demonstrates how to configure the Month View - [DxSchedulerMonthView](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerMonthView).

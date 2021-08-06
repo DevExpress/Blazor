@@ -1,4 +1,4 @@
-You can populate the DevExpress TreeView's nodes with data from a source. This demo demonstrates how to bind the TreeView to the collection of flat data items. Data are loaded from a `IFlatProductsWithCategoryProvider` data provider.  
+You can populate the DevExpress TreeView's nodes with data from a source. This demo demonstrates how to bind the TreeView to the collection of flat data items. 
 
 The code above does the following: 
 

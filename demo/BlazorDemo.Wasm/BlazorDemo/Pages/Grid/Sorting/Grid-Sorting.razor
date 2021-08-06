@@ -2,24 +2,20 @@
 @layout DataProviderAccessArea<INwindDataProvider>
 
 <DemoPageSectionComponent Id="Grid-Sorting" ShowHorizontalScrollBar="true">
-    <ChildContent>
+    <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        @if(Data == null) {
-            <p><em>Loading...</em></p>
-        } else {
-            <DxGrid @ref="Grid"
-                    Data="@Data"
-                    CssClass="w-100">
-                <Columns>
-                    <DxGridColumn FieldName="ContactName" />
-                    <DxGridColumn FieldName="CompanyName" />
-                    <DxGridColumn FieldName="City" Width="200px" />
-                    <DxGridColumn FieldName="Region" Width="120px" />
-                    <DxGridColumn FieldName="Country" SortIndex="0" SortOrder="GridColumnSortOrder.Ascending" Width="200px" />
-                </Columns>
-            </DxGrid>
-        }
+        <DxGrid @ref="Grid"
+                Data="@Data"
+                CssClass="w-100">
+            <Columns>
+                <DxGridDataColumn FieldName="ContactName" />
+                <DxGridDataColumn FieldName="CompanyName" />
+                <DxGridDataColumn FieldName="City" Width="200px" />
+                <DxGridDataColumn FieldName="Region" Width="120px" />
+                <DxGridDataColumn FieldName="Country" SortIndex="0" SortOrder="GridColumnSortOrder.Ascending" Width="200px" />
+            </Columns>
+        </DxGrid>
 
         @code {
             object Data { get; set; }
@@ -44,7 +40,7 @@
                 Grid.EndUpdate();
             }
         }
-    </ChildContent>
+    </ChildContentWithParameters>
     <OptionsContent>
         <OptionComboBox Label="Sort by:" Data="@SortInfo.Keys" Value="@CurrentSortInfoKey" ValueChanged="@((string value) => OnSortingChanged(value))" />
     </OptionsContent>

@@ -1,39 +1,45 @@
 ﻿<DemoPageSectionComponent Id="Grid-DataBinding-LargeDataSource" ShowHorizontalScrollBar="true">
-    @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
-    @inject RentInfoDataService RentInfoDataService
-    @inject IRentInfoDataProvider RentInfoDataProvider
+    <ChildContentWithParameters Context="Params">
+        @inherits OwningComponentBase
+        @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 
-    <DataProviderAccessAreaContainer DataProvider="@RentInfoDataProvider">
-        <DxGrid Data="@Data" PageSize="10" CssClass="w-100">
-            <Columns>
-                <DxGridColumn FieldName="State" />
-                <DxGridColumn FieldName="Area" />
-                <DxGridColumn FieldName="City" Caption="County" />
-                <DxGridColumn FieldName="Name" Caption="Location" />
-                <DxGridColumn FieldName="Year" DisplayFormat="0" Width="120px" />
-                <DxGridColumn FieldName="Bedrooms" Width="120px" />
-                <DxGridColumn FieldName="Population" DisplayFormat="#,0" Width="120px" />
-            </Columns>
-        </DxGrid>
-    </DataProviderAccessAreaContainer>
-    @code {
-        object Data { get; set; }
+        <DataProviderAccessAreaContainer DataProvider="@RentInfoDataProvider">
+            <DxGrid Data="@Data" PageSize="10" CssClass="w-100">
+                <Columns>
+                    <DxGridDataColumn FieldName="State" />
+                    <DxGridDataColumn FieldName="Area" />
+                    <DxGridDataColumn FieldName="City" Caption="County" />
+                    <DxGridDataColumn FieldName="Name" Caption="Location" />
+                    <DxGridDataColumn FieldName="Year" DisplayFormat="0" Width="120px" />
+                    <DxGridDataColumn FieldName="Bedrooms" Width="120px" />
+                    <DxGridDataColumn FieldName="Population" DisplayFormat="#,0" Width="120px" />
+                </Columns>
+            </DxGrid>
+        </DataProviderAccessAreaContainer>
+        @code {
+            IRentInfoDataProvider RentInfoDataProvider { get; set; }
+            RentInfoDataService RentInfoDataService { get; set; }
 
-        protected override async Task OnInitializedAsync() {
-            var connectionString = ConnectionStringUtils.GetGridLargeDataConnectionString(Configuration);
-            if(string.IsNullOrEmpty(connectionString)) return;
+            object Data { get; set; }
 
-            var areaRentInfo = await RentInfoDataService.GetAreaRentInfoAsync();
+            protected override void OnInitialized() {
+                // Refer to https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.components.owningcomponentbase
+                RentInfoDataProvider = ScopedServices.GetRequiredService<IRentInfoDataProvider>();
+                RentInfoDataService = ScopedServices.GetRequiredService<RentInfoDataService>();
 
-            var dataSource = new GridDevExtremeDataSource<AreaRentInfo>(areaRentInfo.AsQueryable());
-            dataSource.CustomizeLoadOptions = (loadOptions) => {
-                // If underlying data is a large SQL table, specify PrimaryKey and PaginateViaPrimaryKey.
-                // This can make SQL execution plans more efficient.
-                loadOptions.PrimaryKey = new[] { "Oid" };
-                loadOptions.PaginateViaPrimaryKey = true;
-            };
+                var connectionString = ConnectionStringUtils.GetGridLargeDataConnectionString(Configuration);
+                if(string.IsNullOrEmpty(connectionString)) return;
 
-            Data = dataSource;
+                var dataSource = new GridDevExtremeDataSource<AreaRentInfo>(RentInfoDataService.GetAreaRentInfo());
+                dataSource.CustomizeLoadOptions = (loadOptions) => {
+                    // If underlying data is a large SQL table, specify PrimaryKey and PaginateViaPrimaryKey.
+                    // This can make SQL execution plans more efficient.
+                    loadOptions.PrimaryKey = new[] { "Oid" };
+                    loadOptions.PaginateViaPrimaryKey = true;
+                };
+
+                Data = dataSource;
+            }
         }
-    }
+    </ChildContentWithParameters>
 </DemoPageSectionComponent>

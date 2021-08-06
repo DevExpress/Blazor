@@ -3,7 +3,7 @@
         <div class="card w-100">
             <div class="card-header border-0 p-2">
                 <DxToolbar DropDownDisplayMode="@SelectedDisplayMode"
-                           ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" @key="@Params.ThemeName">
+                           ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
                     <Items>
                         @foreach(var item in MenuItems) {
                             @RenderItem(item)

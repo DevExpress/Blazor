@@ -18,8 +18,6 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
         private const int FetchBatchSize = 500;
 
         static readonly Dictionary<Guid, Type> EntityTypeLookup = new Dictionary<Guid, Type>() {
-            {typeof(ProductFlat).GUID, typeof(ProductFlat)},
-            {typeof(ProductCategory).GUID, typeof(ProductCategory)},
             {typeof(SaleInfo).GUID, typeof(SaleInfo)},
 
             {typeof(BlazorDemo.Data.SalesViewer.City).GUID, typeof(BlazorDemo.Data.SalesViewer.City)},

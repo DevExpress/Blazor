@@ -26,34 +26,34 @@
                 properties.FirstLineIndentType = FirstLineIndentType.Indented;
                 properties.FirstLineIndent = 500;
             });
-            string bodyParagraphText = "Ayn Rand (born Alisa Zinov'yevna Rosenbaum; February 2, 1905 – March 6, 1982) was a Russian-American novelist, philosopher, playwright, and screenwriter. She is known for her two best-selling novels, The Fountainhead and Atlas Shrugged, and for developing a philosophical system she called Objectivism.";
+            string bodyParagraphText = "Albert Einstein (14 March 1879 – 18 April 1955) was a German-born theoretical physicist, widely acknowledged to be one of the greatest physicists of all time. Einstein is known for developing the theory of relativity, but he also made important contributions to the development of the theory of quantum mechanics.";
             TextSpan bodyParagraphTextSpan = await documentAPI.AddTextAsync(0, bodyParagraphText);
             await bodyParagraphTextSpan.ChangePropertiesAsync(properties => {
                 properties.FontName = "Segoe UI";
                 properties.FontSize = 12;
             });
-            TextSpan boldTextSpan = await documentAPI.GetTextSpanAsync(0, 8);
+            TextSpan boldTextSpan = await documentAPI.GetTextSpanAsync(0, 15);
             await boldTextSpan.ChangePropertiesAsync(properties => {
                 properties.FontBold = true;
             });
-            TextSpan italicTextSpan = await documentAPI.GetTextSpanAsync(9, 68);
+            TextSpan italicTextSpan = await documentAPI.GetTextSpanAsync(16, 31);
             await italicTextSpan.ChangePropertiesAsync(properties => {
                 properties.FontItalic = true;
             });
-            await documentAPI.Hyperlinks.CreateAsync(bodyParagraphText.IndexOf("Objectivism"), "Objectivism".Length, url: "https://en.wikipedia.org/wiki/Objectivism");
-            await documentAPI.Hyperlinks.CreateAsync(bodyParagraphText.IndexOf("Atlas Shrugged"), "Atlas Shrugged".Length, url: "https://en.wikipedia.org/wiki/Atlas_Shrugged");
-            await documentAPI.Hyperlinks.CreateAsync(bodyParagraphText.IndexOf("The Fountainhead"), "The Fountainhead".Length, url: "https://en.wikipedia.org/wiki/The_Fountainhead");
+            await documentAPI.Hyperlinks.CreateAsync(bodyParagraphText.IndexOf("quantum mechanics"), "quantum mechanics".Length, url: "https://en.wikipedia.org/wiki/Quantum_mechanics");
+            await documentAPI.Hyperlinks.CreateAsync(bodyParagraphText.IndexOf("theory of relativity"), "theory of relativity".Length, url: "https://en.wikipedia.org/wiki/Theory_of_relativity");
+            await documentAPI.Hyperlinks.CreateAsync(bodyParagraphText.IndexOf("theoretical physicist"), "theoretical physicist".Length, url: "https://en.wikipedia.org/wiki/Theoretical_physics");
 
             Paragraph pictureParagraph = await documentAPI.Paragraphs.CreateAsync(0);
             await pictureParagraph.ChangePropertiesAsync(properties => {
                 properties.Alignment = ParagraphAlignment.Center;
             });
-            await documentAPI.InlineImages.CreateAsync(0, DocumentImageSource.LoadFromUrl(NavigationManager.BaseUri + "_content/BlazorDemo/images/AynRand.jpg", Units.PixelsToTwips(288, 96), Units.PixelsToTwips(358, 96)));
+            await documentAPI.InlineImages.CreateAsync(0, DocumentImageSource.LoadFromUrl(NavigationManager.BaseUri + "_content/BlazorDemo/images/AlbertEinstein.jpg", UnitConverter.PixelsToTwips(220), UnitConverter.PixelsToTwips(289)));
             Paragraph titleParagraph = await documentAPI.Paragraphs.CreateAsync(0);
             await titleParagraph.ChangePropertiesAsync(properties => {
                 properties.SpacingAfter = 400;
             });
-            TextSpan titleParagraphTextSpan = await documentAPI.AddTextAsync(0, "Ayn Rand");
+            TextSpan titleParagraphTextSpan = await documentAPI.AddTextAsync(0, "Albert Einstein");
             await titleParagraphTextSpan.ChangePropertiesAsync(properties => {
                 properties.FontName = "Arial";
                 properties.FontSize = 24;
@@ -61,7 +61,7 @@
             });
             Section section = await documentAPI.Sections.GetAsync(0);
             SubDocument footer = await section.GetFooterAsync(createIfNotExist: true);
-            await footer.AddTextAsync(0, "From Wikipedia, the free encyclopedia");
+            await footer.AddTextAsync(0, "Source Wikipedia.com");
             documentAPI.EndUpdate();
         }
     }

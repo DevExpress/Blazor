@@ -1,47 +1,47 @@
 ﻿<DemoPageSectionComponent Id="Grid-Templates-Column" ShowHorizontalScrollBar="true">
-    @inject NwindDataService NwindDataService
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
 
-    @if(Data == null) {
-        <p><em>Loading...</em></p>
-    } else {
         <DxGrid Data="@Data" CssClass="w-100">
             <Columns>
-                <DxGridColumn FieldName="FirstName" />
-                <DxGridColumn FieldName="LastName" />
-                <DxGridColumn FieldName="Title" />
-                <DxGridColumn FieldName="BirthDate" Width="150px" />
-                <DxGridColumn FieldName="HireDate" Width="150px" />
-                <DxGridColumn FieldName="EmployeeId" AllowSort="false" Width="90px">
-                    <CellDisplayTemplate><a class="d-block text-left" href="javascript:;" @onclick="() => ShowDetails(context)">More Info...</a></CellDisplayTemplate>
+                <DxGridDataColumn FieldName="FirstName" />
+                <DxGridDataColumn FieldName="LastName" />
+                <DxGridDataColumn FieldName="Title" />
+                <DxGridDataColumn FieldName="BirthDate" Width="150px" />
+                <DxGridDataColumn FieldName="HireDate" Width="150px" />
+                <DxGridDataColumn FieldName="EmployeeId" AllowSort="false" Width="80px">
+                    <CellDisplayTemplate><a class="d-block text-left text-nowrap" href="javascript:;" @onclick="() => ShowDetails((int)context.Value)">More Info...</a></CellDisplayTemplate>
                     <HeaderCaptionTemplate><span title="Click a link below to show more information about an employee">Details</span></HeaderCaptionTemplate>
-                </DxGridColumn>
+                </DxGridDataColumn>
             </Columns>
         </DxGrid>
         <DxPopup @bind-Visible="@PopupVisible"
-                 HeaderText="@PopupHeaderText"
-                 HorizontalAlignment="HorizontalAlignment.Center"
-                 VerticalAlignment="VerticalAlignment.Center">@PopupContent</DxPopup>
-    }
+                    HeaderText="@PopupHeaderText"
+                    HorizontalAlignment="HorizontalAlignment.Center"
+                    VerticalAlignment="VerticalAlignment.Center">
+            @PopupContent
+        </DxPopup>
 
-    @code {
-        IEnumerable<Employee> Data { get; set; }
-        Employee CurrentEmployee { get; set; }
-        bool PopupVisible {
-            get { return CurrentEmployee != null; }
-            set { if(!value) CurrentEmployee = null; }
-        }
-        string PopupHeaderText {
-            get { return CurrentEmployee != null ? CurrentEmployee.FirstName + " " + CurrentEmployee.LastName : ""; }
-        }
-        string PopupContent {
-            get { return CurrentEmployee != null ? CurrentEmployee.Notes : ""; }
-        }
+        @code {
+            IEnumerable<Employee> Data { get; set; }
+            Employee CurrentEmployee { get; set; }
+            bool PopupVisible {
+                get { return CurrentEmployee != null; }
+                set { if(!value) CurrentEmployee = null; }
+            }
+            string PopupHeaderText {
+                get { return CurrentEmployee != null ? CurrentEmployee.FirstName + " " + CurrentEmployee.LastName : ""; }
+            }
+            string PopupContent {
+                get { return CurrentEmployee != null ? CurrentEmployee.Notes : ""; }
+            }
 
-        protected override async Task OnInitializedAsync() {
-            Data = await NwindDataService.GetEmployeesAsync();
+            protected override async Task OnInitializedAsync() {
+                Data = await NwindDataService.GetEmployeesAsync();
+            }
+            public void ShowDetails(int employeeId) {
+                CurrentEmployee = Data.FirstOrDefault(e => e.EmployeeId == employeeId);
+            }
         }
-        public void ShowDetails(GridColumnCellDisplayTemplateContext context) {
-            CurrentEmployee = Data.Where(e => e.EmployeeId == (int)context.Value).FirstOrDefault();
-        }
-    }
+    </ChildContentWithParameters>
 </DemoPageSectionComponent>

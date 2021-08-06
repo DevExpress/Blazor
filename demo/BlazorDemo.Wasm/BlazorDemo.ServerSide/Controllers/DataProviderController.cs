@@ -18,18 +18,12 @@ namespace BlazorDemo.AspNetCoreHost {
         readonly Task _providersReadyToTransfer;
 
         public DataProviderController(
-            IProductsFlatProvider productsFlatProvider,
-            IProductCategoriesProvider productCategoriesProvider,
             ISalesInfoDataProvider salesInfoDataProvider,
             INwindDataProvider nwindDataProvider,
             IIssuesDataProvider issuesDataProvider,
             IWorldcitiesDataProvider worldcitiesDataProvider
         ) {
             var ct = _cancellationToken = _cts.Token;
-
-            InitializeEntities(productsFlatProvider, productsFlatProvider.GetProductsAsync, ct);
-            InitializeEntities(productCategoriesProvider, productCategoriesProvider.GetProductCategoriesAsync, ct);
-
             InitializeEntities(salesInfoDataProvider, salesInfoDataProvider.GetSalesAsync, ct);
 
             InitializeEntities(nwindDataProvider, nwindDataProvider.GetCategoriesAsync, ct);

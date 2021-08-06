@@ -22,7 +22,6 @@
     padding: 0.5rem 0;
 }
 .demo-feedback-panel .feedback-btns .btn {
-    color: var(--secondary);
     padding: 0.2rem;
 }
 .demo-feedback-panel .feedback-btns .btn:not(:last-child) {

@@ -17,7 +17,6 @@ namespace BlazorDemo.Configuration {
         static readonly Regex DemoPageSectionComponentChildContentWithParametersRegex = new Regex(@"\s*<ChildContentWithParameters[^>]*>(?<Code>.*?)<\/ChildContentWithParameters>", options);
         static readonly Regex DemoPageSectionComponentOptionsContentRegex = new Regex(@"\s*<OptionsContent[^>]*>(?<Code>.*?)<\/OptionsContent>", options);
         static readonly Regex DemoPageSectionBaseClassSizeModeAttributeRegex = new Regex("\\s?@?(Item)?SizeMode=\"[^\"]*\"", options);
-        static readonly Regex DemoPageSectionBaseClassThemeAttributeRegex = new Regex("\\s?@key=\"[^\"]*\"", options);
         static readonly Regex DemoDataProviderAccessAreaRegex = new Regex(@"<DataProviderAccessAreaContainer[^>]*>(?<Code>.*?)<\/DataProviderAccessAreaContainer>", options);
         static readonly Regex RandomWrapperRegex = new Regex(@"RandomWrapperFactory.Create\((?<Parameter>[^)]*?)\)", options);
         static readonly Regex IDataProviderRegex = new Regex(@"\:\s+IDataProvider", options);
@@ -87,7 +86,7 @@ namespace BlazorDemo.Configuration {
             yield return notMatch(code.Substring(pos));
         }
         static string ReplaceRandomWrapper(string code) {
-            return ReplaceCode(code, RandomWrapperRegex, match => "new Randow(" + (match.Groups["Parameter"] != null ? match.Groups["Parameter"].Value : "") + ")");
+            return ReplaceCode(code, RandomWrapperRegex, match => "new Random(" + (match.Groups["Parameter"] != null ? match.Groups["Parameter"].Value : "") + ")");
         }
         static string ReplaceIDataProvider(string code) {
             return ReplaceCode(code, IDataProviderRegex);
@@ -99,7 +98,6 @@ namespace BlazorDemo.Configuration {
             => string.Join("", SplitAndReplaceCode(code, regex, eval));
         static string ReplaceCommonParameters(string code) {
             code = ReplaceCode(code, DemoPageSectionBaseClassSizeModeAttributeRegex);
-            code = ReplaceCode(code, DemoPageSectionBaseClassThemeAttributeRegex);
             return code;
         }
         static string ReplaceHideRegion(string code) {

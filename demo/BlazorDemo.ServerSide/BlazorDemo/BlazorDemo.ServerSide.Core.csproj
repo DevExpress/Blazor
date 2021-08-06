@@ -16,12 +16,12 @@
     <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.2" />
-    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.5" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.6" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.112" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="21.1.4" />
-    <PackageReference Include="DevExpress.Blazor.Reporting" Version="21.1.4" />
+    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="21.1.5" />
+    <PackageReference Include="DevExpress.Blazor.Reporting" Version="21.1.5" />
     
     
     
@@ -116,7 +116,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\Documents\AynRand.docx">
+    <Content Include="Data\Documents\AlbertEinstein.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	    <CopyToPublishDirectory>Always</CopyToPublishDirectory>
     </Content>

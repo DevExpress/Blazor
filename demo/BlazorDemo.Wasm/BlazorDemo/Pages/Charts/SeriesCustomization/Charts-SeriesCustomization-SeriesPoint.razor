@@ -4,7 +4,6 @@
     <ChildContentWithParameters Context="Params">
         @inject IWeatherSummaryDataProvider WeatherSummaryDataProvider
         <DxChart Data="@WeatherForecasts"
-                 @key="Params.ThemeName"
                  CustomizeSeriesPoint="@PreparePointColor"
                  CssClass="w-100">
             <DxChartTitle Text="Annual Weather in New York" />

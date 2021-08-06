@@ -5,9 +5,30 @@
 <DemoScriptLoader @ref=@clipboradJsRef Src="//cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" />
 <DemoScriptLoader @ref=@sectionHelper Src="_content/BlazorDemo/lib/page-section-helper.js" />
 
+@{
+    RenderFragment<DemoPageSectionParameters> ComponentArea = parameters =>
+    @<div class="demo-page-section-component-area" @key="parameters.ThemeName">
+        @if(IsComponentAreaVisible) {
+            @if(OptionsContent != null) {
+                <div class="options-container border border-light">
+                    @OptionsContent
+                </div>
+            }
+            <div @attributes="GetComponentContainerAttributes()">
+                @ChildContent
+                @if(ChildContentWithParameters != null)
+                    @ChildContentWithParameters(parameters)
+            </div>
+        }
+    </div>;
+}
+
 <div id="@("section-" + Section.Id)" class="demo-page-section @(!ShowCode ? "no-code" : "") @(ShowHorizontalScrollBar ? "h-scroll" : "")">
     <div class="demo-page-section-title">
-        <h2><a class="demo-anchor" href="@(Page.Url + "#" + Section.Id)" />@(!string.IsNullOrEmpty(Section.TitleOnPage) ? Section.TitleOnPage : Section.Title)</h2>
+        <h2 id="@Section.Id">
+            <a class="demo-anchor" href="@(Page.Url + "#" + Section.Id)" />
+            @(!string.IsNullOrEmpty(Section.TitleOnPage) ? Section.TitleOnPage : Section.Title)
+        </h2>
     </div>
     @if(RootPage.IsPreview) {
         <div class="demo-page-section-status-text">
@@ -16,7 +37,8 @@
     }
     @if(ShowContent) {
         var parameters = new DemoPageSectionParameters() { SizeMode = SizeMode, ThemeName = ThemeName };
-        if(ShowCode) {
+        <CascadingValue Name="VisualTestsEnabled" Value="VisualTestsEnabled" IsFixed="true">
+        @if(ShowCode) {
             <div class="card">
                 <div class="card-header">
                     <ul class="nav nav-tabs">
@@ -54,24 +76,7 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <div class="demo-page-section-component-area">
-                        @if(IsComponentAreaVisible) {
-                            @if(OptionsContent != null) {
-                                <div class="options-container border border-light">
-                                    @OptionsContent
-                                </div>
-                                <div class="component-container">
-                                    @ChildContent
-                                    @if(ChildContentWithParameters != null)
-                                        @ChildContentWithParameters(parameters)
-                                </div>
-                            } else {
-                                @ChildContent
-                                @if(ChildContentWithParameters != null)
-                                    @ChildContentWithParameters(parameters)
-                            }
-                        }
-                    </div>
+                    @ComponentArea.Invoke(parameters)
                     <div class="demo-page-section-code-area d-none">
                         @if(IsCodeVisible) {
                             <PageSectionCodeSnippetTabbed DocUrl="@Section.DocUrl">
@@ -86,23 +91,9 @@
                 </div>
             </div>
         } else {
-            <div class="demo-page-section-component-area">
-                @if(OptionsContent != null) {
-                    <div class="options-container border border-light">
-                        @OptionsContent
-                    </div>
-                    <div class="component-container">
-                        @ChildContent
-                        @if(ChildContentWithParameters != null)
-                            @ChildContentWithParameters(parameters)
-                    </div>
-                } else {
-                    @ChildContent
-                    @if(ChildContentWithParameters != null)
-                        @ChildContentWithParameters(parameters)
-                }
-            </div>
+            @ComponentArea.Invoke(parameters)
         }
+        </CascadingValue>
     }
     @if(ShowDescription) {
         <div class="demo-page-section-description">
@@ -143,6 +134,14 @@
     public bool ShowSizeMode { get; set; }
 
     [Parameter]
+    public HorizontalAlignment HorizontalAlignment { get; set; } = HorizontalAlignment.Center;
+    [Parameter]
+    public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.Center;
+
+    [Parameter]
+    public int? MinHeight { get; set; }
+
+    [Parameter]
     public SizeMode SizeMode { get; set; }
     [CascadingParameter(Name = "ThemeName")]
     public string ThemeName { get; set; }
@@ -169,6 +168,7 @@
             InvokeAsync(StateHasChanged);
         }
     }
+    bool VisualTestsEnabled { get; set; }
     bool IsComponentAreaVisible { get; set; }
     bool IsCodeVisible { get; set; }
     void UpdateTabPagesVisibility() {
@@ -179,6 +179,37 @@
     string GetTabCssClass(bool isActive) {
         return string.Join(" ", "nav-link", isActive ? "active" : "").Trim();
     }
+
+    IReadOnlyDictionary<string, object> GetComponentContainerAttributes() {
+        var result = new Dictionary<string, object>();
+        var className = GetComponentContainerCssClass();
+        if(!string.IsNullOrEmpty(className))
+            result.Add("class", className);
+        var style = GetComponentContainerStyle();
+        if(!string.IsNullOrEmpty(style))
+            result.Add("style", style);
+        return result;
+    }
+    string GetComponentContainerCssClass() {
+        List<string> cssClasses = new List<string>();
+        cssClasses.Add("component-container");
+        if(VerticalAlignment == VerticalAlignment.Top)
+            cssClasses.Add("justify-content-start");
+        else if(VerticalAlignment == VerticalAlignment.Bottom)
+            cssClasses.Add("justify-content-end");
+        if(HorizontalAlignment == HorizontalAlignment.Left)
+            cssClasses.Add("align-items-start");
+        else if(HorizontalAlignment == HorizontalAlignment.Right)
+            cssClasses.Add("align-items-end");
+        return string.Join(" ", cssClasses);
+    }
+    string GetComponentContainerStyle() {
+        var cssRules = new List<string>();
+        if(MinHeight != null)
+            cssRules.Add($"min-height: {MinHeight.Value}px");
+        return string.Join("; ", cssRules);
+    }
+
     string GetTabPageLanguage(string key) {
         key = key.ToLower().Split('.').Last();
         switch(key) {
@@ -200,6 +231,9 @@
     }
 
     protected override void OnInitialized() {
+#if VISUALTESTS
+        VisualTestsEnabled = true;
+#endif
         base.OnInitialized();
         UpdateTabPagesVisibility();
     }

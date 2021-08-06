@@ -3,7 +3,6 @@
         @inject ISalesInfoDataProvider Sales
         @if (SalesData != null) {
             <DxChart Data="@SalesData"
-                     @key="@Params.ThemeName"
                      CssClass="w-100">
 
                 <DxChartTitle Text="Sales amount" />

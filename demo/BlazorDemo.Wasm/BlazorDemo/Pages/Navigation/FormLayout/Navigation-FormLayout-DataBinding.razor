@@ -4,7 +4,7 @@
         <DxFormLayout Data="@editFormData"
                       ItemSizeMode="Params.SizeMode"
                       ItemUpdating="@((pair) => OnItemUpdating(pair.Key, pair.Value))"
-                      @key="@Params.ThemeName" CssClass="w-100">
+                      CssClass="w-100">
             <DxFormLayoutItem Field="@nameof(FormDataItem.Name)"
                               Caption="Contact Name:"
                               ColSpanMd="6" />

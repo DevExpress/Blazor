@@ -3,7 +3,6 @@
         @inject WeatherForecastService ForecastService
 
         <DxChart Data="@WeatherForecasts"
-                 @key="Params.ThemeName"
                  CustomizeSeriesPoint="@PreparePointImage"
                  CssClass="w-100">
             <DxChartTitle Text="15-Day Weather Forecast" />

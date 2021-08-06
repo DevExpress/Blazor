@@ -8,7 +8,7 @@
         byte[] documentContent;
 
         protected override async Task OnInitializedAsync() {
-            documentContent = await File.ReadAllBytesAsync(Path.Combine(AppContext.BaseDirectory, "Data\\Documents\\AynRand.docx"));
+            documentContent = await File.ReadAllBytesAsync(Path.Combine(AppContext.BaseDirectory, "Data\\Documents\\AlbertEinstein.docx"));
             await base.OnInitializedAsync();
         }
     }

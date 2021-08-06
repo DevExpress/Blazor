@@ -3,7 +3,6 @@
         @inject IFinancialSeriesDataProvider FinancialSeriesDataProvider
 
         <DxChart Data="@StockData"
-                 @key="Params.ThemeName"
                  CssClass="w-100">
             <DxChartLegend Position="RelativePosition.Outside" />
             <DxChartCandlestickSeries ValueField="@((BargainDataPoint i) => i.Price)"

@@ -1,11 +1,13 @@
 ﻿<DemoPageSectionComponent Id="Navigation-TreeView-Templates">
     @*BeginHide*@
-    <div>
+    <div class="d-flex flex-row justify-content-center w-100">
     @*EndHide*@
     <DxTreeView Data="@ComponentSets.Data"
-                CssClass="demo-treeview-template w-100"
-                ChildrenExpression="@(dataItem => ((ComponentSet)dataItem).ComponentSets)"
+                CssClass="demo-treeview-template cw-880"
                 @ref="@treeView">
+        <DataMappings>
+            <DxTreeViewDataMapping Children="ComponentSets" />
+        </DataMappings>
         <NodeTemplate>
             @{
                 var dataItem = (ComponentSet)context.DataItem;

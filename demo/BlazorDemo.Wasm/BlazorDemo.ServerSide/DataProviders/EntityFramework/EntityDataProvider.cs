@@ -106,18 +106,15 @@ namespace BlazorDemo.DataProviders {
         }
     }
 
-    public class EntityQueryableDataProvider<T> : EntityDataProviderBase<T> where T : DbContext {
+    public class EntityQueryableDataProvider<T> : EntityDataProviderBase<T>, IDisposable where T : DbContext {
         public EntityQueryableDataProvider(IDbContextFactory<T> contextFactory, IConfiguration configuration) : base(contextFactory, configuration) {
             Context = ContextFactory.CreateDbContext();
         }
 
         public T Context { get; private set; }
 
-        protected async Task<IEnumerable<TEntity>> LoadQueryableDataAsync<TEntity>(CancellationToken ct = default) where TEntity : class, new() {
-            await Task.Delay(150, ct).ConfigureAwait(false);
-
-            var dbSet = Context.Set<TEntity>();
-            return dbSet.AsNoTracking();
+        protected IQueryable<TEntity> GetNonTrackingDbSet<TEntity>() where TEntity : class, new() {
+            return Context.Set<TEntity>().AsNoTracking();
         }
 
         public void Dispose() {
