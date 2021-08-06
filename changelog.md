@@ -2,6 +2,112 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 21.1.5
+
+### Grid
+
+#### Filter Row
+
+Our Blazor Grid now includes a filter row that displays in-place text editors for all data columns. The Grid creates a filter condition based on the editor value and applies this condition to the corresponding column. To display the filter row, set the [ShowFilterRow](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ShowFilterRow) property to true.
+
+We also implemented the following filter row customization options: 
+
+* [FilterRowOperatorType](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.FilterRowOperatorType) – Specifies the operator used to create a filter condition based on the filter row value (Equals, Contains, StartsWith, Greater, Less, and so on).  
+* [FilterRowValue](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.FilterRowValue) - Specifies the initial value in the filter row editor.  
+* [FilterRowEditorVisible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.FilterRowEditorVisible) – Specifies whether to display the filter row editor. 
+* [FilterRowCellTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.FilterRowCellTemplate) - Allows you to display a custom editor in a filter row cell.
+
+[Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ShowFilterRow) | [Demo](https://demos.devexpress.com/blazor/Grid/Filtering) 
+
+#### Filter in Code
+
+You can also manage filter options in code. Call the [FilterBy](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.FilterBy(System.String-DevExpress.Blazor.GridFilterRowOperatorType-System.Object)) method to filter Grid data and the [ClearFilter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ClearFilter) method to reset the applied filter. 
+
+#### Command Column
+
+The new command column type is introduced. This column contains a **Clear** button that resets the applied filter. To display the command column, declare a [DxGridCommandColumn](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridCommandColumn) object in the [Columns](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.Columns) template. 
+ 
+You can also define a [FilterRowCellTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridCommandColumn.FilterRowCellTemplate) to display custom content in the column’s filter row cell.
+ 
+[Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ShowFilterRow#command-column) | [Demo](https://demos.devexpress.com/blazor/Grid/Filtering) 
+
+#### API Changes 
+
+The Grid component now includes two types of columns: data and command. To avoid confusion with column names, we made the following changes to the API: 
+
+* You should now use the [DxGridDataColumn](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn) class instead of the [DxGridColumn](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridColumn) class to add a data column to the Grid. 
+* We made the [DxGridColumn](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridColumn) class abstract and it now contains the base API for data and command columns. 
+
+We also renamed the following templates: 
+
+* ColumnGroupRowTemplate => [DataColumnGroupRowTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.DataColumnGroupRowTemplate) 
+* ColumnCellDisplayTemplate => [DataColumnCellDisplayTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.DataColumnCellDisplayTemplate) 
+
+#### Group Footer Summary
+
+You can now display group summary values in group footers. To do this, set the summary item’s [FooterColumnName](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridSummaryItem.FooterColumnName) property to the name of a group footer column. 
+
+[Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.GroupFooterDisplayMode) | [Demo](https://demos.devexpress.com/blazor/Grid/Summary#GroupFooter) 
+
+#### Group Footer Templates
+
+The new [DxGridColumn.GroupFooterTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridColumn.GroupFooterTemplate) and [DxGrid.ColumnGroupFooterTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ColumnGroupFooterTemplate) properties allow you to customize individual or all group footers. 
+
+#### Group Footer Display Mode
+
+The Grid shows group footers if they contain summary values or custom template content and the corresponding groups are expanded.  
+ 
+You can use the new [GroupFooterDisplayMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.GroupFooterDisplayMode) property to change the display mode of group footers to **Always**, **Never**, or **IfExpanded**.
+ 
+We also renamed the **ShowFooter** option to [FooterDisplayMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.FooterDisplayMode) to make it consistent with [GroupFooterDisplayMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.GroupFooterDisplayMode). The **FooterDisplayMode** property specifies the visibility of the total footer.  
+
+#### Column Name
+
+We introduced the [Name](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridColumn.Name) property to all Grid columns. Use this property to specify the column’s unique identifier. 
+
+### Chart
+
+#### Refresh Chart Data and Rerender the Component in Code
+
+In v21.1.5, we introduced two new methods to the Chart component:
+
+* [RefreshData](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.RefreshData) - Reloads chart data and redraws the component.
+* [RedrawAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.RedrawAsync) - Re-renders the Chart and its child components.
+
+### ComboBox
+
+#### Validate Text
+
+Value and display text can differ in a ComboBox component. You can use the new [ValidateBy](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.ValidateBy) property to specify which component’s property ([Value](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.Value) or [Text](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.Text)) is used for input validation.
+
+### Form Layout
+
+#### Group Header Customization
+
+You can now specify a template for a group header. To do this, define the [HeaderTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutGroup.HeaderTemplate) component within the group’s markup, add the render fragment to the template, and wrap group items in the [Items](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutGroup.Items) component.
+
+To apply CSS classes to a group header, use the new [HeaderCssClass](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutGroup.HeaderCssClass) property.
+
+#### Group Appearance Customization
+
+To apply a CSS class to the entire group, use the new [CssClass](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutGroup.CssClass) property.
+
+### Popup
+
+#### Initialization State
+
+The Popup cannot be shown until the component is initialized. To track the initialization state from code, use the [IsInitialized](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.IsInitialized) property. For example, you can check this property value before you call the [ShowAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.ShowAsync(System.Threading.CancellationToken)) method.
+
+### Button
+
+#### Navigate URL
+
+Use the new [NavigateUrl](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton.NavigateUrl) property to specify the URL the client web browser navigates to when you click the button.
+
+### Resolved Issues
+
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=21.1.5&endBuildName=21.1.3&buildsMode=Single&hasPlatformsWithProducts=true) for a complete list of issues resolved in v21.1.5.
+
 # 21.1.4
 
 ### Navigation and Layout
@@ -622,7 +728,7 @@ The new Memo component for Blazor has the following features:
 * Clear button
 * Read-only state
 
-[Demo](https://demos.devexpress.com/blazor/Memo) | [Documentation]( http://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMemo)
+[Demo](https://demos.devexpress.com/blazor/Memo) | [Documentation]( https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMemo)
 
 ### Data Grid Enhancements
 
