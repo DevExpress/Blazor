@@ -11,9 +11,10 @@ var DemoFeedbackHelper = (function() {
 
         var form_data = new FormData();
         form_data.append("value", requestParams.value);
-        form_data.append("document", requestParams.document);
-        form_data.append("project", requestParams.project);
-        form_data.append("host", requestParams.host);
+        form_data.append("document", window.location.pathname);
+        form_data.append("project", "Blazor");
+        form_data.append("host", window.location.host);
+        form_data.append("title", document.title);
         if(requestParams.message)
             form_data.append("message", requestParams.message);
         var doneCallback = function() {
@@ -36,7 +37,7 @@ var DemoFeedbackHelper = (function() {
         xhr.send(form_data);
     }
     function sendFeedback(value, message, completed) {
-        sendFeedbackData({ value: value, document: window.location.pathname, project: "Blazor", host: window.location.host, message: message, completed: completed });
+        sendFeedbackData({ value: value, message: message, completed: completed });
     }
 
     return {

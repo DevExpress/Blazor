@@ -2,8 +2,7 @@
     <ChildContentWithParameters Context="Params">
         <div class="d-flex flex-wrap justify-content-center">
             <DxChart Data="@GetData()"
-                     Width="400px"
-                     @key="@Params.ThemeName">
+                     Width="400px">
                 <DxChartTitle Text="@($"The loudness of sounds (no changes)")" />
                 <DxChartLegend Visible="false" />
                 <DxChartArgumentAxis Type="ChartAxisType.Discrete" />

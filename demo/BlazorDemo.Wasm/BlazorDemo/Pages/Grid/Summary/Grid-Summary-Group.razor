@@ -1,56 +1,54 @@
 ﻿<DemoPageSectionComponent Id="Grid-Summary-Group" ShowHorizontalScrollBar="true">
-    @inject NwindDataService NwindDataService
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
 
-    @if(Data == null) {
-        <p><em>Loading...</em></p>
-    } else {
         <DxGrid @ref="Grid"
                 Data="@Data"
                 ShowGroupPanel="true"
                 UnboundColumnData="Grid_UnboundColumnData"
                 CssClass="w-100">
             <Columns>
-                <DxGridColumn FieldName="Country" GroupIndex="0" Width="200px" />
-                <DxGridColumn FieldName="City" GroupIndex="1" Width="200px" />
-                <DxGridColumn FieldName="CompanyName" />
-                <DxGridColumn FieldName="UnitPrice" DisplayFormat="c" Width="120px" />
-                <DxGridColumn FieldName="Quantity" Width="120px" />
-                <DxGridColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" Width="200px" />
+                <DxGridDataColumn FieldName="Country" GroupIndex="0" Width="200px" />
+                <DxGridDataColumn FieldName="City" GroupIndex="1" Width="200px" />
+                <DxGridDataColumn FieldName="CompanyName" />
+                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="120px" />
+                <DxGridDataColumn FieldName="Quantity" Width="120px" />
+                <DxGridDataColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" Width="200px" />
             </Columns>
             <GroupSummary>
                 <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="CompanyName" />
                 <DxGridSummaryItem SummaryType="GridSummaryItemType.Sum" FieldName="Total" />
             </GroupSummary>
         </DxGrid>
-    }
-    @code {
-        object Data { get; set; }
-        IGrid Grid { get; set; }
+        @code {
+            object Data { get; set; }
+            IGrid Grid { get; set; }
 
-        protected override async Task OnInitializedAsync() {
-            var invoices = await NwindDataService.GetInvoicesAsync();
-            var customers = await NwindDataService.GetCustomersAsync();
-            Data = invoices.OrderBy(i => i.OrderDate).Join(customers, i => i.CustomerId, c => c.CustomerId, (i, c) => {
-                return new {
-                    CompanyName = c.CompanyName,
-                    City = i.City,
-                    Region = i.Region,
-                    Country = i.Country,
-                    UnitPrice = i.UnitPrice,
-                    Quantity = i.Quantity
-                };
-            });
-        }
-        void Grid_UnboundColumnData(GridUnboundColumnDataEventArgs e) {
-            if(e.FieldName == "Total") {
-                decimal price = (decimal)e.GetRowValue("UnitPrice");
-                short quantity = (short)e.GetRowValue("Quantity");
-                e.Value = price * quantity;
+            protected override async Task OnInitializedAsync() {
+                var invoices = await NwindDataService.GetInvoicesAsync();
+                var customers = await NwindDataService.GetCustomersAsync();
+                Data = invoices.OrderBy(i => i.OrderDate).Join(customers, i => i.CustomerId, c => c.CustomerId, (i, c) => {
+                    return new {
+                        CompanyName = c.CompanyName,
+                        City = i.City,
+                        Region = i.Region,
+                        Country = i.Country,
+                        UnitPrice = i.UnitPrice,
+                        Quantity = i.Quantity
+                    };
+                });
+            }
+            void Grid_UnboundColumnData(GridUnboundColumnDataEventArgs e) {
+                if(e.FieldName == "Total") {
+                    decimal price = (decimal)e.GetRowValue("UnitPrice");
+                    short quantity = (short)e.GetRowValue("Quantity");
+                    e.Value = price * quantity;
+                }
+            }
+            protected override void OnAfterRender(bool firstRender) {
+                if(firstRender)
+                    Grid.ExpandGroupRow(1);
             }
         }
-        protected override void OnAfterRender(bool firstRender) {
-            if(firstRender)
-                Grid.ExpandGroupRow(1);
-        }
-    }
+    </ChildContentWithParameters>
 </DemoPageSectionComponent>

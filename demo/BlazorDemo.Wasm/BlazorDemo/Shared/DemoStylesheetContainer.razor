@@ -1,0 +1,58 @@
+﻿@inject DemoConfiguration DemoConfiguration
+@inject DemoThemeService Themes
+@implements IDisposable
+@implements IDemoThemeChangeRequestDispatcher
+
+<link rel="stylesheet" href="_content/BlazorDemo/css/scroll-view.css">
+<DynamicStylesheetLink Url="@GetThemeCssUrl()" OnLoad="@ThemeStylesheet_LoadAsync" />
+<DynamicStylesheetLink Url="@GetHighlightJSThemeCssUrl()" />
+<link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo.css">
+<link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-pages.css">
+<link rel="stylesheet" href="_content/DevExpress.Blazor/dx-blazor.css">
+
+@if(DemoConfiguration.IsServerSide) {
+    <link rel="stylesheet" href="_content/DevExpress.Blazor.RichEdit/dx-richedit.css">
+    <link rel="stylesheet" href="BlazorDemo.ServerSide.styles.css">
+} else {
+    <link rel="stylesheet" href="BlazorDemo.Wasm.Server.styles.css">
+}
+
+
+@code {
+
+    DemoTheme PendingTheme { get; set; }
+
+    protected override void OnInitialized() {
+        base.OnInitialized();
+        Themes.ThemeChangeRequestDispatcher = this;
+        PendingTheme = Themes.ActiveTheme;
+    }
+
+    public void RequestThemeChange(DemoTheme newTheme) {
+        PendingTheme = newTheme;
+        ForceReRender();
+    }
+
+    async Task ThemeStylesheet_LoadAsync() {
+        if(Themes.ThemeLoadNotifier != null)
+            await Themes.ThemeLoadNotifier.NotifyThemeLoadedAsync(PendingTheme);
+        PendingTheme = null;
+    }
+
+    string GetThemeCssUrl() {
+        return PendingTheme != null ? Themes.GetThemeCssUrl(PendingTheme) : Themes.GetActiveThemeCssUrl();
+    }
+
+    string GetHighlightJSThemeCssUrl() {
+        return PendingTheme != null ? Themes.GetHighlightJSThemeCssUrl(PendingTheme) : Themes.GetActiveHighlightJSThemeCssUrl();
+    }
+
+    void ForceReRender() {
+        StateHasChanged();
+    }
+
+    public void Dispose() {
+        Themes.ThemeChangeRequestDispatcher = null;
+    }
+
+}

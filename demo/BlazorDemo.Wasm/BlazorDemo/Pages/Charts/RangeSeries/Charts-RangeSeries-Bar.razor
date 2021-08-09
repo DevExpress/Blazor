@@ -3,7 +3,6 @@
         @inject IWeatherSummaryDataProvider WeatherSummaryDataProvider
 
         <DxChart Data="@WeatherForecasts"
-                 @key="Params.ThemeName"
                  CssClass="w-100">
             <DxChartTitle Text="Annual Temperature" />
             <DxChartRangeBarSeries ValueField="@((DetailedWeatherSummary  i) => i.AverageTemperatureF)"

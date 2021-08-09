@@ -1,24 +1,20 @@
 ﻿<DemoPageSectionComponent Id="Grid-Grouping-GroupData" ShowHorizontalScrollBar="true">
-    <ChildContent>
+    <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        @if(Data == null) {
-            <p><em>Loading...</em></p>
-        } else {
-            <DxGrid @ref="Grid"
-                    Data="@Data"
-                    ShowGroupPanel="true"
-                    AutoExpandAllGroupRows="true"
-                    CssClass="w-100">
-                <Columns>
-                    <DxGridColumn FieldName="ContactName" />
-                    <DxGridColumn FieldName="CompanyName" />
-                    <DxGridColumn FieldName="City" Width="200px" />
-                    <DxGridColumn FieldName="Region" Width="120px" />
-                    <DxGridColumn FieldName="Country" GroupIndex="0" Width="200px" />
-                </Columns>
-            </DxGrid>
-        }
+        <DxGrid @ref="Grid"
+                Data="@Data"
+                ShowGroupPanel="true"
+                AutoExpandAllGroupRows="true"
+                CssClass="w-100">
+            <Columns>
+                <DxGridDataColumn FieldName="ContactName" />
+                <DxGridDataColumn FieldName="CompanyName" />
+                <DxGridDataColumn FieldName="City" Width="200px" />
+                <DxGridDataColumn FieldName="Region" Width="120px" />
+                <DxGridDataColumn FieldName="Country" GroupIndex="0" Width="200px" />
+            </Columns>
+        </DxGrid>
 
         @code {
             object Data { get; set; }
@@ -44,7 +40,7 @@
                 Grid.EndUpdate();
             }
         }
-    </ChildContent>
+    </ChildContentWithParameters>
     <OptionsContent>
         <OptionComboBox Label="Group by:" Data="@GroupInfo.Keys" Value="@CurrentGroupInfoKey" ValueChanged="@((string value) => OnGroupingChanged(value))" />
         <OptionButton Text="Collapse All Rows" OnClick="@(() => Grid.CollapseAllGroupRows())" />

@@ -1,7 +1,7 @@
 ﻿<DemoPageSectionComponent Id="Navigation-FormLayout-Groups"
                           ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <DxFormLayout @key="@Params.ThemeName"
+        <DxFormLayout
                       ItemSizeMode="Params.SizeMode"
                       CssClass="w-100">
             <DxFormLayoutGroup Caption="Personal Information" ColSpanMd="6">
@@ -15,16 +15,26 @@
                     <DxDateEdit @bind-Date="@BirthDate" />
                 </DxFormLayoutItem>
             </DxFormLayoutGroup>
-            <DxFormLayoutGroup Caption="Work Information" ColSpanMd="6">
-                <DxFormLayoutItem Caption="Position:" ColSpanMd="12">
-                    <DxTextBox @bind-Text="@Position" />
-                </DxFormLayoutItem>
-                <DxFormLayoutItem Caption="Hire Date:" ColSpanMd="12">
-                    <DxDateEdit @bind-Date="@HireDate" />
-                </DxFormLayoutItem>
-                <DxFormLayoutItem Caption="Notes:" ColSpanMd="12">
-                    <DxTextBox @bind-Text="@Notes" />
-                </DxFormLayoutItem>
+            <DxFormLayoutGroup ColSpanMd="6">
+                <HeaderTemplate>
+                    <div class="float-left">
+                        Work Information
+                    </div>
+                    <div class="demo-unemployed-checkbox-fs">
+                        <DxCheckBox CheckedChanged="@((bool t) => UnemployedChanged(t))" LabelPosition="LabelPosition.Left" Checked="@Unemployed">Unemployed</DxCheckBox>
+                    </div>
+                </HeaderTemplate>
+                <Items>
+                    <DxFormLayoutItem Caption="Position:" ColSpanMd="12">
+                        <DxTextBox @bind-Text="@Position" Enabled="!Unemployed" />
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Hire Date:" ColSpanMd="12">
+                        <DxDateEdit @bind-Date="@HireDate" Enabled="!Unemployed" />
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Notes:" ColSpanMd="12">
+                        <DxTextBox @bind-Text="@Notes" Enabled="!Unemployed" />
+                    </DxFormLayoutItem>
+                </Items>
             </DxFormLayoutGroup>
         </DxFormLayout>
 
@@ -48,8 +58,16 @@
         string FirstName { get; set; } = "Nancy";
         string LastName { get; set; } = "Davolio";
         DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-20);
-        string Position { get; set; } = "Sales Representative";
-        DateTime HireDate { get; set; } = DateTime.Now.AddYears(-20);
-        string Notes { get; set; } = "Education includes a BA in psychology.";
+        string? Position { get; set; } = "Sales Representative";
+        DateTime? HireDate { get; set; } = DateTime.Now.AddYears(-20);
+        string? Notes { get; set; } = "Education includes a BA in psychology.";
+        bool Unemployed { get; set; }
+        void UnemployedChanged(bool value) {
+            if(value) {
+                Position = Notes = null;
+                HireDate = null;
+            }
+            Unemployed = value;
+        }
     }
 </DemoPageSectionComponent>

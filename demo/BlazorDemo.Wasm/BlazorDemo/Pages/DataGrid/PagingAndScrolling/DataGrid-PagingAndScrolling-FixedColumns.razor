@@ -1,39 +1,27 @@
 ﻿<DemoPageSectionComponent Id="DataGrid-PagingAndScrolling-FixedColumns">
-    @inject ProductsFlatService ProductsFlatService
+    @inject NwindDataService NwindDataService
 
     @if(DataSource == null) {
         <p><em>Loading...</em></p>
     } else {
         <DxDataGrid Data="@DataSource"
                     HorizontalScrollBarMode="ScrollBarMode.Visible">
-            <DxDataGridColumn Field="@nameof(ProductFlat.Id)" Caption="ID" Width="100px" FixedStyle="DataGridFixedStyle.Left" />
-            <DxDataGridColumn Field="@nameof(ProductFlat.ProductName)" Caption="Product Name" Width="450px" />
-            <DxDataGridColumn Field="@nameof(ProductFlat.Category)" Caption="Category" Width="250px" />
-            <DxDataGridColumn Field="@nameof(ProductFlat.Subcategory)" Caption="Subcategory" Width="250px" />
-            <DxDataGridDateEditColumn Field="@nameof(ProductFlat.LastUpdated)" Caption="Last Updated" Width="200px" />
-            <DxDataGridColumn Field="@nameof(ProductFlat.Availability)" Caption="Availability" Width="150px" FixedStyle="DataGridFixedStyle.Right">
-                <DisplayTemplate>
-                    @{
-                        var id = Guid.NewGuid().ToString();
-                        var inStock = (context as ProductFlat).Availability;
-                        <DxCheckBox Id="@id" Checked="@inStock" Enabled="false">
-                            @if(inStock) {
-                                <label class="form-check-label text-success" for="@id"><span>In stock</span></label>
-                            } else {
-                                <label class="form-check-label text-danger" for="@id"><span>Sold out</span></label>
-                            }
-                        </DxCheckBox>
-                    }
-                </DisplayTemplate>
-            </DxDataGridColumn>
+            <DxDataGridColumn Field="@nameof(Order.ShipName)" Width="250px" FixedStyle="DataGridFixedStyle.Left" />
+            <DxDataGridColumn Field="@nameof(Order.ShipAddress)" Width="350px" />
+            <DxDataGridColumn Field="@nameof(Order.ShipCity)" Width="200px" />
+            <DxDataGridColumn Field="@nameof(Order.ShipPostalCode)" Width="150px" />
+            <DxDataGridColumn Field="@nameof(Order.ShipCountry)" Width="200px" />
+            <DxDataGridColumn Field="@nameof(Order.Freight)" Width="100px" />
+            <DxDataGridDateEditColumn Field="@nameof(Order.OrderDate)" DisplayFormat="d" Width="120px" />
+            <DxDataGridDateEditColumn Field="@nameof(Order.ShippedDate)" DisplayFormat="d" Width="120px" FixedStyle="DataGridFixedStyle.Right" />
         </DxDataGrid>
     }
 
     @code {
-        IEnumerable<ProductFlat> DataSource;
+        IEnumerable<Order> DataSource { get; set; }
 
         protected override async Task OnInitializedAsync() {
-            DataSource = await ProductsFlatService.GetProductsAsync();
+            DataSource = await NwindDataService.GetOrdersAsync();
         }
     }
 </DemoPageSectionComponent>

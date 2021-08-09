@@ -80,7 +80,6 @@ namespace BlazorDemo.ServerSide {
                 services.AddControllers().AddJsonOptions(ConfigureJsonOptions);
                 services.AddDemoServices();
 
-                services.AddSingleton<IProductCategoriesProvider, ProductCategoriesProvider>();
                 services.AddSingleton<ISalesInfoDataProvider, SalesInfoDataProvider>();
                 services.AddSingleton<IFinancialSeriesDataProvider, FinancialSeriesDataProvider>();
                 services.AddSingleton<ICurrencyExchangeDataProvider, UsdJpyDataProvider>();
@@ -91,7 +90,6 @@ namespace BlazorDemo.ServerSide {
                 services.AddSingleton<IWorldcitiesDataProvider, WorldcitiesDataProvider>();
                 // Editable should be scoped
                 services.AddScoped<INwindDataProvider, NwindDataProvider>();
-                services.AddScoped<IProductsFlatProvider, ProductsFlatProvider>();
 
                 static void ConfigureHttpClient(HttpClient httpClient) {
                     httpClient.DefaultRequestHeaders.Add("Accept", "application/json");

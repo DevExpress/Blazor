@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using BlazorDemo.Configuration;
+using BlazorDemo.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.JSInterop;
@@ -10,8 +11,9 @@ namespace BlazorDemo.Shared {
         [Parameter] public string Src { get; set; }
         [Parameter] public string Code { get; set; }
         public Task Loaded => _scriptTcs.Task;
-        [Inject] DemoThemesConfiguration Themes { get; set; }
+        [Inject] DemoThemeService Themes { get; set; }
         [Inject] IJSRuntime JSRuntime { get; set; }
+        [Inject] IDemoVersion DemoVersion { get; set; }
 
         bool _canLoadScript, _jsAttached, _isInlinedMethod;
         TaskCompletionSource<bool> _scriptTcs;
@@ -37,7 +39,10 @@ namespace BlazorDemo.Shared {
                 builder.OpenElement(0, "script");
                 builder.AddAttribute(1, "type", "text/javascript");
                 if(!_isInlinedMethod) {
-                    builder.AddAttribute(2, "src", Src);
+                    var clientSrcValue = Src;
+                    if(!clientSrcValue.Contains('?'))
+                        clientSrcValue += $"?version={DemoVersion.Version}";
+                    builder.AddAttribute(2, "src", clientSrcValue);
                     builder.AddAttribute(3, "async", true);
                     builder.AddAttribute(4, "onload", EventCallback.Factory.Create(this, OnScriptLoaded));
                 } else

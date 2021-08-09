@@ -2,7 +2,7 @@
     <ChildContentWithParameters Context="Params">
         @inject WorldcitiesDataService WorldcitiesDataService
 
-        <DxFormLayout ItemSizeMode="Params.SizeMode" @key="@Params.ThemeName" CssClass="cw-480">
+        <DxFormLayout ItemSizeMode="Params.SizeMode" CssClass="cw-480">
             <DxFormLayoutItem ColSpanMd="12" Caption="Read-Only">
                 <Template>
                     <DxComboBox Data="@Data"

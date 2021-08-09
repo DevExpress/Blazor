@@ -1,4 +1,4 @@
-﻿<DemoPageSectionComponent Id="Editors-TagBox-Validation" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Editors-TagBox-Validation" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         <EditForm Model="@recipients" class="cw-480">
 
@@ -36,7 +36,7 @@
         public class EmailAdressesAttribute : ValidationAttribute {
             public override bool IsValid(object value) {
                 IEnumerable<string> data = value as IEnumerable<string>;
-                if (data != null) {
+                if (data != null && data.Any()) {
                     foreach (var item in data)
                         if (!item.Contains("@") || !item.Substring(item.IndexOf('@')).Contains("."))
                             return false;
@@ -45,10 +45,10 @@
                 else
                     return false;
             }
+
         }
 
         public class EmailRecipients {
-            [Required]
             [EmailAdresses(ErrorMessage = "Invalid email")]
             public IEnumerable<string> Data { get; set; } = null;
         }

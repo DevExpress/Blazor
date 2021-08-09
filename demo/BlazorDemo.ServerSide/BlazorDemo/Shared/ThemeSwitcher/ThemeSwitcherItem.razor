@@ -1,43 +1,15 @@
-﻿@inject DemoThemesConfiguration Themes
+﻿@inject DemoThemeService Themes
 
 <a class="list-group-item list-group-item-action @Theme.GetCssClass(Themes.ActiveTheme == Theme) @Theme.IconCssClass" href="#"
    @onclick:preventDefault
-   @onclick=@OnLinkClick>
+   @onclick="Anchor_Click">
     @Theme.Title
 </a>
-@if(Theme.InLoading) {
-    <link href="@Themes.GetThemeCssUrl(Theme)" as="style" rel="preload" crossorigin="" @onload=@OnPreloadCompleted />
-    <link href="@Themes.GetThemeCssUrl(Theme)" rel="stylesheet" media="screen and (min--moz-device-pixel-ratio:0)" @onload=@OnPreloadCompleted />
-}
 @code {
-    bool _allowRender;
     [Parameter] public DemoTheme Theme { get; set; }
-    [Parameter] public EventCallback<DemoTheme> Apply { get; set; }
+    [Parameter] public EventCallback<DemoTheme> Click { get; set; }
 
-    protected override bool ShouldRender() {
-        if(_allowRender) {
-            _allowRender = false;
-            return true;
-        }
-        return false;
-    }
-    async Task OnPreloadCompleted() {
-        if(!Theme.InLoading)
-            return;
-
-        _allowRender = true;
-        Theme.InLoading = false;
-        Theme.IsLoaded = true;
-        await Apply.InvokeAsync(Theme);
-    }
-    async Task OnLinkClick() {
-        if(Theme.InLoading || Themes.ActiveTheme == Theme)
-            return;
-
-        _allowRender = true;
-        if(!Theme.IsLoaded)
-            Theme.InLoading = true;
-        else
-            await Apply.InvokeAsync(Theme);
+    async Task Anchor_Click() {
+        await Click.InvokeAsync(Theme);
     }
 }

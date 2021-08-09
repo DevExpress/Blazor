@@ -40,8 +40,8 @@ namespace BlazorDemo.ServerSide {
             });
             services.AddScoped<HttpClient>(serviceProvider => serviceProvider.GetService<IHttpClientFactory>().CreateClient());
 
-            services.AddSingleton<IContosoRetailDataProvider, ContosoRetailDataProvider>();
-            services.AddSingleton<IRentInfoDataProvider, RentInfoDataProvider>();
+            services.AddScoped<IContosoRetailDataProvider, ContosoRetailDataProvider>();
+            services.AddScoped<IRentInfoDataProvider, RentInfoDataProvider>();
 
             services.AddDbContextFactory<NorthwindContext>(opt => {
                 var connectionString = ConnectionStringUtils.GetNorthwindConnectionString(context.Configuration);

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BlazorDemo.Configuration;
 using BlazorDemo.DataProviders;
 using BlazorDemo.DataProviders.Implementation;
+using BlazorDemo.Services;
 using BlazorDemo.Wasm.DataProviders.Implementation;
 using BlazorDemo.Wasm.DataProviders.TransportInfrastructure;
 using DevExpress.Blazor.DocumentMetadata;
@@ -24,7 +25,6 @@ namespace BlazorDemo.Wasm {
 
             services.AddTransient<RemoteDataProviderLoader>();
 
-            services.AddSingleton<IProductCategoriesProvider, ProductCategoriesProvider>();
             services.AddSingleton<ISalesInfoDataProvider, SalesInfoDataProvider>();
             services.AddSingleton<IFinancialSeriesDataProvider, FinancialSeriesDataProvider>();
             services.AddSingleton<ICurrencyExchangeDataProvider, UsdJpyDataProviderWasm>();
@@ -32,7 +32,6 @@ namespace BlazorDemo.Wasm {
             services.AddSingleton<IWeatherSummaryDataProvider, WeatherSummaryDataProviderWasm>();
             services.AddSingleton<IWorldcitiesDataProvider, WorldcitiesDataProvider>();
             // Editable should be scoped
-            services.AddScoped<IProductsFlatProvider, ProductsFlatProvider>();
             services.AddScoped<INwindDataProvider, NwindDataProvider>();
 
             services.AddNotSupportedDemoServices();
@@ -46,7 +45,7 @@ namespace BlazorDemo.Wasm {
             });
             services.AddSingleton<DemoConfiguration>();
             services.AddScoped<IDemoThemesConfigurationCookieAccessor, DemoThemesConfigurationCookieAccessor>();
-            services.AddScoped<DemoThemesConfiguration>();
+            services.AddScoped<DemoThemeService>();
 
             builder.RootComponents.AddDocumentMetadata();
             builder.RootComponents.Add<App>("#app");

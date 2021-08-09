@@ -6,10 +6,10 @@ using BlazorDemo.Data;
 
 namespace BlazorDemo.Services {
     public partial class RentInfoDataService {
-        public Task<IEnumerable<AreaRentInfo>> GetAreaRentInfoAsync(CancellationToken ct = default) {
+        public IQueryable<AreaRentInfo> GetAreaRentInfo() {
             // Return your data here
             /*BeginHide*/
-            return _dataProvider.GetAreaRentInfoAsync(ct);
+            return _dataProvider.GetAreaRentInfo();
             /*EndHide*/
         }
     }

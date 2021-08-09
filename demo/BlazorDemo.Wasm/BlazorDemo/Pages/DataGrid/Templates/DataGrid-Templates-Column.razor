@@ -49,7 +49,7 @@
         }
 
         protected override async Task OnInitializedAsync() {
-            DataSource = await NwindDataService.GetEmployeesAsync();
+            DataSource = await NwindDataService.GetEmployeesEditableAsync();
         }
         public void ShowDetails(Employee context) {
             CurrentEmployee = context;

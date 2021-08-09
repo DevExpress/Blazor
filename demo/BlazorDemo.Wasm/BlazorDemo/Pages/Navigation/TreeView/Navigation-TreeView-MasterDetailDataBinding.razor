@@ -1,6 +1,4 @@
 ﻿<DemoPageSectionComponent Id="Navigation-TreeView-MasterDetailDataBinding">
-    @inject ProductsFlatService ProductsFlatService
-
     @if(Data == null) {
         <p><em>Loading...</em></p>
     }
@@ -17,15 +15,15 @@
     }
 
     @code {
-        IEnumerable<FlatDataItem> Data;
+        List<FlatDataItem> Data { get; set; }
 
-        protected override async Task OnInitializedAsync() {
-            IEnumerable<ProductFlat> products = await ProductsFlatService.GetProductsAsync();
-            IEnumerable<ProductCategory> productSubcategories = await ProductsFlatService.GetCategoriesAsync();
-            List<FlatDataItem> data = new List<FlatDataItem>(Enum.GetValues<ProductCategoryMain>().Select(i => new FlatDataItem() { Name = i.ToString(), Id = i }));
-            data.AddRange(products.Select(i => new FlatDataItem() { Name = i.ProductName, Id = i.Id, CategoryId = i.ProductCategoryId }));
-            data.AddRange(productSubcategories.Select(i => new FlatDataItem() { Name = i.Subcategory, Id = i.SubcategoryID, CategoryId = i.Category }));
-            this.Data = data;
+        protected override void OnInitialized() {
+            IEnumerable<ProductFlat> products = ProductData.Products;
+            IEnumerable<ProductCategory> productSubcategories = ProductData.Categories;
+
+            Data = new List<FlatDataItem>(Enum.GetValues<ProductCategoryMain>().Select(i => new FlatDataItem() { Name = i.ToString(), Id = i }));
+            Data.AddRange(products.Select(i => new FlatDataItem() { Name = i.ProductName, Id = i.Id, CategoryId = i.ProductCategoryId }));
+            Data.AddRange(productSubcategories.Select(i => new FlatDataItem() { Name = i.Subcategory, Id = i.SubcategoryID, CategoryId = i.Category }));
         }
     }
 </DemoPageSectionComponent>

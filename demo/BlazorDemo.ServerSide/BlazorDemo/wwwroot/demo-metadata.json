@@ -498,12 +498,16 @@
               "Title": "Paging",
               "AdditionalCodeFiles": [
                 {
-                  "Title": "ProductFlat.cs",
-                  "Path": "Data\\Products\\ProductFlat.cs"
+                  "Title": "Order.cs",
+                  "Path": "Data\\Northwind\\Order.cs"
                 },
                 {
-                  "Title": "ProductsFlatService.cs",
-                  "Path": "Services\\ProductsFlatService.Data.cs"
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Orders.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
               ]
             },
@@ -512,12 +516,16 @@
               "Title": "Vertical Scrolling",
               "AdditionalCodeFiles": [
                 {
-                  "Title": "ProductFlat.cs",
-                  "Path": "Data\\Products\\ProductFlat.cs"
+                  "Title": "Order.cs",
+                  "Path": "Data\\Northwind\\Order.cs"
                 },
                 {
-                  "Title": "ProductsFlatService.cs",
-                  "Path": "Services\\ProductsFlatService.Data.cs"
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Orders.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
               ]
             },
@@ -526,12 +534,16 @@
               "Title": "Horizontal Scrolling",
               "AdditionalCodeFiles": [
                 {
-                  "Title": "ProductFlat.cs",
-                  "Path": "Data\\Products\\ProductFlat.cs"
+                  "Title": "Order.cs",
+                  "Path": "Data\\Northwind\\Order.cs"
                 },
                 {
-                  "Title": "ProductsFlatService.cs",
-                  "Path": "Services\\ProductsFlatService.Data.cs"
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Orders.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
               ]
             },
@@ -540,12 +552,16 @@
               "Title": "Fixed Columns",
               "AdditionalCodeFiles": [
                 {
-                  "Title": "ProductFlat.cs",
-                  "Path": "Data\\Products\\ProductFlat.cs"
+                  "Title": "Order.cs",
+                  "Path": "Data\\Northwind\\Order.cs"
                 },
                 {
-                  "Title": "ProductsFlatService.cs",
-                  "Path": "Services\\ProductsFlatService.Data.cs"
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Orders.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
               ]
             },
@@ -554,16 +570,16 @@
               "Title": "Virtual Scrolling",
               "AdditionalCodeFiles": [
                 {
-                  "Title": "ProductFlat.cs",
-                  "Path": "Data\\Products\\ProductFlat.cs"
+                  "Title": "Order.cs",
+                  "Path": "Data\\Northwind\\Order.cs"
                 },
                 {
-                  "Title": "ProductsFlatService.cs",
-                  "Path": "Services\\ProductsFlatService.Data.cs"
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Orders.cs"
                 },
                 {
                   "Title": "Startup.cs",
-                  "Path": "Pages\\CodeSnippets\\ProductFlat.Startup.cs"
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
               ]
             }
@@ -575,7 +591,7 @@
           "Title": "Master-Detail View",
           "Keywords": "blazor, components, data grid, datagrid, grid, master grid, detail grid, master-detail relationship, master-detail view, detail row, devexpress, demo, sample, example",
           "Description": "The DevExpress Data Grid for Blazor component allows you to build master-detail layouts and relationships of any complexity and depth with a detail row template.",
-          "DocUrl": "Blazor/DevExpress.Blazor.DxDataGrid-1.DetailRowTemplate",
+          "DocUrl": "DevExpress.Blazor.DxDataGrid-1.DetailRowTemplate",
           "AdditionalCodeFiles": [
             {
               "Title": "Customer.cs",
@@ -708,24 +724,16 @@
               "Title": "Column Templates",
               "AdditionalCodeFiles": [
                 {
-                  "Title": "ProductFlat.cs",
-                  "Path": "Data\\Products\\ProductFlat.cs"
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
                 },
                 {
-                  "Title": "ProductCategory.cs",
-                  "Path": "Data\\Products\\ProductCategory.cs"
-                },
-                {
-                  "Title": "ProductsFlatService.cs",
-                  "Path": "Services\\ProductsFlatService.Data.cs"
-                },
-                {
-                  "Title": "ProductsFlatService.Editable.cs",
-                  "Path": "Services\\ProductsFlatService.Editable.cs"
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
                 },
                 {
                   "Title": "Startup.cs",
-                  "Path": "Pages\\CodeSnippets\\ProductFlat.Startup.cs"
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
               ]
             },
@@ -973,6 +981,42 @@
           ]
         },
         {
+          "Id": "Filtering",
+          "Url": "Grid/Filtering",
+          "Title": "Filter Data",
+          "Keywords": "blazor, components, data grid, datagrid, grid, grid filter, grid filtering, datagrid filter, datagrid filtering, data filter, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Data Grid supports the Filter Row that allows users to filter data.",
+          "PageSections": [
+            {
+              "Id": "FilterRow",
+              "Title": "Filter Row",
+              "IsNew": true,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Invoice.cs",
+                  "Path": "Data\\Northwind\\Invoice.cs"
+                },
+                {
+                  "Title": "Customer.cs",
+                  "Path": "Data\\Northwind\\Customer.cs"
+                },
+                {
+                  "Title": "NwindDataService.Invoices.cs",
+                  "Path": "Services\\NwindDataService.Invoices.cs"
+                },
+                {
+                  "Title": "NwindDataService.Customers.cs",
+                  "Path": "Services\\NwindDataService.Customers.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "Id": "Summary",
           "Url": "Grid/Summary",
           "Title": "Summary",
@@ -1008,6 +1052,33 @@
             {
               "Id": "Group",
               "Title": "Group Summary",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Invoice.cs",
+                  "Path": "Data\\Northwind\\Invoice.cs"
+                },
+                {
+                  "Title": "Customer.cs",
+                  "Path": "Data\\Northwind\\Customer.cs"
+                },
+                {
+                  "Title": "NwindDataService.Invoices.cs",
+                  "Path": "Services\\NwindDataService.Invoices.cs"
+                },
+                {
+                  "Title": "NwindDataService.Customers.cs",
+                  "Path": "Services\\NwindDataService.Customers.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "GroupFooter",
+              "Title": "Group Footer Summary",
+              "IsNew":  true,
               "AdditionalCodeFiles": [
                 {
                   "Title": "Invoice.cs",
@@ -3515,6 +3586,10 @@
                 {
                   "Title": "ChemicalElements.cs",
                   "Path": "Data\\ChemicalElements\\ChemicalElements.cs"
+                },
+                {
+                  "Title": "ChemicalElementGroup.cs",
+                  "Path": "Data\\ChemicalElements\\ChemicalElementGroup.cs"
                 }
               ]
             },
@@ -3529,8 +3604,16 @@
                   "Path": "Data\\FlatDataItem.cs"
                 },
                 {
-                  "Title": "Startup.cs",
-                  "Path": "Pages\\CodeSnippets\\ProductFlat.Startup.cs"
+                  "Title": "ProductFlat.cs",
+                  "Path": "Data\\Products\\ProductFlat.cs"
+                },
+                {
+                  "Title": "ProductCategory.cs",
+                  "Path": "Data\\Products\\ProductCategory.cs"
+                },
+                {
+                  "Title": "ProductData.cs",
+                  "Path": "Data\\Products\\ProductData.cs"
                 }
               ]
             },

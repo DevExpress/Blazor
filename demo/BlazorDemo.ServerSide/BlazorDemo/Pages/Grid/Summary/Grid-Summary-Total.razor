@@ -1,20 +1,18 @@
 ﻿<DemoPageSectionComponent Id="Grid-Summary-Total" ShowHorizontalScrollBar="true">
-    @inject NwindDataService NwindDataService
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
 
-    @if(Data == null) {
-        <p><em>Loading...</em></p>
-    } else {
         <DxGrid Data="@Data"
                 UnboundColumnData="Grid_UnboundColumnData"
                 CssClass="w-100">
             <Columns>
-                <DxGridColumn FieldName="CompanyName" />
-                <DxGridColumn FieldName="City" Width="200px" />
-                <DxGridColumn FieldName="Region" Width="120px" />
-                <DxGridColumn FieldName="Country" Width="200px" />
-                <DxGridColumn FieldName="UnitPrice" DisplayFormat="c" Width="120px" />
-                <DxGridColumn FieldName="Quantity" Width="120px" />
-                <DxGridColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" Width="200px" />
+                <DxGridDataColumn FieldName="CompanyName" />
+                <DxGridDataColumn FieldName="City" Width="200px" />
+                <DxGridDataColumn FieldName="Region" Width="120px" />
+                <DxGridDataColumn FieldName="Country" Width="200px" />
+                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="120px" />
+                <DxGridDataColumn FieldName="Quantity" Width="120px" />
+                <DxGridDataColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" Width="200px" />
             </Columns>
             <TotalSummary>
                 <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="CompanyName" />
@@ -24,31 +22,31 @@
                 <DxGridSummaryItem SummaryType="GridSummaryItemType.Sum" FieldName="Total" />
             </TotalSummary>
         </DxGrid>
-    }
-    @code {
-        object Data { get; set; }
+        @code {
+            object Data { get; set; }
 
-        protected override async Task OnInitializedAsync() {
-            var invoices = await NwindDataService.GetInvoicesAsync();
-            var customers = await NwindDataService.GetCustomersAsync();
-            Data = invoices.OrderBy(i => i.OrderDate).Join(customers, i => i.CustomerId, c => c.CustomerId, (i, c) => {
-                return new {
-                    CompanyName = c.CompanyName,
-                    City = i.City,
-                    Region = i.Region,
-                    Country = i.Country,
-                    UnitPrice = i.UnitPrice,
-                    Quantity = i.Quantity
-                };
-            });
-        }
-        void Grid_UnboundColumnData(GridUnboundColumnDataEventArgs e) {
-            if(e.FieldName == "Total") {
-                decimal price = (decimal)e.GetRowValue("UnitPrice");
-                short quantity = (short)e.GetRowValue("Quantity");
-                e.Value = price * quantity;
+            protected override async Task OnInitializedAsync() {
+                var invoices = await NwindDataService.GetInvoicesAsync();
+                var customers = await NwindDataService.GetCustomersAsync();
+                Data = invoices.OrderBy(i => i.OrderDate).Join(customers, i => i.CustomerId, c => c.CustomerId, (i, c) => {
+                    return new {
+                        CompanyName = c.CompanyName,
+                        City = i.City,
+                        Region = i.Region,
+                        Country = i.Country,
+                        UnitPrice = i.UnitPrice,
+                        Quantity = i.Quantity
+                    };
+                });
+            }
+            void Grid_UnboundColumnData(GridUnboundColumnDataEventArgs e) {
+                if(e.FieldName == "Total") {
+                    decimal price = (decimal)e.GetRowValue("UnitPrice");
+                    short quantity = (short)e.GetRowValue("Quantity");
+                    e.Value = price * quantity;
+                }
             }
         }
-    }
+    </ChildContentWithParameters>
 </DemoPageSectionComponent>
 

@@ -9,7 +9,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.2" />
-    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.5" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.6" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="5.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.2" />
@@ -18,7 +18,7 @@
     <ProjectReference Include="..\BlazorDemo.Wasm.Client\BlazorDemo.Wasm.Client.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor" Version="21.1.4" />
+    <PackageReference Include="DevExpress.Blazor" Version="21.1.5" />
     
   </ItemGroup>
   <ItemGroup>

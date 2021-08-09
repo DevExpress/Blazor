@@ -1,4 +1,6 @@
-﻿@inject DemoThemesConfiguration Themes
+﻿@inject DemoThemeService Themes
+@implements IDisposable
+@implements IDemoThemeLoadNotifier
 
 <div class="themeswitcher-container shadow @StateCssClass">
     @if(IsLoaded) {
@@ -7,7 +9,7 @@
                 @foreach(var themeSet in Themes.ThemeSets) {
                     <span class="card-header list-group-item">@themeSet.Title</span>
                     @foreach(var theme in themeSet.Themes) {
-                        <ThemeSwitcherItem @key=@theme.GetRenderKey(Themes.ActiveTheme == theme) Theme="@theme" Apply="@OnApply" />
+                        <ThemeSwitcherItem Theme="@theme" Click="ThemeSwitcherItem_Click"/>
                     }
                 }
             </div>
@@ -28,19 +30,19 @@
     string StateCssClass { get { return IsLoaded ? ((Shown? "themeswitcher-container-shown" : "themeswitcher-container-hidden")) : ""; } }
     bool IsLoaded { get; set; }
 
-    [Inject]
-    IDocumentMetadataService DocumentMetadataService { get; set; }
+    protected override void OnInitialized() {
+        base.OnInitialized();
+        Themes.ThemeLoadNotifier = this;
+    }
 
-    async Task OnApply(DemoTheme theme) {
-        if(ThemeName != theme.Name) {
-            ThemeName = theme.Name;
-            await ThemeNameChanged.InvokeAsync(ThemeName);
-            await ToggleThemeSwitcherPanel(false);
-            DocumentMetadataService.Update((m) => {
-                m.StyleSheet("currentThemeCss", Themes.GetThemeCssUrl(theme));
-                m.StyleSheet("currentThemeCodeCss", Themes.GetThemeCodeCssUrl(theme));
-            });
-        }
+    async Task ThemeSwitcherItem_Click(DemoTheme theme) {
+        Themes.ThemeChangeRequestDispatcher?.RequestThemeChange(theme);
+        await ToggleThemeSwitcherPanel(false);
+    }
+
+    public async Task NotifyThemeLoadedAsync(DemoTheme theme) {
+        ThemeName = theme.Name;
+        await ThemeNameChanged.InvokeAsync(ThemeName);
     }
 
     async Task ToggleThemeSwitcherPanel(bool shown) {
@@ -56,5 +58,9 @@
             if(Shown)
                 StateHasChanged();
         }
+    }
+
+    public void Dispose() {
+        Themes.ThemeLoadNotifier = null;
     }
 }

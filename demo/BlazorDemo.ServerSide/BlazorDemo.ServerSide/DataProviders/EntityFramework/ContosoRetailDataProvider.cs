@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BlazorDemo.Data;
@@ -10,8 +11,8 @@ namespace BlazorDemo.DataProviders {
     class ContosoRetailDataProvider : EntityQueryableDataProvider<ContosoRetailContext>, IContosoRetailDataProvider {
         public ContosoRetailDataProvider(IDbContextFactory<ContosoRetailContext> contextFactory, IConfiguration configuration) : base(contextFactory, configuration) { }
 
-        public async Task<IEnumerable<Sale>> GetSalesAsync(CancellationToken ct = default) {
-            return await LoadQueryableDataAsync<Sale>(ct);
+        public IQueryable<Sale> GetSales() {
+            return GetNonTrackingDbSet<Sale>();
         }
 
         public override Task<IObservable<int>> GetLoadingStateAsync() {

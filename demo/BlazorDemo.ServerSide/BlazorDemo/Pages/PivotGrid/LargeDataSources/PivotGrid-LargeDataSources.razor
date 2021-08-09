@@ -1,9 +1,8 @@
 ﻿@page "/PivotGridLargeDataBase"
 
 <DemoPageSectionComponent Id="PivotGrid-LargeDataSources">
+    @inherits OwningComponentBase
     @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
-    @inject ContosoRetailDataService ContosoRetailDataService
-    @inject IContosoRetailDataProvider ContosoRetailDataProvider
 
     <DataProviderAccessAreaContainer DataProvider="@ContosoRetailDataProvider">
         @if(DataSource == null) {
@@ -25,13 +24,20 @@
         }
     </DataProviderAccessAreaContainer>
     @code {
+        IContosoRetailDataProvider ContosoRetailDataProvider { get; set; }
+        ContosoRetailDataService ContosoRetailDataService { get; set; }
+
         IEnumerable<Sale> DataSource;
 
-        protected override async Task OnInitializedAsync() {
+        protected override void OnInitialized() {
+            // Refer to https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.components.owningcomponentbase
+            ContosoRetailDataProvider = ScopedServices.GetRequiredService<IContosoRetailDataProvider>();
+            ContosoRetailDataService = ScopedServices.GetRequiredService<ContosoRetailDataService>();
+
             var connectionString = ConnectionStringUtils.GetPivotGridLargeDataConnectionString(Configuration);
             if(string.IsNullOrEmpty(connectionString)) return;
 
-            DataSource = await ContosoRetailDataService.GetSalesAsync();
+            DataSource = ContosoRetailDataService.GetSales();
         }
     }
 </DemoPageSectionComponent>

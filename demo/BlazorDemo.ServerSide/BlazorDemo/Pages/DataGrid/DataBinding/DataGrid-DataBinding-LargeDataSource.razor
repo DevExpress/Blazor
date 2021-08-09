@@ -1,9 +1,9 @@
 ﻿<DemoPageSectionComponent Id="DataGrid-DataBinding-LargeDataSource" ShowHorizontalScrollBar="true">
-    @inject RentInfoDataService RentInfoDataService
-    @inject IRentInfoDataProvider RentInfoDataProvider
+    @inherits OwningComponentBase
+    @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 
     <DataProviderAccessAreaContainer DataProvider="@RentInfoDataProvider">
-        <DxDataGrid DataAsync="@RentInfoDataService.GetAreaRentInfoAsync"
+        <DxDataGrid Data="Data"
                     PageSize="10"
                     ShowFilterRow="true"
                     KeyFieldName="@nameof(AreaRentInfo.Oid)">
@@ -25,4 +25,21 @@
             </DxDataGridSpinEditColumn>
         </DxDataGrid>
     </DataProviderAccessAreaContainer>
+    @code {
+        IRentInfoDataProvider RentInfoDataProvider { get; set; }
+        RentInfoDataService RentInfoDataService { get; set; }
+
+        IEnumerable<AreaRentInfo> Data { get; set; }
+
+        protected override void OnInitialized() {
+            // Refer to https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.components.owningcomponentbase
+            RentInfoDataProvider = ScopedServices.GetRequiredService<IRentInfoDataProvider>();
+            RentInfoDataService = ScopedServices.GetRequiredService<RentInfoDataService>();
+
+            var connectionString = ConnectionStringUtils.GetGridLargeDataConnectionString(Configuration);
+            if(string.IsNullOrEmpty(connectionString)) return;
+
+            Data = RentInfoDataService.GetAreaRentInfo();
+        }
+    }
 </DemoPageSectionComponent>

@@ -1,8 +1,8 @@
-﻿@page "/"
+@page "/"
 @using BlazorDemo.Configuration
 @namespace BlazorDemo.ServerSide.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@inject BlazorDemo.Configuration.DemoThemesConfiguration Themes
+@inject BlazorDemo.Services.DemoThemeService Themes
 @inject DemoConfiguration DemoConfiguration
 
 <!DOCTYPE html>
@@ -19,24 +19,13 @@
     <meta property="og:description" content="DevExpress UI for Blazor ships with native user interface components (including a Data Grid, Pivot Grid, Charts and Scheduler) so you can design rich user experiences with both Blazor." />
     <meta property="og:image" content="https://static.devexpress.com/Products/Blazor/blazor-components-grid-pivot-scheduler-charts-editor-devexpress.jpg" />
 
-    <link rel="stylesheet" href="@Themes.GetActiveThemeCssUrl()" id="currentThemeCss">
-    <link rel="stylesheet" href="@Themes.GetActiveThemeCodeCssUrl()" id="currentThemeCodeCss">
-    <link rel="prefetch" href="_content/BlazorDemo/css/scroll-view.css" as="style">
-
-    <link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo.css">
-    <link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-pages.css">
-    <link rel="stylesheet" href="_content/DevExpress.Blazor/dx-blazor.css">
-    @if (DemoConfiguration.IsServerSide) {
-        <link rel="stylesheet" href="_content/DevExpress.Blazor.RichEdit/dx-richedit.css">
-    }
-
     <environment include="ServerSide">
-        <link rel="preload" href="_framework/blazor.server.js" as="script">
-        <link href="BlazorDemo.ServerSide.styles.css" rel="stylesheet">
+        <component type="typeof(BlazorDemo.Shared.DemoStylesheetContainer)" render-mode="ServerPrerendered" />
+        <script src="_framework/blazor.server.js" defer></script>
     </environment>
     <environment include="Wasm.AspNetCoreHosted">
-        <link rel="preload" href="_framework/blazor.webassembly.js" as="script">
-        <link href="BlazorDemo.Wasm.Server.styles.css" rel="stylesheet">
+        <component type="typeof(BlazorDemo.Shared.DemoStylesheetContainer)" render-mode="WebAssemblyPrerendered" />
+        <script src="_framework/blazor.webassembly.js" defer></script>
     </environment>
     <environment include="Wasm.AspNetCoreHosted">
         <style>
@@ -93,9 +82,8 @@
         <component type="typeof(BlazorDemo.Shared.BrowserNotSupported)" render-mode="Static" />
     }
     else {
-        <script type="text/javascript" src="_content/BlazorDemo/bootstrapper.js" defer></script>
         <div id="app">
-            <environment include="ServerSide,Wasm.AspNetCorePrerender">
+            <environment include="ServerSide">
                 <component type="typeof(BlazorDemo.App)" render-mode="ServerPrerendered" />
             </environment>
             <environment include="Wasm.AspNetCoreHosted">
