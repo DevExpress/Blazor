@@ -2,6 +2,30 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 21.1.6
+
+### Scheduler - Cell Customization
+
+We added the new **TimeCellTemplate** property to Scheduler view classes (for example, [DxSchedulerMonthView.TimeCellTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerMonthView.TimeCellTemplate)). You can use these properties to customize content and appearance of time cells in the Scheduler.
+
+Additionally, we introduced the [HtmlCellDecoration](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.HtmlCellDecoration) event that allows you to customize any Scheduler cell (time cell, date header, resource header, and so on).
+
+### Date Edit - Day Cell Template
+
+Use the Date Edit's new [DayCellTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.DayCellTemplate) property to customize the content and appearance of cells in the Date Edit’s calendar.
+
+### Time Edit - Scroll Picker Format
+
+Our Time Edit component now includes the [ScrollPickerFormat](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1.ScrollPickerFormat) property. Use it to specify the order and composition of the Time Edit’s visible scroll picker columns (hour, minute, second, and period of the day).
+
+### List Box - Single Value
+
+We added the new [Value](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.Value) property that allows you to bind a List Box’s value to a single object. We recommend that you use this property if you want to limit selection in the List Box to one item at a time. Otherwise, use the pre-existing [Values](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.Values) property.
+
+### Resolved Issues
+
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=21.1.6&endBuildName=21.1.3&buildsMode=Single&hasPlatformsWithProducts=true) for a complete list of issues resolved in v21.1.6.
+
 # 21.1.5
 
 ### Grid
