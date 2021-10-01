@@ -58,9 +58,9 @@
         string FirstName { get; set; } = "Nancy";
         string LastName { get; set; } = "Davolio";
         DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-20);
-        string? Position { get; set; } = "Sales Representative";
+        string Position { get; set; } = "Sales Representative";
         DateTime? HireDate { get; set; } = DateTime.Now.AddYears(-20);
-        string? Notes { get; set; } = "Education includes a BA in psychology.";
+        string Notes { get; set; } = "Education includes a BA in psychology.";
         bool Unemployed { get; set; }
         void UnemployedChanged(bool value) {
             if(value) {

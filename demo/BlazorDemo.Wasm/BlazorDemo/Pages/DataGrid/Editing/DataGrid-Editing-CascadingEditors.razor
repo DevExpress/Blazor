@@ -1,4 +1,5 @@
 ﻿<DemoPageSectionComponent Id="DataGrid-Editing-CascadingEditors" ShowHorizontalScrollBar="true">
+    @implements IDisposable
     @inject NwindDataService NwindDataService
     @inject WorldcitiesDataService WorldcitiesDataService
 
@@ -7,7 +8,7 @@
     } else {
         <DxDataGrid Data="@Data"
                     @ref="@grid"
-                    ShowPager="false"
+                    PageSize="8"
                     RowRemovingAsync="@((dataItem) => OnRowRemoving(dataItem))"
                     RowInsertingAsync="@((newValues) => OnRowInserting(newValues))"
                     RowUpdatingAsync="@((dataItem, newValues) => OnRowUpdating(dataItem, newValues))">
@@ -57,40 +58,44 @@
     }
 
     @code {
+
+        readonly TaskCompletionSource<Supplier> firstSupplierTcs = new (TaskCreationOptions.RunContinuationsAsynchronously);
         IEnumerable<Supplier> Data;
         IEnumerable<Country> Countries;
         IEnumerable<City> Cities;
         DxDataGrid<Supplier> grid;
 
         protected override async Task OnInitializedAsync() {
-            Data = await NwindDataService.GetSuppliersEditableAsync();
-            Countries = await WorldcitiesDataService.GetCountriesAsync();
-            Cities = await WorldcitiesDataService.GetCitiesAsync();
+            var (dataTask, countriesTask, citiesTask) = (NwindDataService.GetSuppliersEditableAsync(), 
+                        WorldcitiesDataService.GetCountriesAsync(),
+                        WorldcitiesDataService.GetCitiesAsync());
+            (Data, Countries, Cities) = (await dataTask, await countriesTask, await citiesTask);
+            firstSupplierTcs.TrySetResult(Data.FirstOrDefault());
         }
         protected override async Task OnAfterRenderAsync(bool firstRender) {
             if(firstRender) {
-                var editableSupplier = Data.FirstOrDefault();
+                var editableSupplier = await firstSupplierTcs.Task;
                 await grid.StartRowEdit(editableSupplier);
             }
         }
-
-        public void OnRegionChanged() {
-            InvokeAsync(StateHasChanged);
-        }
         async Task OnRowUpdating(Supplier supplier, IDictionary<string, object> newValues) {
             await NwindDataService.UpdateSupplierAsync(supplier, newValues);
-            Data = await NwindDataService.GetSuppliersEditableAsync();
-            StateHasChanged();
+            await UpdateDataAsync();
         }
         async Task OnRowRemoving(Supplier supplier) {
             await NwindDataService.RemoveSupplierAsync(supplier);
-            Data = await NwindDataService.GetSuppliersEditableAsync();
-            StateHasChanged();
+            await UpdateDataAsync();
         }
         async Task OnRowInserting(IDictionary<string, object> newValues) {
             await NwindDataService.InsertSupplierAsync(newValues);
+            await UpdateDataAsync();
+        }
+        async Task UpdateDataAsync() {
             Data = await NwindDataService.GetSuppliersEditableAsync();
             StateHasChanged();
+        }
+        public void Dispose() {
+            firstSupplierTcs.TrySetCanceled();
         }
     }
 </DemoPageSectionComponent>
