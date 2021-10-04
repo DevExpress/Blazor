@@ -1,5 +1,6 @@
 ﻿<DemoPageSectionComponent Id="DataGrid-Editing-EditModes" ShowHorizontalScrollBar="true">
     <ChildContent>
+        @implements IDisposable
         @inject NwindDataService NwindDataService
 
         @if(Data == null) {
@@ -12,8 +13,7 @@
                         RowInsertingAsync="@OnRowInsertingAsync"
                         InitNewRow="@OnInitNewRowAsync"
                         CssClass="w-100"
-                        PageSize="100"
-                        ShowPager="false"
+                        PageSize="12"
                         KeyFieldName="@nameof(Employee.EmployeeId)"
                         EditMode="@CurrentEditMode">
                 <DxDataGridCommandColumn Width="120px" />
@@ -27,14 +27,13 @@
         }
     </ChildContent>
     <OptionsContent>
-        <OptionComboBox Label="Edit Mode:" Data="@EditModes" @bind-Value="CurrentEditMode" />
+        <OptionComboBox Label="Edit Mode:" Data="@(Enum.GetValues<DataGridEditMode>())" @bind-Value="@CurrentEditMode" />
     </OptionsContent>
 
     @code {
+        readonly TaskCompletionSource<Employee> firstEmployeeTcs = new (TaskCreationOptions.RunContinuationsAsynchronously);
         IEnumerable<Employee> Data { get; set; }
         DxDataGrid<Employee> grid;
-
-        IEnumerable<DataGridEditMode> EditModes { get; } = Enum.GetValues(typeof(DataGridEditMode)).Cast<DataGridEditMode>();
 
         DataGridEditMode currentEditMode = DataGridEditMode.EditForm;
         DataGridEditMode CurrentEditMode {
@@ -42,43 +41,44 @@
             set {
                 if(currentEditMode != value) {
                     currentEditMode = value;
-                    CancelEdit();
+                    _ = grid?.CancelRowEdit();
                 }
             }
         }
 
         protected override async Task OnInitializedAsync() {
             Data = await NwindDataService.GetEmployeesEditableAsync();
+            firstEmployeeTcs.TrySetResult(Data.FirstOrDefault());
         }
         protected override async Task OnAfterRenderAsync(bool firstRender) {
             if(firstRender) {
-                var editableSupplier = Data.FirstOrDefault();
-                await grid.StartRowEdit(editableSupplier);
+                var editableEmployee = await firstEmployeeTcs.Task;
+                await grid.StartRowEdit(editableEmployee);
             }
         }
         async Task OnRowRemovingAsync(Employee dataItem) {
             await NwindDataService.RemoveEmployeeAsync(dataItem);
-            Data = await NwindDataService.GetEmployeesEditableAsync();
-            StateHasChanged();
+            await UpdateDataAsync();
         }
         async Task OnRowUpdatingAsync(Employee dataItem, IDictionary<string, object> newValues) {
             await NwindDataService.UpdateEmployeeAsync(dataItem, newValues);
-            Data = await NwindDataService.GetEmployeesEditableAsync();
-            StateHasChanged();
+            await UpdateDataAsync();
         }
         async Task OnRowInsertingAsync(IDictionary<string, object> newValues) {
             await NwindDataService.InsertEmployeeAsync(newValues);
+            await UpdateDataAsync();
+        }
+        Task OnInitNewRowAsync(Dictionary<string, object> values) {
+            values.Add(nameof(Employee.FirstName), "John");
+            values.Add(nameof(Employee.LastName), "Doe");
+            return Task.CompletedTask;
+        }
+        async Task UpdateDataAsync() {
             Data = await NwindDataService.GetEmployeesEditableAsync();
             StateHasChanged();
         }
-        async Task OnInitNewRowAsync(Dictionary<string, object> values) {
-            values.Add(nameof(Employee.FirstName), "John");
-            values.Add(nameof(Employee.LastName), "Doe");
-            await Task.CompletedTask;
-        }
-        void CancelEdit() {
-            var cancelTask = Task.Run(async () => await grid.CancelRowEdit());
-            cancelTask.GetAwaiter().GetResult();
+        public void Dispose() {
+            firstEmployeeTcs.TrySetCanceled();
         }
     }
 </DemoPageSectionComponent>

@@ -1,18 +1,12 @@
 #if SERVER_BLAZOR
 using System;
-using System.Collections.Generic;
-using System.IO;
-using BlazorDemo.Reporting;
 using BlazorDemo.Services;
 using DevExpress.AspNetCore.Reporting;
 using DevExpress.Blazor.Reporting;
 using DevExpress.XtraReports.Web.Extensions;
-using DevExpress.XtraReports.Web.WebDocumentViewer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace BlazorDemo.Reporting {
     class StartupFilter : IStartupFilter {
@@ -20,13 +14,6 @@ namespace BlazorDemo.Reporting {
             return ConfigureApp;
 
             void ConfigureApp(IApplicationBuilder app) {
-                var loggerFactory = app.ApplicationServices.GetService<ILoggerFactory>();
-                var reportingLogger = loggerFactory.CreateLogger("DXBlazorReporting");
-                DevExpress.XtraReports.Web.ClientControls.LoggerService.Initialize((exception, message) => {
-                    var logMessage = $"[{DateTime.Now}]: Exception occurred. Message: '{message}'. Exception Details:\r\n{exception}";
-                    reportingLogger.LogError(logMessage);
-                });
-
                 app.UseSession();
                 app.UseDevExpressBlazorReporting();
                 app.UseDevExpressServerSideBlazorReportViewer();

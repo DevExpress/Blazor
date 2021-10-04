@@ -9,7 +9,7 @@
     } else {
         <DxDataGrid @ref="@grid"
                     Data="@Data"
-                    ShowPager="false"
+                    PageSize="12"
                     RowRemovingAsync="@OnRowRemovingAsync"
                     RowEditStart="@(dataItem => OnRowEditStarting(dataItem))"
                     RowInsertStart="@(() => OnRowEditStarting(null))">
