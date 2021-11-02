@@ -1,6 +1,6 @@
 ﻿@typeparam T
-<OptionComponent Id="@id" Label="@Label">
-    <DxCheckBox T="@T" Checked="Checked" CheckedChanged="@OnCheckedChange">@ChildContent</DxCheckBox>
+<OptionComponent Id="@id" Label="@Label" LabelPosition="LabelPosition.Right" CssClass="option-component-check">
+    <DxCheckBox T="@T" Checked="Checked" CheckedChanged="@OnCheckedChange"/>
 </OptionComponent>
 
 @code {
@@ -8,7 +8,6 @@
     [Parameter] public T Checked { get; set; }
     [Parameter] public EventCallback<T> CheckedChanged { get; set; }
     [Parameter] public string Label { get; set; }
-    [Parameter] public RenderFragment ChildContent { get; set; }
 
     protected void OnCheckedChange(T newValue) {
         if(!Equals(Checked, newValue)) {

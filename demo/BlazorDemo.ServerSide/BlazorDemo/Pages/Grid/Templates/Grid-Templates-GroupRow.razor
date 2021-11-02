@@ -1,15 +1,14 @@
-﻿<DemoPageSectionComponent Id="Grid-Templates-GroupRow" ShowHorizontalScrollBar="true">
+﻿<DemoPageSectionComponent Id="Grid-Templates-GroupRow">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <DxGrid @ref="Grid"
                 Data="@Data"
                 ShowGroupPanel="true"
-                UnboundColumnData="Grid_UnboundColumnData"
-                CssClass="w-100">
+                UnboundColumnData="Grid_UnboundColumnData">
             <Columns>
-                <DxGridDataColumn FieldName="CompanyName" />
-                <DxGridDataColumn FieldName="Country" GroupIndex="0" Width="200px">
+                <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
+                <DxGridDataColumn FieldName="Country" GroupIndex="0" Width="10%">
                     <GroupRowTemplate>
                         <text>@context.DataColumn.FieldName: @context.GroupValue</text>
                         @{
@@ -29,10 +28,10 @@
                         }
                     </GroupRowTemplate>
                 </DxGridDataColumn>
-                <DxGridDataColumn FieldName="City" Width="200px" />
-                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="120px" />
-                <DxGridDataColumn FieldName="Quantity" Width="120px" />
-                <DxGridDataColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" Width="200px" />
+                <DxGridDataColumn FieldName="City" Width="10%" />
+                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
+                <DxGridDataColumn FieldName="Quantity" Width="10%" />
+                <DxGridDataColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" MinWidth="100" Width="15%" />
             </Columns>
             <GroupSummary>
                 <DxGridSummaryItem SummaryType="GridSummaryItemType.Sum" FieldName="Total" />

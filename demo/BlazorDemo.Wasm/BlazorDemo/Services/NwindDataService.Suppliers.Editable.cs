@@ -19,10 +19,10 @@ namespace BlazorDemo.Services {
             return _dataProvider.InsertSupplierAsync(newValues);
             /*EndHide*/
         }
-        public Task InsertSupplierAsync(Supplier dataItem) {
+        public Task InsertSupplierAsync(Supplier newDataItem) {
             // Change your data here
             /*BeginHide*/
-            return _dataProvider.InsertSupplierAsync(dataItem);
+            return _dataProvider.InsertSupplierAsync(newDataItem);
             /*EndHide*/
         }
         public Task RemoveSupplierAsync(Supplier dataItem) {
@@ -35,6 +35,12 @@ namespace BlazorDemo.Services {
             // Change your data here
             /*BeginHide*/
             return _dataProvider.UpdateSupplierAsync(dataItem, newValues);
+            /*EndHide*/
+        }
+        public Task UpdateSupplierAsync(Supplier dataItem, Supplier newDataItem) {
+            // Change your data here
+            /*BeginHide*/
+            return _dataProvider.UpdateSupplierAsync(dataItem, newDataItem);
             /*EndHide*/
         }
     }

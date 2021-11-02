@@ -1,5 +1,5 @@
 var DemoPageSectionHelper = (function() {
-    function switchDemoPageSectionContentPage(id, isCodeVisible) {
+    function switchContentPage(id, isCodeVisible) {
         var dNoneSelector = " d-none";
         var sectionSelector = id ? '#section-' + id + ' ' : '';
         var componentAreaEl = document.querySelector(sectionSelector + '.demo-page-section-component-area');
@@ -19,7 +19,7 @@ var DemoPageSectionHelper = (function() {
             componentAreaEl.className = componentAreaEl.className.replace(dNoneSelector, "");
         }
     }
-    function initCopyDemoPageSectionCode(id) {
+    function initCopyCodeButtons(id) {
         var sectionSelector = id ? '#section-' + id + ' ' : '';
         var codeAreaEl = document.querySelector(sectionSelector + '.demo-page-section-code-area');
         var copyCodeBtn = codeAreaEl && codeAreaEl.querySelector('.btn.copy-code');
@@ -34,16 +34,22 @@ var DemoPageSectionHelper = (function() {
             }
         });
     }
-
+    function initExpandCodeButtons(element) {
+        var expandBtns = element.querySelectorAll('.more-code-btn');
+        for(var i = 0; i < expandBtns.length; i++) {
+            var btn = expandBtns[i];
+            btn.addEventListener("click", function() { expandCode(btn); });
+        }
+    }
     function expandCode(element) {
         element.parentNode.outerHTML = element.nextSibling.innerHTML;
     }
 
     return {
-        initDemoPageSection: function (id, isCodeVisible) {
-            switchDemoPageSectionContentPage(id, isCodeVisible);
-            initCopyDemoPageSectionCode(id)
+        init: function (id, isCodeVisible) {
+            switchContentPage(id, isCodeVisible);
+            initCopyCodeButtons(id);
         },
-        expandCode: expandCode
+        initExpandCodeButtons: initExpandCodeButtons
     };
 })();

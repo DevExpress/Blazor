@@ -1,6 +1,7 @@
-﻿<DemoScriptLoader @ref=@highlightLoaderRef Src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js" />
-<DemoScriptLoader @ref=@cshtml Src="//cdn.jsdelivr.net/npm/highlightjs-cshtml-razor@2.0.1/cshtml-razor.js" />
+﻿<DemoScriptLoader @ref=@highlightLoaderRef Src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js" />
+<DemoScriptLoader @ref=@cshtml Src="https://cdn.jsdelivr.net/npm/highlightjs-cshtml-razor@2.0.1/cshtml-razor.js" />
 <DemoScriptLoader @ref=@initCshtmlLoaderRef Code="function registerHighlightLanguages() { hljs.registerLanguage('cshtml-razor', window.hljsDefineCshtmlRazor); }" />
+<DemoScriptLoader @ref=@sectionHelper Src="_content/BlazorDemo/lib/page-section-helper.js" />
 
 <code @ref=@codeBlockRef class="hljs @Language">@ChildContent</code>
 @code {
@@ -13,12 +14,14 @@
     DemoScriptLoader highlightLoaderRef;
     DemoScriptLoader cshtml;
     DemoScriptLoader initCshtmlLoaderRef;
+    DemoScriptLoader sectionHelper;
     protected override async Task OnAfterRenderAsync(bool firstRender) {
         if(firstRender) {
             try {
                 await Task.WhenAll(highlightLoaderRef.Loaded, cshtml.Loaded);
                 await initCshtmlLoaderRef.InvokeVoidAsync("registerHighlightLanguages");
                 await highlightLoaderRef.InvokeVoidAsync("hljs.highlightBlock", codeBlockRef);
+                await sectionHelper.InvokeVoidAsync("DemoPageSectionHelper.initExpandCodeButtons", codeBlockRef);
             } catch { }
         }
         await base.OnAfterRenderAsync(firstRender);

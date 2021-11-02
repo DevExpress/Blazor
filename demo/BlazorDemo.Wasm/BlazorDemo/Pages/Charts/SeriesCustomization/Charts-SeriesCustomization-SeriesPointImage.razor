@@ -1,26 +1,24 @@
 ﻿<DemoPageSectionComponent Id="Charts-SeriesCustomization-SeriesPointImage">
-    <ChildContentWithParameters Context="Params">
-        @inject WeatherForecastService ForecastService
+    @inject WeatherForecastService ForecastService
 
-        <DxChart Data="@WeatherForecasts"
-                 CustomizeSeriesPoint="@PreparePointImage"
-                 CssClass="w-100">
-            <DxChartTitle Text="15-Day Weather Forecast" />
-            <DxChartLineSeries SummaryMethod="@(i => (int)i.Average())"
-                               ValueField="@((WeatherForecast i) => i.TemperatureF)"
-                               ArgumentField="@(i => i.Date.Date)"
-                               Name="Temperature, °F">
-                <DxChartSeriesPoint>
-                    <DxChartSeriesPointImage Width="50"
-                                             Height="50" />
-                </DxChartSeriesPoint>
-            </DxChartLineSeries>
-            <DxChartLegend Visible="false" />
-            <DxChartValueAxis>
-                <DxChartAxisTitle Text="Temperature, °F" />
-            </DxChartValueAxis>
-        </DxChart>
-    </ChildContentWithParameters>
+    <DxChart Data="@WeatherForecasts"
+             CustomizeSeriesPoint="@PreparePointImage"
+             Width="100%">
+        <DxChartTitle Text="15-Day Weather Forecast" />
+        <DxChartLineSeries SummaryMethod="@(i => (int)i.Average())"
+                           ValueField="@((WeatherForecast i) => i.TemperatureF)"
+                           ArgumentField="@(i => i.Date.Date)"
+                           Name="Temperature, °F">
+            <DxChartSeriesPoint>
+                <DxChartSeriesPointImage Width="50"
+                                         Height="50" />
+            </DxChartSeriesPoint>
+        </DxChartLineSeries>
+        <DxChartLegend Visible="false" />
+        <DxChartValueAxis>
+            <DxChartAxisTitle Text="Temperature, °F" />
+        </DxChartValueAxis>
+    </DxChart>
 
 
     @code {

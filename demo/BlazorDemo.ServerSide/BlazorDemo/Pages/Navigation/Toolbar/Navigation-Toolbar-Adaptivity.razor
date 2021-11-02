@@ -16,7 +16,9 @@
                                            Tooltip="Font Family">
                                 <Items>
                                     @foreach(var font in FontInfo.DefaultFonts) {
-                                        <DxToolbarItem Text="@font.Name" Click="(x) => { currentFont = font; }" GroupName="fontGroup"
+                                        <DxToolbarItem Text="@font.Name"
+                                                       Click="(x) => { currentFont = font; }"
+                                                       Checked="currentFont == font"
                                                        Style="@font.GetCssString()" />
                                     }
                                 </Items>
@@ -25,7 +27,9 @@
                                            Tooltip="Font Size">
                                 <Items>
                                     @foreach(var fontSize in FontSizeInfo.DefaultFontSizes) {
-                                        <DxToolbarItem Text="@fontSize.Size.ToString()" Click="(x) => { currentSize = fontSize; }" GroupName="fontSizeGroup" />
+                                        <DxToolbarItem Text="@fontSize.Size.ToString()"
+                                                       Click="(x) => { currentSize = fontSize; }"
+                                                       Checked="currentSize == fontSize" />
                                     }
                                 </Items>
                             </DxToolbarItem>

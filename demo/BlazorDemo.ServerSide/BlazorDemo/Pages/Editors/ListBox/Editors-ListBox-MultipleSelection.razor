@@ -11,11 +11,11 @@
                        style="flex-basis: 240px"
                        @bind-Values="@Values">
             </DxListBox>
-            <div class="card mt-1 mr-1 flex-grow-1" style="flex-basis: 240px">
-                <div class="card-header bg-transparent text-body py-1 border-bottom-0 font-weight-bold">
+            <div class="card mt-1 mr-1 flex-grow-1 max-h-220" style="flex-basis: 240px">
+                <div class="card-header bg-transparent text-body py-2 border-bottom-0 font-weight-bold">
                     Selected Items:
                 </div>
-                <div class="card-body p-0 overflow-auto">
+                <div class="card-body p-0 pb-2 overflow-auto">
                     <ul class="list-group list-group-flush bg-transparent border-0">
                         @foreach(var item in Values) {
                             <li class="list-group-item bg-transparent text-body py-1 border-0">
@@ -29,9 +29,7 @@
     </ChildContent>
 
     <OptionsContent>
-        <OptionCheckBox @bind-Checked="@ShowCheckboxes">
-            Show Checkboxes
-        </OptionCheckBox>
+        <OptionCheckBox @bind-Checked="@ShowCheckboxes" Label="Show Checkboxes"/>
     </OptionsContent>
 
     @code {

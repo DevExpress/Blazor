@@ -6,7 +6,7 @@
 
     <div class="w-100">
         <div>
-            <DxChart Data="@(PivotGridDataProvider.ChartDataSource)" CssClass="w-100">
+            <DxChart Data="@(PivotGridDataProvider.ChartDataSource)" Width="100%">
                 <DxChartLegend Position="RelativePosition.Outside" VerticalAlignment="VerticalEdge.Bottom"
                                CssClass="shadow border justify-content-around" />
                 <DxChartCommonSeries NameField="@((IChartDataItem s) => s.SeriesName)"

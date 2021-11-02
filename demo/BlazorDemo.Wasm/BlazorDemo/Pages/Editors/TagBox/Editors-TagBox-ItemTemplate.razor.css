@@ -1,0 +1,109 @@
+.item-template-employee-photo {
+    margin-right: 12px;
+    border-radius: 16px;
+    border: solid 0 #000;
+}
+
+.tag-template-employee-photo {
+    height: calc(100% + .6em);
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+}
+
+.dxbs-tagbox.item-template-demo .form-control-sm img.tag-template-employee-photo {
+    height: calc(100% + .2em) !important;
+    bottom: 1px;
+}
+
+div.dx-blazor-tagbox.form-control-lg div.dx-blazor-tag-template-wrapper span.dxbs-tag.dx-blazor-tag span.dxbs-tag-remove-btn-container svg {
+    width: 32px !important;
+    height: 32px !important;
+}
+
+span.tag-item-span-pl {
+    padding-left: 25px;
+    text-overflow: ellipsis;
+    margin-left: 10px;
+}
+
+div.dx-blazor-tagbox.form-control-lg span.tag-item-span-pl {
+    padding-left: 35px;
+}
+
+.item-template-employee-first-name {
+    font-family: 'Segoe UI';
+    font-size: 14px;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-align: left;
+    display: block;
+}
+
+.item-template-employee-home-phone {
+    opacity: 0.65;
+    font-family: 'Segoe UI';
+    font-size: 11px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-align: left;
+    opacity: 0.65;
+    display: block;
+}
+
+.item-template {
+    display: flex;
+    align-items: center;
+}
+
+span.dxbs-tag.l-0::before {
+    left: 0 !important;
+    margin-bottom: 5px;
+}
+
+
+div.dx-blazor-tagbox.form-control-sm span.dxbs-tag.dx-blazor-tag.l-0 span.dxbs-tag-remove-btn-container {
+    left: 9px;
+    bottom: 2px;
+}
+
+div.dx-blazor-tagbox.form-control span.dxbs-tag.dx-blazor-tag.l-0 span.dxbs-tag-remove-btn-container {
+    left: 1em;
+}
+
+.item-template-demo span.dxbs-tag.dx-blazor-tag.l-0 {
+    margin-top: 0 !important;
+}
+/*BeginHide*/
+::deep /*EndHide*/ .item-template-demo div.dx-blazor-tag-template-wrapper {
+    margin-top: 0.75em !important;
+    max-width: 100%;
+    overflow: visible !important;
+    padding-left: 6px;
+}
+
+/*BeginHide*/
+::deep /*EndHide*/ .item-template-demo .form-control-sm div.dx-blazor-tag-template-wrapper {
+    margin-top: 0.35em !important;
+}
+
+/*BeginHide*/
+::deep /*EndHide*/ .item-template-demo .dx-blazor-tagbox.form-control {
+    overflow: visible !important;
+}
+
+.item-template-demo .form-control-sm span.dxbs-tag.dx-blazor-tag.l-0 span.tag-item-span-pl {
+    top: -3.3px !important;
+}
+
+.item-template-demo .form-control span.dxbs-tag.dx-blazor-tag.l-0 span.tag-item-span-pl {
+    position: relative;
+    top: -2.3px;
+}
+
+.item-template-demo .form-control-lg span.dxbs-tag.dx-blazor-tag.l-0 span.tag-item-span-pl {
+    top: 0 !important;
+}

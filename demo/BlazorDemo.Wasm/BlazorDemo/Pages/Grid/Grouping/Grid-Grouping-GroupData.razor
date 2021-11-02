@@ -1,18 +1,17 @@
-﻿<DemoPageSectionComponent Id="Grid-Grouping-GroupData" ShowHorizontalScrollBar="true">
+﻿<DemoPageSectionComponent Id="Grid-Grouping-GroupData">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <DxGrid @ref="Grid"
                 Data="@Data"
                 ShowGroupPanel="true"
-                AutoExpandAllGroupRows="true"
-                CssClass="w-100">
+                AutoExpandAllGroupRows="true">
             <Columns>
-                <DxGridDataColumn FieldName="ContactName" />
-                <DxGridDataColumn FieldName="CompanyName" />
-                <DxGridDataColumn FieldName="City" Width="200px" />
-                <DxGridDataColumn FieldName="Region" Width="120px" />
-                <DxGridDataColumn FieldName="Country" GroupIndex="0" Width="200px" />
+                <DxGridDataColumn FieldName="ContactName" MinWidth="100" />
+                <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
+                <DxGridDataColumn FieldName="City" Width="10%" />
+                <DxGridDataColumn FieldName="Region" Width="10%" />
+                <DxGridDataColumn FieldName="Country" GroupIndex="0" Width="10%" />
             </Columns>
         </DxGrid>
 
@@ -42,8 +41,11 @@
         }
     </ChildContentWithParameters>
     <OptionsContent>
-        <OptionComboBox Label="Group by:" Data="@GroupInfo.Keys" Value="@CurrentGroupInfoKey" ValueChanged="@((string value) => OnGroupingChanged(value))" />
-        <OptionButton Text="Collapse All Rows" OnClick="@(() => Grid.CollapseAllGroupRows())" />
-        <OptionButton Text="Expand All Rows" OnClick="@(() => Grid.ExpandAllGroupRows())" />
+        <OptionComboBox Label="Group by:" Data="@GroupInfo.Keys" Value="@CurrentGroupInfoKey" ValueChanged="@((string value) => OnGroupingChanged(value))" CssClass="ow-180" />
+
+        <OptionButtonGroup>
+            <OptionButton Text="Collapse All Rows" OnClick="@(() => Grid.CollapseAllGroupRows())" SmallSpacing="true" />
+            <OptionButton Text="Expand All Rows" OnClick="@(() => Grid.ExpandAllGroupRows())" />
+        </OptionButtonGroup>
     </OptionsContent>
 </DemoPageSectionComponent>

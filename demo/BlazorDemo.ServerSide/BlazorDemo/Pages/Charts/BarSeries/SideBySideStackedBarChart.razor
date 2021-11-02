@@ -1,0 +1,40 @@
+﻿@inject IPopulationStructureDataProvider DataProvider
+
+<DxChart T="PopulationAgeStructureItem"
+         Data="@ChartsData"
+         Width="100%">
+    <DxChartTitle Text="Population: Age Structure">
+        <DxChartSubTitle Text="Data Estimate for 2020" />
+    </DxChartTitle>
+    <DxChartCommonSeries T="PopulationAgeStructureItem"
+                         TArgument="string"
+                         TValue="int"
+                         TGroup="string"
+                         NameField='pasi => $"{pasi.Gender}: {pasi.AgeGroup}"'>
+        <SeriesTemplate Context="settings">
+            <DxChartStackedBarSeries Settings="@settings"
+                                     ArgumentField="pasi => pasi.Country"
+                                     ValueField="pasi => pasi.Population"
+                                     Stack="@settings.Data.First().Gender" />
+        </SeriesTemplate>
+    </DxChartCommonSeries>
+    <DxChartLegend HorizontalAlignment="HorizontalAlignment.Center"
+                   VerticalAlignment="VerticalEdge.Bottom"
+                   Position="RelativePosition.Outside" />
+    <DxChartTooltip Enabled="true"
+                    Position="RelativePosition.Outside">
+        <div style="margin: 0.75rem">
+            <div class="font-weight-bold">@context.Point.Argument</div>
+            <div>Age Group: @(((PopulationAgeStructureItem)context.Point.DataItems.First()).AgeGroup)</div>
+            <div>Population: @($"{context.Point.Value:N0}")</div>
+        </div>
+    </DxChartTooltip>
+</DxChart>
+
+@code {
+    IEnumerable<PopulationAgeStructureItem> ChartsData;
+
+    protected override async Task OnInitializedAsync() {
+        ChartsData = await DataProvider.QueryData();
+    }
+}

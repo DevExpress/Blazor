@@ -1,0 +1,23 @@
+﻿@page "/Grid"
+@layout DataProviderAccessArea<IIssuesDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Overview">
+    @using BlazorDemo.Data.Issues
+
+    @if(SelectedIssue != null) {
+        <Grid_Overview_Details GotoListView="@ShowIssueList" SelectedIssue="@SelectedIssue" />
+    } else {
+        <Grid_Overview_List GotoDetailsView="@ShowIssueDetails" />
+    }
+
+    @code {
+        Issue SelectedIssue { get; set; }
+
+        void ShowIssueDetails(Issue issue) {
+            SelectedIssue = issue;
+        }
+        void ShowIssueList() {
+            SelectedIssue = null;
+        }
+    }
+</DemoPageSectionComponent>

@@ -44,10 +44,7 @@ namespace BlazorDemo.Reporting {
                 services.AddTransient<DevExpress.DataAccess.Wizard.Services.ICustomQueryValidator, DevExpress.DataAccess.Wizard.Services.CustomQueryValidator>();
                 services.AddSingleton<IDemoReportSource, DemoReportSource>();
                 services.AddScoped<ReportStorageWebExtension, DemoReportStorageWebExtension>();
-
-                services.AddControllers(options => options.EnableEndpointRouting = false)
-                .AddDefaultReportingControllers()
-                .AddDevExpressServerSideBlazorReportViewerControllers();
+                services.AddControllers(options => options.EnableEndpointRouting = false);
             });
 
         }

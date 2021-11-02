@@ -27,13 +27,13 @@
         }
     </ChildContent>
     <OptionsContent>
-        <OptionComboBox Label="Edit Mode:" Data="@(Enum.GetValues<DataGridEditMode>())" @bind-Value="@CurrentEditMode" />
+        <OptionComboBox Label="Edit Mode:" Data="Enum.GetValues<DataGridEditMode>()" @bind-Value="CurrentEditMode" />
     </OptionsContent>
 
     @code {
-        readonly TaskCompletionSource<Employee> firstEmployeeTcs = new (TaskCreationOptions.RunContinuationsAsynchronously);
-        IEnumerable<Employee> Data { get; set; }
-        DxDataGrid<Employee> grid;
+        readonly TaskCompletionSource<EditableEmployee> firstEmployeeTcs = new (TaskCreationOptions.RunContinuationsAsynchronously);
+        IEnumerable<EditableEmployee> Data { get; set; }
+        DxDataGrid<EditableEmployee> grid;
 
         DataGridEditMode currentEditMode = DataGridEditMode.EditForm;
         DataGridEditMode CurrentEditMode {
@@ -56,11 +56,11 @@
                 await grid.StartRowEdit(editableEmployee);
             }
         }
-        async Task OnRowRemovingAsync(Employee dataItem) {
+        async Task OnRowRemovingAsync(EditableEmployee dataItem) {
             await NwindDataService.RemoveEmployeeAsync(dataItem);
             await UpdateDataAsync();
         }
-        async Task OnRowUpdatingAsync(Employee dataItem, IDictionary<string, object> newValues) {
+        async Task OnRowUpdatingAsync(EditableEmployee dataItem, IDictionary<string, object> newValues) {
             await NwindDataService.UpdateEmployeeAsync(dataItem, newValues);
             await UpdateDataAsync();
         }

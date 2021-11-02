@@ -1,0 +1,53 @@
+.popup-demo-container {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+}
+.popup-demo-layout-item {
+    display: flex;
+    align-items: center;
+}
+.popup-image {
+    flex-shrink: 0;
+}
+::deep .popup-demo-caption {
+    margin-left: calc(15px + 1rem);
+}
+::deep .popup-demo-textbox {
+    width: 100%;
+}
+
+.popup-icon-user,
+.popup-icon-birthday,
+.popup-icon-worked,
+.popup-icon-position {
+    background-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    background-position: center center;
+    background-color: currentColor;
+    margin-right: 1rem;
+    opacity: 0.75;
+    width: 18px;
+    height: 18px;
+}
+
+.popup-icon-user {
+    -webkit-mask-image: url("images/PopupUser.svg");
+    mask-image: url("images/PopupUser.svg");
+}
+
+.popup-icon-birthday {
+    -webkit-mask-image: url("images/PopupBirthday.svg");
+    mask-image: url("images/PopupBirthday.svg");
+}
+
+.popup-icon-worked {
+    -webkit-mask-image: url("images/PopupWorked.svg");
+    mask-image: url("images/PopupWorked.svg");
+}
+
+.popup-icon-position {
+    -webkit-mask-image: url("images/PopupPosition.svg");
+    mask-image: url("images/PopupPosition.svg");
+}

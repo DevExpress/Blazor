@@ -2,21 +2,21 @@
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        <div class="d-flex flex-row cw-480">
+        <div class="d-flex flex-row align-items-end cw-480">
             <DxTagBox Data="@Data"
                       TextFieldName="@nameof(Employee.FirstName)"
                       @bind-Values="@Values"
                       DropDownWidthMode="DropDownWidthMode"
                       NullText="Short text"
                       SizeMode="Params.SizeMode"
-                      CssClass="cw-240" />
+                      CssClass="cw-240 minw-0" />
             <DxTagBox Data="@Data"
                       TextFieldName="@nameof(Employee.Text)"
                       @bind-Values="@Values1"
                       NullText="Long text"
                       DropDownWidthMode="DropDownWidthMode"
                       SizeMode="Params.SizeMode"
-                      CssClass="cw-240 ml-2" />
+                      CssClass="cw-240 minw-0 ml-2" />
         </div>
     </ChildContentWithParameters>
 

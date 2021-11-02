@@ -7,7 +7,7 @@
         <DxScrollView id="themesMenu">
             <div class="list-group list-group-flush">
                 @foreach(var themeSet in Themes.ThemeSets) {
-                    <span class="card-header list-group-item">@themeSet.Title</span>
+                    <span class="themeswitcher-group card-header list-group-item">@themeSet.Title</span>
                     @foreach(var theme in themeSet.Themes) {
                         <ThemeSwitcherItem Theme="@theme" Click="ThemeSwitcherItem_Click"/>
                     }

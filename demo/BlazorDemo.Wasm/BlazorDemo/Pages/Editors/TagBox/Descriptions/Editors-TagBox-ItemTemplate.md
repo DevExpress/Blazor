@@ -1,0 +1,3 @@
+Use the [ItemTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.ItemTemplate) property to customize the appearance of individual items displayed within the DevExpress [TagBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2#tags-custom-tags-and-list-items) component. The template's **context** parameter allows you to access a data object and its fields.
+
+In this demo, the **ItemTemplate** property is used to display the TagBox's items in a card-like view. The [TagTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.TagTemplate) property customizes the appearance of the TagBox's tags.

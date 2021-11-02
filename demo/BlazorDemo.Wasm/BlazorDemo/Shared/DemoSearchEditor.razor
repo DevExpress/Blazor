@@ -1,6 +1,6 @@
 ﻿@inject DemoConfiguration Configuration
 
-<div class="search-editor bg-light text-dark">
+<div class="search-editor breadcrumb">
     <DxTextBox NullText="Search" Text="@SearchString" BindValueMode="BindValueMode.OnInput" TextChanged="@TextChanged" InputId="txtSearch" />
     <span class="icon icon-cancel-search @ClearButtonCssClass" @onclick="@ClearClick"></span>
     <label for="txtSearch" class="icon icon-search"></label>

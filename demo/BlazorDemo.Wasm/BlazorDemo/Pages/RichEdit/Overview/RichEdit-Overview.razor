@@ -1,14 +1,14 @@
 ﻿@page "/RichEdit"
 @using System.IO;
 
-<DemoPageSectionComponent Id="RichEdit-Overview" ShowCode="false">
-    <DxRichEdit Id="richEdit" DocumentContent="@documentContent" CssClass="w-100 ch-720" />
+<DemoPageSectionComponent Id="RichEdit-Overview">
+    <DxRichEdit DocumentContent="@documentContent" CssClass="w-100 ch-720" />
 
     @code {
             byte[] documentContent;
 
         protected override async Task OnInitializedAsync() {
-            documentContent = await File.ReadAllBytesAsync(Path.Combine(AppContext.BaseDirectory, "Data\\Documents\\Example.docx"));
+            documentContent = await File.ReadAllBytesAsync(Path.Combine(AppContext.BaseDirectory, Path.Combine("Data", "Documents", "Example.docx")));
             await base.OnInitializedAsync();
         }
 

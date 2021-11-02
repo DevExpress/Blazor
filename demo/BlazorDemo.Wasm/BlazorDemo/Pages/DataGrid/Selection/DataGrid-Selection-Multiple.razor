@@ -9,16 +9,16 @@
                         SelectionMode="DataGridSelectionMode.MultipleSelectedDataRows"
                         @bind-MultipleSelectedDataRows="@SelectedProducts"
                         KeyFieldName="@nameof(Product.ProductId)"
-                        CssClass="w-auto mt-1 mr-1 flex-grow-1" style="flex-basis: 500px">
+                        CssClass="w-auto mt-1 mr-1 flex-grow-1" style="flex-basis: 700px">
                 <DxDataGridColumn Field="@nameof(Product.ProductName)" />
                 <DxDataGridComboBoxColumn Field="@nameof(Product.CategoryId)" Caption="Category"
                                           Data="@Categories" TextFieldName="@nameof(Category.CategoryName)" ValueFieldName="@nameof(Category.CategoryId)" />
                 <DxDataGridSpinEditColumn Field="@nameof(Product.UnitPrice)" DisplayFormat="c" Width="120px" />
-                <DxDataGridSpinEditColumn Field="@nameof(Product.UnitsInStock)" Width="120px" />
+                <DxDataGridSpinEditColumn Field="@nameof(Product.UnitsInStock)" Width="150px" />
             </DxDataGrid>
-            <div class="card mt-1 mr-1 flex-grow-1" style="flex-basis: 220px">
-                <div class="card-header bg-transparent text-body py-1 border-bottom-0 font-weight-bold">Selected products:</div>
-                <div class="card-body p-0 overflow-auto">
+            <div class="card mt-1 mr-1 flex-grow-1 max-h-420" style="flex-basis: 280px">
+                <div class="card-header bg-transparent text-body py-2 border-bottom-0 font-weight-bold">Selected products:</div>
+                <div class="card-body p-0 pb-2 overflow-auto">
                     <ul class="list-group list-group-flush bg-transparent border-0">
                         @foreach(var product in SelectedProducts) {
                             <li class="list-group-item bg-transparent text-body py-1 border-0">@product.ProductName</li>

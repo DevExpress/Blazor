@@ -1,7 +1,7 @@
 ﻿@page "/GridHTMLDecoration"
+@layout DataProviderAccessArea<INwindDataProvider>
 
 <DemoPageSectionComponent Id="DataGrid-HTMLDecoration" ShowHorizontalScrollBar="true">
-    @layout DataProviderAccessArea<INwindDataProvider>
     @inject NwindDataService NwindDataService
 
     @if(Data == null) {

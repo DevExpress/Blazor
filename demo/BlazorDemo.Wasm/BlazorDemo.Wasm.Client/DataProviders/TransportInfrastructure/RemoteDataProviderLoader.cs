@@ -19,6 +19,7 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
 
         static readonly Dictionary<Guid, Type> EntityTypeLookup = new Dictionary<Guid, Type>() {
             {typeof(SaleInfo).GUID, typeof(SaleInfo)},
+            {typeof(DataPoint).GUID, typeof(DataPoint)},
 
             {typeof(BlazorDemo.Data.SalesViewer.City).GUID, typeof(BlazorDemo.Data.SalesViewer.City)},
             {typeof(BlazorDemo.Data.SalesViewer.Customer).GUID, typeof(BlazorDemo.Data.SalesViewer.Customer)},
@@ -39,6 +40,8 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
             {typeof(BlazorDemo.Data.Northwind.Product).GUID, typeof(BlazorDemo.Data.Northwind.Product)},
             {typeof(BlazorDemo.Data.Northwind.Supplier).GUID, typeof(BlazorDemo.Data.Northwind.Supplier)},
             {typeof(BlazorDemo.Data.Northwind.Shipper).GUID, typeof(BlazorDemo.Data.Northwind.Shipper)},
+
+            {typeof(BlazorDemo.Data.Northwind.EditableEmployee).GUID, typeof(BlazorDemo.Data.Northwind.EditableEmployee)},
 
             {typeof(BlazorDemo.Data.Issues.Issue).GUID, typeof(BlazorDemo.Data.Issues.Issue)},
             {typeof(BlazorDemo.Data.Issues.Project).GUID, typeof(BlazorDemo.Data.Issues.Project)},

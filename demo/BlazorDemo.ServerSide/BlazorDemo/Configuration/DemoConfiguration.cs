@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using DevExpress.Blazor.DocumentMetadata;
+using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
@@ -84,6 +85,10 @@ namespace BlazorDemo.Configuration {
                     return rootPage;
             }
             return null;
+        }
+        public DemoPageBase GetDemoPageByUrl(NavigationManager navigationManager, string currentUrl) {
+            var demoPageUrl = navigationManager.ToAbsoluteUri(currentUrl).GetLeftPart(UriPartial.Path).Replace(navigationManager.BaseUri, "");
+            return GetDemoPageByUrl(demoPageUrl);
         }
 
         public DemoPage GetDemoPage(string id) {

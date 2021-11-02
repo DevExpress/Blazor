@@ -1,0 +1,44 @@
+﻿<DemoPageSectionComponent Id="Scheduler-Templates-TimeCellTemplate">
+    <ChildContent>
+        <style>
+            .customScheduler .dxbs-sc-time-cell {
+                height: 250px !important;
+            }
+        </style>
+        <DxScheduler StartDate="@DateTime.Today"
+                     DataStorage="@DataStorage"
+                     ActiveViewType="SchedulerViewType.Timeline"
+                     CssClass="w-100 customScheduler">
+            <Views>
+                <DxSchedulerTimelineView Duration="TimeSpan.FromDays(7)" CellMinWidth="115">
+                    <Scales>
+                        <DxSchedulerTimeScale Unit="SchedulerTimeScaleUnit.Day"></DxSchedulerTimeScale>
+                    </Scales>
+                    <TimeCellTemplate>
+                        <div style="height: 100%; display: flex; align-items: flex-end;">
+                            Count: @DataStorage.GetAppointments(context.Interval).ToList().Count
+                        </div>
+                    </TimeCellTemplate>
+                </DxSchedulerTimelineView>
+            </Views>
+        </DxScheduler>
+    </ChildContent>
+
+    @code {
+        DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
+            AppointmentsSource = RecurringAppointmentCollection.GetAppointments(),
+            AppointmentMappings = new DxSchedulerAppointmentMappings() {
+                Type = "AppointmentType",
+                Start = "StartDate",
+                End = "EndDate",
+                Subject = "Caption",
+                AllDay = "AllDay",
+                Location = "Location",
+                Description = "Description",
+                LabelId = "Label",
+                StatusId = "Status",
+                RecurrenceInfo = "Recurrence"
+            }
+        };
+    }
+</DemoPageSectionComponent>

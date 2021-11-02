@@ -11,7 +11,7 @@ namespace BlazorDemo.DataProviders {
     class IssuesDataProvider : EntityDataProvider<IssuesContext>, IIssuesDataProvider {
         public IssuesDataProvider(IDbContextFactory<IssuesContext> contextFactory, IConfiguration configuration) : base(contextFactory, configuration) { }
 
-        public async Task<IEnumerable<Issue>> GetItemsAsync(CancellationToken ct = default) {
+        public async Task<IEnumerable<Issue>> GetIssuesAsync(CancellationToken ct = default) {
             return await LoadDataAsync<Issue>("Issues", ct);
         }
         public async Task<IEnumerable<Project>> GetProjectsAsync(CancellationToken ct = default) {

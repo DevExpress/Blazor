@@ -3,6 +3,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <EnableDefaultItems>False</EnableDefaultItems>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <IntermediateOutputPath>obj.WASM</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
@@ -18,7 +19,7 @@
     <ProjectReference Include="..\BlazorDemo\BlazorDemo.Wasm.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor" Version="21.1.6" />
+    <PackageReference Include="DevExpress.Blazor" Version="21.2.3" />
     
   </ItemGroup>
   <ItemGroup>

@@ -1,9 +1,10 @@
-@page "/"
+﻿@page "/"
 @using BlazorDemo.Configuration
 @namespace BlazorDemo.ServerSide.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject BlazorDemo.Services.DemoThemeService Themes
 @inject DemoConfiguration DemoConfiguration
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,13 +19,45 @@
     <meta property="og:title" content="Native Blazor Components powered by DevExpress" />
     <meta property="og:description" content="DevExpress UI for Blazor ships with native user interface components (including a Data Grid, Pivot Grid, Charts and Scheduler) so you can design rich user experiences with both Blazor." />
     <meta property="og:image" content="https://static.devexpress.com/Products/Blazor/blazor-components-grid-pivot-scheduler-charts-editor-devexpress.jpg" />
+    <meta http-equiv="Content-Security-Policy"
+          content="base-uri 'self';
+               default-src 'self';
+               img-src data:
+                       https:
+                       http:;
+               object-src 'none';
+               script-src 'self'
+                          'unsafe-eval'
+                          https://cdn.jsdelivr.net/
+                          https://www.googletagmanager.com/
+                          'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA='
+                          'sha256-5IekJdLtTzD/IDYQ2FrNLbLmgyGP6WlpDJ2GbZLv+r0='
+                          'sha256-3/2QOuYlxn5k9KorO7FOcY7NYI+Ui/I3n7nr0X+IWcE='
+                          'sha256-CLBTNKc5dWx2th3lg9lPM2K199I5ZFDpfsv8w5I+A/E=';
+               worker-src 'self'
+                          blob:;
+               frame-src 'self'
+                         blob:;
+               style-src 'self'
+                         https://cdnjs.cloudflare.com/
+                         https://fonts.googleapis.com/
+                         'unsafe-inline';
+               font-src 'self'
+                        https://fonts.gstatic.com/;
+               connect-src 'self'
+                        https://js.devexpress.com/;
+               block-all-mixed-content;
+          ">
+    @{
+        string InitialThemeName = HttpContextAccessor.HttpContext.Request.Cookies[BlazorDemo.Services.DemoThemeService.ThemeCookieKey];
+    }
 
     <environment include="ServerSide">
-        <component type="typeof(BlazorDemo.Shared.DemoStylesheetContainer)" render-mode="ServerPrerendered" />
+        <component type="typeof(BlazorDemo.Shared.DemoStylesheetContainer)" render-mode="ServerPrerendered" param-InitialThemeName="@InitialThemeName" />
         <script src="_framework/blazor.server.js" defer></script>
     </environment>
     <environment include="Wasm.AspNetCoreHosted">
-        <component type="typeof(BlazorDemo.Shared.DemoStylesheetContainer)" render-mode="WebAssemblyPrerendered" />
+        <component type="typeof(BlazorDemo.Shared.DemoStylesheetContainer)" render-mode="WebAssemblyPrerendered" param-InitialThemeName="@InitialThemeName" />
         <script src="_framework/blazor.webassembly.js" defer></script>
     </environment>
     <environment include="Wasm.AspNetCoreHosted">
@@ -78,10 +111,9 @@
     @{
         var isIEOrEdgeLegacy = Request.Headers["User-Agent"].Any(userAgent => userAgent.Contains("MSIE") || userAgent.Contains("Trident"));
     }
-    @if (isIEOrEdgeLegacy) {
+    @if(isIEOrEdgeLegacy) {
         <component type="typeof(BlazorDemo.Shared.BrowserNotSupported)" render-mode="Static" />
-    }
-    else {
+    } else {
         <div id="app">
             <environment include="ServerSide">
                 <component type="typeof(BlazorDemo.App)" render-mode="ServerPrerendered" />
@@ -95,7 +127,7 @@
                             <div id="loadingBackground" class="loading-image-wrapper text-white bg-primary loading-items-center" style="color: #fff; border-radius: 50%"></div>
                         </div>
                         <div class="loading-caption mt-3">DevExpress UI for Blazor</div>
-                        <div class="loading-sm-text text-muted mt-1" style="color: #a1a1a1">Loading...</div>
+                        <div class="loading-sm-text text-body mt-1" style="color: #a1a1a1">Loading...</div>
                     </div>
                 </div>
             </environment>

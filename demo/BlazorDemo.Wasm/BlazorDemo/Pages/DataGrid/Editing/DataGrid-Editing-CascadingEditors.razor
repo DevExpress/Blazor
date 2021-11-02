@@ -9,14 +9,15 @@
         <DxDataGrid Data="@Data"
                     @ref="@grid"
                     PageSize="8"
+                    InitNewRow="@OnInitNewRowAsync"
                     RowRemovingAsync="@((dataItem) => OnRowRemoving(dataItem))"
                     RowInsertingAsync="@((newValues) => OnRowInserting(newValues))"
                     RowUpdatingAsync="@((dataItem, newValues) => OnRowUpdating(dataItem, newValues))">
             <DxDataGridCommandColumn Width="150px"></DxDataGridCommandColumn>
-            <DxDataGridColumn Field="CompanyName" />
-            <DxDataGridColumn Field="ContactName" />
-            <DxDataGridColumn Field="ContactTitle" />
-            <DxDataGridColumn Field="Phone" />
+            <DxDataGridColumn Field="@nameof(Supplier.CompanyName)" />
+            <DxDataGridColumn Field="@nameof(Supplier.ContactName)" />
+            <DxDataGridColumn Field="@nameof(Supplier.ContactTitle)" />
+            <DxDataGridColumn Field="@nameof(Supplier.Phone)" />
             <DxDataGridComboBoxColumn Field="@nameof(Supplier.Country)" Data="@Countries">
                 <EditTemplate>
                     @{
@@ -89,6 +90,11 @@
         async Task OnRowInserting(IDictionary<string, object> newValues) {
             await NwindDataService.InsertSupplierAsync(newValues);
             await UpdateDataAsync();
+        }
+        Task OnInitNewRowAsync(Dictionary<string, object> values) {
+            values.Add(nameof(Supplier.CompanyName), "DevExpress");
+            values.Add(nameof(Supplier.ContactName), "John Doe");
+            return Task.CompletedTask;
         }
         async Task UpdateDataAsync() {
             Data = await NwindDataService.GetSuppliersEditableAsync();

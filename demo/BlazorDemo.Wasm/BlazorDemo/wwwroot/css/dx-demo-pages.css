@@ -52,7 +52,6 @@
     mask-image: url("../images/Settings.svg");
     -webkit-mask-image: url("../images/Settings.svg");
 }
-
 .tb-icon-refresh {
     width: 16px;
     height: 16px;
@@ -345,7 +344,7 @@ body.modal-open .main {
     mask: url("../images/SchedulerDelete.svg");
 }
 
-/* Menu */
+/* Menu, ContextMenu, Overview */
 .menu-icon {
     width: 1rem;
     height: 1rem;
@@ -364,7 +363,7 @@ body.modal-open .main {
 }
 
 .menu-icon-home {
-    mask-image: url("../images/home.svg");
+    mask-image: url("../images/Home.svg");
     -webkit-mask-image: url("../images/Home.svg");
 }
 
@@ -388,9 +387,45 @@ body.modal-open .main {
     -webkit-mask-image: url("../images/About.svg");
 }
 
+.menu-icon-sort-by {
+    mask-image: url("../images/Sort_by.svg");
+    -webkit-mask-image: url("../images/Sort_by.svg");
+}
+
+.menu-icon-copy {
+    mask-image: url("../images/Copy.svg");
+    -webkit-mask-image: url("../images/Copy.svg");
+}
+
+.menu-icon-cut {
+    mask-image: url("../images/Cut.svg");
+    -webkit-mask-image: url("../images/Cut.svg");
+}
+
+.menu-icon-clear {
+    mask-image: url("../images/Clear.svg");
+    -webkit-mask-image: url("../images/Clear.svg");
+}
+
+.menu-icon-user-profile {
+    mask-image: url("images/UserProfile.svg");
+    -webkit-mask-image: url("images/UserProfile.svg");
+}
+
 .menu-box {
     width: 280px !important;
     height: 220px;
+}
+
+.icon-logo {
+    display: flex;
+    height: 20px;
+    width: 120px;
+    background-color: currentColor;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-image: url("../images/Logo-Monochrome.svg");
+    -webkit-mask-image: url("../images/Logo-Monochrome.svg");
 }
 
 /*Chart*/
@@ -410,7 +445,23 @@ body.modal-open .main {
     -webkit-mask-image: url("../images/Calendar.svg");
     mask-image: url("../images/Calendar.svg");
 }
+.component-container .chart-container .dx-blazor-widget {
+    width: 400px;
+}
 
+.component-container .chart-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem 0;
+}
+
+@media (max-width: 899.98px) {
+    .component-container .chart-container .dx-blazor-widget {
+        width: 100%;
+    }
+}
 /*Grid*/
 .grid-icon {
     display: inline-block;
@@ -428,4 +479,24 @@ body.modal-open .main {
 .grid-icon-check {
     mask-image: url("../images/check.svg");
     -webkit-mask-image: url("../images/check.svg");
+}
+
+.grid-btn-link {
+    border: 0;
+    display: inline;
+    font: inherit;
+    line-height: 100%;
+    padding: 0;
+    text-decoration: underline;
+    vertical-align: baseline;
+}
+
+/* Tabs */
+.demo-employee-card h5 {
+    font-size: 1rem;
+    margin-top: 8px;
+}
+
+.demo-employee-card b {
+    font-weight: 600;
 }

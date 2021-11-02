@@ -1,28 +1,27 @@
 ﻿<DemoPageSectionComponent Id="Charts-Axes-Types">
-    <ChildContentWithParameters Context="Params">
-        <div class="d-flex flex-wrap justify-content-center">
-            <DxChart Data="@GetData()"
-                     Width="400px">
-                <DxChartTitle Text="@($"The loudness of sounds (continuous value axis)")" />
-                <DxChartLegend Visible="false" />
-                <DxChartArgumentAxis Type="ChartAxisType.Discrete" />
-                <DxChartValueAxis Type="ChartAxisType.Continuous" />
-                <DxChartLineSeries ArgumentField="@((DataPoint s) => s.Argument)"
-                                   ValueField="@((DataPoint s) => s.Value)" />
-            </DxChart>
-            <DxChart Data="@GetData()"
-                     Width="400px">
-                <DxChartTitle Text="@($"The loudness of sounds (logarithmic value axis)")" />
-                <DxChartLegend Visible="false" />
-                <DxChartArgumentAxis Type="ChartAxisType.Discrete" />
-                <DxChartValueAxis Type="ChartAxisType.Logarithmic"
-                                  LogarithmBase="2" />
-                <DxChartLineSeries ArgumentField="@((DataPoint s) => s.Argument)"
-                                   ValueField="@((DataPoint s) => s.Value)" />
-            </DxChart>
-        </div>
-    </ChildContentWithParameters>
-
+    @*BeginHide*@
+    <div class="chart-container">
+    @*EndHide*@
+        <DxChart Data="@GetData()">
+            <DxChartTitle Text="@($"The loudness of sounds (continuous value axis)")" />
+            <DxChartLegend Visible="false" />
+            <DxChartArgumentAxis Type="ChartAxisType.Discrete" />
+            <DxChartValueAxis Type="ChartAxisType.Continuous" />
+            <DxChartLineSeries ArgumentField="@((DataPoint s) => s.Argument)"
+                               ValueField="@((DataPoint s) => s.Value)" />
+        </DxChart>
+        <DxChart Data="@GetData()">
+            <DxChartTitle Text="@($"The loudness of sounds (logarithmic value axis)")" />
+            <DxChartLegend Visible="false" />
+            <DxChartArgumentAxis Type="ChartAxisType.Discrete" />
+            <DxChartValueAxis Type="ChartAxisType.Logarithmic"
+                              LogarithmBase="2" />
+            <DxChartLineSeries ArgumentField="@((DataPoint s) => s.Argument)"
+                               ValueField="@((DataPoint s) => s.Value)" />
+        </DxChart>
+    @*BeginHide*@
+    </div>
+    @*EndHide*@
 
     @code {
         List<DataPoint> GetData() {

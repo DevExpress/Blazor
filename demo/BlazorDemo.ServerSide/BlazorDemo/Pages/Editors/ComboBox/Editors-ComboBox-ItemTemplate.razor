@@ -1,0 +1,35 @@
+﻿<DemoPageSectionComponent Id="Editors-ComboBox-ItemTemplate" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <DxComboBox Data="@Data"
+                    @bind-Value="@Value"
+                    SizeMode="Params.SizeMode"
+                    CssClass="cw-480">
+            <ItemTemplate>
+                <div class="combobox-item-template">
+                    <img src="@StaticAssetUtils.GetImagePath(GetImagineFileName(context))" />
+                    <div class="combobox-item-template-text">
+                        <span>@context.FirstName @context.LastName</span>
+                        <span class="combobox-item-template-employee-phone">@context.HomePhone</span>
+                    </div>
+                </div>
+            </ItemTemplate>
+        </DxComboBox>
+    </ChildContentWithParameters>
+
+
+    @code {
+        IEnumerable<Employee> Data { get; set; }
+        Employee Value { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetEmployeesAsync();
+            Value = Data.FirstOrDefault();
+        }
+
+        string GetImagineFileName(Employee employee) {
+            return $"Employees/item-template{employee.EmployeeId}.jpg";
+        }
+    }
+
+</DemoPageSectionComponent>

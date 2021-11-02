@@ -43,7 +43,7 @@ namespace BlazorDemo.Data {
                     Label = 1,
                     StartDate = date + (new TimeSpan(1, 10, 0, 0)),
                     EndDate = date + (new TimeSpan(1, 10, 45, 0)),
-                    Recurrence = string.Format("<RecurrenceInfo Start=\"{0}\" End=\"{1}\" WeekDays=\"62\" Id=\"6de79b21-6b16-4dea-9736-c500058ec858\" OccurrenceCount=\"25\" Range=\"1\" />", ToString(date + (new TimeSpan(1, 10, 0, 0))), ToString(date + (new TimeSpan(1, 10, 45, 0)))),
+                    Recurrence = string.Format("<RecurrenceInfo Start=\"{0}\" End=\"{1}\" WeekDays=\"62\" Id=\"6de79b21-6b16-4dea-9736-c500058ec858\" OccurrenceCount=\"25\" Range=\"1\" Type=\"1\" />", ToString(date + (new TimeSpan(1, 10, 0, 0))), ToString(date + (new TimeSpan(1, 10, 45, 0)))),
                     ResourceId = 1
                 },
                 new Appointment {

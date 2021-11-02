@@ -10,9 +10,9 @@
                     @foreach (ButtonRenderStyle style in btnStyles) {
                         <div class="mr-2 mb-2">
                             <DxButton RenderStyle="@style"
-                                      CssClass="w-100"
+                                      SizeMode="Params.SizeMode"
                                       Text="@Enum.GetName(typeof(ButtonRenderStyle), style)"
-                                      SizeMode="Params.SizeMode" />
+                                      CssClass="w-100" />
                         </div>
                     }
                 </div>
@@ -23,10 +23,10 @@
                     @foreach (ButtonRenderStyle style in btnStyles) {
                         <div class="mr-2 mb-2">
                             <DxButton RenderStyle="@style"
-                                      CssClass="w-100"
+                                      SizeMode="Params.SizeMode"
                                       RenderStyleMode="@ButtonRenderStyleMode.Outline"
                                       Text="@Enum.GetName(typeof(ButtonRenderStyle), style)"
-                                      SizeMode="Params.SizeMode" />
+                                      CssClass="w-100" />
                         </div>
                     }
                 </div>
@@ -37,10 +37,10 @@
                     @foreach (ButtonRenderStyle style in btnStyles) {
                         <div class="mr-2 mb-2">
                             <DxButton RenderStyle="@style"
-                                      CssClass="w-100"
+                                      SizeMode="Params.SizeMode"
                                       RenderStyleMode="@ButtonRenderStyleMode.Text"
                                       Text="@Enum.GetName(typeof(ButtonRenderStyle), style)"
-                                      SizeMode="Params.SizeMode" />
+                                      CssClass="w-100" />
                         </div>
                     }
                 </div>

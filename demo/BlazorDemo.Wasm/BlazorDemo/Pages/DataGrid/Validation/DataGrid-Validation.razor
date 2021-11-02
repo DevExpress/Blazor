@@ -77,8 +77,8 @@
     }
 
     @code {
-        DxDataGrid<Employee> grid;
-        IEnumerable<Employee> Data { get; set; }
+        DxDataGrid<EditableEmployee> grid;
+        IEnumerable<EditableEmployee> Data { get; set; }
 
         protected override async Task OnInitializedAsync() {
             Data = await NwindDataService.GetEmployeesEditableAsync();
@@ -90,10 +90,10 @@
         }
 
         class FormEditContext {
-            public FormEditContext(Employee dataItem) {
+            public FormEditContext(EditableEmployee dataItem) {
                 DataItem = dataItem;
                 if(DataItem == null) {
-                    DataItem = new Employee();
+                    DataItem = new EditableEmployee();
                     IsNewRow = true;
                 }
                 FirstName = DataItem.FirstName;
@@ -105,7 +105,7 @@
                 Notes = DataItem.Notes;
             }
 
-            public Employee DataItem { get; set; }
+            public EditableEmployee DataItem { get; set; }
             public bool IsNewRow { get; set; }
 
             [Required]
@@ -132,7 +132,7 @@
         }
 
         FormEditContext EditContext = null;
-        void OnRowEditStarting(Employee employee) {
+        void OnRowEditStarting(EditableEmployee employee) {
             EditContext = new FormEditContext(employee);
             EditContext.StateHasChanged += () => { InvokeAsync(StateHasChanged); };
         }
@@ -159,7 +159,7 @@
             Data = await NwindDataService.GetEmployeesEditableAsync();
             StateHasChanged();
         }
-        async Task OnRowRemovingAsync(Employee dataItem) {
+        async Task OnRowRemovingAsync(EditableEmployee dataItem) {
             await NwindDataService.RemoveEmployeeAsync(dataItem);
             Data = await NwindDataService.GetEmployeesEditableAsync();
             StateHasChanged();

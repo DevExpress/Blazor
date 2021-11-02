@@ -6,7 +6,7 @@
                        Mask="(999)000-0000">
             <DxTextMaskProperties Placeholder="Placeholder" SaveLiteral="SaveLiterals" />
         </DxMaskedInput>
-        <p class="demo-text cw-320 mt-2 text-muted">
+        <p class="demo-text cw-320 mt-2">
             Telephone: <b>@Telephone</b>
         </p>
     </ChildContentWithParameters>
@@ -16,7 +16,7 @@
                         Label="Placeholder:"
                         Data="PredefinedPlaceholders"
                         @bind-Value="Placeholder" />
-        <OptionCheckBox Label="Save Literals:"
+        <OptionCheckBox Label="Save Literals"
                         @bind-Checked="@SaveLiterals" />
     </OptionsContent>
 

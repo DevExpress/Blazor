@@ -1,7 +1,9 @@
 ﻿<DemoPageSectionComponent Id="Editors-TextBox-Overview" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <DxTextBox @bind-Text="@TextValue" CssClass="cw-320" SizeMode="Params.SizeMode" />
-        <p class="demo-text cw-320 mt-2 text-muted">
+        <DxTextBox @bind-Text="@TextValue"
+                   SizeMode="Params.SizeMode"
+                   CssClass="cw-320" />
+        <p class="demo-text cw-320 mt-2">
             Text: <b>@TextValue</b>
         </p>
     </ChildContentWithParameters>

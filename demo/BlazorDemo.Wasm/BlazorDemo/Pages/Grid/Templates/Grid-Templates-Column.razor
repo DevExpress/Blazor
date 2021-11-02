@@ -1,24 +1,24 @@
-﻿<DemoPageSectionComponent Id="Grid-Templates-Column" ShowHorizontalScrollBar="true">
+﻿<DemoPageSectionComponent Id="Grid-Templates-Column">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        <DxGrid Data="@Data" CssClass="w-100">
+        <DxGrid Data="@Data">
             <Columns>
-                <DxGridDataColumn FieldName="FirstName" />
-                <DxGridDataColumn FieldName="LastName" />
-                <DxGridDataColumn FieldName="Title" />
-                <DxGridDataColumn FieldName="BirthDate" Width="150px" />
-                <DxGridDataColumn FieldName="HireDate" Width="150px" />
-                <DxGridDataColumn FieldName="EmployeeId" AllowSort="false" Width="80px">
-                    <CellDisplayTemplate><a class="d-block text-left text-nowrap" href="javascript:;" @onclick="() => ShowDetails((int)context.Value)">More Info...</a></CellDisplayTemplate>
+                <DxGridDataColumn FieldName="FirstName" MinWidth="80" />
+                <DxGridDataColumn FieldName="LastName" MinWidth="80" />
+                <DxGridDataColumn FieldName="Title" MinWidth="100" />
+                <DxGridDataColumn FieldName="BirthDate" Width="10%" MinWidth="80" />
+                <DxGridDataColumn FieldName="HireDate" Width="10%" MinWidth="80" />
+                <DxGridDataColumn FieldName="EmployeeId" AllowSort="false" Width="90px" MinWidth="100" TextAlignment="GridTextAlignment.Center">
+                    <CellDisplayTemplate><button class="btn btn-link grid-btn-link" @onclick="() => ShowDetails((int)context.Value)">More Info</button></CellDisplayTemplate>
                     <HeaderCaptionTemplate><span title="Click a link below to show more information about an employee">Details</span></HeaderCaptionTemplate>
                 </DxGridDataColumn>
             </Columns>
         </DxGrid>
         <DxPopup @bind-Visible="@PopupVisible"
-                    HeaderText="@PopupHeaderText"
-                    HorizontalAlignment="HorizontalAlignment.Center"
-                    VerticalAlignment="VerticalAlignment.Center">
+                 HeaderText="@PopupHeaderText"
+                 HorizontalAlignment="HorizontalAlignment.Center"
+                 VerticalAlignment="VerticalAlignment.Center">
             @PopupContent
         </DxPopup>
 

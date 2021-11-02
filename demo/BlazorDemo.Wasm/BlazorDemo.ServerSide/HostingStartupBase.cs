@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Net.Http;
 using BlazorDemo.Configuration;
@@ -6,6 +7,7 @@ using BlazorDemo.DataProviders.Implementation;
 using BlazorDemo.Wasm.Server.DataProviders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Configuration;
@@ -31,9 +33,11 @@ namespace BlazorDemo.ServerSide {
             builder.Configure(ConfigureApp);
 
             void ConfigureApp(WebHostBuilderContext context, IApplicationBuilder app) {
-                string pathBase = Configuration.GetValue<string>("pathBase");
-                if (!string.IsNullOrEmpty(pathBase))
-                    app.UsePathBase(pathBase);
+                string pathBase = Configuration.GetValue<string>("pathbase");
+                if(!string.IsNullOrEmpty(pathBase)) {
+                    string pathString = pathBase.StartsWith('/') ? pathBase : "/" + pathBase;
+                    app.UsePathBase(pathString);
+                }
 
                 app.UseRequestLocalization(new RequestLocalizationOptions().SetDefaultCulture("en-US"));
 
@@ -81,7 +85,9 @@ namespace BlazorDemo.ServerSide {
                 services.AddDemoServices();
 
                 services.AddSingleton<ISalesInfoDataProvider, SalesInfoDataProvider>();
+                services.AddSingleton<IExperementResultDataProvider, ExperementResultDataProvider>();
                 services.AddSingleton<IFinancialSeriesDataProvider, FinancialSeriesDataProvider>();
+                services.AddSingleton<IPopulationStructureDataProvider, PopulationAgeStructureDataProvider>();
                 services.AddSingleton<ICurrencyExchangeDataProvider, UsdJpyDataProvider>();
                 services.AddSingleton<IUsdJpyCsvFileContentProvider, UsdJpyCsvFileContentProvider>();
                 services.AddSingleton<IWeatherSummaryCsvFileContentProvider, WeatherSummaryCsvFileContentProvider>();

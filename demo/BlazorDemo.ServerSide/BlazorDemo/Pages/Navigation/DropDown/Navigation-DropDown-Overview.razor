@@ -1,0 +1,23 @@
+﻿@using BlazorDemo.Pages.Navigation.Popup
+<DemoPageSectionComponent Id="Navigation-DropDown-Overview">
+    <div id="dropdown-overview-target-container">
+        <DxButton Click="() => IsOpen = true">SHOW A DROPDOWN</DxButton>
+    </div>
+
+    <DxDropDown
+        @bind-IsOpen="@IsOpen"
+        HeaderVisible="true"
+        HeaderText="Header"
+        BodyText="@Constants.Content"
+        PositionMode="DropDownPositionMode.Bottom"
+        Width="max(25vw, 250px)"
+        PositionTarget="#dropdown-overview-target-container"
+        RestrictionTarget="#Navigation-DropDown-Overview"
+        CloseMode="DropDownCloseMode.Close">
+    </DxDropDown>
+
+    @code {
+        bool IsOpen { get; set; } = false;
+    }
+
+</DemoPageSectionComponent>

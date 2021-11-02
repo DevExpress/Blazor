@@ -1,0 +1,32 @@
+.color-picker-header {
+    margin-left: 0.5rem;
+    font-size: 12pt;
+}
+
+.color-picker-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 10rem;
+    padding: 0.25rem 0.25rem 0.25rem 0.25rem;
+    cursor: pointer;
+}
+
+.color-picker-container > .color-picker-cell {
+    height: 1.5rem;
+    width: 1.5rem;
+    cursor: pointer;
+    margin: 0.1rem 0.1rem 0.1rem 0.1rem;
+    border: 1px solid var(--primary);
+}
+
+.color-picker-container > .color-picker-cell:hover {
+    border: 2px solid var(--primary);
+}
+
+.color-picker-container > .color-picker-cell.selected {
+    border: 2px solid var(--primary);
+}
+
+.mt-1-5 {
+    margin-top: 0.15rem;
+}

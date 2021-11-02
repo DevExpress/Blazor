@@ -1,0 +1,23 @@
+.combobox-item-template {
+    display: flex;
+    align-items: center;
+}
+
+.combobox-item-template > img {
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+}
+
+img + .combobox-item-template-text {
+    margin-left: 1rem;
+}
+
+.combobox-item-template-text {
+    display: flex;
+    flex-flow: column;
+}
+
+.combobox-item-template-employee-phone {
+    opacity: 0.65;
+}

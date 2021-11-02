@@ -1,4 +1,6 @@
 ﻿<DemoPageSectionComponent Id="Editors-Validation-FormLayout">
+    @using System.ComponentModel.DataAnnotations
+
     <div class="cw-880">
         <EditForm Model="@starship"
                   OnValidSubmit="@HandleValidSubmit"
@@ -43,7 +45,7 @@
             </DxFormLayout>
 
             <div class="row w-100 mx-0">
-                <p class="demo-text col-12 mt-2 text-muted">
+                <p class="demo-text col-12 mt-2">
                     Form Validation State: <b>@FormValidationState</b>
                 </p>
             </div>

@@ -33,14 +33,13 @@ var DemoPageHelper = (function() {
         document.cookie = escape(name) + '=' + escape(value.toString()) + '; expires=' + date.toGMTString() + '; path=/';
     }
 
-    var _currentThemeCookieName = "DXBS4CurrentTheme";
-    function getThemeNameCookie() {
-        return getCookie(_currentThemeCookieName);
+    function getThemeName(cookieName) {
+        return getCookie(cookieName);
     }
-    function setThemeNameCookie(theme) {
+    function setThemeName(cookieName, themeName) {
         var date = new Date();
         date.setFullYear(date.getFullYear() + 1);
-        setCookie(_currentThemeCookieName, theme, date);
+        setCookie(cookieName, themeName, date);
     }
 
     function demoMatchesQuery(mediaQuery, dotNetHelper) {
@@ -78,8 +77,8 @@ var DemoPageHelper = (function() {
             ensureNavigationTargetIsVisible: ensureNavigationTargetIsVisible
         },
         themes: {
-            getThemeName: getThemeNameCookie,
-            setThemeName: setThemeNameCookie
+            getThemeName: getThemeName,
+            setThemeName: setThemeName
         },
         demoMatchesQuery: demoMatchesQuery,
         patchAppElement: patchAppElement,

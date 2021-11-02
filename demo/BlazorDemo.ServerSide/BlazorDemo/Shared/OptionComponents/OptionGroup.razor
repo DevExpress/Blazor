@@ -1,0 +1,11 @@
+﻿<div class="option-group border border-light">
+	<span class="option-group-caption">@Caption</span>
+	<div class="option-group-content">
+		@ChildContent
+	</div>
+</div>
+
+@code {
+	[Parameter] public RenderFragment ChildContent {get; set;}
+	[Parameter] public string Caption {get; set;}
+}

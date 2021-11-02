@@ -117,7 +117,7 @@ namespace BlazorDemo.Configuration {
         static string GetCollapseRegionHtml(string code) {
             string startComment = "<%--";
             string endComment = "--%>";
-            return string.Format("{1}<span class=\"more-code\"><button type=\"button\" class=\"btn btn-secondary\" onclick=\"DemoPageSectionHelper.expandCode(this)\"></button>" +
+            return string.Format("{1}<span class=\"more-code\"><button type=\"button\" class=\"btn btn-secondary more-code-btn\"></button>" +
                    "<span style=\"display:none\">{2}{0}{1}</span></span>{2}", code.Trim(' ', '\t', '\r', '\n'), startComment, endComment);
         }
         static string TrimCode(string code) {

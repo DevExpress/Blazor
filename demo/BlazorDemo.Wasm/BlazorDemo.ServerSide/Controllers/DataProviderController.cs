@@ -19,16 +19,19 @@ namespace BlazorDemo.AspNetCoreHost {
 
         public DataProviderController(
             ISalesInfoDataProvider salesInfoDataProvider,
+            IExperementResultDataProvider experementResultDataProvider,
             INwindDataProvider nwindDataProvider,
             IIssuesDataProvider issuesDataProvider,
             IWorldcitiesDataProvider worldcitiesDataProvider
         ) {
             var ct = _cancellationToken = _cts.Token;
             InitializeEntities(salesInfoDataProvider, salesInfoDataProvider.GetSalesAsync, ct);
+            InitializeEntities(experementResultDataProvider, experementResultDataProvider.GetResultAsync, ct);
 
             InitializeEntities(nwindDataProvider, nwindDataProvider.GetCategoriesAsync, ct);
             InitializeEntities(nwindDataProvider, nwindDataProvider.GetCustomersAsync, ct);
             InitializeEntities(nwindDataProvider, nwindDataProvider.GetEmployeesAsync, ct);
+            InitializeEntities(nwindDataProvider, nwindDataProvider.GetEmployeesEditableAsync, ct);
             InitializeEntities(nwindDataProvider, nwindDataProvider.GetInvoicesAsync, ct);
             InitializeEntities(nwindDataProvider, nwindDataProvider.GetOrdersAsync, ct);
             InitializeEntities(nwindDataProvider, nwindDataProvider.GetOrderDetailsAsync, ct);
@@ -36,7 +39,7 @@ namespace BlazorDemo.AspNetCoreHost {
             InitializeEntities(nwindDataProvider, nwindDataProvider.GetShippersAsync, ct);
             InitializeEntities(nwindDataProvider, nwindDataProvider.GetSuppliersAsync, ct);
 
-            InitializeEntities(issuesDataProvider, issuesDataProvider.GetItemsAsync, ct);
+            InitializeEntities(issuesDataProvider, issuesDataProvider.GetIssuesAsync, ct);
             InitializeEntities(issuesDataProvider, issuesDataProvider.GetProjectsAsync, ct);
             InitializeEntities(issuesDataProvider, issuesDataProvider.GetUsersAsync, ct);
 

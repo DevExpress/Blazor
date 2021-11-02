@@ -1,33 +1,32 @@
-﻿<DemoPageSectionComponent Id="Grid-Filtering-FilterRow" ShowHorizontalScrollBar="true" VerticalAlignment="VerticalAlignment.Top">
+﻿<DemoPageSectionComponent Id="Grid-Filtering-FilterRow" VerticalAlignment="VerticalAlignment.Top">
     <ChildContentWithParameters Context="Params">
         @using DevExpress.Data.Filtering;
         @inject NwindDataService NwindDataService
 
         <DxGrid Data="GridData"
                 ShowFilterRow="true"
-                CustomizeCellDisplayText="Grid_CustomizeCellDisplayText"
-                CssClass="w-100">
+                CustomizeCellDisplayText="Grid_CustomizeCellDisplayText">
             <Columns>
-                <DxGridDataColumn FieldName="OrderId" DisplayFormat="d" SortIndex="0" Width="120px">
+                <DxGridDataColumn FieldName="OrderId" DisplayFormat="d" SortIndex="0" MinWidth="100" Width="10%">
                     <FilterRowCellTemplate>
                         <DxSpinEdit Value="(int?)context.FilterRowValue"
                                     ValueChanged="(int? v) => context.FilterRowValue = v"
-                                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Never" />
                     </FilterRowCellTemplate>
                 </DxGridDataColumn>
 
-                <DxGridDataColumn FieldName="OrderDate" DisplayFormat="d" Width="150px">
+                <DxGridDataColumn FieldName="OrderDate" DisplayFormat="d" MinWidth="120" Width="10%">
                     <FilterRowCellTemplate>
                         <DxDateEdit Date="(DateTime?)context.FilterRowValue"
                                     DateChanged="(DateTime? v) => context.FilterRowValue = v"
-                                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Never" />
                     </FilterRowCellTemplate>
                 </DxGridDataColumn>
 
                 <DxGridDataColumn FieldName="ProductName"
-                                  FilterRowValue='"Queso"' FilterRowOperatorType="GridFilterRowOperatorType.Contains" />
+                                  FilterRowValue='"Queso"' FilterRowOperatorType="GridFilterRowOperatorType.Contains" MinWidth="100" />
 
-                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c2" Width="150px">
+                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c2" MinWidth="150" Width="10%">
                     <FilterRowCellTemplate>
                         <DxComboBox @bind-Value="context.FilterCriteria"
                                     Data="UnitPriceIntervals" ValueFieldName="Criteria" TextFieldName="DisplayText"
@@ -35,7 +34,7 @@
                     </FilterRowCellTemplate>
                 </DxGridDataColumn>
 
-                <DxGridDataColumn FieldName="CustomerId" Caption="Customer" SortMode="GridColumnSortMode.DisplayText">
+                <DxGridDataColumn FieldName="CustomerId" Caption="Customer" SortMode="GridColumnSortMode.DisplayText" MinWidth="120">
                     <FilterRowCellTemplate>
                         <DxComboBox Value="(string)context.FilterRowValue"
                                     ValueChanged="(string v) => context.FilterRowValue = v"
@@ -45,7 +44,7 @@
                     </FilterRowCellTemplate>
                 </DxGridDataColumn>
 
-                <DxGridDataColumn FieldName="Shipped" UnboundType="GridUnboundColumnType.Boolean" UnboundExpression="[ShippedDate] <> Null" Width="100px">
+                <DxGridDataColumn FieldName="Shipped" UnboundType="GridUnboundColumnType.Boolean" UnboundExpression="[ShippedDate] <> Null" Width="5%" MinWidth="100">
                     <CellDisplayTemplate>
                         <DxCheckBox CssClass="d-inline-block" Enabled="false" Checked="(bool)context.Value" />
                     </CellDisplayTemplate>
@@ -57,7 +56,7 @@
                     </FilterRowCellTemplate>
                 </DxGridDataColumn>
 
-                <DxGridCommandColumn />
+                <DxGridCommandColumn Width="60px" NewButtonVisible="false" EditButtonVisible="false" DeleteButtonVisible="false" />
             </Columns>
         </DxGrid>
 

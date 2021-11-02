@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using BlazorDemo.Configuration;
 using BlazorDemo.Services;
@@ -40,23 +41,8 @@ namespace BlazorDemo.ServerSide {
                 services.AddHttpContextAccessor();
 
                 services.AddSingleton<DemoConfiguration>();
-                services.AddScoped<IDemoThemesConfigurationCookieAccessor, DemoThemesConfigurationCookieAccessor>();
                 services.AddScoped<DemoThemeService>();
             }
         }
     }
-
-    class DemoThemesConfigurationCookieAccessor: IDemoThemesConfigurationCookieAccessor {
-        public DemoThemesConfigurationCookieAccessor(IHttpContextAccessor httpContextAccessor) {
-            HttpContextAccessor = httpContextAccessor;
-        }
-
-        protected IHttpContextAccessor HttpContextAccessor { get; }
-        protected HttpContext HttpContext { get { return HttpContextAccessor.HttpContext; } }
-
-        public string GetCookie(string name) {
-            return HttpContext != null ? HttpContext.Request.Cookies[name] : "";
-        }
-    }
-
 }

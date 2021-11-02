@@ -1,0 +1,44 @@
+﻿<DemoPageSectionComponent Id="Grid-Selection-Single">
+    @inject NwindDataService NwindDataService
+
+    <DxGrid Data="@Products"
+            SelectionMode="GridSelectionMode.Single"
+            AllowSelectRowByClick="true"
+            KeyFieldName="ProductId"
+            @bind-SelectedDataItem="SelectedDataItem"
+            CustomizeCellDisplayText="Grid_CustomizeCellDisplayText">
+        <Columns>
+            <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
+            <DxGridDataColumn FieldName="CategoryId" SortMode="GridColumnSortMode.DisplayText" Caption="Category" MinWidth="100" TextAlignment="GridTextAlignment.Left" />
+            <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
+            <DxGridDataColumn FieldName="UnitsInStock" Width="10%" />
+            <DxGridDataColumn FieldName="QuantityPerUnit" Width="15%" MinWidth="80" />
+            <DxGridDataColumn FieldName="Discontinued" Width="10%" MinWidth="90">
+                <CellDisplayTemplate>
+                    @if((bool)context.Value == true) {
+                        <span class="grid-icon grid-icon-check"></span>
+                    }
+                </CellDisplayTemplate>
+            </DxGridDataColumn>
+        </Columns>
+    </DxGrid>
+    <p class="demo-text w-100 mt-2">Selected Product: <b>@((SelectedDataItem as Product)?.ProductName ?? "(none)")</b></p>
+
+    @code {
+        IEnumerable<Product> Products { get; set; }
+        IEnumerable<Category> Categories { get; set; }
+        object SelectedDataItem { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Products = await NwindDataService.GetProductsAsync();
+            Categories = await NwindDataService.GetCategoriesAsync();
+
+            SelectedDataItem = Products.FirstOrDefault();
+        }
+        void Grid_CustomizeCellDisplayText(GridCustomizeCellDisplayTextEventArgs e) {
+            if(e.FieldName == "CategoryId") {
+                e.DisplayText = Categories.Where(c => c.CategoryId == (int)e.Value).FirstOrDefault().CategoryName;
+            }
+        }
+    }
+</DemoPageSectionComponent>

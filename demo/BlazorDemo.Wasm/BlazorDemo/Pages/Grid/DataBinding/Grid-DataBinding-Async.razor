@@ -1,16 +1,16 @@
-﻿<DemoPageSectionComponent Id="Grid-DataBinding-Async" ShowHorizontalScrollBar="true">
+﻿<DemoPageSectionComponent Id="Grid-DataBinding-Async">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        <DxGrid Data="@Data" CssClass="w-100">
+        <DxGrid Data="@Data">
             <Columns>
                 <DxGridDataColumn FieldName="CompanyName" />
                 <DxGridDataColumn FieldName="ContactName" />
                 <DxGridDataColumn FieldName="ContactTitle" />
-                <DxGridDataColumn FieldName="Country" />
-                <DxGridDataColumn FieldName="City" />
+                <DxGridDataColumn FieldName="Country" Width="10%" />
+                <DxGridDataColumn FieldName="City" Width="10%" />
                 <DxGridDataColumn FieldName="Address" />
-                <DxGridDataColumn FieldName="Phone" />
+                <DxGridDataColumn FieldName="Phone" Width="10%" />
             </Columns>
         </DxGrid>
 

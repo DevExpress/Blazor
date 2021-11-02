@@ -1,7 +1,7 @@
 ﻿@page "/GridToolbar"
+@layout DataProviderAccessArea<INwindDataProvider>
 
 <DemoPageSectionComponent Id="DataGrid-Toolbar" ShowHorizontalScrollBar="true">
-    @layout DataProviderAccessArea<INwindDataProvider>
     @inject NwindDataService NwindDataService
     
     @*BeginHide*@
@@ -39,9 +39,9 @@
     @*EndHide*@
 
     @code {
-        IEnumerable<Employee> Data;
-        Employee SelectedRow;
-        DxDataGrid<Employee> grid;
+        IEnumerable<EditableEmployee> Data;
+        EditableEmployee SelectedRow;
+        DxDataGrid<EditableEmployee> grid;
         bool Enabled = true;
         bool ShowFilterRow = false;
 
@@ -67,7 +67,7 @@
                 SetSelection();
             StateHasChanged();
         }
-        async Task OnRowRemovingAsync(Employee dataItem) {
+        async Task OnRowRemovingAsync(EditableEmployee dataItem) {
             await NwindDataService.RemoveEmployeeAsync(dataItem);
             Data = await NwindDataService.GetEmployeesEditableAsync();
             StateHasChanged();
@@ -77,7 +77,7 @@
             Data = await NwindDataService.GetEmployeesEditableAsync();
             StateHasChanged();
         }
-        async Task OnRowUpdatingAsync(Employee dataItem, IDictionary<string, object> newValues) {
+        async Task OnRowUpdatingAsync(EditableEmployee dataItem, IDictionary<string, object> newValues) {
             await NwindDataService.UpdateEmployeeAsync(dataItem, newValues);
             Data = await NwindDataService.GetEmployeesEditableAsync();
             StateHasChanged();

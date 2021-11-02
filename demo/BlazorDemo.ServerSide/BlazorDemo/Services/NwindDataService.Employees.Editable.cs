@@ -7,7 +7,7 @@ using BlazorDemo.DataProviders;
 
 namespace BlazorDemo.Services {
     public partial class NwindDataService {
-        public Task<IEnumerable<Employee>> GetEmployeesEditableAsync(CancellationToken ct = default) {
+        public Task<IEnumerable<EditableEmployee>> GetEmployeesEditableAsync(CancellationToken ct = default) {
             // Return your data here
             /*BeginHide*/
             return _dataProvider.GetEmployeesEditableAsync(ct);
@@ -19,22 +19,28 @@ namespace BlazorDemo.Services {
             return _dataProvider.InsertEmployeeAsync(newValues);
             /*EndHide*/
         }
-        public Task InsertEmployeeAsync(Employee dataItem) {
+        public Task InsertEmployeeAsync(EditableEmployee newDataItem) {
             // Change your data here
             /*BeginHide*/
-            return _dataProvider.InsertEmployeeAsync(dataItem);
+            return _dataProvider.InsertEmployeeAsync(newDataItem);
             /*EndHide*/
         }
-        public Task RemoveEmployeeAsync(Employee dataItem) {
+        public Task RemoveEmployeeAsync(EditableEmployee dataItem) {
             // Change your data here
             /*BeginHide*/
             return _dataProvider.RemoveEmployeeAsync(dataItem);
             /*EndHide*/
         }
-        public Task UpdateEmployeeAsync(Employee dataItem, IDictionary<string, object> newValues) {
+        public Task UpdateEmployeeAsync(EditableEmployee dataItem, IDictionary<string, object> newValues) {
             // Change your data here
             /*BeginHide*/
             return _dataProvider.UpdateEmployeeAsync(dataItem, newValues);
+            /*EndHide*/
+        }
+        public Task UpdateEmployeeAsync(EditableEmployee dataItem, EditableEmployee newDataItem) {
+            // Change your data here
+            /*BeginHide*/
+            return _dataProvider.UpdateEmployeeAsync(dataItem, newDataItem);
             /*EndHide*/
         }
     }

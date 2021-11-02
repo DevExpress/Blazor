@@ -1,18 +1,17 @@
-﻿<DemoPageSectionComponent Id="Grid-Summary-Total" ShowHorizontalScrollBar="true">
+﻿<DemoPageSectionComponent Id="Grid-Summary-Total">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <DxGrid Data="@Data"
-                UnboundColumnData="Grid_UnboundColumnData"
-                CssClass="w-100">
+                UnboundColumnData="Grid_UnboundColumnData">
             <Columns>
-                <DxGridDataColumn FieldName="CompanyName" />
-                <DxGridDataColumn FieldName="City" Width="200px" />
-                <DxGridDataColumn FieldName="Region" Width="120px" />
-                <DxGridDataColumn FieldName="Country" Width="200px" />
-                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="120px" />
-                <DxGridDataColumn FieldName="Quantity" Width="120px" />
-                <DxGridDataColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" Width="200px" />
+                <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
+                <DxGridDataColumn FieldName="City" Width="10%" />
+                <DxGridDataColumn FieldName="Region" Width="10%" />
+                <DxGridDataColumn FieldName="Country" Width="10%" />
+                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
+                <DxGridDataColumn FieldName="Quantity" MinWidth="80" Width="10%" />
+                <DxGridDataColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" MinWidth="100" Width="15%" />
             </Columns>
             <TotalSummary>
                 <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="CompanyName" />

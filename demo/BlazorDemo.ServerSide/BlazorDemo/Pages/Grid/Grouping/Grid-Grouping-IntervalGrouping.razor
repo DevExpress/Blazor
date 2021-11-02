@@ -1,20 +1,19 @@
-﻿<DemoPageSectionComponent Id="Grid-Grouping-IntervalGrouping" ShowHorizontalScrollBar="true">
+﻿<DemoPageSectionComponent Id="Grid-Grouping-IntervalGrouping">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <DxGrid @ref="Grid"
                 Data="@Data"
                 ShowGroupPanel="true"
-                UnboundColumnData="Grid_UnboundColumnData"
-                CssClass="w-100">
+                UnboundColumnData="Grid_UnboundColumnData">
             <Columns>
-                <DxGridDataColumn FieldName="ProductName" />
-                <DxGridDataColumn FieldName="CategoryName" />
-                <DxGridDataColumn FieldName="Country" Width="200px" />
-                <DxGridDataColumn FieldName="OrderDate" GroupIndex="0" GroupInterval="GridColumnGroupInterval.DateYear" />
-                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="120px" />
-                <DxGridDataColumn FieldName="Quantity" Width="120px" />
-                <DxGridDataColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" Width="200px" />
+                <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
+                <DxGridDataColumn FieldName="CategoryName" MinWidth="100" />
+                <DxGridDataColumn FieldName="Country" Width="10%" />
+                <DxGridDataColumn FieldName="OrderDate" GroupIndex="0" GroupInterval="GridColumnGroupInterval.DateYear" MinWidth="70" Width="10%" />
+                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
+                <DxGridDataColumn FieldName="Quantity" Width="10%" />
+                <DxGridDataColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" MinWidth="100" Width="15%" />
             </Columns>
             <TotalSummary>
                 <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="ProductName" />

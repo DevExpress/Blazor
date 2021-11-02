@@ -1,0 +1,159 @@
+﻿@using BlazorDemo.Data.Issues
+@implements IDisposable
+@inject IssuesDataService IssuesDataService
+
+<DxGrid @ref="Grid"
+        Data="@DataSource"
+        ShowGroupPanel="true"
+        ShowFilterRow="true"
+        PagerNavigationMode="PagerNavigationMode.InputBox"
+        PageSizeSelectorVisible="true"
+        PageSizeSelectorAllRowsItemVisible="true"
+        PageSizeSelectorItems="@(new int[] { 5,10,20 })"
+        CustomizeCellDisplayText="Grid_CustomizeCellDisplayText">
+    <Columns>
+        <DxGridDataColumn FieldName="Type" Caption=" " Width="40px" MinWidth="40" TextAlignment="GridTextAlignment.Center" AllowGroup="false" AllowSort="false">
+            <CellDisplayTemplate>@GetIssueTypeIconHtml((context.DataItem as Issue).Type)</CellDisplayTemplate>
+            <FilterRowCellTemplate></FilterRowCellTemplate>
+        </DxGridDataColumn>
+        <DxGridDataColumn FieldName="Name" Caption="Subject" MinWidth="200" AllowGroup="false">
+            <CellDisplayTemplate>
+                @{
+                    var issue = (context.DataItem as Issue);
+                }
+                <button class="btn btn-link grid-btn-link" @onclick="() => GotoDetailsViewClick(issue)">@(issue.Name)</button>
+            </CellDisplayTemplate>
+        </DxGridDataColumn>
+        <DxGridDataColumn FieldName="ProjectID" Caption="Project" GroupIndex="0" Width="220px" TextAlignment="GridTextAlignment.Left" SortMode="GridColumnSortMode.DisplayText">
+            <FilterRowCellTemplate>
+                <DxComboBox Value="(long?)context.FilterRowValue"
+                            ValueChanged="(long? v) => context.FilterRowValue = v"
+                            Data="ProjectList" ValueFieldName="ID" TextFieldName="Name"
+                            FilteringMode="DataGridFilteringMode.Contains"
+                            ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+            </FilterRowCellTemplate>
+        </DxGridDataColumn>
+        <DxGridDataColumn FieldName="CreatorID" Caption="Owner" Width="140px" MinWidth="100" TextAlignment="GridTextAlignment.Left" SortMode="GridColumnSortMode.DisplayText">
+            <FilterRowCellTemplate>
+                <DxComboBox Value="(long?)context.FilterRowValue"
+                            ValueChanged="(long? v) => context.FilterRowValue = v"
+                            Data="UserList" ValueFieldName="ID" TextFieldName="FullName"
+                            FilteringMode="DataGridFilteringMode.Contains"
+                            ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+            </FilterRowCellTemplate>
+        </DxGridDataColumn>
+        <DxGridDataColumn FieldName="OwnerID" Caption="Assignee" Width="140px" MinWidth="100" TextAlignment="GridTextAlignment.Left" SortMode="GridColumnSortMode.DisplayText">
+            <FilterRowCellTemplate>
+                <DxComboBox Value="(long?)context.FilterRowValue"
+                            ValueChanged="(long? v) => context.FilterRowValue = v"
+                            Data="UserList" ValueFieldName="ID" TextFieldName="FullName"
+                            FilteringMode="DataGridFilteringMode.Contains"
+                            ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+            </FilterRowCellTemplate>
+        </DxGridDataColumn>
+        <DxGridDataColumn FieldName="Status" Caption="Status" Width="140px" MinWidth="140" TextAlignment="GridTextAlignment.Left">
+            <FilterRowCellTemplate>
+                <DxComboBox Value="(IssueStatus?)context.FilterRowValue"
+                            ValueChanged="(IssueStatus? v) => context.FilterRowValue = v"
+                            Data="StatusList"
+                            ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+            </FilterRowCellTemplate>
+        </DxGridDataColumn>
+        <DxGridDataColumn FieldName="CreatedDate" Caption="Created" Width="120px" MinWidth="120">
+            <FilterRowCellTemplate>
+                <DxDateEdit Date="(DateTime?)context.FilterRowValue"
+                            DateChanged="(DateTime? v) => context.FilterRowValue = v"
+                            ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Never" />
+            </FilterRowCellTemplate>
+        </DxGridDataColumn>
+        <DxGridDataColumn FieldName="ModifiedDate" Caption="Modified" Width="120px" MinWidth="120">
+            <FilterRowCellTemplate>
+                <DxDateEdit Date="(DateTime?)context.FilterRowValue"
+                            DateChanged="(DateTime? v) => context.FilterRowValue = v"
+                            ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Never" />
+            </FilterRowCellTemplate>
+        </DxGridDataColumn>
+        <DxGridDataColumn FieldName="FixedDate" Caption="Fixed" Width="120px" MinWidth="120">
+            <FilterRowCellTemplate>
+                <DxDateEdit Date="(DateTime?)context.FilterRowValue"
+                            DateChanged="(DateTime? v) => context.FilterRowValue = v"
+                            ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Never" />
+            </FilterRowCellTemplate>
+        </DxGridDataColumn>
+        <DxGridDataColumn FieldName="Priority" Caption=" " Width="80px" TextAlignment="GridTextAlignment.Center" AllowGroup="false" AllowSort="false">
+            <CellDisplayTemplate>@GetIssuePriorityIconHtml((context.DataItem as Issue).Priority)</CellDisplayTemplate>
+            <FilterRowCellTemplate>
+                <button class="btn btn-link p-0 w-100 text-center @(!IsGridFiltered() ? "disabled" : "")" @onclick="@(() => Grid.ClearFilter())">Clear</button>
+            </FilterRowCellTemplate>
+        </DxGridDataColumn>
+    </Columns>
+    <GroupSummary>
+        <DxGridSummaryItem FieldName="ID" SummaryType="GridSummaryItemType.Count" />
+    </GroupSummary>
+    <TotalSummary>
+        <DxGridSummaryItem FieldName="ID" SummaryType="GridSummaryItemType.Count" FooterColumnName="Name" />
+    </TotalSummary>
+</DxGrid>
+
+@code {
+    IGrid Grid;
+    IEnumerable<Issue> DataSource { get; set; }
+    IEnumerable<Project> ProjectList { get; set; }
+    IEnumerable<User> UserList { get; set; }
+    static List<IssueStatus?> StatusList { get; set; } = ((IssueStatus[])Enum.GetValues(typeof(IssueStatus))).Cast<IssueStatus?>().ToList();
+    readonly TaskCompletionSource<bool> dataLoadedTcs = new(TaskCreationOptions.RunContinuationsAsynchronously);
+
+    [Parameter]
+    public EventCallback<Issue> GotoDetailsView { get; set; }
+
+    async Task GotoDetailsViewClick(Issue issue) {
+        await GotoDetailsView.InvokeAsync(issue);
+    }
+
+    protected override async Task OnInitializedAsync() {
+        DataSource = await IssuesDataService.GetIssuesAsync();
+        ProjectList = await IssuesDataService.GetProjectsAsync();
+        UserList = await IssuesDataService.GetUsersAsync();
+        dataLoadedTcs.TrySetResult(true);
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if(firstRender) {
+            await dataLoadedTcs.Task;
+            Grid.ExpandAllGroupRows();
+        }
+    }
+
+    void Grid_CustomizeCellDisplayText(GridCustomizeCellDisplayTextEventArgs e) {
+        if(e.FieldName == "ProjectID") {
+            e.DisplayText = ProjectList.Where(p => p.ID == (long)e.Value).FirstOrDefault().Name;
+        } else if(e.FieldName == "CreatorID" || e.FieldName == "OwnerID") {
+            e.DisplayText = UserList.Where(u => u.ID == (long)e.Value).FirstOrDefault().FullName;
+        }
+    }
+    public MarkupString GetIssuePriorityIconHtml(IssuePriority priority) {
+        string priorytyClass = "warning";
+        string title = "Medium";
+        if(priority == IssuePriority.High) {
+            priorytyClass = "danger";
+            title = " High ";
+        }
+        if(priority == IssuePriority.Low) {
+            priorytyClass = "info";
+            title = " Low ";
+        }
+        string html = string.Format("<span class='badge badge-{0} bg-{0} py-1 px-2' title='{1} Priority'>{1}</span>", priorytyClass, title);
+        return new MarkupString(html);
+    }
+    public MarkupString GetIssueTypeIconHtml(IssueType type) {
+        string html = "";
+        if(type == IssueType.Bug)
+            html = "<span class='badge badge-danger bg-danger py-1 px-2' title='Bug'>B</span>";
+        return new MarkupString(html);
+    }
+    public bool IsGridFiltered() {
+        return Grid.GetDataColumns().Any(c => c.FilterRowValue != null);
+    }
+    public void Dispose() {
+        dataLoadedTcs.TrySetCanceled();
+    }
+}

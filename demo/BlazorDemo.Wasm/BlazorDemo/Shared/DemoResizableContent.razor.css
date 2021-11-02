@@ -15,15 +15,11 @@
     }
 
 ::deep .demo-img-resize {
-    position: absolute;
-    top: 50%;
-    left: 50%;
     background-color: currentColor;
-    transform: translate(-50%, -50%);
     -webkit-mask-image: url("images/Resize.svg");
     mask-image: url("images/Resize.svg");
-    mask-repeat: no-repeat;
     -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
     width: 6px;
     height: 15px;
 }
@@ -31,12 +27,21 @@
 .demo-resize-handler {
     position: absolute;
     overflow: hidden;
-    width: 14px;
+    width: 15px;
     height: 100%;
     cursor: w-resize;
-    border-radius: 3px;
     right: 0;
     top: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: inherit;
+    border-width: 0 0 0 1px;
+    border-radius: inherit;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (max-width: 400px) {

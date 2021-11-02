@@ -1,0 +1,54 @@
+﻿@using BlazorDemo.Data.Issues
+@inject IssuesDataService IssuesDataService
+
+<div class="w-100">
+    <div class="jumbotron p-4">
+        <div class="d-flex justify-content-between">
+            <div>
+                <h4 class="mb-2">@SelectedIssue.Name</h4>
+                <p class="mb-4">Reported by @GetOwnerName(SelectedIssue) (<a href='mailto:@GetOwnerEmail(SelectedIssue)' target="_top">@GetOwnerEmail(SelectedIssue)</a>) @GetCreatedDate(SelectedIssue) at @GetCreatedTime(SelectedIssue) in @GetProjectName(SelectedIssue)</p>
+                <p class="mb-4">@SelectedIssue.Description</p>
+            </div>
+            <div class="info text-center">
+                <span class="badge badge-pill badge-info">#@SelectedIssue.ID</span>
+                <h5 class="text-info mt-1">@SelectedIssue.Status</h5>
+            </div>
+        </div>
+        <DxButton Text="Back to Grid" @onclick="@GotoListViewClick">
+        </DxButton>
+    </div>
+</div>
+
+@code {
+    IEnumerable<Project> ProjectList { get; set; }
+    IEnumerable<User> UserList { get; set; }
+
+    [Parameter]
+    public Issue SelectedIssue { get; set; }
+    [Parameter]
+    public EventCallback GotoListView { get; set; }
+
+    protected override async Task OnInitializedAsync() {
+        ProjectList = await IssuesDataService.GetProjectsAsync();
+        UserList = await IssuesDataService.GetUsersAsync();
+    }
+
+    async Task GotoListViewClick() {
+        await GotoListView.InvokeAsync();
+    }
+    string GetCreatedDate(Issue issue) {
+        return issue.CreatedDate.HasValue ? issue.CreatedDate.Value.ToString("D") : "";
+    }
+    string GetCreatedTime(Issue issue) {
+        return issue.CreatedDate.HasValue ? issue.CreatedDate.Value.ToString("t") : "";
+    }
+    string GetOwnerName(Issue issue) {
+        return UserList.Where(uc => uc.ID == issue.OwnerID).FirstOrDefault().FullName;
+    }
+    string GetOwnerEmail(Issue issue) {
+        return UserList.Where(uc => uc.ID == issue.OwnerID).FirstOrDefault().Email;
+    }
+    string GetProjectName(Issue issue) {
+        return ProjectList.Where(uc => uc.ID == issue.ProjectID).FirstOrDefault().Name;
+    }
+}
