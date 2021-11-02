@@ -2,6 +2,286 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 21.2.3
+
+### New Blazor DropDown
+
+Our new Blazor DropDown component allows you to display a non-modal drop-down window within a Blazor application. The DropDown includes the following integrated features:
+
+* Header, Body, and Footer Customization
+* Position Customization
+* Position Restrictions
+* Custom Size
+* Resizing
+* Scrolling
+* Show and Close Actions
+
+[Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDown)
+
+### New Dashboard
+
+Our Blazor Dashboard component was first introduced in May 2021 as a Community Technology Preview (CTP). This update marks its official release. v21.2 adds localization support and includes a new API to unregister extensions.
+
+_Note: DevExpress Dashboard ships as part of the [DevExpress Universal Subscription](https://www.devexpress.com/subscriptions/universal.xml)._
+
+### New Rich Text Editor
+
+The DevExpress Blazor Rich Text Editor (Word Processor) was first introduced in May 2021 as a Community Technology Preview (CTP). This update marks its official release.
+
+Our Rich Text Editor allows you to incorporate advanced text editing functionality into your Blazor app. You can create, open, edit, convert, save, and print rich-formatted text files (DOCX, RTF, TXT). Features include:
+
+* Ribbon UI
+* Print Layout / Simple View
+* Horizontal Ruler
+* Character & Paragraph Formatting
+* Bullets & Numbering
+* Header & Footer
+* Document Sections
+* Table of Contents
+* Bookmarks & Links
+* Page Numbers
+* Fields
+* Pictures & Text Inputs
+* Dialogs
+* Undo / Redo
+* Localization
+
+[Documentation](https://docs.devexpress.com/Blazor/401891/rich-text-editor)
+
+### Grid
+
+#### Data Editing and Input Validation
+
+Our Blazor Grid now allows you to edit associated data within a standard edit form or a popup edit form. To enable data editing:
+
+* Create an edit form template and assign it to the [EditFormTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.EditFormTemplate) property.
+* Handle the [EditModelSaving](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.EditModelSaving) event to post changes made in the edit form to a data source.
+* Set the [EditMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.EditMode) property to `PopupEditForm` to display the edit form as a popup.
+
+Our Blazor Grid automatically validates user input based on data annotation attributes. You can also apply and use custom data validation rules.
+
+[Documentation](https://docs.devexpress.com/Blazor/403454/grid/edit-data-and-validate-input)
+
+#### Row Selection
+
+Our Blazor Grid now supports single and multiple row selection. Use the [SelectionMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SelectionMode) property to specify the desired selection mode. To select/deselect rows with a pointing device, enable the [AllowSelectRowByClick](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.AllowSelectRowByClick) option.
+
+Our Blazor Grid also ships with a new column type - [DxGridSelectionColumn](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridSelectionColumn). This column can display a checkbox (with multi-select support) or radio buttons in single selection mode.
+
+We also introduced new methods to help manage record selection in code.
+
+* [SelectRow](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SelectRow(System.Int32-System.Boolean)) / [DeselectRow](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.DeselectRow(System.Int32))
+* [SelectRows](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SelectRows(System.Collections.Generic.IEnumerable-System.Int32--System.Boolean)) / [DeselectRows](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.DeselectRows(System.Collections.Generic.IEnumerable-System.Int32-))
+* [SelectDataItem](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SelectDataItem(System.Object-System.Boolean)) / [DeselectDataItem](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.DeselectDataItem(System.Object))
+* [SelectDataItems](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SelectDataItems(System.Collections.Generic.IEnumerable-System.Object--System.Boolean)) / [DeselectDataItems](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.DeselectDataItems(System.Collections.Generic.IEnumerable-System.Object-))
+* [SelectAllOnPage](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SelectAllOnPage(System.Boolean)) / [DeselectAllOnPage](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.DeselectAllOnPage)
+* [ClearSelection](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ClearSelection)
+
+To access selected data items in code, use the [SelectedDataItems](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SelectedDataItems) property.
+
+#### Command Column - CRUD Buttons
+
+Our [Command Column](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridCommandColumn) can now display CRUD-related commands (New, Edit, Delete) for each row.
+
+#### Vertical and Horizontal Scrolling
+
+Our Blazor Grid now displays a vertical scrollbar when content height exceeds the height of the component itself.
+
+A horizontal scrollbar automatically appears when total width (of all columns) exceeds the width of the component itself.
+
+#### Pager Customization
+
+The DevExpress Blazor Grid includes the following pager-related customization options:
+
+* [PagerVisible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.PagerVisible) - Specifies whether the Grid displays its pager.
+* [PagerPosition](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.PagerPosition) - Specifies pager position (at the bottom, the top, or both at the bottom and the top).
+* [PagerNavigationMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.PagerNavigationMode) - Sets the navigation mode available to users (use numeric buttons, use the input box, or automatic).
+* [PagerSwitchToInputBoxButtonCount](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.PagerSwitchToInputBoxButtonCount) - Specifies the number of pages used when the pager automatically switches from numeric buttons to the input box.
+* [PagerAutoHideNavButtons](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.PagerAutoHideNavButtons) - Hides the pager's built-in navigation buttons when all numeric buttons are displayed on-screen.
+* [PagerVisibleNumericButtonCount](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.PagerVisibleNumericButtonCount) - Specifies the maximum number of numeric buttons displayed within the pager.
+
+#### Page Size Selector
+
+Users can now modify page size at runtime. To display the Blazor Grid's page size selector, enable the [PageSizeSelectorVisible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.PageSizeSelectorVisible) option. Use the [PageSizeSelectorItems](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.PageSizeSelectorItems) property to define available page size values.
+
+To display all records in the underlying data source, enable the [PageSizeSelectorAllRowsItemVisible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.PageSizeSelectorAllRowsItemVisible) option (the page size selector will include **All** within the page size list).
+
+#### Column Width Enhancements
+
+We improved the algorithm used to manage column width and also added a [MinWidth](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridColumn.MinWidth) property. By default, minimum column width is 50 pixels.
+
+#### Column Text Alignment
+
+Our Blazor Grid automatically aligns text within data cells/footer cells based on column type and bound data type. Use the new [TextAlignment](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridColumn.TextAlignment) option to specify text alignment as needs dictate.
+
+#### Access Data Item
+
+You can now access the processed data item within data-related event handlers ([CustomSort](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomSort), [CustomGroup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomGroup), [CustomSummary](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomSummary), etc) and the [CellDisplayTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.CellDisplayTemplate).
+
+### Chart
+
+#### New Pie/Donut Chart Component
+
+We split our Blazor Chart into two distinct components:
+
+* [DxChart](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1) - represents Cartesian charts.
+* [DxPieChart](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPieChart-1) - represents Pie and Donut charts.
+
+We also implemented the following new properties for the Pie/Donut Chart:
+
+* [Diameter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPieChart-1.Diameter)
+* [MinDiameter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPieChart-1.MinDiameter)
+* [InnerDiameter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPieChart-1.InnerDiameter)
+
+#### Localization
+
+You can now localize months and days (numeric and date formats now correspond to the current thread locale).
+
+#### Custom Position of an X-Y Axis
+
+The following new properties allow you to customize X-Y axis position:
+
+* [Alignment](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartAxis-1.Alignment)
+* [CustomPosition](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartAxis-1.CustomPosition)
+* [CustomPositionAxisName](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartArgumentAxis.CustomPositionAxisName)
+* [Offset](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartAxis-1.Offset)
+
+#### Side-by-Side Stacked & Full-Stacked Bar Charts
+
+You can now create side-by-side Blazor Bar Charts. Use our new [Stack](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartStackedBarSeriesBase-3.Stack) property to specify the desired chart stack.
+
+#### Series and Constant Line Appearance
+
+Our new Blazor Charts DashStyle property allows you to specify a dash style for a line series or a constant line. We also added the following settings to control the appearance of constant lines:
+
+* [Color](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartConstantLine.Color)
+* [DisplayBehindSeries](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartConstantLine.DisplayBehindSeries)
+* [ExtendAxis](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartConstantLine.ExtendAxis)
+
+#### Break Series on Empty Points
+
+Our Blazor Chart component includes a new [BreakOnEmptyPoints](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.BreakOnEmptyPoints) option. Enable this option to display empty points (points with undefined/null values) as breaks.
+
+#### Axis Major and Minor Ticks
+
+v21.2 includes two new Blazor components: [DxChartAxisTick](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartAxisTick) and [DxChartAxisMinorTick](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartAxisMinorTick). Use the following options to customize the appearance of major (AxisTick) and minor ticks (AxisMinorTick):
+
+* Visible
+* Color
+* Length
+* Shift
+* Width
+* Opacity
+
+#### Zero Value Always Visible
+
+Our Blazor Chart component's value axis always displays a zero value for Area and Bar series. For other series types (like Line, Point and Range), zero values may be omitted. To display a zero value regardless of series type and value(s), use the [ZeroAlwaysVisible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartValueAxis.ZeroAlwaysVisible) property.
+
+### Data Editors
+
+#### Date Edit - Date Time Offset Type Support
+
+You can now bind our Blazor Date Edit component to `DateTimeOffset` and `DateTimeOffset?` data types.
+
+#### ComboBox, ListBox, and TagBox - Item Template
+
+Our Blazor ComboBox, ListBox, and TagBox components now support item templates. Use the `ItemTemplate` property to define your custom template.
+
+#### SpinEdit - Enable/Disable Mouse Wheel
+
+Our Blazor SpinEdit ships with a new [AllowMouseWheel](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1.AllowMouseWheel) property (prevents users from modifying the editor's value with the mouse wheel).
+
+### Navigation and Layout
+
+#### Tabs - Scroll Modes
+
+Use the new [ScrollMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTabs.ScrollMode) property to specify navigation options when tabs do not fit within a container (width). The following tab scroll modes are available:
+
+* `NavButtons` - Users can navigate to non-visible tabs in the following manner: via navigation buttons, or by hovering the mouse pointer over a tab, holding the Shift key, and scrolling the mouse wheel.
+* `Swipe` - User can navigate to non-visible tabs in the following manner: via a swipe gesture or by hovering the mouse pointer over the container, holding the Shift key, and scrolling the mouse wheel.
+* `Auto` - Tab scroll mode adapts to device type. Mobile and tablet devices use Swipe mode. Desktop devices use NavButtons mode.
+* `NoScroll` - Users cannot scroll to non-visible tabs. Tabs that do not fit the container are moved to a new tab row.
+
+#### Context Menu - Templates
+
+You can now customize the content and appearance of Context Menu items. Use the following properties to specify common templates for all items and templates for individual items:
+
+* [DxContextMenu.ItemTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu.ItemTemplate) / [DxContextMenuItem.Template](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenuItem.Template) - Templates used to display the entire area (for all or individual items).
+* [DxContextMenu.ItemTextTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu.ItemTextTemplate) / [DxContextMenuItem.TextTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenuItem.TextTemplate) - Text templates (for all or individual items).
+* [DxContextMenu.SubMenuTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenu.SubMenuTemplate) / [DxContextMenuItem.SubMenuTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxContextMenuItem.SubMenuTemplate) - Submenu templates (for all or individual items).
+
+#### API Enhancements
+
+* [DxToolbarItem.SubmitFormOnClick](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarItemBase.SubmitFormOnClick) - Item click can submit a parent form.
+* [DxTreeView.Target](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.Target) | [DxTreeViewNode.Target](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeViewNode.Target) - Specify the [target](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/A#attr-target) attribute's value for all or individual nodes. In bound mode, [DxTreeViewDataMapping.Target](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTreeViewDataMappingBase.Target) defines a mapping to a data source field with the target attribute's values.
+* [DxTreeViewNode.IconUrl](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeViewNode.IconUrl) - Specifies the URL of a node's icon. In bound mode, [DxTreeViewDataMapping.IconUrl](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxNavigationDataMappingBase-1.IconUrl) defines a mapping to a data source field with icon URLs.
+
+### Scheduler
+
+#### Date Header and Resource Header Customization
+
+You can now customize the content and appearance of time cells, date headers, and resource headers.
+
+##### Day View, Work Week View, Week View
+
+* [ResourceHeaderCellTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSchedulerDayViewBase.ResourceHeaderCellTemplate)
+* [DateHeaderCellTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSchedulerDayViewBase.DateHeaderCellTemplate)
+
+##### Month View
+
+* [HorizontalResourceHeaderCellTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerMonthView.HorizontalResourceHeaderCellTemplate)
+* [VerticalResourceHeaderCellTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerMonthView.VerticalResourceHeaderCellTemplate)
+* [DayOfWeekHeaderCellTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerMonthView.DayOfWeekHeaderCellTemplate)
+* [DateHeaderCellTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerMonthView.DateHeaderCellTemplate)
+
+##### Timeline View
+
+* [ResourceHeaderCellTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerTimelineView.ResourceHeaderCellTemplate)
+* [DateHeaderCellTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerTimelineView.DateHeaderCellTemplate)
+
+#### Snap to Cells
+
+All Blazor Scheduler Views now include the [SnapToCellsMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxSchedulerDayViewBase.SnapToCellsMode) property. With this property, you can enable/disable the snapping of appointments to time cells or enable automatic snapping (based on appointment time intervals).
+
+#### Responsive Layout - Enhancements
+
+Our Blazor Scheduler component's Day, Week, and Work Week Views now have compact date headers. These Views also adapt date headers and the time ruler to small screens.
+
+In addition, all Scheduler Views can hide appointment captions (when space limits the component's ability to display the caption in full).
+
+### Blazor Report Viewer
+
+#### Search, Document Map and Export Options Panels
+
+Our Blazor Report Viewer reached feature parity with our HTML5 Document Viewer. In v21.2, we added the following UI elements:
+
+* Export Options Panel
+* Search Panel
+* Document Map with Bookmarks
+
+#### Multi-Page View
+
+Our Blazor Report Viewer can now display the entire document. You can scroll pages and zoom the view to see multiple pages at once.
+
+### Content Security Policy (CSP) Support
+
+You can now use our DevExpress Blazor components on websites with a [Content Security Policy (CSP)](https://docs.devexpress.com/Blazor/403487/common-concepts/content-security-policy).
+
+### Breaking Changes
+
+* [T1034169](https://supportcenter.devexpress.com/ticket/details/t1034169/charts-changed-the-default-approach-used-to-create-pie-and-donut-charts): Charts – Changed the default approach used to create pie and donut charts.
+* [T1028794](https://supportcenter.devexpress.com/ticket/details/t1028794/charts-the-dxchartvalueaxis-position-property-is-now-obsolete): Charts – The DxChartValueAxis.Position property is now obsolete.
+* [T1022279](https://supportcenter.devexpress.com/ticket/details/t1022279/charts-the-axis-label-component-does-not-support-the-cssclass-property): Charts – The axis label component does not support the CssClass property.
+* [T1022262](https://supportcenter.devexpress.com/ticket/details/t1022262/charts-color-properties-now-support-alpha-channel): Charts – Color properties now support Alpha channel.
+* [T1026454](https://supportcenter.devexpress.com/ticket/details/t1026454/charts-the-width-and-height-properties-now-use-the-invariant-culture): Charts - The Width and Height properties now use the invariant culture.
+* [T1032759](https://supportcenter.devexpress.com/ticket/details/t1032759/toolbar-the-dropdown-rendering-has-changed): Toolbar - The DropDown rendering has changed.
+* [T1035320](https://supportcenter.devexpress.com/ticket/details/t1035320/combobox-date-edit-and-time-edit-the-dropdown-rendering-has-changed): ComboBox, Date Edit, and Time Edit - The DropDown rendering has changed.
+* [T1034641](https://supportcenter.devexpress.com/ticket/details/t1034641/blazor-scheduler-day-headers-have-been-redesigned): Scheduler - Day headers have been redesigned.
+
+### Resolved Issues
+
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=21.1.6&endBuildName=21.2.3&buildsMode=Range&hasPlatformsWithProducts=true) for a complete list of issues resolved in v21.2.3.
+
 # 21.1.6
 
 ### Scheduler - Cell Customization
