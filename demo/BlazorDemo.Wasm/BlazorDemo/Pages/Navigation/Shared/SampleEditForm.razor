@@ -1,0 +1,43 @@
+﻿<div class="d-flex flex-fill pt-1 pb-2">
+    <DxFormLayout Data="@editFormData" CssClass="w-100">
+        <DxFormLayoutItem Field="@nameof(FormDataItem.Name)" Caption="Contact Name:" CaptionPosition="CaptionPosition.Vertical" CaptionCssClass="popup-demo-caption" CssClass="popup-demo-item" ColSpanMd="12">
+            <Template>
+                <div class="popup-demo-layout-item">
+                    <span class="popup-image popup-icon-user"></span>
+                    <DxTextBox Text="@(((string)((ValueEditContext)context).Value))" CssClass="popup-demo-textbox" />
+                </div>
+            </Template>
+        </DxFormLayoutItem>
+        <DxFormLayoutItem Field="@nameof(FormDataItem.BirthDate)" Caption="Birth Date:" CaptionPosition="CaptionPosition.Vertical" CaptionCssClass="popup-demo-caption" CssClass="popup-demo-item" ColSpanMd="12">
+            <Template>
+                <div class="popup-demo-layout-item">
+                    <span class="popup-image popup-icon-birthday"></span>
+                    <DxDateEdit Date="@(((DateTime)((ValueEditContext)context).Value))" CssClass="popup-demo-textbox" />
+                </div>
+            </Template>
+        </DxFormLayoutItem>
+        <DxFormLayoutItem Field="@nameof(FormDataItem.YearsWorked)" Caption="Years Worked:" CaptionPosition="CaptionPosition.Vertical" CaptionCssClass="popup-demo-caption" CssClass="popup-demo-item" ColSpanMd="12">
+            <Template>
+                <div class="popup-demo-layout-item">
+                    <span class="popup-image popup-icon-worked"></span>
+                    <DxSpinEdit Value="@(((int)((ValueEditContext)context).Value))" CssClass="popup-demo-textbox" />
+                </div>
+            </Template>
+        </DxFormLayoutItem>
+        <DxFormLayoutItem Field="@nameof(FormDataItem.Position)" Caption="Position:" CaptionPosition="CaptionPosition.Vertical" CaptionCssClass="popup-demo-caption" CssClass="popup-demo-item" ColSpanMd="12">
+            <Template>
+                <div class="popup-demo-layout-item">
+                    <span class="popup-image popup-icon-position"></span>
+                    <DxComboBox CssClass="popup-demo-textbox"
+                                Data="@(new List<string>() {"Sales Representative", "Designer"})"
+                                Value="@(((string)((ValueEditContext)context).Value))">
+                    </DxComboBox>
+                </div>
+            </Template>
+        </DxFormLayoutItem>
+    </DxFormLayout>
+</div>
+
+@code {
+    FormDataItem editFormData = new() {Name = "Nancy Davolio", BirthDate = DateTime.Now.AddYears(-30), YearsWorked = 3, Position = "Sales Representative"};
+}

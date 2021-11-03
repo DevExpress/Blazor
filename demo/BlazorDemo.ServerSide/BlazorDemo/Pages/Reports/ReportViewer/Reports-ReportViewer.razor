@@ -5,32 +5,20 @@
 <link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-reporting-pages.css">
 <link rel="stylesheet" href="_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.css">
 
-<DemoPageSectionComponent Id="Reports-ReportViewer" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Reports-ReportViewer" ShowSizeMode="true" OptionsContent="GetOptionalContent()">
     <ChildContentWithParameters Context="Params">
         @using BlazorDemo.Services
         @using DevExpress.XtraPrinting.Caching;
         @inject IDemoReportSource DemoReportSource
-        @inject DemoConfiguration Configuration
         @inject NavigationManager NavigationManager
         @using DevExpress.XtraReports;
         @using DevExpress.XtraReports.UI;
         @using DevExpress.Blazor.Reporting.EditingFields;
 
-        <DxReportViewer Report="@Report" RootCssClasses="w-100" @ref="Viewer" SizeMode="Params.SizeMode"></DxReportViewer>
+        @using DevExpress.XtraReports.Web.Native.ClientControls;
+
+        <DxReportViewer Report="@Report" RootCssClasses="w-100" @ref="Viewer" SizeMode="Params.SizeMode" SinglePagePreview="false"></DxReportViewer>
     </ChildContentWithParameters>
-    <OptionsContent>
-        @if(!Configuration.ShowOnlyReporting) {
-            <DxFormLayout CssClass="dx-options-reporting-choozer">
-                <DxFormLayoutItem Caption="Report Name:" ColSpanMd="12">
-                    <Template>
-                        <DxComboBox Data="@ReportList" ValueFieldName="Key" TextFieldName="Value" Value="@ReportName" ValueChanged="@((string x) => ReportNameChanged(x))" DropDownWidthMode="DropDownWidthMode.EditorWidth" />
-                    </Template>
-                </DxFormLayoutItem>
-            </DxFormLayout>
-        } else {
-            <DxButton CssClass="ml-3" Text="Show in Report Designer" Click="@NavigateToReportDesigner" />
-        }
-    </OptionsContent>
 
     @code {
         Dictionary<string, string> ReportList;
@@ -38,22 +26,38 @@
         IReport Report { get; set; }
         [Parameter] public string ReportName { get; set; }
         [Inject] public EditingFieldModelFactory EditingFieldModelFactory { get; set; }
+        [Inject] public DemoConfiguration Configuration { get; set; }
+
+        [Inject] public DevExpress.XtraReports.Services.IReportProvider reportProvider { get; set; }
 
         void ReportNameChanged(string reportName) {
             ReportName = reportName;
+
             AssignReport();
+            NavigationManager.NavigateTo($"/ReportViewer/{ReportName}");
         }
 
         protected void NavigateToReportDesigner() {
             NavigationManager.NavigateTo($"ReportDesigner/{ReportName}");
         }
 
+        protected RenderFragment GetOptionalContent() {
+            return Configuration.ShowOnlyReporting ? null
+                :@<DxFormLayout CssClass="dx-options-reporting-choozer">
+                    <DxFormLayoutItem Caption="Report Name:" ColSpanMd="12">
+                        <Template>
+                            <DxComboBox Data="@ReportList" ValueFieldName="Key" TextFieldName="Value" Value="@ReportName" ValueChanged="(string x) => ReportNameChanged(x)" DropDownWidthMode="DropDownWidthMode.EditorWidth" />
+                        </Template>
+                    </DxFormLayoutItem>
+                </DxFormLayout>;
+        }
+
         void AssignReport() {
-            XtraReport report = DemoReportSource.GetReport(ReportName);
+            XtraReport report = reportProvider.GetReport(ReportName);
             if(report == null) {
                 throw new Exception($"{ReportName} not found");
             }
-            if(ReportName == ReportNames.LargeDatasetName)
+            if(ReportName == XtraReportsDemos.ReportNames.LargeDatasetName)
                 Report = new CachedReportSource(report, new MemoryDocumentStorage());
             else
                 Report = report;

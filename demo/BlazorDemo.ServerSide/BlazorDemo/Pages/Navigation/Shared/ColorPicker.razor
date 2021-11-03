@@ -1,0 +1,59 @@
+﻿<div>
+    <ul class="list-unstyled">
+        <li>
+            <span class="text-black color-picker-header">@HeaderText</span>
+        </li>
+        <li role="separator" class="separator dropdown-divider"></li>
+        <li>
+            <div class="color-picker-container">
+                @foreach(var color in colors) {
+                    <div class="color-picker-cell @CssClassSelectedCell(color)" style="background-color:@color" @onclick="() => ChangeColor(color)"></div>
+                }
+            </div>
+        </li>
+        <li role="separator" class="separator dropdown-divider"></li>
+        <li>
+            <div class="color-picker-container">
+                <div class="color-picker-cell" @onclick="() => ResetColor()"></div>
+                <span class="ml-2 mt-1-5">No color</span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+@code {
+    static readonly string[] colors = new[] {
+        "#000000",
+        "#c0c0c0",
+        "#808080",
+        "#808000",
+        "#800000",
+        "#800080",
+        "#008000",
+        "#008080",
+        "#000080",
+        "#ff0000",
+        "#0000ff",
+        "#ff00ff",
+        "#00ffff",
+        "#00ff00",
+        "#ffff00"
+    };
+
+    void ChangeColor(string color) {
+        SelectedColor = color;
+        ColorChanged.InvokeAsync(color);
+    }
+
+    void ResetColor() {
+        SelectedColor = "unset";
+        ColorChanged.InvokeAsync("unset");
+    }
+
+    string CssClassSelectedCell(string color) =>
+        color == SelectedColor ? "selected" : "";
+
+    [Parameter] public string HeaderText { get; set; }
+    [Parameter] public EventCallback<string> ColorChanged { get; set; }
+    [Parameter] public string SelectedColor { get; set; }
+}

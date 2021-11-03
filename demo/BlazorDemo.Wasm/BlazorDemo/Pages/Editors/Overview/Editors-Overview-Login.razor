@@ -4,11 +4,9 @@
               OnInvalidSubmit="@HandleInvalidSubmit"
               Context="EditFormContext">
         <DataAnnotationsValidator />
-        <div class="card-header text-center pt-3 pb-2">
-            <h4>
-                Welcome to DevExpress
-            </h4>
-            <p class="mb-0 text-muted font-weight-normal fs-825">
+        <div class="card-header text-center py-3">
+            <h4>Welcome to DevExpress</h4>
+            <p class="tm-8 mb-0 font-weight-normal fs-825">
                 Log in to see it in action
             </p>
         </div>
@@ -46,7 +44,7 @@
                 <DxFormLayoutItem ColSpanMd="12">
                     <Template>
                         <div class="text-center pt-2">
-                            <div class="text-muted fs-825">
+                            <div class="tm-8 fs-825">
                                 Do not have an account?
                             </div>
                             <DxButton Text="Create an account"
@@ -59,7 +57,7 @@
         </div>
     </EditForm>
 </div>
-<p class="demo-text cw-480 mt-2 text-muted">
+<p class="tm-8 cw-480 mt-2">
     @FormSubmitResult
 </p>
 

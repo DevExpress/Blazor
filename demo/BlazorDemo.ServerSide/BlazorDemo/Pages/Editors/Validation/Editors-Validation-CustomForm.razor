@@ -1,6 +1,7 @@
-﻿@using BlazorDemo.Data.Annotations
+﻿<DemoPageSectionComponent Id="Editors-Validation-CustomForm">
+    @using BlazorDemo.Data.Annotations
 
-<DemoPageSectionComponent Id="Editors-Validation-CustomForm">
+
     <div class="cw-880">
         <EditForm Model="@starship"
                   OnValidSubmit="@HandleValidSubmit"
@@ -51,7 +52,7 @@
                 </div>
             </div>
 
-            <p class="demo-text w-100 mt-4 text-muted">
+            <p class="demo-text w-100 mt-4">
                 Form Validation State: <b>@FormValidationState</b>
             </p>
         </EditForm>
@@ -108,7 +109,7 @@
 
             public override bool Equals(object obj) {
                 var item = obj as Classification;
-                if (item == null)
+                if(item == null)
                     return false;
 
                 return item.Id == Id && item.Value == Value;

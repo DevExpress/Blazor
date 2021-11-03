@@ -1,7 +1,6 @@
 ﻿@typeparam T
 @typeparam TData
-<OptionComponent Id="@id"
-                 Label="@Label">
+<OptionComponent Id="@id" Label="@Label" SmallSpacing="@SmallSpacing">
     <DxComboBox CssClass="@CssClass"
                 Data="Data"
                 TValue="@T"
@@ -10,7 +9,8 @@
                 ValueFieldName="@ValueField"
                 Value="@Value"
                 ValueChanged="OnValueChange"
-                InputId="@id" />
+                InputId="@id"
+                Enabled="Enabled"/>
 </OptionComponent>
 
 @code {
@@ -23,6 +23,9 @@
     [Parameter] public EventCallback<T> ValueChanged { get; set; }
     [Parameter] public string ValueField { get; set; }
     [Parameter] public string TextField { get; set; }
+    [Parameter] public bool Enabled { get; set; } = true;
+    [Parameter] public bool SmallSpacing { get; set; }
+
     protected void OnValueChange(T newValue) {
         if(!Equals(Value, newValue)) {
             Value = newValue;

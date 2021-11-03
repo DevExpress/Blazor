@@ -1,5 +1,7 @@
 ﻿@typeparam T
-<OptionComponent Id="@id" Label="@Label">
+@using DevExpress.Blazor.Internal
+
+<OptionComponent Id="@id" Label="@Label" SmallSpacing="@SmallSpacing">
     <DxSpinEdit CssClass="@CssClass"
                 T="@T"
                 Value="@Value"
@@ -7,10 +9,17 @@
                 MaxValue="MaxValue"
                 InputId="@id"
                 Enabled="Enabled"
-                ValueChanged="OnValueChange" />
+                Increment="Increment"
+                ValueChanged="OnValueChange"
+                NullText="@NullText"
+                DisplayFormat="@DisplayFormat"
+                BindValueMode=@BindValueMode
+                ClearButtonDisplayMode="ClearButtonDisplayMode"/>
 </OptionComponent>
+
 @code {
     readonly string id = Guid.NewGuid().ToString();
+
     [Parameter] public string CssClass { get; set; }
     [Parameter] public string Label { get; set; }
     [Parameter] public T Value { get; set; }
@@ -18,6 +27,13 @@
     [Parameter] public T MinValue { get; set; }
     [Parameter] public T MaxValue { get; set; }
     [Parameter] public bool Enabled { get; set; } = true;
+    [Parameter] public T Increment { get; set; } = NumericTypesHelper.TryConvert<T>("1");
+    [Parameter] public string NullText { get; set; }
+    [Parameter] public string DisplayFormat { get; set; }
+    [Parameter] public DataEditorClearButtonDisplayMode ClearButtonDisplayMode { get; set; } = DataEditorClearButtonDisplayMode.Never;
+    [Parameter] public bool SmallSpacing { get; set; }
+    [Parameter] public BindValueMode BindValueMode { get; set; }
+
     protected void OnValueChange(T newValue) {
         if(!Equals(Value, newValue)) {
             Value = newValue;

@@ -1,15 +1,15 @@
-﻿<DemoPageSectionComponent Id="Grid-DataBinding-CustomData" ShowHorizontalScrollBar="true">
+﻿<DemoPageSectionComponent Id="Grid-DataBinding-CustomData">
     <ChildContentWithParameters Context="Params">
         @inject NavigationManager NavigationManager
         @inject HttpClient HttpClient
 
-        <DxGrid Data="@Data" CssClass="w-100">
+        <DxGrid Data="@Data">
             <Columns>
-                <DxGridDataColumn FieldName="ProductName" />
-                <DxGridDataColumn FieldName="QuantityPerUnit" />
-                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="120px" />
-                <DxGridDataColumn FieldName="UnitsInStock" Width="120px" />
-                <DxGridDataColumn FieldName="Discontinued" Width="90px">
+                <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
+                <DxGridDataColumn FieldName="QuantityPerUnit" MinWidth="100" />
+                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" MinWidth="60" Width="10%" />
+                <DxGridDataColumn FieldName="UnitsInStock" Width="10%" />
+                <DxGridDataColumn FieldName="Discontinued" Width="10%" MinWidth="90">
                     <CellDisplayTemplate>
                         @if((bool)context.Value == true) {
                             <span class="grid-icon grid-icon-check"></span>

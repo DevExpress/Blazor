@@ -11,7 +11,8 @@ body,
     overscroll-behavior: none;
 }
 #app,
-#app > div,
+.demo-header-container,
+.demo-content-container,
 .demo-content-container > .demo-content,
 .demo-content > div:not(.modal-backdrop),
 .main > .content,
@@ -22,6 +23,18 @@ body,
 }
 #app.root {
     min-width: 375px;
+}
+
+/* Blazor specific */
+
+#components-reconnect-modal > h5 {
+    color: black;
+    padding: 1rem;
+    margin: 0 !important;
+}
+#components-reconnect-modal > h5 > a {
+    color: black;
+    text-decoration: underline;
 }
 
 /* Header */
@@ -109,26 +122,32 @@ body,
 /* Breadcrumbs */
 .demo-breadcrumbs-container {
     height: 3.5rem;
+    display: block;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
 }
 
 .demo-breadcrumbs {
-    margin: 0 auto;
     max-width: 1920px;
     position: relative;
     height: 3.5rem;
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-start;
+    margin: 0 auto;
 }
 
-.demo-breadcrumbs .breadcrumbs-items {
+.demo-breadcrumbs .items {
     margin-left: 330px;
     display: flex;
     align-items: center;
     padding: 1rem 2rem;
 }
 
-.demo-breadcrumbs .breadcrumbs-items > * {
+.demo-breadcrumbs .items > * {
     display: inline-block;
     font-size: 1rem;
     opacity: 0.6;
@@ -136,22 +155,28 @@ body,
     white-space: nowrap;
 }
 
-.demo-breadcrumbs .breadcrumbs-items > span {
+.demo-breadcrumbs .items > a {
+    color: inherit;
+}
+
+.demo-breadcrumbs .items > span {
     cursor: default;
 }
 
-.demo-breadcrumbs .breadcrumbs-items > span.separator {
+.demo-breadcrumbs .items > span.separator {
+    border-style: solid;
     border-width: 5px!important;
     border-top-color: transparent!important;
     border-right-color: transparent!important;
     border-bottom-color: transparent!important;
+    border-color: currentColor;
     width: 0;
     height: 0;
     margin-top: 0.1rem;
     margin-right: 0.5rem;
 }
 
-.demo-breadcrumbs .breadcrumbs-items > span:last-child {
+.demo-breadcrumbs .items > span:last-child {
     display: none;
 }
 
@@ -168,11 +193,26 @@ body,
         pointer-events: none;
     }
 
-    .demo-breadcrumbs .breadcrumbs-items {
+    .demo-breadcrumbs .items {
         margin-left: 0;
         padding: 1rem 1.5rem;
     }
 }
+
+@media (max-height: 479.98px) {
+    .demo-breadcrumbs-container {
+        display: none;
+    }
+    .demo-breadcrumbs-container + .demo-content-container {
+        height: calc(100% - 3.5rem);
+    }
+    @media (max-width: 899.98px) {
+        .demo-breadcrumbs-container + .demo-content-container .demo-page-right-container {
+            top: 3.5rem;
+        }
+    }
+}
+
 /* SideBar */
 .sidebar {
     position: fixed;
@@ -215,13 +255,13 @@ body,
     .demo-content.sidebar-hidden .sidebar {
         width: 0;
     }
-    .demo-breadcrumbs.sidebar-hidden .breadcrumbs-items,
-    .demo-breadcrumbs.sidebar-shown .breadcrumbs-items,
+    .demo-breadcrumbs.sidebar-hidden .items,
+    .demo-breadcrumbs.sidebar-shown .items,
     .demo-content.sidebar-hidden .main,
     .demo-content.sidebar-shown .main {
         transition: all 0.2s ease-in-out;
     }
-    .demo-breadcrumbs.sidebar-hidden .breadcrumbs-items,
+    .demo-breadcrumbs.sidebar-hidden .items,
     .demo-content.sidebar-hidden .main {
         margin-left: 0;
         width: 100%;
@@ -264,39 +304,39 @@ body,
     padding-bottom: 1rem;
 }
 
-.sidebar-tree .nav-pills > .nav-item a {
+.dxbs-tree.sidebar-tree .nav-pills > .nav-item .nav-link {
     border-radius: 0px;
     display: flex;
     align-items: center;
 }
 
-.sidebar-tree > .nav-pills > .nav-item > a {
+.dxbs-tree.sidebar-tree > .nav-pills > .nav-item > .nav-link {
     font-size: 1rem !important;
     font-weight: 600 !important;
     padding: .25rem 1rem .25rem .125rem;
 }
 
-.sidebar-tree > .nav-pills > .nav-item > a[aria-expanded] ~ ul {
+.dxbs-tree.sidebar-tree > .nav-pills > .nav-item > .nav-link[aria-expanded] ~ ul {
     margin: 0;
 }
 
-.sidebar-tree .nav-pills > .nav-item a:not(.active) {
+.dxbs-tree.sidebar-tree .nav-pills > .nav-item .nav-link:not(.active) {
     color: inherit !important;
 }
 
-.sidebar-tree .nav-pills .nav-item .nav-link {
+.dxbs-tree.sidebar-tree .nav-pills .nav-item .nav-link {
     text-transform: none;
 }
 
-.sidebar-tree .nav-pills .nav-item .nav-link > span:not(.expand-btn):not(.image):not(.badge) {
+.dxbs-tree.sidebar-tree .nav-pills .nav-item .nav-link > span:not(.expand-btn):not(.image):not(.badge) {
     flex: 1;
 }
 
-.sidebar-tree .nav-pills .nav-item .nav-link > span.expand-btn {
+.dxbs-tree.sidebar-tree .nav-pills .nav-item .nav-link > span.expand-btn {
     margin-right: 4px;
 }
 
-.sidebar-tree .nav-pills .nav-item .nav-link > span.badge {
+.dxbs-tree.sidebar-tree .nav-pills .nav-item .nav-link > span.badge {
     flex: 0;
     border-radius: 0.25rem !important;
     min-width: 2.7em;
@@ -336,15 +376,15 @@ body,
     margin: 0;
 }
 
-.sidebar-tree .nav-pills > .nav-item > a:not(.active) {
+.dxbs-tree.sidebar-tree .nav-pills > .nav-item > .nav-link:not(.active) {
     background-image: none !important;
 }
 
-.sidebar-tree .nav-pills > .nav-item > a {
+.dxbs-tree.sidebar-tree .nav-pills > .nav-item > .nav-link {
     border: none !important;
 }
 
-.sidebar-tree .nav-pills .nav-item.dx-badge-preview .nav-link > span.badge {
+.dxbs-tree.sidebar-tree .nav-pills .nav-item.dx-badge-preview .nav-link > span.badge {
     min-width: inherit;
     font-weight: 700;
     color: #212529 !important;
@@ -356,10 +396,13 @@ body,
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0;
     padding: 0 1rem 0 2.1rem;
     width: 330px;
     height: 3.5rem;
     min-height: 3.5rem;
+    border: 0;
+    border-radius: 0;
     box-shadow: inset -140px -8px 30px -100px rgba(0, 0, 0, 0.08);
 }
 
@@ -734,7 +777,7 @@ body,
         margin-right: 0;
         overflow: visible;
     }
-    .demo-page .demo-page-content:not(:only-child) {
+    .demo-page .demo-page-content:not(.demo-page-no-navigation) {
         padding-top: 2.5rem;
     }
     .demo-page .demo-page-content .demo-anchor {
@@ -937,6 +980,7 @@ body,
 
 .demo-page-section-component-area .demo-text {
     font-size: 0.75rem;
+    opacity: 0.75;
 }
 
 .demo-page-section-component-area p.demo-text {
@@ -960,6 +1004,10 @@ body,
 .demo-page-section-component-area .cw-240 {
     max-width: 240px;
     width: 100%;
+}
+
+.demo-page-section-component-area .minw-0 {
+    min-width: 0;
 }
 
 .demo-page-section-component-area .text-decoration-underline {
@@ -996,6 +1044,13 @@ body,
     width: 100%;
 }
 
+@media (min-width: 899.98px) {
+    dxbl-modal > .dxbs-modal > .dxbs-popup.pw-800 {
+        max-width: 800px;
+        width: 800px;
+    }
+}
+
 .demo-page-section-component-area .chi-220 {
     height: 220px !important;
 }
@@ -1012,22 +1067,36 @@ body,
     height: 720px;
 }
 
+.demo-page-section-component-area .max-h-220 {
+    max-height: 220px;
+}
+
+.demo-page-section-component-area .max-h-420 {
+    max-height: 420px;
+}
+
 .demo-page-section-component-area .fs-825 {
     font-size: 0.825rem;
 }
 
-.demo-page-section-component-area .options-container {
-    border-left: 0!important;
-    border-right: 0!important;
-    border-top: 0!important;
+.demo-page-section-component-area .tm-8 {
+    opacity: 0.8;
+}
 
+.demo-page-section-component-area .options-container {
+    border-left: 0 !important;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    padding: 9px 2rem calc(9px - 0.35rem);
     width: 100%;
     min-height: 2.8rem;
+}
+.demo-page-section-component-area .options-container,
+.demo-page-section-component-area .option-group {
+    border-right: 0 !important;
+    border-top: 0 !important;
+    padding: 9px 2rem calc(9px - 0.35rem);
 }
 
 .demo-page-section.h-scroll .demo-page-section-component-area .component-container {
@@ -1039,6 +1108,10 @@ body,
     align-items: center;
     margin-right: 0.75rem;
     margin-bottom: 0.35rem;
+}
+
+.demo-page-section-component-area .options-container .option-component.small-spacing {
+    margin-right: 0.375rem;
 }
 
 .demo-page-section-component-area .options-container .option-component:last-child {
@@ -1055,6 +1128,10 @@ body,
 
 .demo-page-section-component-area .options-container .option-component .ow-150 {
     width: 150px;
+}
+
+.demo-page-section-component-area .options-container .option-component .ow-180 {
+    width: 180px;
 }
 
 .demo-page-section-component-area > .w-100,
@@ -1082,46 +1159,88 @@ body,
     display: none;
 }
 
-@media (min-width: 480px) and (max-width: 575.98px){
-    .demo-page-section-component-area .options-container {
-        display: table;
-    }
-    .demo-page-section-component-area .options-container  .option-component {
-        display: table-row;
-    }
-    .demo-page-section-component-area .options-container  .option-component > * {
-        display: table-cell;
-        padding-bottom: 0.35rem;
-    }
-    .demo-page-section-component-area .options-container .option-component.option-component-button > label {
-        display: table-cell;
-    }
-    .demo-page-section-component-area .options-container  .option-component > label {
-        padding-right: 0.75rem;
-        white-space: nowrap;
-    }
-    .demo-page-section-component-area .options-container  .option-component > div,
-    .demo-page-section-component-area .options-container  .option-component > div > button {
-        width: 100%!important;
-    }
-    .demo-page-section-component-area .options-container .option-component .custom-radio .custom-control-label {
-        white-space: nowrap;
+.demo-page-section-component-area .options-container .option-component.option-component-check {
+    flex-direction: row;
+}
+
+.demo-page-section-component-area .options-container .option-component.option-component-check > dxbl-check {
+    flex: 0;
+    margin-right: 0.5rem;
+}
+.demo-page-section-component-area .options-container .option-component.option-component-check > label {
+    margin-right: 0 !important;
+}
+
+.demo-page-section-component-area .option-group {
+    border-bottom: 0 !important;
+}
+
+.demo-page-section-component-area .option-group:first-child {
+    border-left: 0 !important;
+}
+
+@media(max-width:1142px) {
+    .demo-page-section-component-area .option-group,
+    .demo-page-section-component-area .options-container .option-group .option-component > dxbl-spinedit,
+    .demo-page-section-component-area .options-container .option-group .option-component > dxbl-combobox,
+    .demo-page-section-component-area .options-container .option-group .option-component > div,
+    .demo-page-section-component-area .options-container .option-group .option-component > div > button {
+        width: 100% !important;
     }
 }
 
+.demo-page-section-component-area .option-group .option-group-caption {
+    text-align: start;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.demo-page-section-component-area .option-group .option-group-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.demo-page-section-component-area .option-group .option-group-content .option-component > label {
+    white-space: nowrap;
+}
+
+.demo-page-section-component-area .options-container .option-component.option-button-group .option-component.option-component-button,
+.demo-page-section-component-area .options-container .option-component.option-button-group .option-component.option-component-button:last-child {
+    margin-bottom: 0;
+}
+
 @media (max-width: 479.98px) {
+    .demo-page-section-component-area .options-container .option-component > dxbl-check {
+        width: 100% !important;
+    }
     .demo-page-section-component-area,
     .demo-page-section-component-area .component-container {
         min-height: 120px;
     }
-    .demo-page-section-component-area .options-container {
+    .demo-page-section-component-area .options-container,
+    .demo-page-section-component-area .option-group .option-group-content {
         flex-direction: column;
         padding-bottom: 0.5rem;
     }
-    .demo-page-section-component-area .options-container  .option-component {
+    .demo-page-section-component-area .options-container .option-component {
         flex-direction: column;
         margin-right: 0;
+        margin-bottom: 0.6rem;
         width: 100%!important;
+    }
+    .demo-page-section-component-area .options-container .option-component.small-spacing {
+        margin-right: 0;
+        margin-bottom: 0.4rem;
+    }
+    .demo-page-section-component-area .options-container .option-component.option-component-button,
+    .demo-page-section-component-area .options-container .option-component.option-button-group .option-component.option-component-button,
+    .demo-page-section-component-area .options-container .option-component.option-button-group {
+        margin-bottom: 0.6rem;
+    }
+    .demo-page-section-component-area .options-container .option-component.option-component-button.small-spacing,
+    .demo-page-section-component-area .options-container .option-component.option-button-group .option-component.option-component-button.small-spacing,
+    .demo-page-section-component-area .options-container .option-component.option-button-group.small-spacing {
+        margin-bottom: 0.3rem;
     }
     .demo-page-section-component-area .options-container .option-component.option-component-button > label {
         display: none;
@@ -1130,9 +1249,14 @@ body,
         margin-right: 0!important;
         width: 100%;
     }
+    .demo-page-section-component-area .options-container  .option-component > dxbl-spinedit,
+    .demo-page-section-component-area .options-container  .option-component > dxbl-combobox,
     .demo-page-section-component-area .options-container  .option-component > div,
     .demo-page-section-component-area .options-container  .option-component > div > button {
         width: 100%!important;
+    }
+    .demo-page-section-component-area .options-container  .option-component .dxbs-dropdown-edit {
+        margin-bottom: 2px;
     }
     .demo-page-section-component-area .cw-320,
     .demo-page-section-component-area .cw-400,
@@ -1317,10 +1441,13 @@ body,
 .demo-products .demo-product .demo-product-info {
     display: inline-block;
     font-size: 13px;
+    opacity: 0.8;
 }
 .demo-product-icon {
     width: 40px;
     height: 40px;
+    background-color: currentColor;
+    opacity: 0.8;
 }
 .demo-product-icon-grid {
     mask-image: url("../images/landing/DataGrid.svg");
@@ -1462,3 +1589,5 @@ body,
     font-size: 14px;
     margin-bottom: 16px;
 }
+
+

@@ -1,18 +1,18 @@
-﻿<DemoPageSectionComponent Id="Grid-DataBinding-LargeDataSource" ShowHorizontalScrollBar="true">
+﻿<DemoPageSectionComponent Id="Grid-DataBinding-LargeDataSource">
     <ChildContentWithParameters Context="Params">
         @inherits OwningComponentBase
         @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 
         <DataProviderAccessAreaContainer DataProvider="@RentInfoDataProvider">
-            <DxGrid Data="@Data" PageSize="10" CssClass="w-100">
+            <DxGrid Data="@Data" PageSize="10">
                 <Columns>
-                    <DxGridDataColumn FieldName="State" />
-                    <DxGridDataColumn FieldName="Area" />
-                    <DxGridDataColumn FieldName="City" Caption="County" />
-                    <DxGridDataColumn FieldName="Name" Caption="Location" />
-                    <DxGridDataColumn FieldName="Year" DisplayFormat="0" Width="120px" />
-                    <DxGridDataColumn FieldName="Bedrooms" Width="120px" />
-                    <DxGridDataColumn FieldName="Population" DisplayFormat="#,0" Width="120px" />
+                    <DxGridDataColumn FieldName="State" Width="5%" />
+                    <DxGridDataColumn FieldName="Area" MinWidth="100" />
+                    <DxGridDataColumn FieldName="City" Caption="County" MinWidth="100" />
+                    <DxGridDataColumn FieldName="Name" Caption="Location" MinWidth="100" />
+                    <DxGridDataColumn FieldName="Year" DisplayFormat="0" Width="10%" />
+                    <DxGridDataColumn FieldName="Bedrooms" Width="10%" />
+                    <DxGridDataColumn FieldName="Population" DisplayFormat="#,0" MinWidth="80" Width="10%" />
                 </Columns>
             </DxGrid>
         </DataProviderAccessAreaContainer>

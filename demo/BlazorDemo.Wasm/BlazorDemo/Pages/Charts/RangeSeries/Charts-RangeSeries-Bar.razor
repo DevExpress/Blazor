@@ -1,45 +1,42 @@
 ﻿<DemoPageSectionComponent Id="Charts-RangeSeries-Bar">
-    <ChildContentWithParameters Context="Params">
-        @inject IWeatherSummaryDataProvider WeatherSummaryDataProvider
+    @inject IWeatherSummaryDataProvider WeatherSummaryDataProvider
 
-        <DxChart Data="@WeatherForecasts"
-                 CssClass="w-100">
-            <DxChartTitle Text="Annual Temperature" />
-            <DxChartRangeBarSeries ValueField="@((DetailedWeatherSummary  i) => i.AverageTemperatureF)"
-                                   ArgumentField="@(i => new DateTime(2000, i.Date.Month, 1))"
-                                   Name="New York"
-                                   Filter="@((DetailedWeatherSummary  i) => i.City == "NEW YORK")" />
-            <DxChartRangeBarSeries ValueField="@((DetailedWeatherSummary  i) => i.AverageTemperatureF)"
-                                   ArgumentField="@(i => new DateTime(2000, i.Date.Month, 1))"
-                                   Name="Los Angeles"
-                                   Filter="@((DetailedWeatherSummary  i) => i.City == "LOS ANGELES")" />
+    <DxChart Data="@WeatherForecasts"
+             Width="100%">
+        <DxChartTitle Text="Annual Temperature" />
+        <DxChartRangeBarSeries ValueField="@((DetailedWeatherSummary  i) => i.AverageTemperatureF)"
+                               ArgumentField="@(i => new DateTime(2000, i.Date.Month, 1))"
+                               Name="New York"
+                               Filter="@((DetailedWeatherSummary  i) => i.City == "NEW YORK")" />
+        <DxChartRangeBarSeries ValueField="@((DetailedWeatherSummary  i) => i.AverageTemperatureF)"
+                               ArgumentField="@(i => new DateTime(2000, i.Date.Month, 1))"
+                               Name="Los Angeles"
+                               Filter="@((DetailedWeatherSummary  i) => i.City == "LOS ANGELES")" />
 
-            <DxChartTooltip Enabled="true">
-                @context.GetRangePoint().Render((rangePoint) =>
-                    @<div style="margin: 0.75rem">
-                        <div>Max: @rangePoint.EndValue °F</div>
-                        <div>Min: @rangePoint.StartValue °F</div>
-                    </div>
-                )
-            </DxChartTooltip>
-            <DxChartLegend HorizontalAlignment="HorizontalAlignment.Center"
-                           VerticalAlignment="VerticalEdge.Bottom"
-                           Position="RelativePosition.Outside" />
-            <DxChartValueAxis>
-                <DxChartAxisTitle Text="Temperature, °F" />
-            </DxChartValueAxis>
-            <DxChartArgumentAxis>
-                <DxChartAxisLabel Format="ChartElementFormat.Month" />
-            </DxChartArgumentAxis>
-        </DxChart>
-    </ChildContentWithParameters>
+        <DxChartTooltip Enabled="true">
+            @context.GetRangePoint().Render((rangePoint) =>
+            @<div style="margin: 0.75rem">
+                <div>Max: @rangePoint.EndValue °F</div>
+                <div>Min: @rangePoint.StartValue °F</div>
+            </div>
+            )
+        </DxChartTooltip>
+        <DxChartLegend HorizontalAlignment="HorizontalAlignment.Center"
+                       VerticalAlignment="VerticalEdge.Bottom"
+                       Position="RelativePosition.Outside" />
+        <DxChartValueAxis>
+            <DxChartAxisTitle Text="Temperature, °F" />
+        </DxChartValueAxis>
+        <DxChartArgumentAxis>
+            <DxChartAxisLabel Format="ChartElementFormat.Month" />
+        </DxChartArgumentAxis>
+    </DxChart>
 
 
     @code {
         IEnumerable<DetailedWeatherSummary> WeatherForecasts;
 
-        protected override async Task OnInitializedAsync()
-        {
+        protected override async Task OnInitializedAsync() {
             WeatherForecasts = await WeatherSummaryDataProvider.GetDataAsync();
         }
     }

@@ -1,20 +1,14 @@
-.menu-title-template-img {
-    display: flex;
-    width: 120px;
-}
-
 .menu-icon-user-profile {
     mask-image: url("images/UserProfile.svg");
     -webkit-mask-image: url("images/UserProfile.svg");
 }
 
-
-.dx-menu-item.notoggle > a > .dropdown-toggle {
-    display: none;
-}
-
 .dx-menu-item.notoggle > .dropdown-menu {
     transform: matrix(1, 0, 0, 1, -112, -1) !important;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .dx-menu-item.notoggle a > span.dropdown-toggle {
+    display: none;
 }
 /*BeginHide*/ ::deep /*EndHide*/ .dxbs-menu > .nav .dx-menu-item.notoggle {
     display: none;

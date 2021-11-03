@@ -1,7 +1,8 @@
 ﻿<DemoPageSectionComponent Id="Charts-AreaSeries-Step">
     @inject ISalesInfoDataProvider Sales
 
-    <DxChart Data="@ChartsData" CssClass="w-100">
+    <DxChart Data="@ChartsData"
+             Width="100%">
         <DxChartStepAreaSeries Name="2017"
                                T="SaleInfo"
                                TArgument="string"

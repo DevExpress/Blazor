@@ -1,8 +1,9 @@
 ﻿@using BlazorDemo.Data.Issues
 @inject IssuesDataService IssuesDataService
+@inject NavigationManager NavigationManager
 
 <div class="w-100">
-    <DxDataGrid Data="@DataSource"
+    <DxDataGrid DataAsync="@IssuesDataService.GetIssuesAsync"
                 ShowGroupPanel="true"
                 ShowFilterRow="true"
                 ShowPager="true"
@@ -10,10 +11,10 @@
                 PagerNavigationMode="PagerNavigationMode.InputBox"
                 PagerPageSizeSelectorVisible="true"
                 PagerAllDataRowsItemVisible="true"
-                PagerAllowedPageSizes=@(new int[] {2,10,20,40})>
+                PagerAllowedPageSizes=@(new int[] {5,10,20})>
         <Columns>
-            <DxDataGridColumn Field="@nameof(Issue.Type)" Caption=" " Width="30px" FixedStyle="DataGridFixedStyle.Left" TextAlignment="DataGridTextAlign.Center"
-                              AllowFilter="false" AllowGroup="false" AllowSort="false">
+            <DxDataGridColumn Field="@nameof(Issue.Type)" Caption=" " Width="30px" FixedStyle="DataGridFixedStyle.Left"
+                              TextAlignment="DataGridTextAlign.Center" AllowFilter="false" AllowGroup="false" AllowSort="false">
                 <DisplayTemplate>@GetIssueTypeIconHtml((context as Issue).Type)</DisplayTemplate>
             </DxDataGridColumn>
             <DxDataGridColumn Field="@nameof(Issue.Name)" Caption="Subject" Width="200px" FixedStyle="DataGridFixedStyle.Left">
@@ -21,17 +22,17 @@
                     @{
                         var issue = (context as Issue);
                     }
-                    <a class="text-decoration-underline" href="javascript:;" @onclick="() => GotoDetailsViewClick(issue)">@(issue.Name)</a>
+                    <button class="btn btn-link grid-btn-link" @onclick="() => GotoDetailsViewClick(issue)">@(issue.Name)</button>
                 </DisplayTemplate>
             </DxDataGridColumn>
-            <DxDataGridComboBoxColumn Field="@nameof(Issue.ProjectID)" Data="@ProjectList" Caption="Project" Width="200px"
-                                      ValueFieldName="@nameof(Project.ID)" TextFieldName="@nameof(Project.Name)">
+            <DxDataGridComboBoxColumn Field="@nameof(Issue.ProjectID)" DataAsync="@IssuesDataService.GetProjectsAsync" Caption="Project"
+                                      Width="220px" ValueFieldName="@nameof(Project.ID)" TextFieldName="@nameof(Project.Name)">
             </DxDataGridComboBoxColumn>
-            <DxDataGridComboBoxColumn Field="@nameof(Issue.CreatorID)" Data="@UserList" Caption="Owner"
-                                      ValueFieldName="@nameof(User.ID)" TextFieldName="@nameof(User.FullName)" Width="140px">
+            <DxDataGridComboBoxColumn Field="@nameof(Issue.CreatorID)" DataAsync="@IssuesDataService.GetUsersAsync" Caption="Owner"
+                                      ValueFieldName="@nameof(User.ID)" TextFieldName="@nameof(User.FullName)" Width="120px">
             </DxDataGridComboBoxColumn>
-            <DxDataGridComboBoxColumn Field="@nameof(Issue.OwnerID)" Data="@UserList" Caption="Assignee"
-                                      ValueFieldName="@nameof(User.ID)" TextFieldName="@nameof(User.FullName)" Width="140px">
+            <DxDataGridComboBoxColumn Field="@nameof(Issue.OwnerID)" DataAsync="@IssuesDataService.GetUsersAsync" Caption="Assignee"
+                                      ValueFieldName="@nameof(User.ID)" TextFieldName="@nameof(User.FullName)" Width="120px">
             </DxDataGridComboBoxColumn>
             <DxDataGridComboBoxColumn Field="@nameof(Issue.Status)" Data="@StatusList" Caption="Status"
                                       ValueFieldName="Value" TextFieldName="Text" Width="100px">
@@ -48,19 +49,20 @@
             </DxDataGridColumn>
         </Columns>
         <GroupSummary>
-            <DxDataGridSummaryItem Field="@nameof(Issue.ID)" SummaryType="SummaryItemType.Count" ShowInColumn="@nameof(Issue.ProjectID)" DisplayFormat="Count is {0}" />
+            <DxDataGridSummaryItem Field="@nameof(Issue.ID)" SummaryType="SummaryItemType.Count"
+                                   ShowInColumn="@nameof(Issue.ProjectID)" DisplayFormat="Count is {0}" />
         </GroupSummary>
         <TotalSummary>
-            <DxDataGridSummaryItem Field="@nameof(Issue.ID)" SummaryType="SummaryItemType.Count" />
+            <DxDataGridSummaryItem Field="@nameof(Issue.ID)" SummaryType="SummaryItemType.Count"
+                                   ShowInColumn="@nameof(Issue.Name)" />
         </TotalSummary>
     </DxDataGrid>
 </div>
 
 @code {
-    IEnumerable<Issue> DataSource { get; set; }
-    IEnumerable<Project> ProjectList { get; set; }
-    IEnumerable<User> UserList { get; set; }
-    static IEnumerable<object> StatusList { get; set; } = ((IssueStatus[])Enum.GetValues(typeof(IssueStatus))).Select(s => new { Text = Enum.GetName(typeof(IssueStatus), s), Value = s });
+    static readonly RenderFragment EmptyHtml = _ => {};
+    static IEnumerable<object> StatusList { get; set; } = ((IssueStatus[])Enum.GetValues(typeof(IssueStatus)))
+        .Select(s => new { Text = Enum.GetName(typeof(IssueStatus), s), Value = s });
 
     [Parameter]
     public EventCallback<Issue> GotoDetailsView { get; set; }
@@ -69,30 +71,22 @@
         await GotoDetailsView.InvokeAsync(issue);
     }
 
-    protected override async Task OnInitializedAsync() {
-        DataSource = await IssuesDataService.GetItemsAsync();
-        ProjectList = await IssuesDataService.GetProjectsAsync();
-        UserList = await IssuesDataService.GetUsersAsync();
+    public RenderFragment GetIssuePriorityIconHtml(IssuePriority priority) {
+        var prioritySuffix = GetPriorityCssClassPostfix(priority);
+        return @<span class=@($"badge badge-{prioritySuffix} bg-{prioritySuffix} py-1 px-2") 
+                        title=@($"{priority} Priority")> 
+                            @priority 
+                        </span>;
     }
-
-    public MarkupString GetIssuePriorityIconHtml(IssuePriority priority) {
-        string priorytyClass = "warning";
-        string title = "Medium";
-        if(priority == IssuePriority.High) {
-            priorytyClass = "danger";
-            title = " High ";
-        }
-        if(priority == IssuePriority.Low) {
-            priorytyClass = "info";
-            title = " Low ";
-        }
-        string html = string.Format("<span class='badge badge-{0} bg-{0}' title='{1} Priority'>{1}</span>", priorytyClass, title);
-        return new MarkupString(html);
-    }
-    public MarkupString GetIssueTypeIconHtml(IssueType type) {
-        string html = "";
-        if(type == IssueType.Bug)
-            html = "<span class='badge badge-danger bg-danger' title='Bug'>B</span>";
-        return new MarkupString(html);
-    }
+    public RenderFragment GetIssueTypeIconHtml(IssueType type) =>
+        type switch {
+           IssueType.Bug => @<span class='badge badge-danger bg-danger py-1 px-2' title='Bug'>B</span>,
+            _ => EmptyHtml
+        };
+    static string GetPriorityCssClassPostfix(IssuePriority priority) =>
+        priority switch {
+            IssuePriority.High => "danger",
+            IssuePriority.Low => "info",
+            _ => "warning"
+        };
 }

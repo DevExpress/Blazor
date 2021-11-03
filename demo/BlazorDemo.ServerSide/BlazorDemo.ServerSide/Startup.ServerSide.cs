@@ -84,7 +84,6 @@ namespace BlazorDemo.ServerSide {
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions {
                 ServeUnknownFileTypes = true

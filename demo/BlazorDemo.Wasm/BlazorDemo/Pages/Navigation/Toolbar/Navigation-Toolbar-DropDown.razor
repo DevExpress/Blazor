@@ -71,13 +71,7 @@
                 return _menuItems;
             }
         }
-        DropDownDisplayMode SelectedDisplayMode { get; set; }
-        @*BeginCollapse*@
-        protected override void OnInitialized() {
-            base.OnInitialized();
-            SelectedDisplayMode = DropDownDisplayMode.DropDown;
-        }
-        @*EndCollapse*@
+        DropDownDisplayMode SelectedDisplayMode { get; set; } = DropDownDisplayMode.DropDown;
         RenderFragment RenderItem(TextFormattingMenuItem item) {
             return
                 @<DxToolbarItem Text="@item.Text"

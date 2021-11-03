@@ -1,34 +1,32 @@
 ﻿@page "/ChartDynamicSeries"
 
 <DemoPageSectionComponent Id="Charts-DynamicSeries">
-    <ChildContentWithParameters Context="Params">
-        @inject ISalesInfoDataProvider Sales
+    @inject ISalesInfoDataProvider Sales
 
-        <DxChart Data="@chartData"
-                 LabelOverlap="ChartLabelOverlap.Hide"
-                 CssClass="w-100">
+    <DxChart Data="@chartData"
+             LabelOverlap="ChartLabelOverlap.Hide"
+             Width="100%">
 
-            <DxChartTitle Text="Sales amount, $" />
+        <DxChartTitle Text="Sales amount, $" />
 
-            <DxChartCommonSeries SummaryMethod="Enumerable.Sum"
-                                 NameField="@((SaleInfo s) => s.Date.Year)"
-                                 ArgumentField="@((SaleInfo s) => s.City)"
-                                 ValueField="@((SaleInfo s) => s.Amount)">
-                <SeriesTemplate Context="settings">
-                    @if (settings.GroupKey == 2019) {
-                        <DxChartLineSeries Name='Last year'
-                                           Settings="@settings" />
-                    }
-                    else {
-                        <DxChartBarSeries Settings="@settings">
-                            <DxChartSeriesLabel Visible="true" />
-                        </DxChartBarSeries>
-                    }
-                </SeriesTemplate>
-            </DxChartCommonSeries>
+        <DxChartCommonSeries SummaryMethod="Enumerable.Sum"
+                             NameField="@((SaleInfo s) => s.Date.Year)"
+                             ArgumentField="@((SaleInfo s) => s.City)"
+                             ValueField="@((SaleInfo s) => s.Amount)">
+            <SeriesTemplate Context="settings">
+                @if (settings.GroupKey == 2019) {
+                    <DxChartLineSeries Name='Last year'
+                                       Settings="@settings" />
+                }
+                else {
+                    <DxChartBarSeries Settings="@settings">
+                        <DxChartSeriesLabel Visible="true" />
+                    </DxChartBarSeries>
+                }
+            </SeriesTemplate>
+        </DxChartCommonSeries>
 
-        </DxChart>
-    </ChildContentWithParameters>
+    </DxChart>
 
 
     @code {

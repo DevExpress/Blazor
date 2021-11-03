@@ -1,27 +1,27 @@
 ﻿<DemoPageSectionComponent Id="Editors-CheckBox-Switch">
     <div class="card">
-        <ul class="list-group list-group-flush bg-white text-dark" style="border:none">
-            <li class="list-group-item" style="background-color:transparent;color:inherit;">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
                 <DxCheckBox CheckType="CheckType.Switch"
-                            LabelPosition="LabelPosition.Left" style="width:100%"
+                            LabelPosition="LabelPosition.Left"
                             Checked="@SilentMode"
                             CheckedChanged="@((bool t) => CheckedChanged(t))"
                             Alignment="CheckBoxContentAlignment.SpaceBetween">
                     Silent Mode
                 </DxCheckBox>
             </li>
-            <li class="list-group-item" style="background-color:transparent;color:inherit;">
+            <li class="list-group-item">
                 <DxCheckBox CheckType="CheckType.Switch"
-                            LabelPosition="LabelPosition.Left" style="width:100%"
+                            LabelPosition="LabelPosition.Left"
                             @bind-Checked="@Sound"
                             Enabled="@Enabled"
                             Alignment="CheckBoxContentAlignment.SpaceBetween">
                     Enable sound
                 </DxCheckBox>
             </li>
-            <li class="list-group-item" style="background-color:transparent;color:inherit;">
+            <li class="list-group-item">
                 <DxCheckBox CheckType="CheckType.Switch"
-                            LabelPosition="LabelPosition.Left" style="width:100%"
+                            LabelPosition="LabelPosition.Left"
                             @bind-Checked="@Vibration"
                             Enabled="@Enabled"
                             Alignment="CheckBoxContentAlignment.SpaceBetween">

@@ -7,7 +7,7 @@ namespace BlazorDemo.Configuration {
         public string Title { get { return Name.Replace("-", " "); } }
         public string IconCssClass { get { return Name.ToLower(); } }
 
-        public string GetCssClass(bool isActive) => isActive ? "active" : "text-muted";
+        public string GetCssClass(bool isActive) => isActive ? "active" : "text-body";
         public DemoTheme(string name) {
             Name = name;
         }

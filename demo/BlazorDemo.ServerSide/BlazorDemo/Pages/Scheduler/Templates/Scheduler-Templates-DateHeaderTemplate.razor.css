@@ -1,0 +1,22 @@
+.scheduler-cloud-cover-icon {
+    width: 42px;
+    height: 42px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    margin-right: 8px;
+    margin-top: -6px;
+    margin-bottom: 4px;
+}
+.scheduler-icon-storm {
+    background-image: url("images/Storm.svg");
+}
+.scheduler-icon-cloudy {
+    background-image: url("images/Cloudy.svg");
+}
+.scheduler-icon-partly-cloudy {
+    background-image: url("images/PartlyCloudy.svg");
+}
+.scheduler-icon-sunny {
+    background-image: url("images/Sunny.svg");
+}

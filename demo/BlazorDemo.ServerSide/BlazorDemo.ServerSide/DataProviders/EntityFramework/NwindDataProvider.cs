@@ -24,26 +24,29 @@ namespace BlazorDemo.DataProviders {
             return await LoadDataAsync<Employee>("Employees", ct);
         }
 
-        public async Task<IEnumerable<Employee>> GetEmployeesEditableAsync(CancellationToken ct = default) {
-            return await LoadDataAsync<Employee>("EmployeesEditable", ct);
+        public async Task<IEnumerable<EditableEmployee>> GetEmployeesEditableAsync(CancellationToken ct = default) {
+            return await LoadDataAsync<Employee, EditableEmployee>("EmployeesEditable", ct);
         }
         public async Task InsertEmployeeAsync(IDictionary<string, object> newValues, CancellationToken ct = default) {
-            await InsertAsync<Employee>("EmployeesEditable", newValues, UpdateEmployee, UpdateEmployeeKey, ct);
+            await InsertAsync<Employee, EditableEmployee>("EmployeesEditable", newValues, UpdateEmployeeKey, ct);
         }
-        public async Task InsertEmployeeAsync(Employee dataItem, CancellationToken ct = default) {
-            await InsertAsync<Employee>("EmployeesEditable", dataItem, UpdateEmployeeKey, ct);
+        public async Task InsertEmployeeAsync(EditableEmployee newDateItem, CancellationToken ct = default) {
+            await InsertAsync<Employee, EditableEmployee>("EmployeesEditable", newDateItem, UpdateEmployeeKey, ct);
         }
-        public async Task UpdateEmployeeAsync(Employee dataItem, IDictionary<string, object> newValues, CancellationToken ct = default) {
-            await UpdateAsync<Employee>("EmployeesEditable", dataItem, newValues, UpdateEmployee, ct);
+        public async Task UpdateEmployeeAsync(EditableEmployee dataItem, IDictionary<string, object> newValues, CancellationToken ct = default) {
+            await UpdateAsync<Employee, EditableEmployee>("EmployeesEditable", dataItem, newValues, FindEmployee, ct);
         }
-        public async Task RemoveEmployeeAsync(Employee dataItem, CancellationToken ct = default) {
-            await RemoveAsync<Employee>("EmployeesEditable", dataItem, ct);
+        public async Task UpdateEmployeeAsync(EditableEmployee dataItem, EditableEmployee newDataItem, CancellationToken ct = default) {
+            await UpdateAsync<Employee, EditableEmployee>("EmployeesEditable", dataItem, newDataItem, FindEmployee, ct);
+        }
+        public async Task RemoveEmployeeAsync(EditableEmployee dataItem, CancellationToken ct = default) {
+            await RemoveAsync<Employee, EditableEmployee>("EmployeesEditable", dataItem, FindEmployee, ct);
         }
         static void UpdateEmployeeKey(IQueryable<Employee> items, Employee newItem) {
             UpdateItemKey(items, newItem, i => i.EmployeeId, (i, key) => i.EmployeeId = key);
         }
-        static void UpdateEmployee(Employee item, string name, object value) {
-            UpdateItem(item, name, value);
+        static Employee FindEmployee(IQueryable<Employee> items, EditableEmployee item) {
+            return items.Where(i => i.EmployeeId == item.EmployeeId).FirstOrDefault();
         }
 
         public async Task<IEnumerable<Invoice>> GetInvoicesAsync(CancellationToken ct = default) {
@@ -74,32 +77,22 @@ namespace BlazorDemo.DataProviders {
             return await LoadDataAsync<Supplier>("SuppliersEditable", ct);
         }
         public async Task InsertSupplierAsync(IDictionary<string, object> newValues, CancellationToken ct = default) {
-            await InsertAsync<Supplier>("SuppliersEditable", newValues, UpdateSupplier, UpdateSupplierKey, ct);
+            await InsertAsync<Supplier>("SuppliersEditable", newValues, UpdateSupplierKey, ct);
         }
-        public async Task InsertSupplierAsync(Supplier dateItem, CancellationToken ct = default) {
-            await InsertAsync<Supplier>("SuppliersEditable", dateItem, UpdateSupplierKey, ct);
+        public async Task InsertSupplierAsync(Supplier newDateItem, CancellationToken ct = default) {
+            await InsertAsync<Supplier>("SuppliersEditable", newDateItem, UpdateSupplierKey, ct);
         }
         public async Task UpdateSupplierAsync(Supplier dataItem, IDictionary<string, object> newValues, CancellationToken ct = default) {
-            await UpdateAsync<Supplier>("SuppliersEditable", dataItem, newValues, UpdateSupplier, ct);
+            await UpdateAsync<Supplier>("SuppliersEditable", dataItem, newValues, ct);
+        }
+        public async Task UpdateSupplierAsync(Supplier dataItem, Supplier newDataItem, CancellationToken ct = default) {
+            await UpdateAsync<Supplier>("SuppliersEditable", dataItem, newDataItem, ct);
         }
         public async Task RemoveSupplierAsync(Supplier dataItem, CancellationToken ct = default) {
             await RemoveAsync<Supplier>("SuppliersEditable", dataItem, ct);
         }
         static void UpdateSupplierKey(IQueryable<Supplier> items, Supplier newItem) {
             UpdateItemKey(items, newItem, i => i.SupplierId, (i, key) => i.SupplierId = key);
-        }
-        static void UpdateSupplier(Supplier item, string name, object value) {
-            UpdateItem(item, name, value);
-        }
-
-        static void UpdateItem<T>(T item, string name, object value) {
-            var prop = typeof(T).GetProperty(name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.SetProperty);
-            if(prop != null)
-                prop.SetValue(item, value);
-        }
-        static void UpdateItemKey<T>(IQueryable<T> items, T newItem, Func<T, int> getKey, Action<T, int> setKey) {
-            var lastItem = items.OrderBy(getKey).LastOrDefault();
-            setKey(newItem, lastItem != null ? getKey(lastItem) + 1 : 1);
         }
     }
 }

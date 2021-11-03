@@ -5,6 +5,7 @@
     <Configurations>Debug;Release;VisualTests</Configurations>
     <EnableDefaultItems>False</EnableDefaultItems>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AssemblyName>BlazorDemo</AssemblyName>
     <RootNamespace>BlazorDemo</RootNamespace>
     <OutputType>Library</OutputType>
@@ -20,7 +21,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor" Version="21.1.6" />
+    <PackageReference Include="DevExpress.Blazor" Version="21.2.3" />
     
   </ItemGroup>
   <ItemGroup>
@@ -47,12 +48,11 @@
     <Compile Include="DocumentMetadata\Utils.cs" />
     <Compile Include="DocumentMetadata\Components\WasmMetadataManager.cs" />
     <Compile Include="DocumentMetadata\DocumentMetadata.Wasm.cs" />
-    <Content Include="wwwroot\**\*.*" Exclude="wwwroot\_code\**\*.*" />
+    <Content Include="wwwroot\**\*.*" Exclude="wwwroot\_code\**\*.*" CopyToPublishDirectory="Always" />
     <Content Include="**\*.razor" Exclude="Pages\Reports\**;Pages\RichEdit\**;Shared\NavMenuReporting.razor;wwwroot\_code\**\*.razor" />
     <Content Include="Pages\**\*.md" />
     <Content Include="Pages\**\*.razor.css" />
     <Content Include="Shared\**\*.razor.css" />
-    
     <Content Include="NOTICE.txt" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿<DemoPageSectionComponent Id="Grid-Grouping-CustomGrouping" ShowHorizontalScrollBar="true">
+﻿<DemoPageSectionComponent Id="Grid-Grouping-CustomGrouping">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
@@ -6,15 +6,14 @@
                 Data="@Data"
                 ShowGroupPanel="true"
                 CustomGroup="Grid_CustomGroup"
-                CustomizeGroupValueDisplayText="Grid_CustomizeGroupValueDisplayText"
-                CssClass="w-100">
+                CustomizeGroupValueDisplayText="Grid_CustomizeGroupValueDisplayText">
             <Columns>
-                <DxGridDataColumn FieldName="ProductName" />
-                <DxGridDataColumn FieldName="CategoryName" />
-                <DxGridDataColumn FieldName="Country" Width="200px" />
-                <DxGridDataColumn FieldName="OrderDate" Width="120px" />
-                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" GroupIndex="0" GroupInterval="GridColumnGroupInterval.Custom" Width="120px" />
-                <DxGridDataColumn FieldName="Quantity" Width="120px" />
+                <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
+                <DxGridDataColumn FieldName="CategoryName" MinWidth="100" />
+                <DxGridDataColumn FieldName="Country" Width="10%" />
+                <DxGridDataColumn FieldName="OrderDate" MinWidth="70" Width="10%" />
+                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" GroupIndex="0" GroupInterval="GridColumnGroupInterval.Custom" Width="10%" />
+                <DxGridDataColumn FieldName="Quantity" Width="10%" />
             </Columns>
             <TotalSummary>
                 <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="ProductName" />

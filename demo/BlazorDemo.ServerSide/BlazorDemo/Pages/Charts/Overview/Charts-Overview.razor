@@ -1,11 +1,11 @@
 ﻿@page "/Charts"
-@inject ISalesInfoDataProvider Sales
 
-<DemoPageSectionComponent Id="Charts-Overview"
-                          ShowCode="false">
+<DemoPageSectionComponent Id="Charts-Overview">
+    @inject ISalesInfoDataProvider Sales
     <div class="w-100 overview-chart">
         <div class="row">
-            <DxChart Data="@WWSalesData" CssClass="w-100">
+            <DxChart Data="@WWSalesData"
+                     Width="100%">
 
                 <DxChartTitle Text="World Wide Sales" />
 
@@ -42,19 +42,21 @@
 
     @{ void DrawDonutChart<T>(IEnumerable<T> data, string titleText) {
             <div class="chart-item">
-                <DxChart Data="data" CssClass="w-100">
+                <DxPieChart Data="data"
+                            Width="100%"
+                            InnerDiameter="0.5">
                     <DxChartTitle Text="@titleText" />
 
-                    <DxChartDonutSeries T="DonutDataItem"
-                                        TArgument="int"
-                                        TValue="double"
-                                        ArgumentField="s => s.Year"
-                                        ValueField="s => s.Amount"
-                                        SummaryMethod="Enumerable.Sum">
+                    <DxPieChartSeries T="DonutDataItem"
+                                      TArgument="int"
+                                      TValue="double"
+                                      ArgumentField="s => s.Year"
+                                      ValueField="s => s.Amount"
+                                      SummaryMethod="Enumerable.Sum">
                         <DxChartSeriesLabel Visible="true"
                                             Position="RelativePosition.Inside"
                                             Format='ChartElementFormat.FromLdmlString("$#K")' />
-                    </DxChartDonutSeries>
+                    </DxPieChartSeries>
 
                     <DxChartLegend VerticalAlignment="VerticalEdge.Bottom"
                                    Position="RelativePosition.Outside" />
@@ -66,7 +68,7 @@
                             </div>
                         </div>
                     </DxChartTooltip>
-                </DxChart>
+                </DxPieChart>
             </div>
         } }
 

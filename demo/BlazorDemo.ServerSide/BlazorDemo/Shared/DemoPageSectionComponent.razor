@@ -2,7 +2,7 @@
 @inject DemoConfiguration Configuration
 @inject IJSRuntime JSRuntime
 
-<DemoScriptLoader @ref=@clipboradJsRef Src="//cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" />
+<DemoScriptLoader @ref=@clipboradJsRef Src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" />
 <DemoScriptLoader @ref=@sectionHelper Src="_content/BlazorDemo/lib/page-section-helper.js" />
 
 @{
@@ -10,7 +10,7 @@
     @<div class="demo-page-section-component-area" @key="parameters.ThemeName">
         @if(IsComponentAreaVisible) {
             @if(OptionsContent != null) {
-                <div class="options-container border border-light">
+                <div class=@GetOptionsContentCssClass()>
                     @OptionsContent
                 </div>
             }
@@ -118,6 +118,8 @@
     public RenderFragment ChildContent { get; set; }
     [Parameter]
     public RenderFragment OptionsContent { get; set; }
+    [Parameter]
+    public bool HasOptionsGroups { get; set; }
 
     [Parameter]
     public string Id { get; set; }
@@ -179,8 +181,13 @@
     string GetTabCssClass(bool isActive) {
         return string.Join(" ", "nav-link", isActive ? "active" : "").Trim();
     }
-
-    IReadOnlyDictionary<string, object> GetComponentContainerAttributes() {
+	string GetOptionsContentCssClass() {
+		List<string> cssClasses = new List<string>() { "options-container", "border", "border-light" };
+		if(HasOptionsGroups)
+			cssClasses.Add("px-0");
+        return string.Join(' ', cssClasses);
+	}
+	IReadOnlyDictionary<string, object> GetComponentContainerAttributes() {
         var result = new Dictionary<string, object>();
         var className = GetComponentContainerCssClass();
         if(!string.IsNullOrEmpty(className))
@@ -269,6 +276,6 @@
         }
     }
     protected override async Task OnAfterRenderAsync(bool firstRender) {
-        await sectionHelper.InvokeVoidAsync("DemoPageSectionHelper.initDemoPageSection", Section.Id, ActiveTabPageIndex == 1);
+        await sectionHelper.InvokeVoidAsync("DemoPageSectionHelper.init", Section.Id, ActiveTabPageIndex == 1);
     }
 }

@@ -8,10 +8,6 @@ using BlazorDemo.Shared.ThemeSwitcher;
 using BlazorDemo.Configuration;
 
 namespace BlazorDemo.Services {
-    public interface IDemoThemesConfigurationCookieAccessor {
-        string GetCookie(string name);
-    }
-
     public interface IDemoThemeChangeRequestDispatcher {
         void RequestThemeChange(DemoTheme theme);
     }
@@ -23,13 +19,14 @@ namespace BlazorDemo.Services {
     public class DemoThemeService {
         private DemoTheme _activeTheme;
 #if SERVER_BLAZOR
-        const string ThemeCookieKey = "DXBS4CurrentTheme";
+        public const string ThemeCookieKey = "DXBS4CurrentTheme";
 #else
-        const string ThemeCookieKey = "DXBS4CurrentWasmTheme";
+        public const string ThemeCookieKey = "DXBS4CurrentWasmTheme";
 #endif
         const string DefaultThemeName = "blazing-berry";
         readonly Dictionary<string, string> HighlightJSThemes = new Dictionary<string, string>() {
             { DefaultThemeName, "default" },
+            { "blazing-dark", "androidstudio" },
             { "cyborg", "androidstudio" },
             { "darkly", "androidstudio" },
             { "slate", "atom-one-dark" }
@@ -39,25 +36,14 @@ namespace BlazorDemo.Services {
 
         public IDemoThemeLoadNotifier ThemeLoadNotifier { get; set; }
 
-        public DemoThemeService(IDemoThemesConfigurationCookieAccessor cookieAccessor) {
+        public DemoThemeService() {
             ResourcesReadyState = new ConcurrentDictionary<string, TaskCompletionSource<bool>>();
             ThemeSets = CreateSets(this);
-            CookieAccessor = cookieAccessor;
         }
-
-        protected IDemoThemesConfigurationCookieAccessor CookieAccessor { get; }
 
         public ConcurrentDictionary<string, TaskCompletionSource<bool>> ResourcesReadyState { get; }
         public List<DemoThemeSet> ThemeSets { get; }
-        public DemoTheme ActiveTheme {
-            get {
-                if(_activeTheme == null) {
-                    var themeName = CookieAccessor.GetCookie(ThemeCookieKey);
-                    SetActiveThemeByName(themeName);
-                }
-                return _activeTheme;
-            }
-        }
+        public DemoTheme ActiveTheme { get { return _activeTheme; } }
         public DemoTheme DefaultTheme {
             get { return ThemeSets.SelectMany(ts => ts.Themes).Where(t => t.Name == DefaultThemeName).FirstOrDefault(); }
         }
@@ -72,7 +58,7 @@ namespace BlazorDemo.Services {
             var highlightjsTheme = HighlightJSThemes[DefaultThemeName];
             if(HighlightJSThemes.ContainsKey(theme.Name))
                 highlightjsTheme = HighlightJSThemes[theme.Name];
-            return $"//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/{highlightjsTheme}.min.css";
+            return $"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/{highlightjsTheme}.min.css";
         }
         public string GetActiveHighlightJSThemeCssUrl() {
             return GetHighlightJSThemeCssUrl(ActiveTheme);
@@ -97,7 +83,7 @@ namespace BlazorDemo.Services {
         private static List<DemoThemeSet> CreateSets(DemoThemeService config) {
             return new List<DemoThemeSet>() {
                 new DemoThemeSet("Color Themes",  "default"),
-                new DemoThemeSet("DevExpress Themes", "blazing-berry", "purple", "office-white"),
+                new DemoThemeSet("DevExpress Themes", "blazing-berry", "blazing-dark", "purple", "office-white"),
                 new DemoThemeSet("Bootswatch Themes", "cerulean", "cosmo", "cyborg", "darkly", "flatly", "journal", "litera", "lumen", "lux", "materia", "minty", "pulse",
                     "sandstone", "simplex", "sketchy", "slate", "solar", "spacelab", "superhero", "united", "yeti")
             };

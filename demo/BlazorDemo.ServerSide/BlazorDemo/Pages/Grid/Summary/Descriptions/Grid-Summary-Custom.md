@@ -6,4 +6,4 @@ Our Blazor [Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid) a
 
 You can also handle the [CustomizeSummaryDisplayText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomizeSummaryDisplayText) event to change the summary’s display text. 
 
-In this demo, the custom summary calculates the number of records whose **Quantity** field value is less than 5.  
+In this demo, the custom summary calculates the sum of **Total** values against the selected Grid rows. 

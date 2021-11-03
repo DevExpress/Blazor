@@ -1,9 +1,9 @@
 ﻿@inject DemoThemeService Themes
 
-<a class="list-group-item list-group-item-action @Theme.GetCssClass(Themes.ActiveTheme == Theme) @Theme.IconCssClass" href="#"
+<a class="themeswitcher-item list-group-item list-group-item-action @Theme.GetCssClass(Themes.ActiveTheme == Theme) @Theme.IconCssClass" href="#"
    @onclick:preventDefault
    @onclick="Anchor_Click">
-    @Theme.Title
+    <span>@Theme.Title</span>
 </a>
 @code {
     [Parameter] public DemoTheme Theme { get; set; }

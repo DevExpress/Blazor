@@ -22,7 +22,7 @@
         <ThemeSwitcher @bind-Shown="@ThemeSwitcherShown" @bind-ThemeName="@ThemeName" />
     </nav>
 </div>
-<div class="demo-breadcrumbs-container bg-light">
+<div class="demo-breadcrumbs-container breadcrumb">
     <div class="demo-breadcrumbs @LayoutStateCssClass">
         <DemoBreadcrumbs></DemoBreadcrumbs>
     </div>
@@ -104,13 +104,11 @@
         if(firstRender) {
             await ScrollToMainTopIfNeeded(NavigationManager.Uri);
 
-            var themeName = await pageHelper.InvokeAsync<string>("DemoPageHelper.themes.getThemeName");
-            if(!string.IsNullOrEmpty(themeName))
-                ThemeName = themeName;
             await pageHelper.InvokeVoidAsync("DemoPageHelper.demoMatchesQuery", "(min-width: 1200px)", DotNetObjectReference.Create(this));
             await pageHelper.InvokeVoidAsync("DemoPageHelper.patchAppElement");
         } else {
-            await pageHelper.InvokeVoidAsync("DemoPageHelper.themes.setThemeName", ThemeName);
+            await pageHelper.InvokeVoidAsync("DemoPageHelper.themes.setThemeName", DemoThemeService.ThemeCookieKey, ThemeName);
+
             if(_isDesktop && SavedLayoutToggled != LayoutToggled)
                 await pageHelper.InvokeVoidAsync("DemoPageHelper.raiseWindowOnResize");
         }
@@ -138,7 +136,7 @@
             await InvokeAsync(StateHasChanged);
         }
     }
-    
+
     bool LayoutToggled {
         get { return _layoutToggled; }
         set {

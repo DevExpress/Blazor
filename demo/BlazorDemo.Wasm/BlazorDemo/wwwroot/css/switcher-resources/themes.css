@@ -6,6 +6,10 @@
     background: #5c2d91;
 }
 
+#themesMenu a.blazing-dark:before {
+    background: #46444a;
+}
+
 #themesMenu a.cerulean:before {
     background: #2fa4e7;
 }

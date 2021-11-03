@@ -12,17 +12,17 @@
                     RowInsertStart="@(() => OnRowEditStarting(null))">
             <Columns>
                 <DxDataGridCommandColumn Width="120px" />
-                <DxDataGridColumn Field="FirstName" />
-                <DxDataGridColumn Field="LastName" />
-                <DxDataGridColumn Field="Title" />
+                <DxDataGridColumn Field="@nameof(Employee.FirstName)" />
+                <DxDataGridColumn Field="@nameof(Employee.LastName)" />
+                <DxDataGridColumn Field="@nameof(Employee.Title)" />
                 <DxDataGridColumn Field="@nameof(Employee.TitleOfCourtesy)" Width="150px" />
-                <DxDataGridDateEditColumn Field="BirthDate" Width="150px" />
-                <DxDataGridDateEditColumn Field="HireDate" Width="150px" />
-                <DxDataGridColumn Field="Details" AllowSort="false" Width="90px">
-                    <DisplayTemplate><a class="d-block text-left" href="javascript:;" @onclick="() => ShowDetails(context as Employee)">More Info...</a></DisplayTemplate>
+                <DxDataGridDateEditColumn Field="@nameof(Employee.BirthDate)" Width="150px" />
+                <DxDataGridDateEditColumn Field="@nameof(Employee.HireDate)" Width="150px" />
+                <DxDataGridColumn Field="Details" AllowSort="false" Width="90px" TextAlignment="DataGridTextAlign.Center">
+                    <DisplayTemplate><button class="btn btn-link grid-btn-link" @onclick="() => ShowDetails((EditableEmployee)context)">More Info</button></DisplayTemplate>
                     <EditTemplate>
                         <DxMemo @bind-Text="@EditEmployeeNotes" Rows="5" />
-                        <div class="text-muted pt-1" style="font-size:0.8em">Details should be 4 to 256 characters</div>
+                        <div class="demo-text mt-1">Details should be 4 to 256 characters</div>
                     </EditTemplate>
                 </DxDataGridColumn>
             </Columns>
@@ -34,9 +34,10 @@
     }
 
     @code {
-        IEnumerable<Employee> DataSource { get; set; }
+        IEnumerable<EditableEmployee> DataSource { get; set; }
         string EditEmployeeNotes { get; set; }
-        Employee CurrentEmployee { get; set; }
+        EditableEmployee CurrentEmployee { get; set; }
+
         bool PopupVisible {
             get { return CurrentEmployee != null; }
             set { if(!value) CurrentEmployee = null; }
@@ -51,19 +52,19 @@
         protected override async Task OnInitializedAsync() {
             DataSource = await NwindDataService.GetEmployeesEditableAsync();
         }
-        public void ShowDetails(Employee context) {
+        public void ShowDetails(EditableEmployee context) {
             CurrentEmployee = context;
         }
 
-        void OnRowEditStarting(Employee employee) {
+        void OnRowEditStarting(EditableEmployee employee) {
             EditEmployeeNotes = employee?.Notes;
         }
-        async Task OnRowRemovingAsync(Employee dataItem) {
+        async Task OnRowRemovingAsync(EditableEmployee dataItem) {
             await NwindDataService.RemoveEmployeeAsync(dataItem);
             DataSource = await NwindDataService.GetEmployeesEditableAsync();
             StateHasChanged();
         }
-        async Task OnRowUpdatingAsync(Employee dataItem, IDictionary<string, object> newValues) {
+        async Task OnRowUpdatingAsync(EditableEmployee dataItem, IDictionary<string, object> newValues) {
             newValues.Add(nameof(Employee.Notes), EditEmployeeNotes);
             await NwindDataService.UpdateEmployeeAsync(dataItem, newValues);
             DataSource = await NwindDataService.GetEmployeesEditableAsync();

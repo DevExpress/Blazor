@@ -10,7 +10,7 @@
 #themesMenu,
 #themesMenu div,
 #themesMenu .list-group,
-#themesMenu .card-header {
+#themesMenu .themeswitcher-group {
     background-color: inherit;
 }
 #themesMenu .list-group {
@@ -35,16 +35,17 @@
     font-weight: 500;
     border-color: transparent;
 }
-#themesMenu .card-header {
+#themesMenu .themeswitcher-group {
     font-weight: 600;
     position: sticky;
     top: 0;
     z-index: 3;
     color: inherit;
     border: none;
+    margin-bottom: 0;
 }
-#themesMenu .card-header:not(:first-child):before,
-#themesMenu .card-header::after{
+#themesMenu .themeswitcher-group:not(:first-child):before,
+#themesMenu .themeswitcher-group::after{
     content: "";
     position: absolute;
     width: 100%;
@@ -52,11 +53,14 @@
     border-top: 1px solid currentColor;
     opacity: 0.15;
 }
-#themesMenu .card-header:not(:first-child):before {
+#themesMenu .themeswitcher-group:not(:first-child):before {
     top: 0;
 }
-#themesMenu .card-header::after {
+#themesMenu .themeswitcher-group::after {
     bottom: 0;
+}
+#themesMenu .themeswitcher-item > span {
+    opacity: 0.8;
 }
 #themesMenu a.list-group-item-action:before {
     content: "";

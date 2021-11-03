@@ -1,19 +1,38 @@
-﻿@inject DemoConfiguration Configuration
+﻿@implements IDisposable
+@inject DemoConfiguration Configuration
 @inject DemoThemeService Themes
+@inject NavigationManager NavigationManager
 
 <div class="demo-page">
-    <div class="demo-page-content theme-@Themes.ActiveTheme.Name.Replace(" ", "-")">
+    <div class="demo-page-content @(!HasPageNavigation ? "demo-page-no-navigation" : "") theme-@Themes.ActiveTheme.Name.Replace(" ", "-")" style="@(Configuration.ShowOnlyReporting ? "max-width: 100%; margin-right: 0px" : "")">
         @ChildContent
     </div>
+    @if(!Configuration.ShowOnlyReporting) {
     <div class="demo-page-right-container">
         <DemoPageNavPanel />
         <DemoFeedbackPanel />
     </div>
+    }
 </div>
 
 @code {
     [Parameter] public RenderFragment ChildContent { get; set; }
-    protected override Task OnInitializedAsync() {
-        return base.OnInitializedAsync();
+
+    public bool HasPageNavigation { get; set; }
+
+    protected override void OnInitialized() {
+        NavigationManager.LocationChanged += OnLocationChanged;
+        UpdateHasPageNavigation(NavigationManager.Uri);
+    }
+    void OnLocationChanged(object sender, LocationChangedEventArgs args) {
+        UpdateHasPageNavigation(args.Location);
+        InvokeAsync(StateHasChanged);
+    }
+    void UpdateHasPageNavigation(string currentUri) {
+        var demoPage = Configuration.GetDemoPageByUrl(NavigationManager, currentUri) as DemoPage;
+        HasPageNavigation = demoPage != null && demoPage.PageSections != null && demoPage.PageSections.Count() > 1;
+    }
+    public void Dispose() {
+        NavigationManager.LocationChanged -= OnLocationChanged;
     }
 }

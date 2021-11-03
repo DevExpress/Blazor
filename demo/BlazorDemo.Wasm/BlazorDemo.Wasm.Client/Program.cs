@@ -26,7 +26,9 @@ namespace BlazorDemo.Wasm {
             services.AddTransient<RemoteDataProviderLoader>();
 
             services.AddSingleton<ISalesInfoDataProvider, SalesInfoDataProvider>();
+            services.AddSingleton<IExperementResultDataProvider, ExperementResultDataProvider>();
             services.AddSingleton<IFinancialSeriesDataProvider, FinancialSeriesDataProvider>();
+            services.AddSingleton<IPopulationStructureDataProvider, PopulationAgeStructureDataProvider>();
             services.AddSingleton<ICurrencyExchangeDataProvider, UsdJpyDataProviderWasm>();
             services.AddSingleton<IIssuesDataProvider, IssuesDataProvider>();
             services.AddSingleton<IWeatherSummaryDataProvider, WeatherSummaryDataProviderWasm>();
@@ -44,7 +46,6 @@ namespace BlazorDemo.Wasm {
                 return new DemoVersion(new Version(dxVersion.Major, dxVersion.Minor, dxVersion.Build).ToString());
             });
             services.AddSingleton<DemoConfiguration>();
-            services.AddScoped<IDemoThemesConfigurationCookieAccessor, DemoThemesConfigurationCookieAccessor>();
             services.AddScoped<DemoThemeService>();
 
             builder.RootComponents.AddDocumentMetadata();
@@ -52,12 +53,6 @@ namespace BlazorDemo.Wasm {
 
 
             await builder.Build().RunAsync();
-        }
-    }
-
-    class DemoThemesConfigurationCookieAccessor : IDemoThemesConfigurationCookieAccessor {
-        public string GetCookie(string name) {
-            return null;
         }
     }
 }

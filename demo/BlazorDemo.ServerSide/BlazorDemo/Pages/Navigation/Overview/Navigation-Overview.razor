@@ -1,6 +1,6 @@
 ﻿@page "/Navigation"
 
-<DemoPageSectionComponent Id="Navigation-Overview" ShowCode="false">
+<DemoPageSectionComponent Id="Navigation-Overview">
     <div class="overview-navigation card cw-880">
         <div class="card-body p-0 border-light border-bottom">
             <DxMenu Orientation="Orientation.Horizontal"
@@ -12,7 +12,7 @@
                     CssClass="w-100"
                     ItemClick="@((args) => { if(args.ItemInfo.Name == "LogIn") PopupVisible = true; })">
                 <TitleTemplate>
-                    <img class="menu-title-template-img" src="_content/BlazorDemo/images/Logo-Monochrome.svg" alt="@context" />
+                    <div class="icon-logo" role="img" aria-label="@context"></div>
                 </TitleTemplate>
 
                 <Items>
@@ -105,7 +105,7 @@
                     @{
                         var descriptionParts = Data[ActivePageIndex].Description.Split("\n");
                         @foreach(var descriptionPart in descriptionParts) {
-                            <p class="text-muted">@descriptionPart</p>
+                            <p class="tm-8">@descriptionPart</p>
                         }
                     }
                 </div>

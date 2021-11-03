@@ -1,0 +1,30 @@
+﻿<DemoPageSectionComponent Id="Grid-PagingAndScrolling-Paging">
+    @inject NwindDataService NwindDataService
+
+    <DxGrid Data="@DataSource"
+            PageSize="10"
+            PagerPosition="GridPagerPosition.TopAndBottom"
+            PageSizeSelectorVisible="true"
+            PageSizeSelectorItems="@(new int[] { 5, 10, 20, 100 })"
+            PageSizeSelectorAllRowsItemVisible="true"
+            PagerSwitchToInputBoxButtonCount="10"
+            PagerVisibleNumericButtonCount="10">
+        <Columns>
+            <DxGridDataColumn FieldName="ShipName" MinWidth="100" />
+            <DxGridDataColumn FieldName="ShipCity" Width="15%" />
+            <DxGridDataColumn FieldName="ShipPostalCode" Width="10%" />
+            <DxGridDataColumn FieldName="ShipCountry" Width="15%" />
+            <DxGridDataColumn FieldName="Freight" Width="10%" />
+            <DxGridDataColumn FieldName="OrderDate" Width="10%" MinWidth="80" />
+            <DxGridDataColumn FieldName="ShippedDate" Width="10%" MinWidth="80" />
+        </Columns>
+    </DxGrid>
+
+    @code {
+        IEnumerable<Order> DataSource { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            DataSource = await NwindDataService.GetOrdersAsync();
+        }
+    }
+</DemoPageSectionComponent>

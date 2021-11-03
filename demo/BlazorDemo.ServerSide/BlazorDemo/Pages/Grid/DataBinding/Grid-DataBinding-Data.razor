@@ -1,14 +1,14 @@
-﻿<DemoPageSectionComponent Id="Grid-DataBinding-Data" ShowHorizontalScrollBar="true">
+﻿<DemoPageSectionComponent Id="Grid-DataBinding-Data">
     <ChildContentWithParameters Context="Params">
         @inject WeatherForecastService ForecastService
 
-        <DxGrid Data="@Data" CssClass="w-100">
+        <DxGrid Data="@Data">
             <Columns>
-                <DxGridDataColumn FieldName="Date" DisplayFormat="D" />
-                <DxGridDataColumn FieldName="Forecast" />
-                <DxGridDataColumn FieldName="CloudCover" />
-                <DxGridDataColumn FieldName="TemperatureC" Caption="@("Temp. (\x2103)")" Width="120px" />
-                <DxGridDataColumn FieldName="TemperatureF" Caption="@("Temp. (\x2109)")" Width="120px" />
+                <DxGridDataColumn FieldName="Date" DisplayFormat="D" MinWidth="100" />
+                <DxGridDataColumn FieldName="Forecast" Width="15%" />
+                <DxGridDataColumn FieldName="CloudCover" Width="15%" />
+                <DxGridDataColumn FieldName="TemperatureC" Caption="@("Temp. (\x2103)")" Width="10%" />
+                <DxGridDataColumn FieldName="TemperatureF" Caption="@("Temp. (\x2109)")" Width="10%" />
             </Columns>
         </DxGrid>
 

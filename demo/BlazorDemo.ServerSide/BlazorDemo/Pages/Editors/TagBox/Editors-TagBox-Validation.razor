@@ -1,5 +1,8 @@
-<DemoPageSectionComponent Id="Editors-TagBox-Validation" ShowSizeMode="true">
+﻿<DemoPageSectionComponent Id="Editors-TagBox-Validation" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        @using System.ComponentModel.DataAnnotations
+
+
         <EditForm Model="@recipients" class="cw-480">
 
             <DataAnnotationsValidator />

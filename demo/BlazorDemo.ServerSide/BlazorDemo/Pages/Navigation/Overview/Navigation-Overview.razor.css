@@ -2,11 +2,6 @@
     flex-wrap: nowrap;
 }
 
-.menu-title-template-img {
-    display: flex;
-    width: 120px;
-}
-
 ::deep .menu-icon-user-profile {
     mask-image: url("images/UserProfile.svg");
     -webkit-mask-image: url("images/UserProfile.svg");

@@ -11,20 +11,25 @@
 <link rel="stylesheet" href="_content/DevExpress.Blazor/dx-blazor.css">
 
 @if(DemoConfiguration.IsServerSide) {
-    <link rel="stylesheet" href="_content/DevExpress.Blazor.RichEdit/dx-richedit.css">
+    <link rel="stylesheet" href="_content/DevExpress.Blazor.RichEdit/dx-blazor-richedit.css">
     <link rel="stylesheet" href="BlazorDemo.ServerSide.styles.css">
 } else {
     <link rel="stylesheet" href="BlazorDemo.Wasm.Server.styles.css">
 }
 
-
 @code {
+    [Parameter]
+    public string InitialThemeName { get; set; }
 
     DemoTheme PendingTheme { get; set; }
 
     protected override void OnInitialized() {
         base.OnInitialized();
+
         Themes.ThemeChangeRequestDispatcher = this;
+
+        if(Themes.ActiveTheme == null)
+            Themes.SetActiveThemeByName(InitialThemeName);
         PendingTheme = Themes.ActiveTheme;
     }
 

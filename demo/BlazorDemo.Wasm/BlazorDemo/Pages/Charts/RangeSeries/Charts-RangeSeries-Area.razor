@@ -1,34 +1,31 @@
 ﻿<DemoPageSectionComponent Id="Charts-RangeSeries-Area">
-    <ChildContentWithParameters Context="Params">
-        @inject IWeatherSummaryDataProvider WeatherSummaryDataProvider
+    @inject IWeatherSummaryDataProvider WeatherSummaryDataProvider
 
-        <DxChart Data="@WeatherForecasts"
-                 CssClass="w-100">
-            <DxChartTitle Text="Annual Temperature in Hilo, Hawaii" />
-            <DxChartRangeAreaSeries ValueField="@((DetailedWeatherSummary  i) => i.AverageTemperatureF)"
-                                    ArgumentField="@(i => new DateTime(2000, i.Date.Month, 1))"
-                                    Name="Temperature, °F"
-                                    Filter="@((DetailedWeatherSummary  i) => i.City == "HILO")">
-                <DxChartSeriesLabel Visible="true" Format="@(ChartElementFormat.FromLdmlString("0# °F"))" />
-                <DxChartSeriesPoint Visible="true"/>
-            </DxChartRangeAreaSeries>
-            <DxChartValueAxis>
-                <DxChartAxisTitle Text="Temperature, °F" />
-            </DxChartValueAxis>
-            <DxChartLegend Visible="false" />
-            <DxChartArgumentAxis SideMarginsEnabled="false" >
-                <DxChartAxisLabel Format="ChartElementFormat.Month" />
-            </DxChartArgumentAxis>
-        </DxChart>
-
-    </ChildContentWithParameters>
+    <DxChart Data="@WeatherForecasts"
+             Width="100%">
+        <DxChartTitle Text="Annual Temperature in Hilo, Hawaii" />
+        <DxChartRangeAreaSeries ValueField="@((DetailedWeatherSummary  i) => i.AverageTemperatureF)"
+                                ArgumentField="@(i => new DateTime(2000, i.Date.Month, 1))"
+                                Name="Temperature, °F"
+                                Filter="@((DetailedWeatherSummary  i) => i.City == "HILO")">
+            <DxChartSeriesLabel Visible="true"
+                                Format="@(ChartElementFormat.FromLdmlString("0# °F"))" />
+            <DxChartSeriesPoint Visible="true" />
+        </DxChartRangeAreaSeries>
+        <DxChartValueAxis>
+            <DxChartAxisTitle Text="Temperature, °F" />
+        </DxChartValueAxis>
+        <DxChartLegend Visible="false" />
+        <DxChartArgumentAxis SideMarginsEnabled="false">
+            <DxChartAxisLabel Format="ChartElementFormat.Month" />
+        </DxChartArgumentAxis>
+    </DxChart>
 
 
     @code {
         IEnumerable<DetailedWeatherSummary> WeatherForecasts;
 
-        protected override async Task OnInitializedAsync()
-        {
+        protected override async Task OnInitializedAsync() {
             WeatherForecasts = await WeatherSummaryDataProvider.GetDataAsync();
         }
     }

@@ -1,0 +1,97 @@
+﻿@using System.Drawing
+
+<DemoPageSectionComponent Id="Charts-PieSeries-NestedDonut">
+    <ChildContent>
+        @inject ISalesInfoDataProvider Sales
+        <DxPieChart Data="@SalesData"
+                    CustomizeSeriesPoint="CustomizeSeriesPoint"
+                    T="SaleInfo">
+
+            <DxPieChartSeries T="SaleInfo"
+                              TArgument="string"
+                              TValue="double"
+                              ValueField="si => si.Amount"
+                              ArgumentField="si => si.Region"
+                              SummaryMethod="Enumerable.Sum"
+                              Name="Region Sales">
+                <DxChartSeriesLabel Visible="showLabels"
+                                    Position="RelativePosition.Inside"
+                                    Format="ChartElementFormat.Thousands(0)"
+                                    BackgroundColor="Color.Transparent" />
+                <DxChartSeriesLegendItem Visible="false" />
+            </DxPieChartSeries>
+            <DxPieChartSeries T="SaleInfo"
+                              TArgument="string"
+                              TValue="double"
+                              ValueField="si => si.Amount"
+                              ArgumentField="si => si.City"
+                              SummaryMethod="Enumerable.Sum"
+                              Name="City Sales">
+                <DxChartSeriesLabel Visible="showLabels"
+                                    Position="RelativePosition.Inside"
+                                    Format="ChartElementFormat.Thousands(0)"
+                                    BackgroundColor="Color.Transparent" />
+            </DxPieChartSeries>
+
+
+            <DxChartTooltip Enabled="true"
+                            Position="RelativePosition.Outside">
+                <div style="margin: 0.75rem">
+                    <div class="font-weight-bold">@context.Point.Argument</div>
+                    <div>Sales: @($"${context.Point.Value:#,0.00}")</div>
+                </div>
+            </DxChartTooltip>
+
+            <DxChartTitle Text="Top Sales Worldwide">
+                <DxChartSubTitle Text="USD" />
+            </DxChartTitle>
+
+            <DxChartLegend HorizontalAlignment="HorizontalAlignment.Center"
+                           VerticalAlignment="VerticalEdge.Bottom"
+                           Position="RelativePosition.Outside"
+                           Orientation="Orientation.Horizontal" />
+        </DxPieChart>
+    </ChildContent>
+
+    <OptionsContent>
+        <OptionCheckBox T="bool"
+                        @bind-Checked="showLabels"
+                        Label="Show Labels" />
+    </OptionsContent>
+
+    @code {
+        IEnumerable<SaleInfo> SalesData;
+        bool showLabels = true;
+
+        Dictionary<object, Color> palette = new() {
+            { "North America", Color.FromArgb(0, 123, 255) },
+            { "South America", Color.FromArgb(40, 167, 69) },
+            { "Europe", Color.FromArgb(220, 53, 69) },
+            { "Asia", Color.FromArgb(23, 162, 184) },
+            { "New York", Color.FromArgb(0, 111, 230) },
+            { "Los Angeles", Color.FromArgb(0, 117, 242) },
+            { "Denver", Color.FromArgb(0, 123, 255) },
+            { "Vancouver", Color.FromArgb(76, 163, 255) },
+            { "Edmonton", Color.FromArgb(153, 202, 255) },
+            { "Rio de Janeiro", Color.FromArgb(36, 150, 62) },
+            { "Buenos Aires", Color.FromArgb(40, 167, 69) },
+            { "Asuncion", Color.FromArgb(148, 229, 166) },
+            { "London", Color.FromArgb(209, 36, 53) },
+            { "Berlin", Color.FromArgb(219, 45, 62) },
+            { "Madrid", Color.FromArgb(227, 91, 104) },
+            { "Moscow", Color.FromArgb(240, 168, 175) },
+            { "Beijing", Color.FromArgb(21, 146, 166) },
+            { "Tokyo", Color.FromArgb(23, 162, 184) },
+            { "Seoul", Color.FromArgb(137, 226, 240) }
+        };
+
+        void CustomizeSeriesPoint(ChartSeriesPointCustomizationSettings settings) {
+            settings.PointAppearance.Color = palette[settings.Point.Argument];
+        }
+
+        protected override async Task OnInitializedAsync() {
+            SalesData = (await Sales.GetSalesAsync()).Where(si => si.Region != "Africa" && si.Region != "Australia");
+        }
+
+    }
+</DemoPageSectionComponent>

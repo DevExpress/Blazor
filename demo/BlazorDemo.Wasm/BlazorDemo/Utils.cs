@@ -1,3 +1,6 @@
+using System;
+using System.Drawing;
+using System.IO;
 using Microsoft.Extensions.Configuration;
 
 namespace BlazorDemo {
@@ -20,7 +23,7 @@ namespace BlazorDemo {
         }
         public static string GetNorthwindSqliteConnectionString(IConfiguration config) {
             var dirPath = config.GetValue<string>("DataSourcesFolder");
-            return string.Format("Data Source={0}\\nwind.db", dirPath);
+            return $"Data Source={Path.Combine(dirPath, "nwind.db")}";
         }
 
         public static string GetIssuesConnectionString(IConfiguration config) {
@@ -28,7 +31,7 @@ namespace BlazorDemo {
         }
         public static string GetIssuesSqliteConnectionString(IConfiguration config) {
             var dirPath = config.GetValue<string>("DataSourcesFolder");
-            return string.Format("Data Source={0}\\issue-list.db", dirPath);
+            return $"Data Source={Path.Combine(dirPath, "issue-list.db")}";
         }
 
         public static string GetWorlcitiesConnectionString(IConfiguration config) {
@@ -36,7 +39,7 @@ namespace BlazorDemo {
         }
         public static string GetWorlcitiesSqliteConnectionString(IConfiguration config) {
             var dirPath = config.GetValue<string>("DataSourcesFolder");
-            return string.Format("Data Source={0}\\worldcities.db", dirPath);
+            return $"Data Source={Path.Combine(dirPath, "worldcities.db")}";
         }
 
         public static string GetGridLargeDataConnectionString(IConfiguration config) {

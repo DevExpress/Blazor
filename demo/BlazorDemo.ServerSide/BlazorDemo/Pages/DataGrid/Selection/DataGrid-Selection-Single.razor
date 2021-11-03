@@ -13,7 +13,7 @@
             <DxDataGridColumn Field="@nameof(Product.QuantityPerUnit)" />
             <DxDataGridCheckBoxColumn Field="@nameof(Product.Discontinued)" Width="120px" />
         </DxDataGrid>
-        <p class="demo-text w-100 mt-2 text-muted">Selected Product: <b>@(SelectedProduct == null ? "(none)" : SelectedProduct.ProductName)</b></p>
+        <p class="demo-text w-100 mt-2">Selected Product: <b>@(SelectedProduct == null ? "(none)" : SelectedProduct.ProductName)</b></p>
     }
 
     @code {

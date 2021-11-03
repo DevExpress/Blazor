@@ -63,8 +63,7 @@
     }
 
     void UpdateVisibility(string currentUri) {
-        var demoPageUrl = NavigationManager.ToAbsoluteUri(currentUri).GetLeftPart(UriPartial.Path).Replace(NavigationManager.BaseUri, "");
-        demoPage = Configuration.GetDemoPageByUrl(demoPageUrl) as DemoPage;
+        demoPage = Configuration.GetDemoPageByUrl(NavigationManager, currentUri) as DemoPage;
         demoPageSections = demoPage != null ? demoPage.PageSections : new DemoPageSection[0];
         Visible = demoPageSections.Count() > 1;
     }

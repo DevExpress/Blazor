@@ -12,10 +12,14 @@ namespace BlazorDemo.DataProviders {
         public WorldcitiesDataProvider(IDbContextFactory<WorldcitiesContext> contextFactory, IConfiguration configuration) : base(contextFactory, configuration) { }
 
         public async Task<IEnumerable<Country>> GetCountriesAsync(CancellationToken ct = default) {
-            return await LoadDataAsync<Country>("Countries", ct);
+            var list = await LoadDataAsync<Country>("Countries", ct);
+            list.Sort((x, y) => string.Compare(x.CountryName, y.CountryName));
+            return list;
         }
         public async Task<IEnumerable<City>> GetCitiesAsync(CancellationToken ct = default) {
-            return await LoadDataAsync<City>("Cities", ct);
+            var list = await LoadDataAsync<City>("Cities", ct);
+            list.Sort((x, y) => string.Compare(x.CityName, y.CityName));
+            return list;
         }
     }
 }

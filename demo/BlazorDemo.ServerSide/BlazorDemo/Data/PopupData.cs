@@ -1,6 +1,7 @@
 namespace BlazorDemo.Pages.Navigation.Popup {
     public static class Constants {
         public static readonly string Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.";
+        public static readonly string ContentShort = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus.";
 
         public static readonly string MarkupEULAString =
             @"<p>The terms of our license are fully outlined/described in the Developer Express Inc End User License Agreement (EULA) included with our product installations.

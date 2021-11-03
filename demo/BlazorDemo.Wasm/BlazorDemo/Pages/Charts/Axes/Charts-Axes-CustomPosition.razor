@@ -1,0 +1,62 @@
+﻿@using System.Drawing
+<DemoPageSectionComponent Id="Charts-Axes-CustomPosition" HasOptionsGroups=true>
+    <ChildContent>
+        @inject IExperementResultDataProvider Experement
+        <DxChart T="DataPoint"
+                 Data="points"
+                 Height=400
+                 Width="100%">
+            <DxChartScatterSeries T="DataPoint"
+                                  TArgument="double"
+                                  TValue="double"
+                                  ArgumentField="point=>point.Y"
+                                  ValueField="point=>point.X"
+                                  Filter=@(point => point.X < 0 && point.Y < 0 || point.X > 0 && point.Y > 0)
+                                  Color="@(Color.FromArgb(0, 169, 230))" />
+            <DxChartScatterSeries T="DataPoint"
+                                  TArgument="double"
+                                  TValue="double"
+                                  ArgumentField="point=>point.Y"
+                                  ValueField="point=>point.X"
+                                  Filter=@(point => point.X > 0 && point.Y < 0 || point.X < 0 && point.Y > 0)
+                                  Color="@(Color.FromArgb(220, 53, 69))">
+                <DxChartSeriesPoint Symbol=ChartPointSymbol.TriangleDown />
+            </DxChartScatterSeries>
+            <DxChartValueAxis EndOnTick=false
+                              Offset=@ValueAxisOffset
+                              CustomPosition=@ValueAxisCustomPosition>
+                <DxChartAxisRange StartValue=-20.0 EndValue=20.0 />
+            </DxChartValueAxis>
+            <DxChartArgumentAxis Offset=@ArgumentAxisOffset
+                                 CustomPosition=@ArgumentAxisCustomPosition>
+                <DxChartAxisRange StartValue=-20.0 EndValue=20.0 />
+            </DxChartArgumentAxis>
+            <DxChartLegend Visible="false" />
+        </DxChart>
+        
+        @code {
+            IEnumerable<DataPoint> points;
+            int ValueAxisOffset { get; set; } = 0;
+            double? ValueAxisCustomPosition { get; set; } = 0;
+            int ArgumentAxisOffset { get; set; } = 0;
+            double? ArgumentAxisCustomPosition { get; set; } = 0;
+        
+        
+        	protected override async Task OnInitializedAsync() {
+                points = await Experement.GetResultAsync();
+            }
+        }
+    </ChildContent>
+    <OptionsContent>
+			<OptionGroup Caption="Argument Axis">
+			    <OptionSpinEdit NullText="Bottom" ClearButtonDisplayMode=DataEditorClearButtonDisplayMode.Auto Label="Custom Position: " MinValue="-20" MaxValue="20" CssClass="ow-100" @bind-Value="@ArgumentAxisCustomPosition" BindValueMode="BindValueMode.OnInput" />
+			    <OptionSpinEdit Label="Offset: " DisplayFormat="0 px" MinValue="-500" MaxValue="500" CssClass="ow-100" @bind-Value="@ArgumentAxisOffset" BindValueMode="BindValueMode.OnInput" />
+			</OptionGroup>
+			<OptionGroup Caption="Value Axis">
+			    <OptionSpinEdit NullText="Left" ClearButtonDisplayMode=DataEditorClearButtonDisplayMode.Auto Label="Custom Position: " MinValue="-20" MaxValue="20" CssClass="ow-100" @bind-Value="@ValueAxisCustomPosition" BindValueMode="BindValueMode.OnInput" />
+			    <OptionSpinEdit Label="Offset: " DisplayFormat="0 px" MinValue="-500" MaxValue="500" CssClass="ow-100" @bind-Value="@ValueAxisOffset" BindValueMode="BindValueMode.OnInput" />
+			</OptionGroup>
+    </OptionsContent>
+</DemoPageSectionComponent>
+
+

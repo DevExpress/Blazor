@@ -1,0 +1,38 @@
+﻿<DemoPageSectionComponent Id="Scheduler-Templates-AppointmentTemplates">
+    <DxScheduler StartDate="@DateTime.Today" DataStorage="@DataStorage" CssClass="w-100">
+        <DxSchedulerWorkWeekView ShowWorkTimeOnly="true">
+            <HorizontalAppointmentTemplate>
+                <div class="card shadow-sm p-1 bg-white text-dark" style="width:100%; font-size: .925em; font-weight:600; box-shadow: .125rem .25rem rgba(34,34,34,0.15)">
+                    @context.Appointment.Subject
+                </div>
+            </HorizontalAppointmentTemplate>
+            <VerticalAppointmentTemplate>
+                <div class="card shadow-sm bg-white p-2" style="overflow: hidden; height: 100%;box-shadow: .125rem .25rem rgba(34,34,34,0.15)">
+                    <div><span class="badge badge-info mb-1 @context.Status.CssClass" style="white-space: pre-wrap;">@context.Status.Caption</span></div>
+                    <span class="text-dark pl-0 mb-1" style="font-weight:600; font-size: .925em;">@context.Appointment.Subject</span>
+                    <div style="height:100%; display:flex; flex-direction:column; justify-content:flex-end;">
+                        <div><span class="badge badge-light" style="white-space: pre-wrap;"><span class="dx-icon-time pr-1"></span>@context.Appointment.End.ToString("MMM dd HH:mm")</span></div>
+                    </div>
+                </div>
+            </VerticalAppointmentTemplate>
+        </DxSchedulerWorkWeekView>
+    </DxScheduler>
+
+    @code {
+        DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
+            AppointmentsSource = AppointmentCollection.GetAppointments(),
+            AppointmentMappings = new DxSchedulerAppointmentMappings() {
+                Type = "AppointmentType",
+                Start = "StartDate",
+                End = "EndDate",
+                Subject = "Caption",
+                AllDay = "AllDay",
+                Location = "Location",
+                Description = "Description",
+                LabelId = "Label",
+                StatusId = "Status",
+                RecurrenceInfo = "Recurrence"
+            }
+        };
+    }
+</DemoPageSectionComponent>

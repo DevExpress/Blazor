@@ -19,56 +19,57 @@ namespace BlazorDemo.Services {
 
     public class DemoReportSource : IDemoReportSource {
         List<ReportInfo> commonReports = new List<ReportInfo> {
-            new ReportInfo() { DisplayName = ReportNames.DrillDown, Name = ReportNames.DrillDownName, CreateAction = () => new Reports.DrillDown.Report() },
-            new ReportInfo() { DisplayName = ReportNames.EmployeePerformanceReview, Name = ReportNames.EmployeePerformanceReviewName, CreateAction = () => new Reports.EmployeePerformanceReview.Report() },
-            new ReportInfo() { DisplayName = ReportNames.VehicleInspectionReport, Name = ReportNames.VehicleInspectionReportName, CreateAction = () => new Reports.VehicleInspectionReport.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.DrillDown, Name = XtraReportsDemos.ReportNames.DrillDownName, CreateAction = () => new XtraReportsDemos.DrillDownReport.DrillDownReport() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.EmployeePerformanceReview, Name = XtraReportsDemos.ReportNames.EmployeePerformanceReviewName, CreateAction = () => new XtraReportsDemos.EmployeePerformanceReview.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.VehicleInspectionReport, Name = XtraReportsDemos.ReportNames.VehicleInspectionReportName, CreateAction = () => new XtraReportsDemos.VehicleInspectionReport.Report() },
 
-            new ReportInfo() { DisplayName = ReportNames.HierarchicalReport, Name = ReportNames.HierarchicalReportName, CreateAction = () => new Reports.HierarchicalReport.Report() },
-            new ReportInfo() { DisplayName = ReportNames.TableReport, Name = ReportNames.TableReportName, CreateAction = () => new Reports.TableReport.Report() },
-            new ReportInfo() { DisplayName = ReportNames.MasterDetailReport, Name = ReportNames.MasterDetailReportName, CreateAction = () => new Reports.MasterDetailReport.Report() },
-            new ReportInfo() { DisplayName = ReportNames.Subreports, Name = ReportNames.SubreportsName, CreateAction = () => new Reports.Subreports.MasterReport() },            
-            new ReportInfo() { DisplayName = ReportNames.ReportMergingWithPdf, Name = ReportNames.ReportMergingWithPdfName, CreateAction = () => new Reports.ReportMergingWithPdf.Report() },
-            new ReportInfo() { DisplayName = ReportNames.SideBySideReports, Name = ReportNames.SideBySideReportsName, CreateAction = () => new Reports.SideBySideReports.EmployeeComparisonReport() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.HierarchicalReport, Name = XtraReportsDemos.ReportNames.HierarchicalReportName, CreateAction = () => new XtraReportsDemos.HierarchicalReport.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.TableReport, Name = XtraReportsDemos.ReportNames.TableReportName, CreateAction = () => new XtraReportsDemos.TableReport.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.MasterDetailReport, Name = XtraReportsDemos.ReportNames.MasterDetailReportName, CreateAction = () => new XtraReportsDemos.MasterDetailReport.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.Subreports, Name = XtraReportsDemos.ReportNames.SubreportsName, CreateAction = () => new XtraReportsDemos.Subreports.MasterReport() },            
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.ReportMergingWithPdf, Name = XtraReportsDemos.ReportNames.ReportMergingWithPdfName, CreateAction = () => new XtraReportsDemos.ReportMergingWithPdf.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.EmbeddedPDFContent, Name = XtraReportsDemos.ReportNames.EmbeddedPDFContentName, CreateAction = () => new XtraReportsDemos.EmbeddedPDFContent.Invoice() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.SideBySideReports, Name = XtraReportsDemos.ReportNames.SideBySideReportsName, CreateAction = () => new XtraReportsDemos.SideBySideReports.EmployeeComparisonReport() },
 
-            new ReportInfo() { DisplayName = ReportNames.BalanceSheetReport, Name = ReportNames.BalanceSheetReportName, CreateAction = () => new Reports.BalanceSheetReport.Report() },
-            new ReportInfo() { DisplayName = ReportNames.NorthwindTraders_Invoice, Name = ReportNames.NorthwindTraders_InvoiceName, CreateAction = () => new Reports.NorthwindTraders.InvoiceReport() },
-            new ReportInfo() { DisplayName = ReportNames.ProfitAndLoss, Name = ReportNames.ProfitAndLossName, CreateAction = () => new Reports.ProfitAndLoss.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.BalanceSheetReport, Name = XtraReportsDemos.ReportNames.BalanceSheetReportName, CreateAction = () => new XtraReportsDemos.BalanceSheetReport.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.NorthwindTraders_Invoice, Name = XtraReportsDemos.ReportNames.NorthwindTraders_InvoiceName, CreateAction = () => new XtraReportsDemos.NorthwindTraders.InvoiceReport() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.ProfitAndLoss, Name = XtraReportsDemos.ReportNames.ProfitAndLossName, CreateAction = () => new XtraReportsDemos.ProfitAndLossReport.Report() },
 
-            new ReportInfo() { DisplayName = ReportNames.BarCodes_BarcodeTypes, Name = ReportNames.BarCodes_BarcodeTypesName, CreateAction = () => new Reports.BarCodes.BarCodeTypesReport() },
-            //new ReportInfo() { DisplayName = ReportNames.Shape, Name = ReportNames.ShapeName, CreateAction = () => new Reports.Shape.Report() },
-            new ReportInfo() { DisplayName = ReportNames.Chart, Name = ReportNames.ChartName, CreateAction = () => new Reports.Charts.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.BarCodes_BarcodeTypes, Name = XtraReportsDemos.ReportNames.BarCodes_BarcodeTypesName, CreateAction = () => new XtraReportsDemos.BarCodes.BarCodeTypesReport() },
+            //new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.Shape, Name = XtraReportsDemos.ReportNames.ShapeName, CreateAction = () => new Reports.Shape.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.Chart, Name = XtraReportsDemos.ReportNames.ChartName, CreateAction = () => new XtraReportsDemos.Charts.Report() },
         };
         List<ReportInfo> jsBasedReports = new List<ReportInfo> {            
-            new ReportInfo() { DisplayName = ReportNames.CharacterComb, Name = ReportNames.CharacterCombName, CreateAction = () => new Reports.CharacterComb.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.CharacterComb, Name = XtraReportsDemos.ReportNames.CharacterCombName, CreateAction = () => new XtraReportsDemos.CharacterComb.Report() },
             
-            new ReportInfo() { DisplayName = ReportNames.CalculatedFields, Name = ReportNames.CalculatedFieldsName, CreateAction = () => new Reports.CalculatedFields.Report() },
-            new ReportInfo() { DisplayName = ReportNames.MailMerge, Name = ReportNames.MailMergeName, CreateAction = () => new Reports.MailMerge.Report() },
-            new ReportInfo() { DisplayName = ReportNames.MultiColumn, Name = ReportNames.MultiColumnName, CreateAction = () => new Reports.MultiColumnReport.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.CalculatedFields, Name = XtraReportsDemos.ReportNames.CalculatedFieldsName, CreateAction = () => new XtraReportsDemos.CalculatedFieldsReport.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.MailMerge, Name = XtraReportsDemos.ReportNames.MailMergeName, CreateAction = () => new XtraReportsDemos.MailMerge.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.MultiColumn, Name = XtraReportsDemos.ReportNames.MultiColumnName, CreateAction = () => new XtraReportsDemos.MultiColumnReport.Report() },
 
-            new ReportInfo() { DisplayName = ReportNames.NorthwindTraders_Products, Name = ReportNames.NorthwindTraders_ProductsName, CreateAction = () => new Reports.NorthwindTraders.ProductListReport() },
-            new ReportInfo() { DisplayName = ReportNames.NorthwindTraders_Catalog, Name = ReportNames.NorthwindTraders_CatalogName, CreateAction = () => new Reports.NorthwindTraders.CatalogReport() },
-            new ReportInfo() { DisplayName = ReportNames.ShrinkGrow, Name = ReportNames.ShrinkGrowName, CreateAction = () => new Reports.ShrinkGrow.Report() },
-            new ReportInfo() { DisplayName = ReportNames.Anchor, Name = ReportNames.AnchorName, CreateAction = () => new Reports.AnchorVertical.Report() },
-            new ReportInfo() { DisplayName = ReportNames.HiddenColumns, Name = ReportNames.HiddenColumnsName, CreateAction = () => new Reports.IListDataSource.Report() },
-            new ReportInfo() { DisplayName = ReportNames.SalesSummary, Name = ReportNames.SalesSummaryName, CreateAction = () => new Reports.SalesSummary.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.NorthwindTraders_Products, Name = XtraReportsDemos.ReportNames.NorthwindTraders_ProductsName, CreateAction = () => new XtraReportsDemos.NorthwindTraders.ProductListReport() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.NorthwindTraders_Catalog, Name = XtraReportsDemos.ReportNames.NorthwindTraders_CatalogName, CreateAction = () => new XtraReportsDemos.NorthwindTraders.CatalogReport() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.ShrinkGrow, Name = XtraReportsDemos.ReportNames.ShrinkGrowName, CreateAction = () => new XtraReportsDemos.ShrinkGrow.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.Anchor, Name = XtraReportsDemos.ReportNames.AnchorName, CreateAction = () => new XtraReportsDemos.AnchorVertical.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.HiddenColumns, Name = XtraReportsDemos.ReportNames.HiddenColumnsName, CreateAction = () => new XtraReportsDemos.IListDatasource.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.SalesSummary, Name = XtraReportsDemos.ReportNames.SalesSummaryName, CreateAction = () => new XtraReportsDemos.SalesSummary.Report() },
 
-            new ReportInfo() { DisplayName = ReportNames.Sparkline, Name = ReportNames.SparklineName, CreateAction = () => new Reports.Sparkline.Report() },
-            new ReportInfo() { DisplayName = ReportNames.CrossBands, Name = ReportNames.CrossBandsName, CreateAction = () => new Reports.CrossBandControls.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.Sparkline, Name = XtraReportsDemos.ReportNames.SparklineName, CreateAction = () => new XtraReportsDemos.Sparkline.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.CrossBands, Name = XtraReportsDemos.ReportNames.CrossBandsName, CreateAction = () => new XtraReportsDemos.CrossBandControls.Report() },
         };
         List<ReportInfo> nativeViewerReports = new List<ReportInfo> {            
-            new ReportInfo() { DisplayName = ReportNames.ProductLabels, Name = ReportNames.ProductLabelsName, CreateAction = () => new Reports.BarCodes.ProductLabelsReport() },
-            new ReportInfo() { DisplayName = ReportNames.ReportMerging, Name = ReportNames.ReportMergingName, CreateAction = () => new Reports.ReportMerging.MergedReport() },
-            new ReportInfo() { DisplayName = ReportNames.InteractiveSorting, Name = ReportNames.InteractiveSortingName, CreateAction = () => new Reports.InteractiveSorting.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.ProductLabels, Name = XtraReportsDemos.ReportNames.ProductLabelsName, CreateAction = () => new XtraReportsDemos.BarCodes.ProductLabelsReport() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.ReportMerging, Name = XtraReportsDemos.ReportNames.ReportMergingName, CreateAction = () => new XtraReportsDemos.ReportMerging.MergedReport() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.InteractiveSorting, Name = XtraReportsDemos.ReportNames.InteractiveSortingName, CreateAction = () => new XtraReportsDemos.InteractiveSorting.Report() },
 
-            new ReportInfo() { DisplayName = ReportNames.PivotGridAndChart, Name = ReportNames.PivotGridAndChartName, CreateAction = () => new Reports.PivotGridAndChart.Report() },
-            new ReportInfo() { DisplayName = ReportNames.LargeDataset, Name = ReportNames.LargeDatasetName, CreateAction = () => new Reports.CachedDocumentSource.ReportWeb() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.PivotGridAndChart, Name = XtraReportsDemos.ReportNames.PivotGridAndChartName, CreateAction = () => new XtraReportsDemos.PivotGridAndChart.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.LargeDataset, Name = XtraReportsDemos.ReportNames.LargeDatasetName, CreateAction = () => new XtraReportsDemos.CachedDocumentSourceReport.ReportWeb() },
 
-            new ReportInfo() { DisplayName = ReportNames.SwissQRBill, Name = ReportNames.SwissQRBillName, CreateAction = () => new Reports.SwissQRBill.SwissQRBill() },
-            new ReportInfo() { DisplayName = ReportNames.RollPaper, Name = ReportNames.RollPaperName, CreateAction = () => new Reports.RollPaper.Report() },
-            new ReportInfo() { DisplayName = ReportNames.RestaurantMenu, Name = ReportNames.RestaurantMenuName, CreateAction = () => new Reports.RestaurantMenu.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.SwissQRBill, Name = XtraReportsDemos.ReportNames.SwissQRBillName, CreateAction = () => new XtraReportsDemos.SwissQRCode.SwissQRBill() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.RollPaper, Name = XtraReportsDemos.ReportNames.RollPaperName, CreateAction = () => new XtraReportsDemos.RollPaper.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.RestaurantMenu, Name = XtraReportsDemos.ReportNames.RestaurantMenuName, CreateAction = () => new XtraReportsDemos.RestaurantMenu.Report() },
 
-            new ReportInfo() { DisplayName = ReportNames.CrossBandContent, Name = ReportNames.CrossBandContentName, CreateAction = () => new Reports.CrossBandContent.Report() },
-            new ReportInfo() { DisplayName = ReportNames.PdfSignature, Name = ReportNames.PdfSignatureName, CreateAction = () => new Reports.PdfVisualSignature.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.CrossBandContent, Name = XtraReportsDemos.ReportNames.CrossBandContentName, CreateAction = () => new XtraReportsDemos.CrossBandContent.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.PdfVisualSignature, Name = XtraReportsDemos.ReportNames.PdfVisualSignatureName, CreateAction = () => new XtraReportsDemos.PdfVisualSignature.Report() },
         };
 
         public Dictionary<string, string> GetReportList() {

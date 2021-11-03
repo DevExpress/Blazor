@@ -2,14 +2,14 @@
 @inject DemoConfiguration Configuration
 @inject NavigationManager NavigationManager
 
-<div class="breadcrumbs-items">
+<div class="items">
     @foreach(var key in Items.Keys) {
         @if(!string.IsNullOrEmpty(Items[key])) {
-            <a class="text-dark" href="@Items[key]">@key</a>
+            <a href="@Items[key]">@key</a>
         } else {
-            <span class="text-dark">@key</span>
+            <span>@key</span>
         }
-        <span class="separator border border-dark"></span>
+        <span class="separator"></span>
     }
 </div>
 
@@ -27,8 +27,7 @@
     void UpdateItems(string currentUri) {
         Items.Clear();
 
-        var demoPageUrl = NavigationManager.ToAbsoluteUri(currentUri).GetLeftPart(UriPartial.Path).Replace(NavigationManager.BaseUri, "");
-        var demoPage = Configuration.GetDemoPageByUrl(demoPageUrl);
+        var demoPage = Configuration.GetDemoPageByUrl(NavigationManager, currentUri);
         DemoRootPage rootDemoPage = null;
         if(demoPage is DemoRootPage)
             rootDemoPage = (DemoRootPage)demoPage;

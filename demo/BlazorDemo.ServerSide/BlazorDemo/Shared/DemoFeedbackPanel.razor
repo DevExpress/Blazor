@@ -58,8 +58,7 @@
         StateHasChanged();
     }
     void UpdateCurrentDemoPage(string currentUri) {
-        var demoPageUrl = NavigationManager.ToAbsoluteUri(NavigationManager.Uri).GetLeftPart(UriPartial.Path).Replace(NavigationManager.BaseUri, "");
-        CurrentDemoPage = Configuration.GetDemoPageByUrl(demoPageUrl);
+        CurrentDemoPage = Configuration.GetDemoPageByUrl(NavigationManager, currentUri);
     }
 
     public string GetSupportForumUrl() {

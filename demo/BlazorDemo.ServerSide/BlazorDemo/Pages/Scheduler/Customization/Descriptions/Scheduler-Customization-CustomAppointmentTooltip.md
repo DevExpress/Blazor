@@ -1,3 +1,0 @@
-The DevExpress Scheduler allows you to customize tooltips that appear when a user clicks appointments. Use the [AppointmentTooltipTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.AppointmentTooltipTemplate) property to specify custom content and layout. In the markup for this property, use the `context` parameter to access appointment data. This parameter returns a [SchedulerAppointmentTooltipInfo](https://docs.devexpress.com/Blazor/DevExpress.Blazor.SchedulerAppointmentTooltipInfo) object. 
-
-You can also use the [ShowAppointmentTooltip](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.ShowAppointmentTooltip) property to show or hide the tooltip.

@@ -1,21 +1,21 @@
 ﻿<DemoPageSectionComponent Id="Navigation-ContextMenu-Overview">
     <div class="dxbs-preventsel target-container" @oncontextmenu="((e) => ContextMenu.ShowAsync(e))" @oncontextmenu:preventDefault>
         <p class="target-caption">RIGHT-CLICK OR LONG PRESS TO SHOW THE CONTEXT MENU</p>
-        <p class="demo-text text-muted">Clicked item: <b>@(ClickedItem != null ? ClickedItem : "None")</b></p>
+        <p class="demo-text">Clicked item: <b>@(ClickedItem != null ? ClickedItem : "None")</b></p>
     </div>
 
     <DxContextMenu @ref="@ContextMenu" ItemClick="@OnItemClick">
         <Items>
-            <DxContextMenuItem Text="Sort By" IconUrl="@(StaticAssetUtils.GetImagePath("Sort_by.svg"))">
+            <DxContextMenuItem Text="Sort By" IconCssClass="menu-icon-sort-by menu-icon">
                 <Items>
                     <DxContextMenuItem Text="Name"></DxContextMenuItem>
                     <DxContextMenuItem Text="Size"></DxContextMenuItem>
                     <DxContextMenuItem Text="Type"></DxContextMenuItem>
                 </Items>
             </DxContextMenuItem>
-            <DxContextMenuItem Text="Copy" IconUrl="@(StaticAssetUtils.GetImagePath("Copy.svg"))" BeginGroup="true"></DxContextMenuItem>
-            <DxContextMenuItem Text="Cut" IconUrl="@(StaticAssetUtils.GetImagePath("Cut.svg"))"></DxContextMenuItem>
-            <DxContextMenuItem Text="Remove" IconUrl="@(StaticAssetUtils.GetImagePath("Clear.svg"))"></DxContextMenuItem>
+            <DxContextMenuItem Text="Copy" IconCssClass="menu-icon-copy menu-icon" BeginGroup="true"></DxContextMenuItem>
+            <DxContextMenuItem Text="Cut" IconCssClass="menu-icon-cut menu-icon"></DxContextMenuItem>
+            <DxContextMenuItem Text="Remove" IconCssClass="menu-icon-clear menu-icon"></DxContextMenuItem>
             <DxContextMenuItem Text="Select All" BeginGroup="true"></DxContextMenuItem>
         </Items>
     </DxContextMenu>

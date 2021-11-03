@@ -1,0 +1,24 @@
+﻿<DemoPageSectionComponent Id="Grid-PagingAndScrolling-HorizontalScrolling">
+    @inject NwindDataService NwindDataService
+
+    <DxGrid Data="@Data">
+        <Columns>
+            <DxGridDataColumn FieldName="ShipName" Width="250px" />
+            <DxGridDataColumn FieldName="ShipAddress" Width="350px" />
+            <DxGridDataColumn FieldName="ShipCity" Width="200px" />
+            <DxGridDataColumn FieldName="ShipPostalCode" Width="150px" />
+            <DxGridDataColumn FieldName="ShipCountry" Width="200px" />
+            <DxGridDataColumn FieldName="Freight" Width="100px" />
+            <DxGridDataColumn FieldName="OrderDate" DisplayFormat="d" Width="120px" MinWidth="80" />
+            <DxGridDataColumn FieldName="ShippedDate" DisplayFormat="d" Width="120px" MinWidth="80" />
+        </Columns>
+    </DxGrid>
+
+    @code {
+        object Data { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetOrdersAsync();
+        }
+    }
+</DemoPageSectionComponent>
