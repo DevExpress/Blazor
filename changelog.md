@@ -118,6 +118,16 @@ Our Blazor Grid automatically aligns text within data cells/footer cells based o
 
 You can now access the processed data item within data-related event handlers ([CustomSort](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomSort), [CustomGroup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomGroup), [CustomSummary](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomSummary), etc) and the [CellDisplayTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.CellDisplayTemplate).
 
+### Data Grid
+
+While most of our development effort is focused on our Next-Gen Blazor Grid control (`DxGrid`), we have extended the capabilities of our original Blazor Data Grid (`DxDataGrid`) with the following features:
+
+* We optimized JS interop operations for speed and stability.
+* A column's [Visible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.Visible), [SortIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.SortIndex), [SortOrder](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.SortOrder), [GroupIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.GroupIndex), [VisibleIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.VisibleIndex) properties now support two-way data binding.
+* You can now bind the grid to a dynamic object with compound property names.
+* [HtmlDataCellDecoration](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.HtmlDataCellDecoration) event now supports `INotifyPropertyChanged` data objects.
+* You can now create/render grid columns based on a condition.
+
 ### Chart
 
 #### New Pie/Donut Chart Component
