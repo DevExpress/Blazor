@@ -2,6 +2,52 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 21.2.4
+
+### Support for .NET 6
+
+DevExpress Blazor UI components now support .NET 6.0 (in addition to .NET 5.0). We’ve also updated the DevExpress Template Gallery to include new project templates for .NET 6.0.
+ 
+### New Blazing Dark Theme
+
+In v21.2.4 we introduce a new **Blazing Dark** [theme](https://docs.devexpress.com/Blazor/401523/common-concepts/customize-appearance/themes) for Blazor applications. This theme was added to our [online demos](https://demos.devexpress.com/blazor/) and Project Wizard.
+
+### Grid
+
+#### Conditional Formatting
+
+Handle the new [CustomizeElement](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomizeElement) event to customize the appearance of grid cells and rows according to their values. ([Demo](https://demos.devexpress.com/blazor/Grid/Customization#Rows))
+
+#### Handle Row Clicks
+
+Use the Grid’s [RowClick](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.RowClick) and [RowDoubleClick](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.RowDoubleClick) events to handle user clicks and double-clicks on grid rows.
+
+### Chart
+
+#### Handle Series and Point Clicks
+
+We added the [SeriesClick](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.SeriesClick) and [PointClick](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartBase.PointClick) events that allow you to handle user clicks on series and series points, respectively.
+
+#### Hover Modes
+
+You can now use a new `HoverMode` property that specifies which series elements to highlight when a user hovers over a chart element. This property was added to all series classes (for instance, [DxChartLineSeries.HoverMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartLineSeriesBase-3.HoverMode)), legend, and point objects. 
+ 
+### Date Edit - Configure Format for the Time Section
+
+The new [TimeSectionScrollPickerFormat](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1.TimeSectionScrollPickerFormat) property allows you to apply a custom format to values in the time section.
+ 
+### DropDown - Prevent Close on Outside Clicks
+
+Use the new [PeventCloseOnPositionTargetClick](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDown.PreventCloseOnPositionTargetClick) property to specify whether the drop-down window should be closed when a user clicks the position target element.
+
+### Breaking Change
+
+[1047433](https://supportcenter.devexpress.com/ticket/details/t1047433/scheduler-the-schedulerdayofweekheadercellinfo-resources-property-has-been-renamed-to): Scheduler - The SchedulerDayOfWeekHeaderCellInfo.Resources property has been renamed to SchedulerDayOfWeekHeaderCellInfo.Resource
+
+### Resolved Issues
+
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=21.2.4&endBuildName=21.2.4&buildsMode=Single&hasPlatformsWithProducts=true) a complete list of issues resolved in v21.2.4.
+
 # 21.2.3
 
 ### New Blazor DropDown
