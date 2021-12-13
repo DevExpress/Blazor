@@ -32,7 +32,7 @@
 
     public string GetMainLinkUrl(DemoSearchResult result) {
         if(result.Section != null)
-            return result.Page.Url + "#" + result.Section.Id;
+            return DemoConfiguration.ArePagesAsSections(result.Page) ? result.Section.Uri : result.Page.Url + "#" + result.Section.Id;
         else if(result.Page is DemoRootPage)
             return DemoConfiguration.GetRootDemoPageUrl((DemoRootPage)result.Page);
         return result.Page.Url;

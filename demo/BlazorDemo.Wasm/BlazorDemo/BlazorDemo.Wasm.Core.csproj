@@ -21,7 +21,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor" Version="21.2.3" />
+    <PackageReference Include="DevExpress.Blazor" Version="21.2.4" />
     
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +93,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\CodeSnippets\*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataSources\GlobalTemperatureIndex.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Target Name="ControllersCreate" BeforeTargets="PreBuildEvent" Condition="!Exists('Controllers')">
     <Exec Command="mklink /J &quot;Controllers&quot; &quot;..//BlazorDemo.ServerSide//Controllers&quot;" />

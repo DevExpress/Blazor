@@ -5,8 +5,7 @@
     -webkit-mask-image: url("images/undo.svg");
     mask-image: url("images/undo.svg");
     margin: 0 8px 0 0;
-    color: #fff;
-    background-color: currentColor
+    background-color: currentColor;
 }
 
 /*BeginHide*/
@@ -16,5 +15,5 @@
     -webkit-mask-image: url("images/redo.svg");
     mask-image: url("images/redo.svg");
     margin: 0 0 0 8px;
-    background-color: currentColor
+    background-color: currentColor;
 }

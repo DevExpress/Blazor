@@ -5,7 +5,7 @@
     </OptionsContent>
     <ChildContent>
         <div id="dropdown-position-target-container">
-            <DxButton Click="() => IsOpen = true">SHOW A DROPDOWN</DxButton>
+            <DxButton Click="() => IsOpen = !IsOpen">SHOW A DROPDOWN</DxButton>
         </div>
 
         <DxDropDown
@@ -16,7 +16,8 @@
             Width="max(25vw, 250px)"
             PositionTarget="#dropdown-position-target-container"
             PositionMode="@PositionMode"
-            CloseMode="DropDownCloseMode.Close">
+            CloseMode="DropDownCloseMode.Close"
+            PreventCloseOnPositionTargetClick="true">
         </DxDropDown>
     </ChildContent>
 

@@ -1,0 +1,55 @@
+﻿@using BlazorDemo.Configuration
+@inject DemoConfiguration Configuration
+
+    @if(Page.Pages != null && Page.Pages.Length > 0) {
+        <DxTreeViewNode Text="@Page.Title" CssClass="@GetItemCssClass(Page)" NavigateUrl="@Page.Url" BadgeText="@GetBadgeText(Page)">
+            <Nodes>
+                @foreach(var (childPage, rootIndex) in Page.Pages.Select((p, i) => (p, i))) {
+                    <NavMenuLeaf Page="@childPage"></NavMenuLeaf>
+                }
+            </Nodes>
+        </DxTreeViewNode>
+    } else {
+        <DxTreeViewNode Text="@Page.Title" NavigateUrl="@Page.Url" BadgeText="@GetBadgeText(Page)">
+        </DxTreeViewNode>
+    }
+
+
+    @code {
+        [Parameter]
+        public DemoPageBase Page { get; set; }
+
+        protected string GetBadgeText(DemoPageSection page) {
+            if(page.IsPreview)
+                return "CTP";
+            if(page.IsNew)
+                return "New";
+            if(page.IsUpdated)
+                return "Upd";
+            if(page is DemoRootPage rootPage)
+                return GetBadgeTextFromChildren(rootPage.Pages);            
+            if(page is DemoPage demoPage && demoPage.GetPageSections != null)
+                return GetBadgeTextFromChildren(demoPage.GetPageSections);
+            return string.Empty;
+        }
+
+        string GetBadgeTextFromChildren(IReadOnlyCollection<DemoPageSection> children) {
+            if(children.Count == 0)
+                return string.Empty;
+            var badges = children.Select(GetBadgeText).ToArray();
+            if(badges.All(p => p == "CTP"))
+                return "CTP";
+            if(badges.All(p => p == "New"))
+                return "New";
+            if(badges.Any(p => p == "New" || p == "Upd"))
+                return "Upd";
+            return string.Empty;
+        }
+
+        protected string GetItemCssClass(DemoPageBase page) {
+            if(page.IsPreview)
+                return "item-ctp";
+            return "";
+        }
+
+    }

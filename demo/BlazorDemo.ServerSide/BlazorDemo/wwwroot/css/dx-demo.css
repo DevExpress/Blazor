@@ -356,6 +356,10 @@ body,
     padding: 0 1rem;
 }
 
+.dxbs-tree.sidebar-tree > ul.nav ul.nav ul.nav .nav-link {
+    padding: 0 1rem 0 2rem;
+}
+
 .dxbs-tree.sidebar-tree .badge {
     margin: 0;
     border: 0 !important;
@@ -937,6 +941,15 @@ body,
 
 .theme-lumen .demo-page-section > .card > .card-header > .nav-tabs > .nav-item > .nav-link {
     margin-top: 0;
+}
+
+.theme-materia .invalid .dxbs-input-group input.form-control,
+.theme-materia .invalid .dxbs-input-group textarea.form-control {
+    box-shadow: 0 2px 0 #e51c23;
+}
+.theme-materia .modified.valid .dxbs-input-group input.form-control,
+.theme-materia .modified.valid .dxbs-input-group textarea.form-control {
+    box-shadow: 0 2px 0 #4caf50;
 }
 
 .demo-page-section > .card > .card-body {
@@ -1553,12 +1566,10 @@ body,
 }
 
 /* Misc */
-.valid.modified:not([type=checkbox]) {
-    outline: 1px solid #26b050;
-}
 
-.invalid {
-    outline: 1px solid red;
+.validation-errors {
+    padding-left: 0;
+    list-style-position: inside;
 }
 
 .validation-message {

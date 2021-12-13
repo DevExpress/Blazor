@@ -37,7 +37,7 @@ namespace BlazorDemo.Configuration {
             var results = new List<DemoSearchResult>();
             foreach(var page in rootPage.Pages) {
                 int resultCount = results.Count;
-                foreach(var section in page.PageSections)
+                foreach(var section in page.GetPageSections)
                     results.AddRange(GetRes(requests, page, section, DemoSearchAgregator.HighlightOccurences(section.Title, requests)));
                 if(results.Count == resultCount)
                     results.AddRange(GetRes(requests, page, null, DemoSearchAgregator.HighlightOccurences(page.Title, requests)));
@@ -60,7 +60,7 @@ namespace BlazorDemo.Configuration {
             int keywordRank = 0;
             foreach(var request in requests) {
                 int requestRank = -1;
-                if(section != null && page is DemoPage && ((DemoPage)page).PageSections.Length > 1 && DemoSearchAgregator.CalculateRank(request, GetKeywordsRankList(section), out keywordRank))
+                if(section != null && page is DemoPage && ((DemoPage)page).GetPageSections.Length > 1 && DemoSearchAgregator.CalculateRank(request, GetKeywordsRankList(section), out keywordRank))
                     requestRank += keywordRank;
                 if(page != null && DemoSearchAgregator.CalculateRank(request, GetKeywordsRankList(page), out keywordRank))
                     requestRank += keywordRank;

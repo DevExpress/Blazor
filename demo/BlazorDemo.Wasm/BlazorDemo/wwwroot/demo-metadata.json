@@ -737,6 +737,10 @@
           "Description": "DevExpress Blazor  Data Grid can display a toolbar that aggregates buttons and commands related to the Data Grid and its data.",
           "AdditionalCodeFiles": [
             {
+              "Title": "CSS",
+              "Path": "Pages\\DataGrid\\Toolbar\\DataGrid-Toolbar.razor.css"
+            },
+            {
               "Title": "Employee.cs",
               "Path": "Data\\Northwind\\Employee.Editable.cs"
             },
@@ -874,7 +878,7 @@
           "Url": "Grid/DataBinding",
           "Title": "Data Binding",
           "Keywords": "blazor, components, data grid, datagrid, grid, data bind, data binding, bind to data, asynchronous data binding, bind to data asynchronously, async support, custom data source, custom data binding, web api support, bind to web api, remote data source, large data source, devexpress, demo, sample, example",
-          "Description": "The DevExpress Data Grid for Blazor supports synchronous and asynchronous data binding to various data sources (including custom and large data sources).",
+          "Description": "The DevExpress Grid for Blazor supports synchronous and asynchronous data binding to various data sources (including custom and large data sources).",
           "PageSections": [
             {
               "Id": "Data",
@@ -951,7 +955,7 @@
           "Url": "Grid/Sorting",
           "Title": "Sort Data",
           "Keywords": "blazor, components, data grid, datagrid, grid, grid sort, grid sorting, datagrid sort, datagrid sorting, devexpress, demo, sample, example",
-          "Description": "DevExpress Blazor Data Grid supports sorting data against multiple columns. A column's current sort order is indicated by a sort glyph displayed in the column header.",
+          "Description": "The DevExpress Grid for Blazor supports sorting data against multiple columns. A column's current sort order is indicated by a sort glyph displayed in the column header.",
           "AdditionalCodeFiles": [
             {
               "Title": "Customer.cs",
@@ -972,7 +976,7 @@
           "Url": "Grid/Grouping",
           "Title": "Group Data",
           "Keywords": "blazor, components, data grid, datagrid, grid, grouping, groups, drag-and-drop, devexpress, demo, sample, example",
-          "Description": "The DevExpress Data Grid for Blazor component enables you to drag-and-drop grid headers or use grouping API to group data against multiple data columns.",
+          "Description": "The DevExpress Grid for Blazor component enables you to drag-and-drop grid headers or use grouping API to group data against multiple data columns.",
           "PageSections": [
             {
               "Id": "GroupData",
@@ -1066,9 +1070,9 @@
           "Id": "Editing",
           "Url": "Grid/EditData",
           "Title": "Edit Data",
-          "IsNew":  true,
+          "IsNew": true,
           "Keywords": "blazor, components, data grid, datagrid, grid, data editing, edit data, edit form, popup edit form, add rows, add new row, insert row, remove rows, delete rows, edit row values, edit modes, edit options, command column, cascade editors, cascading combobox, cascade logic, devexpress, demo, sample, example",
-          "Description": "DevExpress Blazor Data Grid allows users to edit data in the edit form or in the popup edit form.",
+          "Description": "The DevExpress Grid for Blazor allows users to edit data in the edit form or in the popup edit form.",
           "PageSections": [
             {
               "Id": "EditModes",
@@ -1151,7 +1155,7 @@
           "Url": "Grid/Filtering",
           "Title": "Filter Data",
           "Keywords": "blazor, components, data grid, datagrid, grid, grid filter, grid filtering, datagrid filter, datagrid filtering, data filter, devexpress, demo, sample, example",
-          "Description": "DevExpress Blazor Data Grid supports the Filter Row that allows users to filter data.",
+          "Description": "The DevExpress Grid for Blazor supports the Filter Row that allows users to filter data.",
           "PageSections": [
             {
               "Id": "FilterRow",
@@ -1187,7 +1191,7 @@
           "Url": "Grid/Summary",
           "Title": "Summary",
           "Keywords": "blazor, components, data grid, datagrid, grid, summary, summaries, totals, total values, total summary, total summaries, group summary, group summaries, data summaries, aggregates, aggregate functions, devexpress, demo, sample, example",
-          "Description": "The DevExpress Data Grid for Blazor supports total and group summaries.",
+          "Description": "The DevExpress Grid for Blazor supports total and group summaries.",
           "PageSections": [
             {
               "Id": "Total",
@@ -1390,7 +1394,7 @@
           "Url": "Grid/Templates",
           "Title": "Templates",
           "Keywords": "blazor, components, data grid, datagrid, grid, template, cell template, cell editor template, row preview template, preview sections, custom row appearance, custom cell appearance, custom content in rows, custom content in cells, devexpress, demo, sample, example",
-          "Description": "DevExpress Blazor Data Grid supports templates that allow you to customize cell appearance, the edit form’s layout, and row preview sections.",
+          "Description": "The DevExpress Grid for Blazor supports templates that allow you to customize cell appearance, the edit form’s layout, and row preview sections.",
           "PageSections": [
             {
               "Id": "Column",
@@ -1439,12 +1443,48 @@
           ]
         },
         {
+          "Id": "Customization",
+          "Url": "Grid/Customization",
+          "Title": "Customization",
+          "Keywords": "Blazor, components, data grid, datagrid, grid, template, customization, appearance customization, style, conditional formatting, conditional data highlighting, row style, row color, column style, cell style, custom style, html decoration, html row decoration, html cell decoration, html attributes, devexpress, demo, sample, example",
+          "Description": "The DevExpress Grid for Blazor allows you to customize the appearance of grid cells and rows according to their values.",
+          "PageSections": [
+            {
+              "Id": "Rows",
+              "Title": "Rows",
+              "IsNew": true,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Invoice.cs",
+                  "Path": "Data\\Northwind\\Invoice.cs"
+                },
+                {
+                  "Title": "Customer.cs",
+                  "Path": "Data\\Northwind\\Customer.cs"
+                },
+                {
+                  "Title": "NwindDataService.Invoices.cs",
+                  "Path": "Services\\NwindDataService.Invoices.cs"
+                },
+                {
+                  "Title": "NwindDataService.Customers.cs",
+                  "Path": "Services\\NwindDataService.Customers.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "Id": "PagingAndScrolling",
           "Url": "Grid/PagingAndScrolling",
           "Title": "Paging and Scrolling",
           "IsNew": true,
           "Keywords": "blazor, components, data grid, datagrid, grid, scrolling, vertical scrolling, horizontal scrolling, virtual scrolling, load records on demand, paging, pager, pages, go to page, page size selection, custom page size, devexpress, demo, sample, example",
-          "Description": "DevExpress Blazor Data Grid supports horizontal scrolling, vertical scrolling, and virtual scrolling (loading data on demand). The Data Grid displays a pager that enables data navigation. ",
+          "Description": "The DevExpress Grid for Blazor supports horizontal scrolling, vertical scrolling, and virtual scrolling (loading data on demand). The Grid displays a pager that enables data navigation.",
           "PageSections": [
             {
               "Id": "Paging",
@@ -2036,6 +2076,20 @@
               "Id": "ScaleBreaks",
               "Title": "Scale Breaks",
               "DocUrl": "DevExpress.Blazor.DxChartScaleBreaks"
+            },
+            {
+              "Id": "ConstantLines",
+              "Url": "ConstantLines",
+              "Title": "Constant Lines",
+              "DocUrl": "DevExpress.Blazor.DxChartConstantLines",
+              "Keywords": "Blazor, components, chart, constant lines, devexpress, demo, sample, example",
+              "Description": "DevExpress Blazor Charts supports constant lines.",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "GlobalTemperatureIndexInfo.cs",
+                  "Path": "Data\\GlobalTemperatureIndexInfo.cs"
+                }
+              ]
             }
           ]
         },
@@ -2159,25 +2213,235 @@
     {
       "Id": "Reports",
       "Title": "Reports",
-      "AnalyticsId": "f9b92ec7-7007-49c0-99fc-5a2a8df485f1:a115bea8-1dd8-49c6-95fd-a4ff848d95fe",
-      "IsUpdated": true,
+      "AnalyticsId": "f9b92ec7-7007-49c0-99fc-5a2a8df485f1:a115bea8-1dd8-49c6-95fd-a4ff848d95fe",      
       "IsServerSideOnly": true,
+      "ReCreateOnThemeChange": false,
       "Pages": [
         {
-          "Id": "ReportViewer",
-          "Url": "ReportViewer",
-          "Title": "Report Viewer (Native)",
-          "IsUpdated": true,
+          "Id": "Interaction",
+          "Title": "Interaction",
           "Keywords": "blazor, components, reports, reporting tool, devexpress reports, report preview, report viewer, document viewer, reportviewer, documentviewer, devexpress, demo, example",
-          "Description": "The DevExpress Blazor Report Viewer is a native Blazor control that allows users to preview, print, and export reports to various formats."
+          "Description": "The DevExpress Blazor Report Viewer is a native Blazor control that allows users to preview, print, and export reports to various formats.",
+          "Pages": [
+            {
+              "Id": "DrillDownReport",
+              "Url": "ReportViewer/Interaction/DrillDownReport",
+              "Title": "Drill-Down Report"
+            },
+            {
+              "Id": "EmployeePerformanceReview",
+              "Url": "ReportViewer/Interaction/EmployeePerformanceReview",
+              "Title": "Employee Performance Review"
+            },
+            {
+              "Id": "InteractiveSortingReport",
+              "Url": "ReportViewer/Interaction/InteractiveSortingReport",
+              "Title": "Interactive Sorting"
+            },
+            {
+              "Id": "CharacterCombReport",
+              "Url": "ReportViewer/Interaction/CharacterCombReport",
+              "Title": "E-Form"
+            },
+            {
+              "Id": "VehicleInspectionReport",
+              "Url": "ReportViewer/Interaction/VehicleInspectionReport",
+              "Title": "Vehicle Inspection Report"
+            }
+          ]
         },
         {
-          "Id": "DocumentViewer",
-          "Url": "DocumentViewer",
-          "IsUpdated": true,
-          "Title": "Report Viewer (JavaScript based)",
-          "Keywords": "blazor, components, reports, reporting tool, devexpress reports, report preview, report viewer, document viewer, reportviewer, documentviewer, devexpress, demo, example",
-          "Description": "The DevExpress Blazor Document Viewer is a JavaScript control integrated in Blazor framework that allows users to preview, print, and export reports to various formats."
+          "Id": "ReportTypes",
+          "Title": "Report Types",
+          "Pages": [
+            {
+              "Id": "HierarchicalReport",
+              "Url": "ReportViewer/ReportTypes/HierarchicalReport",
+              "Title": "Hierarchical Report"
+            },
+            {
+              "Id": "TableReport",
+              "Url": "ReportViewer/ReportTypes/TableReport",
+              "Title": "Table Report"
+            },
+            {
+              "Id": "MasterDetailReport",
+              "Url": "ReportViewer/ReportTypes/MasterDetailReport",
+              "Title": "Master-Detail Report"
+            },
+            {
+              "Id": "SubreportReport",
+              "Url": "ReportViewer/ReportTypes/SubreportReport",
+              "Title": "Subreports"
+            },
+            {
+              "Id": "MultiColumnReport",
+              "Url": "ReportViewer/ReportTypes/MultiColumnReport",
+              "Title": "Multi-Column Report"
+            },
+            {
+              "Id": "LabelReport",
+              "Url": "ReportViewer/ReportTypes/LabelReport",
+              "Title": "Label Report"
+            },
+            {
+              "Id": "ReportMergingReport",
+              "Url": "ReportViewer/ReportTypes/ReportMergingReport",
+              "Title": "Report Merging"
+            },
+            {
+              "Id": "ReportMergingWithPdf",
+              "Url": "ReportViewer/ReportTypes/ReportMergingWithPdf",
+              "Title": "Report Merging with PDF"
+            },
+            {
+              "Id": "EmbeddedPDFContent",
+              "Url": "ReportViewer/ReportTypes/EmbeddedPDFContent",
+              "IsNew": true,
+              "Title": "Embedded PDF Content"
+            },
+            {
+              "Id": "SideBySideReport",
+              "Url": "ReportViewer/ReportTypes/SideBySideReport",
+              "Title": "Side-by-Side Report"
+            }
+          ]
+        },
+        {
+          "Id": "DataBinding",
+          "Title": "Data Binding",
+          "Pages": [
+            {
+              "Id": "PivotGridAndChart",
+              "Url": "ReportViewer/DataBinding/PivotGridAndChart",
+              "Title": "PivotGrid And Chart"
+            },
+            {
+              "Id": "CalculatedFieldsReport",
+              "Url": "ReportViewer/DataBinding/CalculatedFieldsReport",
+              "Title": "Calculated Fields"
+            },
+            {
+              "Id": "LargeDatasetReport",
+              "Url": "ReportViewer/DataBinding/LargeDatasetReport",
+              "Title": "Large Dataset"
+            },
+            {
+              "Id": "MailMergeReport",
+              "Url": "ReportViewer/DataBinding/MailMergeReport",
+              "Title": "Rich Text and Mail Merge"
+            }
+          ]
+        },
+        {
+          "Id": "ComplexReports",
+          "Title": "Real-life Reports",
+          "Pages": [
+            {
+              "Id": "BalanceSheetReport",
+              "Url": "ReportViewer/ComplexReports/BalanceSheetReport",
+              "IsUpdated": true,
+              "Title": "Balance Sheet"
+            },
+            {
+              "Id": "ProductListReport",
+              "Url": "ReportViewer/ComplexReports/ProductListReport",
+              "Title": "Product List"
+            },
+            {
+              "Id": "FallCatalogReport",
+              "Url": "ReportViewer/ComplexReports/FallCatalogReport",
+              "Title": "Fall Catalog"
+            },
+            {
+              "Id": "InvoiceReport",
+              "Url": "ReportViewer/ComplexReports/InvoiceReport",
+              "Title": "Invoice"
+            },
+            {
+              "Id": "SwissQRBillReport",
+              "Url": "ReportViewer/ComplexReports/SwissQRBillReport",
+              "Title": "Swiss QR Bill"
+            },
+            {
+              "Id": "ProfitAndLossReport",
+              "Url": "ReportViewer/ComplexReports/ProfitAndLossReport",
+              "Title": "Profit And Loss Report"
+            },
+            {
+              "Id": "RollPaper",
+              "Url": "ReportViewer/ComplexReports/RollPaper",
+              "Title": "Roll Paper Report"
+            },
+            {
+              "Id": "RestaurantMenu",
+              "Url": "ReportViewer/ComplexReports/RestaurantMenu",
+              "Title": "Restaurant Menu"
+            },
+            {
+              "Id": "SalesSummaryReport",
+              "Url": "ReportViewer/ComplexReports/SalesSummaryReport",
+              "IsUpdated": true,
+              "Title": "Sales Summary Report"
+            }
+          ]
+        },
+        {
+          "Id": "LayoutFeatures",
+          "Title": "Layout Features",
+          "Pages": [
+            {
+              "Id": "CrossBandContent",
+              "Url": "ReportViewer/LayoutFeatures/CrossBandContent",
+              "Title": "Cross-Band Content"
+            },
+            {
+              "Id": "ShrinkGrowReport",
+              "Url": "ReportViewer/LayoutFeatures/ShrinkGrowReport",
+              "Title": "Shrink and Grow"
+            },
+            {
+              "Id": "AnchoringReport",
+              "Url": "ReportViewer/LayoutFeatures/AnchoringReport",
+              "Title": "Anchoring"
+            },
+            {
+              "Id": "HiddenColumnsReport",
+              "Url": "ReportViewer/LayoutFeatures/HiddenColumnsReport",
+              "Title": "Hidden Columns"
+            }
+          ]
+        },
+        {
+          "Id": "ReportControls",
+          "Title": "Report Controls",
+          "Pages": [
+            {
+              "Id": "SparklineReport",
+              "Url": "ReportViewer/ReportControls/SparklineReport",
+              "Title": "Sparkline"
+            },
+            {
+              "Id": "BarCodeReport",
+              "Url": "ReportViewer/ReportControls/BarCodeReport",
+              "Title": "Bar Code"
+            },
+            {
+              "Id": "ChartReport",
+              "Url": "ReportViewer/ReportControls/ChartReport",
+              "Title": "Chart"
+            },
+            {
+              "Id": "CrossBandControlsReport",
+              "Url": "ReportViewer/ReportControls/CrossBandControlsReport",
+              "Title": "Cross-band Controls"
+            },
+            {
+              "Id": "PdfVisualSignature",
+              "Url": "ReportViewer/ReportControls/PdfVisualSignature",
+              "Title": "PDF Visual Signature"
+            }
+          ]
         },
         {
           "Id": "ReportDesigner",
@@ -2542,7 +2806,7 @@
       "Title": "Rich Text Editor",
       "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7",
       "IsServerSideOnly": true,
-      "IsNew":  true,
+      "IsNew": true,
       "Pages": [
         {
           "Id": "Overview",
@@ -2813,7 +3077,7 @@
             {
               "Id": "ItemTemplate",
               "Title": "Item Template",
-              "IsNew":  true,
+              "IsNew": true,
               "DocUrl": "DevExpress.Blazor.DxComboBox-2#item-template",
               "AdditionalCodeFiles": [
                 {
@@ -3970,7 +4234,7 @@
               "AdditionalCodeFiles": [
                 {
                   "Title": "SampleEditForm.razor",
-                  "Path": "Pages\\Navigation\\Popup\\SampleEditForm.razor"
+                  "Path": "Pages\\Navigation\\Shared\\SampleEditForm.razor"
                 }
               ]
             },

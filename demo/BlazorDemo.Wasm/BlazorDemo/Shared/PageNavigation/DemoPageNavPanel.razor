@@ -49,11 +49,14 @@
     }
 
     string GetBadgeText(DemoPageSection demoPageSection) {
-        if(demoPageSection.IsNew)
-            return "New";
-        if(demoPageSection.IsUpdated)
-            return "Upd";
-        return null;
+        var isParentNew = demoPageSection.ParentPage.IsNew || ((demoPageSection.ParentPage is DemoPage) && ((DemoPage)demoPageSection.ParentPage).PageSections.All(s => s.IsNew));
+        if(!isParentNew) {
+            if(demoPageSection.IsNew)
+                return "New";
+            if(demoPageSection.IsUpdated)
+                return "Upd";
+        }
+        return string.Empty;
     }
 
     void OnLocationChanged(object sender, LocationChangedEventArgs args) {

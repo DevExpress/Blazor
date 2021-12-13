@@ -1,7 +1,7 @@
 ﻿@using BlazorDemo.Pages.Navigation.Popup
 <DemoPageSectionComponent Id="Navigation-DropDown-Overview">
     <div id="dropdown-overview-target-container">
-        <DxButton Click="() => IsOpen = true">SHOW A DROPDOWN</DxButton>
+        <DxButton Click="() => IsOpen = !IsOpen">SHOW A DROPDOWN</DxButton>
     </div>
 
     <DxDropDown
@@ -13,7 +13,8 @@
         Width="max(25vw, 250px)"
         PositionTarget="#dropdown-overview-target-container"
         RestrictionTarget="#Navigation-DropDown-Overview"
-        CloseMode="DropDownCloseMode.Close">
+        CloseMode="DropDownCloseMode.Close"
+        PreventCloseOnPositionTargetClick="true">
     </DxDropDown>
 
     @code {

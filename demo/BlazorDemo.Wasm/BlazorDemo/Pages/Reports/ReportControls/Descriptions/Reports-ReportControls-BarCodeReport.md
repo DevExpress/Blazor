@@ -1,0 +1,3 @@
+This report demonstrates all bar code types the BarCode control supports and the AutoModule option the BarCode control exposes. Enable this option in the Parameters panel to automatically calculate the width of the narrowest bar or space based on the control's size.
+
+<a href="https://docs.devexpress.com/XtraReports/1313/detailed-guide-to-devexpress-reporting/use-report-controls/use-bar-codes/add-bar-codes-to-reports" target="_blank">See Documentation</a>

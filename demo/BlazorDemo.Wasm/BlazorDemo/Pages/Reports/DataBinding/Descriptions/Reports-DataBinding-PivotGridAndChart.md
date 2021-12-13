@@ -1,0 +1,3 @@
+This demo illustrates how to use a linked Pivot Grid and Chart controls in your report. In this demo, the Chart's DataSource property is set to the Pivot Grid instance. You can change chart options in the Parameters panel to visualize different data from the Pivot Grid.
+
+<a href="https://docs.devexpress.com/XtraReports/14320/detailed-guide-to-devexpress-reporting/use-report-controls/use-charts/link-a-chart-and-a-pivot-grid" target="_blank">See Documentation</a>

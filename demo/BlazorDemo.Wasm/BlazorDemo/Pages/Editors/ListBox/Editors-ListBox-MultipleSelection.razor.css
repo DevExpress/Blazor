@@ -1,0 +1,10 @@
+::deep .demo-part .demo-part-header {
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding-bottom: .25rem;
+    padding-left: .5rem;
+}
+
+::deep .demo-part-body .list-group-item {
+    padding-left: .5rem;
+}

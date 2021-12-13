@@ -1,1 +1,0 @@
-The DevExpress Blazor [Document Viewer](https://docs.devexpress.com/XtraReports/DevExpress.Blazor.Reporting.DxDocumentViewer) is a JavaScript control integrated in Blazor framework that allows users to preview, print, and export reports to various formats.

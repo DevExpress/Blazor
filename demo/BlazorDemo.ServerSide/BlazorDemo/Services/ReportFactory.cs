@@ -8,7 +8,6 @@ namespace BlazorDemo.Services {
     public interface IDemoReportSource {
         XtraReport GetReport(string reportName);
         Dictionary<string, string> GetReportList();
-        Dictionary<string, string> GetReportViewerList();
     }
 
     public class ReportInfo {
@@ -38,8 +37,7 @@ namespace BlazorDemo.Services {
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.BarCodes_BarcodeTypes, Name = XtraReportsDemos.ReportNames.BarCodes_BarcodeTypesName, CreateAction = () => new XtraReportsDemos.BarCodes.BarCodeTypesReport() },
             //new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.Shape, Name = XtraReportsDemos.ReportNames.ShapeName, CreateAction = () => new Reports.Shape.Report() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.Chart, Name = XtraReportsDemos.ReportNames.ChartName, CreateAction = () => new XtraReportsDemos.Charts.Report() },
-        };
-        List<ReportInfo> jsBasedReports = new List<ReportInfo> {            
+
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.CharacterComb, Name = XtraReportsDemos.ReportNames.CharacterCombName, CreateAction = () => new XtraReportsDemos.CharacterComb.Report() },
             
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.CalculatedFields, Name = XtraReportsDemos.ReportNames.CalculatedFieldsName, CreateAction = () => new XtraReportsDemos.CalculatedFieldsReport.Report() },
@@ -55,8 +53,7 @@ namespace BlazorDemo.Services {
 
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.Sparkline, Name = XtraReportsDemos.ReportNames.SparklineName, CreateAction = () => new XtraReportsDemos.Sparkline.Report() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.CrossBands, Name = XtraReportsDemos.ReportNames.CrossBandsName, CreateAction = () => new XtraReportsDemos.CrossBandControls.Report() },
-        };
-        List<ReportInfo> nativeViewerReports = new List<ReportInfo> {            
+
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.ProductLabels, Name = XtraReportsDemos.ReportNames.ProductLabelsName, CreateAction = () => new XtraReportsDemos.BarCodes.ProductLabelsReport() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.ReportMerging, Name = XtraReportsDemos.ReportNames.ReportMergingName, CreateAction = () => new XtraReportsDemos.ReportMerging.MergedReport() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.InteractiveSorting, Name = XtraReportsDemos.ReportNames.InteractiveSortingName, CreateAction = () => new XtraReportsDemos.InteractiveSorting.Report() },
@@ -73,15 +70,11 @@ namespace BlazorDemo.Services {
         };
 
         public Dictionary<string, string> GetReportList() {
-            return commonReports.Concat(jsBasedReports).OrderBy(x => x.DisplayName).ToDictionary(i => i.Name, i => i.DisplayName);
-        }
-
-        public Dictionary<string, string> GetReportViewerList() {
-            return commonReports.Concat(nativeViewerReports).OrderBy(x => x.DisplayName).ToDictionary(i => i.Name, i => i.DisplayName);
+            return commonReports.OrderBy(x => x.DisplayName).ToDictionary(i => i.Name, i => i.DisplayName);
         }
 
         public XtraReport GetReport(string reportName) {
-            return commonReports.Concat(jsBasedReports).Concat(nativeViewerReports).FirstOrDefault(x => x.Name == reportName)?.CreateAction();
+            return commonReports.FirstOrDefault(x => x.Name == reportName)?.CreateAction();
         }
     }
 }

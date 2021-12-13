@@ -20,6 +20,14 @@ namespace BlazorDemo.Configuration {
             return !string.IsNullOrEmpty(rootPage.Url) ? rootPage.Url : rootPage.Pages.Select(p => p.Url).FirstOrDefault();
         }
 
+        public static bool ArePagesAsSections(DemoPageBase basePage) {
+            return basePage.Pages != null && basePage.Pages.Length > 0;
+        }
+
+        public static DemoPageSection[] GetPageSections(DemoPage basePage) {
+            return basePage.PageSections.Length > 0 ? basePage.PageSections : (ArePagesAsSections(basePage) ? basePage.Pages : Array.Empty<DemoPageSection>());
+        }
+
         protected DemoConfiguration() {
         }
         public DemoConfiguration(IConfiguration configuration) {
@@ -33,24 +41,25 @@ namespace BlazorDemo.Configuration {
             Products = Data.Products ?? new DemoProductInfo[0];
             RootPages = Data.RootPages ?? new DemoRootPage[0];
             Redirect = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
-            foreach(var rootPage in RootPages) {
-                rootPage.Pages = rootPage.Pages ?? new DemoPage[0];
-                foreach(var page in rootPage.Pages) {
-                    page.PageSections = page.PageSections ?? new DemoPageSection[0];
-                    foreach(var pageSection in page.PageSections) {
-                        pageSection.ParentPage = page;
-                        AddRedirect(pageSection);
-                    }
-                    page.ParentPage = rootPage;
-                    AddRedirect(page);
-                }
-                AddRedirect(rootPage);
-            }
+            ConnectRecursive(RootPages, null);
             Search = new DemoSearchHelper(Data.Search, RootPages);
-            void AddRedirect(DemoPageSection section) {
-                if(section.RedirectFrom?.Length > 0)
-                    foreach(var redirect in section.RedirectFrom)
-                        Redirect.Add(redirect, section.Uri);
+
+            void ConnectRecursive(IEnumerable<DemoPageSection> childSections, DemoPageBase parent) {
+                foreach(var section in childSections) {
+                    if(section is DemoPageBase pageBase) {
+                        pageBase.Pages ??= Array.Empty<DemoPage>();
+                        ConnectRecursive(pageBase.Pages, pageBase);
+                    }
+                    if(section is DemoPage page) {
+                        page.PageSections ??= Array.Empty<DemoPageSection>();
+                        ConnectRecursive(page.PageSections, page);
+                    }
+                    section.ParentPage = parent;
+                    if(section.RedirectFrom?.Length > 0) {
+                        foreach(var redirect in section.RedirectFrom)
+                            Redirect.Add(redirect, section.Uri);
+                    }
+                }
             }
         }
 
@@ -76,15 +85,21 @@ namespace BlazorDemo.Configuration {
 
         public DemoPageBase GetDemoPageByUrl(string pageUrl) {
             pageUrl = pageUrl.Trim('/');
-            foreach(var rootPage in Data.RootPages) {
-                if(rootPage.Pages.Length > 0) {
-                    var demoPage = rootPage.Pages.FirstOrDefault(p => string.Equals(p.Url, pageUrl, StringComparison.OrdinalIgnoreCase));
-                    if(demoPage != null)
-                        return demoPage;
-                } else if(string.Equals(rootPage.Url, pageUrl, StringComparison.OrdinalIgnoreCase))
-                    return rootPage;
+
+            DemoPageBase FindRecursive(IEnumerable<DemoPageBase> pages) {
+                if(pages == null)
+                    return null;
+                foreach(var page in pages) {
+                    if(string.Equals(page.Url, pageUrl, StringComparison.OrdinalIgnoreCase))
+                        return page;
+                    var nestedResult = FindRecursive(page.Pages);
+                    if(nestedResult != null)
+                        return nestedResult;
+                }
+                return null;
             }
-            return null;
+
+            return FindRecursive(Data.RootPages);
         }
         public DemoPageBase GetDemoPageByUrl(NavigationManager navigationManager, string currentUrl) {
             var demoPageUrl = navigationManager.ToAbsoluteUri(currentUrl).GetLeftPart(UriPartial.Path).Replace(navigationManager.BaseUri, "");
@@ -102,8 +117,11 @@ namespace BlazorDemo.Configuration {
             string[] idParts = GetIdParts(id);
             if(demoPage == null)
                 demoPage = GetDemoPage(id);
-            if(demoPage != null)
-                return demoPage.PageSections.FirstOrDefault(p => idParts.Length == 2 || p.Id == idParts[2]);
+            if(demoPage != null) {
+                var sections = demoPage.GetPageSections;
+                return sections.FirstOrDefault(p => idParts.Length == 2 || p.Id == idParts[2]);
+            }
+
             return null;
         }
         public string GetDemoPageSectionDescription(string id) {

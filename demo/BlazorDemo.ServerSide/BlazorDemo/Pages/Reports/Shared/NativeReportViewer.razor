@@ -1,0 +1,61 @@
+﻿<link rel="stylesheet" href="_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.css">
+
+
+@using BlazorDemo.Services
+@using DevExpress.XtraPrinting.Caching;
+@inject IDemoReportSource DemoReportSource
+@inject DemoConfiguration Configuration
+@inject NavigationManager NavigationManager
+@using DevExpress.XtraReports;
+@using DevExpress.XtraReports.UI;
+@using DevExpress.Blazor.Reporting.EditingFields;
+@using DevExpress.XtraReports.Web.Native.ClientControls;
+
+<DxReportViewer Report="@Report" RootCssClasses="w-100" @ref="Viewer" SizeMode="Params.SizeMode" SinglePagePreview="false"></DxReportViewer>
+@code {
+    DxReportViewer Viewer { get; set; }
+    IReport Report { get; set; }
+
+    string reportName;
+    [Parameter]
+    public string ReportName {
+        get { return reportName; }
+        set {
+            if(reportName != value) {
+                reportName = value;
+                AssignReport();
+            }
+        }
+    }
+    [Parameter] public DemoPageSectionParameters Params { get; set; }
+    [Inject] public EditingFieldModelFactory EditingFieldModelFactory { get; set; }
+    [Inject] public DevExpress.XtraReports.Services.IReportProvider reportProvider { get; set; }
+
+    void AssignReport() {
+        XtraReport report = reportProvider.GetReport(ReportName);
+        if(report == null) {
+            throw new Exception($"{ReportName} not found");
+        }
+        if(ReportName == XtraReportsDemos.ReportNames.LargeDatasetName)
+            Report = new CachedReportSource(report, new MemoryDocumentStorage());
+        else
+            Report = report;
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if(firstRender) {
+            EditingFieldModelFactory.RegisterMaskEditor("Name", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"[A-Z -.]+" });
+            EditingFieldModelFactory.RegisterMaskEditor("UppercaseLatinLetters", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"[A-Z]+" });
+            EditingFieldModelFactory.RegisterMaskEditor("NumbersAndUppercaseLatinLetters", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"[A-Z0-9]+" });
+            EditingFieldModelFactory.RegisterMaskEditor("UppercaseText", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"[A-Z0-9 ,-/]+" });
+            EditingFieldModelFactory.RegisterMaskEditor("Day", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"(0[1-9])|([1-2][0-9])|(3[0-1])" });
+            EditingFieldModelFactory.RegisterMaskEditor("Month", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"(0[1-9])|(1[0-2])" });
+            EditingFieldModelFactory.RegisterMaskEditor("Year", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"[0-2]([0-9]{3})" });
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    protected override void OnInitialized() {
+        base.OnInitialized();
+        ReportName = ReportName ?? "InvoiceReport";
+    }
+}

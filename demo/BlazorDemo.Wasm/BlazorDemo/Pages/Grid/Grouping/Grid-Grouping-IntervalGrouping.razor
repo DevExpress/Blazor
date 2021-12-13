@@ -70,7 +70,9 @@
                     e.Value = price * quantity;
                 }
             }
-            protected void OnGroupingChanged(string key) {
+            // This method demonstrates how to group Grid data in code.
+            // In this demo, this method is called when the 'Date Group Interval' option value changes.
+            protected void ChangeGrouping(string key) {
                 CurrentGroupIntervalKey = key;
                 Grid.BeginUpdate();
                 var column = Grid.GetDataColumns().First(c => c.FieldName == "OrderDate");
@@ -80,6 +82,6 @@
         }
     </ChildContentWithParameters>
     <OptionsContent>
-        <OptionComboBox Label="Date Group Interval:" Data="@GroupIntervals.Keys" Value="@CurrentGroupIntervalKey" ValueChanged="@((string value) => OnGroupingChanged(value))" />
+        <OptionComboBox Label="Date Group Interval:" Data="@GroupIntervals.Keys" Value="@CurrentGroupIntervalKey" ValueChanged="@((string value) => ChangeGrouping(value))" />
     </OptionsContent>
 </DemoPageSectionComponent>

@@ -7,7 +7,7 @@
 
 @{
     RenderFragment<DemoPageSectionParameters> ComponentArea = parameters =>
-    @<div class="demo-page-section-component-area" @key="parameters.ThemeName">
+    @<div class="demo-page-section-component-area">
         @if(IsComponentAreaVisible) {
             @if(OptionsContent != null) {
                 <div class=@GetOptionsContentCssClass()>
@@ -36,7 +36,7 @@
         </div>
     }
     @if(ShowContent) {
-        var parameters = new DemoPageSectionParameters() { SizeMode = SizeMode, ThemeName = ThemeName };
+        var parameters = new DemoPageSectionParameters() { SizeMode = SizeMode };
         <CascadingValue Name="VisualTestsEnabled" Value="VisualTestsEnabled" IsFixed="true">
         @if(ShowCode) {
             <div class="card">
@@ -105,7 +105,7 @@
 @code {
     DemoScriptLoader clipboradJsRef;
     DemoScriptLoader sectionHelper;
-
+    string themeName;
     int activeTabPageIndex = 0;
 
     public Configuration.DemoPageBase RootPage { get; set; }
@@ -146,8 +146,16 @@
     [Parameter]
     public SizeMode SizeMode { get; set; }
     [CascadingParameter(Name = "ThemeName")]
-    public string ThemeName { get; set; }
-
+    string ThemeName {
+        get => themeName;
+        set {
+            if (value != themeName) {
+                themeName = value;
+                IsComponentAreaVisible = false;
+                UpdateTabPagesVisibility();
+            }
+        }
+    }
     void OnSizeModeChanged(ToolbarItemClickEventArgs e) {
         switch(e.ItemName) {
             case "Small":
@@ -247,7 +255,7 @@
     protected override void OnParametersSet() {
         Page = Configuration.GetDemoPage(Id) as DemoPage;
         RootPage = Page != null && Page.ParentPage != null ? Page.ParentPage : Page;
-        if(Page != null && (Page.PageSections == null || Page.PageSections.Length == 0))
+        if(Page != null && (Page.GetPageSections == null || Page.GetPageSections.Length == 0))
             Section = Page;
         else
             Section = Configuration.GetDemoPageSection(Id, Page);

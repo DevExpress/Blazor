@@ -1,0 +1,1 @@
+In this demo, the report controls' Anchor Horizontally and Anchor Vertically properties are specified to maintain the distance to the container's edges when you change the page's layout (Landscape parameter).

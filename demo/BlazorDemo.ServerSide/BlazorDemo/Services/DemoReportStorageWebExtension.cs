@@ -2,27 +2,30 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using DevExpress.XtraReports.Native;
+using DevExpress.XtraReports.Services;
 using DevExpress.XtraReports.UI;
+using DevExpress.XtraReports.Web.Extensions;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace BlazorDemo.Services {
     public static class SessionExtensions {
         public static void SetObjectAsJson(this ISession session, string key, object value) {
-            session.SetString(key, JsonConvert.SerializeObject(value));
+            session?.SetString(key, JsonConvert.SerializeObject(value));
         }
 
         public static T GetObjectFromJson<T>(this ISession session, string key) {
-            var value = session.GetString(key);
+            var value = session?.GetString(key);
             return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
         }
     }
 
-    public class DemoReportStorageWebExtension : DevExpress.XtraReports.Web.Extensions.ReportStorageWebExtension {
+    public class DemoReportStorageWebExtension : DevExpress.XtraReports.Web.Extensions.ReportStorageWebExtension, IReportProvider {
         readonly static string ReportExtensionSessionKey = "dxReportStorageWebExtensionKey_1C5CB325-69FA-4C9E-9D4D-96AE00C3E86E";
         protected IHttpContextAccessor HttpContextAccessor { get; }
         protected IDemoReportSource PredefinedReports { get; }
-        protected ISession Session { get { return HttpContextAccessor.HttpContext.Session; } }
+        protected ISession Session { get { return HttpContextAccessor.HttpContext?.Session; } }
         readonly object sync = new object();
 
         public DemoReportStorageWebExtension(IHttpContextAccessor httpContextAccessor, IDemoReportSource reportFactory) {
@@ -46,15 +49,26 @@ namespace BlazorDemo.Services {
                     return reportBytes;
                 }
             }
-            XtraReport report = PredefinedReports.GetReport(reportName);
-            if(report == null) {
-                throw new Exception("Report was not found.");
-            }
+            return null;
+        }
 
-            using(var stream = new MemoryStream()) {
-                report.SaveLayoutToXml(stream);
-                report.Dispose();
-                return stream.ToArray();
+        XtraReport IReportProvider.GetReport(string id, ReportProviderContext context) {
+            var reportLayout = GetData(id);
+            XtraReport report = reportLayout != null
+                ? LoadReport(reportLayout, context)
+                : PredefinedReports.GetReport(id);
+            if(report == null)
+                throw new Exception("Report not found.");
+            return report;
+        }
+
+        static XtraReport LoadReport(byte[] reportLayout, ReportProviderContext context) {
+            return context?.LoadReport(reportLayout) ?? LoadReportCore(reportLayout);
+        }
+
+        static XtraReport LoadReportCore(byte[] reportLayout) {
+            using(var ms = new MemoryStream(reportLayout)) {
+                return XtraReport.FromStream(ms);
             }
         }
 
@@ -94,7 +108,6 @@ namespace BlazorDemo.Services {
                 Session.Set(reportName, reportLayout);
             }
         }
-
     }
 }
 #endif

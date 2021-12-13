@@ -10,7 +10,7 @@
                       CssClass="cw-480 item-template-demo">
                 <TagTemplate Context="tagInfo">
                     <span class="dxbs-tag dx-blazor-tag l-0" style="position: relative;">
-                        <img class="tag-template-employee-photo" src="@StaticAssetUtils.GetImagePath(GetImagineFileName(tagInfo.DataItem))" />
+                        <img class="tag-template-employee-photo" src="@StaticAssetUtils.GetImagePath(GetImageFileName(tagInfo.DataItem))" />
                         <span class="tag-item-span-pl">@tagInfo.DataItem.FirstName @tagInfo.DataItem.LastName</span>
                         <span class="dxbs-tag-remove-btn-container">
                             <button @onclick="@tagInfo.RemoveTagAction" class="btn btn-sm dx-btn dxbs-tag-remove-btn dxbs-cmd-btn dx-blazor-clear-button-icon" type="button">
@@ -23,7 +23,7 @@
                 </TagTemplate>
                 <ItemTemplate>
                     <div class="item-template">
-                        <img class="item-template-employee-photo" src="@StaticAssetUtils.GetImagePath(GetImagineFileName(context))" width="32" height="32" />
+                        <img class="item-template-employee-photo" src="@StaticAssetUtils.GetImagePath(GetImageFileName(context))" width="32" height="32" />
                         <div class="item-template-text">
                             <span class="item-template-employee-first-name">@context.FirstName @context.LastName</span>
                             <span class="item-template-employee-home-phone">@context.HomePhone</span>
@@ -46,7 +46,7 @@
 			Values = Data.Take(1);
         }
 
-        string GetImagineFileName(Employee employee) {
+        string GetImageFileName(Employee employee) {
             return $"Employees/item-template{employee.EmployeeId}.jpg";
         }
 

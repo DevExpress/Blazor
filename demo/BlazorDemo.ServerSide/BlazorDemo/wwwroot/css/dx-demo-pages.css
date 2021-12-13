@@ -61,8 +61,8 @@
 .tb-icon-search {
     width: 24px;
     height: 24px;
-    mask-image: url("../images/search.svg");
-    -webkit-mask-image: url("../images/search.svg");
+    mask-image: url("../images/Search.svg");
+    -webkit-mask-image: url("../images/Search.svg");
 }
 .tb-icon-alert {
     width: 16px;
@@ -408,8 +408,8 @@ body.modal-open .main {
 }
 
 .menu-icon-user-profile {
-    mask-image: url("images/UserProfile.svg");
-    -webkit-mask-image: url("images/UserProfile.svg");
+    mask-image: url("../images/UserProfile.svg");
+    -webkit-mask-image: url("../images/UserProfile.svg");
 }
 
 .menu-box {

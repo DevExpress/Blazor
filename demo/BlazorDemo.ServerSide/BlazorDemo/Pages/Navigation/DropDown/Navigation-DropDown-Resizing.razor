@@ -1,12 +1,13 @@
 ﻿<DemoPageSectionComponent Id="Navigation-DropDown-Resizing">
     <div id="dropdown-resizing-target-container">
-        <DxButton Click="() => IsOpen = true">SHOW A DROPDOWN</DxButton>
+        <DxButton Click="() => IsOpen = !IsOpen">SHOW A DROPDOWN</DxButton>
     </div>
 
     <DxDropDown
         @bind-IsOpen="@IsOpen"
         AllowResize="true"
         CloseMode="DropDownCloseMode.Close"
+        PreventCloseOnPositionTargetClick="true"
         PositionMode="DropDownPositionMode.Bottom"
         PositionTarget="#dropdown-resizing-target-container"
         RestrictionTarget="#Navigation-DropDown-Resizing"

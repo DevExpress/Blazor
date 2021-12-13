@@ -1,92 +1,69 @@
 ﻿@page "/ReportViewer"
 @page "/ReportViewer/{ReportName?}"
+@page "/ReportViewer/{CategoryName?}/{ReportName?}"
 
+
+@inject NavigationManager NavigationManager
+@using Microsoft.AspNetCore.WebUtilities
+@using BlazorDemo.Pages.Reports.Shared
 
 <link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-reporting-pages.css">
-<link rel="stylesheet" href="_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.css">
 
-<DemoPageSectionComponent Id="Reports-ReportViewer" ShowSizeMode="true" OptionsContent="GetOptionalContent()">
+<DemoPageSectionComponent Id="@GetPageId()" ShowSizeMode="@IsNativeViewer">
     <ChildContentWithParameters Context="Params">
-        @using BlazorDemo.Services
-        @using DevExpress.XtraPrinting.Caching;
-        @inject IDemoReportSource DemoReportSource
-        @inject NavigationManager NavigationManager
-        @using DevExpress.XtraReports;
-        @using DevExpress.XtraReports.UI;
-        @using DevExpress.Blazor.Reporting.EditingFields;
-
-        @using DevExpress.XtraReports.Web.Native.ClientControls;
-
-        <DxReportViewer Report="@Report" RootCssClasses="w-100" @ref="Viewer" SizeMode="Params.SizeMode" SinglePagePreview="false"></DxReportViewer>
+        @if(IsNativeViewer) {
+            <NativeReportViewer Params="@Params" ReportName="@ReportName"></NativeReportViewer>
+        } else {
+            <JSBasedDocumentViewer ReportName="@ReportName"></JSBasedDocumentViewer>
+        }
     </ChildContentWithParameters>
+    <OptionsContent>
+        <div class="w-100 d-flex justify-content-end">
+            <OptionComboBox Label="Show in Viewer:"
+                            Data="@(ViewerModeData)"
+                            Value="@(currentViewer.ToString())"
+                            ValueChanged="@((string selectedItem) => { OnViewerChanged(selectedItem); })" />
+            <DxButton CssClass="option-component" Text="Show in Report Designer" Click="@NavigateToReportDesigner" />
+        </div>
+    </OptionsContent>
 
     @code {
-        Dictionary<string, string> ReportList;
-        DxReportViewer Viewer { get; set; }
-        IReport Report { get; set; }
         [Parameter] public string ReportName { get; set; }
-        [Inject] public EditingFieldModelFactory EditingFieldModelFactory { get; set; }
-        [Inject] public DemoConfiguration Configuration { get; set; }
+        [Parameter] public string CategoryName { get; set; }
 
-        [Inject] public DevExpress.XtraReports.Services.IReportProvider reportProvider { get; set; }
+        readonly string[] ViewerModeData = new string[] { "Native", "JS Based" };
 
-        void ReportNameChanged(string reportName) {
-            ReportName = reportName;
-
-            AssignReport();
-            NavigationManager.NavigateTo($"/ReportViewer/{ReportName}");
+        string currentViewer;
+        const string CurrentViewerName = "CurrentViewer";
+        System.Uri uri;
+        protected string GetPageId() {
+            return "Reports-" + (CategoryName ?? "ComplexReports") + "-" + (ReportName ?? "InvoiceReport");
         }
 
         protected void NavigateToReportDesigner() {
             NavigationManager.NavigateTo($"ReportDesigner/{ReportName}");
         }
 
-        protected RenderFragment GetOptionalContent() {
-            return Configuration.ShowOnlyReporting ? null
-                :@<DxFormLayout CssClass="dx-options-reporting-choozer">
-                    <DxFormLayoutItem Caption="Report Name:" ColSpanMd="12">
-                        <Template>
-                            <DxComboBox Data="@ReportList" ValueFieldName="Key" TextFieldName="Value" Value="@ReportName" ValueChanged="(string x) => ReportNameChanged(x)" DropDownWidthMode="DropDownWidthMode.EditorWidth" />
-                        </Template>
-                    </DxFormLayoutItem>
-                </DxFormLayout>;
+        protected override void OnParametersSet() {
+            uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+            currentViewer = ViewerModeData[0];
+            if(QueryHelpers.ParseQuery(uri.Query).TryGetValue(CurrentViewerName, out var currentViewerVal)) {
+                currentViewer = currentViewerVal.ToString();
+            }
+            base.OnParametersSet();
+        }
+        protected void OnViewerChanged(string value) {
+            var uriBuilder = new UriBuilder(uri);
+            var q = System.Web.HttpUtility.ParseQueryString(uriBuilder.Query);
+            q[CurrentViewerName] = value;
+            uriBuilder.Query = q.ToString();
+            NavigationManager.NavigateTo(uriBuilder.ToString(), true);
         }
 
-        void AssignReport() {
-            XtraReport report = reportProvider.GetReport(ReportName);
-            if(report == null) {
-                throw new Exception($"{ReportName} not found");
+        public bool IsNativeViewer {
+            get {
+                return currentViewer == ViewerModeData[0];
             }
-            if(ReportName == XtraReportsDemos.ReportNames.LargeDatasetName)
-                Report = new CachedReportSource(report, new MemoryDocumentStorage());
-            else
-                Report = report;
-        }
-        protected override async Task OnAfterRenderAsync(bool firstRender) {
-            if(firstRender) {
-                EditingFieldModelFactory.RegisterMaskEditor("Name", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"[A-Z -.]+" });
-                EditingFieldModelFactory.RegisterMaskEditor("UppercaseLatinLetters", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"[A-Z]+" });
-                EditingFieldModelFactory.RegisterMaskEditor("NumbersAndUppercaseLatinLetters", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"[A-Z0-9]+" });
-                EditingFieldModelFactory.RegisterMaskEditor("UppercaseText", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"[A-Z0-9 ,-/]+" });
-                EditingFieldModelFactory.RegisterMaskEditor("Day", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"(0[1-9])|([1-2][0-9])|(3[0-1])" });
-                EditingFieldModelFactory.RegisterMaskEditor("Month", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"(0[1-9])|(1[0-2])" });
-                EditingFieldModelFactory.RegisterMaskEditor("Year", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"[0-2]([0-9]{3})" });
-            }
-            await base.OnAfterRenderAsync(firstRender);
-        }
-
-        protected override void OnInitialized() {
-            if(!Configuration.ShowOnlyReporting) {
-                ReportList = DemoReportSource.GetReportViewerList();
-                ReportName = ReportList.First().Key;
-            } else {
-                ReportName = ReportName ?? "InvoiceReport";
-            }
-        }
-
-        protected override async Task OnParametersSetAsync() {
-            await base.OnParametersSetAsync();
-            AssignReport();
         }
     }
 </DemoPageSectionComponent>
