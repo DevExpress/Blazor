@@ -29,7 +29,9 @@
             protected override async Task OnInitializedAsync() {
                 Data = await NwindDataService.GetCustomersAsync();
             }
-            protected void OnSortingChanged(string key) {
+            // This method demonstrates how to sort Grid data in code.
+            // In this demo, this method is called when the 'Sort by' option value changes.
+            protected void ChangeSorting(string key) {
                 CurrentSortInfoKey = key;
                 var currentSortInfo = SortInfo[key];
                 Grid.BeginUpdate();
@@ -41,6 +43,6 @@
         }
     </ChildContentWithParameters>
     <OptionsContent>
-        <OptionComboBox Label="Sort by:" Data="@SortInfo.Keys" Value="@CurrentSortInfoKey" ValueChanged="@((string value) => OnSortingChanged(value))" CssClass="ow-180" />
+        <OptionComboBox Label="Sort by:" Data="@SortInfo.Keys" Value="@CurrentSortInfoKey" ValueChanged="@((string value) => ChangeSorting(value))" CssClass="ow-180" />
     </OptionsContent>
 </DemoPageSectionComponent>

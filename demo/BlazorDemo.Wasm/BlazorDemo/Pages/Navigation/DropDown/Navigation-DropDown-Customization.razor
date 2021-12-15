@@ -1,6 +1,6 @@
 ﻿<DemoPageSectionComponent Id="Navigation-DropDown-Customization">
     <div id="dropdown-customization-target-container">
-        <DxButton Click="() => IsOpen = true">SHOW A DROPDOWN</DxButton>
+        <DxButton Click="() => IsOpen = !IsOpen">SHOW A DROPDOWN</DxButton>
     </div>
     <DxDropDown
         @bind-IsOpen="@IsOpen"
@@ -9,6 +9,7 @@
         PositionTarget="#dropdown-customization-target-container"
         RestrictionTarget="#Navigation-DropDown-Customization"
         CloseMode="DropDownCloseMode.Close"
+        PreventCloseOnPositionTargetClick="true"
         HeaderVisible="true"
         HeaderText="Edit Contact"
         FooterVisible="true">

@@ -12,7 +12,7 @@
                             <img src="@(StaticAssetUtils.GetImagePath(employee.ImageFileName))" width="125" />
                             <div class="media-body pl-3">
                                 <h5>@employee.Title @employee.FirstName @employee.LastName</h5>
-                                <p><b>Birthday:</b> @employee.BirthDate.Value.ToShortDateString()</p>
+                                <p><b>Birthday:</b> @employee.BirthDate?.ToShortDateString()</p>
                                 <p>@employee.Notes</p>
                             </div>
                         </div>

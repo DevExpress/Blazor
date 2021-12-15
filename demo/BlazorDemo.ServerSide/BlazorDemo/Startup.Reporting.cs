@@ -3,6 +3,7 @@ using System;
 using BlazorDemo.Services;
 using DevExpress.AspNetCore.Reporting;
 using DevExpress.Blazor.Reporting;
+using DevExpress.XtraReports.Services;
 using DevExpress.XtraReports.Web.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -44,6 +45,7 @@ namespace BlazorDemo.Reporting {
                 services.AddTransient<DevExpress.DataAccess.Wizard.Services.ICustomQueryValidator, DevExpress.DataAccess.Wizard.Services.CustomQueryValidator>();
                 services.AddSingleton<IDemoReportSource, DemoReportSource>();
                 services.AddScoped<ReportStorageWebExtension, DemoReportStorageWebExtension>();
+                services.AddScoped(serviceProvider => (IReportProvider)serviceProvider.GetRequiredService<ReportStorageWebExtension>());
                 services.AddControllers(options => options.EnableEndpointRouting = false);
             });
 

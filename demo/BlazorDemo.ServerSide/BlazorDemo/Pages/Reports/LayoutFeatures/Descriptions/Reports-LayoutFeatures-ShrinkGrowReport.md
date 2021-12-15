@@ -1,0 +1,1 @@
+You can enable the CanShrink and CanGrow properties for labels, table cells and rich text controls to set non-fixed heights. In this demo, the CanGrow property is enabled for the cell that is bound to the About data field. This cell has a different height depending on the bound content.

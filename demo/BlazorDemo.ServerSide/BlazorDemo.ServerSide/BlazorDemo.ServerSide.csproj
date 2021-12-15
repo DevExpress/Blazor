@@ -13,7 +13,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.2" />
     <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
-    <PackageReference Include="DevExpress.Blazor.Server.WebAssembly" Version="21.2.3" />
+    <PackageReference Include="DevExpress.Blazor.Server.WebAssembly" Version="21.2.4" />
+    <PackageReference Include="DevExpress.Blazor.Reporting" Version="21.2.4" />
     
     <ProjectReference Include="..\BlazorDemo\BlazorDemo.ServerSide.Core.csproj" />
   </ItemGroup>

@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="main">
-            <div class="content">
+            <div class="content" @key="ShouldUseThemeNameKey() ? ThemeName : null">
                 <CascadingValue Value="@ScrollToTargetLocked" Name="ScrollToTargetLocked">
                     <CascadingValue Value="@ThemeName" Name="ThemeName">
                         @Body
@@ -95,7 +95,7 @@
     }
 
     void TryRedirect(string url) {
-        if(Configuration.Redirect.TryGetValue(url.Substring(NavigationManager.BaseUri.Length), out var uri)) {
+        if(url?.Length> NavigationManager.BaseUri?.Length && Configuration.Redirect.TryGetValue(url.Substring(NavigationManager.BaseUri.Length), out var uri)) {
             NavigationManager.NavigateTo(uri, true);
         };
     }
@@ -165,6 +165,16 @@
 
     void ToggleThemeSwitcherPanel() {
         ThemeSwitcherShown = !ThemeSwitcherShown;
+    }
+
+    bool ShouldUseThemeNameKey() {
+        var page = Configuration.GetDemoPageByUrl(NavigationManager, NavigationManager.Uri);
+        while(page != null) {
+            if(page.ReCreateOnThemeChange.HasValue)
+                return page.ReCreateOnThemeChange.Value;
+            page = page.ParentPage;
+        }
+        return true;
     }
 
     void ModalBackdropShownChanged(bool shown) {

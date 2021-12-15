@@ -1,5 +1,6 @@
 ﻿@using BlazorDemo.Configuration
 @inject DemoConfiguration Configuration
+
 <DxTreeView @ref="@treeView"
             CssClass="sidebar-tree"
             ExpandButtonIconCssClass="demo-icon-expand"
@@ -9,77 +10,48 @@
             BeforeExpand="@BeforeExpand"
             SelectionChanged="@SelectionChanged">
     <Nodes>
-        @foreach(var (rootDemoPage, rootIndex) in Configuration.RootPages.Select((p, i) => (p, i))) {
-            @if(!Configuration.IsServerSide && rootDemoPage.IsServerSideOnly)
+        @foreach(var (currentPage, rootIndex) in Pages.Select((p, i) => (p, i))) {
+            var rootDemoPage = currentPage as DemoRootPage;
+            @if(!Configuration.IsServerSide && rootDemoPage != null && rootDemoPage.IsServerSideOnly)
                 continue;
-
-            @if(rootDemoPage.Pages.Length > 0) {
-                <DxTreeViewNode Text="@rootDemoPage.Title" CssClass="@GetItemCssClass(rootDemoPage)" NavigateUrl="@rootDemoPage.Url" BadgeText="@GetBadgeText(rootDemoPage)">
-                    <Nodes>
-                        @foreach(var (demoPage, index) in rootDemoPage.Pages.Select((p, i) => (p, i))) {
-                            <DxTreeViewNode Text="@demoPage.Title" NavigateUrl="@demoPage.Url" BadgeText="@GetBadgeText(demoPage)">
-                            </DxTreeViewNode>
-                        }
-                    </Nodes>
-                </DxTreeViewNode>
-            } else {
-                <DxTreeViewNode Text="@rootDemoPage.Title" NavigateUrl="@rootDemoPage.Url" BadgeText="@GetBadgeText(rootDemoPage)">
-                </DxTreeViewNode>
-            }
+            <NavMenuLeaf Page="@currentPage"></NavMenuLeaf>
         }
+
     </Nodes>
 </DxTreeView>
-
 @code {
     DxTreeView treeView;
 
+    [Parameter]
+    public IEnumerable<DemoPageBase> Pages { get; set; }
+
+    void SetParentNodeExpanded(ITreeViewNodeInfo node, Func<ITreeViewNodeInfo, bool> condition, bool expanded) {
+        var parentInfo = node.Parent;
+        if(parentInfo != null) {
+            var parentSiblingNodesInfo = treeView.GetNodesInfo(n => !n.IsLeaf && n.Level == parentInfo.Level && condition(n));
+            foreach(var nodeInfo in parentSiblingNodesInfo)
+                treeView.SetNodeExpanded(n => string.Equals(n.Text, nodeInfo.Text), expanded);
+        } else {
+            treeView.CollapseAll();
+        }
+    }
+
     protected void SelectionChanged(TreeViewNodeEventArgs e) {
-        if(e.NodeInfo.IsLeaf) {
-            var parentInfo = e.NodeInfo.Parent;
-            if(parentInfo != null) {
-                var parentSiblingNodesInfo = treeView.GetNodesInfo(n => !n.IsLeaf && n.Level == parentInfo.Level && !string.Equals(n.Text, parentInfo.Text));
-                foreach(var nodeInfo in parentSiblingNodesInfo)
-                    treeView.SetNodeExpanded(n => string.Equals(n.Text, nodeInfo.Text), false);
-            } else
-                treeView.CollapseAll();
+        if(e.NodeInfo.IsLeaf || e.NodeInfo.Parent != null) {
+            SetParentNodeExpanded(e.NodeInfo, (ITreeViewNodeInfo n) => !string.Equals(n.Text, e.NodeInfo.Parent.Text), false);
         }
     }
 
     protected void BeforeExpand(TreeViewNodeCancelEventArgs e) {
-        if(!e.CausedByAPI)
+        if(!e.CausedByAPI) {
             treeView.CollapseAll();
+
+            ITreeViewNodeInfo node = e.NodeInfo;
+            while(node.Parent != null) {
+                SetParentNodeExpanded(node, (ITreeViewNodeInfo n) => string.Equals(n.Text, node.Parent.Text), true);
+                node = node.Parent;
+            }
+        }
     }
 
-    protected string GetBadgeText(DemoPageSection page) {
-        if(page.IsPreview)
-            return "CTP";
-        if(page.IsNew)
-            return "New";
-        if(page.IsUpdated)
-            return "Upd";
-        if(page is DemoRootPage rootPage)
-            return GetBadgeTextFromChildren(rootPage.Pages);
-        if(page is DemoPage demoPage)
-            return GetBadgeTextFromChildren(demoPage.PageSections);
-        return string.Empty;
-    }
-
-    string GetBadgeTextFromChildren(IReadOnlyCollection<DemoPageSection> children) {
-        if(children.Count == 0)
-            return string.Empty;
-        var badges = children.Select(GetBadgeText).ToArray();
-        if(badges.All(p => p == "CTP"))
-            return "CTP";
-        if(badges.All(p => p == "New"))
-            return "New";
-        if(badges.Any(p => p == "New" || p == "Upd"))
-            return "Upd";
-        return string.Empty;
-    }
-
-    protected string GetItemCssClass(DemoPageBase page) {
-        if(page.IsPreview)
-            return "item-ctp";
-        return "";
-    }
 }

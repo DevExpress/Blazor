@@ -35,7 +35,11 @@ namespace BlazorDemo.Services {
 
         private List<WeatherForecast> CreateForecast() {
             var rng = RandomWrapperFactory.Create();
+#if VISUALTESTS 
+            DateTime startDate = new DateTime(2022, 1, 1); 
+#else
             DateTime startDate = DateTime.Now;
+#endif
 
             int min = 0;
             int max = 0;

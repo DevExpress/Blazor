@@ -1,16 +1,24 @@
 ﻿@page "/ReportDesigner"
 @page "/ReportDesigner/{reportName}"
 <link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-reporting-pages.css">
-
+<DemoScriptLoader Src="_content/BlazorDemo/lib/reporting.js"></DemoScriptLoader>
 <DemoPageSectionComponent Id="Reports-ReportDesigner">
-    <DxReportDesigner ReportName=@ReportName Height="770px" CssClass="w-100"></DxReportDesigner>
+    <DxReportDesigner ReportName=@ReportName Height="770px" @ref="designer" CssClass="w-100">
+    </DxReportDesigner>
 
     @code {
         [Parameter]
         public string ReportName { get; set; }
+        DxReportDesigner designer { get; set; }
 
         protected override void OnInitialized() {
             ReportName = ReportName ?? "InvoiceReport";
         }
-    }
+
+        protected override void OnAfterRender(bool firstRender) {
+            designer.CallbacksModel = new ReportDesignerCallbacksModel();
+            designer.CallbacksModel.Events.ExitDesigner = "\"ReportDesignerExit\"";
+            base.OnAfterRender(firstRender);
+        }
+}
 </DemoPageSectionComponent>

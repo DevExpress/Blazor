@@ -1,0 +1,62 @@
+﻿<DemoPageSectionComponent Id="Charts-Axes-ConstantLines">
+    <ChildContent>
+        <DxChart T="GlobalTemperatureIndexInfo"
+                 Data="Data"
+                 Width="100%"
+                 Height="500px">
+            <DxChartArgumentAxis TickInterval="10">
+                <DxChartAxisTitle Text="Year" />
+                <DxChartAxisLabel Format="ChartElementFormat.Decimal()" />
+            </DxChartArgumentAxis>
+            <DxChartValueAxis>
+                <DxChartAxisTitle Text="Temperature Anomaly, °C" />
+                <DxChartConstantLine Value="0" Width="2">
+                    <DxChartConstantLineLabel Text="Zero Level"
+                                              VerticalAlignment="VerticalAlignment.Center"
+                                              Position="RelativePosition.Inside" />
+                </DxChartConstantLine>
+                <DxChartConstantLine Value="Min" Width="2">
+                    <DxChartConstantLineLabel Text=@($"Minimum = {Min}")
+                                              VerticalAlignment="VerticalAlignment.Center"
+                                              Position="RelativePosition.Inside" />
+                </DxChartConstantLine>
+                <DxChartConstantLine Value="Max" Width="2">
+                    <DxChartConstantLineLabel Text=@($"Maximum = {Max}")
+                                              VerticalAlignment="VerticalAlignment.Center"
+                                              Position="RelativePosition.Inside" />
+                </DxChartConstantLine>
+            </DxChartValueAxis>
+            <DxChartTitle Text="Global Land-Ocean Temperature Index" />
+            <DxChartLineSeries T="GlobalTemperatureIndexInfo"
+                               TArgument="int"
+                               TValue="double"
+                               ArgumentField="info=>info.Year"
+                               ValueField="info=>info.Value"
+                               Color="System.Drawing.Color.LightGray"
+                               Name="Annual mean"/>
+            <DxChartSplineSeries T="GlobalTemperatureIndexInfo"
+                               TArgument="int"
+                               TValue="double"
+                               ArgumentField="info=>info.Year"
+                               ValueField="info=>info.LowessValue"
+                               Name="Lowess smoothing"/>
+            <DxChartTooltip Enabled="true"/>
+            <DxChartLegend Position="RelativePosition.Outside"
+                           VerticalAlignment="VerticalEdge.Bottom"/>
+        </DxChart>
+
+        @code {
+            const double Max = 1.02;
+            const double Min = -0.49;
+            IEnumerable<GlobalTemperatureIndexInfo> Data;
+            @inject IGlobalTemperatureIndexDataProvider DataProvider
+
+            protected override async Task OnInitializedAsync() {
+                Data = await DataProvider.GetDataAsync();
+            }
+        }
+        <div class="credits-title">NASA Global Climate Change</div>
+    </ChildContent>
+</DemoPageSectionComponent>
+
+

@@ -28,7 +28,15 @@
             protected override async Task OnInitializedAsync() {
                 Data = await NwindDataService.GetCustomersAsync();
             }
-            protected void OnGroupingChanged(string key) {
+            void ExpandAllRows_Click() {
+                 Grid.ExpandAllGroupRows();
+            }
+            void CollapseAllRows_Click() {
+                 Grid.CollapseAllGroupRows();
+            }
+            // This method demonstrates how to group Grid data in code.
+            // In this demo, this method is called when the 'Group by' option value changes.
+            protected void ChangeGrouping(string key) {
                 CurrentGroupInfoKey = key;
                 var currentGroupInfo = GroupInfo[key];
 
@@ -41,11 +49,11 @@
         }
     </ChildContentWithParameters>
     <OptionsContent>
-        <OptionComboBox Label="Group by:" Data="@GroupInfo.Keys" Value="@CurrentGroupInfoKey" ValueChanged="@((string value) => OnGroupingChanged(value))" CssClass="ow-180" />
+        <OptionComboBox Label="Group by:" Data="@GroupInfo.Keys" Value="@CurrentGroupInfoKey" ValueChanged="@((string value) => ChangeGrouping(value))" CssClass="ow-180" />
 
         <OptionButtonGroup>
-            <OptionButton Text="Collapse All Rows" OnClick="@(() => Grid.CollapseAllGroupRows())" SmallSpacing="true" />
-            <OptionButton Text="Expand All Rows" OnClick="@(() => Grid.ExpandAllGroupRows())" />
+            <OptionButton Text="Collapse All Rows" OnClick="CollapseAllRows_Click" SmallSpacing="true" />
+            <OptionButton Text="Expand All Rows" OnClick="ExpandAllRows_Click" />
         </OptionButtonGroup>
     </OptionsContent>
 </DemoPageSectionComponent>

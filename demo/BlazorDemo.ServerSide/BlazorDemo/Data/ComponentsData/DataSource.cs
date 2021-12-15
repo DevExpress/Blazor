@@ -22,7 +22,7 @@ namespace BlazorDemo.Data {
         public static List<ComponentSet> Data { get { return componentSets; } }
 
         static string GetImageUrl(string imageName) {
-            return StaticAssetUtils.GetImagePath($"components/{imageName}.svg");
+            return StaticAssetUtils.GetImagePath($"Components/{imageName}.svg");
         }
     }
 }

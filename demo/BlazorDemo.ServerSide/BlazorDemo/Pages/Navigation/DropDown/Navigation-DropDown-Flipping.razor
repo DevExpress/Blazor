@@ -3,12 +3,12 @@
 <DemoPageSectionComponent Id="Navigation-DropDown-Flipping">
     <OptionsContent>
         <OptionComboBox Label="Close mode:" CssClass="ow-100" Data="@CloseModeSource" @bind-Value="@CloseMode"/>
-        <OptionCheckBox Label="Fit to container:" @bind-Checked="FitToRestriction"/>
+        <OptionCheckBox Label="Fit to container" @bind-Checked="FitToRestriction"/>
     </OptionsContent>
     <ChildContent>
         <div class="@(IsMobile ? "" : "card") flipping-overflow-container">
             <dxbl-demo-scrollable center-horizontally center-vertically id="flipping-target-container" class="flipping-overflow-content">
-                <DxButton CssClass="flipping-button" Click="() => IsOpen = true">SHOW A DROPDOWN</DxButton>
+                <DxButton CssClass="flipping-button" Click="() => IsOpen = !IsOpen">SHOW A DROPDOWN</DxButton>
             </dxbl-demo-scrollable>
             <DxDropDown
                 @bind-IsOpen="@IsOpen"
@@ -17,6 +17,7 @@
                 PositionTarget=".flipping-button"
                 RestrictionTarget=".flipping-overflow-container"
                 RestrictionMode="DropDownRestrictionMode.TargetElement"
+                PreventCloseOnPositionTargetClick="true"
                 CloseMode="@CloseMode"
                 FitToRestriction="@FitToRestriction"
                 Width="240">

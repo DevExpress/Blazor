@@ -21,7 +21,7 @@
     <ProjectReference Include="..\BlazorDemo.Wasm.Client\BlazorDemo.Wasm.Client.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor" Version="21.2.3" />
+    <PackageReference Include="DevExpress.Blazor" Version="21.2.4" />
     
   </ItemGroup>
   <ItemGroup>

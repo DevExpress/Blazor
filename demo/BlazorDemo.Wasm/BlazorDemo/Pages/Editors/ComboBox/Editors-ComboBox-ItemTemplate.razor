@@ -7,7 +7,7 @@
                     CssClass="cw-480">
             <ItemTemplate>
                 <div class="combobox-item-template">
-                    <img src="@StaticAssetUtils.GetImagePath(GetImagineFileName(context))" />
+                    <img src="@StaticAssetUtils.GetImagePath(GetImageFileName(context))" />
                     <div class="combobox-item-template-text">
                         <span>@context.FirstName @context.LastName</span>
                         <span class="combobox-item-template-employee-phone">@context.HomePhone</span>
@@ -27,7 +27,7 @@
             Value = Data.FirstOrDefault();
         }
 
-        string GetImagineFileName(Employee employee) {
+        string GetImageFileName(Employee employee) {
             return $"Employees/item-template{employee.EmployeeId}.jpg";
         }
     }

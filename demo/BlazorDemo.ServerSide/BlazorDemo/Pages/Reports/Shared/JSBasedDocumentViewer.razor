@@ -1,0 +1,16 @@
+﻿@using BlazorDemo.Services
+
+@inject IDemoReportSource DemoReportSource
+@inject DemoConfiguration Configuration
+@inject NavigationManager NavigationManager
+
+<DxDocumentViewer ReportName=@ReportName Height="700px" CssClass="w-100"></DxDocumentViewer>
+
+@code {
+    [Parameter] public string ReportName { get; set; }
+
+    protected override void OnInitialized() {
+        base.OnInitialized();
+        ReportName = ReportName ?? "InvoiceReport";
+    }
+}

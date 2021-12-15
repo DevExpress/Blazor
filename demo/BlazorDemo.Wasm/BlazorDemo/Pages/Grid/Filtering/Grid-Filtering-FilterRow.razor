@@ -7,7 +7,7 @@
                 ShowFilterRow="true"
                 CustomizeCellDisplayText="Grid_CustomizeCellDisplayText">
             <Columns>
-                <DxGridDataColumn FieldName="OrderId" DisplayFormat="d" SortIndex="0" MinWidth="100" Width="10%">
+                <DxGridDataColumn FieldName="OrderId" Caption="Order ID" DisplayFormat="d" SortIndex="0" MinWidth="100" Width="10%">
                     <FilterRowCellTemplate>
                         <DxSpinEdit Value="(int?)context.FilterRowValue"
                                     ValueChanged="(int? v) => context.FilterRowValue = v"

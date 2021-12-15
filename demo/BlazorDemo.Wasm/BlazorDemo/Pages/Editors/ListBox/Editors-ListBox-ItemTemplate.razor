@@ -5,7 +5,7 @@
                 CssClass="cw-400 chi-220">
             <ItemTemplate>
                 <div class="listbox-item-template">
-                    <img src="@StaticAssetUtils.GetImagePath(GetImagineFileName(context))" />
+                    <img src="@StaticAssetUtils.GetImagePath(GetImageFileName(context))" />
                     <div class="listbox-item-template-text">
                         <span>@context.FirstName @context.LastName</span>
                         <span class="listbox-item-template-text-phone">@context.HomePhone</span>
@@ -24,7 +24,7 @@
                 Value = Data.FirstOrDefault();
             }
 
-            string GetImagineFileName(Employee employee) {
+            string GetImageFileName(Employee employee) {
                 return $"Employees/item-template{employee.EmployeeId}.jpg";
             }
         }

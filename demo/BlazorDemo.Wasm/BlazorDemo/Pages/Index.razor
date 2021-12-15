@@ -72,7 +72,7 @@
 @code {
     public override async Task SetParametersAsync(ParameterView parameters) {
         if(Configuration.ShowOnlyReporting)
-            NavigationManager.NavigateTo("ReportViewer");
+            NavigationManager.NavigateTo("ReportViewer/InvoiceReport");
         else
             await base.SetParametersAsync(parameters);
     }

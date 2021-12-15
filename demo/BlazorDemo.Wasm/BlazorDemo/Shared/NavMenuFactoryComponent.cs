@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using BlazorDemo.Configuration;
 using Microsoft.AspNetCore.Components;
@@ -14,14 +15,17 @@ namespace BlazorDemo.Shared {
         protected override void BuildRenderTree(RenderTreeBuilder builder) {
 #if SERVER_BLAZOR
             if(Configuration.ShowOnlyReporting) {
-                builder.OpenComponent<NavMenuReporting>(0);
+                builder.OpenComponent<NavMenu>(0);
+                builder.AddAttribute(1, "Pages", Configuration.RootPages.Where(x => x.Id == "Reports").FirstOrDefault().Pages);
                 builder.CloseComponent();
             } else {
-                builder.OpenComponent<NavMenu>(1);
+                builder.OpenComponent<NavMenu>(2);
+                builder.AddAttribute(3, "Pages", Configuration.RootPages);
                 builder.CloseComponent();
             }
 #else
             builder.OpenComponent<NavMenu>(0);
+            builder.AddAttribute(1, "Pages", Configuration.RootPages);
             builder.CloseComponent();
 #endif
         }

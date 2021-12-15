@@ -94,6 +94,8 @@ namespace BlazorDemo.ServerSide {
                 services.AddSingleton<IWeatherSummaryDataProvider, WeatherSummaryDataProvider>();
                 services.AddSingleton<IIssuesDataProvider, IssuesDataProvider>();
                 services.AddSingleton<IWorldcitiesDataProvider, WorldcitiesDataProvider>();
+                services.AddSingleton<IGlobalTemperatureIndexDataProvider, GlobalTemperatureIndexDataProvider>();
+                services.AddSingleton<IGlobalTemperatureIndexFileContentProvider, GlobalTemperatureIndexFileContentProvider>();
                 // Editable should be scoped
                 services.AddScoped<INwindDataProvider, NwindDataProvider>();
 

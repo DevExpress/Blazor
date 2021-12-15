@@ -11,5 +11,7 @@ To enable data editing within the DevExpress Blazor Grid:
 5. (Optional) Handle the [CustomizeEditModel](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomizeEditModel) event to initialize an edit model for new data rows. 
 
 Our Blazor Grid supports different edit modes. Use the [Edit Mode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.EditMode) option above to switch between available modes.
-* [GridEditMode.EditForm](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridEditMode) (Default) – The Grid displays an inline edit form instead of the edited row.
+* [GridEditMode.EditForm](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridEditMode) (Default) – The Grid displays the edit form instead of the edited row.
 * [GridEditMode.PopupEditForm](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridEditMode) – The Grid displays the edit form in a pop-up window.
+
+For detailed information on how to enable data editing and use edit-related option, refer to the following help topic: [Edit Data and Validate Input](https://docs.devexpress.com/Blazor/403454/grid/edit-data-and-validate-input).

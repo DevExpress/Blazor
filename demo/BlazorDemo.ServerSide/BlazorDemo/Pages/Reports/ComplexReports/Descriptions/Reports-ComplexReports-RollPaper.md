@@ -1,0 +1,1 @@
+﻿In this demo, the report's PaperKind property is set to Custom and the RollPaper property is enabled. This allows you to specify the roll paper's width and print the generated document as a single, uninterrupted page.
