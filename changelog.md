@@ -2,6 +2,17 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 21.2.5
+
+### Breaking Changes
+
+* [1059018](https://supportcenter.devexpress.com/ticket/details/t1059018/dxtabs-dxformlayouttabpages-active-tab-choice-was-introduced): DxTabs, DxFormLayoutTabPages – Active tab choice was introduced
+* [1059760](https://supportcenter.devexpress.com/ticket/details/t1059760/tagbox-the-dropdown-render-has-changed): TagBox - The DropDown render has changed
+
+### Resolved Issues
+
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=21.2.5&endBuildName=21.2.5&buildsMode=Single&hasPlatformsWithProducts=true) a complete list of issues resolved in v21.2.5.
+
 # 21.2.4
 
 ### Support for .NET 6
