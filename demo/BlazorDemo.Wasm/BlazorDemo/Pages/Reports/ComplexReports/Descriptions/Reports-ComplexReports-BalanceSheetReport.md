@@ -2,4 +2,4 @@
 
 Refer to the Sales Summary Report demo for another Cross Tab layout.
 
-<a href="https://docs.devexpress.com/XtraReports/401303" target="_blank">See Documentation</a>
+<a href="https://docs.devexpress.com/XtraReports/401303/create-reports/create-a-balance-sheet" target="_blank">See Documentation</a>

@@ -25,7 +25,7 @@ namespace BlazorDemo.Data {
                     ResourceId = 0
                 },
                 new Appointment {
-                    Caption = "Website Re-Design Plan",
+                    Caption = "Website Redesign Plan",
                     Accepted = false,
                     StartDate = date + (new TimeSpan(1, 9, 30, 0)),
                     EndDate = date + (new TimeSpan(1, 11, 30, 0)),

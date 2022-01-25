@@ -22,7 +22,7 @@ namespace BlazorDemo.Data {
                     Status = 4
                 },
                 new Appointment {
-                    Caption = "Website Re-Design Plan",
+                    Caption = "Website Redesign Plan",
                     StartDate = date + (new TimeSpan(1, 9, 30, 0)),
                     EndDate = date + (new TimeSpan(1, 12, 0, 0)),
                     Label = 1,

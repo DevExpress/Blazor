@@ -2,11 +2,9 @@
 @page "/ReportViewer/{ReportName?}"
 @page "/ReportViewer/{CategoryName?}/{ReportName?}"
 
-
 @inject NavigationManager NavigationManager
 @using Microsoft.AspNetCore.WebUtilities
 @using BlazorDemo.Pages.Reports.Shared
-
 <link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-reporting-pages.css">
 
 <DemoPageSectionComponent Id="@GetPageId()" ShowSizeMode="@IsNativeViewer">

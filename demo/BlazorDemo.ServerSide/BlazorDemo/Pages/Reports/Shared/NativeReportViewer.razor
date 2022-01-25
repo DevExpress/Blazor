@@ -10,36 +10,29 @@
 @using DevExpress.XtraReports.UI;
 @using DevExpress.Blazor.Reporting.EditingFields;
 @using DevExpress.XtraReports.Web.Native.ClientControls;
+<DemoScriptLoader Src="_content/BlazorDemo/lib/reporting.js" @ref=demoScriptLoader>
+</DemoScriptLoader>
 
-<DxReportViewer Report="@Report" RootCssClasses="w-100" @ref="Viewer" SizeMode="Params.SizeMode" SinglePagePreview="false"></DxReportViewer>
+<DxReportViewer RootCssClasses="w-100" @ref="Viewer" SizeMode="Params.SizeMode" SinglePagePreview="false"></DxReportViewer>
 @code {
     DxReportViewer Viewer { get; set; }
-    IReport Report { get; set; }
-
-    string reportName;
+    DemoScriptLoader demoScriptLoader { get; set; }
+    string latestReportName;
     [Parameter]
-    public string ReportName {
-        get { return reportName; }
-        set {
-            if(reportName != value) {
-                reportName = value;
-                AssignReport();
-            }
-        }
-    }
+    public string ReportName { get; set; }
     [Parameter] public DemoPageSectionParameters Params { get; set; }
     [Inject] public EditingFieldModelFactory EditingFieldModelFactory { get; set; }
-    [Inject] public DevExpress.XtraReports.Services.IReportProvider reportProvider { get; set; }
+    [Inject] public DevExpress.XtraReports.Services.IReportProviderAsync ReportProvider { get; set; }
 
-    void AssignReport() {
-        XtraReport report = reportProvider.GetReport(ReportName);
+    async Task AssignReportAsync() {
+        XtraReport report = await ReportProvider.GetReportAsync(ReportName);
         if(report == null) {
             throw new Exception($"{ReportName} not found");
         }
         if(ReportName == XtraReportsDemos.ReportNames.LargeDatasetName)
-            Report = new CachedReportSource(report, new MemoryDocumentStorage());
+            await Viewer.OpenReportAsync(new CachedReportSource(report, new MemoryDocumentStorage()));
         else
-            Report = report;
+            await Viewer.OpenReportAsync(report);
     }
     protected override async Task OnAfterRenderAsync(bool firstRender) {
         if(firstRender) {
@@ -50,6 +43,11 @@
             EditingFieldModelFactory.RegisterMaskEditor("Day", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"(0[1-9])|([1-2][0-9])|(3[0-1])" });
             EditingFieldModelFactory.RegisterMaskEditor("Month", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"(0[1-9])|(1[0-2])" });
             EditingFieldModelFactory.RegisterMaskEditor("Year", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"[0-2]([0-9]{3})" });
+        }
+        await demoScriptLoader.Loaded;
+        if(ReportName != latestReportName) {
+            latestReportName = ReportName;
+            await AssignReportAsync();
         }
         await base.OnAfterRenderAsync(firstRender);
     }

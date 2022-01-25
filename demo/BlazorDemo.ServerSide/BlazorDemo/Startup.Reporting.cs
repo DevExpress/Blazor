@@ -1,5 +1,7 @@
 #if SERVER_BLAZOR
 using System;
+using System.IO;
+using System.Threading;
 using BlazorDemo.Services;
 using DevExpress.AspNetCore.Reporting;
 using DevExpress.Blazor.Reporting;
@@ -11,6 +13,25 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazorDemo.Reporting {
     class StartupFilter : IStartupFilter {
+        static Timer cleaner;
+        static void Clean(string contentRootPath) {
+            try {
+                var reportsDirectory = Path.Join(contentRootPath, DemoReportStorageWebExtension.TempReportsFolderName);
+                if(!Directory.Exists(reportsDirectory)) return;
+                var directories = Directory.GetDirectories(reportsDirectory);
+                foreach(var directory in directories) {
+                    var files = Directory.GetFiles(directory);
+                    foreach(var file in files) {
+                        if(DateTime.UtcNow >= File.GetLastAccessTimeUtc(file).AddMinutes(10)) {
+                            File.Delete(file);
+                        }
+                    }
+                    if(Directory.GetFiles(directory).Length == 0) {
+                        Directory.Delete(directory);
+                    }
+                }
+            } catch { }
+        }
         public Action<IApplicationBuilder> Configure(Action<IApplicationBuilder> next) {
             return ConfigureApp;
 
@@ -19,7 +40,9 @@ namespace BlazorDemo.Reporting {
                 app.UseDevExpressBlazorReporting();
                 app.UseDevExpressServerSideBlazorReportViewer();
                 DevExpress.DataAccess.DefaultConnectionStringProvider.AssignConnectionStrings(() => app.ApplicationServices.GetService<ReportingCustomConfigurationProvider>().GetGlobalConnectionStrings());
-
+                var env = app.ApplicationServices.GetService<IWebHostEnvironment>();
+                if(cleaner == null)
+                    cleaner = new Timer(state => Clean((string)state), env.ContentRootPath, TimeSpan.Zero, TimeSpan.FromSeconds(30));
                 next(app);
             }
         }
@@ -35,6 +58,7 @@ namespace BlazorDemo.Reporting {
                 services.AddDevExpressBlazorReporting();
                 services.AddSingleton<ReportingCustomConfigurationProvider, ReportingCustomConfigurationProvider>();
                 services.ConfigureReportingServices((builder) => {
+                    builder.UseAsyncEngine();
                     builder.ConfigureReportDesigner(designer => {
                         designer.RegisterDataSourceWizardConfigurationConnectionStringsProvider(configurationProvider.GetReportDesignerWizardConfigurationSection());
                     });
@@ -45,10 +69,9 @@ namespace BlazorDemo.Reporting {
                 services.AddTransient<DevExpress.DataAccess.Wizard.Services.ICustomQueryValidator, DevExpress.DataAccess.Wizard.Services.CustomQueryValidator>();
                 services.AddSingleton<IDemoReportSource, DemoReportSource>();
                 services.AddScoped<ReportStorageWebExtension, DemoReportStorageWebExtension>();
-                services.AddScoped(serviceProvider => (IReportProvider)serviceProvider.GetRequiredService<ReportStorageWebExtension>());
+                services.AddScoped(serviceProvider => (IReportProviderAsync)serviceProvider.GetRequiredService<ReportStorageWebExtension>());
                 services.AddControllers(options => options.EnableEndpointRouting = false);
             });
-
         }
     }
 }

@@ -2,35 +2,50 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using DevExpress.XtraReports.Native;
+using System.Linq;
+using System.Threading.Tasks;
 using DevExpress.XtraReports.Services;
 using DevExpress.XtraReports.UI;
-using DevExpress.XtraReports.Web.Extensions;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
+using Microsoft.JSInterop;
 
 namespace BlazorDemo.Services {
-    public static class SessionExtensions {
-        public static void SetObjectAsJson(this ISession session, string key, object value) {
-            session?.SetString(key, JsonConvert.SerializeObject(value));
-        }
-
-        public static T GetObjectFromJson<T>(this ISession session, string key) {
-            var value = session?.GetString(key);
-            return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
-        }
-    }
-
-    public class DemoReportStorageWebExtension : DevExpress.XtraReports.Web.Extensions.ReportStorageWebExtension, IReportProvider {
-        readonly static string ReportExtensionSessionKey = "dxReportStorageWebExtensionKey_1C5CB325-69FA-4C9E-9D4D-96AE00C3E86E";
-        protected IHttpContextAccessor HttpContextAccessor { get; }
+    public class DemoReportStorageWebExtension : DevExpress.XtraReports.Web.Extensions.ReportStorageWebExtension, IReportProviderAsync {
+        public static string TempReportsFolderName => Path.Join("obj", "UserReports");
+        public const string IdCookieKey = "xrId";
+        string TempReportsFolderPath => Path.Join(webHostEnvironment.ContentRootPath, TempReportsFolderName);
+        protected IHttpContextAccessor httpContextAccessor { get; }
         protected IDemoReportSource PredefinedReports { get; }
-        protected ISession Session { get { return HttpContextAccessor.HttpContext?.Session; } }
-        readonly object sync = new object();
+        protected IWebHostEnvironment webHostEnvironment { get; }
+        IJSRuntime jsRuntime { get; }
 
-        public DemoReportStorageWebExtension(IHttpContextAccessor httpContextAccessor, IDemoReportSource reportFactory) {
-            HttpContextAccessor = httpContextAccessor;
+        public DemoReportStorageWebExtension(IHttpContextAccessor httpContextAccessor, IWebHostEnvironment webHostEnvironment, IJSRuntime jsRuntime, IDemoReportSource reportFactory) {
+            this.httpContextAccessor = httpContextAccessor;
+            this.webHostEnvironment = webHostEnvironment;
             PredefinedReports = reportFactory;
+            this.jsRuntime = jsRuntime;
+        }
+
+        async Task<string> GetGuidAsync() {
+            string xrId = string.Empty;
+            httpContextAccessor.HttpContext?.Request.Cookies.TryGetValue(IdCookieKey, out xrId);
+            if(string.IsNullOrEmpty(xrId)) {
+                xrId = await jsRuntime.InvokeAsync<string>("_dx_demoPageHelper.getCookie", IdCookieKey);
+                if(string.IsNullOrEmpty(xrId)) {
+                    xrId = Guid.NewGuid().ToString("N");
+                    await jsRuntime.InvokeAsync<string>("_dxr_setId", IdCookieKey, xrId);
+                }
+            }
+            return xrId;
+        }
+
+        public async Task<string> GetReportFolderPathAsync() {
+            var folderPath = Path.Join(TempReportsFolderPath, await GetGuidAsync());
+            if(!Directory.Exists(folderPath)) {
+                Directory.CreateDirectory(folderPath);
+            }
+            return folderPath;
         }
 
         public override bool CanSetData(string reportName) {
@@ -38,75 +53,66 @@ namespace BlazorDemo.Services {
         }
 
         public override bool IsValidUrl(string reportName) {
+            if(string.IsNullOrEmpty(reportName))
+                return false;
+            else if(reportName.Any(x => Array.IndexOf(Path.GetInvalidFileNameChars(), x) >= 0))
+                return false;
+            else if(reportName.Contains(".."))
+                return false;
             return true;
         }
 
-        public override byte[] GetData(string reportName) {
-            byte[] reportBytes;
-            lock(sync) {
-                var storedReports = Session.GetObjectFromJson<Dictionary<string, string>>(ReportExtensionSessionKey);
-                if(storedReports != null && storedReports.ContainsKey(reportName) && Session.TryGetValue(reportName, out reportBytes)) {
-                    return reportBytes;
-                }
+        public override async Task<byte[]> GetDataAsync(string reportName) {
+            ValidateReportName(reportName);
+            var reportPath = Path.Join(await GetReportFolderPathAsync(), reportName + ".repx");
+            if(File.Exists(reportPath)) return await File.ReadAllBytesAsync(reportPath);
+            XtraReport report = PredefinedReports.GetReport(reportName);
+            if(report == null) {
+                throw new Exception("Report was not found.");
             }
-            return null;
+            using(MemoryStream ms = new MemoryStream()) {
+                report.SaveLayoutToXml(ms);
+                return ms.ToArray();
+            }
         }
 
-        XtraReport IReportProvider.GetReport(string id, ReportProviderContext context) {
-            var reportLayout = GetData(id);
-            XtraReport report = reportLayout != null
-                ? LoadReport(reportLayout, context)
-                : PredefinedReports.GetReport(id);
+        async Task<XtraReport> IReportProviderAsync.GetReportAsync(string id, ReportProviderContext context) {
+            ValidateReportName(id);
+            var reportPath = Path.Join(await GetReportFolderPathAsync(), id + ".repx");
+            if(File.Exists(reportPath)) {
+                return XtraReport.FromFile(reportPath);
+            }
+            var report = PredefinedReports.GetReport(id);
             if(report == null)
                 throw new Exception("Report not found.");
             return report;
         }
 
-        static XtraReport LoadReport(byte[] reportLayout, ReportProviderContext context) {
-            return context?.LoadReport(reportLayout) ?? LoadReportCore(reportLayout);
-        }
-
-        static XtraReport LoadReportCore(byte[] reportLayout) {
-            using(var ms = new MemoryStream(reportLayout)) {
-                return XtraReport.FromStream(ms);
-            }
-        }
-
-        public override Dictionary<string, string> GetUrls() {
+        public override async Task<Dictionary<string, string>> GetUrlsAsync() {
             var predefinedList = PredefinedReports.GetReportList();
-            var reportListFromSession = Session.GetObjectFromJson<Dictionary<string, string>>(ReportExtensionSessionKey);
-            if(reportListFromSession != null)
-                foreach(var reportItem in reportListFromSession) {
-                    predefinedList[reportItem.Key] = reportItem.Value;
+            if(Directory.Exists(await GetReportFolderPathAsync())) {
+                var files = Directory.GetFiles(await GetReportFolderPathAsync()).Select(x => Path.GetFileNameWithoutExtension(x)).Where(x => !predefinedList.ContainsKey(x));
+                foreach(var fileName in files) {
+                    predefinedList.Add(fileName, fileName);
                 }
+            }
             return predefinedList;
         }
 
-        public override void SetData(XtraReport report, string reportName) {
-            using(var stream = new MemoryStream()) {
-                report.SaveLayoutToXml(stream);
-                SaveAndUpateSessionState(reportName, stream.ToArray());
-            }
+        public override async Task SetDataAsync(XtraReport report, string url) {
+            ValidateReportName(url);
+            report.SaveLayoutToXml(Path.Join(await GetReportFolderPathAsync(), url + ".repx"));
         }
 
-        public override string SetNewData(XtraReport report, string defaultReportName) {
-            using(var stream = new MemoryStream()) {
-                report.SaveLayoutToXml(stream);
-                SaveAndUpateSessionState(defaultReportName, stream.ToArray());
-            }
-            return defaultReportName;
+        public override async Task<string> SetNewDataAsync(XtraReport report, string defaultUrl) {
+            ValidateReportName(defaultUrl);
+            report.SaveLayoutToXml(Path.Join(await GetReportFolderPathAsync(), defaultUrl + ".repx"));
+            return defaultUrl;
         }
 
-        void SaveAndUpateSessionState(string reportName, byte[] reportLayout) {
-            lock(sync) {
-                var reports = Session.GetObjectFromJson<Dictionary<string, string>>(ReportExtensionSessionKey);
-                if(reports == null)
-                    reports = new Dictionary<string, string>();
-                if(!reports.ContainsKey(reportName))
-                    reports.Add(reportName, reportName);
-                Session.SetObjectAsJson(ReportExtensionSessionKey, reports);
-                Session.Set(reportName, reportLayout);
-            }
+        void ValidateReportName(string reportName) {
+            if(!IsValidUrl(reportName))
+                throw new InvalidOperationException("Invalid name");
         }
     }
 }

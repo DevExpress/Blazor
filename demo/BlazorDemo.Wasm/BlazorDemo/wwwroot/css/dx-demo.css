@@ -1177,7 +1177,6 @@ body,
 }
 
 .demo-page-section-component-area .options-container .option-component.option-component-check > dxbl-check {
-    flex: 0;
     margin-right: 0.5rem;
 }
 .demo-page-section-component-area .options-container .option-component.option-component-check > label {
@@ -1565,6 +1564,12 @@ body,
     mask-image: url("../images/DropFile.svg");
 }
 
+/* DropDown */
+
+.dxbs-editor-dropdown .dxbs-editor-dropdown-body > * {
+    border: none !important;
+}
+
 /* Misc */
 
 .validation-errors {
@@ -1600,5 +1605,4 @@ body,
     font-size: 14px;
     margin-bottom: 16px;
 }
-
 
