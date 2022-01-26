@@ -1,3 +1,3 @@
 This demo illustrates how visual signatures are used. Users can add a signature when they export the report to PDF. The <a href="https://docs.devexpress.com/XtraReports/DevExpress.XtraReports.UI.XRPdfSignature" target="_blank">XRPdfSignature</a> control displays the specified signature.
 
-<a href="https://docs.devexpress.com/XtraReports/402208/create-reports/reports-with-visual-pdf-signature" target="_blank">See Documentation</a>
+<a href="https://docs.devexpress.com/XtraReports/402208/create-reports/create-a-report-with-visual-pdf-signature" target="_blank">See Documentation</a>

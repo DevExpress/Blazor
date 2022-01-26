@@ -80,8 +80,12 @@ var DemoPageHelper = (function() {
             getThemeName: getThemeName,
             setThemeName: setThemeName
         },
+        getCookie: getCookie,
+        setCookie: setCookie,
         demoMatchesQuery: demoMatchesQuery,
         patchAppElement: patchAppElement,
         raiseWindowOnResize: raiseWindowOnResize
     };
 })();
+
+window["_dx_demoPageHelper"] = DemoPageHelper;

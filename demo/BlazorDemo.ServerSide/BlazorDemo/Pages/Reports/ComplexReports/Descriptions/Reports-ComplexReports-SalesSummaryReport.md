@@ -2,4 +2,4 @@ This demo illustrates how to use the Cross Tab control to create a Sales Summary
 
 Refer to the Balance Sheet demo for another Cross Tab layout.
 
-<a href="https://docs.devexpress.com/XtraReports/4226" target="_blank">See Documentation</a>
+<a href="https://docs.devexpress.com/XtraReports/4226/create-reports/create-a-cross-tab-report" target="_blank">See Documentation</a>

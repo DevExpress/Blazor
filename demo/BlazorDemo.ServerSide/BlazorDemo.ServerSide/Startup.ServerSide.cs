@@ -88,7 +88,6 @@ namespace BlazorDemo.ServerSide {
             app.UseStaticFiles(new StaticFileOptions {
                 ServeUnknownFileTypes = true
             });
-
             app.UseEndpoints(endpoints => endpoints.MapBlazorHub());
         }
         public override void Configure(IWebHostBuilder builder) {

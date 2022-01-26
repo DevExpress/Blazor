@@ -3,7 +3,8 @@
     <TargetFramework>net5.0</TargetFramework>
     <EnableDefaultItems>False</EnableDefaultItems>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
-	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <UserSecretsId>eb274127-1fcd-4ba5-9952-497c7df007d0</UserSecretsId>
 	<RollForward>Major</RollForward>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
@@ -13,8 +14,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.2" />
     <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
-    <PackageReference Include="DevExpress.Blazor.Server.WebAssembly" Version="21.2.4" />
-    <PackageReference Include="DevExpress.Blazor.Reporting" Version="21.2.4" />
+    <PackageReference Include="DevExpress.Blazor.Server.WebAssembly" Version="21.2.5" />
+    <PackageReference Include="DevExpress.Blazor.Reporting" Version="21.2.5" />
     
     <ProjectReference Include="..\BlazorDemo\BlazorDemo.ServerSide.Core.csproj" />
   </ItemGroup>

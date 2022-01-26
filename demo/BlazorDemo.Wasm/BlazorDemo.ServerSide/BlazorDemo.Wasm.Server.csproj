@@ -3,7 +3,8 @@
     <TargetFramework>net5.0</TargetFramework>
     <EnableDefaultItems>False</EnableDefaultItems>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
-	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <IntermediateOutputPath>obj.WASM</IntermediateOutputPath>
     <RollForward>Major</RollForward>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
@@ -21,7 +22,7 @@
     <ProjectReference Include="..\BlazorDemo.Wasm.Client\BlazorDemo.Wasm.Client.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor" Version="21.2.4" />
+    <PackageReference Include="DevExpress.Blazor" Version="21.2.5" />
     
   </ItemGroup>
   <ItemGroup>
