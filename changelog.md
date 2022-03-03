@@ -2,6 +2,69 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 21.2.6
+
+### New Blazor Grid
+
+Our Blazor Grid component was first introduced in v21.1 as a Community Technology Preview (CTP). This update marks its official release. v21.2.6 includes many new grid features.
+
+### Server Mode Data Source
+
+The Blazor Grid supports the use of our unique Server Mode data source for Blazor Server-based applications. This data source was designed to work with large data collections. Server mode has the following advantages:
+
+- The Grid loads data in small portions on demand. It does not load the entire dataset. This feature helps reduce memory consumption and improve usability.
+- All data shaping operations (grouping, sorting, and so on) are delegated from the Blazor application itself to underlying services (EF Core, XPO, and so on). These services process operations more efficiently and increase overall performance.
+
+Demo - [https://demos.devexpress.com/blazor/Grid/DataBinding#LargeDataInstantFeedback](https://demos.devexpress.com/blazor/Grid/DataBinding#LargeDataInstantFeedback)
+Documentation - [https://docs.devexpress.com/Blazor/403737/grid/bind-to-data#large-data-server-mode-sources](https://docs.devexpress.com/Blazor/403737/grid/bind-to-data#large-data-server-mode-sources)
+
+### Support for Observable Data Collections
+
+You can bind the Grid to a data collection that implements the [INotifyCollectionChanged](https://docs.microsoft.com/dotnet/api/system.collections.specialized.inotifycollectionchanged) or [IBindingList](https://docs.microsoft.com/dotnet/api/system.componentmodel.ibindinglist) interface. This collection notifies the Grid about relevant changes (when items are added or removed, when the entire collection is refreshed, etc.). The Grid will update its data automatically to reflect appropriate changes.
+
+Demo - [https://demos.devexpress.com/blazor/Grid/DataBinding#ObservableCollection](https://demos.devexpress.com/blazor/Grid/DataBinding#ObservableCollection)
+Documentation - [https://docs.devexpress.com/Blazor/403737/grid/bind-to-data#observable-data-collections
+
+](https://docs.devexpress.com/Blazor/403737/grid/bind-to-data#observable-data-collections)Master-Detail View
+
+Our Blazor Grid component allows you to create hierarchical layouts of any complexity and depth. For example, you can use a nested grid to visualize a master-detail relationship between two data tables or to display preview sections under each grid data row across all columns.
+
+Demo - [https://demos.devexpress.com/blazor/Grid/MasterDetail](https://demos.devexpress.com/blazor/Grid/MasterDetail)
+Documentation - [https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.DetailRowTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.DetailRowTemplate)
+
+### Column Resize
+
+The Grid now supports different resize modes for columns. Use the [ColumnResizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ColumnResizeMode) property to specify whether and how users can resize Grid columns.
+
+Demo - [https://demos.devexpress.com/blazor/Grid/Columns#ColumnResize](https://demos.devexpress.com/blazor/Grid/Columns#ColumnResize)
+Documentation - [https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ColumnResizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ColumnResizeMode)
+
+### Column Visibility and Column Chooser
+
+Use the new [Visible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridColumn.Visible) and [VisibleIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridColumn.VisibleIndex) properties to manage column visibility and order.
+
+The Grid also allows users to display, hide, and reorder columns with its integrated Column Chooser.
+
+Demo - [https://demos.devexpress.com/blazor/Grid/Columns#ColumnChooser](https://demos.devexpress.com/blazor/Grid/Columns#ColumnChooser)
+Documentation - [https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ShowColumnChooser(System.String](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ShowColumnChooser(System.String))
+
+### Grid in DevExpress Project Templates
+
+[DevExpress project templates](https://docs.devexpress.com/Blazor/401057/get-started#devexpress-common-templates) now include the Grid component.
+
+### Scheduler – Access Timescale from Header Templates
+
+ The [SchedulerTimelineHeaderCellInfo](https://docs.devexpress.com/Blazor/DevExpress.Blazor.SchedulerTimelineHeaderCellInfo) object now contains the [Scale](https://docs.devexpress.com/Blazor/DevExpress.Blazor.SchedulerTimelineHeaderCellInfo.Scale) property, which returns the timescale to which the Scheduler header cell belongs.
+
+### Breaking Changes
+
+[T1071089](https://supportcenter.devexpress.com/ticket/details/t1071089/) - The Data Grid component was moved to maintenance mode
+[T1061297](https://supportcenter.devexpress.com/ticket/details/T1061297) - Rich Text Editor: A non-empty paragraph before a table cannot be removed
+
+### Resolved Issues
+
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&amp;entries=ResolvedIssues&amp;startBuildName=21.2.6&amp;endBuildName=21.2.6&amp;buildsMode=Single&amp;hasPlatformsWithProducts=true) for a complete list of issues resolved in v21.2.6.
+
 # 21.2.5
 
 ### Breaking Changes
