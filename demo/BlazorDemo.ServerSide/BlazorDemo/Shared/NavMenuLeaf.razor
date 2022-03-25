@@ -10,7 +10,7 @@
             </Nodes>
         </DxTreeViewNode>
     } else {
-        <DxTreeViewNode Text="@Page.Title" NavigateUrl="@Page.Url" BadgeText="@GetBadgeText(Page)">
+        <DxTreeViewNode Text="@Page.Title" CssClass="@GetItemCssClass(Page)" NavigateUrl="@Page.Url" BadgeText="@GetBadgeText(Page)">
         </DxTreeViewNode>
     }
 
@@ -19,16 +19,20 @@
         [Parameter]
         public DemoPageBase Page { get; set; }
 
-        protected string GetBadgeText(DemoPageSection page) {
-            if(page.IsPreview)
-                return "CTP";
-            if(page.IsNew)
+        protected string GetBadgeText(DemoPageSection item) {
+            if(item is DemoPageBase page) {
+                if(page.IsPreview)
+                    return "CTP";
+                if(page.IsMaintenanceMode)
+                    return "Maintenance";
+            }
+            if(item.IsNew)
                 return "New";
-            if(page.IsUpdated)
+            if(item.IsUpdated)
                 return "Upd";
-            if(page is DemoRootPage rootPage)
+            if(item is DemoRootPage rootPage)
                 return GetBadgeTextFromChildren(rootPage.Pages);            
-            if(page is DemoPage demoPage && demoPage.GetPageSections != null)
+            if(item is DemoPage demoPage && demoPage.GetPageSections != null)
                 return GetBadgeTextFromChildren(demoPage.GetPageSections);
             return string.Empty;
         }
@@ -49,6 +53,8 @@
         protected string GetItemCssClass(DemoPageBase page) {
             if(page.IsPreview)
                 return "item-ctp";
+            if(page.IsMaintenanceMode)
+                return "item-maintenance";
             return "";
         }
 

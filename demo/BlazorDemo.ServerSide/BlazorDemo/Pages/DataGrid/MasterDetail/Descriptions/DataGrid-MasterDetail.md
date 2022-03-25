@@ -7,5 +7,3 @@ The [Data Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-
 5.  Add the second data grid to the template. Bind the grid to a detail data source that uses the template's `context` object as a filter criteria.
 6.  (Optional) To collapse an expanded detail row when a new detail row is displayed, set the [AutoCollapseDetailRow](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.AutoCollapseDetailRow) property to **true**.
 7.  Specify the [key data field](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.KeyFieldName) to enable the grid to identify individual data items.
-
-YouTube Video: [Master-Detail Layout](https://www.youtube.com/watch?v=dndSUsg1i7U&feature=youtu.be)

@@ -1,0 +1,38 @@
+﻿<DemoPageSectionComponent Id="Grid-Columns-ColumnChooser" ShowHorizontalScrollBar="true">
+    <ChildContent>
+        @inject NwindDataService NwindDataService
+
+        <div class="align-self-end pl-2 pb-2">
+            <DxButton
+                Text="Column Chooser"
+                RenderStyle="ButtonRenderStyle.Secondary"
+                IconCssClass="btn-column-chooser"
+                CssClass="column-chooser-button"
+                Click="@OnClick" />
+        </div>
+
+        <DxGrid @ref="@Grid" Data="@Data">
+            <Columns>
+                <DxGridDataColumn FieldName="ContactName" MinWidth="100" />
+                <DxGridDataColumn FieldName="ContactTitle" MinWidth="100" />
+                <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
+                <DxGridDataColumn FieldName="City" Width="10%" MinWidth="80" />
+                <DxGridDataColumn FieldName="Country" Width="10%" MinWidth="80" />
+                <DxGridDataColumn FieldName="Phone" Width="15%" MinWidth="80" Visible="false" />
+            </Columns>
+        </DxGrid>
+    </ChildContent>
+
+    @code {
+        DxGrid Grid { get; set; }
+        IEnumerable<Supplier> Data { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetSuppliersAsync();
+        }
+
+        void OnClick() {
+            Grid.ShowColumnChooser(".column-chooser-button");
+        }
+    }
+</DemoPageSectionComponent>

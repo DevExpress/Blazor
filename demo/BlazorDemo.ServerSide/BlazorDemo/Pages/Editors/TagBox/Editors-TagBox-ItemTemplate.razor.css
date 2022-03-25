@@ -5,18 +5,13 @@
 }
 
 .tag-template-employee-photo {
-    height: calc(100% + .6em);
+    height: 100%;
     border-radius: 50%;
     position: absolute;
     left: 0;
 }
 
-.dxbs-tagbox.item-template-demo .form-control-sm img.tag-template-employee-photo {
-    height: calc(100% + .2em) !important;
-    bottom: 1px;
-}
-
-div.dx-blazor-tagbox.form-control-lg div.dx-blazor-tag-template-wrapper span.dxbs-tag.dx-blazor-tag span.dxbs-tag-remove-btn-container svg {
+div.dxbs-tagbox .form-control-lg div.dxbs-tag svg {
     width: 32px !important;
     height: 32px !important;
 }
@@ -27,7 +22,7 @@ span.tag-item-span-pl {
     margin-left: 10px;
 }
 
-div.dx-blazor-tagbox.form-control-lg span.tag-item-span-pl {
+.form-control-lg span.tag-item-span-pl {
     padding-left: 35px;
 }
 
@@ -58,52 +53,13 @@ div.dx-blazor-tagbox.form-control-lg span.tag-item-span-pl {
     display: flex;
     align-items: center;
 }
-
-span.dxbs-tag.l-0::before {
-    left: 0 !important;
-    margin-bottom: 5px;
-}
-
-
-div.dx-blazor-tagbox.form-control-sm span.dxbs-tag.dx-blazor-tag.l-0 span.dxbs-tag-remove-btn-container {
-    left: 9px;
-    bottom: 2px;
-}
-
-div.dx-blazor-tagbox.form-control span.dxbs-tag.dx-blazor-tag.l-0 span.dxbs-tag-remove-btn-container {
-    left: 1em;
-}
-
-.item-template-demo span.dxbs-tag.dx-blazor-tag.l-0 {
-    margin-top: 0 !important;
-}
 /*BeginHide*/
-::deep /*EndHide*/ .item-template-demo div.dx-blazor-tag-template-wrapper {
-    margin-top: 0.75em !important;
-    max-width: 100%;
-    overflow: visible !important;
-    padding-left: 6px;
-}
-
-/*BeginHide*/
-::deep /*EndHide*/ .item-template-demo .form-control-sm div.dx-blazor-tag-template-wrapper {
-    margin-top: 0.35em !important;
-}
-
-/*BeginHide*/
-::deep /*EndHide*/ .item-template-demo .dx-blazor-tagbox.form-control {
-    overflow: visible !important;
-}
-
-.item-template-demo .form-control-sm span.dxbs-tag.dx-blazor-tag.l-0 span.tag-item-span-pl {
-    top: -3.3px !important;
-}
-
-.item-template-demo .form-control span.dxbs-tag.dx-blazor-tag.l-0 span.tag-item-span-pl {
-    position: relative;
-    top: -2.3px;
-}
-
-.item-template-demo .form-control-lg span.dxbs-tag.dx-blazor-tag.l-0 span.tag-item-span-pl {
-    top: 0 !important;
+::deep /*EndHide*/.dxbs-tagbox .dxbs-tag::before {
+    content: " ";
+    position: absolute;
+    background-color: currentColor;
+    opacity: 0.15;
+    border-radius: 1em;
+    height: 100%;
+    width: 100%;
 }

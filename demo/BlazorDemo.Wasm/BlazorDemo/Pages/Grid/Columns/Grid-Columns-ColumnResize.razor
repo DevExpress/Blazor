@@ -1,0 +1,33 @@
+﻿<DemoPageSectionComponent Id="Grid-Columns-ColumnResize">
+    <ChildContent>
+        @inject NwindDataService NwindDataService
+    
+        <DxGrid Data="@Data"
+            ColumnResizeMode="@ColumnResizeMode">
+            <Columns>
+                <DxGridDataColumn FieldName="ContactName" MinWidth="100" />
+                <DxGridDataColumn FieldName="ContactTitle" MinWidth="100" />
+                <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
+                <DxGridDataColumn FieldName="City" Width="10%" MinWidth="80" />
+                <DxGridDataColumn FieldName="Country" Width="10%" MinWidth="80" />
+                <DxGridDataColumn FieldName="Phone" Width="15%" MinWidth="80" />
+            </Columns>
+        </DxGrid>
+    </ChildContent>
+    <OptionsContent>
+        <OptionComboBox Label="Column Resize Mode:"
+                        Data="Enum.GetValues<GridColumnResizeMode>()"
+                        Value="ColumnResizeMode"
+                        ValueChanged="@((GridColumnResizeMode mode) => { ColumnResizeMode = mode; })"
+                        CssClass="ow-150" />
+    </OptionsContent>
+
+    @code {
+        IEnumerable<Supplier> Data { get; set; }
+        GridColumnResizeMode ColumnResizeMode { get; set; } = GridColumnResizeMode.NextColumn;
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetSuppliersAsync();
+        }
+    }
+</DemoPageSectionComponent>

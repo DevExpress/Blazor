@@ -3,8 +3,8 @@
   "AssemblyName": "BlazorDemo",
   "Products": [
     {
-      "Title": "Blazor Data Grid",
-      "PageUri": "DataGrid",
+      "Title": "Blazor Grid",
+      "PageUri": "Grid",
       "IconName": "grid",
       "Description": "A fast and responsive grid component with unlimited master-detail levels and unmatched data shaping capabilities."
     },
@@ -36,7 +36,7 @@
       "Title": "Blazor Reports",
       "PageUri": "ReportViewer",
       "IconName": "reports",
-      "Description": "A feature-complete reporting suite for Blazor-powered web applications. DevExpress Reports for Blazor ships with an intuitive Visual Studio Report Designer and a comprehensive suite of report elements such as tables, labels, objects, charts, pivot tables, etc.",
+      "Description": "DevExpress Reports for Blazor ships with an intuitive Visual Studio Report Designer and a comprehensive suite of report elements such as tables, labels, objects, charts, pivot tables, etc.",
       "IsServerSideOnly": true
     },
     {
@@ -75,6 +75,8 @@
     {
       "Id": "DataGrid",
       "Title": "Data Grid",
+      "IsMaintenanceMode": true,
+      "MaintenanceModeMessage": "The Data Grid was moved to maintenance support mode. No new features/capabilities will be added to this component. We recommend that you [migrate](https://docs.devexpress.com/Blazor/403162/grid/migrate-from-data-grid-to-grid) to the [Grid](Grid) component.",
       "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7:5a1ee13f-3d06-4eb2-8d64-b24f28bae08d",
       "Pages": [
         {
@@ -842,7 +844,6 @@
       "Id": "Grid",
       "Title": "Grid",
       "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7",
-      "IsPreview": true,
       "Pages": [
         {
           "Id": "Overview",
@@ -893,13 +894,13 @@
           "Id": "DataBinding",
           "Url": "Grid/DataBinding",
           "Title": "Data Binding",
-          "Keywords": "blazor, components, data grid, datagrid, grid, data bind, data binding, bind to data, asynchronous data binding, bind to data asynchronously, async support, custom data source, custom data binding, web api support, bind to web api, remote data source, large data source, devexpress, demo, sample, example",
-          "Description": "The DevExpress Grid for Blazor supports synchronous and asynchronous data binding to various data sources (including custom and large data sources).",
+          "Keywords": "blazor, components, data grid, datagrid, grid, data bind, data binding, bind to data, asynchronous data binding, bind to data asynchronously, async support, data collections, observable collections, dynamic collections, inotifycollectionchanged, ibindinglist, observablecollection, large data source, large data, server mode, http service, web api support, bind to web api, remote data source, devexpress, demo, sample, example",
+          "Description": "The DevExpress Grid for Blazor supports synchronous and asynchronous data binding to various data sources (including large data sources).",
           "PageSections": [
             {
               "Id": "Data",
               "Title": "Data Binding",
-              "DocUrl": "DevExpress.Blazor.DxGrid.Data",
+              "DocUrl": "403737/grid/bind-to-data#synchronous-data-binding",
               "AdditionalCodeFiles": [
                 {
                   "Title": "WeatherForecast.cs",
@@ -918,7 +919,7 @@
             {
               "Id": "Async",
               "Title": "Asynchronous Data Binding",
-              "DocUrl": "DevExpress.Blazor.DxGrid.Data",
+              "DocUrl": "403737/grid/bind-to-data#asynchronous-data-binding",
               "AdditionalCodeFiles": [
                 {
                   "Title": "Supplier.cs",
@@ -935,9 +936,35 @@
               ]
             },
             {
-              "Id": "LargeDataSource",
-              "Title": "Large Datasets",
-              "DocUrl": "DevExpress.Blazor.GridDevExtremeDataSource-1",
+              "Id": "ObservableCollection",
+              "Title": "Observable Data Collections",
+              "DocUrl": "403737/grid/bind-to-data#observable-data-collections",
+              "IsNew": true,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "StockQuoteDisplayModel.cs",
+                  "Path": "Data\\StockQuotes\\StockQuoteDisplayModel.cs"
+                },
+                {
+                  "Title": "StockQuoteChangedEventArgs.cs",
+                  "Path": "Data\\StockQuotes\\StockQuoteChangedEventArgs.cs"
+                },
+                {
+                  "Title": "IStockQuoteService.cs",
+                  "Path": "Services\\IStockQuoteService.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\StockQuoteService.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "LargeDataInstantFeedback",
+              "Title": "Large Data (Instant Feedback Source)",
+              "DocUrl": "403737/grid/bind-to-data#large-data-server-mode-sources",
+              "IsNew": true,
+              "IsServerSideOnly": true,
               "AdditionalCodeFiles": [
                 {
                   "Title": "AreaRentInfo.cs",
@@ -954,9 +981,30 @@
               ]
             },
             {
-              "Id": "CustomData",
-              "Title": "Large Datasets from an HTTP Service",
-              "DocUrl": "DevExpress.Blazor.GridDevExtremeDataSource-1",
+              "Id": "LargeQueryable",
+              "Title": "Large Data (Queryable)",
+              "DocUrl": "403737/grid/bind-to-data#large-data-queryable-collections",
+              "RedirectFrom": [ "Grid/DataBinding#LargeDataSource" ],
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "AreaRentInfo.cs",
+                  "Path": "Data\\AreaRentInfo\\AreaRentInfo.cs"
+                },
+                {
+                  "Title": "RentInfoDataService.cs",
+                  "Path": "Services\\RentInfoDataService.AreaRentInfo.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\RentInfo.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "LargeQueryableAsHttp",
+              "Title": "Large Data (Queryable as HTTP Service)",
+              "DocUrl": "403737/grid/bind-to-data#large-data-queryable-collections",
+              "RedirectFrom": [ "Grid/DataBinding#CustomData" ],
               "AdditionalCodeFiles": [
                 {
                   "Title": "Product.cs",
@@ -1425,6 +1473,66 @@
           ]
         },
         {
+          "Id": "MasterDetail",
+          "Url": "Grid/MasterDetail",
+          "Title": "Master-Detail View",
+          "Keywords": "blazor, components, data grid, datagrid, grid, master grid, detail grid, master-detail relationship, master-detail view, detail row, row preview template, preview sections, custom row appearance, custom content in rows, devexpress, demo, sample, example",
+          "Description": "The DevExpress Grid for Blazor component allows you to build master-detail layouts and relationships of any complexity and depth with a detail row template and row preview sections.",
+          "IsNew": true,
+          "PageSections": [
+            {
+              "Id": "NestedGrid",
+              "Title": "Nested Grid",
+              "DocUrl": "DevExpress.Blazor.DxGrid.DetailRowTemplate",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "DetailContent.razor",
+                  "Path": "Pages\\Grid\\MasterDetail\\Grid-MasterDetail-NestedGrid-DetailContent.razor"
+                },
+                {
+                  "Title": "Customer.cs",
+                  "Path": "Data\\Northwind\\Customer.cs"
+                },
+                {
+                  "Title": "Invoice.cs",
+                  "Path": "Data\\Northwind\\Invoice.cs"
+                },
+                {
+                  "Title": "NwindDataService.Invoices.cs",
+                  "Path": "Services\\NwindDataService.Invoices.cs"
+                },
+                {
+                  "Title": "NwindDataService.Customers.cs",
+                  "Path": "Services\\NwindDataService.Customers.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "RowPreview",
+              "Title": "Row Preview",
+              "DocUrl": "DevExpress.Blazor.DxGrid.DetailRowDisplayMode",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.Employees.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "Id": "Templates",
           "Url": "Grid/Templates",
           "Title": "Templates",
@@ -1479,6 +1587,55 @@
             }
           ]
         },
+        {
+          "Id": "Columns",
+          "Url": "Grid/Columns",
+          "Title": "Columns",
+          "Keywords": "blazor, components, data grid, datagrid, grid, column, columns, resizing, resize, column resizing, column resize, resizing columns, column width, column size, devexpress, demo, sample, example, column chooser, chooser, reorder columns, column order, show column, hide column, hidden column, visible column, visibility",
+          "Description": "The DevExpress Blazor Grid allows users to resize columns in two modes: change the width of the column to the right or the width of the entire column container.",
+          "PageSections": [
+            {
+              "Id": "ColumnResize",
+              "Title": "Column Resize",
+              "DocUrl": "DevExpress.Blazor.DxGrid.ColumnResizeMode",
+              "IsNew": true,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Supplier.cs",
+                  "Path": "Data\\Northwind\\Supplier.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Suppliers.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "ColumnChooser",
+              "Title": "Column Chooser",
+              "IsNew": true,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Supplier.cs",
+                  "Path": "Data\\Northwind\\Supplier.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Suppliers.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            }
+          ]
+        },
+		
         {
           "Id": "Customization",
           "Url": "Grid/Customization",
@@ -4433,9 +4590,10 @@
               ]
             },
             {
-              "Id": "CheckedAndRadioButtons",
-              "Title": "Checked and Radio Buttons",
-              "DocUrl": "DevExpress.Blazor.DxToolbarItem#checked-and-radio-buttons",
+              "Id": "CheckedItemsAndGroups",
+              "Title": "Checked Items and Groups",
+              "DocUrl": "DevExpress.Blazor.DxToolbarItem#checked-items-and-groups",
+              "RedirectFrom": [ "Toolbar#CheckedAndRadioButtons" ],
               "AdditionalCodeFiles": [
                 {
                   "Title": "Icons.css",

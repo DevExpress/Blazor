@@ -14,8 +14,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.2" />
     <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
-    <PackageReference Include="DevExpress.Blazor.Server.WebAssembly" Version="21.2.5" />
-    <PackageReference Include="DevExpress.Blazor.Reporting" Version="21.2.5" />
+    <PackageReference Include="DevExpress.Blazor.Server.WebAssembly" Version="21.2.6" />
+    <PackageReference Include="DevExpress.Blazor.Reporting" Version="21.2.6" />
     
     <ProjectReference Include="..\BlazorDemo\BlazorDemo.ServerSide.Core.csproj" />
   </ItemGroup>
@@ -25,6 +25,7 @@
     <Compile Include="DataProviders\**\*.cs" />
     <Compile Include="HostingStartupBase.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Services\*.cs" />
     <Compile Include="Startup.ServerSide.cs" />
     <Compile Include="Utils\*.cs" />
     <Content Include="Pages\*.razor" />

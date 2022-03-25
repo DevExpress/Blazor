@@ -1,19 +1,16 @@
 ﻿@using BlazorDemo.Configuration
 @inject DemoConfiguration Configuration
+@inject NavigationManager NavigationManager
 
 <DxTreeView @ref="@treeView"
             CssClass="sidebar-tree"
             ExpandButtonIconCssClass="demo-icon-expand"
             CollapseButtonIconCssClass="demo-icon-collapse"
-            AllowSelectNodes="true"
             NodeExpandCollapseAction="TreeViewNodeExpandCollapseAction.NodeClick"
-            BeforeExpand="@BeforeExpand"
+            AllowSelectNodes="true"
             SelectionChanged="@SelectionChanged">
     <Nodes>
         @foreach(var (currentPage, rootIndex) in Pages.Select((p, i) => (p, i))) {
-            var rootDemoPage = currentPage as DemoRootPage;
-            @if(!Configuration.IsServerSide && rootDemoPage != null && rootDemoPage.IsServerSideOnly)
-                continue;
             <NavMenuLeaf Page="@currentPage"></NavMenuLeaf>
         }
 
@@ -25,33 +22,35 @@
     [Parameter]
     public IEnumerable<DemoPageBase> Pages { get; set; }
 
-    void SetParentNodeExpanded(ITreeViewNodeInfo node, Func<ITreeViewNodeInfo, bool> condition, bool expanded) {
-        var parentInfo = node.Parent;
-        if(parentInfo != null) {
-            var parentSiblingNodesInfo = treeView.GetNodesInfo(n => !n.IsLeaf && n.Level == parentInfo.Level && condition(n));
-            foreach(var nodeInfo in parentSiblingNodesInfo)
-                treeView.SetNodeExpanded(n => string.Equals(n.Text, nodeInfo.Text), expanded);
-        } else {
-            treeView.CollapseAll();
-        }
+    protected override void OnInitialized() {
+        NavigationManager.LocationChanged += OnLocationChanged;
     }
-
-    protected void SelectionChanged(TreeViewNodeEventArgs e) {
-        if(e.NodeInfo.IsLeaf || e.NodeInfo.Parent != null) {
-            SetParentNodeExpanded(e.NodeInfo, (ITreeViewNodeInfo n) => !string.Equals(n.Text, e.NodeInfo.Parent.Text), false);
-        }
+    protected override void OnAfterRender(bool firstRender) {
+        UpdateSelection(NavigationManager.Uri, true);
     }
-
-    protected void BeforeExpand(TreeViewNodeCancelEventArgs e) {
-        if(!e.CausedByAPI) {
-            treeView.CollapseAll();
-
-            ITreeViewNodeInfo node = e.NodeInfo;
-            while(node.Parent != null) {
-                SetParentNodeExpanded(node, (ITreeViewNodeInfo n) => string.Equals(n.Text, node.Parent.Text), true);
-                node = node.Parent;
+    void OnLocationChanged(object sender, LocationChangedEventArgs args) {
+        UpdateSelection(NavigationManager.Uri, true);
+    }
+    void UpdateSelection(string currentUri, bool expandNodesToSelection) {
+        treeView.SelectNode(n => {
+            if(!string.IsNullOrEmpty(n.NavigateUrl) && (currentUri.EndsWith(n.NavigateUrl) || currentUri == NavigationManager.BaseUri && n.NavigateUrl == "./")) {
+                if(expandNodesToSelection)
+                    ExpandParentNodes(n);
+                return true;
             }
-        }
+            return false;
+        });
+    }
+    void ExpandParentNodes(ITreeViewNodeInfo node) {
+        treeView.CollapseAll();
+        treeView.ExpandToNode(n => n == node);
+    }
+    protected void SelectionChanged(TreeViewNodeEventArgs e) {
+        if(!e.CausedByAPI && string.IsNullOrEmpty(e.NodeInfo.NavigateUrl)) 
+            UpdateSelection(NavigationManager.Uri, false);
+    }
+    public void Dispose() {
+        NavigationManager.LocationChanged -= OnLocationChanged;
     }
 
 }

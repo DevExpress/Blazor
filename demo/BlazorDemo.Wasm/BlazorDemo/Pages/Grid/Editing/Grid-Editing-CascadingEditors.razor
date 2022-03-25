@@ -43,10 +43,10 @@
                                 TextFieldName="CountryName"
                                 ValueFieldName="CountryName"
                                 Value="@supplier.Country"
-                                ValueChanged="@(EventCallback.Factory.Create(this, (string newCellValue) => {
+                                ValueChanged="(string newCellValue) => {
                                                     supplier.Country = newCellValue;
                                                     supplier.City = null;
-                                                }))">
+                                              }">
                     </DxComboBox>
                 </DxFormLayoutItem>
                 <DxFormLayoutItem Caption="City:" ColSpanMd="6">

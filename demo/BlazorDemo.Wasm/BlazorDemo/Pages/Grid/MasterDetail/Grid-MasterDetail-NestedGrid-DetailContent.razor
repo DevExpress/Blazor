@@ -1,0 +1,37 @@
+﻿@inject NwindDataService NwindDataService
+
+<div class="mb-2">
+    Contact Phone: @Customer.Phone
+</div>
+
+<DxGrid Data="DetailGridData"
+        PageSize="5"
+        AutoExpandAllGroupRows="true">
+    <Columns>
+        <DxGridDataColumn FieldName="OrderId" DisplayFormat="d" GroupIndex="0" />
+        <DxGridDataColumn FieldName="ProductName" Width="40%" />
+        <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" />
+        <DxGridDataColumn FieldName="Quantity" />
+        <DxGridDataColumn FieldName="Discount" DisplayFormat="p0" />
+        <DxGridDataColumn FieldName="ExtendedPrice" DisplayFormat="c" />
+    </Columns>
+    <GroupSummary>
+        <DxGridSummaryItem SummaryType="GridSummaryItemType.Sum"
+                           FieldName="ExtendedPrice"
+                           FooterColumnName="ExtendedPrice" />
+    </GroupSummary>
+</DxGrid>
+
+@code {
+    [Parameter]
+    public Customer Customer { get; set; }
+
+    object DetailGridData { get; set; }
+
+    protected override async Task OnInitializedAsync() {
+        var invoices = await NwindDataService.GetInvoicesAsync();
+        DetailGridData = invoices
+            .Where(i => i.CustomerId == Customer.CustomerId)
+            .ToArray();
+    }
+}

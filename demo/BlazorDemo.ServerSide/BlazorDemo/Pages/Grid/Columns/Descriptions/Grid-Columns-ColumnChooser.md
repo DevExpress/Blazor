@@ -1,0 +1,6 @@
+The DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid) allows users to customize its column list via its integrated Columns Chooser. The Column Chooser lists [data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn), [command](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridCommandColumn), and [selection](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridSelectionColumn) columns. User can:
+
+* Display or hide columns: To display or hide a column, users must enable/disable corresponding checkboxes within the Column Chooser. This action modifies a column's [Visible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridColumn.Visible) property value.
+* Reorder columns: To change column position, users can drag/drop and reposition the column within the Column Chooser. This action modifies a column's [VisibleIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridColumn.VisibleIndex) property value.
+
+To display the Column Chooser, use the [ShowColumnChooser](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ShowColumnChooser(System.String)) method. In this demo, a [DxButton](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton) is used to invoke the Column Chooser.

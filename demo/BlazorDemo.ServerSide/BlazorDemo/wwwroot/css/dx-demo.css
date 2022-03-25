@@ -376,6 +376,13 @@ body,
     letter-spacing: 0.025em;
 }
 
+.dxbs-tree.sidebar-tree .item-maintenance > .nav-link > .badge {
+    color: var(--white) !important;
+    background-color: var(--orange) !important;
+    letter-spacing: 0.025em;
+    min-width: auto !important;
+}
+
 .sidebar .nav-pills .nav-item {
     margin: 0;
 }
@@ -811,6 +818,12 @@ body,
         width: 100%;
         visibility: visible;
     }
+    .theme-blazing-dark .demo-page-nav .nav-header {
+        background-color: #46444a!important;
+    }
+    .theme-blazing-dark .demo-page-nav  .nav-header .nav-header-btn::before {
+        color: white;
+    }
     .demo-page-nav .nav-pills {
         padding: 0.5rem 0;
     }
@@ -933,6 +946,7 @@ body,
 }
 
 .theme-blazing-berry .demo-page-section > .card > .card-header > .nav-tabs > .nav-item > .nav-link.active,
+.theme-blazing-dark .demo-page-section > .card > .card-header > .nav-tabs > .nav-item > .nav-link.active,
 .theme-office-white .demo-page-section > .card > .card-header > .nav-tabs > .nav-item > .nav-link.active,
 .theme-purple .demo-page-section > .card > .card-header > .nav-tabs > .nav-item > .nav-link.active,
 .theme-materia .demo-page-section > .card > .card-header > .nav-tabs > .nav-item > .nav-link.active {
@@ -1338,11 +1352,14 @@ body,
 
 .demo-page-section-code-area > .card > .card-header .btn.btn-sm {
     margin-left: 8px;
-    margin-left: 8px;
+}
+
+.demo-page-section-code-area > .card > .card-header .copy-code,
+.demo-page-section-code-area > .card > .card-header .doc-link {
+    font-size: 0.75rem;
 }
 
 .demo-page-section-code-area > .card > .card-header .btn.btn-sm.copy-code {
-    font-size: 0.75rem;
     margin-left: auto;
 }
 

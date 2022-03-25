@@ -22,11 +22,13 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor" Version="21.2.5" />
+    <PackageReference Include="DevExpress.Blazor" Version="21.2.6" />
     
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Services\DemoThemeService.cs" />
+    <Compile Include="Services\IStockQuoteService.cs" />
+    <Compile Include="Services\StockQuoteService.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Configuration\**\*.cs" />
     <Compile Include="DemoServiceCollectionExtensions.cs" />
