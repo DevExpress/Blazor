@@ -9,16 +9,14 @@
                       SizeMode="Params.SizeMode"
                       CssClass="cw-480 item-template-demo">
                 <TagTemplate Context="tagInfo">
-                    <span class="dxbs-tag dx-blazor-tag l-0" style="position: relative;">
-                        <img class="tag-template-employee-photo" src="@StaticAssetUtils.GetImagePath(GetImageFileName(tagInfo.DataItem))" />
-                        <span class="tag-item-span-pl">@tagInfo.DataItem.FirstName @tagInfo.DataItem.LastName</span>
-                        <span class="dxbs-tag-remove-btn-container">
-                            <button @onclick="@tagInfo.RemoveTagAction" class="btn btn-sm dx-btn dxbs-tag-remove-btn dxbs-cmd-btn dx-blazor-clear-button-icon" type="button">
-                                <svg class="dx-image dx-image-size-14px" role="img">
-                                    <use href="_content/DevExpress.Blazor/dx-blazor.svg#dx-remove-tag"></use>
-                                </svg>
-                            </button>
-                        </span>
+                    <img class="tag-template-employee-photo" src="@StaticAssetUtils.GetImagePath(GetImageFileName(tagInfo.DataItem))" />
+                    <span class="tag-item-span-pl">@tagInfo.DataItem.FirstName @tagInfo.DataItem.LastName</span>
+                    <span class="dxbs-btn-group">
+                        <button @onclick="@tagInfo.RemoveTagAction" class="btn btn-sm dx-btn dxbs-tag-remove-btn dxbs-cmd-btn dx-blazor-clear-button-icon" type="button">
+                            <svg class="dx-image dx-image-size-14px" role="img">
+                                <use href="_content/DevExpress.Blazor/dx-blazor.svg#dx-remove-tag"></use>
+                            </svg>
+                        </button>
                     </span>
                 </TagTemplate>
                 <ItemTemplate>
@@ -38,16 +36,16 @@
 
 
     @code {
-        IEnumerable<Employee> Data { get; set; }
+    IEnumerable<Employee> Data { get; set; }
         IEnumerable<Employee> Values { get; set; }
 
         protected override async Task OnInitializedAsync() {
-            Data = await NwindDataService.GetEmployeesAsync();
-			Values = Data.Take(1);
+        Data = await NwindDataService.GetEmployeesAsync();
+        Values = Data.Take(1);
         }
 
         string GetImageFileName(Employee employee) {
-            return $"Employees/item-template{employee.EmployeeId}.jpg";
+        return $"Employees/item-template{employee.EmployeeId}.jpg";
         }
 
 

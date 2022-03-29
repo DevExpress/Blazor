@@ -30,9 +30,12 @@
             @(!string.IsNullOrEmpty(Section.TitleOnPage) ? Section.TitleOnPage : Section.Title)
         </h2>
     </div>
-    @if(RootPage.IsPreview) {
+    @{
+        var statusMessage = Section.GetStatusMessageMarkdown();
+    }
+    @if(!string.IsNullOrEmpty(statusMessage)) {
         <div class="demo-page-section-status-text">
-            The @RootPage.Title is currently available as a community technology preview <a href="https://www.devexpress.com/aboutus/pre-release.xml">(CTP)</a>.
+            @(new MarkupString(Markdig.Markdown.ToHtml(statusMessage)))
         </div>
     }
     @if(ShowContent) {

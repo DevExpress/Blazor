@@ -34,7 +34,7 @@
         string SelectedGroup = "none";
 
         protected void SelectionChanged(TreeViewNodeEventArgs e) {
-            SelectedGroup = e.NodeInfo.Text;
+            SelectedGroup = e.NodeInfo?.Text;
             InvokeAsync(StateHasChanged);
         }
     }

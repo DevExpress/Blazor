@@ -27,8 +27,6 @@
 
     <div class="row mb-3">
         @foreach(var info in Configuration.Products) {
-            @if(!Configuration.IsServerSide && info.IsServerSideOnly)
-                continue;
             @DemoProduct.Invoke(info)
         }
     </div>
@@ -43,7 +41,7 @@
 <ul>
     <li><a href="https://docs.devexpress.com/Blazor/401055/prerequisites" target="_blank">Set up your Environment</a></li>
     <li><a href="https://docs.devexpress.com/Blazor/401058/demos#run-demos-locally" target="_blank">Run this demo on your machine</a></li>
-    <li><a href="https://docs.devexpress.com/Blazor/401057/getting-started/install-components-and-create-an-application" target="_blank">Create and configure a new project</a></li>
+    <li><a href="https://docs.devexpress.com/Blazor/401057/get-started" target="_blank">Create and configure a new project</a></li>
 </ul>
 
 <h2 class="my-4">Helpful Resources</h2>
@@ -54,7 +52,7 @@
 
 <ul>
     <li><a href="https://docs.devexpress.com/Blazor/400725/blazor-components" target="_blank">Documentation</a></li>
-    <li><a href="https://github.com/DevExpress/Blazor/blob/master/examples.md" target="_blank">Examples</a></li>
+    <li><a href="https://supportcenter.devexpress.com/ticket/list?preset=971248ea-952a-45d0-98e3-8b227de870f4" target="_blank">Examples</a></li>
     <li><a href="https://www.youtube.com/playlist?list=PL8h4jt35t1wiA7rjbbJQ0sYpsSghc7XYJ" target="_blank">Videos</a></li>
     <li><a href="https://github.com/DevExpress/Blazor/" target="_blank">GitHub repository</a></li>
     <li><a href="https://github.com/DevExpress/Blazor/tree/master/tools/DevExpress.Blazor.DocumentMetadata" target="_blank">Document metadata tool</a></li>

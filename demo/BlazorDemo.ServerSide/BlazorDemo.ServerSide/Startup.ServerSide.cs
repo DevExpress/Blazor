@@ -12,6 +12,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using BlazorDemo.Reporting;
 using System.Collections.Generic;
+using BlazorDemo.Services;
 
 namespace BlazorDemo.ServerSide {
 
@@ -74,6 +75,10 @@ namespace BlazorDemo.ServerSide {
                 if(!string.IsNullOrEmpty(connectionString))
                     opt.UseSqlServer(connectionString);
             });
+            services.AddSingleton<IStockQuoteService, StockQuoteService>();
+            services.AddHostedService<StockQuoteChangeTimerService>(
+                provider => new StockQuoteChangeTimerService((StockQuoteService)provider.GetRequiredService<IStockQuoteService>())
+            );
         }
         public override void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
             if(env.IsDevelopment()) {

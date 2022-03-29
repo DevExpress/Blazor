@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using Newtonsoft.Json;
 
 namespace BlazorDemo.Configuration {
@@ -16,10 +16,20 @@ namespace BlazorDemo.Configuration {
         public string OG_Type { get; set; }
 
         public bool? ReCreateOnThemeChange { get; set; }
+
+        public bool IsPreview { get; set; }
+        public string PreviewMessage { get; set; }
+        public bool IsMaintenanceMode { get; set; }
+        public string MaintenanceModeMessage { get; set; }
+
+        protected override DemoPageBase FindPage(Func<DemoPageBase, bool> findFunc) {
+            if(findFunc(this))
+                return this;
+            return base.FindPage(findFunc);
+        }
     }
 
     public class DemoRootPage : DemoPageBase {
-        public bool IsServerSideOnly { get; set; }
         public string AnalyticsId { get; set; }
         public override string Uri => DemoConfiguration.GetRootDemoPageUrl(this);
     }

@@ -3,8 +3,8 @@
 @inject DemoThemeService Themes
 @inject NavigationManager NavigationManager
 
-<div class="demo-page">
-    <div class="demo-page-content @(!HasPageNavigation ? "demo-page-no-navigation" : "") theme-@Themes.ActiveTheme.Name.Replace(" ", "-")" style="@(Configuration.ShowOnlyReporting ? "max-width: 100%; margin-right: 0px" : "")">
+<div class="demo-page theme-@Themes.ActiveTheme.Name.Replace(" ", "-")">
+    <div class="demo-page-content @(!HasPageNavigation ? "demo-page-no-navigation" : "")" style="@(Configuration.ShowOnlyReporting ? "max-width: 100%; margin-right: 0px" : "")">
         @ChildContent
     </div>
     @if(!Configuration.ShowOnlyReporting) {

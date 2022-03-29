@@ -34,6 +34,12 @@ namespace BlazorDemo.Wasm {
             services.AddSingleton<IWeatherSummaryDataProvider, WeatherSummaryDataProviderWasm>();
             services.AddSingleton<IWorldcitiesDataProvider, WorldcitiesDataProvider>();
             services.AddSingleton<IGlobalTemperatureIndexDataProvider, GlobalTemperatureIndexDataProviderWasm>();
+
+            var stockQuoteService = new StockQuoteService();
+            var stockQuoteTimerService = new StockQuoteChangeTimerService(stockQuoteService);
+            services.AddSingleton<IStockQuoteService>(_ => stockQuoteService);
+            services.AddSingleton(stockQuoteService);
+
             // Editable should be scoped
             services.AddScoped<INwindDataProvider, NwindDataProvider>();
 

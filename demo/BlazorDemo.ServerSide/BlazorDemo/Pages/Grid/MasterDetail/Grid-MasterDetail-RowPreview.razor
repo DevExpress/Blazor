@@ -1,0 +1,36 @@
+﻿<DemoPageSectionComponent Id="Grid-MasterDetail-RowPreview">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <DxGrid Data="GridData" PageSize="5"
+                DetailRowDisplayMode="GridDetailRowDisplayMode.Always"
+                CustomizeElement="Grid_CustomizeElement">
+            <Columns>
+                <DxGridDataColumn FieldName="FirstName" />
+                <DxGridDataColumn FieldName="LastName" />
+                <DxGridDataColumn FieldName="Title" />
+                <DxGridDataColumn FieldName="HireDate" />
+            </Columns>
+            <DetailRowTemplate>
+                @{
+                    var employee = (Employee)context.DataItem;
+                    <text>@employee.Notes</text>
+                }
+            </DetailRowTemplate>
+        </DxGrid>
+
+        @code {
+            object GridData { get; set; }
+
+            protected override async Task OnInitializedAsync() {
+                GridData = await NwindDataService.GetEmployeesAsync();
+            }
+
+            void Grid_CustomizeElement(GridCustomizeElementEventArgs e) {
+                if(e.ElementType == GridElementType.DetailCell) {
+                    e.Style = "padding: 0.5rem; opacity: 0.75";
+                }
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

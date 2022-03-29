@@ -20,13 +20,14 @@
     <ProjectReference Include="..\BlazorDemo\BlazorDemo.Wasm.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor" Version="21.2.5" />
+    <PackageReference Include="DevExpress.Blazor" Version="21.2.6" />
     
   </ItemGroup>
   <ItemGroup>
     <Compile Include="*.cs" />
     <Compile Include="DataProviders\**\*.cs" />
     <Content Include="*.json" />
+    <Compile Include="Services\*.cs" />
 	<EmbeddedResource Include="LinkerConfig.xml">
     	<LogicalName>$(MSBuildProjectName).xml</LogicalName>
 	</EmbeddedResource>

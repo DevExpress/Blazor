@@ -1,0 +1,50 @@
+﻿<DemoPageSectionComponent Id="Grid-MasterDetail-NestedGrid">
+    <ChildContent>
+        @inject NwindDataService NwindDataService
+        <DxGrid @ref="Grid" Data="MasterGridData" AutoCollapseDetailRow="AutoCollapseDetailRow">
+            <Columns>
+                <DxGridDataColumn FieldName="ContactName" SortIndex="0" />
+                <DxGridDataColumn FieldName="CompanyName" />
+                <DxGridDataColumn FieldName="Country" />
+                <DxGridDataColumn FieldName="City" />
+            </Columns>
+            <DetailRowTemplate>
+                <Grid_MasterDetail_NestedGrid_DetailContent Customer="(Customer)context.DataItem" />
+            </DetailRowTemplate>
+        </DxGrid>
+    </ChildContent>
+
+    <OptionsContent>
+        <OptionCheckBox T="bool"
+                        Label="Auto Collapse Detail Rows"
+                        Checked="AutoCollapseDetailRow"
+                        CheckedChanged="AutoCollapseDetailRow_Changed" />
+    </OptionsContent>
+
+    @code {
+        IGrid Grid { get; set; }
+        object MasterGridData { get; set; }
+
+        bool AutoCollapseDetailRow { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            MasterGridData = await NwindDataService.GetCustomersAsync();
+        }
+
+        protected override void OnAfterRender(bool firstRender) {
+            if(firstRender) {
+                Grid.ExpandDetailRow(0);
+            }
+        }
+
+        void AutoCollapseDetailRow_Changed(bool newValue) {
+            AutoCollapseDetailRow = newValue;
+            if(newValue) {
+                Grid.BeginUpdate();
+                Grid.CollapseAllDetailRows();
+                Grid.ExpandDetailRow(0);
+                Grid.EndUpdate();
+            }
+        }
+    }
+</DemoPageSectionComponent>

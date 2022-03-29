@@ -24,8 +24,11 @@ namespace BlazorDemo.Configuration {
             if(!string.IsNullOrEmpty(request)) {
                 var requests = SearchAgregator.SplitRequests(request);
                 try {
-                    foreach(var rootPage in RootPages)
+                    foreach(var rootPage in RootPages) {
+                        if(rootPage.IsMaintenanceMode) continue;
+
                         results.AddRange(DoSearch(requests, rootPage));
+                    }
                 }
                 catch {
                 }
@@ -36,6 +39,8 @@ namespace BlazorDemo.Configuration {
         IEnumerable<DemoSearchResult> DoSearch(List<string[]> requests, DemoRootPage rootPage) {
             var results = new List<DemoSearchResult>();
             foreach(var page in rootPage.Pages) {
+                if(page.IsMaintenanceMode) continue;
+
                 int resultCount = results.Count;
                 foreach(var section in page.GetPageSections)
                     results.AddRange(GetRes(requests, page, section, DemoSearchAgregator.HighlightOccurences(section.Title, requests)));

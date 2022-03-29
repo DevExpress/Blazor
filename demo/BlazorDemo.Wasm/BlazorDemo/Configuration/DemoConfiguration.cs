@@ -38,8 +38,8 @@ namespace BlazorDemo.Configuration {
             if(Data == null)
                 return;
 
-            Products = Data.Products ?? new DemoProductInfo[0];
-            RootPages = Data.RootPages ?? new DemoRootPage[0];
+            Products = Data.Products = PrepareList(Data.Products);
+            RootPages = Data.RootPages = PrepareList(Data.RootPages);
             Redirect = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
             ConnectRecursive(RootPages, null);
             Search = new DemoSearchHelper(Data.Search, RootPages);
@@ -47,11 +47,11 @@ namespace BlazorDemo.Configuration {
             void ConnectRecursive(IEnumerable<DemoPageSection> childSections, DemoPageBase parent) {
                 foreach(var section in childSections) {
                     if(section is DemoPageBase pageBase) {
-                        pageBase.Pages ??= Array.Empty<DemoPage>();
+                        pageBase.Pages = PrepareList(pageBase.Pages);
                         ConnectRecursive(pageBase.Pages, pageBase);
                     }
                     if(section is DemoPage page) {
-                        page.PageSections ??= Array.Empty<DemoPageSection>();
+                        page.PageSections = PrepareList(page.PageSections);
                         ConnectRecursive(page.PageSections, page);
                     }
                     section.ParentPage = parent;
@@ -60,6 +60,23 @@ namespace BlazorDemo.Configuration {
                             Redirect.Add(redirect, section.Uri);
                     }
                 }
+            }
+
+            T[] PrepareList<T>(T[] list) {
+                if(list == null)
+                    return Array.Empty<T>();
+                IEnumerable<T> result = list;
+                if(!IsServerSide) {
+                    result = result
+                        .Where(i => i switch {
+                            DemoProductInfo info => !info.IsServerSideOnly,
+                            DemoPageSection section => !section.IsServerSideOnly,
+                            _ => throw new NotSupportedException()
+                        });
+                }
+                return result
+                    .OrderBy(i => i is DemoPageBase page ? page.IsMaintenanceMode : false)
+                    .ToArray();
             }
         }
 
@@ -216,7 +233,7 @@ namespace BlazorDemo.Configuration {
             }
         }
         static void ConfigurePage(IDocumentMetadataCollection metadataCollection, DemoPageBase page, string title, string titleFormat) {
-            if(page.Url != null) {
+            if(page.Url != null && !page.IsMaintenanceMode) {
                 var pageUrl = page.Url == "./" ? "" : page.Url;
                 metadataCollection.AddPage(pageUrl)
                     .OpenGraph("url", page.OG_Url)

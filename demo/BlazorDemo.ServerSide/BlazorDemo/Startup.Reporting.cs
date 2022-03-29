@@ -59,6 +59,7 @@ namespace BlazorDemo.Reporting {
                 services.AddSingleton<ReportingCustomConfigurationProvider, ReportingCustomConfigurationProvider>();
                 services.ConfigureReportingServices((builder) => {
                     builder.UseAsyncEngine();
+                    builder.DisableCheckForCustomControllers();
                     builder.ConfigureReportDesigner(designer => {
                         designer.RegisterDataSourceWizardConfigurationConnectionStringsProvider(configurationProvider.GetReportDesignerWizardConfigurationSection());
                     });
