@@ -4083,6 +4083,10 @@
               "Title": "Icons.css",
               "Path": "wwwroot\\css\\dx-demo-pages.css",
               "ExtractRegex": "((.menu-icon(()|(-title)|(-home)|(-products)|(-support)|(-user-profile)))|(.icon-logo)) {[^}]+}"
+            },
+            {
+              "Title": "UserData.cs",
+              "Path": "Data\\UserData\\UserData.cs"
             }
           ]
         },

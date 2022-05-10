@@ -15,12 +15,10 @@ namespace BlazorDemo.Data.Northwind {
         public string Title { get; set; }
         public string TitleOfCourtesy { get; set; }
         [Required]
-        [Range(typeof(DateTime), "1/1/1970", "1/1/2020",
-        ErrorMessage = "BirthDate must be between {1:d} and {2:d}")]
+        [Range(typeof(DateTime), "1/1/1950", "1/1/2000", ErrorMessage = "BirthDate must be between {1:d} and {2:d}")]
         public Nullable<System.DateTime> BirthDate { get; set; }
         [Required]
-        [Range(typeof(DateTime), "1/1/2000", "1/1/2020",
-        ErrorMessage = "HireDate must be between {1:d} and {2:d}")]
+        [Range(typeof(DateTime), "1/1/1990", "1/1/2020", ErrorMessage = "HireDate must be between {1:d} and {2:d}")]
         public Nullable<System.DateTime> HireDate { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
@@ -30,9 +28,7 @@ namespace BlazorDemo.Data.Northwind {
         public string HomePhone { get; set; }
         public string Extension { get; set; }
         public byte[] Photo { get; set; }
-        [Required]
-        [StringLength(maximumLength: 256, MinimumLength = 4,
-        ErrorMessage = "The Notes should be 4 to 256 characters.")]
+        [StringLength(maximumLength: 256, ErrorMessage = "The Notes value exceeds 256 characters.")]
         public string Notes { get; set; }
         public Nullable<int> ReportsTo { get; set; }
         public string PhotoPath { get; set; }
