@@ -2,6 +2,16 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 21.2.7
+
+### Breaking Change
+
+* [1082988](https://supportcenter.devexpress.com/ticket/details/t1082988/tooltips-are-not-shifted-on-the-edges-of-the-chart-to-fit-into-the-chart): Tooltips are not shifted on the edges of the chart to fit into the chart
+
+### Resolved Issues
+
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=21.2.7&endBuildName=21.2.5&buildsMode=Single&hasPlatformsWithProducts=true) for a complete list of issues resolved in v21.2.7.
+
 # 21.2.6
 
 ### New Blazor Grid
