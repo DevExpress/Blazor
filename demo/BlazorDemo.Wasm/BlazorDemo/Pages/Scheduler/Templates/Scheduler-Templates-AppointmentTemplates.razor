@@ -8,10 +8,10 @@
             </HorizontalAppointmentTemplate>
             <VerticalAppointmentTemplate>
                 <div class="card shadow-sm bg-white p-2" style="overflow: hidden; height: 100%;box-shadow: .125rem .25rem rgba(34,34,34,0.15)">
-                    <div><span class="badge badge-info mb-1 @context.Status.CssClass" style="white-space: pre-wrap;">@context.Status.Caption</span></div>
-                    <span class="text-dark pl-0 mb-1" style="font-weight:600; font-size: .925em;">@context.Appointment.Subject</span>
+                    <div><span class="badge mb-1 @context.Status.CssClass" style="white-space: pre-wrap;">@context.Status.Caption</span></div>
+                    <span class="text-dark ps-0 mb-1" style="font-weight:600; font-size: .925em;">@context.Appointment.Subject</span>
                     <div style="height:100%; display:flex; flex-direction:column; justify-content:flex-end;">
-                        <div><span class="badge badge-light" style="white-space: pre-wrap;"><span class="dx-icon-time pr-1"></span>@context.Appointment.End.ToString("MMM dd HH:mm")</span></div>
+                        <div><span class="badge bg-light text-dark" style="white-space: pre-wrap;"><span class="dx-icon-time pe-1"></span>@context.Appointment.End.ToString("MMM dd HH:mm")</span></div>
                     </div>
                 </div>
             </VerticalAppointmentTemplate>

@@ -4,14 +4,11 @@
 @implements IDemoThemeChangeRequestDispatcher
 
 <link rel="stylesheet" href="_content/BlazorDemo/css/scroll-view.css">
-<DynamicStylesheetLink Url="@GetThemeCssUrl()" OnLoad="@ThemeStylesheet_LoadAsync" />
-<DynamicStylesheetLink Url="@GetHighlightJSThemeCssUrl()" />
+<DynamicStylesheetCompositeLink Urls="@CreateLinkUrls()" OnLinksLoaded="@ThemeStylesheet_LoadAsync"/>
 <link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo.css">
 <link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-pages.css">
-<link rel="stylesheet" href="_content/DevExpress.Blazor/dx-blazor.css">
 
 @if(DemoConfiguration.IsServerSide) {
-    <link rel="stylesheet" href="_content/DevExpress.Blazor.RichEdit/dx-blazor-richedit.css">
     <link rel="stylesheet" href="BlazorDemo.ServerSide.styles.css">
 } else {
     <link rel="stylesheet" href="BlazorDemo.Wasm.Server.styles.css">
@@ -52,10 +49,18 @@
         return PendingTheme != null ? Themes.GetHighlightJSThemeCssUrl(PendingTheme) : Themes.GetActiveHighlightJSThemeCssUrl();
     }
 
+    string GetBootstrapNativeCssUrl() {
+        return PendingTheme != null ? Themes.GetBootstrapThemeCssUrl(PendingTheme) : Themes.GetActiveBootstrapThemeCssUrl();
+    }
+
     void ForceReRender() {
         StateHasChanged();
     }
 
+    string[] CreateLinkUrls() {
+        return new[] {GetBootstrapNativeCssUrl(), GetThemeCssUrl(), GetHighlightJSThemeCssUrl()};
+    }
+    
     public void Dispose() {
         Themes.ThemeChangeRequestDispatcher = null;
     }

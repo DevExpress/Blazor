@@ -4,6 +4,6 @@ using BlazorDemo.Data;
 
 namespace BlazorDemo.DataProviders {
     public interface IFinancialSeriesDataProvider {
-        public Task<IEnumerable<BargainDataPoint>> Generate();
+        public Task<IEnumerable<StockDataPoint>> Generate();
     }
 }

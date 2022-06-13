@@ -54,7 +54,7 @@ span.tag-item-span-pl {
     align-items: center;
 }
 /*BeginHide*/
-::deep /*EndHide*/.dxbs-tagbox .dxbs-tag::before {
+::deep /*EndHide*/ .dxbs-tagbox .dxbs-tag::before {
     content: " ";
     position: absolute;
     background-color: currentColor;

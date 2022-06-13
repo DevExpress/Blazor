@@ -1,4 +1,4 @@
-A layout group ([DxFormLayoutGroup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutGroup) is a container for layout items ([DxFormLayoutItem](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutItem) and other layout groups.
+A layout group ([DxFormLayoutGroup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutGroup)) is a container for layout items ([DxFormLayoutItem](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutItem)) and other layout groups.
 
 The main group properties are:
 * A set of [ColSpanXX](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutGroup._members) properties - Specifies the width of a group.

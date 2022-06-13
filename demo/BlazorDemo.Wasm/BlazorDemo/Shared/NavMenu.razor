@@ -10,10 +10,9 @@
             AllowSelectNodes="true"
             SelectionChanged="@SelectionChanged">
     <Nodes>
-        @foreach(var (currentPage, rootIndex) in Pages.Select((p, i) => (p, i))) {
-            <NavMenuLeaf Page="@currentPage"></NavMenuLeaf>
+        @foreach(var demoPage in Pages) {
+            <NavMenuLeaf Page="@demoPage"></NavMenuLeaf>
         }
-
     </Nodes>
 </DxTreeView>
 @code {

@@ -1,6 +1,8 @@
 using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Web;
 using Microsoft.Extensions.Configuration;
 
 namespace BlazorDemo {
@@ -58,6 +60,22 @@ namespace BlazorDemo {
 
             return result;
         }
+    }
+
+    public static class DemoRenderUtils {
+        private const string ExcludedPageSectionsQueryParameter = "excludedPageSections";
+        
+        public static bool PreventRenderDemoSection(string uri, string demoSectionId) {
+            var queryString = (new Uri(uri)).Query;
+            var queryCollection = HttpUtility.ParseQueryString(queryString);
+            var excludedDemos = queryCollection.Get(ExcludedPageSectionsQueryParameter);
+            if(!string.IsNullOrEmpty(excludedDemos) && excludedDemos.Split(',').Contains(demoSectionId)) {
+                return true;
+            }
+
+            return false;
+        }
+        
     }
 }
 

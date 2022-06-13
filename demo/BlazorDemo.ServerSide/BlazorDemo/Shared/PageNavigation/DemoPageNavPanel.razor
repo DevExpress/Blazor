@@ -10,11 +10,14 @@
         <DemoPageNavHeader Title="@demoPageSections.First().Title" @bind-StateCssClass="@HeaderStateCssClass"></DemoPageNavHeader>
         <div class="nav-pills">
             @foreach(var (demoPageSection, i) in demoPageSections.Select((s, index) => (s, index))) {
+                if(DemoRenderUtils.PreventRenderDemoSection(NavigationManager.Uri, demoPageSection.UniqueId))
+                    continue;
+                    
                 <DemoPageNavPanelItem @key="@($"{demoPage.Url}|{i}")"
                                         Text="@demoPageSection.Title"
                                         Url="@($"{demoPage.Url}#{demoPageSection.Id}")"
                                         CssClass="@GetItemCssClass(i)">
-                    <Badge>@GetBadgeText(demoPageSection)</Badge>
+                    <Badge>@GetItemBadgeText(demoPageSection)</Badge>
                 </DemoPageNavPanelItem>
             }
         </div>
@@ -48,14 +51,12 @@
         return "";
     }
 
-    string GetBadgeText(DemoPageSection demoPageSection) {
-        var isParentNew = demoPageSection.ParentPage.IsNew || ((demoPageSection.ParentPage is DemoPage) && ((DemoPage)demoPageSection.ParentPage).PageSections.All(s => s.IsNew));
-        if(!isParentNew) {
-            if(demoPageSection.IsNew)
-                return "New";
-            if(demoPageSection.IsUpdated)
-                return "Upd";
-        }
+    string GetItemBadgeText(DemoPageSection demoPageSection) {
+        var status = demoPageSection.GetStatus();
+        if(status == DemoItemStatus.New)
+            return "New";
+        if(status == DemoItemStatus.Updated)
+            return "Upd";
         return string.Empty;
     }
 

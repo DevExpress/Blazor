@@ -1,0 +1,44 @@
+﻿@inject NwindDataService NwindDataService
+<DemoPageSectionComponent Id="Navigation-Accordion-Overview">
+    <ChildContent>
+        <div class="cw-480 dxbs-preventsel">
+            <DxAccordion ExpandMode="ExpandMode" ExpandCollapseAction="ExpandCollapseAction">
+                <Items>
+                    @foreach (var (employee, i) in Items) {
+                        <DxAccordionItem Text=@($"{employee.FirstName} {employee.LastName}") Expanded=@(i == 0)>
+                            <ContentTemplate>
+                                <div class="pt-2 pb-3 px-2">
+                                    <EmployeeCard EmployeeInfo="@employee" />
+                                </div>
+                            </ContentTemplate>
+                        </DxAccordionItem>
+                    }
+                </Items>
+            </DxAccordion>
+        </div>
+    </ChildContent>
+    <OptionsContent>
+        <OptionComboBox Label="Expand Mode:"
+                        Data="@(Enum.GetValues<AccordionExpandMode>())"
+                        @bind-Value="ExpandMode">
+        </OptionComboBox>
+        <OptionComboBox Label="Expand Collapse Action:"
+                        Data="@(Enum.GetValues<AccordionExpandCollapseAction>())"
+                        @bind-Value="ExpandCollapseAction">
+        </OptionComboBox>
+    </OptionsContent>
+
+    @code {
+        IEnumerable<Employee> DataSource;
+        IEnumerable<(Employee, int)> Items;
+        AccordionExpandMode ExpandMode { get; set; } = AccordionExpandMode.SingleOrNone;
+        AccordionExpandCollapseAction ExpandCollapseAction { get; set; } = AccordionExpandCollapseAction.HeaderClick;
+
+        protected override async Task OnInitializedAsync() {
+            DataSource = await NwindDataService.GetEmployeesAsync();
+            Items = DataSource.Select((item, index) => (item, index));
+            await base.OnInitializedAsync();
+        }
+    }
+
+</DemoPageSectionComponent>

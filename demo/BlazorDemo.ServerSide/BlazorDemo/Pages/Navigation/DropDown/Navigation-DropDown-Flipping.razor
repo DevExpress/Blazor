@@ -8,7 +8,9 @@
     <ChildContent>
         <div class="@(IsMobile ? "" : "card") flipping-overflow-container">
             <dxbl-demo-scrollable center-horizontally center-vertically id="flipping-target-container" class="flipping-overflow-content">
-                <DxButton CssClass="flipping-button" Click="() => IsOpen = !IsOpen">SHOW A DROPDOWN</DxButton>
+                <DxButton
+                    CssClass="flipping-button" Click="() => IsOpen = !IsOpen"
+                    RenderStyle="@ButtonRenderStyle.Secondary">SHOW A DROPDOWN</DxButton>
             </dxbl-demo-scrollable>
             <DxDropDown
                 @bind-IsOpen="@IsOpen"

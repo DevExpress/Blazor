@@ -14,9 +14,13 @@ namespace BlazorDemo.Wasm.DataProviders.Implementation {
             this.httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<DetailedWeatherSummary>> GetDataAsync() {
+        public async Task<IEnumerable<DetailedWeatherSummary>> GetDataAsync(bool aggregateByMonth) {
             string fileContent = await httpClient.GetStringAsync("api/get-weather-summary");
-            return WeatherForecastCsvParser.Parse(fileContent);
+            List<DetailedWeatherSummary> summary = WeatherForecastCsvParser.Parse(fileContent);
+            if(aggregateByMonth)
+                return await Task.FromResult(WeatherAggregator.Aggregate(summary));
+            else
+                return summary;
         }
     }
 }

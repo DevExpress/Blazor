@@ -6,7 +6,7 @@ using BlazorDemo.Data;
 using BlazorDemo.Wasm.Server.DataProviders;
 
 namespace BlazorDemo.DataProviders.Implementation {
-    public class ExperementResultDataProvider : DataProviderBase, IExperementResultDataProvider {
+    public class ExperimentResultDataProvider : DataProviderBase, IExperimentResultDataProvider {
         public Task<IEnumerable<DataPoint>> GetResultAsync(CancellationToken ct = default) {
             return Task.FromResult(_dataSource.Value);
         }

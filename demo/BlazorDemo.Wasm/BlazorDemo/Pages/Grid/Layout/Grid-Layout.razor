@@ -1,0 +1,106 @@
+﻿@page "/Grid/Layout"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Layout">
+    <ChildContentWithParameters Context="Params">
+        @using System.Text.Json
+        @inject NwindDataService NwindDataService
+        @inject IJSRuntime JSRuntime
+
+        @if(PreRendered) {
+            <DxGrid @ref="Grid" Data="@GridData" AutoExpandAllGroupRows="true"
+                ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                ShowGroupPanel="true" ShowFilterRow="true"
+                PageSizeSelectorVisible="true" PageSizeSelectorAllRowsItemVisible="true"
+                LayoutAutoLoading="Grid_LayoutAutoLoading"
+                LayoutAutoSaving="Grid_LayoutAutoSaving">
+                <Columns>
+                    <DxGridDataColumn FieldName="Country" GroupIndex="0" />
+                    <DxGridDataColumn FieldName="City" GroupIndex="1" />
+                    <DxGridDataColumn FieldName="CompanyName" />
+                    <DxGridDataColumn FieldName="Address" />
+                    <DxGridDataColumn FieldName="Phone" />
+                    <DxGridDataColumn FieldName="ContactName" />
+                </Columns>
+            </DxGrid>
+        } else {
+            <em>Loading...</em>
+        }
+
+        @code {
+            const string LocalStorageKey = "Grid-LayoutPersistence-Data";
+
+            bool PreRendered { get; set; }
+            IGrid Grid { get; set; }
+            object GridData { get; set; }
+
+            protected override async Task OnInitializedAsync() {
+                GridData = await NwindDataService.GetCustomersAsync();
+            }
+
+            protected override void OnAfterRender(bool firstRender) {
+                if(firstRender) {
+                    PreRendered = true;
+                    StateHasChanged();
+                }
+            }
+
+            async Task Grid_LayoutAutoLoading(GridPersistentLayoutEventArgs e) {
+                e.Layout = await LoadLayoutFromLocalStorageAsync();
+            }
+
+            async Task Grid_LayoutAutoSaving(GridPersistentLayoutEventArgs e) {
+                await SaveLayoutToLocalStorageAsync(e.Layout);
+            }
+
+            // Refer to https://docs.microsoft.com/en-us/aspnet/core/blazor/state-management
+            // to learn more about Blazor state management
+            // In Blazor Server apps, prefer ASP.NET Core Protected Browser Storage
+
+            async Task<GridPersistentLayout> LoadLayoutFromLocalStorageAsync() {
+                try {
+                    var json = await JSRuntime.InvokeAsync<string>("localStorage.getItem", LocalStorageKey);
+                    return JsonSerializer.Deserialize<GridPersistentLayout>(json);
+                } catch {
+                    // Mute exceptions
+                    return null;
+                }
+            }
+
+            async Task SaveLayoutToLocalStorageAsync(GridPersistentLayout layout) {
+                try {
+                    var json = JsonSerializer.Serialize(layout);
+                    await JSRuntime.InvokeVoidAsync("localStorage.setItem", LocalStorageKey, json);
+                } catch {
+                    // Mute exceptions
+                }
+            }
+
+            async Task RemoveLayoutFromLocalStorageAsync() {
+                try {
+                    await JSRuntime.InvokeVoidAsync("localStorage.removeItem", LocalStorageKey);
+                } catch {
+                    // Mute exceptions
+                }
+            }
+
+            async Task ReloadPageButton_ClickAsync() {
+                await JSRuntime.InvokeVoidAsync("location.reload");
+            }
+
+            async Task ResetLayoutButton_ClickAsync() {
+                await RemoveLayoutFromLocalStorageAsync();
+                await JSRuntime.InvokeVoidAsync("location.reload");
+            }
+
+            void ShowColumnChooser_Click() {
+                Grid.ShowColumnChooser(".show-column-chooser-button");
+            }
+        }
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionButton Text="Reload Page" OnClick="ReloadPageButton_ClickAsync" />
+        <OptionButton Text="Reset Layout" OnClick="ResetLayoutButton_ClickAsync" />
+        <OptionButton Text="Show Column Chooser" OnClick="ShowColumnChooser_Click" CssClass="show-column-chooser-button" />
+    </OptionsContent>
+</DemoPageSectionComponent>

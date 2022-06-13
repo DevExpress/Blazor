@@ -1,0 +1,16 @@
+﻿@page "/Flyout"
+@layout DataProviderAccessArea<INwindDataProvider>
+@using DevExpress.Blazor.Popup.Internal
+<DemoScriptLoader @ref=@scrollable Src="_content/BlazorDemo/lib/scrollable.js" />
+
+<Navigation_Flyout_Overview />
+<Navigation_Flyout_Placement/>
+<Navigation_Flyout_Customization/>
+<Navigation_Flyout_Flipping/>
+
+@code {
+    DemoScriptLoader scrollable;
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        await scrollable.InvokeVoidAsync("init").SafeInvokeAsync();
+    }
+}

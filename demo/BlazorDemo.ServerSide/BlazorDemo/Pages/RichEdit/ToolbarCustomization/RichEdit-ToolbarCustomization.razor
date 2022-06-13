@@ -1,0 +1,180 @@
+﻿@page "/RichEditToolbarCustomization"
+@using System.IO;
+@using Microsoft.Extensions.Logging;
+
+<link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-richedit-pages.css">
+
+<DemoPageSectionComponent Id="RichEdit-ToolbarCustomization">
+    @inject NavigationManager NavigationManager
+    @inject ILogger<RichEdit_ToolbarCustomization> Logger;
+
+    <DxRichEdit @ref=@rich
+        CssClass="w-100 ch-720"
+        @bind-Modified=@modified
+        DocumentContent=@documentContent DocumentContentChanged=OnDocumentContentChanged
+        Selection=@selection SelectionChanged=OnSelectionChanged
+        DocumentFormat=@documentFormat
+        BarMode=BarMode.Toolbar
+        CustomizeToolbar=OnCustomizeToolbar
+        BarItemExceptionRaised=OnBarItemExceptionRaised />
+@code {
+    DxRichEdit rich;
+    Selection selection;
+    bool modified;
+    byte[] documentContent;
+    decimal currentLeftIndent;
+    System.Drawing.Color? currentColor;
+    DocumentFormat documentFormat;
+
+    void OnCustomizeToolbar(IToolbar model) {
+        BarGroupCollection groups = model.Groups;
+        groups.Clear();
+
+        AddUndoRedoGroup(groups);
+        AddClipboardGroup(groups);
+        AddFileCommonGroup(groups);
+        AddFormattingGroup(groups);
+    }
+    void AddUndoRedoGroup(BarGroupCollection groups) {
+        IBarGroup undoRedoGroup = groups.AddCustomGroup();
+        undoRedoGroup.Text = "Undo/Redo";
+        undoRedoGroup.IconUrl = "_content/BlazorDemo/images/undo.svg";
+        IBarItem undoButton = undoRedoGroup.Items.Add(RichEditBarItemNames.Undo);
+        undoButton.TextDisplayMode = TextDisplayMode.Adaptive;
+        IBarItem redoButton = undoRedoGroup.Items.Add(RichEditBarItemNames.Redo);
+        redoButton.TextDisplayMode = TextDisplayMode.Adaptive;
+    }
+    void AddClipboardGroup(BarGroupCollection groups) {
+        IBarGroup clipboardGroup = groups.AddCustomGroup();
+        clipboardGroup.IconUrl = "_content/BlazorDemo/images/Paste.svg";
+        IBarItem clipboardDropDown = clipboardGroup.Items.Add(RichEditBarItemNames.ClipboardMenu);
+        clipboardDropDown.Text = "Clipboard";
+    }
+    void AddFileCommonGroup(BarGroupCollection groups) {
+        IBarGroup fileCommonGroup = groups.Add(RichEditRibbonGroupNames.FileCommon);
+        //remove unwanted items from default group
+        fileCommonGroup.Items.Remove(RichEditBarItemNames.OpenDocument);
+        fileCommonGroup.Items.Remove(RichEditBarItemNames.DownloadMenu);
+        fileCommonGroup.Items.Remove(RichEditBarItemNames.SaveDocument);
+        fileCommonGroup.Items.Remove(RichEditBarItemNames.PrintDocument);
+
+        //Adds a custom checkable button
+        IBarCheckableButton saveButton = fileCommonGroup.Items.AddCustomCheckButton(1, "Save",
+            async () => await rich.SaveDocumentAsync(),
+            () => !modified
+        );
+        saveButton.IconUrl = "_content/BlazorDemo/images/Save.svg";
+        saveButton.Tooltip = "Save the document.";
+
+        //Adds a custom combo box
+        IBarComboBox documentFormatComboBox = fileCommonGroup.Items.AddCustomComboBox(2,
+            () => documentFormat,
+            (value) => Task.FromResult(documentFormat = (DocumentFormat)value)
+        );
+
+        documentFormatComboBox.Items.Add("Word Document (*.docx)", DocumentFormat.OpenXml);
+        documentFormatComboBox.Items.Add("Rich Text Format (*.rtf)", DocumentFormat.Rtf);
+        documentFormatComboBox.Items.Add("Plain Text (*.txt)", DocumentFormat.PlainText);
+
+        documentFormatComboBox.AllowUserInput = false;
+        documentFormatComboBox.CssClass = "document-format-combobox";
+        documentFormatComboBox.Tooltip = "Change file type.";
+        documentFormatComboBox.Text = "Save as type: ";
+
+        //Adds a custom button
+        IBarButton insertWatermarkButton = fileCommonGroup.Items.AddCustomButton("Watermark", InsertWatermarkAsync);
+        insertWatermarkButton.GetEnabled = () => selection.ActiveSubDocument.Type == SubDocumentType.Main;
+        insertWatermarkButton.IconUrl = "_content/BlazorDemo/images/Watermark.svg";
+        insertWatermarkButton.Tooltip = "Insert Watermark.";
+    }
+    void AddFormattingGroup(BarGroupCollection groups) {
+        IBarGroup formattingGroup = groups.AddCustomGroup();
+        formattingGroup.IconUrl = "_content/BlazorDemo/images/Settings.svg";
+        //Adds a custom drop-down item
+        IBarDropDown fontDropDown = formattingGroup.Items.AddCustomDropDown(string.Empty);
+        fontDropDown.Items.Add(RichEditBarItemNames.FontBold);
+        fontDropDown.Items.Add(RichEditBarItemNames.FontItalic);
+        fontDropDown.IconUrl = "_content/BlazorDemo/images/Font.svg";
+        fontDropDown.Text = "Font";
+
+        //Adds a custom color edit
+        IBarColorEdit fontColor = fontDropDown.Items.AddCustomColorEdit(
+            () => currentColor.HasValue && !currentColor.Value.IsEmpty ? currentColor.Value : System.Drawing.Color.Black,
+            (value) => Task.FromResult(currentColor = value),
+            async () => {
+                TextSpan span = await selection.ActiveSubDocument.GetTextSpanAsync(selection.Intervals[0]);
+                await span.ChangePropertiesAsync(p => p.ForegroundColor = currentColor);
+            }
+        );
+        fontColor.Tooltip = "Change the font color.";
+        fontColor.Text = "Font Color";
+
+        //Adds a custom spin edit
+        IBarSpinEdit spinEdit = formattingGroup.Items.AddCustomSpinEdit(
+            () => currentLeftIndent,
+            async (value) => {
+                currentLeftIndent = value;
+                Paragraph paragraph = await GetCurrentParagraph();
+                await paragraph.ChangePropertiesAsync(p => p.LeftIndent = UnitConverter.InchesToTwips((float)value));
+            }
+        );
+
+        spinEdit.MinValue = -11;
+        spinEdit.MaxValue = 22;
+        spinEdit.Increment = 0.1m;
+        spinEdit.CssClass = "paragraph-left-indent-spinedit";
+        spinEdit.Text = "Left indent:";
+        spinEdit.Tooltip = "Change the indent of the paragraph under the caret.";
+
+        IBarDropDown paragraphDropDown = formattingGroup.Items.AddCustomDropDown(string.Empty);
+        paragraphDropDown.Items.Add(RichEditBarItemNames.IndentMenu);
+        paragraphDropDown.Items.Add(RichEditBarItemNames.ParagraphAlignmentMenu);
+        paragraphDropDown.Items.Add(RichEditBarItemNames.LineSpacingMenu);
+        paragraphDropDown.Items.Add(RichEditBarItemNames.NumberingMenu);
+        paragraphDropDown.IconUrl = "_content/BlazorDemo/images/Paragraph.svg";
+        paragraphDropDown.Text = "Paragraph";
+    }
+
+    async Task OnSelectionChanged(Selection selection) {
+        this.selection = selection;
+
+        TextSpan span = await selection.ActiveSubDocument.GetTextSpanAsync(selection.Intervals.Last());
+        currentColor = span.ForegroundColor;
+
+        Paragraph paragraph = await GetCurrentParagraph();
+        currentLeftIndent = (decimal)UnitConverter.TwipsToInches(paragraph.LeftIndent ?? 0);
+    }
+    async Task<Paragraph> GetCurrentParagraph() {
+        var paragraphs = await selection.ActiveSubDocument.Paragraphs.GetAllAsync();
+        return paragraphs.First(p =>
+            p.Interval.Start <= selection.CaretPosition && selection.CaretPosition <= p.Interval.Start + p.Interval.Length);
+    }
+
+    void OnDocumentContentChanged(byte[] newValue) {
+        documentContent = newValue;
+    }
+
+     async Task InsertWatermarkAsync() {
+        rich.DocumentAPI.BeginUpdate();
+        Section section = await rich.DocumentAPI.Sections.GetAsync(0);
+        try {
+            SubDocument header = await section.GetHeaderAsync(createIfNotExist: true);
+            Image image = await header.Images.CreateAsync(0, DocumentImageSource.LoadFromUrl(NavigationManager.BaseUri + "_content/BlazorDemo/images/SampleWatermark.png", 5000, 5000));
+            await image.ChangePropertiesAsync(ip => {
+                ip.HorizontalAnchorElement = FloatingObjectHorizontalAnchorElement.Page;
+                ip.VerticalAnchorElement = FloatingObjectVerticalAnchorElement.Page;
+                ip.HorizontalAlignment = FloatingObjectHorizontalAlignment.Center;
+                ip.VerticalAlignment = FloatingObjectVerticalAlignment.Center;
+            });
+        }
+        finally {
+            rich.DocumentAPI.EndUpdate();
+        }
+    }
+    void OnBarItemExceptionRaised(BarItemExceptionEventArgs args) {
+        Logger.LogError(args.Exception, args.Exception.Message);
+        args.Handled = true;
+    }
+}
+
+</DemoPageSectionComponent>

@@ -1,17 +1,18 @@
 ﻿<DemoPageSectionComponent Id="Charts-LineSeries-Line">
     <ChildContent>
-        @switch (LineSeriesType)
-        {
+        @switch (lineSeriesType) {
             case ChartSeriesType.Line:
-                <LineChart />
+                <LineChart ShowSeriesPointMarkers="showSeriesPointMarkers"
+                           ShowSeriesLabels="showSeriesLabels" />
                 break;
             case ChartSeriesType.StackedLine:
-                <StackedLineChart />
+                <StackedLineChart ShowSeriesPointMarkers="showSeriesPointMarkers"
+                                  ShowSeriesLabels="showSeriesLabels" />
                 break;
             case ChartSeriesType.FullStackedLine:
-                <FullStackedLineChart />
+                <FullStackedLineChart ShowSeriesPointMarkers="showSeriesPointMarkers"
+                                      ShowSeriesLabels="showSeriesLabels" />
                 break;
-
         }
     </ChildContent>
 
@@ -19,19 +20,27 @@
         <OptionComboBox Label="Series Type:"
                         T="ChartSeriesType"
                         TData="KeyValuePair<string, ChartSeriesType>"
-                        Data="@LineSeriesTypes"
+                        Data="lineSeriesTypes"
                         ValueField="Value"
                         TextField="Key"
-                        @bind-Value="@LineSeriesType" />
+                        @bind-Value="lineSeriesType" />
+        <OptionCheckBox T="bool"
+                        @bind-Checked="showSeriesPointMarkers"
+                        Label="Show Point Markers" />
+        <OptionCheckBox T="bool"
+                        @bind-Checked="showSeriesLabels"
+                        Label="Show Point Labels" />
     </OptionsContent>
 
     @code {
-        ChartSeriesType LineSeriesType = LineSeriesTypes.First().Value;
-        static readonly Dictionary<string,ChartSeriesType> LineSeriesTypes = new Dictionary<string, ChartSeriesType>()
-        {
+        static readonly Dictionary<string, ChartSeriesType> lineSeriesTypes = new () {
             { "Line", ChartSeriesType.Line },
             { "Stacked Line" , ChartSeriesType.StackedLine},
             { "Full Stacked Line", ChartSeriesType.FullStackedLine}
         };
+
+        ChartSeriesType lineSeriesType = lineSeriesTypes.First().Value;
+        bool showSeriesPointMarkers = false;
+        bool showSeriesLabels = false;
     }
 </DemoPageSectionComponent>

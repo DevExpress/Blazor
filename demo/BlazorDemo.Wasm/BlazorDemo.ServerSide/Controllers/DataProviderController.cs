@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using BlazorDemo.DataProviders;
@@ -19,7 +17,7 @@ namespace BlazorDemo.AspNetCoreHost {
 
         public DataProviderController(
             ISalesInfoDataProvider salesInfoDataProvider,
-            IExperementResultDataProvider experementResultDataProvider,
+            IExperimentResultDataProvider experementResultDataProvider,
             INwindDataProvider nwindDataProvider,
             IIssuesDataProvider issuesDataProvider,
             IWorldcitiesDataProvider worldcitiesDataProvider

@@ -2,16 +2,18 @@
 
 <DemoPageSectionComponent Id="Charts-LineSeries-Spline">
     <ChildContent>
-        @switch (SplineSeriesType)
-        {
+        @switch (splineSeriesType){
             case ChartSeriesType.Spline:
-                <SplineChart />
+                <SplineChart ShowSeriesPointMarkers="showSeriesPointMarkers"
+                             ShowSeriesLabels="showSeriesLabels"/>
                 break;
             case ChartSeriesType.StackedSpline:
-                <StackedSplineChart />
+                <StackedSplineChart ShowSeriesPointMarkers="showSeriesPointMarkers"
+                                    ShowSeriesLabels="showSeriesLabels" />
                 break;
             case ChartSeriesType.FullStackedSpline:
-                <FullStackedSplineChart />
+                <FullStackedSplineChart ShowSeriesPointMarkers="showSeriesPointMarkers"
+                                        ShowSeriesLabels="showSeriesLabels"/>
                 break;
 
         }
@@ -21,19 +23,27 @@
         <OptionComboBox Label="Series Type:"
                         T="ChartSeriesType"
                         TData="KeyValuePair<string, ChartSeriesType>"
-                        Data="@SplineSeriesTypes"
+                        Data="splineSeriesTypes"
                         ValueField="Value"
                         TextField="Key"
-                        @bind-Value="@SplineSeriesType" />
+                        @bind-Value="splineSeriesType" />
+        <OptionCheckBox T="bool"
+                        @bind-Checked="showSeriesPointMarkers"
+                        Label="Show Point Markers" />
+        <OptionCheckBox T="bool"
+                        @bind-Checked="showSeriesLabels"
+                        Label="Show Point Labels" />
     </OptionsContent>
 
     @code {
-        ChartSeriesType SplineSeriesType = SplineSeriesTypes.First().Value;
-        static readonly Dictionary<string, ChartSeriesType> SplineSeriesTypes = new Dictionary<string, ChartSeriesType>()
-        {
+        static readonly Dictionary<string, ChartSeriesType> splineSeriesTypes = new () {
             { "Spline", ChartSeriesType.Spline },
             { "Stacked Spline" , ChartSeriesType.StackedSpline},
             { "Full Stacked Spline", ChartSeriesType.FullStackedSpline}
         };
+
+        ChartSeriesType splineSeriesType = splineSeriesTypes.First().Value;
+        bool showSeriesPointMarkers = false;
+        bool showSeriesLabels = false;
     }
 </DemoPageSectionComponent>

@@ -105,27 +105,27 @@ body.modal-open .main {
 
 .gridlayout-header:before,
 .stacklayout-header:before {
-    background-color: var(--red);
+    background-color: var(--bs-red);
 }
 
 .gridlayout-content:before,
 .stacklayout-content:before {
-    background-color: var(--yellow);
+    background-color: var(--bs-yellow);
 }
 
 .gridlayout-left-side-bar:before,
 .stacklayout-left-side-bar:before {
-    background-color: var(--green);
+    background-color: var(--bs-green);
 }
 
 .gridlayout-right-side-bar:before,
 .stacklayout-right-side-bar:before {
-    background-color: var(--info);
+    background-color: var(--bs-info);
 }
 
 .gridlayout-footer:before,
 .stacklayout-footer:before {
-    background-color: var(--blue);
+    background-color: var(--bs-blue);
     opacity: 0.5;
 }
 
@@ -184,7 +184,7 @@ body.modal-open .main {
     border-width: 0;
     margin-right: -0.4em;
     height: 100%;
-    background-color: var(--white);
+    background-color: var(--bs-white);
     box-sizing: border-box;
     width: 0.5em;
     height: 100%;
@@ -204,7 +204,7 @@ body.modal-open .main {
     border-radius: inherit;
 }
 .demo-sc-apt:not(.demo-sc-accepted) .demo-sc-status-container::after {
-    background-image: linear-gradient(-45deg,var(--white) 19%,transparent 0,transparent 50%,var(--white) 0,var(--white) 69%,transparent 0,transparent);
+    background-image: linear-gradient(-45deg,var(--bs-white) 19%,transparent 0,transparent 50%,var(--bs-white) 0,var(--bs-white) 69%,transparent 0,transparent);
     background-size: 8px 8px;
     opacity: 0.9;
 }
@@ -225,14 +225,11 @@ body.modal-open .main {
     display: flex;
 }
 .demo-resnavigator-icon {
-    display: inline-block;
+    -webkit-mask: url("../images/SchedulerResNavigator.svg");
+    mask: url("../images/SchedulerResNavigator.svg");
     width: 1.5em;
     height: 1.5em;
-    vertical-align: middle;
-    content: "";
-    background: no-repeat center center;
-    background-size: 100% 100%;
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+    background-color: currentColor;
 }
 .demo-resnavigator-container {
     flex-shrink: 0;
@@ -457,6 +454,30 @@ body.modal-open .main {
     gap: 2rem 0;
 }
 
+.chart-icon-export {
+    -webkit-mask-image: url("../images/ExportTo.svg");
+    mask-image: url("../images/ExportTo.svg");
+}
+.chart-icon-export-to-png {
+    -webkit-mask-image: url("../images/ExportToPng.svg");
+    mask-image: url("../images/ExportToPng.svg");
+}
+.chart-icon-export-to-jpeg {
+    -webkit-mask-image: url("../images/ExportToJpeg.svg");
+    mask-image: url("../images/ExportToJpeg.svg");
+}
+.chart-icon-export-to-pdf {
+    -webkit-mask-image: url("../images/ExportToPdf.svg");
+    mask-image: url("../images/ExportToPdf.svg");
+}
+.chart-export-menu > dxbl-menu-item > a {
+    padding: 8px;
+}
+.chart-export-menu > dxbl-menu-item > a:hover:before {
+    border-radius: 3px;
+}
+
+
 @media (max-width: 899.98px) {
     .component-container .chart-container .dx-blazor-widget {
         width: 100%;
@@ -491,6 +512,12 @@ body.modal-open .main {
     vertical-align: baseline;
 }
 
+.theme-solar .dxbs-grid-table,
+.theme-solar .dxbs-grid-table a,
+.theme-solar .dxbs-grid-table .btn-link {
+    color: #eeeeee;
+}
+
 /* Tabs */
 .demo-employee-card h5 {
     font-size: 1rem;
@@ -499,4 +526,39 @@ body.modal-open .main {
 
 .demo-employee-card b {
     font-weight: 600;
+}
+
+/* Popup, Flyout*/
+.popup-icon-user {
+    -webkit-mask-image: url("../images/PopupUser.svg");
+    mask-image: url("../images/PopupUser.svg");
+}
+
+.popup-icon-birthday {
+    -webkit-mask-image: url("../images/PopupBirthday.svg");
+    mask-image: url("../images/PopupBirthday.svg");
+}
+
+.popup-icon-worked {
+    -webkit-mask-image: url("../images/PopupWorked.svg");
+    mask-image: url("../images/PopupWorked.svg");
+}
+
+.popup-icon-position {
+    -webkit-mask-image: url("../images/PopupPosition.svg");
+    mask-image: url("../images/PopupPosition.svg");
+}
+
+.popup-icon-user,
+.popup-icon-birthday,
+.popup-icon-worked,
+.popup-icon-position {
+    background-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    background-position: center center;
+    background-color: currentColor;
+    opacity: 0.75;
+    width: 18px;
+    height: 18px;
 }

@@ -1,0 +1,25 @@
+﻿<OptionComponent Id="@id">
+    <DxMenu ItemClick="Export">
+        <Items>
+            <DxMenuItem IconCssClass="chart-icon chart-icon-export" CssClass="chart-export-menu" Text="Export to">
+                <Items>
+                    <DxMenuItem Text="PNG" IconCssClass="chart-icon chart-icon-export-to-png"/>
+                    <DxMenuItem Text="JPEG" IconCssClass="chart-icon chart-icon-export-to-jpeg"/>
+                    <DxMenuItem Text="PDF" IconCssClass="chart-icon chart-icon-export-to-pdf"/>
+                </Items>
+            </DxMenuItem>
+        </Items>
+    </DxMenu>
+</OptionComponent>
+
+@code {
+    readonly string id = Guid.NewGuid().ToString();
+    [Parameter]
+    public Action<ChartExportFormat> ExportMethod { get; set; }
+
+    void Export(MenuItemClickEventArgs args) {
+        ChartExportFormat format = ChartExportFormat.Png;
+        if (Enum.TryParse<ChartExportFormat>(args.ItemInfo.Text, true, out format))
+            ExportMethod?.Invoke(format);
+    }
+}

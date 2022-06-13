@@ -37,8 +37,7 @@ var DemoPageSectionHelper = (function() {
     function initExpandCodeButtons(element) {
         var expandBtns = element.querySelectorAll('.more-code-btn');
         for(var i = 0; i < expandBtns.length; i++) {
-            var btn = expandBtns[i];
-            btn.addEventListener("click", function() { expandCode(btn); });
+            (function (btn) { btn.addEventListener("click", function () { expandCode(btn); }) })(expandBtns[i]);
         }
     }
     function expandCode(element) {

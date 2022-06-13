@@ -1,0 +1,51 @@
+.radio-container {
+    background: rgba(var(--bs-secondary-rgb), 0.1);
+    border: 1px solid var(--bs-gray-400);
+    border-radius: 1.5rem;
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+}
+.radio-container-top {
+    margin-bottom: 120px;
+}
+
+.radio-container-bottom {
+    margin-top: 120px;
+}
+
+.radio-container-horizontal-row {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+.custom-flyout-header {
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.custom-flyout-body {
+    white-space: nowrap;
+}
+
+.custom-flyout-content {
+    font-style: normal;
+    line-height: 16px;
+    text-align: center;
+    padding: 0.75rem;
+}
+
+::deep button#flyout-placement-target-container.mobile-button {
+    width: 2.625rem;
+    height: 2.625rem;
+    border-radius: 50%;
+}
+::deep button#flyout-placement-target-container.mobile-button > .popup-icon-user {
+    margin-right: 0;
+}
+::deep button#flyout-placement-target-container > .popup-icon-user {
+    margin-right: 0.375rem;
+}

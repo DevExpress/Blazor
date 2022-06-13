@@ -2,7 +2,7 @@
     @inject NwindDataService NwindDataService
 
     <div class="d-flex flex-wrap w-100">
-        <div class="w-auto mt-1 mr-1 flex-grow-1" style="flex-basis: 700px">
+        <div class="w-auto mt-1 me-1 flex-grow-1" style="flex-basis: 700px">
             <DxGrid Data="@Products"
                     KeyFieldName="ProductId"
                     SelectionMode="GridSelectionMode.Multiple"
@@ -17,8 +17,8 @@
                 </Columns>
             </DxGrid>
         </div>
-        <div class="card mt-1 mr-1 flex-grow-1 max-h-420" style="flex-basis: 280px">
-            <div class="card-header bg-transparent text-body py-2 border-bottom-0 font-weight-bold">Selected products:</div>
+        <div class="card mt-1 me-1 flex-grow-1 max-h-420" style="flex-basis: 280px">
+            <div class="card-header bg-transparent text-body py-2 border-bottom-0 fw-bold">Selected products:</div>
             <div class="card-body p-0 pb-2 overflow-auto">
                 <ul class="list-group list-group-flush bg-transparent border-0">
                     @foreach(var product in SelectedDataItems.Cast<Product>()) {

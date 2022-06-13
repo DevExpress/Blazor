@@ -1,0 +1,111 @@
+﻿@page "/RichEditRibbonCustomization"
+@using System.IO;
+@using Microsoft.Extensions.Logging;
+
+<DemoPageSectionComponent Id="RichEdit-RibbonCustomization">
+    @inject ILogger<RichEdit_RibbonCustomization> Logger;
+    @inject IDocumentProvider DocumentProvider
+
+    <DxRichEdit @ref=@rich
+        CssClass="w-100 ch-720"
+        DocumentContent="@DocumentContent"
+        @bind-Selection=@selection
+        CustomizeRibbon=OnCustomizeRibbon
+        BarItemExceptionRaised=OnBarItemExceptionRaised />
+@code {
+    DxRichEdit rich;
+    Selection selection;
+
+    byte[] DocumentContent;
+
+    void OnCustomizeRibbon(IRibbon model) {
+        RibbonTabCollection tabs = model.Tabs;
+
+        RemoveOpenDocumentItem(tabs);
+        RemoveTableContextTabs(tabs);
+        AddCustomTableTab(tabs);
+        RemoveItemsFromFontComboBox(tabs);
+        CustomizeInsertHeaderItemAction(tabs);
+        DisableFieldDropDownCommandButton(tabs);
+    }
+    void RemoveOpenDocumentItem(RibbonTabCollection tabs) {
+        IRibbonTab fileTab = tabs[RichEditRibbonTabNames.File];
+        IBarGroup fileCommonGroup = fileTab.Groups[RichEditRibbonGroupNames.FileCommon];
+        fileCommonGroup.Items.Remove(RichEditBarItemNames.OpenDocument);
+    }
+    void RemoveTableContextTabs(RibbonTabCollection tabs) {
+        tabs.Remove(RichEditRibbonTabNames.TableDesign);
+        tabs.Remove(RichEditRibbonTabNames.TableLayout);
+    }
+    void AddCustomTableTab(RibbonTabCollection tabs) {
+        IRibbonTab tableToolsTab = tabs.AddCustomTab("Table Tools", RichEditRibbonContextTabType.Table);
+        IBarGroup firstGroup = tableToolsTab.Groups.AddCustomGroup();
+        firstGroup.Items.Add(RichEditBarItemNames.SelectTableElementsMenu);
+
+        IBarGroup secondGroup = tableToolsTab.Groups.AddCustomGroup();
+        secondGroup.Items.Add(RichEditBarItemNames.InsertTableElementsMenu);
+        secondGroup.Items.Add(RichEditBarItemNames.DeleteTableElementsMenu);
+
+        IBarGroup thirdGroup = tableToolsTab.Groups.AddCustomGroup();
+        thirdGroup.Items.Add(RichEditBarItemNames.MergeTableCells);
+        thirdGroup.Items.Add(RichEditBarItemNames.ShowSplitCellsDialog);
+
+        IBarGroup fourthGroup = tableToolsTab.Groups.AddCustomGroup();
+        fourthGroup.Items.Add(RichEditBarItemNames.TableCellShading);
+    }
+    void RemoveItemsFromFontComboBox(RibbonTabCollection tabs) {
+        IRibbonTab homeTab = tabs[RichEditRibbonTabNames.Home];
+        IBarGroup homeFontGroup = homeTab.Groups[RichEditRibbonGroupNames.HomeFont];
+        IBarItem fontNameItem = homeFontGroup.Items[RichEditBarItemNames.FontName];
+
+        if (fontNameItem.Type == BarItemTypes.ComboBox) {
+            IBarComboBox fontNameComboBox = (IBarComboBox)fontNameItem;
+            fontNameComboBox.Items.Remove("Arial");
+            fontNameComboBox.Items.Remove("Arial Black");
+        }
+    }
+    void CustomizeInsertHeaderItemAction(RibbonTabCollection tabs) {
+        IRibbonTab insertTab = tabs[RichEditRibbonTabNames.Insert];
+        IBarGroup insertHeaderAndFooterGroup = insertTab.Groups[RichEditRibbonGroupNames.InsertHeaderAndFooter];
+        IBarItem insertHeaderItem = insertHeaderAndFooterGroup.Items[RichEditBarItemNames.InsertPageHeader];
+
+        if (insertHeaderItem.Type == BarItemTypes.Button) {
+            IBarButton insertHeaderButton = (IBarButton)insertHeaderItem;
+            insertHeaderButton.Click = async () => {
+                var sections = await rich.DocumentAPI.Sections.GetAllAsync();
+                Section currentSection = sections.First(section => section.Interval.Start >= selection.CaretPosition);
+                SubDocument header = await currentSection.GetHeaderAsync();
+                if (header == null) {
+                    rich.DocumentAPI.BeginUpdate();
+                    try {
+                        header = await currentSection.GetHeaderAsync(createIfNotExist: true);
+                        await header.AddTextAsync("This is sample text for a new Header.");                       
+                    }
+                    finally {
+                        rich.DocumentAPI.EndUpdate();
+                    }
+                }
+                selection = new Selection(header, 0);
+            };
+        }
+    }
+    void DisableFieldDropDownCommandButton(RibbonTabCollection tabs) {
+        IRibbonTab mailMergeTab = tabs[RichEditRibbonTabNames.MailMerge];
+        IBarGroup fieldsGroup = mailMergeTab.Groups[RichEditRibbonGroupNames.MailMergeInsertFields];
+        IBarItem insertFieldItem = fieldsGroup.Items[RichEditBarItemNames.InsertFieldMenu];
+        if (insertFieldItem.Type == BarItemTypes.DropDown) {
+            IBarDropDown insertFieldDropDown = (IBarDropDown)insertFieldItem;
+            insertFieldDropDown.Click = null;
+        }
+    }
+    void OnBarItemExceptionRaised(BarItemExceptionEventArgs args) {
+        Logger.LogError(args.Exception, args.Exception.Message);
+        args.Handled = true;
+    }
+
+    protected override async Task OnInitializedAsync() {
+        DocumentContent = await DocumentProvider.GetDocumentAsync("ActiveCustomers.docx");
+        await base.OnInitializedAsync();
+    }
+}
+</DemoPageSectionComponent>

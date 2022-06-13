@@ -72,66 +72,14 @@
     border: 1px solid #fff;
 }
 .theme-settings {
-    border-width: 0px !important;
-}
-
-.theme-settings.True {
-    background-color: #fff!important;
-    color: #222!important;
-}
-
-.theme-settings a {
-    position: relative;
-    transform: scale(1);
-    height: 3.5rem;
-    display: inline-block;
-}
-
-.theme-settings.True a {
-    color: inherit !important;
-    background-color: transparent!important;
-}
-
-.theme-settings a::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 1px;
-    background-color: currentColor;
-    opacity: .2;
-}
-
-.theme-settings a,
-.theme-settings a:hover,
-.theme-settings a:active,
-.theme-settings a:focus {
-    color: inherit!important;
-    background: transparent!important;
-    border: none!important;
-}
-.theme-settings a:hover:before {
-    opacity: 1;
-}
-.theme-settings a:hover:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 1px;
-    height: 100%;
-    width: calc(100% - 1px);
-    z-index: -1;
-    background-color: currentColor;
-    opacity: 1;
-}
-.theme-settings a:hover > span {
-    opacity: .9;
-    color: #fff;
-}
-.theme-settings-collapsed > a,
-.theme-settings > a {
-    padding: 15px 16px 9px 16px;
-    line-height: 24px;
-    margin: 0;
+    width: 2.125rem;
+    height: 2.125rem;
+    border-width: 2px;
+    border-radius: 50%;
+    margin: 0 0.5rem 0 0.25rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding-left: calc(0.5rem - 1px);
+    padding-right: calc(0.5rem - 1px);
 }

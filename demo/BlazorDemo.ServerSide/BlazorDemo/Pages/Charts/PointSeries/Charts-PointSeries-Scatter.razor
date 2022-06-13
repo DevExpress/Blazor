@@ -1,41 +1,75 @@
 ﻿@inject ISalesInfoDataProvider Sales
+@inject DemoConfiguration DemoConfiguration
 
 <DemoPageSectionComponent Id="Charts-PointSeries-Scatter">
-    @inject ISalesInfoDataProvider Sales
+    <ChildContent>
+        @inject IScatterRandomDataProvider Experement
 
-    <DxChart Data="@ChartsData"
-             Width="100%">
-        <DxChartScatterSeries Name="2017"
-                              T="SaleInfo"
-                              TArgument="string"
-                              TValue="int"
-                              ArgumentField="si => si.City"
-                              ValueField="si => si.Amount"
-                              SummaryMethod="Enumerable.Sum"
-                              Filter="si => si.Date.Year == 2017" />
-        <DxChartScatterSeries Name="2018"
-                              T="SaleInfo"
-                              TArgument="string"
-                              TValue="int"
-                              ArgumentField="si => si.City"
-                              ValueField="si => si.Amount"
-                              SummaryMethod="Enumerable.Sum"
-                              Filter="si => si.Date.Year == 2018" />
-        <DxChartScatterSeries Name="2019"
-                              T="SaleInfo"
-                              TArgument="string"
-                              TValue="int"
-                              ArgumentField="si => si.City"
-                              ValueField="si => si.Amount"
-                              SummaryMethod="Enumerable.Sum"
-                              Filter="si => si.Date.Year == 2019" />
-    </DxChart>
+        <DxChart @ref="@chart"
+                 T="DataPoint"
+                 Width="100%"
+                 Height="400px">
+            <DxChartTitle Text="Random Points Generator"/>
+            <DxChartScatterSeries T="DataPoint"
+                                  TArgument="double"
+                                  TValue="double"
+                                  Data="points1"
+                                  Name = "Population 1"
+                                  ArgumentField="point=>point.Y"
+                                  ValueField="point=>point.X">
+                <DxChartSeriesPoint Symbol=ChartPointSymbol.Circle
+                                    Size="5"
+                                    HoverMode="ChartSeriesPointHoverMode.None" />
+            </DxChartScatterSeries>
+            <DxChartScatterSeries T="DataPoint"
+                                  TArgument="double"
+                                  TValue="double"
+                                  Data="points2"
+                                  Name = "Population 2"
+                                  ArgumentField="point=>point.Y"
+                                  ValueField="point=>point.X">
+                <DxChartSeriesPoint Symbol=ChartPointSymbol.TriangleDown
+                                    Size="5"
+                                    HoverMode="ChartSeriesPointHoverMode.None" />
+            </DxChartScatterSeries>
+            <DxChartScatterSeries T="DataPoint"
+                                  TArgument="double"
+                                  TValue="double"
+                                  Data="points3"
+                                  Name = "Population 3"
+                                  ArgumentField="point=>point.Y"
+                                  ValueField="point=>point.X">
+                <DxChartSeriesPoint Symbol=ChartPointSymbol.Square
+                                    Size="5"
+                                    HoverMode="ChartSeriesPointHoverMode.None"/>
+            </DxChartScatterSeries>
+            <DxChartLegend HoverMode="ChartLegendHoverMode.None"/>
+        </DxChart>
+    </ChildContent>
+
+    <OptionsContent>
+        <OptionChartExportComponent ExportMethod="@ExportChart" />
+    </OptionsContent>
 
     @code {
-        IEnumerable<SaleInfo> ChartsData;
+        DxChartBase chart;
+        IEnumerable<DataPoint> points1;
+        IEnumerable<DataPoint> points2;
+        IEnumerable<DataPoint> points3;
+
+        async void ExportChart(ChartExportFormat format) {
+        await chart?.ExportAsync("ScatterChart", format);
+        }
 
         protected override async Task OnInitializedAsync() {
-            ChartsData = await Sales.GetSalesAsync();
+            int pointCount;
+            if (DemoConfiguration.IsServerSide)
+                pointCount = 1000;
+            else
+                pointCount = 500;
+            points1 = await Experement.GenerateCluster(140, 1280, 100, 1240, pointCount, 1);
+            points2 = await Experement.GenerateCluster(500, 1600, 1000, 2100, pointCount, 2);
+            points3 = await Experement.GenerateCluster(450, 950, 1550, 2050, pointCount, 3);
         }
     }
 </DemoPageSectionComponent>

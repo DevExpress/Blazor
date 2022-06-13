@@ -1,0 +1,25 @@
+﻿@using BlazorDemo.Pages.Navigation.Popup
+<DemoPageSectionComponent Id="Navigation-Flyout-Overview">
+    <div id="flyout-overview-target-container">
+        <DxButton RenderStyle="ButtonRenderStyle.Secondary" Click="() => IsOpen = !IsOpen">SHOW A FLYOUT</DxButton>
+    </div>
+
+    <DxFlyout
+        @bind-IsOpen=IsOpen
+        RenderStyle="@ButtonRenderStyle.Secondary"
+        PositionTarget="#flyout-overview-target-container"
+        RestrictionTarget="#Navigation-Flyout-Overview"
+        FitToRestriction=false
+        CloseMode="FlyoutCloseMode.Close"
+        HeaderVisible="true"
+        HeaderText="Header"
+        BodyText="@Constants.Content"
+        Width="max(25vw, 250px)"
+        PreventCloseOnPositionTargetClick="true">
+    </DxFlyout>
+
+    @code {
+        bool IsOpen { get; set; } = false;
+    }
+
+</DemoPageSectionComponent>

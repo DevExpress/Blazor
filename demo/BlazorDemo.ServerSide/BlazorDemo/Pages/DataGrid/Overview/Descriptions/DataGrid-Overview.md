@@ -1,4 +1,4 @@
-The DevExpress Data Grid for Blazor is a fast and responsive grid component with unlimited master-detail levels and unmatched data shaping capabilities. You can use it to display, manage, and manipulate tabular data with absolute ease.
+The DevExpress [Data Grid](https://www.devexpress.com/blazor/data-grid/) for Blazor is a fast and responsive grid component with unlimited master-detail levels and unmatched data shaping capabilities. You can use it to display, manage, and manipulate tabular data with absolute ease.
 
 
 The Data Grid ships with the following built-in capabilities: 

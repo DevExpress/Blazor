@@ -17,11 +17,18 @@ namespace BlazorDemo.Services {
     }
 
     public class DemoThemeService {
+        public static bool EnableNewBlazorThemes = true;
+        readonly Dictionary<string, string> newBlazorThemesMapping = new() {
+            ["blazing-berry"] = "blazing-berry.bs5",
+            ["blazing-dark"] = "blazing-dark.bs5",
+            ["office-white"] = "office-white.bs5",
+            ["purple"] = "purple.bs5",
+        };
         private DemoTheme _activeTheme;
 #if SERVER_BLAZOR
-        public const string ThemeCookieKey = "DXBS4CurrentTheme";
+        public const string ThemeCookieKey = "DXBZCurrentTheme";
 #else
-        public const string ThemeCookieKey = "DXBS4CurrentWasmTheme";
+        public const string ThemeCookieKey = "DXBZCurrentWasmTheme";
 #endif
         const string DefaultThemeName = "blazing-berry";
         readonly Dictionary<string, string> HighlightJSThemes = new Dictionary<string, string>() {
@@ -43,16 +50,30 @@ namespace BlazorDemo.Services {
 
         public ConcurrentDictionary<string, TaskCompletionSource<bool>> ResourcesReadyState { get; }
         public List<DemoThemeSet> ThemeSets { get; }
-        public DemoTheme ActiveTheme { get { return _activeTheme; } }
+        public DemoTheme ActiveTheme => _activeTheme;
         public DemoTheme DefaultTheme {
-            get { return ThemeSets.SelectMany(ts => ts.Themes).Where(t => t.Name == DefaultThemeName).FirstOrDefault(); }
+            get { return ThemeSets.SelectMany(ts => ts.Themes).FirstOrDefault(t => t.Name == DefaultThemeName); }
         }
 
         public string GetThemeCssUrl(DemoTheme theme) {
-            return $"_content/BlazorDemo/css/switcher-resources/themes/{theme.Name}/bootstrap.min.css";
+            if(EnableNewBlazorThemes) {
+                if (this.newBlazorThemesMapping.ContainsKey(theme.Name))
+                    return $"_content/DevExpress.Blazor.Themes/{this.newBlazorThemesMapping.GetValueOrDefault(theme.Name)}.css";
+                return $"_content/DevExpress.Blazor.Themes/bootstrap-external.bs5.min.css";
+            }
+            return GetBootstrapThemeCssUrl(theme);
+        }
+        public string GetBootstrapThemeCssUrl(DemoTheme theme) {
+            if(!EnableNewBlazorThemes || theme.IsBootstrapNative) {
+                return $"_content/BlazorDemo/css/switcher-resources/themes/{theme.Name}/bootstrap.min.css";
+            }
+            return null;
         }
         public string GetActiveThemeCssUrl() {
             return GetThemeCssUrl(ActiveTheme);
+        }
+        public string GetActiveBootstrapThemeCssUrl() {
+            return GetBootstrapThemeCssUrl(ActiveTheme);
         }
         public string GetHighlightJSThemeCssUrl(DemoTheme theme) {
             var highlightjsTheme = HighlightJSThemes[DefaultThemeName];

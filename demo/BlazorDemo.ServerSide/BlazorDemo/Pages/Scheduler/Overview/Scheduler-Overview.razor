@@ -20,7 +20,7 @@
 
     @code {
         DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
-            AppointmentsSource = RecurringAppointmentCollection.GetAppointments(),
+            AppointmentsSource = ResourceAppointmentCollection.GetAppointments(),
             AppointmentMappings = new DxSchedulerAppointmentMappings() {
                 Type = "AppointmentType",
                 Start = "StartDate",
@@ -31,7 +31,8 @@
                 Description = "Description",
                 LabelId = "Label",
                 StatusId = "Status",
-                RecurrenceInfo = "Recurrence"
+                RecurrenceInfo = "Recurrence",
+                ResourceId = "ResourceId"
             },
             ResourcesSource = ResourceCollection.GetResourcesForGrouping(),
             ResourceMappings = new DxSchedulerResourceMappings() {

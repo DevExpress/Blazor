@@ -3,20 +3,20 @@
     <ChildContentWithParameters Context="Params">
         @*BeginHide*@
         <div>
-        @*EndHide*@
-        <DxButton RenderStyle="ButtonRenderStyle.Secondary"
-                    Text="Undo"
-                    title="Undo the last action."
-                    IconCssClass="btn-icon-undo"
-                    SizeMode="Params.SizeMode"
-                    CssClass="mr-1" />
-        <DxButton RenderStyle="ButtonRenderStyle.Secondary"
-                    Text="Redo"
-                    title="Restore the previously undone action."
-                    IconCssClass="btn-icon-redo"
-                    SizeMode="Params.SizeMode"
-                    IconPosition="ButtonIconPosition.AfterText" />
-        @*BeginHide*@
+            @*EndHide*@
+            <DxButton RenderStyle="ButtonRenderStyle.Secondary"
+                      Text="Undo"
+                      Attributes="@(new Dictionary<string, object> {  ["title"] = "Undo the last action." })"
+                      IconCssClass="btn-icon-undo"
+                      SizeMode="Params.SizeMode"
+                      CssClass="me-1"/>
+            <DxButton RenderStyle="ButtonRenderStyle.Secondary"
+                      Text="Redo"
+                      Attributes="@(new Dictionary<string, object> {  ["title"] = "Restore the previously undone action." })"
+                      IconCssClass="btn-icon-redo"
+                      SizeMode="Params.SizeMode"
+                      IconPosition="ButtonIconPosition.AfterText"/>
+            @*BeginHide*@
         </div>
         @*EndHide*@
     </ChildContentWithParameters>

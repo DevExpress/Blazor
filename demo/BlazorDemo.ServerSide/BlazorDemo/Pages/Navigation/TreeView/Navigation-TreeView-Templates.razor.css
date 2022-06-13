@@ -14,3 +14,20 @@
     width: 30px;
     height: 30px;
 }
+
+.demo-treeview-template .treeview-expand-btn {
+    background-color: currentColor;
+    width: 0.7em;
+    height: 0.7em;    
+}
+
+.demo-treeview-template .treeview-expand-btn.expanded {
+    -webkit-mask-image: url("images/chevron-down.svg");
+    mask-image: url("images/chevron-down.svg");
+
+}
+
+.demo-treeview-template .treeview-expand-btn.collapsed {
+    -webkit-mask-image: url("images/chevron-right.svg");
+    mask-image: url("images/chevron-right.svg");
+}

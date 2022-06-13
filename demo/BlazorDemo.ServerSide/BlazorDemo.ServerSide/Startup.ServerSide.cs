@@ -8,10 +8,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using BlazorDemo.Reporting;
 using System.Collections.Generic;
+using BlazorDemo.DemoData;
 using BlazorDemo.Services;
 
 namespace BlazorDemo.ServerSide {
@@ -28,7 +28,7 @@ namespace BlazorDemo.ServerSide {
             services.AddServerSideBlazor().AddCircuitOptions(x => x.DetailedErrors = detailedErrors);
 
             var optionsBuilder = services.AddOptions();
-            optionsBuilder.AddOptions<DemoConfigurationData>("BlazorDemo");
+            optionsBuilder.AddOptions<DemoModel>("BlazorDemo");
 
             services.AddDevExpressBlazorWasmMasks();
 

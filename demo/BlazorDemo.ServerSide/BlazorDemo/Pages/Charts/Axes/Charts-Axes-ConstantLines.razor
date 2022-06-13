@@ -10,17 +10,17 @@
             </DxChartArgumentAxis>
             <DxChartValueAxis>
                 <DxChartAxisTitle Text="Temperature Anomaly, °C" />
-                <DxChartConstantLine Value="0" Width="2">
+                <DxChartConstantLine Value="0" Width="1">
                     <DxChartConstantLineLabel Text="Zero Level"
                                               VerticalAlignment="VerticalAlignment.Center"
                                               Position="RelativePosition.Inside" />
                 </DxChartConstantLine>
-                <DxChartConstantLine Value="Min" Width="2">
+                <DxChartConstantLine Value="Min" Width="1">
                     <DxChartConstantLineLabel Text=@($"Minimum = {Min}")
                                               VerticalAlignment="VerticalAlignment.Center"
                                               Position="RelativePosition.Inside" />
                 </DxChartConstantLine>
-                <DxChartConstantLine Value="Max" Width="2">
+                <DxChartConstantLine Value="Max" Width="1">
                     <DxChartConstantLineLabel Text=@($"Maximum = {Max}")
                                               VerticalAlignment="VerticalAlignment.Center"
                                               Position="RelativePosition.Inside" />
@@ -32,7 +32,7 @@
                                TValue="double"
                                ArgumentField="info=>info.Year"
                                ValueField="info=>info.Value"
-                               Color="System.Drawing.Color.LightGray"
+                               Color="@(System.Drawing.Color.FromArgb(150, 130, 130, 130))"
                                Name="Annual mean"/>
             <DxChartSplineSeries T="GlobalTemperatureIndexInfo"
                                TArgument="int"

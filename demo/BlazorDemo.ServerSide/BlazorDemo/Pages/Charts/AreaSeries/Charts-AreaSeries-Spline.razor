@@ -1,17 +1,17 @@
-﻿@using System.Text.RegularExpressions
-
-<DemoPageSectionComponent Id="Charts-AreaSeries-Spline">
+﻿<DemoPageSectionComponent Id="Charts-AreaSeries-Spline">
     <ChildContent>
-        @switch (SplineAreaSeriesType)
-        {
+        @switch (splineAreaSeriesType) {
             case ChartSeriesType.SplineArea:
-                <SplineAreaChart />
+                <SplineAreaChart ShowSeriesLabels=showSeriesLabels
+                                 ShowSeriesPointMarkers=showSeriesPointMarkers />
                 break;
             case ChartSeriesType.StackedSplineArea:
-                <StackedSplineAreaChart />
+                <StackedSplineAreaChart ShowSeriesLabels=showSeriesLabels
+                                        ShowSeriesPointMarkers=showSeriesPointMarkers />
                 break;
             case ChartSeriesType.FullStackedSplineArea:
-                <FullStackedSplineAreaChart />
+                <FullStackedSplineAreaChart ShowSeriesLabels=showSeriesLabels
+                                            ShowSeriesPointMarkers=showSeriesPointMarkers />
                 break;
 
         }
@@ -21,19 +21,27 @@
         <OptionComboBox Label="Series Type:"
                         T="ChartSeriesType"
                         TData="KeyValuePair<string, ChartSeriesType>"
-                        Data="@SplineAreaSeriesTypes"
+                        Data="splineAreaSeriesTypes"
                         ValueField="Value"
                         TextField="Key"
-                        @bind-Value="@SplineAreaSeriesType" />
+                        @bind-Value="splineAreaSeriesType" />
+        <OptionCheckBox T="bool"
+                        @bind-Checked="showSeriesPointMarkers"
+                        Label="Show Point Markers" />
+        <OptionCheckBox T="bool"
+                        @bind-Checked="showSeriesLabels"
+                        Label="Show Point Labels" />
     </OptionsContent>
 
     @code {
-        ChartSeriesType SplineAreaSeriesType = SplineAreaSeriesTypes.First().Value;
-        static readonly Dictionary<string, ChartSeriesType> SplineAreaSeriesTypes = new Dictionary<string, ChartSeriesType>()
-        {
+        static readonly Dictionary<string, ChartSeriesType> splineAreaSeriesTypes = new() {
             { "Spline Area", ChartSeriesType.SplineArea },
-            { "Stacked Spline Area" , ChartSeriesType.StackedSplineArea},
-            { "Full Stacked Spline Area", ChartSeriesType.FullStackedSplineArea}
+            { "Stacked Spline Area", ChartSeriesType.StackedSplineArea },
+            { "Full Stacked Spline Area", ChartSeriesType.FullStackedSplineArea }
         };
+
+        ChartSeriesType splineAreaSeriesType = splineAreaSeriesTypes.First().Value;
+        bool showSeriesPointMarkers = false;
+        bool showSeriesLabels = false;
     }
 </DemoPageSectionComponent>

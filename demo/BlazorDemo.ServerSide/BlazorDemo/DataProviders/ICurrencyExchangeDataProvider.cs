@@ -4,6 +4,6 @@ using BlazorDemo.Data;
 
 namespace BlazorDemo.DataProviders {
     public interface ICurrencyExchangeDataProvider {
-        public Task<IEnumerable<BargainDataPoint>> GetDataAsync();
+        public Task<IEnumerable<DatePricePoint>> GetDataAsync();
     }
 }

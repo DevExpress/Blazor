@@ -12,9 +12,11 @@
                         <DxTabs ScrollMode="@ScrollMode" RenderMode="TabsRenderMode.AllTabs">
                             @foreach (var employee in Employees) {
                                 <DxTabPage Text="@(employee.FirstName + ' ' + employee.LastName)">
-                                    <div class="media pt-2 demo-employee-card">
-                                        <img src="@(StaticAssetUtils.GetImagePath(employee.ImageFileName))" width="125"/>
-                                        <div class="media-body pl-3">
+                                    <div class="d-flex pt-2 demo-employee-card">
+                                        <div class="flex-shrink-0">
+                                            <img src="@(StaticAssetUtils.GetImagePath(employee.ImageFileName))" width="125"/>
+                                        </div>
+                                        <div class="flex-grow-1 ps-3">
                                             <h5>@employee.Title @employee.FirstName @employee.LastName</h5>
                                             <p>
                                                 <b>Birthday:</b> @employee.BirthDate?.ToShortDateString()

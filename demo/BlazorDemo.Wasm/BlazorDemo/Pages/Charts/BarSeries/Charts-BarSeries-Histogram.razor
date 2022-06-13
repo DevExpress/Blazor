@@ -1,0 +1,86 @@
+﻿<DemoPageSectionComponent Id="Charts-BarSeries-Histogram">
+    <OptionsContent>
+        <OptionSpinEdit Label="Interval Width:" MinValue="0.1" MaxValue="1" Increment="0.1" @bind-Value="@Interval" CssClass="ow-100" />
+    </OptionsContent>
+
+    <ChildContent>
+        <DxChart @ref="@histogramChart"
+                 T="DataPoint"
+                 Width="100%"
+                 Height="500px"
+                 BarGroupPadding="0.1"
+                 SynchronizeAxes="false">
+            <DxChartArgumentAxis SideMarginsEnabled="false" EndOnTick="false" TickInterval=@Interval>
+                <DxChartAxisRange StartValue="0.0" EndValue="10.0"/>
+            </DxChartArgumentAxis>
+            <DxChartValueAxis>
+                <DxChartAxisTitle Text="Number of points" />
+            </DxChartValueAxis>
+            <DxChartValueAxis Name="NormalDistributionAxis" Visible="false">
+                <DxChartAxisGridLines Visible="false"/>
+                <DxChartAxisTick Visible="false"/>
+                <DxChartAxisMinorTick Visible="false"/>
+                <DxChartAxisLabel Visible="false"/>
+            </DxChartValueAxis>
+            <DxChartBarSeries Name=@GeneratedDataSeriesName
+                      T="DataPoint"
+                      TArgument="double"
+                      TValue="int"
+                      Data="GeneratedData"
+                      ArgumentField="p => (int)(p.X / Interval) * Interval + Interval * 0.5"
+                      ValueField="p => (int)p.Y"
+                      BarPadding="0"
+                      SummaryMethod="Enumerable.Count">
+            </DxChartBarSeries>
+            <DxChartSplineSeries Name="Normal Distribution"
+                      T="DataPoint"
+                      TArgument="double"
+                      TValue="double"
+                      Data="NormalDistribution"
+                      ArgumentField="p => p.X"
+                      ValueField="p => p.Y"
+                      Axis="NormalDistributionAxis">
+                <DxChartSeriesPoint Visible="false" />
+            </DxChartSplineSeries>
+            <DxChartTooltip Enabled="true">
+                <div style="margin: 0.75rem">
+                    @if (context.Series.Name == GeneratedDataSeriesName) {
+                        <div class="fw-bold">
+                            @string.Format("[{0:0.#} - {1:0.#})", (double)context.Point.Argument - Interval * 0.5, (double)context.Point.Argument + Interval * 0.5)
+                        </div>
+                        <div>@context.Point.Value @((int)context.Point.Value == 1 ? "point" : "points")</div>
+                    }
+                    else {
+                       <div>@string.Format("{0:0.###}", (double)context.Point.Value)</div>
+                    }
+                </div>
+            </DxChartTooltip>
+            <DxChartLegend Position="RelativePosition.Inside"
+                           VerticalAlignment="VerticalEdge.Top"
+                           HorizontalAlignment="HorizontalAlignment.Right"/>
+        </DxChart>
+
+        @code {
+            double interval = 1;
+            DxChart histogramChart;
+            IEnumerable<DataPoint> NormalDistribution { get; set; }
+            IEnumerable<DataPoint> GeneratedData { get; set; }
+            double Interval {
+                get => interval;
+                set {
+                    if (interval != value) {
+                        interval = value;
+                        histogramChart?.RefreshData();
+                    }
+                }
+            }
+            string GeneratedDataSeriesName = "Generated Data";
+            @inject IHistogramDataProvider DataProvider
+
+            protected override async Task OnInitializedAsync() {
+                NormalDistribution = await DataProvider.GetNormalDistribution();
+                GeneratedData = await DataProvider.GenerateData();
+            }
+        }
+    </ChildContent>
+</DemoPageSectionComponent>

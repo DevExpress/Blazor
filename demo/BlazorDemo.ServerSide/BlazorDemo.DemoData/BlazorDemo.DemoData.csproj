@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+    <EnableDefaultItems>False</EnableDefaultItems>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BlazorDemo.DemoData</RootNamespace>
+    <AssemblyName>BlazorDemo.DemoData</AssemblyName>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\Bin\NETCore\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\Bin\NETCore\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\DemoModel.cs" />
+    <Compile Include="Models\DemoItem.cs" />
+    <Compile Include="Models\DemoRootPage.cs" />
+    <Compile Include="Models\DemoPageBase.cs" />
+    <Compile Include="Models\DemoPage.cs" />
+    <Compile Include="Models\DemoPageSection.cs" />
+    <Compile Include="Models\DemoCodeFile.cs" />
+    <Compile Include="Models\DemoProductInfo.cs" />
+    <Compile Include="Models\Search\DemoSearchAgregator.cs" />
+    <Compile Include="Models\Search\DemoSearchHelper.cs" />
+    <Compile Include="Models\Search\DemoSearchModel.cs" />
+    <Compile Include="Models\Search\DemoSearchResult.cs" />
+    <Compile Include="Utils\DemoCodeProcessor.cs" />
+    <Compile Include="Utils\DemoUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="demo-metadata.json" />
+  </ItemGroup>
+</Project>

@@ -14,7 +14,7 @@ namespace BlazorDemo.Wasm.DataProviders.Implementation {
             this.httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<BargainDataPoint>> GetDataAsync() {
+        public async Task<IEnumerable<DatePricePoint>> GetDataAsync() {
             string fileContent = await httpClient.GetStringAsync("api/get-usdjpy-exchange-data");
             return CurrencyExchangeCsvParser.Parse(fileContent);
         }

@@ -1,0 +1,82 @@
+﻿<DemoPageSectionComponent Id="Grid-Editing-EditFormValidation">
+    <ChildContent>
+        @inject NwindDataService NwindDataService
+
+        <DxGrid @ref="Grid"
+                Data="DataSource"
+                PageSize="12"
+                KeyFieldName="EmployeeId"
+                EditModelSaving="Grid_EditModelSaving"
+                DataItemDeleting="Grid_DataItemDeleting">
+            <Columns>
+                <DxGridCommandColumn Width="120px" />
+                <DxGridDataColumn FieldName="FirstName" MinWidth="80" />
+                <DxGridDataColumn FieldName="LastName" MinWidth="80" />
+                <DxGridDataColumn FieldName="Title" MinWidth="100" />
+                <DxGridDataColumn FieldName="TitleOfCourtesy" MinWidth="120" />
+                <DxGridDataColumn FieldName="BirthDate" Width="10%" MinWidth="80" />
+                <DxGridDataColumn FieldName="HireDate" Width="10%" MinWidth="80" />
+            </Columns>
+            <EditFormTemplate Context="EditFormContext">
+                @{
+                    var employee = (EditableEmployee)EditFormContext.EditModel;
+                }
+                <DxFormLayout ItemSizeMode="SizeMode.Small" CssClass="w-100">
+                    <DxFormLayoutItem Caption="First Name:" ColSpanMd="6">
+                        <DxTextBox @bind-Text="@employee.FirstName" />
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Last Name:" ColSpanMd="6">
+                        <DxTextBox @bind-Text="@employee.LastName" />
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Title:" ColSpanMd="6">
+                        <DxTextBox @bind-Text="@employee.Title" />
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Title of Courtesy:" ColSpanMd="6">
+                        <DxTextBox @bind-Text="@employee.TitleOfCourtesy" />
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Birth Date:" ColSpanMd="6">
+                        <DxDateEdit @bind-Date="@employee.BirthDate" />
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Hire Date:" ColSpanMd="6">
+                        <DxDateEdit @bind-Date="@employee.HireDate" />
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Notes:" ColSpanMd="12">
+                        <DxMemo @bind-Text="@employee.Notes" Rows="5" />
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem ColSpanMd="12">
+                        <ValidationSummary />
+                    </DxFormLayoutItem>
+                </DxFormLayout>
+            </EditFormTemplate>
+        </DxGrid>
+    </ChildContent>
+
+    @code {
+        IEnumerable<EditableEmployee> DataSource { get; set; }
+        IGrid Grid { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            DataSource = await NwindDataService.GetEmployeesEditableAsync();
+        }
+        protected override async Task OnAfterRenderAsync(bool firstRender) {
+            if(firstRender)
+                await Grid.StartEditNewRowAsync();
+        }
+        async Task Grid_EditModelSaving(GridEditModelSavingEventArgs e) {
+            var editableEmployee = (EditableEmployee)e.EditModel;
+
+            if(e.IsNew)
+                await NwindDataService.InsertEmployeeAsync(editableEmployee);
+            else
+                await NwindDataService.UpdateEmployeeAsync((EditableEmployee)e.DataItem, editableEmployee);
+            await UpdateDataAsync();
+        }
+        async Task Grid_DataItemDeleting(GridDataItemDeletingEventArgs e) {
+            await NwindDataService.RemoveEmployeeAsync((EditableEmployee)e.DataItem);
+            await UpdateDataAsync();
+        }
+        async Task UpdateDataAsync() {
+            DataSource = await NwindDataService.GetEmployeesEditableAsync();
+        }
+    }
+</DemoPageSectionComponent>

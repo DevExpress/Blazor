@@ -5,14 +5,14 @@ using BlazorDemo.Wasm.Server.DataProviders;
 
 namespace BlazorDemo.DataProviders.Implementation {
     public class UsdJpyDataProvider : ICurrencyExchangeDataProvider {
-        List<BargainDataPoint> cachedList = null;
+        List<DatePricePoint> cachedList = null;
         readonly IUsdJpyCsvFileContentProvider fileContentProvider;
 
         public UsdJpyDataProvider(IUsdJpyCsvFileContentProvider fileContentProvider) {
             this.fileContentProvider = fileContentProvider;
         }
 
-        public async Task<IEnumerable<BargainDataPoint>> GetDataAsync() {
+        public async Task<IEnumerable<DatePricePoint>> GetDataAsync() {
             if(cachedList == null) {
                 string fileContent = await fileContentProvider.GetFileContentAsync();
                 cachedList = CurrencyExchangeCsvParser.Parse(fileContent);

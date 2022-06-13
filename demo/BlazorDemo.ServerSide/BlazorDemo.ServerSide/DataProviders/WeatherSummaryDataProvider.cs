@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BlazorDemo.Data;
 using BlazorDemo.Wasm.Server.DataProviders;
+using System.Linq;
+using System;
 
 namespace BlazorDemo.DataProviders.Implementation {
     public class WeatherSummaryDataProvider : IWeatherSummaryDataProvider {
@@ -12,12 +14,15 @@ namespace BlazorDemo.DataProviders.Implementation {
             this.fileContentProvider = fileContentProvider;
         }
 
-        public async Task<IEnumerable<DetailedWeatherSummary>> GetDataAsync() {
+        public async Task<IEnumerable<DetailedWeatherSummary>> GetDataAsync(bool aggregateByMonth = false) {
             if(summary == null) {
                 string fileContent = await fileContentProvider.GetFileContentAsync();
                 summary = WeatherForecastCsvParser.Parse(fileContent);
             }
-            return await Task.FromResult(summary);
+            if(aggregateByMonth) 
+                return await Task.FromResult(WeatherAggregator.Aggregate(summary));
+            else
+                return await Task.FromResult(summary);
         }
     }
 }

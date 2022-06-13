@@ -6,7 +6,7 @@ using BlazorDemo.Data;
 
 namespace BlazorDemo.DataProviders {
     [Guid("1242C59D-E36D-4793-A5E4-B211DB9D1101")]
-    public interface IExperementResultDataProvider : IDataProvider {
+    public interface IExperimentResultDataProvider : IDataProvider {
         public Task<IEnumerable<DataPoint>> GetResultAsync(CancellationToken ct = default);
     }
 }

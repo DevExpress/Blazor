@@ -141,13 +141,13 @@
             priorytyClass = "info";
             title = " Low ";
         }
-        string html = string.Format("<span class='badge badge-{0} bg-{0} py-1 px-2' title='{1} Priority'>{1}</span>", priorytyClass, title);
+        string html = string.Format("<span class='badge bg-{0} py-1 px-2' title='{1} Priority'>{1}</span>", priorytyClass, title);
         return new MarkupString(html);
     }
     public MarkupString GetIssueTypeIconHtml(IssueType type) {
         string html = "";
         if(type == IssueType.Bug)
-            html = "<span class='badge badge-danger bg-danger py-1 px-2' title='Bug'>B</span>";
+            html = "<span class='badge bg-danger py-1 px-2' title='Bug'>B</span>";
         return new MarkupString(html);
     }
     public bool IsGridFiltered() {
