@@ -19,7 +19,7 @@ body,
 .content > .demo-page,
 .demo-page > .demo-page-right-container,
 .demo-page-right-container > .demo-page-nav {
-    background-color: inherit;
+    background-color: var(--bs-body-bg);
 }
 #app.root {
     min-width: 375px;

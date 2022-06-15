@@ -2,4 +2,4 @@ Our Blazor [Flyout](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFlyou
 
 The [HeaderText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFlyout.HeaderText), [BodyText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFlyout.BodyText), and [FooterText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFlyout.FooterText) properties specify text displayed in the Flyout elements.
 
-To show or close the Flyout in code, implement two-way binding for the [IsOpen](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFlyout.IsOpen) property. Users can click outside the Flyout’s boundaries, or press Escape to close the component from the UI.
+To show or close the Flyout in code, implement two-way binding for the [IsOpen](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFlyout.IsOpen) property. Users can click outside the Flyout's boundaries, or press Escape to close the component from the UI.

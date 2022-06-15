@@ -1167,25 +1167,6 @@
               "RedirectFrom": [ "Grid/EditData#EditModes" ]
             },
             {
-              "Id": "EditRow",
-              "Title": "Edit Row",
-              "IsNew": true,
-              "AdditionalCodeFiles": [
-                {
-                  "Title": "Employee.cs",
-                  "Path": "Data\\Northwind\\Employee.Editable.cs"
-                },
-                {
-                  "Title": "NwindDataService.cs",
-                  "Path": "Services\\NwindDataService.Employees.Editable.cs"
-                },
-                {
-                  "Title": "Startup.cs",
-                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
-                }
-              ]
-            },
-            {
               "Id": "EditFormValidation",
               "Title": "Edit Form Input Validation",
               "DocUrl": "DevExpress.Blazor.DxGrid.ValidationEnabled",
@@ -1204,6 +1185,25 @@
                 }
               ],
               "RedirectFrom": [ "Grid/EditData#Validation" ]
+            },
+            {
+              "Id": "EditRow",
+              "Title": "Edit Row",
+              "IsNew": true,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.Editable.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.Editable.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
             },
             {
               "Id": "EditRowValidation",

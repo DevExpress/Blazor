@@ -69,10 +69,6 @@
         protected override async Task OnInitializedAsync() {
             DataSource = await NwindDataService.GetEmployeesEditableAsync();
         }
-        protected override async Task OnAfterRenderAsync(bool firstRender) {
-            if(firstRender)
-                await Grid.StartEditRowAsync(0);
-        }
         void Grid_CustomizeEditModel(GridCustomizeEditModelEventArgs e) {
             if(e.IsNew) {
                 var newEmployee = (EditableEmployee)e.EditModel;

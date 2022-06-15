@@ -35,9 +35,9 @@
     <ProjectReference Include="..\BlazorDemo.DemoData\BlazorDemo.DemoData.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="22.1.3-pre-22164" />
-    <PackageReference Include="DevExpress.Blazor.Reporting" Version="22.1.3-pre-22164" />
-    <PackageReference Include="DevExpress.Reporting.Demos" Version="22.1.3-pre-22164" />
+    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="22.1.3" />
+    <PackageReference Include="DevExpress.Blazor.Reporting" Version="22.1.3" />
+    <PackageReference Include="DevExpress.Reporting.Demos" Version="22.1.3" />
     
     
     

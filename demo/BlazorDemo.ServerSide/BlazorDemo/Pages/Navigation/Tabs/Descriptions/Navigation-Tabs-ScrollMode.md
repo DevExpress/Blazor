@@ -1,4 +1,4 @@
-Use the [ScrollMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTabs.ScrollMode) property to specify how users navigate between tabs when they do not fit the container’s width. The following modes are available:
+Use the [ScrollMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTabs.ScrollMode) property to specify how users navigate between tabs when they do not fit the container's width. The following modes are available:
 
 
 
@@ -14,7 +14,7 @@ Use the [ScrollMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTabs
 
 
 
-* **NoScroll** - users cannot scroll tabs. The tabs that do not fit the container’s width are moved to a new line.
+* **NoScroll** - users cannot scroll tabs. The tabs that do not fit the container's width are moved to a new line.
 
 
 

@@ -5,4 +5,4 @@ Additionally, use the following properties to configure a pie series appearance:
 * [Diameter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPieChart-1.Diameter)
 * [MinDiameter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPieChart-1.MinDiameter)
 
-In this demo, use the UI elements at the module’s header to change a Donut chart’s diameter and inner diameter. You can also change the position of chart labels or hide them. 
+In this demo, use the UI elements at the module's header to change a Donut chart's diameter and inner diameter. You can also change the position of chart labels or hide them. 

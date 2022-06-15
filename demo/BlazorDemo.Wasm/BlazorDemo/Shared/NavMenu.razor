@@ -2,6 +2,10 @@
 @inject DemoConfiguration Configuration
 @inject NavigationManager NavigationManager
 
+@{
+    var siteMode = Configuration.GetConfigurationValue<bool>("SiteMode");
+}
+
 <DxTreeView @ref="@treeView"
             CssClass="sidebar-tree"
             ExpandButtonIconCssClass="demo-icon-expand"
@@ -11,7 +15,9 @@
             SelectionChanged="@SelectionChanged">
     <Nodes>
         @foreach(var demoPage in Pages) {
-            <NavMenuLeaf Page="@demoPage"></NavMenuLeaf>
+            if(!demoPage.IsMaintenanceMode || !siteMode) {
+                <NavMenuLeaf Page="@demoPage"></NavMenuLeaf>
+            }
         }
     </Nodes>
 </DxTreeView>
@@ -32,7 +38,7 @@
     }
     void UpdateSelection(string currentUri, bool expandNodesToSelection) {
         treeView.SelectNode(n => {
-            if(!string.IsNullOrEmpty(n.NavigateUrl) && (currentUri.EndsWith(n.NavigateUrl) || currentUri == NavigationManager.BaseUri && n.NavigateUrl == "./")) {
+            if(!string.IsNullOrEmpty(n.NavigateUrl) && (currentUri.EndsWith("/" + n.NavigateUrl) || currentUri == NavigationManager.BaseUri && n.NavigateUrl == "./")) {
                 if(expandNodesToSelection)
                     ExpandParentNodes(n);
                 return true;

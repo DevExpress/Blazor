@@ -10,7 +10,7 @@ The [Data Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-
 
 The Data Grid supports different edit modes. Use the **Edit Mode** option above (corresponds to the [EditMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.EditMode) property) to switch between available modes.
 
-*   [DataGridEditMode.EditForm](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridEditMode) (Default) – The Data Grid displays the edit form instead of the edited row.
-*   [DataGridEditMode.PopupEditForm](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridEditMode) – The Data Grid displays the edit form in a pop-up window.
+*   [DataGridEditMode.EditForm](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridEditMode) (Default) - The Data Grid displays the edit form instead of the edited row.
+*   [DataGridEditMode.PopupEditForm](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridEditMode) - The Data Grid displays the edit form in a pop-up window.
 
 When a user clicks **New** or **Edit**, the Data Grid displays the Edit Form. This form consists of data editors for each visible column. The editor type depends on the corresponding column's type.

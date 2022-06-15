@@ -1,4 +1,4 @@
-This demo illustrates how to use the Data Grid’s [RowPreviewTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.RowPreviewTemplate) property to show preview sections under each data row across all columns. These sections can display any content, such as tables, images, values from data source fields, custom text, and so on.
+This demo illustrates how to use the Data Grid's [RowPreviewTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.RowPreviewTemplate) property to show preview sections under each data row across all columns. These sections can display any content, such as tables, images, values from data source fields, custom text, and so on.
 
 The template's **Context** parameter has the following properties:
 

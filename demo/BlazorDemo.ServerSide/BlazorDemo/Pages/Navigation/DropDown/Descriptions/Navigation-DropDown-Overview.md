@@ -2,4 +2,4 @@ Our Blazor [DropDown](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDro
 
 The [HeaderText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDown.HeaderText), [BodyText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDown.BodyText), and [FooterText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDown.FooterText) properties specify text displayed in the DropDown elements.
 
-To show or close the DropDown in code, implement two-way binding for the [IsOpen](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDown.IsOpen) property. Users can click outside the DropDown’s boundaries, or press Escape to close the component from the UI.
+To show or close the DropDown in code, implement two-way binding for the [IsOpen](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDown.IsOpen) property. Users can click outside the DropDown's boundaries, or press Escape to close the component from the UI.

@@ -2,12 +2,12 @@ The [ComboBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2
 
 The main ComboBox API members are listed below:
 
-*   [Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.Data) – Specifies the data source that populates the editor’s list items.
-*   [TextFieldName](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.TextFieldName) – Specifies the data source’s field that supplies text for items.
-*   [Text](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.Text) – Specifies the editor’s text.
+*   [Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.Data) - Specifies the data source that populates the editor's list items.
+*   [TextFieldName](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.TextFieldName) - Specifies the data source's field that supplies text for items.
+*   [Text](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.Text) - Specifies the editor's text.
 *   [TextChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.TextChanged) - Fires when the editor text was changed.
-*   [Value](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.Value) – Specifies the drop-down list’s selected value.
-*   [ValueChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.ValueChanged) – Fires when the selected value was changed.
+*   [Value](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.Value) - Specifies the drop-down list's selected value.
+*   [ValueChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.ValueChanged) - Fires when the selected value was changed.
 
 The ComboBox component supports different size modes. To specify the component's size in code, use the [SizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxResizableEditorBase-2.SizeMode) property. To apply different size modes, use the drop-down list in the demo card's header.
 
