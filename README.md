@@ -7,13 +7,13 @@ This repo contains [demos](#demos) for [DevExpress Blazor components](#devexpres
 * [Documentation](#documentation)
 * [Helpful Resources](#helpful-resources)
 * [Support and Feedback](#support-and-feedback)
-* [Bootstrap Themes](#bootstrap-themes)
+* [Themes](#themes)
 * [NuGet Package Change Log](#nuget-package-change-log)
 * [Version Compatibility](#version-compatibility)
 
 # DevExpress UI for Blazor
 
-[DevExpress UI for Blazor](https://www.devexpress.com/blazor/) ships with native and high performance UI components including the Data Grid, Pivot Grid, Scheduler, Charts, and Data Editors. These components can help you create intuitive and refined user experiences for Blazor Server (ASP.NET Core) and Blazor WebAssembly hosting models. 
+[DevExpress UI for Blazor](https://www.devexpress.com/blazor/) ships with native and high performance UI components including the Grid, Pivot Grid, Scheduler, Charts, and Data Editors. These components can help you create intuitive and refined user experiences for Blazor Server and Blazor WebAssembly hosting models. 
 
 # Demos
 
@@ -49,9 +49,14 @@ Refer to [online documentation](https://docs.devexpress.com/Blazor/400725/blazor
 
 Welcome to our [Support Center](https://supportcenter.devexpress.com/ticket/create) if you want to ask questions, share ideas, or report an issue.
 
-# Bootstrap Themes
+# Themes
 
-DevExpress Blazor components use the client-side Bootstrap framework to render their user interface. You can apply a Bootstrap-based theme to a Blazor application to change the appearance of all the components. Refer to the [Themes](http://docs.devexpress.com/Blazor/401523/common-concepts/themes) help topic for more information.
+The **DevExpress.Blazor.Themes NuGet** package contains the following Blazor application stylesheets:
+
+* Four built-in DevExpress themes
+* A stylesheet that allows you to apply Bootstrap-based themes to DevExpress Blazor components
+
+Refer to the [Themes](http://docs.devexpress.com/Blazor/401523/common-concepts/themes) help topic for more information.
 
 # NuGet Package Change Log
 
@@ -59,4 +64,4 @@ Check out the NuGet package's [version history](changelog.md).
 
 # Version Compatibility
 
-Check out the [version compatibility](version-compatibility.md) of .NET Core and the DevExpress.Blazor NuGet package.
+Check out the version compatibility of .NET and the DevExpress.Blazor NuGet package: [Prerequisites](https://docs.devexpress.com/Blazor/401055/prerequisites#net-framework)

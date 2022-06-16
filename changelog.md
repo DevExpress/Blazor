@@ -2,6 +2,216 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 22.1.3
+
+### New Accordion
+
+Our new Blazor Accordion component allows you to address a broad range of navigation related usage scenarios within Blazor-powered web apps. You can create advanced hierarchical navigation menus with endless nesting of navigation elements.
+
+Integrated features include:
+
+* Data Binding Support
+* Built-in Search Panel & Filtering Support
+* Item Groups
+* Multiple Expand/Collapse Modes
+* Unlimited Number of Nesting Levels
+* Custom Items and Group Content
+
+[Demo](https://demos.devexpress.com/blazor/Accordion) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxAccordion)
+
+### New Flyout
+
+Use our new Blazor Flyout component (a contextual popup UI element) to display hints, warnings, or business-specific information within your Blazor-powered web app. You can position the Flyout at top, bottom, left or right side of any webpage UI element. 
+
+[Demo](https://demos.devexpress.com/blazor/Flyout) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFlyout)
+
+### Grid
+
+#### Inline Row Editing
+
+Our Blazor Grid now supports inline data editing and keyboard navigation support. Use Tab and Ctrl+Tab to navigate between cells within the edit row.
+
+[Demo](https://demos.devexpress.com/blazor/Grid/EditData#EditRow)
+
+#### Save / Restore Layout
+
+You can now save and restore the Blazor Data Grid's layout as requirements dictate. Layout information includes the current page, column sort order/direction, column position, filter values, and grouped columns.
+
+We added two new events - [LayoutAutoSaving](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.LayoutAutoSaving) and [LayoutAutoLoading](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.LayoutAutoLoading). The first event fires each time the grid's layout changes and allows you to save the layout. The second event fires once the grid component is initialized and allows you to restore the layout.
+
+We also added [SaveLayout](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SaveLayout) and [LoadLayout](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.LoadLayout(DevExpress.Blazor.GridPersistentLayout)) methods so you can save and restore the grid’s layout when necessary.
+
+#### Show / Hide Summary Items
+
+The Grid's new [Visible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridSummaryItem.Visible) property allows you to display/hide individual summary items.
+
+#### Appearance Customization Enhancements
+
+We added customization support for over [25 grid UI element types](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridElementType) (edit form, filter row, group panel, footer, etc.) within the [CustomizeElement](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomizeElement) event handler.
+
+#### Row Preview
+
+You can now incorporate Preview sections within our Blazor Data Grid (additional information for quick preview by your users). These preview sections can include tables, values from data source fields and custom text.
+
+[Demo](https://demos.devexpress.com/blazor/Grid/MasterDetail#RowPreview) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.DetailRowDisplayMode)
+
+#### API Enhancements - New Events
+
+* [WidthChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridColumn.WidthChanged) - Fires when a column's width changes.
+* [ShowAllPagesChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ShowAllRowsChanged) - Fires when the [ShowAllRows](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ShowAllRows) property value changes.
+
+### Charts
+
+#### Point and Series Selection
+
+Our Blazor Chart (DXChart) component now supports point and series selection. Our Blazor Pie Chart component now supports selection of pie/donut sectors.
+
+Use the following properties to specify selection mode (single/multiple) or disable selection:
+
+* DxChart.SeriesSelectionMode
+* DxChart.PointSelectionMode
+* DxPieChart.PointSelectionMode
+
+For certain series types, you can also specify how other series points are selected when you select a point. Use the following properties:
+
+* DxChartBarSeriesBase.SelectionMode
+* DxChartBubbleSeries.SelectionMode
+* DxChartFinancialSeriesBase.SelectionMode
+* DxChartRangeBarSeries.SelectionMode
+* DxChartScatterSeries.SelectionMode
+
+We also added new events (DxChart.SelectionChanged/DxPieChart.SelectionChanged) to help you respond to user selection.
+
+[Demo](https://demos.devexpress.com/blazor/ChartSelection) | [Documentation: DxChart](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1#selection) | [Documentation: DxPieChart](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPieChart-1#selection)
+
+#### Drill-Down on Series Point Click
+
+You can now incorporate drill down charts (users click data points and navigate through hierarchical information) within your Blazor-powered web app.
+
+The [SeriesClick](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.SeriesClick) event parameter's 'Series' property returns an 'IChartSeries' object and exposes the Data property. Use this property to obtain the source data for the clicked/selected series.
+
+[Demo](https://demos.devexpress.devx/blazor/ChartDrillDown)
+
+#### Financial and Range Series - Data Binding Enhancements
+
+v22.1 includes new properties that allow you to specify data source fields for financial and range series. They include:
+
+* Financial Series: [OpenField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartFinancialSeriesBase-3.OpenField), [HighField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartFinancialSeriesBase-3.HighField), [LowField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartFinancialSeriesBase-3.LowField), [CloseField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartFinancialSeriesBase-3.CloseField)
+* Range Series: [StartValueField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartRangeSeries-3.StartValueField), [EndValueField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartRangeSeries-3.EndValueField)
+
+[Demo](https://demos.devexpress.com/blazor/ChartFinancialSeries)
+
+#### Bar Chart Enhancements
+
+We added the following new options for our Blazor Bar Chart component:
+
+* [BarGroupPadding](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.BarGroupPadding) - Specifies a bar group's left/right paddings (in %).
+* [BarGroupWidth](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.BarGroupWidth) - Specifies a bar group's width in pixels.
+* [BarPadding](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartBarSeriesBase-3.BarPadding) - Specifies padding between * s in bar groups (in %). Use the [DxChartRangeBarSeries.BarPadding](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartRangeBarSeries-3.BarPadding) property for range bar series.
+* [BarWidth](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartBarSeriesBase-3.BarWidth) - Specifies the width of individual bars in a series (in pixels). Use the [DxChartRangeBarSeries.BarWidth](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartRangeBarSeries-3.BarWidth) property for range bar series.
+* [MinBarHeight](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartBarSeriesBase-3.MinBarHeight) - Specifies minimum bar height (in pixels).
+
+#### Axis Enhancements
+
+New axis options include:
+
+* [SynchronizeAxes](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.SynchronizeAxes) - Allows you to disable synchronization of value axes displayed on a single pane.
+* [SynchronizedValue](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartValueAxis.SynchronizedValue) - Specifies values at which axes are synchronized.
+* [Indent](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartValueAxis.Indent) - Specifies the distance between neighboring value axes (in pixels).
+
+#### Export Chart as PDF or Image
+
+Our new [ExportAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartBase.ExportAsync.overloads) method allows you to save your chart in the following file formats: PDF, PNG, JPEG, and GIF.
+
+#### Format Series Labels
+
+We added a new [SeriesLabel.FormatPattern](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesLabel.FormatPattern) property to help format series labels. Format patterns can include placeholders with format specifiers and plain text.
+
+### Upload 
+
+#### New API
+
+* UploadFile, UploadFiles, UploadAllFiles - use these methods to upload a file(s) or resume a previously paused operation;
+* RemoveFile, RemoveFiles, RemoveAllFiles - allow you to remove selected/all files;
+* PauseUploadFile, PauseUploadFiles, PauseUploadAllFiles - use these methods to pause file upload operations;
+* ReloadFile, ReloadFiles, ReloadAllFiles - these methods re-start the upload of selected/all files;
+* CancelUploadFile, CancelUploadFiles, CancelUploadAllFiles - these methods allow you to abort individual operations.
+
+[Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload?v=22.1#upload-files)
+
+#### Performance Enhancements in WASM Apps
+
+We optimized our Blazor Upload component to work with a large collection of files in WASM applications. For example, it now takes three seconds to upload 100 files that previously required ten seconds.
+
+### Navigation and Layout - New API
+
+Our Blazor Context Menu and TreeView components can now map the [CssClass](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.INavigationDataMapping.CssClassField) property in bound mode.
+
+### Rich Text Editor
+
+#### Mail Merge Support
+
+Our Blazor Rich Text Editor now supports mail merge operations. Use the [Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.DxMailMergeSettings.Data) property to bind the Rich Text Editor to an external data source. You can preview generated content directly within your document template and save (export) results as DOCX, RTF, or TXT files.
+
+You can also add fields (dynamic elements) to your document. Fields are placeholders that store and display data from a data source.
+
+[Demo](https://demos.devexpress.com/blazor/RichEditMailMerge)
+
+#### New Command Toolbar
+
+v22.1 allows you to incorporate a Command Toolbar within your app. As its name implies, a Command Toolbar displays all commands across a single tab. Set the 'BarMode' property to 'BarMode.Toolbar' to activate the toolbar. Handle the [CustomizeToolbar](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.DxRichEdit.CustomizeToolbar) event to add new commands and hide/customize default commands as necessary.
+
+[Demo](https://demos.devexpress.com/blazor/RichEditToolbarCustomization)
+
+#### Ribbon Customization
+
+We added a new CustomizeRibbon event so you can:
+
+* Add new/hide default commands (items).
+* Customize the look, feel, and behavior of default commands.
+* Add custom tabs, groups, and commands.
+
+[Demo](https://demos.devexpress.com/blazor/RichEditRibbonCustomization)
+
+#### API Enhancements
+
+* [Document.GetIsEmptyAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.Document.GetIsEmptyAsync(System.Threading.CancellationToken)) - Checks whether a document is empty.
+* [SubDocument.GetRtfAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.SubDocument.GetRtfAsync.overloads), [SubDocument.AddRtfAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.SubDocument.AddRtfAsync.overloads) - Use these methods to obtain/add RTF content from/to the Rich Text Editor.
+* [SubDocument.GetIntervalAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.SubDocument.GetIntervalAsync(System.Threading.CancellationToken)) - Returns a sub-document's interval.
+* [UndoAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.DxRichEdit.UndoAsync(System.Threading.CancellationToken)), [RedoAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.DxRichEdit.RedoAsync(System.Threading.CancellationToken)) - Cancels/reapplies the last edit.
+
+### TreeView - Node Filtering
+
+Our Blazor TreeView component ships with an integrated filtering option. Enable the Filter Panel (displayed at the top of the treeview) to allow users to filter treeview content.
+
+When a user searches for a specific node(s), the tree automatically expands to the node that matches the search string and highlights strings that match search text.
+
+The new API includes:
+
+* [ShowFilterPanel](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.ShowFilterPanel) - Shows/hides the filter panel.
+* [FilterString](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.FilterString) - Specifies the filter string. The 'case-insensitive contains' operator is used by default.
+* [FilterMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.FilterMode) - Specifies the filter mode.
+
+Use the [CustomFilter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.CustomFilter) property to implement custom filter algorithms.
+
+[Demo](https://demos.devexpress.com/blazor/TreeView#Filtering) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView#filter-nodes)
+
+### Breaking Changes
+
+* [T1080871](https://supportcenter.devexpress.com/ticket/details/t1080871/devexpress-blazor-components-no-longer-support-net-5-0): DevExpress Blazor components no longer support .NET 5.0.
+* [T1081253](https://supportcenter.devexpress.com/internal/ticket/details/T1081253): The location of CSS resources for DevExpress Blazor controls has changed.
+* [T1064071](https://supportcenter.devexpress.com/ticket/details/t1064071/devexpress-products-and-components-now-require-the-devexpress-drawing-assembly-for): DevExpress products and components now require the DevExpress.Drawing assembly for deployment.
+* [T1083584](https://supportcenter.devexpress.com/ticket/details/t1083584/dxchart-the-dxchartserieslabel-format-property-has-been-renamed-to-valueformat): Charts - The DxChartSeriesLabel.Format property has been renamed to ValueFormat.
+* [T1062471](https://supportcenter.devexpress.com/ticket/details/t1062471/charts-the-dxchartbase-pointclick-event-has-been-removed): Charts - The DxChartBase.PointClick event has been removed.
+* [T1080875](https://supportcenter.devexpress.com/ticket/details/t1080875/upload-the-component-s-events-change-signature): Upload - The component’s events change signature.
+* [T1080881](https://supportcenter.devexpress.com/ticket/details/t1080881/scheduler-the-default-edit-form-layout-was-changed): Scheduler - The default edit form layout was changed.
+* [T1070927](https://supportcenter.devexpress.com/ticket/details/t1070927/dxcontextmenu-the-component-render-has-changed): DxContextMenu - The component render has changed.
+* [T1063750](https://supportcenter.devexpress.com/ticket/details/t1063750/tabpanelmodel-tabs-are-readonly): TabPanelModel - Tabs are readonly.
+
+### Resolved Issues
+
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=21.2.8&endBuildName=22.1.3&buildsMode=Range&hasPlatformsWithProducts=true) for a complete list of issues resolved in v22.1.3.
+
 # 21.2.7
 
 ### Breaking Change
