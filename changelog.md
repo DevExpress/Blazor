@@ -97,7 +97,7 @@ The [SeriesClick](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1
 v22.1 includes new properties that allow you to specify data source fields for financial and range series. They include:
 
 * Financial Series: [OpenField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartFinancialSeriesBase-3.OpenField), [HighField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartFinancialSeriesBase-3.HighField), [LowField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartFinancialSeriesBase-3.LowField), [CloseField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartFinancialSeriesBase-3.CloseField)
-* Range Series: [StartValueField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartRangeSeries-3.StartValueField), [EndValueField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartRangeSeries-3.EndValueField)
+* Range Series: [StartValueField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartRangeSeriesBase-3.StartValueField), [EndValueField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartRangeSeriesBase-3.EndValueField)
 
 [Demo](https://demos.devexpress.com/blazor/ChartFinancialSeries)
 
@@ -145,7 +145,7 @@ We optimized our Blazor Upload component to work with a large collection of file
 
 ### Navigation and Layout - New API
 
-Our Blazor Context Menu and TreeView components can now map the [CssClass](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.INavigationDataMapping.CssClassField) property in bound mode.
+Our Blazor Context Menu and TreeView components can now map the [CssClass](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxNavigationDataMappingBase-1.CssClass) property in bound mode.
 
 ### Rich Text Editor
 
@@ -199,7 +199,7 @@ Use the [CustomFilter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTr
 ### Breaking Changes
 
 * [T1080871](https://supportcenter.devexpress.com/ticket/details/t1080871/devexpress-blazor-components-no-longer-support-net-5-0): DevExpress Blazor components no longer support .NET 5.0.
-* [T1081253](https://supportcenter.devexpress.com/internal/ticket/details/T1081253): The location of CSS resources for DevExpress Blazor controls has changed.
+* [T1081253](https://supportcenter.devexpress.com/ticket/details/t1081253/the-location-of-css-resources-for-devexpress-blazor-controls-has-changed): The location of CSS resources for DevExpress Blazor controls has changed.
 * [T1064071](https://supportcenter.devexpress.com/ticket/details/t1064071/devexpress-products-and-components-now-require-the-devexpress-drawing-assembly-for): DevExpress products and components now require the DevExpress.Drawing assembly for deployment.
 * [T1083584](https://supportcenter.devexpress.com/ticket/details/t1083584/dxchart-the-dxchartserieslabel-format-property-has-been-renamed-to-valueformat): Charts - The DxChartSeriesLabel.Format property has been renamed to ValueFormat.
 * [T1062471](https://supportcenter.devexpress.com/ticket/details/t1062471/charts-the-dxchartbase-pointclick-event-has-been-removed): Charts - The DxChartBase.PointClick event has been removed.
