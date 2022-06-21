@@ -4,4 +4,4 @@ The DevExpress [Rich Text Editor](https://www.devexpress.com/blazor/rich-text-ed
 * Change character and paragraph formatting
 * Work with floating objects (images and text boxes)
 * Print documents
-* Switch to Simple View (hide pagination and layout control elements and use entire component’s area to display the document)
+* Switch to Simple View (hide pagination and layout control elements and use entire component's area to display the document)

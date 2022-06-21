@@ -1,0 +1,26 @@
+.warning {
+    line-height: 1.25;
+    padding-left: 0.5rem;
+    border-left-width: 0.25rem;
+    border-radius: 0.25rem;
+    border-left-color: var(--bs-red);
+    margin-bottom: 3rem;
+    box-shadow: 0px 2px 6px 0px rgb(0 0 0 / 8%);
+}
+
+.warning .icon-container {
+    padding-right: 0.75rem;
+}
+
+::deep .e-warning {
+    -webkit-mask-image: url("images/Warning.svg");
+    mask-image: url("images/Warning.svg");
+}
+
+.e-icon {
+    opacity: 0.5;
+    display: inline-block;
+    background-color: currentColor;
+    width: 24px;
+    height: 24px;
+}

@@ -3,11 +3,11 @@
 @inject NavigationManager NavigationManager
 
 <div class="items">
-    @foreach(var key in Items.Keys) {
-        @if(!string.IsNullOrEmpty(Items[key])) {
-            <a href="@Items[key]">@key</a>
+    @foreach(var item in Items) {
+        @if(!string.IsNullOrEmpty(item.Item2)) {
+            <a href="@item.Item2">@item.Item1</a>
         } else {
-            <span>@key</span>
+            <span>@item.Item1</span>
         }
         <span class="separator"></span>
     }
@@ -15,7 +15,7 @@
 
 @code {
     const string HomePageTitle = "Home";
-    Dictionary<string, string> Items { get; set; } = new Dictionary<string, string>();
+    List<Tuple<string, string>> Items { get; set; } = new List<Tuple<string, string>>();
 
     protected override void OnInitialized() {
         NavigationManager.LocationChanged += OnLocationChanged;
@@ -27,21 +27,17 @@
     void UpdateItems(string currentUri) {
         Items.Clear();
 
-        var demoPage = Configuration.GetDemoPageByUrl(NavigationManager, currentUri);
-        DemoRootPage rootDemoPage = null;
-        if(demoPage is DemoRootPage)
-            rootDemoPage = (DemoRootPage)demoPage;
-        else if(demoPage is DemoPage && demoPage.ParentPage is DemoRootPage)
-            rootDemoPage = (DemoRootPage)demoPage.ParentPage;
-        if(rootDemoPage != null) {
-            Items.Add(HomePageTitle, "./");
-            if(demoPage != null) {
-                var rootDemoPageUrl = DemoConfiguration.GetRootDemoPageUrl(rootDemoPage);
-                Items.Add(rootDemoPage.Title, rootDemoPageUrl != demoPage.Url ? rootDemoPageUrl : "");
-                Items.Add(demoPage.Title, "");
+        var currentPage = Configuration.GetDemoPageByUrl(NavigationManager, currentUri);
+        if(currentPage != null) {
+            var demoPage = currentPage;
+            while(demoPage != null) {
+                var url = demoPage.GetUrl() != currentPage.GetUrl() ? demoPage.GetUrl() : "";
+                Items.Insert(0, new (demoPage.Title, url));
+                demoPage = demoPage.ParentPage;
             }
+            Items.Insert(0, new (HomePageTitle, "./"));
         } else {
-            Items.Add(HomePageTitle, "");
+            Items.Add(new (HomePageTitle, ""));
         }
         StateHasChanged();
     }

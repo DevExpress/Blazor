@@ -14,15 +14,15 @@
             }
             @if(!context.IsLeaf) {
                 <h4 class="my-0 p-2 d-flex align-items-center">
-                    <svg role="img" class="dx-image dx-image-size-07em">
-                        <use href="@GetIconUrl(dataItem)" />
-                    </svg>
-                    <span class="ml-3">@dataItem.Title</span>
+                    <span class="treeview-expand-btn @(context.Expanded ? "expanded" : "collapsed")" />
+                    <span class="ms-3 flex-grow-1">@dataItem.Title</span>
                 </h4>
             } else {
-                <div class="media p-2">
-                    <img class="bg-primary rounded-circle mr-3 treeview-template-icon" src="@dataItem.ImageUrl" alt="@dataItem.Title" />
-                    <div class="media-body">
+                <div class="d-flex p-2">
+                    <div class="flex-shrink-0 me-3">
+                        <img class="bg-primary rounded-circle treeview-template-icon" src="@dataItem.ImageUrl" alt="@dataItem.Title" />
+                    </div>
+                    <div class="flex-grow-1">
                         <h5 class="mt-0">@dataItem.Title</h5>
                         @dataItem.Description
                     </div>
@@ -36,11 +36,6 @@
     @code {
         @*BeginCollapse*@
         DxTreeView treeView;
-        string GetIconUrl(ComponentSet nodeDataItem) {
-            string name = treeView.GetNodeExpanded(n => n.DataItem == nodeDataItem) ? "down" : "right";
-            return $"_content/DevExpress.Blazor/dx-blazor.svg#dx-chevron-{name}";
-        }
-        
         protected override Task OnAfterRenderAsync(bool firstRender) {
             if(firstRender)
                 treeView.ExpandAll();

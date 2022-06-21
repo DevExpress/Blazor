@@ -2,13 +2,15 @@
 @using System.IO;
 
 <DemoPageSectionComponent Id="RichEdit-SimpleView">
-    <DxRichEdit DocumentContent="@documentContent" ViewType="ViewType.Simple" ActiveRibbonTabIndex="6" CssClass="w-100 ch-720" />
+    @inject IDocumentProvider DocumentProvider
+
+    <DxRichEdit @bind-DocumentContent="@DocumentContent" ViewType="ViewType.Simple" BarMode=BarMode.Toolbar CssClass="w-100 ch-720" />
 
     @code {
-        byte[] documentContent;
+        byte[] DocumentContent;
 
         protected override async Task OnInitializedAsync() {
-            documentContent = await File.ReadAllBytesAsync(Path.Combine(AppContext.BaseDirectory, Path.Combine("Data", "Documents", "AlbertEinstein.docx")));
+            DocumentContent = await DocumentProvider.GetDocumentAsync("AlbertEinstein.docx");
             await base.OnInitializedAsync();
         }
     }

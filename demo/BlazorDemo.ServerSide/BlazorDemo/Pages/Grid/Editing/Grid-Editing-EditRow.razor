@@ -1,0 +1,98 @@
+﻿<DemoPageSectionComponent Id="Grid-Editing-EditRow">
+    <ChildContent>
+        @inject NwindDataService NwindDataService
+
+        <DxGrid @ref="Grid"
+                Data="DataSource"
+                PageSize="12"
+                KeyFieldName="EmployeeId"
+                ValidationEnabled="false"
+                CustomizeEditModel="Grid_CustomizeEditModel"
+                EditModelSaving="Grid_EditModelSaving"
+                DataItemDeleting="Grid_DataItemDeleting"
+                PopupEditFormCssClass="pw-800"
+                EditMode="GridEditMode.EditRow">
+            <Columns>
+                <DxGridCommandColumn Width="140px" />
+                <DxGridDataColumn FieldName="FirstName" MinWidth="80">
+                    <CellEditTemplate>
+                        @{
+                            var employee = (EditableEmployee)context.EditModel;
+                        }
+                        <DxTextBox @bind-Text="@employee.FirstName"></DxTextBox>
+                    </CellEditTemplate>
+                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="LastName" MinWidth="80">
+                    <CellEditTemplate>
+                        @{
+                            var employee = (EditableEmployee)context.EditModel;
+                        }
+                        <DxTextBox @bind-Text="@employee.LastName"></DxTextBox>
+                    </CellEditTemplate>
+                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="Title" MinWidth="100">
+                    <CellEditTemplate>
+                        @{
+                            var employee = (EditableEmployee)context.EditModel;
+                        }
+                        <DxTextBox @bind-Text="@employee.Title"></DxTextBox>
+                    </CellEditTemplate>
+                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="TitleOfCourtesy" MinWidth="120">
+                    <CellEditTemplate>
+                        @{
+                            var employee = (EditableEmployee)context.EditModel;
+                        }
+                        <DxTextBox @bind-Text="@employee.TitleOfCourtesy"></DxTextBox>
+                    </CellEditTemplate>
+                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="BirthDate" Width="10%" MinWidth="80">
+                    <CellEditTemplate>
+                        @{
+                            var employee = (EditableEmployee)context.EditModel;
+                        }
+                        <DxDateEdit @bind-Date="@employee.BirthDate"></DxDateEdit>
+                    </CellEditTemplate>
+                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="HireDate" Width="10%" MinWidth="80">
+                    <CellEditTemplate>
+                        @{
+                            var employee = (EditableEmployee)context.EditModel;
+                        }
+                        <DxDateEdit @bind-Date="@employee.HireDate"></DxDateEdit>
+                    </CellEditTemplate>
+                </DxGridDataColumn>
+            </Columns>
+        </DxGrid>
+    </ChildContent>
+
+    @code {
+        IEnumerable<EditableEmployee> DataSource { get; set; }
+        IGrid Grid { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            DataSource = await NwindDataService.GetEmployeesEditableAsync();
+        }
+        void Grid_CustomizeEditModel(GridCustomizeEditModelEventArgs e) {
+            if(e.IsNew) {
+                var newEmployee = (EditableEmployee)e.EditModel;
+                newEmployee.FirstName = "John";
+                newEmployee.LastName = "Doe";
+            }
+        }
+        async Task Grid_EditModelSaving(GridEditModelSavingEventArgs e) {
+            if(e.IsNew)
+                await NwindDataService.InsertEmployeeAsync((EditableEmployee)e.EditModel);
+            else
+                await NwindDataService.UpdateEmployeeAsync((EditableEmployee)e.DataItem, (EditableEmployee)e.EditModel);
+            await UpdateDataAsync();
+        }
+        async Task Grid_DataItemDeleting(GridDataItemDeletingEventArgs e) {
+            await NwindDataService.RemoveEmployeeAsync((EditableEmployee)e.DataItem);
+            await UpdateDataAsync();
+        }
+        async Task UpdateDataAsync() {
+            DataSource = await NwindDataService.GetEmployeesEditableAsync();
+        }
+    }
+</DemoPageSectionComponent>

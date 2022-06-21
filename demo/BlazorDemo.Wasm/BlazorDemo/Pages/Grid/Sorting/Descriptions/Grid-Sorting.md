@@ -1,4 +1,4 @@
-The DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid) allows users to sort data as requirements dictate. Sort operations can be applied via the Blazor Grid’s UI elements as follows:
+The DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid) allows users to sort data as requirements dictate. Sort operations can be applied via the Blazor Grid's UI elements as follows:
 
 * To sort against a single column, users can click the appropriate column header. Repeating this action will change sort order. The sort glyph indicates the column's current sort order.
 * To sort the Blazor Grid against multiple columns, users must click column headers with the *Shift* key pressed.

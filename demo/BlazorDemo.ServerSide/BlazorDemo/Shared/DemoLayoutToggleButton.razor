@@ -1,9 +1,11 @@
 ﻿@inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
 
-<button class="navbar-toggler d-block bg-primary border-0" @onclick="@OnToggleButtonClick">
-    <span class="navbar-toggler-icon"></span>
-</button>
+<DxButton Click="@OnToggleButtonClick"
+          RenderStyle="ButtonRenderStyle.Secondary"
+          IconCssClass="navbar-toggler-icon"
+          CssClass="navbar-toggler d-block border-0">  
+</DxButton>
 
 @code {
     bool _canToggle;

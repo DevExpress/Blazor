@@ -1,5 +1,4 @@
 ﻿<DemoPageSectionComponent Id="Grid-Editing-CascadingEditors">
-    @implements IDisposable
     @inject NwindDataService NwindDataService
     @inject WorldcitiesDataService WorldcitiesDataService
 
@@ -71,19 +70,11 @@
         IEnumerable<Country> Countries { get; set; }
         IEnumerable<City> Cities { get; set; }
         IGrid Grid { get; set; }
-        TaskCompletionSource<bool> DataLoadedTcs { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
 
         protected override async Task OnInitializedAsync() {
             DataSource = await NwindDataService.GetSuppliersEditableAsync();
             Countries = await WorldcitiesDataService.GetCountriesAsync();
             Cities = await WorldcitiesDataService.GetCitiesAsync();
-            DataLoadedTcs.TrySetResult(true);
-        }
-        protected override async Task OnAfterRenderAsync(bool firstRender) {
-            if(firstRender) {
-                await DataLoadedTcs.Task;
-                await Grid.StartEditRowAsync(0);
-            }
         }
         void Grid_CustomizeEditModel(GridCustomizeEditModelEventArgs e) {
             if(e.IsNew) {
@@ -105,9 +96,6 @@
         }
         async Task UpdateDataAsync() {
             DataSource = await NwindDataService.GetSuppliersEditableAsync();
-        }
-        public void Dispose() {
-            DataLoadedTcs.TrySetCanceled();
         }
     }
 </DemoPageSectionComponent>

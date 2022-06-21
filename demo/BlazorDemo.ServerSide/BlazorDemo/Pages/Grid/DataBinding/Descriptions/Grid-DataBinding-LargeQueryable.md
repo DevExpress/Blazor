@@ -3,5 +3,3 @@ In both Blazor Server and Blazor WebAssembly applications, you can use the [Grid
 To use this data source in your next Blazor project, create a [GridDevExtremeDataSource\<T>](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridDevExtremeDataSource-1) class instance and pass your [IQueryable\<T>](https://docs.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1) data collection as the constructor parameter. Once complete, assign this instance to the Grid's [Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.Data) property. 
  
 For more information about this data source and associated limitations, refer to the following help topic: [Large Data (Queryable Collections)](https://docs.devexpress.com/Blazor/403737/grid/bind-to-data#large-data-queryable-collections). 
-
-

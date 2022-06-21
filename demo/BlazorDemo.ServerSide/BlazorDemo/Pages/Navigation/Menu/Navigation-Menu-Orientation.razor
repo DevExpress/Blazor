@@ -42,7 +42,7 @@
         </div>
     </ChildContent>
     <OptionsContent>
-        <OptionRadioButtonGroup Data="@(new[] { MenuDisplayMode.Desktop,MenuDisplayMode.Mobile })"
+        <OptionRadioButtonGroup Source="@(new[] { MenuDisplayMode.Desktop,MenuDisplayMode.Mobile })"
                                  @bind-Value="DisplayMode"
                                  Label="Display Mode:" />
     </OptionsContent>

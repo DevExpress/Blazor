@@ -1,0 +1,64 @@
+﻿<DemoPageSectionComponent Id="Grid-Customization-AltRowStyle">
+    @inject NwindDataService NwindDataService
+
+    <style>
+        .alt-item > td {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        .header-bold span {
+            font-weight: 700;
+        }
+    </style>
+
+    <DxGrid @ref="Grid"
+            Data="@Data"
+            UnboundColumnData="Grid_UnboundColumnData"
+            CustomizeElement="Grid_CustomizeElement">
+        <Columns>
+            <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
+            <DxGridDataColumn FieldName="City" Width="10%" />
+            <DxGridDataColumn FieldName="Region" Width="10%" />
+            <DxGridDataColumn FieldName="Country" Name="Country" Width="10%" />
+            <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
+            <DxGridDataColumn FieldName="Quantity" MinWidth="80" Width="10%" />
+            <DxGridDataColumn FieldName="Total" Name="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" MinWidth="100" Width="15%" />
+        </Columns>
+    </DxGrid>
+
+    @code {
+        object Data { get; set; }
+        IGrid Grid { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            var invoices = await NwindDataService.GetInvoicesAsync();
+            var customers = await NwindDataService.GetCustomersAsync();
+            Data = invoices.OrderBy(i => i.OrderDate).Join(customers, i => i.CustomerId, c => c.CustomerId, (i, c) => {
+                return new {
+                    CompanyName = c.CompanyName,
+                    City = i.City,
+                    Region = i.Region,
+                    Country = i.Country,
+                    UnitPrice = i.UnitPrice,
+                    Quantity = i.Quantity
+                };
+            });
+        }
+
+        void Grid_UnboundColumnData(GridUnboundColumnDataEventArgs e) {
+            if(e.FieldName == "Total") {
+                decimal price = (decimal)e.GetRowValue("UnitPrice");
+                short quantity = (short)e.GetRowValue("Quantity");
+                e.Value = price * quantity;
+            }
+        }
+        void Grid_CustomizeElement(GridCustomizeElementEventArgs e) {
+            if(e.ElementType == GridElementType.DataRow && e.VisibleIndex % 2 == 1) {
+                e.CssClass = "alt-item";
+            }
+            if(e.ElementType == GridElementType.HeaderCell) {
+                e.Style = "background-color: rgba(0, 0, 0, 0.1)";
+                e.CssClass = "header-bold";
+            }
+        }
+    }
+</DemoPageSectionComponent>

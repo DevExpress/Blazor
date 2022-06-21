@@ -1,0 +1,131 @@
+﻿<DemoPageSectionComponent Id="Grid-Editing-EditRowValidation">
+    <ChildContent>
+        @inject NwindDataService NwindDataService
+
+        <DxGrid @ref="Grid"
+                Data="DataSource"
+                PageSize="12"
+                KeyFieldName="EmployeeId"
+                EditModelSaving="Grid_EditModelSaving"
+                DataItemDeleting="Grid_DataItemDeleting"
+                PopupEditFormCssClass="pw-800"
+                EditMode="GridEditMode.EditRow">
+            <Columns>
+                <DxGridCommandColumn Width="140px" />
+                <DxGridDataColumn FieldName="FirstName" MinWidth="80">
+                    <CellEditTemplate>
+                        @{
+                            var employee = (EditableEmployee)context.EditModel;
+                            var message = GetValidationMessage(context.EditContext, nameof(EditableEmployee.FirstName));
+                        }
+                        <div class="d-flex align-items-center">
+                            <DxTextBox @bind-Text="@employee.FirstName" CssClass="w-100"></DxTextBox>
+                            @if(!string.IsNullOrWhiteSpace(message)) {
+                                <div class="grid-validation-message bg-danger" title="@message"></div>
+                            }
+                        </div>
+                    </CellEditTemplate>
+                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="LastName" MinWidth="80">
+                    <CellEditTemplate>
+                        @{
+                            var employee = (EditableEmployee)context.EditModel;
+                            var message = GetValidationMessage(context.EditContext, nameof(EditableEmployee.LastName));
+                        }
+                        <div class="d-flex align-items-center">
+                            <DxTextBox @bind-Text="@employee.LastName" CssClass="w-100"></DxTextBox>
+                            @if(!string.IsNullOrWhiteSpace(message)) {
+                                <div class="grid-validation-message bg-danger" title="@message"></div>
+                            }
+                        </div>
+                    </CellEditTemplate>
+                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="Title" MinWidth="100">
+                    <CellEditTemplate>
+                        @{
+                            var employee = (EditableEmployee)context.EditModel;
+                            var message = GetValidationMessage(context.EditContext, nameof(EditableEmployee.Title));
+                        }
+                        <div class="d-flex align-items-center">
+                            <DxTextBox @bind-Text="@employee.Title" CssClass="w-100"></DxTextBox>
+                            @if(!string.IsNullOrWhiteSpace(message)) {
+                                <div class="grid-validation-message bg-danger" title="@message"></div>
+                            }
+                        </div>
+                    </CellEditTemplate>
+                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="TitleOfCourtesy" MinWidth="120">
+                    <CellEditTemplate>
+                        @{
+                            var employee = (EditableEmployee)context.EditModel;
+                            var message = GetValidationMessage(context.EditContext, nameof(EditableEmployee.TitleOfCourtesy));
+                        }
+                        <div class="d-flex align-items-center">
+                            <DxTextBox @bind-Text="@employee.TitleOfCourtesy" CssClass="w-100"></DxTextBox>
+                            @if(!string.IsNullOrWhiteSpace(message)) {
+                                <div class="grid-validation-message bg-danger" title="@message"></div>
+                            }
+                        </div>
+                    </CellEditTemplate>
+                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="BirthDate" Width="10%" MinWidth="80">
+                    <CellEditTemplate>
+                        @{
+                            var employee = (EditableEmployee)context.EditModel;
+                            var message = GetValidationMessage(context.EditContext, nameof(EditableEmployee.BirthDate));
+                        }
+                        <div class="d-flex align-items-center">
+                            <DxDateEdit @bind-Date="@employee.BirthDate" CssClass="w-100"></DxDateEdit>
+                            @if(!string.IsNullOrWhiteSpace(message)) {
+                                <div class="grid-validation-message bg-danger" title="@message"></div>
+                            }
+                        </div>
+                    </CellEditTemplate>
+                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="HireDate" Width="10%" MinWidth="80">
+                    <CellEditTemplate>
+                        @{
+                            var employee = (EditableEmployee)context.EditModel;
+                            var message = GetValidationMessage(context.EditContext, nameof(EditableEmployee.HireDate));
+                        }
+                        <div class="d-flex align-items-center">
+                            <DxDateEdit @bind-Date="@employee.HireDate" CssClass="w-100"></DxDateEdit>
+                            @if(!string.IsNullOrWhiteSpace(message)) {
+                                <div class="grid-validation-message bg-danger" title="@message"></div>
+                            }
+                        </div>
+                    </CellEditTemplate>
+                </DxGridDataColumn>
+            </Columns>
+        </DxGrid>
+    </ChildContent>
+
+    @code {
+        IEnumerable<EditableEmployee> DataSource { get; set; }
+        IGrid Grid { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            DataSource = await NwindDataService.GetEmployeesEditableAsync();
+        }
+        async Task Grid_EditModelSaving(GridEditModelSavingEventArgs e) {
+            var editableEmployee = (EditableEmployee)e.EditModel;
+
+            if(e.IsNew)
+                await NwindDataService.InsertEmployeeAsync(editableEmployee);
+            else
+                await NwindDataService.UpdateEmployeeAsync((EditableEmployee)e.DataItem, editableEmployee);
+            await UpdateDataAsync();
+        }
+        async Task Grid_DataItemDeleting(GridDataItemDeletingEventArgs e) {
+            await NwindDataService.RemoveEmployeeAsync((EditableEmployee)e.DataItem);
+            await UpdateDataAsync();
+        }
+        async Task UpdateDataAsync() {
+            DataSource = await NwindDataService.GetEmployeesEditableAsync();
+        }
+        protected string GetValidationMessage(EditContext editContext, string fieldName) {
+            var field = editContext.Field(fieldName);
+            return string.Join("\n", editContext.GetValidationMessages(field));
+        }
+    }
+</DemoPageSectionComponent>

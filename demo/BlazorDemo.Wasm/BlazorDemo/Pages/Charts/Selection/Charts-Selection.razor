@@ -1,0 +1,95 @@
+﻿@page "/ChartSelection"
+@using System.Drawing
+
+@inject ISalesInfoDataProvider Sales
+
+<DemoPageSectionComponent Id="Charts-Selection">
+    <DxPieChart T="SaleInfo"
+             Data="@Data"
+             Width="100%"
+             Height="400px"
+             InnerDiameter="0.5"
+             PointSelectionMode="ChartSelectionMode.Multiple"
+             SelectionChanged="@OnSelectionChanged"
+             CustomizeSeriesPoint="@CustomizePiePoint">
+        <DxPieChartSeries T="SaleInfo"
+                          TArgument="string"
+                          TValue="int"
+                          ArgumentField="si => si.Country"
+                          ValueField="si => si.Amount"
+                          SummaryMethod="Enumerable.Sum"
+                          Filter="si => si.Date.Year == 2018 && FilteredCountries.Contains(si.Country)">
+            <DxChartSeriesLabel Visible="true"
+                                Position="RelativePosition.Outside"
+                                Format="ChartElementFormat.Thousands(1)">
+                <DxChartSeriesLabelConnector Visible="true" />
+            </DxChartSeriesLabel>
+        </DxPieChartSeries>
+        <DxChartLegend HorizontalAlignment="HorizontalAlignment.Right"
+                       VerticalAlignment="VerticalEdge.Top"
+                       Position="RelativePosition.Outside"
+                       Orientation="Orientation.Vertical"/>
+        <DxChartTitle Text="Top Sales Worldwide"/>
+    </DxPieChart>
+
+    <br/><br/>
+
+    <DxChart @ref="DetailChart"
+             T="SaleInfo"
+             Data="@Data"
+             Width="100%"
+             Height="200px">
+        <DxChartCommonSeries SummaryMethod="Enumerable.Sum"
+                             NameField="@((SaleInfo s) => s.Country)"
+                             ArgumentField="@(si => new DateTime(2018, si.Date.Month, 1))"
+                             ValueField="@((SaleInfo s) => s.Amount)"
+                             Filter='si => si.Date.Year == 2018 && FilteredCountries.Contains(si.Country) && (Selection.Count() == 0 || Selection.Contains(si.Country))'>
+            <SeriesTemplate Context="settings">
+                <DxChartBarSeries Settings="@settings"
+                                  Color="mainPalette[settings.Name]"/>
+            </SeriesTemplate>
+        </DxChartCommonSeries>
+        <DxChartArgumentAxis>
+            <DxChartAxisLabel Format="ChartElementFormat.Month" />
+        </DxChartArgumentAxis>
+        <DxChartTooltip Enabled="true"
+                        Position="RelativePosition.Outside">
+            <div style="margin: 0.75rem">
+                <div class="fw-bold">@context.Point.SeriesName</div>
+                <div>@string.Format("Amount in {0}: {1:$0,.#K}", ((DateTime)context.Point.Argument).ToString("MMMM"), (int)context.Point.Value)</div>
+            </div>
+        </DxChartTooltip>
+        <DxChartLegend Visible="false"/>
+    </DxChart>
+</DemoPageSectionComponent>
+
+@code {
+    readonly List<string> FilteredCountries = new List<string>() { "United States", "Canada", "United Kingdom", "Germany", "China", "Republic of Korea", "Australia" };
+    readonly List<string> Selection = new List<string>();
+    IEnumerable<SaleInfo> Data;
+    DxChart DetailChart;
+    Dictionary<string, Color> mainPalette = new() {
+        { "United States", Color.FromArgb(255, 95, 54, 141) },
+        { "Canada", Color.FromArgb(255, 77, 92, 117) },
+        { "United Kingdom", Color.FromArgb(255, 130, 110, 69) },
+        { "Germany", Color.FromArgb(255, 175, 82, 69) },
+        { "China", Color.FromArgb(255, 243, 146, 28) },
+        { "Republic of Korea", Color.FromArgb(255, 170, 185, 81) },
+        { "Australia", Color.FromArgb(255, 85, 177, 156) },
+    };
+
+    protected override async Task OnInitializedAsync() {
+        Data = await Sales.GetSalesAsync();
+    }
+    void OnSelectionChanged(PieChartSelectionChangedEventArgs e) {
+        string country = e.Point.Argument.ToString();
+        if (e.IsPointSelected)
+            Selection.Add(country);
+        else
+            Selection.Remove(country);
+        DetailChart?.RefreshData();
+    }
+    void CustomizePiePoint(ChartSeriesPointCustomizationSettings settings) {
+        settings.PointAppearance.Color = mainPalette[settings.Point.Argument.ToString()];
+    }
+}

@@ -1,12 +1,12 @@
 ﻿<div class="@GetCssClass()">
     @if (!string.IsNullOrEmpty(Label) && LabelPosition == LabelPosition.Left)
     {
-        <label class="col-form-label col-form-label-sm mr-2" @attributes="LabelAttributes()">@Label</label>
+        <label class="col-form-label col-form-label-sm me-2" @attributes="LabelAttributes()">@Label</label>
     }
     @ChildContent
     @if (!string.IsNullOrEmpty(Label) && LabelPosition == LabelPosition.Right)
     {
-        <label class="col-form-label col-form-label-sm mr-2" @attributes="LabelAttributes()">@Label</label>
+        <label class="col-form-label col-form-label-sm me-2" @attributes="LabelAttributes()">@Label</label>
     }
 </div>
 @code {

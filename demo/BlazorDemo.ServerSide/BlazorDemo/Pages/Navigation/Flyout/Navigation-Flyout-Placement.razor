@@ -1,0 +1,89 @@
+﻿@*BeginHide*@
+@using DevExpress.Blazor.Internal
+@using DevExpress.Blazor.Buttons.Internal
+@*EndHide*@
+@using BlazorDemo.Pages.Navigation.Popup
+@using System.Text.RegularExpressions
+<DemoPageSectionComponent Id="Navigation-Flyout-Placement">
+    <OptionsContent>
+        <p class="demo-text cw-480 mt-2">
+            FlyoutPosition: <b>@(Position)</b>
+        </p>
+    </OptionsContent>
+    <ChildContent>
+        @*BeginHide*@
+        <div class="d-flex align-self-stretch">
+            <DxRadioGroup @bind-Value=Position CssClass="flex-column">
+                <div class="radio-container radio-container-top flex-row">
+                    <DxRadio LabelVisible="false" Value=@FlyoutPosition.TopStart/>
+                    <DxRadio LabelVisible="false" Value=@FlyoutPosition.Top/>
+                    <DxRadio LabelVisible="false" Value=@FlyoutPosition.TopEnd/>
+                </div>
+                <div class="radio-container-horizontal-row">
+                    <div class="radio-container flex-column">
+                        <DxRadio LabelVisible="false" Value=@FlyoutPosition.LeftStart/>
+                        <DxRadio LabelVisible="false" Value=@FlyoutPosition.Left/>
+                        <DxRadio LabelVisible="false" Value=@FlyoutPosition.LeftEnd/>
+                    </div>
+                    <DxButton RenderStyle="@ButtonRenderStyle.Secondary"
+                              Click=@(() => IsOpen = !IsOpen)
+                              IconCssClass="popup-icon-user"
+                              CssClass=@(IsMobile ? "mobile-button" : "")
+                              Text=@(!IsMobile ? "My account" : null)
+                              Id="flyout-placement-target-container"/>
+                    <div class="radio-container flex-column">
+                        <DxRadio LabelVisible="false" Value=@FlyoutPosition.RightStart/>
+                        <DxRadio LabelVisible="false" Value=@FlyoutPosition.Right/>
+                        <DxRadio LabelVisible="false" Value=@FlyoutPosition.RightEnd/>
+                    </div>
+                </div>
+                <div class="radio-container radio-container-bottom flex-row">
+                    <DxRadio LabelVisible="false" Value=@FlyoutPosition.BottomStart/>
+                    <DxRadio LabelVisible="false" Value=@FlyoutPosition.Bottom/>
+                    <DxRadio LabelVisible="false" Value=@FlyoutPosition.BottomEnd/>
+                </div>
+            </DxRadioGroup>
+        </div>
+        @*EndHide*@
+        <DxFlyout @bind-IsOpen=@IsOpen
+                  PositionTarget="#flyout-placement-target-container"
+                  Position=@Position
+                  CloseOnOutsideClick=false>
+            <BodyTemplate>
+                <div class="custom-flyout-content">
+                    @if(IsMobile) {
+                        <span class="custom-flyout-header">Poul</span>
+                        <span class="custom-flyout-body">Designer</span>
+                    }
+                    else {
+                        <span class="custom-flyout-header">Margaret Peacock</span>
+                        <span class="custom-flyout-body">Sales Representative</span>
+                    }
+                </div>
+            </BodyTemplate>
+        </DxFlyout>
+    </ChildContent>
+
+    @code {
+        /*BeginHide*/
+        [Inject]
+        IEnvironmentInfo EnvironmentInfo { get; set; }
+        bool IsMobile { get; set; }
+        /*EndHide*/
+        FlyoutPosition Position { get; set; } = FlyoutPosition.Bottom;
+        bool IsOpen { get; set; } = true;
+        FlyoutAnimationType[] Animations { get; set; } = Enum.GetValues<FlyoutAnimationType>();
+        FlyoutAnimationType Animation { get; set; } = FlyoutAnimationType.Fade;
+        /*BeginHide*/
+        protected override async Task OnAfterRenderAsync(bool firstRender) {
+            if (firstRender) {
+                await EnvironmentInfo.InitializeRuntime();
+                var deviceInfo = await EnvironmentInfo.DeviceInfo;
+                IsMobile = deviceInfo.IsMobileDevice;
+            }
+            await base.OnAfterRenderAsync(firstRender);
+        }
+        /*EndHide*/
+    }
+
+</DemoPageSectionComponent>

@@ -5,13 +5,14 @@
         @if(SearchResults.Count > 0) {
             <ul class="nav nav-pills">
                 @for(var i = 0; i < SearchResults.Count; i++) {
+                    var demoItems = GetItemsList(SearchResults[i]);
                     <li class="nav-item">
                         <a class="nav-link" href="@GetMainLinkUrl(SearchResults[i])">@GetMainLinkText(SearchResults[i])</a>
-                        @if(!(SearchResults[i].Page is DemoRootPage)) {
-                            var rootDemoPage = (DemoRootPage)SearchResults[i].Page.ParentPage;
-                            <a class="nav-link" href="@DemoConfiguration.GetRootDemoPageUrl(rootDemoPage)">@rootDemoPage.Title</a>
-                            <span class="nav-link link-separator"></span>
-                            <a class="nav-link" href="@SearchResults[i].Page.Url">@SearchResults[i].Page.Title</a>
+                        @for(var j = 0; j < demoItems.Count; j++) {
+                            <a class="nav-link" href="@demoItems[j].GetUrl()">@demoItems[j].Title</a>
+                            @if(j < demoItems.Count - 1) {
+                                <span class="nav-link link-separator"></span>
+                            }
                         }
                     </li>
                 }
@@ -30,12 +31,21 @@
 
     public string ListCssClass { get { return SearchResults != null ? "shown" : ""; } }
 
+    public List<DemoItem> GetItemsList(DemoSearchResult result) {
+        List<DemoItem> list = new List<DemoItem>();
+        var demoItem = result.Item;
+        if(!(demoItem is DemoRootPage)) {
+            if(demoItem is DemoPageSection)
+                demoItem = demoItem.ParentPage;
+            while(demoItem != null) {
+                list.Insert(0, demoItem);
+                demoItem = demoItem.ParentPage;
+            }
+        }
+        return list;
+    }
     public string GetMainLinkUrl(DemoSearchResult result) {
-        if(result.Section != null)
-            return DemoConfiguration.ArePagesAsSections(result.Page) ? result.Section.Uri : result.Page.Url + "#" + result.Section.Id;
-        else if(result.Page is DemoRootPage)
-            return DemoConfiguration.GetRootDemoPageUrl((DemoRootPage)result.Page);
-        return result.Page.Url;
+        return result.Item.GetUrl();
     }
     public MarkupString GetMainLinkText(DemoSearchResult result) {
         return new MarkupString(result.Text);

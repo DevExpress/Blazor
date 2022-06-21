@@ -1,12 +1,6 @@
-﻿<link rel="stylesheet" href="_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.css">
+﻿﻿<link rel="stylesheet" href="_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.bs5.css">
 
-
-@using BlazorDemo.Services
 @using DevExpress.XtraPrinting.Caching;
-@inject IDemoReportSource DemoReportSource
-@inject DemoConfiguration Configuration
-@inject NavigationManager NavigationManager
-@using DevExpress.XtraReports;
 @using DevExpress.XtraReports.UI;
 @using DevExpress.Blazor.Reporting.EditingFields;
 @using DevExpress.XtraReports.Web.Native.ClientControls;
@@ -14,6 +8,7 @@
 </DemoScriptLoader>
 
 <DxReportViewer RootCssClasses="w-100" @ref="Viewer" SizeMode="Params.SizeMode" SinglePagePreview="false"></DxReportViewer>
+
 @code {
     DxReportViewer Viewer { get; set; }
     DemoScriptLoader demoScriptLoader { get; set; }

@@ -1,0 +1,71 @@
+﻿@page "/ChartDrillDown"
+@using System.Linq.Expressions
+@using System.Diagnostics
+@using DevExpress.Blazor.Internal
+
+@inject IChartDrillDownDataProvider dataProvider;
+
+<DemoPageSectionComponent Id="Charts-DrillDown">
+
+    <nav aria-label="breadcrumb" class="w-100" style="--bs-breadcrumb-divider: '>';">
+        <ol class="breadcrumb">
+            @foreach (DrillDownState state in StateList) {
+                <li class="breadcrumb-item active ">
+                    @if (state != StateList.Last()) {
+                        <a @onclick="@(() => OnBreadcrumbItemClick(state))" href="javascript:void(0);">
+                            @state.Name
+                        </a>
+                    }
+                    else {
+                        @state.Name
+                    }
+                </li>
+            }
+        </ol>
+    </nav>
+
+    <DxChart T="SaleItem"
+             Data="currentState.Data"
+             Rotated="currentState.Rotated"
+             Width="100%"
+             Height="500px"
+             SeriesClick="OnSeriesClick">
+        <DxChartTitle Text="DevAV Sales" />
+        <DxChartCommonSeries T="SaleItem"
+                             TArgument="object"
+                             TValue="double"
+                             TGroup="string"
+                             ArgumentField="currentState.GetArgumentExpression"
+                             NameField="currentState.GetSeriesExpression"
+                             ValueField="si=>si.Income"
+                             SummaryMethod="Enumerable.Sum">
+            <SeriesTemplate>
+                @if (currentState.SeriesType == ChartSeriesType.StackedBar) {
+                    <DxChartStackedBarSeries Settings="context"
+                                             Color="mainPalette[context.Name]" />
+                }
+                @if (currentState.SeriesType == ChartSeriesType.StackedArea) {
+                    <DxChartStackedSplineAreaSeries Settings="context"
+                                                Color="mainPalette[context.Name]"
+                                                Opacity="1">
+                        <DxChartAggregationSettings Enabled="true"
+                                                    Method="ChartAggregationMethod.Sum" />
+                    </DxChartStackedSplineAreaSeries>
+                }
+            </SeriesTemplate>
+        </DxChartCommonSeries>
+        <DxChartLegend HorizontalAlignment="HorizontalAlignment.Center"
+                       VerticalAlignment="VerticalEdge.Bottom"
+                       Position="RelativePosition.Outside"
+                       Orientation="Orientation.Horizontal" />
+        <DxChartValueAxis>
+            <DxChartAxisTitle Text="United States Dollars"></DxChartAxisTitle>
+        </DxChartValueAxis>
+        <DxChartArgumentAxis ArgumentType="currentState.AxisDataType" />
+        <DxChartZoomAndPanSettings ArgumentAxisZoomAndPanMode="currentState.ZoomAndPanMode" />
+        <DxChartScrollBarSettings ArgumentAxisScrollBarPosition="ChartScrollBarPosition.Bottom"
+                                  ArgumentAxisScrollBarVisible="currentState.ZoomAndPanMode != ChartAxisZoomAndPanMode.None" />
+    </DxChart>
+
+</DemoPageSectionComponent>
+

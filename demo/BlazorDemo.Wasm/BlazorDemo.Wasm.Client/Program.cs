@@ -26,8 +26,11 @@ namespace BlazorDemo.Wasm {
             services.AddTransient<RemoteDataProviderLoader>();
 
             services.AddSingleton<ISalesInfoDataProvider, SalesInfoDataProvider>();
-            services.AddSingleton<IExperementResultDataProvider, ExperementResultDataProvider>();
+            services.AddSingleton<IExperimentResultDataProvider, ExperimentResultDataProvider>();
+            services.AddSingleton<IPopulationCorrelationDataProvider, PopulationCorrelationDataProvider>();
+            services.AddSingleton<IScatterRandomDataProvider, ScatterRandomDataProvider>();
             services.AddSingleton<IFinancialSeriesDataProvider, FinancialSeriesDataProvider>();
+            services.AddSingleton<IChartDrillDownDataProvider, ChartDrillDownDataProvider>();
             services.AddSingleton<IPopulationStructureDataProvider, PopulationAgeStructureDataProvider>();
             services.AddSingleton<ICurrencyExchangeDataProvider, UsdJpyDataProviderWasm>();
             services.AddSingleton<IIssuesDataProvider, IssuesDataProvider>();
@@ -38,8 +41,9 @@ namespace BlazorDemo.Wasm {
             var stockQuoteService = new StockQuoteService();
             var stockQuoteTimerService = new StockQuoteChangeTimerService(stockQuoteService);
             services.AddSingleton<IStockQuoteService>(_ => stockQuoteService);
-            services.AddSingleton(stockQuoteService);
+            services.AddSingleton(stockQuoteTimerService);
 
+            services.AddSingleton<IHistogramDataProvider, HistogramDataProvider>();
             // Editable should be scoped
             services.AddScoped<INwindDataProvider, NwindDataProvider>();
 

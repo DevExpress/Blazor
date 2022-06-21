@@ -1,0 +1,68 @@
+﻿<div class="e-card">
+    <div class="e-main d-flex align-items-center">
+        <div class="flex-shrink-0">
+            <img class="e-photo" src=@GetPhotoUrl() alt="" @attributes=@ImageAttributes/>
+        </div>
+        <div class="e-info flex-grow-1 ms-3">
+            <p class="e-name">@($"{EmployeeInfo.FirstName} {EmployeeInfo.LastName}")</p>
+            <p class="e-title">@EmployeeInfo.Title</p>
+            @if(Detailed) {
+                <p class="e-email">
+                    @(($"{EmployeeInfo.FirstName}.{EmployeeInfo.LastName}@sample.com").ToLower())
+                </p>
+            }
+        </div>
+    </div>
+    @if (Detailed) {
+        <div class="e-divider my-3"></div>
+        @if(CustomDetails) {
+            <div class="e-details" >
+                @RenderDetailsItem("e-icon-address", nameof(Employee.Address), EmployeeInfo.Address)
+                @RenderDetailsItem("e-icon-city", nameof(Employee.City), EmployeeInfo.City)
+                @RenderDetailsItem("e-icon-birthdate", "Birth Date", EmployeeInfo.BirthDate?.ToShortDateString())
+                @RenderDetailsItem("e-icon-phone", "Phone", EmployeeInfo.HomePhone)
+            </div>
+        }
+        else {
+            <DxFormLayout CssClass="e-details">
+                <DxFormLayoutItem>
+                    @RenderDetailsItem("e-icon-address", nameof(Employee.Address), EmployeeInfo.Address)
+                </DxFormLayoutItem>
+                <DxFormLayoutItem>
+                    @RenderDetailsItem("e-icon-city", nameof(Employee.City), EmployeeInfo.City)
+                </DxFormLayoutItem>
+                <DxFormLayoutItem>
+                    @RenderDetailsItem("e-icon-birthdate", "Birth Date", EmployeeInfo.BirthDate?.ToShortDateString())
+                </DxFormLayoutItem>
+                <DxFormLayoutItem>
+                    @RenderDetailsItem("e-icon-phone", "Phone", EmployeeInfo.HomePhone)
+                </DxFormLayoutItem>
+            </DxFormLayout>
+        }
+    }
+</div>
+
+@code {
+    [Parameter] public Employee EmployeeInfo { get; set; }
+    [Parameter] public bool Detailed { get; set; } = true;
+    [Parameter] public bool CustomDetails{ get; set; }
+    [Parameter] public IEnumerable<KeyValuePair<string, object>> ImageAttributes { get; set; }
+
+    RenderFragment RenderDetailsItem(string iconCssClass, string caption, string value) {
+        return
+            @<div class="d-flex align-items-center">
+                <div class="icon-container flex-shrink-0">
+                    <span class="e-icon @iconCssClass"></span>
+                </div>
+                <div class="text-container flex-grow-1 ms-2">
+                    <label>@caption:</label>
+                    <div>@value</div>
+                </div>
+            </div>;
+    }
+
+    string GetPhotoUrl() /*BeginHide*/ {
+        return StaticAssetUtils.GetImagePath(EmployeeInfo.ImageFileName);
+    }
+    /*EndHide*/
+}

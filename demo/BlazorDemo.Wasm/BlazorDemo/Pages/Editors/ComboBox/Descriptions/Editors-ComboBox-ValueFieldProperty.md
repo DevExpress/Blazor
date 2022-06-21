@@ -2,4 +2,4 @@ The [ComboBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2
 
 If the **ValueFieldName** property is not specified, the ComboBox component searches for a **Value** field in the data source and uses this field as a value field. Otherwise, values are not assigned to editor items.
 
-To access a selected item’s value, use the [Value](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.Value) property. To track selection changes, use the [ValueChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.ValueChanged) event or two-way synchronization as demonstrated in this module.
+To access a selected item's value, use the [Value](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.Value) property. To track selection changes, use the [ValueChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.ValueChanged) event or two-way synchronization as demonstrated in this module.

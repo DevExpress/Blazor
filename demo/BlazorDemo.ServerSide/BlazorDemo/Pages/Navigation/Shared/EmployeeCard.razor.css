@@ -1,0 +1,96 @@
+.e-name,
+.e-title,
+.e-email,
+.e-photo,
+.e-divider,
+.e-icon,
+/*BeginHide*/::deep /*EndHide*/label {
+    color: rgba(var(--bs-body-color-rgb, 0, 0, 0), var(--color-opacity));
+}
+.e-main {
+    line-height: 1;
+}
+.e-name {
+    --color-opacity: 1;
+    font-weight: 600;
+    font-size: 1.125rem;
+    margin-bottom: 0.25rem;
+}
+.e-title,
+.e-email,
+/*BeginHide*/::deep /*EndHide*/label {
+    --color-opacity: 0.75;
+}
+.e-title {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+.e-email {
+    font-size: 0.75rem;
+    text-decoration: underline;
+    margin-bottom: 0;
+}
+.e-divider,
+.e-photo {
+    --color-opacity: 0.2;
+}
+.e-divider {
+    height: 1px;
+    background-color: currentColor;
+}
+.e-photo {
+    border: 1px solid currentColor;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+@media (max-width: 479.98px) {
+    .e-photo {
+        width: 80px;
+        height: 80px;
+    }
+}
+/*BeginHide*/::deep /*EndHide*/.e-details {
+    width: 100%;
+}
+/*BeginHide*/::deep /*EndHide*/.e-details .text-container {
+    font-size: 0.875rem;
+    line-height: 1.125rem;
+    white-space: nowrap;
+}
+/*BeginHide*/::deep /*EndHide*/.e-details .text-container label {
+    font-size: 0.8125rem;
+    line-height: 1rem;
+}
+/*BeginHide*/::deep /*EndHide*/.e-details .icon-container {
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.e-icon {
+    --color-opacity: 1;
+    display: inline-block;
+    background-color: currentColor;
+    width: 16px;
+    height: 16px;
+}
+.e-icon-address {
+    -webkit-mask-image: url("images/Employees/Address.svg");
+    mask-image: url("images/Employees/Address.svg");
+}
+.e-icon-city {
+    -webkit-mask-image: url("images/Employees/City.svg");
+    mask-image: url("images/Employees/City.svg");
+}
+.e-icon-birthdate {
+    -webkit-mask-image: url("images/Employees/BirthDate.svg");
+    mask-image: url("images/Employees/BirthDate.svg");
+}
+.e-icon-phone {
+    -webkit-mask-image: url("images/Employees/Phone.svg");
+    mask-image: url("images/Employees/Phone.svg");
+}
+

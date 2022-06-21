@@ -1,6 +1,5 @@
 ﻿@page "/RichEditAPI"
 @using DevExpress.Office.Utils
-
 @inject NavigationManager NavigationManager
 
 <DemoPageSectionComponent Id="RichEdit-API">
@@ -26,7 +25,7 @@
                 properties.FirstLineIndentType = FirstLineIndentType.Indented;
                 properties.FirstLineIndent = 500;
             });
-            string bodyParagraphText = "Albert Einstein (14 March 1879 – 18 April 1955) was a German-born theoretical physicist, widely acknowledged to be one of the greatest physicists of all time. Einstein is known for developing the theory of relativity, but he also made important contributions to the development of the theory of quantum mechanics.";
+            string bodyParagraphText = "Albert Einstein (14 March 1879 - 18 April 1955) was a German-born theoretical physicist, widely acknowledged to be one of the greatest physicists of all time. Einstein is known for developing the theory of relativity, but he also made important contributions to the development of the theory of quantum mechanics.";
             TextSpan bodyParagraphTextSpan = await documentAPI.AddTextAsync(0, bodyParagraphText);
             await bodyParagraphTextSpan.ChangePropertiesAsync(properties => {
                 properties.FontName = "Segoe UI";

@@ -34,7 +34,8 @@
                     </FilterRowCellTemplate>
                 </DxGridDataColumn>
 
-                <DxGridDataColumn FieldName="CustomerId" Caption="Customer" SortMode="GridColumnSortMode.DisplayText" MinWidth="120">
+                <DxGridDataColumn FieldName="CustomerId" Caption="Customer" SortMode="GridColumnSortMode.DisplayText" MinWidth="120"
+                                  FilterRowOperatorType="GridFilterRowOperatorType.Equal">
                     <FilterRowCellTemplate>
                         <DxComboBox Value="(string)context.FilterRowValue"
                                     ValueChanged="(string v) => context.FilterRowValue = v"

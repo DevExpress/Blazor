@@ -39,7 +39,7 @@
             if(eventArgs.VisibleIndex % 2 == 1)
                 eventArgs.CssClass = " table-dark";
             if(eventArgs.DataItem != null && eventArgs.DataItem.Quantity > largeOrder)
-                eventArgs.CssClass = " table-warning font-weight-bold";
+                eventArgs.CssClass = " table-warning fw-bold";
             else
                 eventArgs.Attributes.Add("data-low-price", "");
         }
@@ -53,7 +53,7 @@
                     eventArgs.Style += " background-color: rgb(210, 198, 233); color: black;";
 
                 if(eventArgs.DataItem.Quantity > largeOrder) {
-                    eventArgs.CssClass += " font-weight-bold";
+                    eventArgs.CssClass += " fw-bold";
                 }
             }
         }

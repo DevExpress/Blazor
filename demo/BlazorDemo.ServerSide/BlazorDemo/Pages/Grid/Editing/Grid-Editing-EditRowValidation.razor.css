@@ -1,0 +1,12 @@
+.grid-validation-message {
+    width: 22px;
+    height: 18px;
+    margin-left: 4px;
+    margin-right: -4px;
+    mask-image: url("images/Exclamation.svg");
+    -webkit-mask-image: url("images/Exclamation.svg");
+    background-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    background-position: 4px 0;
+}

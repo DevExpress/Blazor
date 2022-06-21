@@ -1,6 +1,7 @@
 ﻿@page "/ReportViewer"
 @page "/ReportViewer/{ReportName?}"
 @page "/ReportViewer/{CategoryName?}/{ReportName?}"
+@page "/ReportViewer/{ParentCategoryName?}/{CategoryName?}/{ReportName?}"
 
 @inject NavigationManager NavigationManager
 @using Microsoft.AspNetCore.WebUtilities
@@ -28,6 +29,7 @@
     @code {
         [Parameter] public string ReportName { get; set; }
         [Parameter] public string CategoryName { get; set; }
+        [Parameter] public string ParentCategoryName { get; set; }
 
         readonly string[] ViewerModeData = new string[] { "Native", "JS Based" };
 
@@ -35,7 +37,17 @@
         const string CurrentViewerName = "CurrentViewer";
         System.Uri uri;
         protected string GetPageId() {
-            return "Reports-" + (CategoryName ?? "ComplexReports") + "-" + (ReportName ?? "InvoiceReport");
+            var id = "";
+            if(CategoryName == null || ReportName == null) {
+                id = "IndustryReports-Finance-InvoiceReport";
+            } else {
+                id = CategoryName;
+                if(ParentCategoryName != null)
+                    id = ParentCategoryName + "-" + id;
+                id = id + "-" + ReportName;
+            }
+
+            return "Reports-" + id;
         }
 
         protected void NavigateToReportDesigner() {

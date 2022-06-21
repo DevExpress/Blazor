@@ -73,14 +73,14 @@
 
     public RenderFragment GetIssuePriorityIconHtml(IssuePriority priority) {
         var prioritySuffix = GetPriorityCssClassPostfix(priority);
-        return @<span class=@($"badge badge-{prioritySuffix} bg-{prioritySuffix} py-1 px-2") 
+        return @<span class=@($"badge bg-{prioritySuffix} py-1 px-2") 
                         title=@($"{priority} Priority")> 
                             @priority 
                         </span>;
     }
     public RenderFragment GetIssueTypeIconHtml(IssueType type) =>
         type switch {
-           IssueType.Bug => @<span class='badge badge-danger bg-danger py-1 px-2' title='Bug'>B</span>,
+           IssueType.Bug => @<span class='badge bg-danger py-1 px-2' title='Bug'>B</span>,
             _ => EmptyHtml
         };
     static string GetPriorityCssClassPostfix(IssuePriority priority) =>

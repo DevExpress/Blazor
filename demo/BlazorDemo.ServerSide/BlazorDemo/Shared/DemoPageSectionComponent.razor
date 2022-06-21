@@ -1,6 +1,11 @@
 ﻿@using BlazorDemo.Configuration
 @inject DemoConfiguration Configuration
+@inject NavigationManager NavigationManager
 @inject IJSRuntime JSRuntime
+
+@if(PreventRender) {
+    return;
+}
 
 <DemoScriptLoader @ref=@clipboradJsRef Src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" />
 <DemoScriptLoader @ref=@sectionHelper Src="_content/BlazorDemo/lib/page-section-helper.js" />
@@ -23,15 +28,15 @@
     </div>;
 }
 
-<div id="@("section-" + Section.Id)" class="demo-page-section @(!ShowCode ? "no-code" : "") @(ShowHorizontalScrollBar ? "h-scroll" : "")">
+<div id="@("section-" + DemoItem.Id)" class="demo-page-section @(!ShowCode ? "no-code" : "") @(ShowHorizontalScrollBar ? "h-scroll" : "")">
     <div class="demo-page-section-title">
-        <h2 id="@Section.Id">
-            <a class="demo-anchor" href="@(Page.Url + "#" + Section.Id)" />
-            @(!string.IsNullOrEmpty(Section.TitleOnPage) ? Section.TitleOnPage : Section.Title)
+        <h2 id="@DemoItem.Id">
+            <a class="demo-anchor" href="@DemoItem.GetUrl()" />
+            @(!string.IsNullOrEmpty(DemoItem.TitleOnPage) ? DemoItem.TitleOnPage : DemoItem.Title)
         </h2>
     </div>
     @{
-        var statusMessage = Section.GetStatusMessageMarkdown();
+        var statusMessage = DemoItem.GetStatusMessageMarkdown();
     }
     @if(!string.IsNullOrEmpty(statusMessage)) {
         <div class="demo-page-section-status-text">
@@ -82,10 +87,10 @@
                     @ComponentArea.Invoke(parameters)
                     <div class="demo-page-section-code-area d-none">
                         @if(IsCodeVisible) {
-                            <PageSectionCodeSnippetTabbed DocUrl="@Section.DocUrl">
-                                @foreach(var key in Section.CodeFilesContent.Keys) {
+                            <PageSectionCodeSnippetTabbed DocUrl="@DemoItem.DocUrl">
+                                @foreach(var key in CodeFilesContent[Id].Keys) {
                                     <PageSectionCodeSnippetTabPage Text="@key" Language="@GetTabPageLanguage(key)">
-                                        @Section.CodeFilesContent[key]
+                                        @CodeFilesContent[Id][key]
                                     </PageSectionCodeSnippetTabPage>
                                 }
                             </PageSectionCodeSnippetTabbed>
@@ -100,7 +105,7 @@
     }
     @if(ShowDescription) {
         <div class="demo-page-section-description">
-            @(new MarkupString(Section.DescriptionFileContent))
+            @(new MarkupString(DescriptionsContent[Id]))
         </div>
     }
 </div>
@@ -111,9 +116,7 @@
     string themeName;
     int activeTabPageIndex = 0;
 
-    public Configuration.DemoPageBase RootPage { get; set; }
-    public Configuration.DemoPage Page { get; set; }
-    public Configuration.DemoPageSection Section { get; set; }
+    public DemoItem DemoItem { get; set; }
 
     [Parameter]
     public RenderFragment<DemoPageSectionParameters> ChildContentWithParameters { get; set; }
@@ -184,10 +187,14 @@
     bool VisualTestsEnabled { get; set; }
     bool IsComponentAreaVisible { get; set; }
     bool IsCodeVisible { get; set; }
+    bool PreventRender { get; set; }
     void UpdateTabPagesVisibility() {
         IsComponentAreaVisible = IsComponentAreaVisible || ActiveTabPageIndex == 0;
         IsCodeVisible = IsCodeVisible || ActiveTabPageIndex == 1;
     }
+
+    static Dictionary<string, Dictionary<string, MarkupString>> CodeFilesContent { get; set; } = new Dictionary<string, Dictionary<string, MarkupString>>();
+    static Dictionary<string, string> DescriptionsContent { get; set; } = new Dictionary<string, string>();
 
     string GetTabCssClass(bool isActive) {
         return string.Join(" ", "nav-link", isActive ? "active" : "").Trim();
@@ -249,44 +256,48 @@
     }
 
     protected override void OnInitialized() {
+        PreventRender = DemoRenderUtils.PreventRenderDemoSection(NavigationManager.Uri, Id);
+        if(PreventRender)
+            return;
+            
 #if VISUALTESTS
         VisualTestsEnabled = true;
 #endif
+        
         base.OnInitialized();
         UpdateTabPagesVisibility();
     }
-    protected override void OnParametersSet() {
-        Page = Configuration.GetDemoPage(Id) as DemoPage;
-        RootPage = Page != null && Page.ParentPage != null ? Page.ParentPage : Page;
-        if(Page != null && (Page.GetPageSections == null || Page.GetPageSections.Length == 0))
-            Section = Page;
-        else
-            Section = Configuration.GetDemoPageSection(Id, Page);
-        if(Page == null)
-            throw new ArgumentException($"It's impossible to find a page by the '{Id}' id. Check your 'wwwroot\\demo-metadata.json' file.");
-        if(Section == null)
-            throw new ArgumentException($"It's impossible to find a page section by the '{Id}' id. Check your 'wwwroot\\demo-metadata.json' file.");
 
-        if(Section.CodeFilesContent == null) {
-            Section.CodeFilesContent = new Dictionary<string, MarkupString>();
-            var codeFiles = Configuration.GetDemoPageSectionCodeFiles(Section);
+    protected override void OnParametersSet() {
+        if(PreventRender)
+            return;
+            
+        DemoItem = Configuration.GetDemoItem(Id);
+        if(DemoItem == null)
+            throw new ArgumentException($"It's impossible to find a demo page or a demo page section by the '{Id}' id. Check your 'wwwroot\\demo-metadata.json' file.");
+
+        if(!CodeFilesContent.ContainsKey(Id)) {
+            CodeFilesContent[Id] = new Dictionary<string, MarkupString>();
+            var codeFiles = Configuration.GetDemoCodeFiles(DemoItem);
             foreach(var key in codeFiles.Keys) {
                 string codeFileContent = codeFiles[key];
                 if(string.IsNullOrEmpty(codeFileContent))
-                    Section.CodeFilesContent.Add(key, (MarkupString)"Source file is unavailable");
+                    CodeFilesContent[Id].Add(key, (MarkupString)"Source file is unavailable");
                 else
-                    Section.CodeFilesContent.Add(key, (MarkupString)DemoPageSectionCodeProcessor.ProcessCode(codeFileContent));
+                    CodeFilesContent[Id].Add(key, (MarkupString)DemoCodeProcessor.ProcessCode(codeFileContent));
             }
         }
-        if(string.IsNullOrEmpty(Section.DescriptionFileContent)) {
-            var description = Configuration.GetDemoPageSectionDescription(Id);
+        if(!DescriptionsContent.ContainsKey(Id)) {
+            var description = Configuration.GetDemoDescription(DemoItem);
             if(string.IsNullOrEmpty(description))
-                Section.DescriptionFileContent = "Description is unavailable";
+                DescriptionsContent[Id] = "Description is unavailable";
             else
-                Section.DescriptionFileContent = Markdig.Markdown.ToHtml(description);
+                DescriptionsContent[Id] = Markdig.Markdown.ToHtml(description);
         }
     }
     protected override async Task OnAfterRenderAsync(bool firstRender) {
-        await sectionHelper.InvokeVoidAsync("DemoPageSectionHelper.init", Section.Id, ActiveTabPageIndex == 1);
+        if(PreventRender)
+            return;
+        await sectionHelper.InvokeVoidAsync("DemoPageSectionHelper.init", DemoItem.Id, ActiveTabPageIndex == 1);
     }
 }

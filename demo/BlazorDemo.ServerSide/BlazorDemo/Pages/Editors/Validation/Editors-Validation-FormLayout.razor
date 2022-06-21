@@ -7,39 +7,43 @@
                   OnInvalidSubmit="@HandleInvalidSubmit"
                   Context="EditFormContext">
 
-            <DataAnnotationsValidator />
+            <DataAnnotationsValidator/>
 
             <DxFormLayout>
                 <DxFormLayoutItem Caption="Identifier:" ColSpanMd="6">
-                    <DxTextBox @bind-Text="@starship.Identifier" />
+                    <DxTextBox @bind-Text="@starship.Identifier"/>
                 </DxFormLayoutItem>
 
                 <DxFormLayoutItem Caption="Primary Classification:" ColSpanMd="6">
                     <DxComboBox NullText="Select classification ..."
                                 ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
                                 Data="classifications"
-                                @bind-Value="@starship.Classification" />
+                                @bind-Value="@starship.Classification"/>
                 </DxFormLayoutItem>
 
                 <DxFormLayoutItem Caption="Maximum Accommodation:"
                                   ColSpanMd="6">
                     <DxSpinEdit Id="accommodation"
-                                @bind-Value="@starship.MaximumAccommodation" />
+                                @bind-Value="@starship.MaximumAccommodation"/>
                 </DxFormLayoutItem>
 
                 <DxFormLayoutItem Caption="Production Date:"
                                   ColSpanMd="6">
-                    <DxDateEdit @bind-Date="@starship.ProductionDate" />
+                    <DxDateEdit @bind-Date="@starship.ProductionDate"/>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Description:"
+                                  ColSpanMd="12">
+                    <DxMemo @bind-Text="@starship.Description"/>
                 </DxFormLayoutItem>
 
                 <DxFormLayoutItem ColSpanMd="12">
                     <DxButton SubmitFormOnClick="true"
                               Text="Submit"
-                              RenderStyle="ButtonRenderStyle.Secondary" />
+                              RenderStyle="ButtonRenderStyle.Secondary"/>
                 </DxFormLayoutItem>
 
                 <DxFormLayoutItem ColSpanMd="12">
-                    <ValidationSummary />
+                    <ValidationSummary/>
                 </DxFormLayoutItem>
 
             </DxFormLayout>
@@ -73,8 +77,7 @@
 
         public class Starship {
             [Required(ErrorMessage = "The Identifier value should be specified.")]
-            [StringLength(16,
-            ErrorMessage = "The Identifier exceeds 16 characters.")]
+            [StringLength(16, ErrorMessage = "The Identifier exceeds 16 characters.")]
             public string Identifier { get; set; }
 
             [Required(ErrorMessage = "The Primary Classification value should be specified.")]
@@ -86,6 +89,10 @@
             [Required]
             [DateInPastAttribute(ErrorMessage = "The Production Date value cannot be later than today.")]
             public DateTime ProductionDate { get; set; }
+            [Required(ErrorMessage = "Description")]
+            public string Description { get; set; }
         }
+
     }
+
 </DemoPageSectionComponent>

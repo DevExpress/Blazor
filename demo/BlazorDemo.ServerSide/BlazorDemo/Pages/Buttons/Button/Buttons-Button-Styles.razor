@@ -8,7 +8,7 @@
                 </div>
                 <div class="d-flex flex-row flex-wrap">
                     @foreach (ButtonRenderStyle style in btnStyles) {
-                        <div class="mr-2 mb-2">
+                        <div class="me-2 mb-2">
                             <DxButton RenderStyle="@style"
                                       SizeMode="Params.SizeMode"
                                       Text="@Enum.GetName(typeof(ButtonRenderStyle), style)"
@@ -21,7 +21,7 @@
                 <div class="buttons-group-title mb-2">Outline style:</div>
                 <div class="d-flex flex-row flex-wrap">
                     @foreach (ButtonRenderStyle style in btnStyles) {
-                        <div class="mr-2 mb-2">
+                        <div class="me-2 mb-2">
                             <DxButton RenderStyle="@style"
                                       SizeMode="Params.SizeMode"
                                       RenderStyleMode="@ButtonRenderStyleMode.Outline"
@@ -35,7 +35,7 @@
                 <div class="buttons-group-title mb-2">Text style:</div>
                 <div class="d-flex flex-row flex-wrap">
                     @foreach (ButtonRenderStyle style in btnStyles) {
-                        <div class="mr-2 mb-2">
+                        <div class="me-2 mb-2">
                             <DxButton RenderStyle="@style"
                                       SizeMode="Params.SizeMode"
                                       RenderStyleMode="@ButtonRenderStyleMode.Text"
@@ -49,7 +49,7 @@
                 <div class="buttons-group-title mb-2">Disabled:</div>
                 <div class="d-flex flex-row flex-wrap">
                     @foreach (ButtonRenderStyle style in btnStyles) {
-                        <div class="mr-2 mb-2">
+                        <div class="me-2 mb-2">
                             <DxButton RenderStyle="@style"
                                       CssClass="w-100"
                                       RenderStyleMode="@ButtonRenderStyleMode.Contained"

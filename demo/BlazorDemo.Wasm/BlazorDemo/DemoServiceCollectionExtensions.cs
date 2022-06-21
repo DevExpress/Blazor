@@ -16,7 +16,9 @@ namespace BlazorDemo {
             services.AddScoped<NwindDataService>();
             services.AddScoped<IssuesDataService>();
             services.AddScoped<WorldcitiesDataService>();
-            services.AddDevExpressBlazor();
+            services.AddDevExpressBlazor(opts => {
+                opts.BootstrapVersion = DevExpress.Blazor.BootstrapVersion.v5;
+            });
 
             services.AddDocumentMetadata(ConfigureMetadata);
             services.AddSingleton<DemoConfiguration>();

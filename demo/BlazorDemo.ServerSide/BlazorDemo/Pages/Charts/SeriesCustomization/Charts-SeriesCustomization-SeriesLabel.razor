@@ -11,7 +11,7 @@
                            Name="Temperature, F"
                            Filter="@((DetailedWeatherSummary  i) => i.City == "NEW YORK")">
             <DxChartSeriesLabel Position="RelativePosition.Outside"
-                                Format="@(ChartElementFormat.FromLdmlString("0#.## °F"))">
+                                FormatPattern="{argument:MMMM}: {value:#.##} °F">
                 <DxChartSeriesLabelConnector Visible="true"
                                              Width="3" />
             </DxChartSeriesLabel>

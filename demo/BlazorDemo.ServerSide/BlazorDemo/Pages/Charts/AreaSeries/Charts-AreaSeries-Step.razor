@@ -1,42 +1,53 @@
 ﻿<DemoPageSectionComponent Id="Charts-AreaSeries-Step">
-    @inject ISalesInfoDataProvider Sales
+    <ChildContent>
+        @inject ISalesInfoDataProvider Sales
+        <DxChart Data="chartsData"
+                 LabelOverlap="ChartLabelOverlap.Hide"
+                 Width="100%">
+            <DxChartStepAreaSeries Name="North America"
+                                   T="SaleInfo"
+                                   TArgument="DateTime"
+                                   TValue="int"
+                                   ArgumentField="si => new DateTime(si.Date.Year, si.Date.Month, 1)"
+                                   ValueField="si => si.Amount"
+                                   SummaryMethod="Enumerable.Sum"
+                                   Filter='si => si.Region == "North America" '
+                                   HoverMode="ChartContinuousSeriesHoverMode.None">
+                <DxChartSeriesPoint Visible=showSeriesPointMarkers
+                                    HoverMode="ChartSeriesPointHoverMode.None" />
+                <DxChartSeriesLabel Visible=showSeriesLabels
+                                    Format="ChartElementFormat.Thousands(1)" />
+            </DxChartStepAreaSeries>
+            <DxChartLegend Position="RelativePosition.Outside"
+                           HorizontalAlignment="HorizontalAlignment.Right" />
+            <DxChartTooltip Enabled="true">
+                @context.Point.Render((seriesPoint) =>
+                    @<div style="margin: 0.75rem">
+                        <div>@seriesPoint.SeriesName</div>
+                        <span>@($"{seriesPoint.Argument: MMMM yyyy}: ")</span>
+                        <span>@($"{seriesPoint.Value: $0,.0}K")</span>
+                    </div>
+                )
+            </DxChartTooltip>
+        </DxChart>
+    </ChildContent>
 
-    <DxChart Data="@ChartsData"
-             Width="100%">
-        <DxChartStepAreaSeries Name="2017"
-                               T="SaleInfo"
-                               TArgument="string"
-                               TValue="int"
-                               ArgumentField="si => si.City"
-                               ValueField="si => si.Amount"
-                               SummaryMethod="Enumerable.Sum"
-                               Filter="si => si.Date.Year == 2017" />
-        <DxChartStepAreaSeries Name="2018"
-                               T="SaleInfo"
-                               TArgument="string"
-                               TValue="int"
-                               ArgumentField="si => si.City"
-                               ValueField="si => si.Amount"
-                               SummaryMethod="Enumerable.Sum"
-                               Filter="si => si.Date.Year == 2018" />
-        <DxChartStepAreaSeries Name="2019"
-                               T="SaleInfo"
-                               TArgument="string"
-                               TValue="int"
-                               ArgumentField="si => si.City"
-                               ValueField="si => si.Amount"
-                               SummaryMethod="Enumerable.Sum"
-                               Filter="si => si.Date.Year == 2019" />
-        <DxChartArgumentAxis SideMarginsEnabled="false" />
-        <DxChartLegend Position="RelativePosition.Outside"
-                       HorizontalAlignment="HorizontalAlignment.Right" />
-    </DxChart>
+    <OptionsContent>
+        <OptionCheckBox T="bool"
+                        @bind-Checked="showSeriesPointMarkers"
+                        Label="Show Point Markers" />
+        <OptionCheckBox T="bool"
+                        @bind-Checked="showSeriesLabels"
+                        Label="Show Point Labels" />
+    </OptionsContent>
 
     @code {
-        IEnumerable<SaleInfo> ChartsData;
+        IEnumerable<SaleInfo> chartsData;
+        bool showSeriesPointMarkers = false;
+        bool showSeriesLabels = false;
 
         protected override async Task OnInitializedAsync() {
-            ChartsData = await Sales.GetSalesAsync();
+            chartsData = await Sales.GetSalesAsync();
         }
     }
 </DemoPageSectionComponent>

@@ -1,61 +1,42 @@
 ﻿@using BlazorDemo.Configuration
 @inject DemoConfiguration Configuration
 
-    @if(Page.Pages != null && Page.Pages.Length > 0) {
-        <DxTreeViewNode Text="@Page.Title" CssClass="@GetItemCssClass(Page)" NavigateUrl="@Page.Url" BadgeText="@GetBadgeText(Page)">
-            <Nodes>
-                @foreach(var (childPage, rootIndex) in Page.Pages.Select((p, i) => (p, i))) {
-                    <NavMenuLeaf Page="@childPage"></NavMenuLeaf>
-                }
-            </Nodes>
-        </DxTreeViewNode>
-    } else {
-        <DxTreeViewNode Text="@Page.Title" CssClass="@GetItemCssClass(Page)" NavigateUrl="@Page.Url" BadgeText="@GetBadgeText(Page)">
-        </DxTreeViewNode>
-    }
-
-
-    @code {
-        [Parameter]
-        public DemoPageBase Page { get; set; }
-
-        protected string GetBadgeText(DemoPageSection item) {
-            if(item is DemoPageBase page) {
-                if(page.IsPreview)
-                    return "CTP";
-                if(page.IsMaintenanceMode)
-                    return "Maintenance";
+@if(Page.Pages.Length > 0) {
+    <DxTreeViewNode Text="@Page.Title" CssClass="@GetItemCssClass(Page)" NavigateUrl="@Page.Url" BadgeText="@GetItemBadgeText(Page)">
+        <Nodes>
+            @foreach(var childPage in Page.Pages) {
+                <NavMenuLeaf Page="@childPage"></NavMenuLeaf>
             }
-            if(item.IsNew)
-                return "New";
-            if(item.IsUpdated)
-                return "Upd";
-            if(item is DemoRootPage rootPage)
-                return GetBadgeTextFromChildren(rootPage.Pages);            
-            if(item is DemoPage demoPage && demoPage.GetPageSections != null)
-                return GetBadgeTextFromChildren(demoPage.GetPageSections);
-            return string.Empty;
-        }
+        </Nodes>
+    </DxTreeViewNode>
+} else {
+    <DxTreeViewNode Text="@Page.Title" CssClass="@GetItemCssClass(Page)" NavigateUrl="@Page.Url" BadgeText="@GetItemBadgeText(Page)">
+    </DxTreeViewNode>
+}
 
-        string GetBadgeTextFromChildren(IReadOnlyCollection<DemoPageSection> children) {
-            if(children.Count == 0)
-                return string.Empty;
-            var badges = children.Select(GetBadgeText).ToArray();
-            if(badges.All(p => p == "CTP"))
-                return "CTP";
-            if(badges.All(p => p == "New"))
-                return "New";
-            if(badges.Any(p => p == "New" || p == "Upd"))
-                return "Upd";
-            return string.Empty;
-        }
+@code {
+    [Parameter]
+    public DemoPageBase Page { get; set; }
 
-        protected string GetItemCssClass(DemoPageBase page) {
-            if(page.IsPreview)
-                return "item-ctp";
-            if(page.IsMaintenanceMode)
-                return "item-maintenance";
-            return "";
-        }
-
+    protected string GetItemBadgeText(DemoItem page) {
+        var status = page.GetStatus();
+        if(status == DemoItemStatus.Preview)
+            return "CTP";
+        if(status == DemoItemStatus.MaintenanceMode)
+            return "Maintenance";
+        if(status == DemoItemStatus.New)
+            return "New";
+        if(status == DemoItemStatus.Updated)
+            return "Upd";
+        return string.Empty;
     }
+
+    protected string GetItemCssClass(DemoPageBase page) {
+        var status = page.GetStatus();
+        if(status == DemoItemStatus.Preview)
+            return "item-ctp";
+        if(status == DemoItemStatus.MaintenanceMode)
+            return "item-maintenance";
+        return "";
+    }
+}

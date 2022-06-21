@@ -19,8 +19,8 @@
                 @GetFeedbackFormTextMarkup()
                 <DxMemo @bind-Text="@FeedbackText" Rows="5" ResizeMode="MemoResizeMode.Disabled" Enabled="@IsFeedbackFormTextAreaEnabled()" NullText="Additional feedback" BindValueMode="BindValueMode.OnInput"></DxMemo>
                 <div class="feedback-form-btns">
-                    <DxButton Enabled="@IsFeedbackFormButtonEnabled()" Text="Submit" RenderStyle="ButtonRenderStyle.Secondary" SizeMode="SizeMode.Small" @onclick="@OnSendFeedbackButtonClick"></DxButton>
-                    <DxButton Text="Skip" RenderStyle="ButtonRenderStyle.Link" SizeMode="SizeMode.Small" @onclick="@OnSkipSendFeedbackButtonClick"></DxButton>
+                    <DxButton Enabled="@IsFeedbackFormButtonEnabled()" Text="Submit" RenderStyle="ButtonRenderStyle.Secondary" SizeMode="SizeMode.Small" Click="@OnSendFeedbackButtonClick"></DxButton>
+                    <DxButton Text="Skip" RenderStyle="ButtonRenderStyle.Link" SizeMode="SizeMode.Small" Click="@OnSkipSendFeedbackButtonClick"></DxButton>
                 </div>
             </div>
         }

@@ -1,36 +1,49 @@
 ﻿<DemoPageSectionComponent Id="Charts-FinancialSeries-Candlestick">
-    @inject IFinancialSeriesDataProvider FinancialSeriesDataProvider
+    <ChildContent>
+        @inject IFinancialSeriesDataProvider FinancialSeriesDataProvider
 
-    <DxChart Data="@StockData"
-             Width="100%">
-        <DxChartLegend Position="RelativePosition.Outside" />
-        <DxChartCandlestickSeries ValueField="@((BargainDataPoint i) => i.Price)"
-                                  ArgumentField="@(i => new DateTime(
-                                                           i.DateTimeStamp.Year,
-                                                           i.DateTimeStamp.Month,
-                                                           i.DateTimeStamp.Day,
-                                                           i.DateTimeStamp.Hour,
-                                                           i.DateTimeStamp.Minute,
-                                                           0) )"
-                                  Name="Eco Supreme" />
-        <DxChartTooltip Enabled="true">
-            @context.GetFinancialPoint().Render((financialPoint) =>
-            @<div style="margin: 0.75rem">
-                <div>Open: @($"{financialPoint.OpenValue: 0.0000}")</div>
-                <div>Close: @($"{financialPoint.CloseValue: 0.0000}")</div>
-                <div>High: @($"{financialPoint.HighValue: 0.0000}")</div>
-                <div>Low: @($"{financialPoint.LowValue: 0.0000}")</div>
-            </div>
-)
-        </DxChartTooltip>
-    </DxChart>
+        <DxChart @ref="@chart"
+                 Data="@stockData"
+                 Width="100%">
+            <DxChartLegend Position="RelativePosition.Outside" />
+            <DxChartCandlestickSeries OpenField="(StockDataPoint sdp)=>sdp.Open"
+                                      HighField="sdp=>sdp.High"
+                                      LowField="sdp=>sdp.Low"
+                                      CloseField="sdp=>sdp.Close"
+                                      ArgumentField="@(sdp => new DateTime(
+                                                               sdp.DateTimeStamp.Year,
+                                                               sdp.DateTimeStamp.Month,
+                                                               sdp.DateTimeStamp.Day,
+                                                               sdp.DateTimeStamp.Hour,
+                                                               sdp.DateTimeStamp.Minute,
+                                                               0) )"
+                                      Name="Eco Supreme" />
+            <DxChartTooltip Enabled="true">
+                @context.GetFinancialPoint().Render((financialPoint) =>
+                    @<div style="margin: 0.75rem">
+                        <div>Open: @($"{financialPoint.OpenValue: 0.0000}")</div>
+                        <div>Close: @($"{financialPoint.CloseValue: 0.0000}")</div>
+                        <div>High: @($"{financialPoint.HighValue: 0.0000}")</div>
+                        <div>Low: @($"{financialPoint.LowValue: 0.0000}")</div>
+                    </div>
+                )
+            </DxChartTooltip>
+        </DxChart>
+    </ChildContent>
 
+    <OptionsContent>
+        <OptionChartExportComponent ExportMethod="@ExportChart" />
+    </OptionsContent>
 
     @code {
-        IEnumerable<BargainDataPoint> StockData;
+        IEnumerable<StockDataPoint> stockData;
+        DxChartBase chart;
 
+        async void ExportChart(ChartExportFormat format) {
+        await chart?.ExportAsync("CandlestickChart", format);
+        }
         protected override async Task OnInitializedAsync() {
-            StockData = await FinancialSeriesDataProvider.Generate();
+        stockData = await FinancialSeriesDataProvider.Generate();
         }
     }
 </DemoPageSectionComponent>

@@ -2,7 +2,7 @@
 @inject IssuesDataService IssuesDataService
 
 <div class="w-100">
-    <div class="jumbotron p-4">
+    <div class="bg-light rounded-3 p-4">
         <div class="d-flex justify-content-between">
             <div>
                 <h4 class="mb-2">@SelectedIssue.Name</h4>
@@ -10,11 +10,11 @@
                 <p class="mb-4">@SelectedIssue.Description</p>
             </div>
             <div class="info text-center">
-                <span class="badge badge-pill badge-info">#@SelectedIssue.ID</span>
+                <span class="badge rounded-pill bg-info">#@SelectedIssue.ID</span>
                 <h5 class="text-info mt-1">@SelectedIssue.Status</h5>
             </div>
         </div>
-        <DxButton Text="Back to Grid" @onclick="@GotoListViewClick">
+        <DxButton Text="Back to Grid" Click="@GotoListViewClick">
         </DxButton>
     </div>
 </div>

@@ -1,0 +1,17 @@
+/*BeginHide*/::deep /*EndHide*/.icon-square-minus,
+/*BeginHide*/::deep /*EndHide*/.icon-square-plus {
+    display: inline-block;
+    background-color: currentColor;
+    width: 16px;
+    height: 16px;
+}
+
+/*BeginHide*/::deep /*EndHide*/.icon-square-minus {
+    -webkit-mask-image: url("images/SquareMinus.svg");
+    mask-image: url("images/SquareMinus.svg");
+}
+
+/*BeginHide*/::deep /*EndHide*/.icon-square-plus {
+    -webkit-mask-image: url("images/SquarePlus.svg");
+    mask-image: url("images/SquarePlus.svg");
+}

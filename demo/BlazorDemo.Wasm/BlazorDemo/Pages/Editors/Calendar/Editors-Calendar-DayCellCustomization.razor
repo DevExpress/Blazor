@@ -14,11 +14,11 @@
             string result = string.Empty;
 
             if(data.PersonalDays.Exists(d => DaysEqual(d, date)))
-                result = "font-weight-bold text-success";
+                result = "fw-bold text-success";
             if(data.Holidays.Exists(d => DaysEqual(d, date)))
                 result = "text-danger";
             if(data.BirthDates.Exists(d => DaysEqual(d, date)))
-                result += "font-weight-bold text-info";
+                result += "fw-bold text-info";
 
             return result;
         }

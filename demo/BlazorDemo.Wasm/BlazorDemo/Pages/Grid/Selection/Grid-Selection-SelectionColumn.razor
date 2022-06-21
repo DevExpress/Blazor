@@ -1,0 +1,44 @@
+﻿<DemoPageSectionComponent Id="Grid-Selection-SelectionColumn">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <DxGrid Data="Products"
+                KeyFieldName="ProductId"
+                @bind-SelectedDataItems="SelectedDataItems"
+                CustomizeCellDisplayText="Grid_CustomizeCellDisplayText">
+            <Columns>
+                <DxGridSelectionColumn Width="60px" />
+                <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
+                <DxGridDataColumn FieldName="CategoryId" SortMode="GridColumnSortMode.DisplayText" Caption="Category" MinWidth="100" TextAlignment="GridTextAlignment.Left" />
+                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
+                <DxGridDataColumn FieldName="UnitsInStock" Width="10%" />
+                <DxGridDataColumn FieldName="QuantityPerUnit" Width="15%" MinWidth="80" />
+                <DxGridDataColumn FieldName="Discontinued" Width="10%" MinWidth="90">
+                    <CellDisplayTemplate>
+                        @if((bool)context.Value) {
+                            <span class="grid-icon grid-icon-check"></span>
+                        }
+                    </CellDisplayTemplate>
+                </DxGridDataColumn>
+            </Columns>
+        </DxGrid>
+        <p class="demo-text w-100 mt-2">The number of selected products: <b>@(SelectedDataItems.Count())</b></p>
+
+        @code {
+            IEnumerable<Product> Products { get; set; }
+            IEnumerable<Category> Categories { get; set; }
+            IReadOnlyList<object> SelectedDataItems { get; set; }
+
+            protected override async Task OnInitializedAsync() {
+                Products = await NwindDataService.GetProductsAsync();
+                Categories = await NwindDataService.GetCategoriesAsync();
+                SelectedDataItems = Products.Where(x => x.UnitPrice > 30).ToList();
+            }
+            void Grid_CustomizeCellDisplayText(GridCustomizeCellDisplayTextEventArgs e) {
+                if(e.FieldName == "CategoryId") {
+                    e.DisplayText = Categories.Where(c => c.CategoryId == (int)e.Value).FirstOrDefault().CategoryName;
+                }
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

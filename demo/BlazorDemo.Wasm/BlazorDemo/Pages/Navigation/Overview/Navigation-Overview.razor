@@ -47,19 +47,19 @@
                             <DxMenuItem Text="Blogs" />
                         </Items>
                     </DxMenuItem>
-                    <DxMenuItem Position="ItemPosition.End">
+                    <DxMenuItem CssClass="search-menu-item" BeginGroup="true" Position="ItemPosition.End">
                         <Template>
                             <SearchItem />
                         </Template>
                     </DxMenuItem>
-                    <DxMenuItem title="Log In" Text="Log In" IconCssClass="menu-icon-user-profile menu-icon" Name="LogIn" Position="ItemPosition.End">
+                    <DxMenuItem title="Log In" Text="Log In" CssClass="notoggle" IconCssClass="menu-icon-user-profile menu-icon" Name="LogIn" Position="ItemPosition.End">
                     </DxMenuItem>
                 </Items>
             </DxMenu>
         </div>
         <div class="card-body pt-0 d-flex flex-row">
-            <div class="pr-3 pt-4" style="min-width: 180px">
-                <h5 class="d-block pl-2">Controls</h5>
+            <div class="pe-3 pt-4" style="min-width: 180px">
+                <h5 class="d-block ps-2">Controls</h5>
                 <DxTreeView>
                     <Nodes>
                         <DxTreeViewNode Text="Office Inspired" Expanded="true">
@@ -99,7 +99,7 @@
                     </Nodes>
                 </DxTreeView>
             </div>
-            <div class="pt-4 pl-2 d-flex flex-column align-items-end justify-content-between flex-grow-1">
+            <div class="pt-4 ps-2 d-flex flex-column align-items-end justify-content-between flex-grow-1">
                 <div class="w-100">
                     <h5 class="mb-3">@Data[ActivePageIndex].Title</h5>
                     @{

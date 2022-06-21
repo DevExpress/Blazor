@@ -5,7 +5,7 @@ In this demo, horizontal constant lines indicate maximum and minimum levels of t
 To add a constant line to a chart, follow the steps below: 
 
  - Add the [DxChartConstantLine](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartConstantLine) markup to the [DxChartArgumentAxis](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartArgumentAxis) or [DxChartValueAxis](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartValueAxis) component. 
- - Specify the constant line’s [value](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartConstantLine.Value). 
+ - Specify the constant line's [value](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartConstantLine.Value). 
  - Add a [text label](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartConstantLineLabel.Text). 
 
 You can also define the following parameters to customize constant line appearance: 

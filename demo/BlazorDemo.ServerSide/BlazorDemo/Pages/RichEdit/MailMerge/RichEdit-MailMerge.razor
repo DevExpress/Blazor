@@ -1,0 +1,25 @@
+﻿@page "/RichEditMailMerge"
+@using System.IO;
+
+<DemoPageSectionComponent Id="RichEdit-MailMerge">
+    @inject IDocumentProvider DocumentProvider
+    @inject NwindDataService NwindDataService
+
+    <DxRichEdit ActiveRibbonTabIndex="5" DocumentContent="@DocumentContent" CssClass="w-100 ch-720">
+        <MailMergeSettings>
+            <DxMailMergeSettings Data="@DataSource" ViewMergedData="true" ActiveRecord="1"/>
+        </MailMergeSettings>
+    </DxRichEdit>
+
+    @code {
+        byte[] DocumentContent;
+        IEnumerable<Customer> DataSource;
+
+        protected override async Task OnInitializedAsync() {
+            DocumentContent = await DocumentProvider.GetDocumentAsync("MailMergeTemplate.docx");
+            DataSource = await NwindDataService.GetCustomersAsync();
+            await base.OnInitializedAsync();
+        }
+
+    }
+</DemoPageSectionComponent>

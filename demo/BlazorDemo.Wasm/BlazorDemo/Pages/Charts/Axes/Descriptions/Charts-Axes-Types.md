@@ -1,4 +1,4 @@
-The [Chart](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1) component automatically detects the first series’ data type and uses it to render X (argument) and Y (value) axes. If the data range or format is series specific, each series can use its own Y axis. The number of Chart's Y axes is not limited.
+The [Chart](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1) component automatically detects the first series' data type and uses it to render X (argument) and Y (value) axes. If the data range or format is series specific, each series can use its own Y axis. The number of Chart's Y axes is not limited.
 
 To change the type of an axis, use its [Type](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartAxis-1.Type) property. The following axis types are available:
 

@@ -4,9 +4,7 @@
     <div class="demo-resnavigator">
         <div class="demo-resnavigator-container card">
             <div class="demo-resnavigator-title card-body">
-                <DxButton RenderStyle="ButtonRenderStyle.None" @onclick="@ToggleResourceNavigator">
-                    <span class="demo-resnavigator-icon"></span>
-                </DxButton>
+                <DxButton RenderStyle="ButtonRenderStyle.None" Click="@ToggleResourceNavigator" IconCssClass="demo-resnavigator-icon" />
                 @if(ResourceNavigatorExpanded) {
                     <span style="">Resources</span>
                 }

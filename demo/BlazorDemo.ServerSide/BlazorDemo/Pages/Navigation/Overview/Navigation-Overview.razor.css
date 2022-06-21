@@ -1,3 +1,13 @@
+/*BeginHide*/::deep /*EndHide*/ .dxbs-menu > .nav .dx-menu-item.notoggle {
+    display: none;
+}
+/*BeginHide*/ ::deep /*EndHide*/ .dxbs-menu > .nav .dx-menu-item.search-menu-item {
+    display: none;
+}
+/*BeginHide*/ ::deep /*EndHide*/ .dxbs-menu > .nav .separator {
+    display: none;
+}
+
 .overview-navigation > .card-body:last-child {
     flex-wrap: nowrap;
 }

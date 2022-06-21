@@ -85,8 +85,11 @@ namespace BlazorDemo.ServerSide {
                 services.AddDemoServices();
 
                 services.AddSingleton<ISalesInfoDataProvider, SalesInfoDataProvider>();
-                services.AddSingleton<IExperementResultDataProvider, ExperementResultDataProvider>();
+                services.AddSingleton<IExperimentResultDataProvider, ExperimentResultDataProvider>();
+                services.AddSingleton<IScatterRandomDataProvider, ScatterRandomDataProvider>();
+                services.AddSingleton<IPopulationCorrelationDataProvider, PopulationCorrelationDataProvider>();
                 services.AddSingleton<IFinancialSeriesDataProvider, FinancialSeriesDataProvider>();
+                services.AddSingleton<IChartDrillDownDataProvider, ChartDrillDownDataProvider>();
                 services.AddSingleton<IPopulationStructureDataProvider, PopulationAgeStructureDataProvider>();
                 services.AddSingleton<ICurrencyExchangeDataProvider, UsdJpyDataProvider>();
                 services.AddSingleton<IUsdJpyCsvFileContentProvider, UsdJpyCsvFileContentProvider>();
@@ -96,6 +99,8 @@ namespace BlazorDemo.ServerSide {
                 services.AddSingleton<IWorldcitiesDataProvider, WorldcitiesDataProvider>();
                 services.AddSingleton<IGlobalTemperatureIndexDataProvider, GlobalTemperatureIndexDataProvider>();
                 services.AddSingleton<IGlobalTemperatureIndexFileContentProvider, GlobalTemperatureIndexFileContentProvider>();
+                services.AddSingleton<IHistogramDataProvider, HistogramDataProvider>();
+                services.AddSingleton<IDocumentProvider, DocumentProvider>();
                 // Editable should be scoped
                 services.AddScoped<INwindDataProvider, NwindDataProvider>();
 

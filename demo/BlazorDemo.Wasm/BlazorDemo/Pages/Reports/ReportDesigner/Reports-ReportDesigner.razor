@@ -1,7 +1,9 @@
 ﻿@page "/ReportDesigner"
 @page "/ReportDesigner/{reportName}"
+
 <link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-reporting-pages.css">
 <DemoScriptLoader Src="_content/BlazorDemo/lib/reporting.js"></DemoScriptLoader>
+
 <DemoPageSectionComponent Id="Reports-ReportDesigner">
     <DxReportDesigner ReportName=@ReportName Height="770px" @ref="designer" CssClass="w-100">
     </DxReportDesigner>
@@ -20,5 +22,5 @@
             designer.CallbacksModel.Events.ExitDesigner = "\"ReportDesignerExit\"";
             base.OnAfterRender(firstRender);
         }
-}
+    }
 </DemoPageSectionComponent>

@@ -2,15 +2,16 @@
 @using System.IO;
 
 <DemoPageSectionComponent Id="RichEdit-Overview">
-    <DxRichEdit DocumentContent="@documentContent" CssClass="w-100 ch-720" />
+    @inject IDocumentProvider DocumentProvider
+
+    <DxRichEdit DocumentContent="@DocumentContent" CssClass="w-100 ch-720" />
 
     @code {
-            byte[] documentContent;
+        byte[] DocumentContent;
 
         protected override async Task OnInitializedAsync() {
-            documentContent = await File.ReadAllBytesAsync(Path.Combine(AppContext.BaseDirectory, Path.Combine("Data", "Documents", "Example.docx")));
+            DocumentContent = await DocumentProvider.GetDocumentAsync("Example.docx");
             await base.OnInitializedAsync();
         }
-
     }
 </DemoPageSectionComponent>

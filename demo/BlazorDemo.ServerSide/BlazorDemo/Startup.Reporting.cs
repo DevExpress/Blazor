@@ -39,6 +39,9 @@ namespace BlazorDemo.Reporting {
                 app.UseSession();
                 app.UseDevExpressBlazorReporting();
                 app.UseDevExpressServerSideBlazorReportViewer();
+                app.UseReporting(configurator => {
+                    configurator.DesignAnalyzerOptions.EnableErrorCodeLinks = true;
+                });
                 DevExpress.DataAccess.DefaultConnectionStringProvider.AssignConnectionStrings(() => app.ApplicationServices.GetService<ReportingCustomConfigurationProvider>().GetGlobalConnectionStrings());
                 var env = app.ApplicationServices.GetService<IWebHostEnvironment>();
                 if(cleaner == null)

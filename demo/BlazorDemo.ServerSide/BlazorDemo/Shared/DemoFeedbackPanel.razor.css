@@ -29,7 +29,7 @@
 }
 .demo-feedback-panel .feedback-btns .btn:hover,
 .demo-feedback-panel .feedback-btns .btn.feedback-selected {
-    color: var(--primary);
+    color: var(--bs-primary);
 }
 .demo-feedback-panel .feedback-btns .btn span {
     display: inline-block;

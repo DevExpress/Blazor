@@ -1,0 +1,30 @@
+﻿<DemoPageSectionComponent Id="Navigation-TreeView-Filtering" VerticalAlignment=VerticalAlignment.Top MinHeight="212">
+    <ChildContent>
+        <div class="cw-320">
+            <DxTreeView Data="@ApiMember.NavigationApi"
+                        @bind-FilterString="FilterString"
+                        ShowFilterPanel="true"
+                        Target="_blank"
+                        FilterMode="FilterMode">
+                <DataMappings>
+                    <DxTreeViewDataMapping Key="Id" ParentKey="ParentId"
+                                           CssClass="CssClass"
+                                           Text="Name"
+                                           NavigateUrl="NavigateUrl" />
+                </DataMappings>
+            </DxTreeView>
+        </div>
+        @code {
+            string FilterString { get; set; }
+            NavigationFilterMode FilterMode { get; set; } = NavigationFilterMode.EntireBranch;
+        }
+    </ChildContent>
+    <OptionsContent>
+        <OptionComboBox Label="Filter Mode:"
+                        Data="@(new[] {NavigationFilterMode.EntireBranch, NavigationFilterMode.Nodes, NavigationFilterMode.ParentBranch})"
+                        @bind-Value="FilterMode">
+        </OptionComboBox>
+    </OptionsContent>
+
+</DemoPageSectionComponent>
+

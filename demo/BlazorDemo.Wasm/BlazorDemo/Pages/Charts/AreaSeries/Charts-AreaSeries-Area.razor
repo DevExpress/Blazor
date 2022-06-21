@@ -1,15 +1,17 @@
 ﻿<DemoPageSectionComponent Id="Charts-AreaSeries-Area">
     <ChildContent>
-        @switch (AreaSeriesType)
-        {
+        @switch (areaSeriesType) {
             case ChartSeriesType.Area:
-                <AreaChart />
+                <AreaChart ShowSeriesLabels=showSeriesLabels
+                           ShowSeriesPointMarkers=showSeriesPointMarkers/>
                 break;
             case ChartSeriesType.StackedArea:
-                <StackedAreaChart />
+                <StackedAreaChart ShowSeriesLabels=showSeriesLabels
+                                  ShowSeriesPointMarkers=showSeriesPointMarkers/>
                 break;
             case ChartSeriesType.FullStackedArea:
-                <FullStackedAreaChart />
+                <FullStackedAreaChart ShowSeriesLabels=showSeriesLabels
+                                      ShowSeriesPointMarkers=showSeriesPointMarkers/>
                 break;
 
         }
@@ -19,19 +21,27 @@
         <OptionComboBox Label="Series Type:"
                         T="ChartSeriesType"
                         TData="KeyValuePair<string, ChartSeriesType>"
-                        Data="@AreaSeriesTypes"
+                        Data="areaSeriesTypes"
                         ValueField="Value"
                         TextField="Key"
-                        @bind-Value="@AreaSeriesType" />
+                        @bind-Value="areaSeriesType" />
+        <OptionCheckBox T="bool"
+                        @bind-Checked="showSeriesPointMarkers"
+                        Label="Show Point Markers" />
+        <OptionCheckBox T="bool"
+                        @bind-Checked="showSeriesLabels"
+                        Label="Show Point Labels" />
     </OptionsContent>
 
     @code {
-        ChartSeriesType AreaSeriesType = AreaSeriesTypes.First().Value;
-        static readonly Dictionary<string,ChartSeriesType> AreaSeriesTypes = new Dictionary<string, ChartSeriesType>()
-        {
+        static readonly Dictionary<string, ChartSeriesType> areaSeriesTypes = new () {
             { "Area", ChartSeriesType.Area },
             { "Stacked Area" , ChartSeriesType.StackedArea},
             { "Full Stacked Area", ChartSeriesType.FullStackedArea}
         };
+
+        ChartSeriesType areaSeriesType = areaSeriesTypes.First().Value;
+        bool showSeriesPointMarkers = false;
+        bool showSeriesLabels = false;
     }
 </DemoPageSectionComponent>

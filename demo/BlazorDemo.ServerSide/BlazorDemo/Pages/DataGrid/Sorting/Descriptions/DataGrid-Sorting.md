@@ -7,4 +7,4 @@ Use the following column properties to sort data in code:
 *   [SortOrder](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.SortOrder) - Specifies a column's sort order.
 *   [SortIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGridColumn.SortIndex) - Specifies a column's position among sorted columns.
 
-In this demo, values in the **ID** column cannot be sorted. The sort order for the **Country** and **City** columns are specified in the Data Grid’s markup (see the code above).
+In this demo, values in the **ID** column cannot be sorted. The sort order for the **Country** and **City** columns are specified in the Data Grid's markup (see the code above).

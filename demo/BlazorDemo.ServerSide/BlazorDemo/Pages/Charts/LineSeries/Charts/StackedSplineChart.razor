@@ -5,37 +5,68 @@
 @inject ISalesInfoDataProvider Sales
 
 <DxChart Data="@ChartsData"
-         Width="100%">
-    <DxChartStackedSplineSeries Name="2017"
+         Width="100%"
+         LabelOverlap="ChartLabelOverlap.Hide">
+    <DxChartStackedSplineSeries Name="North America"
                                 T="SaleInfo"
-                                TArgument="string"
+                                TArgument="DateTime"
                                 TValue="int"
-                                ArgumentField="si => si.City"
+                                ArgumentField="si => new DateTime(si.Date.Year, si.Date.Month, 1)"
                                 ValueField="si => si.Amount"
                                 SummaryMethod="Enumerable.Sum"
-                                Filter="si => si.Date.Year == 2017" />
-    <DxChartStackedSplineSeries Name="2018"
+                                Filter='si => si.Region == "North America" '
+                                HoverMode="ChartContinuousSeriesHoverMode.None">
+        <DxChartSeriesPoint Visible=ShowSeriesPointMarkers
+                            HoverMode="ChartSeriesPointHoverMode.None" />
+        <DxChartSeriesLabel Visible=ShowSeriesLabels
+                            Format="ChartElementFormat.Thousands(1)" />
+    </DxChartStackedSplineSeries>
+    <DxChartStackedSplineSeries Name="Europe"
                                 T="SaleInfo"
-                                TArgument="string"
+                                TArgument="DateTime"
                                 TValue="int"
-                                ArgumentField="si => si.City"
+                                ArgumentField="si => new DateTime(si.Date.Year, si.Date.Month, 1)"
                                 ValueField="si => si.Amount"
                                 SummaryMethod="Enumerable.Sum"
-                                Filter="si => si.Date.Year == 2018" />
-    <DxChartStackedSplineSeries Name="2019"
+                                Filter='si => si.Region == "Europe" '
+                                HoverMode="ChartContinuousSeriesHoverMode.None">
+        <DxChartSeriesPoint Visible=ShowSeriesPointMarkers
+                            HoverMode="ChartSeriesPointHoverMode.None" />
+        <DxChartSeriesLabel Visible=ShowSeriesLabels
+                            Format="ChartElementFormat.Thousands(1)" />
+    </DxChartStackedSplineSeries>
+    <DxChartStackedSplineSeries Name="Asia"
                                 T="SaleInfo"
-                                TArgument="string"
+                                TArgument="DateTime"
                                 TValue="int"
-                                ArgumentField="si => si.City"
+                                ArgumentField="si => new DateTime(si.Date.Year, si.Date.Month, 1)"
                                 ValueField="si => si.Amount"
                                 SummaryMethod="Enumerable.Sum"
-                                Filter="si => si.Date.Year == 2019" />
+                                Filter='si => si.Region == "Asia" '
+                                HoverMode="ChartContinuousSeriesHoverMode.None">
+        <DxChartSeriesPoint Visible=ShowSeriesPointMarkers
+                            HoverMode="ChartSeriesPointHoverMode.None" />
+        <DxChartSeriesLabel Visible=ShowSeriesLabels
+                            Format="ChartElementFormat.Thousands(1)" />
+    </DxChartStackedSplineSeries>
     <DxChartLegend Position="RelativePosition.Outside"
                    HorizontalAlignment="HorizontalAlignment.Right" />
+    <DxChartTooltip Enabled="true">
+        @context.Point.Render((seriesPoint) =>
+            @<div style="margin: 0.75rem">
+                <div>@seriesPoint.SeriesName</div>
+                <span>@($"{seriesPoint.Argument: MMMM yyyy}: ")</span>
+                <span>@($"{seriesPoint.Value: $0,.0}K")</span>
+            </div>
+        )
+    </DxChartTooltip>
 </DxChart>
 
 @code {
     IEnumerable<SaleInfo> ChartsData;
+
+    [Parameter] public bool ShowSeriesPointMarkers { get; set; }
+    [Parameter] public bool ShowSeriesLabels { get; set; }
 
     protected override async Task OnInitializedAsync() {
         ChartsData = await Sales.GetSalesAsync();
