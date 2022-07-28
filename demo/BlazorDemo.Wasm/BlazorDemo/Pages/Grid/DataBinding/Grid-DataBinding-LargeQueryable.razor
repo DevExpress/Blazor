@@ -1,4 +1,7 @@
-﻿<DemoPageSectionComponent Id="Grid-DataBinding-LargeQueryable">
+﻿@page "/Grid/DataBinding/LargeQueryable"
+@layout DataProviderAccessArea<IRentInfoDataProvider>
+
+<DemoPageSectionComponent Id="Grid-DataBinding-LargeQueryable">
     <ChildContentWithParameters Context="Params">
         @inherits OwningComponentBase
         @inject Microsoft.Extensions.Configuration.IConfiguration Configuration

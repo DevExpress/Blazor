@@ -1,4 +1,7 @@
-﻿<DemoPageSectionComponent Id="Grid-DataBinding-LargeDataInstantFeedback">
+﻿@page "/Grid/DataBinding/LargeDataInstantFeedback"
+@layout DataProviderAccessArea<IRentInfoDataProvider>
+
+<DemoPageSectionComponent Id="Grid-DataBinding-LargeDataInstantFeedback">
     <ChildContentWithParameters Context="Params">
         @using DevExpress.Data.Linq
         @inherits OwningComponentBase

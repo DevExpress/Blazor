@@ -22,7 +22,11 @@ namespace BlazorDemo.DemoData {
         public DemoRootPage RootPage { get; set; }
         [JsonIgnore]
         public string UniqueId { get { return string.Join("-", GetUniqueIdParts()); } }
+        [JsonIgnore]
+        public string UniqueResourceId { get { return string.Join(".", GetUniqueIdParts()); } }
 
+        public abstract string GetRazorFilesFolder();
+        public abstract string GetDescriptionFilesFolder();
         public abstract string GetUrl();
         public abstract DemoItem[] GetChildItems();
 

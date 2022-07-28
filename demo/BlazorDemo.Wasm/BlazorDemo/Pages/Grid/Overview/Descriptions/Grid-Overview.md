@@ -1,4 +1,4 @@
-The DevExpress Grid for Blazor is a fast and responsive component that allows you to display, manage, and manipulate tabular data with absolute ease.
+The DevExpress [Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid) for Blazor is a fast and responsive component that allows you to display, manage, and manipulate tabular data with absolute ease.
 
 The Grid ships with the following built-in capabilities: 
 * High Performance Data Processing

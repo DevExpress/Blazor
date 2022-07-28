@@ -1,4 +1,7 @@
-﻿<DemoPageSectionComponent Id="Grid-Summary-Group">
+﻿@page "/Grid/Summary/Group"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Summary-Group">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 

@@ -48,7 +48,7 @@ namespace BlazorDemo.AspNetCoreHost {
         }
         void SaveUploadedFile(string tempFilePath, string fileName) {
             var path = GetOrCreateUploadFolder();
-            System.IO.File.Move(tempFilePath, Path.Combine(path, fileName));
+            System.IO.File.Move(tempFilePath, Path.Combine(path, fileName), true);
         }
         void RemoveTempFilesAfterDelay(string path, TimeSpan delay) {
             var dir = new DirectoryInfo(path);

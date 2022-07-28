@@ -895,13 +895,13 @@
         },
         {
           "Id": "DataBinding",
-          "Url": "Grid/DataBinding",
           "Title": "Data Binding",
           "Keywords": "blazor, components, data grid, datagrid, grid, data bind, data binding, bind to data, asynchronous data binding, bind to data asynchronously, async support, data collections, observable collections, dynamic collections, inotifycollectionchanged, ibindinglist, observablecollection, large data source, large data, server mode, http service, web api support, bind to web api, remote data source, devexpress, demo, sample, example",
           "Description": "The DevExpress Grid for Blazor supports synchronous and asynchronous data binding to various data sources (including large data sources).",
-          "PageSections": [
+          "Pages": [
             {
               "Id": "Data",
+              "Url": "Grid/DataBinding/Data",
               "Title": "Data Binding",
               "DocUrl": "403737/grid/bind-to-data#synchronous-data-binding",
               "AdditionalCodeFiles": [
@@ -917,10 +917,12 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\WeatherForecast.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/DataBinding", "Grid/DataBinding#Data" ]
             },
             {
               "Id": "Async",
+              "Url": "Grid/DataBinding/Async",
               "Title": "Asynchronous Data Binding",
               "DocUrl": "403737/grid/bind-to-data#asynchronous-data-binding",
               "AdditionalCodeFiles": [
@@ -936,10 +938,12 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/DataBinding#Async" ]
             },
             {
               "Id": "ObservableCollection",
+              "Url": "Grid/DataBinding/ObservableCollection",
               "Title": "Observable Data Collections",
               "DocUrl": "403737/grid/bind-to-data#observable-data-collections",
               "AdditionalCodeFiles": [
@@ -959,10 +963,12 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\StockQuoteService.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/DataBinding#ObservableCollection" ]
             },
             {
               "Id": "LargeDataInstantFeedback",
+              "Url": "Grid/DataBinding/LargeDataInstantFeedback",
               "Title": "Large Data (Instant Feedback Source)",
               "DocUrl": "403737/grid/bind-to-data#large-data-server-mode-sources",
               "IsServerSideOnly": true,
@@ -979,13 +985,14 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\RentInfo.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/DataBinding#LargeDataInstantFeedback" ]
             },
             {
               "Id": "LargeQueryable",
+              "Url": "Grid/DataBinding/LargeQueryable",
               "Title": "Large Data (Queryable)",
               "DocUrl": "403737/grid/bind-to-data#large-data-queryable-collections",
-              "RedirectFrom": [ "Grid/DataBinding#LargeDataSource" ],
               "AdditionalCodeFiles": [
                 {
                   "Title": "AreaRentInfo.cs",
@@ -999,13 +1006,14 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\RentInfo.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/DataBinding#LargeDataSource", "Grid/DataBinding#LargeQueryable" ]
             },
             {
               "Id": "LargeQueryableAsHttp",
-              "Title": "Large Data (Queryable as HTTP Service)",
+              "Url": "Grid/DataBinding/LargeQueryableAsHttp",
+              "Title": "Large Data via HTTP Service",
               "DocUrl": "403737/grid/bind-to-data#large-data-queryable-collections",
-              "RedirectFrom": [ "Grid/DataBinding#CustomData" ],
               "AdditionalCodeFiles": [
                 {
                   "Title": "Product.cs",
@@ -1015,7 +1023,8 @@
                   "Title": "NwindController.cs",
                   "Path": "Controllers\\NwindController.Products.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/DataBinding#CustomData", "Grid/DataBinding#LargeQueryableAsHttp" ]
             }
           ]
         },
@@ -1043,13 +1052,13 @@
         },
         {
           "Id": "Grouping",
-          "Url": "Grid/Grouping",
           "Title": "Group Data",
           "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, grouping, groups, drag-and-drop, devexpress, demo, sample, example",
           "Description": "The DevExpress Grid for Blazor component enables you to drag-and-drop grid headers or use grouping API to group data against multiple data columns.",
-          "PageSections": [
+          "Pages": [
             {
               "Id": "GroupData",
+              "Url": "Grid/Grouping/GroupData",
               "Title": "Group Data",
               "DocUrl": "DevExpress.Blazor.DxGrid.ShowGroupPanel",
               "AdditionalCodeFiles": [
@@ -1065,10 +1074,12 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/Grouping", "Grid/Grouping#GroupData" ]
             },
             {
               "Id": "IntervalGrouping",
+              "Url": "Grid/Grouping/IntervalGrouping",
               "Title": "Interval Grouping",
               "DocUrl": "DevExpress.Blazor.DxGridDataColumn.GroupInterval",
               "AdditionalCodeFiles": [
@@ -1100,10 +1111,12 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/Grouping#IntervalGrouping" ]
             },
             {
               "Id": "CustomGrouping",
+              "Url": "Grid/Grouping/CustomGrouping",
               "Title": "Custom Grouping",
               "DocUrl": "DevExpress.Blazor.DxGrid.CustomGroup",
               "AdditionalCodeFiles": [
@@ -1135,19 +1148,20 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/Grouping#CustomGrouping" ]
             }
           ]
         },
         {
           "Id": "Editing",
-          "Url": "Grid/EditData",
           "Title": "Edit Data",
           "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, data editing, edit data, edit form, popup edit form, edit row, inline edit row, inline editing, inline data editing, add rows, add new row, insert row, remove rows, delete rows, edit row values, edit modes, edit options, input validation, validate input, edit form validation, edit row validation, command column, cascade editors, cascading combobox, cascade logic, devexpress, demo, sample, example",
           "Description": "The DevExpress Grid for Blazor allows users to edit data in the inline edit row, edit form or in the popup edit form.",
-          "PageSections": [
+          "Pages": [
             {
               "Id": "EditForms",
+              "Url": "Grid/EditData/EditForms",
               "Title": "Edit Forms",
               "DocUrl": "DevExpress.Blazor.DxGrid.EditMode",
               "AdditionalCodeFiles": [
@@ -1164,10 +1178,11 @@
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
               ],
-              "RedirectFrom": [ "Grid/EditData#EditModes" ]
+              "RedirectFrom": [ "Grid/EditData", "Grid/EditData#EditModes", "Grid/EditData#EditForms" ]
             },
             {
               "Id": "EditFormValidation",
+              "Url": "Grid/EditData/EditFormValidation",
               "Title": "Edit Form Input Validation",
               "DocUrl": "DevExpress.Blazor.DxGrid.ValidationEnabled",
               "AdditionalCodeFiles": [
@@ -1184,10 +1199,11 @@
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
               ],
-              "RedirectFrom": [ "Grid/EditData#Validation" ]
+              "RedirectFrom": [ "Grid/EditData#Validation", "Grid/EditData#EditFormValidation" ]
             },
             {
               "Id": "EditRow",
+              "Url": "Grid/EditData/EditRow",
               "Title": "Edit Row",
               "IsNew": true,
               "AdditionalCodeFiles": [
@@ -1203,16 +1219,22 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/EditData#EditRow" ]
             },
             {
               "Id": "EditRowValidation",
+              "Url": "Grid/EditData/EditRowValidation",
               "Title": "Edit Row Input Validation",
               "IsNew": true,
               "AdditionalCodeFiles": [
                 {
+                  "Title": "ValidationMessage.razor",
+                  "Path": "Pages\\Grid\\Editing\\Grid-Editing-EditRowValidation-ValidationMessage.razor"
+                },
+                {
                   "Title": "CSS",
-                  "Path": "Pages\\Grid\\Editing\\Grid-Editing-EditRowValidation.razor.css"
+                  "Path": "Pages\\Grid\\Editing\\Grid-Editing-EditRowValidation-ValidationMessage.razor.css"
                 },
                 {
                   "Title": "Employee.cs",
@@ -1226,10 +1248,12 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/EditData#EditRowValidation" ]
             },
             {
               "Id": "CascadingEditors",
+              "Url": "Grid/EditData/CascadingEditors",
               "Title": "Cascading Editors",
               "DocUrl": "DevExpress.Blazor.DxComboBox-2#cascading-comboboxes",
               "AdditionalCodeFiles": [
@@ -1265,7 +1289,8 @@
                   "Title": "Worldcities.Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Worldcities.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/EditData#CascadingEditors" ]
             }
           ]
         },
@@ -1307,13 +1332,13 @@
         },
         {
           "Id": "Summary",
-          "Url": "Grid/Summary",
           "Title": "Summary",
           "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, summary, summaries, totals, total values, total summary, total summaries, group summary, group summaries, data summaries, aggregates, aggregate functions, devexpress, demo, sample, example",
           "Description": "The DevExpress Grid for Blazor supports total and group summaries.",
-          "PageSections": [
+          "Pages": [
             {
               "Id": "Total",
+              "Url": "Grid/Summary/Total",
               "Title": "Total Summary",
               "DocUrl": "DevExpress.Blazor.DxGrid.TotalSummary",
               "AdditionalCodeFiles": [
@@ -1337,10 +1362,12 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/Summary", "Grid/Summary#Total" ]
             },
             {
               "Id": "Group",
+              "Url": "Grid/Summary/Group",
               "Title": "Group Summary",
               "DocUrl": "DevExpress.Blazor.DxGrid.GroupSummary",
               "AdditionalCodeFiles": [
@@ -1364,10 +1391,12 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/Summary#Group" ]
             },
             {
               "Id": "GroupFooter",
+              "Url": "Grid/Summary/GroupFooter",
               "Title": "Group Footer Summary",
               "DocUrl": "DevExpress.Blazor.DxGridSummaryItem.FooterColumnName",
               "AdditionalCodeFiles": [
@@ -1391,10 +1420,12 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/Summary#GroupFooter" ]
             },
             {
               "Id": "Custom",
+              "Url": "Grid/Summary/Custom",
               "Title": "Custom Summary",
               "DocUrl": "DevExpress.Blazor.DxGridSummaryItem#add-a-custom-summary-item",
               "AdditionalCodeFiles": [
@@ -1418,19 +1449,20 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/Summary#Custom" ]
             }
           ]
         },
         {
           "Id": "Selection",
-          "Url": "Grid/Selection",
           "Title": "Selection",
           "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, selection, multi-selection, multiple-selection, devexpress, demo, sample, example",
           "Description": "The DevExpress Grid for Blazor component supports Single Row, Multiple Rows, and Multiple Rows with Optimized Performance selection modes.",
-          "PageSections": [
+          "Pages": [
             {
               "Id": "Multiple",
+              "Url": "Grid/Selection/Multiple",
               "Title": "Multiple Row Selection",
               "DocUrl": "DevExpress.Blazor.DxGrid.SelectionMode",
               "AdditionalCodeFiles": [
@@ -1454,10 +1486,12 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/Selection", "Grid/Selection#Multiple" ]
             },
             {
               "Id": "Single",
+              "Url": "Grid/Selection/Single",
               "Title": "Single Row Selection",
               "DocUrl": "DevExpress.Blazor.DxGrid.SelectionMode",
               "AdditionalCodeFiles": [
@@ -1481,10 +1515,12 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/Selection#Single" ]
             },
             {
               "Id": "SelectionColumn",
+              "Url": "Grid/Selection/SelectionColumn",
               "Title": "Selection Column",
               "DocUrl": "DevExpress.Blazor.DxGridSelectionColumn",
               "IsUpdated": true,
@@ -1501,10 +1537,12 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/Selection#SelectionColumn" ]
             },
             {
               "Id": "SelectionAPI",
+              "Url": "Grid/Selection/SelectionAPI",
               "Title": "Selection API",
               "IsUpdated": true,
               "AdditionalCodeFiles": [
@@ -1528,19 +1566,20 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/Selection#SelectionAPI" ]
             }
           ]
         },
         {
           "Id": "MasterDetail",
-          "Url": "Grid/MasterDetail",
           "Title": "Master-Detail View",
           "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, master grid, detail grid, master-detail relationship, master-detail view, detail row, row preview template, preview sections, custom row appearance, custom content in rows, devexpress, demo, sample, example",
           "Description": "The DevExpress Grid for Blazor component allows you to build master-detail layouts and relationships of any complexity and depth with a detail row template and row preview sections.",
-          "PageSections": [
+          "Pages": [
             {
               "Id": "NestedGrid",
+              "Url": "Grid/MasterDetail/NestedGrid",
               "Title": "Nested Grid",
               "DocUrl": "DevExpress.Blazor.DxGrid.DetailRowTemplate",
               "AdditionalCodeFiles": [
@@ -1568,10 +1607,12 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/MasterDetail", "Grid/MasterDetail#NestedGrid" ]
             },
             {
               "Id": "RowPreview",
+              "Url": "Grid/MasterDetail/RowPreview",
               "Title": "Row Preview",
               "DocUrl": "DevExpress.Blazor.DxGrid.DetailRowDisplayMode",
               "AdditionalCodeFiles": [
@@ -1587,19 +1628,20 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/MasterDetail#RowPreview" ]
             }
           ]
         },
         {
           "Id": "Templates",
-          "Url": "Grid/Templates",
           "Title": "Templates",
           "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, template, cell template, cell editor template, row preview template, preview sections, custom row appearance, custom cell appearance, custom content in rows, custom content in cells, devexpress, demo, sample, example",
           "Description": "The DevExpress Grid for Blazor supports templates that allow you to customize cell appearance, the edit form’s layout, and row preview sections.",
-          "PageSections": [
+          "Pages": [
             {
               "Id": "Column",
+              "Url": "Grid/Templates/Column",
               "Title": "Column Templates",
               "DocUrl": "DevExpress.Blazor.DxGridDataColumn.CellDisplayTemplate#show-checkboxes",
               "AdditionalCodeFiles": [
@@ -1615,10 +1657,12 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/Templates", "Grid/Templates#Column" ]
             },
             {
               "Id": "GroupRow",
+              "Url": "Grid/Templates/GroupRow",
               "Title": "Group Row Template",
               "DocUrl": "DevExpress.Blazor.DxGridDataColumn.GroupRowTemplate",
               "AdditionalCodeFiles": [
@@ -1642,24 +1686,27 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/Templates#GroupRow" ]
             }
           ]
         },
         {
           "Id": "Columns",
-          "Url": "Grid/Columns",
           "Title": "Columns",
           "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, column, columns, resizing, resize, column resizing, column resize, resizing columns, column width, column size, devexpress, demo, sample, example, column chooser, chooser, reorder columns, column order, show column, hide column, hidden column, visible column, visibility",
           "Description": "The DevExpress Blazor Grid allows users to resize columns in two modes: change the width of the column to the right or the width of the entire column container.",
-          "PageSections": [
+          "Pages": [
             {
               "Id": "ColumnTypes",
+              "Url": "Grid/Columns/ColumnTypes",
               "Title": "Column Types",
-              "DocUrl": "DevExpress.Blazor.DxGrid.Columns"
+              "DocUrl": "DevExpress.Blazor.DxGrid.Columns",
+              "RedirectFrom": [ "Grid/Columns", "Grid/Columns#ColumnTypes" ]
             },
             {
               "Id": "ColumnResize",
+              "Url": "Grid/Columns/ColumnResize",
               "Title": "Column Resize",
               "DocUrl": "DevExpress.Blazor.DxGrid.ColumnResizeMode",
               "AdditionalCodeFiles": [
@@ -1675,10 +1722,12 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/Columns#ColumnResize" ]
             },
             {
               "Id": "ColumnChooser",
+              "Url": "Grid/Columns/ColumnChooser",
               "Title": "Column Chooser",
               "AdditionalCodeFiles": [
                 {
@@ -1693,7 +1742,8 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/Columns#ColumnChooser" ]
             }
           ]
         },
@@ -1722,13 +1772,13 @@
         },
         {
           "Id": "Customization",
-          "Url": "Grid/Customization",
           "Title": "Customization",
           "Keywords": "Blazor, components, DxGrid, data grid, datagrid, grid, template, customization, appearance customization, style, conditional formatting, conditional data highlighting, row style, row color, column style, cell style, custom style, html decoration, html row decoration, html cell decoration, html attributes, alternating row style, higlight odd rows, devexpress, demo, sample, example",
           "Description": "The DevExpress Grid for Blazor allows you to customize the appearance of UI elements based on custom conditions.",
-          "PageSections": [
+          "Pages": [
             {
               "Id": "ConditionalFormatting",
+              "Url": "Grid/Customization/ConditionalFormatting",
               "Title": "Conditional Formatting",
               "DocUrl": "DevExpress.Blazor.DxGrid.CustomizeElement",
               "AdditionalCodeFiles": [
@@ -1753,10 +1803,11 @@
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
               ],
-              "RedirectFrom": [ "Grid/Customization#Rows" ]
+              "RedirectFrom": [ "Grid/Customization", "Grid/Customization#Rows", "Grid/Customization#ConditionalFormatting" ]
             },
             {
               "Id": "AltRowStyle",
+              "Url": "Grid/Customization/AltRowStyle",
               "Title": "Alternating Row Style",
               "DocUrl": "DevExpress.Blazor.DxGrid.CustomizeElement",
               "IsNew": true,
@@ -1781,19 +1832,20 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/Customization#AltRowStyle" ]
             }
           ]
         },
         {
           "Id": "PagingAndScrolling",
-          "Url": "Grid/PagingAndScrolling",
           "Title": "Paging and Scrolling",
           "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, scrolling, vertical scrolling, horizontal scrolling, virtual scrolling, load records on demand, paging, pager, pages, go to page, page size selection, custom page size, devexpress, demo, sample, example",
           "Description": "The DevExpress Grid for Blazor supports horizontal scrolling, vertical scrolling, and virtual scrolling (loading data on demand). The Grid displays a pager that enables data navigation.",
-          "PageSections": [
+          "Pages": [
             {
               "Id": "Paging",
+              "Url": "Grid/PagingAndScrolling/Paging",
               "Title": "Paging",
               "DocUrl": "DevExpress.Blazor.DxGrid.PagerNavigationMode",
               "AdditionalCodeFiles": [
@@ -1809,10 +1861,12 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/PagingAndScrolling", "Grid/PagingAndScrolling#Paging" ]
             },
             {
               "Id": "VerticalScrolling",
+              "Url": "Grid/PagingAndScrolling/VerticalScrolling",
               "Title": "Vertical Scrolling",
               "DocUrl": "DevExpress.Blazor.DxGrid",
               "AdditionalCodeFiles": [
@@ -1828,10 +1882,12 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/PagingAndScrolling#VerticalScrolling" ]
             },
             {
               "Id": "HorizontalScrolling",
+              "Url": "Grid/PagingAndScrolling/HorizontalScrolling",
               "Title": "Horizontal Scrolling",
               "DocUrl": "DevExpress.Blazor.DxGrid",
               "AdditionalCodeFiles": [
@@ -1847,7 +1903,8 @@
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "Grid/PagingAndScrolling#HorizontalScrolling" ]
             }
           ]
         }
@@ -2664,11 +2721,6 @@
               "Id": "EmbeddedPDFContent",
               "Url": "ReportViewer/MergerdReports/EmbeddedPDFContent",
               "Title": "Embedded PDF Content"
-            },
-            {
-              "Id": "MailMergeReport",
-              "Url": "ReportViewer/MergerdReports/MailMergeReport",
-              "Title": "Mail Merge"
             }
           ]
         },
@@ -2735,7 +2787,7 @@
             {
               "Id": "MailMergeReport",
               "Url": "ReportViewer/DataBinding/MailMergeReport",
-              "Title": "Rich Text and Mail Merge"
+              "Title": "Mail Merge"
             }
           ]
         },
@@ -2854,6 +2906,16 @@
                   "Id": "RestaurantMenu",
                   "Url": "ReportViewer/IndustryReports/Services/RestaurantMenu",
                   "Title": "Restaurant Menu"
+                },
+                {
+                  "Id": "CharacterCombReport",
+                  "Url": "ReportViewer/IndustryReports/Services/CharacterCombReport",
+                  "Title": "Arrival Card"
+                },
+                {
+                  "Id": "LargeDatasetReport100",
+                  "Url": "ReportViewer/IndustryReports/Services/LargeDatasetReport100",
+                  "Title": "Monthly Billing Statement"
                 }
               ]
             }
@@ -2911,19 +2973,15 @@
         },
         {
           "Id": "ViewTypes",
-          "Url": "SchedulerViewTypes",
           "Title": "View Types",
           "Keywords": "Blazor, components, DxScheduler, scheduler, day view, work week view, week view, devexpress, demo, sample, example",
           "Description": "The Scheduler UI for Blazor can display regular and recurrent appointments in a Day, Work Week or Week View. The Scheduler also allows users to create, remove, and manage appointments.",
-          "PageSections": [
-            {
-              "Id": "ViewTypes",
-              "Title": "View Types",
-              "RedirectFrom": [ "SchedulerViewTypes#Overview" ]
-            },
+          "Pages": [
             {
               "Id": "WeekView",
+              "Url": "Scheduler/ViewTypes/WeekView",
               "Title": "Week View",
+              "RedirectFrom": [ "SchedulerViewTypes", "SchedulerViewTypes#ViewTypes", "SchedulerViewTypes#Overview" ],
               "DocUrl": "DevExpress.Blazor.DxSchedulerWeekView",
               "AdditionalCodeFiles": [
                 {
@@ -2934,10 +2992,12 @@
                   "Title": "AppointmentCollection.cs",
                   "Path": "Data\\Appointments\\AppointmentCollection.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "SchedulerViewTypes#WeekView" ]
             },
             {
               "Id": "WorkWeekView",
+              "Url": "Scheduler/ViewTypes/WorkWeekView",
               "Title": "Work Week View",
               "DocUrl": "DevExpress.Blazor.DxSchedulerWorkWeekView",
               "AdditionalCodeFiles": [
@@ -2949,10 +3009,12 @@
                   "Title": "AppointmentCollection.cs",
                   "Path": "Data\\Appointments\\AppointmentCollection.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "SchedulerViewTypes#WorkWeekView" ]
             },
             {
               "Id": "DayView",
+              "Url": "Scheduler/ViewTypes/DayView",
               "Title": "Day View",
               "DocUrl": "DevExpress.Blazor.DxSchedulerDayView",
               "AdditionalCodeFiles": [
@@ -2964,10 +3026,12 @@
                   "Title": "AppointmentCollection.cs",
                   "Path": "Data\\Appointments\\AppointmentCollection.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "SchedulerViewTypes#DayView" ]
             },
             {
               "Id": "MonthView",
+              "Url": "Scheduler/ViewTypes/MonthView",
               "Title": "Month View",
               "DocUrl": "DevExpress.Blazor.DxSchedulerMonthView",
               "AdditionalCodeFiles": [
@@ -2983,10 +3047,12 @@
                   "Title": "ResourceAppointmentCollection.cs",
                   "Path": "Data\\Appointments\\ResourceAppointmentCollection.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "SchedulerViewTypes#MonthView" ]
             },
             {
               "Id": "TimelineView",
+              "Url": "Scheduler/ViewTypes/TimelineView",
               "Title": "Timeline View",
               "DocUrl": "DevExpress.Blazor.DxSchedulerTimelineView",
               "AdditionalCodeFiles": [
@@ -3002,7 +3068,8 @@
                   "Title": "ResourceAppointmentCollection.cs",
                   "Path": "Data\\Appointments\\ResourceAppointmentCollection.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "SchedulerViewTypes#TimelineView" ]
             }
           ]
         },
@@ -3026,13 +3093,13 @@
         },
         {
           "Id": "Resources",
-          "Url": "SchedulerResources",
           "Title": "Resources",
           "Keywords": "Blazor, components, DxScheduler, scheduler, resources, devexpress, demo, sample, example",
           "Description": "The DevExpress Scheduler for Blazor allows you to assign resources to appointments. You can also use this feature to group appointments by resource or by date.",
-          "PageSections": [
+          "Pages": [
             {
               "Id": "GroupByResource",
+              "Url": "Scheduler/Resources/GroupByResource",
               "Title": "Group by Resource",
               "DocUrl": "DevExpress.Blazor.DxScheduler#resources",
               "AdditionalCodeFiles": [
@@ -3052,10 +3119,12 @@
                   "Title": "ResourceCollection.cs",
                   "Path": "Data\\Appointments\\ResourceCollection.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "SchedulerResources", "SchedulerResources#GroupByResource" ]
             },
             {
               "Id": "GroupByDate",
+              "Url": "Scheduler/Resources/GroupByDate",
               "Title": "Group by Date",
               "DocUrl": "DevExpress.Blazor.DxScheduler.GroupType",
               "AdditionalCodeFiles": [
@@ -3075,10 +3144,12 @@
                   "Title": "ResourceCollection.cs",
                   "Path": "Data\\Appointments\\ResourceCollection.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "SchedulerResources#GroupByDate" ]
             },
             {
               "Id": "CustomResourceNavigator",
+              "Url": "Scheduler/Resources/CustomResourceNavigator",
               "Title": "Custom Resource Navigator",
               "DocUrl": "DevExpress.Blazor.DxScheduler.VisibleResourcesDataSource",
               "AdditionalCodeFiles": [
@@ -3098,19 +3169,20 @@
                   "Title": "ResourceCollection.cs",
                   "Path": "Data\\Appointments\\ResourceCollection.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "SchedulerResources#CustomResourceNavigator" ]
             }
           ]
         },
         {
           "Id": "Customization",
-          "Url": "SchedulerCustomization",
           "Title": "Customization",
           "Keywords": "Blazor, components, DxScheduler, scheduler, appointments, template, appointment template, customization, custom appointment appearance, appointment style, custom appointment UI, custom fields, custom field, custom properties, custom property, appointment custom field, customize appointment, appointment customization, appointment form, appointment edit form, customize edit form, custom appointment form, devexpress, demo, sample, example",
           "Description": "The DevExpress Scheduler allows you to use templates to customize appointment appearance.",
-          "PageSections": [
+          "Pages": [
             {
               "Id": "CustomAppointmentForm",
+              "Url": "Scheduler/Customization/CustomAppointmentForm",
               "Title": "Custom Fields and Appointment Form",
               "DocUrl": "DevExpress.Blazor.DxScheduler#custom-fields",
               "AdditionalCodeFiles": [
@@ -3122,10 +3194,12 @@
                   "Title": "AppointmentCollection.cs",
                   "Path": "Data\\Appointments\\AppointmentCollection.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "SchedulerCustomization", "SchedulerCustomization#CustomAppointmentForm" ]
             },
             {
               "Id": "RestrictUserActions",
+              "Url": "Scheduler/Customization/RestrictUserActions",
               "Title": "Restrict User Actions",
               "AdditionalCodeFiles": [
                 {
@@ -3136,22 +3210,22 @@
                   "Title": "AppointmentCollection.cs",
                   "Path": "Data\\Appointments\\AppointmentCollection.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "SchedulerCustomization#RestrictUserActions" ]
             }
           ]
         },
         {
           "Id": "Templates",
-          "Url": "SchedulerTemplates",
           "Title": "Templates",
           "Keywords": "Blazor, components, DxScheduler, scheduler, appointments, template, appointment template, customization, custom appointment appearance, appointment style, custom appointment UI, custom fields, custom field, custom properties, custom property, appointment custom field, customize appointment, appointment customization, appointment form, appointment edit form, customize edit form, custom appointment form, devexpress, demo, sample, example",
           "Description": "The DevExpress Scheduler allows you to use templates to customize appointment appearance.",
-          "PageSections": [
+          "Pages": [
             {
               "Id": "AppointmentTemplates",
+              "Url": "Scheduler/Templates/AppointmentTemplates",
               "Title": "Appointment Templates",
               "DocUrl": "DevExpress.Blazor.DxScheduler#appointment-templates",
-              "RedirectFrom": [ "SchedulerCustomization#AppointmentTemplates" ],
               "AdditionalCodeFiles": [
                 {
                   "Title": "Appointment.cs",
@@ -3161,10 +3235,12 @@
                   "Title": "AppointmentCollection.cs",
                   "Path": "Data\\Appointments\\AppointmentCollection.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "SchedulerTemplates", "SchedulerTemplates#AppointmentTemplates", "SchedulerCustomization#AppointmentTemplates" ]
             },
             {
               "Id": "DateHeaderTemplate",
+              "Url": "Scheduler/Templates/DateHeaderTemplate",
               "Title": "Date Header Template",
               "DocUrl": "DevExpress.Blazor.Base.DxSchedulerDayViewBase.DateHeaderCellTemplate",
               "AdditionalCodeFiles": [
@@ -3176,10 +3252,12 @@
                   "Title": "AppointmentCollection.cs",
                   "Path": "Data\\Appointments\\AppointmentCollection.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "SchedulerTemplates#DateHeaderTemplate" ]
             },
             {
               "Id": "TimeCellTemplate",
+              "Url": "Scheduler/Templates/TimeCellTemplate",
               "Title": "Time Cell Template",
               "DocUrl": "DevExpress.Blazor.DxSchedulerTimelineView.TimeCellTemplate",
               "AdditionalCodeFiles": [
@@ -3191,10 +3269,12 @@
                   "Title": "AppointmentCollection.cs",
                   "Path": "Data\\Appointments\\AppointmentCollection.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "SchedulerTemplates#TimeCellTemplate" ]
             },
             {
               "Id": "ResourceHeaderTemplate",
+              "Url": "Scheduler/Templates/ResourceHeaderTemplate",
               "Title": "Resource Header Template",
               "DocUrl": "DevExpress.Blazor.Base.DxSchedulerDayViewBase.ResourceHeaderCellTemplate",
               "AdditionalCodeFiles": [
@@ -3206,12 +3286,13 @@
                   "Title": "AppointmentCollection.cs",
                   "Path": "Data\\Appointments\\AppointmentCollection.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "SchedulerTemplates#ResourceHeaderTemplate" ]
             },
             {
               "Id": "AppointmentTooltipTemplate",
+              "Url": "Scheduler/Templates/AppointmentTooltipTemplate",
               "Title": "Appointment Tooltip Template",
-              "RedirectFrom": [ "SchedulerCustomization#AppointmentTooltipTemplate" ],
               "DocUrl": "DevExpress.Blazor.DxScheduler.AppointmentTooltipTemplate",
               "AdditionalCodeFiles": [
                 {
@@ -3222,7 +3303,8 @@
                   "Title": "ResourceAppointmentCollection.cs",
                   "Path": "Data\\Appointments\\ResourceAppointmentCollection.cs"
                 }
-              ]
+              ],
+              "RedirectFrom": [ "SchedulerTemplates#AppointmentTooltipTemplate", "SchedulerCustomization#AppointmentTooltipTemplate" ]
             }
           ]
         }
@@ -3318,8 +3400,8 @@
               "Path": "Services\\NwindDataService.Employees.cs"
             },
             {
-              "Title": "Employee.cs",
-              "Path": "Data\\Northwind\\Employee.cs"
+              "Title": "Customer.cs",
+              "Path": "Data\\Northwind\\Customer.cs"
             }
           ]
         }
@@ -4564,11 +4646,15 @@
               "DocUrl": "DevExpress.Blazor.DxFlyout#content-and-appearance",
               "AdditionalCodeFiles": [
                 {
+                  "Title": "CSS",
+                  "Path": "Pages\\Navigation\\Flyout\\Navigation-Flyout-Customization.razor.css"
+                },
+                {
                   "Title": "EmployeeCard.razor",
                   "Path": "Pages\\Navigation\\Shared\\EmployeeCard.razor"
                 },
                 {
-                  "Title": "CSS",
+                  "Title": "EmployeeCard.razor.css",
                   "Path": "Pages\\Navigation\\Shared\\EmployeeCard.razor.css"
                 }
               ]

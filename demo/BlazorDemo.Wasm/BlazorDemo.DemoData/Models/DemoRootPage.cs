@@ -6,9 +6,6 @@ namespace BlazorDemo.DemoData {
     public class DemoRootPage : DemoPageBase {
         public string AnalyticsId { get; set; }
 
-        public string RazorFilesFolder { get; set; }
-        public string DescriptionFilesFolder { get; set; }
-
         public override DemoItem[] GetChildItems() { return Pages; }
     }
 }

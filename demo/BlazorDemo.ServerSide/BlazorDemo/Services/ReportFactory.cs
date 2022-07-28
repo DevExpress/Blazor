@@ -60,6 +60,7 @@ namespace BlazorDemo.Services {
 
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.PivotGridAndChart, Name = XtraReportsDemos.ReportNames.PivotGridAndChartName, CreateAction = () => new XtraReportsDemos.PivotGridAndChart.Report() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.LargeDataset, Name = XtraReportsDemos.ReportNames.LargeDatasetName, CreateAction = () => new XtraReportsDemos.CachedDocumentSourceReport.ReportWeb() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.LargeDataset, Name = XtraReportsDemos.ReportNames.LargeDatasetName + 100, CreateAction = () => new XtraReportsDemos.CachedDocumentSourceReport.ReportWeb(100u) },
 
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.SwissQRBill, Name = XtraReportsDemos.ReportNames.SwissQRBillName, CreateAction = () => new XtraReportsDemos.SwissQRCode.SwissQRBill() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.RollPaper, Name = XtraReportsDemos.ReportNames.RollPaperName, CreateAction = () => new XtraReportsDemos.RollPaper.Report() },

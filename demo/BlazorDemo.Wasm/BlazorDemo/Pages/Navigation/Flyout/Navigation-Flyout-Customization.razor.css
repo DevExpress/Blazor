@@ -1,4 +1,4 @@
-/*BeginHide*/::deep /*EndHide*/ .custom-flyout-body {
+/*BeginHide*/::deep /*EndHide*/.custom-flyout-body {
     margin: 1rem;
 }
 .custom-flyout-footer {
@@ -40,8 +40,9 @@
     column-gap: 0.75rem;
     row-gap: 0.5rem;
 }
+/*BeginHide*/
 @media (max-width: 374.98px) {
-    /*BeginHide*/ ::deep /*EndHide*/ .custom-flyout-body .e-details {
+    ::deep .custom-flyout-body .e-details {
         grid-template-columns: auto;
     }
 }

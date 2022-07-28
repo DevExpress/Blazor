@@ -89,7 +89,7 @@
             [Required]
             [DateInPastAttribute(ErrorMessage = "The Production Date value cannot be later than today.")]
             public DateTime ProductionDate { get; set; }
-            [Required(ErrorMessage = "Description")]
+            [Required(ErrorMessage = "The Description should be specified.")]
             public string Description { get; set; }
         }
 

@@ -9,7 +9,7 @@
     <nav class="demo-header p-0 navbar navbar-dark">
         <DemoLayoutToggleButton @bind-Toggled="@LayoutToggled" />
         <div class="logo-image">
-            <a href="https://devexpress.com" target="_blank" title="DevExpress">
+            <a href="https://www.devexpress.com/" target="_blank" title="DevExpress">
                 <span class="logo-img"></span>
             </a>
             <div class="logo-sep"></div>
@@ -18,10 +18,11 @@
             </a>
         </div>
         <div class="demo-btn-container d-flex">
-            <a class="btn btn-sm dx-btn btn-primary download-btn" href="https://go.devexpress.com/DevexpressDownload_UniversalTrial.aspx" target="_blank">
-                <span class="demo-download-icon" aria-hidden="true"></span>
-                <span>Free Trial</span>
-            </a>
+            <DxButton NavigateUrl="https://go.devexpress.com/DevexpressDownload_UniversalTrial.aspx"
+                CssClass="download-btn"
+                IconCssClass="demo-download-icon"
+                Text="Free Trial"></DxButton>
+                
             <DxButton @onclick="@ToggleThemeSwitcherPanel" CssClass="@GetThemeSwitcherCssClass()"
                 RenderStyle="ButtonRenderStyle.Secondary" RenderStyleMode="ButtonRenderStyleMode.Outline" IconCssClass="demo-theme-icon"></DxButton>
         </div>
@@ -101,7 +102,7 @@
     }
 
     void TryRedirect(string url) {
-        if(url?.Length > NavigationManager.BaseUri?.Length && Configuration.Redirects.TryGetValue(url.Substring(NavigationManager.BaseUri.Length), out var uri)) {
+        if(url?.Length > NavigationManager.BaseUri?.Length && Configuration.Redirects.TryGetValue(url.Substring(NavigationManager.BaseUri.Length).ToLower(), out var uri)) {
             NavigationManager.NavigateTo(uri, true);
         };
     }

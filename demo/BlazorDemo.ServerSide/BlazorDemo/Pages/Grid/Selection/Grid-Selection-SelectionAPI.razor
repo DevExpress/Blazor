@@ -1,4 +1,7 @@
-﻿<DemoPageSectionComponent Id="Grid-Selection-SelectionAPI">
+﻿@page "/Grid/Selection/SelectionAPI"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Selection-SelectionAPI">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 

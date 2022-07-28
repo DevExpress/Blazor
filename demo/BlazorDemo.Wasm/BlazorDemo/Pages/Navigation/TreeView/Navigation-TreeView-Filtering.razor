@@ -3,6 +3,7 @@
         <div class="cw-320">
             <DxTreeView Data="@ApiMember.NavigationApi"
                         @bind-FilterString="FilterString"
+                        FilterMinLength="2"
                         ShowFilterPanel="true"
                         Target="_blank"
                         FilterMode="FilterMode">

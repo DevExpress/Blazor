@@ -1,4 +1,6 @@
-﻿<DemoPageSectionComponent Id="Scheduler-Templates-AppointmentTemplates">
+﻿@page "/Scheduler/Templates/AppointmentTemplates"
+
+<DemoPageSectionComponent Id="Scheduler-Templates-AppointmentTemplates">
     <DxScheduler StartDate="@DateTime.Today" DataStorage="@DataStorage" CssClass="w-100">
         <DxSchedulerWorkWeekView ShowWorkTimeOnly="true">
             <HorizontalAppointmentTemplate>

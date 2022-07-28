@@ -40,15 +40,25 @@
         treeView.SelectNode(n => {
             if(!string.IsNullOrEmpty(n.NavigateUrl) && (currentUri.EndsWith("/" + n.NavigateUrl) || currentUri == NavigationManager.BaseUri && n.NavigateUrl == "./")) {
                 if(expandNodesToSelection)
-                    ExpandParentNodes(n);
+                    ExpandToSelectedNode(n);
                 return true;
             }
             return false;
         });
     }
-    void ExpandParentNodes(ITreeViewNodeInfo node) {
-        treeView.CollapseAll();
-        treeView.ExpandToNode(n => n == node);
+    void ExpandToSelectedNode(ITreeViewNodeInfo selectedNode) {
+        var nodes = treeView.GetNodesInfo(n => true);
+        foreach(var node in nodes) {
+            treeView.SetNodeExpanded(n => n == node, IsParentNode(node, selectedNode));
+        }
+    }
+    bool IsParentNode(ITreeViewNodeInfo parentNode, ITreeViewNodeInfo node) {
+        while(node != null) {
+            if(node == parentNode)
+                return true;
+            node = node.Parent;
+        }
+        return false;
     }
     protected void SelectionChanged(TreeViewNodeEventArgs e) {
         if(!e.CausedByAPI && string.IsNullOrEmpty(e.NodeInfo.NavigateUrl)) 
@@ -57,5 +67,7 @@
     public void Dispose() {
         NavigationManager.LocationChanged -= OnLocationChanged;
     }
-
+    protected override bool ShouldRender() {
+        return false;
+    }
 }

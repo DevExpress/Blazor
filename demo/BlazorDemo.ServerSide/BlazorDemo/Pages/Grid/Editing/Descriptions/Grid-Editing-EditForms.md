@@ -1,4 +1,4 @@
-To enable data editing using an edit form within the DevExpress Blazor Grid:
+To enable data editing using an edit form within the DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid):
 
 1. Declare a [DxGridCommandColumn](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridCommandColumn) object in the [Columns](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.Columns) template. This column displays predefined **New**, **Edit**, and **Delete** command buttons. 
 2. Use the [EditFormTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.EditFormTemplate) to define Grid edit form content. The edit form displays predefined **Save** and **Cancel** buttons.
