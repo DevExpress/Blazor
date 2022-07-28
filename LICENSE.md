@@ -2,9 +2,9 @@ DEVELOPER EXPRESS INC
 
 DevExpress UI for Blazor
 
-Copyright (C) 2000-2020 Developer Express Inc.
+Copyright (C) 2000-2022 Developer Express Inc.
 
-Last revised April, 2019
+Last revised June, 2022
 
 END-USER LICENSE AGREEMENT
 FOR ALL SOFTWARE DEVELOPMENT PRODUCT(S) INCLUDED IN THIS DISTRIBUTION
@@ -80,10 +80,44 @@ The LICENSEE may NOT distribute the SOFTWARE DEVELOPMENT PRODUCT(S), in any form
 If you have purchased a 12 month subscription as described in Section 9 of this AGREEMENT, or have obtained a COMPLIMENTARY USE LICENSE as described in Section 1.3 of this AGREEMENT, you may reproduce and distribute copies of the REDISTRIBUTABLES, provided that such copies are made from the original copy of the REDISTRIBUTABLES included with the SOFTWARE DEVELOPMENT PRODUCT(S) or modified versions of the REDISTRIBUTABLES which are provided to you by DEVEXPRESS or those which you create. Copies of REDISTRIBUTABLES may only be distributed with and for the sole purpose of executing application programs permitted under this AGREEMENT that you have created using the SOFTWARE DEVELOPMENT PRODUCT(S).
 
 The complete list of REDISTRIBUTABLES under this AGREEMENT is as follows:
-DevExtreme.AspNet.Data.dll  
-DevExpress.Blazor.dll  
-dx-blazor.css  
-dx-blazor.js  
+
+DevExpress.AspNetCore.Common.v22.1.dll
+DevExpress.AspNetCore.Core.v22.1.dll
+DevExpress.AspNetCore.Reporting.v22.1.dll
+DevExpress.AspNetCore.Reporting.v22.1.Azure.dll
+DevExpress.AspNetCore.Resources.v22.1.dll
+DevExpress.Blazor.v22.1.dll
+DevExpress.Blazor.Reporting.JSBasedControls.v22.1.dll
+DevExpress.Blazor.Reporting.v22.1.Viewer.dll
+DevExpress.Blazor.RichEdit.v22.1.dll
+DevExpress.Blazor.Server.WebAssembly.v22.1.dll
+DevExpress.Blazor.WebAssembly.Masks.clr.v22.1.dll
+DevExpress.Charts.v22.1.Core.dll
+DevExpress.Data.v22.1.clr
+DevExpress.Data.v22.1.dll
+DevExpress.DataAccess.v22.1.dll
+DevExpress.DataVisualization.v22.1.Core.dll
+DevExpress.Drawing.v22.1.dll
+DevExpress.Office.v22.1.Core.dll
+DevExpress.Pdf.v22.1.Core.dll
+DevExpress.Pdf.v22.1.Drawing.dll
+DevExpress.Pdf.v22.1.SkiaRenderer.dll
+DevExpress.PivotGrid.v22.1.Core.dll
+DevExpress.RichEdit.v22.1.Core.dll
+DevExpress.RichEdit.v22.1.Export.dll
+DevExpress.Printing.v22.1.Core.dll
+DevExpress.Sparkline.v22.1.Core.dll
+DevExpress.Xpo.v22.1.dll
+DevExpress.XtraCharts.v22.1.dll
+DevExpress.XtraReports.v22.1.dll
+DevExpress.XtraReports.v22.1.CodeCompletion.dll
+DevExpress.XtraReports.v22.1.Web.dll
+
+DevExpress.Blazor.Themes\*.*
+
+NPM packages:
+@devexpress/analytics-core
+devexpress-reporting
 
 LICENSEE MAY NOT REDISTRIBUTE any files in the SOFTWARE DEVELOPMENT PRODUCT(S) distribution if using an evaluation, trial, Not for Resale, or demo version of the SOFTWARE DEVELOPMENT PRODUCT(S).
 
@@ -106,9 +140,78 @@ The SOFTWARE DEVELOPMENT PRODUCT(S) may include external installation references
 Whether included as part of the SOFTWARE DEVELOPMENT PRODUCT(S) installation package, or referenced as an external dependency or requirement, THE OPEN SOURCE LIBRARIES are provided "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL DEVEXPRESS, THE AUTHORS, OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE OPEN SOURCE LIBRARIES OR THE USE OF OTHER DEALINGS IN THE OPEN SOURCE LIBRARIES.
 
 THE OPEN SOURCE LIBRARIES listed in this section are included in this SOFTWARE DEVELOPMENT PRODUCT(S) installation package.
+
+Ace (Ajax.org Cloud9 Editor) (Open Source - BSD License)
+Copyright (c) 2010, Ajax.org B.V.
+https://github.com/ajaxorg/ace/blob/master/LICENSE 
+
+Bootstrap (Open Source – MIT License) 
+Copyright (c) 2011-2022 Twitter, Inc. / Copyright (c) 2011-2022 The Bootstrap Authors 
+https://github.com/twbs/bootstrap/blob/main/LICENSE
+
+Bouncy  Castle (Open Source - The Bouncy Castle License)
+Copyright (C) 2000-2020 The Legion of the Bouncy Castle Inc.
+Portions of the Bouncy Castle Library used to support X.509, CMS (RFC 3852), and Time Stamp Protocol (RFC 3161).
+https://github.com/bcgit/bc-csharp/blob/master/crypto/License.html
+
+cldrjs (Open Source - MIT License)
+Copyright (c) Rafael Xavier de Souza http://rafael.xavier.blog.br
+https://github.com/rxaviers/cldrjs/blob/master/LICENSE
+
 DevExtreme ASP.NET Data (Open Source – MIT License)
 Copyright (c) Developer Express Inc.
 https://github.com/DevExpress/DevExtreme.AspNet.Data/blob/master/LICENSE
+ 
+EntityFramework6 (Open Source - Apache License)
+Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.
+https://github.com/aspnet/EntityFramework6/blob/master/License.txt
+ 
+Globalize JavaScript Library (Open Source - MIT License) 
+Copyright (c) Software Freedom Conservancy, Inc. 
+http://jquery.org/license
+
+html2canvas (Open Source - MIT License)
+Copyright (c) 2012 Niklas von Hertzen
+https://github.com/niklasvh/html2canvas/blob/master/LICENSE
+
+International Components for Unicode (ICU License)
+Copyright © 2016 and later Unicode, Inc. and others. All Rights Reserved.
+https://github.com/unicode-org/icu
+
+jQuery JavaScript Library (Open Source - MIT License)
+Copyright (c) jQuery Foundation and other contributors
+http://jquery.com/ 
+ 
+jQueryUI JavaScript Library (Open Source - MIT License)
+Copyright (c) jQuery Foundation and other contributors
+http://jqueryui.com/ 
+ 
+JSZip JavaScript Library (Open Source - MIT License)
+Copyright (c) Stuart Knightley, David Duponchel, Franz Buchinger, António Afonso
+https://stuk.github.io/jszip/
+ 
+Knockout JavaScript Library (Open Source - MIT License)
+Copyright (c) Knockoutjs.com
+http://knockoutjs.com/ 
+http://opensource.org/licenses/mit-license.php 
+ 
+Lit (Open Source – BSD License)
+Copyright (c) 2017 Google LLC. All rights reserved.
+https://github.com/lit/lit/blob/main/LICENSE
+
+Mono: dotnet.js, dotnet.wasm  (Open Source – MIT License)
+Copyright 2018 Microsoft
+https://github.com/mono/mono/blob/main/LICENSE
+ 
+SQLite (Public Domain)
+https://www.sqlite.org/copyright.html
+
+System.Collections, System.Collections.Concurrent, System.ComponentModel, System.ComponentModel.TypeConverter, System.Console, System.IO.FileSystem, System.Linq, System.Linq.Expressions, System.ObjectModel, System.Private.CoreLib, System.Private.Runtime.InteropServices.JavaScript, System.Private.Uri, System.Runtime.CompilerServices.Unsafe, System.Text.RegularExpressions (Open Source – MIT License)
+Copyright (c) .NET Foundation and Contributors. All rights reserved.
+https://github.com/dotnet/runtime/blob/main/LICENSE.TXT
+
+tslib (Open Source – BSD Zero Clause License)
+https://github.com/microsoft/tslib/blob/master/LICENSE.txt 
 
 9.TWELVE (12) MONTH SUBSCRIPTION AND UPDATES.
 
@@ -122,13 +225,13 @@ REDISTRIBUTABLES referenced in this AGREEMENT are dependent upon the type of 12 
 
 DEVEXPRESS reserves the right to discontinue the SOFTWARE DEVELOPMENT PRODUCT(S) or its constituents, at any time.
 
-10.DOWNLOAD of SOFTWARE DEVELOPMENT PRODUCT(S).
+10.DOWNLOAD OF SOFTWARE DEVELOPMENT PRODUCT(S).
 
 The SOFTWARE DEVELOPMENT PRODUCT(S) will be made available for download from DevExpress.com exclusively.
 
 11.EXPORT RESTRICTIONS.
 
-DEVEXPRESS expressly complies with all export restrictions imposed by the government of the United States of America. You, as LICENSEE, must agree not to export or re-export the SOFTWARE DEVELOPMENT PRODUCT(S) within any created application to any country, person, entity or end user subject to U.S.A. export restrictions. Restricted countries currently include, but are not necessarily limited to Cuba, Iran, North Korea, Sudan, and Syria. You warrant and represent that neither the U.S.A. Bureau of Export Administration nor any other federal agency has suspended, revoked or denied your export privileges.
+DEVEXPRESS expressly complies with all export restrictions imposed by the government of the United States of America. You, as LICENSEE, must agree not to export or re-export the SOFTWARE DEVELOPMENT PRODUCT(S) within any created application to any country, person, entity or end user subject to U.S.A. export restrictions. Restricted countries currently include, but are not necessarily limited to Cuba, Iran, North Korea, Sudan, Syria, and Venezuela. You warrant and represent that neither the U.S.A. Bureau of Export Administration nor any other federal agency has suspended, revoked or denied your export privileges.
 
 12.DISCLAIMER OF WARRANTY.
 
@@ -160,13 +263,15 @@ DEVEXPRESS may provide you with support services related to the SOFTWARE DEVELOP
 
 Any supplemental SOFTWARE DEVELOPMENT PRODUCT(S) provided to you as part of the SUPPORT SERVICES shall be considered part of the SOFTWARE DEVELOPMENT PRODUCT(S) and subject to the terms and conditions of this AGREEMENT. With respect to technical information you provide to DEVEXPRESS as part of the SUPPORT SERVICES, DEVEXPRESS may use such information for its business purposes, including for SOFTWARE DEVELOPMENT PRODUCT(S) support and development.
 
+If the SOFTWARE DEVELOPMENT PRODUCT(S) you have obtained is marked as "COMPLIMENTARY" or "FREE", DEVEXPRESS shall restrict the availability of SUPPORT SERVICES, and may discontinue such applicable SUPPORT SERVICES at its sole discretion and without advance notice.
+
 17.TERMINATION.
 
 Without prejudice to any other rights or remedies, DEVEXPRESS will terminate this AGREEMENT upon your failure to comply with all the terms and conditions of this AGREEMENT. In such events, LICENSEE must destroy all copies of the SOFTWARE DEVELOPMENT PRODUCT(S) and all of its component parts including any related documentation, and must remove ANY and ALL use of DEVEXPRESS intellectual property from any applications distributed by LICENSEE, whether in native, altered or compiled states.
 
 18.TAX.
 
-DEVEXPRESS delivers its software electronically and does not collect sales or use tax for residents of US states in which it operates. You should confirm that your local, state, or federal government does not impose any sales or use tax on electronically delivered software. You are entirely liable for any such sales or use tax.
+DEVEXPRESS may be required by local, state, or national government laws, to collect sales or use tax from you. If DEVEXPRESS is not legally required to collect any applicable taxes at the time of purchase, you should confirm that your local, state, or national government does not impose any sales or use tax on electronically delivered software. You are entirely liable for any such sales or use tax.
 
 19.PERSONAL DATA.
 
@@ -182,23 +287,7 @@ DEVEXPRESS may disclose or report Confidential Information in limited circumstan
 
 DEVEXPRESS's use of personal data is governed by the terms set forth in our comprehensive Privacy Policy: https://www.devexpress.com/aboutus/privacy-policy.xml
 
-19.1 CUSTOMER EXPERIENCE PROGRAM.
-
-When you optionally join the Customer Experience Program, your computer or device automatically transmits information to DEVEXPRESS about the usage of the SOFTWARE DEVELOPMENT PRODUCT(S). This information is used to address issues within DEVEXPRESS products and improve quality/usability.
-
-Opt in/Opt out
-
-The Customer Experience Program is strictly optional and you can opt in or opt out of the program at any time by executing the DEVEXPRESS installer and making the appropriate selection within the installation program.
-
-Privacy
-
-The Customer Experience Program does not transmit personally identifiable information such as your name, address or phone number.
-
-What we collect
-
-The Customer Experience Program only collects information related to DEVEXPRESS controls and libraries. This information includes usage of DEVEXPRESS controls at design time within Visual Studio and usage of DEVEXPRESS demos. DEVEXPRESS CodeRush collects project type and file type information when you edit code in Visual Studio. No information is collected from applications/demos you create.
-
-19.2 DEMO FEEDBACK.
+19.1 DEMO FEEDBACK.
 
 Where applicable, the Demo Feedback feature presented within the included demo applications of the SOFTWARE DEVELOPMENT PRODUCT(S), allows you to send feedback to DEVEXPRESS and, optionally, include any additional information to describe the specific compliment or concern you may have with regards to the demo application. Although Demo Feedback doesn’t intentionally collect personally identifiable information, it is possible that such information might be captured in the feedback text you provide. DEVEXPRESS does not wish to receive such information nor will it use this information to identify you.
 Except as otherwise described in this statement, Demo Feedback does not transmit personal information to DEVEXPRESS.
