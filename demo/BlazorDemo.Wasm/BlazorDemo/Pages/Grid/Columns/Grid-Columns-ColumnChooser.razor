@@ -1,4 +1,7 @@
-﻿<DemoPageSectionComponent Id="Grid-Columns-ColumnChooser" ShowHorizontalScrollBar="true">
+﻿@page "/Grid/Columns/ColumnChooser"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Columns-ColumnChooser" ShowHorizontalScrollBar="true">
     <ChildContent>
         @inject NwindDataService NwindDataService
 

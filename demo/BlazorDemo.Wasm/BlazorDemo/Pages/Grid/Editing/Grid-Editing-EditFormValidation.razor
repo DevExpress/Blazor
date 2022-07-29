@@ -1,4 +1,7 @@
-﻿<DemoPageSectionComponent Id="Grid-Editing-EditFormValidation">
+﻿@page "/Grid/EditData/EditFormValidation"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Editing-EditFormValidation">
     <ChildContent>
         @inject NwindDataService NwindDataService
 
@@ -57,6 +60,10 @@
 
         protected override async Task OnInitializedAsync() {
             DataSource = await NwindDataService.GetEmployeesEditableAsync();
+        }
+        protected override async Task OnAfterRenderAsync(bool firstRender) {
+            if(firstRender)
+                await Grid.StartEditNewRowAsync();
         }
         async Task Grid_EditModelSaving(GridEditModelSavingEventArgs e) {
             var editableEmployee = (EditableEmployee)e.EditModel;

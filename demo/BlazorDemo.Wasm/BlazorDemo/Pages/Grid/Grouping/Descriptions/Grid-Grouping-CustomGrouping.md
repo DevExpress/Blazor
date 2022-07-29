@@ -1,4 +1,4 @@
-The DevExpress Blazor Grid allows you to apply custom data grouping logic. Use the steps below to implement custom data grouping logic:
+The DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid) allows you to apply custom data grouping logic. Use the steps below to implement custom data grouping logic:
 
 1. Set the [DxGridDataColumn.GroupInterval](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.GroupInterval) property to `GridColumnGroupInterval.Custom`. 
 2. Handle the [DxGrid.CustomGroup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomGroup) event to implement your logic. You should compare column values and define whether these values belong to the same group. Use the [GridCustomGroupEventArgs](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridCustomGroupEventArgs) event arguments (`Value1`, `Value2`, `SameGroup`, etc.) to access and compare column values. 

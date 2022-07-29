@@ -1,4 +1,7 @@
-﻿<DemoPageSectionComponent Id="Grid-MasterDetail-NestedGrid">
+﻿@page "/Grid/MasterDetail/NestedGrid"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-MasterDetail-NestedGrid">
     <ChildContent>
         @inject NwindDataService NwindDataService
         <DxGrid @ref="Grid" Data="MasterGridData" AutoCollapseDetailRow="AutoCollapseDetailRow">

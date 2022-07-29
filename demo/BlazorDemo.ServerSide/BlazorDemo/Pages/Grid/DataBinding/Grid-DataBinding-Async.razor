@@ -1,4 +1,7 @@
-﻿<DemoPageSectionComponent Id="Grid-DataBinding-Async">
+﻿@page "/Grid/DataBinding/Async"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-DataBinding-Async">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 

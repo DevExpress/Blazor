@@ -21,25 +21,6 @@
     display: contents;
 }
 
-
-
-.demo-page-section > .card {
-    box-shadow: none;
-}
-
 #section-ReportViewer .dx-listbox-scrollable.dxbs-dm.dropdown-menu {
     max-height: 292px;
-}
-
-@media (max-width: 1599.98px) {
-    .demo-page-right-container {
-        display: none;
-    }
-    .demo-page-section-component-area .component-container {
-        width: 100%;
-    }
-    .demo-page .demo-page-content {
-        max-width: 100%;
-        margin-right: 0;
-    }
 }

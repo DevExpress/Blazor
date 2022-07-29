@@ -1,4 +1,7 @@
-﻿<DemoPageSectionComponent Id="Grid-Templates-Column">
+﻿@page "/Grid/Templates/Column"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Templates-Column">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 

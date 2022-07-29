@@ -1,4 +1,7 @@
-﻿<DemoPageSectionComponent Id="Grid-PagingAndScrolling-Paging">
+﻿@page "/Grid/PagingAndScrolling/Paging"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-PagingAndScrolling-Paging">
     @inject NwindDataService NwindDataService
 
     <DxGrid Data="@DataSource"

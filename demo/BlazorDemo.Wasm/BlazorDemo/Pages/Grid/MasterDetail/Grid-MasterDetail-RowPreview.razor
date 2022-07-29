@@ -1,4 +1,7 @@
-﻿<DemoPageSectionComponent Id="Grid-MasterDetail-RowPreview">
+﻿@page "/Grid/MasterDetail/RowPreview"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-MasterDetail-RowPreview">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 

@@ -1,4 +1,7 @@
-﻿<DemoPageSectionComponent Id="Grid-Selection-Single">
+﻿@page "/Grid/Selection/Single"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Selection-Single">
     @inject NwindDataService NwindDataService
 
     <DxGrid Data="@Products"

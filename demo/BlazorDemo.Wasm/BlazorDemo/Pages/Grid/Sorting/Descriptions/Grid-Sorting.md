@@ -12,4 +12,4 @@ Use the following API members to sort Blazor Grid data in code:
 * [DxGrid.SortBy](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SortBy.overloads) - Sorts Grid data against a specified column. 
 * [DxGridDataColumn.SortIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.SortIndex) - Specifies a column's position among sorted columns. If the property is set to `-1`, grid data is not sorted by this column. 
 * [DxGridDataColumn.SortOrder](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.SortOrder) - Specifies a column's sort order (ascending or descending). 
-* [DxGridDataColumn.SortMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.SortMode) - Specifies how Grid data is sorted (by value, by display text, or custom logic is used)
+* [DxGridDataColumn.SortMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.SortMode) - Specifies how a column's data is sorted (by value, by display text, or custom logic is used)

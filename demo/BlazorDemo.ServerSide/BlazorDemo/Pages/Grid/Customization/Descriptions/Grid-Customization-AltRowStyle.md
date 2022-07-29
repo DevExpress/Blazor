@@ -1,4 +1,4 @@
-Our DevExpress Grid for Blazor allows you to customize the appearance of UI elements based on custom conditions. This module demonstrates how to highlight alternating (odd) rows with a different style to enhance readability. 
+Our DevExpress [Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid) for Blazor allows you to customize the appearance of UI elements based on custom conditions. This module demonstrates how to highlight alternating (odd) rows with a different style to enhance readability. 
 
 To do this, handle the Grid's [CustomizeElement](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomizeElement) event and use the following event [arguments](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridCustomizeElementEventArgs) to modify row and cell styles:
 

@@ -2,6 +2,12 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 22.1.4
+
+### Resolved Issues
+
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=22.1.3&endBuildName=22.1.4&buildsMode=Range&hasPlatformsWithProducts=true) for a complete list of issues resolved in v22.1.4.
+
 # 22.1.3
 
 ### New Accordion

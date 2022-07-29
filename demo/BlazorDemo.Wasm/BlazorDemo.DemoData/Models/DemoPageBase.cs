@@ -23,6 +23,9 @@ namespace BlazorDemo.DemoData {
 
         public bool? ReCreateOnThemeChange { get; set; }
 
+        public string RazorFilesFolder { get; set; }
+        public string DescriptionFilesFolder { get; set; }
+
         public string GetDescription() {
             return !string.IsNullOrEmpty(Description) ? Description : ParentPage?.GetDescription();
         }
@@ -30,7 +33,19 @@ namespace BlazorDemo.DemoData {
             return !string.IsNullOrEmpty(Keywords) ? Keywords : ParentPage?.GetKeywords();
         }
 
-        public override string GetUrl() { return !string.IsNullOrEmpty(Url) ? Url : Pages.Select(p => p.GetUrl()).FirstOrDefault(); }
+        public override string GetUrl() {
+            return !string.IsNullOrEmpty(Url) ? Url : Pages.Select(p => p.GetUrl()).FirstOrDefault();
+        }
+        public override string GetRazorFilesFolder() {
+            if(RazorFilesFolder == null)
+                return ParentPage?.GetRazorFilesFolder();
+            return UniqueResourceId + (string.IsNullOrWhiteSpace(RazorFilesFolder) ? "" : "." + RazorFilesFolder);
+        }
+        public override string GetDescriptionFilesFolder() {
+            if(DescriptionFilesFolder == null)
+                return ParentPage?.GetDescriptionFilesFolder();
+            return UniqueResourceId + (string.IsNullOrWhiteSpace(DescriptionFilesFolder) ? "" : "." + DescriptionFilesFolder);
+        }
         protected override DemoItemStatus GetStatusCore() {
             if(IsPreview)
                 return DemoItemStatus.Preview;

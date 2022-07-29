@@ -1,8 +1,8 @@
-The DevExpress Blazor Grid can split data rows across multiple pages and displays a pager to enable data navigation between pages. Use the [PagerNavigationMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.PagerNavigationMode) property to specify how users navigate among pages. The following values are available:
+The DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid) can split data rows across multiple pages and displays a pager to enable data navigation between pages. Use the [PagerNavigationMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.PagerNavigationMode) property to specify how users navigate among pages. The following values are available:
 
-* [InputBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PagerNavigationMode) - The pager includes an input box. Users can enter the desired page value within it.
-* [NumericButtons](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PagerNavigationMode) - The pager includes numeric buttons.
-* [Auto](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PagerNavigationMode) (Default) - If the number of pages is greater than or equal to the [PagerSwitchToInputBoxButtonCount](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.PagerSwitchToInputBoxButtonCount) value or the Grid is displayed on small devices, the pager displays an input box. Otherwise, numeric buttons are displayed.
+* `InputBox` - The pager includes an input box. Users can enter the desired page value within it.
+* `NumericButtons` - The pager includes numeric buttons.
+* `Auto` (default) - If the number of pages is greater than or equal to the [PagerSwitchToInputBoxButtonCount](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.PagerSwitchToInputBoxButtonCount) value or the Grid is displayed on small devices, the pager displays an input box. Otherwise, numeric buttons are displayed.
 
 The Grid also includes the following paging-related customization options:
 * [PageSize](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.PageSize) - Specifies the maximum number of rows displayed on a page.

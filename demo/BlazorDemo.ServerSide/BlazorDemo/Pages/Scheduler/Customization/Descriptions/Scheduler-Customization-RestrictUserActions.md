@@ -1,1 +1,5 @@
-You can prevent users from creating, updating, and deleting appointments. To do this, set the [AllowCreateAppointment](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.AllowCreateAppointment), [AllowEditAppointment](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.AllowEditAppointment), and [AllowDeleteAppointment](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.AllowDeleteAppointment) properties to `false`.
+The DevExpress Blazor [Scheduler](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler) allows you to prevent users from modifying appointments. Use the following proprties to control user edit capabilities:
+
+* [AllowCreateAppointment](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.AllowCreateAppointment) — Specifies whether users can create new appointments.
+* [AllowEditAppointment](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.AllowEditAppointment) — Specifies whether users can edit appointments.
+* [AllowDeleteAppointment](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.AllowDeleteAppointment) — Specifies whether users can delete appointments.

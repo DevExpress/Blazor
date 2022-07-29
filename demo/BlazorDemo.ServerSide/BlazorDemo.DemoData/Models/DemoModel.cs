@@ -50,7 +50,7 @@ namespace BlazorDemo.DemoData {
 
                 if(item.RedirectFrom?.Length > 0) {
                     foreach(var redirect in item.RedirectFrom)
-                        Redirects.Add(redirect, item.GetUrl());
+                        Redirects.Add(redirect.ToLower(), item.GetUrl());
                 }
             }
         }
@@ -102,22 +102,20 @@ namespace BlazorDemo.DemoData {
         }
         public string GetDemoItemDescriptionResourcePath(DemoItem item, string rootFolder) {
             return GetDemoItemResourcePath(item, rootFolder, s => {
-                if(!string.IsNullOrEmpty(item.RootPage.DescriptionFilesFolder))
-                    return item.RootPage.Id + "." + item.RootPage.DescriptionFilesFolder;
-                return s + ".Descriptions";
+                var folder = item.GetDescriptionFilesFolder();
+                return !string.IsNullOrEmpty(folder) ? folder : s + ".Descriptions";
             }, ".md");
         }
         public string GetDemoItemRazorResourcePath(DemoItem item, string rootFolder) {
             return GetDemoItemResourcePath(item, rootFolder, s => {
-                if(!string.IsNullOrEmpty(item.RootPage.RazorFilesFolder))
-                    return item.RootPage.Id + "." + item.RootPage.RazorFilesFolder;
-                return s;
+                var folder = item.GetRazorFilesFolder();
+                return !string.IsNullOrEmpty(folder) ? folder : s;
             }, ".razor");
         }
         string GetDemoItemResourcePath(DemoItem item, string rootFolder, Func<string, string> getFolder, string extension) {
             string[] itemIds = item.GetUniqueIdParts();
             var partCount = itemIds.Length;
-            if(item is DemoPageSection)
+            if(item is DemoPageSection || (!item.GetChildItems().Any() && item.ParentPage != item.RootPage))
                 partCount--;
             List<string> pathParts = new List<string>();
             if(!string.IsNullOrEmpty(rootFolder))
