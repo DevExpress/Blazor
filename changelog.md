@@ -2,11 +2,29 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 22.1.5 
+
+### Navigation and Layout 
+
+####  Tabs – Text Template 
+
+You can now specify a template for a tab’s text. Use the [TextTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTabBase.TextTemplate) property to add the template render fragment to the text. 
+
+#### API Enhancements 
+
+* [IToolbarItemInfo.Parent](https://docs.devexpress.com/Blazor/DevExpress.Blazor.IToolbarItemInfo.Parent) - Returns information about the Toolbar item’s parent. 
+
+* [IMenuItemInfo.Parent](https://docs.devexpress.com/Blazor/DevExpress.Blazor.IMenuItemInfo.Parent) - Returns information about the Menu item’s parent. 
+
+### Resolved Issues
+
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=22.1.5&endBuildName=21.2.5&buildsMode=Single&hasPlatformsWithProducts=true) for a complete list of issues resolved in v22.1.5.
+
 # 22.1.4
 
 ### Resolved Issues
 
-See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=22.1.3&endBuildName=22.1.4&buildsMode=Range&hasPlatformsWithProducts=true) for a complete list of issues resolved in v22.1.4.
+See our [Version History](https://supportcenter.devexpress.com/versionhistory?platformsWithProducts=3c616c71-03dc-46b9-a54f-1334a22dffe7&entries=ResolvedIssues&startBuildName=22.1.4&endBuildName=22.1.4&buildsMode=Range&hasPlatformsWithProducts=true) for a complete list of issues resolved in v22.1.4.
 
 # 22.1.3
 
