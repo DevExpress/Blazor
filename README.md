@@ -60,7 +60,7 @@ Refer to the [Themes](http://docs.devexpress.com/Blazor/401523/common-concepts/t
 
 # NuGet Package Change Log
 
-Check out the NuGet package's [version history](changelog.md).
+Check out the NuGet package's [version history](https://www.devexpress.com/support/versions.xml).
 
 # Version Compatibility
 
