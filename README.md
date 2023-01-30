@@ -21,13 +21,6 @@ The **demo** folder contains demo sources. For information on how to run demos l
 
 DevExpress Blazor components also ship with [online demos](https://demos.devexpress.com/blazor/). 
 
-# Free Blazor Utilities and Dev Tools
-
-The **tools** folder contains the DevExpress Blazor products available free-of-charge:
-
-* [Document metadata tool](https://github.com/DevExpress/Blazor/tree/master/tools/DevExpress.Blazor.DocumentMetadata)
-* [Anchor navigation tool](https://github.com/DevExpress/Blazor/tree/master/tools/DevExpress.Blazor.AnchorUtils)
-
 # Get Started
 
 The following help topics describe how to start using Blazor components:
