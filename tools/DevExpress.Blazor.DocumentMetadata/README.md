@@ -1,5 +1,5 @@
 # DevExpress SEO Metadata Tool
 
-⛔ DEPRECATED. This tool was deprecated. You can find relevant information in the Microsoft documentation: [Control <head> content in ASP.NET Core Blazor apps](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/control-head-content?view=aspnetcore-6.0).
+The Blazor SEO Metadata Tool has been deprecated.
 
-The current repository will not be updated in the future.
+This repository will not be updated in the future. Refer to the following Microsoft help topic for metadata related information: [Control content in ASP.NET Core Blazor apps](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/control-head-content?view=aspnetcore-6.0).

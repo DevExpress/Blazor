@@ -1,5 +1,5 @@
 # DevExpress Blazor Anchor Navigation Tool 
 
-⛔ DEPRECATED. This tool was deprecated.
+The Blazor Anchor Navigation tool has been deprecated.
 
-The current repository will not be updated in the future.
+This repository will not be updated in the future.
