@@ -8,6 +8,11 @@
     display: none;
 }
 
+.overview-navigation > .card-header {
+    font-weight: inherit;
+    font-size: inherit;
+}
+
 .overview-navigation > .card-body:last-child {
     flex-wrap: nowrap;
 }

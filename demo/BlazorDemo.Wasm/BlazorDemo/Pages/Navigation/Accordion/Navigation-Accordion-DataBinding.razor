@@ -4,7 +4,7 @@
 @using System.Text
 
 <DemoPageSectionComponent Id="Navigation-Accordion-DataBinding" VerticalAlignment=VerticalAlignment.Top MinHeight="296">
-    <ChildContent>
+    <DemoChildContent>
         @if(Data == null) {
             <p>
                 <em>Loading...</em>
@@ -25,7 +25,7 @@
                 </DxAccordion>
             </div>
         }
-    </ChildContent>
+    </DemoChildContent>
 
     @code {
         List<FlatDataItem> Data { get; set; }

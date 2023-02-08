@@ -38,7 +38,7 @@
     void AddUndoRedoGroup(BarGroupCollection groups) {
         IBarGroup undoRedoGroup = groups.AddCustomGroup();
         undoRedoGroup.Text = "Undo/Redo";
-        undoRedoGroup.IconUrl = "_content/BlazorDemo/images/undo.svg";
+        undoRedoGroup.IconCssClass = "tb-icon tb-icon-undo";
         IBarItem undoButton = undoRedoGroup.Items.Add(RichEditBarItemNames.Undo);
         undoButton.TextDisplayMode = TextDisplayMode.Adaptive;
         IBarItem redoButton = undoRedoGroup.Items.Add(RichEditBarItemNames.Redo);
@@ -46,7 +46,7 @@
     }
     void AddClipboardGroup(BarGroupCollection groups) {
         IBarGroup clipboardGroup = groups.AddCustomGroup();
-        clipboardGroup.IconUrl = "_content/BlazorDemo/images/Paste.svg";
+        clipboardGroup.IconCssClass = "tb-icon tb-icon-paste";
         IBarItem clipboardDropDown = clipboardGroup.Items.Add(RichEditBarItemNames.ClipboardMenu);
         clipboardDropDown.Text = "Clipboard";
     }
@@ -63,7 +63,7 @@
             async () => await rich.SaveDocumentAsync(),
             () => !modified
         );
-        saveButton.IconUrl = "_content/BlazorDemo/images/Save.svg";
+        saveButton.IconCssClass = "tb-icon tb-icon-save";
         saveButton.Tooltip = "Save the document.";
 
         //Adds a custom combo box
@@ -84,17 +84,17 @@
         //Adds a custom button
         IBarButton insertWatermarkButton = fileCommonGroup.Items.AddCustomButton("Watermark", InsertWatermarkAsync);
         insertWatermarkButton.GetEnabled = () => selection.ActiveSubDocument.Type == SubDocumentType.Main;
-        insertWatermarkButton.IconUrl = "_content/BlazorDemo/images/Watermark.svg";
+        insertWatermarkButton.IconCssClass = "tb-icon tb-icon-watermark";
         insertWatermarkButton.Tooltip = "Insert Watermark.";
     }
     void AddFormattingGroup(BarGroupCollection groups) {
         IBarGroup formattingGroup = groups.AddCustomGroup();
-        formattingGroup.IconUrl = "_content/BlazorDemo/images/Settings.svg";
+        formattingGroup.IconCssClass = "tb-icon tb-icon-settings";
         //Adds a custom drop-down item
         IBarDropDown fontDropDown = formattingGroup.Items.AddCustomDropDown(string.Empty);
         fontDropDown.Items.Add(RichEditBarItemNames.FontBold);
         fontDropDown.Items.Add(RichEditBarItemNames.FontItalic);
-        fontDropDown.IconUrl = "_content/BlazorDemo/images/Font.svg";
+        fontDropDown.IconCssClass = "tb-icon tb-icon-font";
         fontDropDown.Text = "Font";
 
         //Adds a custom color edit
@@ -131,7 +131,7 @@
         paragraphDropDown.Items.Add(RichEditBarItemNames.ParagraphAlignmentMenu);
         paragraphDropDown.Items.Add(RichEditBarItemNames.LineSpacingMenu);
         paragraphDropDown.Items.Add(RichEditBarItemNames.NumberingMenu);
-        paragraphDropDown.IconUrl = "_content/BlazorDemo/images/Paragraph.svg";
+        paragraphDropDown.IconCssClass = "tb-icon tb-icon-paragraph";
         paragraphDropDown.Text = "Paragraph";
     }
 
@@ -159,7 +159,7 @@
         Section section = await rich.DocumentAPI.Sections.GetAsync(0);
         try {
             SubDocument header = await section.GetHeaderAsync(createIfNotExist: true);
-            Image image = await header.Images.CreateAsync(0, DocumentImageSource.LoadFromUrl(NavigationManager.BaseUri + "_content/BlazorDemo/images/SampleWatermark.png", 5000, 5000));
+            Image image = await header.Images.CreateAsync(0, DocumentImageSource.LoadFromUrl(NavigationManager.BaseUri + "_content/BlazorDemo/images/documents/SampleWatermark.png", 5000, 5000));
             await image.ChangePropertiesAsync(ip => {
                 ip.HorizontalAnchorElement = FloatingObjectHorizontalAnchorElement.Page;
                 ip.VerticalAnchorElement = FloatingObjectVerticalAnchorElement.Page;

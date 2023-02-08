@@ -100,7 +100,7 @@ namespace DevExpress.Blazor.DocumentMetadata {
         }
 
         static bool IsAssemblyCanContainComponents(Assembly assembly) {
-            return assembly.GetReferencedAssemblies().Any(r => r.Name == RclBaseAssemblyName);
+            return assembly.FullName.StartsWith("BlazorDemo");
         }
 
         static bool IsSeoRelatedPage(Type type) {

@@ -71,26 +71,26 @@
     justify-content: center;
 }
 .e-icon {
-    --color-opacity: 1;
+    --color-opacity: 0.75;
     display: inline-block;
     background-color: currentColor;
     width: 16px;
     height: 16px;
 }
 .e-icon-address {
-    -webkit-mask-image: url("images/Employees/Address.svg");
-    mask-image: url("images/Employees/Address.svg");
+    -webkit-mask-image: url("images/icons/address.svg");
+    mask-image: url("images/icons/address.svg");
 }
 .e-icon-city {
-    -webkit-mask-image: url("images/Employees/City.svg");
-    mask-image: url("images/Employees/City.svg");
+    -webkit-mask-image: url("images/icons/city.svg");
+    mask-image: url("images/icons/city.svg");
 }
 .e-icon-birthdate {
-    -webkit-mask-image: url("images/Employees/BirthDate.svg");
-    mask-image: url("images/Employees/BirthDate.svg");
+    -webkit-mask-image: url("images/icons/birthdate.svg");
+    mask-image: url("images/icons/birthdate.svg");
 }
 .e-icon-phone {
-    -webkit-mask-image: url("images/Employees/Phone.svg");
-    mask-image: url("images/Employees/Phone.svg");
+    -webkit-mask-image: url("images/icons/phone.svg");
+    mask-image: url("images/icons/phone.svg");
 }
 

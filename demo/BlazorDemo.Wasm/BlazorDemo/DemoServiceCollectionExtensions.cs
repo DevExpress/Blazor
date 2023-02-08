@@ -1,8 +1,12 @@
 using System;
+using System.Globalization;
+using System.Reflection;
 using BlazorDemo.Configuration;
 using BlazorDemo.Services;
 using DevExpress.Blazor.DocumentMetadata;
+using DevExpress.Blazor.RichEdit.SpellCheck;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 
 
@@ -18,6 +22,22 @@ namespace BlazorDemo {
             services.AddScoped<WorldcitiesDataService>();
             services.AddDevExpressBlazor(opts => {
                 opts.BootstrapVersion = DevExpress.Blazor.BootstrapVersion.v5;
+            }).AddSpellCheck(opts => {
+                opts.FileProvider = new EmbeddedFileProvider(Assembly.GetExecutingAssembly(), "BlazorDemo");
+                opts.MaxSuggestionCount = 6;
+                opts.AddToDictionaryAction = (word, culture) => {
+                    //Write the selected word to a dictionary file
+                };
+                opts.Dictionaries.Add(new ISpellDictionary {
+                    DictionaryPath = "Data.Dictionaries.english.xlg",
+                    GrammarPath = "Data.Dictionaries.english.aff",
+                    Culture = "en-US"
+                });
+                opts.Dictionaries.Add(new Dictionary {
+                    DictionaryPath = "Data.Dictionaries.custom.dic",
+                    AlphabetPath = "Data.Dictionaries.english.txt",
+                    Culture = "en-US"
+                });
             });
 
             services.AddDocumentMetadata(ConfigureMetadata);

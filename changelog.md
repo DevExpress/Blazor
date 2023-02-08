@@ -2,6 +2,367 @@
 
 Version history of the "DevExpress.Blazor" NuGet package is listed below.
 
+# 22.2.4
+
+### Data Editors
+
+#### Command Buttons
+
+DevExpress [Blazor Editors](https://www.devexpress.com/blazor/data-editors/) can now display custom command buttons to the left or right of the text input region. You can also hide/customize default command buttons as requirements dictate (such as the button that activates a dropdown).
+
+[Demos](https://demos.devexpress.com/blazor/CommandButtons) | [Documentation](https://docs.devexpress.com/Blazor/404267/data-editors/command-buttons)
+
+# 22.2.3
+
+### .NET 7 Support
+
+Our Blazor components fully support .NET 7. The DevExpress Template Gallery now includes Blazor project templates for .NET 7.
+
+### Ahead-of-Time (AOT) Compilation Support
+
+DevExpress-powered Blazor WebAssembly apps now support ahead-of-time (AOT) compilation. You can compile your .NET code directly to WebAssembly.
+
+Note: AOT compilation improves runtime performance, but it does increase application size.
+
+In the Blazor WebAssembly app's project file, add the **RunAOTCompilation** property. Set this property to 'true' to enable WebAssembly AOT compilation.
+
+### Blazor Hybrid Support (CTP)
+
+You can now use DevExpress Blazor UI components in [Blazor Hybrid](https://learn.microsoft.com/en-us/aspnet/core/blazor/hybrid/) apps. With Blazor Hybrid, Razor components run natively on both mobile and desktop devices. This improves performance and provides access to native device capabilities through the .NET platform.
+
+DevExpress Blazor components support the following platforms with Blazor Hybrid:
+
+* .NET MAUI (Windows, MacOS, Android, iOS)
+* WinForms
+* WPF
+
+[Documentation](https://docs.devexpress.com/Blazor/404118/blazor-hybrid)
+
+### Bootstrap v5.2 Support
+
+DevExpress Blazor components now fully support the latest release of Bootstrap v5.2. Set the [BootstrapVersion](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Configuration.GlobalOptions.BootstrapVersion) option to v5 to ensure that your app works correctly.
+
+### New Render and Size Modes
+
+The DevExpress [Blazor Data Grid](https://www.devexpress.com/blazor/data-grid/) (DxGrid), Editors, Layout, and Navigation components now use our optimized rendering engine instead of Bootstrap. This change will allow us to extend our Blazor component suite with the following new capabilities/features:
+
+* Improved rendering performance with fewer JavaScript interop calls.
+* Consistent appearance across DevExpress Blazor components.
+
+Our new rendering engine significantly improves the capabilities of existing Blazor [Size Modes](https://docs.devexpress.com/Blazor/401784/common-concepts/customize-appearance/size-modes):
+
+* Blazor components (regardless of size mode used) are downsized to address the requirements of "dense" interfaces and display more relevant information on screen. The new Large Size Mode mirrors what used to be “Medium.” The new Medium mode is closer to what used to be “Small.” And our new Small mode allows you to deliver interfaces similar to desktop apps such as Microsoft Outlook.
+* New size modes apply to our Blazor Data Grid (DxGrid), Tabs, Flyout, and other UI components that previously did not support the size mode option.
+* Size modes now offer a more consistent user experience and affect all spacings/sizes across supported Blazor components. For example, our Blazor Form Layout component adjusts paddings between items/groups based on the selected size mode.
+Refer to the following article for instructions on how to update your app: [Bootstrap rendering was replaced with a new rendering engine](https://supportcenter.devexpress.com/internal/ticket/details/t1126535).
+
+### New Window
+
+Our new Window component is a non-modal window. Its features include:
+
+* Move & Resize
+* Header Customization
+* Show/Hide Close Button
+* Window Positioning (at a specified position or UI element)
+* Keyboard Support
+* Comprehensive API
+
+[Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow)
+
+### Grid
+
+#### Export Data to Excel
+
+Our Blazor Data Grid can now export data to Excel. With this new API, you can save your data to XLS, XLSX, and CSV files (or stream). Data export operations support grouping, sorting, filtering, totals, and group summaries.
+
+New API includes:
+
+* [ExportToXlsAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ExportToXlsAsync.overloads)
+* [ExportToXlsxAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ExportToXlsxAsync.overloads)
+* [ExportToCsvAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ExportToCsvAsync.overloads)
+
+All methods accept the 'options' parameter. This parameter allows you to customize the exported document.
+
+[Demo](https://demos.devexpress.com/blazor/Grid/Export/DataAwareExport)
+
+#### Search Box
+
+Our Blazor Data Grid component includes a progressive case-insensitive search option (allows you to locate matched text as you type). When you type within the search box, the Data Grid filters data rows, displays those that match the search string, and highlights search results.
+
+Additional features include:
+
+* Support for special characters.
+* Configurable input delay.
+* Search box placeholder (null text) support.
+* Ability to exclude specific columns from search operations.
+* Built-in search text parse modes.
+* Ability to specify search text in code (Search API).
+
+And yes, you can customize search box appearance settings, render the search box from a template, or use an external editor.
+
+[Documentation](https://docs.devexpress.com/Blazor/404142/grid/search-box)
+
+#### Integrated Editor Appearance
+
+DevExpress Data Editors embedded into cells share the same border with the cell itself.
+
+To enable the new mode, set the [EditorRenderMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.EditorRenderMode) property to 'Integrated'.
+
+[Demo](https://demos.devexpress.com/blazor/Grid/EditData/EditRow)
+
+#### Focused Row
+
+Our Blazor Grid now supports row focus. Users can focus a row with the mouse. Set the [FocusedRowEnabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.FocusedRowEnabled) property to 'true' to enable this feature.
+
+The [SetFocusedDataItemAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SetFocusedDataItemAsync(System.Object)) and [SetFocusedRowIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SetFocusedRowIndex(System.Int32)) methods allow you to focus a row in code. The Data Grid fires the [FocusedRowChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.FocusedRowChanged) event after the focused row has changed.
+
+[Demo](https://demos.devexpress.com/blazor/Grid/Selection/FocusedRow)
+
+#### Select All
+
+The new [SelectAllCheckboxMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SelectAllCheckboxMode) property specifies the behavior of the Select All check box. Available options include:
+
+* Page - selects/deselects all rows on the current page.
+* AllPages - selects/deselects all rows across all pages.
+* Mixed - selects/deselects all rows on the current page. A drop-down button opens a context menu and allows users to select and deselect all rows across all grid pages.
+
+New API includes:
+
+* [SelectAllAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SelectAllAsync(System.Boolean)) - Selects all rows in the grid.
+* [DeselectAllAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.DeselectAllAsync) - Deselects all rows in the grid.
+
+[Demo](https://demos.devexpress.com/blazor/Grid/Selection/SelectionColumn)
+
+#### Filter by Display Text
+
+The new [DxGridDataColumn.FilterMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.FilterMode) property specifies how to filter column data. Available options include:
+
+* DisplayText - filters data against text displayed within cells.
+* Value - filter data against cell values.
+
+#### Filter Expression API
+
+This new API allows you to filter data in code and implement an external filtering UI tailored to specific usage scenarios:
+
+* [GetFilterCriteria](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.GetFilterCriteria) - Gets the filter criteria applied to the grid.
+* [GetFieldFilterCriteria](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.GetFieldFilterCriteria(System.String)) - Gets the filter criteria applied to a specified field.
+* [SetFilterCriteria](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SetFilterCriteria(DevExpress.Data.Filtering.CriteriaOperator)) - Filters grid data against specified criteria.
+* [SetFieldFilterCriteria](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SetFieldFilterCriteria(System.String-DevExpress.Data.Filtering.CriteriaOperator)) - Filters specified field values. The Data Grid combines column filters with the AND operator.
+* [FilterCriteriaChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.FilterCriteriaChanged) - Fires after the filter criterion is changed.
+
+[Demo](https://demos.devexpress.com/blazor/Grid/Filtering/FilterAPI)
+
+#### Fixed and Relative Height
+
+You can explicitly set the height of our Blazor Grid or set the height as a percentage of the height of the container/viewport. The footer element will remain at the bottom regardless of the rows displayed within the Grid.
+
+### Accordion
+
+#### Item Selection
+
+Our Blazor Accordion component now supports item selection. Set the [SelectionMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxAccordion.SelectionMode) property to Single to enable this capability.
+
+Users can click an item header to select the item. The **SelectItem** method allows you to select an item in code.
+
+[Demo](https://demos.devexpress.com/blazor/Accordion#ItemSelection)
+
+#### URL-match Mode
+
+The Accordion component can automatically select an item if its [NavigateUrl](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxAccordion.UrlMatchMode) property value points to the current URL (which is displayed in the web-browser's address bar). Available modes include Current Path, Prefix, and Exact.
+
+Two new properties allow you to specify how the Accordion component matches URLs:
+
+* [DxAccordion.UrlMatchMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxAccordionItem.NavigateUrl) - Specifies URL-matching mode used for all items.
+* [DxAccordionItem.UrlMatchMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxAccordionItem.UrlMatchMode) - Specifies URL-matching mode used for a specific item.
+
+You can also use the [Reason](https://docs.devexpress.com/Blazor/DevExpress.Blazor.AccordionSelectionChangedEventArgs.Reason) property to identify why selection was changed.
+
+#### Expand and Collapse Animation
+
+You can now play the slide animation effect when expanding/collapsing Accordion items.
+
+[Demo](https://demos.devexpress.com/blazor/Accordion#Overview)
+
+### Data Editors
+
+#### New Mask Types
+
+* [Date-Time Offset](https://docs.devexpress.com/Blazor/402515/data-editors/masks/date-time-masks) - allows a user to enter only date and time values, and stores the time's offset from Coordinated Universal Time (UTC) in the editor's value. You can apply this mask to the DxDateEdit and DxMaskedInput components. The **DxDateTimeOffsetMaskProperties** class allows you to customize the mask settings.
+* [Time Span](https://docs.devexpress.com/Blazor/404167/data-editors/masks/time-span-masks) - allows users to enter only time intervals in DxMaskedInput. Use the **DxTimeSpanMaskProperties** class to configure the mask.
+
+[Demo](https://demos.devexpress.com/blazor/MaskedInput)
+
+#### Validation Icons
+
+Data editors can now display meaningful validation icons (Error or Success) and text-based feedback (tooltips).
+
+You can enable validation icons for all editors in your app or specify icon visibility for each editor individually.
+
+[Demo](https://demos.devexpress.com/blazor/FormValidation#FormLayout) | [Documentation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Configuration.GlobalOptions.ShowValidationIcon)
+
+#### Delayed Input
+
+Our data editors with text input fields (e.g., DxMaskedInput, DxMemo, DxTextBox, DxSpinEdit) can now update associated values with a delay. Enable this option if you wish to reduce value updates (reducing updates improves client-side performance).
+
+We also added a new **BindValueMode** property. Set it to 'OnDelayedInput' to enable delayed input. You can also use the **InputDelay** property to specify the delay period.
+
+[Demo](https://demos.devexpress.com/blazor/TextBox#OnInputBinding)
+
+#### Focus First Match
+
+Our Blazor ComboBox component automatically highlights the first match after a filter operation. This feature allows users to select values via the keyword.
+
+[Demo](https://demos.devexpress.com/blazor/ComboBox#Filtering)
+
+### Form Layout
+
+#### Collapsible Groups
+
+Users can now expand/collapse layout groups. You can use the **Expanded** property to expand or collapse a group in code.
+
+The new **ExpandButtonDisplayMode** property allows you to position the expand button within a group header. You can display the expand button to the left or right of the group caption, hide the expand button, or customize its appearance.
+
+You can also play the slide animation effect when expanding/collapsing Form Layout groups.
+
+[Demo](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutGroup#expand-a-group) | [Documentation](https://demos.devexpress.com/blazor/FormLayout#Groups)
+
+#### New Templates and Customization API
+
+The Form Layout component now includes new customization options for tab pages and layout groups.
+
+Tab Page API:
+
+* [CaptionTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutTabPage.CaptionTemplate)
+* [HeaderTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutTabPage.HeaderTemplate)
+* [HeaderIconCssClass](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutTabPage.HeaderIconCssClass)
+
+Layout Group API:
+
+* [CaptionTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutGroup.CaptionTemplate)
+* [HeaderContentTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutGroup.HeaderContentTemplate)
+* [HeaderIconCssClass](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutGroup.HeaderIconCssClass)
+
+You can also specify the [ColSpanXxl](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.FormLayoutItemBase.ColSpanXxl) property to define the number of columns a layout item, group, or tab page spans across large screens (1400px or wider).
+
+[Demo](https://demos.devexpress.com/blazor/FormLayout#Groups)
+
+### Menu
+
+#### API Enhancements
+
+* [IMenuItemInfo.Parent](https://docs.devexpress.com/Blazor/DevExpress.Blazor.IMenuItemInfo.Parent) - Gets the item's parent.
+* [DxMenu.Target](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu.Target) and [DxMenuItem.Target](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenuItem.Target) - Specifies the target attribute for all menu items or a specific item.
+
+### Reporting
+
+#### New Report Viewer & Designer for WebAssembly (ASP.NET Core Hosted)
+
+Our new **DxWasmDocumentViewer** and **DxWasmReportDesigner** WASM components are aimed at minimizing integration efforts and reducing support inquiries. These components ship as part of they** DevExpress.Blazor.Reporting.JSBasedControls.WebAssembly** Nuget package.
+
+[Documentation](https://docs.devexpress.com/XtraReports/404092/web-reporting/blazor-reporting/wasm/blazor-wasm-viewer-designer-js-based?)
+
+#### Native Report Viewer — Parameters Panel Layout
+
+Our Report Viewer component (DxReportViewer) can now render the Parameters panel with a custom layout.
+
+[Demo](https://demos.devexpress.com/blazor/ReportViewer/IndustryReports/Finance/SalesSummaryReport)
+
+#### New Project Templates
+
+The DevExpress Blazor App Template Gallery for Visual Studio now includes Reporting templates. Use these templates to jump start the BI application development (be it a Server or WebAssembly Hosted app) process.
+
+Reporting templates allow you to create an application that includes the following:
+
+* Report Designer
+* Report Viewer (JS-based)
+* Report Viewer (Native)
+* Report Storage
+* Sample SQL Connection, JSON/Object Data Source
+
+In the CLI, our new templates are available as:
+
+* dx.blazor.reporting.blazorserver
+* dx.blazor.reporting.webassembly
+
+### Rich Text Editor
+
+#### WebAssembly Support
+
+Our [Blazor Rich Text Editor](https://www.devexpress.com/blazor/rich-text-editor) now supports the Blazor WebAssembly hosting model. This model offers the following advantages (compared to the server hosting model):
+
+* The application remains functional if the server goes offline.
+* The application makes full use of the client's resources and capabilities.
+* Processing has moved from the server to the client, so your application takes up fewer server resources.
+* Serverless deployment scenarios are possible.
+
+In Web Assembly applications, our Rich Text Editor component provides the same functionality and behavior as that of a Blazor Server application.
+
+#### Spell Check
+
+Our Blazor Rich Text Editor now supports on-demand spell checking. It can detect spelling errors and suggest corrections.
+
+To enable spell checking, call the **AddSpellCheck** method to register a spell check service and set the [CheckSpelling](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.DxRichEdit.CheckSpelling) property to 'true'.
+
+The Rich Text Editor integrates a [spell check service](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.SpellCheck.SpellCheckExtensions) using an English dictionary and allows you to add other dictionaries (for various languages) as needed.
+
+Note: You are not limited by what's available out-of-the-box. You can implement and use a custom spell-check service if the default service does not address business requirements.
+
+[Demo](https://demos.devexpress.com/blazor/RichEditSpellCheck)
+
+#### API Enhancements
+
+* [DxRichEdit.PrintDocumentAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.DxRichEdit.PrintDocumentAsync(System.Threading.CancellationToken)) - Invokes the browser's Print dialog.
+* [Document.ChangeDefaultCharacterPropertiesAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.Document.ChangeDefaultCharacterPropertiesAsync(System.Action%7BDevExpress.Blazor.RichEdit.CharacterProperties%7D,System.Threading.CancellationToken.ChangeDefaultCharacterPropertiesAsync)) - Changes default character formatting used in a document.
+* [SubDocument.ClearFormattingAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.SubDocument.ClearFormattingAsync*) - Resets character formatting in the entire sub-document or in its interval to default settings.
+* [DxRichEdit.ContentInserted](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.DxRichEdit.ContentInserted)/[DxRichEdit.ContentRemoved](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.DxRichEdit.ContentRemoved) - Fires after content was inserted/removed from the document and allows you to track changes.
+
+### Tabs
+
+#### Disabled State
+
+A new [Enabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTabBase.Enabled) property allows you to enable/disable individual tabs.
+
+#### Tab Header Template
+
+The new [TextTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTabBase.TextTemplate) property allows you to define a tab header template, which can include custom UI visuals (such as command buttons).
+
+### Toolbar
+
+#### Bind to Data
+
+You can now bind our Blazor Toolbar component to a data source. To introduce this capability in your Blazor app, use its [Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar.Data) and [DataMappings](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar.DataMappings) properties. In bound mode, the Toolbar generates items automatically.
+
+[Demo](https://demos.devexpress.com/blazor/Toolbar#DataBinding)
+
+#### API Enhancements
+
+[IToolbarItemInfo.Parent](https://docs.devexpress.com/Blazor/DevExpress.Blazor.IToolbarItemInfo.Parent) - Gets the item's parent.
+[DxToolbar.Target](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar.Target) and [DxToolbarItem.Target](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.Target) - Specifies the target attribute for all toolbar items or a specific item.
+
+### TreeView
+
+#### URL-match Mode
+
+The Blazor TreeView component can now automatically expand a tree and select a node if its [NavigateUrl](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeViewNode.NavigateUrl) property value points to the current URL, which is displayed in the web-browser's address bar. Available modes include Current Path, Prefix, and Exact.
+
+Two new properties allow you to specify how the TreeView component matches URLs:
+
+* [DxTreeView.UrlMatchMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.UrlMatchMode) - Specifies URL-matching mode used for all nodes in a tree.
+* [DxTreeViewNode.UrlMatchMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeViewNode.UrlMatchMode) - Specifies URL-matching mode used for a specific node.
+
+You can also use the [Reason](https://docs.devexpress.com/Blazor/DevExpress.Blazor.TreeViewNodeEventArgs.Reason) property to identify why selection was changed.
+
+#### Expand and Collapse Animation
+
+You can now play the [slide animation effect](https://docs.devexpress.com/Blazor/DevExpress.Blazor.LayoutAnimationType) when expanding/collapsing TreeView nodes.
+
+[Demo](https://demos.devexpress.com/blazor/TreeView)
+
+#### Node Click Events
+
+* [DxTreeView.NodeClick](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeView.NodeClick) - Fires when a user clicks a node in a TreeView.
+* [DxTreeViewNode.Click](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeViewNode.Click) - Fires when a user clicks a specific node.
+
 # 22.1.5 
 
 ### Navigation and Layout 

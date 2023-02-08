@@ -1,0 +1,189 @@
+@inject NwindDataService NwindDataService
+@using System.Linq
+@using DevExpress.Blazor.Internal
+@using System.Collections.ObjectModel
+@using System.Text
+
+<DemoPageSectionComponent Id="Navigation-Accordion-ItemSelection" VerticalAlignment="VerticalAlignment.Top">
+    <DemoChildContent>
+        <div class="cw-480">
+            <DxAccordion @ref="@accordion"
+                         Data="@FinancialProducts"
+                         SelectionMode="NavigationSelectionMode.Single"
+                         SelectionChanged="SelectionChanged"
+                         AnimationType="LayoutAnimationType.Slide"
+                         RootItemExpandButtonDisplayMode="AccordionExpandButtonDisplayMode.End"
+                         SubItemExpandButtonDisplayMode="AccordionExpandButtonDisplayMode.None">
+                <DataMappings>
+                    <DxAccordionDataMapping AllowSelection="AllowSelection"
+                                            Children="Items" />
+                </DataMappings>
+                <ItemHeaderTextTemplate>
+                    @*BeginCollapse*@
+                    @{ var item = (FinancialProductInfo)context.DataItem; }
+                    <div class="fp-header @(context.HasChildren ? null : "fp-sub-header")">
+                        @if(context.HasChildren && !context.Expanded) {
+                            <span class="fp-badge @item.BadgeCssClass">@item.Items.Count</span>
+                        }
+                        @if(!string.IsNullOrEmpty(item.IconCssClass)) {
+                            <span class="@item.IconCssClass"></span>
+                        }
+                        <div class="fp-info">
+                            <span>@item.Title</span>
+                            <span class="fp-sub-title">@item.SubTitle</span>
+                        </div>
+                        @if(item.Apply != null) {
+                            <div class="fp-command-ctr" @onclick:stopPropagation="true">
+                                <DxButton Click="item.Apply"
+                                          SizeMode="SizeMode.Medium"
+                                          RenderStyle="ButtonRenderStyle.Primary"
+                                          Text="Apply Now" />
+                            </div>
+                        }
+                    </div>
+                    @*EndCollapse*@
+                </ItemHeaderTextTemplate>
+            </DxAccordion>
+        </div>
+
+        <DxPopup HeaderText="@SelectedItem?.Title"
+                 @bind-Visible="@DetailsPopupVisible"
+                 MinWidth="300px"
+                 ShowCloseButton="false">
+                 <BodyContentTemplate>
+                     <div class="fp-details">
+                         @(new MarkupString(SelectedItem?.Details))
+                         @*BeginCollapse*@
+                         <div class="fp-details-btn-ctr">
+                             @if(SelectedItem?.Apply != null) {
+                                 <DxButton Click="SelectedItem.Apply"
+                                           SizeMode="SizeMode.Medium"
+                                           RenderStyle="ButtonRenderStyle.Primary"
+                                           Text="Apply Now" />
+                             }
+                             <DxButton Click="context.CloseCallback"
+                                       SizeMode="SizeMode.Medium"
+                                       RenderStyle="ButtonRenderStyle.Secondary"
+                                       Text="Close" />
+                        </div>
+                        @*EndCollapse*@
+                    </div>
+                 </BodyContentTemplate>
+        </DxPopup>
+
+        @code {
+            DxAccordion accordion;
+            IEnumerable<FinancialProductInfo> _items;
+
+            bool DetailsPopupVisible { get; set; }
+
+            FinancialProductInfo SelectedItem { get; set; }
+
+            IEnumerable<FinancialProductInfo> FinancialProducts {
+                get {
+                    if(_items == null) {
+                        _items = new List<FinancialProductInfo>() {
+                            @*BeginCollapse*@
+                            new FinancialProductInfo() {
+                                Title = "Checking account",
+                                BadgeCssClass = "fp-badge-primary",
+                                Items = new List<FinancialProductInfo>() {
+                                    new FinancialProductInfo() {
+                                        Title = "Available balance",
+                                        IconCssClass = "fp-icon fp-icon-total",
+                                        SubTitle = "$36,750",
+                                        Details = $@"
+                                            <h1>$36,750</h1>
+                                            <small>Available balance as of today</small>"
+                                    },
+                                    new FinancialProductInfo() {
+                                        Title = "Rewards",
+                                        IconCssClass = "fp-icon fp-icon-bonus",
+                                        SubTitle = "$250",
+                                        Details = @"
+                                            <h1>$250</h1>
+                                            <small>Auto-redeemed at the end of the billing cycle</small>"
+                                    },
+                                }
+                            },
+                            new FinancialProductInfo() {
+                                Title = "Credit cards",
+                                BadgeCssClass = "fp-badge-primary",
+                                Items = new List<FinancialProductInfo>() {
+                                    new FinancialProductInfo() {
+                                        Title = "Cash Rewards Credit Card",
+                                        IconCssClass = "fp-icon fp-icon-credit",
+                                        SubTitle = "...1206",
+                                        Details = @"
+                                            <h1>$36,500</h1>
+                                            <div>
+                                                <small>Last statement balance</small>
+                                                <div class=""bill-info"">
+                                                    <span class=""fp-icon fp-icon-bill""></span>
+                                                    <span>XXXX XXXX XXXX 1206</span>
+                                                </div>
+                                        </div>"
+                                    },
+                                    new FinancialProductInfo() {
+                                        Title = "Travel Rewards Credit Card",
+                                        IconCssClass = "fp-icon fp-icon-debit",
+                                        SubTitle = "...7020",
+                                        Details = @"
+                                            <h1>$10,000</h1>
+                                            <div>
+                                                <small>Last statement balance</small>
+                                                <div class=""bill-info"">
+                                                    <span class=""fp-icon fp-icon-bill""></span>
+                                                    <span>XXXX XXXX XXXX 7020</span>
+                                                </div>
+                                            </div>"
+                                    }
+                                }
+                            },
+                            new FinancialProductInfo() {
+                                Title = "Financing offers",
+                                BadgeCssClass = "fp-badge-success",
+                                Items = new List<FinancialProductInfo>() {
+                                    new FinancialProductInfo() {
+                                        Title = "New car (dealer)",
+                                        SubTitle = "4.3% APR*",
+                                        Apply = () => { },
+                                        Details = @"
+                                            <h1>4.3% APR</h1>
+                                            <small>Fixed annual percentage rate</small>"
+                                    }
+                                }
+                            }
+                            @*EndCollapse*@
+                        };
+                    }
+                    return _items;
+                }
+            }
+
+            void SelectionChanged(AccordionSelectionChangedEventArgs args) {
+                if(args.SelectedItems.Any()) {
+                    SelectedItem = (FinancialProductInfo)args.SelectedItems.FirstOrDefault().DataItem;
+                    DetailsPopupVisible = true;
+                }
+                else
+                    SelectedItem = null;
+            }
+
+            class FinancialProductInfo {
+                public string Title { get; set; }
+                public string SubTitle { get; set; }
+                public string Details { get; set; }
+                @*BeginCollapse*@
+                public string IconCssClass { get; set; }
+                public string BadgeCssClass { get; set; }
+                public List<FinancialProductInfo> Items { get; set; }
+                public Action Apply { get; set; }
+                public bool AllowSelection => !(Items != null && Items.Any());
+                @*EndCollapse*@
+            }
+        }
+    </DemoChildContent>
+</DemoPageSectionComponent>
+
+

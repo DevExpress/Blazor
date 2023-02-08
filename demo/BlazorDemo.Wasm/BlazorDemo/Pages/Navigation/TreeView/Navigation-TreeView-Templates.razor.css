@@ -22,12 +22,12 @@
 }
 
 .demo-treeview-template .treeview-expand-btn.expanded {
-    -webkit-mask-image: url("images/chevron-down.svg");
-    mask-image: url("images/chevron-down.svg");
+    -webkit-mask-image: url("images/icons/chevron-down.svg");
+    mask-image: url("images/icons/chevron-down.svg");
 
 }
 
 .demo-treeview-template .treeview-expand-btn.collapsed {
-    -webkit-mask-image: url("images/chevron-right.svg");
-    mask-image: url("images/chevron-right.svg");
+    -webkit-mask-image: url("images/icons/chevron-right.svg");
+    mask-image: url("images/icons/chevron-right.svg");
 }

@@ -1,7 +1,7 @@
 ﻿@page "/ChartZoomAndPan"
 
 <DemoPageSectionComponent Id="Charts-ZoomAndPan">
-    <ChildContent>
+    <DemoChildContent>
         <DxChart @ref="@chart"
                  T="DatePricePoint"
                  Data="@UsdJpyData"
@@ -44,7 +44,7 @@
             </DxChartTooltip>
 
         </DxChart>
-    </ChildContent>
+    </DemoChildContent>
 
     <OptionsContent>
         <OptionChartExportComponent ExportMethod="@ExportChart"/>

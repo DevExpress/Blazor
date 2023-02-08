@@ -1,5 +1,5 @@
 ﻿<DemoPageSectionComponent Id="Charts-RangeSeries-Area">
-    <ChildContent>
+    <DemoChildContent>
         @inject IWeatherSummaryDataProvider WeatherSummaryDataProvider
 
         <DxChart @ref="@chart"
@@ -23,7 +23,7 @@
                 <DxChartAxisLabel Format="ChartElementFormat.Month" />
             </DxChartArgumentAxis>
         </DxChart>
-    </ChildContent>
+    </DemoChildContent>
 
     <OptionsContent>
         <OptionChartExportComponent ExportMethod="@ExportChart"/>

@@ -1,38 +1,40 @@
-﻿<DemoPageSectionComponent Id="Navigation-Tabs-CustomContent">
-    <div class="cw-480 ch-220">
-        <DxTabs @bind-ActiveTabIndex="@ActiveTabIndex">
-            <DxTab Text="About Us"></DxTab>
-            <DxTab Text="Web Controls"></DxTab>
-            <DxTab Text="Support"></DxTab>
-        </DxTabs>
-        <div class="card dxbs-border-top-0 dxbs-border-radius-top-0" style="min-height: 190px">
-            <div class="card-body">
-                @switch(ActiveTabIndex) {
-                    case 0:
-                        <h4>From 1998 to the Present</h4>
-                        <p>We look forward to working with you and will do everything we can to make your experience with us a profitable one.</p>
-                        break;
-                    case 1:
-                        <ul>
-                            <li><a href="https://www.devexpress.com/products/net/controls/asp/">ASP.NET Web Forms </a></li>
-                            <li><a href="https://www.devexpress.com/products/net/controls/asp/mvc/">ASP.NET MVC</a></li>
-                            <li><a href="https://www.devexpress.com/products/net/controls/asp/core.xml">ASP.NET Core</a></li>
-                            <li><a href="https://www.devexpress.com/products/net/controls/asp/bootstrap-webforms.xml">Bootstrap Web Forms</a></li>
-                            <li><a href="https://js.devexpress.com/">JavaScript - jQuery, Angular, React, Vue</a></li>
-                            <li><a href="https://www.devexpress.com/blazor/">Blazor</a></li>
-                            <li><a href="https://www.devexpress.com/subscriptions/reporting/">Web Reporting</a></li>
-                        </ul>
-                        break;
-                    case 2:
-                        <p>Submit your support inquiries via the <a href="https://supportcenter.devexpress.com/">DevExpress Support Center</a> for assistance.</p>
-                        break;
+﻿<DemoPageSectionComponent Id="Navigation-Tabs-CustomContent" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="cw-480 ch-220">
+            <DxTabs @bind-ActiveTabIndex="@ActiveTabIndex" SizeMode="Params.SizeMode">
+                <DxTab Text="About Us"></DxTab>
+                <DxTab Text="Web Controls"></DxTab>
+                <DxTab Text="Support"></DxTab>
+            </DxTabs>
+            <div class="card tabs-border-top-0 tabs-border-radius-top-0" style="min-height: 190px">
+                <div class="card-body">
+                    @switch(ActiveTabIndex) {
+                        case 0:
+                            <h4>From 1998 to the Present</h4>
+                            <p>We look forward to working with you and will do everything we can to make your experience with us a profitable one.</p>
+                            break;
+                        case 1:
+                            <ul>
+                                <li><a href="https://www.devexpress.com/products/net/controls/asp/">ASP.NET Web Forms </a></li>
+                                <li><a href="https://www.devexpress.com/products/net/controls/asp/mvc/">ASP.NET MVC</a></li>
+                                <li><a href="https://www.devexpress.com/products/net/controls/asp/core.xml">ASP.NET Core</a></li>
+                                <li><a href="https://www.devexpress.com/products/net/controls/asp/bootstrap-webforms.xml">Bootstrap Web Forms</a></li>
+                                <li><a href="https://js.devexpress.com/">JavaScript - jQuery, Angular, React, Vue</a></li>
+                                <li><a href="https://www.devexpress.com/blazor/">Blazor</a></li>
+                                <li><a href="https://www.devexpress.com/subscriptions/reporting/">Web Reporting</a></li>
+                            </ul>
+                            break;
+                        case 2:
+                            <p>Submit your support inquiries via the <a href="https://supportcenter.devexpress.com/">DevExpress Support Center</a> for assistance.</p>
+                            break;
 
-                }
+                    }
+                </div>
             </div>
         </div>
-    </div>
 
-    @code {
-        int ActiveTabIndex { get; set; } = 1;
-    }
+        @code {
+            int ActiveTabIndex { get; set; } = 1;
+        }
+    </ChildContentWithParameters>
 </DemoPageSectionComponent>

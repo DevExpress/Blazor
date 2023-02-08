@@ -1,8 +1,9 @@
-﻿<DemoPageSectionComponent Id="Navigation-Toolbar-DropDown">
+﻿<DemoPageSectionComponent Id="Navigation-Toolbar-DropDown" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         <div class="card w-100">
-            <div class="card-header border-0 p-2">
+            <div class="card-header p-2 demo-bg-transparent">
                 <DxToolbar DropDownDisplayMode="@SelectedDisplayMode"
+                           SizeMode="Params.SizeMode"
                            ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
                     <Items>
                         @foreach(var item in MenuItems) {
@@ -14,7 +15,7 @@
             <div class="card-body">
                 <div style="@Formatting.GetStyleString()">
                     @*BeginHide*@
-                    <span class="dxbs-preventsel">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</span>
+                    <span class="demo-preventsel">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</span>
                     @*EndHide*@
                 </div>
             </div>
@@ -76,12 +77,13 @@
             return
                 @<DxToolbarItem Text="@item.Text"
                                 DropDownCaption="@item.Category"
-                                BeginGroup="@item.BeginGroup"
+                                BeginGroup="item.BeginGroup"
                                 Click="item.Click"
-                                Checked="@item.Checked"
-                                SplitDropDownButton="@item.SplitMenuButton"
+                                Checked="item.Checked"
+                                SplitDropDownButton="item.SplitMenuButton"
                                 IconCssClass="@item.IconCss"
-                                Tooltip="@item.Tooltip">
+                                Tooltip="@item.Tooltip"
+                                Enabled="item.Enabled">
                     <Items>
                         @if(item.Children != null) {
                             @foreach(var child in item.Children) {

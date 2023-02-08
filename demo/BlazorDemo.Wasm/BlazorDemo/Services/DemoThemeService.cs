@@ -34,9 +34,7 @@ namespace BlazorDemo.Services {
         readonly Dictionary<string, string> HighlightJSThemes = new Dictionary<string, string>() {
             { DefaultThemeName, "default" },
             { "blazing-dark", "androidstudio" },
-            { "cyborg", "androidstudio" },
-            { "darkly", "androidstudio" },
-            { "slate", "atom-one-dark" }
+            { "cyborg", "androidstudio" }
         };
 
         public IDemoThemeChangeRequestDispatcher ThemeChangeRequestDispatcher { get; set; }
@@ -103,10 +101,8 @@ namespace BlazorDemo.Services {
 
         private static List<DemoThemeSet> CreateSets(DemoThemeService config) {
             return new List<DemoThemeSet>() {
-                new DemoThemeSet("Color Themes",  "default"),
                 new DemoThemeSet("DevExpress Themes", "blazing-berry", "blazing-dark", "purple", "office-white"),
-                new DemoThemeSet("Bootswatch Themes", "cerulean", "cosmo", "cyborg", "darkly", "flatly", "journal", "litera", "lumen", "lux", "materia", "minty", "pulse",
-                    "sandstone", "simplex", "sketchy", "slate", "solar", "spacelab", "superhero", "united", "yeti")
+                new DemoThemeSet("Bootstrap Themes", "default", "cerulean", "cyborg", "flatly", "journal", "litera", "lumen", "lux", "pulse", "simplex", "solar", "superhero", "united", "yeti")
             };
         }
     }

@@ -11,47 +11,39 @@
             </p>
         </div>
         <div class="card-body">
-            <DxFormLayout>
+            <DxFormLayout SizeMode="@SizeMode">
                 <DxFormLayoutItem ColSpanMd="12">
-                    <Template>
-                        <DxTextBox @bind-Text="@Data.Username"
-                                   NullText="Username"
-                                   ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"/>
-                        <div class="text-danger">
-                            <ValidationMessage For="@(() => Data.Username)" />
-                        </div>
-                    </Template>
+                    <DxTextBox @bind-Text="@Data.Username"
+                               NullText="Username"
+                               ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"/>
+                    <div class="text-danger">
+                        <ValidationMessage For="@(() => Data.Username)" />
+                    </div>
                 </DxFormLayoutItem>
                 <DxFormLayoutItem ColSpanMd="12">
-                    <Template>
-                        <DxTextBox @bind-Text="@Data.Password"
-                                   NullText="Password"
-                                   Password="true"
-                                   ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"/>
-                        <div class="text-danger">
-                            <ValidationMessage For="@(() => Data.Password)" />
-                        </div>
-                    </Template>
+                    <DxTextBox @bind-Text="@Data.Password"
+                               NullText="Password"
+                               Password="true"
+                               ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"/>
+                    <div class="text-danger">
+                        <ValidationMessage For="@(() => Data.Password)" />
+                    </div>
                 </DxFormLayoutItem>
                 <DxFormLayoutItem ColSpanMd="12">
-                    <Template>
-                        <DxButton CssClass="w-100"
-                                  Text="Login"
-                                  RenderStyle="ButtonRenderStyle.Primary"
-                                  SubmitFormOnClick="true"/>
-                    </Template>
+                    <DxButton CssClass="w-100"
+                              Text="Login"
+                              RenderStyle="ButtonRenderStyle.Primary"
+                              SubmitFormOnClick="true"/>
                 </DxFormLayoutItem>
                 <DxFormLayoutItem ColSpanMd="12">
-                    <Template>
-                        <div class="text-center pt-2">
-                            <div class="tm-8 fs-825">
-                                Do not have an account?
-                            </div>
-                            <DxButton Text="Create an account"
-                                      RenderStyle="ButtonRenderStyle.Link"
-                                      Click="GotoRegistrationFormClick"/>
+                    <div class="text-center pt-2">
+                        <div class="tm-8 fs-825">
+                            Do not have an account?
                         </div>
-                    </Template>
+                        <DxButton Text="Create an account"
+                                  RenderStyle="ButtonRenderStyle.Link"
+                                  Click="GotoRegistrationFormClick"/>
+                    </div>
                 </DxFormLayoutItem>
             </DxFormLayout>
         </div>
@@ -63,6 +55,8 @@
 
 
 @code {
+    [Parameter]
+    public SizeMode SizeMode { get; set; }
     [Parameter]
     public EventCallback GotoRegistrationForm { get; set; }
 

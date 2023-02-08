@@ -2,7 +2,7 @@
 @layout DataProviderAccessArea<INwindDataProvider>
 
 <DemoPageSectionComponent Id="DataGrid-ResizeColumns" ShowHorizontalScrollBar="true">
-    <ChildContent>
+    <DemoChildContent>
         @inject NwindDataService NwindDataService
 
         <DxDataGrid DataAsync="@NwindDataService.GetCustomersAsync" ColumnResizeMode="@CurrentMode">
@@ -14,7 +14,7 @@
                 <DxDataGridColumn Field="@nameof(Customer.Country)" />
             </Columns>
         </DxDataGrid>
-    </ChildContent>
+    </DemoChildContent>
     <OptionsContent>
         <OptionComboBox Label="Column Resize Mode:" Data="@Modes" @bind-Value="@CurrentMode" />
     </OptionsContent>

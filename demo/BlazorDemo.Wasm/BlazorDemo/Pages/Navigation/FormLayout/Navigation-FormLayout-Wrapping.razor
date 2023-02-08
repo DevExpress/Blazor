@@ -1,6 +1,6 @@
 ﻿<DemoPageSectionComponent Id="Navigation-FormLayout-Wrapping" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <DxFormLayout ItemSizeMode="Params.SizeMode" CssClass="w-100">
+        <DxFormLayout SizeMode="Params.SizeMode" CssClass="w-100">
             <DxFormLayoutItem Caption="Address:" ColSpanMd="12">
                 <DxTextBox @bind-Text="@Address" />
             </DxFormLayoutItem>
@@ -14,7 +14,7 @@
                 <DxTextBox @bind-Text="@Country" />
             </DxFormLayoutItem>
         </DxFormLayout>
-        <div class="row w-100 mx-0">
+        <div class="w-100 mx-0 mt-3">
             <p class="demo-text col-12 mt-2">
                 @nameof(Address)=<b>@Address</b>,
                 @nameof(City)=<b>@City</b>,

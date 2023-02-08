@@ -27,48 +27,34 @@
                     <DataAnnotationsValidator />
                     <DxFormLayout>
                         <DxFormLayoutItem Caption="First Name:" ColSpanMd="6" Context="FormLayoutContext">
-                            <Template>
-                                <DxTextBox @bind-Text="@EditContext.FirstName" />
-                            </Template>
+                            <DxTextBox @bind-Text="@EditContext.FirstName" />
                         </DxFormLayoutItem>
                         <DxFormLayoutItem Caption="Last Name:" ColSpanMd="6" Context="FormLayoutContext">
-                            <Template>
-                                <DxTextBox @bind-Text="@EditContext.LastName" />
-                            </Template>
+                            <DxTextBox @bind-Text="@EditContext.LastName" />
                         </DxFormLayoutItem>
                         <DxFormLayoutItem Caption="Title:" ColSpanMd="6" Context="FormLayoutContext">
-                            <Template>
-                                <DxTextBox @bind-Text="@EditContext.Title" />
-                            </Template>
+                            <DxTextBox @bind-Text="@EditContext.Title" />
                         </DxFormLayoutItem>
                         <DxFormLayoutItem Caption="Title of Courtesy:" ColSpanMd="6" Context="FormLayoutContext">
-                            <Template>
-                                <DxTextBox @bind-Text="@EditContext.TitleOfCourtesy" />
-                            </Template>
+                            <DxTextBox @bind-Text="@EditContext.TitleOfCourtesy" />
                         </DxFormLayoutItem>
                         <DxFormLayoutItem Caption="Birth Date:" ColSpanMd="6" Context="FormLayoutContext">
-                            <Template>
-                                <DxDateEdit @bind-Date="@EditContext.BirthDate" />
-                            </Template>
+                            <DxDateEdit @bind-Date="@EditContext.BirthDate" />
                         </DxFormLayoutItem>
                         <DxFormLayoutItem Caption="Hire Date:" ColSpanMd="6" Context="FormLayoutContext">
-                            <Template>
-                                <DxDateEdit @bind-Date="@EditContext.HireDate" />
-                            </Template>
+                            <DxDateEdit @bind-Date="@EditContext.HireDate" />
                         </DxFormLayoutItem>
                         <DxFormLayoutItem Caption="Notes:" ColSpanMd="12" Context="FormLayoutContext">
-                            <Template>
-                                <DxMemo @bind-Text="@EditContext.Notes" Rows="5" />
-                            </Template>
+                            <DxMemo @bind-Text="@EditContext.Notes" Rows="5" />
                         </DxFormLayoutItem>
                         <DxFormLayoutItem ColSpanMd="12" Context="FormLayoutContext">
-                                <ValidationSummary />
+                            <ValidationSummary />
                         </DxFormLayoutItem>
                         <DxFormLayoutItem ColSpanMd="12" Context="FormLayoutContext">
-                                <div class="text-end">
-                                    <DxButton RenderStyle="ButtonRenderStyle.Primary" SubmitFormOnClick="true" Text="Update" />
-                                    <DxButton RenderStyle="ButtonRenderStyle.Link" Click="OnCancelButtonClick" Text="Cancel" />
-                                </div>
+                            <div class="text-end">
+                                <DxButton RenderStyle="ButtonRenderStyle.Primary" SubmitFormOnClick="true" Text="Update" />
+                                <DxButton RenderStyle="ButtonRenderStyle.Link" Click="OnCancelButtonClick" Text="Cancel" />
+                            </div>
                         </DxFormLayoutItem>
                     </DxFormLayout>
                 </EditForm>

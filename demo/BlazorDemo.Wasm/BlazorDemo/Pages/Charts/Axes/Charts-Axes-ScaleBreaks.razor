@@ -1,5 +1,5 @@
 ﻿<DemoPageSectionComponent Id="Charts-Axes-ScaleBreaks">
-    <ChildContent>
+    <DemoChildContent>
         <DxChart T="PlanetInfo"
                  Data="PlanetMassData"
                  Width="100%"
@@ -43,7 +43,7 @@
             bool ShowScaleBreaks { get; set; } = true;
             int MaxScaleBreakCount { get; set; } = 4;
         }
-    </ChildContent>
+    </DemoChildContent>
     <OptionsContent>
         <OptionCheckBox Label="Show Scale Breaks" @bind-Checked="@ShowScaleBreaks" />
         <OptionSpinEdit Label="Max count:" MinValue="1" MaxValue="5" @bind-Value="@MaxScaleBreakCount" Enabled="ShowScaleBreaks" CssClass="ow-100" />

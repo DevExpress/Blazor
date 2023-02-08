@@ -27,10 +27,12 @@ namespace BlazorDemo.Data.Northwind {
         public string Notes { get; set; }
         public Nullable<int> ReportsTo { get; set; }
         public string PhotoPath { get; set; }
+        public string GroupName { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
 
         public string Text => $"{FirstName} {LastName} ({Title})";
-        public string ImageFileName => $"Employees/{EmployeeId}.jpg";
+        public string FullName => $"{FirstName} {LastName}";
+        public string ImageFileName => $"employees/{EmployeeId}.jpg";
     }
 }

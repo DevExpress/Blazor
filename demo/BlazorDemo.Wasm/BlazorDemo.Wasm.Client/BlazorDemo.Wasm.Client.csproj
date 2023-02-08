@@ -19,7 +19,8 @@
     <ProjectReference Include="..\BlazorDemo\BlazorDemo.Wasm.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor" Version="22.1.4" />
+    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="22.2.4" />
+    
     
   </ItemGroup>
   <ItemGroup>

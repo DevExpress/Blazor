@@ -1,22 +1,18 @@
 ﻿<DemoPageSectionComponent Id="Editors-TagBox-ReadOnly" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <DxFormLayout ItemSizeMode="Params.SizeMode"
+        <DxFormLayout SizeMode="Params.SizeMode"
                       CssClass="cw-480">
 
             <DxFormLayoutItem ColSpanMd="12" Caption="Read-Only">
-                <Template>
-                    <DxTagBox Data="@DataSource"
-                              @bind-Values="@Options"
-                              ReadOnly="true" />
-                </Template>
+                <DxTagBox Data="@DataSource"
+                          @bind-Values="@Options"
+                          ReadOnly="true" />
             </DxFormLayoutItem>
 
             <DxFormLayoutItem ColSpanMd="12" Caption="Disabled" BeginRow="true">
-                <Template>
-                    <DxTagBox Data="@DataSource"
-                              @bind-Values="@Options"
-                              Enabled="false" />
-                </Template>
+                <DxTagBox Data="@DataSource"
+                          @bind-Values="@Options"
+                          Enabled="false" />
             </DxFormLayoutItem>
 
         </DxFormLayout>

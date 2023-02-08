@@ -1,7 +1,7 @@
 ﻿@page "/Scheduler/Resources/GroupByResource"
 
 <DemoPageSectionComponent Id="Scheduler-Resources-GroupByResource">
-    <ChildContent>
+    <DemoChildContent>
         <DxScheduler StartDate="@DateTime.Today"
                      DataStorage="@DataStorage"
                      GroupType="SchedulerGroupType.Resource"
@@ -11,7 +11,7 @@
             <DxSchedulerMonthView CellMinWidth="120"></DxSchedulerMonthView>
             <DxSchedulerTimelineView CellMinWidth="70"></DxSchedulerTimelineView>
         </DxScheduler>
-    </ChildContent>
+    </DemoChildContent>
     <OptionsContent>
         <OptionCheckBox @bind-Checked="@ResourceColorInHeaderVisible" Label="Resource Color In Header Visible"/>
     </OptionsContent>

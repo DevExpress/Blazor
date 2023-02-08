@@ -1,7 +1,9 @@
-﻿<DemoPageSectionComponent Id="Navigation-TreeView-Selection">
+﻿<DemoPageSectionComponent Id="Navigation-TreeView-Selection" VerticalAlignment=VerticalAlignment.Top>
     <div class="cw-240">
         <h5 class="card-title">Chemical elements</h5>
-        <DxTreeView AllowSelectNodes="true" SelectionChanged="@SelectionChanged">
+        <DxTreeView AllowSelectNodes="true"
+                    SelectionChanged="@SelectionChanged"
+                    AnimationType="LayoutAnimationType.Slide">
             <Nodes>
                 <DxTreeViewNode Text="Metals">
                     <Nodes>
@@ -33,9 +35,8 @@
     @code  {
         string SelectedGroup = "none";
 
-        protected void SelectionChanged(TreeViewNodeEventArgs e) {
+        void SelectionChanged(TreeViewNodeEventArgs e) {
             SelectedGroup = e.NodeInfo?.Text;
-            InvokeAsync(StateHasChanged);
         }
     }
 </DemoPageSectionComponent>

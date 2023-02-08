@@ -1,14 +1,15 @@
 ﻿@page "/Grid/Summary/Group"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Summary-Group">
+<DemoPageSectionComponent Id="Grid-Summary-Group" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <DxGrid @ref="Grid"
                 Data="@Data"
                 ShowGroupPanel="true"
-                UnboundColumnData="Grid_UnboundColumnData">
+                UnboundColumnData="Grid_UnboundColumnData"
+                SizeMode="Params.SizeMode">
             <Columns>
                 <DxGridDataColumn FieldName="Country" GroupIndex="0" Width="10%" />
                 <DxGridDataColumn FieldName="City" GroupIndex="1" Width="10%" />

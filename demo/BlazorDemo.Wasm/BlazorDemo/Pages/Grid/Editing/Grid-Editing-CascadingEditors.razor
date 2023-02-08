@@ -1,73 +1,76 @@
 ﻿@page "/Grid/EditData/CascadingEditors"
 @layout DataProviderAccessArea<INwindDataProvider, IWorldcitiesDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Editing-CascadingEditors">
-    @implements IDisposable
-    @inject NwindDataService NwindDataService
-    @inject WorldcitiesDataService WorldcitiesDataService
+<DemoPageSectionComponent Id="Grid-Editing-CascadingEditors" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @implements IDisposable
+        @inject NwindDataService NwindDataService
+        @inject WorldcitiesDataService WorldcitiesDataService
 
-    <DxGrid Data="DataSource"
-            @ref="Grid"
-            PageSize="8"
-            ValidationEnabled="false"
-            CustomizeEditModel="Grid_CustomizeEditModel"
-            EditModelSaving="Grid_EditModelSaving"
-            DataItemDeleting="Grid_DataItemDeleting">
-        <Columns>
-            <DxGridCommandColumn Width="120px" />
-            <DxGridDataColumn FieldName="CompanyName" />
-            <DxGridDataColumn FieldName="ContactName" />
-            <DxGridDataColumn FieldName="ContactTitle" />
-            <DxGridDataColumn FieldName="Phone" Width="10%" />
-            <DxGridDataColumn FieldName="Country" Width="10%" />
-            <DxGridDataColumn FieldName="City" Width="10%" />
-        </Columns>
-        <EditFormTemplate Context="EditFormContext">
-            @{
-                var supplier = (Supplier)EditFormContext.EditModel;
-            }
-            <DxFormLayout ItemSizeMode="SizeMode.Small" CssClass="w-100">
-                <DxFormLayoutItem Caption="Company Name:" ColSpanMd="6">
-                    <DxTextBox @bind-Text="@supplier.CompanyName" />
-                </DxFormLayoutItem>
-                <DxFormLayoutItem Caption="Contact Name:" ColSpanMd="6">
-                    <DxTextBox @bind-Text="@supplier.ContactName" />
-                </DxFormLayoutItem>
-                <DxFormLayoutItem Caption="Contact Title:" ColSpanMd="6">
-                    <DxTextBox @bind-Text="@supplier.ContactTitle" />
-                </DxFormLayoutItem>
-                <DxFormLayoutItem Caption="Phone:" ColSpanMd="6">
-                    <DxTextBox @bind-Text="@supplier.Phone" />
-                </DxFormLayoutItem>
-                <DxFormLayoutItem Caption="Country:" ColSpanMd="6">
-                    <DxComboBox Data="@Countries"
-                                NullText="Select Country..."
-                                FilteringMode="DataGridFilteringMode.Contains"
-                                TextFieldName="CountryName"
-                                ValueFieldName="CountryName"
-                                Value="@supplier.Country"
-                                ValueChanged="(string newCellValue) => {
-                                                    supplier.Country = newCellValue;
-                                                    supplier.City = null;
-                                              }">
-                    </DxComboBox>
-                </DxFormLayoutItem>
-                <DxFormLayoutItem Caption="City:" ColSpanMd="6">
-                    @{
-                        var countryId = Countries.Where(c => c.CountryName == supplier.Country).FirstOrDefault()?.CountryId;
-                        var cities = Cities.Where(x => x.CountryId == countryId);
-                    }
-                    <DxComboBox Data="@cities"
-                                NullText="Select City..."
-                                FilteringMode="DataGridFilteringMode.Contains"
-                                @bind-Value="@supplier.City"
-                                TextFieldName="CityName"
-                                ValueFieldName="CityName">
-                    </DxComboBox>
-                </DxFormLayoutItem>
-            </DxFormLayout>
-        </EditFormTemplate>
-    </DxGrid>
+        <DxGrid Data="DataSource"
+                @ref="Grid"
+                PageSize="8"
+                ValidationEnabled="false"
+                CustomizeEditModel="Grid_CustomizeEditModel"
+                EditModelSaving="Grid_EditModelSaving"
+                DataItemDeleting="Grid_DataItemDeleting"
+                SizeMode="Params.SizeMode">
+            <Columns>
+                <DxGridCommandColumn Width="160px" />
+                <DxGridDataColumn FieldName="CompanyName" />
+                <DxGridDataColumn FieldName="ContactName" />
+                <DxGridDataColumn FieldName="ContactTitle" />
+                <DxGridDataColumn FieldName="Phone" Width="10%" />
+                <DxGridDataColumn FieldName="Country" Width="10%" />
+                <DxGridDataColumn FieldName="City" Width="10%" />
+            </Columns>
+            <EditFormTemplate Context="EditFormContext">
+                @{
+                    var supplier = (Supplier)EditFormContext.EditModel;
+                }
+                <DxFormLayout CssClass="w-100">
+                    <DxFormLayoutItem Caption="Company Name:" ColSpanMd="6">
+                        <DxTextBox @bind-Text="@supplier.CompanyName" />
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Contact Name:" ColSpanMd="6">
+                        <DxTextBox @bind-Text="@supplier.ContactName" />
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Contact Title:" ColSpanMd="6">
+                        <DxTextBox @bind-Text="@supplier.ContactTitle" />
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Phone:" ColSpanMd="6">
+                        <DxTextBox @bind-Text="@supplier.Phone" />
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Country:" ColSpanMd="6">
+                        <DxComboBox Data="@Countries"
+                                    NullText="Select Country..."
+                                    FilteringMode="DataGridFilteringMode.Contains"
+                                    TextFieldName="CountryName"
+                                    ValueFieldName="CountryName"
+                                    Value="@supplier.Country"
+                                    ValueChanged="(string newCellValue) => {
+                                                        supplier.Country = newCellValue;
+                                                        supplier.City = null;
+                                                  }">
+                        </DxComboBox>
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="City:" ColSpanMd="6">
+                        @{
+                            var countryId = Countries.Where(c => c.CountryName == supplier.Country).FirstOrDefault()?.CountryId;
+                            var cities = Cities.Where(x => x.CountryId == countryId);
+                        }
+                        <DxComboBox Data="@cities"
+                                    NullText="Select City..."
+                                    FilteringMode="DataGridFilteringMode.Contains"
+                                    @bind-Value="@supplier.City"
+                                    TextFieldName="CityName"
+                                    ValueFieldName="CityName">
+                        </DxComboBox>
+                    </DxFormLayoutItem>
+                </DxFormLayout>
+            </EditFormTemplate>
+        </DxGrid>
+    </ChildContentWithParameters>
 
     @code {
         IEnumerable<Supplier> DataSource { get; set; }

@@ -1,0 +1,80 @@
+﻿<DemoPageSectionComponent Id="Navigation-Window-Dragging" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @using System.Drawing
+        @using System.Text.Json
+        @inject IJSRuntime JSRuntime
+
+        <div class="d-flex justify-content-center p-3" @ref=@popupTarget>
+            <DxButton RenderStyle="ButtonRenderStyle.Secondary" Click="@TogglePopupVisibilityAsync">@GetButtonText()</DxButton>
+        </div>
+        <DxWindow AllowDrag=true
+                @ref=@windowRef
+                DragCompleted="OnWindowDragCompleted"
+                ShowCloseButton="true"
+                HeaderText="Header"
+                BodyText="@Constants.Content"
+                Width="max(25vw, 250px)"
+                SizeMode="Params.SizeMode"
+                @bind-Visible="windowVisible">
+        </DxWindow>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionButton Text="Reload Page" OnClick="ReloadPageButton_ClickAsync" />
+        <OptionButton Text="Reset Window Position" OnClick="ResetPositionButton_ClickAsync" />
+    </OptionsContent>
+    @code {
+        const string LocalStorageKey = "Navigation-Window-Dragging";
+
+        int? positionX, positionY;
+        bool windowVisible;
+        DxWindow windowRef;
+        ElementReference popupTarget;
+
+        protected override async Task OnAfterRenderAsync(bool firstRender) {
+            if(firstRender) {
+                var position = await LoadPositionFromLocalStorageAsync();
+                (positionX, positionY) = (position?.X ?? null, position?.Y ?? null);
+                StateHasChanged();
+            }
+
+        }
+        async Task OnWindowDragCompleted(WindowDragCompletedEventArgs args) {
+            (positionX, positionY) = (args.End.X, args.End.Y);
+            await SavePositionToLocalStorageAsync(args.End);
+        }
+        string GetButtonText() => !windowVisible ? "SHOW A WINDOW" : "CLOSE A WINDOW";
+
+        // Refer to https://docs.microsoft.com/en-us/aspnet/core/blazor/state-management
+        // to learn more about Blazor state management
+        // In Blazor Server apps, prefer ASP.NET Core Protected Browser Storage
+        async Task<Point?> LoadPositionFromLocalStorageAsync() {
+            var json = await JSRuntime.InvokeAsync<string>("localStorage.getItem", LocalStorageKey);
+            return string.IsNullOrEmpty(json) ? null : JsonSerializer.Deserialize<Point>(json);
+        }
+
+        async Task SavePositionToLocalStorageAsync(Point position) {
+            await JSRuntime.InvokeVoidAsync("localStorage.setItem", LocalStorageKey, JsonSerializer.Serialize(position));
+        }
+
+        async Task RemovePositionFromLocalStorageAsync() {
+            await JSRuntime.InvokeVoidAsync("localStorage.removeItem", LocalStorageKey);
+        }
+
+        async Task ReloadPageButton_ClickAsync() {
+            await JSRuntime.InvokeVoidAsync("location.reload");
+        }
+
+        async Task ResetPositionButton_ClickAsync() {
+            await RemovePositionFromLocalStorageAsync();
+            await JSRuntime.InvokeVoidAsync("location.reload");
+        }
+        async Task TogglePopupVisibilityAsync() {
+            if (windowVisible)
+                await windowRef.CloseAsync();
+            else if(positionX.HasValue && positionY.HasValue)
+                await windowRef.ShowAtAsync(positionX.Value, positionY.Value);
+            else
+                await windowRef.ShowAtAsync(popupTarget);
+        }
+    }
+</DemoPageSectionComponent>

@@ -1,12 +1,13 @@
 ﻿@page "/Grid/Columns/ColumnResize"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Columns-ColumnResize">
-    <ChildContent>
+<DemoPageSectionComponent Id="Grid-Columns-ColumnResize" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
     
         <DxGrid Data="@Data"
-            ColumnResizeMode="@ColumnResizeMode">
+            ColumnResizeMode="@ColumnResizeMode"
+            SizeMode="Params.SizeMode">
             <Columns>
                 <DxGridDataColumn FieldName="ContactName" MinWidth="100" />
                 <DxGridDataColumn FieldName="ContactTitle" MinWidth="100" />
@@ -16,7 +17,7 @@
                 <DxGridDataColumn FieldName="Phone" Width="15%" MinWidth="80" />
             </Columns>
         </DxGrid>
-    </ChildContent>
+    </ChildContentWithParameters>
     <OptionsContent>
         <OptionComboBox Label="Column Resize Mode:"
                         Data="Enum.GetValues<GridColumnResizeMode>()"

@@ -1,0 +1,64 @@
+﻿@page "/Grid/Filtering/FilterAPI"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Filtering-FilterAPI" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @using DevExpress.Data.Filtering
+        @inject NwindDataService NwindDataService
+
+        <div class="align-self-baseline pb-2 pl-r-2 cw-480">
+            <DxTagBox Data="Categories"
+                      Values="SelectedCategories"
+                      ValuesChanged="(IEnumerable<Category> values) => TagBox_ValuesChanged(values)"
+                      TextFieldName="CategoryName"
+                      SizeMode="Params.SizeMode"
+                      NullText="Select category..."
+                      ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"/>
+        </div>
+        <DxGrid @ref="Grid" Data="Products" SizeMode="Params.SizeMode" CustomizeCellDisplayText="Grid_CustomizeCellDisplayText">
+            <Columns>
+                <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
+                <DxGridDataColumn FieldName="CategoryId" SortMode="GridColumnSortMode.DisplayText" Caption="Category" MinWidth="100" TextAlignment="GridTextAlignment.Left" />
+                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
+                <DxGridDataColumn FieldName="UnitsInStock" Width="10%" />
+                <DxGridDataColumn FieldName="QuantityPerUnit" Width="15%" MinWidth="80" />
+                <DxGridDataColumn FieldName="Discontinued" Width="10%" MinWidth="90">
+                    <CellDisplayTemplate>
+                        @if((bool)context.Value) {
+                            <span class="grid-icon grid-icon-check"></span>
+                        }
+                    </CellDisplayTemplate>
+                </DxGridDataColumn>
+            </Columns>
+        </DxGrid>
+
+        @code {
+            IGrid Grid { get; set; }
+
+            IEnumerable<Product> Products { get; set; }
+            IEnumerable<Category> Categories { get; set; }
+
+            IEnumerable<Category> SelectedCategories { get; set; }
+
+            protected override async Task OnInitializedAsync() {
+                Categories = await NwindDataService.GetCategoriesAsync();
+                Products = await NwindDataService.GetProductsAsync();
+            }
+
+            void TagBox_ValuesChanged(IEnumerable<Category> newSelectedCategories) {
+                SelectedCategories = newSelectedCategories;
+                var filterCriteria = SelectedCategories.Count() > 0
+                    ? new InOperator("CategoryId", SelectedCategories.Select(c => c.CategoryId))
+                    : null;
+                Grid.SetFieldFilterCriteria("CategoryId", filterCriteria);
+            }
+
+            void Grid_CustomizeCellDisplayText(GridCustomizeCellDisplayTextEventArgs e) {
+                if(e.FieldName == "CategoryId") {
+                    e.DisplayText = Categories.Where(c => c.CategoryId == (int)e.Value).First().CategoryName;
+                }
+            }
+        }
+
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

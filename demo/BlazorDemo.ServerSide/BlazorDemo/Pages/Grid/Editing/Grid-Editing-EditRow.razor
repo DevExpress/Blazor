@@ -1,8 +1,8 @@
 ﻿@page "/Grid/EditData/EditRow"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Editing-EditRow">
-    <ChildContent>
+<DemoPageSectionComponent Id="Grid-Editing-EditRow" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <DxGrid @ref="Grid"
@@ -13,10 +13,11 @@
                 CustomizeEditModel="Grid_CustomizeEditModel"
                 EditModelSaving="Grid_EditModelSaving"
                 DataItemDeleting="Grid_DataItemDeleting"
-                PopupEditFormCssClass="pw-800"
-                EditMode="GridEditMode.EditRow">
+                EditMode="GridEditMode.EditRow"
+                EditorRenderMode="GridEditorRenderMode.Integrated"
+                SizeMode="Params.SizeMode">
             <Columns>
-                <DxGridCommandColumn Width="140px" />
+                <DxGridCommandColumn Width="160px" />
                 <DxGridDataColumn FieldName="FirstName" MinWidth="80">
                     <CellEditTemplate>
                         @{
@@ -67,7 +68,7 @@
                 </DxGridDataColumn>
             </Columns>
         </DxGrid>
-    </ChildContent>
+    </ChildContentWithParameters>
 
     @code {
         IEnumerable<EditableEmployee> DataSource { get; set; }

@@ -1,20 +1,11 @@
 ﻿<DemoPageSectionComponent Id="Editors-DateEdit-ReadOnly" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <DxFormLayout ItemSizeMode="Params.SizeMode"
-                      CssClass="cw-320">
-            <DxFormLayoutItem ColSpanMd="12"
-                              Caption="Read-Only">
-                <Template>
-                    <DxDateEdit @bind-Date="@DateTimeValue"
-                                ReadOnly="true" />
-                </Template>
+        <DxFormLayout SizeMode="Params.SizeMode" CssClass="cw-320">
+            <DxFormLayoutItem ColSpanMd="12" Caption="Read-Only">
+                <DxDateEdit @bind-Date="@DateTimeValue" ReadOnly="true" />
             </DxFormLayoutItem>
-            <DxFormLayoutItem ColSpanMd="12" Caption="Disabled"
-                              BeginRow="true">
-                <Template>
-                    <DxDateEdit @bind-Date="@DateTimeValue"
-                                Enabled="false" />
-                </Template>
+            <DxFormLayoutItem ColSpanMd="12" Caption="Disabled" BeginRow="true">
+                <DxDateEdit @bind-Date="@DateTimeValue" Enabled="false" />
             </DxFormLayoutItem>
         </DxFormLayout>
     </ChildContentWithParameters>

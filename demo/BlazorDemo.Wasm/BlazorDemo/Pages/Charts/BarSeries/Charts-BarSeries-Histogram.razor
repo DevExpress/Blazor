@@ -3,7 +3,7 @@
         <OptionSpinEdit Label="Interval Width:" MinValue="0.1" MaxValue="1" Increment="0.1" @bind-Value="@Interval" CssClass="ow-100" />
     </OptionsContent>
 
-    <ChildContent>
+    <DemoChildContent>
         <DxChart @ref="@histogramChart"
                  T="DataPoint"
                  Width="100%"
@@ -82,5 +82,5 @@
                 GeneratedData = await DataProvider.GenerateData();
             }
         }
-    </ChildContent>
+    </DemoChildContent>
 </DemoPageSectionComponent>

@@ -1,0 +1,34 @@
+﻿<DemoPageSectionComponent Id="Editors-Memo-OnInputBinding" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxMemo @bind-Text="TextValue"
+                SizeMode="Params.SizeMode"
+                BindValueMode="@BindValueMode"
+                NullText="Type text..."
+                InputDelay="@InputDelay"
+                CssClass="cw-480"
+                Rows="5"/>
+        <p class="demo-text cw-480 mt-2">
+            Text: <b>@TextValue</b>
+        </p>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionComboBox CssClass="ow-150"
+                        Data="Enum.GetValues<BindValueMode>()"
+                        @bind-Value="BindValueMode" />
+        <OptionSpinEdit CssClass="ow-150"
+                        MinValue="100"
+                        MaxValue="1000"
+                        Increment="100"
+                        Enabled="@BindDelayEnabled"
+                        Label="Input Delay:"
+                        @bind-Value="InputDelay" />
+    </OptionsContent>
+
+    @code {
+        string TextValue { get; set; } = null;
+        int? InputDelay { get; set; } = 500;
+        BindValueMode BindValueMode { get; set; } = BindValueMode.OnInput;
+        bool BindDelayEnabled { get { return BindValueMode == BindValueMode.OnDelayedInput; } }
+    }
+</DemoPageSectionComponent>

@@ -1,10 +1,10 @@
-﻿<DemoPageSectionComponent Id="Navigation-Toolbar-Overview">
+﻿<DemoPageSectionComponent Id="Navigation-Toolbar-Overview" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @*BeginHide*@
         <div class="card w-100">
-            <div class="card-header border-0 p-2 rounded">
+            <div class="card-header border-0 p-2 rounded demo-bg-transparent">
                 @*EndHide*@
-                <DxToolbar ItemClick="@OnItemClick">
+                <DxToolbar ItemClick="@OnItemClick" SizeMode="Params.SizeMode">
                     <Items>
                         <DxToolbarItem Name="Item1" Text="Item1" Tooltip="Item1" />
                         <DxToolbarItem Name="Item2" Text="Item2" Tooltip="Item2" />
@@ -19,7 +19,7 @@
                                        Tooltip="Documentation (opened in a new tab)"
                                        Alignment="ToolbarItemAlignment.Right"
                                        NavigateUrl="https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar"
-                                       target="_blank" />
+                                       Target="_blank" />
                     </Items>
                 </DxToolbar>
                 <DemoToaster Duration="3000" @ref=@toasterRef />

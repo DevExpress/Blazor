@@ -1,6 +1,7 @@
 #if SERVER_BLAZOR
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading;
 using BlazorDemo.Services;
 using DevExpress.AspNetCore.Reporting;
@@ -75,6 +76,9 @@ namespace BlazorDemo.Reporting {
                 services.AddScoped<ReportStorageWebExtension, DemoReportStorageWebExtension>();
                 services.AddScoped(serviceProvider => (IReportProviderAsync)serviceProvider.GetRequiredService<ReportStorageWebExtension>());
                 services.AddControllers(options => options.EnableEndpointRouting = false);
+                if(!RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
+                    DevExpress.Drawing.Internal.DXDrawingEngine.ForceSkia();
+                }
             });
         }
     }

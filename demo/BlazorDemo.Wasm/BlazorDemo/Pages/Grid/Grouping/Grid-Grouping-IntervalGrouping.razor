@@ -1,14 +1,15 @@
 ﻿@page "/Grid/Grouping/IntervalGrouping"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Grouping-IntervalGrouping">
+<DemoPageSectionComponent Id="Grid-Grouping-IntervalGrouping" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <DxGrid @ref="Grid"
                 Data="@Data"
                 ShowGroupPanel="true"
-                UnboundColumnData="Grid_UnboundColumnData">
+                UnboundColumnData="Grid_UnboundColumnData"
+                SizeMode="Params.SizeMode">
             <Columns>
                 <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
                 <DxGridDataColumn FieldName="CategoryName" MinWidth="100" />

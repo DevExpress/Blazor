@@ -39,12 +39,14 @@ namespace BlazorDemo.Data {
             }
         }
         public bool HasSubGroups => GroupType < DateTimeGroupType.Day;
-        public IEnumerable<DateTimeGroup> SubGroups => GetSubGroups();
+        IEnumerable<DateTimeGroup> subGroups;
+        public IEnumerable<DateTimeGroup> SubGroups => subGroups ??= GetSubGroups();
         public IEnumerable<DateTimeGroup> GetSubGroups() {
             switch(GroupType) {
                 case DateTimeGroupType.Year:
                     return Enumerable.Range(1, 12)
-                        .Select(m => new DateTimeGroup(new DateTime(DateTime.Year, m, 1), DateTimeGroupType.Month));
+                        .Select(m => new DateTimeGroup(new DateTime(DateTime.Year, m, 1), DateTimeGroupType.Month))
+                        .ToList();
                 case DateTimeGroupType.Month:
                     var firstDayOfMonth = DateTime;
                     var weekOffset = firstDayOfMonth.Month > 1 ? firstDayOfMonth.DayOfWeek - CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek : 0;

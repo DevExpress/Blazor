@@ -1,7 +1,7 @@
 ﻿@page "/Grid/Summary/Custom"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Summary-Custom">
+<DemoPageSectionComponent Id="Grid-Summary-Custom" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
@@ -12,7 +12,8 @@
                 SelectedDataItemsChanged="Grid_SelectedDataItemsChanged"
                 CustomSummary="Grid_CustomSummary"
                 CustomizeSummaryDisplayText="Grid_CustomizeSummaryDisplayText"
-                UnboundColumnData="Grid_UnboundColumnData">
+                UnboundColumnData="Grid_UnboundColumnData"
+                SizeMode="Params.SizeMode">
             <Columns>
                 <DxGridSelectionColumn Width="60px"/>
                 <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />

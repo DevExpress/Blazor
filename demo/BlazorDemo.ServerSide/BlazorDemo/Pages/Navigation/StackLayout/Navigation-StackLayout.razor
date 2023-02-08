@@ -1,7 +1,7 @@
 ﻿@page "/StackLayout"
 
 <DemoPageSectionComponent Id="Navigation-StackLayout">
-    <ChildContent>
+    <DemoChildContent>
         <DxStackLayout CssClass="w-100 ch-480" Orientation="@currentOrientation">
             <Items>
                 <DxStackLayoutItem>
@@ -41,7 +41,7 @@
                 </DxStackLayoutItem>
             </Items>
         </DxStackLayout>
-    </ChildContent>
+    </DemoChildContent>
     <OptionsContent>
         <OptionComboBox Label="Orientation:" Data="@Orientations" @bind-Value="currentOrientation" />
     </OptionsContent>

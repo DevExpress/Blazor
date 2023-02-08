@@ -1,0 +1,18 @@
+/*BeginHide*/
+.demo-row {
+    display: flex;
+    align-self: stretch;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 0.75rem;
+}
+
+.demo-item-header {
+    padding-bottom: 0.75rem;
+}
+
+.demo-item {
+    display: flex;
+    flex-direction: column;
+}
+/*EndHide*/

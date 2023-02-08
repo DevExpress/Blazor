@@ -1,0 +1,35 @@
+﻿<DemoPageSectionComponent Id="Navigation-Window-ShowOptions" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="d-flex align-items-center">
+            <DxButton RenderStyle="ButtonRenderStyle.Secondary" Text="SHOW A WINDOW AT CLICK POSITION" Click="OnShowAtPositionClick" />
+            <div @ref="targetRef" class="mx-3"><DxButton RenderStyle="ButtonRenderStyle.Secondary" Text="SHOW A WINDOW AT ELEMENT (BY REFERENCE)" Click="OnShowAtElementReferenceClick" /></div>
+            <DxButton RenderStyle="ButtonRenderStyle.Secondary" Id="windowTarget" Text="SHOW A WINDOW AT ELEMENT (BY SELECTOR)" Click="OnShowAtElementSelectorClick" />
+        </div>
+
+        <DxWindow @ref=@windowRef
+                  AllowDrag="false"
+                  VerticalAlignment="VerticalAlignment.Bottom"
+                  HorizontalAlignment="HorizontalAlignment.Left"
+                  ShowCloseButton="true"
+                  HeaderText="Header"
+                  BodyText="@Constants.Content"
+                  Width="max(25vw, 250px)"
+                  SizeMode="Params.SizeMode">
+        </DxWindow>
+    </ChildContentWithParameters>
+
+    @code {
+        ElementReference targetRef;
+        DxWindow windowRef;
+
+        async Task OnShowAtPositionClick(MouseEventArgs args) {
+            await windowRef.ShowAtAsync(args.ClientX, args.ClientY);
+        }
+        async Task OnShowAtElementReferenceClick(MouseEventArgs args) {
+            await windowRef.ShowAtAsync(targetRef);
+        }
+        async Task OnShowAtElementSelectorClick(MouseEventArgs args) {
+            await windowRef.ShowAtAsync("#windowTarget");
+        }
+    }
+</DemoPageSectionComponent>

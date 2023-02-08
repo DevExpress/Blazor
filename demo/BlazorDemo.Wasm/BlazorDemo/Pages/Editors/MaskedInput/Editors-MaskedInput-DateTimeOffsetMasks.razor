@@ -1,0 +1,75 @@
+﻿<DemoPageSectionComponent Id="Editors-MaskedInput-DateTimeOffsetMasks" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params" >
+        <DxMaskedInput @bind-Value="@DateOffset"
+                       CssClass="cw-320"
+                       SizeMode="Params.SizeMode"
+                       Mask="@DateTimeMasks[DateTimeMaskName]">
+                <DxDateTimeOffsetMaskProperties Culture="MaskCultureInfo.Value"
+                                          CaretMode="@((MaskCaretMode)CaretMode)"
+                                          UpdateNextSectionOnCycleChange=@UpdateNextSectionOnCycleChange />
+        </DxMaskedInput>
+        <p class="demo-text cw-320 mt-2">
+            Value: <b>@DateOffset</b>
+        </p>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+         <OptionComboBox CssClass="ow-150"
+                        Label="Mask:"
+                        Data="@DateTimeMasks.Keys"
+                        @bind-Value="@DateTimeMaskName" />
+        <OptionComboBox CssClass="ow-150"
+                        Label="Caret Mode:"
+                        Data="@(Enum.GetNames(typeof(MaskCaretMode)))"
+                        Value="@CaretMode.ToString()"
+                        ValueChanged="@((string selectedItem) =>
+                                        { CaretMode = Enum.Parse<MaskCaretMode>(selectedItem); })" />
+        <OptionComboBox CssClass="ow-150"
+                        Label="Culture:"
+                        Data="@CultureInfoItems"
+                        @bind-Value="MaskCultureInfo" />
+        <OptionCheckBox @bind-Checked="@UpdateNextSectionOnCycleChange"
+                        Label="Cascading Section Updates" />
+    </OptionsContent>
+
+    @code {
+        class CultureInfoItem {
+            public CultureInfo Value { get; set; }
+            public string Text { get; set; }
+            public override string ToString() { return Text; }
+        }
+
+        static CultureInfoItem[] CultureInfoItems { get; set; } = new CultureInfoItem[] {
+            new CultureInfoItem() {
+                Value = CultureInfo.GetCultureInfo("en-US"),
+                Text = "American English"
+            },
+            new CultureInfoItem() {
+                Value = CultureInfo.GetCultureInfo("de-DE"),
+                Text = "German"
+            },
+        };
+
+        bool UpdateNextSectionOnCycleChange { get; set; }
+        DateTimeOffset DateOffset { get; set; } = DateTimeOffset.Now;
+        CultureInfoItem MaskCultureInfo { get; set; } = CultureInfoItems.FirstOrDefault();
+        MaskCaretMode CaretMode { get; set; }
+        string DateTimeMaskName { get; set; } = "Time with Offset";
+
+        static Dictionary<string, string> DateTimeMasks = new Dictionary<string, string>() {
+            { "Time with Offset", "hh:mm:ss tt zzzz" },
+            { "Date Time with Offset", "MM/dd/yyyy HH:mm:ss zzz" },
+            { "Round-Trip Date Time", "o" },
+            { "ISO8601", DateTimeMask.ISO8601 },
+            { "Long Date", DateTimeMask.LongDate },
+            { "Long Date Time", DateTimeMask.LongDateTime },
+            { "Long Time", DateTimeMask.LongTime },
+            { "Month And Day", DateTimeMask.MonthAndDay },
+            { "Month And Year", DateTimeMask.MonthAndYear },
+            { "RFC1123", DateTimeMask.RFC1123 },
+            { "Short Date", DateTimeMask.ShortDate },
+            { "Short Date Time", DateTimeMask.ShortDateTime },
+            { "Short Time", DateTimeMask.ShortTime },
+        };
+    }
+</DemoPageSectionComponent>

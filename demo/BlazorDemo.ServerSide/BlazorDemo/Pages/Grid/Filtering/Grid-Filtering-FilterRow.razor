@@ -1,25 +1,29 @@
-﻿<DemoPageSectionComponent Id="Grid-Filtering-FilterRow" VerticalAlignment="VerticalAlignment.Top">
+﻿@page "/Grid/Filtering/FilterRow"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Filtering-FilterRow" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @using DevExpress.Data.Filtering;
         @inject NwindDataService NwindDataService
 
         <DxGrid Data="GridData"
                 ShowFilterRow="true"
-                CustomizeCellDisplayText="Grid_CustomizeCellDisplayText">
+                CustomizeCellDisplayText="Grid_CustomizeCellDisplayText"
+                CustomizeElement="Grid_CustomizeElement"
+                EditorRenderMode="GridEditorRenderMode.Integrated"
+                SizeMode="Params.SizeMode">
             <Columns>
                 <DxGridDataColumn FieldName="OrderId" Caption="Order ID" DisplayFormat="d" SortIndex="0" MinWidth="100" Width="10%">
                     <FilterRowCellTemplate>
                         <DxSpinEdit Value="(int?)context.FilterRowValue"
-                                    ValueChanged="(int? v) => context.FilterRowValue = v"
-                                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Never" />
+                                    ValueChanged="(int? v) => context.FilterRowValue = v" />
                     </FilterRowCellTemplate>
                 </DxGridDataColumn>
 
                 <DxGridDataColumn FieldName="OrderDate" DisplayFormat="d" MinWidth="120" Width="10%">
                     <FilterRowCellTemplate>
                         <DxDateEdit Date="(DateTime?)context.FilterRowValue"
-                                    DateChanged="(DateTime? v) => context.FilterRowValue = v"
-                                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Never" />
+                                    DateChanged="(DateTime? v) => context.FilterRowValue = v" />
                     </FilterRowCellTemplate>
                 </DxGridDataColumn>
 
@@ -47,7 +51,9 @@
 
                 <DxGridDataColumn FieldName="Shipped" UnboundType="GridUnboundColumnType.Boolean" UnboundExpression="[ShippedDate] <> Null" Width="5%" MinWidth="100">
                     <CellDisplayTemplate>
-                        <DxCheckBox CssClass="d-inline-block" Enabled="false" Checked="(bool)context.Value" />
+                        @if((bool)context.Value == true) {
+                            <span class="grid-icon grid-icon-check"></span>
+                        }
                     </CellDisplayTemplate>
                     <FilterRowCellTemplate>
                         <DxComboBox Value="(bool?)context.FilterRowValue"
@@ -57,7 +63,7 @@
                     </FilterRowCellTemplate>
                 </DxGridDataColumn>
 
-                <DxGridCommandColumn Width="60px" NewButtonVisible="false" EditButtonVisible="false" DeleteButtonVisible="false" />
+                <DxGridCommandColumn Width="80px" NewButtonVisible="false" EditButtonVisible="false" DeleteButtonVisible="false" />
             </Columns>
         </DxGrid>
 
@@ -94,6 +100,12 @@
                     var customerId = (string)e.Value;
                     if (customerId != null && CustomersIndex.TryGetValue(customerId, out var displayText))
                         e.DisplayText = displayText;
+                }
+            }
+
+            void Grid_CustomizeElement(GridCustomizeElementEventArgs e) {
+                if(e.ElementType == GridElementType.DataCell && ((IGridDataColumn)e.Column).FieldName == "Shipped") {
+                    e.CssClass = "p-0";
                 }
             }
 

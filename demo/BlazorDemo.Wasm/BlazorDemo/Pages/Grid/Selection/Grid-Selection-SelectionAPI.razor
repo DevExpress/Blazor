@@ -1,7 +1,7 @@
 ﻿@page "/Grid/Selection/SelectionAPI"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Selection-SelectionAPI">
+<DemoPageSectionComponent Id="Grid-Selection-SelectionAPI" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
@@ -9,7 +9,8 @@
                 Data="@Products"
                 KeyFieldName="ProductId"
                 @bind-SelectedDataItems="@SelectedDataItems"
-                CustomizeCellDisplayText="Grid_CustomizeCellDisplayText">
+                CustomizeCellDisplayText="Grid_CustomizeCellDisplayText"
+                SizeMode="Params.SizeMode">
             <Columns>
                 <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
                 <DxGridDataColumn FieldName="CategoryId" SortMode="GridColumnSortMode.DisplayText" Caption="Category" MinWidth="100" TextAlignment="GridTextAlignment.Left" />

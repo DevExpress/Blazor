@@ -1,5 +1,5 @@
 ﻿<DemoPageSectionComponent Id="Navigation-ContextMenu-Overview">
-    <div class="dxbs-preventsel target-container" @oncontextmenu="((e) => ContextMenu.ShowAsync(e))" @oncontextmenu:preventDefault>
+    <div class="demo-preventsel target-container" @oncontextmenu="((e) => ContextMenu.ShowAsync(e))" @oncontextmenu:preventDefault>
         <p class="target-caption">RIGHT-CLICK OR LONG PRESS TO SHOW THE CONTEXT MENU</p>
         <p class="demo-text">Clicked item: <b>@(ClickedItem != null ? ClickedItem : "None")</b></p>
     </div>

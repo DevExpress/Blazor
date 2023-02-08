@@ -1,8 +1,8 @@
 ﻿@page "/Grid/EditData/EditForms"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Editing-EditForms">
-    <ChildContent>
+<DemoPageSectionComponent Id="Grid-Editing-EditForms" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <DxGrid @ref="Grid"
@@ -14,9 +14,10 @@
                 EditModelSaving="Grid_EditModelSaving"
                 DataItemDeleting="Grid_DataItemDeleting"
                 PopupEditFormCssClass="pw-800"
-                EditMode="@CurrentEditMode">
+                EditMode="@CurrentEditMode"
+                SizeMode="Params.SizeMode">
             <Columns>
-                <DxGridCommandColumn Width="120px" />
+                <DxGridCommandColumn Width="160px" />
                 <DxGridDataColumn FieldName="FirstName" MinWidth="80" />
                 <DxGridDataColumn FieldName="LastName" MinWidth="80" />
                 <DxGridDataColumn FieldName="Title" MinWidth="100" />
@@ -28,7 +29,7 @@
                 @{
                     var employee = (EditableEmployee)EditFormContext.EditModel;
                 }
-                <DxFormLayout ItemSizeMode="SizeMode.Small" CssClass="w-100">
+                <DxFormLayout CssClass="w-100">
                     <DxFormLayoutItem Caption="First Name:" ColSpanMd="6">
                         <DxTextBox @bind-Text="@employee.FirstName" />
                     </DxFormLayoutItem>
@@ -50,7 +51,7 @@
                 </DxFormLayout>
             </EditFormTemplate>
         </DxGrid>
-    </ChildContent>
+    </ChildContentWithParameters>
     <OptionsContent>
         <OptionCheckBox Label="Use Popup Edit Form"
                         Checked="UsePopupEditForm"

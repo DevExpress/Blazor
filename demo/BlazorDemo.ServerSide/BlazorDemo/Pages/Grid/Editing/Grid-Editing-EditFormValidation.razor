@@ -1,8 +1,8 @@
 ﻿@page "/Grid/EditData/EditFormValidation"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Editing-EditFormValidation">
-    <ChildContent>
+<DemoPageSectionComponent Id="Grid-Editing-EditFormValidation" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <DxGrid @ref="Grid"
@@ -10,9 +10,10 @@
                 PageSize="12"
                 KeyFieldName="EmployeeId"
                 EditModelSaving="Grid_EditModelSaving"
-                DataItemDeleting="Grid_DataItemDeleting">
+                DataItemDeleting="Grid_DataItemDeleting"
+                SizeMode="Params.SizeMode">
             <Columns>
-                <DxGridCommandColumn Width="120px" />
+                <DxGridCommandColumn Width="160px" />
                 <DxGridDataColumn FieldName="FirstName" MinWidth="80" />
                 <DxGridDataColumn FieldName="LastName" MinWidth="80" />
                 <DxGridDataColumn FieldName="Title" MinWidth="100" />
@@ -24,7 +25,7 @@
                 @{
                     var employee = (EditableEmployee)EditFormContext.EditModel;
                 }
-                <DxFormLayout ItemSizeMode="SizeMode.Small" CssClass="w-100">
+                <DxFormLayout CssClass="w-100">
                     <DxFormLayoutItem Caption="First Name:" ColSpanMd="6">
                         <DxTextBox @bind-Text="@employee.FirstName" />
                     </DxFormLayoutItem>
@@ -52,7 +53,7 @@
                 </DxFormLayout>
             </EditFormTemplate>
         </DxGrid>
-    </ChildContent>
+    </ChildContentWithParameters>
 
     @code {
         IEnumerable<EditableEmployee> DataSource { get; set; }

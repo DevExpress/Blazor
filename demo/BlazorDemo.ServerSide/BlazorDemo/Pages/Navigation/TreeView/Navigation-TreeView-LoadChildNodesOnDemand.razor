@@ -1,12 +1,13 @@
-﻿<DemoPageSectionComponent Id="Navigation-TreeView-LoadChildNodesOnDemand">
+﻿<DemoPageSectionComponent Id="Navigation-TreeView-LoadChildNodesOnDemand" VerticalAlignment=VerticalAlignment.Top >
     <DxTreeView @ref="@treeView"
                 CssClass="cw-480"
                 Data="@DataSource"
-                LoadChildNodesOnDemand="true">
+                LoadChildNodesOnDemand="true"
+                AnimationType="LayoutAnimationType.Slide">
         <DataMappings>
-            <DxTreeViewDataMapping HasChildren="HasSubGroups"
-                                   Children="SubGroups"
-                                   Text="Title"/>
+            <DxTreeViewDataMapping HasChildren="@(nameof(DateTimeGroup.HasSubGroups))"
+                                   Children="@(nameof(DateTimeGroup.SubGroups))"
+                                   Text="@(nameof(DateTimeGroup.Title))"/>
         </DataMappings>
     </DxTreeView>
 

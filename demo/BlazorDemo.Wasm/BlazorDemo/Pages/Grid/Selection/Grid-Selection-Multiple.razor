@@ -1,36 +1,39 @@
 ﻿@page "/Grid/Selection/Multiple"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Selection-Multiple">
-    @inject NwindDataService NwindDataService
+<DemoPageSectionComponent Id="Grid-Selection-Multiple" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
 
-    <div class="d-flex flex-wrap w-100">
-        <div class="w-auto mt-1 me-1 flex-grow-1" style="flex-basis: 700px">
-            <DxGrid Data="@Products"
-                    KeyFieldName="ProductId"
-                    SelectionMode="GridSelectionMode.Multiple"
-                    AllowSelectRowByClick="true"
-                    @bind-SelectedDataItems="@SelectedDataItems"
-                    CustomizeCellDisplayText="Grid_CustomizeCellDisplayText">
-                <Columns>
-                    <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
-                    <DxGridDataColumn FieldName="CategoryId" SortMode="GridColumnSortMode.DisplayText" Caption="Category" MinWidth="100" TextAlignment="GridTextAlignment.Left" />
-                    <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="15%" />
-                    <DxGridDataColumn FieldName="UnitsInStock" Width="15%" />
-                </Columns>
-            </DxGrid>
-        </div>
-        <div class="card mt-1 me-1 flex-grow-1 max-h-420" style="flex-basis: 280px">
-            <div class="card-header bg-transparent text-body py-2 border-bottom-0 fw-bold">Selected products:</div>
-            <div class="card-body p-0 pb-2 overflow-auto">
-                <ul class="list-group list-group-flush bg-transparent border-0">
-                    @foreach(var product in SelectedDataItems.Cast<Product>()) {
-                        <li class="list-group-item bg-transparent text-body py-1 border-0">@product.ProductName</li>
-                    }
-                </ul>
+        <div class="d-flex flex-wrap w-100">
+            <div class="w-auto mt-1 me-1 flex-grow-1" style="flex-basis: 700px">
+                <DxGrid Data="@Products"
+                        KeyFieldName="ProductId"
+                        SelectionMode="GridSelectionMode.Multiple"
+                        AllowSelectRowByClick="true"
+                        @bind-SelectedDataItems="@SelectedDataItems"
+                        CustomizeCellDisplayText="Grid_CustomizeCellDisplayText"
+                        SizeMode="Params.SizeMode">
+                    <Columns>
+                        <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
+                        <DxGridDataColumn FieldName="CategoryId" SortMode="GridColumnSortMode.DisplayText" Caption="Category" MinWidth="100" TextAlignment="GridTextAlignment.Left" />
+                        <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="15%" />
+                        <DxGridDataColumn FieldName="UnitsInStock" Width="15%" />
+                    </Columns>
+                </DxGrid>
+            </div>
+            <div class="card mt-1 me-1 flex-grow-1 max-h-420" style="flex-basis: 280px">
+                <div class="card-header bg-transparent text-body py-2 border-bottom-0 fw-bold">Selected products:</div>
+                <div class="card-body p-0 pb-2 overflow-auto">
+                    <ul class="list-group list-group-flush bg-transparent border-0">
+                        @foreach(var product in SelectedDataItems.Cast<Product>()) {
+                            <li class="list-group-item bg-transparent text-body py-1 border-0">@product.ProductName</li>
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
+    </ChildContentWithParameters>
 
     @code {
         IEnumerable<Product> Products { get; set; }

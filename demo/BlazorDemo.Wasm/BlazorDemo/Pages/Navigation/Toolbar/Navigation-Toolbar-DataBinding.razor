@@ -1,0 +1,78 @@
+﻿<DemoPageSectionComponent Id="Navigation-Toolbar-DataBinding" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="card w-100">
+            <div class="card-header p-2 demo-bg-transparent">
+                <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain"
+                           Data="@MenuItems"
+                           SizeMode="Params.SizeMode"
+                           ItemClick="OnItemClick">
+                    <DataMappings>
+                        <DxToolbarDataMapping Children="Children"
+                                              Text="Text"
+                                              BeginGroup="BeginGroup"
+                                              Checked="Checked"
+                                              IconCssClass="IconCss"
+                                              SplitDropDownButton="SplitMenuButton"
+                                              Tooltip="GetTooltip"
+                                              Enabled="Enabled"/>
+                    </DataMappings>
+                </DxToolbar>
+            </div>
+            <div class="card-body">
+                <div style="@Formatting.GetStyleString()">
+                    @*BeginHide*@
+                    <span class="demo-preventsel">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</span>
+                    @*EndHide*@
+                </div>
+            </div>
+        </div>
+    </ChildContentWithParameters>
+    @code{
+        TextFormatting Formatting { get; set; } = new TextFormatting();
+        List<TextFormattingMenuItem> _menuItems;
+        List<TextFormattingMenuItem> MenuItems {
+            get {
+                if(_menuItems == null) {
+                    _menuItems = new List<TextFormattingMenuItem>() {
+                        @*BeginCollapse*@
+                        new TextFormattingParentMenuItem(Formatting, "Format", new List<TextFormattingMenuItem>() {
+                            TextFormattingMenu.FontFamilyMenuItem(Formatting),
+                            TextFormattingMenu.FontSizeMenuItem(Formatting),
+                            new TextFormattingParentMenuItem(Formatting, "Change case", new List<TextFormattingMenuItem>() {
+                                new ChangeCaseMenuItem(Formatting, "Default", null),
+                                new ChangeCaseMenuItem(Formatting, "Capitalize", "capitalize") { BeginGroup = true },
+                                new ChangeCaseMenuItem(Formatting, "Lowercase ", "lowercase"),
+                                new ChangeCaseMenuItem(Formatting, "Uppercase ", "uppercase")
+                            })
+                        }),
+                        new TextDecorationMenuItem(Formatting, string.Empty, "Bold") {
+                            IconCss = "tb-icon tb-icon-bold",
+                            BeginGroup = true,
+                            Tooltip = "Bold"
+                        },
+                        new TextDecorationMenuItem(Formatting, string.Empty, "Italic") {
+                            IconCss = "tb-icon tb-icon-italic",
+                            Tooltip = "Italic"
+                        },
+                        new TextDecorationMenuItem(Formatting, string.Empty, "Underline") {
+                            Children = new List<TextFormattingMenuItem>() {
+                                new TextDecorationMenuItem(Formatting, "Overline", "Overline"),
+                                new TextDecorationMenuItem(Formatting, "Strikethrough", "Strikethrough")
+                            },
+                            SplitMenuButton = true,
+                            IconCss = "tb-icon tb-icon-underline",
+                            Category = "Text Decorations",
+                            Tooltip = "Underline"
+                        },
+                        new ClearFormattingMenuItem(Formatting) { BeginGroup = true }
+                        @*EndCollapse*@
+                    };
+                }
+                return _menuItems;
+            }
+        }
+        void OnItemClick(ToolbarItemClickEventArgs e) {
+            ((TextFormattingMenuItem)e.Info.Data).Click();
+        }
+    }
+</DemoPageSectionComponent>

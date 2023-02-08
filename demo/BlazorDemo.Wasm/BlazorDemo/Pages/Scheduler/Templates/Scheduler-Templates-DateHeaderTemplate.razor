@@ -1,7 +1,7 @@
 ﻿@page "/Scheduler/Templates/DateHeaderTemplate"
 
 <DemoPageSectionComponent Id="Scheduler-Templates-DateHeaderTemplate">
-    <ChildContent>
+    <DemoChildContent>
         @inject WeatherForecastService ForecastService
 
         <DxScheduler StartDate="@DateTime.Today" DataStorage="@DataStorage" CssClass="w-100">
@@ -24,7 +24,7 @@
                 </DxSchedulerDayView>
             </Views>
         </DxScheduler>
-    </ChildContent>
+    </DemoChildContent>
 
     @code {
         DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {

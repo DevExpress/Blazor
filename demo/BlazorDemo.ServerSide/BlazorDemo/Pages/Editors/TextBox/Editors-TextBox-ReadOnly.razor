@@ -1,17 +1,13 @@
 ﻿<DemoPageSectionComponent Id="Editors-TextBox-ReadOnly" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <DxFormLayout ItemSizeMode="Params.SizeMode"
+        <DxFormLayout SizeMode="Params.SizeMode"
                       CssClass="cw-320">
             <DxFormLayoutItem ColSpanMd="12" Caption="Read-Only">
-                <Template>
-                    <DxTextBox @bind-Text="@TextValue" ReadOnly="true" />
-                </Template>
+                <DxTextBox @bind-Text="@TextValue" ReadOnly="true" />
             </DxFormLayoutItem>
 
             <DxFormLayoutItem ColSpanMd="12" Caption="Disabled" BeginRow="true">
-                <Template>
-                    <DxTextBox @bind-Text="@TextValue" Enabled="false" />
-                </Template>
+                <DxTextBox @bind-Text="@TextValue" Enabled="false" />
             </DxFormLayoutItem>
         </DxFormLayout>
     </ChildContentWithParameters>

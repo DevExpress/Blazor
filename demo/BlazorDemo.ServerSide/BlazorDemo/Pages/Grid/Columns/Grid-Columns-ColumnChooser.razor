@@ -1,8 +1,8 @@
 ﻿@page "/Grid/Columns/ColumnChooser"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Columns-ColumnChooser" ShowHorizontalScrollBar="true">
-    <ChildContent>
+<DemoPageSectionComponent Id="Grid-Columns-ColumnChooser" ShowHorizontalScrollBar="true" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <div class="align-self-end pl-2 pb-2">
@@ -14,7 +14,7 @@
                 Click="@OnClick" />
         </div>
 
-        <DxGrid @ref="@Grid" Data="@Data">
+        <DxGrid @ref="@Grid" Data="@Data" SizeMode="Params.SizeMode">
             <Columns>
                 <DxGridDataColumn FieldName="ContactName" MinWidth="100" />
                 <DxGridDataColumn FieldName="ContactTitle" MinWidth="100" />
@@ -24,7 +24,7 @@
                 <DxGridDataColumn FieldName="Phone" Width="15%" MinWidth="80" Visible="false" />
             </Columns>
         </DxGrid>
-    </ChildContent>
+    </ChildContentWithParameters>
 
     @code {
         DxGrid Grid { get; set; }

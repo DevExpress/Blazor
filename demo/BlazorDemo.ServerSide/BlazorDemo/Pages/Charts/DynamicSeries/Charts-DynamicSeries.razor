@@ -1,7 +1,7 @@
 ﻿@page "/ChartDynamicSeries"
 
 <DemoPageSectionComponent Id="Charts-DynamicSeries">
-    <ChildContent>
+    <DemoChildContent>
         @inject ISalesInfoDataProvider Sales
 
         <DxChart @ref="@chart"
@@ -29,7 +29,7 @@
             </DxChartCommonSeries>
 
         </DxChart>
-    </ChildContent>
+    </DemoChildContent>
 
     <OptionsContent>
         <OptionChartExportComponent ExportMethod="@ExportChart"/>

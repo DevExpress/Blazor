@@ -96,11 +96,11 @@
 }
 
 .mobile-view {
-    -webkit-mask-image: url("images/mobile_view.svg");
-    mask-image: url("images/mobile_view.svg");
+    -webkit-mask-image: url("images/mobile-view/mobile-view-vertical.svg");
+    mask-image: url("images/mobile-view/mobile-view-vertical.svg");
 }
 
 .mobile-view-horizontal {
-    -webkit-mask-image: url("images/mobile_view_horizontal.svg");
-    mask-image: url("images/mobile_view_horizontal.svg");
+    -webkit-mask-image: url("images/mobile-view/mobile-view-horizontal.svg");
+    mask-image: url("images/mobile-view/mobile-view-horizontal.svg");
 }

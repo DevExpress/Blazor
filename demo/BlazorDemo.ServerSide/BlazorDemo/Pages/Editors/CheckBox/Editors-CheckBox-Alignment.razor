@@ -1,5 +1,5 @@
-﻿<DemoPageSectionComponent Id="Editors-CheckBox-Alignment">
-    <ChildContent>
+﻿<DemoPageSectionComponent Id="Editors-CheckBox-Alignment" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
         <div class="card cw-320">
             <div class="card-body p-2">
                 <div class="row m-0 p-0">
@@ -9,7 +9,8 @@
                             <DxCheckBox CssClass="w-100"
                                         @bind-Checked="@MultimediaChecked"
                                         Alignment="@Alignment"
-                                        LabelPosition="@LabelPosition">
+                                        LabelPosition="@LabelPosition"
+                                        SizeMode="Params.SizeMode">
                                 Multimedia
                             </DxCheckBox>
                         </div>
@@ -18,7 +19,8 @@
                             <DxCheckBox CssClass="w-100"
                                         @bind-Checked="@AirConditioningChecked"
                                         Alignment="@Alignment"
-                                        LabelPosition="@LabelPosition">
+                                        LabelPosition="@LabelPosition"
+                                        SizeMode="Params.SizeMode">
                                 Air Conditioning
                             </DxCheckBox>
                         </div>
@@ -27,7 +29,8 @@
                             <DxCheckBox CssClass="w-100"
                                         @bind-Checked="@HeatedSeatsChecked"
                                         Alignment="@Alignment"
-                                        LabelPosition="@LabelPosition">
+                                        LabelPosition="@LabelPosition"
+                                        SizeMode="Params.SizeMode">
                                 Heated Seats
                             </DxCheckBox>
                         </div>
@@ -36,7 +39,8 @@
                             <DxCheckBox CssClass="w-100"
                                         @bind-Checked="@ParkingCameraChecked"
                                         Alignment="@Alignment"
-                                        LabelPosition="@LabelPosition">
+                                        LabelPosition="@LabelPosition"
+                                        SizeMode="Params.SizeMode">
                                 Parking Camera
                             </DxCheckBox>
                         </div>
@@ -45,7 +49,8 @@
                             <DxCheckBox CssClass="w-100"
                                         @bind-Checked="@DroneChecked"
                                         Alignment="@Alignment"
-                                        LabelPosition="@LabelPosition">
+                                        LabelPosition="@LabelPosition"
+                                        SizeMode="Params.SizeMode">
                                 Drone
                             </DxCheckBox>
                         </div>
@@ -53,7 +58,7 @@
                 </div>
             </div>
         </div>
-    </ChildContent>
+    </ChildContentWithParameters>
 
     <OptionsContent>
         <OptionComboBox CssClass="ow-150"

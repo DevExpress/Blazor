@@ -1,41 +1,47 @@
-﻿<DemoPageSectionComponent Id="Editors-CheckBox-BindToEnum">
-    <div>
-        <DxCheckBox @bind-Checked="@Value"
-                    AllowIndeterminateStateByClick
-                    CssClass="mb-1"
-                    ValueChecked="@Opinion.Yes"
-                    ValueUnchecked="@Opinion.No"
-                    ValueIndeterminate="@Opinion.Abstain">
-            @GetText()
-        </DxCheckBox>
+﻿<DemoPageSectionComponent Id="Editors-CheckBox-BindToEnum" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div>
+            <DxCheckBox @bind-Checked="@Value"
+                        AllowIndeterminateStateByClick
+                        CssClass="mb-1"
+                        ValueChecked="@Opinion.Yes"
+                        ValueUnchecked="@Opinion.No"
+                        ValueIndeterminate="@Opinion.Abstain"
+                        SizeMode="Params.SizeMode">
+                @GetText()
+            </DxCheckBox>
 
-        <DxCheckBox Checked="Opinion.Yes"
-                    Enabled="false"
-                    CssClass="mb-1"
-                    ValueChecked="@Opinion.Yes"
-                    ValueUnchecked="@Opinion.No"
-                    ValueIndeterminate="@Opinion.Abstain">
-            Disabled Checked
-        </DxCheckBox>
+            <DxCheckBox Checked="Opinion.Yes"
+                        Enabled="false"
+                        CssClass="mb-1"
+                        ValueChecked="@Opinion.Yes"
+                        ValueUnchecked="@Opinion.No"
+                        ValueIndeterminate="@Opinion.Abstain"
+                        SizeMode="Params.SizeMode">
+                Disabled Checked
+            </DxCheckBox>
 
-        <DxCheckBox Checked="Opinion.No"
-                    Enabled="false"
-                    CssClass="mb-1"
-                    ValueChecked="@Opinion.Yes"
-                    ValueUnchecked="@Opinion.No"
-                    ValueIndeterminate="@Opinion.Abstain">
-            Disabled Unchecked
-        </DxCheckBox>
+            <DxCheckBox Checked="Opinion.No"
+                        Enabled="false"
+                        CssClass="mb-1"
+                        ValueChecked="@Opinion.Yes"
+                        ValueUnchecked="@Opinion.No"
+                        ValueIndeterminate="@Opinion.Abstain"
+                        SizeMode="Params.SizeMode">
+                Disabled Unchecked
+            </DxCheckBox>
 
-        <DxCheckBox Checked="Opinion.Abstain"
-                    Enabled="false"
-                    CssClass="mb-1"
-                    ValueChecked="@Opinion.Yes"
-                    ValueUnchecked="@Opinion.No"
-                    ValueIndeterminate="@Opinion.Abstain">
-            Disabled Indeterminate
-        </DxCheckBox>
-    </div>
+            <DxCheckBox Checked="Opinion.Abstain"
+                        Enabled="false"
+                        CssClass="mb-1"
+                        ValueChecked="@Opinion.Yes"
+                        ValueUnchecked="@Opinion.No"
+                        ValueIndeterminate="@Opinion.Abstain"
+                        SizeMode="Params.SizeMode">
+                Disabled Indeterminate
+            </DxCheckBox>
+        </div>
+    </ChildContentWithParameters>
 
     @code{
         enum Opinion { Yes, No, Abstain }

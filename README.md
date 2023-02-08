@@ -1,8 +1,7 @@
 This repo contains [demos](#demos) for [DevExpress Blazor components](#devexpress-ui-for-blazor) and [free DevExpress Blazor tools](#free-blazor-utilities-and-dev-tools). Refer to the following sections for more information:
 
 * [DevExpress UI for Blazor](#devexpress-ui-for-blazor)
-* [Demos](#online-demos)
-* [Free Blazor Utilities and Dev Tools](#free-blazor-utilities-and-dev-tools)
+* [Demos](#demos)
 * [Get Started](#get-started)
 * [Documentation](#documentation)
 * [Helpful Resources](#helpful-resources)

@@ -1,0 +1,62 @@
+﻿@page "/Grid/Selection/FocusedRow"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Selection-FocusedRow" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <div class="d-flex flex-wrap w-100">
+            <div class="w-auto mt-1 me-1 flex-grow-1" style="flex-basis: 700px">
+                <DxGrid Data="Orders" FocusedRowEnabled="true" FocusedRowChanged="OnFocusedRowChanged" SizeMode="Params.SizeMode">
+                    <Columns>
+                        <DxGridDataColumn FieldName="ShipName" Width="30%" />
+                        <DxGridDataColumn FieldName="Address" UnboundExpression="[ShipCity] + ' - ' + [ShipAddress]" UnboundType="GridUnboundColumnType.String" />
+                        <DxGridDataColumn Caption="Date" FieldName="RequiredDate" Width="100" />
+                    </Columns>
+                </DxGrid>
+            </div>
+            <div class="card mt-1 me-1 flex-grow-1" style="flex-basis: 280px">
+                <div class="card-header bg-transparent text-body py-2 border-bottom-0 fw-bold">Products:</div>
+                @if (ProductsInOrder != null)
+                {
+                    <div class="card-body p-0 pb-2 overflow-auto">
+                        <ul class="list-group list-group-flush bg-transparent border-0">
+                            @foreach (var product in ProductsInOrder)
+                            {
+                                <li class="list-group-item bg-transparent text-body py-1 border-0">@product.ProductName</li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+
+        @code {
+            IEnumerable<Order> Orders { get; set; }
+            Dictionary<int, List<Product>> OrderProducts { get; set; }
+
+            IEnumerable<Product> ProductsInOrder { get; set; }
+
+            protected override async Task OnInitializedAsync() {
+                Orders = await NwindDataService.GetOrdersAsync();
+
+                var products = await NwindDataService.GetProductsAsync();
+                var orderDetails = await NwindDataService.GetOrderDetailsAsync();
+
+                OrderProducts = orderDetails
+                    .GroupBy(d => d.OrderId)
+                    .ToDictionary(
+                        g => g.Key,
+                        g => g.Select(
+                            od => products.FirstOrDefault(p => p.ProductId == od.ProductId)
+                        ).ToList()
+                    );
+            }
+
+            void OnFocusedRowChanged(GridFocusedRowChangedEventArgs e) {
+                var order = e.DataItem as Order;
+                ProductsInOrder = order != null ? OrderProducts[order.OrderId] : null;
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

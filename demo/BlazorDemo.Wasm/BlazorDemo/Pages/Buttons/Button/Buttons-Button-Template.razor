@@ -1,5 +1,4 @@
-﻿<DemoPageSectionComponent Id="Buttons-Button-Template"
-                          ShowSizeMode="true">
+<DemoPageSectionComponent Id="Buttons-Button-Template" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @*BeginHide*@
         <div>
@@ -7,8 +6,8 @@
         <DxButton RenderStyle="ButtonRenderStyle.Info"
                   Click="@Like"
                   IconCssClass="btn-icon-like"
-                  Text="Like"
-                  SizeMode="Params.SizeMode">
+                  SizeMode="Params.SizeMode"
+                  Text="Like">
             @context
             <span class="ms-1">@likes</span>
         </DxButton>

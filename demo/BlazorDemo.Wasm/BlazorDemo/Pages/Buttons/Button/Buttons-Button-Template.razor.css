@@ -1,9 +1,9 @@
 /*BeginHide*/::deep /*EndHide*/.btn-icon-like {
     height: 16px;
     width: 16px;
-    background-image: url("images/like.svg");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    margin-right: 8px;
+    -webkit-mask-image: url("images/icons/like.svg");
+    mask-image: url("images/icons/like.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    background-color: currentColor;
 }

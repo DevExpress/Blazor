@@ -24,9 +24,10 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Markdig" Version="0.23.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="6.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.CodeDom" Version="5.0.0" />
-    <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
     <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.6" />
@@ -35,9 +36,12 @@
     <ProjectReference Include="..\BlazorDemo.DemoData\BlazorDemo.DemoData.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="22.1.4" />
-    <PackageReference Include="DevExpress.Blazor.Reporting" Version="22.1.4" />
-    <PackageReference Include="DevExpress.Reporting.Demos" Version="22.1.4" />
+    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="22.2.4" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.BlazorServer" Version="22.2.4" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="22.2.4" />    
+    <PackageReference Include="DevExpress.Reporting.Demos" Version="22.2.4" />
+    <PackageReference Include="DevExpress.Drawing.Skia" Version="22.2.4" />
+    
     
     
     
@@ -67,7 +71,7 @@
     <Content Remove="**" />
     <EmbeddedResource Remove="**" />
     <None Remove="**" />
-    <Compile Include="**\*.cs" Exclude="obj\**\*.cs;obj.WASM\**\*.cs;Pages\**\CodeSnippets\*.cs;DocumentMetadata\**\*.cs;wwwroot\_code\**\*.*;Controllers\**\*.cs" />
+    <Compile Include="**\*.cs" Exclude="obj\**\*.cs;obj.WASM\**\*.cs;Pages\**\CodeSnippets\*.cs;DocumentMetadata\**\*.cs;wwwroot\_code\**\*.*;Controllers\**\*.cs;Utils\**\*.cs" />
     <Compile Include="DocumentMetadata\Components\MetadataManager.cs" />
     <Compile Include="DocumentMetadata\Components\MetadataStaticRenderer.cs" />
     <Compile Include="DocumentMetadata\DocumentMetadata.AspNetCore.cs" />
@@ -82,6 +86,7 @@
     <Content Include="Pages\**\*.md" />
     <Content Include="Pages\**\*.razor.css" />
     <Content Include="Shared\**\*.razor.css" />
+    <Content Include="Data\Dictionaries\english.txt" />
     <Content Include="NOTICE.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -154,7 +159,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Update="wwwroot\images\SampleWatermark.png">
+    <Content Update="wwwroot\images\documents\AlbertEinstein.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\images\documents\SampleWatermark.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -175,8 +183,25 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Dictionaries\english.xlg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Dictionaries\custom.dic">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Dictionaries\english.aff">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Documents\SpellChecking.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Target Name="ControllersCreate" BeforeTargets="PreBuildEvent" Condition="!Exists('Controllers')">
     <Exec Command="mklink /J &quot;Controllers&quot; &quot;..//BlazorDemo.ServerSide//Controllers&quot;" />
+  </Target>
+  <Target Name="UtilsCreate" BeforeTargets="PreBuildEvent" Condition="!Exists('Utils')">
+    <Exec Command="mklink /J &quot;Utils&quot; &quot;..//BlazorDemo.ServerSide//Utils&quot;" />
   </Target>
   <Target Name="SourceCode" BeforeTargets="PreBuildEvent">
     <ItemGroup>
@@ -186,6 +211,7 @@
       <EmbeddedResource Include="Services\**\*.*" />
       <EmbeddedResource Include="wwwroot\css\*.css" />
       <EmbeddedResource Include="Controllers\**\*.*" />
+      <EmbeddedResource Include="Utils\**\*.*" />
     </ItemGroup>
   </Target>
 </Project>

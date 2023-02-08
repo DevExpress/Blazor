@@ -16,97 +16,79 @@
         </div>
 
         <div class="card-body">
-            <DxFormLayout>
+            <DxFormLayout SizeMode="@SizeMode">
                 <DxFormLayoutItem ColSpanMd="12">
-                    <Template>
-                        <DxTextBox @bind-Text="@Data.Username"
-                                   NullText="Username"
+                    <DxTextBox @bind-Text="@Data.Username"
+                               NullText="Username"
+                               ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                    <div class="text-danger">
+                        <ValidationMessage For="@(() => Data.Username)" />
+                    </div>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <DxTextBox @bind-Text="@Data.Password"
+                               NullText="Password"
+                               Password="true"
+                               ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                    <div class="text-danger">
+                        <ValidationMessage For="@(() => Data.Password)" />
+                    </div>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <DxTextBox @bind-Text="@Data.Email"
+                               NullText="E-mail"
+                               ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                    <div class="text-danger">
+                        <ValidationMessage For="@(() => Data.Email)" />
+                    </div>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <DxMaskedInput @bind-Value="@Data.Phone"
+                                   NullText="Phone Number"
+                                   Mask="@PhoneMask"
                                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
-                        <div class="text-danger">
-                            <ValidationMessage For="@(() => Data.Username)" />
-                        </div>
-                    </Template>
+                    <div class="text-danger">
+                        <ValidationMessage For="@(() => Data.Phone)" />
+                    </div>
                 </DxFormLayoutItem>
                 <DxFormLayoutItem ColSpanMd="12">
-                    <Template>
-                        <DxTextBox @bind-Text="@Data.Password"
-                                   NullText="Password"
-                                   Password="true"
-                                   ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
-                        <div class="text-danger">
-                            <ValidationMessage For="@(() => Data.Password)" />
-                        </div>
-                    </Template>
+                    <DxDateEdit @bind-Date="@Data.BirthDate"
+                                NullText="Birthday"
+                                NullValue="@BirthDateNullValue"
+                                ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                                Mask="@DateTimeMask.ShortDate" />
+                    <div class="text-danger">
+                        <ValidationMessage For="@(() => Data.BirthDate)" />
+                    </div>
                 </DxFormLayoutItem>
                 <DxFormLayoutItem ColSpanMd="12">
-                    <Template>
-                        <DxTextBox @bind-Text="@Data.Email"
-                                   NullText="E-mail"
-                                   ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
-                        <div class="text-danger">
-                            <ValidationMessage For="@(() => Data.Email)" />
-                        </div>
-                    </Template>
-                </DxFormLayoutItem>
-                <DxFormLayoutItem ColSpanMd="12">
-                    <Template>
-                        <DxMaskedInput @bind-Value="@Data.Phone"
-                                       NullText="Phone Number"
-                                       Mask="@PhoneMask"
-                                       ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
-                        <div class="text-danger">
-                            <ValidationMessage For="@(() => Data.Phone)" />
-                        </div>
-                    </Template>
-                </DxFormLayoutItem>
-                <DxFormLayoutItem ColSpanMd="12">
-                    <Template>
-                        <DxDateEdit @bind-Date="@Data.BirthDate"
-                                    NullText="Birthday"
-                                    NullValue="@BirthDateNullValue"
-                                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
-                                    Mask="@DateTimeMask.ShortDate" />
-                        <div class="text-danger">
-                            <ValidationMessage For="@(() => Data.BirthDate)" />
-                        </div>
-                    </Template>
-                </DxFormLayoutItem>
-                <DxFormLayoutItem ColSpanMd="12">
-                    <Template>
-                        <DxComboBox Data="@Occupations"
-                                    @bind-Value="@Data.Occupation"
-                                    AllowUserInput="false"
-                                    NullText="Occupation"
-                                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
-                    </Template>
-                </DxFormLayoutItem>
-                <DxFormLayoutItem ColSpanMd="12">
-                    <Template>
-                        <DxMemo @bind-Text="@Data.Notes"
-                                NullText="Notes"
-                                Rows="4"
+                    <DxComboBox Data="@Occupations"
+                                @bind-Value="@Data.Occupation"
+                                AllowUserInput="false"
+                                NullText="Occupation"
                                 ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
-                    </Template>
                 </DxFormLayoutItem>
                 <DxFormLayoutItem ColSpanMd="12">
-                    <Template>
-                        <DxButton CssClass="w-100"
-                                  RenderStyle="ButtonRenderStyle.Primary"
-                                  SubmitFormOnClick="true"
-                                  Text="Register" />
-                    </Template>
+                    <DxMemo @bind-Text="@Data.Notes"
+                            NullText="Notes"
+                            Rows="4"
+                            ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
                 </DxFormLayoutItem>
                 <DxFormLayoutItem ColSpanMd="12">
-                    <Template>
-                        <div class="text-center pt-2">
-                            <div class="tm-8">
-                                Already have an account?
-                            </div>
-                            <DxButton RenderStyle="ButtonRenderStyle.Link"
-                                      Text="Login"
-                                      Click="GotoLoginForm" />
+                    <DxButton CssClass="w-100"
+                              RenderStyle="ButtonRenderStyle.Primary"
+                              SubmitFormOnClick="true"
+                              Text="Register" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <div class="text-center pt-2">
+                        <div class="tm-8">
+                            Already have an account?
                         </div>
-                    </Template>
+                        <DxButton RenderStyle="ButtonRenderStyle.Link"
+                                  Text="Login"
+                                  Click="GotoLoginForm" />
+                    </div>
                 </DxFormLayoutItem>
             </DxFormLayout>
         </div>
@@ -118,6 +100,8 @@
 </p>
 
 @code {
+    [Parameter]
+    public SizeMode SizeMode { get; set; }
     [Parameter]
     public EventCallback GotoLoginForm { get; set; }
 

@@ -1,14 +1,15 @@
 ﻿@page "/Grid/Grouping/GroupData"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Grouping-GroupData">
+<DemoPageSectionComponent Id="Grid-Grouping-GroupData" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <DxGrid @ref="Grid"
                 Data="@Data"
                 ShowGroupPanel="true"
-                AutoExpandAllGroupRows="true">
+                AutoExpandAllGroupRows="true"
+                SizeMode="Params.SizeMode">
             <Columns>
                 <DxGridDataColumn FieldName="ContactName" MinWidth="100" />
                 <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />

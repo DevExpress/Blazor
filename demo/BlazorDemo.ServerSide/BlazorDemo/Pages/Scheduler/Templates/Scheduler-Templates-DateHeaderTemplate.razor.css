@@ -9,14 +9,14 @@
     margin-bottom: 4px;
 }
 .scheduler-icon-storm {
-    background-image: url("images/Storm.svg");
+    background-image: url("images/wheather/storm.svg");
 }
 .scheduler-icon-cloudy {
-    background-image: url("images/Cloudy.svg");
+    background-image: url("images/wheather/cloudy.svg");
 }
 .scheduler-icon-partly-cloudy {
-    background-image: url("images/PartlyCloudy.svg");
+    background-image: url("images/wheather/partly-cloudy.svg");
 }
 .scheduler-icon-sunny {
-    background-image: url("images/Sunny.svg");
+    background-image: url("images/wheather/sunny.svg");
 }

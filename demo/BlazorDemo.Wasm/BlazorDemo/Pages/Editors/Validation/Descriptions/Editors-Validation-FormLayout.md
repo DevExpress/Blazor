@@ -8,6 +8,6 @@ Inside the **EditForm**, the code adds a [Form Layout](https://docs.devexpress.c
 *   [Date Edit](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1)
 *   [Memo](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMemo)
 
-The **EditForm** also contains the DevExpress [Button](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton) component with the [SubmitFormOnClick](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton.SubmitFormOnClick) option set to **true**. Once you attempt to submit changes, editors become marked with colored outlines. Red indicates invalid values, while green indicates values that were posted successfully.
+The **EditForm** also contains the DevExpress [Button](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton) component with the [SubmitFormOnClick](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButton.SubmitFormOnClick) option set to **true**. Once you attempt to submit changes, editors become marked with colored outlines. Red indicates invalid values, while green indicates values that were posted successfully. You can also use the [ShowValidationIcon](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Configuration.GlobalOptions.ShowValidationIcon) global option or an editor's [ShowValidationIcon](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxInputDataEditorBase-1.ShowValidationIcon) property to specify whether editors should display validation icons.
 
 Below the form, the standard Blazor **ValidationSummary** component displays the validation summary.

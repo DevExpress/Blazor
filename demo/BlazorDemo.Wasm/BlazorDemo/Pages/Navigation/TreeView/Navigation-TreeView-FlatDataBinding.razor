@@ -1,10 +1,11 @@
-﻿<DemoPageSectionComponent Id="Navigation-TreeView-FlatDataBinding">
+﻿<DemoPageSectionComponent Id="Navigation-TreeView-FlatDataBinding" VerticalAlignment=VerticalAlignment.Top>
     @if(Data == null) {
         <p><em>Loading...</em></p>
     }
     else {
         <div class="cw-320">
-            <DxTreeView Data="@Data">
+            <DxTreeView Data="@Data"
+                        AnimationType="LayoutAnimationType.Slide">
                 <DataMappings>
                     <DxTreeViewDataMapping Text="Name"
                                            Key="Id"

@@ -1,7 +1,7 @@
 ﻿@page "/Grid/DataBinding/LargeDataInstantFeedback"
 @layout DataProviderAccessArea<IRentInfoDataProvider>
 
-<DemoPageSectionComponent Id="Grid-DataBinding-LargeDataInstantFeedback">
+<DemoPageSectionComponent Id="Grid-DataBinding-LargeDataInstantFeedback" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @using DevExpress.Data.Linq
         @inherits OwningComponentBase
@@ -9,7 +9,7 @@
         @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 
         <DataProviderAccessAreaContainer DataProvider="@RentInfoDataProvider">
-            <DxGrid Data="@InstantFeedbackSource" PageSize="10" ShowGroupPanel="true" ShowFilterRow="true">
+            <DxGrid Data="@InstantFeedbackSource" PageSize="10" ShowGroupPanel="true" ShowFilterRow="true" SizeMode="Params.SizeMode">
                 <Columns>
                     <DxGridDataColumn FieldName="State" Width="5%" />
                     <DxGridDataColumn FieldName="Area" MinWidth="100" />

@@ -1,7 +1,7 @@
 ﻿@page "/Grid/Summary/GroupFooter"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Summary-GroupFooter">
+<DemoPageSectionComponent Id="Grid-Summary-GroupFooter" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
@@ -9,7 +9,8 @@
                 Data="@Data"
                 ShowGroupPanel="true"
                 GroupFooterDisplayMode="@CurrentDisplayMode"
-                UnboundColumnData="Grid_UnboundColumnData">
+                UnboundColumnData="Grid_UnboundColumnData"
+                SizeMode="Params.SizeMode">
             <Columns>
                 <DxGridDataColumn FieldName="OrderDate" GroupIndex="0" MinWidth="70" Width="10%" />
                 <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />

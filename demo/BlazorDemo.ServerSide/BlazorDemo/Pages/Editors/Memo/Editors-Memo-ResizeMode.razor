@@ -1,8 +1,7 @@
 ﻿<DemoPageSectionComponent Id="Editors-Memo-ResizeMode"
                           ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <DxMemo @key="@ForceRerender()"
-                @bind-Text="TextValue"
+        <DxMemo @bind-Text="TextValue"
                 SizeMode="Params.SizeMode"
                 ResizeMode="MemoResizeMode"
                 CssClass="cw-480"
@@ -18,7 +17,6 @@
     </OptionsContent>
 
     @code {
-        public object ForceRerender() => new object(); // this fixes a bug in chrome layout.
         MemoResizeMode MemoResizeMode { get; set; } = MemoResizeMode.VerticalAndHorizontal;
 
         string TextValue { get; set; } =

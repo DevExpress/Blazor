@@ -13,8 +13,8 @@
 }
 
 ::deep .e-warning {
-    -webkit-mask-image: url("images/Warning.svg");
-    mask-image: url("images/Warning.svg");
+    -webkit-mask-image: url("images/warning-message.svg");
+    mask-image: url("images/warning-message.svg");
 }
 
 .e-icon {

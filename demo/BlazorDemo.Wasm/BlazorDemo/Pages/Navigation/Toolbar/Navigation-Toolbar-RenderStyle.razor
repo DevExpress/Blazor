@@ -1,20 +1,13 @@
-﻿<DemoPageSectionComponent Id="Navigation-Toolbar-RenderStyle">
+﻿<DemoPageSectionComponent Id="Navigation-Toolbar-RenderStyle" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         <div class="card w-100">
             <div class="card-body">
-                <DxToolbar ItemRenderStyleMode="@SelectedRenderMode" ItemSizeMode="@SizeMode">
+                <DxToolbar ItemRenderStyleMode="@selectedRenderMode" SizeMode="Params.SizeMode" Title="Toolbar title">
                     <Items>
-                        <DxToolbarItem Text="Info"
-                                       RenderStyle="ButtonRenderStyle.Info" />
-                        <DxToolbarItem Text="Success"
-                                       RenderStyle="ButtonRenderStyle.Success" />
-                        <DxToolbarItem Text="Danger"
-                                       RenderStyle="ButtonRenderStyle.Danger" 
-                                       IconCssClass="tb-icon tb-icon-alert" BeginGroup="true"/>
-                        <DxToolbarItem Text="Auto" IconCssClass="tb-icon tb-icon-alert" />
-                        <DxToolbarItem Text="Warning" 
-                                       RenderStyle="ButtonRenderStyle.Warning"
-                                       IconCssClass="tb-icon tb-icon-alert"/>
+                        @foreach(var style in btnStyles) {
+                            <DxToolbarItem Text="@style.ToString()" RenderStyle="@style" BeginGroup="true">
+                            </DxToolbarItem>
+                        }
                     </Items>
                 </DxToolbar>
             </div>
@@ -23,22 +16,23 @@
     <OptionsContent>
         <OptionComboBox Label="Render Style Mode:"
                         Data="@(Enum.GetNames(typeof(ToolbarRenderStyleMode)))"
-                        Value="@(SelectedRenderMode.ToString())"
-                        ValueChanged="@((string selectedItem) => { SelectedRenderMode = Enum.Parse<ToolbarRenderStyleMode>(selectedItem); })" />
-        <OptionComboBox Label="Size Mode:"
-                        Data="@(Enum.GetNames(typeof(SizeMode)))"
-                        Value="@SizeMode.ToString()"
-                        ValueChanged="@((string selectedItem) => { SizeMode = Enum.Parse<SizeMode>(selectedItem); })"/>
+                        Value="@(selectedRenderMode.ToString())"
+                        ValueChanged="@((string selectedItem) => { selectedRenderMode = Enum.Parse<ToolbarRenderStyleMode>(selectedItem); })"/>
     </OptionsContent>
 
     @code{
-        ToolbarRenderStyleMode SelectedRenderMode { get; set; }
-        SizeMode SizeMode { get; set; }
-
+        ToolbarRenderStyleMode selectedRenderMode = ToolbarRenderStyleMode.Contained;
+        List<ButtonRenderStyle> btnStyles;
         protected override void OnInitialized() {
             base.OnInitialized();
-            SelectedRenderMode = ToolbarRenderStyleMode.Contained;
-            SizeMode = SizeMode.Small;
+            btnStyles = new List<ButtonRenderStyle>((ButtonRenderStyle[])Enum.GetValues(typeof(ButtonRenderStyle)));
+            @*BeginHide*@
+            btnStyles.RemoveAt(0);
+            btnStyles.Remove(ButtonRenderStyle.Dark);
+            btnStyles.Remove(ButtonRenderStyle.Light);
+            btnStyles.Add(ButtonRenderStyle.None);
+            @*EndHide*@
         }
     }
+
 </DemoPageSectionComponent>

@@ -1,7 +1,7 @@
 ﻿@page "/Scheduler/Templates/AppointmentTooltipTemplate"
 
 <DemoPageSectionComponent Id="Scheduler-Templates-AppointmentTooltipTemplate">
-    <ChildContent>
+    <DemoChildContent>
         <DxScheduler StartDate="@DateTime.Today" DataStorage="@DataStorage"
                      GroupType="SchedulerGroupType.Date" CssClass="w-100"
                      @bind-ShowAppointmentTooltip="@ShowAppointmentTooltip">
@@ -65,24 +65,22 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-auto ms-1">
-                            <svg class="dxsc-time-icon dx-icon" role="img">
+                            <svg class="dx-icon-time dx-icon" role="img">
                                 <use href="#dxsc-time-icon"></use>
                             </svg>
                         </div>
                         <div class="col ps-0"><span style="vertical-align: middle;">@startDateTime</span></div>
                     </div>
                     <hr />
-                    <div class="row mb-3">
-                        <div class="col-auto">
-                            <DxButton Click="OnClick" RenderStyleMode="ButtonRenderStyleMode.Text" RenderStyle="ButtonRenderStyle.Link"
-                                      Text="@buttonText" IconCssClass="@iconCssClass">
-                            </DxButton>
-                        </div>
+                    <div class="sc-tooltip-bottom-container">
+                        <DxButton Click="OnClick" RenderStyleMode="ButtonRenderStyleMode.Text" RenderStyle="ButtonRenderStyle.Link"
+                                    Text="@buttonText" IconCssClass="@iconCssClass">
+                        </DxButton>
                     </div>
                 </div>
             </AppointmentTooltipTemplate>
         </DxScheduler>
-    </ChildContent>
+    </DemoChildContent>
     <OptionsContent>
         <OptionCheckBox @bind-Checked="@ShowAppointmentTooltip" Label="Show Appointment Tooltip" />
     </OptionsContent>

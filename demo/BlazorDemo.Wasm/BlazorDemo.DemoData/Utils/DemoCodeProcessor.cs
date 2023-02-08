@@ -13,7 +13,7 @@ namespace BlazorDemo.DemoData {
         };
         static readonly Regex[] DemoContainersToExtractCodeRegex = DemoContainersToExtractCode.Select(name => new Regex(@$"<{name}[^>]*>(?<Code>.*?)<\/{name}>", options)).ToArray();
         static readonly Regex DemoPageSectionComponentRegex = new Regex(@"<DemoPageSectionComponent[^>]*>(?<Code>.*?)<\/DemoPageSectionComponent>", options);
-        static readonly Regex DemoPageSectionComponentChildContentRegex = new Regex(@"\s*<ChildContent[^>]*>(?<Code>.*?)<\/ChildContent>", options);
+        static readonly Regex DemoPageSectionComponentChildContentRegex = new Regex(@"\s*<DemoChildContent[^>]*>(?<Code>.*?)<\/DemoChildContent>", options);
         static readonly Regex DemoPageSectionComponentChildContentWithParametersRegex = new Regex(@"\s*<ChildContentWithParameters[^>]*>(?<Code>.*?)<\/ChildContentWithParameters>", options);
         static readonly Regex DemoPageSectionComponentOptionsContentRegex = new Regex(@"\s*<OptionsContent[^>]*>(?<Code>.*?)<\/OptionsContent>", options);
         static readonly Regex DemoPageSectionBaseClassSizeModeAttributeRegex = new Regex("\\s?@?(Item)?SizeMode=\"[^\"]*\"", options);

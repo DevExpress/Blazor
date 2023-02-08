@@ -14,31 +14,31 @@
 }
 
 /*BeginHide*/::deep /*EndHide*/.grid-toolbar-new {
-    -webkit-mask-image: url("images/GridToolbarNew.svg");
-    mask-image: url("images/GridToolbarNew.svg");
+    -webkit-mask-image: url("images/icons/grid-toolbar-new.svg");
+    mask-image: url("images/icons/grid-toolbar-new.svg");
 }
 
 /*BeginHide*/::deep /*EndHide*/.grid-toolbar-edit {
-    -webkit-mask-image: url("images/GridToolbarEdit.svg");
-    mask-image: url("images/GridToolbarEdit.svg");
+    -webkit-mask-image: url("images/icons/grid-toolbar-edit.svg");
+    mask-image: url("images/icons/grid-toolbar-edit.svg");
 }
 
 /*BeginHide*/::deep /*EndHide*/.grid-toolbar-delete {
-    -webkit-mask-image: url("images/GridToolbarDelete.svg");
-    mask-image: url("images/GridToolbarDelete.svg");
+    -webkit-mask-image: url("images/icons/grid-toolbar-delete.svg");
+    mask-image: url("images/icons/grid-toolbar-delete.svg");
 }
 
 /*BeginHide*/::deep /*EndHide*/.grid-toolbar-refresh {
-    -webkit-mask-image: url("images/GridToolbarRefresh.svg");
-    mask-image: url("images/GridToolbarRefresh.svg");
+    -webkit-mask-image: url("images/icons/grid-toolbar-refresh.svg");
+    mask-image: url("images/icons/grid-toolbar-refresh.svg");
 }
 
 /*BeginHide*/::deep /*EndHide*/.grid-toolbar-filter-row {
-    -webkit-mask-image: url("images/GridToolbarFilterRow.svg");
-    mask-image: url("images/GridToolbarFilterRow.svg");
+    -webkit-mask-image: url("images/icons/grid-toolbar-filter.svg");
+    mask-image: url("images/icons/grid-toolbar-filter.svg");
 }
 
 /*BeginHide*/::deep /*EndHide*/.grid-toolbar-document {
-    -webkit-mask-image: url("images/GridToolbarDocument.svg");
-    mask-image: url("images/GridToolbarDocument.svg");
+    -webkit-mask-image: url("images/icons/grid-toolbar-document.svg");
+    mask-image: url("images/icons/grid-toolbar-document.svg");
 }

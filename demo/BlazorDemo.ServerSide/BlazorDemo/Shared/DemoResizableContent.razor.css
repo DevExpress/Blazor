@@ -16,8 +16,8 @@
 
 ::deep .demo-img-resize {
     background-color: currentColor;
-    -webkit-mask-image: url("images/Resize.svg");
-    mask-image: url("images/Resize.svg");
+    -webkit-mask-image: url("images/mobile-view/resize.svg");
+    mask-image: url("images/mobile-view/resize.svg");
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     width: 6px;

@@ -14,6 +14,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Markdig" Version="0.23.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.8" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.6" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />
@@ -23,11 +24,14 @@
     <ProjectReference Include="..\BlazorDemo.DemoData\BlazorDemo.DemoData.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor" Version="22.1.4" />
+    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="22.2.4" />
+    
+    
     
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\Charts\DrillDown\Charts-DrillDown.razor.cs" />
+    <Compile Include="Services\DemoStaticResourceService.cs" />
     <Compile Include="Services\DemoThemeService.cs" />
     <Compile Include="Services\IStockQuoteService.cs" />
     <Compile Include="Services\StockQuoteService.cs" />
@@ -54,10 +58,11 @@
     <Compile Include="DocumentMetadata\Components\WasmMetadataManager.cs" />
     <Compile Include="DocumentMetadata\DocumentMetadata.Wasm.cs" />
     <Content Include="wwwroot\**\*.*" Exclude="wwwroot\_code\**\*.*" CopyToPublishDirectory="Always" />
-    <Content Include="**\*.razor" Exclude="Pages\Reports\**;Pages\RichEdit\**;Shared\NavMenuReporting.razor;wwwroot\_code\**\*.razor" />
+    <Content Include="**\*.razor" Exclude="Pages\Reports\**;Shared\NavMenuReporting.razor;wwwroot\_code\**\*.razor" />
     <Content Include="Pages\**\*.md" />
     <Content Include="Pages\**\*.razor.css" />
     <Content Include="Shared\**\*.razor.css" />
+    <Content Include="Data\Dictionaries\english.txt" />
     <Content Include="NOTICE.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +107,42 @@
   <ItemGroup>
     <Content Include="DataSources\GlobalTemperatureIndex.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Documents\ActiveCustomers.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Documents\AlbertEinstein.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Documents\Example.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Documents\MailMergeTemplate.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Dictionaries\english.xlg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Dictionaries\custom.dic">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Dictionaries\english.aff">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Documents\SpellChecking.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Target Name="ControllersCreate" BeforeTargets="PreBuildEvent" Condition="!Exists('Controllers')">

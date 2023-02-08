@@ -1,17 +1,13 @@
 ﻿<DemoPageSectionComponent Id="Editors-Memo-ReadOnly"
                           ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <DxFormLayout ItemSizeMode="Params.SizeMode"
+        <DxFormLayout SizeMode="Params.SizeMode"
                       CssClass="cw-480">
             <DxFormLayoutItem ColSpanMd="12" Caption="Read-Only">
-                <Template>
-                    <DxMemo Text="@TextValue" ReadOnly="true" />
-                </Template>
+                <DxMemo Text="@TextValue" ReadOnly="true" />
             </DxFormLayoutItem>
             <DxFormLayoutItem ColSpanMd="12" Caption="Disabled" BeginRow="true">
-                <Template>
-                    <DxMemo Text="@TextValue" Enabled="false" />
-                </Template>
+                <DxMemo Text="@TextValue" Enabled="false" />
             </DxFormLayoutItem>
         </DxFormLayout>
     </ChildContentWithParameters>

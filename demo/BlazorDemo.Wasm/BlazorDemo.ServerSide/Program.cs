@@ -42,6 +42,7 @@ namespace BlazorDemo.ServerSide {
 
                 services.AddSingleton<DemoConfiguration>();
                 services.AddScoped<DemoThemeService>();
+                services.AddScoped<IDemoStaticResourceService, DemoStaticResourceService>();
             }
         }
     }

@@ -1,6 +1,6 @@
 ﻿@inject NwindDataService NwindDataService
-<DemoPageSectionComponent Id="Navigation-Tabs-ScrollMode">
-    <ChildContent>
+<DemoPageSectionComponent Id="Navigation-Tabs-ScrollMode" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
         @if (Employees == null) {
             <p>
                 <em>Loading...</em>
@@ -9,7 +9,7 @@
             <div class="w-100 ch-220">
                 <DemoResizableContent>
                     <div>
-                        <DxTabs ScrollMode="@ScrollMode" RenderMode="TabsRenderMode.AllTabs">
+                        <DxTabs ScrollMode="@ScrollMode" RenderMode="TabsRenderMode.AllTabs" SizeMode="Params.SizeMode">
                             @foreach (var employee in Employees) {
                                 <DxTabPage Text="@(employee.FirstName + ' ' + employee.LastName)">
                                     <div class="d-flex pt-2 demo-employee-card">
@@ -32,7 +32,7 @@
                 </DemoResizableContent>
             </div>
         }
-    </ChildContent>
+    </ChildContentWithParameters>
     <OptionsContent>
         <OptionComboBox Label="Scroll Mode:"
                         Data="@ScrollModes"

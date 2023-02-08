@@ -1,0 +1,44 @@
+﻿<DemoPageSectionComponent Id="Editors-MaskedInput-TimeSpanMasks" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxMaskedInput @bind-Value="@Time"
+                       SizeMode="Params.SizeMode"
+                       CssClass="cw-320"
+                       Mask=@TimeSpanMasks[TimeSpanMaskName]>
+            <DxTimeSpanMaskProperties CaretMode="@((MaskCaretMode)CaretMode)"
+                                      AllowNegativeValue=true
+                                      UpdateNextSectionOnCycleChange=@UpdateNextSectionOnCycleChange />
+        </DxMaskedInput>
+        <p class="demo-text cw-320 mt-2">
+            Value: <b>@Time</b>
+        </p>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionComboBox CssClass="ow-150"
+                        Label="Mask:"
+                        Data="@TimeSpanMasks.Keys"
+                        @bind-Value="@TimeSpanMaskName" />
+        <OptionComboBox CssClass="ow-150"
+                        Label="Caret Mode:"
+                        Data="@(Enum.GetNames(typeof(MaskCaretMode)))"
+                        Value="@CaretMode.ToString()"
+                        ValueChanged="@((string selectedItem) =>
+                                        { CaretMode = Enum.Parse<MaskCaretMode>(selectedItem); })" />
+        <OptionCheckBox @bind-Checked="@UpdateNextSectionOnCycleChange"
+                        Label="Cascading Section Updates" />
+    </OptionsContent>
+
+    @code {
+        string TimeSpanMaskName { get; set; } = "General Short";
+        TimeSpan Time { get; set; } = new TimeSpan(DateTime.Now.Day, DateTime.Now.Minute, DateTime.Now.Second, 0);
+        MaskCaretMode CaretMode { get; set; }
+        bool UpdateNextSectionOnCycleChange { get; set; }
+        static Dictionary<string, string> TimeSpanMasks = new Dictionary<string, string>() {
+            { "Constant", TimeSpanMask.ConstantFormat },
+            { "General Long", TimeSpanMask.GeneralLongFormat },
+            { "General Short", TimeSpanMask.GeneralShortFormat },
+            { "User-Friendly Timer", "dd DD hh HH mm MM" },
+            { "Count Down the Days", "dd DD 'left'" },
+        };
+    }
+</DemoPageSectionComponent>
