@@ -1,17 +1,18 @@
 ﻿@inject DemoConfiguration DemoConfiguration
 @inject DemoThemeService Themes
+@inject IDemoStaticResourceService DemoStaticResourceService
 @implements IDisposable
 @implements IDemoThemeChangeRequestDispatcher
 
-<link rel="stylesheet" href="_content/BlazorDemo/css/scroll-view.css">
+<link rel="stylesheet" href="@GetUrlWithVersion("_content/BlazorDemo/css/scroll-view.css")">
 <DynamicStylesheetCompositeLink Urls="@CreateLinkUrls()" OnLinksLoaded="@ThemeStylesheet_LoadAsync"/>
-<link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo.css">
-<link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-pages.css">
+<link rel="stylesheet" href="@GetUrlWithVersion("_content/BlazorDemo/css/dx-demo.css")">
+<link rel="stylesheet" href="@GetUrlWithVersion("_content/BlazorDemo/css/dx-demo-pages.css")">
 
 @if(DemoConfiguration.IsServerSide) {
-    <link rel="stylesheet" href="BlazorDemo.ServerSide.styles.css">
+    <link rel="stylesheet" href="@GetUrlWithVersion("BlazorDemo.ServerSide.styles.css")">
 } else {
-    <link rel="stylesheet" href="BlazorDemo.Wasm.Server.styles.css">
+    <link rel="stylesheet" href="@GetUrlWithVersion("BlazorDemo.Wasm.Server.styles.css")">
 }
 
 @code {
@@ -41,8 +42,13 @@
         PendingTheme = null;
     }
 
+    string GetUrlWithVersion(string url) {
+        return DemoStaticResourceService != null ? DemoStaticResourceService.GetUrlWithVersion(url) : url;
+    }
+
     string GetThemeCssUrl() {
-        return PendingTheme != null ? Themes.GetThemeCssUrl(PendingTheme) : Themes.GetActiveThemeCssUrl();
+        var url = PendingTheme != null ? Themes.GetThemeCssUrl(PendingTheme) : Themes.GetActiveThemeCssUrl();
+        return GetUrlWithVersion(url);
     }
 
     string GetHighlightJSThemeCssUrl() {

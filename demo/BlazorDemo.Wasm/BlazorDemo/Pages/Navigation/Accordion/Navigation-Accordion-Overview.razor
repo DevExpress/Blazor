@@ -1,14 +1,14 @@
 ﻿@inject NwindDataService NwindDataService
 <DemoPageSectionComponent Id="Navigation-Accordion-Overview">
-    <ChildContent>
-        <div class="cw-480 dxbs-preventsel">
-            <DxAccordion ExpandMode="ExpandMode" ExpandCollapseAction="ExpandCollapseAction">
+    <DemoChildContent>
+        <div class="cw-480 demo-preventsel">
+            <DxAccordion ExpandMode="ExpandMode" ExpandCollapseAction="ExpandCollapseAction" AnimationType="LayoutAnimationType.Slide">
                 <Items>
-                    @foreach (var (employee, i) in Items) {
+                    @foreach(var (employee, i) in Items) {
                         <DxAccordionItem Text=@($"{employee.FirstName} {employee.LastName}") Expanded=@(i == 0)>
                             <ContentTemplate>
-                                <div class="pt-2 pb-3 px-2">
-                                    <EmployeeCard EmployeeInfo="@employee" />
+                                <div class="py-3 px-3">
+                                    <EmployeeCard EmployeeInfo="@employee"/>
                                 </div>
                             </ContentTemplate>
                         </DxAccordionItem>
@@ -16,7 +16,7 @@
                 </Items>
             </DxAccordion>
         </div>
-    </ChildContent>
+    </DemoChildContent>
     <OptionsContent>
         <OptionComboBox Label="Expand Mode:"
                         Data="@(Enum.GetValues<AccordionExpandMode>())"

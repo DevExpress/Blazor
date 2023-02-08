@@ -16,15 +16,6 @@
                            SizeMode="Params.SizeMode"
                            CssClass="cw-320"
                            Mask="@NumericMask.Currency" />
-
-            <p class="demo-text cw-320 mt-4 mb-1">
-                Date-Time Mask:
-            </p>
-            <DxMaskedInput @bind-Value="@Date"
-                           SizeMode="Params.SizeMode"
-                           CssClass="cw-320"
-                           Mask="@DateTimeMask.LongDate" />
-
             <p class="demo-text mt-4 mb-1">
                 Regular Expression Mask:
             </p>
@@ -33,12 +24,35 @@
                            CssClass="cw-320"
                            Mask="@EmailMask"
                            MaskMode="MaskMode.RegEx" />
+            <p class="demo-text cw-320 mt-4 mb-1">
+                Date-Time Mask:
+            </p>
+            <DxMaskedInput @bind-Value="@Date"
+                           SizeMode="Params.SizeMode"
+                           CssClass="cw-320"
+                           Mask="@DateTimeMask.ShortDate" />
+            <p class="demo-text mt-4 mb-1">
+                Date-Time Offset Mask:
+            </p>
+            <DxMaskedInput @bind-Value="@DateOffset"
+                           SizeMode="Params.SizeMode"
+                           CssClass="cw-320"
+                           Mask="hh:mm:ss tt zzzz" />
+            <p class="demo-text mt-4 mb-1">
+                Time Span Mask:
+            </p>
+            <DxMaskedInput @bind-Value="@TimeSpan"
+                           SizeMode="Params.SizeMode"
+                           CssClass="cw-320"
+                           Mask="@TimeSpanMask.GeneralLongFormat" />
         </div>
     </ChildContentWithParameters>
 
     @code {
         double Price { get; set; }
         DateTime Date { get; set; } = DateTime.Today;
+        TimeSpan TimeSpan { get; set; } = DateTime.Now.TimeOfDay;
+        DateTimeOffset DateOffset { get; set; } = DateTimeOffset.Now;
         string EmailMask { get; set; } = @"(\w|[.-])+@(\w|-)+\.(\w|-){2,4}";
         string Email { get; set; }
         string Telephone { get; set; }

@@ -1,0 +1,34 @@
+::deep.dx-demo-editors-edit-form {
+    width: 100%;
+    padding-bottom: 0.5rem;
+    padding-top: 0.25rem;
+}
+
+::deep .dx-demo-employee-form-layout-width {
+    width: 100%;
+}
+
+.editor-demo-layout-item {
+    display: flex;
+    align-items: center;
+}
+::deep .text-danger.editors-validation-text > .validation-message {
+    margin-left: 1.5rem;
+}
+.editor-icon {
+    flex-shrink: 0;
+}
+::deep .editors-demo-caption {
+    margin-left: 1.5rem;
+}
+::deep .editors-demo-textbox {
+    width: 100%;
+}
+
+.popup-icon-user,
+.editor-icon-birthdate,
+.editor-icon-city,
+.popup-icon-position {
+    margin-right: 0.5rem;
+}
+

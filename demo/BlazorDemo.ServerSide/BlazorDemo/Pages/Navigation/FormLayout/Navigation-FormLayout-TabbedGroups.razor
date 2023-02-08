@@ -1,7 +1,7 @@
 ﻿<DemoPageSectionComponent Id="Navigation-FormLayout-TabbedGroups"
                           ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <DxFormLayout ItemSizeMode="Params.SizeMode" CssClass="w-100">
+        <DxFormLayout SizeMode="Params.SizeMode" CssClass="w-100">
             <DxFormLayoutTabPages @bind-ActiveTabIndex="@ActiveTabIndex">
                 <DxFormLayoutTabPage Caption="Personal Information">
                     <DxFormLayoutItem Caption="First Name:" ColSpanMd="6">
@@ -27,14 +27,14 @@
                 </DxFormLayoutTabPage>
             </DxFormLayoutTabPages>
         </DxFormLayout>
-        <div class="row w-100 mx-0">
+        <div class="w-100 mx-0">
             <p class="demo-text col-12 mt-2">
                 @nameof(FirstName)=<b>@FirstName</b>,
                 @nameof(LastName)=<b>@LastName</b>,
                 @nameof(BirthDate)=<b>@BirthDate</b>
             </p>
         </div>
-        <div class="row w-100 mx-0">
+        <div class="w-100 mx-0">
             <p class="demo-text col-12 mt-2">
                 @nameof(Position)=<b>@Position</b>,
                 @nameof(HireDate)=<b>@HireDate</b>,

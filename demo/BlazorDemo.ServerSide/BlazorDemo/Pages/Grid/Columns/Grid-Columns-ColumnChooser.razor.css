@@ -1,8 +1,7 @@
 ::deep .btn-column-chooser {
-    width: 18px;
-    height: 18px;
-    -webkit-mask-image: url("images/ColumnChooser.svg");
-    mask-image: url("images/ColumnChooser.svg");
-    margin: 0 8px 0 0;
+    width: 16px;
+    height: 16px;
+    -webkit-mask-image: url("images/icons/column-chooser.svg");
+    mask-image: url("images/icons/column-chooser.svg");
     background-color: currentColor;
 }

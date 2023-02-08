@@ -1,0 +1,72 @@
+﻿@page "/Grid/Export/DataAwareExport"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Export" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @using DevExpress.Export
+
+        @inject NwindDataService NwindDataService
+        <DxGrid @ref="Grid"
+                Data="@Data"
+                ShowSearchBox="true"
+                SearchText="Manager"
+                ShowGroupPanel="true"
+                AutoExpandAllGroupRows="true"
+                GroupFooterDisplayMode="GridGroupFooterDisplayMode.IfExpanded"
+                SelectionMode="GridSelectionMode.Multiple"
+                SelectAllCheckboxMode="GridSelectAllCheckboxMode.AllPages"
+                SizeMode="Params.SizeMode">
+            <Columns>
+                <DxGridSelectionColumn Width="60px" AllowSelectAll="true" />
+                <DxGridDataColumn FieldName="ContactName" Width="15%" />
+                <DxGridDataColumn FieldName="ContactTitle" Width="15%" />
+                <DxGridDataColumn FieldName="CompanyName" Width="20%" />
+                <DxGridDataColumn FieldName="Country" Width="15%" GroupIndex="1" />
+                <DxGridDataColumn FieldName="FullAddress" UnboundType="GridUnboundColumnType.String" UnboundExpression="[City] + ' - ' + [PostalCode] + ' - ' + [Address]" />
+            </Columns>
+            <TotalSummary>
+                <DxGridSummaryItem FieldName="ContactName" SummaryType="GridSummaryItemType.Count" />
+            </TotalSummary>
+            <GroupSummary>
+                <DxGridSummaryItem FieldName="ContactName" SummaryType="GridSummaryItemType.Count" FooterColumnName="ContactName" />
+            </GroupSummary>
+        </DxGrid>
+        @code {
+            IEnumerable<object> Data { get; set; }
+            IGrid Grid { get; set; }
+            bool ExportSelectedRowsOnly { get; set; }
+
+            protected override async Task OnInitializedAsync() {
+                Data = await NwindDataService.GetCustomersAsync();
+            }
+            async Task ExportXlsx_Click() {
+                await Grid.ExportToXlsxAsync("ExportResult", new GridXlExportOptions() {
+                    ExportSelectedRowsOnly = ExportSelectedRowsOnly,
+                    CustomizeCell = OnCustomizeCell
+                });
+            }
+            async Task ExportXls_Click() {
+                await Grid.ExportToXlsAsync("ExportResult", new GridXlExportOptions() {
+                    ExportSelectedRowsOnly = ExportSelectedRowsOnly,
+                    CustomizeCell = OnCustomizeCell
+                });
+            }
+            async Task ExportCsv_Click() {
+                await Grid.ExportToCsvAsync("ExportResult", new GridCsvExportOptions() {
+                    ExportSelectedRowsOnly = ExportSelectedRowsOnly
+                });
+            }
+            void OnCustomizeCell (GridExportCustomizeCellEventArgs args) {
+                if(args.ColumnFieldName == "ContactName" && args.AreaType == SheetAreaType.DataArea)
+                    args.Formatting.Font = new XlCellFont() { Italic = true };
+                args.Handled = true;
+            }
+        }
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionCheckBox Label="Export Selected Rows Only" @bind-Checked="ExportSelectedRowsOnly" />
+        <OptionButton Text="Export to XLSX" OnClick="ExportXlsx_Click" />
+        <OptionButton Text="Export to XLS" OnClick="ExportXls_Click" />
+        <OptionButton Text="Export to CSV" OnClick="ExportCsv_Click" />
+    </OptionsContent>
+</DemoPageSectionComponent>

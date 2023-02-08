@@ -1,0 +1,66 @@
+﻿<EditForm Model="@NewEmployee"
+          OnValidSubmit="@FormSubmitted"
+          id="@FormId"
+          Context="EditFormContext">
+    <DataAnnotationsValidator />
+    <div class="dx-demo-editors-edit-form">
+        <DxFormLayout CssClass="dx-demo-employee-form-layout-width">
+            <DxFormLayoutItem Caption="Employee First Name:"
+                              CaptionPosition="CaptionPosition.Vertical"
+                              CaptionCssClass="editors-demo-caption"
+                              ColSpanMd="12">
+                <div class="editor-demo-layout-item">
+                    <span class="editor-icon popup-icon-user"></span>
+                    <DxTextBox @bind-Text="@NewEmployee.FirstName" CssClass="editors-demo-textbox" />
+                </div>
+                <div class="text-danger editors-validation-text">
+                    <ValidationMessage For="@(() => NewEmployee.FirstName)" />
+                </div>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Hire Date:"
+                              CaptionPosition="CaptionPosition.Vertical"
+                              CaptionCssClass="editors-demo-caption"
+                              ColSpanMd="12">
+                <div class="editor-demo-layout-item">
+                    <span class="editor-icon editor-icon-birthdate"></span>
+                    <DxDateEdit @bind-Date="@NewEmployee.HireDate" CssClass="editors-demo-textbox" />
+                </div>
+                <div class="text-danger editors-validation-text">
+                    <ValidationMessage For="@(() => NewEmployee.HireDate)" />
+                </div>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="City:"
+                              CaptionPosition="CaptionPosition.Vertical"
+                              CaptionCssClass="editors-demo-caption"
+                              ColSpanMd="12">
+                <div class="editor-demo-layout-item">
+                    <span class="editor-icon editor-icon-city"></span>
+                    <DxTextBox @bind-Text="@NewEmployee.City" CssClass="editors-demo-textbox" />
+                </div>
+                <div class="text-danger editors-validation-text">
+                    <ValidationMessage For="@(() => NewEmployee.City)" />
+                </div>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Position:"
+                              CaptionPosition="CaptionPosition.Vertical"
+                              CaptionCssClass="editors-demo-caption"
+                              ColSpanMd="12">
+                <div class="editor-demo-layout-item">
+                    <span class="editor-icon popup-icon-position"></span>
+                    <DxComboBox CssClass="editors-demo-textbox"
+                                Data="@(new List<string> { "Sales Representative", "Designer" })"
+                                @bind-Value="@NewEmployee.Title"/>
+                </div>
+                <div class="text-danger editors-validation-text">
+                    <ValidationMessage For="@(() => NewEmployee.Title)" />
+                </div>
+            </DxFormLayoutItem>
+        </DxFormLayout>
+    </div>
+</EditForm>
+
+@code {
+    EditorsEmployee NewEmployee { get; set; } = new();
+    [Parameter] public EventCallback<EditContext> FormSubmitted { get; set; }
+    [Parameter] public string FormId { get; set; }
+}

@@ -1,10 +1,10 @@
 ﻿@page "/Grid/DataBinding/Data"
 
-<DemoPageSectionComponent Id="Grid-DataBinding-Data">
+<DemoPageSectionComponent Id="Grid-DataBinding-Data" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject WeatherForecastService ForecastService
 
-        <DxGrid Data="@Data">
+        <DxGrid Data="@Data" SizeMode="Params.SizeMode">
             <Columns>
                 <DxGridDataColumn FieldName="Date" DisplayFormat="D" MinWidth="100" />
                 <DxGridDataColumn FieldName="Forecast" Width="15%" />

@@ -1,0 +1,34 @@
+﻿@page "/Grid/Filtering/SearchBox"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Filtering-SearchBox" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <DxGrid Data="@Data"
+                ShowSearchBox="true"
+                SearchText="ana tr"
+                SearchTextParseMode="CurrentSearchTextParseMode"
+                ShowGroupPanel="true"
+                AutoExpandAllGroupRows="true"
+                SizeMode="Params.SizeMode">
+            <Columns>
+                <DxGridDataColumn FieldName="ContactName" SortIndex="0" />
+                <DxGridDataColumn FieldName="CompanyName" />
+                <DxGridDataColumn FieldName="Country" GroupIndex="0" />
+                <DxGridDataColumn FieldName="City" />
+            </Columns>
+        </DxGrid>
+        @code {
+            IEnumerable<object> Data { get; set; }
+            IEnumerable<GridSearchTextParseMode> SearchTextParseModes { get; } = Enum.GetValues<GridSearchTextParseMode>();
+            GridSearchTextParseMode CurrentSearchTextParseMode { get; set; } = GridSearchTextParseMode.GroupWordsByAnd;
+
+            protected override async Task OnInitializedAsync() {
+                Data = await NwindDataService.GetCustomersAsync();
+            }
+        }
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionComboBox Label="SearchTextParseMode:" Data="@SearchTextParseModes" @bind-Value="@CurrentSearchTextParseMode" />
+    </OptionsContent>
+</DemoPageSectionComponent>

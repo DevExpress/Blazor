@@ -2,7 +2,7 @@
 @inject DemoConfiguration DemoConfiguration
 
 <DemoPageSectionComponent Id="Charts-PointSeries-Scatter">
-    <ChildContent>
+    <DemoChildContent>
         @inject IScatterRandomDataProvider Experement
 
         <DxChart @ref="@chart"
@@ -45,7 +45,7 @@
             </DxChartScatterSeries>
             <DxChartLegend HoverMode="ChartLegendHoverMode.None"/>
         </DxChart>
-    </ChildContent>
+    </DemoChildContent>
 
     <OptionsContent>
         <OptionChartExportComponent ExportMethod="@ExportChart" />

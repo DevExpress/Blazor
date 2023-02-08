@@ -3,11 +3,11 @@
 @*EndHide*@
 @inject NwindDataService NwindDataService
 
-<DemoPageSectionComponent Id="Navigation-Flyout-Customization">
+<DemoPageSectionComponent Id="Navigation-Flyout-Customization" ShowSizeMode="true">
     <OptionsContent>
         <OptionComboBox Label="Animation:" CssClass="ow-100" Data="@Animations" @bind-Value="@Animation" />
     </OptionsContent>
-    <ChildContent>
+    <ChildContentWithParameters Context="Params">
         @*BeginHide*@
         <div>
             <WarningMessage Text=@($"{(IsMobile ? "Tap" : "Hover")} a person's photo to display the Flyout component.")/>
@@ -30,8 +30,9 @@
                   PreventCloseOnPositionTargetClick="true"
                   FooterVisible="true"
                   FooterCssClass="custom-flyout-footer"
-                  Position=@(FlyoutPosition.BottomStart | FlyoutPosition.TopStart)>
-            <BodyTemplate>
+                  Position=@(FlyoutPosition.BottomStart | FlyoutPosition.TopStart)
+                  SizeMode="Params.SizeMode">
+            <BodyTextTemplate>
                 @*BeginHide*@
                 <div>
                 @*EndHide*@
@@ -41,7 +42,7 @@
                 @*BeginHide*@
                 </div>
                 @*EndHide*@
-            </BodyTemplate>
+            </BodyTextTemplate>
             <FooterTextTemplate>
                 <div class="w-100">
                     <div class="custom-flyout-footer">
@@ -51,7 +52,7 @@
                 </div>
             </FooterTextTemplate>
         </DxFlyout>
-    </ChildContent>
+    </ChildContentWithParameters>
 
     @code {
         /*BeginHide*/

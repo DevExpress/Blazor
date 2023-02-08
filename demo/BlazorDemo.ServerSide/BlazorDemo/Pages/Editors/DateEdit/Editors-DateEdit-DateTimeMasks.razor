@@ -1,0 +1,73 @@
+﻿<DemoPageSectionComponent Id="Editors-DateEdit-DateTimeMasks" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxDateEdit @bind-Date="@Date"
+                    CssClass="cw-320"
+                    SizeMode="Params.SizeMode"
+                    Mask="@DateTimeMasks[DateTimeMaskName]">
+            <DxDateTimeMaskProperties Culture="MaskCultureInfo.Value"
+                                      CaretMode="@((MaskCaretMode)CaretMode)"
+                                      UpdateNextSectionOnCycleChange=@UpdateNextSectionOnCycleChange/>
+        </DxDateEdit>
+        <p class="demo-text cw-320 mt-2">
+            Date: <b>@Date</b>
+        </p>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionComboBox CssClass="ow-150"
+                        Label="Mask:"
+                        Data="@DateTimeMasks.Keys"
+                        @bind-Value="@DateTimeMaskName" />
+        <OptionComboBox CssClass="ow-150"
+                        Label="Caret Mode:"
+                        Data="@(Enum.GetNames(typeof(MaskCaretMode)))"
+                        Value="@CaretMode.ToString()"
+                        ValueChanged="@((string selectedItem) =>
+                                        { CaretMode = Enum.Parse<MaskCaretMode>(selectedItem); })" />
+        <OptionComboBox CssClass="ow-150"
+                        Label="Culture:"
+                        Data="@CultureInfoItems"
+                        @bind-Value="MaskCultureInfo" />
+        <OptionCheckBox @bind-Checked="@UpdateNextSectionOnCycleChange"
+                        Label="Cascading Section Updates" />
+    </OptionsContent>
+
+    @code {
+        class CultureInfoItem {
+            public CultureInfo Value { get; set; }
+            public string Text { get; set; }
+            public override string ToString() { return Text; }
+        }
+
+        static CultureInfoItem[] CultureInfoItems { get; set; } = new CultureInfoItem[] {
+            new CultureInfoItem() {
+                Value = CultureInfo.GetCultureInfo("en-US"),
+                Text = "American English"
+            },
+            new CultureInfoItem() {
+                Value = CultureInfo.GetCultureInfo("de-DE"),
+                Text = "German"
+            },
+        };
+
+        bool UpdateNextSectionOnCycleChange { get; set; }
+        DateTime Date { get; set; } = DateTime.Today;
+        CultureInfoItem MaskCultureInfo { get; set; } = CultureInfoItems.FirstOrDefault();
+        MaskCaretMode CaretMode { get; set; }
+        string DateTimeMaskName { get; set; } = "Short Date Time";
+
+        static Dictionary<string, string> DateTimeMasks = new Dictionary<string, string>() {
+            { "ISO8601", DateTimeMask.ISO8601 },
+            { "Long Date", DateTimeMask.LongDate },
+            { "Long Date Time", DateTimeMask.LongDateTime },
+            { "Long Time", DateTimeMask.LongTime },
+            { "Month And Day", DateTimeMask.MonthAndDay },
+            { "Month And Year", DateTimeMask.MonthAndYear },
+            { "RFC1123", DateTimeMask.RFC1123 },
+            { "Short Date", DateTimeMask.ShortDate },
+            { "Short Date Time", DateTimeMask.ShortDateTime },
+            { "Short Time", DateTimeMask.ShortTime },
+            { "Universal", DateTimeMask.Universal },
+        };
+    }
+</DemoPageSectionComponent>

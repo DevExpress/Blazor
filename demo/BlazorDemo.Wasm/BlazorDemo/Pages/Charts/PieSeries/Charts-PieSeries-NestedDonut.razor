@@ -1,7 +1,7 @@
 ﻿@using System.Drawing
 
 <DemoPageSectionComponent Id="Charts-PieSeries-NestedDonut">
-    <ChildContent>
+    <DemoChildContent>
         @inject ISalesInfoDataProvider Sales
         <DxPieChart Data="@SalesData"
                     CustomizeSeriesPoint="CustomizeSeriesPoint"
@@ -51,7 +51,7 @@
                            Position="RelativePosition.Outside"
                            Orientation="Orientation.Horizontal" />
         </DxPieChart>
-    </ChildContent>
+    </DemoChildContent>
 
     <OptionsContent>
         <OptionCheckBox T="bool"

@@ -1,5 +1,5 @@
-﻿<DemoPageSectionComponent Id="Editors-ListBox-MultipleSelection">
-    <ChildContent>
+﻿<DemoPageSectionComponent Id="Editors-ListBox-MultipleSelection" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <div class="d-flex flex-wrap cw-800">
@@ -7,6 +7,7 @@
                        TextFieldName="@nameof(Employee.Text)"
                        SelectionMode="ListBoxSelectionMode.Multiple"
                        ShowCheckboxes="@ShowCheckboxes"
+                       SizeMode="Params.SizeMode"
                        CssClass="w-auto mt-1 me-1 flex-grow-1 chi-220"
                        style="flex-basis: 240px"
                        @bind-Values="@Values">
@@ -26,7 +27,7 @@
                 </div>
             </div>
         </div>
-    </ChildContent>
+    </ChildContentWithParameters>
 
     <OptionsContent>
         <OptionCheckBox @bind-Checked="@ShowCheckboxes" Label="Show Checkboxes"/>

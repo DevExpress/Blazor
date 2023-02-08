@@ -1,5 +1,7 @@
-﻿<DemoPageSectionComponent Id="Editors-Calendar-MinMaxDate">
-    <DxCalendar T="DateTime" MinDate="@MinDate" MaxDate="@MaxDate" />
+﻿<DemoPageSectionComponent Id="Editors-Calendar-MinMaxDate" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxCalendar T="DateTime" MinDate="@MinDate" MaxDate="@MaxDate" SizeMode="Params.SizeMode" />
+    </ChildContentWithParameters>
 
     @code {
         DateTime MinDate { get; set; }

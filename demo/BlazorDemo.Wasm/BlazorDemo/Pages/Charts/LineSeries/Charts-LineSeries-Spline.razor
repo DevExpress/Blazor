@@ -1,7 +1,7 @@
 ﻿@using System.Text.RegularExpressions
 
 <DemoPageSectionComponent Id="Charts-LineSeries-Spline">
-    <ChildContent>
+    <DemoChildContent>
         @switch (splineSeriesType){
             case ChartSeriesType.Spline:
                 <SplineChart ShowSeriesPointMarkers="showSeriesPointMarkers"
@@ -17,7 +17,7 @@
                 break;
 
         }
-    </ChildContent>
+    </DemoChildContent>
 
     <OptionsContent>
         <OptionComboBox Label="Series Type:"

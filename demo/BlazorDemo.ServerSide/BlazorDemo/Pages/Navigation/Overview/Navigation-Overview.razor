@@ -2,7 +2,7 @@
 
 <DemoPageSectionComponent Id="Navigation-Overview">
     <div class="overview-navigation card cw-880">
-        <div class="card-body p-0 border-light border-bottom">
+        <div class="card-header p-0 demo-bg-transparent">
             <DxMenu Orientation="Orientation.Horizontal"
                     DropDownActionMode="MenuDropDownActionMode.Click"
                     DisplayMode="MenuDisplayMode.Desktop"
@@ -47,7 +47,7 @@
                             <DxMenuItem Text="Blogs" />
                         </Items>
                     </DxMenuItem>
-                    <DxMenuItem CssClass="search-menu-item" BeginGroup="true" Position="ItemPosition.End">
+                    <DxMenuItem CssClass="search-menu-item" Position="ItemPosition.End">
                         <Template>
                             <SearchItem />
                         </Template>
@@ -74,7 +74,7 @@
                                 </DxTreeViewNode>
                             </Nodes>
                         </DxTreeViewNode>
-                        <DxTreeViewNode Text="Analitics">
+                        <DxTreeViewNode Text="Analytics">
                             <Nodes>
                                 <DxTreeViewNode Text="Charting">
                                 </DxTreeViewNode>
@@ -127,24 +127,15 @@
                 <DataAnnotationsValidator />
                 <DxFormLayout>
                     <DxFormLayoutItem ColSpanMd="12">
-                        <Template>
-                            <DxTextBox @bind-Text="@UserData.Username" NullText="Username" ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto">
-                            </DxTextBox>
-                            <div class="text-danger"><ValidationMessage For="@(() => UserData.Username)" /></div>
-                        </Template>
+                        <DxTextBox @bind-Text="@UserData.Username" NullText="Username" ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"/>
+                        <div class="text-danger"><ValidationMessage For="@(() => UserData.Username)" /></div>
                     </DxFormLayoutItem>
                     <DxFormLayoutItem ColSpanMd="12">
-                        <Template>
-                            <DxTextBox @bind-Text="@UserData.Password" NullText="Password" Password="true" ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto">
-                            </DxTextBox>
-                            <div class="text-danger"><ValidationMessage For="@(() => UserData.Password)" /></div>
-                        </Template>
+                        <DxTextBox @bind-Text="@UserData.Password" NullText="Password" Password="true" ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"/>
+                        <div class="text-danger"><ValidationMessage For="@(() => UserData.Password)" /></div>
                     </DxFormLayoutItem>
                     <DxFormLayoutItem ColSpanMd="12">
-                        <Template>
-                            <DxButton CssClass="w-100" Text="Login" RenderStyle="ButtonRenderStyle.Primary" SubmitFormOnClick="true">
-                            </DxButton>
-                        </Template>
+                        <DxButton CssClass="w-100" Text="Login" RenderStyle="ButtonRenderStyle.Primary" SubmitFormOnClick="true"/>
                     </DxFormLayoutItem>
                 </DxFormLayout>
             </EditForm>

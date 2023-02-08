@@ -30,8 +30,6 @@ namespace BlazorDemo.ServerSide {
             var optionsBuilder = services.AddOptions();
             optionsBuilder.AddOptions<DemoModel>("BlazorDemo");
 
-            services.AddDevExpressBlazorWasmMasks();
-
             services.AddSingleton<IDemoVersion, DemoVersion>(x => {
                 string customVersion = Configuration.GetValue<string>("dxversion");
                 if(!string.IsNullOrEmpty(customVersion))

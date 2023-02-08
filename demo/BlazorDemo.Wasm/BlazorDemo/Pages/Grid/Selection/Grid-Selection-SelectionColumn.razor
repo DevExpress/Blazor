@@ -1,16 +1,18 @@
 ﻿@page "/Grid/Selection/SelectionColumn"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Selection-SelectionColumn">
+<DemoPageSectionComponent Id="Grid-Selection-SelectionColumn" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <DxGrid Data="Products"
                 KeyFieldName="ProductId"
                 @bind-SelectedDataItems="SelectedDataItems"
-                CustomizeCellDisplayText="Grid_CustomizeCellDisplayText">
+                CustomizeCellDisplayText="Grid_CustomizeCellDisplayText"
+                SizeMode="Params.SizeMode"
+                SelectAllCheckboxMode="CurrentSelectAllCheckboxMode">
             <Columns>
-                <DxGridSelectionColumn Width="60px" />
+                <DxGridSelectionColumn Width="104px" />
                 <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
                 <DxGridDataColumn FieldName="CategoryId" SortMode="GridColumnSortMode.DisplayText" Caption="Category" MinWidth="100" TextAlignment="GridTextAlignment.Left" />
                 <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
@@ -31,6 +33,8 @@
             IEnumerable<Product> Products { get; set; }
             IEnumerable<Category> Categories { get; set; }
             IReadOnlyList<object> SelectedDataItems { get; set; }
+            IEnumerable<GridSelectAllCheckboxMode> SelectAllCheckboxModes { get; } = Enum.GetValues<GridSelectAllCheckboxMode>();
+            GridSelectAllCheckboxMode CurrentSelectAllCheckboxMode { get; set; }
 
             protected override async Task OnInitializedAsync() {
                 Products = await NwindDataService.GetProductsAsync();
@@ -44,4 +48,7 @@
             }
         }
     </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionComboBox Label="Select All Checkbox Mode:" Data="SelectAllCheckboxModes" @bind-Value="@CurrentSelectAllCheckboxMode" CssClass="ow-180" />
+    </OptionsContent>
 </DemoPageSectionComponent>

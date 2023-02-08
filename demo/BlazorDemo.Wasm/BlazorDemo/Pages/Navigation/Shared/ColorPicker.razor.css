@@ -19,7 +19,8 @@
     border: 1px solid var(--bs-primary);
 }
 
-.color-picker-container > .color-picker-cell:hover {
+.color-picker-container > .color-picker-cell:hover,
+.color-picker-container-reset:hover > .color-picker-cell {
     border: 2px solid var(--bs-primary);
 }
 

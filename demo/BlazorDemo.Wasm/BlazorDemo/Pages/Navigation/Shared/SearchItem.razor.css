@@ -18,13 +18,13 @@
      align-items: center;
      height: 100%;
      position: absolute;
-     color: gray;
  }
 
  .search .search-button .search-icon {
      background-color: currentColor;
-     width: 24px;
-     height: 24px;
-     mask-image: url("images/Search.svg");
-     -webkit-mask-image: url("images/Search.svg");
+     width: 16px;
+     height: 16px;
+     mask-image: url("images/icons/search.svg");
+     -webkit-mask-image: url("images/icons/search.svg");
+     opacity: 0.6;
  }

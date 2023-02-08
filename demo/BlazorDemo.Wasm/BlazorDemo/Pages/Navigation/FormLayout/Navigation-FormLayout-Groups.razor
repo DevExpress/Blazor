@@ -1,8 +1,9 @@
-﻿<DemoPageSectionComponent Id="Navigation-FormLayout-Groups"
+﻿@inject NwindDataService NwindDataService
+<DemoPageSectionComponent Id="Navigation-FormLayout-Groups"
+                          VerticalAlignment="VerticalAlignment.Top"
                           ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <DxFormLayout
-                      ItemSizeMode="Params.SizeMode"
+        <DxFormLayout SizeMode="Params.SizeMode"
                       CssClass="w-100">
             <DxFormLayoutGroup Caption="Personal Information" ColSpanMd="6">
                 <DxFormLayoutItem Caption="First Name:" ColSpanMd="12">
@@ -16,14 +17,14 @@
                 </DxFormLayoutItem>
             </DxFormLayoutGroup>
             <DxFormLayoutGroup ColSpanMd="6">
-                <HeaderTemplate>
-                    <div class="float-start">
+                <HeaderContentTemplate>
+                    <div>
                         Work Information
                     </div>
-                    <div class="demo-unemployed-checkbox-fs">
-                        <DxCheckBox CheckedChanged="@((bool t) => UnemployedChanged(t))" LabelPosition="LabelPosition.Left" Checked="@Unemployed">Unemployed</DxCheckBox>
+                    <div class="demo-unemployed-checkbox-container">
+                        <DxCheckBox CssClass="demo-unemployed-checkbox" CheckedChanged="@((bool t) => UnemployedChanged(t))" LabelPosition="LabelPosition.Left" Checked="@Unemployed">Unemployed</DxCheckBox>
                     </div>
-                </HeaderTemplate>
+                </HeaderContentTemplate>
                 <Items>
                     <DxFormLayoutItem Caption="Position:" ColSpanMd="12">
                         <DxTextBox @bind-Text="@Position" Enabled="!Unemployed" />
@@ -31,43 +32,63 @@
                     <DxFormLayoutItem Caption="Hire Date:" ColSpanMd="12">
                         <DxDateEdit @bind-Date="@HireDate" Enabled="!Unemployed" />
                     </DxFormLayoutItem>
-                    <DxFormLayoutItem Caption="Notes:" ColSpanMd="12">
-                        <DxTextBox @bind-Text="@Notes" Enabled="!Unemployed" />
+                    <DxFormLayoutItem Caption="Postal code:" ColSpanMd="12">
+                        <DxTextBox @bind-Text="@PostalCode" Enabled="!Unemployed" />
                     </DxFormLayoutItem>
                 </Items>
             </DxFormLayoutGroup>
+            <DxFormLayoutGroup ColSpanMd="12" Caption="Description" ExpandButtonDisplayMode="GroupExpandButtonDisplayMode.Start" AnimationType="LayoutAnimationType.Slide">
+                <DxFormLayoutItem ColSpanMd="12">
+                    <DxMemo @bind-Text="Notes" Rows="4"/>
+                </DxFormLayoutItem>
+            </DxFormLayoutGroup>
         </DxFormLayout>
 
-        <div class="row w-100 mx-0">
+        <div class="w-100 mx-0">
             <p class="demo-text col-12 mt-2">
                 @nameof(FirstName)=<b>@FirstName</b>,
                 @nameof(LastName)=<b>@LastName</b>,
                 @nameof(BirthDate)=<b>@BirthDate</b>
             </p>
         </div>
-        <div class="row w-100 mx-0">
+        <div class="w-100 mx-0">
             <p class="demo-text col-12 mt-2">
                 @nameof(Position)=<b>@Position</b>,
                 @nameof(HireDate)=<b>@HireDate</b>,
-                @nameof(Notes)=<b>@Notes</b>
+                @nameof(PostalCode)=<b>@PostalCode</b>
             </p>
         </div>
     </ChildContentWithParameters>
 
     @code {
-        string FirstName { get; set; } = "Nancy";
-        string LastName { get; set; } = "Davolio";
-        DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-20);
-        string Position { get; set; } = "Sales Representative";
-        DateTime? HireDate { get; set; } = DateTime.Now.AddYears(-20);
-        string Notes { get; set; } = "Education includes a BA in psychology.";
+        static Employee employee;
+        string FirstName { get; set; }
+        string LastName { get; set; }
+        DateTime BirthDate { get; set; }
+        string Position { get; set; }
+        DateTime? HireDate { get; set; }
+        string PostalCode { get; set; }
+        string Notes { get; set; }
         bool Unemployed { get; set; }
         void UnemployedChanged(bool value) {
             if(value) {
-                Position = Notes = null;
+                Position = PostalCode = null;
                 HireDate = null;
             }
             Unemployed = value;
         }
+
+        protected override async Task OnInitializedAsync() {
+            IEnumerable<Employee> dataSource = await NwindDataService.GetEmployeesAsync();
+            employee = dataSource.Select(e => e).First(e => e.FullName == "Andrew Fuller");
+            FirstName = employee.FirstName;
+            LastName = employee.LastName;
+            BirthDate = employee.BirthDate ?? DateTime.Now.AddYears(-20);
+            Position = employee.Title;
+            HireDate = employee.HireDate ?? DateTime.Now.AddYears(-20);
+            Notes = employee.Notes;
+            PostalCode = employee.PostalCode;
+        }
+
     }
 </DemoPageSectionComponent>

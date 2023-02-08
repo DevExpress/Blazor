@@ -1,13 +1,13 @@
 ﻿@page "/Grid/DataBinding/LargeQueryable"
 @layout DataProviderAccessArea<IRentInfoDataProvider>
 
-<DemoPageSectionComponent Id="Grid-DataBinding-LargeQueryable">
+<DemoPageSectionComponent Id="Grid-DataBinding-LargeQueryable" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inherits OwningComponentBase
         @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 
         <DataProviderAccessAreaContainer DataProvider="@RentInfoDataProvider">
-            <DxGrid Data="@Data" PageSize="10">
+            <DxGrid Data="@Data" PageSize="10" SizeMode="Params.SizeMode">
                 <Columns>
                     <DxGridDataColumn FieldName="State" Width="5%" />
                     <DxGridDataColumn FieldName="Area" MinWidth="100" />

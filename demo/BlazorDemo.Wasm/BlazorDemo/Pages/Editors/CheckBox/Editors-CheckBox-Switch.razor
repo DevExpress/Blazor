@@ -1,35 +1,40 @@
-﻿<DemoPageSectionComponent Id="Editors-CheckBox-Switch">
-    <div class="card">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <DxCheckBox CheckType="CheckType.Switch"
-                            LabelPosition="LabelPosition.Left"
-                            Checked="@SilentMode"
-                            CheckedChanged="@((bool t) => CheckedChanged(t))"
-                            Alignment="CheckBoxContentAlignment.SpaceBetween">
-                    Silent Mode
-                </DxCheckBox>
-            </li>
-            <li class="list-group-item">
-                <DxCheckBox CheckType="CheckType.Switch"
-                            LabelPosition="LabelPosition.Left"
-                            @bind-Checked="@Sound"
-                            Enabled="@Enabled"
-                            Alignment="CheckBoxContentAlignment.SpaceBetween">
-                    Enable sound
-                </DxCheckBox>
-            </li>
-            <li class="list-group-item">
-                <DxCheckBox CheckType="CheckType.Switch"
-                            LabelPosition="LabelPosition.Left"
-                            @bind-Checked="@Vibration"
-                            Enabled="@Enabled"
-                            Alignment="CheckBoxContentAlignment.SpaceBetween">
-                    Enable vibration
-                </DxCheckBox>
-            </li>
-        </ul>
-    </div>
+﻿<DemoPageSectionComponent Id="Editors-CheckBox-Switch" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="card">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <DxCheckBox CheckType="CheckType.Switch"
+                                LabelPosition="LabelPosition.Left"
+                                Checked="@SilentMode"
+                                CheckedChanged="@((bool t) => CheckedChanged(t))"
+                                Alignment="CheckBoxContentAlignment.SpaceBetween"
+                                SizeMode="Params.SizeMode">
+                        Silent Mode
+                    </DxCheckBox>
+                </li>
+                <li class="list-group-item">
+                    <DxCheckBox CheckType="CheckType.Switch"
+                                LabelPosition="LabelPosition.Left"
+                                @bind-Checked="@Sound"
+                                Enabled="@Enabled"
+                                Alignment="CheckBoxContentAlignment.SpaceBetween"
+                                SizeMode="Params.SizeMode">
+                        Enable sound
+                    </DxCheckBox>
+                </li>
+                <li class="list-group-item">
+                    <DxCheckBox CheckType="CheckType.Switch"
+                                LabelPosition="LabelPosition.Left"
+                                @bind-Checked="@Vibration"
+                                Enabled="@Enabled"
+                                Alignment="CheckBoxContentAlignment.SpaceBetween"
+                                SizeMode="Params.SizeMode">
+                        Enable vibration
+                    </DxCheckBox>
+                </li>
+            </ul>
+        </div>
+    </ChildContentWithParameters>
 
     @code {
         bool Enabled { get; set; } = false;

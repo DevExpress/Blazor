@@ -1,23 +1,26 @@
 ﻿@using BlazorDemo.Pages.Navigation.Popup
-<DemoPageSectionComponent Id="Navigation-DropDown-Overview">
-    <div id="dropdown-overview-target-container">
-        <DxButton
-            Click="() => IsOpen = !IsOpen"
-            RenderStyle="@ButtonRenderStyle.Secondary">SHOW A DROPDOWN</DxButton>
-    </div>
+<DemoPageSectionComponent Id="Navigation-DropDown-Overview" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div id="dropdown-overview-target-container">
+            <DxButton
+                Click="() => IsOpen = !IsOpen"
+                RenderStyle="@ButtonRenderStyle.Secondary">SHOW A DROPDOWN</DxButton>
+        </div>
 
-    <DxDropDown
-        @bind-IsOpen="@IsOpen"
-        HeaderVisible="true"
-        HeaderText="Header"
-        BodyText="@Constants.Content"
-        PositionMode="DropDownPositionMode.Bottom"
-        Width="max(25vw, 250px)"
-        PositionTarget="#dropdown-overview-target-container"
-        RestrictionTarget="#Navigation-DropDown-Overview"
-        CloseMode="DropDownCloseMode.Close"
-        PreventCloseOnPositionTargetClick="true">
-    </DxDropDown>
+        <DxDropDown
+            @bind-IsOpen="@IsOpen"
+            HeaderVisible="true"
+            HeaderText="Header"
+            BodyText="@Constants.Content"
+            PositionMode="DropDownPositionMode.Bottom"
+            Width="max(25vw, 250px)"
+            PositionTarget="#dropdown-overview-target-container"
+            RestrictionTarget="#Navigation-DropDown-Overview"
+            CloseMode="DropDownCloseMode.Close"
+            PreventCloseOnPositionTargetClick="true"
+            SizeMode="Params.SizeMode">
+        </DxDropDown>
+    </ChildContentWithParameters>
 
     @code {
         bool IsOpen { get; set; } = false;

@@ -117,6 +117,9 @@ namespace BlazorDemo.DataProviders {
 
                 entity.Property(e => e.PhotoPath)
                     .HasMaxLength(255);
+
+                entity.Property(e => e.GroupName)
+                    .HasColumnType("text");
             });
 
             modelBuilder.Entity<Invoice>(entity => {

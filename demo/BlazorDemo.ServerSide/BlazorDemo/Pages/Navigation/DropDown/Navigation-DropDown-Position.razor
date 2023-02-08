@@ -1,9 +1,9 @@
-@using BlazorDemo.Pages.Navigation.Popup
-<DemoPageSectionComponent Id="Navigation-DropDown-Position">
+﻿@using BlazorDemo.Pages.Navigation.Popup
+<DemoPageSectionComponent Id="Navigation-DropDown-Position" ShowSizeMode="true">
     <OptionsContent>
         <OptionComboBox Label="Position Mode:" CssClass="ow-100" Data="@PositionModeSource" @bind-Value="@PositionMode"/>
     </OptionsContent>
-    <ChildContent>
+    <ChildContentWithParameters Context="Params">
         <div id="dropdown-position-target-container">
             <DxButton
                 Click="() => IsOpen = !IsOpen"
@@ -19,9 +19,10 @@
             PositionTarget="#dropdown-position-target-container"
             PositionMode="@PositionMode"
             CloseMode="DropDownCloseMode.Close"
+            SizeMode="Params.SizeMode"
             PreventCloseOnPositionTargetClick="true">
         </DxDropDown>
-    </ChildContent>
+    </ChildContentWithParameters>
 
     @code {
         DropDownPositionMode[] PositionModeSource { get; set; } = Enum.GetValues<DropDownPositionMode>().Except(new [] { DropDownPositionMode.Absolute, DropDownPositionMode.AbsolutePoint }).ToArray();

@@ -1,0 +1,20 @@
+﻿@page "/RichEditSpellCheck"
+@using System.IO;
+
+<DemoPageSectionComponent Id="RichEdit-SpellCheck">
+    @inject IDocumentProvider DocumentProvider
+
+    <DxRichEdit CssClass="w-100 ch-720"
+                DocumentContent="@DocumentContent"
+                CheckSpelling="true"
+                DocumentCulture="en-US"/>
+
+    @code {
+        byte[] DocumentContent;
+
+        protected override async Task OnInitializedAsync() {
+            DocumentContent = await DocumentProvider.GetDocumentAsync("SpellChecking.docx");
+            await base.OnInitializedAsync();
+        }
+    }
+</DemoPageSectionComponent>

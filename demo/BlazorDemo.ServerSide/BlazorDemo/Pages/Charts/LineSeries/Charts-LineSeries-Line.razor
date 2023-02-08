@@ -1,5 +1,5 @@
 ﻿<DemoPageSectionComponent Id="Charts-LineSeries-Line">
-    <ChildContent>
+    <DemoChildContent>
         @switch (lineSeriesType) {
             case ChartSeriesType.Line:
                 <LineChart ShowSeriesPointMarkers="showSeriesPointMarkers"
@@ -14,7 +14,7 @@
                                       ShowSeriesLabels="showSeriesLabels" />
                 break;
         }
-    </ChildContent>
+    </DemoChildContent>
 
     <OptionsContent>
         <OptionComboBox Label="Series Type:"

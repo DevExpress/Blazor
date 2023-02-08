@@ -2,7 +2,7 @@
 @using System.Drawing
 
 <DemoPageSectionComponent Id="Charts-MultiplePanes">
-    <ChildContent>
+    <DemoChildContent>
         @inject IWeatherSummaryDataProvider WeatherSummaryDataProvider
 
         <DxChart @ref="@chart"
@@ -51,7 +51,7 @@
                 <DxChartAxisLabel Format="ChartElementFormat.Month" />
             </DxChartArgumentAxis>
         </DxChart>
-    </ChildContent>
+    </DemoChildContent>
 
     <OptionsContent>
         <OptionChartExportComponent ExportMethod="@ExportChart"/>

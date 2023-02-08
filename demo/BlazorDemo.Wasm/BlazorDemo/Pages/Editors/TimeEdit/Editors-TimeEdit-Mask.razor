@@ -17,7 +17,7 @@
                         Label="Mask:"
                         Data="PredefinedDateTimeMasks"
                         Value="DateTimeMaskName"
-                        ValueChanged="@((string mask) =>ChangeDateTimeMaskType(mask))" />
+                        ValueChanged="@((string mask) => ChangeDateTimeMaskType(mask))" />
         <OptionComboBox CssClass="ow-150"
                         Label="Caret Mode:"
                         Data="@(Enum.GetNames(typeof(MaskCaretMode)))"

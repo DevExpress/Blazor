@@ -2,7 +2,7 @@
     transform: matrix(1, 0, 0, 1, -112, -1) !important;
 }
 
-/*BeginHide*/ ::deep /*EndHide*/ .dx-menu-item.notoggle a > span.dropdown-toggle {
+/*BeginHide*/ ::deep /*EndHide*/ .dx-menu-item.notoggle a > .dx-menu-dropdown-toggle {
     display: none;
 }
 /*BeginHide*/ ::deep /*EndHide*/ .dxbs-menu > .nav .dx-menu-item.notoggle {
@@ -33,6 +33,10 @@
     padding-top: 0.815rem;
     padding-bottom: 0.815rem;
     border-top: 1px solid #e5e5e5;
+}
+
+.menu-icon-user-profile {
+    opacity: 0.75;
 }
 
 .user-profile .menu-icon-user-profile {

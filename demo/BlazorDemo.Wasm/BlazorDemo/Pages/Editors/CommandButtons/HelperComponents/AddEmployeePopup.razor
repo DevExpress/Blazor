@@ -1,0 +1,35 @@
+﻿<DxPopup
+    Visible="@Visible"
+    ShowFooter="true"
+    HeaderText="Add Employee"
+    SizeMode="@SizeMode"
+    VisibleChanged="@VisibleChanged">
+    <BodyContentTemplate>
+        <EmployeeEditForm FormId="@FormId" FormSubmitted="@OnFormSubmitted"/>
+    </BodyContentTemplate>
+    <FooterContentTemplate>
+        <DxButton CssClass="popup-button my-1 ms-2"
+                  RenderStyle="ButtonRenderStyle.Primary"
+                  Text="Add"
+                  SubmitFormOnClick="true"
+                  form="@FormId" />
+        <DxButton CssClass="popup-button my-1 ms-2"
+                  RenderStyle="ButtonRenderStyle.Secondary"
+                  Text="Cancel"
+                  Click="@(async() => await VisibleChanged.InvokeAsync(false))" />
+    </FooterContentTemplate>
+</DxPopup>
+
+@code {
+    readonly string FormId = "AddEmployeeEditForm";
+    [Parameter] public bool Visible { get; set; }
+    [Parameter] public EventCallback<bool> VisibleChanged { get; set; }
+    [Parameter] public SizeMode? SizeMode { get; set; }
+    [Parameter] public EventCallback<Employee> PopupClosed { get; set; }
+
+    async Task OnFormSubmitted(EditContext editContext) {
+        var employee = (Employee)(EditorsEmployee)editContext.Model;
+        await VisibleChanged.InvokeAsync(false);
+        await PopupClosed.InvokeAsync(employee);
+    }
+}

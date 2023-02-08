@@ -14,8 +14,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0" />
     <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
-    <PackageReference Include="DevExpress.Blazor.Server.WebAssembly" Version="22.1.4" />
-    <PackageReference Include="DevExpress.Blazor.Reporting" Version="22.1.4" />
+    <PackageReference Include="DevExpress.Blazor.Server.WebAssembly" Version="22.2.4" />
+    <PackageReference Include="DevExpress.AspNetCore.Reporting" Version="22.2.4" />
     
     
     <ProjectReference Include="..\BlazorDemo\BlazorDemo.ServerSide.Core.csproj" />

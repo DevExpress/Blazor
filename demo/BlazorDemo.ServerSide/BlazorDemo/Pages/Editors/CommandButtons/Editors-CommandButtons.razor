@@ -1,0 +1,170 @@
+﻿@page "/CommandButtons"
+
+@*BeginHide*@
+@using BlazorDemo.Pages.Editors.CommandButtons.HelperComponents
+@*EndHide*@
+
+<DemoPageSectionComponent Id="Editors-CommandButtons" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        @*BeginHide*@
+        <div>
+        @*EndHide*@
+        <DxFormLayout CssClass="dx-demo-form-layout-width" SizeMode="Params.SizeMode">
+            <DxFormLayoutItem ColSpanMd="12" Caption="ComboBox - Add employee:">
+                <DxComboBox Data="@Data"
+                            TextFieldName="@nameof(Employee.Text)"
+                            @bind-Value="@SelectedEmployee"
+                            CssClass="dx-demo-editor-width">
+                    <Buttons>
+                        <DxEditorButton IconCssClass="editor-icon editor-icon-add"
+                                        Tooltip="Add an employee"
+                                        Click="@(_ => OnButtonClick())" />
+                    </Buttons>
+                </DxComboBox>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem ColSpanMd="12" Caption="SpinEdit - Currency:" BeginRow="true">
+                <DxSpinEdit @bind-Value="@Price"
+                            Mask="@NumericMask.Currency"
+                            CssClass="dx-demo-editor-width">
+                    <Buttons>
+                        <DxEditorButton IconCssClass="@($"editor-icon {CurrencyButtonIconClass}")"
+                                        Tooltip="Change currency"
+                                        Click="@OnChangeCultureInfoButtonClick" />
+                    </Buttons>
+                    <ChildContent>
+                        <DxNumericMaskProperties Culture="MaskCultureInfo" />
+                    </ChildContent>
+                </DxSpinEdit>
+            </DxFormLayoutItem>
+
+            <DxFormLayoutItem ColSpanMd="12" Caption="SpinEdit - Large increment:" BeginRow="true">
+                <DxSpinEdit @bind-Value="@SpinEditValue"
+                            ShowSpinButtons="false"
+                            CssClass="dx-demo-editor-width">
+                    <Buttons>
+                        <DxEditorButton IconCssClass="editor-icon editor-icon-caret-left"
+                                        Tooltip="Decrement by 10"
+                                        Click="@(_ => OnLargeIncrementButtonClick(false))" />
+                        <DxSpinButtons />
+                        <DxEditorButton IconCssClass="editor-icon editor-icon-caret-right"
+                                        Tooltip="Increment by 10"
+                                        Click="@(_ => OnLargeIncrementButtonClick(true))" />
+                    </Buttons>
+                </DxSpinEdit>
+            </DxFormLayoutItem>
+
+            <DxFormLayoutItem ColSpanMd="12" Caption="DateEdit - Previous and next date:" BeginRow="true">
+                <DxDateEdit @bind-Date="@DateTimeValue"
+                            @bind-DropDownVisible="@CalendarVisible"
+                            CssClass="dx-demo-editor-width">
+                    <Buttons>
+                        <DxEditorButton IconCssClass="editor-icon editor-icon-chevron-left-small"
+                                        Tooltip="Previous day"
+                                        Position="@EditorButtonPosition.Left"
+                                        Click="@(_ => OnChangeDayButtonClick(false))" />
+                        <DxEditorButton IconCssClass="editor-icon editor-icon-chevron-right-small"
+                                        Tooltip="Next day"
+                                        Position="@EditorButtonPosition.Right"
+                                        Click="@(_ => OnChangeDayButtonClick(true))" />
+                    </Buttons>
+                </DxDateEdit>
+            </DxFormLayoutItem>
+
+            <DxFormLayoutItem ColSpanMd="12" Caption="MaskedInput - Send e-mail:" BeginRow="true">
+                <DxMaskedInput Value="@Email"
+                               ValueChanged="@((string value) => OnEmailChanged(value))"
+                               CssClass="dx-demo-editor-width"
+                               Mask="@EmailMask"
+                               MaskMode="MaskMode.RegEx">
+                    <Buttons>
+                        <DxEditorButton IconCssClass="editor-icon editor-icon-mail"
+                                        Tooltip="Send Email"
+                                        NavigateUrl="@EmailLink" />
+                    </Buttons>
+                    <ChildContent>
+                        <DxRegExMaskProperties MaskAutoCompleteMode="@MaskAutoCompleteMode.Strong"
+                                               Placeholder="@('_')"
+                                               PlaceholdersVisible="true" />
+                    </ChildContent>
+                </DxMaskedInput>
+            </DxFormLayoutItem>
+        </DxFormLayout>
+        @*BeginHide*@
+        </div>
+        @*EndHide*@
+        <DemoToaster Duration="3000" @ref=@toasterRef />
+        <AddEmployeePopup SizeMode="Params.SizeMode"
+                          @bind-Visible="@AddEmployeePopupVisible"
+                          PopupClosed="@OnEmployeeAdded"/>
+    </ChildContentWithParameters>
+    @code {
+        #region ComboBox
+            IObserver<string> toasterRef;
+            IEnumerable<Employee> Data { get; set; }
+            Employee SelectedEmployee { get; set; }
+            bool AddEmployeePopupVisible { get; set; }
+
+            protected override async Task OnInitializedAsync() {
+                Data = await NwindDataService.GetEmployeesAsync();
+                SelectedEmployee = Data.FirstOrDefault();
+            }
+
+            void OnButtonClick() {
+                AddEmployeePopupVisible = true;
+            }
+
+            void OnEmployeeAdded(Employee newEmployee) {
+                if(newEmployee != null) {
+                    Data = Data.Append(newEmployee);
+                }
+            }
+        #endregion
+
+        #region CurrencyEditor
+            double Price { get; set; }
+            string CurrencyButtonIconClass { get; set; } = "editor-icon-euro";
+            CultureInfo MaskCultureInfo { get; set; } = CultureInfoItems[0];
+
+            static CultureInfo[] CultureInfoItems { get; set; } = {
+                CultureInfo.GetCultureInfo("en-US"),
+                CultureInfo.GetCultureInfo("de-DE")
+            };
+
+            void OnChangeCultureInfoButtonClick() {
+                var isCurrentCultureUs = MaskCultureInfo.Equals(CultureInfoItems[0]);
+                MaskCultureInfo = isCurrentCultureUs ? CultureInfoItems[1] : CultureInfoItems[0];
+                CurrencyButtonIconClass = isCurrentCultureUs ? "editor-icon-dollar": "editor-icon-euro";
+            }
+        #endregion
+
+        #region SpinWithLargeincrement
+            Decimal SpinEditValue { get; set; } = 15;
+
+            void OnLargeIncrementButtonClick(bool isIncrement) {
+                SpinEditValue += isIncrement ? 10 : -10;
+            }
+        #endregion
+
+        #region DateEdit
+            DateTime DateTimeValue { get; set; } = DateTime.Today;
+            bool CalendarVisible { get; set; }
+
+            void OnChangeDayButtonClick(bool isAdd) {
+                CalendarVisible = false;
+                DateTimeValue = DateTimeValue.AddDays(isAdd ? 1 : -1);
+            }
+        #endregion
+
+        #region MaskedInput
+            string Email { get; set; } = "test@example.com";
+            string EmailMask { get; set; } = @"(\w|[.-])+@(\w|-)+\.(\w|-){2,4}";
+            string EmailLink { get; set; } = "mailto:test@example.com";
+
+            void OnEmailChanged(string email) {
+                Email = email;
+                EmailLink = $"mailto:{email}";
+            }
+        #endregion
+    }
+</DemoPageSectionComponent>

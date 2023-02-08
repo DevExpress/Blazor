@@ -1,5 +1,5 @@
 ﻿<DemoPageSectionComponent Id="Charts-FinancialSeries-Stock">
-    <ChildContent>
+    <DemoChildContent>
         @inject IFinancialSeriesDataProvider FinancialSeriesDataProvider
 
         <DxChart @ref="@chart"
@@ -33,7 +33,7 @@
             </DxChartTooltip>
 
         </DxChart>
-    </ChildContent>
+    </DemoChildContent>
 
     <OptionsContent>
         <OptionChartExportComponent ExportMethod="@ExportChart" />

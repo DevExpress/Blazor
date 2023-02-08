@@ -1,5 +1,5 @@
 ﻿<DemoPageSectionComponent Id="Navigation-ContextMenu-DataBinding">
-    <div style="@Formatting.GetStyleString()" class="dxbs-preventsel target-container"
+    <div style="@Formatting.GetStyleString()" class="demo-preventsel target-container"
          @oncontextmenu="((e) => { ContextMenu.ShowAsync(e); } )"
          @oncontextmenu:preventDefault>
         @*BeginHide*@
@@ -11,7 +11,8 @@
             <DxContextMenuDataMapping Children="Children"
                                       Text="Text"
                                       IconUrl="IconUrl"
-                                      BeginGroup="BeginGroup" />
+                                      BeginGroup="BeginGroup"
+                                      Enabled="Enabled" />
         </DataMappings>
     </DxContextMenu>
 

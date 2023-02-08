@@ -1,5 +1,5 @@
 ﻿<DemoPageSectionComponent Id="Navigation-Menu-Orientation">
-    <ChildContent>
+    <DemoChildContent>
         <div class="card cw-320 menu-box">
             <div class="card-body p-0">
                 <DxMenu Orientation="Orientation.Vertical" DisplayMode="DisplayMode">
@@ -40,13 +40,14 @@
                 </DxMenu>
             </div>
         </div>
-    </ChildContent>
+    </DemoChildContent>
     <OptionsContent>
-        <OptionRadioButtonGroup Source="@(new[] { MenuDisplayMode.Desktop,MenuDisplayMode.Mobile })"
-                                 @bind-Value="DisplayMode"
-                                 Label="Display Mode:" />
+        <OptionComboBox Label="Display Mode:" CssClass="ow-100" Data="@DisplayModes" @bind-Value="@DisplayMode"></OptionComboBox>
     </OptionsContent>
     @code{
+        /*BeginHide*/
+        static MenuDisplayMode[] DisplayModes { get; set; } = { MenuDisplayMode.Desktop , MenuDisplayMode.Mobile};
+        /*EndHide*/
         MenuDisplayMode DisplayMode { get; set; } = MenuDisplayMode.Desktop;
     }
 </DemoPageSectionComponent>

@@ -20,6 +20,7 @@ namespace BlazorDemo.Data {
         public bool SplitMenuButton { get; set; }
         public string Category { get; set; }
         public string Tooltip { get; set; }
+        public virtual bool Enabled => true;
         public virtual void Click() { }
     }
 
@@ -32,12 +33,6 @@ namespace BlazorDemo.Data {
     class FontFormattingParentMenuItem : TextFormattingParentMenuItem {
         public FontFormattingParentMenuItem(TextFormatting textFormatting, string text, List<TextFormattingMenuItem> children)
             : base(textFormatting, text, children) {
-        }
-        public override string Text {
-            get {
-                var child = Children.FirstOrDefault(c => c.HasValue && c.Checked);
-                return string.IsNullOrWhiteSpace(child?.Text) ? base.Text : child.Text;
-            }
         }
     }
 
@@ -78,7 +73,7 @@ namespace BlazorDemo.Data {
             get { return TextFormatting.Decoration[AttributeName]; }
         }
 
-        public override string IconUrl { get { return Checked ? StaticAssetUtils.GetImagePath("check.svg") : null; } }
+        public override string IconUrl { get { return Checked ? StaticAssetUtils.GetImagePath("icons/check.svg") : null; } }
 
         public override void Click() {
             TextFormatting.Decoration[AttributeName] = !Checked;
@@ -95,12 +90,15 @@ namespace BlazorDemo.Data {
         public override void Click() {
             TextFormatting.TextCase = TextCase;
         }
+        public override bool Checked { get => TextFormatting.TextCase == TextCase; }
     }
 
     class ClearFormattingMenuItem : TextFormattingMenuItem {
         public ClearFormattingMenuItem(TextFormatting textFormatting)
             : base(textFormatting, "Clear Formatting") {
         }
+
+        public override bool Enabled => TextFormatting.GetIsChanged();
 
         public override void Click() {
             TextFormatting.ClearFormatting();

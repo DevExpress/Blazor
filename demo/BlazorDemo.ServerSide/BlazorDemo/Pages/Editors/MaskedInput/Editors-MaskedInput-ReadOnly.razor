@@ -1,22 +1,18 @@
 ﻿<DemoPageSectionComponent Id="Editors-MaskedInput-ReadOnly" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <DxFormLayout ItemSizeMode="Params.SizeMode"
+        <DxFormLayout SizeMode="Params.SizeMode"
                       CssClass="cw-320">
 
             <DxFormLayoutItem ColSpanMd="12" Caption="Read-Only">
-                <Template>
-                    <DxMaskedInput @bind-Value="@Currency"
-                                   Mask="@NumericMask.Currency"
-                                   ReadOnly="true" />
-                </Template>
+                <DxMaskedInput @bind-Value="@Currency"
+                               Mask="@NumericMask.Currency"
+                               ReadOnly="true" />
             </DxFormLayoutItem>
 
             <DxFormLayoutItem ColSpanMd="12" Caption="Disabled" BeginRow="true">
-                <Template>
-                    <DxMaskedInput @bind-Value="@Currency"
-                                   Mask="@NumericMask.Currency"
-                                   Enabled="false" />
-                </Template>
+                <DxMaskedInput @bind-Value="@Currency"
+                               Mask="@NumericMask.Currency"
+                               Enabled="false" />
             </DxFormLayoutItem>
 
         </DxFormLayout>

@@ -10,7 +10,7 @@ namespace BlazorDemo.Data {
         public string TextCss { get; set; }
         public string BackgroundCss { get; set; }
 
-        public string ImageFileName => $"Employees/{Id + 1}.jpg";
+        public string ImageFileName => $"employees/{Id + 1}.jpg";
 
         public override bool Equals(object obj) {
             Resource resource = obj as Resource;

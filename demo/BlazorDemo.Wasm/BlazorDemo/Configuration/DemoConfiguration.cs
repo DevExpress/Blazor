@@ -92,14 +92,12 @@ namespace BlazorDemo.Configuration {
             foreach(var rootPage in Model.RootPages) {
                 var title = rootPage.SeoTitle ?? rootPage.Title;
                 ConfigurePage(metadataCollection, rootPage, title, titleFormat);
-                foreach(var page in rootPage.Pages)
-                    ConfigurePage(metadataCollection, page, string.Join(" - ", title, page.Title), titleFormat);
             }
         }
-        static void ConfigurePage(IDocumentMetadataCollection metadataCollection, DemoPageBase page, string title, string titleFormat) {
+        static void ConfigurePage(IDocumentMetadataCollection metadataCollection, DemoPageBase page, string title, string titleFormat, bool stopIndexation = false) {
             if(page.Url != null && !page.IsMaintenanceMode) {
                 var pageUrl = page.Url == "./" ? "" : page.Url;
-                metadataCollection.AddPage(pageUrl)
+                var metaBuilder = metadataCollection.AddPage(pageUrl)
                     .OpenGraph("url", page.OG_Url)
                     .OpenGraph("type", page.OG_Type)
                     .OpenGraph("title", page.OG_Title)
@@ -108,7 +106,12 @@ namespace BlazorDemo.Configuration {
                     .Title(string.Format(titleFormat, title))
                     .Meta("description", page.GetDescription())
                     .Meta("keywords", page.GetKeywords());
+
+                if(stopIndexation)
+                    metaBuilder.Meta("robots", "none");
             }
+            foreach(var subPage in page.Pages)
+                ConfigurePage(metadataCollection, subPage, string.Join(" - ", title, subPage.Title), titleFormat, page.IsMaintenanceMode);
         }
         // Search
         public List<DemoSearchResult> DoSearch(string request) {

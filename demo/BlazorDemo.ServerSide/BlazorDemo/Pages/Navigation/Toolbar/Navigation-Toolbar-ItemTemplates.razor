@@ -1,27 +1,30 @@
-﻿<DemoPageSectionComponent Id="Navigation-Toolbar-ItemTemplates">
+﻿<DemoPageSectionComponent Id="Navigation-Toolbar-ItemTemplates" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @*BeginHide*@
         <div class="card w-100">
-            <div class="card-header border-0 p-2 rounded">
+            <div class="card-header border-0 p-2 rounded demo-bg-transparent">
                 @*EndHide*@
                 <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain"
+                           SizeMode="Params.SizeMode"
                            Title="DevExpress Logo">
                     <TitleTemplate>
                         <div class="icon-logo" role="img" aria-label="@context"></div>
                     </TitleTemplate>
                     <Items>
+                        <DxToolbarItem BeginGroup="true"
+                                       Alignment="ToolbarItemAlignment.Right">
+                            <Template>
+                                <div class="d-flex flex-row align-items-center h-100">
+                                    <SearchItem CssClass="py-0" />
+                                </div>
+                            </Template>
+                        </DxToolbarItem>
                         <DxToolbarItem IconCssClass="tb-icon tb-icon-refresh"
                                        Tooltip="Refresh"
                                        Alignment="ToolbarItemAlignment.Right"
                                        BeginGroup="true" />
                         <DxToolbarItem IconCssClass="tb-icon tb-icon-settings"
                                        Tooltip="Settings" />
-                        <DxToolbarItem BeginGroup="true"
-                                       Alignment="ToolbarItemAlignment.Right">
-                            <Template>
-                                <SearchItem />
-                            </Template>
-                        </DxToolbarItem>
                     </Items>
                 </DxToolbar>
                 @*BeginHide*@

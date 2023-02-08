@@ -1,14 +1,17 @@
-﻿<DemoPageSectionComponent Id="Editors-ListBox-Overview">
-    @inject NwindDataService NwindDataService
+﻿<DemoPageSectionComponent Id="Editors-ListBox-Overview" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
 
-    <DxListBox Data="@Data"
-               TextFieldName="@nameof(Employee.Text)"
-               @bind-Values="@Values"
-               CssClass="cw-400 chi-220">
-    </DxListBox>
-    <p class="demo-text cw-400 mt-2">
-        Selected item: <b>@Values.FirstOrDefault()?.Text</b>
-    </p>
+        <DxListBox Data="@Data"
+                   TextFieldName="@nameof(Employee.Text)"
+                   @bind-Values="@Values"
+                   SizeMode="Params.SizeMode"
+                   CssClass="cw-400 chi-220">
+        </DxListBox>
+        <p class="demo-text cw-400 mt-2">
+            Selected item: <b>@Values.FirstOrDefault()?.Text</b>
+        </p>
+    </ChildContentWithParameters>
 
     @code {
         IEnumerable<Employee> Data { get; set; }

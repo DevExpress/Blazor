@@ -1,0 +1,5 @@
+The [Width](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow.Width) and [Height](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow.Height) properties set the Window's initial size.
+
+Enable the [AllowResize](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow.AllowResize) property to allow users to change the Window's size. Users can drag the size grip to change the window's width and height. You can handle [ResizeStarted](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow.ResizeStarted) and [ResizeCompleted](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow.ResizeCompleted) events to process resize actions.
+
+You can also use the following properties to restrict changes to the component size: [MinWidth](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow.MinWidth), [MaxWidth](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow.MaxWidth), [MinHeight](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow.MinHeight), [MaxHeight](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow.MaxHeight).

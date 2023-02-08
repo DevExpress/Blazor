@@ -10,9 +10,10 @@
         PageSizeSelectorVisible="true"
         PageSizeSelectorAllRowsItemVisible="true"
         PageSizeSelectorItems="@(new int[] { 5,10,20 })"
-        CustomizeCellDisplayText="Grid_CustomizeCellDisplayText">
+        CustomizeCellDisplayText="Grid_CustomizeCellDisplayText"
+        SizeMode="@SizeMode">
     <Columns>
-        <DxGridDataColumn FieldName="Type" Caption=" " Width="40px" MinWidth="40" TextAlignment="GridTextAlignment.Center" AllowGroup="false" AllowSort="false">
+        <DxGridDataColumn FieldName="Type" Caption=" " Width="50px" MinWidth="50" TextAlignment="GridTextAlignment.Center" AllowGroup="false" AllowSort="false">
             <CellDisplayTemplate>@GetIssueTypeIconHtml((context.DataItem as Issue).Type)</CellDisplayTemplate>
             <FilterRowCellTemplate></FilterRowCellTemplate>
         </DxGridDataColumn>
@@ -80,10 +81,10 @@
                             ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Never" />
             </FilterRowCellTemplate>
         </DxGridDataColumn>
-        <DxGridDataColumn FieldName="Priority" Caption=" " Width="80px" TextAlignment="GridTextAlignment.Center" AllowGroup="false" AllowSort="false">
+        <DxGridDataColumn FieldName="Priority" Caption=" " Width="90px" TextAlignment="GridTextAlignment.Center" AllowGroup="false" AllowSort="false">
             <CellDisplayTemplate>@GetIssuePriorityIconHtml((context.DataItem as Issue).Priority)</CellDisplayTemplate>
-            <FilterRowCellTemplate>
-                <button class="btn btn-link p-0 w-100 text-center @(!IsGridFiltered() ? "disabled" : "")" @onclick="@(() => Grid.ClearFilter())">Clear</button>
+            <FilterRowCellTemplate Context="filterContext">
+                <DxButton RenderStyle="ButtonRenderStyle.Link" CssClass="p-0 w-100" Enabled="IsGridFiltered()" Click="@(() => Grid.ClearFilter())">Clear</DxButton>
             </FilterRowCellTemplate>
         </DxGridDataColumn>
     </Columns>
@@ -103,6 +104,8 @@
     static List<IssueStatus?> StatusList { get; set; } = ((IssueStatus[])Enum.GetValues(typeof(IssueStatus))).Cast<IssueStatus?>().ToList();
     readonly TaskCompletionSource<bool> dataLoadedTcs = new(TaskCreationOptions.RunContinuationsAsynchronously);
 
+    [Parameter]
+    public SizeMode SizeMode { get; set; }
     [Parameter]
     public EventCallback<Issue> GotoDetailsView { get; set; }
 

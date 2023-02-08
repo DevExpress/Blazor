@@ -83,3 +83,7 @@
     padding-left: calc(0.5rem - 1px);
     padding-right: calc(0.5rem - 1px);
 }
+
+.theme-pulse #themesMenu .themeswitcher-item:hover > span {
+    color: white;
+}

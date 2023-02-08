@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BlazorDemo.Data {
     public class TextFormatting {
@@ -39,6 +40,9 @@ namespace BlazorDemo.Data {
             if(!string.IsNullOrEmpty(textDecoration))
                 style += $"text-decoration: {textDecoration};";
             return !string.IsNullOrEmpty(style) ? style : null;
+        }
+        public bool GetIsChanged() {
+            return TextCase != null || FontFamily != null || FontSize != 0 || Decoration.Values.Any(x => x);
         }
         public void ClearFormatting() {
             TextCase = null;

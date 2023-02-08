@@ -2,22 +2,18 @@
     <ChildContentWithParameters Context="Params">
         @inject WorldcitiesDataService WorldcitiesDataService
 
-        <DxFormLayout ItemSizeMode="Params.SizeMode" CssClass="cw-480">
+        <DxFormLayout SizeMode="Params.SizeMode" CssClass="cw-480">
             <DxFormLayoutItem ColSpanMd="12" Caption="Read-Only">
-                <Template>
-                    <DxComboBox Data="@Data"
-                                @bind-Value="@CurrentCountry"
-                                TextFieldName="@nameof(Country.CountryName)"
-                                ReadOnly="true" />
-                </Template>
+                <DxComboBox Data="@Data"
+                            @bind-Value="@CurrentCountry"
+                            TextFieldName="@nameof(Country.CountryName)"
+                            ReadOnly="true" />
             </DxFormLayoutItem>
             <DxFormLayoutItem ColSpanMd="12" Caption="Disabled" BeginRow="true">
-                <Template>
-                    <DxComboBox Data="@Data"
-                                @bind-Value="@CurrentCountry"
-                                TextFieldName="@nameof(Country.CountryName)"
-                                Enabled="false" />
-                </Template>
+                <DxComboBox Data="@Data"
+                            @bind-Value="@CurrentCountry"
+                            TextFieldName="@nameof(Country.CountryName)"
+                            Enabled="false" />
             </DxFormLayoutItem>
         </DxFormLayout>
     </ChildContentWithParameters>

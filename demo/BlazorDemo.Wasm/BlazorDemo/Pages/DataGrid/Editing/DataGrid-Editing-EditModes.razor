@@ -1,5 +1,5 @@
 ﻿<DemoPageSectionComponent Id="DataGrid-Editing-EditModes" ShowHorizontalScrollBar="true">
-    <ChildContent>
+    <DemoChildContent>
         @implements IDisposable
         @inject NwindDataService NwindDataService
 
@@ -25,7 +25,7 @@
                 <DxDataGridDateEditColumn Field="@nameof(Employee.HireDate)" Width="150px" />
             </DxDataGrid>
         }
-    </ChildContent>
+    </DemoChildContent>
     <OptionsContent>
         <OptionComboBox Label="Edit Mode:" Data="Enum.GetValues<DataGridEditMode>()" @bind-Value="CurrentEditMode" />
     </OptionsContent>

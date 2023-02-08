@@ -1,5 +1,5 @@
 ﻿<DemoPageSectionComponent Id="Charts-BarSeries-Bar">
-    <ChildContent>
+    <DemoChildContent>
         @switch (BarSeriesType) {
             case ChartType.SideBySideBar:
                 <BarChart />
@@ -17,7 +17,7 @@
                 <SideBySideFullStackedBarChart />
                 break;
         }
-    </ChildContent>
+    </DemoChildContent>
 
     <OptionsContent>
         <OptionComboBox Label="Series Type:"

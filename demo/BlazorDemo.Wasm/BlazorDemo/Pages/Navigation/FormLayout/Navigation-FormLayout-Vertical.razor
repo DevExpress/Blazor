@@ -1,7 +1,7 @@
 ﻿<DemoPageSectionComponent Id="Navigation-FormLayout-Vertical"
                           ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <DxFormLayout CaptionPosition="CaptionPosition.Vertical" ItemSizeMode="Params.SizeMode" CssClass="w-100">
+        <DxFormLayout CaptionPosition="CaptionPosition.Vertical" SizeMode="Params.SizeMode" CssClass="w-100">
             <DxFormLayoutItem Caption="Location:" ColSpanLg="4" ColSpanMd="12">
                 <DxTextBox @bind-Text="@Location" />
             </DxFormLayoutItem>
@@ -12,7 +12,7 @@
                 <DxDateEdit @bind-Date="@CheckOut" />
             </DxFormLayoutItem>
         </DxFormLayout>
-        <div class="row w-100 mx-0">
+        <div class="w-100 mx-0 mt-3">
             <p class="demo-text col-12 mt-2">
                 @nameof(Location)=<b>@Location</b>,
                 @nameof(CheckIn)=<b>@CheckIn</b>,

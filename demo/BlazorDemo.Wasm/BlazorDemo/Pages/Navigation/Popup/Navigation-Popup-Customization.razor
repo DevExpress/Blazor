@@ -1,20 +1,23 @@
-﻿<DemoPageSectionComponent Id="Navigation-Popup-Customization">
-    <div class="target-container" @onclick="@(() => PopupVisible = true)">
-        <p class="target-caption">CLICK TO SHOW A POP-UP WINDOW</p>
-    </div>
+﻿<DemoPageSectionComponent Id="Navigation-Popup-Customization" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="target-container" @onclick="@(() => PopupVisible = true)">
+            <p class="target-caption">CLICK TO SHOW A POP-UP WINDOW</p>
+        </div>
 
-    <DxPopup
-        @bind-Visible="@PopupVisible"
-        ShowFooter="true"
-        HeaderText="Edit Contact">
-        <BodyTemplate>
-            <SampleEditForm/>
-        </BodyTemplate>
-        <FooterContentTemplate>
-            <DxButton CssClass="popup-button" RenderStyle="ButtonRenderStyle.Primary" Text="OK" Click="@(() => PopupVisible = false)"/>
-            <DxButton CssClass="popup-button" RenderStyle="ButtonRenderStyle.Secondary" Text="Cancel" Click="@(() => PopupVisible = false)"/>
-        </FooterContentTemplate>
-    </DxPopup>
+        <DxPopup
+            @bind-Visible="@PopupVisible"
+            ShowFooter="true"
+            HeaderText="Edit Contact"
+            SizeMode="Params.SizeMode">
+            <BodyContentTemplate>
+                <SampleEditForm/>
+            </BodyContentTemplate>
+            <FooterContentTemplate>
+                <DxButton CssClass="popup-button my-1 ms-2" RenderStyle="ButtonRenderStyle.Primary" Text="OK" Click="@(() => PopupVisible = false)" />
+                <DxButton CssClass="popup-button my-1 ms-2" RenderStyle="ButtonRenderStyle.Secondary" Text="Cancel" Click="@(() => PopupVisible = false)" />
+            </FooterContentTemplate>
+        </DxPopup>
+    </ChildContentWithParameters>
 
     @code {
         bool PopupVisible { get; set; }

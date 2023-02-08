@@ -1,7 +1,7 @@
 ﻿@page "/Grid/Layout"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Layout">
+<DemoPageSectionComponent Id="Grid-Layout" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @using System.Text.Json
         @inject NwindDataService NwindDataService
@@ -13,7 +13,8 @@
                 ShowGroupPanel="true" ShowFilterRow="true"
                 PageSizeSelectorVisible="true" PageSizeSelectorAllRowsItemVisible="true"
                 LayoutAutoLoading="Grid_LayoutAutoLoading"
-                LayoutAutoSaving="Grid_LayoutAutoSaving">
+                LayoutAutoSaving="Grid_LayoutAutoSaving"
+                SizeMode="Params.SizeMode">
                 <Columns>
                     <DxGridDataColumn FieldName="Country" GroupIndex="0" />
                     <DxGridDataColumn FieldName="City" GroupIndex="1" />

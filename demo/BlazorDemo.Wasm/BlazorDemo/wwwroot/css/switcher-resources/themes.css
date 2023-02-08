@@ -1,7 +1,3 @@
-#themesMenu a.default:before {
-    background: #007bff;
-}
-
 #themesMenu a.blazing-berry:before {
     background: #5c2d91;
 }
@@ -10,20 +6,25 @@
     background: #46444a;
 }
 
+#themesMenu a.office-white:before {
+    background: #fe7109;
+}
+
+#themesMenu a.purple:before {
+    background: #7989ff;
+}
+
+
+#themesMenu a.default:before {
+    background: #007bff;
+}
+
 #themesMenu a.cerulean:before {
     background: #2fa4e7;
 }
 
-#themesMenu a.cosmo:before {
-    background: #2780e3;
-}
-
 #themesMenu a.cyborg:before {
     background: #060606;
-}
-
-#themesMenu a.darkly:before {
-    background: #00bc8c;
 }
 
 #themesMenu a.flatly:before {
@@ -46,48 +47,16 @@
     background: #1a1a1a;
 }
 
-#themesMenu a.materia:before {
-    background: #2196f3;
-}
-
-#themesMenu a.minty:before {
-    background: #78c2ad;
-}
-
 #themesMenu a.pulse:before {
     background: #593196;
-}
-
-#themesMenu a.sandstone:before {
-    background: #93c54b;
 }
 
 #themesMenu a.simplex:before {
     background: #d9230f;
 }
 
-#themesMenu a.sketchy:before {
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 2px solid #333;
-    border-radius: 2px 8px 2px 4px/5px 3px 5px 3px;
-    padding-right: calc(1.2em - 2px) !important;
-}
-
-#themesMenu li > a.active .image.sketchy:before {
-    border-color: #fff;
-}
-
-#themesMenu a.slate:before {
-    background: #484e55;
-}
-
 #themesMenu a.solar:before {
     background: #b58900;
-}
-
-#themesMenu a.spacelab:before {
-    background: #446e9b;
 }
 
 #themesMenu a.superhero:before {
@@ -100,12 +69,4 @@
 
 #themesMenu a.yeti:before {
     background: #008cba;
-}
-
-#themesMenu a.purple:before {
-    background: #7989ff;
-}
-
-#themesMenu a.office-white:before {
-    background: #fe7109;
 }

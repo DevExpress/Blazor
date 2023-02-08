@@ -2,7 +2,7 @@
                           ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         <DxFormLayout Data="@editFormData"
-                      ItemSizeMode="Params.SizeMode"
+                      SizeMode="Params.SizeMode"
                       ItemUpdating="@((pair) => OnItemUpdating(pair.Key, pair.Value))"
                       CssClass="w-100">
             <DxFormLayoutItem Field="@nameof(FormDataItem.Name)"
@@ -28,7 +28,7 @@
                               Caption="On Vacation:"
                               ColSpanMd="6" />
         </DxFormLayout>
-        <div class="row w-100 mx-0">
+        <div class="w-100 mx-0 mt-3">
             <p class="demo-text col-12 mt-2">
                 DataObject = {
                 @nameof(FormDataItem.Name)=<b>@editFormData.Name</b>,

@@ -1,5 +1,7 @@
-﻿<DemoPageSectionComponent Id="Editors-Calendar-MultiSelect">
-    <DxCalendar EnableMultiSelect="true" SelectedDates="@GetSelectedDates()" />
+﻿<DemoPageSectionComponent Id="Editors-Calendar-MultiSelect" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxCalendar EnableMultiSelect="true" SelectedDates="@GetSelectedDates()" SizeMode="Params.SizeMode" />
+    </ChildContentWithParameters>
 
     @code {
         List<DateTime> GetSelectedDates() {

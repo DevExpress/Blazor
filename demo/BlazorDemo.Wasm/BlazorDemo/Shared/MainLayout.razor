@@ -23,15 +23,17 @@
                 IconCssClass="demo-download-icon"
                 Text="Free Trial"></DxButton>
                 
-            <DxButton @onclick="@ToggleThemeSwitcherPanel" CssClass="@GetThemeSwitcherCssClass()"
+            <DxButton Click="@ToggleThemeSwitcherPanel" CssClass="@GetThemeSwitcherCssClass()"
                 RenderStyle="ButtonRenderStyle.Secondary" RenderStyleMode="ButtonRenderStyleMode.Outline" IconCssClass="demo-theme-icon"></DxButton>
         </div>
         <ThemeSwitcher @bind-Shown="@ThemeSwitcherShown" @bind-ThemeName="@ThemeName" />
     </nav>
 </div>
-<div class="demo-breadcrumbs-container breadcrumb">
-    <div class="demo-breadcrumbs @LayoutStateCssClass">
-        <DemoBreadcrumbs></DemoBreadcrumbs>
+<div class="@GetDemoBreadcrumbsContainerCss()">
+    <div class="breadcrumb">
+        <div class="@GetDemoBreadcrumbsCss()">
+            <DemoBreadcrumbs></DemoBreadcrumbs>
+        </div>
     </div>
 </div>
 <div class="@GetDemoContentContainerCss()" @ref="@contentContainerRef">
@@ -236,6 +238,18 @@
             cssClasses.Add("animated");
 #endif
         cssClasses.Add("theme-" + ThemeName.Replace(" ", "-"));
+        return string.Join(" ", cssClasses);
+    }
+    string GetDemoBreadcrumbsContainerCss() {
+        List<string> cssClasses = new List<string>();
+        cssClasses.Add("demo-breadcrumbs-container");
+        cssClasses.Add("theme-" + ThemeName.Replace(" ", "-"));
+        return string.Join(" ", cssClasses);
+    }
+    string GetDemoBreadcrumbsCss() {
+        List<string> cssClasses = new List<string>();
+        cssClasses.Add("demo-breadcrumbs");
+        cssClasses.Add(LayoutStateCssClass);
         return string.Join(" ", cssClasses);
     }
     string GetDemoHeaderContainerCss() {

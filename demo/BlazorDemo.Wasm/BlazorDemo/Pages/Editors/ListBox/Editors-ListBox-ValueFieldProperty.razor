@@ -1,32 +1,35 @@
-﻿<DemoPageSectionComponent Id="Editors-ListBox-ValueFieldProperty">
-    @inject NwindDataService NwindDataService
+﻿<DemoPageSectionComponent Id="Editors-ListBox-ValueFieldProperty" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
 
-    <div class="d-flex flex-wrap cw-800">
-        <DxListBox Data="@Data"
-                   TextFieldName="@nameof(Employee.Text)"
-                   ValueFieldName="@nameof(Employee.EmployeeId)"
-                   SelectionMode="ListBoxSelectionMode.Multiple"
-                   CssClass="w-auto mt-1 me-1 flex-grow-1 chi-220"
-                   style="flex-basis: 240px"
-                   @bind-Values="@Values">
-        </DxListBox>
-        <div class="demo-part card mt-1 me-1 flex-grow-1 max-h-220" style="flex-basis: 240px">
-            <div class="demo-part-header card-header bg-transparent text-body border-bottom-0">
-                Selected Values:
-            </div>
-            <div class="demo-part-body card-body p-0 pb-2 overflow-auto">
-                <ul class="list-group list-group-flush bg-transparent border-0">
-                    @if(Values != null) {
-                        @foreach(var item in Values) {
-                            <li class="list-group-item bg-transparent text-body py-1 border-0">
-                                @item
-                            </li>
+        <div class="d-flex flex-wrap cw-800">
+            <DxListBox Data="@Data"
+                       TextFieldName="@nameof(Employee.Text)"
+                       ValueFieldName="@nameof(Employee.EmployeeId)"
+                       SelectionMode="ListBoxSelectionMode.Multiple"
+                       CssClass="w-auto mt-1 me-1 flex-grow-1 chi-220"
+                       SizeMode="Params.SizeMode"
+                       style="flex-basis: 240px"
+                       @bind-Values="@Values">
+            </DxListBox>
+            <div class="demo-part card mt-1 me-1 flex-grow-1 max-h-220" style="flex-basis: 240px">
+                <div class="demo-part-header card-header bg-transparent text-body border-bottom-0">
+                    Selected Values:
+                </div>
+                <div class="demo-part-body card-body p-0 pb-2 overflow-auto">
+                    <ul class="list-group list-group-flush bg-transparent border-0">
+                        @if(Values != null) {
+                            @foreach(var item in Values) {
+                                <li class="list-group-item bg-transparent text-body py-1 border-0">
+                                    @item
+                                </li>
+                            }
                         }
-                    }
-                </ul>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
+    </ChildContentWithParameters>
 
     @code {
         IEnumerable<Employee> Data { get; set; }

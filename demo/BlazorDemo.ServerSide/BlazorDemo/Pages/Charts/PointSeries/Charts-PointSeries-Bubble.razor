@@ -2,7 +2,7 @@
 @using System.Drawing;
 
 <DemoPageSectionComponent Id="Charts-PointSeries-Bubble">
-    <ChildContent>
+    <DemoChildContent>
         @inject IPopulationCorrelationDataProvider PopulationCorrelation
         <DxChart @ref="@chart"
                  Data="@сhartsData"
@@ -74,7 +74,7 @@
                 )
             </DxChartTooltip>
         </DxChart>
-    </ChildContent>
+    </DemoChildContent>
 
     <OptionsContent>
         <OptionChartExportComponent ExportMethod="@ExportChart" />

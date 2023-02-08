@@ -1,11 +1,11 @@
-﻿<DemoPageSectionComponent Id="Navigation-Toolbar-Adaptivity">
+﻿<DemoPageSectionComponent Id="Navigation-Toolbar-Adaptivity" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         <DemoResizableContent>
             @*BeginHide*@
             <div class="card border-0">
-                <div class="card-header border-0 p-2 rounded">
+                <div class="card-header border-0 p-2 rounded demo-bg-transparent">
                     @*EndHide*@
-                    <DxToolbar Title="New Article" ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" ItemSizeMode="SizeMode.Small"
+                    <DxToolbar Title="New Article" ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" SizeMode="Params.SizeMode"
                                AdaptivityMinRootItemCount="2" AdaptivityAutoHideRootItems="true" AdaptivityAutoCollapseItemsToIcons="true">
                         <Items>
                             <DxToolbarItem BeginGroup="true" Name="Undo" IconCssClass="tb-icon tb-icon-undo" AdaptiveText="Undo"

@@ -1,3 +1,0 @@
-In this demo, the [Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid) allows users to select a single row at any one time. To replicate this behavior, enable the [AllowSelectRowByClick](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.AllowSelectRowByClick) option and set the [SelectionMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SelectionMode) option to `Single`.
-
-Implement two-way binding for the [SelectedDataItem](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SelectedDataItem) property to specify and access the selected data item. 

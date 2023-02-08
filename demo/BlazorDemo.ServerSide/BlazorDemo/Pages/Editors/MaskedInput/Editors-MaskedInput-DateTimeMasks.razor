@@ -1,22 +1,23 @@
 ﻿<DemoPageSectionComponent Id="Editors-MaskedInput-DateTimeMasks" ShowSizeMode="true">
-    <ChildContentWithParameters Context="Params">
+    <ChildContentWithParameters Context="Params" >
         <DxMaskedInput @bind-Value="@Date"
-                       SizeMode="Params.SizeMode"
                        CssClass="cw-320"
-                       Mask="@DateTimeMaskValue">
-            <DxDateTimeMaskProperties Culture="MaskCultureInfo.Value" CaretMode="@((MaskCaretMode)CaretMode)" />
+                       SizeMode="Params.SizeMode"
+                       Mask="@DateTimeMasks[DateTimeMaskName]">
+            <DxDateTimeMaskProperties Culture="MaskCultureInfo.Value"
+                                      CaretMode="@((MaskCaretMode)CaretMode)"
+                                      UpdateNextSectionOnCycleChange=@UpdateNextSectionOnCycleChange />
         </DxMaskedInput>
         <p class="demo-text cw-320 mt-2">
-            Date: <b>@Date</b>
+            Value: <b>@Date</b>
         </p>
     </ChildContentWithParameters>
 
     <OptionsContent>
-        <OptionComboBox CssClass="ow-150"
+         <OptionComboBox CssClass="ow-150"
                         Label="Mask:"
-                        Data="PredefinedDateTimeMasks"
-                        Value="DateTimeMaskName"
-                        ValueChanged="@((string mask) =>ChangeDateTimeMaskType(mask))" />
+                        Data="@DateTimeMasks.Keys"
+                        @bind-Value="@DateTimeMaskName" />
         <OptionComboBox CssClass="ow-150"
                         Label="Caret Mode:"
                         Data="@(Enum.GetNames(typeof(MaskCaretMode)))"
@@ -27,6 +28,8 @@
                         Label="Culture:"
                         Data="@CultureInfoItems"
                         @bind-Value="MaskCultureInfo" />
+        <OptionCheckBox @bind-Checked="@UpdateNextSectionOnCycleChange"
+                        Label="Cascading Section Updates" />
     </OptionsContent>
 
     @code {
@@ -47,42 +50,24 @@
             },
         };
 
-        IEnumerable<string> PredefinedDateTimeMasks = new List<string>() {
-            "ISO8601",
-            "LongDate",
-            "LongDateTime",
-            "LongTime",
-            "MonthAndDay",
-            "MonthAndYear",
-            "RFC1123",
-            "ShortDate",
-            "ShortDateTime",
-            "ShortTime",
-            "Universal"
-        };
-
+        bool UpdateNextSectionOnCycleChange { get; set; }
         DateTime Date { get; set; } = DateTime.Today;
         CultureInfoItem MaskCultureInfo { get; set; } = CultureInfoItems.FirstOrDefault();
-        string DateTimeMaskValue { get; set; } = DateTimeMask.LongDate;
         MaskCaretMode CaretMode { get; set; }
-        string DateTimeMaskName { get; set; } = "LongDate";
+        string DateTimeMaskName { get; set; } = "Short Date";
 
-        void ChangeDateTimeMaskType(string mask) {
-            DateTimeMaskValue = mask switch {
-                "ISO8601" => DateTimeMask.ISO8601,
-                "LongDate" => DateTimeMask.LongDate,
-                "LongDateTime" => DateTimeMask.LongDateTime,
-                "LongTime" => DateTimeMask.LongTime,
-                "MonthAndDay" => DateTimeMask.MonthAndDay,
-                "MonthAndYear" => DateTimeMask.MonthAndYear,
-                "RFC1123" => DateTimeMask.RFC1123,
-                "ShortDate" => DateTimeMask.ShortDate,
-                "ShortDateTime" => DateTimeMask.ShortDateTime,
-                "ShortTime" => DateTimeMask.ShortTime,
-                "Universal" => DateTimeMask.Universal,
-                _ => throw new ArgumentException()
-            };
-            DateTimeMaskName = mask;
-        }
+        static Dictionary<string, string> DateTimeMasks = new Dictionary<string, string>() {
+            { "ISO8601", DateTimeMask.ISO8601 },
+            { "Long Date", DateTimeMask.LongDate },
+            { "Long Date Time", DateTimeMask.LongDateTime },
+            { "Long Time", DateTimeMask.LongTime },
+            { "Month And Day", DateTimeMask.MonthAndDay },
+            { "Month And Year", DateTimeMask.MonthAndYear },
+            { "RFC1123", DateTimeMask.RFC1123 },
+            { "Short Date", DateTimeMask.ShortDate },
+            { "Short Date Time", DateTimeMask.ShortDateTime },
+            { "Short Time", DateTimeMask.ShortTime },
+            { "Universal", DateTimeMask.Universal },
+        };
     }
 </DemoPageSectionComponent>

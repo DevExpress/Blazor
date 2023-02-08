@@ -1,11 +1,11 @@
-﻿<DemoPageSectionComponent Id="Navigation-Toolbar-CheckedItemsAndGroups">
+﻿<DemoPageSectionComponent Id="Navigation-Toolbar-CheckedItemsAndGroups" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @*BeginHide*@
 
         <div class="card w-100">
-            <div class="card-header border-0 p-2 rounded">
+            <div class="card-header border-0 p-2 rounded demo-bg-transparent">
                 @*EndHide*@
-                <DxToolbar>
+                <DxToolbar SizeMode="Params.SizeMode">
                     <Items>
                         <DxToolbarItem GroupName="align" IconCssClass="tb-icon tb-icon-align-left" Tooltip="Align Left" />
                         <DxToolbarItem GroupName="align" IconCssClass="tb-icon tb-icon-align-center" Tooltip="Align Center" />

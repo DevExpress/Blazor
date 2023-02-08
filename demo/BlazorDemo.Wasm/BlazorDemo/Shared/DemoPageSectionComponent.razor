@@ -20,15 +20,16 @@
                 </div>
             }
             <div @attributes="GetComponentContainerAttributes()">
-                @ChildContent
-                @if(ChildContentWithParameters != null)
+                @DemoChildContent
+                @if(ChildContentWithParameters != null) {
                     @ChildContentWithParameters(parameters)
+                }
             </div>
         }
     </div>;
 }
 
-<div id="@("section-" + DemoItem.Id)" class="demo-page-section @(!ShowCode ? "no-code" : "") @(ShowHorizontalScrollBar ? "h-scroll" : "")">
+<div @key="@DemoItem.Id" id="@("section-" + DemoItem.Id)" class="demo-page-section @(!ShowCode ? "no-code" : "") @(ShowHorizontalScrollBar ? "h-scroll" : "")">
     <div class="demo-page-section-title">
         <h2 id="@DemoItem.Id">
             <a class="demo-anchor" href="@DemoItem.GetUrl()" />
@@ -69,7 +70,7 @@
                             </a>
                         </li>
                         @if(ShowSizeMode && IsComponentAreaVisible) {
-                            <DxToolbar CssClass="demo-page-section-toolbar" ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" ItemSizeMode="SizeMode.Small">
+                            <DxToolbar CssClass="demo-page-section-toolbar" ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
                                 <Items>
                                     <DxToolbarItem Text="@(SizeMode.ToString() + " size")" Alignment="ToolbarItemAlignment.Right">
                                         <Items>
@@ -121,7 +122,10 @@
     [Parameter]
     public RenderFragment<DemoPageSectionParameters> ChildContentWithParameters { get; set; }
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Obsolete(message: "Instead, use DemoChildContent if needed. However, if you can omit this tag, you can still do so.")]
+    public RenderFragment ChildContent { get => DemoChildContent; set => DemoChildContent = value; }
+    [Parameter]
+    public RenderFragment DemoChildContent { get; set; }
     [Parameter]
     public RenderFragment OptionsContent { get; set; }
     [Parameter]
@@ -150,7 +154,7 @@
     public int? MinHeight { get; set; }
 
     [Parameter]
-    public SizeMode SizeMode { get; set; }
+    public SizeMode SizeMode { get; set; } = SizeMode.Medium;
     [CascadingParameter(Name = "ThemeName")]
     string ThemeName {
         get => themeName;
@@ -259,11 +263,11 @@
         PreventRender = DemoRenderUtils.PreventRenderDemoSection(NavigationManager.Uri, Id);
         if(PreventRender)
             return;
-            
+
 #if VISUALTESTS
         VisualTestsEnabled = true;
 #endif
-        
+
         base.OnInitialized();
         UpdateTabPagesVisibility();
     }
@@ -271,7 +275,7 @@
     protected override void OnParametersSet() {
         if(PreventRender)
             return;
-            
+
         DemoItem = Configuration.GetDemoItem(Id);
         if(DemoItem == null)
             throw new ArgumentException($"It's impossible to find a demo page or a demo page section by the '{Id}' id. Check your 'wwwroot\\demo-metadata.json' file.");

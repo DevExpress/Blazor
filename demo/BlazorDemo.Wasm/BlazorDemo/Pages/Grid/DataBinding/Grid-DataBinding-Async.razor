@@ -1,11 +1,11 @@
 ﻿@page "/Grid/DataBinding/Async"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-DataBinding-Async">
+<DemoPageSectionComponent Id="Grid-DataBinding-Async" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        <DxGrid Data="@Data">
+        <DxGrid Data="@Data" SizeMode="Params.SizeMode">
             <Columns>
                 <DxGridDataColumn FieldName="CompanyName" />
                 <DxGridDataColumn FieldName="ContactName" />

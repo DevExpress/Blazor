@@ -1,16 +1,12 @@
 ﻿<DemoPageSectionComponent Id="Editors-SpinEdit-ReadOnly" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <DxFormLayout ItemSizeMode="Params.SizeMode"
+        <DxFormLayout SizeMode="Params.SizeMode"
                       CssClass="cw-320">
             <DxFormLayoutItem ColSpanMd="12" Caption="Read-Only">
-                <Template>
-                    <DxSpinEdit @bind-Value="@NumericValue" ReadOnly="true" />
-                </Template>
+                <DxSpinEdit @bind-Value="@NumericValue" ReadOnly="true" />
             </DxFormLayoutItem>
             <DxFormLayoutItem ColSpanMd="12" Caption="Disabled" BeginRow="true">
-                <Template>
-                    <DxSpinEdit @bind-Value="@NumericValue" Enabled="false" />
-                </Template>
+                <DxSpinEdit @bind-Value="@NumericValue" Enabled="false" />
             </DxFormLayoutItem>
         </DxFormLayout>
     </ChildContentWithParameters>

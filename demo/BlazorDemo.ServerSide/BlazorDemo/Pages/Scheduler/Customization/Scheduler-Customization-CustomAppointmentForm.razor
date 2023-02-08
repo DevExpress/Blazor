@@ -1,7 +1,7 @@
 ﻿@page "/Scheduler/Customization/CustomAppointmentForm"
 
 <DemoPageSectionComponent Id="Scheduler-Customization-CustomAppointmentForm">
-    <ChildContent>
+    <DemoChildContent>
         <DxScheduler @bind-StartDate="@StartDate" DataStorage="@DataStorage"
                      ActiveViewType="SchedulerViewType.WorkWeek"
                      AppointmentFormShowing="OnAppointmentFormShowing"
@@ -75,7 +75,7 @@
                 </DxSchedulerCustomFormLayoutItem>
             </AppointmentCompactFormLayout>
         </DxScheduler>
-    </ChildContent>
+    </DemoChildContent>
     <OptionsContent>
         <OptionComboBox Label="Form Mode:" Data="@EditModes" @bind-Value="AppointmentFormMode" />
     </OptionsContent>

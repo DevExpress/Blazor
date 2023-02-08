@@ -1,10 +1,10 @@
 ﻿@page "/Grid/MasterDetail/NestedGrid"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-MasterDetail-NestedGrid">
-    <ChildContent>
+<DemoPageSectionComponent Id="Grid-MasterDetail-NestedGrid" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
-        <DxGrid @ref="Grid" Data="MasterGridData" AutoCollapseDetailRow="AutoCollapseDetailRow">
+        <DxGrid @ref="Grid" Data="MasterGridData" AutoCollapseDetailRow="AutoCollapseDetailRow" SizeMode="Params.SizeMode">
             <Columns>
                 <DxGridDataColumn FieldName="ContactName" SortIndex="0" />
                 <DxGridDataColumn FieldName="CompanyName" />
@@ -15,7 +15,7 @@
                 <Grid_MasterDetail_NestedGrid_DetailContent Customer="(Customer)context.DataItem" />
             </DetailRowTemplate>
         </DxGrid>
-    </ChildContent>
+    </ChildContentWithParameters>
 
     <OptionsContent>
         <OptionCheckBox T="bool"

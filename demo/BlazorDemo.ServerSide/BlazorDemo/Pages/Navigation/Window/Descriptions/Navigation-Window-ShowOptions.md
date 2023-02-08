@@ -1,0 +1,6 @@
+You can use the following `ShowAsync` method overloads to show the Window at the specified position:
+
+* [ShowAtAsync(Double, Double, CancellationToken)](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow.ShowAtAsync(System.Double-System.Double-System.Threading.CancellationToken)) - Asynchronously shows the Window at the mouse click position.
+* [ShowAtAsync(ElementReference, CancellationToken)](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow.ShowAtAsync(Microsoft.AspNetCore.Components.ElementReference-System.Threading.CancellationToken)) - Asynchronously shows the Window over the element specified by [ElementReference](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.elementreference?view=aspnetcore-6.0).
+* [ShowAtAsync(Point, CancellationToken)](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow.ShowAtAsync(System.Drawing.Point-System.Threading.CancellationToken)) - Asynchronously shows the Window at the specified [point](System.Drawing.Point).
+* [ShowAtAsync(String, CancellationToken)](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow.ShowAtAsync(System.String-System.Threading.CancellationToken)) - Asynchronously shows the Window over the element specified by a selector.

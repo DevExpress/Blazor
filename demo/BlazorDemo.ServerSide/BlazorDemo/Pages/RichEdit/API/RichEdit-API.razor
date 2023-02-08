@@ -47,7 +47,7 @@
             await pictureParagraph.ChangePropertiesAsync(properties => {
                 properties.Alignment = ParagraphAlignment.Center;
             });
-            await documentAPI.InlineImages.CreateAsync(0, DocumentImageSource.LoadFromUrl(NavigationManager.BaseUri + "_content/BlazorDemo/images/AlbertEinstein.jpg", UnitConverter.PixelsToTwips(220), UnitConverter.PixelsToTwips(289)));
+            await documentAPI.InlineImages.CreateAsync(0, DocumentImageSource.LoadFromUrl(NavigationManager.BaseUri + "_content/BlazorDemo/images/documents/AlbertEinstein.jpg", UnitConverter.PixelsToTwips(220), UnitConverter.PixelsToTwips(289)));
             Paragraph titleParagraph = await documentAPI.Paragraphs.CreateAsync(0);
             await titleParagraph.ChangePropertiesAsync(properties => {
                 properties.SpacingAfter = 400;

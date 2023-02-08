@@ -1,9 +1,10 @@
-﻿<DemoPageSectionComponent Id="Navigation-TreeView-Templates">
+﻿<DemoPageSectionComponent Id="Navigation-TreeView-Templates" VerticalAlignment=VerticalAlignment.Top>
     @*BeginHide*@
     <div class="d-flex flex-row justify-content-center w-100">
     @*EndHide*@
     <DxTreeView Data="@ComponentSets.Data"
                 CssClass="demo-treeview-template cw-880"
+                AnimationType="LayoutAnimationType.Slide"
                 @ref="@treeView">
         <DataMappings>
             <DxTreeViewDataMapping Children="ComponentSets" />

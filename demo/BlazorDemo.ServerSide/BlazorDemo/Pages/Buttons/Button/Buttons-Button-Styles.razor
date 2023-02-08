@@ -1,5 +1,4 @@
-﻿<DemoPageSectionComponent Id="Buttons-Button-Styles"
-                          ShowSizeMode="true">
+﻿<DemoPageSectionComponent Id="Buttons-Button-Styles" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         <div class="component-container flex-column w-100">
             <div class="buttons-group mb-2">
@@ -70,8 +69,12 @@
         protected override void OnInitialized() {
             base.OnInitialized();
             btnStyles = new List<ButtonRenderStyle>((ButtonRenderStyle[])Enum.GetValues(typeof(ButtonRenderStyle)));
+            @*BeginHide*@
             btnStyles.RemoveAt(0);
+            btnStyles.Remove(ButtonRenderStyle.Dark);
+            btnStyles.Remove(ButtonRenderStyle.Light);
             btnStyles.Add(ButtonRenderStyle.None);
+            @*EndHide*@
         }
     }
 </DemoPageSectionComponent>

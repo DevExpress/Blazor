@@ -1,78 +1,27 @@
-﻿<DemoPageSectionComponent Id="Editors-Calendar-DayCellCustomization">
-
-    <DxCalendar T="DateTime">
-        <DayCellTemplate>
-            <a class="@GetCssClassNames(context)">@context.Day.ToString()</a>
-        </DayCellTemplate>
-    </DxCalendar>
-
+﻿<DemoPageSectionComponent Id="Editors-Calendar-DayCellCustomization" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxCalendar T="DateTime" SizeMode="Params.SizeMode">
+            <DayCellTemplate>
+                <a class="@GetCssClassNames(context)">@context.Day.ToString()</a>
+            </DayCellTemplate>
+        </DxCalendar>
+    </ChildContentWithParameters>
 
     @code {
-        CalendarData data = new CalendarData();
+        CalendarData Data { get; set; } = new CalendarData();
 
         string GetCssClassNames(DateTime date) {
-            string result = string.Empty;
+            if(Data.PersonalDays.Exists(d => DaysEqual(d, date)))
+                return "fw-bold text-success";
+            if(Data.Holidays.Exists(d => DaysEqual(d, date)))
+                return "text-danger";
+            if(Data.BirthDates.Exists(d => DaysEqual(d, date)))
+                return "fw-bold text-info";
 
-            if(data.PersonalDays.Exists(d => DaysEqual(d, date)))
-                result = "fw-bold text-success";
-            if(data.Holidays.Exists(d => DaysEqual(d, date)))
-                result = "text-danger";
-            if(data.BirthDates.Exists(d => DaysEqual(d, date)))
-                result += "fw-bold text-info";
-
-            return result;
+            return string.Empty;
         }
         bool DaysEqual(DateTime date1, DateTime date2) {
             return (date1.Year == date2.Year && date1.DayOfYear == date2.DayOfYear);
-        }
-
-        class CalendarData {
-
-            public CalendarData() {
-                DateTime baseDate = DateTime.Today;
-                PersonalDays = GetPersonalDays(baseDate);
-                Holidays = GetHolidays(baseDate);
-                BirthDates = GetBirthDates(baseDate);
-            }
-
-            public List<DateTime> PersonalDays { get; }
-            public List<DateTime> Holidays { get; }
-            public List<DateTime> BirthDates { get; }
-
-            List<DateTime> GetPersonalDays(DateTime baseDate) {
-                return new List<DateTime>() {
-                    baseDate.AddDays(-7),
-                    baseDate.AddDays(-2),
-                    baseDate.AddDays(-1),
-                    baseDate.AddDays(3),
-                    baseDate.AddDays(4),
-                    baseDate.AddDays(9),
-                    baseDate.AddDays(10),
-                    baseDate.AddDays(12),
-                    baseDate.AddDays(15)
-                };
-            }
-
-            List<DateTime> GetHolidays(DateTime baseDate) {
-                return new List<DateTime>() {
-                    baseDate.AddDays(-14),
-                    baseDate.AddDays(-8),
-                    baseDate.AddDays(12),
-                    baseDate.AddDays(13)
-                };
-            }
-
-            List<DateTime> GetBirthDates(DateTime baseDate) {
-                return new List<DateTime>() {
-                    baseDate.AddDays(-20),
-                    baseDate.AddDays(-5),
-                    baseDate,
-                    baseDate.AddDays(1),
-                    baseDate.AddDays(6),
-                    baseDate.AddDays(7),
-                    baseDate.AddDays(17)
-                };
-            }
         }
     }
 </DemoPageSectionComponent>

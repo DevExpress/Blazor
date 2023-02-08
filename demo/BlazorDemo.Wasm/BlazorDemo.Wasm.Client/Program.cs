@@ -44,6 +44,7 @@ namespace BlazorDemo.Wasm {
             services.AddSingleton(stockQuoteTimerService);
 
             services.AddSingleton<IHistogramDataProvider, HistogramDataProvider>();
+            services.AddSingleton<IDocumentProvider, DocumentProviderWasm>();
             // Editable should be scoped
             services.AddScoped<INwindDataProvider, NwindDataProvider>();
 
@@ -58,6 +59,7 @@ namespace BlazorDemo.Wasm {
             });
             services.AddSingleton<DemoConfiguration>();
             services.AddScoped<DemoThemeService>();
+            services.AddScoped<IDemoStaticResourceService, DemoStaticResourceService>();
 
             builder.RootComponents.AddDocumentMetadata();
             builder.RootComponents.Add<App>("#app");

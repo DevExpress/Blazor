@@ -1,6 +1,6 @@
 ﻿@using System.Drawing
 <DemoPageSectionComponent Id="Charts-Axes-CustomPosition" HasOptionsGroups=true>
-    <ChildContent>
+    <DemoChildContent>
         @inject IExperimentResultDataProvider Experement
         <DxChart T="DataPoint"
                  Data="points"
@@ -46,7 +46,7 @@
                 points = await Experement.GetResultAsync();
             }
         }
-    </ChildContent>
+    </DemoChildContent>
     <OptionsContent>
 			<OptionGroup Caption="Argument Axis">
 			    <OptionSpinEdit NullText="Bottom" ClearButtonDisplayMode=DataEditorClearButtonDisplayMode.Auto Label="Custom Position: " MinValue="-20" MaxValue="20" CssClass="ow-100" @bind-Value="@ArgumentAxisCustomPosition" BindValueMode="BindValueMode.OnInput" />

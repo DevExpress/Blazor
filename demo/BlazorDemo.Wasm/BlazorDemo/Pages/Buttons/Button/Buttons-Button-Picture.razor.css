@@ -2,18 +2,24 @@
 ::deep /*EndHide*/ .btn-icon-undo {
     width: 16px;
     height: 16px;
-    -webkit-mask-image: url("images/undo.svg");
-    mask-image: url("images/undo.svg");
-    margin: 0 8px 0 0;
+    -webkit-mask-image: url("images/icons/undo.svg");
+    mask-image: url("images/icons/undo.svg");
     background-color: currentColor;
+    opacity: 0.7;
 }
 
 /*BeginHide*/
 ::deep /*EndHide*/ .btn-icon-redo {
     width: 16px;
     height: 16px;
-    -webkit-mask-image: url("images/redo.svg");
-    mask-image: url("images/redo.svg");
-    margin: 0 0 0 8px;
+    -webkit-mask-image: url("images/icons/redo.svg");
+    mask-image: url("images/icons/redo.svg");
     background-color: currentColor;
+    opacity: 0.7;
 }
+
+/*BeginHide*/
+::deep .dxbl-btn {
+    vertical-align: middle;
+}
+/*EndHide*/

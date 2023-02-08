@@ -1,32 +1,35 @@
 ﻿@page "/Grid/Customization/AltRowStyle"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Customization-AltRowStyle">
-    @inject NwindDataService NwindDataService
+<DemoPageSectionComponent Id="Grid-Customization-AltRowStyle" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
 
-    <style>
-        .alt-item > td {
-            background-color: rgba(0, 0, 0, 0.05);
-        }
-        .header-bold span {
-            font-weight: 700;
-        }
-    </style>
+        <style>
+            .alt-item > td {
+                background-color: rgba(0, 0, 0, 0.05);
+            }
+            .header-bold span {
+                font-weight: 700;
+            }
+        </style>
 
-    <DxGrid @ref="Grid"
-            Data="@Data"
-            UnboundColumnData="Grid_UnboundColumnData"
-            CustomizeElement="Grid_CustomizeElement">
-        <Columns>
-            <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
-            <DxGridDataColumn FieldName="City" Width="10%" />
-            <DxGridDataColumn FieldName="Region" Width="10%" />
-            <DxGridDataColumn FieldName="Country" Name="Country" Width="10%" />
-            <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
-            <DxGridDataColumn FieldName="Quantity" MinWidth="80" Width="10%" />
-            <DxGridDataColumn FieldName="Total" Name="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" MinWidth="100" Width="15%" />
-        </Columns>
-    </DxGrid>
+        <DxGrid @ref="Grid"
+                Data="@Data"
+                UnboundColumnData="Grid_UnboundColumnData"
+                CustomizeElement="Grid_CustomizeElement"
+                SizeMode="Params.SizeMode">
+            <Columns>
+                <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
+                <DxGridDataColumn FieldName="City" Width="10%" />
+                <DxGridDataColumn FieldName="Region" Width="10%" />
+                <DxGridDataColumn FieldName="Country" Name="Country" Width="10%" />
+                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
+                <DxGridDataColumn FieldName="Quantity" MinWidth="80" Width="10%" />
+                <DxGridDataColumn FieldName="Total" Name="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" MinWidth="100" Width="15%" />
+            </Columns>
+        </DxGrid>
+    </ChildContentWithParameters>
 
     @code {
         object Data { get; set; }
@@ -59,7 +62,7 @@
                 e.CssClass = "alt-item";
             }
             if(e.ElementType == GridElementType.HeaderCell) {
-                e.Style = "background-color: rgba(0, 0, 0, 0.1)";
+                e.Style = "background-color: rgba(0, 0, 0, 0.08)";
                 e.CssClass = "header-bold";
             }
         }

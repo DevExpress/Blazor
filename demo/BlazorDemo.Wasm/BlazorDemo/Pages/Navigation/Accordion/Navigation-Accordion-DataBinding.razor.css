@@ -7,11 +7,11 @@
 }
 
 /*BeginHide*/::deep /*EndHide*/.icon-square-minus {
-    -webkit-mask-image: url("images/SquareMinus.svg");
-    mask-image: url("images/SquareMinus.svg");
+    -webkit-mask-image: url("images/icons/minus.svg");
+    mask-image: url("images/icons/minus.svg");
 }
 
 /*BeginHide*/::deep /*EndHide*/.icon-square-plus {
-    -webkit-mask-image: url("images/SquarePlus.svg");
-    mask-image: url("images/SquarePlus.svg");
+    -webkit-mask-image: url("images/icons/plus.svg");
+    mask-image: url("images/icons/plus.svg");
 }

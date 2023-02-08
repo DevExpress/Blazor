@@ -1,0 +1,129 @@
+/*BeginCollapse*/
+.fp-header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    flex: 1 1 100%;
+    font-weight: 400;
+    --fp-color-primary: var(--bs-primary);
+}
+/*BeginHide*/
+.theme-blazing-dark .fp-header {
+    --fp-color-primary: #c86afa;
+}
+/*EndHide*/
+.fp-sub-header {
+    font-size: 0.75rem;
+    padding: 0.25rem 0;
+}
+
+.fp-badge {
+    display: inline-block;
+    height: 1rem;
+    width: 1rem;
+    padding: 0.125rem 0;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 0.75rem;
+    line-height: 1;
+}
+
+.fp-badge-primary {
+    background-color: var(--bs-primary);
+    color: var(--bs-white);
+}
+
+.fp-badge-success {
+    background-color: var(--bs-success);
+    color: var(--bs-white);
+}
+
+.fp-info {
+    display: flex;
+    flex-flow: column nowrap;
+    line-height: 1;
+}
+
+.fp-sub-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--fp-color-primary);
+}
+
+.fp-sub-title:not(:empty) {
+    margin-top: 0.25rem;
+}
+
+.fp-command-ctr {
+    margin-left: auto;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.fp-icon {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    flex: 0 0 auto;
+    margin-right: 0.5rem;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.fp-icon-bonus {
+    background-color: var(--fp-color-primary);
+    -webkit-mask-image: url("images/icons/bonus.svg");
+    mask-image: url("images/icons/bonus.svg");
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.fp-icon-total {
+    background-color: var(--fp-color-primary);
+    -webkit-mask-image: url("images/icons/total.svg");
+    mask-image: url("images/icons/total.svg");
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.fp-icon-credit {
+    background-image: url("images/icons/credit-card.svg");
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.fp-icon-debit {
+    background-image: url("images/icons/debit-card.svg");
+}
+/*EndCollapse*/
+.fp-details {
+    text-align: center;
+}
+
+.fp-details-btn-ctr {
+    margin-top: 1.5rem;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.fp-details-btn-ctr > * {
+    display: block;
+    width: 100%;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.fp-details-btn-ctr > :not(:first-child) {
+    margin-top: 0.5rem;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/h1 {
+    font-size: 2rem;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.bill-info {
+    --color-opacity: 0.5;
+    color: rgba(var(--bs-body-color-rgb, 0, 0, 0), var(--color-opacity));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    font-size: 0.625rem;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.bill-info .fp-icon-bill {
+    --color-opacity: 0.54;
+    background-color: currentColor;
+    -webkit-mask-image: url("images/icons/link.svg");
+    mask-image: url("images/icons/link.svg");
+    margin-right: 0.5rem;
+}

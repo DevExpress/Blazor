@@ -1,19 +1,20 @@
-﻿@page "/Grid/Templates/GroupRow"
+@page "/Grid/Templates/GroupRow"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Templates-GroupRow">
+<DemoPageSectionComponent Id="Grid-Templates-GroupRow" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <DxGrid @ref="Grid"
                 Data="@Data"
                 ShowGroupPanel="true"
-                UnboundColumnData="Grid_UnboundColumnData">
+                UnboundColumnData="Grid_UnboundColumnData"
+                SizeMode="Params.SizeMode">
             <Columns>
                 <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
                 <DxGridDataColumn FieldName="Country" GroupIndex="0" Width="10%">
                     <GroupRowTemplate>
-                        <text>@context.DataColumn.FieldName: @context.GroupValue</text>
+                        <text>@context.ColumnCaption: @context.GroupValue</text>
                         @{
                             var summaryItems = context.Grid.GetGroupSummaryItems();
                             if(summaryItems.Any()) {
