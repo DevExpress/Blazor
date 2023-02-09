@@ -1,4 +1,4 @@
-This repo contains [demos](#demos) for [DevExpress Blazor components](#devexpress-ui-for-blazor) and [free DevExpress Blazor tools](#free-blazor-utilities-and-dev-tools). Refer to the following sections for more information:
+This repo contains [demos](#demos) for [DevExpress Blazor components](#devexpress-ui-for-blazor). Refer to the following sections for more information:
 
 * [DevExpress UI for Blazor](#devexpress-ui-for-blazor)
 * [Demos](#demos)
@@ -56,4 +56,4 @@ Check out the NuGet package's [version history](https://www.devexpress.com/suppo
 
 # Version Compatibility
 
-Check out the version compatibility of .NET and the DevExpress.Blazor NuGet package: [Prerequisites](https://docs.devexpress.com/Blazor/401055/prerequisites#net-framework)
+Check out the version compatibility of .NET and the DevExpress.Blazor NuGet package: [Prerequisites](https://docs.devexpress.com/Blazor/401055/prerequisites#net-framework).
