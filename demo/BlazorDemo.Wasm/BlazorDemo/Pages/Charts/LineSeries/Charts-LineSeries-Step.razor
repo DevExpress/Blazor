@@ -1,4 +1,6 @@
-﻿<DemoPageSectionComponent Id="Charts-LineSeries-Step">
+﻿@page "/ChartStepLineSeries"
+
+<DemoPageSectionComponent Id="Charts-LineSeries-Step">
     <DemoChildContent>
         @inject ISalesInfoDataProvider Sales
         <DxChart Data="chartsData"
@@ -16,7 +18,7 @@
                 <DxChartSeriesPoint Visible=showSeriesPointMarkers
                                     HoverMode="ChartSeriesPointHoverMode.None" />
                 <DxChartSeriesLabel Visible=showSeriesLabels
-                                    Format="ChartElementFormat.Thousands(1)" />
+                                    ValueFormat="ChartElementFormat.Thousands(1)" />
             </DxChartStepLineSeries>
             <DxChartLegend Position="RelativePosition.Outside"
                            HorizontalAlignment="HorizontalAlignment.Right" />

@@ -1,0 +1,73 @@
+﻿<DemoPageSectionComponent Id="Utility-WaitIndicator-Overview" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="card cw-480">
+            <div class="card-header text-center py-3">
+                <p class="tm-8 mb-0 fw-normal fs-825">
+                    Your Feedback Matters
+                </p>
+            </div>
+            <div class="card-body">
+                <DxFormLayout>
+                    <DxFormLayoutItem ColSpanMd="12">
+                        <DxMemo Text="@feedbackText"
+                                Enabled="!isSending"
+                                NullText="Feedback"
+                                SizeMode="Params.SizeMode"
+                                TextChanged="FeedbackChanged"
+                                ResizeMode="MemoResizeMode.Disabled"
+                                Rows="3" />
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem ColSpanMd="12" Context="fl_context">
+                        <DxButton CssClass="w-100"
+                                  Enabled="!isSending"
+                                  SizeMode="Params.SizeMode"
+                                  Click="Send"
+                                  RenderStyle="ButtonRenderStyle.Primary">
+                            <div class="d-flex">
+                                <DxWaitIndicator Visible="isSending"
+                                                 SizeMode="Params.SizeMode"/>
+                                <span class="mx-2">@Message</span>
+                            </div>
+                        </DxButton>
+                    </DxFormLayoutItem>
+                </DxFormLayout>
+            </div>
+        </div>
+        <p class="tm-8 cw-480 mt-2">
+            @formSubmitResult
+        </p>
+
+        @code {
+            bool isSending = false;
+            string feedbackText = "Your components are great!";
+            string formSubmitResult = "";
+            DateTime refreshedDate = DateTime.Now;
+
+            string Message => isSending ? "Sending..." : "Send";
+
+            private async Task Send() {
+                if (string.IsNullOrWhiteSpace(feedbackText)) return;
+
+                isSending = true;
+                await Task.Delay(3000);
+                formSubmitResult = "Thank you for completing the survey. " + refreshedDate.ToString("dd-MM-yyyy HH:mm:ss");
+                isSending = false;
+            }
+
+            private void FeedbackChanged(string text) {
+                feedbackText = text;
+                formSubmitResult = "";
+            }
+
+            /*BeginHide*/
+#if VISUALTESTS
+            protected override void OnInitialized()
+            {
+                isSending = true;
+                base.OnInitialized();
+            }
+#endif
+            /*EndHide*/
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

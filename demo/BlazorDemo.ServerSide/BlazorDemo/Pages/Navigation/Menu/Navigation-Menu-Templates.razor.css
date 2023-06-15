@@ -1,26 +1,18 @@
-.dx-menu-item.notoggle > .dropdown-menu {
-    transform: matrix(1, 0, 0, 1, -112, -1) !important;
+
+/*BeginHide*/ ::deep /*EndHide*/ .dxbl-menu-item-tmpl {
+    display: flex;
+    align-items: center;
 }
 
-/*BeginHide*/ ::deep /*EndHide*/ .dx-menu-item.notoggle a > .dx-menu-dropdown-toggle {
-    display: none;
-}
-/*BeginHide*/ ::deep /*EndHide*/ .dxbs-menu > .nav .dx-menu-item.notoggle {
-    display: none;
-}
-/*BeginHide*/ ::deep /*EndHide*/ .dxbs-menu > .nav .dx-menu-item.search-menu-item {
-    display: none;
-}
-/*BeginHide*/ ::deep /*EndHide*/ .dxbs-menu > .nav .separator {
+/*BeginHide*/ ::deep /*EndHide*/ .notoggle svg {
     display: none;
 }
 
-.dx-menu-item .search {
+.dxbl-menu-item .search {
     min-width: 123px
 }
 
-.dxbs-menu-item-tmpl > .search {
-    padding: 0.25rem;
+.dxbl-menu-item-tmpl > .search {
     position: relative;
 }
 

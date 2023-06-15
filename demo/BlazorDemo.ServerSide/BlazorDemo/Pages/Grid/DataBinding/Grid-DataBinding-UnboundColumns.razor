@@ -1,0 +1,78 @@
+﻿@page "/Grid/DataBinding/UnboundColumns"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-DataBinding-UnboundColumns" ShowSizeMode="true">
+    @inject NwindDataService NwindDataService
+    <DxGrid Data="@Data"
+            ColumnResizeMode="GridColumnResizeMode.NextColumn"
+            UnboundColumnData="Grid_UnboundColumnData"
+            CustomizeElement="Grid_CustomizeElement">
+        <Columns>
+            <DxGridDataColumn FieldName="Product" MinWidth="150" />
+            <DxGridDataColumn FieldName="OrderDate" Width="10%" />
+            <DxGridDataColumn FieldName="ShippedDate" Width="10%" />
+            <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
+            <DxGridDataColumn FieldName="Quantity" Width="10%" />
+            <DxGridDataColumn FieldName="FinalDiscount"
+                              UnboundType="GridUnboundColumnType.Decimal"
+                              Caption="Discount"
+                              DisplayFormat="p0"
+                              Width="10%" />
+            <DxGridDataColumn FieldName="Total"
+                              UnboundType="GridUnboundColumnType.Decimal"
+                              UnboundExpression="[UnitPrice] * [Quantity] * (1 - [FinalDiscount])"
+                              SortIndex="0"
+                              SortOrder="GridColumnSortOrder.Descending"
+                              DisplayFormat="c"
+                              MinWidth="100"
+                              Width="15%" />
+        </Columns>
+    </DxGrid>
+
+    @code {
+        object Data { get; set; }
+        protected override async Task OnInitializedAsync() {
+            var invoices = await NwindDataService.GetInvoicesAsync();
+            var customers = await NwindDataService.GetCustomersAsync();
+            Data = invoices.OrderBy(i => i.OrderDate).Join(customers, i => i.CustomerId, c => c.CustomerId, (i, c) => {
+                return new {
+                    Product = i.ProductName,
+                    OrderDate = i.OrderDate,
+                    ShippedDate = i.ShippedDate,
+                    UnitPrice = i.UnitPrice,
+                    Quantity = i.Quantity,
+                    Discount = i.Discount,
+                    OrderId = i.OrderId
+                };
+            });
+        }
+
+        void Grid_UnboundColumnData(GridUnboundColumnDataEventArgs e) {
+            if(e.FieldName == "FinalDiscount") {
+                var discount = Convert.ToDouble(e.GetRowValue("Discount"));
+
+                var orderDate = Convert.ToDateTime(e.GetRowValue("OrderDate"));
+                var shippedDate = (DateTime?)e.GetRowValue("ShippedDate");
+                if(IncreaseDiscountRequired(orderDate, shippedDate))
+                    discount += 0.1;
+
+                e.Value = discount;
+            }
+        }
+
+        void Grid_CustomizeElement(GridCustomizeElementEventArgs e) {
+            if(e.ElementType == GridElementType.DataCell && e.Column is IGridDataColumn dataColumn && dataColumn.FieldName == "FinalDiscount") {
+                var orderDate = Convert.ToDateTime(e.Grid.GetRowValue(e.VisibleIndex, "OrderDate"));
+                var shippedDate = (DateTime?)e.Grid.GetRowValue(e.VisibleIndex, "ShippedDate");
+                if(IncreaseDiscountRequired(orderDate, shippedDate))
+                    e.Style = "color: green; font-weight: 700; background-color: #A3EBB1";
+            }
+        }
+
+        bool IncreaseDiscountRequired(DateTime orderDate, DateTime? shippedDate) {
+            if(shippedDate == null)
+                return false;
+            return (shippedDate.Value - orderDate).TotalDays >= 7;
+        }
+    }
+</DemoPageSectionComponent>

@@ -6,8 +6,15 @@
         <span>Drag and Drop File Here</span><span class="m-1">or</span>
         <button id="overviewDemoSelectButton" class="btn border-primary btn-primary m-1">Select File</button>
     </div>
-    <DxUpload Name="myFile" Visible="@UploadVisible" ExternalSelectButtonCssSelector="#overviewDemoSelectButton" ExternalDropZoneCssSelector="#overviewDemoDropZone" MaxFileSize="15000000"
-                ExternalDropZoneDragOverCssClass="bg-light border-secondary text-dark" UploadUrl="@GetUploadUrl("api/Upload/UploadFile/")" SelectedFilesChanged="@SelectedFilesChanged" CssClass="w-100">
+    <DxUpload Name="myFile"
+              Visible="@UploadVisible"
+              ExternalSelectButtonCssSelector="#overviewDemoSelectButton"
+              ExternalDropZoneCssSelector="#overviewDemoDropZone"
+              ExternalDropZoneDragOverCssClass="bg-light border-secondary text-dark"
+              MaxFileSize="15000000"
+              UploadUrl="@GetUploadUrl("api/Upload/Upload/")"
+              SelectedFilesChanged="@SelectedFilesChanged"
+              CssClass="w-100">
     </DxUpload>
 
     @code {

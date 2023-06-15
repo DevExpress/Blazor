@@ -9,7 +9,12 @@
         @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 
         <DataProviderAccessAreaContainer DataProvider="@RentInfoDataProvider">
-            <DxGrid Data="@InstantFeedbackSource" PageSize="10" ShowGroupPanel="true" ShowFilterRow="true" SizeMode="Params.SizeMode">
+            <DxGrid Data="@InstantFeedbackSource"
+                    ShowGroupPanel="true" ShowFilterRow="true"
+                    EditorRenderMode="GridEditorRenderMode.Integrated"
+                    VirtualScrollingEnabled="VirtualScrollingEnabled"
+                    PageSize="20" CssClass="ch-480"
+                    SizeMode="Params.SizeMode">
                 <Columns>
                     <DxGridDataColumn FieldName="State" Width="5%" />
                     <DxGridDataColumn FieldName="Area" MinWidth="100" />
@@ -21,7 +26,13 @@
                 </Columns>
             </DxGrid>
         </DataProviderAccessAreaContainer>
+        </ChildContentWithParameters>
+        <OptionsContent>
+            <OptionCheckBox Label="Enable Virtual Scrolling" @bind-Checked="VirtualScrollingEnabled" />
+        </OptionsContent>
         @code {
+            bool VirtualScrollingEnabled { get; set; } = true;
+
             IRentInfoDataProvider RentInfoDataProvider { get; set; }
             RentInfoDataService RentInfoDataService { get; set; }
 
@@ -45,5 +56,4 @@
                 InstantFeedbackSource?.Dispose();
             }
         }
-    </ChildContentWithParameters>
 </DemoPageSectionComponent>

@@ -1,29 +1,32 @@
-﻿<DemoPageSectionComponent Id="Navigation-Menu-DataBinding">
-    <div class="card w-100">
-        <div class="card-header p-0 fw-normal">
-            <DxMenu ItemClick="@(e => ((TextFormattingMenuItem)e.ItemInfo.Data).Click())"
-                    Data="@MenuItems">
-                <DataMappings>
-                    <DxMenuDataMapping Text="Text"
-                                       Children="Children"
-                                       BeginGroup="BeginGroup"
-                                       CssClass="CssClass"
-                                       Enabled="Enabled" />
-                </DataMappings>
-            </DxMenu>
-        </div>
-        <div class="card-body">
-            <div style="@Formatting.GetStyleString()">
-                @*BeginHide*@
-                <span class="demo-preventsel">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</span>
-                @*EndHide*@
+﻿<DemoPageSectionComponent Id="Navigation-Menu-DataBinding" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="card w-100">
+            <div class="card-header p-0 fw-normal">
+                <DxMenu ItemClick="@(e => ((TextFormattingMenuItem)e.ItemInfo.Data).Click())"
+                        Data="@MenuItems"
+                        SizeMode="@Params.SizeMode">
+                    <DataMappings>
+                        <DxMenuDataMapping Text="Text"
+                                           Children="Children"
+                                           BeginGroup="BeginGroup"
+                                           CssClass="CssClass"
+                                           Enabled="Enabled" />
+                    </DataMappings>
+                </DxMenu>
+            </div>
+            <div class="card-body">
+                <div style="@Formatting.GetStyleString()">
+                    @*BeginHide*@
+                    <span class="demo-preventsel">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</span>
+                    @*EndHide*@
+                </div>
             </div>
         </div>
-    </div>
 
-    @code {
-        List<TextFormattingMenuItem> menuItems;
-        List<TextFormattingMenuItem> MenuItems => menuItems = menuItems ?? TextFormattingMenu.MenuItems(Formatting);
-        TextFormatting Formatting { get; } = new TextFormatting();
-    }
+        @code {
+            List<TextFormattingMenuItem> menuItems;
+            List<TextFormattingMenuItem> MenuItems => menuItems = menuItems ?? TextFormattingMenu.MenuItems(Formatting);
+            TextFormatting Formatting { get; } = new TextFormatting();
+        }
+    </ChildContentWithParameters>
 </DemoPageSectionComponent>

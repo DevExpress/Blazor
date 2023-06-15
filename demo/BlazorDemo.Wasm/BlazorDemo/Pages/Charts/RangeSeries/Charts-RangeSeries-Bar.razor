@@ -1,4 +1,6 @@
-﻿<DemoPageSectionComponent Id="Charts-RangeSeries-Bar">
+﻿@page "/ChartRangeBar"
+
+<DemoPageSectionComponent Id="Charts-RangeSeries-Bar">
     <DemoChildContent>
         @inject IWeatherSummaryDataProvider WeatherSummaryDataProvider
 
@@ -17,10 +19,10 @@
 
             <DxChartTooltip Enabled="true">
                 @context.GetRangePoint().Render((rangePoint) =>
-                @<div style="margin: 0.75rem">
-                    <div>Max: @rangePoint.EndValue °F</div>
-                    <div>Min: @rangePoint.StartValue °F</div>
-                </div>
+                    @<div style="margin: 0.75rem">
+                        <div>Max: @rangePoint.EndValue °F</div>
+                        <div>Min: @rangePoint.StartValue °F</div>
+                    </div>
                 )
             </DxChartTooltip>
             <DxChartLegend HorizontalAlignment="HorizontalAlignment.Center"

@@ -1,0 +1,67 @@
+﻿<DemoPageSectionComponent Id="DialogsAndWindows-Popup-Events" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="target-container" @onclick="@(() => EulaVisible = true)">
+            <p class="target-caption">CLICK TO SHOW A POP-UP WINDOW</p>
+        </div>
+
+        <DxPopup
+            CssClass="popup-demo-events"
+            @bind-Visible="@EulaVisible"
+            ShowFooter="true"
+            CloseOnEscape="false"
+            CloseOnOutsideClick="false"
+            ShowCloseButton="false"
+            HeaderText="DevExpress EULA"
+            Closing="EulaPopupClosing"
+            Closed="EulaPopupClosed"
+            SizeMode="Params.SizeMode">
+            <BodyContentTemplate>
+                @(new MarkupString(Constants.MarkupEULAString))
+            </BodyContentTemplate>
+            <FooterContentTemplate Context="Context">
+                <div class="popup-demo-events-footer">
+                    <DxCheckBox CssClass="popup-demo-events-checkbox" @bind-Checked="@EulaAccepted">I accept the terms of the EULA</DxCheckBox>
+                    <DxButton CssClass="popup-demo-events-button ms-2" RenderStyle="ButtonRenderStyle.Primary" Text="OK" Click="Context.CloseCallback"/>
+                    <DxButton CssClass="popup-demo-events-button ms-2" RenderStyle="ButtonRenderStyle.Secondary" Text="Cancel" Click="CancelEulaClick"/>
+                </div>
+            </FooterContentTemplate>
+        </DxPopup>
+        <DxPopup
+            @bind-Visible="@MessageBoxVisible"
+            ShowFooter="true"
+            HeaderText="DevExpress EULA"
+            BodyText="You must read and accept the terms of the EULA to continue."
+            SizeMode="Params.SizeMode">
+            <FooterContentTemplate Context="Context">
+                <DxButton CssClass="popup-button my-1 ms-2" RenderStyle="ButtonRenderStyle.Primary" Text="OK" Click="Context.CloseCallback" />
+                <DxButton CssClass="popup-button my-1 ms-2" RenderStyle="ButtonRenderStyle.Secondary" Text="Cancel" Click="CancelEulaClick" />
+            </FooterContentTemplate>
+        </DxPopup>
+    </ChildContentWithParameters>
+
+    @code {
+        bool EulaAccepted { get; set; }
+        bool EulaVisible { get; set; }
+        bool MessageBoxVisible { get; set; }
+        bool SkipEulaCheck { get; set; }
+        void TryAgainClick() {
+            MessageBoxVisible = false;
+        }
+        void CancelEulaClick() {
+            SkipEulaCheck = true;
+            MessageBoxVisible = false;
+            EulaVisible = false;
+        }
+        void EulaPopupClosed() {
+            EulaAccepted = false;
+            SkipEulaCheck = false;
+        }
+        void EulaPopupClosing(PopupClosingEventArgs args) {
+            if (SkipEulaCheck)
+                return;
+            args.Cancel = !EulaAccepted;
+            MessageBoxVisible = !EulaAccepted;
+        }
+    }
+
+</DemoPageSectionComponent>

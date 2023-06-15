@@ -21,7 +21,9 @@
             } else {
                 <div class="d-flex p-2">
                     <div class="flex-shrink-0 me-3">
-                        <img class="bg-primary rounded-circle treeview-template-icon" src="@dataItem.ImageUrl" alt="@dataItem.Title" />
+                        <div class="rounded-circle bg-primary">
+                            <img class="treeview-template-icon" src="@dataItem.ImageUrl" alt="@dataItem.Title"/>
+                        </div>
                     </div>
                     <div class="flex-grow-1">
                         <h5 class="mt-0">@dataItem.Title</h5>

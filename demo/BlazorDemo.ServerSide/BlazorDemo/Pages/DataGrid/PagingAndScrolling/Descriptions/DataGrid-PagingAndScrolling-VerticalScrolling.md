@@ -4,6 +4,6 @@ The Data Grid's height is determined by the number of rows displayed within a pa
 
 The [DxDataGrid.VerticalScrollBarMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.VerticalScrollBarMode) property accepts the following values:
 
-*   [Auto](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ScrollBarMode) - The scrollbar is automatically shown when the size of the component content exceeds the size of the component itself.
-*   [Hidden](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ScrollBarMode) - The scrollbar is hidden.
-*   [Visible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ScrollBarMode) - The scrollbar is visible.
+*   [Auto](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ScrollBarMode) — The scrollbar is automatically shown when the size of the component content exceeds the size of the component itself.
+*   [Hidden](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ScrollBarMode) — The scrollbar is hidden.
+*   [Visible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ScrollBarMode) — The scrollbar is visible.

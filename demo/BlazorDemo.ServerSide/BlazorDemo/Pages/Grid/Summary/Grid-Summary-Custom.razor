@@ -1,7 +1,7 @@
-﻿@page "/Grid/Summary/Custom"
+@page "/Grid/Summary/Custom"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Summary-Custom" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Grid-Summary-Custom" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
@@ -12,8 +12,8 @@
                 SelectedDataItemsChanged="Grid_SelectedDataItemsChanged"
                 CustomSummary="Grid_CustomSummary"
                 CustomizeSummaryDisplayText="Grid_CustomizeSummaryDisplayText"
-                UnboundColumnData="Grid_UnboundColumnData"
-                SizeMode="Params.SizeMode">
+                SizeMode="Params.SizeMode" 
+                KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
             <Columns>
                 <DxGridSelectionColumn Width="60px"/>
                 <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
@@ -22,7 +22,12 @@
                 <DxGridDataColumn FieldName="Country" Width="10%" />
                 <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
                 <DxGridDataColumn FieldName="Quantity" Width="10%" />
-                <DxGridDataColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" MinWidth="100" Width="15%" />
+                <DxGridDataColumn FieldName="Total"
+                                  UnboundType="GridUnboundColumnType.Decimal"
+                                  UnboundExpression="[UnitPrice] * [Quantity]"
+                                  DisplayFormat="c"
+                                  MinWidth="100"
+                                  Width="15%" />
             </Columns>
             <TotalSummary>
                 <DxGridSummaryItem SummaryType="GridSummaryItemType.Custom" Name="Custom" FieldName="Total" />
@@ -63,13 +68,6 @@
             void Grid_CustomizeSummaryDisplayText(GridCustomizeSummaryDisplayTextEventArgs e) {
                 if(e.Item.Name == "Custom")
                     e.DisplayText = string.Format("Sum of Selected: {0:c}", e.Value);
-            }
-            void Grid_UnboundColumnData(GridUnboundColumnDataEventArgs e) {
-                if(e.FieldName == "Total") {
-                    var price = (decimal)e.GetRowValue("UnitPrice");
-                    var quantity = (short)e.GetRowValue("Quantity");
-                    e.Value = price * quantity;
-                }
             }
             void Grid_SelectedDataItemsChanged() {
                 Grid.RefreshSummary();

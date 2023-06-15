@@ -1,0 +1,41 @@
+﻿<DemoPageSectionComponent Id="Layout-FormLayout-Overview"
+                          ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxFormLayout SizeMode="Params.SizeMode" CssClass="w-100">
+            <DxFormLayoutItem Caption="Contact Name:">
+                    <DxTextBox @bind-Text="@Name" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Email:">
+                    <DxTextBox @bind-Text="@Email" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Birth Date:">
+                    <DxDateEdit @bind-Date="@BirthDate" Mask="@DateTimeMask.ShortDate" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Years Worked:">
+                    <DxSpinEdit @bind-Value="@YearsWorked" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="On Vacation:">
+                    <DxCheckBox @bind-Checked="@OnVacation" />
+            </DxFormLayoutItem>
+        </DxFormLayout>
+        <div class="w-100 mx-0 mt-3">
+            <p class="demo-text col-12 mt-2">
+                @nameof(Name)=<b>@Name</b>,
+                @nameof(Email)=<b>@Email</b>,
+                @nameof(BirthDate)=<b>@BirthDate</b>,
+                @nameof(YearsWorked)=<b>@YearsWorked</b>,
+                @nameof(OnVacation)=<b>@OnVacation</b>
+            </p>
+        </div>
+    </ChildContentWithParameters>
+
+
+    @code {
+        string Name { get; set; } = "Nancy Davolio";
+        string Email { get; set; } = "NancyDavolio@sample.com";
+        DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-20);
+
+        int YearsWorked { get; set; } = 3;
+        bool OnVacation { get; set; } = true;
+    }
+</DemoPageSectionComponent>

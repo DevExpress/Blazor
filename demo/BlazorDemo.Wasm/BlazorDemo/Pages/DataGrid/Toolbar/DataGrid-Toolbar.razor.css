@@ -11,6 +11,7 @@
     background-color: currentColor;
     height: 16px;
     width: 16px;
+    opacity: 0.7;
 }
 
 /*BeginHide*/::deep /*EndHide*/.grid-toolbar-new {

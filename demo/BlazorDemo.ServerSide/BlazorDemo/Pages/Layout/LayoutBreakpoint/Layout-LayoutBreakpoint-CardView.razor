@@ -1,0 +1,29 @@
+﻿@inject NavigationManager NavigationManager
+<link rel="preload" href="@GetDemoUrl()" as="document">
+
+<DemoPageSectionComponent Id="Layout-LayoutBreakpoint-CardView">
+    <DemoMobileContent>
+        @if(afterFirstRender) {
+            <iframe @onload="() => { loadIndicatorVisible = false; }" title="Card View" src="@GetDemoUrl()">
+            </iframe>
+        }
+        @if(loadIndicatorVisible) {
+            <DemoLoadIndicator></DemoLoadIndicator>
+        }
+    </DemoMobileContent>
+</DemoPageSectionComponent>
+
+@code {
+    bool loadIndicatorVisible = true;
+    bool afterFirstRender;
+    protected override void OnAfterRender(bool firstRender) {
+        base.OnAfterRender(firstRender);
+        if (firstRender) {
+            afterFirstRender = true;
+            StateHasChanged();
+        }
+    }
+    string GetDemoUrl() {
+        return NavigationManager.ToAbsoluteUri("Layout_LayoutBreakpoint_CardViewIFrameContent").AbsoluteUri;
+    }
+}

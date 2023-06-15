@@ -1,1 +1,3 @@
-In the following example, polynomial curves limit the area. You can choose between the following spline area series types: [Spline Area](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSplineAreaSeries-3), [Stacked Spline Area](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartStackedSplineAreaSeries-3), and [Full Stacked Spline Area](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartFullStackedSplineAreaSeries-3).
+The Spline Area chart visualizes data trends over specified intervals after interpolation. The area between the spline and the argument axis is shaded with a color. 
+
+Use the combo boxes at the top of the chart to display data point markers and labels.

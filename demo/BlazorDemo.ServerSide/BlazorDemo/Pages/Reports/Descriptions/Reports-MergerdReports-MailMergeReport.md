@@ -1,3 +1,0 @@
-This demo illustrates how to use Mail Merge and the Rich Text control within DevExpress Reports. The Report Designer displays Rich Text controls with data field names enclosed in square brackets. In Print Preview these names are substituted with data from the report's data source.
-
-<a href="https://docs.devexpress.com/XtraReports/DevExpress.XtraReports.UI.XRRichText" target="_blank">See Documentation</a>

@@ -1,7 +1,7 @@
 ﻿@page "/Grid/Selection/Multiple"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Selection-Multiple" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Grid-Selection-Multiple" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
@@ -12,11 +12,14 @@
                         SelectionMode="GridSelectionMode.Multiple"
                         AllowSelectRowByClick="true"
                         @bind-SelectedDataItems="@SelectedDataItems"
-                        CustomizeCellDisplayText="Grid_CustomizeCellDisplayText"
-                        SizeMode="Params.SizeMode">
+                        SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
                     <Columns>
                         <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
-                        <DxGridDataColumn FieldName="CategoryId" SortMode="GridColumnSortMode.DisplayText" Caption="Category" MinWidth="100" TextAlignment="GridTextAlignment.Left" />
+                        <DxGridDataColumn FieldName="CategoryId" Caption="Category" MinWidth="100">
+                            <EditSettings>
+                                <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId" TextFieldName="CategoryName" />
+                            </EditSettings>
+                        </DxGridDataColumn>
                         <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="15%" />
                         <DxGridDataColumn FieldName="UnitsInStock" Width="15%" />
                     </Columns>
@@ -37,19 +40,14 @@
 
     @code {
         IEnumerable<Product> Products { get; set; }
-        IEnumerable<Category> Categories { get; set; }
+        IReadOnlyList<Category> Categories { get; set; }
         IReadOnlyList<object> SelectedDataItems { get; set; }
 
         protected override async Task OnInitializedAsync() {
-            Categories = await NwindDataService.GetCategoriesAsync();
+            Categories = (await NwindDataService.GetCategoriesAsync()).ToList();
             Products = await NwindDataService.GetProductsAsync();
 
             SelectedDataItems = Products.Skip(1).Take(4).ToList();
-        }
-        void Grid_CustomizeCellDisplayText(GridCustomizeCellDisplayTextEventArgs e) {
-            if(e.FieldName == "CategoryId") {
-                e.DisplayText = Categories.Where(c => c.CategoryId == (int)e.Value).FirstOrDefault().CategoryName;
-            }
         }
     }
 </DemoPageSectionComponent>

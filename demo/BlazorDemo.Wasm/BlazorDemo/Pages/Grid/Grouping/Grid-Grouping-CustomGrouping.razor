@@ -1,7 +1,7 @@
 ﻿@page "/Grid/Grouping/CustomGrouping"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Grouping-CustomGrouping" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Grid-Grouping-CustomGrouping" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
@@ -10,7 +10,7 @@
                 ShowGroupPanel="true"
                 CustomGroup="Grid_CustomGroup"
                 CustomizeGroupValueDisplayText="Grid_CustomizeGroupValueDisplayText"
-                SizeMode="Params.SizeMode">
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
             <Columns>
                 <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
                 <DxGridDataColumn FieldName="CategoryName" MinWidth="100" />

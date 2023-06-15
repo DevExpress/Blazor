@@ -1,1 +1,3 @@
-Line chart series visualize data trends over specified intervals. In this example, you can switch between the following line series types: [Line](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartLineSeries-3), [Stacked Line](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartStackedLineSeries-3), and [Full Stacked Line](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartFullStackedLineSeries-3).
+The Line chart displays data points and connects them with straight lines. You can display multiple series on a chart to compare values corresponding to same arguments. 
+
+Use the combo boxes at the top of the chart to display data point markers and labels.

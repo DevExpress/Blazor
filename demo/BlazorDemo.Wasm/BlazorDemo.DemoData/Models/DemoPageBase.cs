@@ -8,6 +8,7 @@ namespace BlazorDemo.DemoData {
         public string Url { get; set; }
         public string SeoTitle { get; set; }
         public string Keywords { get; set; }
+        public string SearchKeywords { get; set; }
         public string Description { get; set; }
 
         public bool IsPreview { get; set; }

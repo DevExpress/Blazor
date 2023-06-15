@@ -1,30 +1,33 @@
-﻿<DemoPageSectionComponent Id="Navigation-TreeView-LoadChildNodesOnDemand" VerticalAlignment=VerticalAlignment.Top >
-    <DxTreeView @ref="@treeView"
-                CssClass="cw-480"
-                Data="@DataSource"
-                LoadChildNodesOnDemand="true"
-                AnimationType="LayoutAnimationType.Slide">
-        <DataMappings>
-            <DxTreeViewDataMapping HasChildren="@(nameof(DateTimeGroup.HasSubGroups))"
-                                   Children="@(nameof(DateTimeGroup.SubGroups))"
-                                   Text="@(nameof(DateTimeGroup.Title))"/>
-        </DataMappings>
-    </DxTreeView>
+﻿<DemoPageSectionComponent Id="Navigation-TreeView-LoadChildNodesOnDemand" VerticalAlignment=VerticalAlignment.Top ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxTreeView @ref="@treeView"
+                    CssClass="cw-480"
+                    Data="@DataSource"
+                    LoadChildNodesOnDemand="true"
+                    SizeMode="Params.SizeMode"
+                    AnimationType="LayoutAnimationType.Slide">
+            <DataMappings>
+                <DxTreeViewDataMapping HasChildren="@(nameof(DateTimeGroup.HasSubGroups))"
+                                       Children="@(nameof(DateTimeGroup.SubGroups))"
+                                       Text="@(nameof(DateTimeGroup.Title))"/>
+            </DataMappings>
+        </DxTreeView>
 
-    @code {
-        DxTreeView treeView;
+        @code {
+            DxTreeView treeView;
 
-        IEnumerable<DateTimeGroup> DataSource = new List<DateTimeGroup>() {
-            new DateTimeGroup(new DateTime(DateTime.Now.Year, 1, 1), DateTimeGroupType.Year)
-        };
+            IEnumerable<DateTimeGroup> DataSource = new List<DateTimeGroup>() {
+                new DateTimeGroup(new DateTime(DateTime.Now.Year, 1, 1), DateTimeGroupType.Year)
+            };
 
-        protected override void OnAfterRender(bool firstRender) {
-            if(firstRender) {
-                var todayDate = DateTime.Now;
-                treeView.SetNodeExpanded(n => n.Text == todayDate.Year.ToString(), true);
+            protected override void OnAfterRender(bool firstRender) {
+                if(firstRender) {
+                    var todayDate = DateTime.Now;
+                    treeView.SetNodeExpanded(n => n.Text == todayDate.Year.ToString(), true);
+                }
+                base.OnAfterRender(firstRender);
             }
-            base.OnAfterRender(firstRender);
         }
-    }
+    </ChildContentWithParameters>
 </DemoPageSectionComponent>
 

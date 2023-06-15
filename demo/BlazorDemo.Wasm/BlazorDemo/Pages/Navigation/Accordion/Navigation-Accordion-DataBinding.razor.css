@@ -15,3 +15,7 @@
     -webkit-mask-image: url("images/icons/plus.svg");
     mask-image: url("images/icons/plus.svg");
 }
+
+/*BeginHide*/::deep /*EndHide*/.dxbl-accordion-group-body > .dxbl-accordion-items-container {
+    padding: 0.375rem 0;
+ }

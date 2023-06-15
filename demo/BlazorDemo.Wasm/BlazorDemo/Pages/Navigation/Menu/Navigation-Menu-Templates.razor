@@ -1,4 +1,4 @@
-﻿<DemoPageSectionComponent Id="Navigation-Menu-Templates">
+﻿<DemoPageSectionComponent Id="Navigation-Menu-Templates" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         <div class="card w-100">
             <div class="card-body p-0">
@@ -7,7 +7,9 @@
                         DisplayMode="MenuDisplayMode.Desktop"
                         Title="DevExpress Logo"
                         CollapseItemsToHamburgerMenu="true"
-                        CollapseItemToIconMode="MenuCollapseItemToIconMode.All">
+                        CollapseItemToIconMode="MenuCollapseItemToIconMode.All"
+                        SubMenuCssClass="menu-dropdown"
+                        SizeMode="@Params.SizeMode">
                     <TitleTemplate>
                         <div class="icon-logo" role="img" aria-label="@context"></div>
                     </TitleTemplate>

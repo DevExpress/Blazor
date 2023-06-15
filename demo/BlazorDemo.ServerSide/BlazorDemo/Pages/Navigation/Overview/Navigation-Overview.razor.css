@@ -1,11 +1,15 @@
-/*BeginHide*/::deep /*EndHide*/ .dxbs-menu > .nav .dx-menu-item.notoggle {
+/*BeginHide*/::deep /*EndHide*/ .dxbl-menu > .dxbl-menu-item-list .dxbl-menu-item.notoggle {
     display: none;
 }
-/*BeginHide*/ ::deep /*EndHide*/ .dxbs-menu > .nav .dx-menu-item.search-menu-item {
+/*BeginHide*/ ::deep /*EndHide*/ .dxbs-menu > .dxbl-menu-item-list .dx-menu-item.search-menu-item {
     display: none;
 }
-/*BeginHide*/ ::deep /*EndHide*/ .dxbs-menu > .nav .separator {
+/*BeginHide*/ ::deep /*EndHide*/ .dxbs-menu > .dxbl-menu-item-list .dxbl-menu-items-separator {
     display: none;
+}
+/*BeginHide*/ ::deep /*EndHide*/ .dxbl-menu-item-tmpl {
+    display: flex;
+    align-items: center;
 }
 
 .overview-navigation > .card-header {
@@ -17,12 +21,11 @@
     flex-wrap: nowrap;
 }
 
-.dx-menu-item .search {
+.dxbl-menu-item .search {
     min-width: 123px
 }
 
-.dxbs-menu-item-tmpl > .search {
-    padding: 0.25rem;
+.dxbl-menu-item-tmpl > .search {
     position: relative;
 }
 

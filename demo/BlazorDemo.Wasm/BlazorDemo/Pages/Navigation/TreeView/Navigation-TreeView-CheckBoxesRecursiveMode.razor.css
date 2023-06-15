@@ -1,0 +1,28 @@
+/*BeginHide*/::deep /*EndHide*/ .treeview-icon {
+    width: 1rem;
+    height: 1rem;
+    min-width: 1rem;
+    min-height: 1rem;
+    background-size: contain;
+    background-position: center center;
+}
+
+/*BeginHide*/::deep /*EndHide*/ .treeview-icon-folder {
+    background-image: url("images/icons/folder-color.svg");
+}
+
+/*BeginHide*/::deep /*EndHide*/ .treeview-icon-image {
+    background-image: url("images/icons/image-colors.svg");
+}
+
+/*BeginHide*/::deep /*EndHide*/ .treeview-icon-video {
+    background-image: url("images/icons/video-colors.svg");
+}
+
+/*BeginHide*/::deep /*EndHide*/ .treeview-icon-music {
+    background-image: url("images/icons/music-colors.svg");
+}
+
+/*BeginHide*/::deep /*EndHide*/ .treeview-icon-document {
+    background-image: url("images/icons/document-color.svg");
+}

@@ -2,4 +2,4 @@ You can use the [Text](https://docs.devexpress.com/Blazor/402516/data-editors/ma
 
 Masked Input activates a text mask if you bind the component's [Value](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMaskedInput-1.Value) property to a string object. To enable this mask type in other cases, set the component's [MaskMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMaskedInput-1.MaskMode) property to MaskMode.Text. 
 
-The **Placeholder** сombobox and **Save Literals** radio button specify the placeholder character and whether to save literals to the editor's value, respectively.
+The **Placeholder** combobox and **Save Literals** radio button specify the placeholder character and whether to save literals to the editor's value, respectively.

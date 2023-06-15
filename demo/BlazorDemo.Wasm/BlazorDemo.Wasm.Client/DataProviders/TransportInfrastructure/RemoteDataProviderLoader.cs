@@ -43,6 +43,8 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
 
             {typeof(BlazorDemo.Data.Northwind.EditableEmployee).GUID, typeof(BlazorDemo.Data.Northwind.EditableEmployee)},
 
+            {typeof(BlazorDemo.Data.Homes.Home).GUID, typeof(BlazorDemo.Data.Homes.Home)},
+
             {typeof(BlazorDemo.Data.Issues.Issue).GUID, typeof(BlazorDemo.Data.Issues.Issue)},
             {typeof(BlazorDemo.Data.Issues.Project).GUID, typeof(BlazorDemo.Data.Issues.Project)},
             {typeof(BlazorDemo.Data.Issues.User).GUID, typeof(BlazorDemo.Data.Issues.User)},

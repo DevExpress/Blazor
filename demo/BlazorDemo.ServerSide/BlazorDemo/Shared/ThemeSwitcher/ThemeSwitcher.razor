@@ -4,7 +4,7 @@
 
 <div class="themeswitcher-container shadow @StateCssClass">
     @if(IsLoaded) {
-        <DxScrollView id="themesMenu">
+        <DxScrollView CssClass="blazor-themes">
             <div class="list-group list-group-flush">
                 @foreach(var themeSet in Themes.ThemeSets) {
                     <span class="themeswitcher-group card-header list-group-item">@themeSet.Title</span>

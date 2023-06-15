@@ -1,46 +1,70 @@
-﻿<DemoPageSectionComponent Id="Charts-LineSeries-Line">
-    <DemoChildContent>
-        @switch (lineSeriesType) {
-            case ChartSeriesType.Line:
-                <LineChart ShowSeriesPointMarkers="showSeriesPointMarkers"
-                           ShowSeriesLabels="showSeriesLabels" />
-                break;
-            case ChartSeriesType.StackedLine:
-                <StackedLineChart ShowSeriesPointMarkers="showSeriesPointMarkers"
-                                  ShowSeriesLabels="showSeriesLabels" />
-                break;
-            case ChartSeriesType.FullStackedLine:
-                <FullStackedLineChart ShowSeriesPointMarkers="showSeriesPointMarkers"
-                                      ShowSeriesLabels="showSeriesLabels" />
-                break;
-        }
-    </DemoChildContent>
+﻿@page "/ChartLineSeries"
 
+<DemoPageSectionComponent Id="Charts-LineSeries-Line">
     <OptionsContent>
-        <OptionComboBox Label="Series Type:"
-                        T="ChartSeriesType"
-                        TData="KeyValuePair<string, ChartSeriesType>"
-                        Data="lineSeriesTypes"
-                        ValueField="Value"
-                        TextField="Key"
-                        @bind-Value="lineSeriesType" />
         <OptionCheckBox T="bool"
-                        @bind-Checked="showSeriesPointMarkers"
+                        @bind-Checked="ShowSeriesPointMarkers"
                         Label="Show Point Markers" />
         <OptionCheckBox T="bool"
-                        @bind-Checked="showSeriesLabels"
+                        @bind-Checked="ShowSeriesLabels"
                         Label="Show Point Labels" />
     </OptionsContent>
+    <DemoChildContent>
+        @inject ISalesInfoDataProvider Sales
+
+        <DxChart Data="chartsData"
+                 Width="100%"
+                 LabelOverlap="ChartLabelOverlap.Hide">
+            <DxChartLineSeries Name="North America"
+                               T="SaleInfo"
+                               TArgument="DateTime"
+                               TValue="int"
+                               ArgumentField="si => new DateTime(si.Date.Year, si.Date.Month, 1)"
+                               ValueField="si => si.Amount"
+                               SummaryMethod="Enumerable.Sum"
+                               Filter='si => si.Region == "North America" '
+                               HoverMode="ChartContinuousSeriesHoverMode.None">
+                <DxChartSeriesPoint Visible=ShowSeriesPointMarkers
+                                    HoverMode="ChartSeriesPointHoverMode.None" />
+                <DxChartSeriesLabel Visible=ShowSeriesLabels
+                                    ValueFormat="ChartElementFormat.Thousands(1)" />
+            </DxChartLineSeries>
+            <DxChartLineSeries Name="Europe"
+                               T="SaleInfo"
+                               TArgument="DateTime"
+                               TValue="int"
+                               ArgumentField="si => new DateTime(si.Date.Year, si.Date.Month, 1)"
+                               ValueField="si => si.Amount"
+                               SummaryMethod="Enumerable.Sum"
+                               Filter='si => si.Region == "Europe"'
+                               HoverMode="ChartContinuousSeriesHoverMode.None">
+                <DxChartSeriesPoint Visible=ShowSeriesPointMarkers
+                                    HoverMode="ChartSeriesPointHoverMode.None" />
+                <DxChartSeriesLabel Visible=ShowSeriesLabels
+                                    ValueFormat="ChartElementFormat.Thousands(1)" />
+            </DxChartLineSeries>
+            <DxChartLegend Position="RelativePosition.Outside"
+                           HorizontalAlignment="HorizontalAlignment.Right" />
+            <DxChartTooltip Enabled="!ShowSeriesLabels">
+                @context.Point.Render((seriesPoint) =>
+                    @<div style="margin: 0.75rem">
+                        <div>@seriesPoint.SeriesName</div>
+                        <span>@($"{seriesPoint.Argument: MMMM yyyy}: ")</span>
+                        <span>@($"{seriesPoint.Value: $0,.0}K")</span>
+                    </div>
+                )
+            </DxChartTooltip>
+        </DxChart>
+    </DemoChildContent>
 
     @code {
-        static readonly Dictionary<string, ChartSeriesType> lineSeriesTypes = new () {
-            { "Line", ChartSeriesType.Line },
-            { "Stacked Line" , ChartSeriesType.StackedLine},
-            { "Full Stacked Line", ChartSeriesType.FullStackedLine}
-        };
+        IEnumerable<SaleInfo> chartsData;
 
-        ChartSeriesType lineSeriesType = lineSeriesTypes.First().Value;
-        bool showSeriesPointMarkers = false;
-        bool showSeriesLabels = false;
+        [Parameter] public bool ShowSeriesPointMarkers { get; set; }
+        [Parameter] public bool ShowSeriesLabels { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            chartsData = await Sales.GetSalesAsync();
+        }
     }
 </DemoPageSectionComponent>

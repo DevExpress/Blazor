@@ -1,0 +1,33 @@
+﻿<DemoPageSectionComponent Id="Utility-LoadingPanel-Blocking" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="card-body w-100">
+            <div class="card-header border-0 p-2 rounded">
+                <DxLoadingPanel @bind-Visible="visible"
+                                IsContentBlocked="true"
+                                CloseOnClick="closeOnClick"
+                                CssClass="w-100"
+                                SizeMode="Params.SizeMode"
+                                ApplyBackgroundShading="true">
+                    <DxMemo @bind-Text="@text"
+                                CssClass="memo-area"
+                                Rows="7"></DxMemo>
+                </DxLoadingPanel>
+            </div>
+        </div>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionCheckBox T="bool"
+                        @bind-Checked="visible"
+                        Label="Show the panel" />
+        <OptionCheckBox T="bool"
+                        @bind-Checked="closeOnClick"
+                        Label="Close the panel on click"/>
+    </OptionsContent>
+
+    @code {
+        bool visible = true;
+        bool closeOnClick = true;
+        string text = "Andrew received his BTS commercial in 1987 and a Ph.D. in international marketing at the University of Dallas in 1994. He speaks French and Italian fluently, and reads German. He joined the company as a sales representative. After that, he was promoted to sales manager in January 2005 and vice president of sales in March 2006. Andrew is a member of the Sales Management Round table, Seattle Chamber of Commerce, and Pacific Rim Importers Association.\n\nAndrew is an avid golfer with a -9 handicap. If he is not in the office, you will find him at a driving range or a local public golf course.";
+    }
+</DemoPageSectionComponent>

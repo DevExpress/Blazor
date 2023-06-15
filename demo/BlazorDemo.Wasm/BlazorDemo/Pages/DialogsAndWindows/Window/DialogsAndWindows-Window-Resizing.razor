@@ -1,0 +1,90 @@
+﻿@using System.Drawing
+@using System.Text.Json
+@inject IJSRuntime JSRuntime
+<DemoPageSectionComponent Id="DialogsAndWindows-Window-Resizing" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="d-flex justify-content-center p-3" @ref=@popupTarget>
+            <DxButton RenderStyle="ButtonRenderStyle.Secondary" Click="@TogglePopupVisibilityAsync">@GetButtonText()</DxButton>
+        </div>
+        <DxWindow @ref=windowRef
+                  AllowResize="true"
+                  ShowCloseButton="true"
+                  ShowFooter="true"
+                  HeaderText="Edit Contact"
+                  MinWidth="300"
+                  MinHeight="200"
+                  MaxWidth="800"
+                  MaxHeight="500"
+                  Width="@width"
+                  Height="@height"
+                  SizeMode="Params.SizeMode"
+                  ResizeCompleted="@OnWindowResizeCompleted"
+                  @bind-Visible="IsWindowVisible">
+            <BodyContentTemplate>
+                <SampleEditForm />
+            </BodyContentTemplate>
+            <FooterContentTemplate>
+                <DxButton CssClass="popup-button my-1 ms-2" RenderStyle="ButtonRenderStyle.Primary" Text="OK" Click="@context.CloseCallback" />
+                <DxButton CssClass="popup-button my-1 ms-2" RenderStyle="ButtonRenderStyle.Secondary" Text="Cancel" Click="@context.CloseCallback" />
+            </FooterContentTemplate>
+        </DxWindow>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionButton Text="Reload Page" OnClick="ReloadPageButton_ClickAsync" />
+        <OptionButton Text="Reset Window Size" OnClick="ResetSizeButton_ClickAsync" />
+    </OptionsContent>
+
+    @code {
+        const string LocalStorageKey = "Navigation-Window-Resizing";
+        bool IsWindowVisible { get; set; } = false;
+        DxWindow windowRef;
+        ElementReference popupTarget;
+        string width = "max(25vw, 250px)", height = null;
+
+        protected override async Task OnAfterRenderAsync(bool firstRender) {
+            if(firstRender) {
+                var size = await LoadSizeFromLocalStorageAsync();
+                if (size is Size savedSize) {
+                    (width, height) = ($"{savedSize.Width}px", $"{savedSize.Height}px");
+                    StateHasChanged();
+                }
+            }
+        }
+        async Task OnWindowResizeCompleted(WindowResizeCompletedEventArgs args)
+        {
+            (width, height) = ($"{args.Size.Width}px", $"{args.Size.Height}px");
+            await SaveSizeToLocalStorageAsync(args.Size);
+        }
+
+        string GetButtonText() => !IsWindowVisible ? "SHOW A WINDOW" : "CLOSE A WINDOW";
+        async Task TogglePopupVisibilityAsync() {
+            if (IsWindowVisible)
+                await windowRef.CloseAsync();
+            else
+                await windowRef.ShowAtAsync(popupTarget);
+        }
+        // Refer to https://docs.microsoft.com/en-us/aspnet/core/blazor/state-management
+        // to learn more about Blazor state management
+        // In Blazor Server apps, prefer ASP.NET Core Protected Browser Storage
+        async Task<Size?> LoadSizeFromLocalStorageAsync() {
+            var json = await JSRuntime.InvokeAsync<string>("localStorage.getItem", LocalStorageKey);
+            return string.IsNullOrEmpty(json) ? null : JsonSerializer.Deserialize<Size>(json);
+        }
+
+        async Task SaveSizeToLocalStorageAsync(Size position) {
+            await JSRuntime.InvokeVoidAsync("localStorage.setItem", LocalStorageKey, JsonSerializer.Serialize(position));
+        }
+
+        async Task RemoveSizeFromLocalStorageAsync() {
+            await JSRuntime.InvokeVoidAsync("localStorage.removeItem", LocalStorageKey);
+        }
+        async Task ReloadPageButton_ClickAsync() {
+            await JSRuntime.InvokeVoidAsync("location.reload");
+        }
+
+        async Task ResetSizeButton_ClickAsync() {
+            await RemoveSizeFromLocalStorageAsync();
+            await JSRuntime.InvokeVoidAsync("location.reload");
+        }
+    }
+</DemoPageSectionComponent>

@@ -1,0 +1,29 @@
+﻿<DemoPageSectionComponent Id="Layout-FormLayout-Vertical"
+                          ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxFormLayout CaptionPosition="CaptionPosition.Vertical" SizeMode="Params.SizeMode" CssClass="w-100">
+            <DxFormLayoutItem Caption="Location:" ColSpanLg="4" ColSpanMd="12">
+                <DxTextBox @bind-Text="@Location" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Check in:" ColSpanLg="4" ColSpanMd="6">
+                <DxDateEdit @bind-Date="@CheckIn" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Check out:" ColSpanLg="4" ColSpanMd="6">
+                <DxDateEdit @bind-Date="@CheckOut" />
+            </DxFormLayoutItem>
+        </DxFormLayout>
+        <div class="w-100 mx-0 mt-3">
+            <p class="demo-text col-12 mt-2">
+                @nameof(Location)=<b>@Location</b>,
+                @nameof(CheckIn)=<b>@CheckIn</b>,
+                @nameof(CheckOut)=<b>@CheckOut</b>
+            </p>
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        string Location { get; set; } = "London";
+        DateTime CheckIn { get; set; } = DateTime.Now;
+        DateTime CheckOut { get; set; } = DateTime.Now;
+    }
+</DemoPageSectionComponent>

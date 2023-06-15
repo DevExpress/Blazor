@@ -1,3 +1,0 @@
-In this invoice demo, a report document is merged with PDF content. The report includes an <a href="https://docs.devexpress.com/XtraReports/DevExpress.XtraReports.UI.XRPdfContent" target="_blank">XRPdfContent</a> control that adds a PDF specification document for each product ordered.
-
-<a href="https://docs.devexpress.com/XtraReports/401691/create-reports/create-a-report-merged-with-pdf" target="_blank">See Documentation</a>

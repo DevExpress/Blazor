@@ -8,23 +8,31 @@
                 padding-right: 12px;
             }
         </style>
-
         <DxScheduler StartDate="@DateTime.Today"
                      DataStorage="@DataStorage"
-                     @bind-AllowCreateAppointment="@AllowCreateAppointment"
-                     @bind-AllowDeleteAppointment="@AllowDeleteAppointment"
-                     @bind-AllowEditAppointment="@AllowEditAppointment"
+                     GroupType="SchedulerGroupType.Resource"
+                     VisibleResourcesDataSource="VisibleResources"
+                     AllowCreateAppointment="@AllowCreateAppointment"
+                     AllowDeleteAppointment="@AllowDeleteAppointment"
+                     AllowEditAppointment="@AllowEditAppointment"
+                     AllowDragAppointment="@AllowDragAndResizeAppointment"
+                     AllowResizeAppointment="@AllowDragAndResizeAppointment"
+                     AllowDragAppointmentBetweenResources="@AllowDragAppointmentBetweenResources"
+                     ShowAppointmentTooltip="@ShowAppointmentTooltip"
                      CssClass="w-100">
-            <DxSchedulerWeekView ShowWorkTimeOnly="true"></DxSchedulerWeekView>
+            <DxSchedulerDayView DayCount="1" ShowWorkTimeOnly="true"></DxSchedulerDayView>
         </DxScheduler>
     </DemoChildContent>
     <OptionsContent>
         <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
             <Items>
-                <DxToolbarItem CssClass="caption-item" Text="Allow Options:" Enabled="false" />
-                <DxToolbarItem CssClass="me-2 p-0" GroupName="Edit" @bind-Checked="@AllowEditAppointment" Tooltip="Allow Editing" IconCssClass="dx-icon-toolbar icon-edit" />
-                <DxToolbarItem CssClass="me-2 p-0" GroupName="Create" @bind-Checked="@AllowCreateAppointment" Tooltip="Allow Creating" IconCssClass="dx-icon-toolbar icon-add" />
-                <DxToolbarItem CssClass="me-2 p-0" GroupName="Delete" @bind-Checked="@AllowDeleteAppointment" Tooltip="Allow Deleting" IconCssClass="dx-icon-toolbar icon-delete" />
+                <DxToolbarItem CssClass="caption-item" Text="Enable/Disable User Actions:" Enabled="false" />
+                <DxToolbarItem CssClass="me-2 p-0" GroupName="Edit" @bind-Checked="@AllowEditAppointment" Tooltip="Allow Edit Operations" IconCssClass="dx-icon-toolbar icon-edit" />
+                <DxToolbarItem CssClass="me-2 p-0" GroupName="Create" @bind-Checked="@AllowCreateAppointment" Tooltip="Allow Insert Operations" IconCssClass="dx-icon-toolbar icon-add" />
+                <DxToolbarItem CssClass="me-2 p-0" GroupName="Delete" @bind-Checked="@AllowDeleteAppointment" Tooltip="Allow Delete Operations" IconCssClass="dx-icon-toolbar icon-delete" />
+                <DxToolbarItem CssClass="me-2 p-0" GroupName="Drag" @bind-Checked="@AllowDragAndResizeAppointment" Tooltip="Allow Drag & Drop Operations" IconCssClass="dx-icon-toolbar icon-drag-and-sizing" />
+                <DxToolbarItem CssClass="me-2 p-0" GroupName="DragBetweenResources" @bind-Checked="@AllowDragAppointmentBetweenResources" Tooltip="Allow Drag Operations between Resources" IconCssClass="dx-icon-toolbar icon-drag-appointment-btw-resources" />
+                <DxToolbarItem CssClass="me-2 p-0" GroupName="ShowAppointmentTooltip" @bind-Checked="@ShowAppointmentTooltip" Tooltip="Allow Tooltip Display Operations" IconCssClass="dx-icon-toolbar icon-tooltip" />
             </Items>
         </DxToolbar>
     </OptionsContent>
@@ -33,10 +41,14 @@
         bool AllowCreateAppointment { get; set; } = false;
         bool AllowEditAppointment { get; set; } = false;
         bool AllowDeleteAppointment { get; set; } = false;
+        bool AllowDragAndResizeAppointment { get; set; } = false;
+        bool AllowDragAppointmentBetweenResources { get; set; } = false;
+        bool ShowAppointmentTooltip { get; set; } = false;
 
         DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
-            AppointmentsSource = AppointmentCollection.GetAppointments(),
-            AppointmentMappings = new DxSchedulerAppointmentMappings() {
+            AppointmentsSource = ResourceAppointmentCollection.GetAppointments(),
+            AppointmentMappings = new DxSchedulerAppointmentMappings()
+            {
                 Type = "AppointmentType",
                 Start = "StartDate",
                 End = "EndDate",
@@ -46,8 +58,18 @@
                 Description = "Description",
                 LabelId = "Label",
                 StatusId = "Status",
-                RecurrenceInfo = "Recurrence"
+                RecurrenceInfo = "Recurrence",
+                ResourceId = "ResourceId"
+            },
+            ResourcesSource = ResourceCollection.GetResourcesForGrouping(),
+            ResourceMappings = new DxSchedulerResourceMappings()
+            {
+                Id = "Id",
+                Caption = "Name",
+                BackgroundCssClass = "BackgroundCss",
+                TextCssClass = "TextCss"
             }
         };
+        List<Resource> VisibleResources = ResourceCollection.GetResources().Take(2).ToList();
     }
 </DemoPageSectionComponent>

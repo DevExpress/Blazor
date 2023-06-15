@@ -2,7 +2,8 @@
 
 <DemoPageSectionComponent Id="Scheduler-Customization-CustomAppointmentForm">
     <DemoChildContent>
-        <DxScheduler @bind-StartDate="@StartDate" DataStorage="@DataStorage"
+        <DxScheduler @ref="Scheduler"
+                     @bind-StartDate="@StartDate" DataStorage="@DataStorage"
                      ActiveViewType="SchedulerViewType.WorkWeek"
                      AppointmentFormShowing="OnAppointmentFormShowing"
                      ValidateEditForm="true" CssClass="w-100"
@@ -10,7 +11,7 @@
             <Views>
                 <DxSchedulerWorkWeekView VisibleTime="@(new DxSchedulerTimeSpanRange(TimeSpan.FromHours(8), TimeSpan.FromHours(19)))">
                     <HorizontalAppointmentTemplate>
-                        <div class="demo-sc-apt @((bool)context.CustomFields["IsAccepted"] ? "demo-sc-accepted " : "")" style="width: 100%;">
+                        <div class="demo-sc-apt @(IsAccepted(context.CustomFields) ? "demo-sc-accepted " : "")" style="width: 100%;">
                             <div class="card demo-apt-bg dx-purple-color" style="width: 100%;"></div>
                             <div class="card shadow-sm p-1 demo-sc-apt-content text-white" style="width:100%;">
                                 @context.Appointment.Subject
@@ -18,7 +19,7 @@
                         </div>
                     </HorizontalAppointmentTemplate>
                     <VerticalAppointmentTemplate>
-                        <div class="shadow-sm demo-sc-apt @((bool)context.CustomFields["IsAccepted"] ? "demo-sc-accepted" : "")">
+                        <div class="shadow-sm demo-sc-apt @(IsAccepted(context.CustomFields) ? "demo-sc-accepted" : "")">
                             <div class="card demo-apt-bg dx-purple-color"></div>
                             <div class="card demo-sc-apt-content text-white">
                                 <div class="card demo-sc-status-container">
@@ -32,6 +33,25 @@
                     </VerticalAppointmentTemplate>
                 </DxSchedulerWorkWeekView>
             </Views>
+            <AppointmentFormHeaderTemplate>
+                <div class="popup-text-header">@context.Subject</div>
+                <DxSchedulerSaveAppointmentChangesButton></DxSchedulerSaveAppointmentChangesButton>
+                <DxSchedulerDeleteAppointmentButton Text="@null"></DxSchedulerDeleteAppointmentButton>
+                <DxSchedulerDiscardAppointmentChangesButton></DxSchedulerDiscardAppointmentChangesButton>
+                @*BeginHide*@
+                <div>
+                @*EndHide*@
+                @if(AppointmentFormMode == SchedulerAppointmentFormMode.Both) {
+                    <DxButton Click="@(() => Scheduler.ShowAppointmentEditFormAsync(true))"
+                              IconCssClass="btn-icon-back"
+                              RenderStyle="ButtonRenderStyle.None"
+                              CssClass="dxbl-btn-tool">
+                    </DxButton>
+                }
+                @*BeginHide*@
+                </div>
+                @*EndHide*@
+            </AppointmentFormHeaderTemplate>
             <AppointmentFormLayout Context="formInfo">
                 <DxSchedulerSubjectFormLayoutItem></DxSchedulerSubjectFormLayoutItem>
                 <DxSchedulerAllDayFormLayoutItem></DxSchedulerAllDayFormLayoutItem>
@@ -54,6 +74,15 @@
                     </Template>
                 </DxSchedulerCustomFormLayoutItem>
             </AppointmentFormLayout>
+            <AppointmentCompactFormHeaderTemplate>
+                <div class="popup-text-header">@context.Subject</div>
+                <DxSchedulerSaveAppointmentChangesButton></DxSchedulerSaveAppointmentChangesButton>
+                <DxSchedulerDeleteAppointmentButton Text="@null"></DxSchedulerDeleteAppointmentButton>
+                <DxSchedulerDiscardAppointmentChangesButton></DxSchedulerDiscardAppointmentChangesButton>
+                @if (AppointmentFormMode == SchedulerAppointmentFormMode.Both) {
+                    <DxSchedulerShowAppointmentEditFormButton></DxSchedulerShowAppointmentEditFormButton>
+                }
+            </AppointmentCompactFormHeaderTemplate>
             <AppointmentCompactFormLayout Context="formInfo">
                 <DxSchedulerSubjectFormLayoutItem></DxSchedulerSubjectFormLayoutItem>
                 <DxSchedulerAllDayFormLayoutItem></DxSchedulerAllDayFormLayoutItem>
@@ -82,6 +111,7 @@
 
 
     @code {
+        ISchedulerAppointmentActions Scheduler { get; set; }
         SchedulerAppointmentFormMode AppointmentFormMode { get; set; } = SchedulerAppointmentFormMode.Both;
         List<SchedulerAppointmentFormMode> EditModes = Enum.GetValues(typeof(SchedulerAppointmentFormMode))
             .OfType<SchedulerAppointmentFormMode>()
@@ -97,7 +127,7 @@
             }
 
             public bool IsAccepted {
-                get { return (bool)CustomFields["IsAccepted"]; }
+                get { return IsAccepted(CustomFields); }
                 set { CustomFields["IsAccepted"] = value; }
             }
         }
@@ -105,6 +135,8 @@
         void OnAppointmentFormShowing(SchedulerAppointmentFormEventArgs args) {
             args.FormInfo = new CustomAppointmentFormInfo(args.Appointment, DataStorage);
         }
+
+        static bool IsAccepted(DxExpandoDictionaryObject customFields) => true == (bool?)customFields["IsAccepted"];
 
         DateTime StartDate { get; set; } = DateTime.Today;
 

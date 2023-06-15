@@ -10,11 +10,10 @@
                 Text="Column Chooser"
                 RenderStyle="ButtonRenderStyle.Secondary"
                 IconCssClass="btn-column-chooser"
-                CssClass="column-chooser-button"
-                Click="@OnClick" />
+                Click="ColumnChooserButton_Click" />
         </div>
 
-        <DxGrid @ref="@Grid" Data="@Data" SizeMode="Params.SizeMode">
+        <DxGrid @ref="Grid" Data="Data" SizeMode="Params.SizeMode">
             <Columns>
                 <DxGridDataColumn FieldName="ContactName" MinWidth="100" />
                 <DxGridDataColumn FieldName="ContactTitle" MinWidth="100" />
@@ -27,15 +26,15 @@
     </ChildContentWithParameters>
 
     @code {
-        DxGrid Grid { get; set; }
-        IEnumerable<Supplier> Data { get; set; }
+        IGrid Grid { get; set; }
+        object Data { get; set; }
 
         protected override async Task OnInitializedAsync() {
             Data = await NwindDataService.GetSuppliersAsync();
         }
 
-        void OnClick() {
-            Grid.ShowColumnChooser(".column-chooser-button");
+        void ColumnChooserButton_Click() {
+            Grid.ShowColumnChooser();
         }
     }
 </DemoPageSectionComponent>

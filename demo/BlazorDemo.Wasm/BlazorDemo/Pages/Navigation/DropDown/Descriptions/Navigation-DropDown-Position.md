@@ -1,3 +1,0 @@
-Use the [PositionMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDown.PositionMode) property to specify the DropDown position relative to a target element [PositionTarget](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDown.PositionTarget) or to a Rectangle object [PositionRectangle](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDown.PositionRectangle).
-
-The [HorizontalOffset](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDown.HorizontalOffset) and [VerticalOffset](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDown.VerticalOffset) properties set the component offset from the specified position.

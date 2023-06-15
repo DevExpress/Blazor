@@ -29,7 +29,7 @@
                                  ArgumentField="@(i => new DateTime(2000, i.Date.Month, 1))"
                                  ValueField="@((DetailedWeatherSummary  s) => s.AverageTemperatureF)"
                                  Color="@(Color.FromArgb(0, 169, 230))">
-                <DxChartSeriesLabel Visible="true" Format="@(ChartElementFormat.FromLdmlString("0#.## °F"))" />
+                <DxChartSeriesLabel Visible="true" ValueFormat="@(ChartElementFormat.FromLdmlString("0#.## °F"))" />
             </DxChartSplineSeries>
             <DxChartBarSeries Pane="BottomPane"
                               Name="Precipitation, inch"
@@ -38,7 +38,7 @@
                               ValueField="@((DetailedWeatherSummary  s) => s.PrecipitationInch)"
                               Color="@(Color.FromArgb(220, 53, 69))">
                 <DxChartSeriesLabel Visible="true"
-                                    Format="@(ChartElementFormat.FromLdmlString("0#.## inch"))" />
+                                    ValueFormat="@(ChartElementFormat.FromLdmlString("0#.## inch"))" />
             </DxChartBarSeries>
             <DxChartValueAxis Pane="TopPane">
                 <DxChartAxisTitle Text="Temperature, °F" />

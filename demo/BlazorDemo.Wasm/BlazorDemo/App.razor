@@ -5,8 +5,13 @@
         <RouteView RouteData="@routeData" DefaultLayout="@(typeof(MainLayout))"  />
     </Found>
     <NotFound>
-        <LayoutView Layout="@(typeof(MainLayout))">
-            <p>Sorry, there's nothing at this address.</p>
+        <LayoutView Layout="@(typeof(Error404Layout))">
+            <div class="full-height">
+                <div class="page-not-found">
+                    <span class="error-icon"></span>
+                    <p>The page you requested was not found</p>
+                </div>
+            </div>
         </LayoutView>
     </NotFound>
 </Router>

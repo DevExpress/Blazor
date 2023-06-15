@@ -1,0 +1,78 @@
+﻿@using System.Drawing;
+@using System.Text.Json;
+@inject IJSRuntime JSRuntime
+<DemoPageSectionComponent Id="DialogsAndWindows-Popup-Dragging" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="target-container" @onclick="@(() => PopupVisible = true)">
+            <p class="target-caption">CLICK TO SHOW A POP-UP WINDOW</p>
+        </div>
+
+        <DxPopup
+            AllowDrag="true"
+            HeaderText="Popup"
+            @bind-Visible="@PopupVisible"
+            BodyText="@Constants.Text"
+            SizeMode="Params.SizeMode"
+            PositionX="positionX"
+            PositionY="positionY"
+            DragCompleted="OnPopupDragCompleted">
+        </DxPopup>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionButton Text="Reload Page" OnClick="ReloadPageButton_ClickAsync" />
+        <OptionButton Text="Reset Popup Position" OnClick="ResetPositionButton_ClickAsync" />
+    </OptionsContent>
+    @code {
+        bool PopupVisible { get; set; } = false;
+        const string LocalStorageKey = "DialogsAndWindows-Popup-Dragging";
+
+        int? positionX, positionY;
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                var position = await LoadPositionFromLocalStorageAsync();
+                (positionX, positionY) = (position?.X ?? null, position?.Y ?? null);
+                StateHasChanged();
+            }
+        }
+        async Task OnPopupDragCompleted(PopupDragCompletedEventArgs args)
+        {
+            (positionX, positionY) = (args.End.X, args.End.Y);
+            await SavePositionToLocalStorageAsync(args.End);
+        }
+
+        // Refer to https://docs.microsoft.com/en-us/aspnet/core/blazor/state-management
+        // to learn more about Blazor state management
+        // In Blazor Server apps, prefer ASP.NET Core Protected Browser Storage
+        async Task<Point?> LoadPositionFromLocalStorageAsync()
+        {
+            var json = await JSRuntime.InvokeAsync<string>("localStorage.getItem", LocalStorageKey);
+            return string.IsNullOrEmpty(json) ? null : JsonSerializer.Deserialize<Point>(json);
+        }
+
+        async Task SavePositionToLocalStorageAsync(Point position)
+        {
+            await JSRuntime.InvokeVoidAsync("localStorage.setItem", LocalStorageKey, JsonSerializer.Serialize(position));
+        }
+
+        async Task RemovePositionFromLocalStorageAsync()
+        {
+            await JSRuntime.InvokeVoidAsync("localStorage.removeItem", LocalStorageKey);
+        }
+
+        async Task ReloadPageButton_ClickAsync()
+        {
+            await JSRuntime.InvokeVoidAsync("location.reload");
+        }
+
+        async Task ResetPositionButton_ClickAsync()
+        {
+            await RemovePositionFromLocalStorageAsync();
+            await JSRuntime.InvokeVoidAsync("location.reload");
+        }
+    }
+
+</DemoPageSectionComponent>

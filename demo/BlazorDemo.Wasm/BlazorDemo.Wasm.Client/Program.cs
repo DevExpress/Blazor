@@ -20,7 +20,7 @@ namespace BlazorDemo.Wasm {
 
             var services = builder.Services;
 
-            services.AddDemoServices();
+            services.AddDemoServices(true);
             services.AddTransient<EntityDataContainer>();
 
             services.AddTransient<RemoteDataProviderLoader>();
@@ -45,6 +45,7 @@ namespace BlazorDemo.Wasm {
 
             services.AddSingleton<IHistogramDataProvider, HistogramDataProvider>();
             services.AddSingleton<IDocumentProvider, DocumentProviderWasm>();
+            services.AddSingleton<IHomesDataProvider, HomesDataProvider>();
             // Editable should be scoped
             services.AddScoped<INwindDataProvider, NwindDataProvider>();
 

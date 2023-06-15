@@ -1,0 +1,22 @@
+.tooltip-text-header {
+    margin-right: auto;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.demo-appointment-disabled {
+    opacity: .3 !important;
+}
+
+.demo-appointment-disabled + .dxsc-apt-content {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.demo-disabled-white {
+    background-color: rgba(225, 226, 228, 0.5);
+}
+
+.demo-disabled-white + .dxsc-apt-content {
+    color: rgba(34, 37, 41, 0.6);
+}

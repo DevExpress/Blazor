@@ -18,14 +18,11 @@ namespace BlazorDemo.Shared {
         bool _canLoadScript, _jsAttached, _isInlinedMethod;
         TaskCompletionSource<bool> _scriptTcs;
         public async ValueTask InvokeVoidAsync(string identifier, params object[] args) {
-            if(!_scriptTcs.Task.IsCompleted)
-                await _scriptTcs.Task;
-            await JSRuntime.InvokeVoidAsync(identifier, args);
-        }
-        public async ValueTask<T> InvokeAsync<T>(string identifier, params object[] args) {
-            if(!_scriptTcs.Task.IsCompleted)
-                await _scriptTcs.Task;
-            return await JSRuntime.InvokeAsync<T>(identifier, args);
+            if(_scriptTcs != null) {
+                if(!_scriptTcs.Task.IsCompleted)
+                    await _scriptTcs.Task;
+                await JSRuntime.InvokeVoidAsync(identifier, args);
+            }
         }
 
         protected override void OnInitialized() {

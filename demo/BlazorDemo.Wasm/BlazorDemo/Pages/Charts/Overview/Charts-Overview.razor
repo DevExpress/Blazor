@@ -55,7 +55,7 @@
                                       SummaryMethod="Enumerable.Sum">
                         <DxChartSeriesLabel Visible="true"
                                             Position="RelativePosition.Inside"
-                                            Format='ChartElementFormat.FromLdmlString("$#K")' />
+                                            ValueFormat='ChartElementFormat.FromLdmlString("$#K")' />
                     </DxPieChartSeries>
 
                     <DxChartLegend VerticalAlignment="VerticalEdge.Bottom"
@@ -73,7 +73,8 @@
         } }
 
 
-    @code { class DonutDataItem {
+    @code {
+        class DonutDataItem {
             public int Year { get; }
             public double Amount { get; }
             public DonutDataItem(int year, double amount) {
@@ -92,6 +93,6 @@
             LSalesData = WWSalesData.Where(s => s.City == "London").Select(selector);
             BSalesData = WWSalesData.Where(s => s.City == "Berlin").Select(selector);
             MSalesData = WWSalesData.Where(s => s.City == "Moscow").Select(selector);
-        } }
-
+        }
+    }
 </DemoPageSectionComponent>

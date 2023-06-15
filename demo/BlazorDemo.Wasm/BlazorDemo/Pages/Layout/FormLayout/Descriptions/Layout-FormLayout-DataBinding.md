@@ -1,0 +1,3 @@
+You can use the [Form Layout](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayout#bind-to-data) component to display and edit data from an external source. In this demo, such data source is assigned to the [Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayout.Data) property. Form Layout items must be declared and bound to data source fields using the [Field](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutItem.Field) property. Each item automatically displays a DevExpress data editor suitable for the target data type.
+
+You can override the default behavior and assign a custom editor to a layout item. To see an example, review the code for the Position item below.

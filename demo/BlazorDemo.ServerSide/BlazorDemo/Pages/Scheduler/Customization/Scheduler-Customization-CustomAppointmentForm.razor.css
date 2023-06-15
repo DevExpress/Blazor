@@ -1,0 +1,16 @@
+/*BeginHide*/::deep /*EndHide*/ .btn-icon-back {
+    height: 16px;
+    width: 16px;
+    -webkit-mask-image: url("images/icons/collapse.svg");
+    mask-image: url("images/icons/collapse.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    background-color: currentColor;
+}
+
+.popup-text-header {
+    margin-right: auto;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

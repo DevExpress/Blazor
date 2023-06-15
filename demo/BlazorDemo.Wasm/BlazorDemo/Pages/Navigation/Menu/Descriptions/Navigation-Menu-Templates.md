@@ -16,4 +16,4 @@ Use the following properties to specify templates for an individual item:
 
 Note that individual templates override common templates.
 
-The following example demonstrates how to use templates to create the **Search** and **User Profile** menu items.
+The demo above demonstrates how to use templates to create the **Search** and **User Profile** menu items.

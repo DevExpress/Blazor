@@ -10,7 +10,7 @@
 }
 
 .demo-treeview-template .treeview-template-icon {
-    padding: 5px;
+    padding: 7px;
     width: 30px;
     height: 30px;
 }
@@ -18,7 +18,7 @@
 .demo-treeview-template .treeview-expand-btn {
     background-color: currentColor;
     width: 0.7em;
-    height: 0.7em;    
+    height: 0.7em;
 }
 
 .demo-treeview-template .treeview-expand-btn.expanded {

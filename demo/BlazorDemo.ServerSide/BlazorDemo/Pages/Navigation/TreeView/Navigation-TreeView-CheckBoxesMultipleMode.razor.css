@@ -1,0 +1,14 @@
+/*BeginHide*/::deep /*EndHide*/ .checked-nodes {
+    padding-left: 1rem;
+    margin-left: 2rem;
+    border-left: 1px solid #dee2e6;
+}
+
+.panel-class {
+    display: flex;
+    flex-direction: row;
+}
+
+.panel-class > div:first-of-type {
+    margin-top: 1.5rem;
+ }

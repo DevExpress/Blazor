@@ -1,0 +1,32 @@
+﻿<DemoPageSectionComponent Id="Navigation-TreeView-CheckBoxesRecursiveMode" VerticalAlignment=VerticalAlignment.Top ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @using BlazorDemo.Data.FileSystem
+        <div class="cw-320">
+            <DxTreeView Data="@FileSystemObjects.Content"
+                        SizeMode="Params.SizeMode"
+                        CheckMode="TreeViewCheckMode.Recursive"
+                        CheckAllVisible="true"
+                        CheckedChanged="CheckedChanged"
+                        AnimationType="LayoutAnimationType.Slide"
+                        CssClass="h-300">
+                <DataMappings>
+                    <DxTreeViewDataMapping Children="Content"
+                                           Text="Name"
+                                           IconCssClass="IconCssClass"/>
+                </DataMappings>
+            </DxTreeView>
+            <div class="mt-1 demo-text">
+                Number of checked nodes: @count
+            </div>
+        </div>
+
+        @code {
+            int count = 0;
+
+            void CheckedChanged(TreeViewCheckedChangedEventArgs e) {
+                count = e.CheckedItems.Count;
+            }
+        }
+
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

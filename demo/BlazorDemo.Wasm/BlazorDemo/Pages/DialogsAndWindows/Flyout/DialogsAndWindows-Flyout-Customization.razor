@@ -1,0 +1,103 @@
+﻿@*BeginHide*@
+@using DevExpress.Blazor.Internal
+@*EndHide*@
+@inject NwindDataService NwindDataService
+
+<DemoPageSectionComponent Id="DialogsAndWindows-Flyout-Customization" ShowSizeMode="true">
+    <OptionsContent>
+        <OptionComboBox Label="Animation:" CssClass="ow-100" Data="@Animations" @bind-Value="@Animation" />
+    </OptionsContent>
+    <ChildContentWithParameters Context="Params">
+        @*BeginHide*@
+        <div>
+            <WarningMessage Text=@($"{(IsMobile ? "Tap" : "Hover")} a person's photo to display the Flyout component.")/>
+        </div>
+        @*EndHide*@
+        <div class="cw-320" >
+            <span class="custom-title">Working Group</span>
+            <div class="employee-group">
+                @foreach (var item in DataSource.Take(new Range(2, 6))) {
+                    <EmployeeCard EmployeeInfo=item
+                                  Detailed=false
+                                  ImageAttributes=@GetImageAttributes(item)/>
+                }
+            </div>
+        </div>
+        <DxFlyout @bind-IsOpen=IsOpen
+                  PositionTarget=@($"#employee-{CurrentEmployee?.EmployeeId}")
+                  RestrictionTarget="#Navigation-Flyout-Customization"
+                  AnimationType=@Animation
+                  PreventCloseOnPositionTargetClick="true"
+                  FooterVisible="true"
+                  FooterCssClass="custom-flyout-footer"
+                  Position=@(FlyoutPosition.BottomStart | FlyoutPosition.TopStart)
+                  SizeMode="Params.SizeMode">
+            <BodyContentTemplate>
+                @*BeginHide*@
+                <div>
+                @*EndHide*@
+                <div class="custom-flyout-body">
+                    <EmployeeCard EmployeeInfo=@CurrentEmployee CustomDetails=true/>
+                </div>
+                @*BeginHide*@
+                </div>
+                @*EndHide*@
+            </BodyContentTemplate>
+            <FooterContentTemplate>
+                <div class="w-100">
+                    <div class="custom-flyout-footer">
+                        <DxTextBox NullText="Send a message" CssClass="flex-grow-1"/>
+                        <DxButton CssClass="popup-button" RenderStyle="ButtonRenderStyle.Primary" Text="Send" Click=@(()=> IsOpen = false)/>
+                    </div>
+                </div>
+            </FooterContentTemplate>
+        </DxFlyout>
+    </ChildContentWithParameters>
+
+    @code {
+        /*BeginHide*/
+        [Inject]
+        IEnvironmentInfo EnvironmentInfo { get; set; }
+        bool IsMobile { get; set; }
+        /*EndHide*/
+        IEnumerable<Employee> DataSource;
+        bool IsOpen { get; set; } = false;
+        private Employee CurrentEmployee { get; set; }
+        FlyoutAnimationType[] Animations { get; set; } = Enum.GetValues<FlyoutAnimationType>();
+        FlyoutAnimationType Animation { get; set; } = FlyoutAnimationType.Fade;
+
+        protected override async Task OnInitializedAsync() {
+            DataSource = await NwindDataService.GetEmployeesAsync();
+            await base.OnInitializedAsync();
+        }
+
+        /*BeginHide*/
+        protected override async Task OnAfterRenderAsync(bool firstRender) {
+            if (firstRender) {
+                await EnvironmentInfo.InitializeRuntime();
+                SetDeviceInfo(await EnvironmentInfo.DeviceInfo);
+            }
+            await base.OnAfterRenderAsync(firstRender);
+        }
+        void SetDeviceInfo(DeviceInfo deviceInfo) {
+            if(IsMobile != deviceInfo.IsMobileDevice){
+                IsMobile = deviceInfo.IsMobileDevice;
+                InvokeAsync(StateHasChanged);
+            }
+        }
+        /*EndHide*/
+        private void ShowFlyout(Employee employee) {
+            CurrentEmployee = employee;
+            IsOpen=true;
+        }
+
+        IEnumerable<KeyValuePair<string, object>> GetImageAttributes(Employee employeeInfo) {
+            EventCallback onImagePointerOver = EventCallback.Factory.Create(this, () => ShowFlyout(employeeInfo));
+
+            yield return new KeyValuePair<string, object>("ontouchstart", onImagePointerOver);
+            yield return new KeyValuePair<string, object>("onmouseover", onImagePointerOver);
+            
+            yield return new KeyValuePair<string, object>("id", $"employee-{employeeInfo.EmployeeId}");
+        }
+    }
+</DemoPageSectionComponent>

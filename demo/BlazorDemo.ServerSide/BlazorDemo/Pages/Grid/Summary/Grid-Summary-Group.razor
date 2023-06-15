@@ -1,22 +1,27 @@
-﻿@page "/Grid/Summary/Group"
+@page "/Grid/Summary/Group"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Summary-Group" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Grid-Summary-Group" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <DxGrid @ref="Grid"
                 Data="@Data"
                 ShowGroupPanel="true"
-                UnboundColumnData="Grid_UnboundColumnData"
-                SizeMode="Params.SizeMode">
+                SizeMode="Params.SizeMode" 
+                KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
             <Columns>
                 <DxGridDataColumn FieldName="Country" GroupIndex="0" Width="10%" />
                 <DxGridDataColumn FieldName="City" GroupIndex="1" Width="10%" />
                 <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
                 <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
                 <DxGridDataColumn FieldName="Quantity" Width="10%" />
-                <DxGridDataColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" MinWidth="100" Width="15%" />
+                <DxGridDataColumn FieldName="Total"
+                                  UnboundType="GridUnboundColumnType.Decimal"
+                                  UnboundExpression="[UnitPrice] * [Quantity]"
+                                  DisplayFormat="c"
+                                  MinWidth="100"
+                                  Width="15%" />
             </Columns>
             <GroupSummary>
                 <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="CompanyName" />
@@ -40,13 +45,6 @@
                         Quantity = i.Quantity
                     };
                 });
-            }
-            void Grid_UnboundColumnData(GridUnboundColumnDataEventArgs e) {
-                if(e.FieldName == "Total") {
-                    decimal price = (decimal)e.GetRowValue("UnitPrice");
-                    short quantity = (short)e.GetRowValue("Quantity");
-                    e.Value = price * quantity;
-                }
             }
             protected override void OnAfterRender(bool firstRender) {
                 if(firstRender)

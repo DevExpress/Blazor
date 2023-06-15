@@ -1,7 +1,7 @@
 ﻿@page "/Grid/Customization/ConditionalFormatting"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Customization-ConditionalFormatting" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Grid-Customization-ConditionalFormatting" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
     <ChildContentWithParameters Context="Params">
         @implements IDisposable
         @inject NwindDataService NwindDataService
@@ -15,9 +15,8 @@
         <DxGrid @ref="Grid"
                 Data="@Data"
                 ShowGroupPanel="true"
-                UnboundColumnData="Grid_UnboundColumnData"
                 CustomizeElement="Grid_CustomizeElement"
-                SizeMode="Params.SizeMode">
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
             <Columns>
                 <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
                 <DxGridDataColumn FieldName="City" Width="10%" />
@@ -25,7 +24,13 @@
                 <DxGridDataColumn FieldName="Country" Name="Country" Width="10%" GroupIndex="0" />
                 <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
                 <DxGridDataColumn FieldName="Quantity" MinWidth="80" Width="10%" />
-                <DxGridDataColumn FieldName="Total" Name="Total" UnboundType="GridUnboundColumnType.Decimal" DisplayFormat="c" MinWidth="100" Width="15%" />
+                <DxGridDataColumn FieldName="Total"
+                                  Name="Total"
+                                  UnboundType="GridUnboundColumnType.Decimal"
+                                  UnboundExpression="[UnitPrice] * [Quantity]"
+                                  DisplayFormat="c"
+                                  MinWidth="100"
+                                  Width="15%" />
             </Columns>
             <GroupSummary>
                 <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="Country" Visible="false" />
@@ -58,14 +63,6 @@
             if(firstRender) {
                 await dataLoadedTcs.Task;
                 Grid.ExpandGroupRow(1);
-            }
-        }
-
-        void Grid_UnboundColumnData(GridUnboundColumnDataEventArgs e) {
-            if(e.FieldName == "Total") {
-                decimal price = (decimal)e.GetRowValue("UnitPrice");
-                short quantity = (short)e.GetRowValue("Quantity");
-                e.Value = price * quantity;
             }
         }
         void Grid_CustomizeElement(GridCustomizeElementEventArgs e) {

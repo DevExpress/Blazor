@@ -4,6 +4,6 @@ Much like radio buttons, you can define separate checked buttons (with checked a
 
 Related API members are as follows:
 
-*   [Checked](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.Checked) - Specifies an item's checked state.
-*   [CheckedChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.CheckedChanged) - Fires when an item's checked state changes.
-*   [Click](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarItemBase.Click) - Fires when a user clicks the item.
+*   [Checked](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.Checked) — Specifies an item's checked state.
+*   [CheckedChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.CheckedChanged) — Fires when an item's checked state changes.
+*   [Click](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarItemBase.Click) — Fires when a user clicks the item.

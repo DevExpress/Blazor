@@ -1,12 +1,15 @@
-﻿<DemoPageSectionComponent Id="Navigation-TreeView-HierarchicalDataBinding" VerticalAlignment=VerticalAlignment.Top>
-    <div class="cw-240">
-        <h5 class="card-title">Chemical elements</h5>
-        <DxTreeView Data="@ChemicalElements.Groups"
-                    AnimationType="LayoutAnimationType.Slide">
-            <DataMappings>
-                <DxTreeViewDataMapping Children="Groups"
-                                       Text="Name"/>
-            </DataMappings>
-        </DxTreeView>
-    </div>
+﻿<DemoPageSectionComponent Id="Navigation-TreeView-HierarchicalDataBinding" VerticalAlignment=VerticalAlignment.Top ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="cw-240">
+            <h5 class="card-title">Chemical elements</h5>
+            <DxTreeView Data="@ChemicalElements.Groups"
+                        SizeMode="Params.SizeMode"
+                        AnimationType="LayoutAnimationType.Slide">
+                <DataMappings>
+                    <DxTreeViewDataMapping Children="Groups"
+                                           Text="Name"/>
+                </DataMappings>
+            </DxTreeView>
+        </div>
+    </ChildContentWithParameters>
 </DemoPageSectionComponent>

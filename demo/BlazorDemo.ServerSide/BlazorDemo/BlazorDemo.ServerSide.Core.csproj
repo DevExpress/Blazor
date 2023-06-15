@@ -30,17 +30,18 @@
     <PackageReference Include="System.Drawing.Common" Version="5.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
-    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.6" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.9.0" />
     <PackageReference Include="System.Reactive" Version="5.0.0" />
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.115.5" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.117" />
     <ProjectReference Include="..\BlazorDemo.DemoData\BlazorDemo.DemoData.csproj" />
+    <ProjectReference Include="..\BlazorDemo.Reporting.Core\BlazorDemo.Reporting.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="22.2.4" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.BlazorServer" Version="22.2.4" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="22.2.4" />    
-    <PackageReference Include="DevExpress.Reporting.Demos" Version="22.2.4" />
-    <PackageReference Include="DevExpress.Drawing.Skia" Version="22.2.4" />
+    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="23.1.3" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.BlazorServer" Version="23.1.3" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="23.1.3" />    
+    <PackageReference Include="DevExpress.Reporting.Demos" Version="23.1.3" />
+    <PackageReference Include="DevExpress.Drawing.Skia" Version="23.1.3" />
     
     
     
@@ -82,7 +83,7 @@
     <Compile Include="DocumentMetadata\TagHelpers\DocumentHead.cs" />
     <Compile Include="DocumentMetadata\Utils.cs" />
     <Content Include="wwwroot\**\*.*" Exclude="wwwroot\_code\**\*.*" />
-    <Content Include="**\*.razor" Exclude="wwwroot\_code\**\*.razor" />
+    <Content Include="**\*.razor" Exclude="wwwroot\_code\**\*.razor;Pages\Reports\**\*.Wasm.razor" />
     <Content Include="Pages\**\*.md" />
     <Content Include="Pages\**\*.razor.css" />
     <Content Include="Shared\**\*.razor.css" />
@@ -172,13 +173,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\Buttons\ImageButton\Buttons-ImageButton-ButtonKind.razor" />
-    <_ContentIncludedByDefault Remove="Pages\Buttons\ImageButton\Buttons-ImageButton-IconSource.razor" />
-    <_ContentIncludedByDefault Remove="Pages\Buttons\ImageButton\Buttons-ImageButton-Styles.razor" />
-    <_ContentIncludedByDefault Remove="Pages\Buttons\ImageButton\Buttons-ImageButton-Template.razor" />
-    <_ContentIncludedByDefault Remove="Pages\Buttons\ImageButton\Buttons-ImageButton.razor" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Data\Documents\ActiveCustomers.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -197,11 +191,20 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Navigation\LoadingPanel\Navigation-LoadingPanel-Overview.razor" />
+    <_ContentIncludedByDefault Remove="Pages\Navigation\LoadingPanel\Navigation-LoadingPanel.razor" />
+    <_ContentIncludedByDefault Remove="Pages\Navigation\WaitIndicator\Navigation-WaitIndicator-Overview.razor" />
+    <_ContentIncludedByDefault Remove="Pages\Navigation\WaitIndicator\Navigation-WaitIndicator-Templates.razor" />
+    <_ContentIncludedByDefault Remove="Pages\Navigation\WaitIndicator\Navigation-WaitIndicator.razor" />
+  </ItemGroup>
   <Target Name="ControllersCreate" BeforeTargets="PreBuildEvent" Condition="!Exists('Controllers')">
-    <Exec Command="mklink /J &quot;Controllers&quot; &quot;..//BlazorDemo.ServerSide//Controllers&quot;" />
+    <Exec Condition="$([MSBuild]::IsOSPlatform('Windows'))" Command="mklink /J &quot;Controllers&quot; &quot;..//BlazorDemo.ServerSide//Controllers&quot;" />
+    <Exec Condition="$([MSBuild]::IsOSPlatform('OSX'))" Command="ln -s &quot;..//BlazorDemo.ServerSide//Controllers&quot; &quot;Controllers&quot;" />
   </Target>
   <Target Name="UtilsCreate" BeforeTargets="PreBuildEvent" Condition="!Exists('Utils')">
-    <Exec Command="mklink /J &quot;Utils&quot; &quot;..//BlazorDemo.ServerSide//Utils&quot;" />
+    <Exec Condition="$([MSBuild]::IsOSPlatform('Windows'))" Command="mklink /J &quot;Utils&quot; &quot;..//BlazorDemo.ServerSide//Utils&quot;" />
+    <Exec Condition="$([MSBuild]::IsOSPlatform('OSX'))" Command="ln -s &quot;..//BlazorDemo.ServerSide//Utils&quot; &quot;Utils&quot;" />
   </Target>
   <Target Name="SourceCode" BeforeTargets="PreBuildEvent">
     <ItemGroup>

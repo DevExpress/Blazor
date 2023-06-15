@@ -1,29 +1,31 @@
-﻿<DemoPageSectionComponent Id="Navigation-ContextMenu-DataBinding">
-    <div style="@Formatting.GetStyleString()" class="demo-preventsel target-container"
-         @oncontextmenu="((e) => { ContextMenu.ShowAsync(e); } )"
-         @oncontextmenu:preventDefault>
-        @*BeginHide*@
-        <span style="display: inline-block; text-align: center; margin: auto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</span>
-        @*EndHide*@
-    </div>
-    <DxContextMenu Data="@MenuItems" ItemClick="@ItemClick" @ref="@ContextMenu">
-        <DataMappings>
-            <DxContextMenuDataMapping Children="Children"
-                                      Text="Text"
-                                      IconUrl="IconUrl"
-                                      BeginGroup="BeginGroup"
-                                      Enabled="Enabled" />
-        </DataMappings>
-    </DxContextMenu>
+﻿<DemoPageSectionComponent Id="Navigation-ContextMenu-DataBinding" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div style="@Formatting.GetStyleString()" class="demo-preventsel target-container"
+            @oncontextmenu="((e) => { ContextMenu.ShowAsync(e); } )"
+            @oncontextmenu:preventDefault>
+            @*BeginHide*@
+            <span style="display: inline-block; text-align: center; margin: auto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</span>
+            @*EndHide*@
+        </div>
+        <DxContextMenu Data="@MenuItems" ItemClick="@ItemClick" SizeMode="Params.SizeMode" @ref="@ContextMenu">
+            <DataMappings>
+                <DxContextMenuDataMapping Children="Children"
+                                          Text="Text"
+                                          IconUrl="IconUrl"
+                                          BeginGroup="BeginGroup"
+                                          Enabled="Enabled" />
+            </DataMappings>
+        </DxContextMenu>
 
-    @code {
-        List<TextFormattingMenuItem> menuItems;
-        List<TextFormattingMenuItem> MenuItems => menuItems = menuItems ?? TextFormattingMenu.ContextMenuItems(Formatting);
-        DxContextMenu ContextMenu { get; set; }
-        TextFormatting Formatting { get; set; } = new TextFormatting();
+        @code {
+            List<TextFormattingMenuItem> menuItems;
+            List<TextFormattingMenuItem> MenuItems => menuItems = menuItems ?? TextFormattingMenu.ContextMenuItems(Formatting);
+            DxContextMenu ContextMenu { get; set; }
+            TextFormatting Formatting { get; set; } = new TextFormatting();
 
-        void ItemClick(ContextMenuItemClickEventArgs args) {
-            ((TextFormattingMenuItem)args.ItemInfo.DataItem).Click();
+            void ItemClick(ContextMenuItemClickEventArgs args) {
+                ((TextFormattingMenuItem)args.ItemInfo.DataItem).Click();
+            }
         }
-    }
+    </ChildContentWithParameters>
 </DemoPageSectionComponent>

@@ -1,0 +1,55 @@
+/*BeginHide*/::deep /*EndHide*/.custom-flyout-body {
+    margin: 1rem;
+}
+.custom-flyout-footer {
+    flex-flow: nowrap;
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: space-between;
+    align-content: center;
+    gap: 0.5rem;
+}
+/*BeginHide*/::deep /*EndHide*/.employee-group .e-photo {
+    height: 80px;
+    width: 80px;
+}
+/*BeginHide*/::deep /*EndHide*/.employee-group .e-card {
+    padding-bottom: 1rem;
+    display: flex;
+    align-content: center;
+    justify-content: start;
+    flex: 1 1 auto;
+}
+/*BeginHide*/::deep /*EndHide*/.employee-group .e-info {
+    justify-content: center;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    border-bottom: 1px solid var(--bs-gray-400);
+}
+/*BeginHide*/::deep /*EndHide*/.employee-group .e-main {
+    width: 100%;
+}
+/*BeginHide*/::deep /*EndHide*/.employee-group .e-name,
+/*BeginHide*/::deep /*EndHide*/.custom-flyout-body .e-name {
+    font-weight: 400;
+}
+/*BeginHide*/::deep /*EndHide*/.custom-flyout-body .e-details {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 0.75rem;
+    row-gap: 0.5rem;
+}
+/*BeginHide*/
+@media (max-width: 374.98px) {
+    ::deep .custom-flyout-body .e-details {
+        grid-template-columns: auto;
+    }
+}
+
+/*EndHide*/ 
+.custom-title {
+    padding-bottom: 1.5rem;
+    display: block;
+    font-size: 1.5rem;
+}

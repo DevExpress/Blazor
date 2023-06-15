@@ -1,0 +1,154 @@
+﻿@page "/Scheduler/Customization/UserActionCustomization"
+@using System.Collections;
+
+<DemoPageSectionComponent Id="Scheduler-Customization-UserActionCustomization">
+    <OptionsContent>
+        <OptionComboBox Label="Current user:"
+                        Data="Resources"
+                        TextField="@nameof(Resource.Name)"
+                        @bind-Value="CurrentUserResourceId"
+                        ValueField="@nameof(Resource.Id)" />
+    </OptionsContent>
+    <DemoChildContent>
+        <DxScheduler @bind-StartDate="@StartDate"
+                     DataStorage="@DataStorage"
+                     GroupType="SchedulerGroupType.Resource"
+                     @bind-VisibleResourcesDataSource="VisibleResources"
+                     AppointmentUpdating="OnUpdating"
+                     AppointmentInserting="OnInserting"
+                     AppointmentStartDragging="OnStartDragging"
+                     AppointmentStartResizing="OnStartResizing"
+                     AppointmentFormShowing="OnFormShowing"
+                     AllowDragAppointmentBetweenResources="false"
+                     CssClass="w-100">
+            <Views>
+                <DxSchedulerDayView DayCount="3"
+                                    WorkTime="WorkTime"
+                                    ShowWorkTimeOnly="false"
+                                    VisibleTime="@(new DxSchedulerTimeSpanRange(TimeSpan.FromHours(8), TimeSpan.FromHours(19)))">
+                    <HorizontalAppointmentTemplate>
+                        <div class="@(GetBackgroundCssClass(context))" style="width: 100%;"></div>
+                        <div class="dxsc-apt-content">
+                            <div class="dxsc-content-wrapper">
+                                @context.Appointment.Subject
+                            </div>
+                        </div>
+                    </HorizontalAppointmentTemplate>
+                    <VerticalAppointmentTemplate>
+                        <div class="@(GetBackgroundCssClass(context))"></div>
+                        <div class="dxsc-apt-content">
+                            <div class="dxsc-content-wrapper">
+                                @context.Appointment.Subject
+                            </div>
+                        </div>
+                    </VerticalAppointmentTemplate>
+                </DxSchedulerDayView>
+            </Views>
+            <AppointmentTooltipHeaderTemplate>
+                <div class="tooltip-text-header">@context.Appointment.Subject</div>
+                @if(IsCurrentUsersAppointment(context.Appointment))
+                {
+                    <DxSchedulerShowAppointmentCompactFormButton></DxSchedulerShowAppointmentCompactFormButton>
+                    <DxSchedulerDeleteAppointmentButton></DxSchedulerDeleteAppointmentButton>
+                }
+                <DxSchedulerCloseAppointmentButton></DxSchedulerCloseAppointmentButton>
+            </AppointmentTooltipHeaderTemplate>
+        </DxScheduler>
+
+        <DxPopup @bind-Visible="@AlertVisible"
+                 CloseOnEscape="true"
+                 CloseOnOutsideClick="true"
+                 ShowCloseButton="true"
+                 HeaderText="Note"
+                 BodyText="Appointments cannot be moved outside standard work hours and between “Resources/users.”">
+        </DxPopup>
+    </DemoChildContent>
+
+    @code {
+        static List<Resource> Resources = ResourceCollection.GetResourcesForGrouping();
+
+        DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
+            AppointmentsSource = GetAppointments(),
+            AppointmentMappings = new DxSchedulerAppointmentMappings() {
+                Type = "AppointmentType",
+                Start = "StartDate",
+                End = "EndDate",
+                Subject = "Caption",
+                AllDay = "AllDay",
+                Location = "Location",
+                Description = "Description",
+                LabelId = "Label",
+                StatusId = "Status",
+                RecurrenceInfo = "Recurrence",
+                ResourceId = "ResourceId"
+            },
+            ResourcesSource = Resources,
+            ResourceMappings = new DxSchedulerResourceMappings() {
+                Id = "Id",
+                Caption = "Name",
+                BackgroundCssClass = "BackgroundCss",
+                TextCssClass = "TextCss"
+            }
+        };
+        DateTime StartDate = DateTime.Now;
+        IEnumerable VisibleResources = Resources.Take(2).ToList();
+        DxSchedulerTimeSpanRange WorkTime = new DxSchedulerTimeSpanRange(TimeSpan.FromHours(9), TimeSpan.FromHours(18));
+        bool AlertVisible = false;
+        int CurrentUserResourceId = 0;
+
+        static List<Appointment> GetAppointments() => ResourceAppointmentCollection
+            .GetAppointments()
+            .Select(apt => {
+                if(!IsWorkingDay(apt.StartDate)) {
+                    apt.StartDate = apt.StartDate.AddDays(2);
+                    apt.EndDate = apt.EndDate.AddDays(2);
+                }
+                return apt;
+            })
+            .ToList();
+
+        void OnUpdating(SchedulerAppointmentOperationEventArgs args) => CancelIfNeeded(args, true);
+
+        void OnInserting(SchedulerAppointmentOperationEventArgs args) => CancelIfNeeded(args, true);
+
+        void OnStartDragging(SchedulerAppointmentOperationEventArgs args) => CancelIfNeeded(args);
+
+        void OnStartResizing(SchedulerAppointmentOperationEventArgs args) => CancelIfNeeded(args);
+
+        void OnFormShowing(SchedulerAppointmentFormEventArgs args) => CancelIfNeeded(args);
+
+        void CancelIfNeeded(SchedulerAppointmentOperationEventArgs args, bool showAlert = false) {
+            if (!IsCurrentUsersAppointment(args.Appointment) || !IsInWorkTime(args.Appointment))
+            {
+                args.Cancel = true;
+                AlertVisible = showAlert;
+            }
+        }
+
+        bool IsCurrentUsersAppointment(DxSchedulerAppointmentItem apt) => apt.ResourceId as int? == CurrentUserResourceId;
+
+        bool IsInWorkTime(DxSchedulerAppointmentItem apt) =>
+            apt.AllDay
+            || IsWorkingDay(apt.Start)
+            && IsWorkingDay(apt.End)
+            && apt.Start - apt.Start.Date >= WorkTime.Start
+            && WorkTime.End >= apt.End - apt.End.Date;
+
+        static bool IsWorkingDay(DateTime time) =>
+            time.DayOfWeek != DayOfWeek.Saturday &&
+            time.DayOfWeek != DayOfWeek.Sunday;
+
+        string GetBackgroundCssClass(DxSchedulerAppointmentView view) {
+            string css = "dxsc-apt-bg card " + view?.Resource?.BackgroundCssClass ?? string.Empty;
+
+            if((int?)view?.Resource?.Id != CurrentUserResourceId) {
+                if(view?.Resource?.Id is null)
+                    css += " demo-disabled-white";
+                else
+                    css += " demo-appointment-disabled";
+            }
+
+            return css;
+        }
+    }
+</DemoPageSectionComponent>

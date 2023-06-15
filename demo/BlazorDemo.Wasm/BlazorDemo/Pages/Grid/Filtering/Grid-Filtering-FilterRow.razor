@@ -1,88 +1,46 @@
 ﻿@page "/Grid/Filtering/FilterRow"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Filtering-FilterRow" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Grid-Filtering-FilterRow" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
     <ChildContentWithParameters Context="Params">
         @using DevExpress.Data.Filtering;
         @inject NwindDataService NwindDataService
 
         <DxGrid Data="GridData"
                 ShowFilterRow="true"
-                CustomizeCellDisplayText="Grid_CustomizeCellDisplayText"
-                CustomizeElement="Grid_CustomizeElement"
                 EditorRenderMode="GridEditorRenderMode.Integrated"
-                SizeMode="Params.SizeMode">
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
             <Columns>
-                <DxGridDataColumn FieldName="OrderId" Caption="Order ID" DisplayFormat="d" SortIndex="0" MinWidth="100" Width="10%">
-                    <FilterRowCellTemplate>
-                        <DxSpinEdit Value="(int?)context.FilterRowValue"
-                                    ValueChanged="(int? v) => context.FilterRowValue = v" />
-                    </FilterRowCellTemplate>
-                </DxGridDataColumn>
-
-                <DxGridDataColumn FieldName="OrderDate" DisplayFormat="d" MinWidth="120" Width="10%">
-                    <FilterRowCellTemplate>
-                        <DxDateEdit Date="(DateTime?)context.FilterRowValue"
-                                    DateChanged="(DateTime? v) => context.FilterRowValue = v" />
-                    </FilterRowCellTemplate>
-                </DxGridDataColumn>
-
-                <DxGridDataColumn FieldName="ProductName"
-                                  FilterRowValue='"Queso"' FilterRowOperatorType="GridFilterRowOperatorType.Contains" MinWidth="100" />
-
-                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c2" MinWidth="150" Width="10%">
+                <DxGridDataColumn FieldName="OrderId" Caption="Order ID" DisplayFormat="d" SortIndex="0" MinWidth="110" Width="10%" />
+                <DxGridDataColumn FieldName="OrderDate" DisplayFormat="d" MinWidth="135" Width="10%" />
+                <DxGridDataColumn FieldName="ProductName" FilterRowValue='"Queso"' FilterRowOperatorType="GridFilterRowOperatorType.Contains" MinWidth="100" />
+                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c2" MinWidth="135" Width="10%">
                     <FilterRowCellTemplate>
                         <DxComboBox @bind-Value="context.FilterCriteria"
                                     Data="UnitPriceIntervals" ValueFieldName="Criteria" TextFieldName="DisplayText"
                                     ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
                     </FilterRowCellTemplate>
                 </DxGridDataColumn>
-
-                <DxGridDataColumn FieldName="CustomerId" Caption="Customer" SortMode="GridColumnSortMode.DisplayText" MinWidth="120"
-                                  FilterRowOperatorType="GridFilterRowOperatorType.Equal">
-                    <FilterRowCellTemplate>
-                        <DxComboBox Value="(string)context.FilterRowValue"
-                                    ValueChanged="(string v) => context.FilterRowValue = v"
-                                    Data="Customers" ValueFieldName="CustomerId" TextFieldName="DisplayText"
-                                    FilteringMode="DataGridFilteringMode.Contains"
-                                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
-                    </FilterRowCellTemplate>
+                <DxGridDataColumn FieldName="CustomerId" Caption="Customer" MinWidth="120">
+                    <EditSettings>
+                        <DxComboBoxSettings Data="Customers" ValueFieldName="CustomerId" TextFieldName="DisplayText" FilteringMode="DataGridFilteringMode.Contains" />
+                    </EditSettings>
                 </DxGridDataColumn>
-
-                <DxGridDataColumn FieldName="Shipped" UnboundType="GridUnboundColumnType.Boolean" UnboundExpression="[ShippedDate] <> Null" Width="5%" MinWidth="100">
-                    <CellDisplayTemplate>
-                        @if((bool)context.Value == true) {
-                            <span class="grid-icon grid-icon-check"></span>
-                        }
-                    </CellDisplayTemplate>
-                    <FilterRowCellTemplate>
-                        <DxComboBox Value="(bool?)context.FilterRowValue"
-                                    ValueChanged="(bool? v) => context.FilterRowValue = v"
-                                    Data="ShippedStates" ValueFieldName="Value" TextFieldName="DisplayText"
-                                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
-                    </FilterRowCellTemplate>
-                </DxGridDataColumn>
-
-                <DxGridCommandColumn Width="80px" NewButtonVisible="false" EditButtonVisible="false" DeleteButtonVisible="false" />
+                <DxGridDataColumn FieldName="Shipped" UnboundType="GridUnboundColumnType.Boolean" UnboundExpression="[ShippedDate] <> Null" Width="5%" MinWidth="95" />
+                <DxGridCommandColumn Width="70px" NewButtonVisible="false" EditButtonVisible="false" DeleteButtonVisible="false" />
             </Columns>
         </DxGrid>
 
         @code {
             static readonly IReadOnlyList<PriceFilterInterval> UnitPriceIntervals = new PriceFilterInterval[] {
                 new("[UnitPrice] < 10", "< $10"),
-                new("[UnitPrice] between (10, 100)", "$10 to $100"),
+                new("[UnitPrice] between (10, 100)", "$10 - $100"),
                 new("[UnitPrice] > 100", "> $100")
-            };
-
-            static readonly IReadOnlyList<ShippedState> ShippedStates = new ShippedState[] {
-                new(true, "Yes"),
-                new(false, "No")
             };
 
             object GridData { get; set; }
 
             IReadOnlyList<CustomerInfo> Customers { get; set; }
-            IReadOnlyDictionary<string, string> CustomersIndex { get; set; }
 
             protected override async Task OnInitializedAsync() {
                 GridData = await NwindDataService.GetInvoicesAsync();
@@ -91,22 +49,6 @@
                     .Select(i => new CustomerInfo(i.CustomerId, $"{i.ContactName} ({i.CompanyName})"))
                     .OrderBy(i => i.DisplayText)
                     .ToList();
-
-                CustomersIndex = Customers.ToDictionary(i => i.CustomerId, i => i.DisplayText);
-            }
-
-            void Grid_CustomizeCellDisplayText(GridCustomizeCellDisplayTextEventArgs e) {
-                if (e.FieldName == "CustomerId") {
-                    var customerId = (string)e.Value;
-                    if (customerId != null && CustomersIndex.TryGetValue(customerId, out var displayText))
-                        e.DisplayText = displayText;
-                }
-            }
-
-            void Grid_CustomizeElement(GridCustomizeElementEventArgs e) {
-                if(e.ElementType == GridElementType.DataCell && ((IGridDataColumn)e.Column).FieldName == "Shipped") {
-                    e.CssClass = "p-0";
-                }
             }
 
             record PriceFilterInterval(CriteriaOperator Criteria, string DisplayText) {
@@ -115,7 +57,6 @@
                 }
             }
 
-            record ShippedState(bool? Value, string DisplayText);
             record CustomerInfo(string CustomerId, string DisplayText);
         }
     </ChildContentWithParameters>

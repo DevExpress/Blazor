@@ -8,14 +8,16 @@
 
 @{
     RenderFragment<DemoProductInfo> DemoProduct = (info) =>
-    @<div class="col-xl-4 col-sm-6 col-xs-12">
-        <a class="shadow-sm rounded-3 demo-product" href="@info.PageUri">
-            <div class="d-flex p-2">
-                <span class="flex-shrink-0 me-3 text-body demo-product-icon demo-product-icon-@info.IconName" title="@info.Title"></span>
-                <div class="flex-grow-1">
-                    <h5 class="mt-0 text-body">@info.Title</h5>
-                    <span class="demo-product-info text-body">@info.Description</span>
-                </div>
+    @<div class="col-xl-4 col-lg-6 col-xs-12">
+        <a class="demo-product" href="@info.PageUri">
+            <div class="demo-product-icon demo-product-icon-@info.IconName">
+                <svg role="img" title="@info.Title">
+                    <use href="@(StaticAssetUtils.GetImagePath("products.svg"))#@info.IconName"></use>
+                </svg>
+            </div>
+            <div class="flex-grow-1 text-body">
+                <h5>@info.Title</h5>
+                <span class="demo-product-info">@info.Description</span>
             </div>
         </a>
     </div>;
@@ -23,8 +25,8 @@
 
 <div class="demo-products demo-products-description theme-@Themes.ActiveTheme.Name.Replace(" ", "-")">
     <h1 class="mb-4">DevExpress UI Components for Blazor</h1>
-    <p class="mb-5">The <a href="https://www.devexpress.com/blazor/" target="_blank">DevExpress Blazor UI component suite</a> ships with a comprehensive suite of native Blazor components (including a DataGrid, Scheduler, Chart, Data Editors, Rich Text Editor, and Reporting). To learn more about the capabilities of our Blazor UI controls (for both Blazor Server and Blazor WebAssembly), select a product from the list below. DevExpress Blazor UI controls ship as part of the DevExpress ASP.NET Subscription.</p>
-
+    <p>The <a href="https://www.devexpress.com/blazor/" target="_blank">DevExpress Blazor UI component suite</a> ships with a comprehensive suite of native Blazor components (including a DataGrid, Scheduler, Chart, Data Editors, Rich Text Editor, and Reporting). To learn more about the capabilities of our Blazor UI controls (for both Blazor Server and Blazor WebAssembly), select a product from the list below. DevExpress Blazor UI controls ship as part of the DevExpress ASP.NET Subscription.</p>
+    <p>Should you have any questions about the products listed herein or are considering our UI components for an upcoming Blazor project, please email <a href="mailto:info@devexpress.com" tabindex="-1">info@devexpress.com</a>. We will be happy to follow-up.</p>
     <div class="row mb-3">
         @foreach(var info in Configuration.Products) {
             @DemoProduct.Invoke(info)
@@ -55,8 +57,6 @@
     <li><a href="https://supportcenter.devexpress.com/ticket/list?preset=971248ea-952a-45d0-98e3-8b227de870f4" target="_blank">Examples</a></li>
     <li><a href="https://www.youtube.com/playlist?list=PL8h4jt35t1wiA7rjbbJQ0sYpsSghc7XYJ" target="_blank">Videos</a></li>
     <li><a href="https://github.com/DevExpress/Blazor/" target="_blank">GitHub repository</a></li>
-    <li><a href="https://github.com/DevExpress/Blazor/tree/master/tools/DevExpress.Blazor.DocumentMetadata" target="_blank">Document metadata tool</a></li>
-    <li><a href="https://github.com/DevExpress/Blazor/tree/master/tools/DevExpress.Blazor.AnchorUtils" target="_blank">Anchor navigation tool</a></li>
     <li><a href="https://www.youtube.com/playlist?list=PL8h4jt35t1wjvwFnvcB2LlYL4jLRzRmoz" target="_blank">Free Blazor training course</a></li>
     <li><a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/" target="_blank">Official Blazor documentation</a></li>
 </ul>
@@ -70,7 +70,7 @@
 @code {
     public override async Task SetParametersAsync(ParameterView parameters) {
         if(Configuration.ShowOnlyReporting)
-            NavigationManager.NavigateTo("ReportViewer/InvoiceReport");
+            NavigationManager.NavigateTo("ReportViewer");
         else
             await base.SetParametersAsync(parameters);
     }

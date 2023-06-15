@@ -10,6 +10,7 @@ namespace BlazorDemo.DemoData {
         public string Title { get; set; }
         public string TitleOnPage { get; set; }
         public bool IsServerSideOnly { get; set; }
+        public bool IsClientSideOnly { get; set; }
         public bool IsNew { get; set; }
         public bool IsUpdated { get; set; }
         public string DocUrl { get; set; }

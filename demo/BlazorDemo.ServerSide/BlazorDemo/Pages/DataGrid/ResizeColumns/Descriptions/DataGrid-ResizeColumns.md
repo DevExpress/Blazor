@@ -2,5 +2,5 @@ The DevExpress Blazor [Data Grid](https://docs.devexpress.com/Blazor/DevExpress.
 
 To enable column resize operations, set the [ColumnResizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.ColumnResizeMode) property to one of the following values:
 
-*   [DataGridColumnResizeMode.NextColumn](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridColumnResizeMode) - The width of the column to the right changes, but the Data Grid's width does not change.
-*   [DataGridColumnResizeMode.Component](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridColumnResizeMode) - The Data Grid's width changes, but the width of other columns does not change.
+*   [DataGridColumnResizeMode.NextColumn](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridColumnResizeMode) — The width of the column to the right changes, but the Data Grid's width does not change.
+*   [DataGridColumnResizeMode.Component](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridColumnResizeMode) — The Data Grid's width changes, but the width of other columns does not change.

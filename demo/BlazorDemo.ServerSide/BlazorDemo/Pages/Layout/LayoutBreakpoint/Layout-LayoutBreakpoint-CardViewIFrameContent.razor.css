@@ -1,0 +1,29 @@
+.card-vew-wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .card-view-container {
+    flex: 1 1 auto;
+    overflow-y: auto;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .card-container {
+    border-radius: 0.25rem;
+    padding: 1.5rem;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .card-price {
+    margin-bottom: 0;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .card-link-container {
+    text-align: right;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .card-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

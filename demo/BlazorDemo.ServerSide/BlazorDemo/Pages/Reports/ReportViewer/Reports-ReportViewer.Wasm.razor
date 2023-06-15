@@ -1,0 +1,77 @@
+﻿@page "/ReportViewer"
+@page "/ReportViewer/{ReportName?}"
+@page "/ReportViewer/{CategoryName?}/{ReportName?}"
+@page "/ReportViewer/{ParentCategoryName?}/{CategoryName?}/{ReportName?}"
+
+@inject NavigationManager NavigationManager
+@using Microsoft.AspNetCore.WebUtilities
+@using BlazorDemo.Pages.Reports.Shared
+<link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-reporting-pages.css">
+
+<DemoPageSectionComponent Id="@GetPageId()" ShowSizeMode="@IsNativeViewer">
+    <ChildContentWithParameters Context="Params">
+        @if(IsNativeViewer) {
+            <NativeReportViewer Params="@Params" ReportName="@ReportName"></NativeReportViewer>
+        } else {
+            <JSBasedDocumentViewer_Wasm ReportName="@ReportName"></JSBasedDocumentViewer_Wasm>
+        }
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <div class="w-100 d-flex justify-content-end">
+            <OptionComboBox Label="Show in Viewer:"
+                            Data="@(ViewerModeData)"
+                            Value="@(currentViewer.ToString())"
+                            ValueChanged="@((string selectedItem) => { OnViewerChanged(selectedItem); })" />
+            <DxButton CssClass="option-component" Text="Show in Report Designer" Click="@NavigateToReportDesigner" />
+        </div>
+    </OptionsContent>
+
+    @code {
+        [Parameter] public string ReportName { get; set; }
+        [Parameter] public string CategoryName { get; set; }
+        [Parameter] public string ParentCategoryName { get; set; }
+        [Parameter] [SupplyParameterFromQuery] public string CurrentViewer { get; set; }
+
+        readonly string[] ViewerModeData = new string[] { "Native", "JS Based" };
+
+        string currentViewer;
+        const string CurrentViewerName = "CurrentViewer";
+        protected string GetPageId() {
+            var id = "";
+            if(CategoryName == null || ReportName == null) {
+                id = "IndustryReports-Finance-BalanceSheetReport";
+            } else {
+                id = CategoryName;
+                if(ParentCategoryName != null)
+                    id = ParentCategoryName + "-" + id;
+                id = id + "-" + ReportName;
+            }
+
+            return "Reports-" + id;
+        }
+
+        protected void NavigateToReportDesigner() {
+            NavigationManager.NavigateTo($"ReportDesigner/{ReportName}");
+        }
+
+        protected override void OnInitialized() {
+            currentViewer = CurrentViewer ?? ViewerModeData[0];
+        }
+
+        protected void OnViewerChanged(string value) {
+            var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+            var uriBuilder = new UriBuilder(uri);
+            var q = System.Web.HttpUtility.ParseQueryString(uriBuilder.Query);
+            q[CurrentViewerName] = value;
+            currentViewer = value;
+            uriBuilder.Query = q.ToString();
+            NavigationManager.NavigateTo(uriBuilder.ToString());
+        }
+
+        public bool IsNativeViewer {
+            get {
+                return currentViewer == ViewerModeData[0];
+            }
+        }
+    }
+</DemoPageSectionComponent>

@@ -21,7 +21,7 @@
                           Filter="si => si.Date.Year == 2018 && FilteredCountries.Contains(si.Country)">
             <DxChartSeriesLabel Visible="true"
                                 Position="RelativePosition.Outside"
-                                Format="ChartElementFormat.Thousands(1)">
+                                ValueFormat="ChartElementFormat.Thousands(1)">
                 <DxChartSeriesLabelConnector Visible="true" />
             </DxChartSeriesLabel>
         </DxPieChartSeries>
@@ -61,35 +61,35 @@
         </DxChartTooltip>
         <DxChartLegend Visible="false"/>
     </DxChart>
+
+    @code {
+        readonly List<string> FilteredCountries = new List<string>() { "United States", "Canada", "United Kingdom", "Germany", "China", "Republic of Korea", "Australia" };
+        readonly List<string> Selection = new List<string>();
+        IEnumerable<SaleInfo> Data;
+        DxChart DetailChart;
+        Dictionary<string, Color> mainPalette = new() {
+            { "United States", Color.FromArgb(255, 95, 54, 141) },
+            { "Canada", Color.FromArgb(255, 77, 92, 117) },
+            { "United Kingdom", Color.FromArgb(255, 130, 110, 69) },
+            { "Germany", Color.FromArgb(255, 175, 82, 69) },
+            { "China", Color.FromArgb(255, 243, 146, 28) },
+            { "Republic of Korea", Color.FromArgb(255, 170, 185, 81) },
+            { "Australia", Color.FromArgb(255, 85, 177, 156) },
+        };
+
+        protected override async Task OnInitializedAsync() {
+            Data = await Sales.GetSalesAsync();
+        }
+        void OnSelectionChanged(PieChartSelectionChangedEventArgs e) {
+            string country = e.Point.Argument.ToString();
+            if (e.IsPointSelected)
+                Selection.Add(country);
+            else
+                Selection.Remove(country);
+            DetailChart?.RefreshData();
+        }
+        void CustomizePiePoint(ChartSeriesPointCustomizationSettings settings) {
+            settings.PointAppearance.Color = mainPalette[settings.Point.Argument.ToString()];
+        }
+    }
 </DemoPageSectionComponent>
-
-@code {
-    readonly List<string> FilteredCountries = new List<string>() { "United States", "Canada", "United Kingdom", "Germany", "China", "Republic of Korea", "Australia" };
-    readonly List<string> Selection = new List<string>();
-    IEnumerable<SaleInfo> Data;
-    DxChart DetailChart;
-    Dictionary<string, Color> mainPalette = new() {
-        { "United States", Color.FromArgb(255, 95, 54, 141) },
-        { "Canada", Color.FromArgb(255, 77, 92, 117) },
-        { "United Kingdom", Color.FromArgb(255, 130, 110, 69) },
-        { "Germany", Color.FromArgb(255, 175, 82, 69) },
-        { "China", Color.FromArgb(255, 243, 146, 28) },
-        { "Republic of Korea", Color.FromArgb(255, 170, 185, 81) },
-        { "Australia", Color.FromArgb(255, 85, 177, 156) },
-    };
-
-    protected override async Task OnInitializedAsync() {
-        Data = await Sales.GetSalesAsync();
-    }
-    void OnSelectionChanged(PieChartSelectionChangedEventArgs e) {
-        string country = e.Point.Argument.ToString();
-        if (e.IsPointSelected)
-            Selection.Add(country);
-        else
-            Selection.Remove(country);
-        DetailChart?.RefreshData();
-    }
-    void CustomizePiePoint(ChartSeriesPointCustomizationSettings settings) {
-        settings.PointAppearance.Color = mainPalette[settings.Point.Argument.ToString()];
-    }
-}

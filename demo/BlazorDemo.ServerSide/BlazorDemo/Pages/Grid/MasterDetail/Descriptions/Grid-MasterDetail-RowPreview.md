@@ -1,4 +1,4 @@
-This demo illustrates how to display preview sections under each [Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid) data row across all columns. These sections can display any content, including tables, values from data source fields, custom text, etc. To replicate the capabilities of this demo, follow the steps below:
+This demo illustrates how to display preview sections under each [Grid](https://docs.devexpress.com/Blazor/403143/grid) data row across all columns. These sections can display any content, including tables, values from data source fields, custom text, etc. To replicate the capabilities of this demo, follow the steps below:
 
 1. Add a grid to your application.
 2. Bind the grid to data and add columns to its [Columns](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.Columns) collection.

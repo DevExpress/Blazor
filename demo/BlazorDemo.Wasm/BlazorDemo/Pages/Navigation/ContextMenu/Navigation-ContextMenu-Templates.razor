@@ -1,45 +1,46 @@
-﻿<DemoPageSectionComponent Id="Navigation-ContextMenu-Templates">
-    <div class="demo-preventsel target-container"
-         @oncontextmenu="e => ContextMenu.ShowAsync(e)"
-         @oncontextmenu:preventDefault>
-        <p style="display: inline-block; text-align: center; margin: auto; color:@TextColor; background-color:@BackgroundColor">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</p>
-    </div>
+﻿<DemoPageSectionComponent Id="Navigation-ContextMenu-Templates" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="demo-preventsel target-container"
+             @oncontextmenu="e => ContextMenu.ShowAsync(e)"
+             @oncontextmenu:preventDefault>
+            <p style="display: inline-block; text-align: center; margin: auto; color:@TextColor; background-color:@BackgroundColor">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</p>
+        </div>
 
-    <DxContextMenu @ref="@ContextMenu">
-        <Items>
-            <DxContextMenuItem Text="Text color">
-                <SubMenuTemplate>
-                    <ColorPicker HeaderText="Text color" SelectedColor="@TextColor" ColorChanged="ChangeTextColor"/>
-                </SubMenuTemplate>
-            </DxContextMenuItem>
-            <DxContextMenuItem Text="Background color">
-                <SubMenuTemplate>
-                    <ColorPicker HeaderText="Background color" SelectedColor="@BackgroundColor" ColorChanged="@ChangeBackgroundColor"/>
-                </SubMenuTemplate>
-            </DxContextMenuItem>
-            <DxContextMenuItem Text="Reset colors" Click="@ResetColors" BeginGroup="true"
-                               Enabled="@(BackgroundColor != UnsetValue || TextColor != UnsetValue)"/>
-        </Items>
-    </DxContextMenu>
+        <DxContextMenu @ref="@ContextMenu" SizeMode="Params.SizeMode">
+            <Items>
+                <DxContextMenuItem Text="Text color">
+                    <SubMenuTemplate>
+                        <ColorPicker HeaderText="Text color" SelectedColor="@TextColor" ColorChanged="ChangeTextColor"/>
+                    </SubMenuTemplate>
+                </DxContextMenuItem>
+                <DxContextMenuItem Text="Background color">
+                    <SubMenuTemplate>
+                        <ColorPicker HeaderText="Background color" SelectedColor="@BackgroundColor" ColorChanged="@ChangeBackgroundColor"/>
+                    </SubMenuTemplate>
+                </DxContextMenuItem>
+                <DxContextMenuItem Text="Reset colors" Click="@ResetColors" BeginGroup="true"
+                                   Enabled="@(BackgroundColor != UnsetValue || TextColor != UnsetValue)"/>
+            </Items>
+        </DxContextMenu>
 
-    @code {
-        const string UnsetValue = "unset";
-        DxContextMenu ContextMenu { get; set; }
-        private string TextColor { get; set; } = UnsetValue;
-        private string BackgroundColor { get; set; } = UnsetValue;
+        @code {
+            const string UnsetValue = "unset";
+            DxContextMenu ContextMenu { get; set; }
+            private string TextColor { get; set; } = UnsetValue;
+            private string BackgroundColor { get; set; } = UnsetValue;
 
-        private void ChangeTextColor(string color) {
-            TextColor = color;
-            ContextMenu.HideAsync();
+            private void ChangeTextColor(string color) {
+                TextColor = color;
+                ContextMenu.HideAsync();
+            }
+            private void ChangeBackgroundColor(string color) {
+                BackgroundColor = color;
+                ContextMenu.HideAsync();
+            }
+            private void ResetColors() {
+                BackgroundColor = TextColor = UnsetValue;
+                InvokeAsync(StateHasChanged);
+            }
         }
-        private void ChangeBackgroundColor(string color) {
-            BackgroundColor = color;
-            ContextMenu.HideAsync();
-        }
-        private void ResetColors() {
-            BackgroundColor = TextColor = UnsetValue;
-            InvokeAsync(StateHasChanged);
-        }
-    }
-
+    </ChildContentWithParameters>
 </DemoPageSectionComponent>

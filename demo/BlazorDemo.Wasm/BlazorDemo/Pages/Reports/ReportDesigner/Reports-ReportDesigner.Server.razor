@@ -1,0 +1,35 @@
+﻿@page "/ReportDesigner"
+@page "/ReportDesigner/{reportName}"
+
+<link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-reporting-pages.css">
+<DemoScriptLoader @ref="reportingScriptLoader" Src="_content/BlazorDemo/lib/reporting.js"></DemoScriptLoader>
+
+<DemoPageSectionComponent Id="Reports-ReportDesigner">
+    @if(ScriptsLoaded) {
+        <DxReportDesigner ReportName=@ReportName Height="770px" @ref="designer" CssClass="w-100"></DxReportDesigner>
+    }
+
+    @code {
+        [Parameter]
+        public string ReportName { get; set; }
+        DxReportDesigner designer { get; set; }
+        DemoScriptLoader reportingScriptLoader { get; set; }
+        bool ScriptsLoaded { get; set; } = false;
+
+        protected override void OnInitialized() {
+            ReportName = ReportName ?? "InvoiceReport";
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender) {
+            if(!ScriptsLoaded) {
+                await reportingScriptLoader.Loaded;
+                ScriptsLoaded = true;
+                StateHasChanged();
+            } else {
+                designer.CallbacksModel = new ReportDesignerCallbacksModel();
+                designer.CallbacksModel.Events.ExitDesigner = "\"ReportDesignerExit\"";
+            }
+            await base.OnAfterRenderAsync(firstRender);
+        }
+    }
+</DemoPageSectionComponent>

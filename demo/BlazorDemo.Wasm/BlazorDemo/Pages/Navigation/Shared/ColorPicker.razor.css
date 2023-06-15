@@ -1,33 +1,46 @@
-.color-picker-header {
-    margin-left: 0.5rem;
-    font-size: 12pt;
+/*BeginHide*/::deep /*EndHide*/ .dropdown-divider {
+    margin: unset !important;
+}
+
+.color-picker-item {
+    margin: 0.3125rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.4285;
 }
 
 .color-picker-container {
     display: flex;
     flex-wrap: wrap;
-    max-width: 10rem;
-    padding: 0.25rem 0.25rem 0.25rem 0.25rem;
+    min-width: 10rem;
     cursor: pointer;
+    justify-content: space-between;
 }
 
-.color-picker-container > .color-picker-cell {
-    height: 1.5rem;
-    width: 1.5rem;
+.color-picker-cell {
+    height: 1.75rem;
+    width: 1.75rem;
     cursor: pointer;
     margin: 0.1rem 0.1rem 0.1rem 0.1rem;
     border: 1px solid var(--bs-primary);
 }
 
+.color-picker-item-reset {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.color-picker-item-reset > .color-picker-cell {
+    height: 1rem;
+    width: 1rem;
+    margin-right: 0.5rem;
+}
+
 .color-picker-container > .color-picker-cell:hover,
-.color-picker-container-reset:hover > .color-picker-cell {
+.color-picker-item-reset:hover > .color-picker-cell {
     border: 2px solid var(--bs-primary);
 }
 
 .color-picker-container > .color-picker-cell.selected {
     border: 2px solid var(--bs-primary);
-}
-
-.mt-1-5 {
-    margin-top: 0.15rem;
 }

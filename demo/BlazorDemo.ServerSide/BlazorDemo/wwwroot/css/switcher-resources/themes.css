@@ -1,72 +1,76 @@
-#themesMenu a.blazing-berry:before {
+.blazor-themes a.blazing-berry:before {
     background: #5c2d91;
 }
 
-#themesMenu a.blazing-dark:before {
+.blazor-themes a.blazing-dark:before {
     background: #46444a;
 }
 
-#themesMenu a.office-white:before {
+.blazor-themes a.office-white:before {
     background: #fe7109;
 }
 
-#themesMenu a.purple:before {
+.blazor-themes a.purple:before {
     background: #7989ff;
 }
 
 
-#themesMenu a.default:before {
+.blazor-themes a.default:before {
     background: #007bff;
 }
 
-#themesMenu a.cerulean:before {
+.blazor-themes a.cerulean:before {
     background: #2fa4e7;
 }
 
-#themesMenu a.cyborg:before {
+.blazor-themes a.cyborg:before {
     background: #060606;
 }
 
-#themesMenu a.flatly:before {
+.blazor-themes a.flatly:before {
     background: #dce4ec;
 }
 
-#themesMenu a.journal:before {
+.blazor-themes a.journal:before {
     background: #eb6864;
 }
 
-#themesMenu a.litera:before {
+.blazor-themes a.litera:before {
     background: #4582ec;
 }
 
-#themesMenu a.lumen:before {
+.blazor-themes a.lumen:before {
     background: #158cba;
 }
 
-#themesMenu a.lux:before {
+.blazor-themes a.lux:before {
     background: #1a1a1a;
 }
 
-#themesMenu a.pulse:before {
+.blazor-themes a.pulse:before {
     background: #593196;
 }
 
-#themesMenu a.simplex:before {
+.blazor-themes a.simplex:before {
     background: #d9230f;
 }
 
-#themesMenu a.solar:before {
+.blazor-themes a.solar:before {
     background: #b58900;
 }
 
-#themesMenu a.superhero:before {
+.blazor-themes a.superhero:before {
     background: #df691a;
 }
 
-#themesMenu a.united:before {
+.blazor-themes a.united:before {
     background: #e95420;
 }
 
-#themesMenu a.yeti:before {
+.blazor-themes a.yeti:before {
     background: #008cba;
+}
+
+.theme-external {
+    font-size: 0.875rem;
 }

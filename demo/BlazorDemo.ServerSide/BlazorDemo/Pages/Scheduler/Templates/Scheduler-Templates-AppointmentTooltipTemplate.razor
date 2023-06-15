@@ -11,7 +11,7 @@
                         @{
                             string backgroundCss = context.Resource == null ? "dx-purple-color" : context.Resource.BackgroundCssClass;
                         }
-                        <div class="demo-sc-apt @((bool)context.CustomFields["Accepted"] ? "demo-sc-accepted" : "")" style="width: 100%;">
+                        <div class="demo-sc-apt @(IsAccepted(context.Appointment) ? "demo-sc-accepted" : "")" style="width: 100%;">
                             <div class="card demo-apt-bg @backgroundCss" style="width: 100%;"></div>
                             <div class="card shadow-sm p-1 demo-sc-apt-content text-white" style="width:100%;">
                                 @context.Appointment.Subject
@@ -22,7 +22,7 @@
                         @{
                             string backgroundCss = context.Resource == null ? "dx-purple-color" : context.Resource.BackgroundCssClass;
                         }
-                        <div class="shadow-sm demo-sc-apt @((bool)context.CustomFields["Accepted"] ? "demo-sc-accepted"  : "")">
+                        <div class="shadow-sm demo-sc-apt @(IsAccepted(context.Appointment) ? "demo-sc-accepted"  : "")">
                             <div class="card demo-apt-bg @backgroundCss"></div>
                             <div class="card demo-sc-apt-content text-white">
                                 <div class="card demo-sc-status-container">
@@ -36,16 +36,23 @@
                     </VerticalAppointmentTemplate>
                 </DxSchedulerDayView>
             </Views>
+            <AppointmentTooltipHeaderTemplate>
+                <div class="tooltip-text-header">@context.Appointment.Subject</div>
+                @if (IsAccepted(context.Appointment))
+                {
+                    <div style="margin-right: .3em;">(Accepted)</div>
+                }
+                <DxSchedulerShowAppointmentCompactFormButton></DxSchedulerShowAppointmentCompactFormButton>
+                <DxSchedulerDeleteAppointmentButton></DxSchedulerDeleteAppointmentButton>
+                <DxSchedulerCloseAppointmentButton></DxSchedulerCloseAppointmentButton>
+            </AppointmentTooltipHeaderTemplate>
             <AppointmentTooltipTemplate>
                 @{
                     string resourceCssClass = context.Resource == null ? "dx-purple-color" : context.Resource.BackgroundCssClass;
-                    bool accepted = (bool)context.CustomFields["Accepted"];
+                    bool accepted = IsAccepted(context.Appointment);
                     string buttonText = accepted ? "Accepted" : "Tentative";
                     string iconCssClass = accepted ? "dx-icon-accepted" : "dx-icon-tentative";
                     string startDateTime = $"{context.Appointment.Start.ToString("ddd, MMM dd")}, {context.Appointment.Start.ToShortTimeString()} - {context.Appointment.End.ToShortTimeString()}";
-                    void OnClick(MouseEventArgs args) {
-                        context.CustomFields["Accepted"] = !accepted;
-                    }
                 }
                 <div class="container">
                     <div class="row mb-3">
@@ -73,7 +80,7 @@
                     </div>
                     <hr />
                     <div class="sc-tooltip-bottom-container">
-                        <DxButton Click="OnClick" RenderStyleMode="ButtonRenderStyleMode.Text" RenderStyle="ButtonRenderStyle.Link"
+                        <DxButton Click="@(args => SwitchAccepted(context, args))" RenderStyleMode="ButtonRenderStyleMode.Text" RenderStyle="ButtonRenderStyle.Link"
                                     Text="@buttonText" IconCssClass="@iconCssClass">
                         </DxButton>
                     </div>
@@ -115,5 +122,9 @@
                 TextCssClass = "TextCss"
             }
         };
+
+        bool IsAccepted(DxSchedulerAppointmentItem apt) => true == (bool?)apt.CustomFields["Accepted"];
+        void SwitchAccepted(SchedulerAppointmentTooltipInfo tooltipInfo, MouseEventArgs mouseArgs) => tooltipInfo.CustomFields["Accepted"] = !IsAccepted(tooltipInfo.Appointment);
+
     }
 </DemoPageSectionComponent>

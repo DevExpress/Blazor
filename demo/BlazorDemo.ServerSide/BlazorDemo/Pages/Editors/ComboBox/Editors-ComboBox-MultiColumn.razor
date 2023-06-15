@@ -8,13 +8,15 @@
                     SizeMode="Params.SizeMode"
                     FilteringMode="DataGridFilteringMode.Contains"
                     EditFormat="{1} {2}">
-            <DxListEditorColumn FieldName="@nameof(Employee.EmployeeId)"
-                                Caption="Id"
-                                Width="50px" />
-            <DxListEditorColumn FieldName="@nameof(Employee.FirstName)"
-                                Caption="Name" />
-            <DxListEditorColumn FieldName="@nameof(Employee.LastName)"
-                                Caption="Surname" />
+            <Columns>
+                <DxListEditorColumn FieldName="@nameof(Employee.EmployeeId)"
+                                    Caption="Id"
+                                    Width="50px" />
+                <DxListEditorColumn FieldName="@nameof(Employee.FirstName)"
+                                    Caption="Name" />
+                <DxListEditorColumn FieldName="@nameof(Employee.LastName)"
+                                    Caption="Surname" />
+            </Columns>
         </DxComboBox>
     </ChildContentWithParameters>
 

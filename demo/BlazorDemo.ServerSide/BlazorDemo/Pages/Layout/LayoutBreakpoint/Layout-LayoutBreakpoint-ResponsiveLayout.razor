@@ -1,0 +1,30 @@
+﻿@inject NavigationManager NavigationManager
+<link rel="preload" href="@GetDemoUrl()" as="document">
+
+<DemoPageSectionComponent Id="Layout-LayoutBreakpoint-ResponsiveLayout">    
+    <DemoMobileContent>
+        @if(afterFirstRender) {
+            <iframe @onload="() => { loadIndicatorVisible = false; }"  src="@GetDemoUrl()"
+                title="Responsive layout"></iframe>
+        }
+        @if(loadIndicatorVisible) {
+            <DemoLoadIndicator></DemoLoadIndicator>
+        }
+    </DemoMobileContent>
+</DemoPageSectionComponent>
+
+@code {
+
+    bool loadIndicatorVisible = true;
+    bool afterFirstRender;
+    protected override void OnAfterRender(bool firstRender) {
+        base.OnAfterRender(firstRender);
+        if (firstRender) {
+            afterFirstRender = true;
+            StateHasChanged();
+        }
+    }
+    string GetDemoUrl() {
+        return NavigationManager.ToAbsoluteUri("Layout_LayoutBreakpoint_ResponsiveLayoutIFrameContent").AbsoluteUri;
+    }
+}

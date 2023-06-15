@@ -3,8 +3,8 @@
 @using System.Collections.ObjectModel
 @using System.Text
 
-<DemoPageSectionComponent Id="Navigation-Accordion-DataBinding" VerticalAlignment=VerticalAlignment.Top MinHeight="296">
-    <DemoChildContent>
+<DemoPageSectionComponent Id="Navigation-Accordion-DataBinding" VerticalAlignment=VerticalAlignment.Top MinHeight="296" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
         @if(Data == null) {
             <p>
                 <em>Loading...</em>
@@ -13,6 +13,7 @@
         else {
             <div class="cw-480">
                 <DxAccordion Data="@Data"
+                             SizeMode="Params.SizeMode"
                              ShowFilterPanel="true"
                              RootItemExpandButtonDisplayMode="AccordionExpandButtonDisplayMode.End"
                              SubItemExpandButtonIconCssClass="icon-square-plus"
@@ -25,7 +26,7 @@
                 </DxAccordion>
             </div>
         }
-    </DemoChildContent>
+    </ChildContentWithParameters>
 
     @code {
         List<FlatDataItem> Data { get; set; }

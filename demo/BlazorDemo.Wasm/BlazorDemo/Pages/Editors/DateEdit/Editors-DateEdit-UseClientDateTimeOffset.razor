@@ -1,0 +1,17 @@
+﻿<DemoPageSectionComponent Id="Editors-DateEdit-UseClientDateTimeOffset" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxDateEdit @bind-Date="@DateOffset"
+                    CssClass="cw-320"
+                    SizeMode="Params.SizeMode"
+                    TimeSectionVisible="true">
+        </DxDateEdit>
+        <p class="demo-text cw-320 mt-2">
+            Server Date: <b>@ServerDateOffset</b>
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        DateTimeOffset DateOffset { get; set; } = DateTimeOffset.Now;
+        DateTimeOffset ServerDateOffset => DateOffset.ToOffset(DateTimeOffset.Now.Offset);
+    }
+</DemoPageSectionComponent>

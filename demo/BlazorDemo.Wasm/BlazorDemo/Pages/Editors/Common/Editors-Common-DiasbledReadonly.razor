@@ -1,0 +1,109 @@
+﻿@page "/DisabledAndReadOnlyModes"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Editors-Common-DiasbledReadonly" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <DxFormLayout SizeMode="Params.SizeMode" CssClass="w-100">
+            <DxFormLayoutGroup Caption="Read-Only Mode" ColSpanMd="6">
+                <DxFormLayoutItem Caption="ComboBox" ColSpanMd="12">
+                    <DxComboBox Data="@Data"
+                                @bind-Value="@CurrentValue"
+                                TextFieldName="@nameof(Employee.Text)"
+                                ReadOnly="true" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Date Edit" ColSpanMd="12">
+                    <DxDateEdit @bind-Date="@DateTimeValue" ReadOnly="true" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Masked Input" ColSpanMd="12">
+                    <DxMaskedInput @bind-Value="@CurrencyValue"
+                                   Mask="@NumericMask.Currency"
+                                   ReadOnly="true" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Memo" ColSpanMd="12">
+                    <DxMemo Text="@TextValue" ReadOnly="true" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Spin Edit" ColSpanMd="12">
+                    <DxSpinEdit @bind-Value="@NumericValue" ReadOnly="true" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="TagBox" ColSpanMd="12">
+                    <DxTagBox Data="@Data"
+                              @bind-Values="@Values"
+                              ReadOnly="true" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Text Box" ColSpanMd="12">
+                    <DxTextBox @bind-Text="@TextValue" ReadOnly="true" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Time Edit" ColSpanMd="12">
+                    <DxTimeEdit @bind-Time="@DateTimeValue" ReadOnly="true" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="List Box" ColSpanMd="12">
+                    <DxListBox Data="@Data"
+                               TextFieldName="@nameof(Employee.Text)"
+                               ReadOnly="true"
+                               Values="@Values"
+                               CssClass="w-100 chi-220">
+                    </DxListBox>
+                </DxFormLayoutItem>
+            </DxFormLayoutGroup>
+            <DxFormLayoutGroup Caption="Disabled Mode" ColSpanMd="6">
+                <DxFormLayoutItem Caption="ComboBox" ColSpanMd="12">
+                    <DxComboBox Data="@Data"
+                                @bind-Value="@CurrentValue"
+                                TextFieldName="@nameof(Employee.Text)"
+                                Enabled="false" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Date Edit" ColSpanMd="12">
+                    <DxDateEdit @bind-Date="@DateTimeValue" Enabled="false" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Masked Input" ColSpanMd="12">
+                    <DxMaskedInput @bind-Value="@CurrencyValue"
+                                   Mask="@NumericMask.Currency"
+                                   Enabled="false" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Memo" ColSpanMd="12">
+                    <DxMemo Text="@TextValue" Enabled="false" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Spin Edit" ColSpanMd="12">
+                    <DxSpinEdit @bind-Value="@NumericValue" Enabled="false" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="TagBox" ColSpanMd="12">
+                    <DxTagBox Data="@Data"
+                              @bind-Values="@Values"
+                              Enabled="false" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Text Box" ColSpanMd="12">
+                    <DxTextBox @bind-Text="@TextValue" Enabled="false" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Time Edit" ColSpanMd="12">
+                    <DxTimeEdit @bind-Time="@DateTimeValue" Enabled="false" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="List Box" ColSpanMd="12">
+                    <DxListBox Data="@Data"
+                               TextFieldName="@nameof(Employee.Text)"
+                               Enabled="false"
+                               Values="@Values"
+                               CssClass="w-100 chi-220 ">
+                    </DxListBox>
+                </DxFormLayoutItem>
+            </DxFormLayoutGroup>
+        </DxFormLayout>
+    </ChildContentWithParameters>
+
+    @code {
+        DateTime DateTimeValue { get; set; } = DateTime.Now;
+        double CurrencyValue { get; set; } = 123.45;
+        string TextValue { get; set; } = "End users cannot change the text value";
+        int? NumericValue { get; set; } = 180798;
+        IEnumerable<Employee> Data { get; set; }
+        IEnumerable<Employee> Values { get; set; }
+        Employee CurrentValue { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+        Data = await NwindDataService.GetEmployeesAsync();
+        CurrentValue = Data.FirstOrDefault();
+        Values = Data.Take(2);
+        }
+    }
+</DemoPageSectionComponent>

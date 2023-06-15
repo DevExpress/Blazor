@@ -1,0 +1,25 @@
+﻿<DemoPageSectionComponent Id="Layout-GridLayout-Adaptivity">
+    @inject NavigationManager NavigationManager
+    <DemoMobileContent>
+        @if (afterFirstRender) {
+            <iframe @onload="() => { loadIndicatorVisible = false; }" src="@NavigationManager.ToAbsoluteUri("Layout_GridLayout_AdaptivityIFrameContent")"
+                    title="GridLayout Adaptivity"></iframe>
+        }
+        @if(loadIndicatorVisible) {
+            <DemoLoadIndicator></DemoLoadIndicator>
+        }
+    </DemoMobileContent>
+</DemoPageSectionComponent>
+
+@code {
+
+    bool loadIndicatorVisible = true;
+    bool afterFirstRender;
+    protected override void OnAfterRender(bool firstRender) {
+        base.OnAfterRender(firstRender);
+        if (firstRender) {
+            afterFirstRender = true;
+            StateHasChanged();
+        }
+    }
+}

@@ -1,19 +1,20 @@
 ﻿@page "/Grid/PagingAndScrolling/Paging"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-PagingAndScrolling-Paging" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Grid-PagingAndScrolling-Paging" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <DxGrid Data="@DataSource"
-                PageSize="10"
+                PageSize="20"
+                CssClass="ch-480"
                 PagerPosition="GridPagerPosition.TopAndBottom"
                 PageSizeSelectorVisible="true"
-                PageSizeSelectorItems="@(new int[] { 5, 10, 20, 100 })"
+                PageSizeSelectorItems="@(new int[] { 10, 20, 100 })"
                 PageSizeSelectorAllRowsItemVisible="true"
                 PagerSwitchToInputBoxButtonCount="10"
                 PagerVisibleNumericButtonCount="10"
-                SizeMode="Params.SizeMode">
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
             <Columns>
                 <DxGridDataColumn FieldName="ShipName" MinWidth="100" />
                 <DxGridDataColumn FieldName="ShipCity" Width="15%" />

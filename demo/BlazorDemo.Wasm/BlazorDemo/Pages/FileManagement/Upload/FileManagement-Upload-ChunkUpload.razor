@@ -6,8 +6,12 @@
             <span class="drop-file-icon mb-3"></span>
             <span class="mb-3">Click the Select File button to select a file</span>
         </div>
-        <DxUpload Name="myFile" UploadUrl="@GetUploadUrl("api/Upload/UploadChunkFile/")" SelectedFilesChanged="SelectedFilesChanged"
-                  ChunkSize="200000" MaxFileSize="15000000" CssClass="@(SelectedFilesCount > 0 ? "w-100" : string.Empty)">
+        <DxUpload Name="myFile"
+                  ChunkSize="200000"
+                  MaxFileSize="15000000"
+                  UploadUrl="@GetUploadUrl("api/UploadChunks/Upload/")"
+                  SelectedFilesChanged="@SelectedFilesChanged"
+                  CssClass="@(SelectedFilesCount > 0 ? "w-100" : string.Empty)">
         </DxUpload>
     </div>
 

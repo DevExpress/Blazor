@@ -1,0 +1,23 @@
+﻿<DemoScriptLoader Src="_content/BlazorDemo/lib/reporting.js" @ref=demoScriptLoader></DemoScriptLoader>
+@if(ScriptsLoaded) {
+    <DxDocumentViewer ReportName=@ReportName Height="700px" CssClass="w-100"></DxDocumentViewer>
+}
+
+@code {
+    [Parameter] public string ReportName { get; set; }
+    DemoScriptLoader demoScriptLoader { get; set; }
+    bool ScriptsLoaded { get; set; } = false;
+
+    protected override void OnInitialized() {
+        base.OnInitialized();
+        ReportName = ReportName ?? "InvoiceReport";
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if(!ScriptsLoaded) {
+            await demoScriptLoader.Loaded;
+            ScriptsLoaded = true;
+            StateHasChanged();
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}

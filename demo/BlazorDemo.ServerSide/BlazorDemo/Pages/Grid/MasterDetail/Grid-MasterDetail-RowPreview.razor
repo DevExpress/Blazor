@@ -1,14 +1,14 @@
 ﻿@page "/Grid/MasterDetail/RowPreview"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-MasterDetail-RowPreview" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Grid-MasterDetail-RowPreview" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <DxGrid Data="GridData" PageSize="5"
                 DetailRowDisplayMode="GridDetailRowDisplayMode.Always"
                 CustomizeElement="Grid_CustomizeElement"
-                SizeMode="Params.SizeMode">
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
             <Columns>
                 <DxGridDataColumn FieldName="FirstName" />
                 <DxGridDataColumn FieldName="LastName" />

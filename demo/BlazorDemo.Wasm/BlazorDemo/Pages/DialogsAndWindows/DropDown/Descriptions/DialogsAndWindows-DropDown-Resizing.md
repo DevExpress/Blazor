@@ -1,0 +1,3 @@
+Enable the [AllowResize](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDown.AllowResize) property to allow users to change the DropDown's size. When enabled, the component displays a size grip. Users can drag it to change the drop-down window width and height.
+
+Use the following properties to restrict changes to the component size: [MinWidth](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDown.MinWidth), [MaxWidth](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDown.MaxWidth), [MinHeight](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDown.MinHeight), [MaxHeight](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDown.MaxHeight).

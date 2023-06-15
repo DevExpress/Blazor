@@ -1,0 +1,65 @@
+﻿@using DevExpress.ClipboardSource.SpreadsheetML
+@inject WeatherForecastService ForecastService
+
+<DemoPageSectionComponent Id="Utility-LoadingPanel-Overview" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxLoadingPanel @bind-Visible="PanelVisible"
+                        IsContentBlocked="true"
+                        ApplyBackgroundShading="true"
+                        IndicatorAreaVisible="false"
+                        Text="Fetching Data..."
+                        SizeMode="Params.SizeMode">
+            <DxGrid Data="DataSource"
+                    CssClass="ch-360"
+                    ShowAllRows="true">
+                <Columns>
+                    @*BeginCollapse*@
+                    <DxGridDataColumn FieldName="Date" DisplayFormat="D" MinWidth="100"/>
+                    <DxGridDataColumn FieldName="Forecast" Width="20%"/>
+                    <DxGridDataColumn FieldName="CloudCover" Width="20%"/>
+                    <DxGridDataColumn FieldName="TemperatureC"
+                                      Caption="@("Temp. (\x2103)")"
+                                      TextAlignment="GridTextAlignment.Left"
+                                      Width="15%"/>
+                    <DxGridDataColumn FieldName="TemperatureF"
+                                      Caption="@("Temp. (\x2109)")"
+                                      TextAlignment="GridTextAlignment.Left"
+                                      Width="15%"/>
+                    @*EndCollapse*@
+                </Columns>
+            </DxGrid>
+        </DxLoadingPanel>
+
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionButton Text="Refresh Grid data"
+                      Enabled="!PanelVisible"
+                      OnClick="RefreshButton_Click"/>
+    </OptionsContent>
+
+    @code {
+        bool PanelVisible { get; set; }
+        object DataSource { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            await LoadGridData();
+        }
+
+        private async Task RefreshButton_Click() {
+            await LoadGridData();
+        }
+
+        async Task LoadGridData() {
+            PanelVisible = true;
+            await Task.Delay(3000);
+            DataSource = ForecastService.GetForecast(regenerate: true);
+            /*BeginHide*/
+#if VISUALTESTS
+            return;
+#endif
+            /*EndHide*/
+            PanelVisible = false;
+        }
+    }
+</DemoPageSectionComponent>

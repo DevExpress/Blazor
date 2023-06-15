@@ -1,30 +1,33 @@
-﻿<DemoPageSectionComponent Id="Navigation-TreeView-FlatDataBinding" VerticalAlignment=VerticalAlignment.Top>
-    @if(Data == null) {
-        <p><em>Loading...</em></p>
-    }
-    else {
-        <div class="cw-320">
-            <DxTreeView Data="@Data"
-                        AnimationType="LayoutAnimationType.Slide">
-                <DataMappings>
-                    <DxTreeViewDataMapping Text="Name"
-                                           Key="Id"
-                                           ParentKey="CategoryId" />
-                </DataMappings>
-            </DxTreeView>
-        </div>
-    }
-
-    @code {
-        List<FlatDataItem> Data { get; set; }
-
-        protected override void OnInitialized() {
-            IEnumerable<ProductFlat> products = ProductData.Products;
-            IEnumerable<ProductCategory> productSubcategories = ProductData.Categories;
-
-            Data = new List<FlatDataItem>(Enum.GetValues<ProductCategoryMain>().Select(i => new FlatDataItem() { Name = i.ToString(), Id = i }));
-            Data.AddRange(products.Select(i => new FlatDataItem() { Name = i.ProductName, Id = i.Id, CategoryId = i.ProductCategoryId }));
-            Data.AddRange(productSubcategories.Select(i => new FlatDataItem() { Name = i.Subcategory, Id = i.SubcategoryID, CategoryId = i.Category }));
+﻿<DemoPageSectionComponent Id="Navigation-TreeView-FlatDataBinding" VerticalAlignment=VerticalAlignment.Top ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @if(Data == null) {
+            <p><em>Loading...</em></p>
+        } else {
+            <div class="cw-320">
+                <DxTreeView Data="@Data"
+                            SizeMode="Params.SizeMode"
+                            AnimationType="LayoutAnimationType.Slide">
+                    <DataMappings>
+                        <DxTreeViewDataMapping Text="Name"
+                                               Key="Id"
+                                               ParentKey="CategoryId"/>
+                    </DataMappings>
+                </DxTreeView>
+            </div>
         }
-    }
+
+        @code {
+            List<FlatDataItem> Data { get; set; }
+
+            protected override void OnInitialized() {
+                IEnumerable<ProductFlat> products = ProductData.Products;
+                IEnumerable<ProductCategory> productSubcategories = ProductData.Categories;
+
+                Data = new List<FlatDataItem>(Enum.GetValues<ProductCategoryMain>().Select(i => new FlatDataItem() { Name = i.ToString(), Id = i }));
+                Data.AddRange(products.Select(i => new FlatDataItem() { Name = i.ProductName, Id = i.Id, CategoryId = i.ProductCategoryId }));
+                Data.AddRange(productSubcategories.Select(i => new FlatDataItem() { Name = i.Subcategory, Id = i.SubcategoryID, CategoryId = i.Category }));
+            }
+
+        }
+    </ChildContentWithParameters>
 </DemoPageSectionComponent>

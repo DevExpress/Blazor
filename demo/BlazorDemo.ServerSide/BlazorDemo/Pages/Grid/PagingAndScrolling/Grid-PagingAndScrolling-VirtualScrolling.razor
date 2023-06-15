@@ -1,0 +1,74 @@
+﻿@page "/Grid/PagingAndScrolling/VirtualScrolling"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-PagingAndScrolling-VirtualScrolling" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <DxGrid Data="GridData"
+                CssClass="ch-480"
+                TextWrapEnabled="TextWrapEnabled"
+                ShowGroupPanel="true"
+                AutoExpandAllGroupRows="true"
+                VirtualScrollingEnabled="true"
+                SizeMode="Params.SizeMode">
+            <Columns>
+                <DxGridDataColumn FieldName="OrderDate" GroupIndex="0" GroupInterval="GridColumnGroupInterval.DateYear" MinWidth="70" Width="10%" />
+                <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
+                <DxGridDataColumn FieldName="CategoryId" Caption="Category" MinWidth="100" Width="10%">
+                    <EditSettings>
+                        <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId" TextFieldName="CategoryName" />
+                    </EditSettings>
+                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="CustomerId" Caption="Customer" MinWidth="200" Width="20%">
+                    <EditSettings>
+                        <DxComboBoxSettings Data="Customers" ValueFieldName="CustomerId" TextFieldName="DisplayText" />
+                    </EditSettings>
+                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="Country" Width="10%" />
+                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
+                <DxGridDataColumn FieldName="Quantity" Width="10%" />
+                <DxGridDataColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" UnboundExpression="[UnitPrice] * [Quantity]" DisplayFormat="c" MinWidth="100" Width="10%" />
+            </Columns>
+            <GroupSummary>
+                <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="Country" />
+                <DxGridSummaryItem SummaryType="GridSummaryItemType.Sum" FieldName="Total" />
+            </GroupSummary>
+        </DxGrid>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionCheckBox Label="Enable Text Wrap" @bind-Checked="TextWrapEnabled" />
+    </OptionsContent>
+
+    @code {
+        bool TextWrapEnabled { get; set; }
+
+        object GridData { get; set; }
+        IReadOnlyList<Category> Categories { get; set; }
+        IReadOnlyList<CustomerInfo> Customers { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Categories = (await NwindDataService.GetCategoriesAsync()).ToList();
+            Customers = (await NwindDataService.GetCustomersAsync())
+                .Select(i => new CustomerInfo(i.CustomerId, $"{i.ContactName} ({i.CompanyName})"))
+                .OrderBy(i => i.DisplayText)
+                .ToList();
+
+            var invoices = await NwindDataService.GetInvoicesAsync();
+            var products = await NwindDataService.GetProductsAsync();
+            GridData = invoices.Join(products, i => i.ProductId, p => p.ProductId, (i, p) => {
+                return new {
+                    ProductName = i.ProductName,
+                    CategoryId = p.CategoryId,
+                    CustomerId = i.CustomerId,
+                    Country = i.Country,
+                    OrderDate = i.OrderDate,
+                    UnitPrice = i.UnitPrice,
+                    Quantity = i.Quantity
+                };
+            });
+        }
+
+        record CustomerInfo(string CustomerId, string DisplayText);
+    }
+</DemoPageSectionComponent>

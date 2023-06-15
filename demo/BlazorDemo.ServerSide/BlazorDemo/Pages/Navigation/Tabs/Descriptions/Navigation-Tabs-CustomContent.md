@@ -1,1 +1,0 @@
-You can use the [ActiveTabIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTabs.ActiveTabIndex) property to track active tab change events. This example demonstrates how to update the content area when a user selects a tab.

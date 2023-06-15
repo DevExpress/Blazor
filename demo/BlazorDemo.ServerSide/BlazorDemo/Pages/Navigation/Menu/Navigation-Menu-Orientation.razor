@@ -1,8 +1,12 @@
-﻿<DemoPageSectionComponent Id="Navigation-Menu-Orientation">
-    <DemoChildContent>
-        <div class="card cw-320 menu-box">
-            <div class="card-body p-0">
-                <DxMenu Orientation="Orientation.Vertical" DisplayMode="DisplayMode">
+﻿<DemoPageSectionComponent Id="Navigation-Menu-Orientation" ShowSizeMode="true" VerticalAlignment="VerticalAlignment.Top">
+    <ChildContentWithParameters Context="Params">
+        <div class="cw-640">
+            <div class="card">
+                <DxMenu Title="DevExpress"
+                        Orientation="Orientation"
+                        DisplayMode="DisplayMode"
+                        CollapseItemsToHamburgerMenu="true"
+                        SizeMode="@Params.SizeMode">
                     <Items>
                         <DxMenuItem Text="Home" IconCssClass="menu-icon-home menu-icon">
                             <Items>
@@ -34,20 +38,22 @@
                                 <DxMenuItem Text="Blogs" />
                             </Items>
                         </DxMenuItem>
-                        <DxMenuItem Text="Contacts" IconCssClass="menu-icon-contacts menu-icon" />
-                        <DxMenuItem Text="About" IconCssClass="menu-icon-about menu-icon" />
                     </Items>
                 </DxMenu>
             </div>
         </div>
-    </DemoChildContent>
+    </ChildContentWithParameters>
     <OptionsContent>
         <OptionComboBox Label="Display Mode:" CssClass="ow-100" Data="@DisplayModes" @bind-Value="@DisplayMode"></OptionComboBox>
+        <OptionComboBox Label="Orientation:" CssClass="ow-120" Data="@OrientationOptions" @bind-Value="@Orientation"></OptionComboBox>
     </OptionsContent>
-    @code{
+
+    @code {
         /*BeginHide*/
-        static MenuDisplayMode[] DisplayModes { get; set; } = { MenuDisplayMode.Desktop , MenuDisplayMode.Mobile};
+        IEnumerable<MenuDisplayMode> DisplayModes { get; } = Enum.GetValues<MenuDisplayMode>();
+        IEnumerable<Orientation> OrientationOptions { get; } = Enum.GetValues<Orientation>();
         /*EndHide*/
-        MenuDisplayMode DisplayMode { get; set; } = MenuDisplayMode.Desktop;
+        MenuDisplayMode DisplayMode { get; set; } = MenuDisplayMode.Mobile;
+        Orientation Orientation { get; set; } = Orientation.Vertical;
     }
 </DemoPageSectionComponent>

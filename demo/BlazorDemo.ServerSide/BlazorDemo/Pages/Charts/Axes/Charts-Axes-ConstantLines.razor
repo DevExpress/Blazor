@@ -33,13 +33,17 @@
                                ArgumentField="info=>info.Year"
                                ValueField="info=>info.Value"
                                Color="@(System.Drawing.Color.FromArgb(150, 130, 130, 130))"
-                               Name="Annual mean"/>
+                               Name="Annual mean">
+				<DxChartSeriesPoint Visible="false" />
+			</DxChartLineSeries>
             <DxChartSplineSeries T="GlobalTemperatureIndexInfo"
                                TArgument="int"
                                TValue="double"
                                ArgumentField="info=>info.Year"
                                ValueField="info=>info.LowessValue"
-                               Name="Lowess smoothing"/>
+                               Name="Lowess smoothing">
+				<DxChartSeriesPoint Visible="false" />
+			</DxChartSplineSeries>
             <DxChartTooltip Enabled="true"/>
             <DxChartLegend Position="RelativePosition.Outside"
                            VerticalAlignment="VerticalEdge.Bottom"/>

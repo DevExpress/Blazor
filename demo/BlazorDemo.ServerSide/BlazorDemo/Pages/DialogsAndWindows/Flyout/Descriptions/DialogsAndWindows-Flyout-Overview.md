@@ -1,0 +1,5 @@
+Our Blazor [Flyout](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFlyout) component allows you to display a flyout window in your application. The window consists of the header, body, and footer elements. The header and footer are initially hidden. Set the [HeaderVisible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFlyout.HeaderVisible) and [FooterVisible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFlyout.FooterVisible) properties to **true** to display these elements. 
+
+The [HeaderText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFlyout.HeaderText), [BodyText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFlyout.BodyText), and [FooterText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFlyout.FooterText) properties specify text displayed in the Flyout elements.
+
+To show or close the Flyout in code, implement two-way binding for the [IsOpen](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFlyout.IsOpen) property. Users can click outside the Flyout's boundaries, or press Escape to close the component from the UI.

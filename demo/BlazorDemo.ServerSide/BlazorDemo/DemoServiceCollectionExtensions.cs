@@ -13,11 +13,12 @@ using Microsoft.Extensions.Options;
 namespace BlazorDemo {
 
     public static class DemoServiceCollectionExtensions {
-        public static void AddDemoServices(this IServiceCollection services) {
+        public static void AddDemoServices(this IServiceCollection services, bool blazorWasm = false) {
             services.AddScoped<WeatherForecastService>();
             services.AddScoped<RentInfoDataService>();
             services.AddScoped<ContosoRetailDataService>();
             services.AddScoped<NwindDataService>();
+            services.AddScoped<HomesDataService>();
             services.AddScoped<IssuesDataService>();
             services.AddScoped<WorldcitiesDataService>();
             services.AddDevExpressBlazor(opts => {
@@ -40,6 +41,10 @@ namespace BlazorDemo {
                 });
             });
 
+            if(blazorWasm) {
+                services.AddScoped<DevExpress.XtraReports.Services.IReportProviderAsync, DemoReportSourceWasm>();
+                services.AddDevExpressWebAssemblyBlazorReportViewer();
+            }
             services.AddDocumentMetadata(ConfigureMetadata);
             services.AddSingleton<DemoConfiguration>();
 

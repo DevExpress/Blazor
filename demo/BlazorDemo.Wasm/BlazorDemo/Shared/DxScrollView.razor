@@ -1,28 +1,11 @@
-﻿<DemoScriptLoader @ref=@scriptLoaderRef Src="_content/BlazorDemo/lib/scroll-view.js" />
-
-<div @attributes=@Attributes class="blazor-scroll-view @CssClass" @ref=@elementRef>
+﻿@using DevExpress.Blazor.Internal
+<DxScrollViewer CssClass="@(CssClass + " blazor-scroll-view")">
     @ChildContent
-</div>
-@code {
-    ElementReference elementRef;
-    DemoScriptLoader scriptLoaderRef;
+</DxScrollViewer>
 
+@code {
     [Parameter]
     public string CssClass { get; set; }
     [Parameter]
     public RenderFragment ChildContent { get; set; }
-    [Parameter]
-    public Func<Task> ScriptLoaded { get; set; }
-
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IEnumerable<KeyValuePair<string, object>> Attributes { get; set; }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender) {
-        if(firstRender) {
-            await scriptLoaderRef.Loaded;
-            await scriptLoaderRef.InvokeVoidAsync("DevExpress.ui.ensureScrollView", elementRef);
-            if(ScriptLoaded != null)
-                await ScriptLoaded.Invoke();
-        }
-    }
 }

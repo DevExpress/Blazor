@@ -27,6 +27,10 @@ namespace BlazorDemo {
             var dirPath = config.GetValue<string>("DataSourcesFolder");
             return $"Data Source={Path.Combine(dirPath, "nwind.db")}";
         }
+        public static string GetHomesSqliteConnectionString(IConfiguration config) {
+            var dirPath = config.GetValue<string>("DataSourcesFolder");
+            return $"Data Source={Path.Combine(dirPath, "homes.db")}";
+        }
 
         public static string GetIssuesConnectionString(IConfiguration config) {
             return GetConnectionString(config, "IssuesConnectionString");

@@ -1,1 +1,3 @@
-Area charts display data as a region between the data curve and the argument axis. The Area series can be used to emphasize value changes. In this example, you can switch between the following area series types: [Area](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartAreaSeries-3), [Stacked Area](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartStackedAreaSeries-3), and [Full Stacked Area](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartFullStackedAreaSeries-3).
+The Area chart displays data as a region between the data curve and the argument axis. Use the Area series to emphasize value changes or compare values in multiple series. 
+
+Use the combo boxes at the top of the chart to display data point markers and labels.

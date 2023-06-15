@@ -1,0 +1,97 @@
+﻿.template-container {
+    display: flex;
+    align-items: center;
+    width: 100%
+}
+
+.template-icon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.375rem;
+    -webkit-mask-image: url("images/icons/theme-icon.svg");
+    mask-image: url("images/icons/theme-icon.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    background-color: currentColor;
+    border: 1px solid white;
+}
+
+.dxbl-sm .template-icon {
+    margin-right: 0.25rem;
+}
+
+.dxbl-lg .template-icon {
+    margin-right: 0.5rem;
+}
+
+.template-container > .blazing-berry {
+    color: #5c2d91;
+}
+
+.template-container > .blazing-dark {
+    color: #46444a;
+}
+
+.template-container > .office-white {
+    color: #fe7109;
+}
+
+.template-container > .purple {
+    color: #7989ff;
+}
+
+.template-container > .default {
+    color: #007bff;
+}
+
+.template-container > .cerulean {
+    color: #2fa4e7;
+}
+
+.template-container > .cyborg {
+    color: #060606;
+}
+
+.template-container > .flatly {
+    color: #dce4ec;
+}
+
+.template-container > .journal {
+    color: #eb6864;
+}
+
+.template-container > .litera {
+    color: #4582ec;
+}
+
+.template-container > .lumen {
+    color: #158cba;
+}
+
+.template-container > .lux {
+    color: #1a1a1a;
+}
+
+.template-container > .pulse {
+    color: #593196;
+}
+
+.template-container > .simplex {
+    color: #d9230f;
+}
+
+.template-container > .solar {
+    color: #b58900;
+}
+
+.template-container > .superhero {
+    color: #df691a;
+}
+
+.template-container > .united {
+    color: #e95420;
+}
+
+.template-container > .yeti {
+    color: #008cba;
+}

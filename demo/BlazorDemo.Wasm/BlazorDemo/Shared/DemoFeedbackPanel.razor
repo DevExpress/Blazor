@@ -62,8 +62,8 @@
     }
 
     public string GetSupportForumUrl() {
-        var rootDemoPage = CurrentDemoPage.ParentPage != null ? CurrentDemoPage.ParentPage : CurrentDemoPage;
-        var currentProductID = ((DemoRootPage)rootDemoPage).AnalyticsId;
+        var rootDemoPage = CurrentDemoPage.RootPage ?? (CurrentDemoPage as DemoRootPage);
+        var currentProductID = rootDemoPage.AnalyticsId;
         var currentProductFilter = "filters=%5B%7B%22filterName%22:%22PlatformedProductId%22,%22selectedValues%22:%5B%22" + currentProductID + "%22%5D%7D%5D";
         var searchString = rootDemoPage != CurrentDemoPage && CurrentDemoPage.Title != "Overview" ? rootDemoPage.Title + " " + CurrentDemoPage.Title : rootDemoPage.Title;
         return string.Format("https://supportcenter.devexpress.com/ticket/list?{0}&searchString={1}&sorting=Relevance", currentProductFilter, searchString);

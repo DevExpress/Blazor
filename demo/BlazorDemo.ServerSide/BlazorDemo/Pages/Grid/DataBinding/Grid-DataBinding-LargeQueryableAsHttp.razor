@@ -1,23 +1,17 @@
 ﻿@page "/Grid/DataBinding/LargeQueryableAsHttp"
 
-<DemoPageSectionComponent Id="Grid-DataBinding-LargeQueryableAsHttp" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Grid-DataBinding-LargeQueryableAsHttp" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
     <ChildContentWithParameters Context="Params">
         @inject NavigationManager NavigationManager
         @inject HttpClient HttpClient
 
-        <DxGrid Data="@Data" SizeMode="Params.SizeMode">
+        <DxGrid Data="@Data" SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
             <Columns>
                 <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
                 <DxGridDataColumn FieldName="QuantityPerUnit" MinWidth="100" />
                 <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" MinWidth="60" Width="10%" />
                 <DxGridDataColumn FieldName="UnitsInStock" Width="10%" />
-                <DxGridDataColumn FieldName="Discontinued" Width="10%" MinWidth="90">
-                    <CellDisplayTemplate>
-                        @if((bool)context.Value == true) {
-                            <span class="grid-icon grid-icon-check"></span>
-                        }
-                    </CellDisplayTemplate>
-                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="Discontinued" Width="10%" MinWidth="90" />
             </Columns>
         </DxGrid>
 

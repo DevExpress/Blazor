@@ -5,7 +5,7 @@
 @using DevExpress.XtraPrinting.Caching;
 @using DevExpress.XtraReports.UI;
 @using DevExpress.Blazor.Reporting.EditingFields;
-@using DevExpress.XtraReports.Web.Native.ClientControls;
+
 <DemoScriptLoader Src="_content/BlazorDemo/lib/reporting.js" @ref=demoScriptLoader>
 </DemoScriptLoader>
 
@@ -18,18 +18,21 @@
     [Parameter]
     public string ReportName { get; set; }
     [Parameter] public DemoPageSectionParameters Params { get; set; }
+    [Inject] public HttpClient Http { get; set; }
     [Inject] public EditingFieldModelFactory EditingFieldModelFactory { get; set; }
     [Inject] public DevExpress.XtraReports.Services.IReportProviderAsync ReportProvider { get; set; }
 
     async Task AssignReportAsync() {
-        XtraReport report = await ReportProvider.GetReportAsync(ReportName);
+        XtraReport report = await ReportProvider.GetReportAsync(ReportName, null);
         if(report == null) {
             throw new Exception($"{ReportName} not found");
         }
-        if(ReportName == XtraReportsDemos.ReportNames.LargeDatasetName)
-            await Viewer.OpenReportAsync(new CachedReportSource(report, new MemoryDocumentStorage()));
-        else
-            await Viewer.OpenReportAsync(report);
+#if SERVER_BLAZOR
+    if(ReportName == XtraReportsDemos.ReportNames.LargeDatasetName)
+        await Viewer.OpenReportAsync(new CachedReportSource(report, new MemoryDocumentStorage()));
+    else
+#endif
+        await Viewer.OpenReportAsync(report);
     }
     protected override async Task OnAfterRenderAsync(bool firstRender) {
         if(firstRender) {
@@ -51,6 +54,10 @@
 
     protected override void OnParametersSet() {
         base.OnParametersSet();
-        ReportName = ReportName ?? "InvoiceReport";
+#if SERVER_BLAZOR
+    ReportName = ReportName ?? "InvoiceReport";
+#else
+        ReportName = ReportName ?? XtraReportsDemos.ReportNames.BalanceSheetReportName;
+#endif
     }
 }

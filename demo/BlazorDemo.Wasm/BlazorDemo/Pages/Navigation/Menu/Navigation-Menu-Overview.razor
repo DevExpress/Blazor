@@ -1,8 +1,8 @@
-﻿<DemoPageSectionComponent Id="Navigation-Menu-Overview">
+﻿<DemoPageSectionComponent Id="Navigation-Menu-Overview" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         <div class="card w-100">
             <div class="card-body p-0">
-                <DxMenu Title="DevExpress" ItemsPosition="ItemPosition.End" CollapseItemsToHamburgerMenu="true" Target="_blank">
+                <DxMenu Title="DevExpress" ItemsPosition="ItemPosition.End" CollapseItemsToHamburgerMenu="true" Target="_blank" SizeMode="@Params.SizeMode">
                     <Items>
                         <DxMenuItem Text="Home" IconCssClass="menu-icon-home menu-icon">
                             <Items>

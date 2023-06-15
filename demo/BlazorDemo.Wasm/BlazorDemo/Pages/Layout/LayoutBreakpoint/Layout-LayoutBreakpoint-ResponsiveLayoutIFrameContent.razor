@@ -1,0 +1,49 @@
+﻿@*BeginHide*@
+@page "/Layout_LayoutBreakpoint_ResponsiveLayoutIFrameContent"
+@layout IFrameDataProviderAccessLayout<INwindDataProvider>
+@*EndHide*@
+<DxLayoutBreakpoint DeviceSize="DeviceSize.XSmall" @bind-IsActive="@isXSmallScreen" />
+
+<div class="h-100 grid-wrapper">
+    @inject NwindDataService NwindDataService
+
+    @if (isXSmallScreen) {
+        <div class="fab-container">
+            <DxButton RenderStyle="ButtonRenderStyle.Primary"
+                IconCssClass="btn-column-chooser"
+                CssClass="fab"
+                Click="@ShowColumnChooser" />
+        </div>
+    } else {
+        <div class="align-self-start p-2">
+            <DxButton Text="Column Chooser"
+                RenderStyle="ButtonRenderStyle.Secondary"
+                IconCssClass="btn-column-chooser"
+                Click="@ShowColumnChooser" />
+        </div>
+    }
+    <DxGrid @ref="@Grid" CssClass="flexGrid" Data="@Data" VirtualScrollingEnabled="true">
+            <Columns>
+                <DxGridDataColumn FieldName="ContactName" MinWidth="80" />
+                <DxGridDataColumn FieldName="ContactTitle" MinWidth="100" Visible="@GetExtraColumnsVisible()" />
+                <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
+                <DxGridDataColumn FieldName="City" Width="15%" MinWidth="80" Visible="@GetExtraColumnsVisible()" />
+                <DxGridDataColumn FieldName="Country" Width="10%" MinWidth="80" />
+            </Columns>
+    </DxGrid>
+</div>
+
+@code {
+    bool isXSmallScreen;
+    IGrid Grid { get; set; }
+    IEnumerable<Supplier> Data { get; set; }
+
+    protected override async Task OnInitializedAsync() {
+        Data = await NwindDataService.GetSuppliersAsync();
+    }
+
+    void ShowColumnChooser() {
+        Grid.ShowColumnChooser(new DialogDisplayOptions($".flexGrid", HorizontalAlignment.Center, VerticalAlignment.Center));
+    }
+    bool GetExtraColumnsVisible() { return !isXSmallScreen; }
+}

@@ -1,0 +1,40 @@
+﻿@page "/Grid/Columns/FixedColumns"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Columns-FixedColumns" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <DxGrid Data="@Data"
+                TextWrapEnabled="false"
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
+            <Columns>
+                <DxGridSelectionColumn FixedPosition="GridColumnFixedPosition.Left" Width="60px" />
+                <DxGridDataColumn FieldName="ContactName" Width="190px" />
+                <DxGridDataColumn FieldName="ContactTitle" Width="200px" />
+                <DxGridDataColumn FieldName="CompanyName" FixedPosition="GridColumnFixedPosition.Left" Width="240px" />
+                <DxGridDataColumn FieldName="City" FixedPosition="CityColumnFixedPosition" Width="100px" />
+                <DxGridDataColumn FieldName="Country" Width="100px" />
+                <DxGridDataColumn FieldName="Address" Width="270px" />
+                <DxGridDataColumn FieldName="Fax" Width="120px" />
+                <DxGridDataColumn FieldName="PostalCode" Width="100px" />
+                <DxGridDataColumn FieldName="Phone" Width="150px" />
+            </Columns>
+        </DxGrid>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionCheckBox Label="Fix the City column to the right" @bind-Checked="FixCityToRight" />
+    </OptionsContent>
+
+    @code {
+        object Data { get; set; }
+        bool FixCityToRight { get; set; } = true;
+
+        GridColumnFixedPosition CityColumnFixedPosition {
+            get { return FixCityToRight ? GridColumnFixedPosition.Right : GridColumnFixedPosition.None; }
+        }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetSuppliersAsync();
+        }
+    }
+</DemoPageSectionComponent>

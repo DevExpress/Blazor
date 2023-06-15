@@ -90,15 +90,19 @@ namespace BlazorDemo.DemoData {
                 if(rootPage != null) {
                     textRanks.Add(new TextRank(rootPage.Title, 15));
                     textRanks.Add(new TextRank(rootPage.Id, 7));
+                    textRanks.Add(new TextRank(rootPage.SearchKeywords, 7));
                     textRanks.Add(new TextRank(rootPage.SeoTitle, 5));
                     textRanks.Add(new TextRank(rootPage.Keywords, 3));
                 } else if(page != null) {
                     textRanks.Add(new TextRank(page.Title, 5));
+                    textRanks.Add(new TextRank(page.TitleOnPage, 5));
+                    textRanks.Add(new TextRank(page.SearchKeywords, 5));
                     textRanks.Add(new TextRank(page.Id, 3));
                     textRanks.Add(new TextRank(page.Keywords, 3));
                     textRanks.Add(new TextRank(page.SeoTitle, 2));
                 } else {
                     textRanks.Add(new TextRank(item.Title, 5));
+                    textRanks.Add(new TextRank(item.TitleOnPage, 5));
                     textRanks.Add(new TextRank(item.Id, 3));
                 }
                 KeywordsRankList.Add(item, SearchAgregator.GetKeywordsRankList(textRanks));

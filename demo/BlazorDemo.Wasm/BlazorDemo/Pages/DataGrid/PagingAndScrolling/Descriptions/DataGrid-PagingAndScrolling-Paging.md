@@ -1,8 +1,8 @@
 The DevExpress [Data Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1) for Blazor splits large amount of data rows across multiple pages and displays a pager for data navigation. Use the [PagerNavigationMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PagerNavigationMode) to specify how users navigate between pages. The following values are available:
 
-*   [InputBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PagerNavigationMode) - Users can type a page number in the Go to Page input box to navigate to the corresponding page.
-*   [NumericButtons](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PagerNavigationMode) - Users can click numeric buttons to navigate between pages.
-*   [Auto](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PagerNavigationMode) (Default) - If the number of pages is greater or equal to the [PagerSwitchToInputBoxButtonCount](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PagerSwitchToInputBoxButtonCount) value or the Data Grid is shown on small devices, the Go to Page input box is displayed. Otherwise, numeric buttons are displayed.
+*   [InputBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PagerNavigationMode) — Users can type a page number in the Go to Page input box to navigate to the corresponding page.
+*   [NumericButtons](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PagerNavigationMode) — Users can click numeric buttons to navigate between pages.
+*   [Auto](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PagerNavigationMode) (Default) — If the number of pages is greater or equal to the [PagerSwitchToInputBoxButtonCount](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PagerSwitchToInputBoxButtonCount) value or the Data Grid is shown on small devices, the Go to Page input box is displayed. Otherwise, numeric buttons are displayed.
 
 Use the [PageSize](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDataGrid-1.PageSize) property to specify the maximum number of rows that the Data Grid can display on a page. If **PageSize** is less than or equal to 0, all Data Grid rows are displayed on one page, and the pager is hidden.
 

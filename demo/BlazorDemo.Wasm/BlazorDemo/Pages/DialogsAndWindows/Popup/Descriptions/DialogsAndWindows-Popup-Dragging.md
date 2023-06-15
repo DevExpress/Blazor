@@ -1,0 +1,3 @@
+You can specify [PositionX](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.PositionX) and [PositionY](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.PositionY) properties to set the Popup's initial position relative to the viewport.
+
+Activate the [AllowDrag](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.AllowDrag) option to allow users to drag the Popup to a new position. Handle [DragStarted](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.DragStarted) and [DragCompleted](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.DragCompleted) events to process drag-related operations.

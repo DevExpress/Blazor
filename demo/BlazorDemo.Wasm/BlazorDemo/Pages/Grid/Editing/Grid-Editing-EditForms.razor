@@ -1,7 +1,7 @@
 ﻿@page "/Grid/EditData/EditForms"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Editing-EditForms" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Grid-Editing-EditForms" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
@@ -15,7 +15,7 @@
                 DataItemDeleting="Grid_DataItemDeleting"
                 PopupEditFormCssClass="pw-800"
                 EditMode="@CurrentEditMode"
-                SizeMode="Params.SizeMode">
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
             <Columns>
                 <DxGridCommandColumn Width="160px" />
                 <DxGridDataColumn FieldName="FirstName" MinWidth="80" />
@@ -26,27 +26,24 @@
                 <DxGridDataColumn FieldName="HireDate" Width="10%" MinWidth="80" />
             </Columns>
             <EditFormTemplate Context="EditFormContext">
-                @{
-                    var employee = (EditableEmployee)EditFormContext.EditModel;
-                }
                 <DxFormLayout CssClass="w-100">
                     <DxFormLayoutItem Caption="First Name:" ColSpanMd="6">
-                        <DxTextBox @bind-Text="@employee.FirstName" />
+                        @EditFormContext.GetEditor("FirstName")
                     </DxFormLayoutItem>
                     <DxFormLayoutItem Caption="Last Name:" ColSpanMd="6">
-                        <DxTextBox @bind-Text="@employee.LastName" />
+                        @EditFormContext.GetEditor("LastName")
                     </DxFormLayoutItem>
                     <DxFormLayoutItem Caption="Title:" ColSpanMd="6">
-                        <DxTextBox @bind-Text="@employee.Title" />
+                        @EditFormContext.GetEditor("Title")
                     </DxFormLayoutItem>
                     <DxFormLayoutItem Caption="Title of Courtesy:" ColSpanMd="6">
-                        <DxTextBox @bind-Text="@employee.TitleOfCourtesy" />
+                        @EditFormContext.GetEditor("TitleOfCourtesy")
                     </DxFormLayoutItem>
                     <DxFormLayoutItem Caption="Birth Date:" ColSpanMd="6">
-                        <DxDateEdit @bind-Date="@employee.BirthDate" />
+                        @EditFormContext.GetEditor("BirthDate")
                     </DxFormLayoutItem>
                     <DxFormLayoutItem Caption="Hire Date:" ColSpanMd="6">
-                        <DxDateEdit @bind-Date="@employee.HireDate" />
+                        @EditFormContext.GetEditor("HireDate")
                     </DxFormLayoutItem>
                 </DxFormLayout>
             </EditFormTemplate>

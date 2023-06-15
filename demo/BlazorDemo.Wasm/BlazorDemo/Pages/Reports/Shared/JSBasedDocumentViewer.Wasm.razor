@@ -1,0 +1,12 @@
+﻿<DxWasmDocumentViewer ReportName=@ReportName Height="700px" CssClass="w-100">
+    <DxWasmDocumentViewerRequestOptions InvokeAction="DXXRDV"></DxWasmDocumentViewerRequestOptions>
+</DxWasmDocumentViewer>
+
+@code {
+    [Parameter] public string ReportName { get; set; }
+
+    protected override async Task OnInitializedAsync() {
+        await base.OnInitializedAsync();
+        ReportName = ReportName ?? "InvoiceReport";
+    }
+}

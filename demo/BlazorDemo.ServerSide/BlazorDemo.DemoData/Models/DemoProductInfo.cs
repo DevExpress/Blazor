@@ -7,5 +7,6 @@ namespace BlazorDemo.DemoData {
         public string IconName { get; set; }
         public string Description { get; set; }
         public bool IsServerSideOnly { get; set; }
+        public bool IsClientSideOnly { get; set; }
     }
 }

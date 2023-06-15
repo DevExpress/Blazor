@@ -1,0 +1,1 @@
+You can arrange [Radio Group](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxRadioGroup-2) items vertically or horizontally (via the control's [Layout](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxRadioGroup-2.Layout) property). Use the **RadioGroup layout** combo box to switch layout modes (Vertical/Horizontal) within this demo.

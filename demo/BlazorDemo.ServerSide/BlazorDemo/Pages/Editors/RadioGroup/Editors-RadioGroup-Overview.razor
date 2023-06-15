@@ -1,0 +1,28 @@
+﻿<DemoPageSectionComponent Id="Editors-RadioGroup-Overview" ShowSizeMode="@true">
+    <ChildContentWithParameters Context="Params">
+        <fieldset>
+            <legend class="@GetLegendCssClass(Params.SizeMode)">Select your preferred language:</legend>
+            <DxRadioGroup Items="@Languages"
+                          @bind-Value="@PreferredLanguage"
+                          SizeMode="@Params.SizeMode"
+                          CssClass="dx-demo-radio-group" />
+            <p class="demo-text dx-demo-radio-selected-value">
+                Preferred language:
+                <strong>@PreferredLanguage</strong>
+            </p>
+        </fieldset>
+    </ChildContentWithParameters>
+
+    @code {
+        string PreferredLanguage { get; set; } = "English";
+        IEnumerable<string> Languages = new[] { "English", "简体中文", "Español", "Français", "Deutsch" };
+
+        string GetLegendCssClass(SizeMode sizeMode) {
+            var result = "dx-demo-radio-group-label";
+            if(sizeMode != SizeMode.Medium)
+                result += sizeMode == SizeMode.Large ? " dx-demo-large" : " dx-demo-small";
+            return result;
+        }
+    }
+
+</DemoPageSectionComponent>

@@ -1,0 +1,39 @@
+﻿<DemoPageSectionComponent Id="Utility-LoadingPanel-Indicator" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="card-body w-100">
+            <div class="card-header border-0 p-2 rounded">
+                <DxLoadingPanel IndicatorAnimationType="WaitIndicatorAnimationType.Pulse"
+                                CssClass="w-100"
+                                IndicatorVisible="indicatorVisible"
+                                IndicatorAreaVisible="indicatorAreaVisible"
+                                Visible="true"
+                                Text="Processing..."
+                                TextAlignment="textAlignment"
+                                SizeMode="Params.SizeMode">
+                    <div style="min-height: 250px;"></div>
+                </DxLoadingPanel>
+            </div>
+        </div>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionComboBox T="LoadingPanelTextAlignment"
+                        TData="LoadingPanelTextAlignment"
+                        Label="Text alignment:"
+                        Data="Enum.GetValues<LoadingPanelTextAlignment>()"
+                        @bind-Value="textAlignment"
+                        CssClass="ow-120" />
+        <OptionCheckBox T="bool"
+                        @bind-Checked="indicatorVisible"
+                        Label="Show the indicator"/>
+        <OptionCheckBox T="bool"
+                        @bind-Checked="indicatorAreaVisible"
+                        Label="Show the indicator frame" />
+    </OptionsContent>
+
+    @code {
+        bool indicatorVisible = true;
+        bool indicatorAreaVisible = true;
+        LoadingPanelTextAlignment textAlignment = LoadingPanelTextAlignment.Right;
+    }
+</DemoPageSectionComponent>

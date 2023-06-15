@@ -1,0 +1,116 @@
+﻿@*BeginHide*@
+@page "/Layout_LayoutBreakpoint_CardViewIFrameContent"
+@layout IFrameDataProviderAccessLayout<IHomesDataProvider>
+@*EndHide*@
+
+<DxLayoutBreakpoint DeviceSize="DeviceSize.XSmall" @bind-IsActive="@IsXSmallScreen" />
+
+<div class="h-100 w-100 ps-2 pt-2 card-vew-wrapper" >
+    @using BlazorDemo.Data.Homes;
+    @inject HomesDataService HomesDataService
+    <DxPager PageCount="@PageCount" CssClass="mb-2" @bind-ActivePageIndex="@ActivePageIndex" />
+    @if(Homes != null) {
+        var layoutInfo = GetCurrentPageLayoutInfo();
+        <div class="card-view-container">
+            <div class="pe-2 pb-2">
+                <DxGridLayout ColumnSpacing="0.5rem" RowSpacing="0.5rem">
+                <Rows>
+                    @for (int i = 0; i < layoutInfo.RowCount; i++) {
+                        <DxGridLayoutRow />
+                    }
+                </Rows>
+                <Columns>
+                    @for (int i = 0; i < layoutInfo.ColCount; i++) {
+                        <DxGridLayoutColumn Width="1fr" />
+                    }
+                </Columns>
+                <Items>
+                    @for (int i = layoutInfo.StartPageIndex; i <= layoutInfo.EndPageIndex; i++) {
+                        Home home = Homes[i];
+                        <DxGridLayoutItem Row="@layoutInfo.GetPageRowIndex(i)" Column="@layoutInfo.GetPageColumnIndex(i)" CssClass="border card-container">
+                            <Template>
+                                <div class="text-center">
+                                    <img src="@(StaticAssetUtils.GetImagePath(home.PhotoUrl))" class="m-auto w-75" />
+                                </div>
+                                <p class="mt-3">
+                                    <span class="text-muted">Size:</span>
+                                    <span class="fw-bold">@home.HouseSize ft2</span>
+                                </p>
+                                <p>
+                                    <span class="text-muted">Year:</span>
+                                    <span class="fw-bold">@home.YearBuilt</span>
+                                </p>
+                                <p class="card-ellipsis" title=@home.Address>
+                                    <span  class="text-muted">Address: </span>
+                                    <span class="fw-bold">@home.Address</span>
+                                </p>
+                                <p class="text-muted" style="overflow: hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                    @home.Features
+                                </p>
+                                <p class="card-link-container">
+                                    <a href="javascript:;" @onclick="@(() => ShowDetails(home.Features))">...More details</a>
+                                </p>
+                                <h5 class="text-center card-price">@string.Format("{0:C}", home.Price)</h5>
+                            </Template>
+                        </DxGridLayoutItem>
+                    }
+                </Items>
+            </DxGridLayout>
+            </div>
+        </div>
+    }
+
+    <DxPopup HeaderText="Details" @bind-Visible="@PopupVisible">
+        <Content>
+            @Details
+        </Content>
+    </DxPopup>
+</div>
+@code {
+    class PageLayoutInfo {
+        public static int
+            PageSize = 6,
+            SmallScreenColCount = 1,
+            MediumScreenColCount = 2;
+
+        public PageLayoutInfo(int pageIndex, bool isXSmallScreen, int itemsCount) {
+            StartPageIndex = pageIndex * PageSize;
+            EndPageIndex = Math.Min(itemsCount, StartPageIndex + PageSize) - 1;
+            int itemsOnPage = EndPageIndex - StartPageIndex + 1;
+            ColCount = isXSmallScreen ? SmallScreenColCount : MediumScreenColCount;
+            double rowCount = itemsOnPage / ColCount;
+            RowCount = (int)Math.Floor(rowCount);
+        }
+
+        public int StartPageIndex { get; private set; }
+        public int EndPageIndex { get; private set; }
+        public int ColCount { get; private set; }
+        public int RowCount { get; private set; }
+
+        public int GetPageRowIndex(int itemIndex) {
+            return (itemIndex - StartPageIndex) / ColCount;
+        }
+        public int GetPageColumnIndex(int itemIndex) {
+            return itemIndex % ColCount;
+        }
+    }
+    bool IsXSmallScreen;
+    List<Home> Homes;
+    int PageCount = 0;
+    int ActivePageIndex = 0;
+    bool PopupVisible = false;
+    string Details;
+
+    protected override async Task OnInitializedAsync() {
+        Homes = (await HomesDataService.GetHomesAsync()).ToList();
+        PageCount = (Homes.Count() / PageLayoutInfo.PageSize) + 1;
+    }
+
+    void ShowDetails(string details) {
+        PopupVisible = true;
+        Details = details;
+    }
+    PageLayoutInfo GetCurrentPageLayoutInfo() {
+        return new PageLayoutInfo(ActivePageIndex, IsXSmallScreen, Homes.Count());
+    }
+}

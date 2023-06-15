@@ -1,7 +1,7 @@
 ﻿@page "/Grid/EditData/EditRowValidation"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Editing-EditRowValidation" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Grid-Editing-EditRowValidation" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
@@ -9,11 +9,12 @@
                 Data="DataSource"
                 PageSize="12"
                 KeyFieldName="EmployeeId"
+                CustomizeDataRowEditor="Grid_CustomizeDataRowEditor"
                 EditModelSaving="Grid_EditModelSaving"
                 DataItemDeleting="Grid_DataItemDeleting"
                 EditMode="GridEditMode.EditRow"
                 EditorRenderMode="GridEditorRenderMode.Integrated"
-                SizeMode="Params.SizeMode">
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
             <Columns>
                 <DxGridCommandColumn Width="160px" />
                 <DxGridDataColumn FieldName="FirstName" MinWidth="80" />
@@ -23,33 +24,6 @@
                 <DxGridDataColumn FieldName="BirthDate" Width="10%" MinWidth="80" />
                 <DxGridDataColumn FieldName="HireDate" Width="10%" MinWidth="80" />
             </Columns>
-            <DataColumnCellEditTemplate>
-                @{
-                    var employee = (EditableEmployee)context.EditModel;
-                }
-                @switch(context.DataColumn.FieldName) {
-                    case "FirstName":
-                        <DxTextBox @bind-Text="@employee.FirstName" ShowValidationIcon="true" />
-                        break;
-                    case "LastName":
-                        <DxTextBox @bind-Text="@employee.LastName" ShowValidationIcon="true"  />
-                        break;
-                    case "Title":
-                        <DxTextBox @bind-Text="@employee.Title" ShowValidationIcon="true" />
-                        break;
-                    case "TitleOfCourtesy":
-                        <DxTextBox @bind-Text="@employee.TitleOfCourtesy" ShowValidationIcon="true" />
-                        break;
-                    case "BirthDate":
-                        <DxDateEdit @bind-Date="@employee.BirthDate" ShowValidationIcon="true" />
-                        break;
-                    case "HireDate":
-                        <DxDateEdit @bind-Date="@employee.HireDate" ShowValidationIcon="true" />
-                        break;
-                    default:
-                        throw new NotImplementedException();
-                }
-            </DataColumnCellEditTemplate>
         </DxGrid>
     </ChildContentWithParameters>
 
@@ -63,6 +37,9 @@
         protected override async Task OnAfterRenderAsync(bool firstRender) {
             if(firstRender)
                 await Grid.StartEditNewRowAsync();
+        }
+        void Grid_CustomizeDataRowEditor(GridCustomizeDataRowEditorEventArgs e) {
+            ((ITextEditSettings)e.EditSettings).ShowValidationIcon = true;
         }
         async Task Grid_EditModelSaving(GridEditModelSavingEventArgs e) {
             var editableEmployee = (EditableEmployee)e.EditModel;

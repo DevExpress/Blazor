@@ -1,11 +1,11 @@
 ﻿<div>
     <ul class="list-unstyled m-0">
         <li>
-            <span class="color-picker-header">@HeaderText</span>
+            <div class="color-picker-item">@HeaderText</div>
         </li>
         <li role="separator" class="separator dropdown-divider"></li>
         <li>
-            <div class="color-picker-container">
+            <div class="color-picker-item color-picker-container">
                 @foreach(var color in colors) {
                     <div class="color-picker-cell @CssClassSelectedCell(color)" style="background-color:@color" @onclick="() => ChangeColor(color)"></div>
                 }
@@ -13,9 +13,9 @@
         </li>
         <li role="separator" class="separator dropdown-divider"></li>
         <li>
-            <div class="color-picker-container color-picker-container-reset" @onclick="ResetColor">
+            <div class="color-picker-item color-picker-item-reset" @onclick="ResetColor">
                 <div class="color-picker-cell"></div>
-                <span class="ms-2 mt-1-5">No color</span>
+                <span>No color</span>
             </div>
         </li>
     </ul>

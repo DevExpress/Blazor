@@ -1,6 +1,6 @@
 ﻿@page "/Grid/DataBinding/ObservableCollection"
 
-<DemoPageSectionComponent Id="Grid-DataBinding-ObservableCollection" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Grid-DataBinding-ObservableCollection" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
     <ChildContentWithParameters Context="Params">
         @using System.Collections.ObjectModel
         @using BlazorDemo.Data.StockQuotes
@@ -10,7 +10,7 @@
 
         <DxGrid Data="GridData"
                 CustomizeElement="Grid_CustomizeElement"
-                SizeMode="Params.SizeMode">
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
             <Columns>
                 <DxGridDataColumn FieldName="Ticker"/>
                 <DxGridDataColumn FieldName="LastPrice" DisplayFormat="N2"/>

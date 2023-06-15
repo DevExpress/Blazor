@@ -2,5 +2,5 @@ Group summaries (using aggregate functions such as Sum, Min, Max, Avg, and Count
 
 Use the [GroupSummaryPosition](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSummaryItemBase-1.GroupSummaryPosition) property to position group summaries. The following values are available:
 
-*   [GroupSummaryPosition.GroupRow](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GroupSummaryPosition) (Default) - The summary is displayed in parentheses after the group header.
-*   [GroupSummaryPosition.GroupFooter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GroupSummaryPosition) - The summary is displayed in the group footer below the target column.
+*   [GroupSummaryPosition.GroupRow](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GroupSummaryPosition) (Default) — The summary is displayed in parentheses after the group header.
+*   [GroupSummaryPosition.GroupFooter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GroupSummaryPosition) — The summary is displayed in the group footer below the target column.

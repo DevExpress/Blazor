@@ -1,0 +1,38 @@
+.grid-wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .btn-column-chooser {
+    width: 16px;
+    height: 16px;
+    -webkit-mask-image: url("images/icons/column-chooser.svg");
+    mask-image: url("images/icons/column-chooser.svg");
+    background-color: currentColor;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .fab-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    user-select: none;
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .fab {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.35) !important;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .flexGrid {
+    flex: 1 1 auto;
+    overflow-y: auto;
+}

@@ -56,7 +56,7 @@ namespace BlazorDemo.Services {
         public string GetThemeCssUrl(DemoTheme theme) {
             if(EnableNewBlazorThemes) {
                 if (this.newBlazorThemesMapping.ContainsKey(theme.Name))
-                    return $"_content/DevExpress.Blazor.Themes/{this.newBlazorThemesMapping.GetValueOrDefault(theme.Name)}.css";
+                    return $"_content/DevExpress.Blazor.Themes/{this.newBlazorThemesMapping.GetValueOrDefault(theme.Name)}.min.css";
                 return $"_content/DevExpress.Blazor.Themes/bootstrap-external.bs5.min.css";
             }
             return GetBootstrapThemeCssUrl(theme);

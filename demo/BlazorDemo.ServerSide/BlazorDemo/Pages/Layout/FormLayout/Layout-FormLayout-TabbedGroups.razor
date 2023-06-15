@@ -1,0 +1,55 @@
+﻿<DemoPageSectionComponent Id="Layout-FormLayout-TabbedGroups"
+                          ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxFormLayout SizeMode="Params.SizeMode" CssClass="w-100">
+            <DxFormLayoutTabPages @bind-ActiveTabIndex="@ActiveTabIndex">
+                <DxFormLayoutTabPage Caption="Personal Information">
+                    <DxFormLayoutItem Caption="First Name:">
+                        <DxTextBox @bind-Text="@FirstName" />
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Last Name:">
+                        <DxTextBox @bind-Text="@LastName" />
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Birth Date:">
+                        <DxDateEdit @bind-Date="@BirthDate" />
+                    </DxFormLayoutItem>
+                </DxFormLayoutTabPage>
+                <DxFormLayoutTabPage Caption="Work Information">
+                    <DxFormLayoutItem Caption="Position:">
+                        <DxTextBox @bind-Text="@Position" />
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Hire Date:">
+                        <DxDateEdit @bind-Date="@HireDate" />
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Notes:">
+                        <DxTextBox @bind-Text="@Notes" />
+                    </DxFormLayoutItem>
+                </DxFormLayoutTabPage>
+            </DxFormLayoutTabPages>
+        </DxFormLayout>
+        <div class="w-100 mx-0">
+            <p class="demo-text col-12 mt-2">
+                @nameof(FirstName)=<b>@FirstName</b>,
+                @nameof(LastName)=<b>@LastName</b>,
+                @nameof(BirthDate)=<b>@BirthDate</b>
+            </p>
+        </div>
+        <div class="w-100 mx-0">
+            <p class="demo-text col-12 mt-2">
+                @nameof(Position)=<b>@Position</b>,
+                @nameof(HireDate)=<b>@HireDate</b>,
+                @nameof(Notes)=<b>@Notes</b>
+            </p>
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        int ActiveTabIndex { get; set; } = 1;
+        string FirstName { get; set; } = "Nancy";
+        string LastName { get; set; } = "Davolio";
+        DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-20);
+        string Position { get; set; } = "Sales Representative";
+        DateTime HireDate { get; set; } = DateTime.Now.AddYears(-2);
+        string Notes { get; set; } = "Education includes a BA in psychology.";
+    }
+</DemoPageSectionComponent>

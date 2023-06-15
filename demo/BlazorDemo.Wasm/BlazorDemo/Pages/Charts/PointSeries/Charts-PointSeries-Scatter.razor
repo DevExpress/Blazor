@@ -1,9 +1,11 @@
-﻿@inject ISalesInfoDataProvider Sales
+﻿@page "/ChartScatterSeries"
+
+@inject ISalesInfoDataProvider Sales
 @inject DemoConfiguration DemoConfiguration
 
 <DemoPageSectionComponent Id="Charts-PointSeries-Scatter">
     <DemoChildContent>
-        @inject IScatterRandomDataProvider Experement
+        @inject IScatterRandomDataProvider Experiment
 
         <DxChart @ref="@chart"
                  T="DataPoint"
@@ -67,9 +69,9 @@
                 pointCount = 1000;
             else
                 pointCount = 500;
-            points1 = await Experement.GenerateCluster(140, 1280, 100, 1240, pointCount, 1);
-            points2 = await Experement.GenerateCluster(500, 1600, 1000, 2100, pointCount, 2);
-            points3 = await Experement.GenerateCluster(450, 950, 1550, 2050, pointCount, 3);
+            points1 = await Experiment.GenerateCluster(140, 1280, 100, 1240, pointCount, 1);
+            points2 = await Experiment.GenerateCluster(500, 1600, 1000, 2100, pointCount, 2);
+            points3 = await Experiment.GenerateCluster(450, 950, 1550, 2050, pointCount, 3);
         }
     }
 </DemoPageSectionComponent>

@@ -19,6 +19,7 @@ namespace BlazorDemo.AspNetCoreHost {
             ISalesInfoDataProvider salesInfoDataProvider,
             IExperimentResultDataProvider experementResultDataProvider,
             INwindDataProvider nwindDataProvider,
+            IHomesDataProvider homesDataProvider,
             IIssuesDataProvider issuesDataProvider,
             IWorldcitiesDataProvider worldcitiesDataProvider
         ) {
@@ -36,6 +37,8 @@ namespace BlazorDemo.AspNetCoreHost {
             InitializeEntities(nwindDataProvider, nwindDataProvider.GetProductsAsync, ct);
             InitializeEntities(nwindDataProvider, nwindDataProvider.GetShippersAsync, ct);
             InitializeEntities(nwindDataProvider, nwindDataProvider.GetSuppliersAsync, ct);
+
+            InitializeEntities(homesDataProvider, homesDataProvider.GetHomesAsync, ct);
 
             InitializeEntities(issuesDataProvider, issuesDataProvider.GetIssuesAsync, ct);
             InitializeEntities(issuesDataProvider, issuesDataProvider.GetProjectsAsync, ct);

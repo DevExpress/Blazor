@@ -1,0 +1,16 @@
+﻿@page "/DropDown"
+@using DevExpress.Blazor.Popup.Internal
+<DemoScriptLoader @ref=@scrollable Src="_content/BlazorDemo/lib/scrollable.js" />
+
+<DialogsAndWindows_DropDown_Overview />
+<DialogsAndWindows_DropDown_Customization />
+<DialogsAndWindows_DropDown_Position />
+<DialogsAndWindows_DropDown_Flipping />
+<DialogsAndWindows_DropDown_Resizing />
+
+@code {
+    DemoScriptLoader scrollable;
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        await scrollable.InvokeVoidAsync("init").SafeInvokeAsync();
+    }
+}

@@ -21,9 +21,14 @@
             <DxButton NavigateUrl="https://go.devexpress.com/DevexpressDownload_UniversalTrial.aspx"
                 CssClass="download-btn"
                 IconCssClass="demo-download-icon"
-                Text="Free Trial"></DxButton>
-                
-            <DxButton Click="@ToggleThemeSwitcherPanel" CssClass="@GetThemeSwitcherCssClass()"
+                Text="Free Trial" SizeMode="SizeMode.Large"></DxButton>
+            <DxButton NavigateUrl="https://github.com/DevExpress/blazor"
+                      CssClass="github-btn"
+                      IconCssClass="demo-github-icon"
+                      RenderStyle="ButtonRenderStyle.Secondary" RenderStyleMode="ButtonRenderStyleMode.Outline"
+                      Text="GitHub" SizeMode="SizeMode.Large"></DxButton>
+            <div class="btn-sep"></div>
+            <DxButton Click="@ToggleThemeSwitcherPanel" CssClass="@GetThemeSwitcherCssClass()" SizeMode="SizeMode.Large"
                 RenderStyle="ButtonRenderStyle.Secondary" RenderStyleMode="ButtonRenderStyleMode.Outline" IconCssClass="demo-theme-icon"></DxButton>
         </div>
         <ThemeSwitcher @bind-Shown="@ThemeSwitcherShown" @bind-ThemeName="@ThemeName" />
@@ -40,7 +45,7 @@
     <div class="demo-content @LayoutStateCssClass">
         <div class="sidebar">
             <DemoSearchEditor @bind-SearchString="@SearchString" />
-            <DxScrollView ScriptLoaded="@ScrollViewScriptLoaded">
+            <DxScrollView>
                 <DemoSearchResultList SearchString="@SearchString" SearchResults="@SearchResults" />
                 <NavMenuFactoryComponent />
             </DxScrollView>
@@ -54,10 +59,8 @@
         </div>
         <div class="main">
             <div class="content" @key="ShouldUseThemeNameKey() ? ThemeName : null">
-                <CascadingValue Value="@ScrollToTargetLocked" Name="ScrollToTargetLocked">
-                    <CascadingValue Value="@ThemeName" Name="ThemeName">
-                        @Body
-                    </CascadingValue>
+                <CascadingValue Value="@ThemeName" Name="ThemeName">
+                    @Body
                 </CascadingValue>
             </div>
             <div class="content-footer"></div>
@@ -83,7 +86,7 @@
     [Inject]
     IDemoVersion DemoVersion { get; set; }
     [Inject]
-    NavigationManager NavigationManager { get; set; }
+    protected NavigationManager NavigationManager { get; set; }
     [Inject]
     IJSRuntime JsRuntime { get; set; }
 
@@ -98,15 +101,22 @@
         }
     }
 
+    protected bool IsBootstrapNative {
+        get { return Themes.ActiveTheme.IsBootstrapNative; }
+    }
+
     protected override void OnInitialized() {
         ThemeName = Themes.ActiveTheme.Name;
         NavigationManager.LocationChanged += OnLocationChanged;
     }
 
     void TryRedirect(string url) {
-        if(url?.Length > NavigationManager.BaseUri?.Length && Configuration.Redirects.TryGetValue(url.Substring(NavigationManager.BaseUri.Length).ToLower(), out var uri)) {
+        if(TryGetRedirectUrl(url, out var uri))
             NavigationManager.NavigateTo(uri, true);
-        };
+    }
+    protected bool TryGetRedirectUrl(string currentUrl, out string redirectUrl) {
+        redirectUrl = "";
+        return currentUrl?.Length > NavigationManager.BaseUri?.Length && Configuration.Redirects.TryGetValue(currentUrl.Substring(NavigationManager.BaseUri.Length).ToLower(), out redirectUrl);
     }
     protected override async Task OnAfterRenderAsync(bool firstRender) {
         TryRedirect(NavigationManager.Uri);
@@ -122,8 +132,7 @@
             if(_isDesktop && SavedLayoutToggled != LayoutToggled)
                 await pageHelper.InvokeVoidAsync("DemoPageHelper.raiseWindowOnResize");
         }
-        if(!ScrollToTargetLocked)
-            await ScrollToTargetIfNeeded(NavigationManager.Uri);
+        await ScrollToTargetIfNeeded(NavigationManager.Uri);
         SavedLayoutToggled = LayoutToggled;
         IsFirstTimeRendered = true;
     }
@@ -220,12 +229,6 @@
         if(!HasAnchorInUrl(uri))
             await pageHelper.InvokeVoidAsync("DemoPageHelper.scroll.toElementTop", contentContainerRef);
     }
-
-    bool ScrollToTargetLocked { get; set; } = true;
-    async Task ScrollViewScriptLoaded() {
-        ScrollToTargetLocked = false;
-        await ScrollToTargetIfNeeded(NavigationManager.Uri);
-    }
     async Task ScrollToTargetIfNeeded(string uri) {
         if(HasAnchorInUrl(uri))
             await pageHelper.InvokeVoidAsync("DemoPageHelper.scroll.ensureNavigationTargetIsVisible");
@@ -238,12 +241,16 @@
             cssClasses.Add("animated");
 #endif
         cssClasses.Add("theme-" + ThemeName.Replace(" ", "-"));
+        if(IsBootstrapNative)
+            cssClasses.Add("theme-external");
         return string.Join(" ", cssClasses);
     }
     string GetDemoBreadcrumbsContainerCss() {
         List<string> cssClasses = new List<string>();
         cssClasses.Add("demo-breadcrumbs-container");
         cssClasses.Add("theme-" + ThemeName.Replace(" ", "-"));
+        if(IsBootstrapNative)
+            cssClasses.Add("theme-external");
         return string.Join(" ", cssClasses);
     }
     string GetDemoBreadcrumbsCss() {
@@ -256,6 +263,8 @@
         List<string> cssClasses = new List<string>();
         cssClasses.Add("demo-header-container");
         cssClasses.Add("theme-" + ThemeName.Replace(" ", "-"));
+        if(IsBootstrapNative)
+            cssClasses.Add("theme-external");
         return string.Join(" ", cssClasses);
     }
     string GetThemeSwitcherCssClass() {

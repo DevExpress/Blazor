@@ -4,7 +4,7 @@ To apply a date-time mask to the [Date Edit](https://docs.devexpress.com/Blazor/
 
 Use the settings available in this demo to explore different mask modes:
 
-* **Mask** - Specifies the mask pattern.
-* **Caret Mode** - Specifies whether to automatically move the caret to the next editable section once you complete input within a mask section (`Advancing` mode) or to move focus manually (`Regular` mode).
-* **Culture** - Specifies the current culture. Culture can affect the appearance of a mask pattern.
-* **Cascading Section Updates** - Specifies whether to increase or decrease the value of the previous or next mask section once you change a section's value with the Up/Down arrow key (or the mouse wheel) and the value passes the minimum or maximum threshold.
+* **Mask** — Specifies the mask pattern.
+* **Caret Mode** — Specifies whether to automatically move the caret to the next editable section once you complete input within a mask section (`Advancing` mode) or to move focus manually (`Regular` mode).
+* **Culture** — Specifies the current culture. Culture can affect the appearance of a mask pattern.
+* **Cascading Section Updates** — Specifies whether to increase or decrease the value of the previous or next mask section once you change a section's value with the Up/Down arrow key (or the mouse wheel) and the value passes the minimum or maximum threshold.

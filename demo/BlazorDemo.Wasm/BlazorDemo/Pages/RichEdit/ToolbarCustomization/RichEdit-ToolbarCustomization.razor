@@ -141,13 +141,14 @@
         TextSpan span = await selection.ActiveSubDocument.GetTextSpanAsync(selection.Intervals.Last());
         currentColor = span.ForegroundColor;
 
-        Paragraph paragraph = await GetCurrentParagraph();
+        Paragraph paragraph = await GetCurrentParagraph(selection.CaretPosition);
         currentLeftIndent = (decimal)UnitConverter.TwipsToInches(paragraph.LeftIndent ?? 0);
     }
-    async Task<Paragraph> GetCurrentParagraph() {
+    async Task<Paragraph> GetCurrentParagraph(int? currentPosition = null) {
+        currentPosition ??= selection.CaretPosition;
         var paragraphs = await selection.ActiveSubDocument.Paragraphs.GetAllAsync();
         return paragraphs.First(p =>
-            p.Interval.Start <= selection.CaretPosition && selection.CaretPosition <= p.Interval.Start + p.Interval.Length);
+        p.Interval.Start <= currentPosition && currentPosition <= p.Interval.Start + p.Interval.Length);
     }
 
     void OnDocumentContentChanged(byte[] newValue) {

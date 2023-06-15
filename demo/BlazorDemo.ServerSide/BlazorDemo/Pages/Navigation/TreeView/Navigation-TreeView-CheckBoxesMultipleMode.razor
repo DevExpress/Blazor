@@ -1,0 +1,60 @@
+@using BlazorDemo.Data.Employees
+@using EmployeeDepartment = BlazorDemo.Data.Employees.EmployeeDepartment
+<DemoPageSectionComponent Id="Navigation-TreeView-CheckBoxesMultipleMode" VerticalAlignment=VerticalAlignment.Top ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="panel-class cw-640">
+            <div class="cw-320">
+                <DxTreeView Data="@Data"
+                            SizeMode="Params.SizeMode"
+                            CheckMode="TreeViewCheckMode.Multiple"
+                            CheckedChanged="CheckingChanged"
+                            AnimationType="LayoutAnimationType.Slide"
+                            CssClass="h-300"
+                            @ref="treeview">
+                    <DataMappings>
+                        <DxTreeViewDataMapping Children="Employees"
+                                               AllowCheck="AllowCheck"
+                                               Text="Name"/>
+                        <DxTreeViewDataMapping Text="FullName"
+                                               Level="1"
+                                               Checked="Checked"/>
+                    </DataMappings>
+                </DxTreeView>
+            </div>
+            <div class="checked-nodes">
+                <h5>Selected employees:</h5>
+                @if(checkedEmployees.Count != 0) {
+                    foreach(var item in checkedEmployees) {
+                        <p class="demo-text">
+                            @item.Text
+                        </p>
+                    }
+                }
+            </div>
+        </div>
+
+        @code {
+            DxTreeView treeview;
+            List<EmployeeDepartment> Data { get; set; }
+            IReadOnlyList<ITreeViewNodeInfo> checkedEmployees;
+
+            void CheckingChanged(TreeViewCheckedChangedEventArgs e) {
+                if(e.CheckedItems != null)
+                    checkedEmployees = e.CheckedItems;
+            }
+
+            protected override void OnInitialized() {
+                base.OnInitialized();
+                checkedEmployees = new List<ITreeViewNodeInfo>();
+                Data = Employees.Departments;
+            }
+
+            protected override void OnAfterRender(bool firstRender) {
+                base.OnAfterRender(firstRender);
+                checkedEmployees = treeview.GetCheckedNodeInfo().ToList();
+            }
+
+        }
+
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

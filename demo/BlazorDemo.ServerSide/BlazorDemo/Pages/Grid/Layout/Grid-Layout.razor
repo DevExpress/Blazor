@@ -1,20 +1,21 @@
 ﻿@page "/Grid/Layout"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Layout" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Grid-Layout" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
     <ChildContentWithParameters Context="Params">
         @using System.Text.Json
         @inject NwindDataService NwindDataService
         @inject IJSRuntime JSRuntime
 
         @if(PreRendered) {
-            <DxGrid @ref="Grid" Data="@GridData" AutoExpandAllGroupRows="true"
+            <DxGrid @ref="Grid" Data="GridData" AutoExpandAllGroupRows="true"
                 ColumnResizeMode="GridColumnResizeMode.NextColumn"
                 ShowGroupPanel="true" ShowFilterRow="true"
+                EditorRenderMode="GridEditorRenderMode.Integrated"
                 PageSizeSelectorVisible="true" PageSizeSelectorAllRowsItemVisible="true"
                 LayoutAutoLoading="Grid_LayoutAutoLoading"
                 LayoutAutoSaving="Grid_LayoutAutoSaving"
-                SizeMode="Params.SizeMode">
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
                 <Columns>
                     <DxGridDataColumn FieldName="Country" GroupIndex="0" />
                     <DxGridDataColumn FieldName="City" GroupIndex="1" />
@@ -63,7 +64,7 @@
                     var json = await JSRuntime.InvokeAsync<string>("localStorage.getItem", LocalStorageKey);
                     return JsonSerializer.Deserialize<GridPersistentLayout>(json);
                 } catch {
-                    // Mute exceptions
+                    // Mute exceptions for the server prerender stage
                     return null;
                 }
             }
@@ -73,7 +74,7 @@
                     var json = JsonSerializer.Serialize(layout);
                     await JSRuntime.InvokeVoidAsync("localStorage.setItem", LocalStorageKey, json);
                 } catch {
-                    // Mute exceptions
+                    // Mute exceptions for the server prerender stage
                 }
             }
 
@@ -81,7 +82,7 @@
                 try {
                     await JSRuntime.InvokeVoidAsync("localStorage.removeItem", LocalStorageKey);
                 } catch {
-                    // Mute exceptions
+                    // Mute exceptions for the server prerender stage
                 }
             }
 
@@ -95,13 +96,13 @@
             }
 
             void ShowColumnChooser_Click() {
-                Grid.ShowColumnChooser(".show-column-chooser-button");
+                Grid.ShowColumnChooser();
             }
         }
     </ChildContentWithParameters>
     <OptionsContent>
         <OptionButton Text="Reload Page" OnClick="ReloadPageButton_ClickAsync" />
         <OptionButton Text="Reset Layout" OnClick="ResetLayoutButton_ClickAsync" />
-        <OptionButton Text="Show Column Chooser" OnClick="ShowColumnChooser_Click" CssClass="show-column-chooser-button" />
+        <OptionButton Text="Show Column Chooser" OnClick="ShowColumnChooser_Click" />
     </OptionsContent>
 </DemoPageSectionComponent>

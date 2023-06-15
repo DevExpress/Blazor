@@ -1,7 +1,7 @@
 ﻿@page "/Grid/EditData/EditRow"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Editing-EditRow" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Grid-Editing-EditRow" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
@@ -15,57 +15,15 @@
                 DataItemDeleting="Grid_DataItemDeleting"
                 EditMode="GridEditMode.EditRow"
                 EditorRenderMode="GridEditorRenderMode.Integrated"
-                SizeMode="Params.SizeMode">
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
             <Columns>
                 <DxGridCommandColumn Width="160px" />
-                <DxGridDataColumn FieldName="FirstName" MinWidth="80">
-                    <CellEditTemplate>
-                        @{
-                            var employee = (EditableEmployee)context.EditModel;
-                        }
-                        <DxTextBox @bind-Text="@employee.FirstName"></DxTextBox>
-                    </CellEditTemplate>
-                </DxGridDataColumn>
-                <DxGridDataColumn FieldName="LastName" MinWidth="80">
-                    <CellEditTemplate>
-                        @{
-                            var employee = (EditableEmployee)context.EditModel;
-                        }
-                        <DxTextBox @bind-Text="@employee.LastName"></DxTextBox>
-                    </CellEditTemplate>
-                </DxGridDataColumn>
-                <DxGridDataColumn FieldName="Title" MinWidth="100">
-                    <CellEditTemplate>
-                        @{
-                            var employee = (EditableEmployee)context.EditModel;
-                        }
-                        <DxTextBox @bind-Text="@employee.Title"></DxTextBox>
-                    </CellEditTemplate>
-                </DxGridDataColumn>
-                <DxGridDataColumn FieldName="TitleOfCourtesy" MinWidth="120">
-                    <CellEditTemplate>
-                        @{
-                            var employee = (EditableEmployee)context.EditModel;
-                        }
-                        <DxTextBox @bind-Text="@employee.TitleOfCourtesy"></DxTextBox>
-                    </CellEditTemplate>
-                </DxGridDataColumn>
-                <DxGridDataColumn FieldName="BirthDate" Width="10%" MinWidth="80">
-                    <CellEditTemplate>
-                        @{
-                            var employee = (EditableEmployee)context.EditModel;
-                        }
-                        <DxDateEdit @bind-Date="@employee.BirthDate"></DxDateEdit>
-                    </CellEditTemplate>
-                </DxGridDataColumn>
-                <DxGridDataColumn FieldName="HireDate" Width="10%" MinWidth="80">
-                    <CellEditTemplate>
-                        @{
-                            var employee = (EditableEmployee)context.EditModel;
-                        }
-                        <DxDateEdit @bind-Date="@employee.HireDate"></DxDateEdit>
-                    </CellEditTemplate>
-                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="FirstName" MinWidth="80" />
+                <DxGridDataColumn FieldName="LastName" MinWidth="80" />
+                <DxGridDataColumn FieldName="Title" MinWidth="100" />
+                <DxGridDataColumn FieldName="TitleOfCourtesy" MinWidth="120" />
+                <DxGridDataColumn FieldName="BirthDate" Width="10%" MinWidth="80" />
+                <DxGridDataColumn FieldName="HireDate" Width="10%" MinWidth="80" />
             </Columns>
         </DxGrid>
     </ChildContentWithParameters>

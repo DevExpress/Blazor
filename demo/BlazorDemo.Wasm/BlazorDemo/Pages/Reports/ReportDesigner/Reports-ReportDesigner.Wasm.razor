@@ -1,0 +1,38 @@
+﻿@page "/ReportDesigner"
+@page "/ReportDesigner/{reportName}"
+
+<link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-reporting-pages.css">
+<DemoScriptLoader @ref="pageScriptLoader" Src="_content/BlazorDemo/lib/page-helper.js"></DemoScriptLoader>
+<DemoScriptLoader @ref="reportingScriptLoader" Src="_content/BlazorDemo/lib/reporting.js"></DemoScriptLoader>
+
+<DemoPageSectionComponent Id="Reports-ReportDesigner">
+    <DxWasmReportDesigner ReportName=@ReportName Height="770px" @ref="designer" CssClass="w-100">
+        <DxWasmReportDesignerRequestOptions GetDesignerModelAction="DXXRD/GetReportDesignerModel"></DxWasmReportDesignerRequestOptions>
+        <DxReportDesignerModelSettings>
+            <DxReportDesignerWizardSettings EnableSqlDataSource=false />
+        </DxReportDesignerModelSettings>
+    </DxWasmReportDesigner>
+
+    @code {
+        [Parameter]
+        public string ReportName { get; set; }
+        DxWasmReportDesigner designer { get; set; }
+        DemoScriptLoader reportingScriptLoader { get; set; }
+        DemoScriptLoader pageScriptLoader { get; set; }
+        [Inject] IJSRuntime JSRuntime { get; set; }
+
+        protected override void OnInitialized() {
+            ReportName = ReportName ?? "InvoiceReport";
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender) {
+            await pageScriptLoader.Loaded;
+            await reportingScriptLoader.Loaded;
+            await ReportingCookieHelper.SetSessionID(JSRuntime);
+            designer.CallbacksModel = new ReportDesignerCallbacksModel();
+            designer.CallbacksModel.Events.ExitDesigner = "\"ReportDesignerExit\"";
+            await designer.OpenReport(ReportName);
+            await base.OnAfterRenderAsync(firstRender);
+        }
+    }
+</DemoPageSectionComponent>

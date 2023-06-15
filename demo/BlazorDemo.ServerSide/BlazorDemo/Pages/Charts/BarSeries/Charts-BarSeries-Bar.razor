@@ -1,51 +1,58 @@
-﻿<DemoPageSectionComponent Id="Charts-BarSeries-Bar">
-    <DemoChildContent>
-        @switch (BarSeriesType) {
-            case ChartType.SideBySideBar:
-                <BarChart />
-                break;
-            case ChartType.StackedBar:
-                <StackedBarChart />
-                break;
-            case ChartType.SideBySideStackedBar:
-                <SideBySideStackedBarChart />
-                break;
-            case ChartType.FullStackedBar:
-                <FullStackedBarChart />
-                break;
-            case ChartType.SideBySideFullStackedBar:
-                <SideBySideFullStackedBarChart />
-                break;
-        }
-    </DemoChildContent>
+﻿@page "/ChartBarSeries"
+@namespace BlazorDemo
 
-    <OptionsContent>
-        <OptionComboBox Label="Series Type:"
-                        T="ChartType"
-                        TData="KeyValuePair<string, ChartType>"
-                        Data="@BarSeriesTypes"
-                        ValueField="Value"
-                        TextField="Key"
-                        @bind-Value="@BarSeriesType" />
-    </OptionsContent>
+<DemoPageSectionComponent Id="Charts-BarSeries-Bar">
+    @inject IPopulationStructureDataProvider DataProvider
+    <DxChart T="PopulationAgeStructureItem"
+             Data="@ChartsData"
+             Width="100%">
+        <DxChartTitle Text="Population: Age Structure">
+            <DxChartSubTitle Text="Data Estimate for 2020" />
+        </DxChartTitle>
+        <DxChartBarSeries Name="0-14 years"
+                          T="PopulationAgeStructureItem"
+                          TArgument="string"
+                          TValue="int"
+                          ArgumentField="pasi => pasi.Country"
+                          ValueField="pasi => pasi.Population"
+                          SummaryMethod="Enumerable.Sum"
+                          Filter='pasi => pasi.AgeGroup == "0-14 years"' />
+        <DxChartBarSeries Name="15-64 years"
+                          T="PopulationAgeStructureItem"
+                          TArgument="string"
+                          TValue="int"
+                          ArgumentField="pasi => pasi.Country"
+                          ValueField="pasi => pasi.Population"
+                          SummaryMethod="Enumerable.Sum"
+                          Filter='pasi => pasi.AgeGroup == "15-64 years"' />
+        <DxChartBarSeries Name="65 years and older"
+                          T="PopulationAgeStructureItem"
+                          TArgument="string"
+                          TValue="int"
+                          ArgumentField="pasi => pasi.Country"
+                          ValueField="pasi => pasi.Population"
+                          SummaryMethod="Enumerable.Sum"
+                          Filter='pasi => pasi.AgeGroup == "65 years and older"' />
+        <DxChartLegend Position="RelativePosition.Outside"
+                       HorizontalAlignment="HorizontalAlignment.Center"
+                       VerticalAlignment="VerticalEdge.Bottom" />
+        <DxChartTooltip Enabled="true"
+                        Position="RelativePosition.Outside">
+            <div style="margin: 0.75rem">
+                <div class="fw-bold">@context.Point.Argument</div>
+                <div>Age Group: @context.Point.SeriesName</div>
+                <div>Population: @($"{context.Point.Value:N0}")</div>
+            </div>
+        </DxChartTooltip>
+    </DxChart>
 
     @code {
-        enum ChartType {
-            SideBySideBar,
-            StackedBar,
-            SideBySideStackedBar,
-            FullStackedBar,
-            SideBySideFullStackedBar
+        IEnumerable<PopulationAgeStructureItem> ChartsData;
+
+        protected override async Task OnInitializedAsync() {
+            ChartsData = await DataProvider.QueryData();
         }
-
-        static readonly Dictionary<string, ChartType> BarSeriesTypes = new() {
-            { "Bar", ChartType.SideBySideBar },
-            { "Stacked Bar", ChartType.StackedBar },
-            { "Side-by-Side Stacked Bar", ChartType.SideBySideStackedBar },
-            { "Full-Stacked Bar", ChartType.FullStackedBar },
-            { "Side-by-Side Full-Stacked Bar", ChartType.SideBySideFullStackedBar }
-        };
-
-        ChartType BarSeriesType = ChartType.SideBySideBar;
+        [Parameter] public bool ShowSeriesPointMarkers { get; set; }
+        [Parameter] public bool ShowSeriesLabels { get; set; }
     }
 </DemoPageSectionComponent>

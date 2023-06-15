@@ -4,5 +4,5 @@ The Accordion stores its root-level elements in the [Items](https://docs.devexpr
 
 The following properties help manage a user’s ability to expand and collapse items:
 
-* [ExpandMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxAccordion.ExpandMode) - Specifies how many items can be expanded at a given point in time.
-* [ExpandCollapseAction](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxAccordion.ExpandCollapseAction) - Specifies the action that expands or collapses the item. 
+* [ExpandMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxAccordion.ExpandMode) — Specifies how many items can be expanded at a given point in time.
+* [ExpandCollapseAction](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxAccordion.ExpandCollapseAction) — Specifies the action that expands or collapses the item. 

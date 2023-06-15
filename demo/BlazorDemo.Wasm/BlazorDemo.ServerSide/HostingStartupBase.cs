@@ -25,6 +25,7 @@ namespace BlazorDemo.ServerSide {
 
         public abstract void Configure(IApplicationBuilder app, IWebHostEnvironment env);
         public abstract void ConfigureServices(WebHostBuilderContext context, IServiceCollection services);
+#pragma warning disable DX0006
         public virtual void Configure(IWebHostBuilder builder) {
             builder.UseEnvironment(EnvironmentName);
             builder.UseStaticWebAssets();
@@ -103,6 +104,7 @@ namespace BlazorDemo.ServerSide {
                 services.AddSingleton<IDocumentProvider, DocumentProvider>();
                 // Editable should be scoped
                 services.AddScoped<INwindDataProvider, NwindDataProvider>();
+                services.AddScoped<IHomesDataProvider, HomesDataProvider>();
 
                 static void ConfigureHttpClient(HttpClient httpClient) {
                     httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
@@ -113,6 +115,7 @@ namespace BlazorDemo.ServerSide {
                 };
             }
         }
+#pragma warning restore DX0006
 
         void IHostingStartup.Configure(IWebHostBuilder builder) {
             Configure(builder);

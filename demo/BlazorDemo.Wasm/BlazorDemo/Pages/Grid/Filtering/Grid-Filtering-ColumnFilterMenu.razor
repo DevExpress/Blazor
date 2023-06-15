@@ -1,0 +1,90 @@
+﻿@page "/Grid/Filtering/ColumnFilterMenu"
+@layout DataProviderAccessArea<INwindDataProvider>
+@using DevExpress.Data.Filtering;
+@using static BlazorDemo.Pages.Grid.Filtering.Grid_Filtering_ColumnFilterMenu_CustomRange;
+
+<DemoPageSectionComponent Id="Grid-Filtering-ColumnFilterMenu" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <DxGrid Data="GridData"
+            FilterMenuButtonDisplayMode="GridFilterMenuButtonDisplayMode.Always"
+            SizeMode="Params.SizeMode">
+            <Columns>
+                <DxGridDataColumn FieldName="OrderDate" Width="140px">
+                    <FilterMenuTemplate>
+                        <Grid_Filtering_ColumnFilterMenu_DateRange FilterContext="context" />
+                    </FilterMenuTemplate>
+                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
+                <DxGridDataColumn FieldName="CategoryId" Caption="Category" Width="130px">
+                    <EditSettings>
+                        <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId" TextFieldName="CategoryName" />
+                    </EditSettings>
+                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c2" Width="140px" />
+                <DxGridDataColumn FieldName="Quantity" Width="110px" />
+                <DxGridDataColumn FieldName="Discount" DisplayFormat="p0" Width="110px" />
+                <DxGridDataColumn FieldName="Total"
+                                  UnboundType="GridUnboundColumnType.Decimal"
+                                  UnboundExpression="[UnitPrice] * [Quantity] * (1 - [Discount])"
+                                  DisplayFormat="c2"
+                                  Width="110px">
+                    <FilterMenuTemplate>
+                        <Grid_Filtering_ColumnFilterMenu_CustomRange FilterContext="context" Items="TotalPriceIntervals" />
+                    </FilterMenuTemplate>
+                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="Shipped"
+                                  UnboundType="GridUnboundColumnType.Boolean"
+                                  UnboundExpression="[ShippedDate] <> Null"
+                                  Width="100px" />
+            </Columns>
+        </DxGrid>
+        @code {
+            static IReadOnlyList<CustomRangeFilterItem> TotalPriceIntervals { get; } = CreateTotalPriceIntervals();
+
+            object GridData { get; set; }
+            IReadOnlyList<Category> Categories { get; set; }
+
+            protected override async Task OnInitializedAsync() {
+                Categories = (await NwindDataService.GetCategoriesAsync()).ToList();
+
+                var invoices = await NwindDataService.GetInvoicesAsync();
+                var products = await NwindDataService.GetProductsAsync();
+                GridData = invoices.Join(products, i => i.ProductId, p => p.ProductId, (i, p) => {
+                    return new {
+                        ProductName = i.ProductName,
+                        CategoryId = p.CategoryId,
+                        OrderDate = i.OrderDate,
+                        UnitPrice = i.UnitPrice,
+                        Quantity = i.Quantity,
+                        Discount = i.Discount,
+                        ShippedDate = i.ShippedDate
+                    };
+                });
+            }
+
+            static IReadOnlyList<CustomRangeFilterItem> CreateTotalPriceIntervals() {
+                var prop = new OperandProperty("Total");
+                var result = new List<CustomRangeFilterItem>();
+
+                var step = 100M;
+                for(var i = 0; i < 10; i++) {
+                    var start = step * i;
+                    var end = start + step;
+
+                    result.Add(new() {
+                        Criteria = prop >= start & prop < end,
+                        DisplayText = $"from {start:c} to {end - 0.01M:c}"
+                    });
+                }
+                result.Add(new() {
+                    Criteria = prop > 1000,
+                    DisplayText = $"> {1000:c}"
+                });
+
+                return result;
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

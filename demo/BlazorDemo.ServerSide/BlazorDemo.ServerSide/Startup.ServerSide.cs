@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using BlazorDemo.Reporting;
 using System.Collections.Generic;
 using BlazorDemo.DemoData;
 using BlazorDemo.Services;
@@ -19,6 +18,7 @@ namespace BlazorDemo.ServerSide {
     partial class Startup {
 
         public override string EnvironmentName => "ServerSide";
+#pragma warning disable DX0006
         public override void ConfigureServices(WebHostBuilderContext context, IServiceCollection services) {
 #if DEBUG
             bool detailedErrors = true;
@@ -41,6 +41,10 @@ namespace BlazorDemo.ServerSide {
 
             services.AddScoped<IContosoRetailDataProvider, ContosoRetailDataProvider>();
             services.AddScoped<IRentInfoDataProvider, RentInfoDataProvider>();
+
+            services.AddDbContextFactory<HomesContext>(opt => {
+                opt.UseSqlite(ConnectionStringUtils.GetHomesSqliteConnectionString(context.Configuration));
+            });
 
             services.AddDbContextFactory<NorthwindContext>(opt => {
                 var connectionString = ConnectionStringUtils.GetNorthwindConnectionString(context.Configuration);
@@ -78,6 +82,7 @@ namespace BlazorDemo.ServerSide {
                 provider => new StockQuoteChangeTimerService((StockQuoteService)provider.GetRequiredService<IStockQuoteService>())
             );
         }
+#pragma warning restore DX0006
         public override void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
             if(env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();

@@ -6,7 +6,7 @@
 
 <DxGrid Data="DetailGridData"
         PageSize="5"
-        AutoExpandAllGroupRows="true">
+        AutoExpandAllGroupRows="true" KeyboardNavigationEnabled="KeyboardNavigationEnabled">
     <Columns>
         <DxGridDataColumn FieldName="OrderId" DisplayFormat="d" GroupIndex="0" />
         <DxGridDataColumn FieldName="ProductName" Width="40%" />
@@ -23,6 +23,8 @@
 </DxGrid>
 
 @code {
+    [Parameter]
+    public bool KeyboardNavigationEnabled { get; set; }
     [Parameter]
     public Customer Customer { get; set; }
 

@@ -1,0 +1,82 @@
+﻿@*BeginHide*@
+@using DevExpress.Blazor.Internal
+@*EndHide*@
+<DemoPageSectionComponent Id="DialogsAndWindows-Flyout-Placement" ShowSizeMode="true">
+    <OptionsContent>
+        <OptionComboBox Label="Position:" CssClass="ow-100" Data="positions" Value="@position" ValueChanged="(DemoFlyoutPosition v) => { position = v; UpdateFlyoutPosition();}" />
+        <OptionComboBox Label="Alignment:" CssClass="ow-100" Data="alignments" Value="@alignment" ValueChanged="(DemoFlyoutAlignment v) => { alignment = v; UpdateFlyoutPosition();}"/>
+    </OptionsContent>
+    <ChildContentWithParameters Context="Params">
+        @*BeginHide*@
+        <DxButton RenderStyle="@ButtonRenderStyle.Secondary"
+                  Click=@(() => IsOpen = !IsOpen)
+                  IconCssClass="popup-icon-user"
+                  CssClass=@($"{(IsMobile ? "mobile-button" : "")} mt-auto mb-auto")
+                  Text=@(!IsMobile ? "My account" : null)
+                  Id="flyout-placement-target-container"/>
+        <p class="demo-text">
+            FlyoutPosition: <b>@(Position)</b>
+        </p>
+        @*EndHide*@
+        <DxFlyout @bind-IsOpen=@IsOpen
+                  PositionTarget="#flyout-placement-target-container"
+                  Position=@Position
+                  CloseOnOutsideClick=false
+                  SizeMode="Params.SizeMode">
+            <BodyContentTemplate>
+                <div class="custom-flyout-content">
+                    @if(IsMobile) {
+                        <span class="custom-flyout-header">Poul</span>
+                        <span class="custom-flyout-body">Designer</span>
+                    }
+                    else {
+                        <span class="custom-flyout-header">Margaret Peacock</span>
+                        <span class="custom-flyout-body">Sales Representative</span>
+                    }
+                </div>
+            </BodyContentTemplate>
+        </DxFlyout>
+    </ChildContentWithParameters>
+
+    @code {
+        /*BeginHide*/
+        [Inject]
+        IEnvironmentInfo EnvironmentInfo { get; set; }
+        bool IsMobile { get; set; }
+        DemoFlyoutAlignment alignment = DemoFlyoutAlignment.Center;
+        DemoFlyoutPosition position = DemoFlyoutPosition.Bottom;
+        DemoFlyoutPosition[] positions = { DemoFlyoutPosition.Top, DemoFlyoutPosition.Right, DemoFlyoutPosition.Bottom, DemoFlyoutPosition.Left };
+        DemoFlyoutAlignment[] alignments = { DemoFlyoutAlignment.Start, DemoFlyoutAlignment.Center, DemoFlyoutAlignment.End };
+        /*EndHide*/
+        FlyoutPosition Position { get; set; } = FlyoutPosition.Bottom;
+        bool IsOpen { get; set; } = true;
+        FlyoutAnimationType[] Animations { get; set; } = Enum.GetValues<FlyoutAnimationType>();
+        FlyoutAnimationType Animation { get; set; } = FlyoutAnimationType.Fade;
+        /*BeginHide*/
+        protected override async Task OnAfterRenderAsync(bool firstRender) {
+            if (firstRender) {
+                await EnvironmentInfo.InitializeRuntime();
+                var deviceInfo = await EnvironmentInfo.DeviceInfo;
+                IsMobile = deviceInfo.IsMobileDevice;
+                StateHasChanged();
+            }
+            await base.OnAfterRenderAsync(firstRender);
+        }
+        void UpdateFlyoutPosition() {
+            Position = (FlyoutPosition)((int)position << (int)alignment);
+        }
+        
+        enum DemoFlyoutPosition {
+            Top = 1,
+            Right = 1 << 3,
+            Left = 1 << 9,
+            Bottom = 1 << 6,
+        }
+        enum DemoFlyoutAlignment {
+            Start = 0,
+            Center = 1,
+            End = 2,
+        }
+        /*EndHide*/
+    }
+</DemoPageSectionComponent>

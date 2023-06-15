@@ -1,0 +1,5 @@
+The [Width](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopupBase.Width) and [Height](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopupBase.Height) properties set the Popup's initial size.
+
+Enable the [AllowResize](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.AllowResize) property to allow users to change Popup size as requirements dictate. A user can drag window edges or its corners. You can handle [ResizeStarted](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.ResizeStarted) and [ResizeCompleted](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup.ResizeCompleted) events to process resize actions.
+
+You can also use the following properties to restrict changes to component size: [MinWidth](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopupBase.MinWidth), [MaxWidth](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopupBase.MaxWidth), [MinHeight](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopupBase.MinHeight), [MaxHeight](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopupBase.MaxHeight).

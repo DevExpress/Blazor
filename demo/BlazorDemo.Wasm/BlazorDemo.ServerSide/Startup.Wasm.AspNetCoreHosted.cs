@@ -25,6 +25,9 @@ namespace BlazorDemo.ServerSide {
                 else
                     opt.UseSqlite(ConnectionStringUtils.GetNorthwindSqliteConnectionString(context.Configuration));
             });
+            services.AddDbContextFactory<HomesContext>(opt => {
+                opt.UseSqlite(ConnectionStringUtils.GetHomesSqliteConnectionString(context.Configuration));
+            });
             services.AddDbContextFactory<IssuesContext>(opt => {
                 var connectionString = ConnectionStringUtils.GetIssuesConnectionString(context.Configuration);
                 if(!string.IsNullOrEmpty(connectionString))
@@ -51,6 +54,7 @@ namespace BlazorDemo.ServerSide {
                 });
             }));
             base.Configure(builder);
+            ReportingHostingStartup.Configure(builder);
         }
     }
 }

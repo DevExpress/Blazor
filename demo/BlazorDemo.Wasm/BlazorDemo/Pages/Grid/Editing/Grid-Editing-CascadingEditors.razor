@@ -1,7 +1,7 @@
 ﻿@page "/Grid/EditData/CascadingEditors"
 @layout DataProviderAccessArea<INwindDataProvider, IWorldcitiesDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Editing-CascadingEditors" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Grid-Editing-CascadingEditors" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
     <ChildContentWithParameters Context="Params">
         @implements IDisposable
         @inject NwindDataService NwindDataService
@@ -14,7 +14,7 @@
                 CustomizeEditModel="Grid_CustomizeEditModel"
                 EditModelSaving="Grid_EditModelSaving"
                 DataItemDeleting="Grid_DataItemDeleting"
-                SizeMode="Params.SizeMode">
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
             <Columns>
                 <DxGridCommandColumn Width="160px" />
                 <DxGridDataColumn FieldName="CompanyName" />
@@ -30,16 +30,16 @@
                 }
                 <DxFormLayout CssClass="w-100">
                     <DxFormLayoutItem Caption="Company Name:" ColSpanMd="6">
-                        <DxTextBox @bind-Text="@supplier.CompanyName" />
+                        @EditFormContext.GetEditor("CompanyName")
                     </DxFormLayoutItem>
                     <DxFormLayoutItem Caption="Contact Name:" ColSpanMd="6">
-                        <DxTextBox @bind-Text="@supplier.ContactName" />
+                        @EditFormContext.GetEditor("ContactName")
                     </DxFormLayoutItem>
                     <DxFormLayoutItem Caption="Contact Title:" ColSpanMd="6">
-                        <DxTextBox @bind-Text="@supplier.ContactTitle" />
+                        @EditFormContext.GetEditor("ContactTitle")
                     </DxFormLayoutItem>
                     <DxFormLayoutItem Caption="Phone:" ColSpanMd="6">
-                        <DxTextBox @bind-Text="@supplier.Phone" />
+                        @EditFormContext.GetEditor("Phone")
                     </DxFormLayoutItem>
                     <DxFormLayoutItem Caption="Country:" ColSpanMd="6">
                         <DxComboBox Data="@Countries"

@@ -1,0 +1,5 @@
+Use the [EditBoxTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.EditBoxTemplate) property to customize the appearance of items displayed within the edit box. The template's *context* parameter allows you to access a data object and its associated fields.
+
+To create an edit box template with user input and filter mode support, declare the [DxInputBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxInputBox) object within the **EditBoxTemplate** markup and enable the [DxComboBox.AllowUserInput](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.AllowUserInput) and [DxComboBox.FilteringMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.FilteringMode) properties.
+
+In this demo, the **EditBoxTemplate** property is used to display the ComboBox item and its icon within the edit box. The template contains the **DxInputBox** component and allows users to enter text in the edit box and filter data as needs dictate (Note: for this demo, we've enabled the **StartsWith** filter mode).

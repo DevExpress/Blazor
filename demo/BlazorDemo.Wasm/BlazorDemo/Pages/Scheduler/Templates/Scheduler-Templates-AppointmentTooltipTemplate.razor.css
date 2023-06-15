@@ -1,0 +1,6 @@
+.tooltip-text-header {
+    margin-right: auto;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

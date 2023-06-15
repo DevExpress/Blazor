@@ -1,9 +1,7 @@
 ﻿@page "/"
-@using BlazorDemo.Configuration
 @namespace BlazorDemo.ServerSide.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject BlazorDemo.Services.DemoThemeService Themes
-@inject DemoConfiguration DemoConfiguration
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
 <!DOCTYPE html>
@@ -49,15 +47,37 @@
                block-all-mixed-content;
           ">
     @{
-        string InitialThemeName = HttpContextAccessor.HttpContext.Request.Cookies[BlazorDemo.Services.DemoThemeService.ThemeCookieKey];
+        var InitialThemeName = HttpContextAccessor.HttpContext.Request.Cookies[BlazorDemo.Services.DemoThemeService.ThemeCookieKey];
+        Themes.SetActiveThemeByName(InitialThemeName);
+        var bsTheme = Themes.GetBootstrapThemeCssUrl(Themes.ActiveTheme);
+        var dxTheme = Themes.GetThemeCssUrl(Themes.ActiveTheme);
+        var hlTheme = Themes.GetHighlightJSThemeCssUrl(Themes.ActiveTheme);
     }
 
+    @if (!string.IsNullOrEmpty(bsTheme))
+    {
+        <link rel="stylesheet" href="@bsTheme" asp-append-version="true" bs-theme-link />
+    }
+    @if (!string.IsNullOrEmpty(dxTheme))
+    {
+        <link rel="stylesheet" href="@dxTheme" asp-append-version="true" dx-theme-link />
+    }
+    @if (!string.IsNullOrEmpty(hlTheme))
+    {
+        <link rel="stylesheet" href="@hlTheme" asp-append-version="true" hl-theme-link />
+    }
+
+    <link rel="stylesheet" href="~/_content/BlazorDemo/css/dx-demo.css" asp-append-version="true" dx-demo-link>
+    <link rel="stylesheet" href="~/_content/BlazorDemo/css/dx-demo-pages.css" asp-append-version="true">
+
     <environment include="ServerSide">
-        <component type="typeof(BlazorDemo.Shared.DemoStylesheetContainer)" render-mode="ServerPrerendered" param-InitialThemeName="@InitialThemeName" />
+        <link rel="stylesheet" href="BlazorDemo.ServerSide.styles.css" asp-append-version="true">
+        <component type="typeof(BlazorDemo.Shared.DemoThemeJsChangeDispatcher)" render-mode="ServerPrerendered" param-InitialThemeName="@InitialThemeName" />
         <script src="_framework/blazor.server.js" defer></script>
     </environment>
     <environment include="Wasm.AspNetCoreHosted">
-        <component type="typeof(BlazorDemo.Shared.DemoStylesheetContainer)" render-mode="WebAssemblyPrerendered" param-InitialThemeName="@InitialThemeName" />
+        <link rel="stylesheet" href="BlazorDemo.Wasm.Server.styles.css" asp-append-version="true">
+        <component type="typeof(BlazorDemo.Shared.DemoThemeJsChangeDispatcher)" render-mode="WebAssemblyPrerendered" param-InitialThemeName="@InitialThemeName" />
         <script src="_framework/blazor.webassembly.js" defer></script>
     </environment>
     <environment include="Wasm.AspNetCoreHosted">

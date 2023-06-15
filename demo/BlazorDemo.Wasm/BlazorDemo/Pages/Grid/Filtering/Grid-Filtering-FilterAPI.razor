@@ -1,7 +1,7 @@
 ﻿@page "/Grid/Filtering/FilterAPI"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Filtering-FilterAPI" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Grid-Filtering-FilterAPI" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
     <ChildContentWithParameters Context="Params">
         @using DevExpress.Data.Filtering
         @inject NwindDataService NwindDataService
@@ -11,24 +11,22 @@
                       Values="SelectedCategories"
                       ValuesChanged="(IEnumerable<Category> values) => TagBox_ValuesChanged(values)"
                       TextFieldName="CategoryName"
-                      SizeMode="Params.SizeMode"
+                      SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled"
                       NullText="Select category..."
                       ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"/>
         </div>
-        <DxGrid @ref="Grid" Data="Products" SizeMode="Params.SizeMode" CustomizeCellDisplayText="Grid_CustomizeCellDisplayText">
+        <DxGrid @ref="Grid" Data="Products" SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
             <Columns>
                 <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
-                <DxGridDataColumn FieldName="CategoryId" SortMode="GridColumnSortMode.DisplayText" Caption="Category" MinWidth="100" TextAlignment="GridTextAlignment.Left" />
+                <DxGridDataColumn FieldName="CategoryId" Caption="Category" MinWidth="100">
+                    <EditSettings>
+                        <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId" TextFieldName="CategoryName" />
+                    </EditSettings>
+                </DxGridDataColumn>
                 <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
                 <DxGridDataColumn FieldName="UnitsInStock" Width="10%" />
                 <DxGridDataColumn FieldName="QuantityPerUnit" Width="15%" MinWidth="80" />
-                <DxGridDataColumn FieldName="Discontinued" Width="10%" MinWidth="90">
-                    <CellDisplayTemplate>
-                        @if((bool)context.Value) {
-                            <span class="grid-icon grid-icon-check"></span>
-                        }
-                    </CellDisplayTemplate>
-                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="Discontinued" Width="10%" MinWidth="90" />
             </Columns>
         </DxGrid>
 
@@ -51,12 +49,6 @@
                     ? new InOperator("CategoryId", SelectedCategories.Select(c => c.CategoryId))
                     : null;
                 Grid.SetFieldFilterCriteria("CategoryId", filterCriteria);
-            }
-
-            void Grid_CustomizeCellDisplayText(GridCustomizeCellDisplayTextEventArgs e) {
-                if(e.FieldName == "CategoryId") {
-                    e.DisplayText = Categories.Where(c => c.CategoryId == (int)e.Value).First().CategoryName;
-                }
             }
         }
 

@@ -1,0 +1,45 @@
+﻿<DemoPageSectionComponent Id="Editors-Radio-Disabled" ShowSizeMode="@true">
+    <ChildContentWithParameters Context="Params">
+        <fieldset>
+            <legend class="@GetLegendCssClass(Params.SizeMode)">Select your preferred language:</legend>
+            <div class="dx-demo-radio-group" role="radiogroup">
+                @foreach(var language in Languages) {
+                    <DxRadio GroupName="disabled-option-radio-group"
+                             @bind-GroupValue="@PreferredLanguage"
+                             Value="@language"
+                             Enabled="@IsLanguageInstalled(language)"
+                             SizeMode="@Params.SizeMode"
+                             CssClass="dx-demo-radio">
+                        @GetOptionLabel(language)
+                    </DxRadio>
+                }
+            </div>
+            <p class="demo-text dx-demo-radio-selected-value">
+                Preferred language:
+                <strong>@PreferredLanguage</strong>
+            </p>
+        </fieldset>
+    </ChildContentWithParameters>
+
+    @code {
+        string PreferredLanguage { get; set; } = "English";
+        IEnumerable<string> Languages = new[] { "English", "简体中文", "Español", "Français", "Deutsch" };
+
+        bool IsLanguageInstalled(string language) => language != "Español";
+
+        string GetOptionLabel(string language) {
+            var result = language;
+            if(!IsLanguageInstalled(language))
+                result += " (not installed)";
+            return result;
+        }
+
+        string GetLegendCssClass(SizeMode sizeMode) {
+            var result = "dx-demo-radio-group-label";
+            if(sizeMode != SizeMode.Medium)
+                result += sizeMode == SizeMode.Large ? " dx-demo-large" : " dx-demo-small";
+            return result;
+        }
+
+    }
+</DemoPageSectionComponent>

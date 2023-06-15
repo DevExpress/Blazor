@@ -1,4 +1,4 @@
-The DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid) allows you to filter data in code.
+The DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/403143/grid) allows you to filter data in code.
 
 To apply filter criteria, create a [criteria operator](https://docs.devexpress.com/CoreLibraries/2129/devexpress-data-library/criteria-operators) object that specifies a filter expression and send this object to the [SetFilterCriteria](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SetFilterCriteria(DevExpress.Data.Filtering.CriteriaOperator)) method. When you call this method, the Grid clears all filters applied previously. 
 
@@ -8,7 +8,7 @@ When a filter is applied, the Grid raises the [FilterCriteriaChanged](https://do
 
 You can use the following methods to get currently applied filters:
 
-* [GetFilterCriteria](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.GetFilterCriteria) - Returns the criteria operator applied to the Grid.
-* [GetFieldFilterCriteria](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.GetFieldFilterCriteria(System.String)) - Returns the criteria operator applied to the specified data field.
+* [GetFilterCriteria](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.GetFilterCriteria) — Returns the criteria operator applied to the Grid.
+* [GetFieldFilterCriteria](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.GetFieldFilterCriteria(System.String)) — Returns the criteria operator applied to the specified data field.
 
 In this demo, we create a criteria operator object based on the current value of the tag box. The [SetFieldFilterCriteria](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SetFieldFilterCriteria(System.String-DevExpress.Data.Filtering.CriteriaOperator)) method is called to apply the criteria operator to the **CategoryId** column.

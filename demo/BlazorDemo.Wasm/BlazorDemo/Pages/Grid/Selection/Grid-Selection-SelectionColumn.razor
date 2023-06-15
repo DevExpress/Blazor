@@ -1,50 +1,42 @@
 ﻿@page "/Grid/Selection/SelectionColumn"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Selection-SelectionColumn" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Grid-Selection-SelectionColumn" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <DxGrid Data="Products"
                 KeyFieldName="ProductId"
                 @bind-SelectedDataItems="SelectedDataItems"
-                CustomizeCellDisplayText="Grid_CustomizeCellDisplayText"
-                SizeMode="Params.SizeMode"
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled"
                 SelectAllCheckboxMode="CurrentSelectAllCheckboxMode">
             <Columns>
                 <DxGridSelectionColumn Width="104px" />
                 <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
-                <DxGridDataColumn FieldName="CategoryId" SortMode="GridColumnSortMode.DisplayText" Caption="Category" MinWidth="100" TextAlignment="GridTextAlignment.Left" />
+                <DxGridDataColumn FieldName="CategoryId" Caption="Category" MinWidth="100">
+                    <EditSettings>
+                        <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId" TextFieldName="CategoryName" />
+                    </EditSettings>
+                </DxGridDataColumn>
                 <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
                 <DxGridDataColumn FieldName="UnitsInStock" Width="10%" />
                 <DxGridDataColumn FieldName="QuantityPerUnit" Width="15%" MinWidth="80" />
-                <DxGridDataColumn FieldName="Discontinued" Width="10%" MinWidth="90">
-                    <CellDisplayTemplate>
-                        @if((bool)context.Value) {
-                            <span class="grid-icon grid-icon-check"></span>
-                        }
-                    </CellDisplayTemplate>
-                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="Discontinued" Width="10%" MinWidth="90" />
             </Columns>
         </DxGrid>
         <p class="demo-text w-100 mt-2">The number of selected products: <b>@(SelectedDataItems.Count())</b></p>
 
         @code {
             IEnumerable<Product> Products { get; set; }
-            IEnumerable<Category> Categories { get; set; }
+            IReadOnlyList<Category> Categories { get; set; }
             IReadOnlyList<object> SelectedDataItems { get; set; }
             IEnumerable<GridSelectAllCheckboxMode> SelectAllCheckboxModes { get; } = Enum.GetValues<GridSelectAllCheckboxMode>();
             GridSelectAllCheckboxMode CurrentSelectAllCheckboxMode { get; set; }
 
             protected override async Task OnInitializedAsync() {
+                Categories = (await NwindDataService.GetCategoriesAsync()).ToList();
                 Products = await NwindDataService.GetProductsAsync();
-                Categories = await NwindDataService.GetCategoriesAsync();
                 SelectedDataItems = Products.Where(x => x.UnitPrice > 30).ToList();
-            }
-            void Grid_CustomizeCellDisplayText(GridCustomizeCellDisplayTextEventArgs e) {
-                if(e.FieldName == "CategoryId") {
-                    e.DisplayText = Categories.Where(c => c.CategoryId == (int)e.Value).FirstOrDefault().CategoryName;
-                }
             }
         }
     </ChildContentWithParameters>

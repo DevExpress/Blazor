@@ -36,8 +36,8 @@ namespace BlazorDemo.Services {
         private List<WeatherForecast> CreateForecast() {
             var rng = RandomWrapperFactory.Create();
             /*BeginHide*/
-#if VISUALTESTS 
-            DateTime startDate = new DateTime(2022, 1, 1); 
+#if VISUALTESTS
+            DateTime startDate = new DateTime(2022, 1, 1);
 #else
             /*EndHide*/
             DateTime startDate = DateTime.Now;
@@ -84,7 +84,8 @@ namespace BlazorDemo.Services {
         public Task<IEnumerable<WeatherForecast>> GetForecastAsync(CancellationToken ct = default) {
             return Task.FromResult(Forecasts.AsEnumerable());
         }
-        public IEnumerable<WeatherForecast> GetForecast() {
+        public IEnumerable<WeatherForecast> GetForecast(bool regenerate = false) {
+            if(regenerate) _forecasts = null;
             return Forecasts;
         }
         public Task<string[]> GetSummariesAsync(CancellationToken ct = default) {

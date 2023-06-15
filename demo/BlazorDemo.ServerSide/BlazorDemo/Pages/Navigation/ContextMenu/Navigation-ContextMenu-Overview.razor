@@ -1,32 +1,34 @@
-﻿<DemoPageSectionComponent Id="Navigation-ContextMenu-Overview">
-    <div class="demo-preventsel target-container" @oncontextmenu="((e) => ContextMenu.ShowAsync(e))" @oncontextmenu:preventDefault>
-        <p class="target-caption">RIGHT-CLICK OR LONG PRESS TO SHOW THE CONTEXT MENU</p>
-        <p class="demo-text">Clicked item: <b>@(ClickedItem != null ? ClickedItem : "None")</b></p>
-    </div>
+﻿<DemoPageSectionComponent Id="Navigation-ContextMenu-Overview" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="demo-preventsel target-container" @oncontextmenu="((e) => ContextMenu.ShowAsync(e))" @oncontextmenu:preventDefault>
+            <p class="target-caption">RIGHT-CLICK OR LONG PRESS TO SHOW THE CONTEXT MENU</p>
+            <p class="demo-text">Clicked item: <b>@(ClickedItem != null ? ClickedItem : "None")</b></p>
+        </div>
 
-    <DxContextMenu @ref="@ContextMenu" ItemClick="@OnItemClick">
-        <Items>
-            <DxContextMenuItem Text="Sort By" IconCssClass="menu-icon-sort-by menu-icon">
-                <Items>
-                    <DxContextMenuItem Text="Name"></DxContextMenuItem>
-                    <DxContextMenuItem Text="Size"></DxContextMenuItem>
-                    <DxContextMenuItem Text="Type"></DxContextMenuItem>
-                </Items>
-            </DxContextMenuItem>
-            <DxContextMenuItem Text="Copy" IconCssClass="menu-icon-copy menu-icon" BeginGroup="true"></DxContextMenuItem>
-            <DxContextMenuItem Text="Cut" IconCssClass="menu-icon-cut menu-icon"></DxContextMenuItem>
-            <DxContextMenuItem Text="Remove" IconCssClass="menu-icon-clear menu-icon"></DxContextMenuItem>
-            <DxContextMenuItem Text="Select All" BeginGroup="true"></DxContextMenuItem>
-        </Items>
-    </DxContextMenu>
+        <DxContextMenu @ref="@ContextMenu" ItemClick="@OnItemClick" SizeMode="Params.SizeMode">
+            <Items>
+                <DxContextMenuItem Text="Sort By" IconCssClass="menu-icon-sort-by menu-icon">
+                    <Items>
+                        <DxContextMenuItem Text="Name"></DxContextMenuItem>
+                        <DxContextMenuItem Text="Size"></DxContextMenuItem>
+                        <DxContextMenuItem Text="Type"></DxContextMenuItem>
+                    </Items>
+                </DxContextMenuItem>
+                <DxContextMenuItem Text="Copy" IconCssClass="menu-icon-copy menu-icon" BeginGroup="true"></DxContextMenuItem>
+                <DxContextMenuItem Text="Cut" IconCssClass="menu-icon-cut menu-icon"></DxContextMenuItem>
+                <DxContextMenuItem Text="Remove" IconCssClass="menu-icon-clear menu-icon"></DxContextMenuItem>
+                <DxContextMenuItem Text="Select All" BeginGroup="true"></DxContextMenuItem>
+            </Items>
+        </DxContextMenu>
 
-    @code {
-        DxContextMenu ContextMenu { get; set; }
+        @code {
+            DxContextMenu ContextMenu { get; set; }
 
-        string ClickedItem { get; set; }
+            string ClickedItem { get; set; }
 
-        void OnItemClick(ContextMenuItemClickEventArgs args) {
-            ClickedItem = args.ItemInfo.Text;
+            void OnItemClick(ContextMenuItemClickEventArgs args) {
+                ClickedItem = args.ItemInfo.Text;
+            }
         }
-    }
+    </ChildContentWithParameters>
 </DemoPageSectionComponent>

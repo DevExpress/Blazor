@@ -1,10 +1,11 @@
-﻿<DemoPageSectionComponent Id="Navigation-Menu-Adaptivity">
+﻿<DemoPageSectionComponent Id="Navigation-Menu-Adaptivity" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         <DemoResizableContent MinWidth="200">
             <DxMenu Title="DevExpress"
                     CollapseItemsToHamburgerMenu="true"
                     CollapseItemToIconMode="MenuCollapseItemToIconMode.Sequentially"
-                    DisplayMode="MenuDisplayMode.Desktop">
+                    DisplayMode="MenuDisplayMode.Desktop"
+                    SizeMode="@Params.SizeMode">
                 <Items>
                     <DxMenuItem Text="Home" IconCssClass="menu-icon-home menu-icon">
                         <Items>

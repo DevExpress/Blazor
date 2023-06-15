@@ -1,0 +1,26 @@
+.dx-demo-price-list-title {
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+/*BeginHide*/::deep/*EndHide*/ .dx-demo-select-all-checkbox {
+    margin-bottom: 0.25rem;
+}
+.dx-demo-price-list-content {
+    padding-left: 2rem;
+}
+.dx-demo-row {
+    display: flex;
+    justify-content: space-between;
+}
+.dx-demo-row + .dx-demo-row {
+    margin-top: 0.25rem;
+}
+.dx-demo-total {
+    margin-top: 0.5rem;
+}
+.dx-demo-total-value {
+    text-align: right;
+}
+.dx-demo-text-strikethrough {
+    text-decoration: line-through;
+}

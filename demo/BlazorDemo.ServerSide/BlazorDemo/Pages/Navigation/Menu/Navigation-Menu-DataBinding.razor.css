@@ -9,3 +9,8 @@
     background-color: currentColor !important;
     opacity: 0.2;
 }
+
+/*BeginHide*/ ::deep /*EndHide*/ .dxbl-menu {
+    --dxbl-menu-bottom-right-border-radius: 0;
+    --dxbl-menu-bottom-left-border-radius: 0;
+}

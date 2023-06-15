@@ -1,0 +1,1 @@
+Use our Blazor [Radio Group](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxRadioGroup-2)'s [ItemTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxRadioGroup-2.ItemTemplate) property to customize item appearance and layout.

@@ -1,0 +1,3 @@
+Our [Radio](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxRadio-1) component allows you to disable an individual radio button. When a radio button is disabled, it cannot be focused/selected. Set the [Enabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxRadio-1.Enabled) property to `false` to activate this mode.
+
+This demo illustrates how to disable options conditionally (based on installed languages). 

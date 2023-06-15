@@ -1,0 +1,15 @@
+﻿<DemoPageSectionComponent Id="Utility-Pager-Overview" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxPager PageCount="@PageCount" @bind-ActivePageIndex="@ActivePageIndex" SizeMode="Params.SizeMode" />
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionSpinEdit Label="Page Count:" CssClass="ow-100" @bind-Value="@PageCount" MinValue="0" MaxValue="int.MaxValue" />
+        <OptionSpinEdit Label="Active Page Index:" CssClass="ow-100" @bind-Value="@ActivePageIndex" MinValue="0" MaxValue="@(Math.Max(0,PageCount - 1))" />
+    </OptionsContent>
+
+    @code {
+        int PageCount { get; set; } = 10;
+        int ActivePageIndex { get; set; } = 1;
+    }
+</DemoPageSectionComponent>

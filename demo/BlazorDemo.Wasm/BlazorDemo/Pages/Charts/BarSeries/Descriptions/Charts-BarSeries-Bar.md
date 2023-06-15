@@ -1,3 +1,1 @@
-This example uses the [Age Structure dataset](https://www.cia.gov/the-world-factbook/field/age-structure/) to illustrate different bar chart types. You can switch between the five different styles: [Bar](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartBarSeries-3), [Stacked Bar](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartStackedBarSeries-3), Side-by-Side Stacked Bar, [Full-Stacked Bar](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartFullStackedBarSeries-3), and Side-by-Side Full-Stacked Bar.
-
-Note that you need to use the [Stack](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartStackedBarSeriesBase-3.Stack) property to enable side-by-side views.
+The Bar chart displays data as a collection of rectangular bars. Use the Bar series to compare values across categories and across multiple series.

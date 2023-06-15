@@ -8,10 +8,9 @@
 
 <DxTreeView @ref="@treeView"
             CssClass="sidebar-tree"
-            ExpandButtonIconCssClass="demo-icon-expand"
-            CollapseButtonIconCssClass="demo-icon-collapse"
             NodeExpandCollapseAction="TreeViewNodeExpandCollapseAction.NodeClick"
             AllowSelectNodes="true"
+            TextWrapEnabled="true"
             SelectionChanged="@SelectionChanged">
     <Nodes>
         @foreach(var demoPage in Pages) {
@@ -61,7 +60,7 @@
         return false;
     }
     protected void SelectionChanged(TreeViewNodeEventArgs e) {
-        if(e.Reason != NavigationItemStateChangeReason.ApiCall && string.IsNullOrEmpty(e.NodeInfo.NavigateUrl)) 
+        if(e.Reason != NavigationItemStateChangeReason.ApiCall && string.IsNullOrEmpty(e.NodeInfo.NavigateUrl))
             UpdateSelection(NavigationManager.Uri, false);
     }
     public void Dispose() {

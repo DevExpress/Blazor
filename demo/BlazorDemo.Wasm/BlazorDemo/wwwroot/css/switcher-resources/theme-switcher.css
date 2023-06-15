@@ -3,22 +3,22 @@
     100% { transform: translateX(-100%); }
 }
 
-#themesMenu.card {
+.blazor-themes {
     border-radius: 0;
     border: none;
 }
-#themesMenu,
-#themesMenu div,
-#themesMenu .list-group,
-#themesMenu .themeswitcher-group {
+.blazor-themes,
+.blazor-themes div,
+.blazor-themes .list-group,
+.blazor-themes .themeswitcher-group {
     background-color: inherit;
 }
-#themesMenu .list-group {
+.blazor-themes .list-group {
     flex-flow: row wrap;
     border: none;
     color: inherit;
 }
-#themesMenu .list-group-item {
+.blazor-themes .list-group-item {
     flex: 1 0 100%;
     font-size: 1em;
     white-space: nowrap;
@@ -26,16 +26,16 @@
     padding: .5rem .75rem;
     border-radius: 0 !important;
 }
-#themesMenu .list-group-item-action:not(.active):not(:hover) {
+.blazor-themes .list-group-item-action:not(.active):not(:hover) {
     background: none;
 }
-#themesMenu .list-group-item-action {
+.blazor-themes .list-group-item-action {
     flex: 1 0 50%;
     max-width: 50%;
     font-weight: 500;
     border-color: transparent;
 }
-#themesMenu .themeswitcher-group {
+.blazor-themes .themeswitcher-group {
     font-weight: 600;
     position: sticky;
     top: 0;
@@ -44,8 +44,8 @@
     border: none;
     margin-bottom: 0;
 }
-#themesMenu .themeswitcher-group:not(:first-child):before,
-#themesMenu .themeswitcher-group::after{
+.blazor-themes .themeswitcher-group:not(:first-child):before,
+.blazor-themes .themeswitcher-group::after {
     content: "";
     position: absolute;
     width: 100%;
@@ -53,37 +53,25 @@
     border-top: 1px solid currentColor;
     opacity: 0.15;
 }
-#themesMenu .themeswitcher-group:not(:first-child):before {
+.blazor-themes .themeswitcher-group:not(:first-child):before {
     top: 0;
 }
-#themesMenu .themeswitcher-group::after {
+.blazor-themes .themeswitcher-group::after {
     bottom: 0;
 }
-#themesMenu .themeswitcher-item > span {
+.blazor-themes .themeswitcher-item > span {
     opacity: 0.8;
 }
-#themesMenu a.list-group-item-action:before {
+.blazor-themes a.list-group-item-action:before {
     content: "";
     display: inline;
     margin: 0 .75rem 0 .5rem;
     padding-right: 1.2em;
 }
-#themesMenu a:before {
+.blazor-themes a:before {
     border: 1px solid #fff;
 }
-.theme-settings {
-    width: 2.125rem;
-    height: 2.125rem;
-    border-width: 2px;
-    border-radius: 50%;
-    margin: 0 0.5rem 0 0.5rem;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    padding-left: calc(0.5rem - 1px);
-    padding-right: calc(0.5rem - 1px);
-}
 
-.theme-pulse #themesMenu .themeswitcher-item:hover > span {
+.theme-pulse .blazor-themes .themeswitcher-item:hover > span {
     color: white;
 }

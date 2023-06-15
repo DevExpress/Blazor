@@ -1,47 +1,57 @@
-﻿<DemoPageSectionComponent Id="Charts-AreaSeries-Area">
-    <DemoChildContent>
-        @switch (areaSeriesType) {
-            case ChartSeriesType.Area:
-                <AreaChart ShowSeriesLabels=showSeriesLabels
-                           ShowSeriesPointMarkers=showSeriesPointMarkers/>
-                break;
-            case ChartSeriesType.StackedArea:
-                <StackedAreaChart ShowSeriesLabels=showSeriesLabels
-                                  ShowSeriesPointMarkers=showSeriesPointMarkers/>
-                break;
-            case ChartSeriesType.FullStackedArea:
-                <FullStackedAreaChart ShowSeriesLabels=showSeriesLabels
-                                      ShowSeriesPointMarkers=showSeriesPointMarkers/>
-                break;
+﻿@page "/ChartAreaSeries"
+@namespace BlazorDemo
 
-        }
+<DemoPageSectionComponent Id="Charts-AreaSeries-Area">
+    <DemoChildContent>
+        @inject ISalesInfoDataProvider Sales
+        <DxChart Data="@chartsData"
+                 Width="100%"
+                 LabelOverlap="ChartLabelOverlap.Hide">
+            <DxChartAreaSeries Name="North America"
+                               T="SaleInfo"
+                               TArgument="DateTime"
+                               TValue="int"
+                               ArgumentField="si => new DateTime(si.Date.Year, si.Date.Month, 1)"
+                               ValueField="si => si.Amount"
+                               SummaryMethod="Enumerable.Sum"
+                               Filter='si => si.Region == "North America" '
+                               HoverMode="ChartContinuousSeriesHoverMode.None">
+                <DxChartSeriesPoint Visible=ShowSeriesPointMarkers
+                                    HoverMode="ChartSeriesPointHoverMode.None" />
+                <DxChartSeriesLabel Visible=ShowSeriesLabels
+                                    ValueFormat="ChartElementFormat.Thousands(1)" />
+            </DxChartAreaSeries>
+            <DxChartLegend Position="RelativePosition.Outside"
+                           HorizontalAlignment="HorizontalAlignment.Right" />
+            <DxChartTooltip Enabled="!ShowSeriesLabels">
+                @context.Point.Render((seriesPoint) =>
+                    @<div style="margin: 0.75rem">
+                        <div>@seriesPoint.SeriesName</div>
+                        <span>@($"{seriesPoint.Argument: MMMM yyyy}: ")</span>
+                        <span>@($"{seriesPoint.Value: $0,.0}K")</span>
+                    </div>
+                )
+            </DxChartTooltip>
+        </DxChart>
     </DemoChildContent>
 
     <OptionsContent>
-        <OptionComboBox Label="Series Type:"
-                        T="ChartSeriesType"
-                        TData="KeyValuePair<string, ChartSeriesType>"
-                        Data="areaSeriesTypes"
-                        ValueField="Value"
-                        TextField="Key"
-                        @bind-Value="areaSeriesType" />
         <OptionCheckBox T="bool"
-                        @bind-Checked="showSeriesPointMarkers"
+                        @bind-Checked="ShowSeriesPointMarkers"
                         Label="Show Point Markers" />
         <OptionCheckBox T="bool"
-                        @bind-Checked="showSeriesLabels"
+                        @bind-Checked="ShowSeriesLabels"
                         Label="Show Point Labels" />
     </OptionsContent>
 
     @code {
-        static readonly Dictionary<string, ChartSeriesType> areaSeriesTypes = new () {
-            { "Area", ChartSeriesType.Area },
-            { "Stacked Area" , ChartSeriesType.StackedArea},
-            { "Full Stacked Area", ChartSeriesType.FullStackedArea}
-        };
+        IEnumerable<SaleInfo> chartsData;
 
-        ChartSeriesType areaSeriesType = areaSeriesTypes.First().Value;
-        bool showSeriesPointMarkers = false;
-        bool showSeriesLabels = false;
+        [Parameter] public bool ShowSeriesPointMarkers { get; set; }
+        [Parameter] public bool ShowSeriesLabels { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            chartsData = await Sales.GetSalesAsync();
+        }
     }
 </DemoPageSectionComponent>

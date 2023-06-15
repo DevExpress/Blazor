@@ -1,0 +1,56 @@
+﻿<DemoPageSectionComponent Id="Editors-RadioGroup-ItemTemplate" ShowSizeMode="@true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        @if(Products == null) {
+            <p><em>Loading...</em></p>
+        } else {
+            <fieldset>
+                <legend class="@GetLegendCssClass(Params.SizeMode)">Select your drink:</legend>
+                <DxRadioGroup Items="@Drinks"
+                              @bind-Value="@SelectedDrinkId"
+                              ValueFieldName="@nameof(Product.ProductId)"
+                              EnabledFieldName="@nameof(Product.InStock)"
+                              SizeMode="@Params.SizeMode"
+                              CssClass="dx-demo-radio-group">
+                    <ItemTemplate>@context.ProductName @GetDrinkState(context)</ItemTemplate>
+                </DxRadioGroup>
+                <p class="demo-text dx-demo-radio-selected-value">
+                    You have selected:
+                    <strong>@GetDrinkName()</strong>
+                </p>
+            </fieldset>
+        }
+    </ChildContentWithParameters>
+
+    @code {
+        int SelectedDrinkId { get; set; } = 2;
+        IEnumerable<Product> Products { get; set; }
+        IEnumerable<Product> drinks;
+
+        IEnumerable<Product> Drinks {
+            get => drinks;
+            set {
+                drinks = value;
+                InvokeAsync(StateHasChanged);
+            }
+        }
+
+        protected override async Task OnInitializedAsync() {
+            Products = await NwindDataService.GetProductsAsync();
+            Drinks = Products.Where(p => p.CategoryId == 1).Take(5).AsEnumerable();
+        }
+
+        string GetDrinkState(Product product) => product.InStock ? $"({product.UnitsInStock} units left)" : "(out of stock)";
+
+        string GetDrinkName() => Drinks.First(p => p.ProductId == SelectedDrinkId).ProductName;
+
+        string GetLegendCssClass(SizeMode sizeMode) {
+            var result = "dx-demo-radio-group-label";
+            if(sizeMode != SizeMode.Medium)
+                result += sizeMode == SizeMode.Large ? " dx-demo-large" : " dx-demo-small";
+            return result;
+        }
+    }
+
+</DemoPageSectionComponent>

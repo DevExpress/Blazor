@@ -1,4 +1,6 @@
-﻿<DemoPageSectionComponent Id="Charts-PieSeries-PieDonut">
+﻿@page "/ChartPieSeries"
+
+<DemoPageSectionComponent Id="Charts-PieSeries-PieDonut">
     <DemoChildContent>
         @inject ISalesInfoDataProvider Sales
 
@@ -15,7 +17,7 @@
                                 SummaryMethod="Enumerable.Sum">
                 <DxChartSeriesLabel Visible="showLabels"
                                     Position="labelPosition"
-                                    Format="ChartElementFormat.Thousands(1)">
+                                    ValueFormat="ChartElementFormat.Thousands(1)">
                     <DxChartSeriesLabelConnector Visible="true" />
                 </DxChartSeriesLabel>
             </DxPieChartSeries>

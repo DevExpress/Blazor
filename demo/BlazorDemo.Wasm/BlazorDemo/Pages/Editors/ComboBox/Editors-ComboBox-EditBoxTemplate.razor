@@ -1,0 +1,47 @@
+﻿<DemoPageSectionComponent Id="Editors-ComboBox-EditBoxTemplate" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxComboBox Data="@Themes"
+                    @bind-Value="@CurrentTheme"
+                    NullText="Select a theme..."
+                    FilteringMode="DataGridFilteringMode.StartsWith"
+                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                    CssClass="cw-480" SizeMode="Params.SizeMode">
+            <EditBoxTemplate>
+                @GetEditBoxTemplateContent(context)
+            </EditBoxTemplate>
+            <ItemTemplate>
+                @GetItemTemplateContent(context)
+            </ItemTemplate>
+        </DxComboBox>
+    </ChildContentWithParameters>
+    @code {
+        string CurrentTheme { get; set; } = "Blazing-berry";
+        IEnumerable<string> Themes = new List<string>() {
+            "Blazing-berry", "Blazing-dark", "Purple", "Office-white",
+            "Default", "Cerulean", "Cyborg", "Flatly", "Journal", "Litera", "Lumen", "Lux", "Pulse", "Simplex", "Solar", "Superhero", "United", "Yeti"
+        };
+
+        RenderFragment GetEditBoxTemplateContent(string item) {
+            return @<div class="template-container">
+                       @GetTemplateIcon(item)
+                       <DxInputBox/>
+                   </div>;
+        }
+        RenderFragment GetItemTemplateContent(string item) {
+            return @<div class="template-container">
+                       @GetTemplateIcon(item)
+                       @item
+                   </div>;
+        }
+
+        RenderFragment GetTemplateIcon(string item) {
+            if(string.IsNullOrEmpty(item))
+                return @<text></text>;
+            return @<span class="@GetIconCssClass(item)"></span>;
+        }
+
+        string GetIconCssClass(string item) {
+            return $"template-icon {item.ToLower()}";
+        }
+    }
+</DemoPageSectionComponent>

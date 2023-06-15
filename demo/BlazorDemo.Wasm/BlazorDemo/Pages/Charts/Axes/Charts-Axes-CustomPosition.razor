@@ -1,7 +1,7 @@
 ﻿@using System.Drawing
 <DemoPageSectionComponent Id="Charts-Axes-CustomPosition" HasOptionsGroups=true>
     <DemoChildContent>
-        @inject IExperimentResultDataProvider Experement
+        @inject IExperimentResultDataProvider Experiment
         <DxChart T="DataPoint"
                  Data="points"
                  Height=400
@@ -43,7 +43,7 @@
         
         
         	protected override async Task OnInitializedAsync() {
-                points = await Experement.GetResultAsync();
+                points = await Experiment.GetResultAsync();
             }
         }
     </DemoChildContent>

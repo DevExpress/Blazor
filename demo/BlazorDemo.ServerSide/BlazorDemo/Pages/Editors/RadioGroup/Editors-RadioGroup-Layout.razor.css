@@ -1,0 +1,17 @@
+/*BeginHide*/::deep /*EndHide*/.dx-demo-radio-group-label {
+    font-size: inherit;
+    font-weight: 600;
+}
+/*BeginHide*/::deep /*EndHide*/.dx-demo-radio-group-label.dx-demo-small {
+    font-size: 0.75rem;
+}
+/*BeginHide*/::deep /*EndHide*/.dx-demo-radio-group-label.dx-demo-large {
+    font-size: 1rem;
+}
+/*BeginHide*/::deep /*EndHide*/.dx-demo-radio-group {
+    padding-bottom: 1rem;
+}
+/*BeginHide*/::deep /*EndHide*/.dx-demo-radio-selected-value {
+    max-width: 480px;
+    width: 100%;
+}

@@ -58,14 +58,12 @@ namespace BlazorDemo.DemoData {
             if(list == null)
                 return Array.Empty<T>();
             IEnumerable<T> result = list;
-            if(!IsBlazorServer) { 
-                result = result
-                    .Where(i => i switch {
-                        DemoProductInfo info => !info.IsServerSideOnly,
-                        DemoItem item => !item.IsServerSideOnly,
-                        _ => throw new NotSupportedException()
-                    });
-            }
+            result = result
+               .Where(i => i switch {
+                   DemoProductInfo info => !(IsBlazorServer ? info.IsClientSideOnly : info.IsServerSideOnly),
+                   DemoItem item => !(IsBlazorServer ? item.IsClientSideOnly : item.IsServerSideOnly),
+                   _ => throw new NotSupportedException()
+               });
             return result
                 .OrderBy(i => i is DemoPageBase page ? page.IsMaintenanceMode : false)
                 .ToArray();

@@ -1,4 +1,6 @@
-﻿<DemoPageSectionComponent Id="Charts-RangeSeries-Area">
+﻿@page "/ChartRangeArea"
+
+<DemoPageSectionComponent Id="Charts-RangeSeries-Area">
     <DemoChildContent>
         @inject IWeatherSummaryDataProvider WeatherSummaryDataProvider
 
@@ -12,7 +14,7 @@
                                     Name="Temperature, °F"
                                     Filter="@((DetailedWeatherSummary  i) => i.City == "HILO")">
                 <DxChartSeriesLabel Visible="true"
-                                    Format="@(ChartElementFormat.FromLdmlString("0# °F"))" />
+                                    ValueFormat="@(ChartElementFormat.FromLdmlString("0# °F"))" />
                 <DxChartSeriesPoint Visible="true" />
             </DxChartRangeAreaSeries>
             <DxChartValueAxis>

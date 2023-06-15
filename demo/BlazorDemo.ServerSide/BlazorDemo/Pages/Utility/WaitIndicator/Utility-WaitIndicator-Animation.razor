@@ -1,0 +1,41 @@
+﻿<DemoPageSectionComponent Id="Utility-WaitIndicator-Animation" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @*BeginHide*@
+        <div class="d-flex">
+            @*EndHide*@
+            <div class="m-3 d-flex flex-column">
+                    @*BeginHide*@
+                    <p class="dxbl-text d-block mb-3">Spinner</p>
+                    @*EndHide*@
+                    <DxWaitIndicator Visible="true"
+                                     SizeMode="Params.SizeMode"
+                                     CssClass="m-auto"
+                                     AnimationType="WaitIndicatorAnimationType.Spin" />
+            </div>
+            <div class="m-3 d-flex flex-column">
+                @*BeginHide*@
+                <p class="dxbl-text d-block mb-3">Pulse</p>
+                @*EndHide*@
+                <DxWaitIndicator Visible="true"
+                                 SizeMode="Params.SizeMode"
+                                 CssClass="m-auto"
+                                 AnimationType="WaitIndicatorAnimationType.Pulse" />
+            </div>
+            <div class="m-3 d-flex flex-column">
+                @*BeginHide*@
+                <p class="dxbl-text d-block mb-3">Flip</p>
+                @*EndHide*@
+                <DxWaitIndicator Visible="true"
+                                 SizeMode="Params.SizeMode"
+                                 CssClass="m-auto"
+                                 AnimationType="WaitIndicatorAnimationType.Flip">
+                    <Template>
+                        <div class="icon-logo-color" role="img"></div>
+                    </Template>
+                </DxWaitIndicator>
+            </div>
+            @*BeginHide*@
+        </div>
+        @*EndHide*@
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

@@ -6,8 +6,12 @@
             <span class="drop-file-icon mb-3"></span>
             <span class="mb-3">Click the Select Files button to select a file</span>
         </div>
-        <DxUpload Name="myFile" UploadUrl="@GetUploadUrl("api/Upload/UploadFile/")" SelectedFilesChanged="SelectedFilesChanged"
-                  AllowMultiFileUpload="true" UploadMode="UploadMode.OnButtonClick" MaxFileSize="15000000"
+        <DxUpload Name="myFile"
+                  UploadMode="@UploadMode.OnButtonClick"
+                  AllowMultiFileUpload="true"
+                  UploadUrl="@GetUploadUrl("api/Upload/Upload/")"
+                  SelectedFilesChanged="@SelectedFilesChanged"
+                  MaxFileSize="15000000"
                   CssClass="@(SelectedFilesCount > 0 ? "w-100" : string.Empty)">
         </DxUpload>
     </div>

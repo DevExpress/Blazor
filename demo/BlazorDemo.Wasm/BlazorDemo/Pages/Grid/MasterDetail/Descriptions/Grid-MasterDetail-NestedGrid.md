@@ -1,4 +1,4 @@
-﻿The DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid) component allows you to create hierarchical layouts of any complexity and depth. This demo module illustrates how to use a nested grid component to visualize a master-detail relationship between two data tables. To replicate the capabilities of this demo, follow the steps below:
+﻿The DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/403143/grid) component allows you to create hierarchical layouts of any complexity and depth. This demo module illustrates how to use a nested grid component to visualize a master-detail relationship between two data tables. To replicate the capabilities of this demo, follow the steps below:
 
 1. Add a master grid to your application.
 2. Bind the master grid to data and add columns to its [Columns](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.Columns) collection.

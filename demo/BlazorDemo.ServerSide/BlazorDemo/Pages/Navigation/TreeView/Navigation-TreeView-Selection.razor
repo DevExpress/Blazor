@@ -1,42 +1,45 @@
-﻿<DemoPageSectionComponent Id="Navigation-TreeView-Selection" VerticalAlignment=VerticalAlignment.Top>
-    <div class="cw-240">
-        <h5 class="card-title">Chemical elements</h5>
-        <DxTreeView AllowSelectNodes="true"
-                    SelectionChanged="@SelectionChanged"
-                    AnimationType="LayoutAnimationType.Slide">
-            <Nodes>
-                <DxTreeViewNode Text="Metals">
-                    <Nodes>
-                        <DxTreeViewNode Text="Alkali metals" />
-                        <DxTreeViewNode Text="Alkaline earth metals" />
-                        <DxTreeViewNode Text="Inner transition elements">
-                            <Nodes>
-                                <DxTreeViewNode Text="Lanthanides" />
-                                <DxTreeViewNode Text="Actinides" />
-                            </Nodes>
-                        </DxTreeViewNode>
-                        <DxTreeViewNode Text="Transition elements" />
-                        <DxTreeViewNode Text="Other metals" />
-                    </Nodes>
-                </DxTreeViewNode>
-                <DxTreeViewNode Text="Metalloids" />
-                <DxTreeViewNode Text="Nonmetals">
-                    <Nodes>
-                        <DxTreeViewNode Text="Halogens" />
-                        <DxTreeViewNode Text="Noble gases" />
-                        <DxTreeViewNode Text="Other nonmetals" />
-                    </Nodes>
-                </DxTreeViewNode>
-            </Nodes>
-        </DxTreeView>
-        <p class="demo-text cw-480 mt-2">Selected group: <b>@SelectedGroup</b></p>
-    </div>
+﻿<DemoPageSectionComponent Id="Navigation-TreeView-Selection" VerticalAlignment=VerticalAlignment.Top ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="cw-240">
+            <h5 class="card-title">Chemical elements</h5>
+            <DxTreeView AllowSelectNodes="true"
+                        SelectionChanged="@SelectionChanged"
+                        SizeMode="Params.SizeMode"
+                        AnimationType="LayoutAnimationType.Slide">
+                <Nodes>
+                    <DxTreeViewNode Text="Metals">
+                        <Nodes>
+                            <DxTreeViewNode Text="Alkali metals"/>
+                            <DxTreeViewNode Text="Alkaline earth metals"/>
+                            <DxTreeViewNode Text="Inner transition elements">
+                                <Nodes>
+                                    <DxTreeViewNode Text="Lanthanides"/>
+                                    <DxTreeViewNode Text="Actinides"/>
+                                </Nodes>
+                            </DxTreeViewNode>
+                            <DxTreeViewNode Text="Transition elements"/>
+                            <DxTreeViewNode Text="Other metals"/>
+                        </Nodes>
+                    </DxTreeViewNode>
+                    <DxTreeViewNode Text="Metalloids"/>
+                    <DxTreeViewNode Text="Nonmetals">
+                        <Nodes>
+                            <DxTreeViewNode Text="Halogens"/>
+                            <DxTreeViewNode Text="Noble gases"/>
+                            <DxTreeViewNode Text="Other nonmetals"/>
+                        </Nodes>
+                    </DxTreeViewNode>
+                </Nodes>
+            </DxTreeView>
+            <p class="demo-text cw-480 mt-2">Selected group: <b>@SelectedGroup</b></p>
+        </div>
 
-    @code  {
-        string SelectedGroup = "none";
+        @code {
+            string SelectedGroup = "none";
 
-        void SelectionChanged(TreeViewNodeEventArgs e) {
-            SelectedGroup = e.NodeInfo?.Text;
+            void SelectionChanged(TreeViewNodeEventArgs e) {
+                SelectedGroup = e.NodeInfo?.Text;
+            }
         }
-    }
+    </ChildContentWithParameters>
 </DemoPageSectionComponent>

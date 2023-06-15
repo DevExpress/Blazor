@@ -1,8 +1,11 @@
 ﻿@inject NwindDataService NwindDataService
-<DemoPageSectionComponent Id="Navigation-Accordion-Overview">
-    <DemoChildContent>
+<DemoPageSectionComponent Id="Navigation-Accordion-Overview" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
         <div class="cw-480 demo-preventsel">
-            <DxAccordion ExpandMode="ExpandMode" ExpandCollapseAction="ExpandCollapseAction" AnimationType="LayoutAnimationType.Slide">
+            <DxAccordion ExpandMode="ExpandMode"
+                         ExpandCollapseAction="ExpandCollapseAction"
+                         SizeMode="Params.SizeMode"
+                         AnimationType="LayoutAnimationType.Slide">
                 <Items>
                     @foreach(var (employee, i) in Items) {
                         <DxAccordionItem Text=@($"{employee.FirstName} {employee.LastName}") Expanded=@(i == 0)>
@@ -16,7 +19,7 @@
                 </Items>
             </DxAccordion>
         </div>
-    </DemoChildContent>
+    </ChildContentWithParameters>
     <OptionsContent>
         <OptionComboBox Label="Expand Mode:"
                         Data="@(Enum.GetValues<AccordionExpandMode>())"

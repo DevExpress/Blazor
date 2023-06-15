@@ -1,0 +1,69 @@
+﻿<DemoPageSectionComponent Id="Editors-Radio-Overview" ShowSizeMode="@true" VerticalAlignment="@VerticalAlignment.Top">
+    <ChildContentWithParameters Context="Params">
+        <div class="survey-wrapper">
+            <fieldset>
+                <legend class="@GetLegendCssClass(Params.SizeMode)">Are you developing Blazor WebAssembly apps?</legend>
+                <div class="@GetGroupClass()" role="radiogroup">
+                    @foreach(var option in GeneralAnswerOptions) {
+                        <DxRadio GroupName="general-radio-group"
+                                 @bind-GroupValue="@GeneralAnswer"
+                                 Value="@option"
+                                 CssClass="dx-demo-radio"
+                                 SizeMode="@Params.SizeMode">
+                            @option
+                        </DxRadio>
+                    }
+                </div>
+            </fieldset>
+                @if(AOTGroupVisible) {
+                    <fieldset>
+                        <legend class="@GetLegendCssClass(Params.SizeMode)">Do you expect to enable AOT in your Blazor WebAssembly apps?</legend>
+                        <div class="dx-demo-radio-group" role="radiogroup">
+                            @foreach(var option in AOTAnswerOptions) {
+                                <DxRadio GroupName="aot-radio-group"
+                                         @bind-GroupValue="@AOTAnswer"
+                                         Value="@option"
+                                         CssClass="dx-demo-radio"
+                                         SizeMode="@Params.SizeMode">
+                                    @option
+                                </DxRadio>
+                            }
+                        </div>
+                    </fieldset>
+                }
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        string GeneralAnswer { get; set; }
+        string AOTAnswer { get; set; }
+        bool AOTGroupVisible => !string.IsNullOrEmpty(GeneralAnswer) && GeneralAnswer != GeneralAnswerOptions.Last();
+
+        IEnumerable<string> GeneralAnswerOptions = new[] {
+            "Yes.",
+            "No, but I plan to develop a WebAssembly app in the near future.",
+            "No."
+        };
+        IEnumerable<string> AOTAnswerOptions = new[] {
+            "Yes, I already enabled it.",
+            "Yes, I plan to enable it AOT in my WebAssembly app.",
+            "No."
+        };
+
+        string GetGroupClass() {
+            var result = "dx-demo-radio-group";
+            if(AOTGroupVisible)
+                result += " dx-demo-radio-group-indented";
+            return result;
+        }
+
+        string GetLegendCssClass(SizeMode sizeMode) {
+            var result = "dx-demo-radio-group-label";
+            if(sizeMode != SizeMode.Medium)
+                result += sizeMode == SizeMode.Large ? " dx-demo-large" : " dx-demo-small";
+            return result;
+        }
+
+    }
+
+</DemoPageSectionComponent>

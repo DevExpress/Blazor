@@ -1,0 +1,24 @@
+/*BeginHide*/::deep /*EndHide*/.dx-demo-radio-group-label {
+    font-size: inherit;
+    font-weight: 600;
+}
+/*BeginHide*/::deep /*EndHide*/.dx-demo-radio-group-label.dx-demo-small {
+    font-size: 0.75rem;
+}
+/*BeginHide*/::deep /*EndHide*/.dx-demo-radio-group-label.dx-demo-large {
+    font-size: 1rem;
+}
+/*BeginHide*/::deep /*EndHide*/.dx-demo-form-layout-width {
+    max-width: 640px;
+    width: 100%;
+}
+/*BeginHide*/::deep /*EndHide*/.dx-demo-radio-group {
+    padding-bottom: 1rem;
+}
+/*BeginHide*/::deep /*EndHide*/.dx-demo-radio-group > .dx-demo-radio + .dx-demo-radio {
+    padding-top: 0.5rem;
+}
+/*BeginHide*/::deep /*EndHide*/.dx-demo-radio-selected-value {
+    max-width: 480px;
+    width: 100%;
+}

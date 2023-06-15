@@ -1,0 +1,42 @@
+﻿<DemoPageSectionComponent Id="Editors-Radio-Customization" ShowSizeMode="@true">
+    <ChildContentWithParameters Context="Params">
+        <fieldset class="survey-wrapper">
+            <legend class="@GetLegendCssClass(Params.SizeMode)">Select priority level:</legend>
+            <div class="dx-demo-radio-group" role="radiogroup">
+                @foreach(var priorityLevel in PriorityLevels) {
+                    <DxRadio GroupName="priorities-radio-group"
+                             @bind-GroupValue="@SelectedPriorityLevel"
+                             Value="@priorityLevel"
+                             SizeMode="@Params.SizeMode"
+                             CssClass="@GetItemCssClass(priorityLevel)">
+                        @CultureInfo.CurrentCulture.TextInfo.ToTitleCase(priorityLevel)
+                    </DxRadio>
+                }
+            </div>
+            <p class="demo-text dx-demo-radio-selected-value">
+                Selected priority level:
+                <strong>@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(SelectedPriorityLevel)</strong>
+            </p>
+        </fieldset>
+    </ChildContentWithParameters>
+
+    @code {
+        string SelectedPriorityLevel { get; set; } = "normal";
+        IEnumerable<string> PriorityLevels = new[] { "low", "normal", "urgent", "high" };
+
+        string GetItemCssClass(string priorityLevel) {
+            var result = $"dx-demo-radio priority-{priorityLevel}";
+            if(priorityLevel == SelectedPriorityLevel)
+                result += " dx-demo-radio-selected";
+            return result;
+        }
+
+        string GetLegendCssClass(SizeMode sizeMode) {
+            var result = "dx-demo-radio-group-label";
+            if(sizeMode != SizeMode.Medium)
+                result += sizeMode == SizeMode.Large ? " dx-demo-large" : " dx-demo-small";
+            return result;
+        }
+
+    }
+</DemoPageSectionComponent>

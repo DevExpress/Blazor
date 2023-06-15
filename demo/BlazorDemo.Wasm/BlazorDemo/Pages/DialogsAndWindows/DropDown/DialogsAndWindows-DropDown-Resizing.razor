@@ -1,0 +1,41 @@
+﻿<DemoPageSectionComponent Id="DialogsAndWindows-DropDown-Resizing" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div id="dropdown-resizing-target-container">
+            <DxButton
+                Click="() => IsOpen = !IsOpen"
+                RenderStyle="@ButtonRenderStyle.Secondary">SHOW A DROPDOWN</DxButton>
+        </div>
+
+        <DxDropDown
+            @bind-IsOpen="@IsOpen"
+            AllowResize="true"
+            CloseMode="DropDownCloseMode.Close"
+            PreventCloseOnPositionTargetClick="true"
+            PositionMode="DropDownPositionMode.Bottom"
+            PositionTarget="#dropdown-resizing-target-container"
+            RestrictionTarget="#Navigation-DropDown-Resizing"
+            HeaderVisible="true"
+            HeaderText="Edit Contact"
+            FooterVisible="true"
+            MinWidth="300"
+            MinHeight="200"
+            MaxWidth="800"
+            MaxHeight="500"
+            Width="max(25vw, 250px)"
+            SizeMode="Params.SizeMode">
+            <BodyContentTemplate>
+                <SampleEditForm/>
+            </BodyContentTemplate>
+            <FooterContentTemplate>
+                <DxButton CssClass="popup-button my-1 ms-2" RenderStyle="ButtonRenderStyle.Primary" Text="OK" Click="@context.CloseCallback" />
+                <DxButton CssClass="popup-button my-1 ms-2" RenderStyle="ButtonRenderStyle.Secondary" Text="Cancel" Click="@context.CloseCallback"/>
+            </FooterContentTemplate>
+        </DxDropDown>
+    </ChildContentWithParameters>
+
+    @code {
+        bool IsOpen { get; set; } = false;
+    }
+
+
+</DemoPageSectionComponent>

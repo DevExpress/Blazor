@@ -19,6 +19,7 @@ namespace BlazorDemo.Data.Northwind {
         public short? UnitsOnOrder { get; set; }
         public short? ReorderLevel { get; set; }
         public bool Discontinued { get; set; }
+        public bool InStock => !Discontinued;
 
         public virtual Category Category { get; set; }
         public virtual Supplier Supplier { get; set; }

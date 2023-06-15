@@ -1,0 +1,44 @@
+﻿@using System.Drawing
+
+<DemoPageSectionComponent Id="Charts-Customization-Series-SeriesPoint">
+    @inject IWeatherSummaryDataProvider WeatherSummaryDataProvider
+    <DxChart Data="@WeatherForecasts"
+             CustomizeSeriesPoint="@PreparePointColor"
+             Width="100%">
+        <DxChartTitle Text="Annual Weather in New York" />
+        <DxChartLineSeries SummaryMethod="@(i => i.Average())"
+                           Color="@Color.Gray"
+                           ValueField="@((DetailedWeatherSummary i) => i.AverageTemperatureF)"
+                           ArgumentField="@(i => new DateTime(2000, i.Date.Month, 1))"
+                           Name="Temperature, °F"
+                           Filter="@((DetailedWeatherSummary  i) => i.City == "NEW YORK")">
+            <DxChartSeriesPoint Symbol="ChartPointSymbol.Polygon"
+                                Color="@Color.Gray"
+                                Size="25" />
+        </DxChartLineSeries>
+        <DxChartLegend Visible="false" />
+        <DxChartValueAxis>
+            <DxChartAxisTitle Text="Temperature, °F" />
+        </DxChartValueAxis>
+        <DxChartArgumentAxis>
+            <DxChartAxisLabel Format="ChartElementFormat.Month" />
+        </DxChartArgumentAxis>
+    </DxChart>
+
+
+    @code {
+        IEnumerable<DetailedWeatherSummary> WeatherForecasts;
+
+        protected override async Task OnInitializedAsync() {
+            WeatherForecasts = await WeatherSummaryDataProvider.GetDataAsync();
+        }
+
+        protected void PreparePointColor(ChartSeriesPointCustomizationSettings pointSettings) {
+            double value = (double)pointSettings.Point.Value;
+            if (value > 70)
+                pointSettings.PointAppearance.Color = Color.Red;
+            else if (value < 40)
+                pointSettings.PointAppearance.Color = Color.Blue;
+        }
+    }
+</DemoPageSectionComponent>

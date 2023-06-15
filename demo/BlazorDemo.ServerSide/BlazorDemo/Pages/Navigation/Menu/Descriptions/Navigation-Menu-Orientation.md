@@ -1,3 +1,9 @@
-The Menu's default orientation is **Horizontal** (menu items are arranged in a row). Use the [Orientation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu.Orientation) property to change the orientation. 
+You can specify whether Menu arranges items vertically or horizontally (the [Orientation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu.Orientation) property).
 
-This demo demonstrates how to create a vertical menu. You can also choose the **Desktop** or **Mobile** display mode. View the [Display Mode](Menu#MobileHorizontal) demo for more information about these modes.
+For each of these Orientation options, you can also choose between the following [DisplayMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu.DisplayMode) options:
+
+*   **Auto** — adapts to the device.
+*   **Desktop** — cascading menus. Root level items appear in a horizontal or vertical panel. In horizontal orientation, second-level menus drop down. In vertical orientation, second-level menus appear to the right or left side.
+*   **Mobile** — a compact layout. In horizontal orientation, the component emulates a hamburger menu. In vertical orientation, root level items appear in the same way as in Desktop mode. The second-level menu appears within the same container (and includes a Back button).
+
+In this demo, you can switch between display and orientation modes and review all available combinations.

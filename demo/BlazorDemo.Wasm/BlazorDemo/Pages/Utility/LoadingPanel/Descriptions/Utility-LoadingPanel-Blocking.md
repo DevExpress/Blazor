@@ -1,0 +1,1 @@
+If you activate the [IsContentBlocked](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxLoadingPanel.IsContentBlocked) option, users cannot interact with content under the Loading Panel. In this demo, you can click the Memo to close the Loading Panel and check the **Show panel** check box to display the component again.
