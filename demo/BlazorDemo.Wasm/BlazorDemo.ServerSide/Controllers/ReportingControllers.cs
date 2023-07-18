@@ -28,9 +28,9 @@ namespace BlazorDemo.Reports {
             ReportDesignerModel model;
             Dictionary<string, object> dataSources = new();
             if(string.IsNullOrEmpty(reportUrl))
-                model = await designerClientSideModelGenerator.GetModelAsync(new XtraReport(), dataSources, "/DXXRD", "/DXXRDV", "/DXXQB");
+                model = await designerClientSideModelGenerator.GetModelAsync(new XtraReport(), dataSources, "DXXRD", "DXXRDV", "DXXQB");
             else
-                model = await designerClientSideModelGenerator.GetModelAsync(reportUrl, dataSources, "/DXXRD", "/DXXRDV", "/DXXQB");
+                model = await designerClientSideModelGenerator.GetModelAsync(reportUrl, dataSources, "DXXRD", "DXXRDV", "DXXQB");
             model.Assign(designerModelSettings);
             var modelJsonScript = designerClientSideModelGenerator.GetJsonModelScript(model);
             return Content(modelJsonScript, "application/json");

@@ -49,12 +49,12 @@
     </ChildContentWithParameters>
 
     @code {
-        double Price { get; set; }
+        double Price { get; set; } = 1.11;
         DateTime Date { get; set; } = DateTime.Today;
         TimeSpan TimeSpan { get; set; } = DateTime.Now.TimeOfDay;
         DateTimeOffset DateOffset { get; set; } = DateTimeOffset.Now;
         string EmailMask { get; set; } = @"(\w|[.-])+@(\w|-)+\.(\w|-){2,4}";
-        string Email { get; set; }
-        string Telephone { get; set; }
+        string Email { get; set; } = "leahs@dx-email.com";
+        string Telephone { get; set; } = "5625595830";
     }
 </DemoPageSectionComponent>

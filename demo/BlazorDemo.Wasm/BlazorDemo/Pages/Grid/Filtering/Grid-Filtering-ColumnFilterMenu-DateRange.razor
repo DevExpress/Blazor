@@ -3,13 +3,13 @@
 
 <style>
     .spaced-content {
-        --dxbl-fl-padding-x: 0.75rem;
-        --dxbl-fl-padding-y: 0.75rem;
+        padding: 0.75rem;
     }
 </style>
 <DxFormLayout CssClass="spaced-content" ItemCaptionAlignment="ItemCaptionAlignment.All">
     <DxFormLayoutItem Caption="From" ColSpanSm="12">
         <DxDateEdit T="DateTime?"
+                    Enabled="DateEditEnabled"
                     Date="StartDate"
                     DateChanged="StartDate_Changed"
                     MinDate="StartDateEdit_MinDate"
@@ -18,6 +18,7 @@
     </DxFormLayoutItem>
     <DxFormLayoutItem Caption="To" ColSpanSm="12">
         <DxDateEdit T="DateTime?"
+                    Enabled="DateEditEnabled"
                     Date="EndDate"
                     DateChanged="EndDate_Changed"
                     MinDate="EndDateEdit_MinDate"
@@ -37,10 +38,12 @@
     DateTime MaxDate { get; set; } = DateTime.MaxValue;
 
     DateTime StartDateEdit_MinDate => MinDate;
-    DateTime StartDateEdit_MaxDate => EndDate != null ? EndDate.Value : MaxDate;
+    DateTime StartDateEdit_MaxDate => EndDate != null && EndDate.Value >= StartDateEdit_MinDate ? EndDate.Value : MaxDate;
 
-    DateTime EndDateEdit_MinDate => StartDate != null ? StartDate.Value : MinDate;
+    DateTime EndDateEdit_MinDate => StartDate != null && StartDate.Value <= EndDateEdit_MaxDate ? StartDate.Value : MinDate;
     DateTime EndDateEdit_MaxDate => MaxDate;
+
+    bool DateEditEnabled { get; set; }
 
     protected override async Task OnInitializedAsync() {
         (StartDate, EndDate) = LoadDateRangeValues(FilterContext.FilterCriteria, FilterContext.DataColumn.FieldName);
@@ -48,16 +51,26 @@
         var items = await FilterContext.GetDataItemsAsync();
         var allDates = items.Select(i => Convert.ToDateTime(i.Value)).ToList();
 
-        MinDate = allDates.Min();
-        MaxDate = allDates.Max();
+        if(allDates.Any()) {
+            MinDate = allDates.Min();
+            MaxDate = allDates.Max();
+
+            DateEditEnabled = true;
+        }
     }
 
     void StartDate_Changed(DateTime? value) {
         StartDate = value;
+        if(StartDate > EndDate)
+            EndDate = StartDate;
+
         UpdateCriteria();
     }
     void EndDate_Changed(DateTime? value) {
         EndDate = value;
+        if(StartDate > EndDate)
+            StartDate = EndDate;
+
         UpdateCriteria();
     }
     void UpdateCriteria() {
@@ -72,10 +85,11 @@
         if(startDate != null)
             left = prop >= startDate;
         if(endDate != null)
-            right = prop < endDate;
+            right = prop < ConvertEndDateToOperandDate(endDate);
 
         return left & right;
     }
+    static DateTime? ConvertEndDateToOperandDate(DateTime? endDate) => endDate?.Date.AddDays(1);
     static (DateTime? startDate, DateTime? endDate) LoadDateRangeValues(CriteriaOperator criteria, string fieldName) {
         CriteriaOperator left = null;
         CriteriaOperator right = null;
@@ -83,14 +97,13 @@
         if(criteria is GroupOperator groupOp && groupOp.OperatorType == GroupOperatorType.And && groupOp.Operands.Count == 2) {
             left = groupOp.Operands[0];
             right = groupOp.Operands[1];
-        }
-        else {
+        } else {
             left = right = criteria;
         }
 
         return (
             ExtractRangeDate(left, fieldName, BinaryOperatorType.GreaterOrEqual),
-            ExtractRangeDate(right, fieldName, BinaryOperatorType.Less)
+            ConvertOperandDateToEndDate(ExtractRangeDate(right, fieldName, BinaryOperatorType.Less))
         );
     }
     static DateTime? ExtractRangeDate(CriteriaOperator criteria, string fieldName, BinaryOperatorType opType) {
@@ -104,4 +117,5 @@
             return (DateTime)((OperandValue)((BinaryOperator)criteria).RightOperand).Value;
         return null;
     }
+    static DateTime? ConvertOperandDateToEndDate(DateTime? endDate) => endDate?.Date.AddDays(-1);
 }

@@ -12,3 +12,5 @@ You can use the following methods to get currently applied filters:
 * [GetFieldFilterCriteria](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.GetFieldFilterCriteria(System.String)) — Returns the criteria operator applied to the specified data field.
 
 In this demo, we create a criteria operator object based on the current value of the tag box. The [SetFieldFilterCriteria](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SetFieldFilterCriteria(System.String-DevExpress.Data.Filtering.CriteriaOperator)) method is called to apply the criteria operator to the **CategoryId** column.
+
+For more information, refer to the following topic: [Filter API](https://docs.devexpress.com/Blazor/404327/components/grid/filter-data/filter-api).

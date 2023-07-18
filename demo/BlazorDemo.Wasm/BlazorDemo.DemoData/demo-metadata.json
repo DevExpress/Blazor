@@ -2091,6 +2091,11 @@
               "DocUrl": "DevExpress.Blazor.DxGrid",
               "AdditionalCodeFiles": [
                 {
+                  "Title": "CSS",
+                  "Path": "wwwroot\\css\\dx-demo.css",
+                  "ExtractRegex": "\\.ch-480 {[^}]+}"
+                },
+                {
                   "Title": "Invoice.cs",
                   "Path": "Data\\Northwind\\Invoice.cs"
                 },
@@ -4523,7 +4528,7 @@
           "Id": "LayoutBreakpoint",
           "Url": "LayoutBreakpoint",
           "Title": "Layout Breakpoint",
-          "Keywords": "Blazor, components, LayoutBreakpoint, page layout, grid layout, layout, layout breakpoints, breakpoint, adaptive UI, adaptivity, adaptive layout, responsive layout, responsive UI, arrange UI elements, layout items, rows, columns, areas, template areas, layout areas, grid areas, devexpress, demo, sample, example",
+          "Keywords": "Blazor, components, LayoutBreakpoint, page layout, adaptive grid, responsive grid, cardview, card view, implement cardview, grid layout, layout, layout breakpoints, breakpoint, adaptive UI, adaptivity, adaptive layout, responsive layout, responsive UI, arrange UI elements, layout items, rows, columns, areas, template areas, layout areas, grid areas, devexpress, demo, sample, example",
           "Description": "Layout breakpoint description",
           "IsNew": "true",
           "PageSections": [
@@ -5371,7 +5376,8 @@
             {
               "Id": "EmbeddedPDFContent",
               "Url": "ReportViewer/MergedReports/EmbeddedPDFContent",
-              "Title": "Embedded PDF Content"
+              "Title": "Embedded PDF Content",
+              "IsUpdated": true
             }
           ]
         },
@@ -5495,7 +5501,8 @@
             {
               "Id": "PdfVisualSignature",
               "Url": "ReportViewer/ReportControls/PdfVisualSignature",
-              "Title": "PDF Visual Signature"
+              "Title": "PDF Visual Signature",
+              "IsUpdated": true
             },
             {
               "Id": "ProductListReport",
@@ -5583,7 +5590,8 @@
               "Title": "Razor",
               "Path": "Pages\\Reports\\ReportDesigner\\Reports-ReportDesigner.razor"
             }
-          ]
+          ],
+          "IsUpdated":  true
         }
       ]
     },
@@ -6353,10 +6361,6 @@
             {
               "Id": "Animation",
               "Title": "Animation"
-            },
-            {
-              "Id": "Template",
-              "Title": "Template"
             }
           ]
         }

@@ -31,7 +31,7 @@
     @code {
         IEnumerable<char> PredefinedPlaceholders { get; set; } = new List<char>() { '_', '#' };
 
-        string Email { get; set; }
+        string Email { get; set; } = "leahs@dx-email.com";
         string EmailMask { get; set; } = @"(\w|[.-])+@(\w|-)+\.(\w|-){2,4}";
 
         MaskAutoCompleteMode AutoCompleteMode { get; set; } = MaskAutoCompleteMode.Strong;

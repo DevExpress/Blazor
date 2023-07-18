@@ -41,7 +41,7 @@ namespace BlazorDemo.Data {
                 style += $"text-decoration: {textDecoration};";
             return !string.IsNullOrEmpty(style) ? style : null;
         }
-        public bool GetIsChanged() {
+        public bool IsStyleChanged() {
             return TextCase != null || FontFamily != null || FontSize != 0 || Decoration.Values.Any(x => x);
         }
         public void ClearFormatting() {

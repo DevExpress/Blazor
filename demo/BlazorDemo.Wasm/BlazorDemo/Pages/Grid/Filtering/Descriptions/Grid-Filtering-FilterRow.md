@@ -15,6 +15,6 @@ In this demo, the **Customer** column's settings are modified to display values 
 
 Our Blazor Grid also supports a command column with a Clear button that resets the filter. To display this column, declare a [DxGridCommandColumn](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridCommandColumn) object in the [Columns](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.Columns) template.
 
-To manage filter options in code, you can call the [FilterBy](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.FilterBy(System.String-DevExpress.Blazor.GridFilterRowOperatorType-System.Object)) and [ClearFilter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ClearFilter) methods. 
+For more information, refer to the following topics: [Filter Row](https://docs.devexpress.com/Blazor/404325/components/grid/filter-data/filter-row), [Filter API](https://docs.devexpress.com/Blazor/404327/components/grid/filter-data/filter-api).
 
 This demo comes with an enabled Integrated [editor render mode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.EditorRenderMode). In this mode, the Grid renders editors in filter rows so that they occupy the entire cell; editor borders are not displayed.

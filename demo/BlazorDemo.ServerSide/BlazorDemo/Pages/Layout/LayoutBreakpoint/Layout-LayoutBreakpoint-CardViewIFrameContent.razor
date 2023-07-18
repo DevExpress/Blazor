@@ -5,7 +5,7 @@
 
 <DxLayoutBreakpoint DeviceSize="DeviceSize.XSmall" @bind-IsActive="@IsXSmallScreen" />
 
-<div class="h-100 w-100 ps-2 pt-2 card-vew-wrapper" >
+<div class="h-100 w-100 ps-2 pt-2 card-view-wrapper" >
     @using BlazorDemo.Data.Homes;
     @inject HomesDataService HomesDataService
     <DxPager PageCount="@PageCount" CssClass="mb-2" @bind-ActivePageIndex="@ActivePageIndex" />

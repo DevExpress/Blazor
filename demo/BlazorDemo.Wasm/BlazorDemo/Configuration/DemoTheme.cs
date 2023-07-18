@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace BlazorDemo.Configuration {
     public class DemoTheme {
         public string Name { get; }
-        public string Title { get { return Name.Replace("-", " "); } }
+        public string Title { get { return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(Name.Replace("-", " ")); } }
         public string IconCssClass { get { return Name.ToLower(); } }
         public bool IsBootstrapNative { get; }
         public string GetCssClass(bool isActive) => isActive ? "active" : "text-body";
