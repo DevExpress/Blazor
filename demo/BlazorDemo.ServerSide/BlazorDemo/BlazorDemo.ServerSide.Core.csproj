@@ -37,11 +37,11 @@
     <ProjectReference Include="..\BlazorDemo.Reporting.Core\BlazorDemo.Reporting.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="23.1.4" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.BlazorServer" Version="23.1.4" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="23.1.4" />    
-    <PackageReference Include="DevExpress.Reporting.Demos" Version="23.1.4" />
-    <PackageReference Include="DevExpress.Drawing.Skia" Version="23.1.4" />
+    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="23.1.5" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.BlazorServer" Version="23.1.5" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="23.1.5" />    
+    <PackageReference Include="DevExpress.Reporting.Demos" Version="23.1.5" />
+    <PackageReference Include="DevExpress.Drawing.Skia" Version="23.1.5" />
     
     
     

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BlazorDemo.Data;
+using DevExpress.Data.Utils;
 
 namespace BlazorDemo.DataProviders.Implementation {
     public class FinancialSeriesDataProvider : IFinancialSeriesDataProvider {
@@ -9,7 +10,7 @@ namespace BlazorDemo.DataProviders.Implementation {
         const double MaxPrice = 100;
         const double MinPrice = 5;
 
-        static StockDataPoint GeneratePoint(DateTime dateTime, double previousClose, Random random) {
+        static StockDataPoint GeneratePoint(DateTime dateTime, double previousClose, NonCryptographicRandom random) {
             double open = previousClose + (random.NextDouble() - 0.5) / 25d;
             double close = open + (random.NextDouble() - 0.5) / 5d;
             if(close > MaxPrice)
@@ -21,7 +22,7 @@ namespace BlazorDemo.DataProviders.Implementation {
             return new StockDataPoint(dateTime, open, high, low, close);
         }
         IEnumerable<StockDataPoint> GenerateInternal() {
-            Random random = new Random(28);
+            NonCryptographicRandom random = new NonCryptographicRandom(28);
             List<StockDataPoint> points = new List<StockDataPoint>();
             DateTime now = DateTime.Now.Date;
             DateTime currentDateTime = now.AddMinutes(-90);

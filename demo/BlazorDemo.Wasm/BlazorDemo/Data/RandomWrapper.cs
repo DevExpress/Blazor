@@ -1,4 +1,5 @@
 using System;
+using DevExpress.Data.Utils;
 
 namespace BlazorDemo.Data {
     public static class RandomWrapperFactory {
@@ -12,13 +13,13 @@ namespace BlazorDemo.Data {
     }
 
     public class RandomWrapper : IRandomWrapper {
-        readonly Random random;
+        readonly NonCryptographicRandom random;
 
         public RandomWrapper() {
-            random = new Random();
+            random = NonCryptographicRandom.System;
         }
         public RandomWrapper(int seed) {
-            random = new Random(seed);
+            random = new(seed);
         }
 
         public int Next(int maxValue) => random.Next(maxValue);

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System;
+using DevExpress.Data.Utils;
 
 namespace BlazorDemo.Data {
     public class SaleItem : IComparable<SaleItem> {
@@ -28,7 +29,7 @@ namespace BlazorDemo.Data {
         }
 
         internal static List<SaleItem> GetTotalIncome() {
-            Random rnd = new Random(DateTime.Now.Millisecond);
+            NonCryptographicRandom rnd = new NonCryptographicRandom(DateTime.Now.Millisecond);
             DateTime now = DateTime.Now;
             DateTime endDate = new DateTime(now.Year, now.Month, 1);
             List<SaleItem> items = new List<SaleItem>();

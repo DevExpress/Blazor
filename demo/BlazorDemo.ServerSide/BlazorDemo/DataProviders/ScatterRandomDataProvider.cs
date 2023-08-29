@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BlazorDemo.Data;
+using DevExpress.Data.Utils;
 
 namespace BlazorDemo.DataProviders.Implementation {
     public class ScatterRandomDataProvider : IScatterRandomDataProvider {
         public Task<IEnumerable<DataPoint>> GenerateCluster(int xPlus, int xMinus, int yPlus, int yMinus, int count, int randomSeek) {
-            Random random = new Random(randomSeek);
+            NonCryptographicRandom random = new NonCryptographicRandom(randomSeek);
             List<DataPoint> points = new();
             int deltaX = xMinus - xPlus;
             int deltaY = yMinus - yPlus;

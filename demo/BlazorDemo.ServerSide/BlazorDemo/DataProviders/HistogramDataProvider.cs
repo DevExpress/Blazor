@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BlazorDemo.Data;
+using DevExpress.Data.Utils;
 
 namespace BlazorDemo.DataProviders.Implementation {
     public class HistogramDataProvider : IHistogramDataProvider {
@@ -10,7 +11,7 @@ namespace BlazorDemo.DataProviders.Implementation {
         const double Mean = 0.5;
         const double StdDev = 0.15;
         const double Max = 10;
-        Random random = new Random(1);
+        NonCryptographicRandom random = new(1);
         List<DataPoint> normalDistribution;
         List<DataPoint> generatedData;
 
