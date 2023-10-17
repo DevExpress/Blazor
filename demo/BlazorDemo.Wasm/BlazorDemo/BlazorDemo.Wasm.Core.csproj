@@ -27,10 +27,10 @@
     <ProjectReference Include="..\BlazorDemo.Reporting.Core\BlazorDemo.Reporting.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.WebAssembly" Version="23.1.5" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="23.1.5" />
-    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="23.1.5" />
-    <PackageReference Include="DevExpress.Reporting.Demos" Version="23.1.5" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.WebAssembly" Version="23.1.6" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="23.1.6" />
+    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="23.1.6" />
+    <PackageReference Include="DevExpress.Reporting.Demos" Version="23.1.6" />
     
     
     

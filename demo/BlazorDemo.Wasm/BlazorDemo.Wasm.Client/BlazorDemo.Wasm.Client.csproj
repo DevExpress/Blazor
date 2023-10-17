@@ -16,16 +16,15 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0" PrivateAssets="all" />
-    <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2.3" />
-    <PackageReference Include="SkiaSharp.HarfBuzz" Version="2.88.3" />
-    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" Version="2.88.3" />
-    <PackageReference Include="SkiaSharp.Views.Blazor" Version="2.88.3" />
+    <PackageReference Include="SkiaSharp.Views.Blazor" Version="2.88.6" />
+    <PackageReference Include="SkiaSharp.HarfBuzz" Version="2.88.6" />
+    <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="7.3.0" />
     <NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\2.0.23\*.a" />
     <ProjectReference Include="..\BlazorDemo\BlazorDemo.Wasm.Core.csproj" />
   </ItemGroup>
 <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="23.1.5" />
-    <PackageReference Include="DevExpress.Drawing.Skia" Version="23.1.5" />
+    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="23.1.6" />
+    <PackageReference Include="DevExpress.Drawing.Skia" Version="23.1.6" />
     
     
     

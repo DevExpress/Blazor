@@ -5,6 +5,7 @@ Set the [FocusedRowEnabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor
 Focus moves under the following conditions/events:
 
 * A user clicks a row with a pointing device
+* A user navigates between rows with a keyboard (the [KeyboardNavigationEnabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.KeyboardNavigationEnabled) property is set to `true`)
 * The Grid moves focus on initial load or when visible rows change (for instance, when a user sorts data or changes a page)
 * The [SetFocusedDataItemAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SetFocusedDataItemAsync(System.Object)) or [SetFocusedRowIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SetFocusedRowIndex(System.Int32)) method is called
 

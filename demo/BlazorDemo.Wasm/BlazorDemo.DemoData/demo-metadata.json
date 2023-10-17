@@ -74,7 +74,7 @@
       "Title": "File Management",
       "PageUri": "Upload",
       "IconName": "filemanager",
-      "Description": "Our straightforward and easy-to-use File Management UI component suite allows you to monitor and manage the file upload process within your Blazor project at runtime."
+      "Description": "Our Blazor file management-related components allow you to upload files within your Blazor project at runtime."
     },
     {
       "Title": "Utility Controls",
@@ -877,7 +877,7 @@
           "Title": "Overview",
           "Keywords": "Blazor, components, data grid, datagrid, grid, data, devexpress, demo, sample, example",
           "Description": "A fast and responsive grid component with unmatched data shaping capabilities.",
-          "DocUrl": "DevExpress.Blazor.DxGrid",
+          "DocUrl": "403143/components/grid",
           "AdditionalCodeFiles": [
             {
               "Title": "Grid-Overview-List.razor",
@@ -1098,7 +1098,7 @@
           "Title": "Sort Data",
           "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, grid sort, grid sorting, datagrid sort, datagrid sorting, devexpress, demo, sample, example",
           "Description": "The DevExpress Grid for Blazor supports sorting data against multiple columns. A column's current sort order is indicated by a sort glyph displayed in the column header.",
-          "DocUrl": "DevExpress.Blazor.DxGrid.AllowSort",
+          "DocUrl": "404460/components/grid/sort-data",
           "AdditionalCodeFiles": [
             {
               "Title": "Customer.cs",
@@ -1123,7 +1123,7 @@
               "Id": "GroupData",
               "Url": "Grid/Grouping/GroupData",
               "Title": "Group Data",
-              "DocUrl": "DevExpress.Blazor.DxGrid.ShowGroupPanel",
+              "DocUrl": "404433/components/grid/group-data",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, grouping, groups, drag-and-drop, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1145,7 +1145,7 @@
               "Id": "IntervalGrouping",
               "Url": "Grid/Grouping/IntervalGrouping",
               "Title": "Interval Grouping",
-              "DocUrl": "DevExpress.Blazor.DxGridDataColumn.GroupInterval",
+              "DocUrl": "404433/components/grid/group-data#interval-grouping",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, grouping, groups, interval grouping, date-time ranges, drag-and-drop, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1183,7 +1183,7 @@
               "Id": "CustomGrouping",
               "Url": "Grid/Grouping/CustomGrouping",
               "Title": "Custom Grouping",
-              "DocUrl": "DevExpress.Blazor.DxGrid.CustomGroup",
+              "DocUrl": "404433/components/grid/group-data#custom-grouping",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, grouping, groups, custom grouping, drag-and-drop, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1229,7 +1229,7 @@
               "Url": "Grid/EditData/EditForms",
               "Title": "Edit Forms",
               "IsUpdated": true,
-              "DocUrl": "DevExpress.Blazor.DxGrid.EditMode",
+              "DocUrl": "403454/components/grid/edit-data",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, data editing, edit data, edit form, popup edit form, add rows, add new row, insert row, remove rows, delete rows, edit row values, edit modes, edit options, command column, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1251,7 +1251,7 @@
               "Id": "EditFormValidation",
               "Url": "Grid/EditData/EditFormValidation",
               "Title": "Edit Form Input Validation",
-              "DocUrl": "DevExpress.Blazor.DxGrid.ValidationEnabled",
+              "DocUrl": "404443/components/grid/validation",
               "Keywords": "blazor, components, data grid, datagrid, grid, data editing, edit data, edit form, add rows, add new row, insert row, remove rows, delete rows, validate input, validate edit form, command column, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1275,6 +1275,7 @@
               "Title": "Edit Row",
               "Keywords": "blazor, components, data grid, datagrid, grid, data editing, edit data, edit row, add rows, add new row, insert row, remove rows, delete rows, edit modes, edit options, command column, devexpress, demo, sample, example",
               "IsUpdated": true,
+              "DocUrl": "403454/components/grid/edit-data",
               "AdditionalCodeFiles": [
                 {
                   "Title": "Employee.cs",
@@ -1296,6 +1297,7 @@
               "Url": "Grid/EditData/EditRowValidation",
               "Keywords": "blazor, components, data grid, datagrid, grid, data editing, edit data, add rows, add new row, insert row, remove rows, delete rows, edit row values, edit modes, edit options, validate input, validate edit row, devexpress, demo, sample, example",
               "Title": "Edit Row Input Validation",
+              "DocUrl": "404443/components/grid/validation",
               "AdditionalCodeFiles": [
                 {
                   "Title": "Employee.cs",
@@ -1367,7 +1369,7 @@
               "Url": "Grid/Filtering/FilterRow",
               "Title": "Filter Row",
               "IsUpdated": true,
-              "DocUrl": "DevExpress.Blazor.DxGrid.ShowFilterRow",
+              "DocUrl": "404325/components/grid/filter-data/filter-row",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, grid filter, grid filtering, datagrid filter, datagrid filtering, data filter, filter row, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1397,7 +1399,7 @@
               "Id": "SearchBox",
               "Url": "Grid/Filtering/SearchBox",
               "Title": "Search Box",
-              "DocUrl": "DevExpress.Blazor.DxGrid.ShowSearchBox",
+              "DocUrl": "404142/components/grid/filter-data/search-box",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, grid filter, grid filtering, integrated search, highlight search result, search box, datagrid filter, datagrid filtering, data filter, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1427,6 +1429,7 @@
               "Url": "Grid/Filtering/ColumnFilterMenu",
               "Title": "Column Filter Menu",
               "IsNew": true,
+              "DocUrl": "404417/components/grid/filter-data/filter-menu",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, grid filter, column filter menu, grid filtering, datagrid filter, datagrid filtering, data filter, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1471,6 +1474,7 @@
               "Id": "FilterAPI",
               "Url": "Grid/Filtering/FilterAPI",
               "Title": "Filter API",
+              "DocUrl": "404327/components/grid/filter-data/filter-api",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, grid filter, grid filtering, datagrid filter, filter data in code, filter criteria, datagrid filtering, data filter, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1506,7 +1510,7 @@
               "Id": "Total",
               "Url": "Grid/Summary/Total",
               "Title": "Total Summary",
-              "DocUrl": "DevExpress.Blazor.DxGrid.TotalSummary",
+              "DocUrl": "404471/components/grid/summary",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, summary, summaries, totals, total values, total summary, total summaries, data summaries, aggregates, aggregate functions, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1536,7 +1540,7 @@
               "Id": "Group",
               "Url": "Grid/Summary/Group",
               "Title": "Group Summary",
-              "DocUrl": "DevExpress.Blazor.DxGrid.GroupSummary",
+              "DocUrl": "404471/components/grid/summary",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, summary, summaries, totals, group summary, group summaries, data summaries, aggregates, aggregate functions, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1566,7 +1570,7 @@
               "Id": "GroupFooter",
               "Url": "Grid/Summary/GroupFooter",
               "Title": "Group Footer Summary",
-              "DocUrl": "DevExpress.Blazor.DxGridSummaryItem.FooterColumnName",
+              "DocUrl": "404471/components/grid/summary",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, summary, summaries, totals, total values, group summary, group summaries, group footer summary, data summaries, aggregates, aggregate functions, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1597,7 +1601,7 @@
               "Url": "Grid/Summary/Custom",
               "Title": "Custom Summary",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, summary, summaries, totals, total values, custom summary, custom total summary, custom group summary, aggregates, aggregate functions, devexpress, demo, sample, example",
-              "DocUrl": "DevExpress.Blazor.DxGridSummaryItem#add-a-custom-summary-item",
+              "DocUrl": "404471/components/grid/summary",
               "AdditionalCodeFiles": [
                 {
                   "Title": "Invoice.cs",
@@ -1633,7 +1637,7 @@
               "Id": "Multiple",
               "Url": "Grid/Selection/Multiple",
               "Title": "Multiple Row Selection",
-              "DocUrl": "DevExpress.Blazor.DxGrid.SelectionMode",
+              "DocUrl": "404461/components/grid/selection#selection-in-blazor-grid",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, selection, multi selection, multiple selection, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1663,7 +1667,7 @@
               "Id": "SelectionColumn",
               "Url": "Grid/Selection/SelectionColumn",
               "Title": "Selection Column",
-              "DocUrl": "DevExpress.Blazor.DxGridSelectionColumn",
+              "DocUrl": "404461/components/grid/selection#selection-column",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, selection, multi-selection, multiple-selection, selection column, selection check box, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1685,6 +1689,7 @@
               "Id": "SelectionAPI",
               "Url": "Grid/Selection/SelectionAPI",
               "Title": "Selection API",
+              "DocUrl": "404461/components/grid/selection#select-and-deselect-rows-in-code",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, selection, multi-selection, multiple-selection, select in code, API, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1716,7 +1721,7 @@
               "Title": "Focused Row",
               "Keywords": "Blazor, components, DxGrid, data grid, datagrid, grid, focused row, devexpress, demo, sample, example",
               "Description": "The DevExpress Grid for Blazor component supports Focused Row.",
-              "DocUrl": "DevExpress.Blazor.Grid.FocusedRow",
+              "DocUrl": "404461/components/grid/selection#focused-row",
               "AdditionalCodeFiles": [
                 {
                   "Title": "Order.cs",
@@ -1822,7 +1827,7 @@
               "Id": "Column",
               "Url": "Grid/Templates/Column",
               "Title": "Column Templates",
-              "DocUrl": "DevExpress.Blazor.DxGridDataColumn.CellDisplayTemplate#show-checkboxes",
+              "DocUrl": "404473/components/grid/templates#data-column-templates",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, template, cell template, cell editor template, custom row appearance, custom cell appearance, custom content in rows, custom content in cells, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1905,6 +1910,7 @@
               "Title": "Column Chooser",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, column, columns, devexpress, demo, sample, example, column chooser, chooser, reorder columns, column order, show column, hide column, hidden column, visible column, visibility",
               "IsUpdated":  true,
+              "DocUrl": "DevExpress.Blazor.DxGrid.ShowColumnChooser.overloads",
               "AdditionalCodeFiles": [
                 {
                   "Title": "Supplier.cs",
@@ -1926,6 +1932,7 @@
               "Url": "Grid/Columns/FixedColumns",
               "Title": "Fixed (Anchored) Columns",
               "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DxGridColumn.FixedPosition",
               "Keywords": "Blazor, components, DxGrid, data grid, datagrid, grid, fixed columns, frozen columns, sticky columns, fix column, freeze column, anchor column, keep column visible, horizontal scrolling, devexpress, demo, sample, example",
               "Description": "The DevExpress Blazor Grid allows you to anchor columns to the Grid's left and right edges. Fixed columns remain visible when a user scrolls the Grid horizontally.",
               "AdditionalCodeFiles": [
@@ -1973,6 +1980,7 @@
           "Title": "Export Data",
           "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, grid export, datagrid export, data export, export to xls, export to xlsx, export to csv, data aware export, export to excel, devexpress, demo, sample, example",
           "Description": "The DevExpress Grid for Blazor supports data export to different formats.",
+          "DocUrl": "404338/components/grid/export",
           "AdditionalCodeFiles": [
             {
               "Title": "Customer.cs",
@@ -2064,7 +2072,7 @@
               "Id": "Paging",
               "Url": "Grid/PagingAndScrolling/Paging",
               "Title": "Paging",
-              "DocUrl": "DevExpress.Blazor.DxGrid.PagerNavigationMode",
+              "DocUrl": "404474/components/grid/paging",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, paging, pager, pages, go to page, page size selection, custom page size, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -2088,7 +2096,7 @@
               "Title": "Virtual Scrolling (Preview)",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, scrolling, vertical scrolling, virtual scrolling, load records on demand, no paging, display all rows, devexpress, demo, sample, example",
               "IsNew": true,
-              "DocUrl": "DevExpress.Blazor.DxGrid",
+              "DocUrl": "DevExpress.Blazor.DxGrid.VirtualScrollingEnabled",
               "AdditionalCodeFiles": [
                 {
                   "Title": "CSS",
@@ -4342,6 +4350,10 @@
                   "Path": "Data\\DialogsAndWindowsConstants.cs"
                 }
               ]
+            },
+            {
+              "Id": "Multiple",
+              "Title": "Multiple Windows"
             }
           ]
         }
