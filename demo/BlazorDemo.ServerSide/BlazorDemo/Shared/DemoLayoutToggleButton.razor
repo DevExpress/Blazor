@@ -4,7 +4,9 @@
 <DxButton Click="@OnToggleButtonClick"
           RenderStyle="ButtonRenderStyle.Secondary"
           IconCssClass="navbar-toggler-icon"
-          CssClass="navbar-toggler d-block border-0">  
+          CssClass="navbar-toggler d-block border-0"
+          aria-label="@ButtonText"
+          aria-pressed="@((!Toggled).ToString())">
 </DxButton>
 
 @code {
@@ -26,4 +28,8 @@
         base.OnAfterRender(firstRender);
         _canToggle = true;
     }
+
+
+
+    string ButtonText => Toggled ? "Open sidebar" : "Close sidebar";
 }

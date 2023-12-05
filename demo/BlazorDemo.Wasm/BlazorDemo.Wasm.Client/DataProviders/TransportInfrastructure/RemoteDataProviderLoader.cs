@@ -12,9 +12,12 @@ using BlazorDemo.DataProviders;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
 using Newtonsoft.Json;
+#if MAUI
+using Microsoft.AspNetCore.Components;
+#endif
 
 namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
-    sealed class RemoteDataProviderLoader {
+    public sealed class RemoteDataProviderLoader {
         private const int FetchBatchSize = 500;
 
         static readonly Dictionary<Guid, Type> EntityTypeLookup = new Dictionary<Guid, Type>() {
@@ -61,6 +64,9 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
         readonly IServiceProvider _serviceProvider;
         readonly ConcurrentDictionary<Guid, IObservable<int>> _statesLookup;
         readonly ConcurrentDictionary<EntityId, EntityDataContainer> _entityDatasetLookup;
+#if MAUI
+        public NavigationManager NavigationManager { get; set; }
+#endif
 
         EntityLoadingState[] _metadataSnapshot;
         static readonly JsonSerializerOptions JSONOptions = new JsonSerializerOptions() {
@@ -210,7 +216,13 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
             return _entityDatasetLookup.GetOrAdd(id, CreateDataContainer);
         }
         EntityDataContainer CreateDataContainer(EntityId id) {
+#if MAUI
+            EntityDataContainer container = _serviceProvider.GetService<EntityDataContainer>();
+            container._navigationManager = NavigationManager;
+            return container;
+#else
             return _serviceProvider.GetService<EntityDataContainer>();
+#endif
         }
     }
 }

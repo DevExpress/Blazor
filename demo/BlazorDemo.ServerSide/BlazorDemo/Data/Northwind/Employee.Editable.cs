@@ -28,7 +28,7 @@ namespace BlazorDemo.Data.Northwind {
         public string HomePhone { get; set; }
         public string Extension { get; set; }
         public byte[] Photo { get; set; }
-        [StringLength(maximumLength: 256, ErrorMessage = "The Notes value exceeds 256 characters.")]
+        [StringLength(maximumLength: 512, ErrorMessage = "The Notes value exceeds 512 characters.")]
         public string Notes { get; set; }
         public Nullable<int> ReportsTo { get; set; }
         public string PhotoPath { get; set; }

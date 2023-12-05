@@ -2,11 +2,15 @@
 
 <DemoPageSectionComponent Id="Editors-TimeEdit-DisplayFormat" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="teDisplayFormat" class="demo-text cw-320 mb-1">
+            "HH:mm" format
+        </label>
         <DxTimeEdit @bind-Time="@TimeValue"
                     Format="HH:mm"
                     DisplayFormat="@DisplayFormat"
                     SizeMode="Params.SizeMode"
-                    CssClass="cw-320" />
+                    CssClass="cw-320"
+                    InputId="teDisplayFormat" />
     </ChildContentWithParameters>
 
     @code {

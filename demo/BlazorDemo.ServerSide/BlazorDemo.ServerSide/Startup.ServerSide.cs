@@ -25,8 +25,11 @@ namespace BlazorDemo.ServerSide {
 #else
             bool detailedErrors = Configuration.GetValue("detailedErrors", false);
 #endif
-            services.AddServerSideBlazor().AddCircuitOptions(x => x.DetailedErrors = detailedErrors);
-
+            services.AddServerSideBlazor()
+                .AddCircuitOptions(x => x.DetailedErrors = detailedErrors)
+                .AddHubOptions(options => {
+                    options.EnableDetailedErrors = detailedErrors;
+                });
             var optionsBuilder = services.AddOptions();
             optionsBuilder.AddOptions<DemoModel>("BlazorDemo");
 

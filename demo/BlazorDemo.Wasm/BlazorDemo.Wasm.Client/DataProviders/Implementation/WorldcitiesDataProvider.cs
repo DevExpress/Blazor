@@ -8,7 +8,7 @@ using BlazorDemo.DataProviders;
 using BlazorDemo.Wasm.DataProviders.TransportInfrastructure;
 
 namespace BlazorDemo.Wasm.DataProviders.Implementation {
-    class WorldcitiesDataProvider : RemoteDataProviderBase, IWorldcitiesDataProvider {
+    public class WorldcitiesDataProvider : RemoteDataProviderBase, IWorldcitiesDataProvider {
         public Task<IEnumerable<Country>> GetCountriesAsync(CancellationToken ct = default) {
             return Loader.LoadRemoteEntities(this, GetCountriesAsync);
         }

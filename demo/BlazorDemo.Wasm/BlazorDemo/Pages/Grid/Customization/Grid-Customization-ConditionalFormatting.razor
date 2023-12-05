@@ -1,7 +1,7 @@
 ﻿@page "/Grid/Customization/ConditionalFormatting"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Customization-ConditionalFormatting" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
+<DemoPageSectionComponent Id="Grid-Customization-ConditionalFormatting" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @implements IDisposable
         @inject NwindDataService NwindDataService
@@ -16,7 +16,7 @@
                 Data="@Data"
                 ShowGroupPanel="true"
                 CustomizeElement="Grid_CustomizeElement"
-                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
             <Columns>
                 <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
                 <DxGridDataColumn FieldName="City" Width="10%" />

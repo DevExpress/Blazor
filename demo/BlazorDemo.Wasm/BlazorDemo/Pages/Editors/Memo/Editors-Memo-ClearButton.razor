@@ -1,12 +1,16 @@
 ﻿<DemoPageSectionComponent Id="Editors-Memo-ClearButton" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="memoClearButton" class="demo-text cw-480 mb-1">
+            Description
+        </label>
         <DxMemo @bind-Text="@TextValue"
                 ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
                 BindValueMode="BindValueMode.OnInput"
                 NullText="Type text..."
                 Rows="5"
                 SizeMode="Params.SizeMode"
-                CssClass="cw-480" />
+                CssClass="cw-480"
+                InputId="memoClearButton" />
     </ChildContentWithParameters>
 
     @code {

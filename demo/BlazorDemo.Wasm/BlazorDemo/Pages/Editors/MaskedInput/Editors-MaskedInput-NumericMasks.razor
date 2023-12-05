@@ -1,13 +1,17 @@
 ﻿<DemoPageSectionComponent Id="Editors-MaskedInput-NumericMasks" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="teNumericMasks" class="demo-text cw-320 mb-1">
+            Price
+        </label>
         <DxMaskedInput @bind-Value="@Price"
                        SizeMode="Params.SizeMode"
                        CssClass="cw-320"
-                       Mask="@NumericMaskValue">
+                       Mask="@NumericMaskValue"
+                       InputId="teNumericMasks">
             <DxNumericMaskProperties Culture="MaskCultureInfo.Value" />
         </DxMaskedInput>
-        <p class="demo-text cw-320 mt-2">
-        Price: <b>@Price</b>
+        <p class="demo-text cw-320 mt-3">
+            The entered value is: <b>@Price</b>
         </p>
     </ChildContentWithParameters>
 

@@ -4,7 +4,7 @@
     <DemoChildContent>
         <DxScheduler @ref="Scheduler"
                      @bind-StartDate="@StartDate" DataStorage="@DataStorage"
-                     ActiveViewType="SchedulerViewType.WorkWeek"
+                     @bind-ActiveViewType="@ActiveViewType"
                      AppointmentFormShowing="OnAppointmentFormShowing"
                      ValidateEditForm="true" CssClass="w-100"
                      @bind-AppointmentFormMode="@AppointmentFormMode">
@@ -117,6 +117,9 @@
             .OfType<SchedulerAppointmentFormMode>()
             .ToList();
 
+        DateTime StartDate { get; set; } = DateTime.Today;
+        SchedulerViewType ActiveViewType { get; set; } = SchedulerViewType.WorkWeek;
+
         public class CustomAppointmentFormInfo : SchedulerAppointmentFormInfo {
             public CustomAppointmentFormInfo(DxSchedulerAppointmentItem AppointmentItem, DxSchedulerDataStorage DataStorage) : base(AppointmentItem, DataStorage) { }
 
@@ -137,8 +140,6 @@
         }
 
         static bool IsAccepted(DxExpandoDictionaryObject customFields) => true == (bool?)customFields["IsAccepted"];
-
-        DateTime StartDate { get; set; } = DateTime.Today;
 
         DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
             AppointmentsSource = AppointmentCollection.GetAppointments(),

@@ -46,6 +46,7 @@ public class DemoThemeJsChangeDispatcher : ComponentBase, IDemoThemeChangeReques
         _pendingTheme = theme;
         await _module.InvokeVoidAsync("ThemeController.setStylesheetLinks",
             Themes.GetBootstrapThemeCssUrl(theme),
+            theme.BootstrapThemeMode,
             DemoStaticResourceService.GetUrlWithVersion(Themes.GetThemeCssUrl(theme)),
             Themes.GetHighlightJSThemeCssUrl(theme),
             DotNetObjectReference.Create(this));

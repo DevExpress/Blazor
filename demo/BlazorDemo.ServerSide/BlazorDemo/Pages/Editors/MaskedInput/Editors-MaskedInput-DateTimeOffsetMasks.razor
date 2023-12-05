@@ -1,15 +1,19 @@
 ﻿<DemoPageSectionComponent Id="Editors-MaskedInput-DateTimeOffsetMasks" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params" >
+        <label for="teDateTimeOffsetMasks" class="demo-text cw-320 mb-1">
+            Time
+        </label>
         <DxMaskedInput @bind-Value="@DateOffset"
                        CssClass="cw-320"
                        SizeMode="Params.SizeMode"
-                       Mask="@DateTimeMasks[DateTimeMaskName]">
+                       Mask="@DateTimeMasks[DateTimeMaskName]"
+                       InputId="teDateTimeOffsetMasks">
                 <DxDateTimeOffsetMaskProperties Culture="MaskCultureInfo.Value"
                                           CaretMode="@((MaskCaretMode)CaretMode)"
                                           UpdateNextSectionOnCycleChange=@UpdateNextSectionOnCycleChange />
         </DxMaskedInput>
-        <p class="demo-text cw-320 mt-2">
-            Value: <b>@DateOffset</b>
+        <p class="demo-text cw-320 mt-3">
+            The entered time is: <b>@DateOffset</b>
         </p>
     </ChildContentWithParameters>
 

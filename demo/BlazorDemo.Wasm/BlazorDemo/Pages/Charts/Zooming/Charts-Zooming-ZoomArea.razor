@@ -1,0 +1,50 @@
+﻿<DemoPageSectionComponent Id="Charts-Zooming-ZoomArea">
+    <DemoChildContent>
+        @inject IChartBirthLifeDataProvider ChartBirthLifeDataProvider
+        <DxChart Data="@DataSource"
+                 Width="100%">
+            <DxChartTitle Text="Life Expectancy vs. Birth Rate"/>
+            <DxChartLegend Position="RelativePosition.Inside"
+                           VerticalAlignment="VerticalEdge.Top"
+                           HorizontalAlignment="HorizontalAlignment.Right"/>
+            <DxChartScatterSeries ArgumentField="@((BirthLife i) => i.LifeExp)"
+                                  ValueField="@((BirthLife i) => i.BirthRate)"
+                                  Filter="@((BirthLife i) => i.Year == 1970)"
+                                  Name="1970">
+                <DxChartSeriesPoint Size="8"/>
+            </DxChartScatterSeries>
+            <DxChartScatterSeries ArgumentField="@((BirthLife i) => i.LifeExp)"
+                                  ValueField="@((BirthLife i) => i.BirthRate)"
+                                  Filter="@((BirthLife i) => i.Year == 2010)"
+                                  Name="2010">
+                <DxChartSeriesPoint Size="8"/>
+            </DxChartScatterSeries>
+            <DxChartArgumentAxis>
+                <DxChartAxisTitle Text="Life Expectancy"/>
+            </DxChartArgumentAxis>
+            <DxChartValueAxis>
+                <DxChartAxisTitle Text="Birth Rate"/>
+            </DxChartValueAxis>
+            <DxChartTooltip Enabled="true">
+                <div class="chart-tooltip">
+                    <div>@(((BirthLife)context.Point.DataItems.First()).Country) @(((BirthLife)context.Point.DataItems.First()).Year)</div>
+                </div>
+            </DxChartTooltip>
+            <DxChartZoomAndPanSettings ArgumentAxisZoomAndPanMode="ChartAxisZoomAndPanMode.Both"
+                                       ValueAxisZoomAndPanMode="ChartAxisZoomAndPanMode.Both"
+                                       AllowDragToZoom="true"
+                                       AllowMouseWheel="true"
+                                       PanKey="ChartEventPanKey.Shift"/>
+        </DxChart>
+    </DemoChildContent>
+
+    @code {
+        IEnumerable<BirthLife> DataSource = Enumerable.Empty<BirthLife>();
+
+        protected override void OnInitialized() {
+            DataSource = ChartBirthLifeDataProvider.GenerateData();
+        }
+
+    }
+
+</DemoPageSectionComponent>

@@ -1,0 +1,59 @@
+﻿@using DevExtreme.AspNet.Data.ResponseModel
+@using DevExtreme.AspNet.Data
+@using System.Threading
+@using System.Text.Json
+<DemoPageSectionComponent Id="Editors-ListBox-EmptyDataAreaTemplate" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <DxListBox TData="@WebApiLookup" TValue="string"
+                   SizeMode="Params.SizeMode"
+                   ListRenderMode="ListRenderMode.Virtual"
+                   CssClass="cw-400 chi-220"
+                   CustomData="@LoadCustomData"
+                   @key="ComponentKey">
+            <EmptyDataAreaTemplate>
+                @if (context.IsDataLoading) {
+                    <div class="empty-data-area-template">
+                        <div class="d-flex flex-column">
+                            <DxWaitIndicator Visible="true"
+                                             SizeMode="Params.SizeMode"
+                                             CssClass="m-auto"
+                                             AnimationType="WaitIndicatorAnimationType.Spin" />
+                            <p class="dxbl-text d-block mt-1">Loading, please wait...</p>
+                        </div>
+                    </div>
+                }
+            </EmptyDataAreaTemplate>
+        </DxListBox>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionButton Text="Reload Data" OnClick="ReloadListBox"/>
+    </OptionsContent>
+
+    @code {
+        [Inject] protected HttpClient Client { get; set; }
+        Guid ComponentKey { get; set; } = Guid.NewGuid();
+
+        async Task<LoadResult> LoadCustomData(DataSourceLoadOptionsBase options, CancellationToken cancellationToken) {
+            using var response = await Client.GetAsync(options.ConvertToGetRequestUri
+                ("https://js.devexpress.com/Demos/NetCore/api/DataGridWebApi/CustomersLookup"), cancellationToken);
+            response.EnsureSuccessStatusCode();
+            if(options.RequireTotalCount)
+                await Task.Delay(3000, cancellationToken);
+            using var responseStream = await response.Content.ReadAsStreamAsync();
+            var result = await JsonSerializer.DeserializeAsync<LoadResult>(responseStream, cancellationToken: cancellationToken);
+            return result;
+        }
+
+        void ReloadListBox() {
+            ComponentKey = Guid.NewGuid();
+        }
+
+        public class WebApiLookup {
+            public string Text { get; set; }
+            public string Value { get; set; }
+        }
+    }
+</DemoPageSectionComponent>

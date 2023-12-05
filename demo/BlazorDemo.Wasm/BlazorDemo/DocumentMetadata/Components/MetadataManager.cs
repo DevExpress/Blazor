@@ -10,7 +10,7 @@ using Microsoft.JSInterop;
 namespace DevExpress.Blazor.DocumentMetadata {
 
     [RequireJavascriptApi("dx-head-manager.js")]
-    class MetadataManagerComponent : ComponentBase, IObserver<Renderer>, IDisposable {
+    public class MetadataManagerComponent : ComponentBase, IObserver<Renderer>, IDisposable {
 
         bool _initialized, _disposed;
         readonly ConcurrentQueue<Renderer> _renderers = new ConcurrentQueue<Renderer>();

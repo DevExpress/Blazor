@@ -1,49 +1,101 @@
 ﻿@page "/Grid/DataBinding/LargeQueryable"
 @layout DataProviderAccessArea<IRentInfoDataProvider>
+@using BlazorDemo.Pages.Grid.Filtering
+@using static BlazorDemo.Pages.Grid.Filtering.Grid_Filtering_ColumnFilterMenu_CustomRange;
 
-<DemoPageSectionComponent Id="Grid-DataBinding-LargeQueryable" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
+<DemoPageSectionComponent Id="Grid-DataBinding-LargeQueryable" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inherits OwningComponentBase
         @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 
         <DataProviderAccessAreaContainer DataProvider="@RentInfoDataProvider">
-            <DxGrid Data="@Data"
-                    SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
+            <DxGrid @ref="Grid"
+                    Data="Data"
+                    ShowGroupPanel="true"
+                    VirtualScrollingEnabled="VirtualScrollingEnabled" PageSize="20"
+                    FilterMenuButtonDisplayMode="GridFilterMenuButtonDisplayMode.Always" CssClass="ch-480"
+                    SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true" CustomizeCellDisplayText="Grid_CustomizeCellDisplayText" CustomizeFilterMenu="Grid_CustomizeFilterMenu">
                 <Columns>
-                    <DxGridDataColumn FieldName="State" Width="5%" />
-                    <DxGridDataColumn FieldName="Area" MinWidth="100" />
-                    <DxGridDataColumn FieldName="City" Caption="County" MinWidth="100" />
-                    <DxGridDataColumn FieldName="Name" Caption="Location" MinWidth="100" />
-                    <DxGridDataColumn FieldName="Year" DisplayFormat="0" Width="10%" />
-                    <DxGridDataColumn FieldName="Bedrooms" Width="10%" />
-                    <DxGridDataColumn FieldName="Population" DisplayFormat="#,0" MinWidth="80" Width="10%" />
+                    <DxGridDataColumn FieldName="State" MinWidth="80" Width="10%" />
+                    <DxGridDataColumn FieldName="Area" Width="12%" />
+                    <DxGridDataColumn FieldName="City" Caption="County" MinWidth="100" Width="17%" />
+                    <DxGridDataColumn FieldName="Name" Caption="Location" MinWidth="100" Width="17%" />
+                    <DxGridDataColumn FieldName="Year" DisplayFormat="0" MinWidth="80" Width="10%" />
+                    <DxGridDataColumn FieldName="Population" DisplayFormat="#,0" MinWidth="100">
+                        <FilterMenuTemplate>
+                            <Grid_Filtering_ColumnFilterMenu_CustomRange FilterContext="context" Items="PopulationIntervals" />
+                        </FilterMenuTemplate>
+                    </DxGridDataColumn>
+                    <DxGridDataColumn FieldName="Bedrooms" Width="12%" />
+                    <DxGridDataColumn FieldName="Rent" MinWidth="80" DisplayFormat="C0">
+                        <FilterMenuTemplate>
+                            <Grid_Filtering_ColumnFilterMenu_CustomRange FilterContext="context" Items="RentIntervals" />
+                        </FilterMenuTemplate>
+                    </DxGridDataColumn>
                 </Columns>
+                <GroupSummary>
+                    <DxGridSummaryItem FieldName="Rent" SummaryType="GridSummaryItemType.Avg"/>
+                </GroupSummary>
+                <TotalSummary>
+                    <DxGridSummaryItem FieldName="Rent" SummaryType="GridSummaryItemType.Avg"/>
+                </TotalSummary>
             </DxGrid>
         </DataProviderAccessAreaContainer>
-        @code {
-            IRentInfoDataProvider RentInfoDataProvider { get; set; }
-            RentInfoDataService RentInfoDataService { get; set; }
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionCheckBox Label="Enable Virtual Scrolling" @bind-Checked="VirtualScrollingEnabled" />
+    </OptionsContent>
+    @code {
+        static IReadOnlyList<CustomRangeFilterItem> PopulationIntervals { get; } = CustomRangeFilterItem.CreateIntervals("Population", 10, 6, false, "{0:N0}");
+        static IReadOnlyList<CustomRangeFilterItem> RentIntervals { get; } = CustomRangeFilterItem.CreateIntervals("Rent", 200, 10, true, "{0:c}");
+        static IReadOnlyList<string> BedroomDisplayValues { get; } = new[] { "Studio", "One Bedroom", "Two Bedrooms", "Three Bedrooms", "Four Bedrooms" };
+        IRentInfoDataProvider RentInfoDataProvider { get; set; }
+        RentInfoDataService RentInfoDataService { get; set; }
 
-            object Data { get; set; }
+        bool VirtualScrollingEnabled { get; set; } = true;
+        IGrid Grid { get; set; }
+        object Data { get; set; }
 
-            protected override void OnInitialized() {
-                // Refer to https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.components.owningcomponentbase
-                RentInfoDataProvider = ScopedServices.GetRequiredService<IRentInfoDataProvider>();
-                RentInfoDataService = ScopedServices.GetRequiredService<RentInfoDataService>();
+        protected override void OnInitialized() {
+            // Refer to https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.components.owningcomponentbase
+            RentInfoDataProvider = ScopedServices.GetRequiredService<IRentInfoDataProvider>();
+            RentInfoDataService = ScopedServices.GetRequiredService<RentInfoDataService>();
 
-                var connectionString = ConnectionStringUtils.GetGridLargeDataConnectionString(Configuration);
-                if(string.IsNullOrEmpty(connectionString)) return;
+            var connectionString = ConnectionStringUtils.GetGridLargeDataConnectionString(Configuration);
+            if(string.IsNullOrEmpty(connectionString)) return;
 
-                var dataSource = new GridDevExtremeDataSource<AreaRentInfo>(RentInfoDataService.GetAreaRentInfo());
-                dataSource.CustomizeLoadOptions = (loadOptions) => {
-                    // If underlying data is a large SQL table, specify PrimaryKey and PaginateViaPrimaryKey.
-                    // This can make SQL execution plans more efficient.
-                    loadOptions.PrimaryKey = new[] { "Oid" };
-                    loadOptions.PaginateViaPrimaryKey = true;
-                };
+            var dataSource = new GridDevExtremeDataSource<AreaRentInfo>(RentInfoDataService.GetAreaRentInfo());
+            dataSource.CustomizeLoadOptions = (loadOptions) => {
+                // If underlying data is a large SQL table, specify PrimaryKey and PaginateViaPrimaryKey.
+                // This can make SQL execution plans more efficient.
+                loadOptions.PrimaryKey = new[] { "Oid" };
+                loadOptions.PaginateViaPrimaryKey = true;
+            };
 
-                Data = dataSource;
+            Data = dataSource;
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender) {
+            if(firstRender) {
+                await Grid.WaitForDataLoadAsync();
+                Grid.ExpandGroupRow(1);
+
+                await Grid.WaitForDataLoadAsync();
+                Grid.ExpandGroupRow(2);
             }
         }
-    </ChildContentWithParameters>
+
+        void Grid_CustomizeCellDisplayText(GridCustomizeCellDisplayTextEventArgs e) {
+            if(e.FieldName != "Bedrooms")
+                return;
+            e.DisplayText = BedroomDisplayValues[(int)e.Value];
+        }
+
+        void Grid_CustomizeFilterMenu(GridCustomizeFilterMenuEventArgs e) {
+            if(e.DataColumn.FieldName != "Bedrooms")
+                return;
+            for(int i = 0; i < e.DataItems.Count; ++i)
+                e.DataItems[i].DisplayText = BedroomDisplayValues[(int)e.DataItems[i].Value];
+        }
+    }
 </DemoPageSectionComponent>

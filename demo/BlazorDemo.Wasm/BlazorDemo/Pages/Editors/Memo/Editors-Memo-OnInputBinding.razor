@@ -1,21 +1,26 @@
 ﻿<DemoPageSectionComponent Id="Editors-Memo-OnInputBinding" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="memoInputBinding" class="demo-text cw-480 mb-1">
+            Description
+        </label>
         <DxMemo @bind-Text="TextValue"
                 SizeMode="Params.SizeMode"
                 BindValueMode="@BindValueMode"
                 NullText="Type text..."
                 InputDelay="@InputDelay"
                 CssClass="cw-480"
-                Rows="5"/>
-        <p class="demo-text cw-480 mt-2">
-            Text: <b>@TextValue</b>
+                Rows="5"
+                InputId="memoInputBinding" />
+        <p class="demo-text cw-480 mt-3">
+            The entered text is: <b>@TextValue</b>
         </p>
     </ChildContentWithParameters>
 
     <OptionsContent>
         <OptionComboBox CssClass="ow-150"
                         Data="Enum.GetValues<BindValueMode>()"
-                        @bind-Value="BindValueMode" />
+                        @bind-Value="BindValueMode"
+                        Label="Bind Value Mode:"/>
         <OptionSpinEdit CssClass="ow-150"
                         MinValue="100"
                         MaxValue="1000"

@@ -15,8 +15,8 @@
   <ItemGroup>
     <PackageReference Include="Markdig" Version="0.23.0" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.8" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.9.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="3.0.0" />
     <PackageReference Include="System.CodeDom" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
@@ -27,10 +27,10 @@
     <ProjectReference Include="..\BlazorDemo.Reporting.Core\BlazorDemo.Reporting.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.WebAssembly" Version="23.1.6" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="23.1.6" />
-    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="23.1.6" />
-    <PackageReference Include="DevExpress.Reporting.Demos" Version="23.1.6" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.WebAssembly" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Reporting.Demos" Version="23.2.3" />
     
     
     
@@ -53,6 +53,7 @@
     <Compile Include="Services\DemoThemeService.cs" />
     <Compile Include="Services\IStockQuoteService.cs" />
     <Compile Include="Services\StockQuoteService.cs" />
+    <Compile Include="DataUtils.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Configuration\**\*.cs" />
     <Compile Include="DemoServiceCollectionExtensions.cs" />
@@ -176,6 +177,7 @@
       <EmbeddedResource Include="Services\**\*.*" />
       <EmbeddedResource Include="wwwroot\css\*.css" />
       <EmbeddedResource Include="Controllers\**\*.*" />
+      <EmbeddedResource Include="DataUtils.cs" />
     </ItemGroup>
   </Target>
 </Project>

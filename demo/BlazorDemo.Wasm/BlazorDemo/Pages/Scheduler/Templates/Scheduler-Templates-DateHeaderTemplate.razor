@@ -4,7 +4,7 @@
     <DemoChildContent>
         @inject WeatherForecastService ForecastService
 
-        <DxScheduler StartDate="@DateTime.Today" DataStorage="@DataStorage" CssClass="w-100">
+        <DxScheduler @bind-StartDate="@StartDate" DataStorage="@DataStorage" CssClass="w-100">
             <Views>
                 <DxSchedulerDayView DayCount="5" ShowWorkTimeOnly="true">
                     <DateHeaderCellTemplate>
@@ -27,6 +27,8 @@
     </DemoChildContent>
 
     @code {
+        DateTime StartDate { get; set; } = DateTime.Today;
+
         DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
             AppointmentsSource = AppointmentCollection.GetAppointments(),
             AppointmentMappings = new DxSchedulerAppointmentMappings() {

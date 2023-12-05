@@ -24,24 +24,25 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Markdig" Version="0.23.0" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="6.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="System.CodeDom" Version="5.0.0" />
-    <PackageReference Include="System.Drawing.Common" Version="5.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
-    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.9.0" />
+    <!--<PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="6.0.0" />-->
+    <!--<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />-->
+    <!--<PackageReference Include="System.CodeDom" Version="6.0.0" />-->
+    <!--<PackageReference Include="System.Drawing.Common" Version="6.0.0" />-->
+    <!--<PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />-->
+    <!--<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />-->
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="3.0.0" />
     <PackageReference Include="System.Reactive" Version="5.0.0" />
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.117" />
+    <!--<PackageReference Include="System.Data.SQLite.Core" Version="1.0.117" />-->
     <ProjectReference Include="..\BlazorDemo.DemoData\BlazorDemo.DemoData.csproj" />
     <ProjectReference Include="..\BlazorDemo.Reporting.Core\BlazorDemo.Reporting.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="23.1.6" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.BlazorServer" Version="23.1.6" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="23.1.6" />    
-    <PackageReference Include="DevExpress.Reporting.Demos" Version="23.1.6" />
-    <PackageReference Include="DevExpress.Drawing.Skia" Version="23.1.6" />
+    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="23.2.3" />    
+    <PackageReference Include="DevExpress.AspNetCore.Reporting" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Reporting.Demos" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Drawing.Skia" Version="23.2.3" />
     
     
     
@@ -215,6 +216,7 @@
       <EmbeddedResource Include="wwwroot\css\*.css" />
       <EmbeddedResource Include="Controllers\**\*.*" />
       <EmbeddedResource Include="Utils\**\*.*" />
+      <EmbeddedResource Include="DataUtils.cs" />
     </ItemGroup>
   </Target>
 </Project>

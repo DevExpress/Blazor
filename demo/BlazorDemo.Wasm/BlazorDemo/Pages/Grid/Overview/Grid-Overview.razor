@@ -1,14 +1,14 @@
 ﻿@page "/Grid"
 @layout DataProviderAccessArea<IIssuesDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Overview" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
+<DemoPageSectionComponent Id="Grid-Overview" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @using BlazorDemo.Data.Issues
 
         @if(SelectedIssue != null) {
             <Grid_Overview_Details GotoListView="@ShowIssueList" SelectedIssue="@SelectedIssue" />
         } else {
-            <Grid_Overview_List GotoDetailsView="@ShowIssueDetails" SizeMode="@Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled" />
+            <Grid_Overview_List GotoDetailsView="@ShowIssueDetails" SizeMode="@Params.SizeMode" KeyboardNavigationEnabled="true" />
         }
     </ChildContentWithParameters>
 

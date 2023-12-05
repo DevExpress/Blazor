@@ -1,11 +1,15 @@
 ﻿<DemoPageSectionComponent Id="Editors-SpinEdit-NullableValue" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="seNullableValue" class="demo-text cw-320 mb-1">
+            Numeric Value
+        </label>
         <DxSpinEdit @bind-Value="@NumericValue"
                     ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
                     NullText="Type a value..."
                     BindValueMode="BindValueMode.OnInput"
                     SizeMode="@Params.SizeMode"
-                    CssClass="cw-320" />
+                    CssClass="cw-320"
+                    InputId="seNullableValue" />
     </ChildContentWithParameters>
 
     @code {

@@ -1,0 +1,34 @@
+﻿<DemoPageSectionComponent Id="Editors-ListBox-ItemDisplayTemplate" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <DxListBox Data="@Data"
+                   @bind-Value="@Value"
+                   SizeMode="Params.SizeMode"
+                   CssClass="cw-400 chi-220">
+            <ItemDisplayTemplate>
+                <div class="listbox-item-template">
+                    <img src="@StaticAssetUtils.GetImagePath(GetImageFileName(context.DataItem))" alt="@context.DataItem.FullName" />
+                    <div class="listbox-item-template-text">
+                        <span>@context.DataItem.FullName</span>
+                        <span class="listbox-item-template-text-phone">@context.DataItem.HomePhone</span>
+                    </div>
+                </div>
+            </ItemDisplayTemplate>
+        </DxListBox>
+    </ChildContentWithParameters>
+
+    @code {
+        IEnumerable<Employee> Data { get; set; }
+        Employee Value { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetEmployeesAsync();
+            Value = Data.FirstOrDefault();
+        }
+
+        string GetImageFileName(Employee employee) {
+            return $"employees/item-template{employee.EmployeeId}.jpg";
+        }
+    }
+</DemoPageSectionComponent>

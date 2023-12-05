@@ -16,6 +16,7 @@ namespace BlazorDemo.DemoData {
         public string DocUrl { get; set; }
         public DemoCodeFile[] AdditionalCodeFiles { get; set; }
         public bool? ShowRazorFile { get; set; }
+        public bool IsExternal { get; set; }
 
         [JsonIgnore]
         public DemoPageBase ParentPage { get; set; }

@@ -1,12 +1,12 @@
 ﻿@page "/Grid/Columns/FixedColumns"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Columns-FixedColumns" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
+<DemoPageSectionComponent Id="Grid-Columns-FixedColumns" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
         <DxGrid Data="@Data"
                 TextWrapEnabled="false"
-                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
             <Columns>
                 <DxGridSelectionColumn FixedPosition="GridColumnFixedPosition.Left" Width="60px" />
                 <DxGridDataColumn FieldName="ContactName" Width="190px" />

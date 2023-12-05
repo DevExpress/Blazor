@@ -53,5 +53,29 @@
     public record CustomRangeFilterItem {
         public CriteriaOperator Criteria { get; init; }
         public string DisplayText { get; init; }
+
+        public static IReadOnlyList<CustomRangeFilterItem> CreateIntervals(string fieldName, int step, int stepsCount, bool isMult, string numberDisplayFormat) {
+            var prop = new OperandProperty(fieldName);
+            var result = new List<CustomRangeFilterItem>();
+            var start = 0;
+            var end = 0;
+            var firstStepIndex = isMult ? 0 : -1;
+
+            for(var i = firstStepIndex; i < stepsCount; ++i) {
+                start = isMult ? step * i : (int)Math.Pow(step, i);
+                end = isMult ? start + step : (int)Math.Pow(step, i + 1);
+
+                result.Add(new CustomRangeFilterItem() {
+                    Criteria = prop >= start & prop < end,
+                    DisplayText = $"from {string.Format(numberDisplayFormat, start)} to {string.Format(numberDisplayFormat, end)}"
+                });
+            }
+            result.Add(new CustomRangeFilterItem() {
+                Criteria = prop >= end,
+                DisplayText = $"from {string.Format(numberDisplayFormat, end)}"
+            });
+
+            return result;
+        }
     }
 }

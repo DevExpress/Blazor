@@ -4,14 +4,17 @@
 
         @if (Data != null)
         {
-            <DxComboBox Id="ComboBox1"
-                        Data="@Data"
+            <label for="cbFiltering" class="demo-text cw-480 mb-1">
+                Country Name
+            </label>
+            <DxComboBox Data="@Data"
                         FilteringMode="@FilteringMode"
                         @bind-Value="@Value"
                         @bind-Text="@Text"
                         TextFieldName="@nameof(Country.CountryName)"
                         SizeMode="Params.SizeMode"
-                        CssClass="cw-480" />
+                        CssClass="cw-480"
+                        InputId="cbFiltering" />
         }
     </ChildContentWithParameters>
 

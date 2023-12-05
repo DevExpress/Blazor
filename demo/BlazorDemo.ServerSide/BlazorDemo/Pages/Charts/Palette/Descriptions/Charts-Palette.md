@@ -1,0 +1,3 @@
+DevExpress Blazor Chart components allow you to create a custom palette to colorize chart series. To apply a color scheme, assign it to the [Palette](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartBase.Palette) property. When the number of series (for [DxChart](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1)) or series points (for [DxPieChart](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPieChart-1)) exceeds the number of palette colors, you can use the [PaletteExtensionMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartBase.PaletteExtensionMode) property to extend the palette.
+ 
+In this demo, you can use drop-down menus to select a palette and change how it is extended.

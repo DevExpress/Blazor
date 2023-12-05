@@ -1,14 +1,18 @@
 ﻿<DemoPageSectionComponent Id="Editors-TextBox-ClearButton" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="tbClearButton" class="demo-text cw-320 mb-1">
+            Username
+        </label>
         <DxTextBox @bind-Text="@TextValue"
                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
                    BindValueMode="BindValueMode.OnInput"
-                   NullText="Type text..."
+                   NullText="Enter username"
                    SizeMode="Params.SizeMode"
-                   CssClass="cw-320" />
+                   CssClass="cw-320"
+                   InputId="tbClearButton" />
     </ChildContentWithParameters>
 
     @code {
-        string TextValue { get; set; } = "Some text";
+        string TextValue { get; set; } = "Nancy Davolio";
     }
 </DemoPageSectionComponent>

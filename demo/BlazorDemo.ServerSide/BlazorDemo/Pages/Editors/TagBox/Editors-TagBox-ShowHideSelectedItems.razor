@@ -2,13 +2,17 @@
     <ChildContentWithParameters Context="Params">
         @inject WorldcitiesDataService WorldcitiesDataService
 
+        <label for="tbCityName" class="demo-text cw-480 mb-1">
+            Cities
+        </label>
         <DxTagBox Data="@Data"
                   @bind-Values="@Values"
                   TextFieldName="@nameof(City.CityName)"
                   HideSelectedItems="false"
                   CssClass="cw-480"
                   SizeMode="Params.SizeMode"
-                  ListRenderMode="ListRenderMode.Virtual" />
+                  ListRenderMode="ListRenderMode.Virtual"
+                  InputId="tbCityName" />
     </ChildContentWithParameters>
 
     @code {

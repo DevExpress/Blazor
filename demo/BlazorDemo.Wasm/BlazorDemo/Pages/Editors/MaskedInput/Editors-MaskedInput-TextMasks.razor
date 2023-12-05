@@ -1,13 +1,17 @@
 ﻿<DemoPageSectionComponent Id="Editors-MaskedInput-TextMasks" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="teTextMasks" class="demo-text cw-320 mb-1">
+            Telephone
+        </label>
         <DxMaskedInput @bind-Value="@Telephone"
                        SizeMode="Params.SizeMode"
                        CssClass="cw-320"
-                       Mask="(999)000-0000">
+                       Mask="(999)000-0000"
+                       InputId="teTextMasks" >
             <DxTextMaskProperties Placeholder="Placeholder" SaveLiteral="SaveLiterals" />
         </DxMaskedInput>
-        <p class="demo-text cw-320 mt-2">
-            Telephone: <b>@Telephone</b>
+        <p class="demo-text cw-320 mt-3">
+            The entered value is: <b>@Telephone</b>
         </p>
     </ChildContentWithParameters>
 

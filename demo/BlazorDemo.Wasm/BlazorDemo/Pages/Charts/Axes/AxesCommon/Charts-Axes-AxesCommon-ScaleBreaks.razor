@@ -1,0 +1,53 @@
+﻿<DemoPageSectionComponent Id="Charts-Axes-AxesCommon-ScaleBreaks">
+    <DemoChildContent>
+        <DxChart T="PlanetInfo"
+                 Data="PlanetMassData"
+                 Width="100%"
+                 Height="500px">
+            <DxChartValueAxis AutoBreaksEnabled="ShowScaleBreaks"
+                              MaxAutoBreakCount="MaxScaleBreakCount">
+                <DxChartAxisTitle Text="Earth Mass" />
+            </DxChartValueAxis>
+            <DxChartTitle Text="Mass of Planets in the Solar System" />
+            <DxChartBarSeries T="PlanetInfo"
+                              TArgument="string"
+                              TValue="double"
+                              ArgumentField="pi=>pi.Planet"
+                              ValueField="pi=>pi.Mass" />
+            <DxChartTooltip Enabled="true"/>
+            <DxChartLegend Visible="false"/>
+        </DxChart>
+
+        @code {
+            public class PlanetInfo {
+                public string Planet { get; }
+                public double Mass { get; }
+
+                public PlanetInfo(string planet, double mass) {
+                    Planet = planet;
+                    Mass = mass;
+                }
+            }
+
+            List<PlanetInfo> PlanetMassData = new() {
+                new("Mercury", 0.06),
+                new("Venus", 0.82),
+                new("Earth", 1),
+                new("Mars", 0.11),
+                new("Jupiter", 318),
+                new("Saturn", 95),
+                new("Uranus", 14.6),
+                new("Neptune", 17.2)
+            };
+
+            bool ShowScaleBreaks { get; set; } = true;
+            int MaxScaleBreakCount { get; set; } = 4;
+        }
+    </DemoChildContent>
+    <OptionsContent>
+        <OptionCheckBox Label="Show Scale Breaks" @bind-Checked="@ShowScaleBreaks" />
+        <OptionSpinEdit Label="Max count:" MinValue="1" MaxValue="5" @bind-Value="@MaxScaleBreakCount" Enabled="ShowScaleBreaks" CssClass="ow-100" />
+    </OptionsContent>
+</DemoPageSectionComponent>
+
+

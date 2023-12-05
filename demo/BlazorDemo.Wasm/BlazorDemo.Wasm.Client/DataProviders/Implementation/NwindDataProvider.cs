@@ -9,7 +9,7 @@ using BlazorDemo.Wasm.DataProviders.TransportInfrastructure;
 using System.Reflection;
 
 namespace BlazorDemo.Wasm.DataProviders.Implementation {
-    class NwindDataProvider : RemoteDataProviderBase, INwindDataProvider {
+    public class NwindDataProvider : RemoteDataProviderBase, INwindDataProvider {
         public Task<IEnumerable<Category>> GetCategoriesAsync(CancellationToken ct = default) {
             return Loader.LoadRemoteEntities(this, GetCategoriesAsync);
         }

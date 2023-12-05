@@ -1,6 +1,11 @@
-.dx-demo-price-list-title {
-    padding-bottom: 0.25rem;
-    margin-bottom: 0.5rem;
+/*BeginHide*/::deep /*EndHide*/.dx-demo-label {
+    font-size: inherit;
+}
+/*BeginHide*/::deep /*EndHide*/.dx-demo-label.dx-demo-small {
+    font-size: 0.75rem;
+}
+/*BeginHide*/::deep /*EndHide*/.dx-demo-label.dx-demo-large {
+    font-size: 1rem;
 }
 /*BeginHide*/::deep/*EndHide*/ .dx-demo-select-all-checkbox {
     margin-bottom: 0.25rem;

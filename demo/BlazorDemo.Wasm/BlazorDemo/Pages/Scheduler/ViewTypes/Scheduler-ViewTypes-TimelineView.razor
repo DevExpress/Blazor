@@ -1,7 +1,7 @@
 ﻿@page "/Scheduler/ViewTypes/TimelineView"
 
 <DemoPageSectionComponent Id="Scheduler-ViewTypes-TimelineView">
-    <DxScheduler StartDate="@DateTime.Today"
+    <DxScheduler @bind-StartDate="@StartDate"
                  DataStorage="@DataStorage"
                  ResourceNavigatorVisible="false"
                  CssClass="w-100">
@@ -14,6 +14,8 @@
     </DxScheduler>
 
     @code {
+        DateTime StartDate { get; set; } = DateTime.Today;
+
         DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
             AppointmentsSource = ResourceAppointmentCollection.GetAppointments(),
             AppointmentMappings = new DxSchedulerAppointmentMappings() {

@@ -1,114 +1,82 @@
-﻿@inherits OwningComponentBase
-
-<DemoPageSectionComponent Id="DialogsAndWindows-Window-Multiple" ShowSizeMode="true">
+﻿<DemoPageSectionComponent Id="DialogsAndWindows-Window-Multiple" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        @*BeginHide*@
-        @code {
-            IHomesDataProvider homeDataProvider;
+        @using BlazorDemo.Data.Homes
+        @using DevExpress.Blazor.Internal
+        @inject HomesDataService HomesDataService
 
-            protected override void OnInitialized()
-            {
-                homeDataProvider = ScopedServices.GetRequiredService<IHomesDataProvider>();
-                base.OnInitialized();
-            }
-        }
-        @*EndHide*@
+        <div class="d-flex justify-content-center p-3">
+            <DxButton RenderStyle="ButtonRenderStyle.Secondary"
+                      Click="ToggleWindowsVisibility">
+                @GetButtonText()
+            </DxButton>
+        </div>
 
-        <DataProviderAccessAreaContainer DataProvider="homeDataProvider">
-            @using BlazorDemo.Data.Homes
-            @using DevExpress.Blazor.Internal
-            @inject HomesDataService HomesDataService
+        @for(int i = 0; i < homes.Length; i++) {
+            var home = homes[i];
+            var index = i;
 
-            <div class="d-flex justify-content-center p-3">
-                <DxButton RenderStyle="ButtonRenderStyle.Secondary"
-                          Click="ToggleWindowsVisibility">
-                    @GetButtonText()
-                </DxButton>
-            </div>
-
-            @for (int i = 0; i < homes.Count; i++)
-            {
-                var home = homes[i];
-                var index = i;
-
-                <DxWindow @ref="windows[index]"
-                          AllowDrag=true
-                          ShowCloseButton=true
-                          HeaderText="@("Home #" + (index + 1))"
-                          Width="@($"min({width}px, 50vw)")"
-                          Height="@($"min({height}px, 65vh)")"
-                          Closed="@(args => OnWindowClose(index))">
-                    <BodyContentTemplate>
-                        <div class="m-3">
-                            <div class="w-100">
-                                <img src="@(StaticAssetUtils.GetImagePath(home.PhotoUrl))" class="w-100"/>
-                            </div>
-                            <h5 class="mt-3 font-weight-600" style="">$@home.Price</h5>
-                            <div class="mt-3">
-                                <p class="mt-2 mb-0">
-                                    <span class="text-muted">Size:</span>
-                                    <span class="fw-bold">@home.HouseSize</span>
-                                    <span class="text-muted">ft2</span>
-                                </p>
-                                <p class="mt-2 mb-0">
-                                    <span class="text-muted">Year: </span>
-                                    <span class="fw-bold">@home.YearBuilt</span>
-                                </p>
-                                <p class="mt-2 mb-0">
-                                    <span class="text-muted">Address: </span>
-                                    <span class="fw-bold">@home.Address</span>
-                                </p>
-                                <p class="mt-2 mb-0">
-                                    <span class="text-muted">@home.Features</span>
-                                </p>
-                            </div>
+            <DxWindow @ref="windows[index]"
+                      AllowDrag=true
+                      ShowCloseButton=true
+                      HeaderText="@("Home #" + (index + 1))"
+                      Width="@($"min({width}px, 50vw)")"
+                      Height="@($"min({height}px, 65vh)")"
+                      @bind-Visible="visibilities[index]">
+                <BodyContentTemplate>
+                    <div class="m-3">
+                        <div class="w-100">
+                            <img src="@(StaticAssetUtils.GetImagePath(home.PhotoUrl))" class="w-100"/>
                         </div>
-                    </BodyContentTemplate>
-                </DxWindow>
-            }
+                        <h5 class="mt-3 font-weight-600" style="">$@home.Price</h5>
+                        <div class="mt-3">
+                            <p class="mt-2 mb-0">
+                                <span class="text-muted">Size:</span>
+                                <span class="fw-bold">@home.HouseSize</span>
+                                <span class="text-muted">ft2</span>
+                            </p>
+                            <p class="mt-2 mb-0">
+                                <span class="text-muted">Year: </span>
+                                <span class="fw-bold">@home.YearBuilt</span>
+                            </p>
+                            <p class="mt-2 mb-0">
+                                <span class="text-muted">Address: </span>
+                                <span class="fw-bold">@home.Address</span>
+                            </p>
+                            <p class="mt-2 mb-0">
+                                <span class="text-muted">@home.Features</span>
+                            </p>
+                        </div>
+                    </div>
+                </BodyContentTemplate>
+            </DxWindow>
+        }
 
-        </DataProviderAccessAreaContainer>
     </ChildContentWithParameters>
 
     @code {
-        List<Home> homes;
-        List<bool> visibilities = new List<bool>();
-        Dictionary<int, DxWindow> windows = new Dictionary<int, DxWindow>();
-
+        const int windowsCount = 3;
+        Home[] homes = new Home[windowsCount];
+        bool[] visibilities = new bool[windowsCount];
+        DxWindow[] windows = new DxWindow[windowsCount];
         int width = 350;
         int height = 500;
-        bool windowVisible;
-        string GetButtonText() => !windowVisible ? "SHOW THE WINDOWS" : "CLOSE THE WINDOWS";
+        bool windowsVisible => visibilities.Any(x => x);
+        string GetButtonText() => !windowsVisible ? "SHOW THE WINDOWS" : "CLOSE THE WINDOWS";
 
-        protected override async Task OnInitializedAsync()
-        {
-            homes = (await HomesDataService.GetHomesAsync()).Take(3).ToList();
-            visibilities = homes.Select(x => windowVisible).ToList();
+        protected override async Task OnInitializedAsync() {
+            homes = (await HomesDataService.GetHomesAsync()).Take(windowsCount).ToArray();
         }
 
-        private async Task ToggleWindowsVisibility(MouseEventArgs args)
-        {
-            windowVisible = !windowVisible;
-
-            if (windowVisible)
-            {
-                for (int i = 0; i < windows.Count; i++)
+        private async Task ToggleWindowsVisibility(MouseEventArgs args) {
+            if (!windowsVisible) {
+                for (int i = 0; i < windows.Length; i++)
                     await windows[i].ShowAtAsync(
                         args.ClientX + i * 30 - width / 2, args.ClientY + i * 30 - height * 2 / 3);
             }
-            else
-            {
-                foreach (var window in windows.Values)
+            else {
+                foreach (var window in windows)
                     await window.CloseAsync();
             }
-
-            visibilities = visibilities.Select(x => windowVisible).ToList();
-        }
-
-        private void OnWindowClose(int index)
-        {
-            visibilities[index] = false;
-            windowVisible = visibilities.Any(x => x);
         }
     }
 </DemoPageSectionComponent>

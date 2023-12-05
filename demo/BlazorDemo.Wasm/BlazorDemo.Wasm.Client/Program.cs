@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BlazorDemo.Configuration;
@@ -10,7 +9,6 @@ using BlazorDemo.Wasm.DataProviders.Implementation;
 using BlazorDemo.Wasm.DataProviders.TransportInfrastructure;
 using DevExpress.Blazor.DocumentMetadata;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazorDemo.Wasm {
@@ -48,6 +46,8 @@ namespace BlazorDemo.Wasm {
             services.AddSingleton<IHomesDataProvider, HomesDataProvider>();
             // Editable should be scoped
             services.AddScoped<INwindDataProvider, NwindDataProvider>();
+
+            services.AddScoped<IChartBirthLifeDataProvider, ChartBirthLifeDataProvider>();
 
             services.AddNotSupportedDemoServices();
 

@@ -4,14 +4,18 @@
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
+        <label for="tbValueField" class="demo-text cw-480 mb-1">
+            Employees
+        </label>
         <DxTagBox Data="@Data"
                   TextFieldName="@nameof(Employee.Text)"
                   ValueFieldName="@nameof(Employee.EmployeeId)"
                   SizeMode="Params.SizeMode"
                   CssClass="cw-480"
                   @bind-Values="Values"
-                  ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
-        <p class="demo-text cw-480 mt-2">
+                  ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                  InputId="tbValueField" />
+        <p class="demo-text cw-480 mt-3">
             Selected values: { @GetStringRepresentation() }
         </p>
     </ChildContentWithParameters>

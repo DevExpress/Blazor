@@ -1,14 +1,18 @@
 ﻿<DemoPageSectionComponent Id="Editors-TextBox-Overview" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="tbOverview" class="demo-text cw-320 mb-1">
+            Username
+        </label>
         <DxTextBox @bind-Text="@TextValue"
                    SizeMode="Params.SizeMode"
-                   CssClass="cw-320" />
-        <p class="demo-text cw-320 mt-2">
-            Text: <b>@TextValue</b>
+                   CssClass="cw-320"
+                   InputId="tbOverview" />
+        <p class="demo-text cw-320 mt-3">
+            The entered text is: <b>@TextValue</b>
         </p>
     </ChildContentWithParameters>
 
     @code {
-        string TextValue { get; set; } = "Some text";
+        string TextValue { get; set; } = "Nancy Davolio";
     }
 </DemoPageSectionComponent>

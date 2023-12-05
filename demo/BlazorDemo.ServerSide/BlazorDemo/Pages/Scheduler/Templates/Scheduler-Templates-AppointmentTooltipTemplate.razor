@@ -2,9 +2,11 @@
 
 <DemoPageSectionComponent Id="Scheduler-Templates-AppointmentTooltipTemplate">
     <DemoChildContent>
-        <DxScheduler StartDate="@DateTime.Today" DataStorage="@DataStorage"
-                     GroupType="SchedulerGroupType.Date" CssClass="w-100"
-                     @bind-ShowAppointmentTooltip="@ShowAppointmentTooltip">
+        <DxScheduler @bind-StartDate="@StartDate"
+                     DataStorage="@DataStorage"
+                     GroupType="SchedulerGroupType.Date" 
+                     @bind-ShowAppointmentTooltip="@ShowAppointmentTooltip"
+                     CssClass="w-100">
             <Views>
                 <DxSchedulerDayView DayCount="2" ShowWorkTimeOnly="true">
                     <HorizontalAppointmentTemplate>
@@ -94,6 +96,7 @@
 
 
     @code {
+        DateTime StartDate { get; set; } = DateTime.Today;
         bool ShowAppointmentTooltip { get; set; } = true;
 
         DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {

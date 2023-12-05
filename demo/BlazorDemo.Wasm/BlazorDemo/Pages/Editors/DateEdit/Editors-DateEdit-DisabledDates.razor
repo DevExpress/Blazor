@@ -1,11 +1,15 @@
 ﻿<DemoPageSectionComponent Id="Editors-DateEdit-DisabledDates" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="deDisabledDates" class="demo-text cw-320 mb-1">
+            Date
+        </label>
         <DxDateEdit @bind-Date="@DateTimeValue"
                     SizeMode="Params.SizeMode"
                     CssClass="cw-320"
-                    CustomDisabledDate="@OnCustomDisabledDate" />
-        <p class="demo-text cw-320 mt-2">
-            Date: <b>@DateTimeValue.ToString("dddd, dd MMMM yyyy")</b>
+                    CustomDisabledDate="@OnCustomDisabledDate"
+                    InputId="deDisabledDates" />
+        <p class="demo-text cw-320 mt-3">
+            Selected Date: <b>@DateTimeValue.ToString("dddd, dd MMMM yyyy")</b>
         </p>
     </ChildContentWithParameters>
 

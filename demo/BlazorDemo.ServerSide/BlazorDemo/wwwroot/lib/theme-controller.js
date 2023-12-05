@@ -51,7 +51,7 @@ export const ThemeController = (function () {
         return links.filter(l => l.href !== url);
     }
 
-    async function setStylesheetLinks(bsUrl, dxUrl, hlUrl, reference) {
+    async function setStylesheetLinks(bsUrl, bsThemeMode, dxUrl, hlUrl, reference) {
         abortController?.abort();
         abortController = new AbortController();
         const signal = abortController.signal;
@@ -68,6 +68,8 @@ export const ThemeController = (function () {
         for (const link of oldLinks) {
             link.remove();
         }
+
+        document.querySelector("HTML").setAttribute("data-bs-theme", bsThemeMode);
 
         await reference.invokeMethodAsync("ThemeLoadedAsync");
     }

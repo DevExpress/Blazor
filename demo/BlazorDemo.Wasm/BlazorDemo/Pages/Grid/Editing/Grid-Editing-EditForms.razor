@@ -1,49 +1,73 @@
 ﻿@page "/Grid/EditData/EditForms"
-@layout DataProviderAccessArea<INwindDataProvider>
+@layout DataProviderAccessArea<INwindDataProvider, IWorldcitiesDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Editing-EditForms" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
+<DemoPageSectionComponent Id="Grid-Editing-EditForms" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        @implements IDisposable
         @inject NwindDataService NwindDataService
+        @inject WorldcitiesDataService WorldcitiesDataService
 
         <DxGrid @ref="Grid"
                 Data="DataSource"
-                PageSize="12"
-                KeyFieldName="EmployeeId"
+                PageSize="8"
                 ValidationEnabled="false"
                 CustomizeEditModel="Grid_CustomizeEditModel"
                 EditModelSaving="Grid_EditModelSaving"
                 DataItemDeleting="Grid_DataItemDeleting"
                 PopupEditFormCssClass="pw-800"
                 EditMode="@CurrentEditMode"
-                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
             <Columns>
                 <DxGridCommandColumn Width="160px" />
-                <DxGridDataColumn FieldName="FirstName" MinWidth="80" />
-                <DxGridDataColumn FieldName="LastName" MinWidth="80" />
-                <DxGridDataColumn FieldName="Title" MinWidth="100" />
-                <DxGridDataColumn FieldName="TitleOfCourtesy" MinWidth="120" />
-                <DxGridDataColumn FieldName="BirthDate" Width="10%" MinWidth="80" />
-                <DxGridDataColumn FieldName="HireDate" Width="10%" MinWidth="80" />
+                <DxGridDataColumn FieldName="CompanyName" />
+                <DxGridDataColumn FieldName="ContactName" />
+                <DxGridDataColumn FieldName="ContactTitle" />
+                <DxGridDataColumn FieldName="Phone" Width="10%" />
+                <DxGridDataColumn FieldName="Country" Width="10%" />
+                <DxGridDataColumn FieldName="City" Width="10%" />
             </Columns>
             <EditFormTemplate Context="EditFormContext">
+                @{
+                    var supplier = (Supplier)EditFormContext.EditModel;
+                }
                 <DxFormLayout CssClass="w-100">
-                    <DxFormLayoutItem Caption="First Name:" ColSpanMd="6">
-                        @EditFormContext.GetEditor("FirstName")
+                    <DxFormLayoutItem Caption="Company Name:" ColSpanMd="6">
+                        @EditFormContext.GetEditor("CompanyName")
                     </DxFormLayoutItem>
-                    <DxFormLayoutItem Caption="Last Name:" ColSpanMd="6">
-                        @EditFormContext.GetEditor("LastName")
+                    <DxFormLayoutItem Caption="Contact Name:" ColSpanMd="6">
+                        @EditFormContext.GetEditor("ContactName")
                     </DxFormLayoutItem>
-                    <DxFormLayoutItem Caption="Title:" ColSpanMd="6">
-                        @EditFormContext.GetEditor("Title")
+                    <DxFormLayoutItem Caption="Contact Title:" ColSpanMd="6">
+                        @EditFormContext.GetEditor("ContactTitle")
                     </DxFormLayoutItem>
-                    <DxFormLayoutItem Caption="Title of Courtesy:" ColSpanMd="6">
-                        @EditFormContext.GetEditor("TitleOfCourtesy")
+                    <DxFormLayoutItem Caption="Phone:" ColSpanMd="6">
+                        @EditFormContext.GetEditor("Phone")
                     </DxFormLayoutItem>
-                    <DxFormLayoutItem Caption="Birth Date:" ColSpanMd="6">
-                        @EditFormContext.GetEditor("BirthDate")
+                    <DxFormLayoutItem Caption="Country:" ColSpanMd="6">
+                        <DxComboBox Data="@Countries"
+                                    NullText="Select Country..."
+                                    FilteringMode="DataGridFilteringMode.Contains"
+                                    TextFieldName="CountryName"
+                                    ValueFieldName="CountryName"
+                                    Value="@supplier.Country"
+                                    ValueChanged="(string newCellValue) => {
+                                                        supplier.Country = newCellValue;
+                                                        supplier.City = null;
+                                                  }">
+                        </DxComboBox>
                     </DxFormLayoutItem>
-                    <DxFormLayoutItem Caption="Hire Date:" ColSpanMd="6">
-                        @EditFormContext.GetEditor("HireDate")
+                    <DxFormLayoutItem Caption="City:" ColSpanMd="6">
+                        @{
+                            var countryId = Countries.Where(c => c.CountryName == supplier.Country).FirstOrDefault()?.CountryId;
+                            var cities = Cities.Where(x => x.CountryId == countryId);
+                        }
+                        <DxComboBox Data="@cities"
+                                    NullText="Select City..."
+                                    FilteringMode="DataGridFilteringMode.Contains"
+                                    @bind-Value="@supplier.City"
+                                    TextFieldName="CityName"
+                                    ValueFieldName="CityName">
+                        </DxComboBox>
                     </DxFormLayoutItem>
                 </DxFormLayout>
             </EditFormTemplate>
@@ -52,15 +76,17 @@
     <OptionsContent>
         <OptionCheckBox Label="Use Popup Edit Form"
                         Checked="UsePopupEditForm"
-                        CheckedChanged="new Func<bool, Task>(UsePopupEditForm_CheckedChanged)"
-        />
+                        CheckedChanged="new Func<bool, Task>(UsePopupEditForm_CheckedChanged)" />
     </OptionsContent>
 
     @code {
-        IEnumerable<EditableEmployee> DataSource { get; set; }
+        IEnumerable<Supplier> DataSource { get; set; }
+        IEnumerable<Country> Countries { get; set; }
+        IEnumerable<City> Cities { get; set; }
         IGrid Grid { get; set; }
         bool UsePopupEditForm { get; set; }
         GridEditMode CurrentEditMode { get { return UsePopupEditForm ? GridEditMode.PopupEditForm : GridEditMode.EditForm; } }
+        TaskCompletionSource<bool> DataLoadedTcs { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
 
         async Task UsePopupEditForm_CheckedChanged(bool value) {
             UsePopupEditForm = value;
@@ -68,34 +94,40 @@
         }
 
         protected override async Task OnInitializedAsync() {
-            DataSource = await NwindDataService.GetEmployeesEditableAsync();
+            DataSource = await NwindDataService.GetSuppliersEditableAsync();
+            Countries = await WorldcitiesDataService.GetCountriesAsync();
+            Cities = await WorldcitiesDataService.GetCitiesAsync();
+            DataLoadedTcs.TrySetResult(true);
         }
         protected override async Task OnAfterRenderAsync(bool firstRender) {
-            if(firstRender)
+            if(firstRender) {
+                await DataLoadedTcs.Task;
                 await Grid.StartEditRowAsync(0);
-        }
+            }
+         }
         void Grid_CustomizeEditModel(GridCustomizeEditModelEventArgs e) {
             if(e.IsNew) {
-                var newEmployee = (EditableEmployee)e.EditModel;
-                newEmployee.FirstName = "John";
-                newEmployee.LastName = "Doe";
+                var newSupplier = (Supplier)e.EditModel;
+                newSupplier.CompanyName = "DevExpress";
+                newSupplier.ContactName = "John Doe";
             }
         }
         async Task Grid_EditModelSaving(GridEditModelSavingEventArgs e) {
-            var editableEmployee = (EditableEmployee)e.EditModel;
-
             if(e.IsNew)
-                await NwindDataService.InsertEmployeeAsync(editableEmployee);
+                await NwindDataService.InsertSupplierAsync((Supplier)e.EditModel);
             else
-                await NwindDataService.UpdateEmployeeAsync((EditableEmployee)e.DataItem, editableEmployee);
+                await NwindDataService.UpdateSupplierAsync((Supplier)e.DataItem, (Supplier)e.EditModel);
             await UpdateDataAsync();
         }
         async Task Grid_DataItemDeleting(GridDataItemDeletingEventArgs e) {
-            await NwindDataService.RemoveEmployeeAsync((EditableEmployee)e.DataItem);
+            await NwindDataService.RemoveSupplierAsync((Supplier)e.DataItem);
             await UpdateDataAsync();
         }
         async Task UpdateDataAsync() {
-            DataSource = await NwindDataService.GetEmployeesEditableAsync();
+            DataSource = await NwindDataService.GetSuppliersEditableAsync();
+        }
+        public void Dispose() {
+            DataLoadedTcs.TrySetCanceled();
         }
     }
 </DemoPageSectionComponent>

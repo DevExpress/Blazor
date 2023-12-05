@@ -1,13 +1,17 @@
 ﻿<DemoPageSectionComponent Id="Editors-ComboBox-AllowUserInput" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="cbUserInput" class="demo-text cw-480 mb-1">
+            City Name
+        </label>
         <DxComboBox Data="@Cities"
                     AllowUserInput="true"
                     NullText="Select City ..."
                     @bind-Value="@Value"
                     @bind-Text="@Text"
                     SizeMode="Params.SizeMode"
-                    CssClass="cw-480" />
-        <p class="demo-text cw-480 mt-2">
+                    CssClass="cw-480"
+                    InputId="cbUserInput"/>
+        <p class="demo-text cw-480 mt-3">
             Selected item: <b>@(Value == null ? "null" : Value)</b>, Text = <b>@Text</b>
         </p>
     </ChildContentWithParameters>

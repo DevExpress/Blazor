@@ -1,0 +1,104 @@
+﻿<DemoPageSectionComponent Id="Editors-ListBox-ColumnCellDisplayTemplate" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <div class="d-flex flex-wrap w-100">
+            <div class="w-auto mt-1 me-1 flex-grow-1" style="flex-basis: 240px">
+                <DxListBox TData="Product" TValue="Product" Data="@Products"
+                           @bind-Values="@SelectedProducts"
+                           SizeMode="Params.SizeMode"
+                           ListRenderMode="ListRenderMode.Virtual"
+                           SelectionMode="ListBoxSelectionMode.Multiple">
+                    <Columns>
+                        <DxListEditorColumn FieldName="@nameof(Product.ProductName)" Caption="Product" Width="30%"/>
+                        <DxListEditorColumn FieldName="@nameof(Product.UnitPrice)" Caption="Unit Price"/>
+                        <DxListEditorColumn FieldName="@nameof(Product.Quantity)"/>
+                        <DxListEditorColumn FieldName="@nameof(Product.Discount)"/>
+                        <DxListEditorColumn FieldName="@nameof(Product.Total)" />
+                    </Columns>
+                    <ColumnCellDisplayTemplate>
+                        @{
+                            object displayValue;
+                            string cssClass = string.Empty;
+
+                            switch (context.Column.FieldName) {
+                                case nameof(Product.UnitPrice):
+                                    cssClass = alignRightCssClass;
+                                    displayValue = $"{context.Value:c}";
+                                    break;
+                                case nameof(Product.Quantity):
+                                    cssClass = alignRightCssClass;
+                                    displayValue = context.DisplayText;
+                                    break;
+                                case nameof(Product.Discount):
+                                    displayValue = $"{context.Value:p}";
+                                    break;
+                                case nameof(Product.Total):
+                                    var value = context.DataItem.UnitPrice * context.DataItem.Quantity;
+                                    var valueCssClass = value >= TotalPriceCeiling ? textGreenCssClass : textRedCssClass;
+                                    cssClass = $"{alignRightCssClass} {valueCssClass}";
+                                    displayValue = $"{value:c}";
+                                    break;
+                                default:
+                                    displayValue = context.DisplayText;
+                                    break;
+                            }
+                        }
+                        <div class="@cssClass">@displayValue</div>
+                    </ColumnCellDisplayTemplate>
+                </DxListBox>
+            </div>
+            <div class="card mt-1 me-1 flex-grow-1" style="max-height: 200px; flex-basis: 60px">
+                <div class="card-header bg-transparent text-body py-2 border-bottom-0 fw-bold">Selected products:</div>
+                <div class="card-body p-0 pb-2 overflow-auto">
+                    <ul class="list-group list-group-flush bg-transparent border-0">
+                        @foreach(var product in SelectedProducts) {
+                            <li class="list-group-item bg-transparent text-body py-1 border-0">@product.ProductName</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        const int SelectedProductsCount = 3;
+        const int TotalPriceCeiling = 100;
+
+        IEnumerable<Product> Products { get; set; }
+        IEnumerable<Product> SelectedProducts { get; set; }
+        
+        string alignRightCssClass = "align-right";
+        string textGreenCssClass = "text-green";
+        string textRedCssClass = "text-red";
+
+        protected override async Task OnInitializedAsync() {
+            var invoices = await NwindDataService.GetInvoicesAsync();
+            var products = await NwindDataService.GetProductsAsync();
+            Products = invoices.Join(products, i => i.ProductId, p => p.ProductId, (i, p) =>
+                new Product {
+                    ProductName = i.ProductName,
+                    UnitPrice = i.UnitPrice,
+                    Quantity = i.Quantity,
+                    Discount = i.Discount
+                }
+            );
+            SelectedProducts = Products.Skip(1).Take(SelectedProductsCount);
+        }
+
+        public class Product {
+            public string ProductName { get; set; }
+            public decimal UnitPrice { get; set; }
+            public int Quantity { get; set; }
+            public float Discount { get; set; }
+            public int Total { get; set; }
+
+            public override bool Equals(object obj) {
+                return obj is Product product && string.Equals(product.ProductName, ProductName) && product.Quantity == Quantity;
+            }
+
+            public override int GetHashCode() {
+                return HashCode.Combine(ProductName, Quantity);
+            }
+        }
+    }
+</DemoPageSectionComponent>

@@ -7,9 +7,9 @@
                 height: 250px !important;
             }
         </style>
-        <DxScheduler StartDate="@DateTime.Today"
+        <DxScheduler @bind-StartDate="@StartDate"
                      DataStorage="@DataStorage"
-                     ActiveViewType="SchedulerViewType.Timeline"
+                     ActiveViewType="@ActiveViewType"
                      CssClass="w-100 customScheduler">
             <Views>
                 <DxSchedulerTimelineView Duration="TimeSpan.FromDays(7)" CellMinWidth="115">
@@ -27,6 +27,9 @@
     </DemoChildContent>
 
     @code {
+        DateTime StartDate { get; set; } = DateTime.Today;
+        SchedulerViewType ActiveViewType { get; set; } = SchedulerViewType.Timeline;
+
         DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
             AppointmentsSource = RecurringAppointmentCollection.GetAppointments(),
             AppointmentMappings = new DxSchedulerAppointmentMappings() {

@@ -1,13 +1,13 @@
 @page "/Grid/Summary/Total"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Summary-Total" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
+<DemoPageSectionComponent Id="Grid-Summary-Total" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <DxGrid Data="@Data"
                 SizeMode="Params.SizeMode" 
-                KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
+                KeyboardNavigationEnabled="true">
             <Columns>
                 <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
                 <DxGridDataColumn FieldName="City" Width="10%" />

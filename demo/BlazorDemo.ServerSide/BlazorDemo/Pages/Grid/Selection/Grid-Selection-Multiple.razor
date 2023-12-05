@@ -1,7 +1,7 @@
 ﻿@page "/Grid/Selection/Multiple"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Selection-Multiple" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
+<DemoPageSectionComponent Id="Grid-Selection-Multiple" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
@@ -12,7 +12,7 @@
                         SelectionMode="GridSelectionMode.Multiple"
                         AllowSelectRowByClick="true"
                         @bind-SelectedDataItems="@SelectedDataItems"
-                        SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
+                        SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
                     <Columns>
                         <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
                         <DxGridDataColumn FieldName="CategoryId" Caption="Category" MinWidth="100">

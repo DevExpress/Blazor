@@ -1,14 +1,16 @@
 ﻿<DemoPageSectionComponent Id="Editors-SpinEdit-Mask" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-
+        <label for="seMask" class="demo-text cw-320 mb-1">
+            Numeric Mask
+        </label>
         <DxSpinEdit @bind-Value="@Price"
                     Mask="@NumericMaskValue"
                     SizeMode="@Params.SizeMode"
-                    CssClass="cw-320">
+                    CssClass="cw-320"
+                    InputId="seMask">
             <DxNumericMaskProperties Culture="MaskCultureInfo.Value" />
         </DxSpinEdit>
-
-        <p class="demo-text cw-320 mt-2">
+        <p class="demo-text cw-320 mt-3">
             Price: <b>@Price</b>
         </p>
     </ChildContentWithParameters>

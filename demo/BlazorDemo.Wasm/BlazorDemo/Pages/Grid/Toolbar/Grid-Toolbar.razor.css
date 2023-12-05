@@ -1,0 +1,56 @@
+.grid-container {
+    display: contents;
+}
+
+/*BeginHide*/::deep /*EndHide*/.grid-toolbar-new,
+/*BeginHide*/::deep /*EndHide*/.grid-toolbar-delete,
+/*BeginHide*/::deep /*EndHide*/.grid-toolbar-edit,
+/*BeginHide*/::deep /*EndHide*/.grid-toolbar-column-chooser,
+/*BeginHide*/::deep /*EndHide*/.grid-toolbar-export {
+    background-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    background-position: center center;
+    background-color: currentColor;
+    height: 16px;
+    width: 16px;
+    opacity: 0.7;
+}
+
+/*BeginHide*/::deep /*EndHide*/.grid-toolbar-new {
+    -webkit-mask-image: url("images/icons/grid-toolbar-new.svg");
+    mask-image: url("images/icons/grid-toolbar-new.svg");
+}
+
+/*BeginHide*/::deep /*EndHide*/.grid-toolbar-delete {
+    -webkit-mask-image: url("images/icons/grid-toolbar-delete.svg");
+    mask-image: url("images/icons/grid-toolbar-delete.svg");
+}
+
+/*BeginHide*/::deep /*EndHide*/.grid-toolbar-edit {
+    -webkit-mask-image: url("images/icons/grid-toolbar-edit.svg");
+    mask-image: url("images/icons/grid-toolbar-edit.svg");
+}
+
+/*BeginHide*/::deep /*EndHide*/.grid-toolbar-column-chooser {
+    -webkit-mask-image: url("images/icons/column-chooser.svg");
+    mask-image: url("images/icons/column-chooser.svg");
+}
+
+/*BeginHide*/::deep /*EndHide*/.grid-toolbar-export {
+    -webkit-mask-image: url("images/icons/export.svg");
+    mask-image: url("images/icons/export.svg");
+}
+
+/*BeginHide*/::deep /*EndHide*/.search-icon {
+    background-color: currentColor;
+    width: 16px;
+    height: 16px;
+    mask-image: url("images/icons/search.svg");
+    -webkit-mask-image: url("images/icons/search.svg");
+    opacity: 0.6;
+}
+
+/*BeginHide*/::deep /*EndHide*/.search-item {
+    width: 10rem;
+}

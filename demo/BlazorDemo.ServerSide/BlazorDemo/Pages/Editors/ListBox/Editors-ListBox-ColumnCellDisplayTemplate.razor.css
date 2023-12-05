@@ -1,0 +1,11 @@
+.align-right {
+    text-align: right;
+}
+
+.text-green {
+    color: var(--bs-success);
+}
+
+.text-red {
+    color: var(--bs-danger);
+}

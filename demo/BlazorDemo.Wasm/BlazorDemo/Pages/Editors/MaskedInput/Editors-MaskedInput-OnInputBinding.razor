@@ -1,21 +1,26 @@
 ﻿<DemoPageSectionComponent Id="Editors-MaskedInput-OnInputBinding" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="teInputBinding" class="demo-text cw-320 mb-1">
+            Price
+        </label>
         <DxMaskedInput @bind-Value="@Price"
                        Mask="@NumericMask.Currency"
                        BindValueMode="@BindValueMode"
                        InputDelay="@InputDelay"
                        NullText="Type text..."
                        SizeMode="Params.SizeMode"
-                       CssClass="cw-320" />
-        <p class="demo-text cw-320 mt-2">
-            Price: <b>@Price</b>
+                       CssClass="cw-320"
+                       InputId="teInputBinding"/>
+        <p class="demo-text cw-320 mt-3">
+            The entered value is: <b>@Price</b>
         </p>
     </ChildContentWithParameters>
 
     <OptionsContent>
         <OptionComboBox CssClass="ow-150"
                         Data="Enum.GetValues<BindValueMode>()"
-                    @bind-Value="BindValueMode" />
+                        @bind-Value="BindValueMode"
+                        Label="Bind Value Mode:" />
         <OptionSpinEdit CssClass="ow-150"
                         MinValue="100"
                         MaxValue="1000"

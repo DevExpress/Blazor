@@ -13,18 +13,22 @@
         <div class="card-body">
             <DxFormLayout SizeMode="@SizeMode">
                 <DxFormLayoutItem ColSpanMd="12">
+                    <label for="tbUsername" class="d-none">Username</label>
                     <DxTextBox @bind-Text="@Data.Username"
                                NullText="Username"
-                               ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"/>
+                               ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                               InputId="tbUsername" />
                     <div class="text-danger">
                         <ValidationMessage For="@(() => Data.Username)" />
                     </div>
                 </DxFormLayoutItem>
                 <DxFormLayoutItem ColSpanMd="12">
+                    <label for="tbPassword" class="d-none">Password</label>
                     <DxTextBox @bind-Text="@Data.Password"
                                NullText="Password"
                                Password="true"
-                               ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"/>
+                               ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                               InputId="tbPassword" />
                     <div class="text-danger">
                         <ValidationMessage For="@(() => Data.Password)" />
                     </div>

@@ -2,12 +2,16 @@
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
+        <label for="cbMultiColumn" class="demo-text cw-480 mb-1">
+            Employee
+        </label>
         <DxComboBox Data="@Data"
                     @bind-Value="@SelectedEmployee"
                     CssClass="cw-480"
                     SizeMode="Params.SizeMode"
                     FilteringMode="DataGridFilteringMode.Contains"
-                    EditFormat="{1} {2}">
+                    EditFormat="{1} {2}"
+                    InputId="cbMultiColumn">
             <Columns>
                 <DxListEditorColumn FieldName="@nameof(Employee.EmployeeId)"
                                     Caption="Id"

@@ -1,7 +1,7 @@
 ﻿@page "/Grid/Filtering/SearchBox"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Filtering-SearchBox" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
+<DemoPageSectionComponent Id="Grid-Filtering-SearchBox" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
         <DxGrid Data="@Data"
@@ -10,7 +10,7 @@
                 SearchTextParseMode="CurrentSearchTextParseMode"
                 ShowGroupPanel="true"
                 AutoExpandAllGroupRows="true"
-                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
             <Columns>
                 <DxGridDataColumn FieldName="ContactName" SortIndex="0" />
                 <DxGridDataColumn FieldName="CompanyName" />

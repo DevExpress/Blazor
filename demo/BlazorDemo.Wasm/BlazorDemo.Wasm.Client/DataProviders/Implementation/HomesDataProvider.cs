@@ -9,8 +9,8 @@ using BlazorDemo.Wasm.DataProviders.TransportInfrastructure;
 using System.Reflection;
 
 namespace BlazorDemo.Wasm.DataProviders.Implementation {
-    class HomesDataProvider : RemoteDataProviderBase, IHomesDataProvider {
-       
+    public class HomesDataProvider : RemoteDataProviderBase, IHomesDataProvider {
+
         public Task<IEnumerable<Home>> GetHomesAsync(CancellationToken ct = default) {
             return Loader.LoadRemoteEntities(this, GetHomesAsync);
         }

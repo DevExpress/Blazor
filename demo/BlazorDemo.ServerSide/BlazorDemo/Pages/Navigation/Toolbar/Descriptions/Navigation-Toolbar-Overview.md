@@ -10,3 +10,5 @@ Key Toolbar API members are as follows:
 *   [Target](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.Target) — Specifies [target](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/A) attribute value for an item.
 *   [Alignment](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarItemBase.Alignment) — Specifies item alignment.
 *   [Enabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxNavigationControlComponent-2.Enabled) — Specifies whether the component is enabled.
+
+The Toolbar component also supports [keyboard navigation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar#keyboard-navigation). Press the Tab key or Shift+Tab to focus the toolbar and use Arrow keys to navigate through menu items.

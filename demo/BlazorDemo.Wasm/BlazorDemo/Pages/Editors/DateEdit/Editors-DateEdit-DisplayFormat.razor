@@ -1,10 +1,14 @@
 ﻿<DemoPageSectionComponent Id="Editors-DateEdit-DisplayFormat" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="deDisplayFormat" class="demo-text cw-320 mb-1">
+            Date
+        </label>
         <DxDateEdit @bind-Date="@DateTimeValue"
                     DisplayFormat="D"
                     Format="d"
                     SizeMode="Params.SizeMode"
-                    CssClass="cw-320" />
+                    CssClass="cw-320"
+                    InputId="deDisplayFormat" />
     </ChildContentWithParameters>
 
     @code {

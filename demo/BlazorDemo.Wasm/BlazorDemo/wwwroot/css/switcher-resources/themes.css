@@ -19,6 +19,10 @@
     background: #007bff;
 }
 
+.blazor-themes a.default-dark:before {
+    background: #212529;
+}
+
 .blazor-themes a.cerulean:before {
     background: #2fa4e7;
 }

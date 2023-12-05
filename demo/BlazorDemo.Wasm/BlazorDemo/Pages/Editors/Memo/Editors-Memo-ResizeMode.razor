@@ -1,11 +1,15 @@
 ﻿<DemoPageSectionComponent Id="Editors-Memo-ResizeMode"
                           ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="memoResizeMode" class="demo-text cw-480 mb-1">
+            Description
+        </label>
         <DxMemo @bind-Text="TextValue"
                 SizeMode="Params.SizeMode"
                 ResizeMode="MemoResizeMode"
                 CssClass="cw-480"
-                Rows="5" />
+                Rows="5"
+                InputId="memoResizeMode" />
     </ChildContentWithParameters>
 
     <OptionsContent>

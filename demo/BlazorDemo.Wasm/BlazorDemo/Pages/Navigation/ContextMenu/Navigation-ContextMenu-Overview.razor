@@ -1,11 +1,11 @@
 ﻿<DemoPageSectionComponent Id="Navigation-ContextMenu-Overview" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <div class="demo-preventsel target-container" @oncontextmenu="((e) => ContextMenu.ShowAsync(e))" @oncontextmenu:preventDefault>
+        <div class="demo-preventsel target-container" @oncontextmenu="@OnContextMenu" @oncontextmenu:preventDefault @onkeydown="@OnKeyDown" tabindex="0">
             <p class="target-caption">RIGHT-CLICK OR LONG PRESS TO SHOW THE CONTEXT MENU</p>
             <p class="demo-text">Clicked item: <b>@(ClickedItem != null ? ClickedItem : "None")</b></p>
         </div>
 
-        <DxContextMenu @ref="@ContextMenu" ItemClick="@OnItemClick" SizeMode="Params.SizeMode">
+        <DxContextMenu @ref="@ContextMenu" PositionTarget="#section-Overview .target-container" ItemClick="@OnItemClick" SizeMode="Params.SizeMode">
             <Items>
                 <DxContextMenuItem Text="Sort By" IconCssClass="menu-icon-sort-by menu-icon">
                     <Items>
@@ -28,6 +28,13 @@
 
             void OnItemClick(ContextMenuItemClickEventArgs args) {
                 ClickedItem = args.ItemInfo.Text;
+            }
+            async void OnContextMenu(MouseEventArgs args) {
+                await ContextMenu.ShowAsync(args);
+            }
+            async void OnKeyDown(KeyboardEventArgs args) {
+                if (args.Key == "F10" && args.ShiftKey)
+                    await ContextMenu.ShowAsync(ContextMenuPosition.Center);
             }
         }
     </ChildContentWithParameters>

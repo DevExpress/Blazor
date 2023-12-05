@@ -1,4 +1,6 @@
-The DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/403143/grid) allows users to resize columns as needed. When users position the mouse pointer over the right border of a column, the component displays a double-sided arrow. This arrow allows users to drag the column border and change column width. To specify whether and how users can resize Grid columns, set the [ColumnResizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ColumnResizeMode) property to one of the following values:
+The DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/403143/grid) allows users to resize columns. When a user position the mouse pointer over the right edge of a column, the cursor becomes a double-sided arrow. The grid controls indicate that the user can drag the column edge and change the column width. Users can also double-click a column's right border to apply the optimal width.
+
+To specify whether and how users can resize Grid columns, set the [ColumnResizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ColumnResizeMode) property to one of the following values:
 
 * `Disabled` — A user cannot resize columns.
 * `NextColumn` — When a user resizes a column, the width of the column to the right changes, but the Grid's total width does not change.

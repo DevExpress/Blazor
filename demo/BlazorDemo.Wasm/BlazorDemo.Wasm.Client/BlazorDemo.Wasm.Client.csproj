@@ -11,7 +11,7 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
     <PackageReference Include="System.Net.Http.Json" Version="3.2.1" />
     <PackageReference Include="System.Security.Permissions" Version="6.0.0" />
-    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.9.0" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0" />
@@ -23,8 +23,8 @@
     <ProjectReference Include="..\BlazorDemo\BlazorDemo.Wasm.Core.csproj" />
   </ItemGroup>
 <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="23.1.6" />
-    <PackageReference Include="DevExpress.Drawing.Skia" Version="23.1.6" />
+    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Drawing.Skia" Version="23.2.3" />
     
     
     
@@ -37,6 +37,10 @@
 	<EmbeddedResource Include="LinkerConfig.xml">
     	<LogicalName>$(MSBuildProjectName).xml</LogicalName>
 	</EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup Condition="'$(DXTrimming)'=='true'">
+    <TrimmableAssembly Include="DevExpress.Data.v23.2" />
+    <TrimmerRootDescriptor Include="TrimmerRootDescriptor.xml" />
   </ItemGroup>
 	<Target Name="RestoreWasmWorkload" BeforeTargets="BeforeRestore">
     <!-- Unix requires sudo and password input for this command -->

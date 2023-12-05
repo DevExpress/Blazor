@@ -1,0 +1,63 @@
+﻿<DemoPageSectionComponent Id="Charts-Zooming-ZoomAndPan">
+    <DemoChildContent>
+        <DxChart @ref="@chart"
+                 T="DatePricePoint"
+                 Data="@UsdJpyData"
+                 Width="100%">
+
+            <DxChartLegend Position="RelativePosition.Inside"
+                           VerticalAlignment="VerticalEdge.Top"
+                           HorizontalAlignment="HorizontalAlignment.Right" />
+
+            <DxChartLineSeries T="DatePricePoint"
+                               TArgument="DateTime"
+                               TValue="double"
+                               ArgumentField="i => i.DateTimeStamp"
+                               ValueField="i => i.Price"
+                               Name="USDJPY">
+                <DxChartSeriesPoint Visible="false" />
+                <DxChartAggregationSettings Enabled="true"
+                                            Method="ChartAggregationMethod.Average" />
+            </DxChartLineSeries>
+
+            <DxChartArgumentAxis>
+                <DxChartAxisRange StartValue="new DateTime(2020, 01, 01)"
+                                  EndValue="new DateTime(2021, 01, 29)" />
+            </DxChartArgumentAxis>
+
+            <DxChartZoomAndPanSettings ArgumentAxisZoomAndPanMode="ChartAxisZoomAndPanMode.Both" />
+
+            <DxChartScrollBarSettings ArgumentAxisScrollBarVisible="true"
+                                      ArgumentAxisScrollBarPosition="ChartScrollBarPosition.Bottom" />
+
+            <DxChartTooltip Enabled="true" Position="RelativePosition.Outside">
+                <div style="margin: 0.75rem">
+                    <div class="fw-bold">
+                        @(((DateTime)context.Point.Argument).ToString("d"))
+                    </div>
+                    <div>
+                        1$=@(Math.Round((double)context.Point.Value, 2))¥
+                    </div>
+                </div>
+            </DxChartTooltip>
+
+        </DxChart>
+    </DemoChildContent>
+
+    <OptionsContent>
+        <OptionChartExportComponent ExportMethod="@ExportChart"/>
+    </OptionsContent>
+
+    @code {
+        IEnumerable<DatePricePoint> UsdJpyData;
+        DxChartBase chart;
+        @inject ICurrencyExchangeDataProvider UsdJpyDataProvider
+
+        async void ExportChart(ChartExportFormat format) {
+            await chart?.ExportAsync("ZoomAndPanChart", format);
+        }
+        protected override async Task OnInitializedAsync() {
+            UsdJpyData = await UsdJpyDataProvider.GetDataAsync();
+        }
+    }
+</DemoPageSectionComponent>

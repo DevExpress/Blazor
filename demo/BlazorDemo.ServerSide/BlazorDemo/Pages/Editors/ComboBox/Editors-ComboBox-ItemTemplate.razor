@@ -1,15 +1,20 @@
 ﻿<DemoPageSectionComponent Id="Editors-ComboBox-ItemTemplate" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
+
+        <label for="cbItemTemplate" class="demo-text cw-480 mb-1">
+            Employee
+        </label>
         <DxComboBox Data="@Data"
                     @bind-Value="@Value"
                     SizeMode="Params.SizeMode"
-                    CssClass="cw-480">
+                    CssClass="cw-480"
+                    InputId="cbItemTemplate">
             <ItemTemplate>
                 <div class="combobox-item-template">
-                    <img src="@StaticAssetUtils.GetImagePath(GetImageFileName(context))" />
+                    <img src="@StaticAssetUtils.GetImagePath(GetImageFileName(context))" alt="@context.FullName" />
                     <div class="combobox-item-template-text">
-                        <span>@context.FirstName @context.LastName</span>
+                        <span>@context.FullName</span>
                         <span class="combobox-item-template-employee-phone">@context.HomePhone</span>
                     </div>
                 </div>

@@ -3,29 +3,31 @@
         @inject NwindDataService NwindDataService
 
         <DxListBox Data="@Data"
-                   @bind-Values="@Values"
+                   @bind-Value="@Value"
                    SizeMode="Params.SizeMode"
                    CssClass="cw-400 chi-220">
-            <DxListEditorColumn FieldName="@nameof(Employee.EmployeeId)"
-                                Caption="Id"
-                                Width="50px" />
-            <DxListEditorColumn FieldName="@nameof(Employee.FirstName)"
-                                Caption="Name" />
-            <DxListEditorColumn FieldName="@nameof(Employee.LastName)"
-                                Caption="Surname" />
+                   <Columns>
+                        <DxListEditorColumn FieldName="@nameof(Employee.EmployeeId)"
+                                            Caption="Id"
+                                            Width="50px" />
+                        <DxListEditorColumn FieldName="@nameof(Employee.FirstName)"
+                                            Caption="Name" />
+                        <DxListEditorColumn FieldName="@nameof(Employee.LastName)"
+                                            Caption="Surname" />
+                    </Columns>
         </DxListBox>
         <p class="demo-text cw-400 mt-2">
-            Selected item: <b>@Values.FirstOrDefault()?.Text</b>
+            Selected item: <b>@Value?.Text</b>
         </p>
     </ChildContentWithParameters>
 
     @code {
         IEnumerable<Employee> Data { get; set; }
-        IEnumerable<Employee> Values { get; set; }
+        Employee Value { get; set; }
 
         protected override async Task OnInitializedAsync() {
             Data = await NwindDataService.GetEmployeesAsync();
-            Values = Data.Take(1);
+            Value = Data.FirstOrDefault();
         }
     }
 </DemoPageSectionComponent>

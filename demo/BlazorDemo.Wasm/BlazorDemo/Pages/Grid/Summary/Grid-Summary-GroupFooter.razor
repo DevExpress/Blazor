@@ -1,7 +1,7 @@
 @page "/Grid/Summary/GroupFooter"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Summary-GroupFooter" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
+<DemoPageSectionComponent Id="Grid-Summary-GroupFooter" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
@@ -10,7 +10,7 @@
                 ShowGroupPanel="true"
                 GroupFooterDisplayMode="@CurrentDisplayMode"
                 SizeMode="Params.SizeMode" 
-                KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
+                KeyboardNavigationEnabled="true">
             <Columns>
                 <DxGridDataColumn FieldName="OrderDate" GroupIndex="0" MinWidth="70" Width="10%" />
                 <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />

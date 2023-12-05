@@ -1,10 +1,14 @@
 ﻿<DemoPageSectionComponent Id="Editors-Memo-Overview"
                           ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="memoOverview" class="demo-text cw-480 mb-1">
+            Description
+        </label>
         <DxMemo @bind-Text="TextValue"
                 SizeMode="Params.SizeMode"
                 CssClass="cw-480"
-                Rows="5"/>
+                Rows="5"
+                InputId="memoOverview" />
     </ChildContentWithParameters>
 
 

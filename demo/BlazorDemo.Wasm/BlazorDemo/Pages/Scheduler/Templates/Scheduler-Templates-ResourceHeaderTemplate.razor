@@ -2,10 +2,11 @@
 
 <DemoPageSectionComponent Id="Scheduler-Templates-ResourceHeaderTemplate">
     <DemoChildContent>
-        <DxScheduler StartDate="@DateTime.Today"
+        <DxScheduler @bind-StartDate="@StartDate"
                      DataStorage="@DataStorage"
                      GroupType="@SchedulerGroupType.Resource"
-                     ResourceColorInHeaderVisible="false" HtmlCellDecoration="OnHtmlCellDecoration"
+                     ResourceColorInHeaderVisible="false"
+                     HtmlCellDecoration="OnHtmlCellDecoration"
                      CssClass="w-100" >
             <Views>
                 <DxSchedulerDayView DayCount="2" ShowWorkTimeOnly="true">
@@ -22,6 +23,8 @@
     </DemoChildContent>
 
     @code {
+        DateTime StartDate { get; set; } = DateTime.Today;
+
         DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
             AppointmentsSource = ResourceAppointmentCollection.GetAppointments(),
             AppointmentMappings = new DxSchedulerAppointmentMappings() {

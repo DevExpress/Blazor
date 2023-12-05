@@ -1,0 +1,31 @@
+.listbox-item-template {
+    display: flex;
+    align-items: center;
+}
+
+.listbox-item-template > img {
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+}
+
+img + .listbox-item-template-text {
+    margin-left: 0.5rem;
+}
+
+.dxbl-sm img + .listbox-item-template-text {
+    margin-left: 0.375rem;
+}
+
+.dxbl-lg img + .listbox-item-template-text {
+    margin-left: 0.625rem;
+}
+
+.listbox-item-template-text {
+    display: flex;
+    flex-flow: column;
+}
+
+.listbox-item-template-text-phone {
+    opacity: 0.65;
+}

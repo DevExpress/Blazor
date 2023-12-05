@@ -1,0 +1,139 @@
+﻿@page "/Grid/EditData/EditBatch"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Editing-EditBatch" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <div class="grid-container">
+            <DxGrid @ref="Grid"
+                    PageSize="12"
+                    Data="DataSource"
+                    KeyFieldName="EmployeeId"
+                    ValidationEnabled="false"
+                    SizeMode="Params.SizeMode"
+                    EditMode="GridEditMode.EditCell"
+                    KeyboardNavigationEnabled="true"
+                    EditModelSaving="Grid_EditModelSaving"
+                    CustomizeElement="Grid_CustomizeElement"
+                    CustomizeEditModel="Grid_CustomizeEditModel">
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
+                        <DxToolbarItem Text="New" Click="New_Click" IconCssClass="grid-toolbar-new" Enabled="true"/>
+                        <DxToolbarItem Text="Save" Click="Save_Click" IconCssClass="grid-toolbar-save" Enabled="BatchItemsEnabled" BeginGroup="true"/>
+                        <DxToolbarItem Text="Cancel" Click="Cancel_Click" IconCssClass="grid-toolbar-cancel" Enabled="BatchItemsEnabled"/>
+                    </DxToolbar>
+                </ToolbarTemplate>
+                <Columns>
+                    <DxGridDataColumn FieldName="TitleOfCourtesy" Caption="Courtesy Title" MinWidth="50"/>
+                    <DxGridDataColumn FieldName="FirstName" MinWidth="80"/>
+                    <DxGridDataColumn FieldName="LastName" MinWidth="80"/>
+                    <DxGridDataColumn FieldName="Title" MinWidth="200"/>
+                    <DxGridDataColumn FieldName="HomePhone" MinWidth="150"/>
+                    <DxGridDataColumn FieldName="City" MinWidth="150"/>
+                    <DxGridDataColumn FieldName="BirthDate" Width="10%" MinWidth="80"/>
+                    <DxGridDataColumn FieldName="HireDate" Width="10%" MinWidth="80"/>
+                    <DxGridCommandColumn Width="30px" NewButtonVisible="false">
+                        <CellDisplayTemplate>
+                            <div class="grid-cell-align-center">
+                                <DxButton IconCssClass="grid-icon grid-icon-delete"
+                                          RenderStyle="ButtonRenderStyle.Link"
+                                          Click="@(() => DeleteDataItem(context.DataItem))"/>
+                            </div>
+                        </CellDisplayTemplate>
+                        <CellEditTemplate>
+                            <div class="grid-cell-align-center">
+                                <DxButton Enabled="false"
+                                          CssClass="grid-disabled-button"
+                                          IconCssClass="grid-icon grid-icon-delete"
+                                          RenderStyle="ButtonRenderStyle.Link"/>
+                            </div>
+                        </CellEditTemplate>
+                    </DxGridCommandColumn>
+                </Columns>
+            </DxGrid>
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        IGrid Grid { get; set; }
+        IList<EditableEmployee> DataSource { get; set; }
+        Dictionary<EditableEmployee, DataChange> UnsavedChanges { get; } = new();
+        bool BatchItemsEnabled => UnsavedChanges.Count > 0 || Grid.IsEditing();
+
+        protected override async Task OnInitializedAsync() => await UpdateDataAsync();
+        async Task New_Click() => await Grid.StartEditNewRowAsync();
+        async Task Cancel_Click() => await ClearUnsavedChangesAsync();
+        async Task Save_Click() {
+            foreach(var unsavedChange in UnsavedChanges) {
+                var dataItem = unsavedChange.Key;
+                var changeType = unsavedChange.Value.Type;
+                var changedFields = unsavedChange.Value.ChangedFields;
+                switch(changeType) {
+                    case DataChangeType.Addition:
+                        await NwindDataService.InsertEmployeeAsync(dataItem);
+                        break;
+                    case DataChangeType.Delete:
+                        await NwindDataService.RemoveEmployeeAsync(dataItem);
+                        break;
+                    case DataChangeType.Modification:
+                        await NwindDataService.UpdateEmployeeAsync(dataItem, DataUtils.GetFieldValues(dataItem, changedFields));
+                        break;
+                }
+            }
+            await ClearUnsavedChangesAsync();
+        }
+        void Grid_CustomizeElement(GridCustomizeElementEventArgs ea) {
+            if(ea.ElementType == GridElementType.DataCell) {
+                var employee = (EditableEmployee) Grid.GetDataItem(ea.VisibleIndex);
+                var column = (IGridDataColumn) ea.Column;
+                bool isNew = employee == null;
+                if(!isNew && UnsavedChanges.TryGetValue(employee, out var changes)) {
+                    if(changes.Type == DataChangeType.Addition || changes.ChangedFields.Contains(column.FieldName))
+                        ea.CssClass = "grid-modified-cell";
+                }
+            }
+        }
+        void Grid_CustomizeEditModel(GridCustomizeEditModelEventArgs e) {
+            if(e.IsNew) {
+                var newEmployee = (EditableEmployee)e.EditModel;
+                newEmployee.FirstName = "John";
+                newEmployee.LastName = "Doe";
+                newEmployee.EmployeeId = DataSource.Max(x => x.EmployeeId) + 1;
+            }
+        }
+        void Grid_EditModelSaving(GridEditModelSavingEventArgs e) {
+            var editableEmployee = (EditableEmployee)e.EditModel;
+            var employee = (EditableEmployee)e.DataItem;
+            if(e.IsNew) {
+                DataSource.Add(editableEmployee);
+                UnsavedChanges[editableEmployee] = new(DataChangeType.Addition, new());
+            }
+            else {
+                var changedFields = DataUtils.ApplyModifiedFields(editableEmployee, employee);
+                if(changedFields.Count > 0) {
+                    if(UnsavedChanges.TryGetValue(employee, out var changes))
+                        changes.ChangedFields.UnionWith(changedFields);
+                    else
+                        UnsavedChanges.Add(employee, new(DataChangeType.Modification, changedFields));
+                }
+            }
+        }
+        void DeleteDataItem(object dataItem) {
+            var employee = (EditableEmployee) dataItem;
+            UnsavedChanges[employee] = new(DataChangeType.Delete, new());
+            DataSource.Remove(employee);
+            Grid.Reload();
+        }
+        async Task ClearUnsavedChangesAsync() {
+            UnsavedChanges.Clear();
+            await UpdateDataAsync();
+        }
+        async Task UpdateDataAsync() {
+            var data = await NwindDataService.GetEmployeesEditableAsync();
+            DataSource = new List<EditableEmployee>(data);
+        }
+        record DataChange(DataChangeType Type, HashSet<string> ChangedFields);
+        enum DataChangeType { Modification, Addition, Delete }
+    }
+</DemoPageSectionComponent>

@@ -580,7 +580,8 @@ body.modal-open .main {
     }
 }
 /* Editors */
-.editor-icon {
+.editor-icon,
+.dxbl-btn .editor-icon {
     width: 1rem;
     height: 1rem;
     background-size: contain;
@@ -655,6 +656,20 @@ body.modal-open .main {
     -webkit-mask-image: url("../images/icons/check.svg");
 }
 
+.grid-icon-add {
+    -webkit-mask-image: url("../images/icons/add.svg");
+    mask-image: url("../images/icons/add.svg");
+}
+
+.grid-icon-delete {
+    -webkit-mask-image: url("../images/icons/delete.svg");
+    mask-image: url("../images/icons/delete.svg");
+}
+
+.grid-disabled-button {
+    pointer-events:none;
+}
+
 .grid-btn-link {
     border: 0;
     display: inline;
@@ -663,6 +678,14 @@ body.modal-open .main {
     padding: 0;
     text-decoration: underline;
     vertical-align: baseline;
+}
+
+.grid-cell-align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -4px;
+    margin-bottom: -4px;
 }
 
 .theme-solar .dxbs-grid-table,

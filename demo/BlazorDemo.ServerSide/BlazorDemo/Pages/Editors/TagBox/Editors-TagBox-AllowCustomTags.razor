@@ -1,5 +1,8 @@
 ﻿<DemoPageSectionComponent Id="Editors-TagBox-AllowCustomTags" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="tbCustomTags" class="demo-text cw-480 mb-1">
+            Cities
+        </label>
         <DxTagBox Data="@Cities"
                   NullText="Select city..."
                   TData="string"
@@ -8,7 +11,8 @@
                   @bind-Tags="@Tags"
                   ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
                   SizeMode="Params.SizeMode"
-                  CssClass="cw-480" />
+                  CssClass="cw-480"
+                  InputId="tbCustomTags" />
     </ChildContentWithParameters>
 
     @code {

@@ -8,7 +8,7 @@
                 padding-right: 12px;
             }
         </style>
-        <DxScheduler StartDate="@DateTime.Today"
+        <DxScheduler @bind-StartDate="@StartDate"
                      DataStorage="@DataStorage"
                      GroupType="SchedulerGroupType.Resource"
                      VisibleResourcesDataSource="VisibleResources"
@@ -38,6 +38,8 @@
     </OptionsContent>
 
     @code {
+        DateTime StartDate { get; set; } = DateTime.Today;
+
         bool AllowCreateAppointment { get; set; } = false;
         bool AllowEditAppointment { get; set; } = false;
         bool AllowDeleteAppointment { get; set; } = false;

@@ -6,6 +6,11 @@
     background-color: #fcfcfc;
 }
 
+.template-container {
+    margin-bottom: 1rem;
+    position: relative;
+}
+
 .flexBox, .checkBox, .gradientCircle, .borderContainer, .boxLabel, .borderCyrcle {
     display: flex;
     justify-content: center;
@@ -119,7 +124,7 @@
 
 @keyframes turn90 {
     0% {
-        transform: rotate(0deg);
+        transform: rotate(-180deg);
     }
 
     100% {
@@ -129,7 +134,7 @@
 
 @keyframes turn180 {
     0% {
-        transform: rotate(-90deg);
+        transform: rotate(0deg);
     }
 
     100% {
@@ -139,10 +144,10 @@
 
 @keyframes turn0 {
     0% {
-        transform: rotate(180deg);
+        transform: rotate(-90deg);
     }
 
     100% {
-        transform: rotate(360deg);
+        transform: rotate(0deg);
     }
 }

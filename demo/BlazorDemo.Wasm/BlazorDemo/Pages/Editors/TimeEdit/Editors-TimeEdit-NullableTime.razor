@@ -1,10 +1,14 @@
 ﻿<DemoPageSectionComponent Id="Editors-TimeEdit-NullableTime" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="teNullableTime" class="demo-text cw-320 mb-1">
+            Time
+        </label>
         <DxTimeEdit @bind-Time="@TimeValue"
                     NullText="Select time..."
                     ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
                     SizeMode="Params.SizeMode"
-                    CssClass="cw-320" />
+                    CssClass="cw-320"
+                    InputId="teNullableTime" />
     </ChildContentWithParameters>
 
     @code {

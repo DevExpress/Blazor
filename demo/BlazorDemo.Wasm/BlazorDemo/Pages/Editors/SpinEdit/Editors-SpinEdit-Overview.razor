@@ -1,9 +1,13 @@
 ﻿<DemoPageSectionComponent Id="Editors-SpinEdit-Overview" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="seOverview" class="demo-text cw-320 mb-1">
+            Decimal Value
+        </label>
         <DxSpinEdit @bind-Value="@DecimalValue"
                     SizeMode="@Params.SizeMode"
-                    CssClass="cw-320" />
-        <p class="demo-text cw-320 mt-2">
+                    CssClass="cw-320"
+                    InputId="seOverview" />
+        <p class="demo-text cw-320 mt-3">
             Value: <b>@DecimalValue</b>
         </p>
     </ChildContentWithParameters>

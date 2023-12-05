@@ -1,10 +1,14 @@
 ﻿<DemoPageSectionComponent Id="Editors-TimeEdit-Overview" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="teOverview" class="demo-text cw-320 mb-1">
+            Time
+        </label>
         <DxTimeEdit @bind-Time="@TimeValue"
                     SizeMode="Params.SizeMode"
-                    CssClass="cw-320" />
-        <p class="demo-text cw-320 mt-2">
-            Time: <b>@TimeValue.ToString(@"hh\:mm\:ss")</b>
+                    CssClass="cw-320"
+                    InputId="teOverview" />
+        <p class="demo-text cw-320 mt-3">
+            The selected time is: <b>@TimeValue.ToString(@"hh\:mm\:ss")</b>
         </p>
     </ChildContentWithParameters>
 

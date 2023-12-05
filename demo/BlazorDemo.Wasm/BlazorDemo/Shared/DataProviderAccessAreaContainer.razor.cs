@@ -8,7 +8,14 @@ using Microsoft.AspNetCore.Components;
 namespace BlazorDemo.Shared {
     public partial class DataProviderAccessArea<T> where T : IDataProvider {
         [Inject] T DataProvider { get; set; }
+#if MAUI
+        [Inject] NavigationManager NavigationManager { get; set; }
+#endif
         protected virtual IEnumerable<IDataProvider> GetDataProviders() {
+#if MAUI
+            object loader = DataProvider.GetType().GetProperty("Loader", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)?.GetValue(DataProvider);
+            loader?.GetType().GetProperty("NavigationManager", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public).SetValue(loader, NavigationManager);
+#endif
             yield return DataProvider;
         }
     }

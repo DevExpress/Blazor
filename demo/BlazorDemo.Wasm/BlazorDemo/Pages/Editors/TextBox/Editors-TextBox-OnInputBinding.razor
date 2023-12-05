@@ -1,20 +1,25 @@
 ﻿<DemoPageSectionComponent Id="Editors-TextBox-OnInputBinding" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="tbInputBinding" class="demo-text cw-320 mb-1">
+            Username
+        </label>
         <DxTextBox @bind-Text="@TextValue"
                    BindValueMode="@BindValueMode"
                    InputDelay="@InputDelay"
-                   NullText="Type text..."
+                   NullText="Enter username"
                    SizeMode="Params.SizeMode"
-                   CssClass="cw-320" />
-        <p class="demo-text cw-320 mt-2">
-            Text: <b>@TextValue</b>
+                   CssClass="cw-320"
+                   InputId="tbInputBinding" />
+        <p class="demo-text cw-320 mt-3">
+            The entered text is: <b>@TextValue</b>
         </p>
     </ChildContentWithParameters>
 
     <OptionsContent>
         <OptionComboBox CssClass="ow-150"
                         Data="Enum.GetValues<BindValueMode>()"
-                        @bind-Value="BindValueMode" />
+                        @bind-Value="BindValueMode"
+                        Label="Bind Value Mode:"/>
         <OptionSpinEdit CssClass="ow-150"
                         MinValue="100"
                         MaxValue="1000"

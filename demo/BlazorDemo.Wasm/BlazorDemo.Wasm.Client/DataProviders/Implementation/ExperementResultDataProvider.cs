@@ -6,7 +6,7 @@ using BlazorDemo.DataProviders;
 using BlazorDemo.Wasm.DataProviders.TransportInfrastructure;
 
 namespace BlazorDemo.Wasm.DataProviders.Implementation {
-    class ExperimentResultDataProvider : RemoteDataProviderBase, IExperimentResultDataProvider {
+    public class ExperimentResultDataProvider : RemoteDataProviderBase, IExperimentResultDataProvider {
         public Task<IEnumerable<DataPoint>> GetResultAsync(CancellationToken ct = default) {
             return Loader.LoadRemoteEntities(this, GetResultAsync);
         }

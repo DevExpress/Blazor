@@ -1,12 +1,16 @@
 ﻿<DemoPageSectionComponent Id="Editors-SpinEdit-Increment" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="seIncrement" class="demo-text cw-320 mb-1">
+            Decimal Value
+        </label>
         <DxSpinEdit @bind-Value="DecimalValue"
                     BindValueMode="BindValueMode.OnInput"
                     Increment="0.1M"
                     MinValue="0M"
                     MaxValue="1M"
                     SizeMode="Params.SizeMode"
-                    CssClass="cw-320" />
+                    CssClass="cw-320"
+                    InputId="seIncrement" />
     </ChildContentWithParameters>
 
     @code {

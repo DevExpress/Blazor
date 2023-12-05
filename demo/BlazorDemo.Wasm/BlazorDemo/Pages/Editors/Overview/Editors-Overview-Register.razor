@@ -18,61 +18,75 @@
         <div class="card-body">
             <DxFormLayout SizeMode="@SizeMode">
                 <DxFormLayoutItem ColSpanMd="12">
+                    <label for="tbUsername" class="d-none">Username</label>
                     <DxTextBox @bind-Text="@Data.Username"
                                NullText="Username"
-                               ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                               ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                               InputId="tbUsername" />
                     <div class="text-danger">
                         <ValidationMessage For="@(() => Data.Username)" />
                     </div>
                 </DxFormLayoutItem>
                 <DxFormLayoutItem ColSpanMd="12">
+                    <label for="tbPassword" class="d-none">Password</label>
                     <DxTextBox @bind-Text="@Data.Password"
                                NullText="Password"
                                Password="true"
-                               ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                               ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                               InputId="tbPassword" />
                     <div class="text-danger">
                         <ValidationMessage For="@(() => Data.Password)" />
                     </div>
                 </DxFormLayoutItem>
                 <DxFormLayoutItem ColSpanMd="12">
+                    <label for="tbEmail" class="d-none">E-mail</label>
                     <DxTextBox @bind-Text="@Data.Email"
                                NullText="E-mail"
-                               ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                               ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                               InputId="tbEmail" />
                     <div class="text-danger">
                         <ValidationMessage For="@(() => Data.Email)" />
                     </div>
                 </DxFormLayoutItem>
                 <DxFormLayoutItem ColSpanMd="12">
+                    <label for="miPhone" class="d-none">Phone Number</label>
                     <DxMaskedInput @bind-Value="@Data.Phone"
                                    NullText="Phone Number"
                                    Mask="@PhoneMask"
-                                   ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                                   ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                                   InputId="miPhone" />
                     <div class="text-danger">
                         <ValidationMessage For="@(() => Data.Phone)" />
                     </div>
                 </DxFormLayoutItem>
                 <DxFormLayoutItem ColSpanMd="12">
+                    <label for="deBirthDate" class="d-none">Birthday</label>
                     <DxDateEdit @bind-Date="@Data.BirthDate"
                                 NullText="Birthday"
                                 NullValue="@BirthDateNullValue"
                                 ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
-                                Mask="@DateTimeMask.ShortDate" />
+                                Mask="@DateTimeMask.ShortDate"
+                                InputId="deBirthDate" />
                     <div class="text-danger">
                         <ValidationMessage For="@(() => Data.BirthDate)" />
                     </div>
                 </DxFormLayoutItem>
                 <DxFormLayoutItem ColSpanMd="12">
+                    <label for="cbOccupation" class="d-none">Occupation</label>
                     <DxComboBox Data="@Occupations"
                                 @bind-Value="@Data.Occupation"
                                 AllowUserInput="false"
                                 NullText="Occupation"
-                                ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                                ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                                InputId="cbOccupation" />
                 </DxFormLayoutItem>
                 <DxFormLayoutItem ColSpanMd="12">
+                    <label for="mNotes" class="d-none">Notes</label>
                     <DxMemo @bind-Text="@Data.Notes"
                             NullText="Notes"
                             Rows="4"
-                            ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                            ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                            InputId="mNotes" />
                 </DxFormLayoutItem>
                 <DxFormLayoutItem ColSpanMd="12">
                     <DxButton CssClass="w-100"

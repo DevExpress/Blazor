@@ -1,4 +1,9 @@
-In this demo module, the [Calendar](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1) component allows you to select several dates simultaneously. Click a date while you press **Ctrl** to add a date to the selection.
+The [Calendar](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1) component allows users to select multiple dates: individual dates, date ranges, or a combination of both.
 
-*   [EnableMultiSelect](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1.EnableMultiSelect) — Specifies whether multiple date selection is enabled.
-*   [SelectedDates](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1.SelectedDates) — Specifies the collection of selected dates.
+Set the [EnableMultiSelect](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1.EnableMultiSelect) property to `true` to enable multiple date selection. The [SelectedDates](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1.SelectedDates) collection stores selected dates. To handle selection changes, use the [SelectedDatesChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1.SelectedDatesChanged) event.
+
+Users can select dates using the mouse or [keyboard](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1##multiple-date-selection).
+
+To add dates to a selection, select the dates while pressing the Ctrl key. 
+
+To select a range of dates, select the initial date, press the Shift key, and select the last date. 

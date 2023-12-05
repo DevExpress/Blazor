@@ -44,3 +44,10 @@
 .color-picker-container > .color-picker-cell.selected {
     border: 2px solid var(--bs-primary);
 }
+
+.color-picker-separator {
+    height: 0;
+    overflow: hidden;
+    border-top: 1px solid;
+    opacity: 0.3;
+}

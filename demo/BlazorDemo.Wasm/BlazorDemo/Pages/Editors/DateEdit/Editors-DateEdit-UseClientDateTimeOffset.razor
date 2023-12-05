@@ -1,11 +1,15 @@
 ﻿<DemoPageSectionComponent Id="Editors-DateEdit-UseClientDateTimeOffset" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="deDateOffset" class="demo-text cw-320 mb-1">
+            Date
+        </label>
         <DxDateEdit @bind-Date="@DateOffset"
                     CssClass="cw-320"
                     SizeMode="Params.SizeMode"
-                    TimeSectionVisible="true">
+                    TimeSectionVisible="true"
+                    InputId="deDateOffset">
         </DxDateEdit>
-        <p class="demo-text cw-320 mt-2">
+        <p class="demo-text cw-320 mt-3">
             Server Date: <b>@ServerDateOffset</b>
         </p>
     </ChildContentWithParameters>

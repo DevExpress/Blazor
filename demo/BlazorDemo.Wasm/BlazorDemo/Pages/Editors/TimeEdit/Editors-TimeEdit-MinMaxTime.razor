@@ -1,12 +1,16 @@
 ﻿<DemoPageSectionComponent Id="Editors-TimeEdit-MinMaxTime" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="teMinMaxTime" class="demo-text cw-320 mb-1">
+            Time
+        </label>
         <DxTimeEdit @bind-Time="@TimeValue"
                     CssClass="cw-320"
                     SizeMode="Params.SizeMode"
                     MinTime="@MinTime"
-                    MaxTime="@MaxTime" />
-        <p class="demo-text cw-320 mt-2">
-            Time: <b>@TimeValue.ToString(@"hh\:mm\:ss")</b>
+                    MaxTime="@MaxTime"
+                    InputId="teMinMaxTime" />
+        <p class="demo-text cw-320 mt-3">
+            The selected time is: <b>@TimeValue.ToString(@"hh\:mm\:ss")</b>
         </p>
     </ChildContentWithParameters>
 

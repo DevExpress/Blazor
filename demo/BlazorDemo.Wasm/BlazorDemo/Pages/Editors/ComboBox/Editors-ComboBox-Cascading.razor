@@ -2,18 +2,28 @@
     <ChildContentWithParameters Context="Params">
         @inject WorldcitiesDataService WorldcitiesDataService
 
-        <div class="d-flex flex-row cw-480">
-            <DxComboBox Data="@Countries"
-                        TextFieldName="@nameof(Country.CountryName)"
-                        Value="@CurrentCountry"
-                        ValueChanged="@((Country country) => SelectedCountryChanged(country))"
-                        SizeMode="Params.SizeMode"
-                        CssClass="cw-240" />
-            <DxComboBox Data="@CurrentCountryCities"
-                        TextFieldName="@nameof(City.CityName)"
-                        @bind-Value="@CurrentCity"
-                        SizeMode="Params.SizeMode"
-                        CssClass="cw-240 ms-1" />
+        <div class="row cw-480">
+            <div class="col-md-6">
+                <label for="cbCountryName" class="demo-text mb-1">
+                    Country Name
+                </label>
+                <DxComboBox Data="@Countries"
+                            TextFieldName="@nameof(Country.CountryName)"
+                            Value="@CurrentCountry"
+                            ValueChanged="@((Country country) => SelectedCountryChanged(country))"
+                            SizeMode="Params.SizeMode"
+                            InputId="cbCountryName" />
+            </div>
+            <div class="col-md-6">
+                <label for="cbCityName" class="demo-text mb-1">
+                    City Name
+                </label>
+                <DxComboBox Data="@CurrentCountryCities"
+                            TextFieldName="@nameof(City.CityName)"
+                            @bind-Value="@CurrentCity"
+                            SizeMode="Params.SizeMode"
+                            InputId="cbCityName" />
+            </div>
         </div>
     </ChildContentWithParameters>
 

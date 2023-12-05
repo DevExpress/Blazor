@@ -11,7 +11,7 @@
                         <DxTabPage Text="@(employee.FirstName + ' ' + employee.LastName)">
                             <div class="d-flex pt-2 demo-employee-card">
                                 <div class="flex-shrink-0">
-                                    <img src="@(StaticAssetUtils.GetImagePath(employee.ImageFileName))" width="125" />
+                                    <img src="@(StaticAssetUtils.GetImagePath(employee.ImageFileName))" width="125" alt="@(employee.FullName + " photo")"/>
                                 </div>
                                 <div class="flex-grow-1 ps-3">
                                     <h5>@employee.Title @employee.FirstName @employee.LastName</h5>

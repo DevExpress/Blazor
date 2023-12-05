@@ -2,11 +2,15 @@
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
+        <label for="tbOverview" class="demo-text cw-480 mb-1">
+            Employees
+        </label>
         <DxTagBox Data="@Data"
                   TextFieldName="@nameof(Employee.Text)"
                   @bind-Values="@Values"
                   SizeMode="Params.SizeMode"
-                  CssClass="cw-480" />
+                  CssClass="cw-480"
+                  InputId="tbOverview" />
     </ChildContentWithParameters>
 
     @code {

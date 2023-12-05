@@ -13,4 +13,6 @@ The Grid ships with the following built-in capabilities:
 * Column Resizing
 * Column Chooser
 * Cell and Row Customization
+* Toolbar
 * Paging and Scrolling
+* Keyboard Support

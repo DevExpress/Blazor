@@ -1,0 +1,58 @@
+﻿@page "/Grid/Columns/AutoFitWidths"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Columns-AutoFit" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <div class="align-self-end pl-2 pb-2">
+            <DxButton Text="Column Chooser"
+                      RenderStyle="ButtonRenderStyle.Secondary"
+                      IconCssClass="btn-column-chooser"
+                      SizeMode="Params.SizeMode"
+                      Click="ColumnChooserButton_Click" />
+        </div>
+        <DxGrid @ref="Grid"
+                Data="@Data"
+                ColumnResizeMode="GridColumnResizeMode.ColumnsContainer"
+                SizeMode="Params.SizeMode"
+                TextWrapEnabled="false"
+                KeyboardNavigationEnabled="true">
+            <Columns>
+                <DxGridDataColumn FieldName="CompanyName" />
+                <DxGridDataColumn FieldName="Phone" />
+                <DxGridDataColumn FieldName="Fax" />
+                <DxGridDataColumn FieldName="PostalCode" />
+                <DxGridDataColumn FieldName="Address" />
+                <DxGridDataColumn FieldName="City" />
+                <DxGridDataColumn FieldName="Region" />
+                <DxGridDataColumn FieldName="Country" />
+                <DxGridDataColumn FieldName="ContactTitle" />
+                <DxGridDataColumn FieldName="ContactName" />
+            </Columns>
+        </DxGrid>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionComponent Label="Column Auto Fit:">
+            <OptionButton Text="Match Component Width" OnClick="((args) => Grid_FitWidths(true))" />
+            <OptionButton Text="Match Content" OnClick="((args) => Grid_FitWidths(false))" />
+        </OptionComponent>
+    </OptionsContent>
+
+    @code {
+        IGrid Grid { get; set; }
+        IEnumerable<Supplier> Data { get; set; }
+        GridColumnResizeMode ColumnResizeMode { get; set; } = GridColumnResizeMode.NextColumn;
+
+        void Grid_FitWidths(bool сolumnsFitInGrid) {
+            Grid.AutoFitColumnWidths(сolumnsFitInGrid);
+        }
+
+        void ColumnChooserButton_Click() {
+            Grid.ShowColumnChooser();
+        }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetSuppliersAsync();
+        }
+    }
+</DemoPageSectionComponent>

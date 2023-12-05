@@ -1,0 +1,64 @@
+﻿@page "/ChartPalette"
+<DemoPageSectionComponent Id="Charts-Palette">
+    <DemoChildContent>
+        <div class="flex-container">
+            <DxPieChart Data="@GetData()"
+                        Width="400"
+                        InnerDiameter="0.5"
+                        Palette="@Colors[CurrentPalette]"
+                        PaletteExtensionMode="@CurrentPaletteMode">
+                <DxChartLegend Visible="false"/>
+                <DxPieChartSeries ArgumentField="@((DataPoint s) => s.Argument)"
+                                  ValueField="@((DataPoint s) => s.Value)"/>
+            </DxPieChart>
+            <div class="palette-container">
+                @foreach(var color in Colors[CurrentPalette]) {
+                    <div class="palette-item" style="background-color: @color"></div>
+                }
+            </div>
+        </div>
+
+        @code {
+
+            public enum Palettes {
+                Material,
+                Bootstrap,
+                Tailwind
+            }
+
+            Dictionary<Palettes, string[]> Colors = new Dictionary<Palettes, string[]>() {
+                { Palettes.Material, new string[] { "#1db2f5", "#f5564a", "#97c95c", "#ffc720", "#eb3573", "#a63db8" } },
+                { Palettes.Bootstrap, new string[] { "#0d6efd", "#6c757d", "#28a745", "#dc3545", "#ffc107", "#17a2b8" } },
+                { Palettes.Tailwind, new string[] { "#ef4444", "#eab308", "#22c55e", "#0ea5e9", "#8b5cf6", "#ec4899" } }
+            };
+
+            Palettes CurrentPalette = Palettes.Material;
+            ChartPaletteExtensionMode CurrentPaletteMode = ChartPaletteExtensionMode.Alternate;
+
+            List<DataPoint> GetData() {
+                List<DataPoint> result = new List<DataPoint>();
+                for(var i = 0; i < 20; i++) {
+                    result.Add(new DataPoint($"Item{i}", 1));
+                }
+
+                return result;
+            }
+
+            public class DataPoint {
+                public string Argument { get; set; }
+                public int Value { get; set; }
+
+                public DataPoint(string argument, int value) {
+                    Argument = argument;
+                    Value = value;
+                }
+            }
+
+        }
+
+    </DemoChildContent>
+    <OptionsContent>
+        <OptionComboBox Label="Palette:" Data="Enum.GetValues<Palettes>()" @bind-Value="@CurrentPalette"/>
+        <OptionComboBox Label="Palette Extension Mode:" Data="Enum.GetValues<ChartPaletteExtensionMode>()" @bind-Value="@CurrentPaletteMode"/>
+    </OptionsContent>
+</DemoPageSectionComponent>

@@ -4,24 +4,32 @@
         @*BeginHide*@
         <div class="cw-480">
             @*EndHide*@
+            <label for="tbItemTemplate" class="demo-text cw-480 mb-1">
+                Employees
+            </label>
             <DxTagBox Data="@Data"
                       @bind-Values="@Values"
                       SizeMode="Params.SizeMode"
-                      CssClass="cw-480">
+                      CssClass="cw-480"
+                      InputId="tbItemTemplate">
                 <TagTemplate Context="tagInfo">
                     <div class="tag-template">
-                        <img class="tag-template-employee-photo" src="@StaticAssetUtils.GetImagePath(GetImageFileName(tagInfo.DataItem))" />
-                        <div>@tagInfo.DataItem.FirstName @tagInfo.DataItem.LastName</div>
-                        <DxButton Click="@tagInfo.RemoveTagAction" @onclick:stopPropagation CssClass="tag-template-close-btn" IconCssClass="tag-template-close-btn-icon"
+                        <img class="tag-template-employee-photo" src="@StaticAssetUtils.GetImagePath(GetImageFileName(tagInfo.DataItem))" alt="@tagInfo.DataItem.FullName" />
+                        <div>@tagInfo.DataItem.FullName</div>
+                        <DxButton Click="@tagInfo.RemoveTagAction"
+                                  @onclick:stopPropagation
+                                  aria-label="Remove Tag"
+                                  CssClass="tag-template-close-btn"
+                                  IconCssClass="tag-template-close-btn-icon"
                             RenderStyle="ButtonRenderStyle.None" RenderStyleMode="ButtonRenderStyleMode.Text">
                         </DxButton>
                     </div>
                 </TagTemplate>
                 <ItemTemplate>
                     <div class="item-template">
-                        <img class="item-template-employee-photo" src="@StaticAssetUtils.GetImagePath(GetImageFileName(context))" />
+                        <img class="item-template-employee-photo" src="@StaticAssetUtils.GetImagePath(GetImageFileName(context))" alt="@context.FullName" />
                         <div>
-                            <span class="item-template-employee-first-name">@context.FirstName @context.LastName</span>
+                            <span class="item-template-employee-first-name">@context.FullName</span>
                             <span class="item-template-employee-home-phone">@context.HomePhone</span>
                         </div>
                     </div>

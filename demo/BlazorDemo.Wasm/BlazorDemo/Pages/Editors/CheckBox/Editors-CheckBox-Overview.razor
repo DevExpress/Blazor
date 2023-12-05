@@ -1,29 +1,33 @@
 ﻿<DemoPageSectionComponent Id="Editors-CheckBox-Overview" ShowSizeMode="@true">
     <ChildContentWithParameters Context="Params">
         <div class="cw-320">
-            <label class="dx-demo-price-list-title">Choose your new car options:</label>
-            <DxCheckBox @bind-Checked="@SelectAllState" CssClass="dx-demo-select-all-checkbox" SizeMode="Params.SizeMode">
-                Select All
-            </DxCheckBox>
-            <div class="dx-demo-price-list-content">
-                <div class="dx-demo-row">
-                    <DxCheckBox @bind-Checked="@Multimedia" SizeMode="Params.SizeMode">Multimedia</DxCheckBox>
-                    <div class="@GetCssClass(Multimedia)">$130</div>
+            <fieldset>
+                <legend class="@GetLabelCssClass(Params.SizeMode)">Choose your new car options:</legend>
+                <DxCheckBox @bind-Checked="@SelectAllState"
+                            CssClass="dx-demo-select-all-checkbox"
+                            SizeMode="Params.SizeMode">
+                    Select All
+                </DxCheckBox>
+                <div class="dx-demo-price-list-content">
+                    <div class="dx-demo-row">
+                        <DxCheckBox @bind-Checked="@Multimedia" SizeMode="Params.SizeMode">Multimedia</DxCheckBox>
+                        <div class="@GetCssClass(Multimedia)">$130</div>
+                    </div>
+                    <div class="dx-demo-row">
+                        <DxCheckBox @bind-Checked="@AirConditioning" SizeMode="Params.SizeMode">Air conditioning</DxCheckBox>
+                        <div class="@GetCssClass(AirConditioning)">$800</div>
+                    </div>
+                    <div class="dx-demo-row">
+                        <DxCheckBox @bind-Checked="@ParkingSensors" SizeMode="Params.SizeMode">Parking camera</DxCheckBox>
+                        <div class="@GetCssClass(ParkingSensors)">$400</div>
+                    </div>
+                    <div class="dx-demo-row">
+                        <DxCheckBox @bind-Checked="@HeatedSeats" SizeMode="Params.SizeMode">Heated seats</DxCheckBox>
+                        <div class="@GetCssClass(HeatedSeats)">$230</div>
+                    </div>
                 </div>
-                <div class="dx-demo-row">
-                    <DxCheckBox @bind-Checked="@AirConditioning" SizeMode="Params.SizeMode">Air conditioning</DxCheckBox>
-                    <div class="@GetCssClass(AirConditioning)">$800</div>
-                </div>
-                <div class="dx-demo-row">
-                    <DxCheckBox @bind-Checked="@ParkingSensors" SizeMode="Params.SizeMode">Parking camera</DxCheckBox>
-                    <div class="@GetCssClass(ParkingSensors)">$400</div>
-                </div>
-                <div class="dx-demo-row">
-                    <DxCheckBox @bind-Checked="@HeatedSeats" SizeMode="Params.SizeMode">Heated seats</DxCheckBox>
-                    <div class="@GetCssClass(HeatedSeats)">$230</div>
-                </div>
-            </div>
-            <div class="dx-demo-total dx-demo-row">
+            </fieldset>
+            <div class="@GetLabelCssClass(Params.SizeMode) dx-demo-total dx-demo-row">
                 <strong>Total price:</strong>
                 <strong class="@GetCssClass(true)">$@GetTotalPrice()</strong>
             </div>
@@ -84,6 +88,12 @@
         }
 
         string GetCssClass(bool selected) => selected ? string.Empty : " dx-demo-text-strikethrough";
+        string GetLabelCssClass(SizeMode sizeMode) {
+            var result = "dx-demo-label";
+            if(sizeMode != SizeMode.Medium)
+                result += sizeMode == SizeMode.Large ? " dx-demo-large" : " dx-demo-small";
+            return result;
+        }
 
         [Flags]
         enum CarOptions {

@@ -1,0 +1,147 @@
+﻿@page "/Grid/ToolbarTemplate"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Toolbar" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <div class="grid-container">
+            <DxGrid @ref="Grid"
+                    Data="Data"
+                    FocusedRowEnabled="true"
+                    EditModelSaving="Grid_EditModelSaving"
+                    CustomizeEditModel="Grid_CustomizeEditModel"
+                    DataItemDeleting="Grid_DataItemDeleting"
+                    FocusedRowChanged="Grid_FocusedRowChanged"
+                    SizeMode="Params.SizeMode"
+                    KeyboardNavigationEnabled="true">
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
+                        <DxToolbarItem Text="New" Click="NewItem_Click" IconCssClass="grid-toolbar-new" />
+                        <DxToolbarItem Text="Edit" Click="EditItem_Click" IconCssClass="grid-toolbar-edit" Enabled="EditItemsEnabled" />
+                        <DxToolbarItem Text="Delete" Click="DeleteItem_Click" IconCssClass="grid-toolbar-delete" Enabled="EditItemsEnabled" />
+                        <DxToolbarItem Text="Column Chooser" BeginGroup="true" Click="ColumnChooserItem_Click" IconCssClass="grid-toolbar-column-chooser" />
+                        <DxToolbarItem Text="Export" IconCssClass="grid-toolbar-export">
+                            <Items>
+                                <DxToolbarItem Text="To CSV" Click="ExportCsvItem_Click" />
+                                <DxToolbarItem Text="To XLSX" Click="ExportXlsxItem_Click" />
+                                <DxToolbarItem Text="To XLS" Click="ExportXlsItem_Click" />
+                            </Items>
+                        </DxToolbarItem>
+                    </DxToolbar>
+                </ToolbarTemplate>
+                <Columns>
+                    <DxGridDataColumn FieldName="FirstName" MinWidth="50" />
+                    <DxGridDataColumn FieldName="LastName" MinWidth="50" />
+                    <DxGridDataColumn FieldName="Title" MinWidth="200" />
+                    <DxGridDataColumn FieldName="TitleOfCourtesy" MinWidth="150" />
+                    <DxGridDataColumn FieldName="BirthDate" Width="10%" MinWidth="50" />
+                    <DxGridDataColumn FieldName="HireDate" Width="10%" MinWidth="50" />
+                    <DxGridDataColumn FieldName="Address" MinWidth="300" />
+                    <DxGridDataColumn FieldName="HomePhone" MinWidth="80" Visible="false" />
+                </Columns>
+                <EditFormTemplate Context="EditFormContext">
+                    @*BeginCollapse*@
+                    <DxFormLayout CssClass="w-100">
+                        <DxFormLayoutItem Caption="First Name:" ColSpanMd="6">
+                            @EditFormContext.GetEditor("FirstName")
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Last Name:" ColSpanMd="6">
+                            @EditFormContext.GetEditor("LastName")
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Title:" ColSpanMd="6">
+                            @EditFormContext.GetEditor("Title")
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Title of Courtesy:" ColSpanMd="6">
+                            @EditFormContext.GetEditor("TitleOfCourtesy")
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Birth Date:" ColSpanMd="6">
+                            @EditFormContext.GetEditor("BirthDate")
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Hire Date:" ColSpanMd="6">
+                            @EditFormContext.GetEditor("HireDate")
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Address:" ColSpanMd="6">
+                            @EditFormContext.GetEditor("Address")
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Home Phone:" ColSpanMd="6">
+                            @EditFormContext.GetEditor("HomePhone")
+                        </DxFormLayoutItem>
+                    </DxFormLayout>
+                    @*EndCollapse*@
+                </EditFormTemplate>
+            </DxGrid>
+        </div>
+
+        @code {
+            const string ExportFileName = "ExportResult";
+
+            bool EditItemsEnabled { get; set; }
+
+            int FocusedRowVisibleIndex { get; set; }
+
+            EditableEmployee[] Data { get; set; }
+
+            IGrid Grid { get; set; }
+
+            protected override async Task OnInitializedAsync() {
+                await LoadGridDataAsync();
+            }
+            async Task LoadGridDataAsync() {
+                Data = (await NwindDataService.GetEmployeesEditableAsync()).ToArray();
+            }
+            void Grid_FocusedRowChanged(GridFocusedRowChangedEventArgs args) {
+                FocusedRowVisibleIndex = args.VisibleIndex;
+                UpdateEditItemsEnabled(true);
+            }
+            void UpdateEditItemsEnabled(bool enabled) {
+                EditItemsEnabled = enabled;
+            }
+            @*BeginCollapse*@
+            void Grid_CustomizeEditModel(GridCustomizeEditModelEventArgs e) {
+                if(e.IsNew) {
+                    var newEmployee = (EditableEmployee)e.EditModel;
+                    newEmployee.FirstName = "John";
+                    newEmployee.LastName = "Doe";
+                }
+            }
+            @*EndCollapse*@
+            async Task Grid_DataItemDeleting(GridDataItemDeletingEventArgs e) {
+                await NwindDataService.RemoveEmployeeAsync((EditableEmployee)e.DataItem);
+                await LoadGridDataAsync();
+
+                if(Data.Length == 0)
+                    UpdateEditItemsEnabled(false);
+            }
+            async Task Grid_EditModelSaving(GridEditModelSavingEventArgs e) {
+                if(e.IsNew) {
+                    await NwindDataService.InsertEmployeeAsync((EditableEmployee)e.EditModel);
+                    UpdateEditItemsEnabled(true);
+                } else
+                    await NwindDataService.UpdateEmployeeAsync((EditableEmployee)e.DataItem, (EditableEmployee)e.EditModel);
+                await LoadGridDataAsync();
+            }
+            async Task NewItem_Click() {
+                await Grid.StartEditNewRowAsync();
+            }
+            async Task EditItem_Click() {
+                await Grid.StartEditRowAsync(FocusedRowVisibleIndex);
+            }
+            void DeleteItem_Click() {
+                Grid.ShowRowDeleteConfirmation(FocusedRowVisibleIndex);
+            }
+            void ColumnChooserItem_Click(ToolbarItemClickEventArgs e) {
+                Grid.ShowColumnChooser();
+            }
+            async Task ExportXlsxItem_Click() {
+                await Grid.ExportToXlsxAsync(ExportFileName);
+            }
+            async Task ExportXlsItem_Click() {
+                await Grid.ExportToXlsAsync(ExportFileName);
+            }
+            async Task ExportCsvItem_Click() {
+                await Grid.ExportToCsvAsync(ExportFileName);
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

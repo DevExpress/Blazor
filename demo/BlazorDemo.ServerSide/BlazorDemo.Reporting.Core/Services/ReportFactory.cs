@@ -22,6 +22,7 @@ namespace BlazorDemo.Services {
     public class DemoReportSource : IDemoReportSource {
         readonly protected List<ReportInfo> commonReports = new() {
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.DrillDown, Name = XtraReportsDemos.ReportNames.DrillDownName, CreateAction = () => new XtraReportsDemos.DrillDownReport.DrillDownReport() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.DrillThrough, Name = XtraReportsDemos.ReportNames.DrillThroughName, CreateAction = () => new XtraReportsDemos.DrillThroughReport.Report() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.EmployeePerformanceReview, Name = XtraReportsDemos.ReportNames.EmployeePerformanceReviewName, CreateAction = () => new XtraReportsDemos.EmployeePerformanceReview.Report() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.VehicleInspectionReport, Name = XtraReportsDemos.ReportNames.VehicleInspectionReportName, CreateAction = () => new XtraReportsDemos.VehicleInspectionReport.Report() },
 

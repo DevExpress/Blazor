@@ -12,3 +12,6 @@
     width: 42px;
     height: 42px;
 }
+.theme-default-dark  .custom-drop-zone ::deep {
+    background-color: #282B2F !important
+}

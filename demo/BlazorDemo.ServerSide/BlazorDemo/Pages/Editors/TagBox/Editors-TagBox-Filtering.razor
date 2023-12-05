@@ -3,13 +3,16 @@
         @inject WorldcitiesDataService WorldcitiesDataService
 
         @if(Data != null) {
-            <DxTagBox Id="TagBox1"
-                      Data="@Data"
+            <label for="tbFiltering" class="demo-text cw-480 mb-1">
+                Countries
+            </label>
+            <DxTagBox Data="@Data"
                       FilteringMode="@FilteringMode"
                       @bind-Values="@Values"
                       TextFieldName="@nameof(Country.CountryName)"
                       SizeMode="Params.SizeMode"
-                      CssClass="cw-480" />
+                      CssClass="cw-480"
+                      InputId="tbFiltering" />
         }
     </ChildContentWithParameters>
 

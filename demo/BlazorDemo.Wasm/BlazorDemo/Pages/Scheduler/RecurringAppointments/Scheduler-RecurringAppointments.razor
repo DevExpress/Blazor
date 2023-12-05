@@ -1,9 +1,9 @@
 ﻿@page "/SchedulerRecurringAppointments"
 
 <DemoPageSectionComponent Id="Scheduler-RecurringAppointments">
-    <DxScheduler StartDate="@DateTime.Today"
+    <DxScheduler @bind-StartDate="@StartDate"
                  DataStorage="@DataStorage"
-                 ActiveViewType="SchedulerViewType.WorkWeek"
+                 @bind-ActiveViewType="@ActiveViewType"
                  AppointmentFormMode="SchedulerAppointmentFormMode.EditForm"
                  CssClass="w-100">
         <DxSchedulerDayView VisibleTime="@VisibleTime"></DxSchedulerDayView>
@@ -19,6 +19,8 @@
     </DxScheduler>
 
     @code {
+        DateTime StartDate { get; set; } = DateTime.Today;
+        SchedulerViewType ActiveViewType { get; set; } = SchedulerViewType.WorkWeek;
         DxSchedulerTimeSpanRange VisibleTime = new DxSchedulerTimeSpanRange(TimeSpan.FromHours(8), TimeSpan.FromHours(19));
 
         DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {

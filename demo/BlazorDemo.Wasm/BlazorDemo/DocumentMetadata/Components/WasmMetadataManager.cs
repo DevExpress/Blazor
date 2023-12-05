@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace DevExpress.Blazor.DocumentMetadata {
 
-    sealed class WebAssemblyMetadataManager : MetadataManagerComponent {
+    public sealed class WebAssemblyMetadataManager : MetadataManagerComponent {
         protected override void BuildRenderTree(RenderTreeBuilder builder) {
             builder.OpenElement(0, "script");
             builder.AddAttribute(1, "type", "text/javascript");

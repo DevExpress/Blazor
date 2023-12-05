@@ -1,10 +1,14 @@
 ﻿<DemoPageSectionComponent Id="Editors-MaskedInput-DisplayFormat" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="teDisplayFormat" class="demo-text cw-320 mb-1">
+            Date
+        </label>
         <DxMaskedInput @bind-Value="@DecimalValue"
                        Mask="@DateTimeMask.ShortDate"
                        DisplayFormat="@DateTimeMask.LongDate"
                        SizeMode="Params.SizeMode"
-                       CssClass="cw-320" />
+                       CssClass="cw-320"
+                       InputId="teDisplayFormat" />
     </ChildContentWithParameters>
 
     @code {

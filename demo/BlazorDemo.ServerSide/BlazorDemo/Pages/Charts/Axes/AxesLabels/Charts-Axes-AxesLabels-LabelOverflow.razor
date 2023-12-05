@@ -1,0 +1,54 @@
+﻿<DemoPageSectionComponent Id="Charts-Axes-AxesLabels-LabelOverflow">
+    <DemoChildContent>
+        <DxChart Data="@GetData()" Width="100%" Height="500" Rotated="true">
+            <DxChartTitle Text="Pizza Shop Complaints" CssClass="mb-2"/>
+            <DxChartLegend Visible="false"/>
+            <DxChartBarSeries ArgumentField="@((DataPoint s) => s.Complaint)"
+                              ValueField="@((DataPoint s) => s.Count)"/>
+            <DxChartTooltip Enabled="true">
+                <div class="chart-tooltip">
+                    <div class="fw-bold">@context.Point.Argument</div>
+                    <div>Complaint frequency: @context.Point.Value</div>
+                </div>
+            </DxChartTooltip>
+            <DxChartArgumentAxis PlaceholderSize="@CurrentPlaceholderSize">
+                <DxChartAxisLabel WordWrap="@CurrentWordWrap" TextOverflow="@CurrentTextOverflow"/>
+            </DxChartArgumentAxis>
+        </DxChart>
+
+        @code {
+            ChartTextOverflow CurrentTextOverflow = ChartTextOverflow.Ellipsis;
+            ChartWordWrap CurrentWordWrap = ChartWordWrap.Normal;
+            double CurrentPlaceholderSize = 55;
+
+            List<DataPoint> GetData() {
+                var result = new List<DataPoint>(7);
+                result.Add(new DataPoint("Delayed delivery", 1123));
+                result.Add(new DataPoint("Cold pizza", 780));
+                result.Add(new DataPoint("Damaged pizza", 321));
+                result.Add(new DataPoint("Wrong size delivered", 222));
+                result.Add(new DataPoint("Not enough cheese", 120));
+                result.Add(new DataPoint("Incorrect billing", 89));
+                result.Add(new DataPoint("Underbaked or Overbaked", 52));
+                return result;
+            }
+
+            public class DataPoint {
+                public string Complaint { get; set; }
+                public int Count { get; set; }
+
+                public DataPoint(string complaint, int count) {
+                    Complaint = complaint;
+                    Count = count;
+                }
+            }
+
+        }
+
+    </DemoChildContent>
+    <OptionsContent>
+        <OptionComboBox Label="Text Overflow:" Data="Enum.GetValues<ChartTextOverflow>()" @bind-Value="@CurrentTextOverflow"/>
+        <OptionComboBox Label="Word Wrap:" Data="Enum.GetValues<ChartWordWrap>()" @bind-Value="@CurrentWordWrap"/>
+        <OptionSpinEdit Label="Placeholder Size:" DisplayFormat="0 px" MinValue="0" MaxValue="200" @bind-Value="@CurrentPlaceholderSize"/>
+    </OptionsContent>
+</DemoPageSectionComponent>

@@ -3,19 +3,22 @@
         <li>
             <div class="color-picker-item">@HeaderText</div>
         </li>
-        <li role="separator" class="separator dropdown-divider"></li>
+        <li role="separator" class="color-picker-separator"></li>
         <li>
             <div class="color-picker-item color-picker-container">
                 @foreach(var color in colors) {
-                    <div class="color-picker-cell @CssClassSelectedCell(color)" style="background-color:@color" @onclick="() => ChangeColor(color)"></div>
+                    <div class="color-picker-cell @CssClassSelectedCell(color)" style="background-color:@color" tabindex="0"
+                        @onkeypress="(e) => HandleActionKeys(e.Code, () => ChangeColor(color))"
+                        @onclick="() => ChangeColor(color)"></div>
                 }
             </div>
         </li>
-        <li role="separator" class="separator dropdown-divider"></li>
+        <li role="separator" class="color-picker-separator"></li>
         <li>
-            <div class="color-picker-item color-picker-item-reset" @onclick="ResetColor">
-                <div class="color-picker-cell"></div>
-                <span>No color</span>
+            <div class="color-picker-item color-picker-item-reset" @onclick="ResetColor"
+                @onkeypress="(e) => HandleActionKeys(e.Code, ResetColor)">
+                <div class="color-picker-cell" tabindex="0"></div>
+                <div tabindex="0">No color</div>
             </div>
         </li>
     </ul>
@@ -48,6 +51,11 @@
     void ResetColor() {
         SelectedColor = "unset";
         ColorChanged.InvokeAsync("unset");
+    }
+
+    void HandleActionKeys(string key, Action handler) {
+        if (key == "Enter" || key == "Space")
+            handler();
     }
 
     string CssClassSelectedCell(string color) =>

@@ -1,13 +1,15 @@
 ﻿@page "/Scheduler/ViewTypes/WorkWeekView"
 
 <DemoPageSectionComponent Id="Scheduler-ViewTypes-WorkWeekView">
-    <DxScheduler StartDate="@DateTime.Today"
+    <DxScheduler @bind-StartDate="@StartDate"
                  DataStorage="@DataStorage"
                  CssClass="w-100">
         <DxSchedulerWorkWeekView ShowWorkTimeOnly="true"></DxSchedulerWorkWeekView>
     </DxScheduler>
 
     @code {
+        DateTime StartDate { get; set; } = DateTime.Today;
+
         DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
             AppointmentsSource = AppointmentCollection.GetAppointments(),
             AppointmentMappings = new DxSchedulerAppointmentMappings() {

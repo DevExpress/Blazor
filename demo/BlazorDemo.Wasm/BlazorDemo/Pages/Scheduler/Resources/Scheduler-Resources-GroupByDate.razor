@@ -2,7 +2,7 @@
 
 <DemoPageSectionComponent Id="Scheduler-Resources-GroupByDate">
     <DemoChildContent>
-        <DxScheduler StartDate="@DateTime.Today"
+        <DxScheduler @bind-StartDate="@StartDate"
                      DataStorage="@DataStorage"
                      GroupType="SchedulerGroupType.Date"
                      ResourceColorInHeaderVisible="@ResourceColorInHeaderVisible"
@@ -17,6 +17,9 @@
     </OptionsContent>
 
     @code {
+        DateTime StartDate { get; set; } = DateTime.Today;
+        bool ResourceColorInHeaderVisible { get; set; } = true;
+
         DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
             AppointmentsSource = ResourceAppointmentCollection.GetAppointments(),
             AppointmentMappings = new DxSchedulerAppointmentMappings() {
@@ -40,7 +43,5 @@
                 TextCssClass = "TextCss"
             }
         };
-
-        bool ResourceColorInHeaderVisible { get; set; } = true;
     }
 </DemoPageSectionComponent>

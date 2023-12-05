@@ -1,0 +1,70 @@
+﻿<DemoPageSectionComponent Id="Charts-Axes-AxesLabels-LabelOverlap">
+    <DemoChildContent>
+        @*BeginHide*@
+        <div style="max-width: 900px; width: 100% ">
+            @*EndHide*@
+            <DxChart Data="@GetData()" Width="100%">
+                <DxChartTitle Text="Population by Country 2023" CssClass="mb-1"/>
+                <DxChartLegend Visible="false"/>
+                <DxChartLineSeries ArgumentField="@((DataPoint s) => s.Country)"
+                                   ValueField="@((DataPoint s) => s.Value)"/>
+                <DxChartTooltip Enabled="true">
+                    <div class="chart-tooltip">
+                        <div class="fw-bold">@context.Point.Argument</div>
+                        <div>
+                            Population:
+                            @if((int)context.Point.Value > 1000000000) {
+                                @string.Format("{0:0,,,.###B}", context.Point.Value)
+                            } else {
+                                @string.Format("{0:0,,M}", context.Point.Value)
+                            }
+                        </div>
+                    </div>
+                </DxChartTooltip>
+                <DxChartArgumentAxis>
+                    <DxChartAxisLabel WordWrap="ChartWordWrap.None" Overlap="@CurrentOverlapMode"/>
+                </DxChartArgumentAxis>
+            </DxChart>
+            @*BeginHide*@
+        </div>
+        @*EndHide*@
+
+        @code {
+            ChartAxisLabelOverlap CurrentOverlapMode = ChartAxisLabelOverlap.Stagger;
+
+            List<DataPoint> GetData() {
+                var result = new List<DataPoint>(14);
+                result.Add(new DataPoint("India", 1428627663));
+                result.Add(new DataPoint("China", 1425671352));
+                result.Add(new DataPoint("United States", 339996563));
+                result.Add(new DataPoint("Indonesia", 277534122));
+                result.Add(new DataPoint("Pakistan", 240485658));
+                result.Add(new DataPoint("Nigeria", 223804632));
+                result.Add(new DataPoint("Brazil", 216422446));
+                result.Add(new DataPoint("Bangladesh", 172954319));
+                result.Add(new DataPoint("Russia", 144444359));
+                result.Add(new DataPoint("Mexico", 128455567));
+                result.Add(new DataPoint("Ethiopia", 126527060));
+                result.Add(new DataPoint("Japan", 123294513));
+                result.Add(new DataPoint("Philippines", 117337368));
+                result.Add(new DataPoint("Egypt", 112716598));
+                return result;
+            }
+
+            public class DataPoint {
+                public string Country { get; set; }
+                public int Value { get; set; }
+
+                public DataPoint(string country, int value) {
+                    Country = country;
+                    Value = value;
+                }
+            }
+
+        }
+
+    </DemoChildContent>
+    <OptionsContent>
+        <OptionComboBox Label="Overlap Mode:" Data="Enum.GetValues<ChartAxisLabelOverlap>()" @bind-Value="@CurrentOverlapMode"/>
+    </OptionsContent>
+</DemoPageSectionComponent>

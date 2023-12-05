@@ -1,10 +1,14 @@
 ﻿<DemoPageSectionComponent Id="Editors-DateEdit-Overview" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="deOverview" class="demo-text cw-320 mb-1">
+            Date
+        </label>
         <DxDateEdit @bind-Date="@DateTimeValue"
                     SizeMode="Params.SizeMode"
-                    CssClass="cw-320" />
-        <p class="demo-text cw-320 mt-2">
-            Date: <b>@DateTimeValue.ToString("dddd, dd MMMM yyyy")</b>
+                    CssClass="cw-320"
+                    InputId="deOverview" />
+        <p class="demo-text cw-320 mt-3">
+            Selected Date: <b>@DateTimeValue.ToString("dddd, dd MMMM yyyy")</b>
         </p>
     </ChildContentWithParameters>
 

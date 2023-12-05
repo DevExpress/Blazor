@@ -2,13 +2,17 @@
     <ChildContentWithParameters Context="Params">
         @inject WorldcitiesDataService WorldcitiesDataService
 
+        <label for="cbNullText" class="demo-text cw-480 mb-1">
+            Country Name
+        </label>
         <DxComboBox NullText="Select a country..."
                     Data="@Data"
                     @bind-Value="@CurrentCountry"
                     TextFieldName="@nameof(Country.CountryName)"
                     ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
                     SizeMode="Params.SizeMode"
-                    CssClass="cw-480" />
+                    CssClass="cw-480"
+                    InputId="cbNullText"/>
     </ChildContentWithParameters>
 
     @code {

@@ -10,10 +10,10 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0" />
-    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.9.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.10" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
@@ -23,10 +23,11 @@
     <ProjectReference Include="..\BlazorDemo.Wasm.Client\BlazorDemo.Wasm.Client.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="23.1.6" />
-    <PackageReference Include="DevExpress.AspNetCore.Reporting" Version="23.1.6" />
-    <PackageReference Include="DevExpress.Reporting.Demos" Version="23.1.6" />
-    <PackageReference Include="DevExpress.Drawing.Skia" Version="23.1.6" />
+    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="23.2.3" />
+    <PackageReference Include="DevExpress.AspNetCore.Reporting" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Reporting.Demos" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Drawing.Skia" Version="23.2.3" />
+    
     
     
     

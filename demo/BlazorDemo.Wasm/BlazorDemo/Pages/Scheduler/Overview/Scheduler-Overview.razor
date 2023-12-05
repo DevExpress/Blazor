@@ -1,7 +1,7 @@
 ﻿@page "/Scheduler"
 
 <DemoPageSectionComponent Id="Scheduler-Overview">
-    <DxScheduler StartDate="@DateTime.Today"
+    <DxScheduler @bind-StartDate="@StartDate"
                  DataStorage="@DataStorage"
                  GroupType="SchedulerGroupType.Resource"
                  VisibleResourcesDataSource="VisibleResources"
@@ -19,6 +19,8 @@
     </DxScheduler>
 
     @code {
+        DateTime StartDate { get; set; } = DateTime.Today;
+
         DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
             AppointmentsSource = ResourceAppointmentCollection.GetAppointments(),
             AppointmentMappings = new DxSchedulerAppointmentMappings() {

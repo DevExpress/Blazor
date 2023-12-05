@@ -2,6 +2,9 @@
 
 <DemoPageSectionComponent Id="Editors-ComboBox-EditBoxTemplate" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="cbTemplate" class="demo-text cw-480 mb-1">
+            Theme
+        </label>
         <DxComboBox Data="@Themes"
                     @bind-Value="@CurrentTheme"
                     TextFieldName="@nameof(DemoTheme.Title)"
@@ -9,7 +12,8 @@
                     FilteringMode="DataGridFilteringMode.StartsWith"
                     ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
                     CssClass="cw-480"
-                    SizeMode="Params.SizeMode">
+                    SizeMode="Params.SizeMode"
+                    InputId="cbTemplate">
             <EditBoxTemplate>
                 @GetEditBoxTemplateContent(context)
             </EditBoxTemplate>

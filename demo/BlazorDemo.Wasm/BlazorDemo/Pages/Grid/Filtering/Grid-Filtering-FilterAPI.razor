@@ -1,7 +1,7 @@
 ﻿@page "/Grid/Filtering/FilterAPI"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Filtering-FilterAPI" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
+<DemoPageSectionComponent Id="Grid-Filtering-FilterAPI" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @using DevExpress.Data.Filtering
         @inject NwindDataService NwindDataService
@@ -11,11 +11,12 @@
                       Values="SelectedCategories"
                       ValuesChanged="(IEnumerable<Category> values) => TagBox_ValuesChanged(values)"
                       TextFieldName="CategoryName"
-                      SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled"
+                      SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true"
                       NullText="Select category..."
-                      ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"/>
+                      ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                      aria-label="Select category" />
         </div>
-        <DxGrid @ref="Grid" Data="Products" SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
+        <DxGrid @ref="Grid" Data="Products" SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
             <Columns>
                 <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
                 <DxGridDataColumn FieldName="CategoryId" Caption="Category" MinWidth="100">

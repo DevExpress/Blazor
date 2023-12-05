@@ -14,7 +14,10 @@
             SelectionChanged="@SelectionChanged">
     <Nodes>
         @foreach(var demoPage in Pages) {
-            if(!demoPage.IsMaintenanceMode || !siteMode) {
+            bool demoInMaintenenceShouldBeShown = demoPage.IsMaintenanceMode && !siteMode;
+            bool externalDemoShouldBeShown = demoPage.IsExternal && siteMode;
+            bool regularDemoShouldBeShown = !demoPage.IsExternal && !demoPage.IsMaintenanceMode;
+            if (regularDemoShouldBeShown || externalDemoShouldBeShown || demoInMaintenenceShouldBeShown) {
                 <NavMenuLeaf Page="@demoPage"></NavMenuLeaf>
             }
         }

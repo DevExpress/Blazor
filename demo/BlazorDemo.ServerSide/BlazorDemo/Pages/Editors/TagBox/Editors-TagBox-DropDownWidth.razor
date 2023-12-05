@@ -2,21 +2,31 @@
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        <div class="d-flex flex-row align-items-start cw-480">
-            <DxTagBox Data="@Data"
-                      TextFieldName="@nameof(Employee.FirstName)"
-                      @bind-Values="@Values"
-                      DropDownWidthMode="DropDownWidthMode"
-                      NullText="Short text"
-                      SizeMode="Params.SizeMode"
-                      CssClass="cw-240 minw-0" />
-            <DxTagBox Data="@Data"
-                      TextFieldName="@nameof(Employee.Text)"
-                      @bind-Values="@Values1"
-                      NullText="Long text"
-                      DropDownWidthMode="DropDownWidthMode"
-                      SizeMode="Params.SizeMode"
-                      CssClass="cw-240 minw-0 ms-2" />
+        <div class="row cw-480">
+            <div class="col-md-6">
+                <label for="tbFirstName" class="demo-text mb-1">
+                    Names
+                </label>
+                <DxTagBox Data="@Data"
+                          TextFieldName="@nameof(Employee.FirstName)"
+                          @bind-Values="@Values"
+                          DropDownWidthMode="DropDownWidthMode"
+                          NullText="Short text"
+                          SizeMode="Params.SizeMode"
+                          InputId="tbFirstName" />
+            </div>
+            <div class="col-md-6">
+                <label for="tbEmployee" class="demo-text mb-1">
+                    Employees
+                </label>
+                <DxTagBox Data="@Data"
+                          TextFieldName="@nameof(Employee.Text)"
+                          @bind-Values="@Values1"
+                          NullText="Long text"
+                          DropDownWidthMode="DropDownWidthMode"
+                          SizeMode="Params.SizeMode"
+                          InputId="tbEmployee" />
+            </div>
         </div>
     </ChildContentWithParameters>
 

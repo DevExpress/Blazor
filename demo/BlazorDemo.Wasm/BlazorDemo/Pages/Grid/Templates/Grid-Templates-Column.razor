@@ -1,11 +1,11 @@
 ﻿@page "/Grid/Templates/Column"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Templates-Column" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
+<DemoPageSectionComponent Id="Grid-Templates-Column" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        <DxGrid Data="@Data" SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
+        <DxGrid Data="@Data" SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
             <Columns>
                 <DxGridDataColumn FieldName="FirstName" MinWidth="80" />
                 <DxGridDataColumn FieldName="LastName" MinWidth="80" />

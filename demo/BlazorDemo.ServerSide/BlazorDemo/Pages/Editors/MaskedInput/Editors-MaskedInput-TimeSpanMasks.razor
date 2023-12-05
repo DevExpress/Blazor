@@ -1,15 +1,19 @@
 ﻿<DemoPageSectionComponent Id="Editors-MaskedInput-TimeSpanMasks" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="teTimeSpanMasks" class="demo-text cw-320 mb-1">
+            Time
+        </label>
         <DxMaskedInput @bind-Value="@Time"
                        SizeMode="Params.SizeMode"
                        CssClass="cw-320"
-                       Mask=@TimeSpanMasks[TimeSpanMaskName]>
+                       Mask=@TimeSpanMasks[TimeSpanMaskName]
+                       InputId="teTimeSpanMasks">
             <DxTimeSpanMaskProperties CaretMode="@((MaskCaretMode)CaretMode)"
                                       AllowNegativeValue=true
                                       UpdateNextSectionOnCycleChange=@UpdateNextSectionOnCycleChange />
         </DxMaskedInput>
-        <p class="demo-text cw-320 mt-2">
-            Value: <b>@Time</b>
+        <p class="demo-text cw-320 mt-3">
+            The entered time is: <b>@Time</b>
         </p>
     </ChildContentWithParameters>
 

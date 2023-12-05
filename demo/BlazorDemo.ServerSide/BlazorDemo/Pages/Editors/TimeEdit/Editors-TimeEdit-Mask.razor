@@ -1,14 +1,18 @@
 ﻿<DemoPageSectionComponent Id="Editors-TimeEdit-Mask" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="teMask" class="demo-text cw-320 mb-1">
+            Time
+        </label>
         <DxTimeEdit @bind-Time="@Time"
                     Mask="@DateTimeMaskValue"
                     SizeMode="Params.SizeMode"
-                    CssClass="cw-320">
+                    CssClass="cw-320"
+                    InputId="teMask">
             <DxDateTimeMaskProperties Culture="MaskCultureInfo.Value"
                                       CaretMode="@((MaskCaretMode)CaretMode)" />
         </DxTimeEdit>
-        <p class="demo-text cw-320 mt-2">
-            Time: <b>@Time.ToString(@"hh\:mm\:ss")</b>
+        <p class="demo-text cw-320 mt-3">
+            The selected time is: <b>@Time.ToString(@"hh\:mm\:ss")</b>
         </p>
     </ChildContentWithParameters>
 

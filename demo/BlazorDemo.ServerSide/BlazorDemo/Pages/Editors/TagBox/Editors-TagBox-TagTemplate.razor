@@ -2,6 +2,9 @@
     <ChildContentWithParameters Context="Params">
         @inject WorldcitiesDataService WorldcitiesDataService
 
+        <label for="tbTagTemplate" class="demo-text cw-480 mb-1">
+            Cities
+        </label>
         <DxTagBox Data="@Data"
                   TextFieldName="@nameof(City.CityName)"
                   TData="City"
@@ -10,7 +13,8 @@
                   @bind-Tags="@Tags"
                   ListRenderMode="ListRenderMode.Virtual"
                   SizeMode="Params.SizeMode"
-                  CssClass="cw-480">
+                  CssClass="cw-480"
+                  InputId="tbTagTemplate">
             <TagTemplate Context="tagInfo">
                 @{
                     var styleMode = tagInfo.IsCustom ?

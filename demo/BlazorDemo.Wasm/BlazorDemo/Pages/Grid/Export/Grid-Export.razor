@@ -1,7 +1,7 @@
 ﻿@page "/Grid/Export/DataAwareExport"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Export" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
+<DemoPageSectionComponent Id="Grid-Export" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @using DevExpress.Export
 
@@ -15,7 +15,7 @@
                 GroupFooterDisplayMode="GridGroupFooterDisplayMode.IfExpanded"
                 SelectionMode="GridSelectionMode.Multiple"
                 SelectAllCheckboxMode="GridSelectAllCheckboxMode.AllPages"
-                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
             <Columns>
                 <DxGridSelectionColumn Width="60px" AllowSelectAll="true" />
                 <DxGridDataColumn FieldName="ContactName" Width="15%" />

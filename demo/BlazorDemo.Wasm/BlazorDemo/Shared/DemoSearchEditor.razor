@@ -4,7 +4,9 @@
     <div class="breadcrumb">
         <DxTextBox NullText="Search" Text="@SearchString" BindValueMode="BindValueMode.OnDelayedInput" TextChanged="@TextChanged" InputId="txtSearch" />
         <span class="icon icon-cancel-search @ClearButtonCssClass" @onclick="@ClearClick"></span>
-        <label for="txtSearch" class="icon icon-search"></label>
+        <label for="txtSearch" class="icon icon-search">
+            Search
+        </label>
     </div>
 </div>
 

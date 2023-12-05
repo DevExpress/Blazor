@@ -8,7 +8,7 @@ using BlazorDemo.DataProviders;
 using BlazorDemo.Wasm.DataProviders.TransportInfrastructure;
 
 namespace BlazorDemo.Wasm.DataProviders.Implementation {
-    class IssuesDataProvider : RemoteDataProviderBase, IIssuesDataProvider {
+    public class IssuesDataProvider : RemoteDataProviderBase, IIssuesDataProvider {
         public Task<IEnumerable<Issue>> GetIssuesAsync(CancellationToken ct = default) {
             return Loader.LoadRemoteEntities(this, GetIssuesAsync);
         }

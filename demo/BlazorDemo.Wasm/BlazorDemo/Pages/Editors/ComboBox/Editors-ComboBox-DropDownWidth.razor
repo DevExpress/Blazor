@@ -2,19 +2,29 @@
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        <div class="d-flex flex-row cw-480">
-            <DxComboBox Data="@Data"
-                        TextFieldName="@nameof(Employee.FirstName)"
-                        @bind-Value="@SelectedEmployee"
-                        SizeMode="Params.SizeMode"
-                        CssClass="cw-240"
-                        DropDownWidthMode="DropDownWidthMode" />
-            <DxComboBox Data="@Data"
-                        TextFieldName="@nameof(Employee.Text)"
-                        @bind-Value="@SelectedEmployee1"
-                        SizeMode="Params.SizeMode"
-                        CssClass="cw-240 ms-2"
-                        DropDownWidthMode="DropDownWidthMode" />
+        <div class="row cw-480">
+            <div class="col-md-6">
+                <label for="cbFirstName" class="demo-text mb-1">
+                    First Name
+                </label>
+                <DxComboBox Data="@Data"
+                            TextFieldName="@nameof(Employee.FirstName)"
+                            @bind-Value="@SelectedEmployee"
+                            SizeMode="Params.SizeMode"
+                            DropDownWidthMode="DropDownWidthMode"
+                            InputId="cbFirstName" />
+            </div>
+            <div class="col-md-6">
+                <label for="cbEmployee" class="demo-text mb-1">
+                    Employee
+                </label>
+                <DxComboBox Data="@Data"
+                            TextFieldName="@nameof(Employee.Text)"
+                            @bind-Value="@SelectedEmployee1"
+                            SizeMode="Params.SizeMode"
+                            DropDownWidthMode="DropDownWidthMode"
+                            InputId="cbEmployee"/>
+            </div>
         </div>
     </ChildContentWithParameters>
 

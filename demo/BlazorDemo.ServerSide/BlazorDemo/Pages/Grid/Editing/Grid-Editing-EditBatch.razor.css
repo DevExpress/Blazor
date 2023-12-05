@@ -1,0 +1,41 @@
+.grid-container {
+    display: contents;
+}
+
+/*BeginHide*/::deep /*EndHide*/.grid-toolbar-new,
+/*BeginHide*/::deep /*EndHide*/.grid-toolbar-delete,
+/*BeginHide*/::deep /*EndHide*/.grid-toolbar-save,
+/*BeginHide*/::deep /*EndHide*/.grid-toolbar-cancel {
+    background-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    background-position: center center;
+    background-color: currentColor;
+    height: 16px;
+    width: 16px;
+    opacity: 0.7;
+}
+
+/*BeginHide*/::deep /*EndHide*/.grid-toolbar-new {
+    -webkit-mask-image: url("images/icons/grid-toolbar-new.svg");
+    mask-image: url("images/icons/grid-toolbar-new.svg");
+}
+
+/*BeginHide*/::deep /*EndHide*/.grid-toolbar-delete {
+    -webkit-mask-image: url("images/icons/grid-toolbar-delete.svg");
+    mask-image: url("images/icons/grid-toolbar-delete.svg");
+}
+
+/*BeginHide*/::deep /*EndHide*/.grid-toolbar-save {
+    -webkit-mask-image: url("images/icons/save.svg");
+    mask-image: url("images/icons/save.svg");
+}
+
+/*BeginHide*/::deep /*EndHide*/.grid-toolbar-cancel {
+    -webkit-mask-image: url("images/icons/undo.svg");
+    mask-image: url("images/icons/undo.svg");
+}
+
+/*BeginHide*/::deep /*EndHide*/.grid-modified-cell {
+    background-color: rgba(var(--bs-primary-rgb), 0.15) !important;
+}

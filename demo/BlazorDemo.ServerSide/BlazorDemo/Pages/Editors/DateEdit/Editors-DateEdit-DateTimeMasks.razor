@@ -1,15 +1,19 @@
 ﻿<DemoPageSectionComponent Id="Editors-DateEdit-DateTimeMasks" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="deMasks" class="demo-text cw-320 mb-1">
+            Date
+        </label>
         <DxDateEdit @bind-Date="@Date"
                     CssClass="cw-320"
                     SizeMode="Params.SizeMode"
-                    Mask="@DateTimeMasks[DateTimeMaskName]">
+                    Mask="@DateTimeMasks[DateTimeMaskName]"
+                    InputId="deMasks">
             <DxDateTimeMaskProperties Culture="MaskCultureInfo.Value"
                                       CaretMode="@((MaskCaretMode)CaretMode)"
                                       UpdateNextSectionOnCycleChange=@UpdateNextSectionOnCycleChange/>
         </DxDateEdit>
-        <p class="demo-text cw-320 mt-2">
-            Date: <b>@Date</b>
+        <p class="demo-text cw-320 mt-3">
+            Selected Date: <b>@Date</b>
         </p>
     </ChildContentWithParameters>
 

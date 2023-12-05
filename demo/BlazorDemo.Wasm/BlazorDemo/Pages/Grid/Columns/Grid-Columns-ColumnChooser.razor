@@ -10,10 +10,11 @@
                 Text="Column Chooser"
                 RenderStyle="ButtonRenderStyle.Secondary"
                 IconCssClass="btn-column-chooser"
+                SizeMode="Params.SizeMode"
                 Click="ColumnChooserButton_Click" />
         </div>
 
-        <DxGrid @ref="Grid" Data="Data" SizeMode="Params.SizeMode">
+        <DxGrid @ref="Grid" Data="Data" SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
             <Columns>
                 <DxGridDataColumn FieldName="ContactName" MinWidth="100" />
                 <DxGridDataColumn FieldName="ContactTitle" MinWidth="100" />

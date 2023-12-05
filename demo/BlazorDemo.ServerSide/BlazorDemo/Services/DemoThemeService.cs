@@ -34,7 +34,8 @@ namespace BlazorDemo.Services {
         readonly Dictionary<string, string> HighlightJSThemes = new Dictionary<string, string>() {
             { DefaultThemeName, "default" },
             { "blazing-dark", "androidstudio" },
-            { "cyborg", "androidstudio" }
+            { "cyborg", "androidstudio" },
+            { "default-dark", "androidstudio" }
         };
 
         public IDemoThemeChangeRequestDispatcher ThemeChangeRequestDispatcher { get; set; }
@@ -63,7 +64,7 @@ namespace BlazorDemo.Services {
         }
         public string GetBootstrapThemeCssUrl(DemoTheme theme) {
             if(!EnableNewBlazorThemes || theme.IsBootstrapNative) {
-                return $"_content/BlazorDemo/css/switcher-resources/themes/{theme.Name}/bootstrap.min.css";
+                return $"_content/BlazorDemo/css/switcher-resources/themes/{theme.ThemePath}/bootstrap.min.css";
             }
             return null;
         }
@@ -102,7 +103,7 @@ namespace BlazorDemo.Services {
         private static List<DemoThemeSet> CreateSets(DemoThemeService config) {
             return new List<DemoThemeSet>() {
                 new DemoThemeSet("DevExpress Themes", "blazing-berry", "blazing-dark", "purple", "office-white"),
-                new DemoThemeSet("Bootstrap Themes", "default", "cerulean", "cyborg", "flatly", "journal", "litera", "lumen", "lux", "pulse", "simplex", "solar", "superhero", "united", "yeti")
+                new DemoThemeSet("Bootstrap Themes", "default", "default-dark", "cerulean", "cyborg", "flatly", "journal", "litera", "lumen", "lux", "pulse", "simplex", "solar", "superhero", "united", "yeti")
             };
         }
     }

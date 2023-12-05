@@ -1,11 +1,11 @@
 ﻿@page "/Grid/DataBinding/LargeQueryableAsHttp"
 
-<DemoPageSectionComponent Id="Grid-DataBinding-LargeQueryableAsHttp" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
+<DemoPageSectionComponent Id="Grid-DataBinding-LargeQueryableAsHttp" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NavigationManager NavigationManager
         @inject HttpClient HttpClient
 
-        <DxGrid Data="@Data" SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
+        <DxGrid Data="@Data" SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
             <Columns>
                 <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
                 <DxGridDataColumn FieldName="QuantityPerUnit" MinWidth="100" />

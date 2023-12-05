@@ -9,13 +9,10 @@
 
         <DxGrid Data="GridData"
             FilterMenuButtonDisplayMode="GridFilterMenuButtonDisplayMode.Always"
-            SizeMode="Params.SizeMode">
+            SizeMode="Params.SizeMode"
+            KeyboardNavigationEnabled="true">
             <Columns>
-                <DxGridDataColumn FieldName="OrderDate" Width="140px">
-                    <FilterMenuTemplate>
-                        <Grid_Filtering_ColumnFilterMenu_DateRange FilterContext="context" />
-                    </FilterMenuTemplate>
-                </DxGridDataColumn>
+                <DxGridDataColumn FieldName="OrderDate" Width="140px" />
                 <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
                 <DxGridDataColumn FieldName="CategoryId" Caption="Category" Width="130px">
                     <EditSettings>
@@ -41,7 +38,7 @@
             </Columns>
         </DxGrid>
         @code {
-            static IReadOnlyList<CustomRangeFilterItem> TotalPriceIntervals { get; } = CreateTotalPriceIntervals();
+            static IReadOnlyList<CustomRangeFilterItem> TotalPriceIntervals { get; } = CustomRangeFilterItem.CreateIntervals("Total", 100, 10, true, "{0:c}");
 
             object GridData { get; set; }
             IReadOnlyList<Category> Categories { get; set; }
@@ -62,28 +59,6 @@
                         ShippedDate = i.ShippedDate
                     };
                 });
-            }
-
-            static IReadOnlyList<CustomRangeFilterItem> CreateTotalPriceIntervals() {
-                var prop = new OperandProperty("Total");
-                var result = new List<CustomRangeFilterItem>();
-
-                var step = 100M;
-                for(var i = 0; i < 10; i++) {
-                    var start = step * i;
-                    var end = start + step;
-
-                    result.Add(new() {
-                        Criteria = prop >= start & prop < end,
-                        DisplayText = $"from {start:c} to {end - 0.01M:c}"
-                    });
-                }
-                result.Add(new() {
-                    Criteria = prop > 1000,
-                    DisplayText = $"> {1000:c}"
-                });
-
-                return result;
             }
         }
     </ChildContentWithParameters>

@@ -1,7 +1,7 @@
 ﻿@page "/Scheduler/Templates/AppointmentTemplates"
 
 <DemoPageSectionComponent Id="Scheduler-Templates-AppointmentTemplates">
-    <DxScheduler StartDate="@DateTime.Today" DataStorage="@DataStorage" CssClass="w-100">
+    <DxScheduler @bind-StartDate="@StartDate" DataStorage="@DataStorage" CssClass="w-100">
         <DxSchedulerWorkWeekView ShowWorkTimeOnly="true">
             <HorizontalAppointmentTemplate>
                 <div class="card shadow-sm p-1 bg-white text-dark" style="width:100%; font-size: .925em; font-weight:600; box-shadow: .125rem .25rem rgba(34,34,34,0.15)">
@@ -21,6 +21,8 @@
     </DxScheduler>
 
     @code {
+        DateTime StartDate { get; set; } = DateTime.Today;
+
         DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
             AppointmentsSource = AppointmentCollection.GetAppointments(),
             AppointmentMappings = new DxSchedulerAppointmentMappings() {

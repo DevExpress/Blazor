@@ -1,0 +1,3 @@
+The [Blazor Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid) allows you to specify a template for a [toolbar](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar). This template adds all necessary styles automatically. You can use the [GridToolbarTemplateContext](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridToolbarTemplateContext) object to access the Grid component's API and execute appropriate commands.
+
+To attach a toolbar to your Grid component, add the [ToolbarTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ToolbarTemplate) to the Grid component's markup. In the template, add a **DxToolbar** component and populate it with items. Toolbar items can display an icon, text, or both.

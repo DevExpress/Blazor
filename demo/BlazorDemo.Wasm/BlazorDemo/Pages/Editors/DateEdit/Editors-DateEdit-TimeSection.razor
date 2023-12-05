@@ -1,11 +1,15 @@
 ﻿<DemoPageSectionComponent Id="Editors-DateEdit-TimeSection" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="deTimeSection" class="demo-text cw-320 mb-1">
+            Date
+        </label>
         <DxDateEdit @bind-Date="@DateTimeValue"
                     TimeSectionVisible="true"
                     SizeMode="Params.SizeMode"
-                    CssClass="cw-320" />
-        <p class="demo-text cw-320 mt-2">
-            Date: <b>@DateTimeValue.ToString("dddd, dd MMMM yyyy HH:mm:ss")</b>
+                    CssClass="cw-320"
+                    InputId="deTimeSection" />
+        <p class="demo-text cw-320 mt-3">
+            Selected Date: <b>@DateTimeValue.ToString("dddd, dd MMMM yyyy HH:mm:ss")</b>
         </p>
     </ChildContentWithParameters>
 

@@ -8,12 +8,11 @@
             <DataAnnotationsValidator />
 
             <div class="mb-4">
-                <label class="col-form-label col-form-label-sm"
+                <label class="demo-text mb-1"
                        for="cbxEmails">
                     Recipients:
                 </label>
-                <DxTagBox Id="emails"
-                          InputId="cbxEmails"
+                <DxTagBox InputId="cbxEmails"
                           Data="@Emails.DataSource"
                           NullText="Select email recipients"
                           AllowCustomTags="true"

@@ -1,10 +1,14 @@
 ﻿<DemoPageSectionComponent Id="Editors-DateEdit-NullableDate" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="deNullableDate" class="demo-text cw-320 mb-1">
+            Date
+        </label>
         <DxDateEdit @bind-Date="@DateTimeValue"
                     NullText="Select a date..."
                     ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
                     SizeMode="Params.SizeMode"
-                    CssClass="cw-320">
+                    CssClass="cw-320"
+                    InputId="deNullableDate">
         </DxDateEdit>
     </ChildContentWithParameters>
 

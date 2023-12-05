@@ -32,7 +32,10 @@
 <div @key="@DemoItem.Id" id="@("section-" + DemoItem.Id)" class="demo-page-section @(!ShowCode ? "no-code" : "") @(ShowHorizontalScrollBar ? "h-scroll" : "")">
     <div class="demo-page-section-title">
         <h2 id="@DemoItem.Id">
-            <a class="demo-anchor" href="@DemoItem.GetUrl()" />@(!string.IsNullOrEmpty(DemoItem.TitleOnPage) ? DemoItem.TitleOnPage : DemoItem.Title)
+            <a class="demo-anchor"
+               href="@DemoItem.GetUrl()"
+               aria-labelledby="@DemoItem.Id" />
+               @(!string.IsNullOrEmpty(DemoItem.TitleOnPage) ? DemoItem.TitleOnPage : DemoItem.Title)
         </h2>
     </div>
     @{
@@ -44,7 +47,7 @@
         </div>
     }
     @if(ShowContent) {
-        var parameters = new DemoPageSectionParameters() { SizeMode = SizeMode, KeyboardNavigationEnabled = KeyboardNavigationEnabled };
+        var parameters = new DemoPageSectionParameters() { SizeMode = SizeMode };
         <CascadingValue Name="VisualTestsEnabled" Value="VisualTestsEnabled" IsFixed="true">
         @if(ShowCode) {
             <div class="card">
@@ -68,24 +71,22 @@
                                 View Source
                             </a>
                         </li>
-                            @if((ShowSizeMode || ShowKeyboardNavigationSwitcher) && IsComponentAreaVisible) {
-                            <DxToolbar CssClass="demo-page-section-toolbar" ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
-                                <Items>
-                                        <DxToolbarItem Alignment="ToolbarItemAlignment.Right" Visible="ShowKeyboardNavigationSwitcher">
-                                        <DxCheckBox @bind-Checked="KeyboardNavigationEnabled" CheckType="CheckType.Switch">
-                                            Keyboard Navigation (Tech Preview)
-                                        </DxCheckBox>
-                                    </DxToolbarItem>
-                                    <DxToolbarItem Text="@(SizeMode.ToString() + " size")" Alignment="ToolbarItemAlignment.Right" Visible="ShowSizeMode">
-                                        <Items>
-                                            <DxToolbarItem Name="Small" Click="OnSizeModeChanged" Text="Small size"></DxToolbarItem>
-                                            <DxToolbarItem Name="Medium" Click="OnSizeModeChanged" Text="Medium size"></DxToolbarItem>
-                                            <DxToolbarItem Name="Large" Click="OnSizeModeChanged" Text="Large size"></DxToolbarItem>
-                                        </Items>
-                                    </DxToolbarItem>
-                                </Items>
-                            </DxToolbar>
-                        }
+                        <li class="demo-page-section-toolbar">
+                            @if(ShowSizeMode && IsComponentAreaVisible) {
+                                <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
+                                    <Items>
+                                        <DxToolbarItem Text="@(SizeMode.ToString() + " size")" Alignment="ToolbarItemAlignment.Right" Visible="ShowSizeMode">
+                                            <Items>
+                                                <DxToolbarItem Name="Small" Click="OnSizeModeChanged" Text="Small size"></DxToolbarItem>
+                                                <DxToolbarItem Name="Medium" Click="OnSizeModeChanged" Text="Medium size"></DxToolbarItem>
+                                                <DxToolbarItem Name="Large" Click="OnSizeModeChanged" Text="Large size"></DxToolbarItem>
+                                            </Items>
+                                        </DxToolbarItem>
+                                    </Items>
+                                </DxToolbar>
+                            }
+                        </li>
+
                     </ul>
                 </div>
                 <div class="card-body">
@@ -148,8 +149,6 @@
     public bool ShowHorizontalScrollBar { get; set; } = false;
     [Parameter]
     public bool ShowSizeMode { get; set; }
-    [Parameter]
-    public bool ShowKeyboardNavigationSwitcher { get; set; }
 
     [Parameter]
     public HorizontalAlignment HorizontalAlignment { get; set; } = HorizontalAlignment.Center;
@@ -161,8 +160,6 @@
 
     [Parameter]
     public SizeMode SizeMode { get; set; } = SizeMode.Medium;
-    [Parameter]
-    public bool KeyboardNavigationEnabled { get; set; }
 
     [CascadingParameter(Name = "ThemeName")]
     string ThemeName {
@@ -213,7 +210,7 @@
         return string.Join(" ", "nav-link", isActive ? "active" : "").Trim();
     }
 	string GetOptionsContentCssClass() {
-		List<string> cssClasses = new List<string>() { "options-container", "border", "border-light" };
+		List<string> cssClasses = new List<string>() { "options-container" };
 		if(HasOptionsGroups)
 			cssClasses.Add("px-0");
         return string.Join(' ', cssClasses);

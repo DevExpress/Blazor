@@ -29,7 +29,11 @@
                       Text="GitHub" SizeMode="SizeMode.Large"></DxButton>
             <div class="btn-sep"></div>
             <DxButton Click="@ToggleThemeSwitcherPanel" CssClass="@GetThemeSwitcherCssClass()" SizeMode="SizeMode.Large"
-                RenderStyle="ButtonRenderStyle.Secondary" RenderStyleMode="ButtonRenderStyleMode.Outline" IconCssClass="demo-theme-icon"></DxButton>
+                      RenderStyle="ButtonRenderStyle.Secondary" RenderStyleMode="ButtonRenderStyleMode.Outline" IconCssClass="demo-theme-icon"
+                      aria-label="Themes"
+                      aria-haspopup="True"
+                      aria-expanded="@(ThemeSwitcherShown.ToString())">
+            </DxButton>
         </div>
         <ThemeSwitcher @bind-Shown="@ThemeSwitcherShown" @bind-ThemeName="@ThemeName" />
     </nav>
@@ -106,7 +110,11 @@
     }
 
     protected override void OnInitialized() {
+#if MAUI
+        ThemeName = "";
+#else
         ThemeName = Themes.ActiveTheme.Name;
+#endif
         NavigationManager.LocationChanged += OnLocationChanged;
     }
 

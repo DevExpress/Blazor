@@ -1,15 +1,19 @@
 ﻿<DemoPageSectionComponent Id="Editors-MaskedInput-DateTimeMasks" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params" >
+        <label for="teDateTimeMasks" class="demo-text cw-320 mb-1">
+            Date
+        </label>
         <DxMaskedInput @bind-Value="@Date"
                        CssClass="cw-320"
                        SizeMode="Params.SizeMode"
-                       Mask="@DateTimeMasks[DateTimeMaskName]">
+                       Mask="@DateTimeMasks[DateTimeMaskName]"
+                       InputId="teDateTimeMasks">
             <DxDateTimeMaskProperties Culture="MaskCultureInfo.Value"
                                       CaretMode="@((MaskCaretMode)CaretMode)"
                                       UpdateNextSectionOnCycleChange=@UpdateNextSectionOnCycleChange />
         </DxMaskedInput>
-        <p class="demo-text cw-320 mt-2">
-            Value: <b>@Date</b>
+        <p class="demo-text cw-320 mt-3">
+            The entered date is: <b>@Date</b>
         </p>
     </ChildContentWithParameters>
 

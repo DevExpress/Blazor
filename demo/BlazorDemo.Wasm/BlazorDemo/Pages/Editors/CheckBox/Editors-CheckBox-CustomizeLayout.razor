@@ -2,7 +2,7 @@
     <DxCheckBox @bind-Checked="@Value"
                 AllowIndeterminateStateByClick="true"
                 DisableDefaultRender="true">
-        <div class="table position-relative">
+        <div class="template-container">
             <div class="boxLabel" style="margin: 10px">
                 Medium
             </div>
@@ -40,7 +40,7 @@
     </DxCheckBox>
 
     @code {
-        bool? Value { get; set; } = true;
-        int Angle { get { return Value == true ? 0 : Value == false ? 90 : 180; } }
+        bool? Value { get; set; } = false;
+        int Angle { get { return Value == true ? 0 : Value == false ? 180 : 90; } }
     }
 </DemoPageSectionComponent>

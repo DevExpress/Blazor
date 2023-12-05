@@ -1,15 +1,19 @@
 ﻿<DemoPageSectionComponent Id="Editors-MaskedInput-RegExMasks" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <label for="teRegExMasks" class="demo-text cw-320 mb-1">
+            Email
+        </label>
         <DxMaskedInput @bind-Value="@Email"
                        SizeMode="Params.SizeMode"
                        CssClass="cw-320"
                        Mask="@EmailMask"
-                       MaskMode="MaskMode.RegEx">
+                       MaskMode="MaskMode.RegEx"
+                       InputId="teRegExMasks">
             <DxRegExMaskProperties MaskAutoCompleteMode="@((MaskAutoCompleteMode)AutoCompleteMode)"
                                    Placeholder="Placeholder"
                                    PlaceholdersVisible="PlaceholderVisible" />
         </DxMaskedInput>
-        <p class="demo-text cw-320 mt-2">Email : <b>@Email</b></p>
+        <p class="demo-text cw-320 mt-3">The entered email is: <b>@Email</b></p>
     </ChildContentWithParameters>
 
     <OptionsContent>

@@ -3,3 +3,5 @@ Our Blazor [Menu](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu) c
 Menu items can help you organize navigation. Use the item's [NavigateUrl](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenuItem.NavigateUrl) and [Target](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenuItem.Target) properties to specify the navigation location and where to open it (in the same or new tab).
 
 To customize item content and appearance, use the [Text](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenuItem.Text), [IconCssClass](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenuItem.IconCssClass), and [CssClass](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenuItem.CssClass) properties. You can also [disable](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxNavigationControlComponent-2.Enabled) the component.
+
+The Menu component also supports [keyboard navigation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMenu#keyboard-navigation). Press the Tab key or Shift+Tab to focus the menu and use Arrow keys to navigate through menu items.

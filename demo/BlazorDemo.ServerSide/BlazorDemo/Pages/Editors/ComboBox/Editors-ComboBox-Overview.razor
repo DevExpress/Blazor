@@ -2,12 +2,16 @@
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
+        <label for="cbOverview" class="demo-text cw-480 mb-1">
+            Employee
+        </label>
         <DxComboBox Data="@Data"
                     TextFieldName="@nameof(Employee.Text)"
                     @bind-Value="@SelectedEmployee"
                     SizeMode="@Params.SizeMode"
-                    CssClass="cw-480" />
-        <p class="demo-text cw-480 mt-2">
+                    CssClass="cw-480"
+                    InputId="cbOverview"/>
+        <p class="demo-text cw-480 mt-3">
             Selected item: { FirstName=<b>@SelectedEmployee?.FirstName</b>,
             LastName=<b>@SelectedEmployee?.LastName</b>,
             Title=<b>@SelectedEmployee?.Title</b> }

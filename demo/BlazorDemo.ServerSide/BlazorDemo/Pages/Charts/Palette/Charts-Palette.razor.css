@@ -1,0 +1,15 @@
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.palette-container {
+    float: left;
+}
+
+.palette-item {
+    width: 40px;
+    height: 40px;
+}

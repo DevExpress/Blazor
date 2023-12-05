@@ -4,6 +4,6 @@ Our Blazor [Grid](https://docs.devexpress.com/Blazor/403143/grid) allows you to 
 * For each data row in the processed range. The [SummaryStage](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridCustomSummaryEventArgs.SummaryStage) property value is [Calculate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridCustomSummaryStage). At this stage, you can calculate a summary value. 
 * After grid rows are processed. The [SummaryStage](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridCustomSummaryEventArgs.SummaryStage) property value is [Finalize](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridCustomSummaryStage). At this stage, you can finalize summary calculation. 
 
-To refresh grid summary values, call the [RefreshSummary](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.RefreshSummary) method. You can also handle the [CustomizeSummaryDisplayText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomizeSummaryDisplayText) event to change the summary's display text. 
+To refresh grid summary values, call the [RefreshSummary](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.RefreshSummary) method. You can also specify the [DisplayText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridSummaryItem.DisplayText) property or handle the [CustomizeSummaryDisplayText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomizeSummaryDisplayText) event to customize the summary's display text. 
 
-In this demo, the custom summary calculates the sum of **Total** values against the selected Grid rows. 
+In this demo, the custom summary calculates the sum of **Total** values against the selected Grid rows. The built-in total summary calculates the grand total for all rows.

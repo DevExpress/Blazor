@@ -1,5 +1,7 @@
 ﻿@using BlazorDemo.Configuration
 @inject DemoConfiguration DemoConfiguration
+
+@DxResourceManager.RegisterScripts()
 <Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@(typeof(MainLayout))"  />

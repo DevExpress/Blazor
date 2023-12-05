@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 
 namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
-    sealed class EntityDataContainer {
+    public sealed class EntityDataContainer {
 
         sealed class EntityWrapper<T> {
             public T DataObject { get; }
@@ -18,8 +18,12 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
                 DataObject = dataObject;
             }
         }
-
-        readonly NavigationManager _navigationManager;
+#if MAUI
+        public
+#else
+        readonly
+#endif
+        NavigationManager _navigationManager;
         readonly ReadOnlyCollectionBuilder<EntityWrapper<object>> _bufferBuilder;
         readonly TaskCompletionSource<ReadOnlyCollection<EntityWrapper<object>>> _tcs =
             new TaskCompletionSource<ReadOnlyCollection<EntityWrapper<object>>>();

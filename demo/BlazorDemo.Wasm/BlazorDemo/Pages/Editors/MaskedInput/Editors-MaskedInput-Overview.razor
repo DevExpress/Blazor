@@ -1,49 +1,55 @@
 ﻿<DemoPageSectionComponent Id="Editors-MaskedInput-Overview" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         <div class="d-flex flex-column cw-320">
-            <p class="demo-text mb-1">
-                Text Mask:
-            </p>
+            <label for="textMaskID" class="demo-text mb-1">
+                Text Mask
+            </label>
             <DxMaskedInput @bind-Value="@Telephone"
                            SizeMode="Params.SizeMode"
                            CssClass="cw-320"
+                           InputId="textMaskID"
                            Mask="(999)000-0000" />
 
-            <p class="demo-text mt-4 mb-1 ">
-                Numeric Mask:
-            </p>
+            <label for="numericMaskID" class="demo-text mt-4 mb-1 ">
+                Numeric Mask
+            </label>
             <DxMaskedInput @bind-Value="@Price"
                            SizeMode="Params.SizeMode"
                            CssClass="cw-320"
+                           InputId="numericMaskID"
                            Mask="@NumericMask.Currency" />
-            <p class="demo-text mt-4 mb-1">
-                Regular Expression Mask:
-            </p>
+            <label for="regularExpressionMaskID" class="demo-text mt-4 mb-1">
+                Regular Expression Mask
+            </label>
             <DxMaskedInput @bind-Value="@Email"
                            SizeMode="Params.SizeMode"
                            CssClass="cw-320"
                            Mask="@EmailMask"
+                           InputId="regularExpressionMaskID"
                            MaskMode="MaskMode.RegEx" />
-            <p class="demo-text cw-320 mt-4 mb-1">
-                Date-Time Mask:
-            </p>
+            <label for="dateTimeMaskID" class="demo-text cw-320 mt-4 mb-1">
+                Date-Time Mask
+            </label>
             <DxMaskedInput @bind-Value="@Date"
                            SizeMode="Params.SizeMode"
                            CssClass="cw-320"
+                           InputId="dateTimeMaskID"
                            Mask="@DateTimeMask.ShortDate" />
-            <p class="demo-text mt-4 mb-1">
-                Date-Time Offset Mask:
-            </p>
+            <label for="dateTimeOffsetMaskID" class="demo-text mt-4 mb-1">
+                Date-Time Offset Mask
+            </label>
             <DxMaskedInput @bind-Value="@DateOffset"
                            SizeMode="Params.SizeMode"
                            CssClass="cw-320"
+                           InputId="dateTimeOffsetMaskID"
                            Mask="hh:mm:ss tt zzzz" />
-            <p class="demo-text mt-4 mb-1">
-                Time Span Mask:
-            </p>
+            <label for="timeSpanMaskID" class="demo-text mt-4 mb-1">
+                Time Span Mask
+            </label>
             <DxMaskedInput @bind-Value="@TimeSpan"
                            SizeMode="Params.SizeMode"
                            CssClass="cw-320"
+                           InputId="timeSpanMaskID"
                            Mask="@TimeSpanMask.GeneralLongFormat" />
         </div>
     </ChildContentWithParameters>

@@ -1,14 +1,14 @@
 ﻿@page "/Grid/Selection/SelectionColumn"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Selection-SelectionColumn" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
+<DemoPageSectionComponent Id="Grid-Selection-SelectionColumn" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <DxGrid Data="Products"
                 KeyFieldName="ProductId"
                 @bind-SelectedDataItems="SelectedDataItems"
-                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled"
+                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true"
                 SelectAllCheckboxMode="CurrentSelectAllCheckboxMode">
             <Columns>
                 <DxGridSelectionColumn Width="104px" />

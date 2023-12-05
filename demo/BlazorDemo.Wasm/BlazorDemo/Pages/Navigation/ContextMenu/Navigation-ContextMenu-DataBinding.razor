@@ -1,13 +1,14 @@
 ﻿<DemoPageSectionComponent Id="Navigation-ContextMenu-DataBinding" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <div style="@Formatting.GetStyleString()" class="demo-preventsel target-container"
-            @oncontextmenu="((e) => { ContextMenu.ShowAsync(e); } )"
-            @oncontextmenu:preventDefault>
+        <div style="@Formatting.GetStyleString()" class="demo-preventsel target-container" tabindex="0"
+            @oncontextmenu="@OnContextMenu"
+            @oncontextmenu:preventDefault
+            @onkeydown="@OnKeyDown">
             @*BeginHide*@
             <span style="display: inline-block; text-align: center; margin: auto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</span>
             @*EndHide*@
         </div>
-        <DxContextMenu Data="@MenuItems" ItemClick="@ItemClick" SizeMode="Params.SizeMode" @ref="@ContextMenu">
+        <DxContextMenu PositionTarget="#section-DataBinding .target-container" Data="@MenuItems" ItemClick="@ItemClick" SizeMode="Params.SizeMode" @ref="@ContextMenu">
             <DataMappings>
                 <DxContextMenuDataMapping Children="Children"
                                           Text="Text"
@@ -25,6 +26,13 @@
 
             void ItemClick(ContextMenuItemClickEventArgs args) {
                 ((TextFormattingMenuItem)args.ItemInfo.DataItem).Click();
+            }
+            async void OnContextMenu(MouseEventArgs args) {
+                await ContextMenu.ShowAsync(args);
+            }
+            async void OnKeyDown(KeyboardEventArgs args) {
+                if (args.Key == "F10" && args.ShiftKey)
+                    await ContextMenu.ShowAsync(ContextMenuPosition.Center);
             }
         }
     </ChildContentWithParameters>

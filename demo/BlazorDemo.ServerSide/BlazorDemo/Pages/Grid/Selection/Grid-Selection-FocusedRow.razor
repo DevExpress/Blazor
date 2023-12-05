@@ -1,13 +1,13 @@
 ﻿@page "/Grid/Selection/FocusedRow"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Selection-FocusedRow" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
+<DemoPageSectionComponent Id="Grid-Selection-FocusedRow" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
         <div class="d-flex flex-wrap w-100">
             <div class="w-auto mt-1 me-1 flex-grow-1" style="flex-basis: 700px">
-                <DxGrid Data="Orders" FocusedRowEnabled="true" FocusedRowChanged="OnFocusedRowChanged" SizeMode="Params.SizeMode" KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
+                <DxGrid Data="Orders" FocusedRowEnabled="true" FocusedRowChanged="OnFocusedRowChanged" SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
                     <Columns>
                         <DxGridDataColumn FieldName="ShipName" Width="30%" />
                         <DxGridDataColumn FieldName="Address" UnboundExpression="[ShipCity] + ' - ' + [ShipAddress]" UnboundType="GridUnboundColumnType.String" />

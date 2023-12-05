@@ -8,7 +8,7 @@ using BlazorDemo.DataProviders;
 using BlazorDemo.Wasm.DataProviders.TransportInfrastructure;
 
 namespace BlazorDemo.Wasm.DataProviders.Implementation {
-    class SalesInfoDataProvider : RemoteDataProviderBase, ISalesInfoDataProvider {
+    public class SalesInfoDataProvider : RemoteDataProviderBase, ISalesInfoDataProvider {
         public Task<IEnumerable<SaleInfo>> GetSalesAsync(CancellationToken ct = default) {
             return Loader.LoadRemoteEntities(this, GetSalesAsync);
         }

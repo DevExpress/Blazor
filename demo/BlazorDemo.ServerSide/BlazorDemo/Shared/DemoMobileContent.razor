@@ -3,12 +3,14 @@
         <div>
             <button type="button" class="btn btn-secondary d-inline-flex align-items-center vertical
                         @GetButtonOrientationSelector(Orientation.Vertical)"
-                    @onclick="() => ChangeOrientation(Orientation.Vertical)">
+                    @onclick="() => ChangeOrientation(Orientation.Vertical)"
+                    aria-label="Vertical orientation">
                 <span class="mobile-view"></span>
             </button>
             <button type="button" class="btn btn-secondary d-inline-flex align-items-center horizontal
                         @GetButtonOrientationSelector(Orientation.Horizontal)"
-                    @onclick="() => ChangeOrientation(Orientation.Horizontal)">
+                    @onclick="() => ChangeOrientation(Orientation.Horizontal)"
+                    aria-label="Horizontal orientation">
                 <span class="mobile-view-horizontal"></span>
             </button>
         </div>

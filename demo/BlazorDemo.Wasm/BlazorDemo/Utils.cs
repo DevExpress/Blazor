@@ -81,6 +81,13 @@ namespace BlazorDemo {
         }
         
     }
+
+    public static class SplitTextHelper {
+        public static string SplitPascalCaseString(string name) {
+            string[] separateWordsByCapitalLetter = System.Text.RegularExpressions.Regex.Split(name, @"(?<!^)(?=[A-Z])");
+            return String.Join(" ", separateWordsByCapitalLetter);
+        }
+    }
 }
 
 #if !SERVER_BLAZOR

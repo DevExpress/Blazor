@@ -1,7 +1,7 @@
 @page "/Grid/Summary/Group"
 @layout DataProviderAccessArea<INwindDataProvider>
 
-<DemoPageSectionComponent Id="Grid-Summary-Group" ShowSizeMode="true" ShowKeyboardNavigationSwitcher="true">
+<DemoPageSectionComponent Id="Grid-Summary-Group" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
@@ -9,7 +9,7 @@
                 Data="@Data"
                 ShowGroupPanel="true"
                 SizeMode="Params.SizeMode" 
-                KeyboardNavigationEnabled="Params.KeyboardNavigationEnabled">
+                KeyboardNavigationEnabled="true">
             <Columns>
                 <DxGridDataColumn FieldName="Country" GroupIndex="0" Width="10%" />
                 <DxGridDataColumn FieldName="City" GroupIndex="1" Width="10%" />

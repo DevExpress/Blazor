@@ -4,7 +4,7 @@
             <img class="e-photo" src=@GetPhotoUrl() alt="" @attributes=@ImageAttributes/>
         </div>
         <div class="e-info flex-grow-1 ms-3">
-            <p class="e-name">@($"{EmployeeInfo.FirstName} {EmployeeInfo.LastName}")</p>
+            <h5 class="e-name">@($"{EmployeeInfo.FirstName} {EmployeeInfo.LastName}")</h5>
             <p class="e-title">@EmployeeInfo.Title</p>
             @if(Detailed) {
                 <p class="e-email">

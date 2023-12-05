@@ -2,11 +2,15 @@
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
+        <label for="tbMultiColumn" class="demo-text cw-480 mb-1">
+            Employees
+        </label>
         <DxTagBox Data="@Data"
                   @bind-Values="@Values"
                   SizeMode="Params.SizeMode"
                   CssClass="cw-480"
-                  EditFormat="{1} {2}">
+                  EditFormat="{1} {2}"
+                  InputId="tbMultiColumn">
             <DxListEditorColumn FieldName="@nameof(Employee.EmployeeId)"
                                 Caption="Id"
                                 Width="50px" />

@@ -4,22 +4,22 @@
 
         <DxListBox Data="@Data"
                    TextFieldName="@nameof(Employee.Text)"
-                   @bind-Values="@Values"
+                   @bind-Value="@Value"
                    SizeMode="Params.SizeMode"
                    CssClass="cw-400 chi-220">
         </DxListBox>
         <p class="demo-text cw-400 mt-2">
-            Selected item: <b>@Values.FirstOrDefault()?.Text</b>
+            Selected item: <b>@Value?.Text</b>
         </p>
     </ChildContentWithParameters>
 
     @code {
         IEnumerable<Employee> Data { get; set; }
-        IEnumerable<Employee> Values { get; set; }
+        Employee Value { get; set; }
 
         protected override async Task OnInitializedAsync() {
             Data = await NwindDataService.GetEmployeesAsync();
-            Values = Data.Take(2);
+            Value = Data.FirstOrDefault();
         }
     }
 </DemoPageSectionComponent>
