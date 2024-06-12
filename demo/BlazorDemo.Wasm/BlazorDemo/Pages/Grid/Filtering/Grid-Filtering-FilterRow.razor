@@ -6,36 +6,41 @@
         @using DevExpress.Data.Filtering;
         @inject NwindDataService NwindDataService
 
-        <DxGrid Data="GridData"
-                ShowFilterRow="true"
-                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
-            <Columns>
-                <DxGridDataColumn FieldName="OrderId" Caption="Order ID" DisplayFormat="d" SortIndex="0" MinWidth="110" Width="10%" />
-                <DxGridDataColumn FieldName="OrderDate" DisplayFormat="d" MinWidth="135" Width="10%" />
-                <DxGridDataColumn FieldName="ProductName" FilterRowValue='"Queso"' FilterRowOperatorType="GridFilterRowOperatorType.Contains" MinWidth="100" />
-                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c2" MinWidth="135" Width="10%">
-                    <FilterRowCellTemplate>
-                        <DxComboBox @bind-Value="context.FilterCriteria"
-                                    Data="UnitPriceIntervals" ValueFieldName="Criteria" TextFieldName="DisplayText"
-                                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
-                                    aria-label="Select unit price"/>
-                    </FilterRowCellTemplate>
-                </DxGridDataColumn>
-                <DxGridDataColumn FieldName="CustomerId" Caption="Customer" MinWidth="120">
-                    <EditSettings>
-                        <DxComboBoxSettings Data="Customers" ValueFieldName="CustomerId" TextFieldName="DisplayText" FilteringMode="DataGridFilteringMode.Contains" />
-                    </EditSettings>
-                </DxGridDataColumn>
-                <DxGridDataColumn FieldName="Shipped" UnboundType="GridUnboundColumnType.Boolean" UnboundExpression="[ShippedDate] <> Null" Width="5%" MinWidth="95" />
-                <DxGridCommandColumn Width="70px" NewButtonVisible="false" EditButtonVisible="false" DeleteButtonVisible="false" />
-            </Columns>
-        </DxGrid>
+        <div class="grid-container">
+            <DxGrid Data="GridData"
+                    ShowFilterRow="true"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    SizeMode="Params.SizeMode"
+                    PageSize="20">
+                <Columns>
+                    <DxGridDataColumn FieldName="OrderId" Caption="Order ID" DisplayFormat="d" SortIndex="0" MinWidth="110" Width="10%" />
+                    <DxGridDataColumn FieldName="OrderDate" DisplayFormat="d" MinWidth="135" Width="10%" />
+                    <DxGridDataColumn FieldName="ProductName" FilterRowValue='"Queso"' FilterRowOperatorType="GridFilterRowOperatorType.Contains" MinWidth="100" />
+                    <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c2" MinWidth="135" Width="10%">
+                        <FilterRowCellTemplate>
+                            <DxComboBox @bind-Value="context.FilterCriteria"
+                                        Data="UnitPriceIntervals" ValueFieldName="Criteria" TextFieldName="DisplayText"
+                                        ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                                        aria-label="Select unit price"/>
+                        </FilterRowCellTemplate>
+                    </DxGridDataColumn>
+                    <DxGridDataColumn FieldName="CustomerId" Caption="Customer" MinWidth="120">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="Customers" ValueFieldName="CustomerId" TextFieldName="DisplayText" FilteringMode="DataGridFilteringMode.Contains" />
+                        </EditSettings>
+                    </DxGridDataColumn>
+                    <DxGridDataColumn FieldName="Shipped" UnboundType="GridUnboundColumnType.Boolean" UnboundExpression="[ShippedDate] <> Null" Width="5%" MinWidth="95" />
+                    <DxGridCommandColumn Width="70px" NewButtonVisible="false" EditButtonVisible="false" DeleteButtonVisible="false" />
+                </Columns>
+            </DxGrid>
+        </div>
 
         @code {
             static readonly IReadOnlyList<PriceFilterInterval> UnitPriceIntervals = new PriceFilterInterval[] {
-                new("[UnitPrice] < 10", "< $10"),
-                new("[UnitPrice] between (10, 100)", "$10 - $100"),
-                new("[UnitPrice] > 100", "> $100")
+                new("[UnitPrice] < 15", "< $15"),
+                new("[UnitPrice] between (15, 30)", "$15 - $30"),
+                new("[UnitPrice] > 30", "> $30")
             };
 
             object GridData { get; set; }

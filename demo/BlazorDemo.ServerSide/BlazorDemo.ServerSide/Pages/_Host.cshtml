@@ -35,6 +35,8 @@
                           'unsafe-eval'
                           https://cdn.jsdelivr.net/
                           https://www.googletagmanager.com/
+                          https://*.bing.com
+                          https://*.virtualearth.net
                           'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA='
                           'sha256-5IekJdLtTzD/IDYQ2FrNLbLmgyGP6WlpDJ2GbZLv+r0='
                           'sha256-3/2QOuYlxn5k9KorO7FOcY7NYI+Ui/I3n7nr0X+IWcE='
@@ -46,10 +48,14 @@
                style-src 'self'
                          https://cdnjs.cloudflare.com/
                          https://fonts.googleapis.com/
+                         https://*.bing.com
                          'unsafe-inline';
                font-src 'self'
+                        data:
                         https://fonts.gstatic.com/;
                connect-src 'self'
+                        https://*.bing.com
+                        https://*.virtualearth.net
                         https://js.devexpress.com/;
                block-all-mixed-content;
           ">

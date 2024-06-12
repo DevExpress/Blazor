@@ -1,0 +1,67 @@
+﻿@page "/ChartAxesStrips"
+@using System.Drawing;
+
+<DemoPageSectionComponent Id="Charts-Axes-AxesStrips">
+    <DemoChildContent>
+        @inject IChartTemperatureDataProvider ChartTemperatureDataProvider
+        <DxChart Data="@DataSource" Width="100%" CustomizeSeriesPoint="@CustomizePoint">
+            <DxChartTitle Text="Temperature (high) in September, °F" />
+            <DxChartLegend Visible="false" />
+            <DxChartSplineSeries ArgumentField="@((TemperatureData s) => s.Date)"
+                                 ValueField="@((TemperatureData s) => s.Temperature)"
+                                 Color="@SeriesColor">
+                <DxChartSeriesLabel FormatPattern="{value:#}°F" />
+            </DxChartSplineSeries>
+            <DxChartValueAxis>
+                <DxChartAxisStrip StartValue="@HighAverage" Color="rgba(255, 155, 85, 0.15)">
+                    <DxChartAxisStripLabel Text="Above average high">
+                        <DxChartFont Color="@HighAverageColor" Weight="500" Size="14"/>
+                    </DxChartAxisStripLabel>
+                </DxChartAxisStrip>
+
+                <DxChartAxisStrip EndValue="LowAverage" Color="rgba(97, 153, 230, 0.1)">
+                    <DxChartAxisStripLabel Text="Below average low">
+                        <DxChartFont Color="@LowAverageColor" Weight="500" Size="14" />
+                    </DxChartAxisStripLabel>
+                </DxChartAxisStrip>
+            </DxChartValueAxis>
+        </DxChart>
+
+        @code {
+            IEnumerable<TemperatureData> DataSource = Enumerable.Empty<TemperatureData>();
+
+            protected override void OnInitialized() {
+                DataSource = ChartTemperatureDataProvider.GenerateData();
+            }
+
+            Color SeriesColor = ColorTranslator.FromHtml("#a3aaaa");
+
+            double HighAverage = 60.8;
+            double LowAverage = 53;
+            string HighAverageColor = "#ff9b52";
+            string LowAverageColor = "#6199e6";
+
+            protected void CustomizePoint(ChartSeriesPointCustomizationSettings pointSettings) {
+                double value = (double)pointSettings.Point.Value;
+                if (value > HighAverage) {
+                    PreparePointSettings(pointSettings, HighAverageColor);
+                    PrepareLabelSettings(pointSettings, HighAverageColor);
+                } else if (value < LowAverage) {
+                    PreparePointSettings(pointSettings, LowAverageColor);
+                    PrepareLabelSettings(pointSettings, LowAverageColor);
+                }
+            }
+
+            protected void PreparePointSettings(ChartSeriesPointCustomizationSettings pointSettings, string averageColor) {
+                pointSettings.PointAppearance.Color = ColorTranslator.FromHtml(averageColor);
+            }
+
+            protected void PrepareLabelSettings(ChartSeriesPointCustomizationSettings pointSettings, string averageColor) {
+                pointSettings.PointLabel.Visible = true;
+                pointSettings.PointLabel.BackgroundColor = ColorTranslator.FromHtml(averageColor);
+            }
+        }
+
+    </DemoChildContent>
+</DemoPageSectionComponent>
+

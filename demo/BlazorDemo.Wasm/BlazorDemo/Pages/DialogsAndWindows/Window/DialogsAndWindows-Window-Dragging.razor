@@ -8,25 +8,27 @@
             <DxButton RenderStyle="ButtonRenderStyle.Secondary" Click="@TogglePopupVisibilityAsync">@GetButtonText()</DxButton>
         </div>
         <DxWindow AllowDrag=true
-                @ref=@windowRef
-                DragCompleted="OnWindowDragCompleted"
-                ShowCloseButton="true"
-                HeaderText="Window"
-                BodyText="@Constants.Text"
-                Width="max(25vw, 250px)"
-                SizeMode="Params.SizeMode"
-                @bind-Visible="windowVisible">
+                  AllowDragByHeaderOnly="allowDragByHeaderOnly"
+                  @ref=@windowRef
+                  DragCompleted="OnWindowDragCompleted"
+                  ShowCloseButton="true"
+                  HeaderText="Window" BodyText="@Constants.Text"
+                  Width="max(25vw, 250px)"
+                  SizeMode="Params.SizeMode"
+                  @bind-Visible="windowVisible">
         </DxWindow>
     </ChildContentWithParameters>
     <OptionsContent>
         <OptionButton Text="Reload Page" OnClick="ReloadPageButton_ClickAsync" />
         <OptionButton Text="Reset Window Position" OnClick="ResetPositionButton_ClickAsync" />
+        <OptionCheckBox Label="Allow Drag By Header Only" @bind-Checked="allowDragByHeaderOnly" />
     </OptionsContent>
     @code {
         const string LocalStorageKey = "Navigation-Window-Dragging";
 
         int? positionX, positionY;
         bool windowVisible;
+        bool allowDragByHeaderOnly = true;
         DxWindow windowRef;
         ElementReference popupTarget;
 

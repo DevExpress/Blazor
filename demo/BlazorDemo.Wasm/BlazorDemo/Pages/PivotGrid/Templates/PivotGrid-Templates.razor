@@ -9,8 +9,7 @@
     } else {
         <DxPivotGrid Data="@GridData"
                      ShowGrandTotals="@ShowGrandTotals"
-                     ShowFieldHeaders="@ShowFieldHeaders"
-                     CssClass="w-100">
+                     ShowFieldHeaders="@ShowFieldHeaders">
             <DxPivotGridField Field="@nameof(SaleInfo.Region)" SortOrder="PivotGridSortOrder.Ascending" Area="PivotGridFieldArea.Row" />
             <DxPivotGridField Field="@nameof(SaleInfo.Country)" Area="PivotGridFieldArea.Row" />
             <DxPivotGridField Field="@nameof(SaleInfo.City)" Area="PivotGridFieldArea.Row" />

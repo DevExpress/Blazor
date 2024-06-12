@@ -43,7 +43,7 @@ namespace BlazorDemo.Data.StockQuotes {
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        void SetPropertyValue<T>(ref T property, T value, [CallerMemberName] string propertyName = "") {
+        protected void SetPropertyValue<T>(ref T property, T value, [CallerMemberName] string propertyName = "") {
             if(EqualityComparer<T>.Default.Equals(property, value))
                 return;
 
@@ -51,5 +51,21 @@ namespace BlazorDemo.Data.StockQuotes {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+    }
+
+    public class StockQuoteByRegionDisplayModel : StockQuoteDisplayModel {
+        int id;
+        int parentId;
+
+
+        public int Id {
+            get => id;
+            set => SetPropertyValue(ref id, value);
+        }
+
+        public int ParentId {
+            get => parentId;
+            set => SetPropertyValue(ref parentId, value);
+        }
     }
 }

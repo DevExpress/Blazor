@@ -7,14 +7,16 @@
     <ChildContentWithParameters Context="Params">
         @inherits OwningComponentBase
         @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
-
+        
         <DataProviderAccessAreaContainer DataProvider="@RentInfoDataProvider">
+        <div class="grid-container">
             <DxGrid @ref="Grid"
                     Data="Data"
                     ShowGroupPanel="true"
                     VirtualScrollingEnabled="VirtualScrollingEnabled" PageSize="20"
-                    FilterMenuButtonDisplayMode="GridFilterMenuButtonDisplayMode.Always" CssClass="ch-480"
-                    SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true" CustomizeCellDisplayText="Grid_CustomizeCellDisplayText" CustomizeFilterMenu="Grid_CustomizeFilterMenu">
+                    FilterMenuButtonDisplayMode="GridFilterMenuButtonDisplayMode.Always"
+                    SizeMode="Params.SizeMode"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn" TextWrapEnabled="false">
                 <Columns>
                     <DxGridDataColumn FieldName="State" MinWidth="80" Width="10%" />
                     <DxGridDataColumn FieldName="Area" Width="12%" />
@@ -26,7 +28,11 @@
                             <Grid_Filtering_ColumnFilterMenu_CustomRange FilterContext="context" Items="PopulationIntervals" />
                         </FilterMenuTemplate>
                     </DxGridDataColumn>
-                    <DxGridDataColumn FieldName="Bedrooms" Width="12%" />
+                    <DxGridDataColumn FieldName="Bedrooms" Width="12%">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="BedroomDisplayValues" />
+                        </EditSettings>
+                    </DxGridDataColumn>
                     <DxGridDataColumn FieldName="Rent" MinWidth="80" DisplayFormat="C0">
                         <FilterMenuTemplate>
                             <Grid_Filtering_ColumnFilterMenu_CustomRange FilterContext="context" Items="RentIntervals" />
@@ -39,12 +45,23 @@
                 <TotalSummary>
                     <DxGridSummaryItem FieldName="Rent" SummaryType="GridSummaryItemType.Avg"/>
                 </TotalSummary>
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" SizeMode="Params.SizeMode">
+                        <Items>
+                            <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                                <Template Context="toolbar_item_context">
+                                    <div class="d-flex flex-row align-items-center h-100">
+                                        <DxCheckBox @bind-Checked="VirtualScrollingEnabled">Enable Virtual Scrolling</DxCheckBox>
+                                    </div>
+                                </Template>
+                            </DxToolbarItem>
+                        </Items>
+                    </DxToolbar>
+                </ToolbarTemplate>
             </DxGrid>
+        </div>
         </DataProviderAccessAreaContainer>
     </ChildContentWithParameters>
-    <OptionsContent>
-        <OptionCheckBox Label="Enable Virtual Scrolling" @bind-Checked="VirtualScrollingEnabled" />
-    </OptionsContent>
     @code {
         static IReadOnlyList<CustomRangeFilterItem> PopulationIntervals { get; } = CustomRangeFilterItem.CreateIntervals("Population", 10, 6, false, "{0:N0}");
         static IReadOnlyList<CustomRangeFilterItem> RentIntervals { get; } = CustomRangeFilterItem.CreateIntervals("Rent", 200, 10, true, "{0:c}");
@@ -83,19 +100,6 @@
                 await Grid.WaitForDataLoadAsync();
                 Grid.ExpandGroupRow(2);
             }
-        }
-
-        void Grid_CustomizeCellDisplayText(GridCustomizeCellDisplayTextEventArgs e) {
-            if(e.FieldName != "Bedrooms")
-                return;
-            e.DisplayText = BedroomDisplayValues[(int)e.Value];
-        }
-
-        void Grid_CustomizeFilterMenu(GridCustomizeFilterMenuEventArgs e) {
-            if(e.DataColumn.FieldName != "Bedrooms")
-                return;
-            for(int i = 0; i < e.DataItems.Count; ++i)
-                e.DataItems[i].DisplayText = BedroomDisplayValues[(int)e.DataItems[i].Value];
         }
     }
 </DemoPageSectionComponent>

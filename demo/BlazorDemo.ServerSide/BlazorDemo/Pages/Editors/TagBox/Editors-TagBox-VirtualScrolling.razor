@@ -7,7 +7,6 @@
         </label>
         <DxTagBox Data="@Data"
                   ListRenderMode="ListRenderMode.Virtual"
-                  HideSelectedItems="false"
                   @bind-Values="@Values"
                   TextFieldName="@nameof(City.CityName)"
                   ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
@@ -22,7 +21,7 @@
 
         protected override async Task OnInitializedAsync() {
             Data = await WorldcitiesDataService.GetCitiesAsync();
-            Values = new List<City>() { Data.First() };
+            Values = new List<City>() { Data.FirstOrDefault() };
         }
     }
 </DemoPageSectionComponent>

@@ -10,5 +10,6 @@ Key Radio Group API members include:
 * [TextFieldName](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxRadioGroup-2.TextFieldName) - Specifies the data source field used to supply text for individual items.
 * [Value](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxRadioGroup-2.Value) - Specifies the value of the selected item.
 * [ValueFieldName](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxRadioGroup-2.ValueFieldName) - Specifies the data source field to populate item values.
+* [ValueChanged](http://docs.devexpress.com/Blazor/DevExpress.Blazor.DxRadioGroup-2.ValueChanged) - Fires when the RadioGroup's selected value changes.
 
 Our Radio Group component supports different size modes. To specify component size in code, use the [SizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxResizableEditorBase-2.SizeMode) property. To apply different size modes within this demo, use the drop-down list in the demo card's header.

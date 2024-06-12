@@ -1,0 +1,53 @@
+﻿@page "/TreeList/Customization/AltRowStyle"
+
+<DemoPageSectionComponent Id="TreeList-Customization-AltRowStyle" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject ISalesByRegionDataProvider SalesByRegionDataProvider
+
+        <style>
+            .alt-item {
+                background-color: var(--bs-gray-200);
+            }
+        </style>
+
+        <DxTreeList @ref="TreeList"
+                    Data="Data"
+                    KeyFieldName="ID"
+                    ParentKeyFieldName="RegionID"
+                    ShowAllRows="true"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    CustomizeElement="TreeList_CustomizeElement"
+                    SizeMode="Params.SizeMode"
+                    CssClass="max-h-480">
+            <Columns>
+                <DxTreeListDataColumn FieldName="Region" />
+                <DxTreeListDataColumn FieldName="MarchSales" DisplayFormat="c0" />
+                <DxTreeListDataColumn FieldName="SeptemberSales" DisplayFormat="c0" />
+                <DxTreeListDataColumn FieldName="MarchChange" DisplayFormat="p2" />
+                <DxTreeListDataColumn FieldName="SeptemberChange" DisplayFormat="p2" />
+                <DxTreeListDataColumn FieldName="MarketShare" DisplayFormat="p0" />
+            </Columns>
+        </DxTreeList>
+
+        @code {
+            ITreeList TreeList { get; set; }
+            object Data { get; set; }
+
+            protected override void OnInitialized () {
+                Data = SalesByRegionDataProvider.GenerateData();
+            }
+
+            protected override void OnAfterRender (bool firstRender) {
+                if(firstRender)
+                    TreeList.ExpandRow(0);
+            }
+
+            void TreeList_CustomizeElement(TreeListCustomizeElementEventArgs e) {
+                if(e.ElementType == TreeListElementType.DataRow && e.VisibleIndex % 2 == 1) {
+                    e.CssClass = "alt-item";
+                }
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

@@ -1,0 +1,1 @@
+In this demo, users can upload multiple files simultaneously. Set the [AllowMultiFileUpload](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFileInput.AllowMultiFileUpload) property to `true` to enable this behavior.

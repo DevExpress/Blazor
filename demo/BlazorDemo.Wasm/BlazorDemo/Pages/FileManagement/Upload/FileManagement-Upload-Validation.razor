@@ -10,8 +10,7 @@
                   MaxFileSize="4000000"
                   AllowedFileExtensions="@(new List<string> { ".jpg", ".jpeg", ".gif", ".png" })"
                   UploadUrl="@GetUploadUrl("api/UploadValidation/Upload/")"
-                  SelectedFilesChanged="@SelectedFilesChanged"
-                  CssClass="@(SelectedFilesCount > 0 ? "w-100" : string.Empty)">
+                  SelectedFilesChanged="@SelectedFilesChanged">
         </DxUpload>
     </div>
 

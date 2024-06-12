@@ -2,36 +2,46 @@
     <ChildContentWithParameters Context="Params">
         @inject WorldcitiesDataService WorldcitiesDataService
 
-        @if(Data != null) {
-            <label for="tbFiltering" class="demo-text cw-480 mb-1">
-                Countries
-            </label>
-            <DxTagBox Data="@Data"
-                      FilteringMode="@FilteringMode"
-                      @bind-Values="@Values"
-                      TextFieldName="@nameof(Country.CountryName)"
-                      SizeMode="Params.SizeMode"
-                      CssClass="cw-480"
-                      InputId="tbFiltering" />
-        }
+        <label for="tbFiltering" class="demo-text cw-480 mb-1">
+            Countries
+        </label>
+        <DxTagBox Data="@Countries"
+                  SearchMode="@SearchMode"
+                  SearchFilterCondition="@SearchFilterCondition"
+                  SearchTextParseMode="@SearchTextParseMode"
+                  @bind-Values="@Values"
+                  TextFieldName="@nameof(Country.CountryName)"
+                  SizeMode="Params.SizeMode"
+                  CssClass="cw-480"
+                  InputId="tbFiltering" />
     </ChildContentWithParameters>
 
     <OptionsContent>
-        <OptionComboBox Label="Filtering Mode:"
-                        Data="@(Enum.GetNames(typeof(DataGridFilteringMode)))"
-                        Value="@(FilteringMode.ToString())"
-                        ValueChanged="@((string selectedItem) =>
-                            { FilteringMode = Enum.Parse<DataGridFilteringMode>(selectedItem); })" />
+        <OptionComboBox Label="Search Mode:"
+                        Data="@(Enum.GetNames(typeof(ListSearchMode)))"
+                        Value="@(SearchMode.ToString())"
+                        ValueChanged="@((string item) => { SearchMode = Enum.Parse<ListSearchMode>(item); })" />
+        <OptionComboBox Label="Search Filter Condition:"
+                        Data="@(Enum.GetNames(typeof(ListSearchFilterCondition)))"
+                        Value="@(SearchFilterCondition.ToString())"
+                        ValueChanged="@((string item) => { SearchFilterCondition = Enum.Parse<ListSearchFilterCondition>(item); })" />
+        <OptionComboBox Label="Search Text Parse Mode:"
+                        Data="@(Enum.GetNames(typeof(ListSearchTextParseMode)))"
+                        Value="@(SearchTextParseMode.ToString())"
+                        ValueChanged="@((string item) => { SearchTextParseMode = Enum.Parse<ListSearchTextParseMode>(item); })" />
     </OptionsContent>
 
     @code {
-        IEnumerable<Country> Data { get; set; }
+        IEnumerable<Country> Countries { get; set; }
         IEnumerable<Country> Values { get; set; }
-        DataGridFilteringMode FilteringMode { get; set; } = DataGridFilteringMode.StartsWith;
+
+        ListSearchMode SearchMode { get; set; } = ListSearchMode.AutoSearch;
+        ListSearchFilterCondition SearchFilterCondition { get; set; } = ListSearchFilterCondition.Contains;
+        ListSearchTextParseMode SearchTextParseMode { get; set; } = ListSearchTextParseMode.GroupWordsByAnd;
 
         protected override async Task OnInitializedAsync() {
-            Data = await WorldcitiesDataService.GetCountriesAsync();
-            Values = Data.Where(c => c.CountryName == "UK" || c.CountryName == "USA");
+            Countries = await WorldcitiesDataService.GetCountriesAsync();
+            Values = Countries.Where(c => c.CountryName == "UK" || c.CountryName == "USA");
         }
     }
 </DemoPageSectionComponent>

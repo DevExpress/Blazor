@@ -1,0 +1,49 @@
+﻿<DemoPageSectionComponent Id="DialogsAndWindows-Toast-Positioning" ShowSizeMode="true" MinHeight="500">
+    <ChildContentWithParameters Context="Params">
+        <div class="custom-toast-background d-flex align-items-center">
+            <DxButton RenderStyle="ButtonRenderStyle.Secondary" Text="SHOW A TOAST" Click="AddToast" />
+            <DxToastProvider Name="Positioning"
+                             MaxToastCount="3"
+                             HorizontalAlignment="HorizontalAlignment"
+                             VerticalAlignment="VerticalAlignment"
+                             Width="@Width"
+                             ShowCloseButton="true"
+                             SizeMode="Params.SizeMode"/>
+        </div>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionComboBox Label="Horizontal Alignment:"
+                        CssClass="ow-100"
+                        Data="@HorizontalAlignmentSource"
+                        @bind-Value="@HorizontalAlignment" />
+        <OptionComboBox Label="Vertical Alignment:"
+                        CssClass="ow-100"
+                        Data="@VerticalAlignmentSource"
+                        @bind-Value="@VerticalAlignment" />
+        <OptionComboBox Label="Width:"
+                        CssClass="ow-100"
+                        Data="@WidthSource"
+                        @bind-Value="@Width" />
+    </OptionsContent>
+
+    @code {
+        [Inject] IToastNotificationService ToastService { get; set; }
+
+        static HorizontalAlignment[] HorizontalAlignmentSource { get; set; } = Enum.GetValues<HorizontalAlignment>();
+        static VerticalEdge[] VerticalAlignmentSource { get; set; } = Enum.GetValues<VerticalEdge>();
+        static string[] WidthSource { get; set; } = { "300px", "50%", "auto" };
+
+        HorizontalAlignment HorizontalAlignment { get; set; } = HorizontalAlignment.Right;
+        VerticalEdge VerticalAlignment { get; set; } = VerticalEdge.Bottom;
+        string Width { get; set; } = WidthSource.First();
+
+        private void AddToast() {
+            ToastService.ShowToast(new ToastOptions {
+                ProviderName = "Positioning",
+                Title = "Notification title",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit,..."
+            });
+        }
+    }
+
+</DemoPageSectionComponent>

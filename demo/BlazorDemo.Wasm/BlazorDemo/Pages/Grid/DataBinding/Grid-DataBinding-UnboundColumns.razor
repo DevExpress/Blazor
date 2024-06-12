@@ -4,33 +4,37 @@
 <DemoPageSectionComponent Id="Grid-DataBinding-UnboundColumns" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
-        <DxGrid Data="@Data"
-                SizeMode="Params.SizeMode"
-                KeyboardNavigationEnabled="true"
-                ColumnResizeMode="GridColumnResizeMode.NextColumn"
-                UnboundColumnData="Grid_UnboundColumnData"
-                CustomizeElement="Grid_CustomizeElement">
-            <Columns>
-                <DxGridDataColumn FieldName="Product" MinWidth="150" />
-                <DxGridDataColumn FieldName="OrderDate" Width="10%" />
-                <DxGridDataColumn FieldName="ShippedDate" Width="10%" />
-                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
-                <DxGridDataColumn FieldName="Quantity" Width="10%" />
-                <DxGridDataColumn FieldName="FinalDiscount"
-                                  UnboundType="GridUnboundColumnType.Decimal"
-                                  Caption="Discount"
-                                  DisplayFormat="p0"
-                                  Width="10%" />
-                <DxGridDataColumn FieldName="Total"
-                                  UnboundType="GridUnboundColumnType.Decimal"
-                                  UnboundExpression="[UnitPrice] * [Quantity] * (1 - [FinalDiscount])"
-                                  SortIndex="0"
-                                  SortOrder="GridColumnSortOrder.Descending"
-                                  DisplayFormat="c"
-                                  MinWidth="100"
-                                  Width="15%" />
-            </Columns>
-        </DxGrid>
+
+        <div class="grid-container">
+            <DxGrid Data="@Data"
+                    SizeMode="Params.SizeMode"                
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                    UnboundColumnData="Grid_UnboundColumnData"
+                    CustomizeElement="Grid_CustomizeElement"
+                    TextWrapEnabled="false"
+                    VirtualScrollingEnabled="true">
+                <Columns>
+                    <DxGridDataColumn FieldName="Product" MinWidth="150" />
+                    <DxGridDataColumn FieldName="OrderDate" Width="10%" />
+                    <DxGridDataColumn FieldName="ShippedDate" Width="10%" />
+                    <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
+                    <DxGridDataColumn FieldName="Quantity" Width="10%" />
+                    <DxGridDataColumn FieldName="FinalDiscount"
+                                      UnboundType="GridUnboundColumnType.Decimal"
+                                      Caption="Discount"
+                                      DisplayFormat="p0"
+                                      Width="10%" />
+                    <DxGridDataColumn FieldName="Total"
+                                      UnboundType="GridUnboundColumnType.Decimal"
+                                      UnboundExpression="[UnitPrice] * [Quantity] * (1 - [FinalDiscount])"
+                                      SortIndex="0"
+                                      SortOrder="GridColumnSortOrder.Descending"
+                                      DisplayFormat="c"
+                                      MinWidth="100"
+                                      Width="15%" />
+                </Columns>
+            </DxGrid>
+        </div>
 
         @code {
             object Data { get; set; }
@@ -68,7 +72,7 @@
                     var orderDate = Convert.ToDateTime(e.Grid.GetRowValue(e.VisibleIndex, "OrderDate"));
                     var shippedDate = (DateTime?)e.Grid.GetRowValue(e.VisibleIndex, "ShippedDate");
                     if(IncreaseDiscountRequired(orderDate, shippedDate))
-                        e.Style = "color: green; font-weight: 700; background-color: #A3EBB1";
+                    e.Style = "color: #207A33; font-weight: 700; background-color: rgba(40, 167, 69, 0.15)";
                 }
             }
 

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace BlazorDemo.DemoData {
     public class DemoPageSection : DemoItem {

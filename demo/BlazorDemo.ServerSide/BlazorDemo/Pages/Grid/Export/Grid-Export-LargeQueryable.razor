@@ -1,0 +1,101 @@
+﻿@page "/Grid/Export/LargeQueryable"
+@layout DataProviderAccessArea<IRentInfoDataProvider>
+@using static BlazorDemo.Pages.Grid.Filtering.Grid_Filtering_ColumnFilterMenu_CustomRange;
+@using BlazorDemo.Pages.Grid.Filtering
+@using DevExpress.Export
+
+<DemoPageSectionComponent Id="Grid-Export-LargeQueryable" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inherits OwningComponentBase
+        @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+
+        <DataProviderAccessAreaContainer DataProvider="RentInfoDataProvider">
+        <div class="grid-container">
+            <DxGrid @ref="Grid"
+                    Data="Data"
+                    KeyFieldName="Oid"
+                    ShowGroupPanel="true"
+                    AutoExpandAllGroupRows="true"
+                    FilterMenuButtonDisplayMode="GridFilterMenuButtonDisplayMode.Always"
+                    GroupFooterDisplayMode="GridGroupFooterDisplayMode.IfExpanded"
+                    SelectionMode="GridSelectionMode.Multiple"
+                    SelectAllCheckboxMode="GridSelectAllCheckboxMode.AllPages"
+                    VirtualScrollingEnabled="true"
+                    PageSize="20"
+                    SizeMode="Params.SizeMode"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    HighlightRowOnHover="true">
+                <Columns>
+                    <DxGridSelectionColumn Width="9%" AllowSelectAll="true" />
+                    <DxGridDataColumn FieldName="State" MinWidth="80" Width="10%" GroupIndex="0" />
+                    <DxGridDataColumn FieldName="Area" Width="15%" />
+                    <DxGridDataColumn FieldName="City" Caption="County" MinWidth="100" Width="20%" />
+                    <DxGridDataColumn FieldName="Name" Caption="Location" MinWidth="100" Width="20%" />
+                    <DxGridDataColumn FieldName="Year" DisplayFormat="0" MinWidth="80" Width="15%" FilterRowValue="2022" />
+                    <DxGridDataColumn FieldName="Rent" MinWidth="80" DisplayFormat="C0" FilterRowOperatorType="GridFilterRowOperatorType.GreaterOrEqual" FilterRowValue="2000">
+                        <FilterMenuTemplate>
+                            <Grid_Filtering_ColumnFilterMenu_CustomRange FilterContext="context" Items="RentIntervals" />
+                        </FilterMenuTemplate>
+                    </DxGridDataColumn>
+                </Columns>
+                <TotalSummary>
+                    <DxGridSummaryItem FieldName="Area" SummaryType="GridSummaryItemType.Count" />
+                    <DxGridSummaryItem FieldName="Rent" SummaryType="GridSummaryItemType.Avg" />
+                </TotalSummary>
+                <GroupSummary>
+                    <DxGridSummaryItem FieldName="Area" SummaryType="GridSummaryItemType.Count" FooterColumnName="Area" />
+                    <DxGridSummaryItem FieldName="Rent" SummaryType="GridSummaryItemType.Avg" FooterColumnName="Rent" />
+                </GroupSummary>
+                <ToolbarTemplate>
+                    <DxToolbar>
+                        <DxToolbarItem Text="Export to XLSX" Click="ExportXlsx_Click"  BeginGroup="true" />
+                        <DxToolbarItem Text="Export to CSV" Click="ExportCsv_Click"  BeginGroup="true" />
+                        <DxToolbarItem Context="itemCtx" Alignment="ToolbarItemAlignment.Right" BeginGroup="true">
+                            <Template>
+                                <DxCheckBox @bind-Checked="ExportSelectedRowsOnly">Export Selected Rows Only</DxCheckBox>
+                            </Template>
+                        </DxToolbarItem>
+                    </DxToolbar>
+                </ToolbarTemplate>
+            </DxGrid>
+        </div>
+        </DataProviderAccessAreaContainer>
+    </ChildContentWithParameters>
+    @code {
+        static IReadOnlyList<CustomRangeFilterItem> RentIntervals { get; } = CustomRangeFilterItem.CreateIntervals("Rent", 200, 10, true, "{0:c}");
+        IRentInfoDataProvider RentInfoDataProvider { get; set; }
+        RentInfoDataService RentInfoDataService { get; set; }
+
+        bool ExportSelectedRowsOnly { get; set; }
+        IGrid Grid { get; set; }
+        object Data { get; set; }
+
+        protected override void OnInitialized() {
+            // Refer to https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.components.owningcomponentbase
+            RentInfoDataProvider = ScopedServices.GetRequiredService<IRentInfoDataProvider>();
+            RentInfoDataService = ScopedServices.GetRequiredService<RentInfoDataService>();
+
+            var connectionString = ConnectionStringUtils.GetGridLargeDataConnectionString(Configuration);
+            if(string.IsNullOrEmpty(connectionString)) return;
+
+            var dataSource = new GridDevExtremeDataSource<AreaRentInfo>(RentInfoDataService.GetAreaRentInfo());
+            dataSource.CustomizeLoadOptions = (loadOptions) => {
+                loadOptions.PrimaryKey = new[] { "Oid" };
+            };
+
+            Data = dataSource;
+        }
+
+        async Task ExportXlsx_Click() {
+            await Grid.ExportToXlsxAsync("ExportResult", new GridXlExportOptions() {
+                ExportSelectedRowsOnly = ExportSelectedRowsOnly
+            });
+        }
+        async Task ExportCsv_Click() {
+            await Grid.ExportToCsvAsync("ExportResult", new GridCsvExportOptions() {
+                ExportSelectedRowsOnly = ExportSelectedRowsOnly
+            });
+        }
+    }
+</DemoPageSectionComponent>

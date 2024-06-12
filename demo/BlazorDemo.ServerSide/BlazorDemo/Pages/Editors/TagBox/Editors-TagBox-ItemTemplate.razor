@@ -12,28 +12,28 @@
                       SizeMode="Params.SizeMode"
                       CssClass="cw-480"
                       InputId="tbItemTemplate">
-                <TagTemplate Context="tagInfo">
-                    <div class="tag-template">
-                        <img class="tag-template-employee-photo" src="@StaticAssetUtils.GetImagePath(GetImageFileName(tagInfo.DataItem))" alt="@tagInfo.DataItem.FullName" />
-                        <div>@tagInfo.DataItem.FullName</div>
-                        <DxButton Click="@tagInfo.RemoveTagAction"
+                <TagDisplayTemplate Context="tagContext">
+                    <div class="tagbox-tag-template">
+                        <img class="tagbox-tag-template-employee-photo" src="@StaticAssetUtils.GetImagePath(GetImageFileName(tagContext.DataItem))" alt="@tagContext.DataItem.FullName" />
+                        <div>@tagContext.DataItem.FullName</div>
+                        <DxButton Click="@tagContext.RemoveTagAction"
                                   @onclick:stopPropagation
                                   aria-label="Remove Tag"
-                                  CssClass="tag-template-close-btn"
-                                  IconCssClass="tag-template-close-btn-icon"
+                                  CssClass="tagbox-tag-template-close-btn"
+                                  IconCssClass="tagbox-tag-template-close-btn-icon"
                             RenderStyle="ButtonRenderStyle.None" RenderStyleMode="ButtonRenderStyleMode.Text">
                         </DxButton>
                     </div>
-                </TagTemplate>
-                <ItemTemplate>
-                    <div class="item-template">
-                        <img class="item-template-employee-photo" src="@StaticAssetUtils.GetImagePath(GetImageFileName(context))" alt="@context.FullName" />
+                </TagDisplayTemplate>
+                <ItemDisplayTemplate>
+                    <div class="tagbox-item-template">
+                        <img class="tagbox-item-template-employee-photo" src="@StaticAssetUtils.GetImagePath(GetImageFileName(context.DataItem))" alt="@context.DataItem.FullName" />
                         <div>
-                            <span class="item-template-employee-first-name">@context.FullName</span>
-                            <span class="item-template-employee-home-phone">@context.HomePhone</span>
+                            <span class="tagbox-item-template-employee-first-name">@context.DataItem.FullName</span>
+                            <span class="tagbox-item-template-employee-home-phone">@context.DataItem.HomePhone</span>
                         </div>
                     </div>
-                </ItemTemplate>
+                </ItemDisplayTemplate>
             </DxTagBox>
             @*BeginHide*@
         </div>
@@ -42,19 +42,17 @@
 
 
     @code {
-    IEnumerable<Employee> Data { get; set; }
+        IEnumerable<Employee> Data { get; set; }
         IEnumerable<Employee> Values { get; set; }
 
         protected override async Task OnInitializedAsync() {
-        Data = await NwindDataService.GetEmployeesAsync();
-        Values = Data.Take(1);
+            Data = await NwindDataService.GetEmployeesAsync();
+            Values = Data.Take(1);
         }
 
         string GetImageFileName(Employee employee) {
-        return $"employees/item-template{employee.EmployeeId}.jpg";
+            return $"employees/item-template{employee.EmployeeId}.jpg";
         }
-
-
     }
 
 </DemoPageSectionComponent>

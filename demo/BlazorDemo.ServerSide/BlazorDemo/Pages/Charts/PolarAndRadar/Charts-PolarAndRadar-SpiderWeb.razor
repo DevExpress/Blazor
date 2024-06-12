@@ -1,0 +1,79 @@
+﻿@page "/ChartPolarSpiderWeb"
+@using BlazorDemo.DataProviders.Implementation
+@using System.Drawing
+@using Microsoft.AspNetCore.Components.Rendering
+@using System.Linq.Expressions
+
+<DemoPageSectionComponent Id="Charts-PolarAndRadar-SpiderWeb">
+    <OptionsContent>
+        <OptionComboBox Label="Series Type:" Data="@SeriesTypes" @bind-Value="@SelectedSeries"/>
+    </OptionsContent>
+    <DemoChildContent>
+        @inject IChartSpiderDataProvider ChartSpiderDataProvider
+        <DxPolarChart Data=@DataSource UseSpiderWeb="true" Width="100%" Height="500">
+            <DxChartTitle>
+                <div class="spider-chart-title">
+                    Fruit Production By Country (Millions of Tons)
+                </div>
+            </DxChartTitle>
+            <DxChartLegend Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Right"/>
+            <DxChartTooltip Enabled="true">
+                <div class="spider-chart-tooltip">
+                    @context.Point.Value M
+                </div>
+            </DxChartTooltip>
+            @foreach(var info in SeriesInfos) {
+                @RenderSeries(info.ValueField, info.Name);
+            }
+        </DxPolarChart>
+
+        @code {
+            public class SeriesInfo {
+                public string Name { get; set; }
+                public Expression<Func<SpiderPoint, object>> ValueField { get; set; }
+
+                public SeriesInfo (string name, Expression<Func<SpiderPoint, object>> valueField) {
+                    Name = name;
+                    ValueField = valueField;
+                }
+            }
+
+            string SelectedSeries { get; set; }
+
+            IEnumerable<string> SeriesTypes = new List<string>() {
+                "Line",
+                "Area",
+                "Scatter",
+            };
+
+            IEnumerable<SeriesInfo> SeriesInfos = new List<SeriesInfo>() {
+                new SeriesInfo("Apples", i => i.Apples),
+                new SeriesInfo("Grapes", i => i.Grapes),
+                new SeriesInfo("Lemons", i => i.Lemons),
+                new SeriesInfo("Oranges", i => i.Oranges),
+            };
+
+            IEnumerable<SpiderPoint> DataSource = Enumerable.Empty<SpiderPoint>();
+
+            protected override void OnInitialized () {
+                DataSource = ChartSpiderDataProvider.GenerateData();
+                SelectedSeries = SeriesTypes.FirstOrDefault();
+            }
+
+            RenderFragment RenderSeries(Expression<Func<SpiderPoint, object>> valueField, string name) {
+                Expression<Func<SpiderPoint, object>> argumentField = i => i.Arg;
+                switch(SelectedSeries) {
+                    case "Line":
+                        return @<DxPolarChartLineSeries Name="@name" ArgumentField="@argumentField" ValueField="@valueField"/>;
+                    case "Area":
+                        return @<DxPolarChartAreaSeries Name="@name" ArgumentField="@argumentField" ValueField="@valueField"/>;
+                    case "Scatter":
+                        return @<DxPolarChartScatterSeries Name="@name" ArgumentField="@argumentField" ValueField="@valueField"/>;
+                }
+
+                throw new ArgumentException("Incorrect series argument");
+            }
+        }
+
+    </DemoChildContent>
+</DemoPageSectionComponent>

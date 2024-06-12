@@ -1,0 +1,68 @@
+﻿@page "/ChartPolarDiscreteData"
+@using System.Drawing
+@using System.Linq.Expressions
+@using BlazorDemo.DataProviders.Implementation
+@using Microsoft.AspNetCore.Components.Rendering
+
+<DemoPageSectionComponent Id="Charts-PolarAndRadar-DiscreteData">
+    <OptionsContent>
+        <OptionComboBox Label="Series Type:" Data="@SeriesTypes" @bind-Value="@SelectedSeries"/>
+    </OptionsContent>
+    <DemoChildContent>
+        @inject IChartDiscreteDataProvider ChartDiscreteDataProvider
+        <DxPolarChart Data=@DataSource Width="100%" Height="500">
+            <DxChartTitle>
+                <div class="discrete-chart-title">
+                    Average Temperature in London, °C
+                </div>
+            </DxChartTitle>
+            <DxChartLegend Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Right"/>
+            <DxChartTooltip Enabled="true">
+                <div class="discrete-chart-tooltip">
+                    @context.Point.Value °C
+                </div>
+            </DxChartTooltip>
+
+            @RenderSeries(i => i.Day, Color.Sienna, "Day")
+            @RenderSeries(i => i.Night, Color.MidnightBlue, "Night")
+        </DxPolarChart>
+
+        @code {
+            IEnumerable<DiscretePoint> DataSource = Enumerable.Empty<DiscretePoint>();
+
+            string SelectedSeries { get; set; }
+
+            IEnumerable<string> SeriesTypes = new List<string>() {
+                "Area",
+                "Line",
+                "Scatter",
+                "Bar",
+                "StackedBar"
+            };
+
+            protected override void OnInitialized () {
+                DataSource = ChartDiscreteDataProvider.GenerateData();
+                SelectedSeries = SeriesTypes.FirstOrDefault();
+            }
+
+            RenderFragment RenderSeries(Expression<Func<DiscretePoint, object>> valueField, Color color, string name) {
+                Expression<Func<DiscretePoint, object>> argumentField = i => i.Arg;
+                switch(SelectedSeries) {
+                    case "Line":
+                        return @<DxPolarChartLineSeries Name="@name" Color="@color" ArgumentField="@argumentField" ValueField="@valueField"/>;
+                    case "Area":
+                        return @<DxPolarChartAreaSeries Name="@name" Color="@color" ArgumentField="@argumentField" ValueField="@valueField"/>;
+                    case "Bar":
+                        return @<DxPolarChartBarSeries Name="@name" Color="@color" ArgumentField="@argumentField" ValueField="@valueField"/>;
+                    case "StackedBar":
+                        return @<DxPolarChartStackedBarSeries Name="@name" Color="@color" ArgumentField="@argumentField" ValueField="@valueField"/>;
+                    case "Scatter":
+                        return @<DxPolarChartScatterSeries Name="@name" Color="@color" ArgumentField="@argumentField" ValueField="@valueField"/>;
+                }
+
+                throw new ArgumentException("Incorrect series argument");
+            }
+        }
+
+    </DemoChildContent>
+</DemoPageSectionComponent>

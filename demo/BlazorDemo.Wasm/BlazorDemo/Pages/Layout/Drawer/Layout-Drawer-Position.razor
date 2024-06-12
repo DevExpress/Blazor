@@ -1,0 +1,57 @@
+﻿<DemoPageSectionComponent Id="Layout-Drawer-Position"
+                          ShowSizeMode="true">
+    <OptionsContent>
+        <OptionComboBox Label="Mode:" CssClass="ow-100" Data="@ModeSource" @bind-Value="@Mode"/>
+        <OptionComboBox Label="Position:" CssClass="ow-100" Data="@PositionSource" @bind-Value="@Position"/>
+    </OptionsContent>
+    <ChildContentWithParameters Context="Params">
+        <div class="card ch-480 overflow-hidden">
+            <div class="card-header p-2 demo-bg-transparent">
+                <DxToolbar SizeMode="Params.SizeMode">
+                    <Items>
+                        <DxToolbarItem Attributes="@(DrawerUtils.GetToolbarButtonAttributes(IsOpen))"
+                                       Click="OnToolbarItemClick"
+                                       IconCssClass="tb-icon icon-hamburger" />
+                    </Items>
+                </DxToolbar>
+            </div>
+            <div class="card-body p-0">
+                <DxDrawer SizeMode="Params.SizeMode" CssClass="demo-drawer"
+                          @bind-IsOpen="IsOpen"
+                          Mode="Mode"
+                          Position="Position"
+                          PanelWidth="20%">
+                    <BodyTemplate>
+                        <DxMenu SizeMode="Params.SizeMode" CssClass="demo-drawer-menu w-100"
+                                Orientation="Orientation.Vertical">
+                            <Items>
+                                <DxMenuItem Text="Home" IconCssClass="menu-icon-home menu-icon" />
+                                <DxMenuItem Text="Components" IconCssClass="menu-icon-products menu-icon" />
+                                <DxMenuItem Text="Support" IconCssClass="menu-icon-support menu-icon" />
+                                <DxMenuItem Text="Contacts" IconCssClass="menu-icon-contacts menu-icon" />
+                                <DxMenuItem Text="About" IconCssClass="menu-icon-about menu-icon" />
+                            </Items>
+                        </DxMenu>
+                    </BodyTemplate>
+                    <TargetContent>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Penatibus et magnis dis parturient. Eget dolor morbi non arcu risus. Tristique magna sit amet purus gravida quis blandit. Auctor urna nunc id cursus metus aliquam eleifend mi in. Tellus orci ac auctor augue mauris augue neque gravida. Nullam vehicula ipsum a arcu. Nullam ac tortor vitae purus faucibus ornare suspendisse sed nisi. Cursus in hac habitasse platea dictumst. Egestas dui id ornare arcu. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim.</p>
+                        <p>Mauris rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar. Neque volutpat ac tincidunt vitae semper quis lectus. Sed sed risus pretium quam vulputate dignissim suspendisse in. Urna nec tincidunt praesent semper feugiat nibh sed pulvinar. Ultricies lacus sed turpis tincidunt id aliquet risus feugiat. Amet cursus sit amet dictum sit amet justo donec enim. Vestibulum rhoncus est pellentesque elit ullamcorper. Id aliquet risus feugiat in ante metus dictum at.</p>
+                    </TargetContent>
+                </DxDrawer>
+            </div>
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        DrawerMode[] ModeSource { get; set; } = Enum.GetValues<DrawerMode>();
+        DrawerPosition[] PositionSource { get; set; } = Enum.GetValues<DrawerPosition>();
+
+        bool IsOpen { get; set; } = true;
+        DrawerMode Mode { get; set; } = DrawerMode.Shrink;
+        DrawerPosition Position { get; set; } = DrawerPosition.Left;
+
+        void OnToolbarItemClick() {
+            IsOpen = !IsOpen;
+        }
+    }
+</DemoPageSectionComponent>

@@ -1,0 +1,18 @@
+.email-caption {
+    display: flex;
+    align-items: center;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.info-icon-btn {
+    padding-left: .25rem;
+    padding-right: .25rem;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.info-icon {
+    display: inline-block;
+    background-color: currentColor;
+    width: 16px;
+    height: 16px;
+    -webkit-mask-image: url("images/icons/info-circle.svg");
+    mask-image: url("images/icons/info-circle.svg");
+}

@@ -1,35 +1,40 @@
-@page "/Grid/Summary/Total"
+﻿@page "/Grid/Summary/Total"
 @layout DataProviderAccessArea<INwindDataProvider>
 
 <DemoPageSectionComponent Id="Grid-Summary-Total" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        <DxGrid Data="@Data"
-                SizeMode="Params.SizeMode" 
-                KeyboardNavigationEnabled="true">
-            <Columns>
-                <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
-                <DxGridDataColumn FieldName="City" Width="10%" />
-                <DxGridDataColumn FieldName="Region" Width="10%" />
-                <DxGridDataColumn FieldName="Country" Width="10%" />
-                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
-                <DxGridDataColumn FieldName="Quantity" MinWidth="80" Width="10%" />
-                <DxGridDataColumn FieldName="Total"
-                                  UnboundType="GridUnboundColumnType.Decimal"
-                                  UnboundExpression="[UnitPrice] * [Quantity]"
-                                  DisplayFormat="c"
-                                  MinWidth="100"
-                                  Width="15%" />
-            </Columns>
-            <TotalSummary>
-                <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="CompanyName" />
-                <DxGridSummaryItem SummaryType="GridSummaryItemType.Min" FieldName="Quantity" />
-                <DxGridSummaryItem SummaryType="GridSummaryItemType.Avg" FieldName="Quantity" ValueDisplayFormat="0.00" />
-                <DxGridSummaryItem SummaryType="GridSummaryItemType.Max" FieldName="Quantity" />
-                <DxGridSummaryItem SummaryType="GridSummaryItemType.Sum" FieldName="Total" />
-            </TotalSummary>
-        </DxGrid>
+        <div class="grid-container">
+            <DxGrid Data="@Data"
+                    SizeMode="Params.SizeMode"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    VirtualScrollingEnabled="true">
+                <Columns>
+                    <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
+                    <DxGridDataColumn FieldName="City" Width="10%" />
+                    <DxGridDataColumn FieldName="Region" Width="10%" />
+                    <DxGridDataColumn FieldName="Country" Width="10%" />
+                    <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
+                    <DxGridDataColumn FieldName="Quantity" MinWidth="80" Width="10%" />
+                    <DxGridDataColumn FieldName="Total"
+                                      UnboundType="GridUnboundColumnType.Decimal"
+                                      UnboundExpression="[UnitPrice] * [Quantity]"
+                                      DisplayFormat="c"
+                                      MinWidth="100"
+                                      Width="15%" />
+                </Columns>
+                <TotalSummary>
+                    <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="CompanyName" />
+                    <DxGridSummaryItem SummaryType="GridSummaryItemType.Min" FieldName="Quantity" />
+                    <DxGridSummaryItem SummaryType="GridSummaryItemType.Avg" FieldName="Quantity" ValueDisplayFormat="0.00" />
+                    <DxGridSummaryItem SummaryType="GridSummaryItemType.Max" FieldName="Quantity" />
+                    <DxGridSummaryItem SummaryType="GridSummaryItemType.Sum" FieldName="Total" />
+                </TotalSummary>
+            </DxGrid>
+        </div>
+
         @code {
             object Data { get; set; }
 

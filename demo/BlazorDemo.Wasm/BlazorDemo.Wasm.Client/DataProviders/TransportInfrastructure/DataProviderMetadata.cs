@@ -1,6 +1,6 @@
 using System;
-using Newtonsoft.Json;
-using JsonSerializer = System.Text.Json.JsonSerializer;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
 

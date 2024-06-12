@@ -37,7 +37,7 @@
         protected override async Task OnInitializedAsync() {
             Countries = await WorldcitiesDataService.GetCountriesAsync();
             Cities = await WorldcitiesDataService.GetCitiesAsync();
-            CurrentCountry = Countries.Where(c => c.CountryName == "USA").FirstOrDefault();
+            CurrentCountry = Countries.FirstOrDefault(c => c.CountryName == "USA");
             CurrentCountryCities = Cities.Where(c => c.CountryId == CurrentCountry.CountryId);
             CurrentCity = CurrentCountryCities.FirstOrDefault();
         }

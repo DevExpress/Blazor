@@ -11,11 +11,13 @@
                 KeyFieldName="EmployeeId"
                 ValidationEnabled="false"
                 SizeMode="Params.SizeMode"
-                EditMode="GridEditMode.EditCell"
-                KeyboardNavigationEnabled="true"
+                EditMode="GridEditMode.EditCell"                
                 EditModelSaving="Grid_EditModelSaving"
                 DataItemDeleting="Grid_DataItemDeleting"
-                CustomizeEditModel="Grid_CustomizeEditModel">
+                CustomizeEditModel="Grid_CustomizeEditModel"
+                ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                TextWrapEnabled="false"
+                HighlightRowOnHover="true">
             <Columns>
                 <DxGridDataColumn FieldName="TitleOfCourtesy" Caption="Courtesy Title" MinWidth="50" />
                 <DxGridDataColumn FieldName="FirstName" MinWidth="80" />
@@ -29,12 +31,14 @@
                     <HeaderTemplate>
                         <DxButton IconCssClass="grid-icon grid-icon-add"
                                   RenderStyle="ButtonRenderStyle.Link"
+                                  aria-label="Add"
                                   Click="@(() => Grid.StartEditNewRowAsync())" />
                     </HeaderTemplate>
                     <CellDisplayTemplate>
                         <div class="grid-cell-align-center">
                             <DxButton IconCssClass="grid-icon grid-icon-delete"
                                       RenderStyle="ButtonRenderStyle.Link"
+                                      aria-label="Delete"
                                       Click="@(() => Grid.ShowRowDeleteConfirmation(context.VisibleIndex))"/>
                         </div>
                     </CellDisplayTemplate>
@@ -43,6 +47,7 @@
                             <DxButton Enabled="false"
                                       CssClass="grid-disabled-button"
                                       IconCssClass="grid-icon grid-icon-delete"
+                                      aria-label="Delete"
                                       RenderStyle="ButtonRenderStyle.Link"/>
                         </div>
                     </CellEditTemplate>
@@ -57,10 +62,6 @@
 
         protected override async Task OnInitializedAsync() {
             DataSource = await NwindDataService.GetEmployeesEditableAsync();
-        }
-        protected override async Task OnAfterRenderAsync(bool firstRender) {
-            if(firstRender)
-                await Grid.StartEditRowAsync(0);
         }
         void Grid_CustomizeEditModel(GridCustomizeEditModelEventArgs e) {
             if(e.IsNew) {

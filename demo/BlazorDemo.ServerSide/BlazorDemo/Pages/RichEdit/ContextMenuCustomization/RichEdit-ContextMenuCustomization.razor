@@ -1,0 +1,86 @@
+﻿@page "/RichEditContextMenuCustomization"
+@using System.IO;
+@using System.Web;
+@using DevExpress.Blazor.RichEdit;
+
+<DemoPageSectionComponent Id="RichEdit-ContextMenuCustomization">
+    <DemoChildContent>
+        @inject IJSRuntime JSRuntime
+        @inject IDocumentProvider DocumentProvider
+
+        <DxRichEdit @ref=richEdit
+                    DocumentContent="@documentContent"
+                    ContextMenuEnabled=showContextMenu
+                    CustomizeContextMenu=OnCustomizeContextMenu
+                    @bind-Selection=selection
+                    CssClass="w-100 ch-720" />
+
+        <DxPopup @ref=popup HeaderText="Hyperlink URL">
+            <BodyContentTemplate>
+                <p>@link</p>
+            </BodyContentTemplate>
+        </DxPopup>
+
+    </DemoChildContent>
+    <OptionsContent>
+        <OptionCheckBox T="bool"
+                        @bind-Checked="showContextMenu"
+                        Label="Enable Context Menu" />
+    </OptionsContent>
+
+    @code {
+        DxRichEdit richEdit;
+        DxPopup popup;
+        Selection selection;
+        string textToSearch;
+        string link;
+        byte[] documentContent;
+        bool showContextMenu = true;
+
+        protected override async Task OnInitializedAsync() {
+            documentContent = await DocumentProvider.GetDocumentAsync("Example.docx");
+            await base.OnInitializedAsync();
+        }
+
+        async Task OnCustomizeContextMenu(IContextMenuItemCollection items) {
+            if (selection.Intervals[0].Length > 0) {
+                var span = await selection.ActiveSubDocument.GetTextSpanAsync(selection.Intervals[0]);
+                textToSearch = span.Text.Trim();
+            }
+            else
+                textToSearch = null;
+            var searchItem = items.AddCustomItem(0, "Google Search...", async () => {
+                var url = $"https://www.google.com/search?q={HttpUtility.UrlEncode(textToSearch)}";
+                await JSRuntime.InvokeVoidAsync("open", url, "_blank");
+            });
+            searchItem.Enabled = !string.IsNullOrEmpty(textToSearch);
+            searchItem.IconCssClass = "search-icon";
+
+            var hyperlinks = await selection.ActiveSubDocument.Hyperlinks.GetAllAsync();
+            var hyperlink = hyperlinks.SingleOrDefault(h => Enumerable.Range(h.Interval.Start, h.Interval.Length).Contains(selection.CaretPosition));
+            link = hyperlink?.Url;
+            if (!string.IsNullOrEmpty(link)) {
+                var openHyperlinkItem = items[RichEditContextMenuItemNames.OpenHyperlink];
+                openHyperlinkItem.BeginGroup = false;
+                var index = items.IndexOf(openHyperlinkItem);
+                var showURLItem = items.AddCustomItem(index, "Show URL");
+                showURLItem.Click = async () => {
+                    if (popup is not null)
+                        await popup.ShowAsync();
+                };
+                showURLItem.BeginGroup = true;
+            }
+
+            items.Remove(RichEditContextMenuItemNames.CutSelection);
+            items.Remove(RichEditContextMenuItemNames.CopySelection);
+            items.Remove(RichEditContextMenuItemNames.Paste);
+
+            var clipboardItem = items.AddCustomItem(1, "Clipboard");
+            clipboardItem.BeginGroup = true;
+            clipboardItem.Items.Add(RichEditContextMenuItemNames.CutSelection);
+            clipboardItem.Items.Add(RichEditContextMenuItemNames.CopySelection);
+            clipboardItem.Items.Add(RichEditContextMenuItemNames.Paste);
+        }
+    }
+
+</DemoPageSectionComponent>

@@ -1,0 +1,74 @@
+﻿@page "/TreeList/Selection/MultipleRowSelection"
+
+<DemoPageSectionComponent Id="TreeList-Selection-MultipleRowSelection" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject ISpaceObjectDataProvider SpaceObjectDataProvider
+
+        <div class="d-flex flex-wrap w-100">
+            <div class="w-auto mt-1 me-1 flex-grow-1" style="flex-basis: 500px">
+                <DxTreeList @ref="TreeList"
+                            Data="@TreeListData"
+                            ChildrenFieldName="Satellites"
+                            ShowAllRows="true"
+                            @bind-SelectedDataItems="SelectedDataItems"
+                            AllowSelectRowByClick="true"
+                            ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                            TextWrapEnabled="false"
+                            SizeMode="Params.SizeMode"
+                            CssClass="max-h-480">
+                    <Columns>
+                        <DxTreeListSelectionColumn Width="50px"/>
+                        <DxTreeListDataColumn FieldName="Name"/>
+                        <DxTreeListDataColumn FieldName="TypeOfObject" Caption="Type"/>
+                        <DxTreeListDataColumn FieldName="Mass10pow21kg" Caption="Mass, kg" DisplayFormat="N2">
+                            <HeaderCaptionTemplate>Mass, 10<sup>21</sup> &#215; kg</HeaderCaptionTemplate>
+                        </DxTreeListDataColumn>
+                    </Columns>
+                </DxTreeList>
+            </div>
+            <div class="card mt-1 me-1 flex-grow-1 max-h-480" style="flex-basis: 380px">
+                <div class="card-header bg-transparent text-body py-2 border-bottom-0 fw-bold">Selected solar system objects:</div>
+                <div class="card-body p-0 pb-2 overflow-auto">
+                    <ul class="list-group list-group-flush bg-transparent border-0">
+                        @foreach(var spaceObject in SelectedDataItems.Cast<SpaceObject>()) {
+                            <li class="list-group-item bg-transparent text-body py-0 border-0 mb-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@spaceObject.Name</h5>
+                                        <p class="card-text">
+                                            Radius: @spaceObject.MeanRadiusInKM.ToString("N2") km
+                                            Density: @spaceObject.Density.ToString("N2") g/cm<sup>3</sup>
+                                            Gravity: @spaceObject.SurfaceGravity.ToString("N2") m/s<sup>2</sup>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        @code {
+            ITreeList TreeList { get; set; }
+
+            List<SpaceObject> TreeListData { get; set; }
+            IReadOnlyList<object> SelectedDataItems { get; set; }
+
+            protected override void OnInitialized () {
+                TreeListData = SpaceObjectDataProvider.GenerateData();
+                SelectedDataItems = TreeListData.First().Satellites.Take(3).ToList();
+            }
+
+            protected override void OnAfterRender (bool firstRender) {
+                if(firstRender) {
+                    TreeList.BeginUpdate();
+                    TreeList.ExpandRow(0);
+                    TreeList.ExpandRow(3);
+                    TreeList.EndUpdate();
+                }
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

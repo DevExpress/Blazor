@@ -1,0 +1,3 @@
+The DevExpress Blazor Toast component allows you to initiate communications (about processes and events) with end users via “toast” notifications.
+
+The [DxToastProvider](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToastProvider) component serves as a toast container and should be declared where toasts will be displayed. In this demo, toasts are created at runtime. The [IToastNotificationService](https://docs.devexpress.com/Blazor/DevExpress.Blazor.IToastNotificationService) interface implements methods for dynamic toast creation. Inject the service in your page and call the [ShowToast](https://docs.devexpress.com/Blazor/DevExpress.Blazor.IToastNotificationService.ShowToast.overloads) method to create a toast at runtime.

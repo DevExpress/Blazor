@@ -1,0 +1,8 @@
+﻿/*BeginHide*/::deep /*EndHide*/.dxbl-drawer-content:has(.demo-drawer-overview-right) {
+    padding: 0;
+}
+/*BeginHide*/::deep /*EndHide*/.demo-drawer-overview-right .dxbl-drawer-header,
+/*BeginHide*/::deep /*EndHide*/.demo-drawer-overview-right .dxbl-drawer-body,
+/*BeginHide*/::deep /*EndHide*/.demo-drawer-overview-right .dxbl-drawer-footer {
+    width: 225px;
+}

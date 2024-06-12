@@ -2,8 +2,8 @@ The [ItemDisplayTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.D
 
 * [DataItem](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ListBoxItemDisplayTemplateContext-1.DataItem)
 * [DisplayText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ListBoxItemDisplayTemplateContext-1.DisplayText)
+* [HighlightedDisplayText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ListBoxItemDisplayTemplateContext-1.HighlightedDisplayText)
 * [Value](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ListBoxItemDisplayTemplateContext-1.Value)
 * [VisibleIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ListBoxDisplayTemplateContextBase-1.VisibleIndex)
-
 
 In this demo, the **ItemDisplayTemplate** property is used to display the ListBox's items in a card-like view. Each item shows an employee's first name, last name, photo, and phone number.

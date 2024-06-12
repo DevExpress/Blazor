@@ -8,13 +8,16 @@ using System.Threading.Tasks;
 namespace BlazorDemo.Services {
     public class StockQuoteChangeTimerService : IDisposable {
 
-        public StockQuoteChangeTimerService(StockQuoteService stockQuoteService) {
+        public StockQuoteChangeTimerService(StockQuoteService stockQuoteService, StockQuoteByRegionService stockQuoteByRegionService) {
             StockQuoteService = stockQuoteService;
+            StockQuoteByRegionService = stockQuoteByRegionService;
+
             CancellationTokenSource = new CancellationTokenSource();
             _ = ExecuteAsync(CancellationTokenSource.Token);
         }
 
         StockQuoteService StockQuoteService { get; }
+        StockQuoteByRegionService StockQuoteByRegionService { get; }
 
         CancellationTokenSource CancellationTokenSource { get; }
 
@@ -26,6 +29,7 @@ namespace BlazorDemo.Services {
         async Task ExecuteAsync(CancellationToken token) {
             while(!token.IsCancellationRequested) {
                 StockQuoteService.GenerateChanges();
+                StockQuoteByRegionService.GenerateChanges();
                 await Task.Delay(500, token);
             }
         }

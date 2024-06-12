@@ -24,6 +24,11 @@
                 @if(ChildContentWithParameters != null) {
                     @ChildContentWithParameters(parameters)
                 }
+                @if(!string.IsNullOrEmpty(DemoItem.DataSourceInfo)) {
+                    <div class="info-text">
+                        Data Source: @DemoItem.DataSourceInfo
+                    </div>
+                }
             </div>
         }
     </div>;
@@ -54,8 +59,7 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a href="#"
-                               class="@GetTabCssClass(ActiveTabPageIndex == 0)"
+                            <a class="@GetTabCssClass(ActiveTabPageIndex == 0)"
                                @key="0"
                                @onclick="@(() => OnTabClick(0))"
                                @onclick:preventDefault="true">
@@ -63,8 +67,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#"
-                               class="@GetTabCssClass(ActiveTabPageIndex == 1)"
+                            <a class="@GetTabCssClass(ActiveTabPageIndex == 1)"
                                @key="1"
                                @onclick="@(() => OnTabClick(1))"
                                @onclick:preventDefault="true">
@@ -75,7 +78,14 @@
                             @if(ShowSizeMode && IsComponentAreaVisible) {
                                 <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
                                     <Items>
-                                        <DxToolbarItem Text="@(SizeMode.ToString() + " size")" Alignment="ToolbarItemAlignment.Right" Visible="ShowSizeMode">
+                                        <DxToolbarItem
+                                            Text="Docs"
+                                            NavigateUrl="@(DemoConfiguration.DocBaseUrl + DemoItem.DocUrl)"
+                                            Target="_blank"
+                                            Alignment="ToolbarItemAlignment.Right"
+                                            IconCssClass="icon icon-doc"
+                                            Visible="!string.IsNullOrEmpty(DemoItem.DocUrl)"></DxToolbarItem>
+                                        <DxToolbarItem Text="@(SizeMode.ToString() + " size")" Alignment="ToolbarItemAlignment.Right" Visible="ShowSizeMode" BeginGroup="true">
                                             <Items>
                                                 <DxToolbarItem Name="Small" Click="OnSizeModeChanged" Text="Small size"></DxToolbarItem>
                                                 <DxToolbarItem Name="Medium" Click="OnSizeModeChanged" Text="Medium size"></DxToolbarItem>
@@ -86,14 +96,13 @@
                                 </DxToolbar>
                             }
                         </li>
-
                     </ul>
                 </div>
                 <div class="card-body">
                     @ComponentArea.Invoke(parameters)
                     <div class="demo-page-section-code-area d-none">
                         @if(IsCodeVisible) {
-                            <PageSectionCodeSnippetTabbed DocUrl="@DemoItem.DocUrl">
+                            <PageSectionCodeSnippetTabbed>
                                 @foreach(var key in CodeFilesContent[Id].Keys) {
                                     <PageSectionCodeSnippetTabPage Text="@key" Language="@GetTabPageLanguage(key)">
                                         @CodeFilesContent[Id][key]

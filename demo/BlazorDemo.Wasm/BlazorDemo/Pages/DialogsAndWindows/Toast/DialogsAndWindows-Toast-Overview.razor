@@ -1,0 +1,64 @@
+﻿<DemoPageSectionComponent Id="DialogsAndWindows-Toast-Overview" ShowSizeMode="true" MinHeight="580">
+    <ChildContentWithParameters Context="Params">
+        <div class="d-flex align-items-center custom-toast-background">
+            <DxToastProvider Name="Overview"
+                             MaxToastCount="5"
+                             AnimationType="ToastAnimationType.Slide"
+                             HorizontalAlignment="HorizontalAlignment.Center"
+                             DisplayTime="TimeSpan.Zero"
+                             SizeMode="Params.SizeMode"/>
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        [Inject] IToastNotificationService ToastService { get; set; }
+
+        protected override void OnAfterRender(bool firstRender) {
+            ToastService.ShowToast(new ToastOptions() {
+                ProviderName = "Overview",
+                ThemeMode = ToastThemeMode.Light,
+                RenderStyle = ToastRenderStyle.Primary,
+                Title = "Notification title",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit,..."
+            }, RenderButtons());
+
+            ToastService.ShowToast(new ToastOptions() {
+                ProviderName = "Overview",
+                ThemeMode = ToastThemeMode.Pastel,
+                RenderStyle = ToastRenderStyle.Primary,
+                Title = "Notification title",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit,..."
+            });
+
+            ToastService.ShowToast(new ToastOptions() {
+                ProviderName = "Overview",
+                ThemeMode = ToastThemeMode.Dark,
+                RenderStyle = ToastRenderStyle.Primary,
+                Title = "Notification title",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit,..."
+            });
+
+            ToastService.ShowToast(new ToastOptions() {
+                ProviderName = "Overview",
+                ThemeMode = ToastThemeMode.Saturated,
+                RenderStyle = ToastRenderStyle.Success,
+                Title = "Notification title"
+            });
+
+            ToastService.ShowToast(new ToastOptions() {
+                ProviderName = "Overview",
+                ThemeMode = ToastThemeMode.Saturated,
+                RenderStyle = ToastRenderStyle.Danger,
+                Title = "Notification title"
+            });
+        }
+
+        private RenderFragment RenderButtons() {
+            return @<div style="display: flex; gap: 0.5rem;">
+                       <DxButton>Button</DxButton>
+                       <DxButton RenderStyle="ButtonRenderStyle.Secondary">Button</DxButton>
+                   </div>;
+        }
+    }
+
+</DemoPageSectionComponent>

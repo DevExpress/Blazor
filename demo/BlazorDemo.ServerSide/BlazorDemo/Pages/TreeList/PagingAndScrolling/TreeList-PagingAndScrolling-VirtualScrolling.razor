@@ -1,0 +1,51 @@
+﻿@page "/TreeList/PagingAndScrolling/VirtualScrolling"
+
+<DemoPageSectionComponent Id="TreeList-PagingAndScrolling-VirtualScrolling" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject IEmployeeTaskDataProvider EmployeeTaskDataProvider
+
+        <DxTreeList @ref="TreeList"
+                    Data="Data"
+                    KeyFieldName="Id"
+                    ParentKeyFieldName="ParentId"
+                    VirtualScrollingEnabled="true"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    SizeMode="Params.SizeMode"
+                    CssClass="max-h-480">
+            <Columns>
+                <DxTreeListDataColumn FieldName="Name" Caption="Task" SortOrder="TreeListColumnSortOrder.Ascending" />
+                <DxTreeListDataColumn FieldName="EmployeeName" Caption="Assigned To" TextAlignment="TreeListTextAlignment.Left" Width="200px"/>
+                <DxTreeListDataColumn FieldName="StartDate" Width="100px"/>
+                <DxTreeListDataColumn FieldName="DueDate" Width="100px"/>
+                <DxTreeListDataColumn FieldName="Priority" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                    <CellDisplayTemplate>
+                        @{
+                            var displayText = TreeListRenderHelper.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem);
+                        }
+                        <span title="@displayText  priority">@displayText</span>
+                    </CellDisplayTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn Caption="Progress" FieldName="Status" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                    <CellDisplayTemplate>
+                        <span>@TreeListRenderHelper.EmployeeTaskStatusToString((EmployeeTask)context.DataItem)</span>
+                    </CellDisplayTemplate>
+                </DxTreeListDataColumn>
+            </Columns>
+        </DxTreeList>
+
+        @code {
+            ITreeList TreeList { get; set; }
+            object Data { get; set; }
+
+            protected override void OnInitialized () {
+                Data = EmployeeTaskDataProvider.GenerateData();
+            }
+
+            protected override void OnAfterRender (bool firstRender) {
+                if(firstRender)
+                    TreeList.ExpandAll();
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

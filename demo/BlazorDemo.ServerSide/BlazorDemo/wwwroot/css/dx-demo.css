@@ -412,12 +412,7 @@ body,
     --dxbl-treeview-spacing-y: 1rem;
 }
 
-.dxbl-treeview.sidebar-tree .dxbl-treeview-items-container > .dxbl-treeview-item .dxbl-treeview-item-container {
-    display: flex;
-    align-items: center;
-}
-
-.dxbl-treeview.sidebar-tree > .dxbl-scroll-viewer > .dxbl-scroll-viewer-content > .dxbl-treeview-items-container > .dxbl-treeview-item > .dxbl-treeview-item-content > .dxbl-treeview-item-container {
+.dxbl-treeview.sidebar-tree .dxbl-scroll-viewer-content > .dxbl-treeview-items-container > .dxbl-treeview-item > .dxbl-treeview-item-content > .dxbl-treeview-item-container {
     --dxbl-treeview-font-weight: 600;
 }
 
@@ -427,6 +422,11 @@ body,
 
 .dxbl-treeview.sidebar-tree .dxbl-treeview-items-container .dxbl-treeview-item .dxbl-treeview-item-container > span:not(.image):not(.dxbl-badge) {
     flex: 1;
+}
+
+.dxbl-treeview.sidebar-tree .dxbl-treeview-item-content > .dxbl-treeview-item-container > .dxbl-badge {
+    --dxbl-navigation-badge-border-radius: 0.75rem;
+    margin: 0;
 }
 
 .dxbl-treeview.sidebar-tree .item-ctp > .dxbl-treeview-item-content > .dxbl-treeview-item-container > .dxbl-badge {
@@ -439,12 +439,31 @@ body,
     --dxbl-navigation-badge-color: var(--bs-white);
 }
 
+.dxbl-treeview.sidebar-tree .item-new > .dxbl-treeview-item-content > .dxbl-treeview-item-container > .dxbl-badge {
+    --dxbl-navigation-badge-bg: var(--bs-primary);
+    --dxbl-navigation-badge-color: var(--bs-white);
+}
+
+.dxbl-treeview.sidebar-tree .item-upd > .dxbl-treeview-item-content > .dxbl-treeview-item-container > .dxbl-badge {
+    --dxbl-navigation-badge-bg: var(--bs-success);
+    --dxbl-navigation-badge-text-spacing-x: 0;
+    height: 0.5rem;
+    width: 0.5rem;
+}
+
 .dxbl-treeview.sidebar-tree .dxbl-treeview-items-container > .dxbl-treeview-item > .dxbl-treeview-item-content > .dxbl-treeview-item-container:not(.active) {
     background-image: none !important;
+    align-items: center;
+}
+
+.dxbl-treeview.sidebar-tree .dxbl-treeview-items-container > .dxbl-treeview-item.item-upd > .dxbl-treeview-item-content > .dxbl-treeview-item-container:not(.active) {
+    align-items: baseline;
 }
 
 .dxbl-treeview.sidebar-tree .dxbl-treeview-items-container > .dxbl-treeview-item > .dxbl-treeview-item-content > .dxbl-treeview-item-container {
     border: none !important;
+    display: grid;
+    grid-template-columns: auto auto 1fr;
 }
 
 .dxbl-treeview.sidebar-tree .dxbl-treeview-items-container .dxbl-treeview-item.dx-badge-preview .dxbl-treeview-item-container > .dxbl-badge {
@@ -933,12 +952,26 @@ body,
     font-size: 0.875rem;
     padding-top: .6rem;
     padding-bottom: .4rem;
+    cursor: wait;
+}
+
+.demo-page-section > .card > .card-header > .nav-tabs > .nav-item > .nav-link[href] {
+    cursor: pointer;
 }
 
 .demo-page-section > .card > .card-header .demo-page-section-toolbar {
     align-self: center;
     margin-right: 0.6rem;
     flex-grow: 1;
+    font-weight: 400;
+}
+
+.demo-page-section > .card > .card-header .demo-page-section-toolbar .icon-doc {
+    width: var(--dxbl-image-width);
+    height: var(--dxbl-image-height);
+    background-color: currentColor;
+    -webkit-mask-image: url("../images/documentation.svg");
+    mask-image: url("../images/documentation.svg");
 }
 
 .demo-page-section.no-code .demo-page-section-component-area .component-container {
@@ -970,6 +1003,15 @@ body,
 
 .demo-page-section-component-area .demo-text b {
     font-weight: 600;
+}
+
+.demo-page-section-component-area .info-text {
+    color: var(--bs-gray-600);
+    display: flex;
+    font-weight: 600;
+    justify-content: right;
+    margin: 1rem 0 -1rem 0;
+    width: 100%;
 }
 
 .demo-page-section-component-area .w-100 {
@@ -1046,8 +1088,20 @@ body,
     max-height: 220px;
 }
 
+.demo-page-section-component-area .max-h-380 {
+    max-height: 380px;
+}
+
 .demo-page-section-component-area .max-h-420 {
     max-height: 420px;
+}
+
+.demo-page-section-component-area .max-h-480 {
+    max-height: 480px;
+}
+
+.demo-page-section-component-area .max-h-525 {
+    max-height: 525px;
 }
 
 .demo-page-section-component-area .fs-825 {
@@ -1351,13 +1405,6 @@ body,
     -webkit-mask-repeat: no-repeat;
     background-position: center center;
     background-color: currentColor;
-}
-
-.demo-page-section-code-area .icon-doc {
-    width: 16px;
-    height: 16px;
-    mask-image: url("../images/documentation.svg");
-    -webkit-mask-image: url("../images/documentation.svg");
 }
 
 .demo-page-section-code-area .icon-copy {

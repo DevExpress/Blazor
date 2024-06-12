@@ -1,0 +1,30 @@
+﻿<DemoPageSectionComponent Id="FileManagement-FileInput-UploadModes">
+    <div class="upload-container">
+        <div style="@(SelectedFilesCount > 0 ? "display: none" : string.Empty)">
+            <span class="drop-file-icon mb-3"></span>
+            <span class="mb-3">Click the Select Files button to select a file</span>
+        </div>
+        <DxFileInput
+                  UploadMode="@UploadMode.OnButtonClick"
+                  AllowMultiFileUpload="true"
+                  MaxFileSize="15000000"
+                  SelectedFilesChanged="@SelectedFilesChanged"
+                  FilesUploading="OnFilesUploading">
+        </DxFileInput>
+    </div>
+
+    @code {
+        int SelectedFilesCount { get; set; }
+
+        protected void SelectedFilesChanged(IEnumerable<UploadFileInfo> files) {
+            SelectedFilesCount = files.ToList().Count;
+            InvokeAsync(StateHasChanged);
+        }
+
+        protected async Task OnFilesUploading(FilesUploadingEventArgs args) {
+            var file = args.Files[0];
+            using var stream = new System.IO.MemoryStream();
+            await file.OpenReadStream(file.Size).CopyToAsync(stream);
+        }
+    }
+</DemoPageSectionComponent>

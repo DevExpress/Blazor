@@ -1,4 +1,4 @@
-The [TagBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2) is an editor that allows users to select multiple items (tags) from a predefined drop-down list. Users can also type in the edit box to filter list items that contain the search string. Users can also use the ARROW UP, ARROW DOWN, and ENTER keys to navigate to the editor's items and select them. When a user presses and holds an arrow key, the editor's window continuously navigates between items. To remove a tag, users can click its remove button or press Backspace.
+The [TagBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2) is an editor that allows users to select multiple items (tags) from a predefined drop-down list. Users can also type in the edit box to filter list items that contain the search string. 
 
 The main TagBox API members are listed below:
 
@@ -10,5 +10,7 @@ The main TagBox API members are listed below:
 *   [ValuesChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.ValuesChanged) — Fires when the selected value collection is changed.
 
 The TagBox component supports different size modes. To specify the component's size in code, use the [SizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxResizableEditorBase-2.SizeMode) property. To apply different size modes, use the drop-down list in the demo card's header.
+
+The TagBox supports keyboard navigation ([list of supported keyboard shortcuts](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2#keyboard-navigation)), allowing users to navigate within the item list and select tags.
 
 This demo illustrates how to bind the TagBox to a list of complex business objects.

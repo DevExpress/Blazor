@@ -1,0 +1,22 @@
+.templateContainer {
+    width: 600px;
+}
+
+@media(max-width: 576px) {
+    .templateContainer {
+        width: 360px;
+    }
+}
+
+/*BeginHide*/::deep /*EndHide*/ .templateSpinEdit {
+    margin-bottom: 1rem;
+}
+.dx-demo-bold {
+    font-weight: bold;
+}
+.dx-demo-italic {
+    font-style: italic;
+}
+.dx-demo-underline {
+    text-decoration: underline;
+}

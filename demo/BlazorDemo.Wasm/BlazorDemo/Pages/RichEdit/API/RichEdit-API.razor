@@ -3,23 +3,54 @@
 @inject NavigationManager NavigationManager
 
 <DemoPageSectionComponent Id="RichEdit-API">
-    <DxRichEdit @ref="richEdit" CssClass="w-100 ch-720" />
+    <DxRichEdit @ref="richEdit" CssClass="w-100 ch-720"/>
 
     @code {
         DxRichEdit richEdit;
 
         protected override async Task OnAfterRenderAsync(bool firstRender) {
-            if (firstRender) {
+            if(firstRender) {
                 try {
                     await InitializeDocument();
-                }
-                catch (TaskCanceledException) { }
+                } catch(TaskCanceledException) { }
             }
+
             await base.OnAfterRenderAsync(firstRender);
         }
+
         async Task InitializeDocument() {
             Document documentAPI = richEdit.DocumentAPI;
+
             documentAPI.BeginUpdate();
+
+            await CreateTable(documentAPI);
+            await CreateHorizontalLine(documentAPI);
+            await CreateBodyParagraph(documentAPI);
+            await CreatePictureParagraph(documentAPI);
+            await CreateTitleParagraph(documentAPI);
+            await AddTextToFooter(documentAPI);
+
+            documentAPI.EndUpdate();
+        }
+
+        async Task CreateTitleParagraph(Document documentAPI) {
+            Paragraph titleParagraph = await documentAPI.Paragraphs.CreateAsync(0);
+            await titleParagraph.ChangePropertiesAsync(properties => { properties.SpacingAfter = 400; });
+            TextSpan titleParagraphTextSpan = await documentAPI.AddTextAsync(0, "Albert Einstein");
+            await titleParagraphTextSpan.ChangePropertiesAsync(properties => {
+                properties.FontName = "Arial";
+                properties.FontSize = 24;
+                properties.FontBold = true;
+            });
+        }
+
+        async Task CreatePictureParagraph(Document documentAPI) {
+            Paragraph pictureParagraph = await documentAPI.Paragraphs.CreateAsync(0);
+            await pictureParagraph.ChangePropertiesAsync(properties => { properties.Alignment = ParagraphAlignment.Center; });
+            await documentAPI.InlineImages.CreateAsync(0, DocumentImageSource.LoadFromUrl(NavigationManager.BaseUri + "_content/BlazorDemo/images/documents/AlbertEinstein.jpg", UnitConverter.PixelsToTwips(220), UnitConverter.PixelsToTwips(289)));
+        }
+
+        async Task CreateBodyParagraph(Document documentAPI) {
             Paragraph bodyParagraph = await documentAPI.Paragraphs.CreateAsync(0);
             await bodyParagraph.ChangePropertiesAsync(properties => {
                 properties.FirstLineIndentType = FirstLineIndentType.Indented;
@@ -32,36 +63,86 @@
                 properties.FontSize = 12;
             });
             TextSpan boldTextSpan = await documentAPI.GetTextSpanAsync(0, 15);
-            await boldTextSpan.ChangePropertiesAsync(properties => {
-                properties.FontBold = true;
-            });
+            await boldTextSpan.ChangePropertiesAsync(properties => { properties.FontBold = true; });
             TextSpan italicTextSpan = await documentAPI.GetTextSpanAsync(16, 31);
-            await italicTextSpan.ChangePropertiesAsync(properties => {
-                properties.FontItalic = true;
-            });
+            await italicTextSpan.ChangePropertiesAsync(properties => { properties.FontItalic = true; });
             await documentAPI.Hyperlinks.CreateAsync(bodyParagraphText.IndexOf("quantum mechanics"), "quantum mechanics".Length, url: "https://en.wikipedia.org/wiki/Quantum_mechanics");
             await documentAPI.Hyperlinks.CreateAsync(bodyParagraphText.IndexOf("theory of relativity"), "theory of relativity".Length, url: "https://en.wikipedia.org/wiki/Theory_of_relativity");
             await documentAPI.Hyperlinks.CreateAsync(bodyParagraphText.IndexOf("theoretical physicist"), "theoretical physicist".Length, url: "https://en.wikipedia.org/wiki/Theoretical_physics");
+        }
 
-            Paragraph pictureParagraph = await documentAPI.Paragraphs.CreateAsync(0);
-            await pictureParagraph.ChangePropertiesAsync(properties => {
-                properties.Alignment = ParagraphAlignment.Center;
+        async Task CreateHorizontalLine(Document documentAPI) {
+            var horizontalLine = await documentAPI.Tables.CreateAsync(0, 1, 2);
+
+            await horizontalLine.ChangePropertiesAsync(properties => {
+                properties.Width.Type = TableWidthType.Percent;
+                properties.Width.Value = 100;
+                properties.Borders.Top.Style = BorderLineStyle.None;
+                properties.Borders.Right.Style = BorderLineStyle.None;
+                properties.Borders.Left.Style = BorderLineStyle.None;
+                properties.Borders.Bottom.Style = BorderLineStyle.None;
+                properties.Borders.InsideHorizontal.Width = 45;
             });
-            await documentAPI.InlineImages.CreateAsync(0, DocumentImageSource.LoadFromUrl(NavigationManager.BaseUri + "_content/BlazorDemo/images/documents/AlbertEinstein.jpg", UnitConverter.PixelsToTwips(220), UnitConverter.PixelsToTwips(289)));
-            Paragraph titleParagraph = await documentAPI.Paragraphs.CreateAsync(0);
-            await titleParagraph.ChangePropertiesAsync(properties => {
-                properties.SpacingAfter = 400;
+        }
+
+        async Task CreateTable(Document documentAPI) {
+            string[,] tableContent = {
+                { "Title (translated)", "Significance" },
+                { "\"On a Heuristic Viewpoint Concerning the Production and Transformation of Light\"", "Resolved an unsolved puzzle by suggesting that energy is exchanged only in discrete amounts (quanta). This idea was pivotal to the early development of quantum theory." },
+                { "\"On the Motion of Small Particles Suspended in a Stationary Liquid, as Required by the Molecular Kinetic Theory of Heat\"", "Explained empirical evidence for the atomic theory, supporting the application of statistical physics." },
+                { "\"On the Electrodynamics of Moving Bodies\"", "Reconciled Maxwell's equations for electricity and magnetism with the laws of mechanics by introducing changes to mechanics, resulting from analysis based on empirical evidence that the speed of light is independent of the motion of the observer. Discredited the concept of a \"luminiferous ether\"." },
+            };
+
+            await documentAPI.Paragraphs.CreateAsync(0);
+
+            Table table = await documentAPI.Tables.CreateAsync(1, 2, 4);
+
+            await table.ChangePropertiesAsync(properties => {
+                properties.AutoFit = false;
+                properties.Width = new TableWidth { Type = TableWidthType.Percent, Value = 85 };
+                properties.TableStyleOptions = TableStyleOptions.HeaderRow;
+                properties.StyleName = TableStyleName.GridTable4Accent3;
             });
-            TextSpan titleParagraphTextSpan = await documentAPI.AddTextAsync(0, "Albert Einstein");
-            await titleParagraphTextSpan.ChangePropertiesAsync(properties => {
-                properties.FontName = "Arial";
-                properties.FontSize = 24;
-                properties.FontBold = true;
-            });
+
+            TableRows rows = table.Rows;
+
+            for(var i = rows.Count - 1; i >= 0; i--) {
+                var cells = rows[i].Cells;
+
+                for(var j = cells.Count - 1; j >= 0; j--)
+                    await documentAPI.AddTextAsync(cells[j].Interval.Start, tableContent[i, j]);
+            }
+
+            table = await documentAPI.Tables.GetAsync(0);
+
+            foreach(var cell in table.Rows[0].Cells) {
+                await cell.ChangePropertiesAsync(properties => {
+                    properties.ContentHorizontalAlignment = HorizontalAlignment.Center;
+                    properties.CharacterProperties.FontBold = true;
+                });
+            }
+
+            TableRow newRow = await table.Rows.InsertAsync(3, true);
+
+            await documentAPI.AddTextAsync(newRow.Cells[1].Interval.Start, "Equivalence of matter and energy, E = mc2 (and by implication, the ability of gravity to \"bend\" light), the existence of \"rest energy\", and the basis of nuclear energy.");
+            await documentAPI.AddTextAsync(newRow.Cells[0].Interval.Start, "\"Does the Inertia of a Body Depend Upon Its Energy Content?\"");
+
+            table = await documentAPI.Tables.GetAsync(0);
+
+            foreach(var row in table.Rows) {
+                await row.Cells[0].ChangePropertiesAsync(properties => {
+                    properties.Width = new TableWidth(TableWidthType.Percent, 30);
+                });
+                await row.Cells[1].ChangePropertiesAsync(properties => {
+                    properties.Width = new TableWidth(TableWidthType.Percent, 55);
+                });
+            }
+        }
+
+        async Task AddTextToFooter(Document documentAPI) {
             Section section = await documentAPI.Sections.GetAsync(0);
             SubDocument footer = await section.GetFooterAsync(createIfNotExist: true);
             await footer.AddTextAsync(0, "Source Wikipedia.com");
-            documentAPI.EndUpdate();
         }
     }
 </DemoPageSectionComponent>

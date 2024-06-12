@@ -13,10 +13,12 @@
                     CustomizeEditModel="Grid_CustomizeEditModel"
                     DataItemDeleting="Grid_DataItemDeleting"
                     FocusedRowChanged="Grid_FocusedRowChanged"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
                     SizeMode="Params.SizeMode"
-                    KeyboardNavigationEnabled="true">
+                    HighlightRowOnHover="true">
                 <ToolbarTemplate>
-                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" SizeMode="Params.SizeMode">
                         <DxToolbarItem Text="New" Click="NewItem_Click" IconCssClass="grid-toolbar-new" />
                         <DxToolbarItem Text="Edit" Click="EditItem_Click" IconCssClass="grid-toolbar-edit" Enabled="EditItemsEnabled" />
                         <DxToolbarItem Text="Delete" Click="DeleteItem_Click" IconCssClass="grid-toolbar-delete" Enabled="EditItemsEnabled" />

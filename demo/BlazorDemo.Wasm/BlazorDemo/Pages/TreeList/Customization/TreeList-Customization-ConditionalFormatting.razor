@@ -1,0 +1,73 @@
+﻿@page "/TreeList/Customization/ConditionalFormatting"
+
+<DemoPageSectionComponent Id="TreeList-Customization-ConditionalFormatting" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject ISalesByRegionDataProvider SalesByRegionDataProvider
+
+        <style>
+            .parent-region-row {
+                background-color: #f8f8f8;
+            }
+            td.loss-threshold {
+                background-color: rgba(245, 198, 203, 0.5);
+            }
+            td.win-threshold {
+                background-color: rgba(198, 245, 203, 0.5);
+            }
+        </style>
+
+        <DxTreeList @ref="TreeList"
+                    Data="Data"
+                    KeyFieldName="ID"
+                    ParentKeyFieldName="RegionID"
+                    ShowAllRows="true"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    CustomizeElement="TreeList_CustomizeElement"
+                    SizeMode="Params.SizeMode"
+                    CssClass="max-h-480">
+            <Columns>
+                <DxTreeListDataColumn FieldName="Region" />
+                <DxTreeListDataColumn FieldName="MarchSales" DisplayFormat="c0" />
+                <DxTreeListDataColumn FieldName="SeptemberSales" DisplayFormat="c0" />
+                <DxTreeListDataColumn FieldName="MarchChange" DisplayFormat="p2" />
+                <DxTreeListDataColumn FieldName="SeptemberChange" DisplayFormat="p2" />
+                <DxTreeListDataColumn FieldName="MarketShare" DisplayFormat="p0" />
+            </Columns>
+        </DxTreeList>
+
+        @code {
+            const decimal Threshold = 0.05M;
+            ITreeList TreeList { get; set; }
+            object Data { get; set; }
+
+            protected override void OnInitialized () {
+                Data = SalesByRegionDataProvider.GenerateData();
+            }
+
+            protected override void OnAfterRender (bool firstRender) {
+                if(firstRender)
+                    TreeList.ExpandAll();
+            }
+
+            void TreeList_CustomizeElement(TreeListCustomizeElementEventArgs e) {
+                if(e.ElementType == TreeListElementType.DataRow && (int)e.TreeList.GetRowValue(e.VisibleIndex, "RegionID") == 0) {
+                    e.CssClass = "parent-region-row";
+                }
+
+                if(e.ElementType == TreeListElementType.DataCell && e.Column is ITreeListDataColumn dataColumn) {
+                    if(dataColumn.FieldName == "MarchChange" || dataColumn.FieldName == "SeptemberChange") {
+                        var value = (decimal)e.TreeList.GetRowValue(e.VisibleIndex, dataColumn.FieldName);
+
+                        if(value > Threshold) {
+                            e.CssClass = "win-threshold";
+                        }
+                        else if(value < -Threshold) {
+                            e.CssClass = "loss-threshold";
+                        }
+                    }
+                }
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

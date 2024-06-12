@@ -1,0 +1,34 @@
+﻿<DemoPageSectionComponent Id="Utility-ProgressBar-Indeterminate" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="demo-progress-indeterminate">
+            <DxProgressBar Value="1"
+                           Type="ProgressBarType"
+                           SizeMode="Params.SizeMode"
+                           Size="@Size"
+                           ShowLabel="ShowLabel"
+                           ShowIcon="ShowIcon"
+                           Label="Loading..."
+                           Indeterminate="true" />
+        </div>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionComboBox @bind-Value="ProgressBarType"
+                        Data="Enum.GetValues<ProgressBarType>().ToList()"
+                        Label="Progress Bar Type" />
+        <OptionCheckBox @bind-Checked="ShowLabel" Label="Show label"/>
+        <OptionCheckBox @bind-Checked="ShowIcon" Label="Show icon"/>
+    </OptionsContent>
+
+    @code {
+        bool ShowLabel { get; set; }
+        bool ShowIcon { get; set; }
+        ProgressBarType ProgressBarType { get; set; }
+
+        string Size => ProgressBarType switch {
+            ProgressBarType.Horizontal => "350px",
+            ProgressBarType.Circular => "120px",
+            _ => string.Empty
+        };
+    }
+</DemoPageSectionComponent>

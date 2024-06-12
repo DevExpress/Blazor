@@ -1,9 +1,12 @@
-The [TagBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2) can display data across multiple columns. To create columns, use [DxListEditorColumn](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn) objects that include the following options for column customization:
+Our Blazor [TagBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2) can display data across multiple columns. To create columns, use [DxListEditorColumn](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn) objects as needs dictate. Objects include the following column customization options:
 
 *   [Caption](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.Caption) — Specifies the column caption.
-*   [FieldName](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.FieldName) — Specifies the data source field that populates column items.
-*   [Visible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.Visible) — Specifies the column visibility.
-*   [VisibleIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.VisibleIndex) — Specifies the column display order.
-*   [Width](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.Width) — Specifies the column width.
+*   [FieldName](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.FieldName) — Specifies the data source field used to populate column items.
+*   [SearchEnabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.SearchEnabled) — Specifies whether the component can search text in cells associated with the current column.
+*   [Visible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.Visible) — Specifies column visibility.
+*   [VisibleChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.VisibleChanged) — Fires when column visibility changes.
+*   [VisibleIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.VisibleIndex) — Specifies column display order.
+*   [VisibleIndexChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.VisibleIndexChanged) — Fires when the column's visible index changes.
+*   [Width](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.Width) — Specifies column width.
 
-To format an editor value, use the [EditFormat](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.EditFormat) property. This property allows you to format values displayed in both ordinary and multi-column TagBoxes. The `{1} {2}` format specifies that the editor value includes values of the following columns: **Name** (`VisibleIndex = 1`) and **Surname** (`VisibleIndex = 2`).
+To format an editor value, use the [EditFormat](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDropDownListEditorBase-2.EditFormat) property. This property allows you to format values displayed in both standard and multi-column TagBoxes. A `{0} {1}` format specifies that the editor value includes values for the following columns: **FirstName** (`VisibleIndex = 0`) and **LastName** (`VisibleIndex = 1`).

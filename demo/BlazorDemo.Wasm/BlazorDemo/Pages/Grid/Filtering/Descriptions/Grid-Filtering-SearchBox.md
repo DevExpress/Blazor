@@ -6,6 +6,6 @@ Use the [SearchText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid
 * **GroupWordsByOr** — Search words are treated as individual conditions grouped by the OR logical operator. Records that match at least one of these conditions are displayed.
 * **ExactMatch** — Search words are not treated separately. Only records that match search text exactly are displayed.
 
-In this demo, [keyboard navigation](https://docs.devexpress.com/Blazor/404652/components/grid/keyboard-support) is enabled. You can press Ctrl+F to move focus from a Grid element to the Search Box.
+You can press Ctrl+F to move focus from a Grid element to the Search Box.
 
 For more information about our Blazor Data Grid and its built-in search capabilities, refer to the following topic: [Search Box](https://docs.devexpress.com/Blazor/404142/grid/filter-data/search-box).

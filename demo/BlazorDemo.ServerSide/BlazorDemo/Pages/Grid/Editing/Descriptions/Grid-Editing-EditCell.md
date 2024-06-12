@@ -2,7 +2,7 @@ When `EditCell` mode is used, the DevExpress Blazor Grid displays an in-place ed
 
 To enable cell editing, you must:
 
-1. Enable the [KeyboardNavigationEnabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.KeyboardNavigationEnabled) property and set the [EditMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.EditMode) property to `EditCell`.
+1. Set the [EditMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.EditMode) property to `EditCell`.
 2. If your data object has a primary key, assign it to the [KeyFieldName](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.KeyFieldName) or [KeyFieldNames](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.KeyFieldNames) property. The Grid uses field values to compare and identify data items. If you do not specify these properties, the Grid uses standard [.NET value equality comparison](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/equality-comparisons) to identify data items.
 3. Handle the following events to make final data changes, check access permissions, post changes to the underlying data source, and reload Grid data:
     * [EditModelSaving](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.EditModelSaving) — Fires when a user saves the edited row and validation passes.
@@ -16,4 +16,4 @@ To display an editor in a data cell, users can focus the cell and press Enter. W
 * Esc — Hides the editor and discards changes made in this cell. Pressing Esc when the editor is hidden discards all changes made in the row and cancels row editing.
 * Tab/Shift+Tab — Hides the editor, focuses the next/previous data cell, and displays an editor in the newly focused cell.
 
-For detailed information on how to enable data editing and use edit-related options, refer to the following help topic: [Edit Data](https://docs.devexpress.com/Blazor/403454/components/grid/edit-data).
+For detailed information on how to enable data editing and use edit-related options, refer to the following help topic: [Cell Editing in Blazor Grid](https://docs.devexpress.com/Blazor/404756/components/grid/editing-and-validation/edit-modes/edit-cell).

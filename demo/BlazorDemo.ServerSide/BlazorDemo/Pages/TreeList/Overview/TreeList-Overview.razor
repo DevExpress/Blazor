@@ -1,0 +1,102 @@
+﻿@page "/TreeList"
+@using DevExpress.Data.Filtering
+
+<DemoPageSectionComponent Id="TreeList-Overview" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject IEmployeeTaskDataProvider EmployeeTaskDataProvider
+
+        <style>
+            .status-progress .dxbl-progress-bar-label {
+                display: none;
+            }
+        </style>
+
+        <DxTreeList @ref="TreeList"
+                    Data="TreeListData"
+                    KeyFieldName="Id"
+                    ParentKeyFieldName="ParentId"
+                    VirtualScrollingEnabled="true"
+                    ShowFilterRow="true"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    SizeMode="Params.SizeMode"
+                    CssClass="max-h-480">
+            <Columns>
+                <DxTreeListDataColumn FieldName="Name" Caption="Task" SortOrder="TreeListColumnSortOrder.Ascending" />
+                <DxTreeListDataColumn FieldName="EmployeeName" Caption="Assigned To" TextAlignment="TreeListTextAlignment.Left" Width="200px">
+                    <EditSettings>
+                        <DxComboBoxSettings Data="TreeListData" ValueFieldName="EmployeeName" TextFieldName="EmployeeName" FilteringMode="DataGridFilteringMode.Contains"/>
+                    </EditSettings>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn FieldName="StartDate" Width="100px"/>
+                <DxTreeListDataColumn FieldName="DueDate" Width="100px"/>
+                <DxTreeListDataColumn FieldName="Priority" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                    <EditSettings>
+                        <DxComboBoxSettings Data="Priorities" ValueFieldName="Value" TextFieldName="Text" ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Never"/>
+                    </EditSettings>
+                    <CellDisplayTemplate>
+                        @{
+                            var employeeTask = (EmployeeTask)context.DataItem;
+                            var displayText = TreeListRenderHelper.EmployeeTaskPriorityToString(employeeTask);
+
+                            var badgeClass = employeeTask.Priority switch {
+                                -1 => "bg-success",
+                                0 => "bg-info",
+                                1 => "bg-warning",
+                                _ => throw new ArgumentException()
+                            };
+                        }
+                        <span class="badge @badgeClass py-1 px-2" title="@displayText  priority">@displayText</span>
+                    </CellDisplayTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn Caption="Progress" FieldName="Status" Width="120px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                    <FilterRowCellTemplate>
+                        <DxComboBox @bind-Value="context.FilterCriteria"
+                                    Data="CompletedIntervals" ValueFieldName="Criteria" TextFieldName="DisplayText"
+                                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                                    aria-label="Select status"/>
+                    </FilterRowCellTemplate>
+                    <CellDisplayTemplate>
+                        <DxProgressBar Value="Convert.ToDouble(context.Value)"
+                                       MinValue="0"
+                                       MaxValue="100"
+                                       CssClass="status-progress"
+                                       Thickness="0.875em"
+                                       Size="100%"
+                                       ShowLabel="false" />
+                    </CellDisplayTemplate>
+                </DxTreeListDataColumn>
+            </Columns>
+            <TotalSummary>
+                <DxTreeListSummaryItem SummaryType="TreeListSummaryItemType.Count" FieldName="Name"/>
+                <DxTreeListSummaryItem SummaryType="TreeListSummaryItemType.Avg" FieldName="Status" DisplayText="Status: {0}%"/>
+            </TotalSummary>
+        </DxTreeList>
+
+        @code {
+            static readonly IReadOnlyList<FilterInterval> CompletedIntervals = new FilterInterval[] {
+                new("[Status] == 100", "Completed"),
+                new("[Status] < 100", "In Progress"),
+            };
+            static readonly IReadOnlyList<Priority> Priorities = new Priority[] {
+                new Priority(-1, "Low"),
+                new Priority(0, "Medium"),
+                new Priority(1, "High"),
+            };
+
+            ITreeList TreeList { get; set; }
+            List<EmployeeTask> TreeListData { get; set; }
+
+            protected override void OnInitialized () {
+                TreeListData = EmployeeTaskDataProvider.GenerateData();
+            }
+
+            record FilterInterval (CriteriaOperator Criteria, string DisplayText) {
+                public FilterInterval (string CriteriaText, string DisplayText)
+                    : this(CriteriaOperator.Parse(CriteriaText), DisplayText) {
+                }
+            }
+            record Priority (int Value, string Text);
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

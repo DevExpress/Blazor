@@ -34,8 +34,7 @@
         <OptionComboBox Label="Drop Down Width Mode:"
                         Data="@(Enum.GetNames(typeof(DropDownWidthMode)))"
                         Value="@(DropDownWidthMode.ToString())"
-                        ValueChanged="@((string selectedItem) =>
-                            { DropDownWidthMode = Enum.Parse<DropDownWidthMode>(selectedItem); })" />
+                        ValueChanged="@((string selectedItem) => { DropDownWidthMode = Enum.Parse<DropDownWidthMode>(selectedItem); })" />
     </OptionsContent>
 
     @code {

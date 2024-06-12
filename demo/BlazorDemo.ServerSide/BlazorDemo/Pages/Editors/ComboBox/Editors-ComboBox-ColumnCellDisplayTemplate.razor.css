@@ -1,0 +1,16 @@
+.align-right {
+    text-align: right;
+}
+
+.text-green {
+    color: var(--bs-success);
+}
+
+.text-red {
+    color: var(--bs-danger);
+}
+
+tr.dxbl-list-box-item-selected > td > div.text-red,
+tr.dxbl-list-box-item-selected > td > div.text-green {
+    color: var(--bs-white);
+}

@@ -1,0 +1,95 @@
+﻿<DemoPageSectionComponent Id="Editors-ComboBox-ColumnCellDisplayTemplate" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <DxComboBox Data="@Products"
+                    @bind-Value="@SelectedProduct"
+                    TextFieldName="@nameof(Product.ProductName)"
+                    ListRenderMode="@ListRenderMode.Virtual"
+                    SizeMode="Params.SizeMode"
+                    CssClass="cw-480"
+                    InputId="cbItemTemplate">
+            <Columns>
+                <DxListEditorColumn FieldName="@nameof(Product.ProductName)" Caption="Product" Width="30%" />
+                <DxListEditorColumn FieldName="@nameof(Product.UnitPrice)" Caption="Unit Price" />
+                <DxListEditorColumn FieldName="@nameof(Product.Quantity)" />
+                <DxListEditorColumn FieldName="@nameof(Product.Discount)" />
+                <DxListEditorColumn FieldName="@nameof(Product.Total)" />
+            </Columns>
+            <ColumnCellDisplayTemplate>
+                @GetColumnCellTemplateRenderFragment(context)
+            </ColumnCellDisplayTemplate>
+        </DxComboBox>
+    </ChildContentWithParameters>
+
+
+    @code {
+        const int SelectedProductsCount = 3;
+        const int TotalPriceCeiling = 100;
+
+        IEnumerable<Product> Products { get; set; }
+        Product SelectedProduct { get; set; }
+
+        const string AlignRightCssClass = "align-right";
+        const string TextGreenCssClass = "text-green";
+        const string TextRedCssClass = "text-red";
+
+        protected override async Task OnInitializedAsync() {
+            var invoices = await NwindDataService.GetInvoicesAsync();
+            var products = await NwindDataService.GetProductsAsync();
+            Products = invoices.Join(products, i => i.ProductId, p => p.ProductId, (i, p) =>
+            new Product {
+                    ProductName = i.ProductName,
+                    UnitPrice = i.UnitPrice,
+                    Quantity = i.Quantity,
+                    Discount = i.Discount
+            });
+            SelectedProduct = Products.FirstOrDefault();
+        }
+
+        RenderFragment GetColumnCellTemplateRenderFragment(ComboBoxColumnCellDisplayTemplateContext<Product> context) {
+            object displayValue;
+            string cssClass = string.Empty;
+            switch(context.Column.FieldName) {
+                case nameof(Product.UnitPrice):
+                cssClass = AlignRightCssClass;
+                    displayValue = $"{context.Value:c}";
+                    break;
+                case nameof(Product.Quantity):
+                    cssClass = AlignRightCssClass;
+                    displayValue = context.DisplayText;
+                    break;
+                case nameof(Product.Discount):
+                    displayValue = $"{context.Value:p}";
+                    break;
+                case nameof(Product.Total):
+                    var value = context.DataItem.UnitPrice * context.DataItem.Quantity;
+                    var valueCssClass = value >= TotalPriceCeiling ? TextGreenCssClass : TextRedCssClass;
+                    cssClass = $"{AlignRightCssClass} {valueCssClass}";
+                    displayValue = $"{value:c}";
+                    break;
+                default:
+                    displayValue = context.DisplayText;
+                    break;
+            }
+            return @<text><div class="@cssClass">@displayValue</div></text>;
+        }
+
+        public class Product {
+            public string ProductName { get; set; }
+            public decimal UnitPrice { get; set; }
+            public int Quantity { get; set; }
+            public float Discount { get; set; }
+            public int Total { get; set; }
+
+            public override bool Equals(object obj) {
+                return obj is Product product && string.Equals(product.ProductName, ProductName) && product.Quantity == Quantity;
+            }
+
+            public override int GetHashCode() {
+                return HashCode.Combine(ProductName, Quantity);
+            }
+        }
+    }
+
+</DemoPageSectionComponent>

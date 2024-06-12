@@ -1,0 +1,87 @@
+﻿@using DevExpress.Blazor.Internal
+@using DevExpress.Blazor.Internal.Editors
+
+<DemoPageSectionComponent Id="Editors-ListBox-SearchText" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <div class="cw-640 mb-1">
+            <DxTextBox NullText="Type search text..."
+                   InputDelay="500"
+                   @bind-Text="@SearchText"
+                   BindValueMode="BindValueMode.OnInput"
+                   ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto">
+                <Buttons>
+                    <DxEditorIconInternal Position="@EditorButtonPosition.Left" Icon="@SvgSymbolSpriteSourceCreator.Search" />
+                </Buttons>
+            </DxTextBox>
+            <br />
+            <DxListBox TData="Product" TValue="Product" Data="@Products"
+                               @bind-SearchText="@SearchText"
+                               @bind-Value="@SelectedProduct"
+                               SizeMode="Params.SizeMode"
+                               SearchTextParseMode="@SearchTextParseMode"
+                               ListRenderMode="ListRenderMode.Virtual"
+                               SelectionMode="ListBoxSelectionMode.Single">
+                        <Columns>
+                            <DxListEditorColumn FieldName="@nameof(Product.ProductName)" Caption="Product" Width="35%"/>
+                            <DxListEditorColumn FieldName="@nameof(Product.Country)" SearchEnabled="false" />
+                            <DxListEditorColumn FieldName="@nameof(Product.City)" />
+                            <DxListEditorColumn FieldName="@nameof(Product.Address)" Width="35%" />
+                        </Columns>
+            </DxListBox>
+            <p class="demo-text cw-800 mt-2">
+                Selected item: <b>@SelectedProduct?.ProductName</b>
+            </p>
+        </div>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionComboBox Label="Search Text Parse Mode:"
+                        Data="@(Enum.GetNames(typeof(ListSearchTextParseMode)))"
+                        Value="@(SearchTextParseMode.ToString())"
+                        ValueChanged="@((string item) => { SearchTextParseMode = Enum.Parse<ListSearchTextParseMode>(item); })" />
+    </OptionsContent>
+
+    @code {
+        IEnumerable<Product> Products { get; set; }
+    Product SelectedProduct { get; set; }
+    ListSearchTextParseMode SearchTextParseMode { get; set; } = ListSearchTextParseMode.GroupWordsByAnd;
+    string SearchText { get; set; } = "so ad";
+    protected override async Task OnInitializedAsync() {
+        var invoices = await NwindDataService.GetInvoicesAsync();
+        var products = await NwindDataService.GetProductsAsync();
+        Products = invoices.Join(products, i => i.ProductId, p => p.ProductId, (i, p) => new Product {
+                ProductName = i.ProductName,
+                Country = i.Country,
+                City = i.City,
+                Address = i.Address
+            }).Distinct();
+
+        SelectedProduct = new Product() {
+            ProductName = "Chef Anton's Cajun Seasoning",
+            Country = "Spain",
+            City = "Madrid",
+            Address = "C/ Araquil, 67",
+        };
+    }
+
+    public class Product {
+        public string ProductName { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
+        public string Address { get; set; }
+
+        public override bool Equals(object obj) {
+            return obj is Product product &&
+                string.Equals(product.ProductName, ProductName) &&
+                string.Equals(product.Country, Country) &&
+                string.Equals(product.City, City) &&
+                string.Equals(product.Address, Address);
+        }
+
+        public override int GetHashCode() {
+            return HashCode.Combine(ProductName, Country, City, Address);
+        }
+    }
+}
+</DemoPageSectionComponent>

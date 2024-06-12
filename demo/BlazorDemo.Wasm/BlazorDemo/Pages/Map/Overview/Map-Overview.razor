@@ -1,0 +1,11 @@
+﻿@page "/Map"
+
+@inject IMapApiKeyProvider MapApiKeyProvider
+<DemoPageSectionComponent Id="Map-Overview">
+    <DemoChildContent>
+        <DxMap Zoom="14" Provider="MapProvider.Bing" Width="100%" Height="600px" ControlsVisible="true" >
+            <DxMapApiKeys Bing="@MapApiKeyProvider.GetBingProviderKey()" />
+            <DxMapCenter GeoPosition="40.7061, -73.9969" />
+        </DxMap>
+    </DemoChildContent>
+</DemoPageSectionComponent>

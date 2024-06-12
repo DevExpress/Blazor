@@ -5,26 +5,47 @@
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        <DxGrid Data="GridData" PageSize="5"
-                DetailRowDisplayMode="GridDetailRowDisplayMode.Always"
-                CustomizeElement="Grid_CustomizeElement"
-                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
-            <Columns>
-                <DxGridDataColumn FieldName="FirstName" />
-                <DxGridDataColumn FieldName="LastName" />
-                <DxGridDataColumn FieldName="Title" />
-                <DxGridDataColumn FieldName="HireDate" />
-            </Columns>
-            <DetailRowTemplate>
-                @{
-                    var employee = (Employee)context.DataItem;
-                    <text>@employee.Notes</text>
-                }
-            </DetailRowTemplate>
-        </DxGrid>
+        <div class="grid-container">
+            <DxGrid Data="GridData"
+                    DetailRowDisplayMode="CurrentGridDetailRowDisplayMode"
+                    CustomizeElement="Grid_CustomizeElement"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    SizeMode="Params.SizeMode"
+                    ShowAllRows="true">
+                <Columns>
+                    <DxGridDataColumn FieldName="FirstName" />
+                    <DxGridDataColumn FieldName="LastName" />
+                    <DxGridDataColumn FieldName="Title" />
+                    <DxGridDataColumn FieldName="HireDate" />
+                </Columns>
+                <DetailRowTemplate>
+                    @{
+                        var employee = (Employee)context.DataItem;
+                        <text>@employee.Notes</text>
+                    }
+                </DetailRowTemplate>
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Contained">
+                        <Items>
+                            <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                                <Template Context="toolbar_item_context">
+                                    <div class="d-flex flex-row align-items-center h-100">
+                                        <div class="me-2">Detail Row Display Mode:</div>
+                                        <DxComboBox Data="@GridDetailRowDisplayModes" @bind-Value="@CurrentGridDetailRowDisplayMode"/>
+                                    </div>
+                                </Template>
+                            </DxToolbarItem>
+                        </Items>
+                    </DxToolbar>
+                </ToolbarTemplate>
+            </DxGrid>
+        </div>
 
         @code {
             object GridData { get; set; }
+            IEnumerable<GridDetailRowDisplayMode> GridDetailRowDisplayModes { get; } = Enum.GetValues<GridDetailRowDisplayMode>();
+            GridDetailRowDisplayMode CurrentGridDetailRowDisplayMode = GridDetailRowDisplayMode.Always;
 
             protected override async Task OnInitializedAsync() {
                 GridData = await NwindDataService.GetEmployeesAsync();

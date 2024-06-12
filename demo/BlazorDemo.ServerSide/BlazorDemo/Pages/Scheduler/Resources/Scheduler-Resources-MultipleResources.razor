@@ -1,0 +1,45 @@
+﻿@page "/Scheduler/Resources/MultipleResources"
+
+<DemoPageSectionComponent Id="Scheduler-Resources-MultipleResources">
+    <DemoChildContent>
+        <DxScheduler @bind-StartDate="@StartDate"
+                     DataStorage="@DataStorage"
+                     GroupType="SchedulerGroupType.Resource"
+                     CssClass="demo-sc-size"
+                     AppointmentFormMode="SchedulerAppointmentFormMode.EditForm">
+            <DxSchedulerDayView DayCount="2" ShowWorkTimeOnly="true"></DxSchedulerDayView>
+        </DxScheduler>
+    </DemoChildContent>
+
+    @code {
+        DateTime StartDate { get; set; } = DateTime.Today;
+        DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage()
+        {
+            AppointmentsSource = MultipleResourceAppointmentCollection.GetAppointments(),
+            AppointmentMappings = new DxSchedulerAppointmentMappings()
+            {
+                Type = "AppointmentType",
+                Start = "StartDate",
+                End = "EndDate",
+                Subject = "Caption",
+                AllDay = "AllDay",
+                Location = "Location",
+                Description = "Description",
+                LabelId = "Label",
+                StatusId = "Status",
+                RecurrenceInfo = "Recurrence",
+                ResourceId = "Resources"
+            },
+            ResourcesSource = ResourceCollection.GetResourcesForGrouping(),
+            ResourceMappings = new DxSchedulerResourceMappings()
+            {
+                Id = "Id",
+                Caption = "Name",
+                BackgroundCssClass = "BackgroundCss",
+                TextCssClass = "TextCss"
+            },
+            EnableMultipleResources = true
+        };
+    }
+</DemoPageSectionComponent>
+

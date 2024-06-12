@@ -12,9 +12,7 @@
                     CssClass="cw-480"
                     InputId="cbOverview"/>
         <p class="demo-text cw-480 mt-3">
-            Selected item: { FirstName=<b>@SelectedEmployee?.FirstName</b>,
-            LastName=<b>@SelectedEmployee?.LastName</b>,
-            Title=<b>@SelectedEmployee?.Title</b> }
+            @GetSelectedItemDescription()
         </p>
     </ChildContentWithParameters>
 
@@ -25,6 +23,23 @@
         protected override async Task OnInitializedAsync() {
             Data = await NwindDataService.GetEmployeesAsync();
             SelectedEmployee = Data.FirstOrDefault();
+        }
+
+        RenderFragment GetSelectedItemDescription() {
+            if(SelectedEmployee != null) {
+                return @<text>
+                    Selected Item: (
+                        @GetFieldDescription(nameof(Employee.FirstName), SelectedEmployee.FirstName),
+                        @GetFieldDescription(nameof(Employee.LastName), SelectedEmployee.LastName),
+                        @GetFieldDescription(nameof(Employee.City), SelectedEmployee.City)
+                    )
+                </text>;
+            }
+            return @<text>Selected Item: <b>null</b></text>;
+        }
+
+        RenderFragment GetFieldDescription(string fieldName, object value) {
+            return @<text>@fieldName: <b>@value</b></text>;
         }
     }
 </DemoPageSectionComponent>

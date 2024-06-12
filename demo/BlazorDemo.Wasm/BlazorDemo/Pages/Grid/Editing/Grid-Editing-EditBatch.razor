@@ -4,7 +4,6 @@
 <DemoPageSectionComponent Id="Grid-Editing-EditBatch" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
-
         <div class="grid-container">
             <DxGrid @ref="Grid"
                     PageSize="12"
@@ -12,11 +11,13 @@
                     KeyFieldName="EmployeeId"
                     ValidationEnabled="false"
                     SizeMode="Params.SizeMode"
-                    EditMode="GridEditMode.EditCell"
-                    KeyboardNavigationEnabled="true"
+                    EditMode="GridEditMode.EditCell"                    
                     EditModelSaving="Grid_EditModelSaving"
                     CustomizeElement="Grid_CustomizeElement"
-                    CustomizeEditModel="Grid_CustomizeEditModel">
+                    CustomizeEditModel="Grid_CustomizeEditModel"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    HighlightRowOnHover="true">
                 <ToolbarTemplate>
                     <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
                         <DxToolbarItem Text="New" Click="New_Click" IconCssClass="grid-toolbar-new" Enabled="true"/>
@@ -38,12 +39,14 @@
                             <div class="grid-cell-align-center">
                                 <DxButton IconCssClass="grid-icon grid-icon-delete"
                                           RenderStyle="ButtonRenderStyle.Link"
+                                          aria-label="Delete"
                                           Click="@(() => DeleteDataItem(context.DataItem))"/>
                             </div>
                         </CellDisplayTemplate>
                         <CellEditTemplate>
                             <div class="grid-cell-align-center">
                                 <DxButton Enabled="false"
+                                          aria-label="Delete"
                                           CssClass="grid-disabled-button"
                                           IconCssClass="grid-icon grid-icon-delete"
                                           RenderStyle="ButtonRenderStyle.Link"/>
@@ -66,18 +69,18 @@
         async Task Cancel_Click() => await ClearUnsavedChangesAsync();
         async Task Save_Click() {
             foreach(var unsavedChange in UnsavedChanges) {
-                var dataItem = unsavedChange.Key;
+                var changedItem = unsavedChange.Key;
                 var changeType = unsavedChange.Value.Type;
-                var changedFields = unsavedChange.Value.ChangedFields;
+                var dataItem = await FindDataItem(changedItem);
                 switch(changeType) {
                     case DataChangeType.Addition:
-                        await NwindDataService.InsertEmployeeAsync(dataItem);
+                        await NwindDataService.InsertEmployeeAsync(changedItem);
                         break;
                     case DataChangeType.Delete:
                         await NwindDataService.RemoveEmployeeAsync(dataItem);
                         break;
                     case DataChangeType.Modification:
-                        await NwindDataService.UpdateEmployeeAsync(dataItem, DataUtils.GetFieldValues(dataItem, changedFields));
+                        await NwindDataService.UpdateEmployeeAsync(dataItem, changedItem);
                         break;
                 }
             }
@@ -130,8 +133,11 @@
             await UpdateDataAsync();
         }
         async Task UpdateDataAsync() {
-            var data = await NwindDataService.GetEmployeesEditableAsync();
+            var data = (await NwindDataService.GetEmployeesEditableAsync()).Select(e => e.Clone());
             DataSource = new List<EditableEmployee>(data);
+        }
+        async Task<EditableEmployee> FindDataItem(EditableEmployee changedItem) {
+             return (await NwindDataService.GetEmployeesEditableAsync()).FirstOrDefault(e => e.EmployeeId == changedItem.EmployeeId);
         }
         record DataChange(DataChangeType Type, HashSet<string> ChangedFields);
         enum DataChangeType { Modification, Addition, Delete }

@@ -6,3 +6,5 @@ The following properties help manage a user’s ability to expand and collapse i
 
 * [ExpandMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxAccordion.ExpandMode) — Specifies how many items can be expanded at a given point in time.
 * [ExpandCollapseAction](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxAccordion.ExpandCollapseAction) — Specifies the action that expands or collapses the item. 
+
+The Accordion component also supports [keyboard navigation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxAccordion#keyboard-navigation). Press the Tab key or Shift+Tab to focus the Accordion and use Arrow keys to navigate through items.

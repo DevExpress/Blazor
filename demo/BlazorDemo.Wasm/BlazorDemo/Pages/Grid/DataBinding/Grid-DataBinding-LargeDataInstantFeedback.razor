@@ -1,5 +1,7 @@
 ﻿@page "/Grid/DataBinding/LargeDataInstantFeedback"
 @layout DataProviderAccessArea<IRentInfoDataProvider>
+@using BlazorDemo.Pages.Grid.Filtering
+@using static BlazorDemo.Pages.Grid.Filtering.Grid_Filtering_ColumnFilterMenu_CustomRange;
 
 <DemoPageSectionComponent Id="Grid-DataBinding-LargeDataInstantFeedback" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
@@ -7,33 +9,67 @@
         @inherits OwningComponentBase
         @implements IDisposable
         @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
-
+       
         <DataProviderAccessAreaContainer DataProvider="@RentInfoDataProvider">
-            <DxGrid Data="@InstantFeedbackSource"
-                    ShowGroupPanel="true" ShowFilterRow="true"
-                    VirtualScrollingEnabled="VirtualScrollingEnabled"
-                    PageSize="20" CssClass="ch-480"
-                    SizeMode="Params.SizeMode">
-                <Columns>
-                    <DxGridDataColumn FieldName="State" Width="5%" />
-                    <DxGridDataColumn FieldName="Area" MinWidth="100" />
-                    <DxGridDataColumn FieldName="City" Caption="County" MinWidth="100" />
-                    <DxGridDataColumn FieldName="Name" Caption="Location" MinWidth="100" />
-                    <DxGridDataColumn FieldName="Year" DisplayFormat="0" Width="10%" />
-                    <DxGridDataColumn FieldName="Bedrooms" Width="10%" />
-                    <DxGridDataColumn FieldName="Population" DisplayFormat="#,0" MinWidth="80" Width="10%" />
+        <div class="grid-container">
+            <DxGrid  @ref="Grid"
+                    Data="@InstantFeedbackSource"
+                    ShowGroupPanel="true"
+                    VirtualScrollingEnabled="VirtualScrollingEnabled" PageSize="20"
+                    FilterMenuButtonDisplayMode="GridFilterMenuButtonDisplayMode.Always"
+                    SizeMode="Params.SizeMode"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false">
+                <Columns>                   
+                    <DxGridDataColumn FieldName="State" MinWidth="80" Width="10%" />
+                    <DxGridDataColumn FieldName="Area" Width="12%" />
+                    <DxGridDataColumn FieldName="City" Caption="County" MinWidth="100" Width="17%" />
+                    <DxGridDataColumn FieldName="Name" Caption="Location" MinWidth="100" Width="17%" />
+                    <DxGridDataColumn FieldName="Year" DisplayFormat="0" MinWidth="80" Width="10%" />
+                    <DxGridDataColumn FieldName="Population" DisplayFormat="#,0" MinWidth="100">
+                        <FilterMenuTemplate>
+                            <Grid_Filtering_ColumnFilterMenu_CustomRange FilterContext="context" Items="PopulationIntervals" />
+                        </FilterMenuTemplate>
+                    </DxGridDataColumn>
+                    <DxGridDataColumn FieldName="Bedrooms" Width="12%">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="BedroomDisplayValues" />
+                        </EditSettings>
+                    </DxGridDataColumn>
+                    <DxGridDataColumn FieldName="Rent" MinWidth="80" DisplayFormat="C0">
+                        <FilterMenuTemplate>
+                            <Grid_Filtering_ColumnFilterMenu_CustomRange FilterContext="context" Items="RentIntervals" />
+                        </FilterMenuTemplate>
+                    </DxGridDataColumn>
                 </Columns>
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" SizeMode="Params.SizeMode">
+                        <Items>
+                            <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                                <Template Context="toolbar_item_context">
+                                    <div class="d-flex flex-row align-items-center h-100">
+                                        <DxCheckBox @bind-Checked="VirtualScrollingEnabled">Enable Virtual Scrolling</DxCheckBox>
+                                    </div>
+                                </Template>
+                            </DxToolbarItem>
+                        </Items>
+                    </DxToolbar>
+                </ToolbarTemplate>
             </DxGrid>
+        </div>
         </DataProviderAccessAreaContainer>
         </ChildContentWithParameters>
-        <OptionsContent>
-            <OptionCheckBox Label="Enable Virtual Scrolling" @bind-Checked="VirtualScrollingEnabled" />
-        </OptionsContent>
+        
         @code {
-            bool VirtualScrollingEnabled { get; set; } = true;
-
+            static IReadOnlyList<CustomRangeFilterItem> PopulationIntervals { get; } = CustomRangeFilterItem.CreateIntervals("Population", 10, 6, false, "{0:N0}");
+            static IReadOnlyList<CustomRangeFilterItem> RentIntervals { get; } = CustomRangeFilterItem.CreateIntervals("Rent", 200, 10, true, "{0:c}");
+            static IReadOnlyList<string> BedroomDisplayValues { get; } = new[] { "Studio", "One Bedroom", "Two Bedrooms", "Three Bedrooms", "Four Bedrooms" };
             IRentInfoDataProvider RentInfoDataProvider { get; set; }
             RentInfoDataService RentInfoDataService { get; set; }
+
+            bool VirtualScrollingEnabled { get; set; } = true;
+            IGrid Grid { get; set; }
+            object Data { get; set; }
 
             EntityInstantFeedbackSource InstantFeedbackSource { get; set; }
 
@@ -49,6 +85,18 @@
                     e.KeyExpression = "Oid";
                     e.QueryableSource = RentInfoDataService.GetAreaRentInfo();
                 });
+            }
+
+            protected override async Task OnAfterRenderAsync(bool firstRender)
+            {
+                if (firstRender)
+                {
+                    await Grid.WaitForDataLoadAsync();
+                    Grid.ExpandGroupRow(1);
+
+                    await Grid.WaitForDataLoadAsync();
+                    Grid.ExpandGroupRow(2);
+                }
             }
 
             public void Dispose() {

@@ -35,11 +35,24 @@ namespace BlazorDemo.Wasm {
             services.AddSingleton<IWeatherSummaryDataProvider, WeatherSummaryDataProviderWasm>();
             services.AddSingleton<IWorldcitiesDataProvider, WorldcitiesDataProvider>();
             services.AddSingleton<IGlobalTemperatureIndexDataProvider, GlobalTemperatureIndexDataProviderWasm>();
+            services.AddSingleton<IFileSystemDataProvider, FileSystemDataProviderWasm>();
 
             var stockQuoteService = new StockQuoteService();
-            var stockQuoteTimerService = new StockQuoteChangeTimerService(stockQuoteService);
+            var stockQuoteByRegionService = new StockQuoteByRegionService();
+            var stockQuoteTimerService = new StockQuoteChangeTimerService(stockQuoteService, stockQuoteByRegionService);
             services.AddSingleton<IStockQuoteService>(_ => stockQuoteService);
+            services.AddSingleton<IStockQuoteByRegionService>(_ => stockQuoteByRegionService);
             services.AddSingleton(stockQuoteTimerService);
+
+            var barGaugeTemperatureMeasurerService = new BarGaugeTemperatureMeasurerService();
+            var barGaugeTemperatureMeasurerTimerService = new BarGaugeTemperatureMeasurerTimerService(barGaugeTemperatureMeasurerService);
+            services.AddSingleton<IBarGaugeTemperatureMeasurerService>(_ => barGaugeTemperatureMeasurerService);
+            services.AddSingleton(barGaugeTemperatureMeasurerTimerService);
+
+            var networkSpeedTesterService = new NetworkSpeedTesterService();
+            var networkSpeedTesterTimerServiceTimerService = new NetworkSpeedTesterTimerServiceTimerService(networkSpeedTesterService);
+            services.AddSingleton<INetworkSpeedTesterService>(_ => networkSpeedTesterService);
+            services.AddSingleton(networkSpeedTesterTimerServiceTimerService);
 
             services.AddSingleton<IHistogramDataProvider, HistogramDataProvider>();
             services.AddSingleton<IDocumentProvider, DocumentProviderWasm>();
@@ -47,7 +60,23 @@ namespace BlazorDemo.Wasm {
             // Editable should be scoped
             services.AddScoped<INwindDataProvider, NwindDataProvider>();
 
-            services.AddScoped<IChartBirthLifeDataProvider, ChartBirthLifeDataProvider>();
+            services.AddSingleton<IChartBirthLifeDataProvider, ChartBirthLifeDataProvider>();
+            services.AddSingleton<IChartApplePriceDataProvider, ChartApplePriceDataProvider>();
+            services.AddSingleton<IChartTemperatureDataProvider, ChartTemperatureDataProvider>();
+            services.AddSingleton<IChartAverageTemperatureDataProvider, ChartAverageTemperatureDataProvider>();
+
+            services.AddSingleton<IChartContinuousDataProvider, ChartContinuousDataProvider>();
+            services.AddSingleton<IChartDiscreteDataProvider, ChartDiscreteDataProvider>();
+            services.AddSingleton<IChartSpiderDataProvider, ChartSpiderDataProvider>();
+            services.AddSingleton<IChartWindRoseDataProvider, ChartWindRoseDataProvider>();
+            services.AddSingleton<ISparklineDataProvider, SparklineDataProvider>();
+            services.AddSingleton<IMapApiKeyProvider, MapApiKeyProvider>();
+            services.AddSingleton<IHtmlEditorStringDataProvider, HtmlEditorStringDataProvider>();
+            services.AddSingleton<EmployeeTaskService>();
+
+            services.AddSingleton<IEmployeeTaskDataProvider, EmployeeTaskDataProvider>();
+            services.AddSingleton<ISpaceObjectDataProvider, SpaceObjectDataProvider>();
+            services.AddSingleton<ISalesByRegionDataProvider, SalesByRegionDataProvider>();
 
             services.AddNotSupportedDemoServices();
 

@@ -1,0 +1,102 @@
+﻿<DemoPageSectionComponent Id="Utility-ProgressBar-Types" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="demo-progress-bars-types">
+            <div class="demo-progress-horizontal-bars demo-progress-bars-item">
+                <DxProgressBar Type="ProgressBarType.Horizontal" Value="value1" SizeMode="Params.SizeMode" />
+                <DxProgressBar Type="ProgressBarType.Horizontal" Value="value2" SizeMode="Params.SizeMode" />
+                <DxProgressBar Type="ProgressBarType.Horizontal" Value="value3" SizeMode="Params.SizeMode" />
+            </div>
+            <div class="demo-progress-vertical-bars demo-progress-bars-item">
+                <DxProgressBar CssClass="demo-progress-bar-vertical demo-progress-bar-w-30"
+                               Size="200px"
+                               Type="ProgressBarType.Vertical"
+                               Value="value1"
+                               SizeMode="Params.SizeMode" />
+                <DxProgressBar CssClass="demo-progress-bar-vertical demo-progress-bar-w-30"
+                               Size="200px"
+                               Type="ProgressBarType.Vertical"
+                               Value="value2"
+                               SizeMode="Params.SizeMode" />
+                <DxProgressBar CssClass="demo-progress-bar-vertical demo-progress-bar-w-50"
+                               Size="200px"
+                               Type="ProgressBarType.Vertical"
+                               Value="value3"
+                               SizeMode="Params.SizeMode" />
+            </div>
+            <div class="demo-progress-circular-bars demo-progress-bars-item">
+                <DxProgressBar Size="80px" Type="ProgressBarType.Circular" Value="value1" SizeMode="Params.SizeMode" />
+                <DxProgressBar Size="80px" Type="ProgressBarType.Circular" Value="value2" SizeMode="Params.SizeMode" />
+                <DxProgressBar Size="80px"
+                               Type="ProgressBarType.Circular"
+                               Value="value3"
+                               SizeMode="Params.SizeMode"
+                               ShowLabel="showLabel"
+                               ShowIcon="showIcon"
+                               Completed="ProgressCompleted"/>
+            </div>
+        </div>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionButton Text="Run Progress" OnClick="RunProgress"/>
+    </OptionsContent>
+
+    @code {
+        bool running;
+        ProgressBarType ProgressBarType { get; set; }
+        int ProgressValue { get; set; }
+
+        int value1 = 5;
+        int value2 = 50;
+        int value3 = 90;
+
+        bool showLabel = true;
+        bool showIcon;
+
+        protected override void OnInitialized() {
+            base.OnInitialized();
+            Reset();
+        }
+
+        public string CssClass => ProgressBarType switch {
+            ProgressBarType.Horizontal => "progress-horizontal",
+            ProgressBarType.Vertical => "progress-vertical",
+            ProgressBarType.Circular => "progress-circular",
+            _ => throw new ArgumentOutOfRangeException()};
+
+        private void RunProgress() {
+            if(running) return;
+            running = true;
+
+            Reset();
+
+            InvokeAsync(async () => {
+                var progress = 0;
+                while (running && progress < 30)
+                {
+                    await Task.Delay(50);
+                    progress++;
+                    value1++;
+                    value2++;
+                    value3++;
+                    StateHasChanged();
+                }
+                running = false;
+            });
+        }
+
+        void Reset() {
+            value1 = 5;
+            value2 = 50;
+            value3 = 90;
+            showIcon = false;
+            showLabel = true;
+        }
+
+        private void ProgressCompleted() {
+            showLabel = false;
+            showIcon = true;
+        }
+
+    }
+</DemoPageSectionComponent>

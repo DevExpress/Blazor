@@ -39,10 +39,12 @@
         public class EmailAdressesAttribute : ValidationAttribute {
             public override bool IsValid(object value) {
                 IEnumerable<string> data = value as IEnumerable<string>;
-                if (data != null && data.Any()) {
-                    foreach (var item in data)
-                        if (!item.Contains("@") || !item.Substring(item.IndexOf('@')).Contains("."))
+                if(data != null && data.Any()) {
+                    foreach (var item in data) {
+                        int index = item.IndexOf('@');
+                        if(index < 0 || !item.Substring(index).Contains("."))
                             return false;
+                    }
                     return true;
                 }
                 else

@@ -21,7 +21,7 @@ namespace BlazorDemo.DataProviders.Implementation {
             double low = Math.Min(open, close) - random.NextDouble() / 5d;
             return new StockDataPoint(dateTime, open, high, low, close);
         }
-        IEnumerable<StockDataPoint> GenerateInternal() {
+        IEnumerable<StockDataPoint> GeneratePointsByMinutes() {
             NonCryptographicRandom random = new NonCryptographicRandom(28);
             List<StockDataPoint> points = new List<StockDataPoint>();
             DateTime now = DateTime.Now.Date;
@@ -36,9 +36,32 @@ namespace BlazorDemo.DataProviders.Implementation {
             }
             return points;
         }
+        IEnumerable<StockDataPoint> GeneratePointsByDays() {
+            NonCryptographicRandom random = new NonCryptographicRandom(28);
+            List<StockDataPoint> points = new List<StockDataPoint>();
+            DateTime now = DateTime.Now.Date;
+            DateTime currentDateTime = now.AddDays(-30);
+            DateTime endDateTime = now;
+            double previousClose = StartPrice;
+            while(currentDateTime < endDateTime) {
+                StockDataPoint point = GeneratePoint(currentDateTime, previousClose, random);
+                points.Add(point);
+                previousClose = point.Close;
+                if(currentDateTime.DayOfWeek == DayOfWeek.Friday) {
+                    currentDateTime = currentDateTime.AddDays(3);
+                } else {
+                    currentDateTime = currentDateTime.AddDays(1);
+                }
+            }
+            return points;
+        }
 
-        public Task<IEnumerable<StockDataPoint>> Generate() {
-            return Task.Run(GenerateInternal);
+        public Task<IEnumerable<StockDataPoint>> GenerateByMinutes() {
+            return Task.Run(GeneratePointsByMinutes);
+        }
+
+        public Task<IEnumerable<StockDataPoint>> GenerateByDays() {
+            return Task.Run(GeneratePointsByDays);
         }
     }
 }

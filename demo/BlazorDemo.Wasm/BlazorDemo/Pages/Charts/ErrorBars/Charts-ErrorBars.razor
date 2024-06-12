@@ -1,0 +1,78 @@
+﻿@page "/ChartErrorBars"
+@using System.Drawing
+
+<DemoPageSectionComponent Id="Charts-ErrorBars">
+    <DemoChildContent>
+        @inject IChartAverageTemperatureDataProvider ChartAverageTemperatureDataProvider
+
+        <DxChart Data="@DataSource"
+                 Width="100%"
+                 Height="500px">
+            <DxChartTitle Text="Weather in Los Angeles, California" />
+            <DxChartLegend VerticalAlignment="VerticalEdge.Bottom"
+                           Position="RelativePosition.Outside" />
+
+            <DxChartPane Name="TopPane" />
+            <DxChartPane Name="BottomPane" />
+
+            <DxChartLineSeries Pane="TopPane"
+                               Name="@LineSeriesName"
+                               ArgumentField="@((AverageTemperatureData i) => i.Month)"
+                               ValueField="@((AverageTemperatureData i) => i.AverageTemperature)">
+                <DxChartSeriesValueErrorBar LowValueField="@nameof(AverageTemperatureData.AverageLowTemperature)"
+                                            HighValueField="@nameof(AverageTemperatureData.AverageHighTemperature)"
+                                            LineWidth="1"
+                                            Opacity="0.8"/>
+            </DxChartLineSeries>
+            <DxChartBarSeries Pane="BottomPane"
+                              Name="@BarSeriesName"
+                              ArgumentField="@((AverageTemperatureData i) => i.Month)"
+                              ValueField="@((AverageTemperatureData i) => i.AverageHumidity)">
+                <DxChartSeriesValueErrorBar Type="ChartValueErrorBarType.Fixed" Value="@ErrorBarValue" LineWidth="1" />
+            </DxChartBarSeries>
+            <DxChartValueAxis Pane="TopPane">
+                <DxChartAxisTitle Text="Temperature, °C" />
+            </DxChartValueAxis>
+            <DxChartValueAxis Pane="BottomPane">
+                <DxChartAxisTitle Text="Humidity, %" />
+            </DxChartValueAxis>
+            <DxChartArgumentAxis>
+                <DxChartAxisLabel DisplayMode="ChartAxisLabelDisplayMode.Stagger" />
+            </DxChartArgumentAxis>
+            <DxChartTooltip Enabled="true">
+                <div style="margin: 0.75rem">
+                    <div>@GetPointDescription(context.Point.SeriesName, (double)context.Point.Value)</div>
+                    <div>Range: @GetRange(context.Point.SeriesName, (string)context.Point.Argument)</div>
+                </div>
+            </DxChartTooltip>
+        </DxChart>
+    </DemoChildContent>
+
+    @code {
+        IEnumerable<AverageTemperatureData> DataSource = Enumerable.Empty<AverageTemperatureData>();
+        double ErrorBarValue = 3;
+        string LineSeriesName = "Average Temperature, °C";
+        string BarSeriesName = "Average Humidity, %";
+
+        protected override void OnInitialized() {
+            DataSource = ChartAverageTemperatureDataProvider.GenerateData();
+        }
+
+        string GetRange(string name, string argument) {
+            var item = DataSource.Single(data => data.Month == argument);
+            if(name == LineSeriesName) {
+                return $"{item.AverageLowTemperature}-{item.AverageHighTemperature} °C";
+            } else {
+                return $"{item.AverageHumidity - ErrorBarValue}%-{item.AverageHumidity + ErrorBarValue}%";
+            }
+        }
+
+        string GetPointDescription(string name, double value) {
+            if(name == LineSeriesName) {
+                return $"Avg Temperature: {value} °C";
+            } else {
+                return $"Avg Humidity: {value}%";
+            }
+        }
+    }
+</DemoPageSectionComponent>

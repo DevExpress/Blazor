@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using Newtonsoft.Json;
 
 namespace BlazorDemo.DemoData {
     public class DemoRootPage : DemoPageBase {

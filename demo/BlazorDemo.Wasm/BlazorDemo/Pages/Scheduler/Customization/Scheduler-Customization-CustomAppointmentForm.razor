@@ -6,13 +6,13 @@
                      @bind-StartDate="@StartDate" DataStorage="@DataStorage"
                      @bind-ActiveViewType="@ActiveViewType"
                      AppointmentFormShowing="OnAppointmentFormShowing"
-                     ValidateEditForm="true" CssClass="w-100"
+                     ValidateEditForm="true" CssClass="demo-sc-size"
                      @bind-AppointmentFormMode="@AppointmentFormMode">
             <Views>
                 <DxSchedulerWorkWeekView VisibleTime="@(new DxSchedulerTimeSpanRange(TimeSpan.FromHours(8), TimeSpan.FromHours(19)))">
                     <HorizontalAppointmentTemplate>
                         <div class="demo-sc-apt @(IsAccepted(context.CustomFields) ? "demo-sc-accepted " : "")" style="width: 100%;">
-                            <div class="card demo-apt-bg dx-purple-color" style="width: 100%;"></div>
+                            <div class="card demo-apt-bg dxbl-purple-color" style="width: 100%;"></div>
                             <div class="card shadow-sm p-1 demo-sc-apt-content text-white" style="width:100%;">
                                 @context.Appointment.Subject
                             </div>
@@ -20,10 +20,10 @@
                     </HorizontalAppointmentTemplate>
                     <VerticalAppointmentTemplate>
                         <div class="shadow-sm demo-sc-apt @(IsAccepted(context.CustomFields) ? "demo-sc-accepted" : "")">
-                            <div class="card demo-apt-bg dx-purple-color"></div>
+                            <div class="card demo-apt-bg dxbl-purple-color"></div>
                             <div class="card demo-sc-apt-content text-white">
                                 <div class="card demo-sc-status-container">
-                                    <div class="card demo-apt-status dx-purple-color"></div>
+                                    <div class="card demo-apt-status dxbl-purple-color"></div>
                                 </div>
                                 <div class="demo-apt-subject">
                                     @context.Appointment.Subject

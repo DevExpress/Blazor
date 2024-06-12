@@ -16,9 +16,6 @@
     <OutputPath>..\..\Bin\NETCore\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Models\DemoModel.cs" />
     <Compile Include="Models\DemoItem.cs" />
     <Compile Include="Models\DemoRootPage.cs" />

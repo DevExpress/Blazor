@@ -8,7 +8,7 @@
         @if(SelectedIssue != null) {
             <Grid_Overview_Details GotoListView="@ShowIssueList" SelectedIssue="@SelectedIssue" />
         } else {
-            <Grid_Overview_List GotoDetailsView="@ShowIssueDetails" SizeMode="@Params.SizeMode" KeyboardNavigationEnabled="true" />
+            <Grid_Overview_List GotoDetailsView="@ShowIssueDetails" SizeMode="@Params.SizeMode" />
         }
     </ChildContentWithParameters>
 

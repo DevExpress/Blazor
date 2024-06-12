@@ -1,0 +1,3 @@
+The DevExpress Blazor [HTML Editor](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxHtmlEditor) is a WYSIWIG text editor that allows users to format text and add graphics to a document. The component stores its markup in the [Markup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxHtmlEditor.Markup) property and allows you to specify [markup type](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxHtmlEditor.MarkupType): `Html` or `Markdown`.
+
+You can use built-in toolbar commands to edit and customize document content. To access and configure the toolbar, handle the [CustomizeToolbar](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxHtmlEditor.CustomizeToolbar) event as requirements dictate.

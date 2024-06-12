@@ -9,22 +9,23 @@
                     @bind-Value="@CurrentTheme"
                     TextFieldName="@nameof(DemoTheme.Title)"
                     NullText="Select a theme..."
-                    FilteringMode="DataGridFilteringMode.StartsWith"
+                    SearchMode="@ListSearchMode.AutoSearch"
+                    SearchFilterCondition="@ListSearchFilterCondition.StartsWith"
                     ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
                     CssClass="cw-480"
                     SizeMode="Params.SizeMode"
                     InputId="cbTemplate">
-            <EditBoxTemplate>
-                @GetEditBoxTemplateContent(context)
-            </EditBoxTemplate>
-            <ItemTemplate>
+            <EditBoxDisplayTemplate>
+                @GetEditBoxTemplateContent(context.DataItem)
+            </EditBoxDisplayTemplate>
+            <ItemDisplayTemplate>
                 @GetItemTemplateContent(context)
-            </ItemTemplate>
+            </ItemDisplayTemplate>
         </DxComboBox>
     </ChildContentWithParameters>
     @code {
         DemoTheme CurrentTheme { get; set; }
-        IEnumerable<DemoTheme> Themes;
+        IEnumerable<DemoTheme> Themes { get; set; }
 
         RenderFragment GetEditBoxTemplateContent(DemoTheme item) {
             return @<div class="template-container">
@@ -32,17 +33,17 @@
                        <DxInputBox/>
                    </div>;
         }
-        RenderFragment GetItemTemplateContent(DemoTheme item) {
+        RenderFragment GetItemTemplateContent(ComboBoxItemDisplayTemplateContext<DemoTheme> context) {
             return @<div class="template-container">
-                       @GetTemplateIcon(item)
-                       @item.Title
+                       @GetTemplateIcon(context.DataItem)
+                       @context.HighlightedDisplayText
                    </div>;
         }
 
-        RenderFragment GetTemplateIcon(DemoTheme item) {
-            if(string.IsNullOrEmpty(item?.Name))
+        RenderFragment GetTemplateIcon(DemoTheme dataItem) {
+            if(string.IsNullOrEmpty(dataItem?.Name))
                 return @<text></text>;
-            return @<span class="@GetIconCssClass(item)"></span>;
+            return @<span class="@GetIconCssClass(dataItem)"></span>;
         }
 
         string GetIconCssClass(DemoTheme item) {
@@ -50,7 +51,7 @@
         }
         protected override void OnInitialized() {
             Themes = ThemeService.ThemeSets.SelectMany(ts => ts.Themes);
-            CurrentTheme = Themes.First();
+            CurrentTheme = Themes.FirstOrDefault();
         }
     }
 </DemoPageSectionComponent>

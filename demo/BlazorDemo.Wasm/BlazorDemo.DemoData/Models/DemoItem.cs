@@ -1,7 +1,4 @@
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace BlazorDemo.DemoData {
     public abstract class DemoItem {
@@ -9,6 +6,7 @@ namespace BlazorDemo.DemoData {
         public string Id { get; set; }
         public string Title { get; set; }
         public string TitleOnPage { get; set; }
+        public string DataSourceInfo { get; set; }
         public bool IsServerSideOnly { get; set; }
         public bool IsClientSideOnly { get; set; }
         public bool IsNew { get; set; }
@@ -42,7 +40,7 @@ namespace BlazorDemo.DemoData {
         public bool IsRazorFileVisible() {
             if(ShowRazorFile.HasValue && !ShowRazorFile.Value)
                 return false;
-            if(ParentPage != null )
+            if(ParentPage != null)
                 return ParentPage.IsRazorFileVisible();
             return true;
         }
@@ -111,5 +109,5 @@ namespace BlazorDemo.DemoData {
         }
     }
 
-    public enum DemoItemStatus { Empty, Preview, MaintenanceMode, New, Updated}
+    public enum DemoItemStatus { Empty, Preview, MaintenanceMode, New, Updated }
 }

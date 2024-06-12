@@ -1,0 +1,37 @@
+﻿@page "/BarGaugeGeometry"
+
+<DemoPageSectionComponent Id="BarGauge-Geometry">
+    <DemoChildContent>
+        <DxBarGauge Width="100%"
+                    Height="500px"
+                    StartValue="0"
+                    EndValue="100"
+                    Values="@Values">
+            <DxGaugeGeometrySettings StartAngle="-90" EndAngle="270" />
+
+            <DxBarGaugeLabelSettings Indent="30">
+                <DxTextFormatSettings LdmlString="@LabelFormat" />
+            </DxBarGaugeLabelSettings>
+
+            <DxBarGaugeLegendSettings Visible="true"
+                                      ItemCaptions="@LegendItemCaptions"
+                                      VerticalAlignment="VerticalEdge.Bottom"
+                                      HorizontalAlignment="HorizontalAlignment.Center" />
+
+            <DxTitleSettings Text="Series Ratings">
+                <DxFontSettings Size="28" Weight="600" />
+            </DxTitleSettings>
+
+            <DxTooltipSettings Enabled="true" Color="lightyellow" >
+                <DxTextFormatSettings LdmlString="@LabelFormat" />
+            </DxTooltipSettings>
+
+        </DxBarGauge>
+
+        @code {
+            double[] Values = new double[] { 47.27, 65.32, 84.59, 81.86, 99 };
+            string LabelFormat = "##.#'%' ";
+            string[] LegendItemCaptions = new string[] { "Metacritic", "Ratingraph.com", "Rotten Tomatoes", "IMDb", "TV.com" };
+        }
+    </DemoChildContent>
+</DemoPageSectionComponent>

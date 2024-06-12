@@ -72,7 +72,7 @@
     },
     {
       "Title": "File Management",
-      "PageUri": "Upload",
+      "PageUri": "FileInput",
       "IconName": "filemanager",
       "Description": "Our Blazor file management-related components allow you to upload files within your Blazor project at runtime."
     },
@@ -884,6 +884,10 @@
               "Path": "Pages\\Grid\\Overview\\Grid-Overview-List.razor"
             },
             {
+              "Title": "CSS",
+              "Path": "Pages\\Grid\\Overview\\Grid-Overview-List.razor.css"
+            },
+            {
               "Title": "Grid-Overview-Details.razor",
               "Path": "Pages\\Grid\\Overview\\Grid-Overview-Details.razor"
             },
@@ -962,6 +966,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\DataBinding\\Grid-DataBinding-Async.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/DataBinding#Async" ]
@@ -969,7 +977,7 @@
             {
               "Id": "ObservableCollection",
               "Url": "Grid/DataBinding/ObservableCollection",
-              "Title": "Observable Data Collections",
+              "Title": "Observable Data Collection",
               "DocUrl": "403737/grid/bind-to-data#observable-data-collections",
               "Keywords": "blazor, components, data grid, datagrid, grid, data bind, data binding, bind to data, data collections, observable collections, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
@@ -988,6 +996,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\StockQuoteService.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\DataBinding\\Grid-DataBinding-ObservableCollection.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/DataBinding#ObservableCollection" ]
@@ -995,7 +1007,8 @@
             {
               "Id": "LargeDataInstantFeedback",
               "Url": "Grid/DataBinding/LargeDataInstantFeedback",
-              "Title": "Large Data (Instant Feedback Source)",
+              "Title": "Large Dataset (Server Mode)",
+              "DataSourceInfo": "U.S. Department of Housing and Urban Development",
               "DocUrl": "403737/grid/bind-to-data#large-data-server-mode-sources",
               "IsServerSideOnly": true,
               "Keywords": "blazor, components, data grid, datagrid, grid, data bind, data binding, bind to data, large data source, async data binding, server mode, http service, devexpress, demo, sample, example",
@@ -1011,6 +1024,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\RentInfo.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\DataBinding\\Grid-DataBinding-LargeDataInstantFeedback.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/DataBinding#LargeDataInstantFeedback" ]
@@ -1018,8 +1035,8 @@
             {
               "Id": "LargeQueryable",
               "Url": "Grid/DataBinding/LargeQueryable",
-              "Title": "Large Data (Queryable)",
-              "IsUpdated": true,
+              "Title": "Large Dataset (Queryable)",
+              "DataSourceInfo": "U.S. Department of Housing and Urban Development",
               "DocUrl": "403737/grid/bind-to-data#large-data-queryable-collections",
               "Keywords": "blazor, components, data grid, datagrid, grid, data bind, data binding, bind to data, data collections, large data source, large data, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
@@ -1038,6 +1055,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\RentInfo.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\DataBinding\\Grid-DataBinding-LargeQueryable.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/DataBinding#LargeDataSource", "Grid/DataBinding#LargeQueryable" ]
@@ -1045,7 +1066,7 @@
             {
               "Id": "LargeQueryableAsHttp",
               "Url": "Grid/DataBinding/LargeQueryableAsHttp",
-              "Title": "Large Data via HTTP Service",
+              "Title": "Large Dataset via HTTP Service",
               "DocUrl": "403737/grid/bind-to-data#large-data-queryable-collections",
               "Keywords": "blazor, components, data grid, datagrid, grid, data bind, data binding, bind to data, data collections, inotifycollectionchanged, ibindinglist, observablecollection, large data source, large data, server mode, http service, web api support, bind to web api, remote data source, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
@@ -1060,6 +1081,10 @@
                 {
                   "Title": "DataSourceLoadOptions.cs",
                   "Path": "Utils\\DataSourceLoadOptions.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\DataBinding\\Grid-DataBinding-LargeQueryableAsHttp.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/DataBinding#CustomData", "Grid/DataBinding#LargeQueryableAsHttp" ]
@@ -1090,6 +1115,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\DataBinding\\Grid-DataBinding-UnboundColumns.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/Columns", "Grid/Columns#ColumnTypes", "Grid/Columns/ColumnTypes" ]
@@ -1141,6 +1170,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Grouping\\Grid-Grouping-GroupData.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/Grouping", "Grid/Grouping#GroupData" ]
@@ -1179,6 +1212,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Grouping\\Grid-Grouping-IntervalGrouping.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/Grouping#IntervalGrouping" ]
@@ -1217,6 +1254,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Grouping\\Grid-Grouping-CustomGrouping.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/Grouping#CustomGrouping" ]
@@ -1232,7 +1273,7 @@
               "Id": "EditForms",
               "Url": "Grid/EditData/EditForms",
               "Title": "Edit Forms",
-              "DocUrl": "403454/components/grid/edit-data",
+              "DocUrl": "404757/components/grid/editing-and-validation/edit-modes/edit-forms",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, data editing, edit data, edit form, popup edit form, add rows, add new row, insert row, remove rows, delete rows, edit row values, edit modes, edit options, command column, devexpress, demo, sample, example, cascade editors, cascading combobox, cascade logic, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1266,6 +1307,10 @@
                 {
                   "Title": "Worldcities.Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Worldcities.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Editing\\Grid-Editing-EditForms.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/EditData#CascadingEditors", "Grid/EditData/CascadingEditors", "Grid/EditData", "Grid/EditData#EditModes", "Grid/EditData#EditForms" ]
@@ -1274,7 +1319,7 @@
               "Id": "EditRow",
               "Url": "Grid/EditData/EditRow",
               "Title": "Edit Row",
-              "DocUrl": "403454/components/grid/edit-data",
+              "DocUrl": "404758/components/grid/editing-and-validation/edit-modes/edit-row",
               "Keywords": "blazor, components, data grid, datagrid, grid, data editing, edit data, edit row, add rows, add new row, insert row, remove rows, delete rows, edit modes, edit options, command column, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1295,9 +1340,8 @@
             {
               "Id": "EditCell",
               "Url": "Grid/EditData/EditCell",
-              "Title": "Edit Cell (Preview)",
-              "DocUrl": "403454/components/grid/edit-data",
-              "IsNew": true,
+              "Title": "Edit Cell",
+              "DocUrl": "404756/components/grid/editing-and-validation/edit-modes/edit-cell",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, data editing, edit data, edit cell, inplace edit, inplace editing, cell editing, add rows, add new row, insert row, remove rows, delete rows, edit options, command column, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1317,9 +1361,8 @@
             {
               "Id": "EditBatch",
               "Url": "Grid/EditData/EditBatch",
-              "Title": "Batch Edit (Preview)",
-              "DocUrl": "403454/components/grid/edit-data",
-              "IsNew": true,
+              "Title": "Batch Edit",
+              "DocUrl": "404756/components/grid/editing-and-validation/edit-modes/edit-cell",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, data editing, edit data, batch edit, inplace edit, inplace editing, batch editing, add rows, add new row, insert row, remove rows, delete rows, edit options, command column, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
                 {
@@ -1347,10 +1390,9 @@
             {
               "Id": "InputValidation",
               "Url": "Grid/EditData/InputValidation",
-              "IsUpdated": true,
               "Keywords": "blazor, components, data grid, datagrid, grid, data editing, edit data, edit form, edit row, edit cell, inplace edit, inplace editing, cell editing, add rows, add new row, insert row, remove rows, delete rows, edit row values, edit modes, edit options, validate input, validate edit row, validate edit form, validate cells, devexpress, command column, demo, sample, example",
               "Title": "Input Validation",
-              "DocUrl": "404443/components/grid/validation",
+              "DocUrl": "404443/components/grid/editing-and-validation/validation",
               "AdditionalCodeFiles": [
                 {
                   "Title": "Employee.cs",
@@ -1401,6 +1443,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Filtering\\Grid-Filtering-FilterRow.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/Filtering" ]
@@ -1431,6 +1477,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Filtering\\Grid-Filtering-SearchBox.razor.css"
                 }
               ]
             },
@@ -1438,7 +1488,6 @@
               "Id": "ColumnFilterMenu",
               "Url": "Grid/Filtering/ColumnFilterMenu",
               "Title": "Column Filter Menu",
-              "IsUpdated": true,
               "DocUrl": "404417/components/grid/filter-data/filter-menu",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, grid filter, column filter menu, grid filtering, datagrid filter, datagrid filtering, data filter, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
@@ -1473,6 +1522,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Filtering\\Grid-Filtering-ColumnFilterMenu.razor.css"
                 }
               ]
             },
@@ -1502,6 +1555,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Filtering\\Grid-Filtering-FilterAPI.razor.css"
                 }
               ]
             }
@@ -1538,6 +1595,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Summary\\Grid-Summary-Total.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/Summary", "Grid/Summary#Total" ]
@@ -1568,6 +1629,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Summary\\Grid-Summary-Group.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/Summary#Group" ]
@@ -1598,6 +1663,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Summary\\Grid-Summary-GroupFooter.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/Summary#GroupFooter" ]
@@ -1628,6 +1697,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Summary\\Grid-Summary-Custom.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/Summary#Custom" ]
@@ -1665,6 +1738,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Selection\\Grid-Selection-Multiple.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/Selection", "Grid/Selection#Multiple" ]
@@ -1687,6 +1764,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Selection\\Grid-Selection-SelectionColumn.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/Selection#SelectionColumn" ]
@@ -1717,6 +1798,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Selection\\Grid-Selection-SelectionAPI.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/Selection#SelectionAPI" ]
@@ -1756,6 +1841,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Selection\\Grid-Selection-FocusedRow.razor.css"
                 }
               ]
             }
@@ -1796,6 +1885,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\MasterDetail\\Grid-MasterDetail-NestedGrid.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/MasterDetail", "Grid/MasterDetail#NestedGrid" ]
@@ -1818,6 +1911,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\MasterDetail\\Grid-MasterDetail-RowPreview.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/MasterDetail#RowPreview" ]
@@ -1877,9 +1974,48 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Templates\\Grid-Templates-GroupRow.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/Templates#GroupRow" ]
+            },
+            {
+              "Id": "Sparkline",
+              "Url": "Grid/Templates/Sparkline",
+              "Title": "Sparklines",
+              "Keywords": "Blazor, components, DxChart, chart, sparkline, devexpress, demo, sample, example",
+              "Description": "DevExpress Blazor Charts supports Sparklines",
+              "DocUrl": "DevExpress.Blazor.GridPersistentLayout",
+              "IsNew": true,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Page CSS",
+                  "Path": "Pages\\Charts\\Sparkline\\Charts-Sparkline.razor.css"
+                },
+                {
+                  "Title": "SparklineTemplate.razor",
+                  "Path": "Pages\\Charts\\Sparkline\\SparklineComponents\\SparklineTemplate.razor"
+                },
+                {
+                  "Title": "Template CSS",
+                  "Path": "Pages\\Charts\\Sparkline\\SparklineComponents\\SparklineTemplate.razor.css"
+                },
+                {
+                  "Title": "SparklineData.cs",
+                  "Path": "Data\\SparklineData.cs"
+                },
+                {
+                  "Title": "ISparklineDataProvider.cs",
+                  "Path": "DataProviders\\ISparklineDataProvider.cs"
+                },
+                {
+                  "Title": "SparklineDataProvider.cs",
+                  "Path": "DataProviders\\SparklineDataProvider.cs"
+                }
+              ]
             }
           ]
         },
@@ -1906,6 +2042,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Columns\\Grid-Columns-ColumnResize.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/Columns#ColumnResize" ]
@@ -1914,7 +2054,6 @@
               "Id": "AutoFit",
               "Url": "Grid/Columns/AutoFitWidths",
               "Title": "Auto Fit",
-              "IsNew": "true",
               "DocUrl": "DevExpress.Blazor.DxGrid.AutoFitColumnWidths(System.Boolean)",
               "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, column, columns, resizing, resize, column resizing, column resize, resizing columns, column width, column size, fit widths, best fit, bestfit, auto fit, devexpress, demo, sample, example",
               "AdditionalCodeFiles": [
@@ -1929,6 +2068,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Columns\\Grid-Columns-AutoFit.razor.css"
                 }
               ]
             },
@@ -1973,6 +2116,45 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Columns\\Grid-Columns-FixedColumns.razor.css"
+                }
+              ]
+            },
+            {
+              "Id": "HeaderBands",
+              "Url": "Grid/Columns/HeaderBands",
+              "Title": "Header Bands",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DxGridColumn.HeaderBands",
+              "Keywords": "Blazor, components, DxGrid, data grid, datagrid, grid, header bands, band, multi-level headers, multi-row headers, grouped headers, devexpress, demo, sample, example",
+              "Description": "Header bands combine Grid headers into logical groups and display them as hierarchical multi-row headers.",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Invoice.cs",
+                  "Path": "Data\\Northwind\\Invoice.cs"
+                },
+                {
+                  "Title": "Customer.cs",
+                  "Path": "Data\\Northwind\\Customer.cs"
+                },
+                {
+                  "Title": "NwindDataService.Invoices.cs",
+                  "Path": "Services\\NwindDataService.Invoices.cs"
+                },
+                {
+                  "Title": "NwindDataService.Customers.cs",
+                  "Path": "Services\\NwindDataService.Customers.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Columns\\Grid-Columns-HeaderBands.razor.css"
                 }
               ]
             }
@@ -1997,28 +2179,103 @@
             {
               "Title": "Startup.cs",
               "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+            },
+            {
+              "Title": "CSS",
+              "Path": "Pages\\Grid\\Layout\\Grid-Layout.razor.css"
+            }
+          ]
+        },
+        {
+          "Id": "Adaptivity",
+          "Url": "Grid/Adaptivity",
+          "Title": "Adaptivity",
+          "IsNew": true,
+          "Keywords": "Blazor, components, LayoutBreakpoint, page layout, adaptive grid, responsive grid, cardview, card view, implement cardview, grid layout, layout, layout breakpoints, breakpoint, adaptive UI, adaptivity, adaptive layout, responsive layout, responsive UI, arrange UI elements, layout items, rows, columns, areas, template areas, layout areas, grid areas, devexpress, demo, sample, example",
+          "Description": "Layout breakpoint description",
+          "DocUrl": "DevExpress.Blazor.LayoutBreakpoint#responsivelayout",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "Razor",
+              "Path": "Pages\\Layout\\LayoutBreakpoint\\Layout-LayoutBreakpoint-ResponsiveLayoutIFrameContent.razor"
+            },
+            {
+              "Title": "CSS",
+              "Path": "Pages\\Layout\\LayoutBreakpoint\\Layout-LayoutBreakpoint-ResponsiveLayoutIFrameContent.razor.css"
+            },
+            {
+              "Title": "Supplier.cs",
+              "Path": "Data\\Northwind\\Supplier.cs"
+            },
+            {
+              "Title": "NwindDataService.cs",
+              "Path": "Services\\NwindDataService.Suppliers.cs"
+            },
+            {
+              "Title": "Startup.cs",
+              "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
             }
           ]
         },
         {
           "Id": "Export",
-          "Url": "Grid/Export/DataAwareExport",
-          "Title": "Export Data",
-          "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, grid export, datagrid export, data export, export to xls, export to xlsx, export to csv, data aware export, export to excel, devexpress, demo, sample, example",
+          "Title": "Export",
           "Description": "The DevExpress Grid for Blazor supports data export to different formats.",
-          "DocUrl": "404338/components/grid/export",
-          "AdditionalCodeFiles": [
+          "Pages": [
             {
-              "Title": "Customer.cs",
-              "Path": "Data\\Northwind\\Customer.cs"
+              "Id": "Data",
+              "Url": "Grid/Export/DataAwareExport",
+              "Title": "Export Data",
+              "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, grid export, datagrid export, data export, export to xls, export to xlsx, export to csv, data aware export, export to excel, devexpress, demo, sample, example",
+              "DocUrl": "404338/components/grid/export",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Customer.cs",
+                  "Path": "Data\\Northwind\\Customer.cs"
+                },
+                {
+                  "Title": "NwindDataService.Customers.cs",
+                  "Path": "Services\\NwindDataService.Customers.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Export\\Grid-Export-Data.razor.css"
+                }
+              ]
             },
             {
-              "Title": "NwindDataService.Customers.cs",
-              "Path": "Services\\NwindDataService.Customers.cs"
-            },
-            {
-              "Title": "Startup.cs",
-              "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+              "Id": "LargeQueryable",
+              "Url": "Grid/Export/LargeQueryable",
+              "Title": "Export Large Dataset",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DataAwareExport.LargeQueryable",
+              "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, grid export, large data, remote data, remote data export, large data export, datagrid export, data export, export to xls, export to xlsx, export to csv, data aware export, export to excel, devexpress, demo, sample, example",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CustomRange.razor",
+                  "Path": "Pages\\Grid\\Filtering\\Grid-Filtering-ColumnFilterMenu-CustomRange.razor"
+                },
+                {
+                  "Title": "AreaRentInfo.cs",
+                  "Path": "Data\\AreaRentInfo\\AreaRentInfo.cs"
+                },
+                {
+                  "Title": "RentInfoDataService.cs",
+                  "Path": "Services\\RentInfoDataService.AreaRentInfo.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\RentInfo.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Export\\Grid-Export-LargeQueryable.razor.css"
+                }
+              ]
             }
           ]
         },
@@ -2053,6 +2310,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Customization\\Grid-Customization-ConditionalFormatting.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/Customization", "Grid/Customization#Rows", "Grid/Customization#ConditionalFormatting" ]
@@ -2083,6 +2344,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\Customization\\Grid-Customization-AltRowStyle.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/Customization#AltRowStyle" ]
@@ -2095,7 +2360,6 @@
           "Title": "Toolbar",
           "Description": "Add a toolbar at the top edge of a Grid component and implement data shaping operations to perform in the UI.",
           "DocUrl": "DevExpress.Blazor.DxGrid.Toolbar",
-          "IsNew": true,
           "Keywords": "blazor, components, DxGrid, data grid, datagrid, grid, template, toolbar, toolbar template, devexpress, demo, sample, example",
           "AdditionalCodeFiles": [
             {
@@ -2113,6 +2377,10 @@
             {
               "Title": "Startup.cs",
               "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+            },
+            {
+              "Title": "CSS",
+              "Path": "Pages\\Grid\\Toolbar\\Grid-Toolbar.razor.css"
             }
           ]
         },
@@ -2139,6 +2407,10 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\PagingAndScrolling\\Grid-PagingAndScrolling-Paging.razor.css"
                 }
               ],
               "RedirectFrom": [ "Grid/PagingAndScrolling", "Grid/PagingAndScrolling#Paging", "Grid/PagingAndScrolling/HorizontalScrolling", "Grid/PagingAndScrolling#HorizontalScrolling", "Grid/PagingAndScrolling/VerticalScrolling", "Grid/PagingAndScrolling#VerticalScrolling" ]
@@ -2190,8 +2462,63 @@
                 {
                   "Title": "Startup.cs",
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Grid\\PagingAndScrolling\\Grid-PagingAndScrolling-Paging.razor.css"
                 }
               ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "BarGauge",
+      "Title": "Bar Gauge",
+      "Description": "A component that visualizes data as circular bars where each bar indicates a single value.",
+      "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7:e33ea808-c07a-42c7-9850-a34380eb5133",
+      "IsNew": true,
+      "Pages": [
+        {
+          "Id": "Geometry",
+          "Url": "BarGaugeGeometry",
+          "Title": "Geometry",
+          "Keywords": "Blazor, components, bar gauge, devexpress, demo, sample, example",
+          "DocUrl": "DevExpress.Blazor.DxBarGauge"
+        },
+        {
+          "Id": "Palette",
+          "Url": "BarGaugePalette",
+          "Title": "Palette",
+          "Keywords": "Blazor, components, bar gauge, devexpress, colors, palette",
+          "DocUrl": "DevExpress.Blazor.DxBarGauge#palette"
+        },
+        {
+          "Id": "RealTimeData",
+          "Url": "BarGaugeRealTimeData",
+          "Title": "Real Time Data",
+          "Keywords": "Blazor, components, bar gauge, devexpress, live data",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "Page CSS",
+              "Path": "Pages\\BarGauge\\RealTimeData\\BarGauge-RealTimeData.razor.css"
+            },
+            {
+              "Title": "Temperature Data",
+              "Path": "Data\\BarGaugeTemperatureMeasureData.cs"
+            },
+            {
+              "Title": "Measure Service",
+              "Path": "Services\\IBarGaugeTemperatureMeasurerService.cs"
+            },
+            {
+              "Title": "Service implementation",
+              "Path": "Services\\BarGaugeTemperatureMeasurerService.cs"
+            },
+            {
+              "Title": "Service registration",
+              "Path": "Pages\\CodeSnippets\\BarGaugeTemperatureMeasurerService.Startup.cs"
             }
           ]
         }
@@ -2663,6 +2990,7 @@
               "Id": "Stock",
               "Title": "OHLC",
               "Url": "ChartStock",
+              "IsUpdated": true,
               "DocUrl": "DevExpress.Blazor.DxChartStockSeries-3",
               "AdditionalCodeFiles": [
                 {
@@ -2684,6 +3012,7 @@
               "Id": "PieDonut",
               "Title": "Pie and Donut",
               "Url": "ChartPieSeries",
+              "IsUpdated": true,
               "DocUrl": "DevExpress.Blazor.DxPieChart-1",
               "AdditionalCodeFiles": [
                 {
@@ -2713,6 +3042,141 @@
                 }
               ],
               "RedirectFrom": [ "ChartPieSeries#NestedDonut" ]
+            }
+          ]
+        },
+        {
+          "Id": "PolarAndRadar",
+          "Title": "Polar and Radar",
+          "Keywords": "Blazor, components, DxChart, chart, polar, radar, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Charts supports Polar and Radar series that allow you to compare the percentage values of different point arguments and illustrate these values as pie slices.",
+          "IsNew": true,
+          "Pages": [
+            {
+              "Id": "ContinuousData",
+              "Title": "Continuous Data",
+              "Url": "ChartPolarContinuousData",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Charts\\PolarAndRadar\\Charts-PolarAndRadar-ContinuousData.razor.css"
+                },
+                {
+                  "Title": "DataPoint.cs",
+                  "Path": "Data\\DataPoint.cs"
+                },
+                {
+                  "Title": "IChartContinuousDataProvider.cs",
+                  "Path": "DataProviders\\IChartContinuousDataProvider.cs"
+                },
+                {
+                  "Title": "ChartContinuousDataProvider.cs",
+                  "Path": "DataProviders\\ChartContinuousDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "DiscreteData",
+              "Title": "Discrete Data",
+              "Url": "ChartPolarDiscreteData",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Charts\\PolarAndRadar\\Charts-PolarAndRadar-DiscreteData.razor.css"
+                },
+                {
+                  "Title": "DiscretePoint.cs",
+                  "Path": "Data\\DiscretePoint.cs"
+                },
+                {
+                  "Title": "IChartDiscreteDataProvider.cs",
+                  "Path": "DataProviders\\IChartDiscreteDataProvider.cs"
+                },
+                {
+                  "Title": "ChartDiscreteDataProvider.cs",
+                  "Path": "DataProviders\\ChartDiscreteDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "SpiderWeb",
+              "Title": "Spider Web",
+              "Url": "ChartPolarSpiderWeb",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Charts\\PolarAndRadar\\Charts-PolarAndRadar-SpiderWeb.razor.css"
+                },
+                {
+                  "Title": "SpiderPoint.cs",
+                  "Path": "Data\\SpiderPoint.cs"
+                },
+                {
+                  "Title": "IChartSpiderDataProvider.cs",
+                  "Path": "DataProviders\\IChartSpiderDataProvider.cs"
+                },
+                {
+                  "Title": "ChartSpiderDataProvider.cs",
+                  "Path": "DataProviders\\ChartSpiderDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "WindRose",
+              "Title": "Wind Rose",
+              "Url": "ChartPolarWindRose",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Charts\\PolarAndRadar\\Charts-PolarAndRadar-WindRose.razor.css"
+                },
+                {
+                  "Title": "WindRosePoint.cs",
+                  "Path": "Data\\WindRosePoint.cs"
+                },
+                {
+                  "Title": "IChartWindRoseDataProvider.cs",
+                  "Path": "DataProviders\\IChartWindRoseDataProvider.cs"
+                },
+                {
+                  "Title": "ChartWindRoseDataProvider.cs",
+                  "Path": "DataProviders\\ChartWindRoseDataProvider.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "Sparkline",
+          "Title": "Sparklines",
+          "Keywords": "Blazor, components, DxChart, chart, sparkline, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor Charts supports Sparklines",
+          "IsNew": true,
+          "Url": "ChartSparkline",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "Page CSS",
+              "Path": "Pages\\Charts\\Sparkline\\Charts-Sparkline.razor.css"
+            },
+            {
+              "Title": "SparklineTemplate.razor",
+              "Path": "Pages\\Charts\\Sparkline\\SparklineComponents\\SparklineTemplate.razor"
+            },
+            {
+              "Title": "Template CSS",
+              "Path": "Pages\\Charts\\Sparkline\\SparklineComponents\\SparklineTemplate.razor.css"
+            },
+            {
+              "Title": "SparklineData.cs",
+              "Path": "Data\\SparklineData.cs"
+            },
+            {
+              "Title": "ISparklineDataProvider.cs",
+              "Path": "DataProviders\\ISparklineDataProvider.cs"
+            },
+            {
+              "Title": "SparklineDataProvider.cs",
+              "Path": "DataProviders\\SparklineDataProvider.cs"
             }
           ]
         },
@@ -2845,7 +3309,6 @@
                   "DocUrl": "DevExpress.Blazor.DxChartConstantLine",
                   "Keywords": "Blazor, components, DxChart, chart, constant lines, devexpress, demo, sample, example",
                   "Description": "DevExpress Blazor Charts supports constant lines.",
-                  "IsUpdated": true,
                   "AdditionalCodeFiles": [
                     {
                       "Title": "GlobalTemperatureIndexInfo.cs",
@@ -2865,7 +3328,6 @@
                   "Id": "LabelOverlap",
                   "Title": "Label Overlap",
                   "DocUrl": "",
-                  "IsNew": true,
                   "AdditionalCodeFiles": [
                     {
                       "Title": "CSS",
@@ -2877,13 +3339,33 @@
                   "Id": "LabelOverflow",
                   "Title": "Text Overflow and Word Wrap",
                   "DocUrl": "",
-                  "IsNew": true,
                   "AdditionalCodeFiles": [
                     {
                       "Title": "CSS",
                       "Path": "Pages\\Charts\\Axes\\AxesLabels\\Charts-Axes-AxesLabels-LabelOverflow.razor.css"
                     }
                   ]
+                }
+              ]
+            },
+            {
+              "Id": "AxesStrips",
+              "Title": "Strips",
+              "Url": "ChartAxesStrips",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DxChartAxisStrip",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "TemperatureData.cs",
+                  "Path": "Data\\TemperatureData.cs"
+                },
+                {
+                  "Title": "IChartTemperatureDataProvider.cs",
+                  "Path": "DataProviders\\IChartTemperatureDataProvider.cs"
+                },
+                {
+                  "Title": "ChartTemperatureDataProvider.cs",
+                  "Path": "DataProviders\\ChartTemperatureDataProvider.cs"
                 }
               ]
             }
@@ -2912,7 +3394,6 @@
               "Id": "ZoomArea",
               "Title": "Zoom Selected Area",
               "DocUrl": "",
-              "IsNew": true,
               "AdditionalCodeFiles": [
                 {
                   "Title": "BirthLife.cs",
@@ -3040,7 +3521,6 @@
                   "Id": "SeriesLabel",
                   "Title": "Series Label Customization",
                   "DocUrl": "DevExpress.Blazor.DxChart-1#labels",
-                  "IsUpdated": true,
                   "AdditionalCodeFiles": [
                     {
                       "Title": "DetailedWeatherSummary.cs",
@@ -3074,14 +3554,80 @@
           "RedirectFrom": [ "ChartsSelection" ]
         },
         {
+          "Id": "RealTimeData",
+          "IsNew": true,
+          "Url": "ChartRealTimeData",
+          "Title": "Real Time Data",
+          "Keywords": "Blazor, components, DxChart, chart, real time data, live data",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "Page CSS",
+              "Path": "Pages\\Charts\\RealTimeData\\Charts-RealTimeData.razor.css"
+            },
+            {
+              "Title": "Measure Service",
+              "Path": "Services\\INetworkSpeedTesterService.cs"
+            },
+            {
+              "Title": "Service implementation",
+              "Path": "Services\\NetworkSpeedTesterService.cs"
+            },
+            {
+              "Title": "Service registration",
+              "Path": "Pages\\CodeSnippets\\NetworkSpeedTesterService.Startup.cs"
+            }
+          ]
+        },
+        {
           "Id": "Palette",
           "Url": "ChartPalette",
           "Title": "Palette",
-          "IsNew": true,
           "AdditionalCodeFiles": [
             {
               "Title": "CSS",
               "Path": "Pages\\Charts\\Palette\\Charts-Palette.razor.css"
+            }
+          ]
+        },
+        {
+          "Id": "Annotations",
+          "Url": "ChartAnnotations",
+          "Title": "Annotations",
+          "IsNew": true,
+          "DocUrl": "DevExpress.Blazor.DxChartAnnotationBase-1",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "ApplePrice.cs",
+              "Path": "Data\\ApplePrice.cs"
+            },
+            {
+              "Title": "IChartApplePriceDataProvider.cs",
+              "Path": "DataProviders\\IChartApplePriceDataProvider.cs"
+            },
+            {
+              "Title": "ChartApplePriceDataProvider.cs",
+              "Path": "DataProviders\\ChartApplePriceDataProvider.cs"
+            }
+          ]
+        },
+        {
+          "Id": "ErrorBars",
+          "Url": "ChartErrorBars",
+          "Title": "Error Bars",
+          "DocUrl": "DevExpress.Blazor.DxChartSeriesValueErrorBar",
+          "IsNew": true,
+          "AdditionalCodeFiles": [
+            {
+              "Title": "AverageTemperatureData.cs",
+              "Path": "Data\\AverageTemperatureData.cs"
+            },
+            {
+              "Title": "IChartAverageTemperatureDataProvider.cs",
+              "Path": "DataProviders\\IChartAverageTemperatureDataProvider.cs"
+            },
+            {
+              "Title": "ChartAverageTemperatureDataProvider.cs",
+              "Path": "DataProviders\\ChartAverageTemperatureDataProvider.cs"
             }
           ]
         }
@@ -3231,19 +3777,16 @@
           "Title": "Calendar",
           "Keywords": "blazor, components, DxCalendar, calendar, date, devexpress, demo, sample, example",
           "Description": "DevExpress Blazor Calendar allows users to select dates and navigate through months and years. The component supports multiple date selection and cell customization.",
-          "IsUpdated": true,
           "PageSections": [
             {
               "Id": "Overview",
               "Title": "Overview",
-              "DocUrl": "DevExpress.Blazor.DxCalendar-1",
-              "IsUpdated": true
+              "DocUrl": "DevExpress.Blazor.DxCalendar-1"
             },
             {
               "Id": "MultiSelect",
               "Title": "Multiple Selection",
-              "DocUrl": "DevExpress.Blazor.DxCalendar-1#select-multiple-dates",
-              "IsUpdated": true
+              "DocUrl": "DevExpress.Blazor.DxCalendar-1#select-multiple-dates"
             },
             {
               "Id": "MinMaxDate",
@@ -3321,6 +3864,7 @@
           "Title": "ComboBox",
           "Keywords": "Blazor, components, DxComboBox, combo box, combobox, data binding, databinding, data source, virtual scrolling, scrolling, custom input, filtering, data filtering, incremental filtering, null text, nulltext, cascading lists, devexpress, demo, sample, example",
           "Description": "DevExpress Blazor ComboBox is a drop-down list editor that supports virtual scrolling, incremental filtering, and cascade logic.",
+          "IsUpdated": true,
           "PageSections": [
             {
               "Id": "Overview",
@@ -3381,12 +3925,13 @@
             },
             {
               "Id": "AllowUserInput",
-              "Title": "Allow Input",
+              "Title": "Allow Custom Values",
               "DocUrl": "DevExpress.Blazor.DxComboBox-2#items"
             },
             {
               "Id": "Filtering",
-              "Title": "Incremental Filtering",
+              "Title": "Search and Filter Data",
+              "IsUpdated": true,
               "DocUrl": "DevExpress.Blazor.DxComboBox-2#filter-data",
               "AdditionalCodeFiles": [
                 {
@@ -3462,7 +4007,7 @@
             },
             {
               "Id": "ItemTemplate",
-              "Title": "Item Template",
+              "Title": "Item Display Template",
               "DocUrl": "DevExpress.Blazor.DxComboBox-2.ItemTemplate",
               "AdditionalCodeFiles": [
                 {
@@ -3484,8 +4029,56 @@
               ]
             },
             {
+              "Id": "ColumnCellDisplayTemplate",
+              "Title": "Column Cell Display Template",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DxComboBox-2.ColumnCellDisplayTemplate",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "ComboBoxColumnCellDisplayTemplate.css",
+                  "Path": "Pages\\Editors\\ComboBox\\Editors-ComboBox-ColumnCellDisplayTemplate.razor.css"
+                }
+              ]
+            },
+            {
+              "Id": "EmptyDataAreaTemplate",
+              "Title": "Empty Data Area Template",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DxComboBox-2.EmptyDataAreaTemplate",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "ComboBoxEmptyDataAreaTemplate.css",
+                  "Path": "Pages\\Editors\\ComboBox\\Editors-ComboBox-EmptyDataAreaTemplate.razor.css"
+                }
+              ]
+            },
+            {
               "Id": "EditBoxTemplate",
-              "Title": "Edit Box Template",
+              "Title": "Edit Box Display Template",
               "DocUrl": "DevExpress.Blazor.DxComboBox-2#editbox-template",
               "AdditionalCodeFiles": [
                 {
@@ -3602,6 +4195,118 @@
           ]
         },
         {
+          "Id": "DateRangePicker",
+          "Url": "DateRangePicker",
+          "Title": "Date Range Picker",
+          "IsNew": true,
+          "Keywords": "blazor, components, DxDateRangePicker, DxDateEdit, date range picker, date range, date edit, daterangepicker, dateedit, date, date and time, calendar, null text, prompt text, devexpress, demo, sample, example, mask, date mask",
+          "Description": "DevExpress Blazor Date Range Picker is an editor that allows you to select a range of dates within a single calendar dropdown.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DxDateRangePicker-1"
+            },
+            {
+              "Id": "NullableDate",
+              "Title": "Null Date Values and Placeholder",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DxDateRangePicker-1#nullable-date-and-placeholder"
+            },
+            {
+              "Id": "DisplayFormat",
+              "Title": "Display Format",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DxDateRangePicker-1#display-format"
+            },
+            {
+              "Id": "MinMaxDate",
+              "Title": "Range of Available Dates",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DxDateRangePicker-1#set-range-of-available-dates"
+            },
+            {
+              "Id": "HighlightSpecialDates",
+              "Title": "Highlight Special Dates",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DxDateRangePicker-1#highlight-special-dates",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CalendarData.cs",
+                  "Path": "Data\\CalendarData.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "DropDownBox",
+          "Url": "DropDownBox",
+          "Title": "DropDown Box",
+          "Keywords": "blazor, components, DropDownBox, dropdown box, drop down, devexpress, demo, sample, example",
+          "Description": "The DevExpress Drop-Down Box for Blazor displays a drop-down window that can contain any UI element or combination of controls.",
+          "IsNew": true,
+          "PageSections": [
+            {
+              "Id": "MultipleSelectionListBox",
+              "Title": "Multiple Selection ListBox",
+              "DocUrl": "DevExpress.Blazor.DxDropDownBox-1",
+              "IsNew": true,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "SearchLookup",
+              "Title": "Search Lookup",
+              "DocUrl": "DevExpress.Blazor.DxDropDownBox-1",
+              "IsNew": true,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Editors-DropDownBox-SearchLookup-Grid.razor",
+                  "Path": "Pages\\Editors\\DropDownBox\\Editors-DropDownBox-SearchLookup-Grid.razor"
+                },
+                {
+                  "Title": "Customer.cs",
+                  "Path": "Data\\Northwind\\Customer.cs"
+                },
+                {
+                  "Title": "NwindDataService.Customers.cs",
+                  "Path": "Services\\NwindDataService.Customers.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "FontSelector",
+              "Title": "Font Selector",
+              "DocUrl": "DevExpress.Blazor.DxDropDownBox-1",
+              "IsNew": true,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "DropDownBoxFontSelector.css",
+                  "Path": "Pages\\Editors\\DropDownBox\\Editors-DropDownBox-FontSelector.razor.css"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "Id": "ListBox",
           "Url": "ListBox",
           "Title": "List Box",
@@ -3705,10 +4410,57 @@
               ]
             },
             {
+              "Id": "SearchText",
+              "Title": "Search Text",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DxListBox-2#search-text",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
+              "Id": "FilterAPI",
+              "Title": "Filter Data",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DxListBox-2#filter-api",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Product.cs",
+                  "Path": "Data\\Northwind\\Product.cs"
+                },
+                {
+                  "Title": "Category.cs",
+                  "Path": "Data\\Northwind\\Category.cs"
+                },
+                {
+                  "Title": "NwindDataService.Products.cs",
+                  "Path": "Services\\NwindDataService.Products.cs"
+                },
+                {
+                  "Title": "NwindDataService.Categories.cs",
+                  "Path": "Services\\NwindDataService.Categories.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                }
+              ]
+            },
+            {
               "Id": "ItemDisplayTemplate",
               "Title": "Item Display Template",
               "DocUrl": "DevExpress.Blazor.DxListBox-2#item-display-template",
-              "IsUpdated": true,
               "AdditionalCodeFiles": [
                 {
                   "Title": "Employee.cs",
@@ -3732,7 +4484,6 @@
               "Id": "ColumnCellDisplayTemplate",
               "Title": "Column Cell Display Template",
               "DocUrl": "DevExpress.Blazor.DxListBox-2#column-cell-display-template",
-              "IsNew": true,
               "AdditionalCodeFiles": [
                 {
                   "Title": "Employee.cs",
@@ -3747,7 +4498,7 @@
                   "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
                 },
                 {
-                  "Title": "ListBoxItemDisplayTemplate.css",
+                  "Title": "ListBoxColumnCellDisplayTemplate.css",
                   "Path": "Pages\\Editors\\ListBox\\Editors-ListBox-ColumnCellDisplayTemplate.razor.css"
                 }
               ]
@@ -3756,7 +4507,6 @@
               "Id": "EmptyDataAreaTemplate",
               "Title": "Empty Data Area Template",
               "DocUrl": "DevExpress.Blazor.DxListBox-2#empty-data-area-template",
-              "IsNew": true,
               "AdditionalCodeFiles": [
                 {
                   "Title": "Employee.cs",
@@ -4002,6 +4752,7 @@
           "Title": "TagBox",
           "Keywords": "Blazor, components, DxTagBox, tag box, tagbox, tags, custom tags, data binding, databinding, data source, virtual scrolling, scrolling, filtering, incremental filtering, starts with filtering, contains filtering, null text, nulltext, templates, validation, read-only tagbox, multiple tag selection, devexpress, demo, sample, example",
           "Description": "DevExpress Blazor TagBox allows users to select multiple tags from a drop-down list or type custom tags. TagBox supports incremental filtering, virtual scrolling, validation, and templates.",
+          "IsUpdated": true,
           "PageSections": [
             {
               "Id": "Overview",
@@ -4105,8 +4856,9 @@
             },
             {
               "Id": "Filtering",
-              "Title": "Filter Modes",
+              "Title": "Search and Filter Data",
               "DocUrl": "DevExpress.Blazor.DxTagBox-2#filter-data",
+              "IsUpdated": true,
               "AdditionalCodeFiles": [
                 {
                   "Title": "Country.cs",
@@ -4143,7 +4895,7 @@
             },
             {
               "Id": "ShowHideSelectedItems",
-              "Title": "Show Selected Items",
+              "Title": "Show/Hide Selected Items",
               "DocUrl": "DevExpress.Blazor.DxTagBox-2.HideSelectedItems",
               "AdditionalCodeFiles": [
                 {
@@ -4166,7 +4918,7 @@
             },
             {
               "Id": "TagTemplate",
-              "Title": "Tag Template",
+              "Title": "Tag Display Template",
               "DocUrl": "DevExpress.Blazor.DxTagBox-2#tag-template",
               "AdditionalCodeFiles": [
                 {
@@ -4185,7 +4937,7 @@
             },
             {
               "Id": "ItemTemplate",
-              "Title": "Item Template",
+              "Title": "Item Display Template",
               "DocUrl": "DevExpress.Blazor.DxTagBox-2#item-template",
               "AdditionalCodeFiles": [
                 {
@@ -4203,6 +4955,54 @@
                 {
                   "Title": "TagBoxItemTemplate.css",
                   "Path": "Pages\\Editors\\TagBox\\Editors-TagBox-ItemTemplate.razor.css"
+                }
+              ]
+            },
+            {
+              "Id": "ColumnCellDisplayTemplate",
+              "Title": "Column Cell Display Template",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DxTagBox-2#ColumnCellDisplayTemplate",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "TagBoxColumnCellDisplayTemplate.css",
+                  "Path": "Pages\\Editors\\TagBox\\Editors-TagBox-ColumnCellDisplayTemplate.razor.css"
+                }
+              ]
+            },
+            {
+              "Id": "EmptyDataAreaTemplate",
+              "Title": "Empty Data Area Template",
+              "IsNew": true,
+              "DocUrl": "DevExpress.Blazor.DxTagBox-2#EmptyDataAreaTemplate",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Employee.cs",
+                  "Path": "Data\\Northwind\\Employee.cs"
+                },
+                {
+                  "Title": "NwindDataService.cs",
+                  "Path": "Services\\NwindDataService.Employees.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\Nwind.Startup.cs"
+                },
+                {
+                  "Title": "TagBoxEmptyDataAreaTemplate.css",
+                  "Path": "Pages\\Editors\\TagBox\\Editors-TagBox-EmptyDataAreaTemplate.razor.css"
                 }
               ]
             },
@@ -4384,11 +5184,11 @@
                 },
                 {
                   "Title": "EmployeeCard.razor",
-                  "Path": "Pages\\DialogsAndWindows\\Shared\\EmployeeCard.razor"
+                  "Path": "Pages\\Navigation\\Shared\\EmployeeCard.razor"
                 },
                 {
                   "Title": "EmployeeCard.razor.css",
-                  "Path": "Pages\\DialogsAndWindows\\Shared\\EmployeeCard.razor.css"
+                  "Path": "Pages\\Navigation\\Shared\\EmployeeCard.razor.css"
                 }
               ]
             },
@@ -4470,6 +5270,7 @@
             {
               "Id": "Dragging",
               "Title": "Dragging",
+              "IsUpdated": true,
               "DocUrl": "",
               "AdditionalCodeFiles": [
                 {
@@ -4523,6 +5324,7 @@
             {
               "Id": "Dragging",
               "Title": "Dragging",
+              "IsUpdated": true,
               "DocUrl": "DevExpress.Blazor.DxWindow#dragging",
               "AdditionalCodeFiles": [
                 {
@@ -4536,6 +5338,32 @@
               "Title": "Multiple Windows"
             }
           ]
+        },
+        {
+          "Id": "Toast",
+          "Url": "Toast",
+          "IsNew": true,
+          "Title": "Toast Notification",
+          "Keywords": "blazor, components, DxToast, toast",
+          "Description": "This is a toast notification component description!",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview"
+            },
+            {
+              "Id": "Positioning",
+              "Title": "Positioning"
+            },
+            {
+              "Id": "Template",
+              "Title": "Template"
+            },
+            {
+              "Id": "Customization",
+              "Title": "Customization"
+            }
+          ]
         }
       ]
     },
@@ -4543,11 +5371,49 @@
       "Id": "FileManagement",
       "Title": "File Management",
       "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7:900fa932-f4a8-42cc-81d4-386edae78ebd",
+      "IsUpdated": true,
       "Pages": [
+        {
+          "Id": "FileInput",
+          "Url": "FileInput",
+          "Title": "File Input",
+          "IsNew": true,
+          "Keywords": "blazor, components, DxFileInput, fileinput, inputfile, file input, input file, file input control, input file control, blazor file input, file upload, upload files, blazor upload, multi-file selection, drag and drop, external drop zone, validation, limit uploaded file size, validate uploaded file extension, devexpress, demo, sample, example",
+          "Description": "DevExpress Blazor FileInput allows users to select files and gives you direct access to selected files in Razor code. Upload selected files, send them to another destination, save them to the file system, or display file content on a web page. The component supports drag and drop, multi-file selection, and validation.",
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxFileInput"
+            },
+            {
+              "Id": "UploadOnPage",
+              "Title": "Display Uploaded Image on Page",
+              "DocUrl": "DevExpress.Blazor.DxFileInput#implement-file-upload",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\FileManagement\\FileInput\\FileManagement-FileInput-UploadOnPage.razor.css"
+                }
+              ]
+            },
+            {
+              "Id": "MultiFileSelection",
+              "Title": "Multiple File Selection",
+              "DocUrl": "DevExpress.Blazor.DxFileInput#multiple-file-upload"
+            },
+            {
+              "Id": "UploadModes",
+              "Title": "Upload Modes",
+              "DocUrl": "DevExpress.Blazor.DxFileInput#upload-modes"
+            }
+          ]
+        },
         {
           "Id": "Upload",
           "Url": "Upload",
           "Title": "Upload",
+          "IsUpdated": true,
           "Keywords": "blazor, components, DxUpload, upload, upload control, file upload, file upload control, upload files, blazor upload, chunk upload, large files upload, large files, delayed upload, delay file upload, multi-file selection, drag and drop, external drop zone, validation, limit uploaded file size, validate uploaded file extension, devexpress, demo, sample, example",
           "Description": "DevExpress Blazor Upload allows users to upload files to the server. It supports drag and drop, chunk upload for large files, multi-file selection, and validation.",
           "PageSections": [
@@ -4615,10 +5481,135 @@
       ]
     },
     {
+      "Id": "HtmlEditor",
+      "Title": "HTML Editor",
+      "AnalyticsId": "TODO",
+      "IsNew": true,
+      "Pages": [
+        {
+          "Id": "Overview",
+          "Url": "HtmlEditor",
+          "Title": "Overview",
+          "Keywords": "Blazor, component, dxHtmlEditor",
+          "Description": "A WYSIWYG text editor.",
+          "DocUrl": "DevExpress.Blazor.DxHtmlEditor",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "IHtmlEditorStringDataProvider.cs",
+              "Path": "DataProviders\\IHtmlEditorStringDataProvider.cs"
+            },
+            {
+              "Title": "HtmlEditorStringDataProvider.cs",
+              "Path": "DataProviders\\HtmlEditorStringDataProvider.cs"
+            }
+          ]
+        },
+        {
+          "Id": "Mentions",
+          "Url": "HtmlEditorMentions",
+          "Title": "Mentions",
+          "Keywords": "Blazor, component, dxHtmlEditor, Mentions",
+          "DocUrl": "DevExpress.Blazor.DxHtmlEditor#mentions",
+          "Description": "Mentions allow a user to reference other users in text or conversation threads.",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "CSS",
+              "Path": "Pages\\HtmlEditor\\Mentions\\HtmlEditor-Mentions.razor.css"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "Id": "Layout",
       "Title": "Layout",
       "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7:e33ea808-c07a-42c7-9850-a34380eb5133",
       "Pages": [
+        {
+          "Id": "Drawer",
+          "Url": "Drawer",
+          "Title": "Drawer",
+          "Keywords": "blazor, components, DxDrawer, drawer, sidebar, side bar, sidepanel, side panel, devexpress, demo, sample, example",
+          "Description": "The DevExpress Drawer for Blazor is a side panel that supports minimized layout and expand/collapse operations.",
+          "IsNew": true,
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview",
+              "DocUrl": "DevExpress.Blazor.DxDrawer",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "drawer.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "\\n.+?demo-drawer[\\s\\S\\n]+?\\}"
+                },
+                {
+                  "Title": "drawer-overview.css",
+                  "Path": "Pages\\Layout\\Drawer\\Layout-Drawer-Overview.razor.css"
+                },
+                {
+                  "Title": "DrawerUtils.cs",
+                  "Path": "Pages\\Layout\\Drawer\\DrawerUtils.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Position",
+              "Title": "Position and Mode",
+              "DocUrl": "https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDrawer#drawer-position",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "drawer.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "\\n.+?demo-drawer[\\s\\S\\n]+?\\}"
+                },
+                {
+                  "Title": "DrawerUtils.cs",
+                  "Path": "Pages\\Layout\\Drawer\\DrawerUtils.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Mini",
+              "Title": "Mini View",
+              "DocUrl": "https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDrawer.MiniModeEnabled",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "drawer.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "\\n.+?demo-drawer[\\s\\S\\n]+?\\}"
+                },
+                {
+                  "Title": "drawer-mini.css",
+                  "Path": "Pages\\Layout\\Drawer\\Layout-Drawer-Mini.razor.css"
+                },
+                {
+                  "Title": "DrawerUtils.cs",
+                  "Path": "Pages\\Layout\\Drawer\\DrawerUtils.cs"
+                }
+              ]
+            },
+            {
+              "Id": "Responsive",
+              "Title": "Responsive Drawer",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Razor",
+                  "Path": "Pages\\Layout\\Drawer\\Layout-Drawer-ResponsiveIFrameContent.razor"
+                },
+                {
+                  "Title": "drawer.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "\\n.+?demo-drawer[\\s\\S\\n]+?\\}"
+                },
+                {
+                  "Title": "DrawerUtils.cs",
+                  "Path": "Pages\\Layout\\Drawer\\DrawerUtils.cs"
+                }
+              ]
+            }
+          ]
+        },
         {
           "Id": "FormLayout",
           "Url": "FormLayout",
@@ -4629,7 +5620,14 @@
             {
               "Id": "Overview",
               "Title": "Overview",
-              "DocUrl": "DevExpress.Blazor.DxFormLayout"
+              "DocUrl": "DevExpress.Blazor.DxFormLayout",
+              "IsUpdated": true,
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Layout\\FormLayout\\Layout-FormLayout-Overview.razor.css"
+                }
+              ]
             },
             {
               "Id": "Vertical",
@@ -4810,7 +5808,7 @@
                 {
                   "Title": "Icons.css",
                   "Path": "wwwroot\\css\\dx-demo-pages.css",
-                  "ExtractRegex": "(.menu-icon(()||(-home)|(-products)|(-support))) {[^}]+}"
+                  "ExtractRegex": "(.tabs-icon(()||(-home)|(-products)|(-support))) {[^}]+}"
                 }
               ]
             },
@@ -4877,6 +5875,53 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "Id": "Map",
+      "Title": "Map",
+      "IsNew": true,
+      "Keywords": "Blazor, components, map",
+      "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7:e33ea808-c07a-42c7-9850-a34380eb5133",
+      "Pages": [
+        {
+          "Id": "Overview",
+          "Url": "Map",
+          "Title": "Overview",
+          "Keywords": "Blazor, components, map, geo",
+          "Description": "An interactive component that displays a geographic map with markers and routes.",
+          "DocUrl": "DevExpress.Blazor.DxMap"
+        },
+        {
+          "Id": "Markers",
+          "Url": "MapMarkers",
+          "Title": "Markers",
+          "Keywords": "Blazor, components, map, geo, position, marker",
+          "Description": "The Map component allows you to create markers on the map.",
+          "DocUrl": "DevExpress.Blazor.DxMap#map-markers",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "EditMarkerPopup.razor",
+              "Path": "Pages\\Map\\Markers\\MarkerEditComponents\\EditMarkerPopup.razor"
+            },
+            {
+              "Title": "MarkerEditForm.razor",
+              "Path": "Pages\\Map\\Markers\\MarkerEditComponents\\MarkerEditForm.razor"
+            },
+            {
+              "Title": "MapMarkerInfo",
+              "Path": "Data\\MapMarker\\MapMarkerInfo.cs"
+            }
+          ]
+        },
+        {
+          "Id": "Routes",
+          "Url": "MapRoutes",
+          "Title": "Routes",
+          "Keywords": "Blazor, components, map, route, driving, position",
+          "Description": "MapRoute objects denote routes in the map",
+          "DocUrl": "DevExpress.Blazor.DxMap#map-routes"
         }
       ]
     },
@@ -4996,7 +6041,6 @@
             {
               "Id": "Overview",
               "Title": "Overview",
-              "IsUpdated": true,
               "DocUrl": "DevExpress.Blazor.DxContextMenu",
               "AdditionalCodeFiles": [
                 {
@@ -5052,7 +6096,6 @@
             {
               "Id": "Overview",
               "Title": "Overview",
-              "IsUpdated": true,
               "DocUrl": "DevExpress.Blazor.DxMenu",
               "AdditionalCodeFiles": [
                 {
@@ -5146,7 +6189,6 @@
             {
               "Id": "Overview",
               "Title": "Overview",
-              "IsUpdated": true,
               "DocUrl": "DevExpress.Blazor.DxToolbar",
               "AdditionalCodeFiles": [
                 {
@@ -5285,6 +6327,7 @@
             {
               "Id": "Selection",
               "Title": "Node Selection",
+              "IsUpdated": true,
               "DocUrl": "DevExpress.Blazor.DxTreeView#node-selection"
             },
             {
@@ -5416,6 +6459,29 @@
       ]
     },
     {
+      "Id": "PdfViewer",
+      "Title": "PDF Viewer (Preview)",
+      "AnalyticsId": "TODO",
+      "IsNew": true,
+      "Pages": [
+        {
+          "Id": "Overview",
+          "Url": "PdfViewer",
+          "Title": "Overview",
+          "Keywords": "Blazor, component, DxPdfViewer",
+          "Description": "A component that displays PDF documents directly in the browser.",
+          "DocUrl": "DevExpress.Blazor.PdfViewer.DxPdfViewer",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "CSS",
+              "Path": "Pages\\PdfViewer\\Overview\\PdfViewer-Overview.razor.css"
+
+            }
+          ]
+        }
+      ]
+    },
+    {
       "Id": "PivotGrid",
       "Title": "Pivot Grid",
       "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7:a66317f9-3abf-4178-abfc-336c43eb98af",
@@ -5441,7 +6507,7 @@
         {
           "Id": "LargeDataSources",
           "Url": "PivotGridLargeDataBase",
-          "Title": "Large Data Source",
+          "Title": "Large Dataset Source",
           "Keywords": "Blazor, components, DxPivotGrid, pivot grid, pivot table, data binding, entity framework bind, paging, devexpress, demo, sample, example",
           "Description": "DevExpress Blazor Pivot Grid delivers high performance when the component is bound to a large data source.",
           "DocUrl": "DevExpress.Blazor.DxPivotGrid-1#bind-to-data",
@@ -5505,7 +6571,7 @@
       "AdditionalCodeFiles": [
         {
           "Title": "Razor",
-          "Path": "Pages\\Reports\\ReportViewer\\Reports-ReportViewer.razor"
+          "Path": "Pages\\Reports\\ReportViewer\\Reports-ReportViewer.Server.razor"
         },
         {
           "Title": "NativeReportViewer.razor",
@@ -5513,7 +6579,7 @@
         },
         {
           "Title": "JSBasedDocumentViewer.razor",
-          "Path": "Pages\\Reports\\Shared\\JSBasedDocumentViewer.razor"
+          "Path": "Pages\\Reports\\Shared\\JSBasedDocumentViewer.Server.razor"
         }
       ],
       "IsServerSideOnly": true,
@@ -5531,8 +6597,7 @@
             {
               "Id": "DrillThroughReport",
               "Url": "ReportViewer/Interaction/DrillThroughReport",
-              "Title": "Drill-Through Report",
-              "IsNew": true
+              "Title": "Drill-Through Report"
             },
             {
               "Id": "EmployeePerformanceReview",
@@ -5783,9 +6848,10 @@
           "AdditionalCodeFiles": [
             {
               "Title": "Razor",
-              "Path": "Pages\\Reports\\ReportDesigner\\Reports-ReportDesigner.razor"
+              "Path": "Pages\\Reports\\ReportDesigner\\Reports-ReportDesigner.Server.razor"
             }
-          ]
+          ],
+          "IsUpdated": true
         }
       ]
     },
@@ -5895,7 +6961,8 @@
               "Title": "Razor",
               "Path": "Pages\\Reports\\ReportDesigner\\Reports-ReportDesigner.Wasm.razor"
             }
-          ]
+          ],
+          "IsUpdated": true
         }
       ]
     },
@@ -5903,6 +6970,7 @@
       "Id": "RichEdit",
       "Title": "Rich Text Editor",
       "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7",
+      "IsUpdated": true,
       "Pages": [
         {
           "Id": "Overview",
@@ -5922,6 +6990,7 @@
           "Id": "API",
           "Url": "RichEditAPI",
           "Title": "Document API",
+          "IsUpdated": true,
           "Keywords": "Blazor, component, DxRichEdit, text editor, rich format, modify document, programmatically, in code",
           "Description": "With our Blazor Rich Text Editor, you can modify the open document programmatically.",
           "DocUrl": "DevExpress.Blazor.RichEdit.DxRichEdit.DocumentAPI"
@@ -5965,6 +7034,26 @@
             {
               "Title": "DocumentProvider.cs",
               "Path": "DataProviders\\DocumentProvider.cs"
+            }
+          ]
+        },
+        {
+          "Id": "ContextMenuCustomization",
+          "Url": "RichEditContextMenuCustomization",
+          "Title": "Context Menu Customization",
+          "Keywords": "Blazor, component, DxRichEdit, text editor, rich format, customization, appearance customization, context menu",
+          "Description": "The CustomizeContextMenu event allows you to customize the context menu in the Rich Text Editor.",
+          "DocUrl": "DevExpress.Blazor.RichEdit.DxRichEdit#context-menu-customization",
+          "IsNew": true,
+          "AdditionalCodeFiles": [
+            {
+              "Title": "DocumentProvider.cs",
+              "Path": "DataProviders\\DocumentProvider.cs"
+            },
+            {
+              "Title": "Icons.css",
+              "Path": "wwwroot\\css\\dx-demo-pages.css",
+              "ExtractRegex": "\\.search-icon {[^}]+}"
             }
           ]
         },
@@ -6250,6 +7339,32 @@
                 }
               ],
               "RedirectFrom": [ "SchedulerResources#CustomResourceNavigator" ]
+            },
+            {
+              "Id": "MultipleResources",
+              "Url": "Scheduler/Resources/MultipleResources",
+              "Title": "Multiple Resources",
+              "DocUrl": "DevExpress.Blazor.DxScheduler#resource-sharing",
+              "IsNew": true,
+              "Keywords": "Blazor, components, DxScheduler, scheduler, resources, resource sharing, multiple resources, devexpress, demo, sample, example",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Appointment.cs",
+                  "Path": "Data\\Appointments\\Appointment.cs"
+                },
+                {
+                  "Title": "Resource.cs",
+                  "Path": "Data\\Appointments\\Resource.cs"
+                },
+                {
+                  "Title": "MultipleResourceAppointmentCollection.cs",
+                  "Path": "Data\\Appointments\\MultipleResourceAppointmentCollection.cs"
+                },
+                {
+                  "Title": "ResourceCollection.cs",
+                  "Path": "Data\\Appointments\\ResourceCollection.cs"
+                }
+              ]
             }
           ]
         },
@@ -6425,6 +7540,538 @@
       ]
     },
     {
+      "Id": "TreeList",
+      "Title": "TreeList (Preview)",
+      "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7",
+      "IsNew": true,
+      "Pages": [
+        {
+          "Id": "Overview",
+          "Url": "TreeList",
+          "Title": "Overview",
+          "Keywords": "blazor, components, DxTreeList, treelist, tree list, data, devexpress, demo, sample, example",
+          "Description": "A fast and responsive TreeList component with unmatched data shaping capabilities.",
+          "DocUrl": "",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "EmployeeTask",
+              "Path": "Data\\EmployeeTask.cs"
+            },
+            {
+              "Title": "IEmployeeTaskDataProvider",
+              "Path": "DataProviders\\IEmployeeTaskDataProvider.cs"
+            },
+            {
+              "Title": "EmployeeTaskDataProvider",
+              "Path": "DataProviders\\EmployeeTaskDataProvider.cs"
+            }
+          ]
+        },
+        {
+          "Id": "DataBinding",
+          "Title": "Data Binding",
+          "Description": "The DevExpress TreeList for Blazor supports binding to flat and hierarchical data sources (including large data sources).",
+          "Pages": [
+            {
+              "Id": "FlatData",
+              "Url": "TreeList/DataBinding/FlatData",
+              "Title": "Flat Data",
+              "Keywords": "blazor, components, DxTreeList, treelist, tree list, data bind, data binding, bind to data, data collections, flat data, plain data, self-reference data, devexpress, demo, sample, example",
+              "DocUrl": "",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SalesByRegion",
+                  "Path": "Data\\SalesByRegion.cs"
+                },
+                {
+                  "Title": "ISalesByRegionDataProvider",
+                  "Path": "DataProviders\\ISalesByRegionDataProvider.cs"
+                },
+                {
+                  "Title": "SalesByRegionDataProvider",
+                  "Path": "DataProviders\\SalesByRegionDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "HierarchicalData",
+              "Url": "TreeList/DataBinding/HierarchicalData",
+              "Title": "Hierarchical Data",
+              "Keywords": "blazor, components, DxTreeList, treelist, tree list, data bind, data binding, bind to data, data collections, hierarchical data, devexpress, demo, sample, example",
+              "DocUrl": "",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SpaceObject",
+                  "Path": "Data\\SpaceObject.cs"
+                },
+                {
+                  "Title": "ISpaceObjectDataProvider",
+                  "Path": "DataProviders\\ISpaceObjectDataProvider.cs"
+                },
+                {
+                  "Title": "SpaceObjectDataProvider",
+                  "Path": "DataProviders\\SpaceObjectDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "LargeDataset",
+              "Url": "TreeList/DataBinding/LargeDataset",
+              "Title": "Large Dataset",
+              "Keywords": "blazor, components, DxTreeList, treelist, tree list, data bind, data binding, bind to data, large data source, flat data, plain data, self-reference data, load nodes on demand, on demand load mode, devexpress, demo, sample, example",
+              "DocUrl": "",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "EmployeeTask",
+                  "Path": "Data\\EmployeeTask.cs"
+                },
+                {
+                  "Title": "IEmployeeTaskDataProvider",
+                  "Path": "DataProviders\\IEmployeeTaskDataProvider.cs"
+                },
+                {
+                  "Title": "EmployeeTaskDataProvider",
+                  "Path": "DataProviders\\EmployeeTaskDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "LargeDatasetAsHttp",
+              "Url": "TreeList/DataBinding/LargeDatasetAsHttp",
+              "Title": "Large Dataset via HTTP Service",
+              "Keywords": "blazor, components, DxTreeList, treelist, tree list, data bind, data binding, bind to data, large data source, large data, server mode, http service, web api support, bind to web api, remote data source, flat data, load nodes on demand, on demand load mode, devexpress, demo, sample, example",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "EmployeeTask",
+                  "Path": "Data\\EmployeeTask.cs"
+                },
+                {
+                  "Title": "IEmployeeTaskDataProvider",
+                  "Path": "DataProviders\\IEmployeeTaskDataProvider.cs"
+                },
+                {
+                  "Title": "EmployeeTaskDataProvider",
+                  "Path": "DataProviders\\EmployeeTaskDataProvider.cs"
+                },
+                {
+                  "Title": "EmployeeTaskController.cs",
+                  "Path": "Controllers\\EmployeeTaskController.cs"
+                },
+                {
+                  "Title": "DataSourceLoadOptions.cs",
+                  "Path": "Utils\\DataSourceLoadOptions.cs"
+                }
+              ]
+            },
+            {
+              "Id": "LoadDataOnDemand",
+              "Url": "TreeList/DataBinding/LoadDataOnDemand",
+              "Title": "Load Data on Demand",
+              "Keywords": "blazor, components, DxTreeList, treelist, tree list, data bind, data binding, bind to data, load nodes on demand, on demand load mode, hierarchical data, devexpress, demo, sample, example",
+              "DocUrl": "",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "FileSystemDataItem",
+                  "Path": "Data\\FileSystemDataItem.cs"
+                },
+                {
+                  "Title": "IFileSystemDataProvider",
+                  "Path": "DataProviders\\IFileSystemDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "ObservableCollection",
+              "Url": "TreeList/DataBinding/ObservableCollection",
+              "Title": "Observable Data Collection",
+              "Keywords": "blazor, components, DxTreeList, treelist, tree list, data bind, data binding, bind to data, data collections, observable collections, dynamic collections, inotifycollectionchanged, ibindinglist, observablecollection, devexpress, demo, sample, example",
+              "DocUrl": "",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "StockQuoteDisplayModel.cs",
+                  "Path": "Data\\StockQuotes\\StockQuoteDisplayModel.cs"
+                },
+                {
+                  "Title": "StockQuoteByRegionChangedEventArgs.cs",
+                  "Path": "Data\\StockQuotes\\StockQuoteByRegionChangedEventArgs.cs"
+                },
+                {
+                  "Title": "IStockQuoteService.cs",
+                  "Path": "Services\\IStockQuoteService.cs"
+                },
+                {
+                  "Title": "Startup.cs",
+                  "Path": "Pages\\CodeSnippets\\StockQuoteService.Startup.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "Sorting",
+          "Url": "TreeList/Sorting",
+          "Title": "Sort Data",
+          "Keywords": "blazor, components, DxTreeList, treelist, tree list, treelist sort, treelist sorting, tree list sort, tree list sorting, devexpress, demo, sample, example",
+          "Description": "The DevExpress TreeList for Blazor supports sorting data against multiple columns. The sort glyph in the header indicates the column's current sort order.",
+          "DocUrl": "",
+          "AdditionalCodeFiles": [
+            {
+              "Title": "EmployeeTask",
+              "Path": "Data\\EmployeeTask.cs"
+            },
+            {
+              "Title": "IEmployeeTaskDataProvider",
+              "Path": "DataProviders\\IEmployeeTaskDataProvider.cs"
+            },
+            {
+              "Title": "EmployeeTaskDataProvider",
+              "Path": "DataProviders\\EmployeeTaskDataProvider.cs"
+            }
+          ]
+        },
+        {
+          "Id": "Filtering",
+          "Title": "Filter Data",
+          "Description": "The DevExpress TreeList for Blazor supports filtering data against multiple columns.",
+          "Pages": [
+            {
+              "Id": "FilterRow",
+              "Url": "TreeList/Filtering/FilterRow",
+              "Title": "Filter Row",
+              "Keywords": "blazor, components, DxTreeList, treelist, tree list, treelist filter, treelist filtering, tree list filter, tree list filtering, data filter, filter row, devexpress, demo, sample, example",
+              "DocUrl": "",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "EmployeeTask",
+                  "Path": "Data\\EmployeeTask.cs"
+                },
+                {
+                  "Title": "IEmployeeTaskDataProvider",
+                  "Path": "DataProviders\\IEmployeeTaskDataProvider.cs"
+                },
+                {
+                  "Title": "EmployeeTaskDataProvider",
+                  "Path": "DataProviders\\EmployeeTaskDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "FilterAPI",
+              "Url": "TreeList/Filtering/FilterAPI",
+              "Title": "Filter API",
+              "Keywords": "blazor, components, DxTreeList, treelist, tree list, treelist filter, treelist filtering, tree list filter, filter data in code, filter criteria, tree list filtering, data filter, devexpress, demo, sample, example",
+              "DocUrl": "",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SpaceObject",
+                  "Path": "Data\\SpaceObject.cs"
+                },
+                {
+                  "Title": "ISpaceObjectDataProvider",
+                  "Path": "DataProviders\\ISpaceObjectDataProvider.cs"
+                },
+                {
+                  "Title": "SpaceObjectDataProvider",
+                  "Path": "DataProviders\\SpaceObjectDataProvider.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "Summary",
+          "Title": "Summary",
+          "Description": "The DevExpress TreeList for Blazor can compute total summaries across all nodes.",
+          "Pages": [
+            {
+              "Id": "TotalSummary",
+              "Url": "TreeList/Summary/TotalSummary",
+              "Title": "Total Summary",
+              "Keywords": "blazor, components, DxTreeList, treelist, tree list, summary, summaries, totals, total values, total summary, total summaries, data summaries, aggregates, aggregate functions, devexpress, demo, sample, example",
+              "DocUrl": "",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SalesByRegion",
+                  "Path": "Data\\SalesByRegion.cs"
+                },
+                {
+                  "Title": "ISalesByRegionDataProvider",
+                  "Path": "DataProviders\\ISalesByRegionDataProvider.cs"
+                },
+                {
+                  "Title": "SalesByRegionDataProvider",
+                  "Path": "DataProviders\\SalesByRegionDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "CustomSummary",
+              "Url": "TreeList/Summary/CustomSummary",
+              "Title": "Custom Summary",
+              "Keywords": "blazor, components, DxTreeList, treelist, tree list, summary, summaries, totals, total values, custom summary, custom total summary, aggregates, aggregate functions, devexpress, demo, sample, example",
+              "DocUrl": "",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SalesByRegion",
+                  "Path": "Data\\SalesByRegion.cs"
+                },
+                {
+                  "Title": "ISalesByRegionDataProvider",
+                  "Path": "DataProviders\\ISalesByRegionDataProvider.cs"
+                },
+                {
+                  "Title": "SalesByRegionDataProvider",
+                  "Path": "DataProviders\\SalesByRegionDataProvider.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "Selection",
+          "Title": "Selection and Focus",
+          "Description": "The DevExpress TreeList for Blazor component supports single and multiple selection modes.",
+          "Pages": [
+            {
+              "Id": "MultipleRowSelection",
+              "Url": "TreeList/Selection/MultipleRowSelection",
+              "Title": "Multiple Row Selection",
+              "Keywords": "blazor, components, DxTreeList, treelist, tree list, selection, multi selection, multiple selection, selection column, selection check box, devexpress, demo, sample, example",
+              "DocUrl": "",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SpaceObject",
+                  "Path": "Data\\SpaceObject.cs"
+                },
+                {
+                  "Title": "ISpaceObjectDataProvider",
+                  "Path": "DataProviders\\ISpaceObjectDataProvider.cs"
+                },
+                {
+                  "Title": "SpaceObjectDataProvider",
+                  "Path": "DataProviders\\SpaceObjectDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "FocusedRow",
+              "Url": "TreeList/Selection/FocusedRow",
+              "Title": "Focused Row",
+              "Keywords": "Blazor, components, DxTreeList, treelist, tree list, focused row, devexpress, demo, sample, example",
+              "Description": "The DevExpress TreeList for Blazor allows users to focus individual rows.",
+              "DocUrl": "",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SpaceObject",
+                  "Path": "Data\\SpaceObject.cs"
+                },
+                {
+                  "Title": "ISpaceObjectDataProvider",
+                  "Path": "DataProviders\\ISpaceObjectDataProvider.cs"
+                },
+                {
+                  "Title": "SpaceObjectDataProvider",
+                  "Path": "DataProviders\\SpaceObjectDataProvider.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "Columns",
+          "Title": "Columns",
+          "Description": "The DevExpress Blazor TreeList allows users to resize columns. They can also apply the optimal width to a column by double-clicking a header's right edge. You can do the same using a method call.",
+          "Pages": [
+            {
+              "Id": "AutoFitWidths",
+              "Url": "TreeList/Columns/AutoFitWidths",
+              "Title": "Auto Fit",
+              "Keywords": "blazor, components, DxTreeList, tree list, treelist, column, columns, resizing, resize, column resizing, column resize, resizing columns, column width, column size, fit widths, best fit, bestfit, auto fit, devexpress, demo, sample, example",
+              "DocUrl": "",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SpaceObject",
+                  "Path": "Data\\SpaceObject.cs"
+                },
+                {
+                  "Title": "ISpaceObjectDataProvider",
+                  "Path": "DataProviders\\ISpaceObjectDataProvider.cs"
+                },
+                {
+                  "Title": "SpaceObjectDataProvider",
+                  "Path": "DataProviders\\SpaceObjectDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "ColumnChooser",
+              "Url": "TreeList/Columns/ColumnChooser",
+              "Title": "Column Chooser",
+              "Keywords": "blazor, components, DxTreeList, treelist, tree list, column, columns, devexpress, demo, sample, example, column chooser, chooser, reorder columns, column order, show column, hide column, hidden column, visible column, visibility",
+              "Description": "The DevExpress Blazor TreeList allows users to customize its column list with the integrated column chooser.",
+              "DocUrl": "",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SpaceObject",
+                  "Path": "Data\\SpaceObject.cs"
+                },
+                {
+                  "Title": "ISpaceObjectDataProvider",
+                  "Path": "DataProviders\\ISpaceObjectDataProvider.cs"
+                },
+                {
+                  "Title": "SpaceObjectDataProvider",
+                  "Path": "DataProviders\\SpaceObjectDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "FixedColumns",
+              "Url": "TreeList/Columns/FixedColumns",
+              "Title": "Fixed (Anchored) Columns",
+              "Keywords": "blazor, components, DxTreeList, treelist, tree list, fixed columns, frozen columns, sticky columns, fix column, freeze column, anchor column, keep column visible, horizontal scrolling, devexpress, demo, sample, example",
+              "Description": "The DevExpress Blazor TreeList allows you to anchor columns to the TreeList's left and right edges. Fixed columns remain visible when a user scrolls the TreeList horizontally.",
+              "DocUrl": "",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SpaceObject",
+                  "Path": "Data\\SpaceObject.cs"
+                },
+                {
+                  "Title": "ISpaceObjectDataProvider",
+                  "Path": "DataProviders\\ISpaceObjectDataProvider.cs"
+                },
+                {
+                  "Title": "SpaceObjectDataProvider",
+                  "Path": "DataProviders\\SpaceObjectDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "HeaderBands",
+              "Url": "TreeList/Columns/HeaderBands",
+              "Title": "Header Bands",
+              "DocUrl": "",
+              "Keywords": "blazor, components, DxTreeList, treelist, tree list, header bands, band, multi-level headers, multi-row headers, grouped headers, devexpress, demo, sample, example",
+              "Description": "Header bands combine TreeList headers into logical groups and display them as hierarchical multi-row headers.",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SalesByRegion",
+                  "Path": "Data\\SalesByRegion.cs"
+                },
+                {
+                  "Title": "ISalesByRegionDataProvider",
+                  "Path": "DataProviders\\ISalesByRegionDataProvider.cs"
+                },
+                {
+                  "Title": "SalesByRegionDataProvider",
+                  "Path": "DataProviders\\SalesByRegionDataProvider.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "Customization",
+          "Title": "Customization",
+          "Description": "The DevExpress TreeList for Blazor allows you to customize the appearance of UI elements based on custom conditions.",
+          "Pages": [
+            {
+              "Id": "ConditionalFormatting",
+              "Url": "TreeList/Customization/ConditionalFormatting",
+              "Title": "Conditional Formatting",
+              "Keywords": "blazor, components, DxTreeList, treelist, tree list, customization, appearance customization, style, conditional formatting, conditional data highlighting, html attributes, devexpress, demo, sample, example",
+              "DocUrl": "",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SalesByRegion",
+                  "Path": "Data\\SalesByRegion.cs"
+                },
+                {
+                  "Title": "ISalesByRegionDataProvider",
+                  "Path": "DataProviders\\ISalesByRegionDataProvider.cs"
+                },
+                {
+                  "Title": "SalesByRegionDataProvider",
+                  "Path": "DataProviders\\SalesByRegionDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "AltRowStyle",
+              "Url": "TreeList/Customization/AltRowStyle",
+              "Title": "Alternating Row Style",
+              "Keywords": "blazor, components, DxTreeList, treelist, tree list, customization, appearance customization, style, row style, row color, column style, cell style, custom style, html decoration, html row decoration, html cell decoration, html attributes, alternating row style, higlight odd rows, devexpress, demo, sample, example",
+              "DocUrl": "",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "SalesByRegion",
+                  "Path": "Data\\SalesByRegion.cs"
+                },
+                {
+                  "Title": "ISalesByRegionDataProvider",
+                  "Path": "DataProviders\\ISalesByRegionDataProvider.cs"
+                },
+                {
+                  "Title": "SalesByRegionDataProvider",
+                  "Path": "DataProviders\\SalesByRegionDataProvider.cs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "PagingAndScrolling",
+          "Title": "Paging and Scrolling",
+          "Description": "The DevExpress TreeList for Blazor supports paging, horizontal scrolling, vertical scrolling, and virtual scrolling (loading data on demand).",
+          "Pages": [
+            {
+              "Id": "Paging",
+              "Url": "TreeList/PagingAndScrolling/Paging",
+              "Title": "Paging",
+              "Keywords": "blazor, components, DxTreeList, treelist, tree list, paging, pager, pages, go to page, page size selection, custom page size, devexpress, demo, sample, example",
+              "DocUrl": "",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "EmployeeTask",
+                  "Path": "Data\\EmployeeTask.cs"
+                },
+                {
+                  "Title": "IEmployeeTaskDataProvider",
+                  "Path": "DataProviders\\IEmployeeTaskDataProvider.cs"
+                },
+                {
+                  "Title": "EmployeeTaskDataProvider",
+                  "Path": "DataProviders\\EmployeeTaskDataProvider.cs"
+                }
+              ]
+            },
+            {
+              "Id": "VirtualScrolling",
+              "Url": "TreeList/PagingAndScrolling/VirtualScrolling",
+              "Title": "Virtual Scrolling",
+              "Keywords": "blazor, components, DxTreeList, treelist, tree list, scrolling, vertical scrolling, virtual scrolling, load records on demand, no paging, display all rows, devexpress, demo, sample, example",
+              "DocUrl": "",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "EmployeeTask",
+                  "Path": "Data\\EmployeeTask.cs"
+                },
+                {
+                  "Title": "IEmployeeTaskDataProvider",
+                  "Path": "DataProviders\\IEmployeeTaskDataProvider.cs"
+                },
+                {
+                  "Title": "EmployeeTaskDataProvider",
+                  "Path": "DataProviders\\EmployeeTaskDataProvider.cs"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "Id": "Utility",
       "Title": "Utility Controls",
       "AnalyticsId": "3c616c71-03dc-46b9-a54f-1334a22dffe7:d2def247-370a-4a20-9edd-78715fd9963b",
@@ -6556,6 +8203,44 @@
               "DocUrl": "DevExpress.Blazor.DxWaitIndicator#customize-appearance"
             }
           ]
+        },
+        {
+          "Id": "ProgressBar",
+          "Url": "ProgressBar",
+          "Title": "Progress Bar",
+          "Keywords": "Blazor, components, progress bar, progress panel, progress indicator, loading panel, loading indicator, circular bar, indeterminate bar, devexpress, demo, sample, example",
+          "Description": "Progress Bar",
+          "IsNew": true,
+          "PageSections": [
+            {
+              "Id": "Overview",
+              "Title": "Overview"
+            },
+            {
+              "Id": "Types",
+              "Title": "Types",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Utility\\ProgressBar\\Utility-ProgressBar-Types.razor.css"
+                }
+              ]
+            },
+            {
+              "Id": "Indeterminate",
+              "Title": "Indeterminate",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "CSS",
+                  "Path": "Pages\\Utility\\ProgressBar\\Utility-ProgressBar-Indeterminate.razor.css"
+                }
+              ]
+            },
+            {
+              "Id": "Customization",
+              "Title": "Customization"
+            }
+          ]
         }
       ]
     },
@@ -6563,7 +8248,7 @@
       "Id": "OfficeFileApi",
       "Title": "Office File API ↗",
       "IsExternal": true,
-      "IsNew":  true,
+      "IsNew": true,
       "Url": "https://demos.devexpress.com/OfficeFileAPI/BlazorServer/"
     }
   ],

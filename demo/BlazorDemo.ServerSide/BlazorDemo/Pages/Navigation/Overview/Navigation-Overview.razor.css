@@ -12,6 +12,10 @@
     align-items: center;
 }
 
+/*BeginHide*/ ::deep /*EndHide*/ .dxbl-menu-item .search {
+    width: 160px;
+}
+
 .overview-navigation > .card-header {
     font-weight: inherit;
     font-size: inherit;
@@ -19,10 +23,6 @@
 
 .overview-navigation > .card-body:last-child {
     flex-wrap: nowrap;
-}
-
-.dxbl-menu-item .search {
-    min-width: 123px
 }
 
 .dxbl-menu-item-tmpl > .search {

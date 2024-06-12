@@ -1,0 +1,67 @@
+﻿@using System.Drawing
+
+<div class="sparkline-template-container">
+    <DxSparkline
+        Width="100%"
+        Height="100%"
+        Data="@Data"
+        ArgumentFieldName="Month"
+        ValueFieldName="VisitorCount"
+        Type="@SparklineType"
+        ShowMinMax="true"
+        WinLossThreshold="@WinLossThreshold"
+        WinColor="@GetDefaultColor(BaseColor)"
+        LossColor="@ColorTranslator.ToHtml(Color.LightGray)"
+        LineColor="@GetDefaultColor(BaseColor)"
+        MaxColor="@GetMaxColor(BaseColor)"
+        MinColor="@GetMinColor(BaseColor)"
+        BarPositiveColor="@GetDefaultColor(BaseColor)"
+        FirstLastColor="@GetDefaultColor(BaseColor)">
+        <DxTooltipSettings Enabled="true">
+            <DxTextFormatSettings LdmlString=",###"></DxTextFormatSettings>
+        </DxTooltipSettings>
+    </DxSparkline>
+</div>
+
+@code {
+    [Parameter]
+    public string BaseColor {
+        get;
+        set;
+    }
+
+    [Parameter]
+    public int WinLossThreshold {
+        get;
+        set;
+    }
+
+    [Parameter]
+    public SparklineType SparklineType {
+        get;
+        set;
+    }
+
+    [Parameter]
+    public IEnumerable<SparklineDataPoint> Data {
+        get;
+        set;
+    }
+
+    string opacityDefault = "B3";
+    string opacityMin = "66";
+    string opacityMax = "ff";
+
+    string ModifyColor(string color, string opacity) {
+        return $"{color}{opacity}";
+    }
+    string GetDefaultColor(string color) {
+        return ModifyColor(color, opacityDefault);
+    }
+    string GetMinColor(string color) {
+        return ModifyColor(color, opacityMin);
+    }
+    string GetMaxColor(string color) {
+        return ModifyColor(color, opacityMax);
+    }
+}

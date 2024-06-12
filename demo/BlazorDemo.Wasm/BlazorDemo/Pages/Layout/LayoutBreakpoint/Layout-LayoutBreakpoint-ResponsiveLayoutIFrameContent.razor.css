@@ -4,14 +4,6 @@
     overflow: hidden;
 }
 
-/*BeginHide*/ ::deep /*EndHide*/ .btn-column-chooser {
-    width: 16px;
-    height: 16px;
-    -webkit-mask-image: url("images/icons/column-chooser.svg");
-    mask-image: url("images/icons/column-chooser.svg");
-    background-color: currentColor;
-}
-
 /*BeginHide*/ ::deep /*EndHide*/ .fab-container {
     display: flex;
     flex-direction: column;

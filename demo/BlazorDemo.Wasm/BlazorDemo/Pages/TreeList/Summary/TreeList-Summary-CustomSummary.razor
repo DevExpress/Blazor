@@ -1,0 +1,70 @@
+﻿@page "/TreeList/Summary/CustomSummary"
+
+<DemoPageSectionComponent Id="TreeList-Summary-CustomSummary" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject ISalesByRegionDataProvider SalesByRegionDataProvider
+
+        <DxTreeList @ref="TreeList"
+                    Data="Data"
+                    KeyFieldName="ID"
+                    ParentKeyFieldName="RegionID"
+                    ShowAllRows="true"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    CustomSummary="TreeList_CustomSummary"
+                    CustomizeSummaryDisplayText="TreeList_CustomizeSummaryDisplayText"
+                    SelectedDataItemsChanged="TreeList_SelectedDataItemsChanged"
+                    SizeMode="Params.SizeMode"
+                    CssClass="max-h-480">
+            <Columns>
+                <DxTreeListSelectionColumn Width="50px" />
+                <DxTreeListDataColumn FieldName="Region" Width="15%" />
+                <DxTreeListDataColumn FieldName="MarchSales" DisplayFormat="c0" Width="25%" />
+                <DxTreeListDataColumn FieldName="SeptemberSales" DisplayFormat="c0" Width="15%" />
+                <DxTreeListDataColumn FieldName="MarchChange" DisplayFormat="p2" Width="15%" />
+                <DxTreeListDataColumn FieldName="SeptemberChange" DisplayFormat="p2" Width="15%" />
+                <DxTreeListDataColumn FieldName="MarketShare" DisplayFormat="p0" Width="15%" />
+            </Columns>
+            <TotalSummary>
+                <DxTreeListSummaryItem SummaryType="TreeListSummaryItemType.Count" FieldName="Region" />
+                <DxTreeListSummaryItem SummaryType="TreeListSummaryItemType.Sum" FieldName="MarchSales" />
+                <DxTreeListSummaryItem SummaryType="TreeListSummaryItemType.Custom" FieldName="MarchSales" Name="Custom" />
+            </TotalSummary>
+        </DxTreeList>
+
+        @code {
+            ITreeList TreeList { get; set; }
+            object Data { get; set; }
+
+            protected override void OnInitialized() {
+                Data = SalesByRegionDataProvider.GenerateData();
+            }
+
+            protected override void OnAfterRender(bool firstRender) {
+                if(firstRender)
+                    TreeList.ExpandRow(2);
+            }
+
+            void TreeList_CustomSummary(TreeListCustomSummaryEventArgs e) {
+                switch(e.SummaryStage) {
+                    case TreeListCustomSummaryStage.Start:
+                        e.TotalValue = 0m;
+                        break;
+                    case TreeListCustomSummaryStage.Calculate:
+                        if(e.TreeList.IsDataItemSelected(e.DataItem))
+                            e.TotalValue = (decimal)e.TotalValue + (decimal)e.GetRowValue("MarchSales");
+                        break;
+                }
+            }
+        
+            void TreeList_CustomizeSummaryDisplayText(TreeListCustomizeSummaryDisplayTextEventArgs e) {
+                if(e.Item.Name == "Custom")
+                    e.DisplayText = string.Format("Sum of Selected ({0}): {1:c0}", e.TreeList.SelectedDataItems.Count, e.Value);
+            }
+
+            void TreeList_SelectedDataItemsChanged(IReadOnlyList<object> newSelection) {
+                TreeList.RefreshSummary();
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

@@ -7,12 +7,13 @@
                      GroupType="@SchedulerGroupType.Resource"
                      ResourceColorInHeaderVisible="false"
                      HtmlCellDecoration="OnHtmlCellDecoration"
-                     CssClass="w-100" >
+                     CssClass="demo-sc-size">
             <Views>
-                <DxSchedulerDayView DayCount="2" ShowWorkTimeOnly="true">
+                <DxSchedulerDayView DayCount="2" ShowWorkTimeOnly="true" CellMinWidth="120">
                     <ResourceHeaderCellTemplate>
                         <div class="" style="display: flex; flex-direction: row; align-items: center;">
                             <img class="card" src="@(StaticAssetUtils.GetImagePath(context.Resource.CustomFields["ImageFileName"].ToString()))"
+                                 alt=""
                                  style="object-fit: cover; height: 80px; width: 80px; object-position: 0px 0px; border-radius: 50%;" />
                             <div style="padding: 0.4725rem;">@context.Resource.Caption</div>
                         </div>

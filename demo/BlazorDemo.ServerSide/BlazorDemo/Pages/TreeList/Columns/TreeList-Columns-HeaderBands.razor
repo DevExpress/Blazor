@@ -1,0 +1,41 @@
+﻿@page "/TreeList/Columns/HeaderBands"
+
+<DemoPageSectionComponent Id="TreeList-Columns-HeaderBands" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject ISalesByRegionDataProvider SalesByRegionDataProvider
+
+        <DxTreeList Data="TreeListData"
+                    KeyFieldName="ID"
+                    ParentKeyFieldName="RegionID"
+                    ShowAllRows="true"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    SizeMode="Params.SizeMode"
+                    CssClass="max-h-480">
+            <Columns>
+                <DxTreeListBandColumn Caption="Sales">
+                    <Columns>
+                        <DxTreeListDataColumn FieldName="Region" />
+                        <DxTreeListDataColumn FieldName="MarchSales" Caption="March" DisplayFormat="c0" />
+                        <DxTreeListDataColumn FieldName="SeptemberSales" Caption="September" DisplayFormat="c0" />
+                    </Columns>
+                </DxTreeListBandColumn>
+                <DxTreeListBandColumn Caption="Year-Over-Year Comparison">
+                    <Columns>
+                        <DxTreeListDataColumn FieldName="MarchChange" Caption="March" DisplayFormat="p2" />
+                        <DxTreeListDataColumn FieldName="SeptemberChange" Caption="September" DisplayFormat="p2" />
+                    </Columns>
+                </DxTreeListBandColumn>
+                <DxTreeListDataColumn FieldName="MarketShare" DisplayFormat="p0" />
+            </Columns>
+        </DxTreeList>
+
+        @code {
+            object TreeListData { get; set; }
+
+            protected override void OnInitialized() {
+                TreeListData = SalesByRegionDataProvider.GenerateData();
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

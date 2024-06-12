@@ -1,0 +1,105 @@
+﻿@page "/TreeList/Filtering/FilterRow"
+@using DevExpress.Data.Filtering
+
+<DemoPageSectionComponent Id="TreeList-Filtering-FilterRow" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject IEmployeeTaskDataProvider EmployeeTaskDataProvider
+
+        <DxTreeList @ref="TreeList"
+                    Data="TreeListData"
+                    KeyFieldName="Id"
+                    ParentKeyFieldName="ParentId"
+                    VirtualScrollingEnabled="true"
+                    ShowFilterRow="true"
+                    FilterTreeMode="FilterTreeMode.Mode"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    SizeMode="Params.SizeMode"
+                    CssClass="max-h-480">
+            <Columns>
+                <DxTreeListDataColumn FieldName="Name" Caption="Task" SortOrder="TreeListColumnSortOrder.Ascending" FilterRowValue='"Product"' />
+                <DxTreeListDataColumn FieldName="EmployeeName" Caption="Assigned To" TextAlignment="TreeListTextAlignment.Left" Width="200px">
+                    <EditSettings>
+                        <DxComboBoxSettings Data="TreeListData" ValueFieldName="EmployeeName" TextFieldName="EmployeeName" FilteringMode="DataGridFilteringMode.Contains" />
+                    </EditSettings>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn FieldName="StartDate" Width="100px" />
+                <DxTreeListDataColumn FieldName="DueDate" Width="100px" />
+                <DxTreeListDataColumn FieldName="Priority" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                    <EditSettings>
+                        <DxComboBoxSettings Data="Priorities" ValueFieldName="Value" TextFieldName="Text" ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Never" />
+                    </EditSettings>
+                    <CellDisplayTemplate>
+                        <span title="@TreeListRenderHelper.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem) priority">@TreeListRenderHelper.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem)</span>
+                    </CellDisplayTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn Caption="Progress" FieldName="Status" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                    <FilterRowCellTemplate>
+                        <DxComboBox @bind-Value="context.FilterCriteria"
+                                    Data="CompletedIntervals" ValueFieldName="Criteria" TextFieldName="DisplayText"
+                                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                                    aria-label="Select status" />
+                    </FilterRowCellTemplate>
+                    <CellDisplayTemplate>
+                        <span>@TreeListRenderHelper.EmployeeTaskStatusToString((EmployeeTask)context.DataItem)</span>
+                    </CellDisplayTemplate>
+                </DxTreeListDataColumn>
+            </Columns>
+            <ToolbarTemplate>
+                <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" SizeMode="Params.SizeMode">
+                    <Items>
+                        <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                            <Template Context="toolbar_item_context">
+                                <div class="d-flex flex-row align-items-center h-100">
+                                    <div class="me-2">Tree Filter Mode:</div>
+                                    <DxComboBox Data="FilterModes" @bind-Value="FilterTreeMode" TextFieldName="Name" />
+                                </div>
+                            </Template>
+                        </DxToolbarItem>
+                    </Items>
+                </DxToolbar>
+            </ToolbarTemplate>
+        </DxTreeList>
+
+        @code {
+            static readonly IReadOnlyList<FilterInterval> CompletedIntervals = new FilterInterval[] {
+                new("[Status] == 100", "Completed"),
+                new("[Status] < 100", "In Progress"),
+            };
+            static readonly IReadOnlyList<Priority> Priorities = new Priority[] {
+                new Priority(-1, "Low"),
+                new Priority(0, "Medium"),
+                new Priority(1, "High"),
+            };
+
+            static readonly IList<TreeListFilterTreeModeItem> FilterModes = Enum.GetValues<TreeListFilterTreeMode>()
+                .Select(e => TreeListFilterTreeModeItem.Create(e)).ToList();
+
+            ITreeList TreeList { get; set; }
+            object TreeListData { get; set; }
+            TreeListFilterTreeModeItem FilterTreeMode { get; set; }
+
+            protected override void OnInitialized() {
+                FilterTreeMode = FilterModes.First();
+                TreeListData = EmployeeTaskDataProvider.GenerateData();
+            }
+
+            protected override void OnAfterRender(bool firstRender) {
+                if(firstRender)
+                    TreeList.ExpandRow(0);
+            }
+
+            record Priority(int Value, string Text);
+
+            record FilterInterval(CriteriaOperator Criteria, string DisplayText) {
+                public FilterInterval(string CriteriaText, string DisplayText)
+                : this(CriteriaOperator.Parse(CriteriaText), DisplayText) {
+                }
+            }
+
+            record TreeListFilterTreeModeItem(string Name, TreeListFilterTreeMode Mode) {
+                public static TreeListFilterTreeModeItem Create(TreeListFilterTreeMode mode) => new (SplitTextHelper.SplitPascalCaseString(mode.ToString()), mode);
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

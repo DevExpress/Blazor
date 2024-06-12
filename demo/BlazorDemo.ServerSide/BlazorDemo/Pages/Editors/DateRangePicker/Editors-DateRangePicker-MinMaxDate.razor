@@ -1,0 +1,31 @@
+﻿<DemoPageSectionComponent Id="Editors-DateRangePicker-MinMaxDate" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <label for="deMinMaxDate" class="demo-text cw-320 mb-1">Date Range</label>
+        <DxDateRangePicker @bind-StartDate="@DateTimeStart"
+                           @bind-EndDate="@DateTimeEnd"
+                           SizeMode="Params.SizeMode"
+                           CssClass="cw-320"
+                           MinDate="@MinDate"
+                           MaxDate="@MaxDate"
+                           InputId="deMinMaxDate" />
+        <p class="demo-text cw-320 mt-3">
+            Selected Date Range:
+            <b>@DateTimeStart.ToString("dddd, dd MMMM yyyy")</b> - <b>@DateTimeEnd.ToString("dddd, dd MMMM yyyy")</b>
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        DateTime DateTimeStart { get; set; } = DateTime.Today;
+        DateTime DateTimeEnd { get; set; } = DateTime.Today.AddDays(7);
+        DateTime MinDate { get; set; }
+        DateTime MaxDate { get; set; }
+
+        protected override void OnInitialized() {
+            MinDate = DateTimeStart.AddDays(-7);
+            int days = DateTime.DaysInMonth(DateTimeStart.Year, DateTimeStart.Month);
+            MaxDate = new DateTime(DateTimeStart.Year, DateTimeStart.Month, days).AddDays(14);
+        }
+
+    }
+
+</DemoPageSectionComponent>

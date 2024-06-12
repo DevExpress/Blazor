@@ -1,4 +1,4 @@
-The [Calendar](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1) component allows users to select multiple dates: individual dates, date ranges, or a combination of both.
+The DevExpress Blazor [Calendar](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1) component allows users to select multiple dates: individual dates, date ranges, or a combination of both.
 
 Set the [EnableMultiSelect](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1.EnableMultiSelect) property to `true` to enable multiple date selection. The [SelectedDates](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1.SelectedDates) collection stores selected dates. To handle selection changes, use the [SelectedDatesChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxCalendar-1.SelectedDatesChanged) event.
 

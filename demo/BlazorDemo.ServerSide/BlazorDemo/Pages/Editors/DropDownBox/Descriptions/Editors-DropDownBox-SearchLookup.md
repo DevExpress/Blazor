@@ -1,0 +1,3 @@
+In this demo, the [DropDownBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownBox) editor contains a fully-functional [DevExpres Blazor Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid) control. The control displays a search box.
+
+The editor's [Value](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownBox.Value) property is bound to a data item that corresponds to the selected grid row. When grid selection changes, the [DxGrid.SelectedDataItemChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SelectedDataItemChanged) event handler assigns a new data item to the editor value and calls the [HideDropDown](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownBox.HideDropDown) method.

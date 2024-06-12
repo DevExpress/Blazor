@@ -17,7 +17,7 @@
             </DxChart>
         </div>
         <div class="mt-4">
-            <DxPivotGrid Data="@(PivotGridDataProvider.PivotGridDataSource)" CssClass="m-100">
+            <DxPivotGrid Data="@(PivotGridDataProvider.PivotGridDataSource)">
                 <DxPivotGridField Field="@nameof(SaleInfo.Region)" SortOrder="PivotGridSortOrder.Ascending" Area="PivotGridFieldArea.Row" />
                 <DxPivotGridField Field="@nameof(SaleInfo.Country)" Area="PivotGridFieldArea.Row" />
                 <DxPivotGridField Field="@nameof(SaleInfo.City)" Area="PivotGridFieldArea.Row" />

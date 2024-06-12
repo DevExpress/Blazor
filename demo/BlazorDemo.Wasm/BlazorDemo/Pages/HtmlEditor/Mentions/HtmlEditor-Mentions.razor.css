@@ -1,0 +1,45 @@
+﻿#chat-window {
+    background-color: rgba(191, 191, 191, 0.15);
+    height: 350px;
+    padding: 10px;
+    width: 100%;
+}
+
+.message {
+    height: 100px;
+    background-color: inherit;
+    display: inline-block;
+    max-width: 60%;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    background-color: var(--bs-body-bg)
+}
+
+.name {
+    font-weight: bold;
+}
+
+.date {
+    opacity: 0.5;
+}
+
+.photo {
+    float: left;
+    height: 100%;
+}
+
+.photo > img {
+    height: 40px;
+    width: 40px;
+    display: block;
+    border-radius: 40px;
+    margin-right: 10px;
+    object-fit: cover;
+    object-position: top;
+}
+
+.mention {
+    color: var(--bs-primary);
+}

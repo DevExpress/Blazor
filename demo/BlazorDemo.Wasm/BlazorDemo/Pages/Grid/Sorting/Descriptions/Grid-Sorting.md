@@ -14,6 +14,6 @@ Use the following API members to sort Blazor Grid data in code:
 * [DxGridDataColumn.SortOrder](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.SortOrder) — Specifies a column's sort order (ascending or descending). 
 * [DxGridDataColumn.SortMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.SortMode) — Specifies how a column's data is sorted (by value, by display text, or custom logic is used)
 
-In this demo, [keyboard navigation](https://docs.devexpress.com/Blazor/404652/components/grid/keyboard-support#header-row) is enabled. You can focus a column header with a keyboard and press Space, Shift+Space, or Ctlr+Space to change sort criteria.
+You can focus a column header with a keyboard and press Space, Shift+Space, or Ctrl+Space to change sort criteria.
 
 For more information, refer to the following topic: [Sort Data](https://docs.devexpress.com/Blazor/404460/components/grid/sort-data).

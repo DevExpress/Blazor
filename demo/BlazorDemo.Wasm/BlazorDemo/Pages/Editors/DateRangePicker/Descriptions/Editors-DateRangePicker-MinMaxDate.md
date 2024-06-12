@@ -1,0 +1,1 @@
+Use the [MinDate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateRangePicker-1.MinDate) and [MaxDate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateRangePicker-1.MaxDate) properties to specify a range of available dates. The Blazor Date Range Picker's calendar disables dates that are out of range and hides navigation arrows as needed.

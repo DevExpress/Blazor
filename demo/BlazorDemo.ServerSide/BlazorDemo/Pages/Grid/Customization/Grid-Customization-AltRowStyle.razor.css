@@ -1,0 +1,19 @@
+/*BeginHide*/::deep /*EndHide*/.dxbl-grid {
+    height: 522px;
+}
+
+/*BeginHide*/::deep /*EndHide*/ .alt-item {
+    background-color: color-mix(in srgb, var(--bs-gray-300), transparent 50%);
+}
+
+/*BeginHide*/::deep /*EndHide*/ .alt-item > td {
+    --dxbl-grid-bg: color-mix(in srgb, var(--bs-gray-300), transparent 50%);
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .header-bold span {
+    font-weight: 700;
+}
+/*BeginHide*/ .grid-container {
+    display: contents;
+}
+/*EndHide*/

@@ -3,14 +3,14 @@
 <DemoPageSectionComponent Id="Scheduler-Templates-TimeCellTemplate">
     <DemoChildContent>
         <style>
-            .customScheduler .dxbs-sc-time-cell {
+            .customScheduler .dxbl-sc-time-cell {
                 height: 250px !important;
             }
         </style>
         <DxScheduler @bind-StartDate="@StartDate"
                      DataStorage="@DataStorage"
                      ActiveViewType="@ActiveViewType"
-                     CssClass="w-100 customScheduler">
+                     CssClass="demo-sc-size customScheduler">
             <Views>
                 <DxSchedulerTimelineView Duration="TimeSpan.FromDays(7)" CellMinWidth="115">
                     <Scales>

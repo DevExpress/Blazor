@@ -1,16 +1,16 @@
-.item-template {
+.tagbox-item-template {
     display: flex;
     align-items: center;
 }
 
-.tag-template {
+.tagbox-tag-template {
     display: flex;
     align-items: center;
     padding: 0.125em 0.5em 0.125em 0;
     position: relative;
 }
 
-.tag-template:before {
+.tagbox-tag-template:before {
     content: " ";
     position: absolute;
     background-color: currentColor;
@@ -23,30 +23,30 @@
     pointer-events: none;
 }
 
-.item-template-employee-photo,
-.tag-template-employee-photo {
+.tagbox-item-template-employee-photo,
+.tagbox-tag-template-employee-photo {
     margin-right: 0.5em;
     border-radius: 16px;
     border: 0 solid #000;
 }
 
-.item-template-employee-photo {
-    width: 32px;
-    height: 32px;
+.tagbox-item-template-employee-photo {
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
 }
 
-.tag-template-employee-photo {
+.tagbox-tag-template-employee-photo {
     width: 24px;
     height: 24px;
 }
 
-.item-template-employee-home-phone {
+.tagbox-item-template-employee-home-phone {
     opacity: 0.65;
     display: block;
-    font-size: 0.75em;
 }
 
-/*BeginHide*/::deep /*EndHide*/.tag-template-close-btn {
+/*BeginHide*/::deep /*EndHide*/.tagbox-tag-template-close-btn {
     border: 0;
     border-radius: 3rem;
     box-shadow: none;
@@ -58,11 +58,11 @@
     opacity: 0.5;
 }
 
-/*BeginHide*/::deep /*EndHide*/.tag-template-close-btn:hover {
+/*BeginHide*/::deep /*EndHide*/.tagbox-tag-template-close-btn:hover {
     opacity: 0.75;
 }
 
-/*BeginHide*/::deep /*EndHide*/.tag-template-close-btn-icon {
+/*BeginHide*/::deep /*EndHide*/.tagbox-tag-template-close-btn-icon {
     height: 16px;
     width: 16px;
     mask-image: url("images/icons/clear.svg");

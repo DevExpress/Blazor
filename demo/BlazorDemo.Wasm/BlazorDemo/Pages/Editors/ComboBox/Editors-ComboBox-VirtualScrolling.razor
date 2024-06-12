@@ -5,26 +5,45 @@
         <label for="cbVirtualScrolling" class="demo-text cw-480 mb-1">
             Country Name
         </label>
-        <DxComboBox Data="@Data"
-                    ListRenderMode="ListRenderMode.Virtual"
-                    FilteringMode="DataGridFilteringMode.Contains"
+        <DxComboBox Data="@Countries"
+                    Value="@Country"
+                    ValueChanged="@((Country country) => SelectedCountryChanged(country))"
                     TextFieldName="@nameof(Country.CountryName)"
-                    @bind-Value="@Value"
+                    SearchMode="@ListSearchMode.AutoSearch"
+                    SearchFilterCondition="@ListSearchFilterCondition.Contains"
+                    ListRenderMode="ListRenderMode.Virtual"
                     SizeMode="Params.SizeMode"
                     CssClass="cw-480"
                     InputId="cbVirtualScrolling"/>
         <p class="demo-text cw-480 mt-3">
-            Selected item: <b>@(Value != null ? Value.CountryName : "null")</b>
+            Country: <b>@GetSelectedValueDescription()</b>, Capital: <b>@GetSelectedCountryCapitalDescription()</b>
         </p>
     </ChildContentWithParameters>
 
     @code {
-        IEnumerable<Country> Data { get; set; }
+        IEnumerable<Country> Countries { get; set; }
+        IEnumerable<City> Cities { get; set; }
+        Country Country { get; set; }
+        City Capital { get; set; }
 
         protected override async Task OnInitializedAsync() {
-            Data = await WorldcitiesDataService.GetCountriesAsync();
+            Countries = await WorldcitiesDataService.GetCountriesAsync();
+            Cities = await WorldcitiesDataService.GetCitiesAsync();
+            Country = Countries.FirstOrDefault(x => string.Equals(x.CountryName, "USA"));
+            Capital = Country != null ? Cities.FirstOrDefault(x => x.CityId == Country.CapitalId) : null;
         }
 
-        Country Value { get; set; }
+        string GetSelectedValueDescription() {
+            return Country != null ? Country.CountryName : "null";
+        }
+
+        string GetSelectedCountryCapitalDescription() {
+            return Capital != null ? Capital.CityName : "null";
+        }
+
+        void SelectedCountryChanged(Country country) {
+            Country = country;
+            Capital = Country != null ?  Cities.FirstOrDefault(x => x.CityId == country.CapitalId) : null;
+        }
     }
 </DemoPageSectionComponent>

@@ -13,6 +13,9 @@
 .e-name {
     --color-opacity: 1;
     margin-bottom: 0.25rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.2;
 }
 .e-title,
 .e-email,

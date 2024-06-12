@@ -1,0 +1,74 @@
+﻿@using DevExpress.Blazor.Internal
+@using DevExpress.Blazor.Internal.Editors
+@using DevExpress.Data
+@using DevExpress.Data.Filtering
+@using DevExpress.Data.Filtering.Helpers
+@using DevExpress.Data.Helpers
+
+<DemoPageSectionComponent Id="Editors-ListBox-FilterAPI" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <div class="cw-640 mb-1">
+            <div class="align-self-baseline pb-2 pl-r-2 cw-640">
+                <DxTagBox Data="@Cities"
+                          Values="@SelectedCities"
+                          ValuesChanged="(IEnumerable<string> values) => UpdateSelectedValues(values)"
+                          SizeMode="Params.SizeMode"
+                          NullText="Select city..."
+                          ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                          aria-label="Select city" />
+            </div>
+            <DxListBox @ref="ListBox" TData="Employee" TValue="Employee" Data="@Employees"
+                @bind-Value="@Employee"
+                SizeMode="Params.SizeMode">
+                <Columns>
+                    <DxListEditorColumn FieldName="@nameof(Employee.FirstName)" Caption="First Name" />
+                    <DxListEditorColumn FieldName="@nameof(Employee.LastName)" Caption="Last Name" />
+                    <DxListEditorColumn FieldName="@nameof(Employee.Title)" />
+                    <DxListEditorColumn FieldName="@nameof(Employee.City)" />
+                </Columns>
+            </DxListBox>
+            <p class="demo-text cw-640 mt-2">
+                Filter Criteria: <b>@FilterCriteria</b>
+            </p>
+        </div>
+    </ChildContentWithParameters>
+    @code {
+        IListBox<Employee, Employee> ListBox { get; set; }
+        IEnumerable<Employee> Employees { get; set; }
+        Employee Employee { get; set; }
+
+        IEnumerable<string> Cities { get; set; }
+        IEnumerable<string> SelectedCities { get; set; }
+
+        string FilterCriteria { get; set; } = "null";
+
+        protected override async Task OnInitializedAsync() {
+            Employees = await NwindDataService.GetEmployeesAsync();
+            Employee = Employees.FirstOrDefault();
+            Cities = Employees.Select(x => x.City).Distinct();
+            SelectedCities = new [] { "Seattle", "London", "Tacoma" };
+        }
+
+        protected override void OnAfterRender(bool firstRender) {
+            base.OnAfterRender(firstRender);
+            if(firstRender) {
+                UpdateFilterCriteria();
+                StateHasChanged();
+            }
+        }
+
+        void UpdateSelectedValues(IEnumerable<string> selectedCities) {
+            SelectedCities = selectedCities;
+            UpdateFilterCriteria();
+        }
+
+        void UpdateFilterCriteria(){
+            CriteriaOperator filterCriteria = SelectedCities.Any() ?
+                new InOperator(nameof(Employee.City), SelectedCities) :
+                null;
+            FilterCriteria = filterCriteria?.ToString() ?? "null";
+            ListBox.SetFilterCriteria(filterCriteria);
+        }
+    }
+</DemoPageSectionComponent>

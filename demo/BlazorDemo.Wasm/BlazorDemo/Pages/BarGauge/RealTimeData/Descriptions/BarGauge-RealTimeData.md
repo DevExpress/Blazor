@@ -1,0 +1,3 @@
+The DevExpress BLazor [BarGauge](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxBarGauge) component allows you to change the number of bars displayed at runtime. When you toggle demo check boxes, the component passes check box states to the [Values](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxBarGauge.Values) property and renders corresponding bars.
+
+The BarGauge component also supports real-time data updates. This demo uses a custom interface (*IBarTemperatureMeasureService*) to update bar values dynamically in the [OnInitialized](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle?view=aspnetcore-6.0#component-initialization-oninitializedasync) lifecycle method.

@@ -96,12 +96,28 @@ namespace BlazorDemo.ServerSide {
                 services.AddSingleton<IWorldcitiesDataProvider, WorldcitiesDataProvider>();
                 services.AddSingleton<IGlobalTemperatureIndexDataProvider, GlobalTemperatureIndexDataProvider>();
                 services.AddSingleton<IGlobalTemperatureIndexFileContentProvider, GlobalTemperatureIndexFileContentProvider>();
+                services.AddSingleton<IDataSourcesFileContentProvider, DataSourcesFileContentProvider>();
                 services.AddSingleton<IHistogramDataProvider, HistogramDataProvider>();
                 services.AddSingleton<IDocumentProvider, DocumentProvider>();
                 services.AddSingleton<IChartBirthLifeDataProvider, ChartBirthLifeDataProvider>();
+                services.AddSingleton<IChartApplePriceDataProvider, ChartApplePriceDataProvider>();
+                services.AddSingleton<IChartTemperatureDataProvider, ChartTemperatureDataProvider>();
+                services.AddSingleton<IChartAverageTemperatureDataProvider, ChartAverageTemperatureDataProvider>();
+                services.AddSingleton<IChartContinuousDataProvider, ChartContinuousDataProvider>();
+                services.AddSingleton<IChartDiscreteDataProvider, ChartDiscreteDataProvider>();
+                services.AddSingleton<IChartSpiderDataProvider, ChartSpiderDataProvider>();
+                services.AddSingleton<IChartWindRoseDataProvider, ChartWindRoseDataProvider>();
+                services.AddSingleton<ISparklineDataProvider, SparklineDataProvider>();
+                services.AddSingleton<IHtmlEditorStringDataProvider, HtmlEditorStringDataProvider>();
+                services.AddSingleton<IMapApiKeyProvider, MapApiKeyProvider>();
                 // Editable should be scoped
                 services.AddScoped<INwindDataProvider, NwindDataProvider>();
                 services.AddScoped<IHomesDataProvider, HomesDataProvider>();
+
+                services.AddSingleton<IEmployeeTaskDataProvider, EmployeeTaskDataProvider>();
+                services.AddSingleton<IFileSystemDataProvider, FileSystemDataProvider>();
+                services.AddSingleton<ISpaceObjectDataProvider, SpaceObjectDataProvider>();
+                services.AddSingleton<ISalesByRegionDataProvider, SalesByRegionDataProvider>();
 
                 static void ConfigureHttpClient(HttpClient httpClient) {
                     httpClient.DefaultRequestHeaders.Add("Accept", "application/json");

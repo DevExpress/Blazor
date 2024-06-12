@@ -1,0 +1,78 @@
+﻿@page "/HtmlEditorMentions"
+
+<DemoPageSectionComponent Id="HtmlEditor-Mentions">
+    <div id="chat-window">
+        <div class="message" tabindex="0">
+            <div class="photo">
+                <img alt="Kevin Carter" src="@StaticAssetUtils.GetImagePath("employees/5.jpg")" />
+            </div>
+            <div class="name"> Kevin Carter </div>
+            <div class="date"> 07/03/24 - 12:22AM </div>
+            <div class="text">
+                <span class="mention" spellcheck="false">
+                    <span><span>@@</span>John Heart</span>
+                </span>
+                What experience do you have in this field?
+            </div>
+        </div>
+        <br />
+        <div class="message" tabindex="0">
+            <div class="photo">
+                <img alt="John Heart" src="@StaticAssetUtils.GetImagePath("employees/11.jpg")" />
+            </div>
+            <div class="name"> John Heart </div>
+            <div class="date"> 07/03/24 - 12:25AM </div>
+            <div class="text"> I've been in the audio/video industry since 2001, and I've been the CEO of DevAv since 2009. </div>
+        </div>
+        <br />
+        <div class="message" tabindex="0">
+            <div class="photo">
+                <img alt="Kevin Carter" src="@StaticAssetUtils.GetImagePath("employees/5.jpg")" />
+            </div>
+            <div class="name"> Kevin Carter </div>
+            <div class="date"> 07/03/24 - 12:26AM </div>
+            <div class="text">
+                That's very interesting.
+                <span class="mention" spellcheck="false">
+                    <span><span>@@</span>Olivia Peyton</span>
+                </span>, what do you think?
+            </div>
+        </div>
+    </div>
+    <DxHtmlEditor Markup="@markup" Height="200px">
+        <DxHtmlEditorMentions>
+            <DxHtmlEditorMention Data="@employeesData"
+                                 DisplayFieldName="@nameof(MentionData.Name)"
+                                 SearchFieldNames="@searchFieldNames"/>
+        </DxHtmlEditorMentions>
+    </DxHtmlEditor>
+
+    @code {
+        string markup = @"<p>
+                          <span class='dx-mention' spellcheck='false' data-marker='@' data-mention-value='Kevin Carter'>
+                            <span>
+                                <span>@</span>
+                                Kevin Carter
+                            </span>
+                          </span>
+                          I think John's expertise can be very valuable in our startup.
+                        </p>";
+
+        string[] searchFieldNames = { nameof(MentionData.Name) };
+
+        class MentionData {
+            public string Name { get; set; }
+            public string Team { get; set; }
+        }
+
+        MentionData[] employeesData = {
+            new MentionData() { Name = "John Heart", Team = "Engineering" },
+            new MentionData() { Name = "Kevin Carter", Team = "Engineering" },
+            new MentionData() { Name = "Olivia Peyton", Team = "Management" },
+            new MentionData() { Name = "Robert Reagan", Team = "Management" },
+            new MentionData() { Name = "Cynthia Stanwick", Team = "Engineering" },
+            new MentionData() { Name = "Brett Wade", Team = "Analysis" },
+            new MentionData() { Name = "Greta Sims", Team = "QA" },
+        };
+    }
+</DemoPageSectionComponent>

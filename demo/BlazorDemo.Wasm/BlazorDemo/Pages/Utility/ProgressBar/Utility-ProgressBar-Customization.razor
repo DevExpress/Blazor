@@ -1,0 +1,19 @@
+﻿<DemoPageSectionComponent Id="Utility-ProgressBar-Customization" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxProgressBar Value="67"
+                       Type="ProgressBarType.Horizontal"
+                       LabelPosition="LabelPosition"
+                       Size="350px"
+                       SizeMode="Params.SizeMode" />
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionComboBox @bind-Value="LabelPosition"
+                        Data="Enum.GetValues<ProgressBarLabelPosition>().ToList()"
+                        Label="Label Position" />
+    </OptionsContent>
+
+    @code {
+        ProgressBarLabelPosition LabelPosition { get; set; }
+    }
+</DemoPageSectionComponent>

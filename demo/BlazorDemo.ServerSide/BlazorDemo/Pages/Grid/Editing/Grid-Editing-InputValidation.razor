@@ -5,16 +5,11 @@
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        <DxGrid @ref="Grid"
-                Data="DataSource"
-                PageSize="12"
-                KeyFieldName="EmployeeId"
-                CustomizeDataRowEditor="Grid_CustomizeDataRowEditor"
-                EditModelSaving="Grid_EditModelSaving"
-                DataItemDeleting="Grid_DataItemDeleting"
-                PopupEditFormCssClass="pw-800"
-                EditMode="@CurrentEditMode.Mode"
-                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
+        <DxGrid Data="DataSource" PageSize="12" KeyFieldName="EmployeeId"
+            CustomizeDataRowEditor="Grid_CustomizeDataRowEditor" EditModelSaving="Grid_EditModelSaving"
+            DataItemDeleting="Grid_DataItemDeleting" PopupEditFormCssClass="pw-800" EditMode="@EditMode.Mode"
+            ColumnResizeMode="GridColumnResizeMode.NextColumn" TextWrapEnabled="false" SizeMode="Params.SizeMode"
+            HighlightRowOnHover="true">
             <Columns>
                 <DxGridCommandColumn Width="160px" />
                 <DxGridDataColumn FieldName="FirstName" MinWidth="80" />
@@ -46,68 +41,64 @@
                     </DxFormLayoutItem>
                 </DxFormLayout>
             </EditFormTemplate>
+            <ToolbarTemplate>
+                <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" SizeMode="Params.SizeMode">
+                    <Items>
+                        <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                            <Template Context="toolbar_item_context">
+                                <div class="d-flex flex-row align-items-center h-100">
+                                    <div class="me-2">Edit Mode:</div>
+                                    <DxComboBox Data="@GridEditModes" TextFieldName="Name"
+                                        @bind-Value="@EditMode" />
+                                </div>
+                            </Template>
+                        </DxToolbarItem>
+                    </Items>
+                </DxToolbar>
+            </ToolbarTemplate>
         </DxGrid>
     </ChildContentWithParameters>
-    <OptionsContent>
-        <OptionComboBox Label="Edit Mode:"
-                        Data="@GridEditModes"
-                        TextField="Name"
-                        @bind-Value="@CurrentEditMode" />
-    </OptionsContent>
 
     @code {
-        GridEditModeItem _currentEditMode;
-
-        IGrid Grid { get; set; }
         IEnumerable<EditableEmployee> DataSource { get; set; }
-        GridEditModeItem CurrentEditMode {
-            get {
-                return _currentEditMode;
-            }
-            set {
-                if(CurrentEditMode == value)
-                    return;
-                _currentEditMode = value;
-                StartEditNewRowRequested = true;
-            }
-        }
-        bool StartEditNewRowRequested { get; set; }
-        IEnumerable<GridEditModeItem> GridEditModes { get; } = Enum.GetValues<GridEditMode>().Select(e => GridEditModeItem.Create(e)).ToList();
+        GridEditModeItem EditMode { get; set; }
+        IEnumerable<GridEditModeItem> GridEditModes { get; } = Enum.GetValues<GridEditMode>().Select(e =>
+        GridEditModeItem.Create(e)).ToList();
 
-        protected override async Task OnInitializedAsync() {
+        protected override async Task OnInitializedAsync()
+        {
             await base.OnInitializedAsync();
             DataSource = await NwindDataService.GetEmployeesEditableAsync();
-            CurrentEditMode = GridEditModes.First();
+            EditMode = GridEditModes.First();
         }
-        protected override async Task OnAfterRenderAsync(bool firstRender) {
-            await base.OnAfterRenderAsync(firstRender);
-            if(StartEditNewRowRequested) {
-                StartEditNewRowRequested = false;
-                await Grid.CancelEditAsync();
-                await Grid.StartEditNewRowAsync();
-            }
+        void Grid_CustomizeDataRowEditor(GridCustomizeDataRowEditorEventArgs e)
+        {
+            if (e.EditSettings is ITextEditSettings settings)
+                settings.ShowValidationIcon = true;
         }
-        void Grid_CustomizeDataRowEditor(GridCustomizeDataRowEditorEventArgs e) {
-            ((ITextEditSettings)e.EditSettings).ShowValidationIcon = true;
-        }
-        async Task Grid_EditModelSaving(GridEditModelSavingEventArgs e) {
+        async Task Grid_EditModelSaving(GridEditModelSavingEventArgs e)
+        {
             var editableEmployee = (EditableEmployee)e.EditModel;
 
-            if(e.IsNew)
+            if (e.IsNew)
                 await NwindDataService.InsertEmployeeAsync(editableEmployee);
             else
                 await NwindDataService.UpdateEmployeeAsync((EditableEmployee)e.DataItem, editableEmployee);
             await UpdateDataAsync();
         }
-        async Task Grid_DataItemDeleting(GridDataItemDeletingEventArgs e) {
+        async Task Grid_DataItemDeleting(GridDataItemDeletingEventArgs e)
+        {
             await NwindDataService.RemoveEmployeeAsync((EditableEmployee)e.DataItem);
             await UpdateDataAsync();
         }
-        async Task UpdateDataAsync() {
+        async Task UpdateDataAsync()
+        {
             DataSource = await NwindDataService.GetEmployeesEditableAsync();
         }
-        record GridEditModeItem(string Name, GridEditMode Mode) {
-            public static GridEditModeItem Create(GridEditMode mode) => new (SplitTextHelper.SplitPascalCaseString(mode.ToString()), mode);
+        record GridEditModeItem(string Name, GridEditMode Mode)
+        {
+            public static GridEditModeItem Create(GridEditMode mode) => new
+            (SplitTextHelper.SplitPascalCaseString(mode.ToString()), mode);
         }
     }
 </DemoPageSectionComponent>

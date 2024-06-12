@@ -7,14 +7,19 @@
         @inject NwindDataService NwindDataService
         @inject IJSRuntime JSRuntime
 
+        <div class="grid-container">
         @if(PreRendered) {
             <DxGrid @ref="Grid" Data="GridData" AutoExpandAllGroupRows="true"
                 ColumnResizeMode="GridColumnResizeMode.NextColumn"
-                ShowGroupPanel="true" ShowFilterRow="true"
-                PageSizeSelectorVisible="true" PageSizeSelectorAllRowsItemVisible="true"
+                ShowGroupPanel="true"
+                ShowFilterRow="true"
+                PageSizeSelectorVisible="true"
+                PageSizeSelectorAllRowsItemVisible="true"
                 LayoutAutoLoading="Grid_LayoutAutoLoading"
                 LayoutAutoSaving="Grid_LayoutAutoSaving"
-                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
+                TextWrapEnabled="false"
+                SizeMode="Params.SizeMode"
+                VirtualScrollingEnabled="true">
                 <Columns>
                     <DxGridDataColumn FieldName="Country" GroupIndex="0" />
                     <DxGridDataColumn FieldName="City" GroupIndex="1" />
@@ -23,10 +28,20 @@
                     <DxGridDataColumn FieldName="Phone" />
                     <DxGridDataColumn FieldName="ContactName" />
                 </Columns>
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Contained">
+                        <Items>
+                            <DxToolbarItem Text="Reload Page" Click="ReloadPageButton_ClickAsync" BeginGroup="true" />
+                            <DxToolbarItem Text="Reset Layout" Click="ResetLayoutButton_ClickAsync" BeginGroup="true" />
+                            <DxToolbarItem Text="Show Column Chooser" Click="ShowColumnChooser_Click" BeginGroup="true" />
+                        </Items>
+                    </DxToolbar>
+                </ToolbarTemplate>
             </DxGrid>
         } else {
             <em>Loading...</em>
         }
+        </div>
 
         @code {
             const string LocalStorageKey = "Grid-LayoutPersistence-Data";
@@ -99,9 +114,4 @@
             }
         }
     </ChildContentWithParameters>
-    <OptionsContent>
-        <OptionButton Text="Reload Page" OnClick="ReloadPageButton_ClickAsync" />
-        <OptionButton Text="Reset Layout" OnClick="ResetLayoutButton_ClickAsync" />
-        <OptionButton Text="Show Column Chooser" OnClick="ShowColumnChooser_Click" />
-    </OptionsContent>
 </DemoPageSectionComponent>

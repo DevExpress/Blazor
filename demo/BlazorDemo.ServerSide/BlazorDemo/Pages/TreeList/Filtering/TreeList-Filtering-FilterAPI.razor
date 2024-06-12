@@ -1,0 +1,83 @@
+﻿@page "/TreeList/Filtering/FilterAPI"
+@using DevExpress.Data.Filtering
+
+<DemoPageSectionComponent Id="TreeList-Filtering-FilterAPI" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject ISpaceObjectDataProvider SpaceObjectDataProvider
+
+        <DxTreeList @ref="TreeList"
+                    Data="Data"
+                    ChildrenFieldName="Satellites"
+                    ShowAllRows="true"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    SizeMode="Params.SizeMode"
+                    CssClass="max-h-480">
+            <Columns>
+                <DxTreeListDataColumn FieldName="Name" />
+                <DxTreeListDataColumn FieldName="TypeOfObject" Caption="Type" />
+                <DxTreeListDataColumn FieldName="Mass10pow21kg" Caption="Mass, kg" DisplayFormat="N2">
+                    <HeaderCaptionTemplate>Mass, 10<sup>21</sup> &#215; kg</HeaderCaptionTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn FieldName="MeanRadiusInKM" Caption="Radius, km" DisplayFormat="N2">
+                    <HeaderCaptionTemplate>Radius, km</HeaderCaptionTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn FieldName="Volume10pow9KM3" DisplayFormat="N2">
+                    <HeaderCaptionTemplate>Volume, 10<sup>9</sup> &#215; km<sup>3</sup></HeaderCaptionTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn FieldName="SurfaceGravity" Caption="Gravity" DisplayFormat="N2">
+                    <HeaderCaptionTemplate>Gravity, m/s<sup>2</sup></HeaderCaptionTemplate>
+                </DxTreeListDataColumn>
+            </Columns>
+            <ToolbarTemplate>
+                <div class="cw-480">
+                    <DxTagBox Data="SpaceObjectTypes"
+                              CssClass="cw-480 option-component"
+                              Values="SelectedSpaceObjectTypes"
+                              ValuesChanged="(IEnumerable<string> values) => TagBox_ValuesChanged(values)"
+                              NullText="Select object type..."
+                              ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                              aria-label="Select object type" />
+                </div>
+            </ToolbarTemplate>
+        </DxTreeList>
+
+        @code {
+            ITreeList TreeList { get; set; }
+            object Data { get; set; }
+            IEnumerable<string> SpaceObjectTypes { get; } = new[] {
+                "Star",
+                "Planet",
+                "Dwarf planet",
+                "Satellite",
+                "Asteroid"
+            };
+            IEnumerable<string> SelectedSpaceObjectTypes { get; set; }
+
+            protected override void OnInitialized() {
+                Data = SpaceObjectDataProvider.GenerateData();
+            }
+
+            protected override void OnAfterRender(bool firstRender) {
+                if (firstRender) {
+                    TreeList.BeginUpdate();
+                    TreeList.ExpandRow(0);
+                    TreeList.ExpandRow(3);
+                    TreeList.EndUpdate();
+                }
+            }
+
+            void TagBox_ValuesChanged(IEnumerable<string> newSelectedObjectTypes) {
+                SelectedSpaceObjectTypes = newSelectedObjectTypes;
+
+                var filterCriteria = SelectedSpaceObjectTypes.Any()
+                    ? new InOperator("TypeOfObject", SelectedSpaceObjectTypes)
+                    : null;
+
+                TreeList.SetFieldFilterCriteria("TypeOfObject", filterCriteria);
+            }
+
+        }
+
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

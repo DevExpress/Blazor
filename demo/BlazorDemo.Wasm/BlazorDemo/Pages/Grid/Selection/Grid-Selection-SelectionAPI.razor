@@ -5,25 +5,48 @@
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        <DxGrid @ref="Grid"
-                Data="@Products"
-                KeyFieldName="ProductId"
-                @bind-SelectedDataItems="@SelectedDataItems"
-                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
-            <Columns>
-                <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
-                <DxGridDataColumn FieldName="CategoryId" Caption="Category" MinWidth="100">
-                    <EditSettings>
-                        <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId" TextFieldName="CategoryName" />
-                    </EditSettings>
-                </DxGridDataColumn>
-                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
-                <DxGridDataColumn FieldName="UnitsInStock" Width="10%" />
-                <DxGridDataColumn FieldName="QuantityPerUnit" Width="15%" MinWidth="80" />
-                <DxGridDataColumn FieldName="Discontinued" Width="10%" MinWidth="90" />
-            </Columns>
-        </DxGrid>
-        <p class="demo-text w-100 mt-2">The number of selected products: <b>@(SelectedDataItems.Count())</b></p>
+        <div class="grid-container">
+            <DxGrid @ref="Grid"
+                    Data="@Products"
+                    PageSize="20"
+                    KeyFieldName="ProductId"
+                    @bind-SelectedDataItems="@SelectedDataItems"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    SizeMode="Params.SizeMode">
+                <Columns>
+                    <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
+                    <DxGridDataColumn FieldName="CategoryId" Caption="Category" MinWidth="100">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId" TextFieldName="CategoryName" />
+                        </EditSettings>
+                    </DxGridDataColumn>
+                    <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
+                    <DxGridDataColumn FieldName="UnitsInStock" Width="10%" />
+                    <DxGridDataColumn FieldName="QuantityPerUnit" Width="15%" MinWidth="80" />
+                    <DxGridDataColumn FieldName="Discontinued" Width="10%" MinWidth="90" />
+                </Columns>
+                 <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Contained" SizeMode="Params.SizeMode">
+                        <Items>
+                            <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                                <Template Context="toolbar_item_context">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <div class="me-2">Category:</div>
+                                        <DxComboBox Label="" Data="@Categories" TextFieldName="CategoryName"
+                                            @bind-Value="@SelectedCategory" />
+                                    </div>
+                                </Template>
+                            </DxToolbarItem>
+                            <DxToolbarItem Text="Select" Click="Select_Click" BeginGroup="true" />
+                            <DxToolbarItem Text="Deselect" Click="Deselect_Click" />
+                            <DxToolbarItem Text="Clear Selection" Click="ClearSelection_Click" BeginGroup="true" />
+                        </Items>
+                    </DxToolbar>
+                </ToolbarTemplate>
+            </DxGrid>
+            <p class="demo-text w-100 mt-2">The number of selected products: <b>@(SelectedDataItems.Count())</b></p>
+        </div>
 
         @code {
             IEnumerable<Product> Products { get; set; }
@@ -53,12 +76,4 @@
             }
         }
     </ChildContentWithParameters>
-    <OptionsContent>
-        <OptionComboBox Label="Category:" Data="@Categories" TextField="CategoryName" @bind-Value="@SelectedCategory" SmallSpacing="true" CssClass="ow-150" />
-        <OptionButtonGroup>
-            <OptionButton Text="Select" OnClick="Select_Click" SmallSpacing="true" />
-            <OptionButton Text="Deselect" OnClick="Deselect_Click" />
-        </OptionButtonGroup>
-        <OptionButton Text="Clear Selection" OnClick="ClearSelection_Click" />
-    </OptionsContent>
 </DemoPageSectionComponent>

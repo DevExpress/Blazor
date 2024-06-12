@@ -8,17 +8,20 @@
         @inject IStockQuoteService StockQuoteService
         @implements IDisposable
 
-        <DxGrid Data="GridData"
-                CustomizeElement="Grid_CustomizeElement"
-                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
-            <Columns>
-                <DxGridDataColumn FieldName="Ticker"/>
-                <DxGridDataColumn FieldName="LastPrice" DisplayFormat="N2"/>
-                <DxGridDataColumn FieldName="Change" DisplayFormat="N2"/>
-                <DxGridDataColumn FieldName="PercentageChange" Caption="% Change" DisplayFormat="P2" SortIndex="0" SortOrder="GridColumnSortOrder.Descending"/>
-                <DxGridDataColumn FieldName="LastUpdated" DisplayFormat="HH:mm:ss"/>
-            </Columns>
-        </DxGrid>
+        <div class="grid-container">
+            <DxGrid Data="GridData"
+                    CustomizeElement="Grid_CustomizeElement"
+                    SizeMode="Params.SizeMode"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn" TextWrapEnabled="false">
+                <Columns>
+                    <DxGridDataColumn FieldName="Ticker"/>
+                    <DxGridDataColumn FieldName="LastPrice" DisplayFormat="N2"/>
+                    <DxGridDataColumn FieldName="Change" DisplayFormat="N2"/>
+                    <DxGridDataColumn FieldName="PercentageChange" Caption="% Change" DisplayFormat="P2" SortIndex="0" SortOrder="GridColumnSortOrder.Descending"/>
+                    <DxGridDataColumn FieldName="LastUpdated" DisplayFormat="HH:mm:ss"/>
+                </Columns>
+            </DxGrid>
+        </div>
 
         @code {
             ObservableCollection<StockQuoteDisplayModel> GridData { get; set; }

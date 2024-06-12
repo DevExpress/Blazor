@@ -1,0 +1,15 @@
+/*BeginHide*/::deep /*EndHide*/ .sw-line1 {
+    --dxbl-checkbox-switch-checked-bg: lightcoral;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .sw-line2 {
+    --dxbl-checkbox-switch-checked-bg: brown;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .sw-line3 {
+    --dxbl-checkbox-switch-checked-bg: magenta;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .sw-line4 {
+    --dxbl-checkbox-switch-checked-bg: lightblue;
+}

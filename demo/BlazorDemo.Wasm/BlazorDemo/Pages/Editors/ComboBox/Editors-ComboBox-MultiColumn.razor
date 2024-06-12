@@ -7,21 +7,21 @@
         </label>
         <DxComboBox Data="@Data"
                     @bind-Value="@SelectedEmployee"
+                    SearchMode="@ListSearchMode.AutoSearch"
+                    SearchFilterCondition="@ListSearchFilterCondition.Contains"
+                    EditFormat="{0} {1}"
                     CssClass="cw-480"
                     SizeMode="Params.SizeMode"
-                    FilteringMode="DataGridFilteringMode.Contains"
-                    EditFormat="{1} {2}"
                     InputId="cbMultiColumn">
             <Columns>
-                <DxListEditorColumn FieldName="@nameof(Employee.EmployeeId)"
-                                    Caption="Id"
-                                    Width="50px" />
-                <DxListEditorColumn FieldName="@nameof(Employee.FirstName)"
-                                    Caption="Name" />
-                <DxListEditorColumn FieldName="@nameof(Employee.LastName)"
-                                    Caption="Surname" />
+                <DxListEditorColumn FieldName="@nameof(Employee.FirstName)" Caption="First Name" />
+                <DxListEditorColumn FieldName="@nameof(Employee.LastName)" Caption="Last Name" />
+                <DxListEditorColumn FieldName="@nameof(Employee.City)" Caption="City" />
             </Columns>
         </DxComboBox>
+        <p class="demo-text cw-480 mt-3">
+            @GetSelectedItemDescription()
+        </p>
     </ChildContentWithParameters>
 
 
@@ -32,6 +32,23 @@
         protected override async Task OnInitializedAsync() {
             Data = await NwindDataService.GetEmployeesAsync();
             SelectedEmployee = Data.FirstOrDefault();
+        }
+
+        RenderFragment GetSelectedItemDescription() {
+            if(SelectedEmployee != null) {
+                return @<text>
+                    Selected Item: (
+                        @GetFieldDescription(nameof(Employee.FirstName), SelectedEmployee.FirstName),
+                        @GetFieldDescription(nameof(Employee.LastName), SelectedEmployee.LastName),
+                        @GetFieldDescription(nameof(Employee.City), SelectedEmployee.City)
+                    )
+                </text>;
+            }
+            return @<text>Selected Item: <b>null</b></text>;
+        }
+
+        RenderFragment GetFieldDescription(string fieldName, object value) {
+            return @<text>@fieldName: <b>@value</b></text>;
         }
     }
 </DemoPageSectionComponent>

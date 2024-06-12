@@ -1,0 +1,39 @@
+﻿<DemoPageSectionComponent Id="Utility-ProgressBar-Overview" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxProgressBar Value="@ProgressValue"
+                       ShowIcon="true"
+                       SizeMode="Params.SizeMode"
+                       Size="350px"/>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionButton Text="Run Progress" OnClick="RunProgress"/>
+        <OptionButton Text="Reset Progress" OnClick="ResetProgress"/>
+    </OptionsContent>
+
+    @code {
+        bool running;
+        int ProgressValue { get; set; }
+
+        private void RunProgress() {
+            if(running) return;
+
+            running = true;
+            InvokeAsync(async () =>
+            {
+                while (running && ProgressValue < 100)
+                {
+                    ProgressValue++;
+                    await Task.Delay(50);
+                    StateHasChanged();
+                }
+                running = false;
+            });
+        }
+
+        private void ResetProgress() {
+            running = false;
+            ProgressValue = 0;
+        }
+    }
+</DemoPageSectionComponent>

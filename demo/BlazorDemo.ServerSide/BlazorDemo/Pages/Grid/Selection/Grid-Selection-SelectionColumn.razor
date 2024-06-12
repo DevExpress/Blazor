@@ -5,26 +5,47 @@
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        <DxGrid Data="Products"
-                KeyFieldName="ProductId"
-                @bind-SelectedDataItems="SelectedDataItems"
-                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true"
-                SelectAllCheckboxMode="CurrentSelectAllCheckboxMode">
-            <Columns>
-                <DxGridSelectionColumn Width="104px" />
-                <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
-                <DxGridDataColumn FieldName="CategoryId" Caption="Category" MinWidth="100">
-                    <EditSettings>
-                        <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId" TextFieldName="CategoryName" />
-                    </EditSettings>
-                </DxGridDataColumn>
-                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
-                <DxGridDataColumn FieldName="UnitsInStock" Width="10%" />
-                <DxGridDataColumn FieldName="QuantityPerUnit" Width="15%" MinWidth="80" />
-                <DxGridDataColumn FieldName="Discontinued" Width="10%" MinWidth="90" />
-            </Columns>
-        </DxGrid>
-        <p class="demo-text w-100 mt-2">The number of selected products: <b>@(SelectedDataItems.Count())</b></p>
+        <div class="grid-container">
+            <DxGrid Data="Products"
+                    KeyFieldName="ProductId"
+                    PageSize="20"
+                    @bind-SelectedDataItems="SelectedDataItems"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    SizeMode="Params.SizeMode"
+                    SelectAllCheckboxMode="CurrentSelectAllCheckboxMode"
+                    HighlightRowOnHover="true">
+                <Columns>
+                    <DxGridSelectionColumn Width="104px" />
+                    <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
+                    <DxGridDataColumn FieldName="CategoryId" Caption="Category" MinWidth="100">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId" TextFieldName="CategoryName" />
+                        </EditSettings>
+                    </DxGridDataColumn>
+                    <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
+                    <DxGridDataColumn FieldName="UnitsInStock" Width="10%" />
+                    <DxGridDataColumn FieldName="QuantityPerUnit" Width="15%" MinWidth="80" />
+                    <DxGridDataColumn FieldName="Discontinued" Width="10%" MinWidth="90" />
+                </Columns>
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Contained" SizeMode="Params.SizeMode">
+                        <Items>
+                            <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                                <Template Context="toolbar_item_context">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <div class="me-2">Select All Checkbox Mode:</div>
+                                        <DxComboBox Label="" Data="@SelectAllCheckboxModes"
+                                            @bind-Value="@CurrentSelectAllCheckboxMode" />
+                                    </div>
+                                </Template>
+                            </DxToolbarItem>
+                        </Items>
+                    </DxToolbar>
+                </ToolbarTemplate>
+            </DxGrid>
+            <p class="demo-text w-100 mt-2">The number of selected products: <b>@(SelectedDataItems.Count())</b></p>
+        </div>
 
         @code {
             IEnumerable<Product> Products { get; set; }
@@ -40,7 +61,4 @@
             }
         }
     </ChildContentWithParameters>
-    <OptionsContent>
-        <OptionComboBox Label="Select All Checkbox Mode:" Data="SelectAllCheckboxModes" @bind-Value="@CurrentSelectAllCheckboxMode" CssClass="ow-180" />
-    </OptionsContent>
 </DemoPageSectionComponent>

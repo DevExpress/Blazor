@@ -1,14 +1,20 @@
 ﻿@page "/Scheduler/ViewTypes/WorkWeekView"
 
 <DemoPageSectionComponent Id="Scheduler-ViewTypes-WorkWeekView">
-    <DxScheduler @bind-StartDate="@StartDate"
-                 DataStorage="@DataStorage"
-                 CssClass="w-100">
-        <DxSchedulerWorkWeekView ShowWorkTimeOnly="true"></DxSchedulerWorkWeekView>
-    </DxScheduler>
+    <DemoChildContent>
+        <DxScheduler @bind-StartDate="@StartDate"
+                     DataStorage="@DataStorage"
+                     CssClass="demo-sc-size">
+            <DxSchedulerWorkWeekView ShowWorkTimeOnly="ShowWorkTimeOnly"></DxSchedulerWorkWeekView>
+        </DxScheduler>
+    </DemoChildContent>
+    <OptionsContent>
+        <OptionCheckBox T=bool Label="Show Work Time Only" @bind-Checked="ShowWorkTimeOnly" />
+    </OptionsContent>
 
     @code {
         DateTime StartDate { get; set; } = DateTime.Today;
+        bool ShowWorkTimeOnly { get; set; } = true;
 
         DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
             AppointmentsSource = AppointmentCollection.GetAppointments(),

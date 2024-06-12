@@ -1,7 +1,3 @@
-.grid-container {
-    display: contents;
-}
-
 /*BeginHide*/::deep /*EndHide*/.grid-toolbar-new,
 /*BeginHide*/::deep /*EndHide*/.grid-toolbar-delete,
 /*BeginHide*/::deep /*EndHide*/.grid-toolbar-edit,
@@ -54,3 +50,7 @@
 /*BeginHide*/::deep /*EndHide*/.search-item {
     width: 10rem;
 }
+/*BeginHide*/ .grid-container {
+    display: contents;
+}
+/*EndHide*/

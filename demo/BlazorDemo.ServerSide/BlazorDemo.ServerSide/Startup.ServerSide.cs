@@ -1,17 +1,17 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using BlazorDemo.Configuration;
 using BlazorDemo.DataProviders;
+using BlazorDemo.DemoData;
+using BlazorDemo.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Collections.Generic;
-using BlazorDemo.DemoData;
-using BlazorDemo.Services;
 
 namespace BlazorDemo.ServerSide {
 
@@ -44,6 +44,7 @@ namespace BlazorDemo.ServerSide {
 
             services.AddScoped<IContosoRetailDataProvider, ContosoRetailDataProvider>();
             services.AddScoped<IRentInfoDataProvider, RentInfoDataProvider>();
+            services.AddSingleton<EmployeeTaskService>();
 
             services.AddDbContextFactory<HomesContext>(opt => {
                 opt.UseSqlite(ConnectionStringUtils.GetHomesSqliteConnectionString(context.Configuration));
@@ -80,9 +81,27 @@ namespace BlazorDemo.ServerSide {
                 if(!string.IsNullOrEmpty(connectionString))
                     opt.UseSqlServer(connectionString);
             });
+
+
             services.AddSingleton<IStockQuoteService, StockQuoteService>();
+            services.AddSingleton<IStockQuoteByRegionService, StockQuoteByRegionService>();
+
+
+
             services.AddHostedService<StockQuoteChangeTimerService>(
-                provider => new StockQuoteChangeTimerService((StockQuoteService)provider.GetRequiredService<IStockQuoteService>())
+                provider => new StockQuoteChangeTimerService(
+                (StockQuoteService)provider.GetRequiredService<IStockQuoteService>(),
+                (StockQuoteByRegionService)provider.GetRequiredService<IStockQuoteByRegionService>())
+            );
+
+            services.AddSingleton<IBarGaugeTemperatureMeasurerService, BarGaugeTemperatureMeasurerService>();
+            services.AddHostedService(
+                provider => new BarGaugeTemperatureMeasurerTimerService((BarGaugeTemperatureMeasurerService)provider.GetRequiredService<IBarGaugeTemperatureMeasurerService>())
+            );
+
+            services.AddSingleton<INetworkSpeedTesterService, NetworkSpeedTesterService>();
+            services.AddHostedService(
+                provider => new NetworkSpeedTesterTimerService((NetworkSpeedTesterService)provider.GetRequiredService<INetworkSpeedTesterService>())
             );
         }
 #pragma warning restore DX0006

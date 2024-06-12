@@ -1,6 +1,4 @@
-The [Upload](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload) component allows users to upload files to the server. Users can select files in the open file dialog or drag and drop files to the drop zone.
-
-The main Upload API members are listed below:
+The [Upload](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload) component allows users to upload files to the server. Users can select files in the open file dialog or drag and drop files to the drop zone. The main Upload API members are listed below:
 
 *   [Name](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload.Name) — Required to access uploaded files on the server.
 *   [UploadUrl](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload.UploadUrl) — Specifies a target URL for the upload request.
@@ -11,3 +9,5 @@ The main Upload API members are listed below:
 *   [ExternalDropZoneDragOverCssClass](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload.ExternalDropZoneDragOverCssClass) — Specifies the CSS class that is used for a drop zone when users drag files over it.
 
 This demo illustrates how to implement the external **Select File** button and drop zone container. The [Upload](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload) component is hidden when the file list is empty.
+
+To maintain the highest possible security posture, we do not include the full implementation of the Upload controller. To incorporate secure file upload operations in your web app, we recommend that you add different validation types to upload controller code as described in the following help section: [Validation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload#validation). For information on controller implementation code for different file upload scenarios, refer to the following Microsoft article: [File Upload Scenarios](https://learn.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-8.0#file-upload-scenarios).

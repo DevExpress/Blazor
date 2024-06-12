@@ -1,0 +1,51 @@
+﻿@page "/TreeList/DataBinding/HierarchicalData"
+
+<DemoPageSectionComponent Id="TreeList-DataBinding-HierarchicalData" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject ISpaceObjectDataProvider SpaceObjectDataProvider
+
+        <DxTreeList @ref="TreeList"
+                    Data="TreeListData"
+                    ChildrenFieldName="Satellites"
+                    ShowAllRows="true"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    SizeMode="Params.SizeMode"
+                    CssClass="max-h-480">
+            <Columns>
+                <DxTreeListDataColumn FieldName="Name" />
+                <DxTreeListDataColumn FieldName="TypeOfObject" Caption="Type" />
+                <DxTreeListDataColumn FieldName="Mass10pow21kg" Caption="Mass, kg" DisplayFormat="N2">
+                    <HeaderCaptionTemplate>Mass, 10<sup>21</sup> &#215; kg</HeaderCaptionTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn FieldName="MeanRadiusInKM" Caption="Radius, km" DisplayFormat="N2">
+                    <HeaderCaptionTemplate>Radius, km</HeaderCaptionTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn FieldName="Volume10pow9KM3" DisplayFormat="N2">
+                    <HeaderCaptionTemplate>Volume, 10<sup>9</sup> &#215; km<sup>3</sup></HeaderCaptionTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn FieldName="SurfaceGravity" Caption="Gravity" DisplayFormat="N2">
+                    <HeaderCaptionTemplate>Gravity, m/s<sup>2</sup></HeaderCaptionTemplate>
+                </DxTreeListDataColumn>
+            </Columns>
+        </DxTreeList>
+
+        @code {
+            ITreeList TreeList { get; set; }
+            object TreeListData { get; set; }
+
+            protected override void OnInitialized() {
+                TreeListData = SpaceObjectDataProvider.GenerateData();
+            }
+
+            protected override void OnAfterRender(bool firstRender) {
+                if(firstRender) {
+                    TreeList.BeginUpdate();
+                    TreeList.ExpandRow(0);
+                    TreeList.ExpandRow(3);
+                    TreeList.EndUpdate();
+                }
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

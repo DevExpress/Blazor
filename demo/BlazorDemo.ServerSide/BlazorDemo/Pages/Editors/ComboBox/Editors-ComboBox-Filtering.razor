@@ -2,44 +2,68 @@
     <ChildContentWithParameters Context="Params">
         @inject WorldcitiesDataService WorldcitiesDataService
 
-        @if (Data != null)
-        {
-            <label for="cbFiltering" class="demo-text cw-480 mb-1">
-                Country Name
-            </label>
-            <DxComboBox Data="@Data"
-                        FilteringMode="@FilteringMode"
-                        @bind-Value="@Value"
-                        @bind-Text="@Text"
-                        TextFieldName="@nameof(Country.CountryName)"
-                        SizeMode="Params.SizeMode"
-                        CssClass="cw-480"
-                        InputId="cbFiltering" />
-        }
+        <label for="cbFiltering" class="demo-text cw-480 mb-1">
+            Country Name
+        </label>
+        <DxComboBox Data="@Countries"
+                    SearchMode="@SearchMode"
+                    SearchFilterCondition="@SearchFilterCondition"
+                    SearchTextParseMode="@SearchTextParseMode"
+                    Value="@Country"
+                    ValueChanged="@((Country country) => SelectedCountryChanged(country))"
+                    TextFieldName="@nameof(Country.CountryName)"
+                    SizeMode="Params.SizeMode"
+                    CssClass="cw-480"
+                    InputId="cbFiltering" />
+        <p class="demo-text cw-480 mt-3">
+            Country: <b>@GetSelectedValueDescription()</b>, Capital: <b>@GetSelectedCountryCapitalDescription()</b>
+        </p>
     </ChildContentWithParameters>
 
     <OptionsContent>
-        <OptionComboBox Label="Filtering Mode:"
-                        Data="@(Enum.GetNames(typeof(DataGridFilteringMode)))"
-                        Value="@(FilteringMode.ToString())"
-                        ValueChanged="@((string selectedItem) =>
-                            { FilteringMode = Enum.Parse<DataGridFilteringMode>(selectedItem); })" />
+        <OptionComboBox Label="Search Mode:"
+                        Data="@(Enum.GetNames(typeof(ListSearchMode)))"
+                        Value="@(SearchMode.ToString())"
+                        ValueChanged="@((string item) => { SearchMode = Enum.Parse<ListSearchMode>(item); })" />
+        <OptionComboBox Label="Search Filter Condition:"
+                        Data="@(Enum.GetNames(typeof(ListSearchFilterCondition)))"
+                        Value="@(SearchFilterCondition.ToString())"
+                        ValueChanged="@((string item) => { SearchFilterCondition = Enum.Parse<ListSearchFilterCondition>(item); })" />
+        <OptionComboBox Label="Search Text Parse Mode:"
+                        Data="@(Enum.GetNames(typeof(ListSearchTextParseMode)))"
+                        Value="@(SearchTextParseMode.ToString())"
+                        ValueChanged="@((string item) => { SearchTextParseMode = Enum.Parse<ListSearchTextParseMode>(item); })" />
     </OptionsContent>
 
 
     @code {
-        IEnumerable<Country> Data;
+        IEnumerable<Country> Countries { get; set; }
+        IEnumerable<City> Cities { get; set; }
+        Country Country { get; set; }
+        City Capital { get; set; }
 
-        DataGridFilteringMode FilteringMode { get; set; } = DataGridFilteringMode.StartsWith;
+        ListSearchMode SearchMode { get; set; } = ListSearchMode.AutoSearch;
+        ListSearchFilterCondition SearchFilterCondition { get; set; } = ListSearchFilterCondition.Contains;
+        ListSearchTextParseMode SearchTextParseMode { get; set; } = ListSearchTextParseMode.GroupWordsByAnd;
 
-        protected override async Task OnInitializedAsync()
-        {
-            Data = await WorldcitiesDataService.GetCountriesAsync();
+        protected override async Task OnInitializedAsync() {
+            Countries = await WorldcitiesDataService.GetCountriesAsync();
+            Cities = await WorldcitiesDataService.GetCitiesAsync();
+            Country = Countries.FirstOrDefault(x => string.Equals(x.CountryName, "USA"));
+            Capital = Country != null ? Cities.FirstOrDefault(x => x.CityId == Country.CapitalId) : null;
         }
 
-        string text = "";
-        string Text { get => text; set { text = value; InvokeAsync(StateHasChanged); } }
+        string GetSelectedValueDescription() {
+            return Country != null ? Country.CountryName : "null";
+        }
 
-        Country Value { get; set; }
+        string GetSelectedCountryCapitalDescription() {
+            return Capital != null ? Capital.CityName : "null";
+        }
+
+        void SelectedCountryChanged(Country country) {
+            Country = country;
+            Capital = Country != null ? Cities.FirstOrDefault(x => x.CityId == country.CapitalId) : null;
+        }
     }
 </DemoPageSectionComponent>

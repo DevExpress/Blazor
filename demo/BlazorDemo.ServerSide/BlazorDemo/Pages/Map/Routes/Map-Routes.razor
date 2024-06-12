@@ -1,0 +1,48 @@
+﻿@page "/MapRoutes"
+@inject IMapApiKeyProvider MapApiKeyProvider
+
+<DemoPageSectionComponent Id="Map-Routes">
+    <OptionsContent>
+        <OptionComboBox Label="Route Mode:" Data="Enum.GetValues<MapRouteMode>()" @bind-Value="@CurrentRouteMode" />
+        <OptionComboBox Label="Route Color:" Data="Colors" @bind-Value="@CurrentRouteColor" />
+    </OptionsContent>
+    <DemoChildContent>
+        <DxMap ControlsVisible="true" Zoom="14" Provider="MapProvider.Bing" Width="100%" Height="600px" >
+            <DxMapApiKeys Bing="@MapApiKeyProvider.GetBingProviderKey()" />
+            <DxMapMarkers>
+                <DxMapMarker>
+                    <DxMapMarkerLocation GeoPosition="40.7825, -73.966111" />
+                    <DxMapMarkerTooltip Text="Pont 1" />
+                </DxMapMarker>
+                <DxMapMarker>
+                    <DxMapMarkerLocation GeoPosition="40.755833, -73.986389" />
+                    <DxMapMarkerTooltip Text="Pont 2" />
+                </DxMapMarker>
+                <DxMapMarker>
+                    <DxMapMarkerLocation Latitude="40.753889" Longitude="-73.981389" />
+                    <DxMapMarkerTooltip Text="Pont 3" />
+                </DxMapMarker>
+                <DxMapMarker>
+                    <DxMapMarkerLocation GeoPosition="Brooklyn Bridge,New York,NY" />
+                    <DxMapMarkerTooltip Text="Pont 4" />
+                </DxMapMarker>
+            </DxMapMarkers>
+            <DxMapRoutes>
+                <DxMapRoute Weight="9" Color="@CurrentRouteColor" Mode="@CurrentRouteMode">
+                    <DxMapRouteLocations>
+                        <DxMapRouteLocation Latitude="40.782500" Longitude="-73.966111" />
+                        <DxMapRouteLocation Latitude="40.755833" Longitude="-73.986389" />
+                        <DxMapRouteLocation GeoPosition="40.753889, -73.981389" />
+                        <DxMapRouteLocation GeoPosition="Brooklyn Bridge,New York,NY" />
+                    </DxMapRouteLocations>
+                </DxMapRoute>
+            </DxMapRoutes>
+        </DxMap>
+
+        @code {
+            MapRouteMode CurrentRouteMode = MapRouteMode.Driving;
+            static string[] Colors = new string[] { "blue", "green", "red", "magenta", "yellow" };
+            string CurrentRouteColor = Colors[0];
+        }
+    </DemoChildContent>
+</DemoPageSectionComponent>

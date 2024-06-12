@@ -1,0 +1,74 @@
+﻿@page "/TreeList/DataBinding/LoadDataOnDemand"
+
+<DemoPageSectionComponent Id="TreeList-DataBinding-LoadDataOnDemand" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject IFileSystemDataProvider FileSystemDataProvider
+
+        <DxTreeList @ref="TreeList"
+                    Data="Data"
+                    KeyFieldName="Name"
+                    HasChildrenFieldName="HasChildren"
+                    ChildrenLoadingOnDemand="TreeList_ChildrenLoadingOnDemand"
+                    VirtualScrollingEnabled="true"
+                    CustomizeCellDisplayText="TreeList_CustomizeCellDisplayText"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    SizeMode="Params.SizeMode"
+                    CssClass="ch-480">
+            <Columns>
+                <DxTreeListDataColumn FieldName="Name" SortIndex="1" SortOrder="TreeListColumnSortOrder.Ascending">
+                    <CellDisplayTemplate>
+                        <div class="d-flex align-items-center">
+                            <span class="@GetIconClassName((FileSystemDataItem)context.DataItem)"></span> @context.DisplayText
+                        </div>
+                    </CellDisplayTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn FieldName="Type" SortIndex="0" SortOrder="TreeListColumnSortOrder.Descending" Width="100" />
+                <DxTreeListDataColumn FieldName="DateModified" Width="120" />
+                <DxTreeListDataColumn FieldName="Size" Width="100" />
+            </Columns>
+        </DxTreeList>
+
+        @code {
+            ITreeList TreeList { get; set; }
+            object Data { get; set; }
+
+            protected override async Task OnInitializedAsync() {
+                Data = await FileSystemDataProvider.GetRootItemsAsync();
+            }
+
+            Task TreeList_ChildrenLoadingOnDemand(TreeListChildrenLoadingOnDemandEventArgs e) {
+                var item = e.Parent as FileSystemDataItem;
+                e.Children = item.Children;
+                return Task.CompletedTask;
+            }
+
+            protected override async Task OnAfterRenderAsync(bool firstRender) {
+                if(firstRender) {
+                    await TreeList.WaitForDataLoadAsync();
+                    TreeList.ExpandRow(0);
+                }
+            }
+
+            void TreeList_CustomizeCellDisplayText(TreeListCustomizeCellDisplayTextEventArgs e) {
+                if(e.FieldName == "Size") {
+                    var item = (FileSystemDataItem)e.DataItem;
+                    e.DisplayText = GetSizeColumnDisplayText(item.Type, item.Size);
+                }
+            }
+
+            string GetSizeColumnDisplayText(FileType fileType, long size) {
+                if(fileType == FileType.Folder)
+                    return null;
+                if(size >= 1024)
+                    return string.Format("{0:### ### ###} KB", size / 1024);
+                return string.Format("{0} Bytes", size);
+            }
+
+            static string GetIconClassName(FileSystemDataItem item) {
+                var fileTypeClassName = item.Type == FileType.Folder ? "file-system-icon-folder" : "file-system-icon-file";
+                return $"d-inline-block me-1 {fileTypeClassName}";
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

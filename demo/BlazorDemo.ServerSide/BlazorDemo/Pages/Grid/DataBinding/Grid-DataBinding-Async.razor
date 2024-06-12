@@ -5,17 +5,19 @@
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        <DxGrid Data="@Data" SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
-            <Columns>
-                <DxGridDataColumn FieldName="CompanyName" />
-                <DxGridDataColumn FieldName="ContactName" />
-                <DxGridDataColumn FieldName="ContactTitle" />
-                <DxGridDataColumn FieldName="Country" Width="10%" />
-                <DxGridDataColumn FieldName="City" Width="10%" />
-                <DxGridDataColumn FieldName="Address" />
-                <DxGridDataColumn FieldName="Phone" Width="10%" />
-            </Columns>
-        </DxGrid>
+        <div class="grid-container">
+            <DxGrid Data="@Data" SizeMode="Params.SizeMode" ShowAllRows="true" ColumnResizeMode="GridColumnResizeMode.NextColumn" TextWrapEnabled="false">
+                <Columns>
+                    <DxGridDataColumn FieldName="CompanyName" />
+                    <DxGridDataColumn FieldName="ContactName" />
+                    <DxGridDataColumn FieldName="ContactTitle" />
+                    <DxGridDataColumn FieldName="Country" Width="10%" />
+                    <DxGridDataColumn FieldName="City" Width="10%" />
+                    <DxGridDataColumn FieldName="Address" />
+                    <DxGridDataColumn FieldName="Phone" Width="10%" />
+                </Columns>
+            </DxGrid>
+        </div>
 
         @code {
             object Data { get; set; }

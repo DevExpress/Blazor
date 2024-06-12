@@ -1,4 +1,3 @@
-using Newtonsoft.Json;
 using System.Linq;
 
 namespace BlazorDemo.DemoData {

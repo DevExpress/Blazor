@@ -10,15 +10,15 @@
                     SizeMode="Params.SizeMode"
                     CssClass="cw-480"
                     InputId="cbItemTemplate">
-            <ItemTemplate>
+            <ItemDisplayTemplate>
                 <div class="combobox-item-template">
-                    <img src="@StaticAssetUtils.GetImagePath(GetImageFileName(context))" alt="@context.FullName" />
+                    <img src="@StaticAssetUtils.GetImagePath(GetImageFileName(context.DataItem))" alt="@context.DataItem.FullName" />
                     <div class="combobox-item-template-text">
-                        <span>@context.FullName</span>
-                        <span class="combobox-item-template-employee-phone">@context.HomePhone</span>
+                        <span>@context.DataItem.FullName</span>
+                        <span class="combobox-item-template-employee-phone">@context.DataItem.HomePhone</span>
                     </div>
                 </div>
-            </ItemTemplate>
+            </ItemDisplayTemplate>
         </DxComboBox>
     </ChildContentWithParameters>
 

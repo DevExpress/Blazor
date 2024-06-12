@@ -1,0 +1,96 @@
+﻿<DemoPageSectionComponent Id="Editors-TagBox-ColumnCellDisplayTemplate" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <div class="cw-480">
+            <DxTagBox TData="Product" TValue="Product" Data="@Products"
+                       @bind-Values="@SelectedProducts"
+                       TextFieldName="@nameof(Product.ProductName)"
+                       SizeMode="Params.SizeMode"
+                       ListRenderMode="ListRenderMode.Virtual">
+                <Columns>
+                    <DxListEditorColumn FieldName="@nameof(Product.ProductName)" Caption="Product" Width="30%" />
+                    <DxListEditorColumn FieldName="@nameof(Product.UnitPrice)" Caption="Unit Price" />
+                    <DxListEditorColumn FieldName="@nameof(Product.Quantity)" />
+                    <DxListEditorColumn FieldName="@nameof(Product.Discount)" />
+                    <DxListEditorColumn FieldName="@nameof(Product.Total)" />
+                </Columns>
+                <ColumnCellDisplayTemplate>
+                    @GetColumnCellTemplateRenderFragment(context)
+                </ColumnCellDisplayTemplate>
+            </DxTagBox>
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        const int SelectedProductsCount = 3;
+        const int TotalPriceCeiling = 100;
+
+        IEnumerable<Product> Products { get; set; }
+        IEnumerable<Product> SelectedProducts { get; set; }
+        
+        const string AlignRightCssClass = "align-right";
+        const string TextGreenCssClass = "text-green";
+        const string TextRedCssClass = "text-red";
+
+        protected override async Task OnInitializedAsync() {
+            var invoices = await NwindDataService.GetInvoicesAsync();
+            var products = await NwindDataService.GetProductsAsync();
+            Products = invoices.Join(products, i => i.ProductId, p => p.ProductId, (i, p) =>
+                new Product {
+                    ProductName = i.ProductName,
+                    UnitPrice = i.UnitPrice,
+                    Quantity = i.Quantity,
+                    Discount = i.Discount
+                }
+            );
+            SelectedProducts = Products.Skip(1).Take(SelectedProductsCount);
+        }
+
+        RenderFragment GetColumnCellTemplateRenderFragment(TagBoxColumnCellDisplayTemplateContext<Product> context) {
+            object displayValue;
+            string cssClass = string.Empty;
+            switch(context.Column.FieldName) {
+                case nameof(Product.UnitPrice):
+                    cssClass = AlignRightCssClass;
+                    displayValue = $"{context.Value:c}";
+                    break;
+                case nameof(Product.Quantity):
+                    cssClass = AlignRightCssClass;
+                    displayValue = context.DisplayText;
+                    break;
+                case nameof(Product.Discount):
+                    displayValue = $"{context.Value:p}";
+                    break;
+                case nameof(Product.Total):
+                    var value = context.DataItem.UnitPrice * context.DataItem.Quantity;
+                    var valueCssClass = value >= TotalPriceCeiling ? TextGreenCssClass : TextRedCssClass;
+                    cssClass = $"{AlignRightCssClass} {valueCssClass}";
+                    displayValue = $"{value:c}";
+                    break;
+                default:
+                    displayValue = context.DisplayText;
+                    break;
+            }
+            return @<text><div class="@cssClass">@displayValue</div></text>;
+        }
+
+        public class Product {
+            public string ProductName { get; set; }
+            public decimal UnitPrice { get; set; }
+            public int Quantity { get; set; }
+            public float Discount { get; set; }
+            public int Total { get; set; }
+
+            public override bool Equals(object obj) {
+                return obj is Product product &&
+                    string.Equals(product.ProductName, ProductName) &&
+                    product.Quantity == Quantity &&
+                    product.Total == Total;
+            }
+
+            public override int GetHashCode() {
+                return HashCode.Combine(ProductName, Quantity, Total);
+            }
+        }
+    }
+</DemoPageSectionComponent>

@@ -1,0 +1,79 @@
+﻿@page "/MapMarkers"
+@using BlazorDemo.Pages.Map.Markers.MarkerEditComponents
+@inject IMapApiKeyProvider MapApiKeyProvider
+
+<DemoPageSectionComponent Id="Map-Markers">
+    <DemoChildContent>
+        <DxMap Zoom="14" Provider="MapProvider.Bing" Width="100%" Height="600px" MapClick=@OnMapClick MarkerClick="@OnMapMarkerClick" >
+            <DxMapApiKeys Bing="@MapApiKeyProvider.GetBingProviderKey()" />
+            <DxMapCenter GeoPosition="40.7061, -73.9969" />
+            <DxMapMarkers>
+                @foreach(var entity in Markers) {
+                    <DxMapMarker MarkerId="@entity.Key">
+                        <DxMapMarkerLocation GeoPosition="@entity.Value.GeoPosition" />
+                        <DxMapMarkerTooltip Text="@entity.Value.Text" Visible="@(!string.IsNullOrEmpty(entity.Value.Text))" />
+                    </DxMapMarker>
+                }
+            </DxMapMarkers>
+        </DxMap>
+
+        @if(EditingMarker != null) {
+            <CascadingValue Value="@EditingMarker">
+                <EditMarkerPopup RemoveButtonVisible="@IsRemoveButtonVisible()"
+                                 OnEndEdit="@OnMarkerEndEdit"
+                                 OnRemove="@OnSelectedMarkerRemove"
+                                 OnCancel="@OnMarkerCancelEdit" />
+            </CascadingValue>
+        }
+
+        @code {
+            MapMarkerInfo EditingMarker { get; set; }
+            string SelectedMarkerId { get; set; }
+
+            Dictionary<string, MapMarkerInfo> Markers = new Dictionary<string, MapMarkerInfo>() {
+                { Guid.NewGuid().ToString(), new MapMarkerInfo() { Text = "Times Square", GeoPosition = "40.755833, -73.986389" } },
+                { Guid.NewGuid().ToString(), new MapMarkerInfo() { Text = "Central Park", GeoPosition = "40.7825, -73.966111" } },
+                { Guid.NewGuid().ToString(), new MapMarkerInfo() { Text = "Brooklyn Bridge", GeoPosition = "Brooklyn Bridge,New York,NY" } }
+            };
+
+            void OnMapClick(MapClickEventArgs e) {
+                var marker = new MapMarkerInfo("new marker", e.CurrentLocation.Latitude, e.CurrentLocation.Longitude);
+                StartEditMarker(marker);
+            }
+
+            void OnMapMarkerClick(MapMarkerClickEventArgs e) {
+                var id = e.Marker.MarkerId;
+                var editMarker = new MapMarkerInfo(Markers[id]);
+                StartEditMarker(editMarker, id);
+            }
+
+            void OnMarkerEndEdit(MapMarkerInfo marker) {
+                if(string.IsNullOrEmpty(SelectedMarkerId))
+                    Markers.Add(Guid.NewGuid().ToString(), marker);
+                else
+                    Markers[SelectedMarkerId].Assign(marker);
+
+                EndEditMarker();
+            }
+
+            void OnSelectedMarkerRemove() {
+                Markers.Remove(SelectedMarkerId);
+                EndEditMarker();
+            }
+            void OnMarkerCancelEdit() {
+                EndEditMarker();
+            }
+
+            void StartEditMarker(MapMarkerInfo marker, string id = "") {
+                EditingMarker = marker;
+                SelectedMarkerId = id;
+            }
+            void EndEditMarker() {
+                EditingMarker = null;
+                SelectedMarkerId = string.Empty;
+            }
+
+            bool IsRemoveButtonVisible() => !string.IsNullOrEmpty(SelectedMarkerId);
+        }
+    </DemoChildContent>
+</DemoPageSectionComponent>

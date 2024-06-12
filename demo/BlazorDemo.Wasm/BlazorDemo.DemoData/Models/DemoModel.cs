@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace BlazorDemo.DemoData {
     public class DemoModel {
@@ -23,7 +24,7 @@ namespace BlazorDemo.DemoData {
             return Create(isBlazorServer, jsonContent);
         }
         public static DemoModel Create(bool isBlazorServer, string jsonContent) {
-            var model = JsonConvert.DeserializeObject<DemoModel>(jsonContent);
+            var model = JsonSerializer.Deserialize<DemoModel>(jsonContent);
             model.IsBlazorServer = isBlazorServer;
             model.Prepare();
             return model;

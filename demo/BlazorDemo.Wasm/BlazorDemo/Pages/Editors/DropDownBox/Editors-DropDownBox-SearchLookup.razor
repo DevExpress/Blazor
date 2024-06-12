@@ -1,0 +1,39 @@
+<DemoPageSectionComponent Id="Editors-DropDownBox-SearchLookup" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <label for="ddbSearchLookup" class="demo-text cw-480 mb-1">Customer</label>
+        <DxDropDownBox @bind-Value="Value"
+                       QueryDisplayText="QueryText"
+                       DropDownWidthMode="DropDownWidthMode.ContentWidth"
+                       ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                       NullText="Select a customer..."
+                       SizeMode="Params.SizeMode"
+                       InputId="ddbSearchLookup"
+                       CssClass="cw-480"
+                       >
+            <DropDownBodyTemplate>
+                <Editors_DropDownBox_SearchLookup_Grid DropDownBox="@context.DropDownBox"/>
+            </DropDownBodyTemplate>
+        </DxDropDownBox>
+        <p class="demo-text cw-480 mt-3">
+            Selected item: <b>@GetSelectedItemText()</b>
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        object Value { get; set; }
+
+        string QueryText(DropDownBoxQueryDisplayTextContext arg) {
+            if(arg.Value is Customer value)
+                return value.ContactName;
+            return string.Empty;
+        }
+
+        string GetSelectedItemText() {
+            if(Value is Customer value)
+                return value.ContactName;
+            return "null";
+        }
+    }
+</DemoPageSectionComponent>

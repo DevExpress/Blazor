@@ -10,8 +10,7 @@
         } else {
             <DxPivotGrid Data="@DataSource"
                          ShowPager="true"
-                         PageSize="10"
-                         CssClass="w-100">
+                         PageSize="10">
                 <DxPivotGridField Field="@nameof(Sale.StoreName)" Caption="Store" Area="PivotGridFieldArea.Row" />
                 <DxPivotGridField Field="@nameof(Sale.DateKey)" GroupInterval="PivotGridGroupInterval.Year" Caption="Year" Area="PivotGridFieldArea.Column" />
                 <DxPivotGridField Field="@nameof(Sale.SalesAmount)" Caption="Amount" Area="PivotGridFieldArea.Data" SummaryType="PivotGridSummaryType.Sum">

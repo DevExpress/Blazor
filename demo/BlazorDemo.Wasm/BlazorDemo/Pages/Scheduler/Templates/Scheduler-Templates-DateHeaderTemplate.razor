@@ -4,14 +4,14 @@
     <DemoChildContent>
         @inject WeatherForecastService ForecastService
 
-        <DxScheduler @bind-StartDate="@StartDate" DataStorage="@DataStorage" CssClass="w-100">
+        <DxScheduler @bind-StartDate="@StartDate" DataStorage="@DataStorage" CssClass="demo-sc-size">
             <Views>
                 <DxSchedulerDayView DayCount="5" ShowWorkTimeOnly="true">
                     <DateHeaderCellTemplate>
                         <div style="display: flex;">
-                            <div class="dxbs-sc-date-hr-wrapper" style="width: 100%;">
-                                <span class="dxbs-sc-date-hr-day">@context.Interval.Start.Day</span>
-                                <span class="dxbs-sc-date-hr-week">@context.Interval.Start.ToString("ddd")</span>
+                            <div class="dxbl-sc-date-hr-wrapper" style="width: 100%;">
+                                <span class="dxbl-sc-date-hr-day">@context.Interval.Start.Day</span>
+                                <span class="dxbl-sc-date-hr-week">@context.Interval.Start.ToString("ddd")</span>
                             </div>
                             @{
                                 string cloudCover = GetCloudCoverByDate(context.Interval.Start);

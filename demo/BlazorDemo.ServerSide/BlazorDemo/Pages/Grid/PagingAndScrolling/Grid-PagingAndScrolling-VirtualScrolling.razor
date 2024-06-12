@@ -5,40 +5,52 @@
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        <DxGrid Data="GridData"
-                CssClass="ch-480"
-                TextWrapEnabled="TextWrapEnabled"
-                ShowGroupPanel="true"
-                AutoExpandAllGroupRows="true"
-                VirtualScrollingEnabled="true"
-                SizeMode="Params.SizeMode">
-            <Columns>
-                <DxGridDataColumn FieldName="OrderDate" GroupIndex="0" GroupInterval="GridColumnGroupInterval.DateYear" MinWidth="70" Width="10%" />
-                <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
-                <DxGridDataColumn FieldName="CategoryId" Caption="Category" MinWidth="100" Width="10%">
-                    <EditSettings>
-                        <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId" TextFieldName="CategoryName" />
-                    </EditSettings>
-                </DxGridDataColumn>
-                <DxGridDataColumn FieldName="CustomerId" Caption="Customer" MinWidth="200" Width="20%">
-                    <EditSettings>
-                        <DxComboBoxSettings Data="Customers" ValueFieldName="CustomerId" TextFieldName="DisplayText" />
-                    </EditSettings>
-                </DxGridDataColumn>
-                <DxGridDataColumn FieldName="Country" Width="10%" />
-                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
-                <DxGridDataColumn FieldName="Quantity" Width="10%" />
-                <DxGridDataColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" UnboundExpression="[UnitPrice] * [Quantity]" DisplayFormat="c" MinWidth="100" Width="10%" />
-            </Columns>
-            <GroupSummary>
-                <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="Country" />
-                <DxGridSummaryItem SummaryType="GridSummaryItemType.Sum" FieldName="Total" />
-            </GroupSummary>
-        </DxGrid>
+        <div class="grid-container">
+            <DxGrid Data="GridData"
+                    TextWrapEnabled="TextWrapEnabled"
+                    ShowGroupPanel="true"
+                    AutoExpandAllGroupRows="true"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                    VirtualScrollingEnabled="true"
+                    SizeMode="Params.SizeMode">
+                <Columns>
+                    <DxGridDataColumn FieldName="OrderDate" GroupIndex="0" GroupInterval="GridColumnGroupInterval.DateYear" MinWidth="70" Width="10%" />
+                    <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
+                    <DxGridDataColumn FieldName="CategoryId" Caption="Category" MinWidth="100" Width="10%">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId" TextFieldName="CategoryName" />
+                        </EditSettings>
+                    </DxGridDataColumn>
+                    <DxGridDataColumn FieldName="CustomerId" Caption="Customer" MinWidth="200" Width="20%">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="Customers" ValueFieldName="CustomerId" TextFieldName="DisplayText" />
+                        </EditSettings>
+                    </DxGridDataColumn>
+                    <DxGridDataColumn FieldName="Country" Width="10%" />
+                    <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
+                    <DxGridDataColumn FieldName="Quantity" Width="10%" />
+                    <DxGridDataColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" UnboundExpression="[UnitPrice] * [Quantity]" DisplayFormat="c" MinWidth="100" Width="10%" />
+                </Columns>
+                <GroupSummary>
+                    <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="Country" />
+                    <DxGridSummaryItem SummaryType="GridSummaryItemType.Sum" FieldName="Total" />
+                </GroupSummary>
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
+                        <Items>
+                                <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                                <Template Context="toolbar_item_context">
+                                    <div class="d-flex flex-row align-items-center">                                        
+                                        <DxCheckBox @bind-Checked="TextWrapEnabled">Enable Text Wrap</DxCheckBox>
+                                    </div>
+                                </Template>
+                            </DxToolbarItem>
+                        </Items>
+                    </DxToolbar>
+                </ToolbarTemplate>
+            </DxGrid>
+        </div>
     </ChildContentWithParameters>
-    <OptionsContent>
-        <OptionCheckBox Label="Enable Text Wrap" @bind-Checked="TextWrapEnabled" />
-    </OptionsContent>
 
     @code {
         bool TextWrapEnabled { get; set; }

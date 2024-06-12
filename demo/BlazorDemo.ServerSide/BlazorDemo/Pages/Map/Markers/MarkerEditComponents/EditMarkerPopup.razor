@@ -1,0 +1,52 @@
+﻿<DxPopup
+    Visible="true"
+    ShowFooter="true"
+    HeaderText="Marker Editor"
+    CloseOnEscape="false"
+    CloseOnOutsideClick="false"
+    Closed="@OnCancel">
+    <BodyContentTemplate>
+        <MarkerEditForm FormId="@FormId" FormSubmitted="@OnFormSubmitted" />
+    </BodyContentTemplate>
+    <FooterContentTemplate>
+        <DxButton CssClass="popup-button my-1 ms-2"
+                  RenderStyle="ButtonRenderStyle.Primary"
+                  Text="Apply"
+                  SubmitFormOnClick="true"
+                  form="@FormId" />
+        @if(RemoveButtonVisible) {
+            <DxButton CssClass="popup-button my-1 ms-2"
+                      RenderStyle="ButtonRenderStyle.Primary"
+                      Text="Remove"
+                      Click="@OnRemoveClick"/>
+        }
+        <DxButton CssClass="popup-button my-1 ms-2"
+                  RenderStyle="ButtonRenderStyle.Secondary"
+                  Text="Cancel"
+                  Click="@OnCancelClick" />
+    </FooterContentTemplate>
+</DxPopup>
+
+@code {
+    readonly string FormId = "MarkerEditForm";
+    [Parameter] public bool RemoveButtonVisible { get; set; }
+    [Parameter] public EventCallback<MapMarkerInfo> OnEndEdit { get; set; }
+    [Parameter] public EventCallback OnRemove { get; set; }
+    [Parameter] public EventCallback OnCancel { get; set; }
+    
+
+    void OnFormSubmitted(EditContext editContext) {
+        var marker = (MapMarkerInfo)editContext.Model;
+        OnEndEdit.InvokeAsync(marker);
+    }
+
+    void OnRemoveClick() {
+        OnRemove.InvokeAsync();
+    }
+
+    void OnCancelClick() {
+        OnCancel.InvokeAsync();
+    }
+}
+
+

@@ -12,4 +12,4 @@ Follow the steps below to enable data editing using an edit form:
 
 In this demo, the checkbox above the Grid allows you to switch to the `PopupEditForm` mode. The edit form contains two [cascading Comboboxes](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2#cascading-comboboxes): **Country** and **City**. The **City** combo box is dynamically populated with items based on the value selected within the **Country** combo box.
 
-For detailed information on how to enable data editing and use edit-related options, refer to the following help topic: [Edit Data](https://docs.devexpress.com/Blazor/403454/components/grid/edit-data).
+For detailed information on how to enable data editing and use edit-related options, refer to the following help topic: [Edit Forms in Blazor Grid](https://docs.devexpress.com/Blazor/404757/components/grid/editing-and-validation/edit-modes/edit-forms).

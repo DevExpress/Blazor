@@ -1,0 +1,116 @@
+﻿@page "/BarGaugeRealTimeData"
+@implements IDisposable
+@inject IBarGaugeTemperatureMeasurerService TemperatureMeasurerService
+@inject NavigationManager NavigationManager
+
+
+<DemoPageSectionComponent Id="BarGauge-RealTimeData">
+    <DemoChildContent>
+        <div class="w-100 row">
+            <div class="col-9">
+                <DxBarGauge Width="100%"
+                            Height="500px"
+                            StartValue="100"
+                            EndValue="200"
+                            Palette="@GetPalette()"
+                            Values="@GetTemperatures()">
+
+                    <DxGaugeAnimationSettings Duration="200" />
+
+                    <DxBarGaugeLabelSettings Indent="30">
+                        <DxTextFormatSettings LdmlString="@LabelFormat" />
+                    </DxBarGaugeLabelSettings>
+
+                    <DxTitleSettings Text="Boiler Temperature">
+                        <DxFontSettings Size="28" Weight="600" />
+                    </DxTitleSettings>
+
+
+                    <DxTooltipSettings Enabled="true" Color="lightyellow">
+                        <DxTextFormatSettings LdmlString="@LabelFormat" />
+                    </DxTooltipSettings>
+
+                </DxBarGauge>
+            </div>
+
+            <div class="col">
+                <div class="card border-0 w-100">
+                    <div class="card-body p-2">
+                        @for (int i = 0; i < MeasureLines.Length; i++) {                            
+                            var line = MeasureLines[i];
+                            var className = $"sw-line{i + 1}";
+                            <div class="p-1">
+                                <DxCheckBox @bind-Checked="@line.Enabled" CheckType="CheckType.Switch" CssClass="@className">
+                                    @line.Name
+                                </DxCheckBox>
+                            </div>                        
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        @code {
+            string LabelFormat = "## °F";
+
+            MeasureLine[] MeasureLines = new MeasureLine[] {
+                new MeasureLine() { Name = "Assembly Line", BarColor = "lightcoral" },
+                new MeasureLine() { Name = "Packaging Zone", BarColor = "brown" },
+                new MeasureLine() { Name = "Office", BarColor = "magenta" },
+                new MeasureLine() { Name = "Warehouse", BarColor = "lightblue" },
+            };
+
+            protected override void OnInitialized() {
+                /*BeginHide*/
+                if (DemoRenderUtils.PreventRenderDemoSection(NavigationManager.Uri, "BarGauge-RealTimeData")) return;
+                /*EndHide*/
+
+                base.OnInitialized();
+                TemperatureMeasurerService.DataReceived += OnTemperatureChanged;
+            }
+
+            void OnTemperatureChanged(object sender, BarGaugeTemperatureMeasureData data) {
+                if(ApplyTemperatureData(data))
+                    InvokeAsync(StateHasChanged);
+            }
+
+            bool ApplyTemperatureData(BarGaugeTemperatureMeasureData data) {
+                bool changed = false;
+                for (var i = 0; i < MeasureLines.Length; i++) {
+                    var line = MeasureLines[i];
+                    if(line.Value != data.Temperatures[i]) {
+                        line.Value = data.Temperatures[i];
+                        changed = true;
+                    }
+                }
+                return changed;
+            }
+
+            public void Dispose() {
+                TemperatureMeasurerService.DataReceived -= OnTemperatureChanged;
+            }
+
+            double[] GetTemperatures() {
+                return MeasureLines.Where(line => line.Enabled).Select(line => line.Value).ToArray();
+            }
+
+            string[] GetPalette() {
+                return MeasureLines.Where(line => line.Enabled).Select(line => line.BarColor).ToArray();
+            }
+
+            string GetLineSwitcherCssClass(MeasureLine line) {
+                return "sw-" + line.BarColor;
+            }
+
+            class MeasureLine {
+                public bool Enabled { get; set; } = true;
+                public string Name { get; set; }
+                public string BarColor { get; set; }
+                public double Value { get; set; }
+            }
+        }
+    </DemoChildContent>
+</DemoPageSectionComponent>

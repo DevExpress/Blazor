@@ -1,0 +1,45 @@
+.demo-progress-bars-types {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .demo-progress-bars-types {
+        flex-wrap: wrap;
+    }
+}
+
+.demo-progress-bars-item {
+    width: 100%;
+    height: 200px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.demo-progress-horizontal-bars {
+    display: flex;
+    flex-direction: column;
+}
+
+.demo-progress-vertical-bars {
+    display: flex;
+}
+
+::deep .demo-progress-bar-vertical {
+    justify-content: center;
+}
+
+::deep .demo-progress-bar-w-30 {
+    width: 30px;
+}
+
+::deep .demo-progress-bar-w-50 {
+    width: 50px;
+}
+
+.demo-progress-circular-bars {
+    display: flex;
+    gap: 10px;
+}

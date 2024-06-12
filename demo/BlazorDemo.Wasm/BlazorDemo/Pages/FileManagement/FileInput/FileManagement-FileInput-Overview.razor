@@ -1,0 +1,32 @@
+﻿<DemoPageSectionComponent Id="FileManagement-FileInput-Overview">
+
+    <div id="overviewDemoDropZone" class="card custom-drop-zone bg-light rounded-3 w-100 m-0">
+        <span class="drop-file-icon mb-3"></span>
+        <span>Drag and Drop File Here</span><span class="m-1">or</span>
+        <button id="overviewDemoSelectButton" class="btn border-primary btn-primary m-1">Select File</button>
+    </div>
+    <DxFileInput
+              Visible="@UploadVisible"
+              ExternalSelectButtonCssSelector="#overviewDemoSelectButton"
+              ExternalDropZoneCssSelector="#overviewDemoDropZone"
+              ExternalDropZoneDragOverCssClass="bg-light border-secondary text-dark"
+              MaxFileSize="15000000"
+              FilesUploading="OnFilesUploading"
+              SelectedFilesChanged="@SelectedFilesChanged">
+    </DxFileInput>
+
+    @code {
+        bool UploadVisible { get; set; } = false;
+
+        protected void SelectedFilesChanged(IEnumerable<UploadFileInfo> files) {
+            UploadVisible = files.ToList().Count > 0;
+            InvokeAsync(StateHasChanged);
+        }
+
+        protected async Task OnFilesUploading(FilesUploadingEventArgs args) {
+            var file = args.Files[0];
+            using var stream = new System.IO.MemoryStream();
+            await file.OpenReadStream(file.Size).CopyToAsync(stream);
+        }
+    }
+</DemoPageSectionComponent>

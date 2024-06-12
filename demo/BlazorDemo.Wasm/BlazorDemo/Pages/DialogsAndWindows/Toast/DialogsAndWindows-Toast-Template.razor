@@ -1,0 +1,63 @@
+﻿<DemoPageSectionComponent Id="DialogsAndWindows-Toast-Template" ShowSizeMode="true" MinHeight="500">
+    <ChildContentWithParameters Context="Params">
+        <div class="custom-toast-background d-flex align-items-center">
+            <DxButton RenderStyle="ButtonRenderStyle.Secondary" Text="SHOW A TOAST WITH BUTTONS" Click="ShowToastButtons" />
+            <DxButton RenderStyle="ButtonRenderStyle.Secondary" CssClass="my-4" Text="SHOW A TOAST WITH A COMBOBOX" Click="ShowToastTextInput" />
+            <DxButton RenderStyle="ButtonRenderStyle.Secondary" Text="SHOW A TOAST WITH RADIOBUTTONS" Click="ShowToastRadio" />
+            <DxToastProvider Name="Template"
+                             SizeMode="Params.SizeMode"
+                             MaxToastCount="3"/>
+        </div>
+
+        <DxToast @ref=toastButtons
+                 Title="Notification title"
+                 Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit,..."
+                 ProviderName="Template">
+            <div class="d-flex align-items-center">
+                <DxButton CssClass="mx-2">Button</DxButton>
+                <DxButton RenderStyle="ButtonRenderStyle.Secondary">Button</DxButton>
+            </div>
+        </DxToast>
+
+        <DxToast @ref=toastTextInput
+                 Title="Notification title"
+                 Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit,..."
+                 ProviderName="Template">
+            <DxComboBox NullText="Default text item" Data="comboboxData" @bind-Value="comboboxValue" />
+        </DxToast>
+
+        <DxToast @ref=toastRadio
+                 Title="Notification title"
+                 Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit,..."
+                 ProviderName="Template">
+            <DxRadioGroup @bind-Value="radioValue"
+                          Items="radioValues"
+                          Layout="RadioGroupLayout.Horizontal" />
+        </DxToast>
+
+    </ChildContentWithParameters>
+
+    @code {
+        DxToast toastButtons;
+        DxToast toastTextInput;
+        DxToast toastRadio;
+
+        string[] radioValues = { "Option 1", "Option 2" };
+        string radioValue;
+
+        string[] comboboxData = new[] { "Option 1", "Option 2", "Option 3" };
+        string comboboxValue = "";
+
+        private void ShowToastButtons() {
+            toastButtons.Show();
+        }
+
+        private void ShowToastTextInput() {
+            toastTextInput.Show();
+        }
+
+        private void ShowToastRadio() {
+            toastRadio.Show();
+        }
+    }
+</DemoPageSectionComponent>

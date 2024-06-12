@@ -1,0 +1,63 @@
+﻿@page "/Grid/Columns/HeaderBands"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Columns-HeaderBands" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <div class="grid-container">
+            <DxGrid @ref="Grid" Data="Data" ShowGroupPanel="true" AutoExpandAllGroupRows="true"
+                ColumnResizeMode="GridColumnResizeMode.NextColumn" TextWrapEnabled="false" SizeMode="Params.SizeMode"
+                VirtualScrollingEnabled="true">
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" SizeMode="Params.SizeMode">
+                        <DxToolbarItem Text="Column Chooser" Click="ColumnChooserItem_Click" IconCssClass="grid-toolbar-column-chooser" />
+                    </DxToolbar>
+                </ToolbarTemplate>
+                <Columns>
+                    <DxGridDataColumn FieldName="SalesPerson" Caption="Salesperson" />
+                    <DxGridBandColumn Caption="Order">
+                        <Columns>
+                            <DxGridDataColumn FieldName="CompanyName" />
+                            <DxGridDataColumn FieldName="OrderDate" Caption="Date" Width="100px" />
+                            <DxGridBandColumn Caption="Product">
+                                <Columns>
+                                    <DxGridDataColumn FieldName="ProductName" Caption="Name" />
+                                    <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c"
+                                        CaptionAlignment="GridTextAlignment.Right" Width="100px" />
+                                </Columns>
+                            </DxGridBandColumn>
+                            <DxGridDataColumn FieldName="Quantity" Width="80px" />
+                        </Columns>
+                    </DxGridBandColumn>
+                </Columns>
+            </DxGrid>
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        object Data { get; set; }
+        IGrid Grid { get; set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+            var invoices = await NwindDataService.GetInvoicesAsync();
+            var customers = await NwindDataService.GetCustomersAsync();
+            Data = invoices.OrderBy(i => i.OrderDate).Join(customers, i => i.CustomerId, c => c.CustomerId, (i, c) =>
+            {
+                return new
+                {
+                    CompanyName = c.CompanyName,
+                    SalesPerson = i.Salesperson,
+                    UnitPrice = i.UnitPrice,
+                    OrderDate = i.OrderDate,
+                    ProductName = i.ProductName,
+                    Quantity = i.Quantity
+                };
+            });
+        }
+
+        void ColumnChooserItem_Click(ToolbarItemClickEventArgs e) {
+            Grid.ShowColumnChooser();
+        }
+    }
+</DemoPageSectionComponent>

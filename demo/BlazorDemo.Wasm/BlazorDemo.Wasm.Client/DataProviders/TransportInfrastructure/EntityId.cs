@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using BlazorDemo.DataProviders;
 
 namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
@@ -11,6 +12,7 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
 
         public Guid Entity { get; }
 
+        [JsonConstructor]
         public EntityId(Guid provider, Guid entity) {
             Provider = provider;
             Entity = entity;

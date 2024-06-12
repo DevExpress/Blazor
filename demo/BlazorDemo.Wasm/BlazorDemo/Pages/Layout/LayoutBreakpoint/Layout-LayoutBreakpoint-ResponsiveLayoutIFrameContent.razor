@@ -10,15 +10,16 @@
     @if (isXSmallScreen) {
         <div class="fab-container">
             <DxButton RenderStyle="ButtonRenderStyle.Primary"
-                IconCssClass="btn-column-chooser"
+                      IconCssClass="grid-icon-column-chooser"
                 CssClass="fab"
+                aria-label="Column Chooser"
                 Click="@ShowColumnChooser" />
         </div>
     } else {
         <div class="align-self-start p-2">
             <DxButton Text="Column Chooser"
                 RenderStyle="ButtonRenderStyle.Secondary"
-                IconCssClass="btn-column-chooser"
+                IconCssClass="grid-icon-column-chooser"
                 Click="@ShowColumnChooser" />
         </div>
     }

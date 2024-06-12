@@ -13,11 +13,9 @@
             TextWrapEnabled="true"
             SelectionChanged="@SelectionChanged">
     <Nodes>
-        @foreach(var demoPage in Pages) {
-            bool demoInMaintenenceShouldBeShown = demoPage.IsMaintenanceMode && !siteMode;
-            bool externalDemoShouldBeShown = demoPage.IsExternal && siteMode;
-            bool regularDemoShouldBeShown = !demoPage.IsExternal && !demoPage.IsMaintenanceMode;
-            if (regularDemoShouldBeShown || externalDemoShouldBeShown || demoInMaintenenceShouldBeShown) {
+        @foreach (var demoPage in Pages) {
+            var hideDemoInTree = demoPage.IsMaintenanceMode || demoPage.IsExternal && !siteMode;
+            if (!hideDemoInTree) {
                 <NavMenuLeaf Page="@demoPage"></NavMenuLeaf>
             }
         }

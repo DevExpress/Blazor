@@ -4,7 +4,8 @@
     <ChildContentWithParameters Context="Params">
         @inject WeatherForecastService ForecastService
 
-        <DxGrid Data="@Data" SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
+        <DxGrid Data="@Data" SizeMode="Params.SizeMode" PageSize="15"
+            ColumnResizeMode="GridColumnResizeMode.NextColumn" TextWrapEnabled="false">
             <Columns>
                 <DxGridDataColumn FieldName="Date" DisplayFormat="D" MinWidth="100" />
                 <DxGridDataColumn FieldName="Forecast" Width="15%" />

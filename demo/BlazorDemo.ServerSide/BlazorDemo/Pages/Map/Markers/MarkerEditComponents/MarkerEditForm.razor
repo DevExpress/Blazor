@@ -1,0 +1,50 @@
+﻿@*BeginHide*@
+@inject IMapApiKeyProvider MapApiKeyProvider
+@*EndHide*@
+
+<EditForm Model="@EditingMarker"
+          OnValidSubmit="@FormSubmitted"
+          id="@FormId"
+          Context="EditFormContext">
+         <DxFormLayout CssClass="w-100" >
+            <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="Marker Text:" ColSpanMd="6">
+                <DxTextBox @bind-Text="@EditingMarker.Text" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="Marker Geo Position:" ColSpanMd="6">
+                <DxTextBox @bind-Text="@EditingMarker.GeoPosition" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem ColSpanMd="12">
+                <DxMap Zoom="14" Provider="MapProvider.Bing" Width="100%" Height="400px" ShowControls="false" AutoAdjust="false" MapClick=@OnEditorMapClick>
+                    <DxMapApiKeys Bing="@MapApiKeyProvider.GetBingProviderKey()" />
+                <DxMapCenter GeoPosition="@GetMapGeoPosition()" />
+                    <DxMapMarkers>
+                        <DxMapMarker>
+                            <DxMapMarkerLocation GeoPosition="@EditingMarker.GeoPosition" />
+                            <DxMapMarkerTooltip Text="@EditingMarker.Text" Visible="true" />
+                        </DxMapMarker>
+                    </DxMapMarkers>
+                </DxMap>
+            </DxFormLayoutItem>
+        </DxFormLayout>
+</EditForm>
+
+
+
+@code {
+    [CascadingParameter] public MapMarkerInfo EditingMarker { get; set; }
+    [Parameter] public EventCallback<EditContext> FormSubmitted { get; set; }
+    [Parameter] public string FormId { get; set; }
+
+    string MapGeoPosition { get; set; }
+
+    void OnEditorMapClick(MapClickEventArgs e) {
+        EditingMarker.GeoPosition = MapMarkerInfo.GetGeoPositionFrommCoords(e.CurrentLocation.Latitude, e.CurrentLocation.Longitude);
+    }
+
+    string GetMapGeoPosition() {
+        if(string.IsNullOrEmpty(MapGeoPosition))
+            MapGeoPosition = EditingMarker.GeoPosition;
+
+        return MapGeoPosition;
+    }
+}

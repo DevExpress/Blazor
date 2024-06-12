@@ -1,7 +1,7 @@
-Use the [FilteringMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.FilteringMode) property to specify whether and how the [ComboBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2#filter-data) filters list items when users type in the edit box.
+Our Blazor [ComboBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2) ships with API members that allow you to search and apply filters to list content:
 
-*   [Contains](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode) — The ComboBox filters list items that contain the search string and highlights matches.
-*   [StartsWith](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode) — The ComboBox filters list items that begin with the search string and highlights matches.
-*   [None](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode) — The ComboBox does not filter list items.
+* [SearchMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDropDownListEditorBase-2.SearchMode) — Specifies whether the component can search for text users enter within the edit box.
+* [SearchFilterCondition](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDropDownListEditorBase-2.SearchFilterCondition) — Specifies the search and filter condition (**Contains** or **StartsWith**).
+* [SearchTextParseMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDropDownListEditorBase-2.SearchTextParseMode) — Specifies how the component treats search words. If search text contains multiple words separated by space characters, words can be treated as a single condition or individual conditions. The following modes are available: **GroupWordsByAnd**, **GroupWordsByOr**, and **ExactMatch**.
 
-In this demo, the filter mode is set to [DataGridFilteringMode.StartsWith](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DataGridFilteringMode). To change the filter mode or disable filtering, use the **Filtering Mode** drop-down list.
+For additional information, refer to the following topic: [Search and Filter Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2#search-and-filter-data).

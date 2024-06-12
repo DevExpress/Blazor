@@ -1,0 +1,48 @@
+﻿<DemoPageSectionComponent Id="DialogsAndWindows-Toast-Customization" ShowSizeMode="true" MinHeight="500">
+    <ChildContentWithParameters Context="Params">
+        <div class="d-flex align-items-center custom-toast-background">
+            <DxButton RenderStyle="ButtonRenderStyle.Secondary" Text="SHOW A TOAST" Click="AddToast" />
+            <DxToastProvider Name="Customization"
+                             MaxToastCount="3"
+                             AnimationType="@Animation"
+                             SizeMode="Params.SizeMode"/>
+        </div>
+    </ChildContentWithParameters>
+    <OptionsContent>
+            <OptionComboBox Label="Render Style:"
+                            CssClass="ow-100"
+                            Data="@RenderModeSource"
+                            @bind-Value="@RenderStyle" />
+            <OptionComboBox Label="Theme Mode:"
+                            CssClass="ow-100"
+                            Data="@ThemeModeSource"
+                            @bind-Value="@ThemeMode" />
+            <OptionComboBox Label="Animation:"
+                            CssClass="ow-100"
+                            Data="@AnimationSource"
+                            @bind-Value="@Animation" />
+    </OptionsContent>
+
+    @code {
+        [Inject] IToastNotificationService ToastService { get; set; }
+
+        static ToastAnimationType[] AnimationSource { get; set; } = Enum.GetValues<ToastAnimationType>();
+        static ToastRenderStyle[] RenderModeSource { get; set; } = Enum.GetValues<ToastRenderStyle>();
+        static ToastThemeMode[] ThemeModeSource { get; set; } = Enum.GetValues<ToastThemeMode>();
+
+        ToastRenderStyle RenderStyle { get; set; } = ToastRenderStyle.Primary;
+        ToastThemeMode ThemeMode { get; set; } = ToastThemeMode.Auto;
+        ToastAnimationType Animation { get; set; }= ToastAnimationType.Slide;
+
+        private void AddToast() {
+            ToastService.ShowToast(new ToastOptions {
+                ProviderName = "Customization",
+                Title = "Notification title",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit,...",
+                ThemeMode = ThemeMode,
+                RenderStyle = RenderStyle,
+            });
+        }
+    }
+
+</DemoPageSectionComponent>

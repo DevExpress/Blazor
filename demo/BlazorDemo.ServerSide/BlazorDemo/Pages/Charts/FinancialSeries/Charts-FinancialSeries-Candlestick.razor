@@ -8,17 +8,17 @@
                  Data="@stockData"
                  Width="100%">
             <DxChartLegend Position="RelativePosition.Outside" />
-            <DxChartCandlestickSeries OpenField="(StockDataPoint sdp)=>sdp.Open"
-                                      HighField="sdp=>sdp.High"
-                                      LowField="sdp=>sdp.Low"
-                                      CloseField="sdp=>sdp.Close"
+            <DxChartCandlestickSeries OpenField="(StockDataPoint sdp) => sdp.Open"
+                                      HighField="sdp => sdp.High"
+                                      LowField="sdp => sdp.Low"
+                                      CloseField="sdp => sdp.Close"
                                       ArgumentField="@(sdp => new DateTime(
-                                                               sdp.DateTimeStamp.Year,
-                                                               sdp.DateTimeStamp.Month,
-                                                               sdp.DateTimeStamp.Day,
-                                                               sdp.DateTimeStamp.Hour,
-                                                               sdp.DateTimeStamp.Minute,
-                                                               0) )"
+                                                    sdp.DateTimeStamp.Year,
+                                                    sdp.DateTimeStamp.Month,
+                                                    sdp.DateTimeStamp.Day,
+                                                    sdp.DateTimeStamp.Hour,
+                                                    sdp.DateTimeStamp.Minute,
+                                                    0) )"
                                       Name="Eco Supreme" />
             <DxChartTooltip Enabled="true">
                 @context.GetFinancialPoint().Render((financialPoint) =>
@@ -42,10 +42,10 @@
         DxChartBase chart;
 
         async void ExportChart(ChartExportFormat format) {
-        await chart?.ExportAsync("CandlestickChart", format);
+            await chart?.ExportAsync("CandlestickChart", format);
         }
         protected override async Task OnInitializedAsync() {
-        stockData = await FinancialSeriesDataProvider.Generate();
+            stockData = await FinancialSeriesDataProvider.GenerateByMinutes();
         }
     }
 </DemoPageSectionComponent>

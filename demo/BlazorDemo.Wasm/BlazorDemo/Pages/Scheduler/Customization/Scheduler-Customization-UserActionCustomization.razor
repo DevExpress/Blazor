@@ -20,24 +20,25 @@
                      AppointmentStartResizing="OnStartResizing"
                      AppointmentFormShowing="OnFormShowing"
                      AllowDragAppointmentBetweenResources="false"
-                     CssClass="w-100">
+                     CssClass="demo-sc-size">
             <Views>
                 <DxSchedulerDayView DayCount="3"
                                     WorkTime="WorkTime"
                                     ShowWorkTimeOnly="false"
+                                    CellMinWidth="120"
                                     VisibleTime="@(new DxSchedulerTimeSpanRange(TimeSpan.FromHours(8), TimeSpan.FromHours(19)))">
                     <HorizontalAppointmentTemplate>
                         <div class="@(GetBackgroundCssClass(context))" style="width: 100%;"></div>
-                        <div class="dxsc-apt-content">
-                            <div class="dxsc-content-wrapper">
+                        <div class="dxbl-apt-content">
+                            <div class="dxbl-sc-content-wrapper">
                                 @context.Appointment.Subject
                             </div>
                         </div>
                     </HorizontalAppointmentTemplate>
                     <VerticalAppointmentTemplate>
                         <div class="@(GetBackgroundCssClass(context))"></div>
-                        <div class="dxsc-apt-content">
-                            <div class="dxsc-content-wrapper">
+                        <div class="dxbl-apt-content">
+                            <div class="dxbl-sc-content-wrapper">
                                 @context.Appointment.Subject
                             </div>
                         </div>
@@ -139,10 +140,10 @@
             time.DayOfWeek != DayOfWeek.Sunday;
 
         string GetBackgroundCssClass(DxSchedulerAppointmentView view) {
-            string css = "dxsc-apt-bg card " + view?.Resource?.BackgroundCssClass ?? string.Empty;
+            string css = "dxbl-apt-bg " + view?.Resource?.BackgroundCssClass ?? string.Empty;
 
-            if((int?)view?.Resource?.Id != CurrentUserResourceId) {
-                if(view?.Resource?.Id is null)
+        if ((int?)view?.Appointment?.ResourceId != CurrentUserResourceId) {
+                if(view?.Appointment?.ResourceId is null)
                     css += " demo-disabled-white";
                 else
                     css += " demo-appointment-disabled";

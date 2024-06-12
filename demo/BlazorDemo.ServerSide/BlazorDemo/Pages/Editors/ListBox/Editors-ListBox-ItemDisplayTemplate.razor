@@ -5,13 +5,14 @@
         <DxListBox Data="@Data"
                    @bind-Value="@Value"
                    SizeMode="Params.SizeMode"
-                   CssClass="cw-400 chi-220">
+                   CssClass="cw-640 ch-360">
             <ItemDisplayTemplate>
                 <div class="listbox-item-template">
                     <img src="@StaticAssetUtils.GetImagePath(GetImageFileName(context.DataItem))" alt="@context.DataItem.FullName" />
                     <div class="listbox-item-template-text">
                         <span>@context.DataItem.FullName</span>
                         <span class="listbox-item-template-text-phone">@context.DataItem.HomePhone</span>
+                        <span >@context.DataItem.Notes</span>
                     </div>
                 </div>
             </ItemDisplayTemplate>

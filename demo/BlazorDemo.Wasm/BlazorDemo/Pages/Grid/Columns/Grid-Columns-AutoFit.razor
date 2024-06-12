@@ -4,47 +4,48 @@
 <DemoPageSectionComponent Id="Grid-Columns-AutoFit" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
-        <div class="align-self-end pl-2 pb-2">
-            <DxButton Text="Column Chooser"
-                      RenderStyle="ButtonRenderStyle.Secondary"
-                      IconCssClass="btn-column-chooser"
-                      SizeMode="Params.SizeMode"
-                      Click="ColumnChooserButton_Click" />
+
+        <div class="grid-container">
+            <DxGrid @ref="Grid"
+                    Data="@Data"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                    SizeMode="Params.SizeMode"
+                    TextWrapEnabled="false"
+                    HighlightRowOnHover="true"
+                    ShowAllRows="true">
+                <Columns>
+                    <DxGridCommandColumn Width="100" />
+                    <DxGridSelectionColumn Width="100" />
+                    <DxGridDataColumn FieldName="CompanyName" Width="100" />
+                    <DxGridDataColumn FieldName="Phone" Width="200" />
+                    <DxGridDataColumn FieldName="Fax" Width="15%" MinWidth="100" Visible="false" />
+                    <DxGridDataColumn FieldName="PostalCode" Width="10%" MinWidth="70" Visible="false" />
+                    <DxGridDataColumn FieldName="Address" MinWidth="120" />
+                    <DxGridDataColumn FieldName="City" Width="100" />
+                    <DxGridDataColumn FieldName="Region" MinWidth="70" Visible="false" />
+                    <DxGridDataColumn FieldName="Country" MinWidth="70" Width="200" />
+                    <DxGridDataColumn FieldName="ContactTitle" MinWidth="120" Visible="false" />
+                    <DxGridDataColumn FieldName="ContactName" MinWidth="120" Visible="false" />
+                </Columns>
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Contained" SizeMode="Params.SizeMode">
+                        <Items>
+                            <DxToolbarItem Alignment="ToolbarItemAlignment.Left" Text="Auto Fit Columns" Click="Grid_FitWidths" RenderStyle="ButtonRenderStyle.Secondary" />
+                            <DxToolbarItem Alignment="ToolbarItemAlignment.Right" Text="Column Chooser" RenderStyle="ButtonRenderStyle.Secondary" IconCssClass="grid-icon-column-chooser" Click="ColumnChooserButton_Click" />
+                        </Items>
+                    </DxToolbar>
+                </ToolbarTemplate>
+            </DxGrid>
         </div>
-        <DxGrid @ref="Grid"
-                Data="@Data"
-                ColumnResizeMode="GridColumnResizeMode.ColumnsContainer"
-                SizeMode="Params.SizeMode"
-                TextWrapEnabled="false"
-                KeyboardNavigationEnabled="true">
-            <Columns>
-                <DxGridDataColumn FieldName="CompanyName" />
-                <DxGridDataColumn FieldName="Phone" />
-                <DxGridDataColumn FieldName="Fax" />
-                <DxGridDataColumn FieldName="PostalCode" />
-                <DxGridDataColumn FieldName="Address" />
-                <DxGridDataColumn FieldName="City" />
-                <DxGridDataColumn FieldName="Region" />
-                <DxGridDataColumn FieldName="Country" />
-                <DxGridDataColumn FieldName="ContactTitle" />
-                <DxGridDataColumn FieldName="ContactName" />
-            </Columns>
-        </DxGrid>
     </ChildContentWithParameters>
-    <OptionsContent>
-        <OptionComponent Label="Column Auto Fit:">
-            <OptionButton Text="Match Component Width" OnClick="((args) => Grid_FitWidths(true))" />
-            <OptionButton Text="Match Content" OnClick="((args) => Grid_FitWidths(false))" />
-        </OptionComponent>
-    </OptionsContent>
 
     @code {
         IGrid Grid { get; set; }
         IEnumerable<Supplier> Data { get; set; }
         GridColumnResizeMode ColumnResizeMode { get; set; } = GridColumnResizeMode.NextColumn;
 
-        void Grid_FitWidths(bool сolumnsFitInGrid) {
-            Grid.AutoFitColumnWidths(сolumnsFitInGrid);
+        void Grid_FitWidths() {
+            Grid.AutoFitColumnWidths();
         }
 
         void ColumnChooserButton_Click() {

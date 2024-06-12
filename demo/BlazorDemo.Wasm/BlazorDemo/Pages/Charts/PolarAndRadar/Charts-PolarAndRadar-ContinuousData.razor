@@ -1,0 +1,29 @@
+﻿@page "/ChartPolarContinuousData"
+@using BlazorDemo.DataProviders.Implementation
+
+<DemoPageSectionComponent Id="Charts-PolarAndRadar-ContinuousData">
+    <DemoChildContent>
+        @inject IChartContinuousDataProvider ChartContinuousDataProvider
+        <DxPolarChart Data=@DataSource Width="100%" Height="500">
+            <DxChartTitle>
+                <div class="continuous-chart-title">
+                    Rose in Polar Coordinates
+                </div>
+            </DxChartTitle>
+            <DxChartLegend Visible="false"/>
+            <DxPolarChartArgumentAxis Inverted="true" StartAngle="90" TickInterval="30"/>
+            <DxPolarChartLineSeries
+                ArgumentField="@((DataPoint i) => i.X)"
+                ValueField="@((DataPoint i) => i.Y)"/>
+        </DxPolarChart>
+
+        @code {
+            IEnumerable<DataPoint> DataSource = Enumerable.Empty<DataPoint>();
+
+            protected override void OnInitialized () {
+                DataSource = ChartContinuousDataProvider.GenerateData();
+            }
+        }
+
+    </DemoChildContent>
+</DemoPageSectionComponent>

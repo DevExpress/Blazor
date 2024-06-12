@@ -11,7 +11,6 @@ using BlazorDemo.Data;
 using BlazorDemo.DataProviders;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
-using Newtonsoft.Json;
 #if MAUI
 using Microsoft.AspNetCore.Components;
 #endif
@@ -209,7 +208,7 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
         async Task<IEnumerable<T>> DeserializeCollectionAsync<T>(Stream stream) {
             using var sr = new StreamReader(stream);
             var json = await sr.ReadToEndAsync();
-            return JsonConvert.DeserializeObject<IEnumerable<T>>(json);
+            return JsonSerializer.Deserialize<IEnumerable<T>>(json, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
         EntityDataContainer GetEntityDataContainer(EntityId id) {

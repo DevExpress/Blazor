@@ -1,0 +1,92 @@
+﻿@page "/TreeList/DataBinding/ObservableCollection"
+
+<DemoPageSectionComponent Id="TreeList-DataBinding-ObservableCollection" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @using System.Collections.ObjectModel
+        @using BlazorDemo.Data.StockQuotes
+        @inject IStockQuoteByRegionService StockQuoteService
+        @implements IDisposable
+
+        <DxTreeList @ref="TreeList"
+                    Data="TreeListData"
+                    KeyFieldName="Id"
+                    ParentKeyFieldName="ParentId"
+                    ShowAllRows="true"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    CustomizeElement="TreeList_CustomizeElement"
+                    CustomizeCellDisplayText="TreeList_CustomizeCellDisplayText"
+                    SizeMode="Params.SizeMode"
+                    CssClass="max-h-480">
+            <Columns>
+                <DxTreeListDataColumn FieldName="Ticker" />
+                <DxTreeListDataColumn FieldName="LastPrice" DisplayFormat="N2" />
+                <DxTreeListDataColumn FieldName="Change" DisplayFormat="N2" />
+                <DxTreeListDataColumn FieldName="PercentageChange" Caption="% Change" DisplayFormat="P2" SortIndex="0" />
+                <DxTreeListDataColumn FieldName="LastUpdated" DisplayFormat="HH:mm:ss" />
+            </Columns>
+        </DxTreeList>
+
+        @code {
+            ITreeList TreeList { get; set; }
+            ObservableCollection<StockQuoteByRegionDisplayModel> TreeListData { get; set; }
+
+            protected override void OnInitialized() {
+                TreeListData = new ObservableCollection<StockQuoteByRegionDisplayModel>();
+                StockQuoteService.StockQuoteChanged += OnStockQuoteChanged;
+            }
+
+            void TreeList_CustomizeElement(TreeListCustomizeElementEventArgs e) {
+                if(e.ElementType != TreeListElementType.DataCell)
+                    return;
+
+                var stockQuoteModel = (StockQuoteByRegionDisplayModel)e.TreeList.GetDataItem(e.VisibleIndex);
+                var fieldName = ((ITreeListDataColumn)e.Column).FieldName;
+                if(stockQuoteModel.Change != 0 && (fieldName == "Change" || fieldName == "PercentageChange")) {
+                    e.Style = stockQuoteModel.Change > 0 ? "color: rgb(40, 167, 69)" : "color: rgb(220, 53, 69)";
+                }
+            }
+
+            void TreeList_CustomizeCellDisplayText(TreeListCustomizeCellDisplayTextEventArgs e) {
+                if(e.FieldName != "Ticker") {
+                    var model = (StockQuoteByRegionDisplayModel)e.DataItem;
+                    if(model.ParentId == 0)
+                        e.DisplayText = null;
+                }
+            }
+
+            void OnStockQuoteChanged(object sender, StockQuoteByRegionChangedEventArgs e) {
+                _ = InvokeAsync(() => ApplyStockChanges(e));
+            }
+
+            void ApplyStockChanges(StockQuoteByRegionChangedEventArgs e) {
+                var stockQuoteModel = TreeListData.FirstOrDefault(x => x.Ticker == e.Ticker);
+                var isNew = stockQuoteModel == null;
+
+                if(isNew) {
+                    stockQuoteModel = new StockQuoteByRegionDisplayModel {
+                        Ticker = e.Ticker,
+                        Id = e.Id,
+                        ParentId = e.ParentId
+                    };
+                }
+
+                if(e.ParentId != 0) {
+                    stockQuoteModel.Change = e.Change;
+                    stockQuoteModel.LastPrice = e.OpenPrice + e.Change;
+                    stockQuoteModel.PercentageChange = e.Change / e.OpenPrice;
+                    stockQuoteModel.LastUpdated = e.LastUpdate;
+                }
+
+                if(isNew) {
+                    TreeListData.Add(stockQuoteModel);
+                    TreeList?.ExpandAll();
+                }
+            }
+
+            public void Dispose() {
+                StockQuoteService.StockQuoteChanged -= OnStockQuoteChanged;
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

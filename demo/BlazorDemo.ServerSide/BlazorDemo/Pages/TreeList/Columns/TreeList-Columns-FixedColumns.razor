@@ -1,0 +1,54 @@
+﻿@page "/TreeList/Columns/FixedColumns"
+
+<DemoPageSectionComponent Id="TreeList-Columns-FixedColumns" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject ISpaceObjectDataProvider SpaceObjectDataProvider
+
+        <DxTreeList @ref="TreeList"
+                    Data="Data"
+                    ChildrenFieldName="Satellites"
+                    ShowAllRows="true"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    SizeMode="Params.SizeMode"
+                    CssClass="max-h-480">
+            <Columns>
+                <DxTreeListDataColumn FieldName="Name" FixedPosition="TreeListColumnFixedPosition.Left" Width="200px"/>
+                <DxTreeListDataColumn FieldName="TypeOfObject" FixedPosition="TreeListColumnFixedPosition.Right" Caption="Type" Width="150px"/>
+                <DxTreeListDataColumn FieldName="Mass10pow21kg" Caption="Mass, kg" Width="150px" DisplayFormat="N2">
+                    <HeaderCaptionTemplate>Mass, 10<sup>21</sup> &#215; kg</HeaderCaptionTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn FieldName="MeanRadiusInKM" Caption="Radius, km" Width="150px" DisplayFormat="N2">
+                    <HeaderCaptionTemplate>Radius, km</HeaderCaptionTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn FieldName="MeanRadiusByEarth" Caption="Radius, Ratio to Earth" Width="160px" DisplayFormat="N2" />
+                <DxTreeListDataColumn FieldName="Volume10pow9KM3" Width="150px" DisplayFormat="N2">
+                    <HeaderCaptionTemplate>Volume, 10<sup>9</sup> &#215; km<sup>3</sup></HeaderCaptionTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn FieldName="VolumeRByEarth" Caption="Volume, Ratio to Earth" Width="160px" DisplayFormat="N2" />
+                <DxTreeListDataColumn FieldName="SurfaceGravity" Caption="Gravity" Width="150px" DisplayFormat="N2">
+                    <HeaderCaptionTemplate>Gravity, m/s<sup>2</sup></HeaderCaptionTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn FieldName="SurfaceGravityByEarth" Caption="Gravity, Ratio to Earth" Width="160px" DisplayFormat="N2" />
+            </Columns>
+        </DxTreeList>
+
+        @code {
+            ITreeList TreeList { get; set; }
+            object Data { get; set; }
+
+            protected override void OnInitialized () {
+                Data = SpaceObjectDataProvider.GenerateData();
+            }
+
+            protected override void OnAfterRender (bool firstRender) {
+                if(firstRender) {
+                    TreeList.BeginUpdate();
+                    TreeList.ExpandRow(0);
+                    TreeList.ExpandRow(3);
+                    TreeList.EndUpdate();
+                }
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

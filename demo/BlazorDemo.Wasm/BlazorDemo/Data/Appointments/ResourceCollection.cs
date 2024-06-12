@@ -11,11 +11,11 @@ namespace BlazorDemo.Data {
 
         public static List<Resource> GetResources() {
             return new List<Resource>() {
-                new Resource() { Id=0 , Name="Nancy Davolio", GroupId=100, BackgroundCss="dx-green-color", TextCss="text-white" },
-                new Resource() { Id=1 , Name="Andrew Fuller", GroupId=101, BackgroundCss="dx-orange-color", TextCss="text-white" },
-                new Resource() { Id=2 , Name="Janet Leverling", GroupId=100, BackgroundCss="dx-purple-color", TextCss="text-white" },
-                new Resource() { Id=3 , Name="Margaret Peacock", GroupId=101, BackgroundCss="dx-indigo-color", TextCss="text-white" },
-                new Resource() { Id=4 , Name="Steven Buchanan", GroupId=100, BackgroundCss="dx-red-color", TextCss="text-white" }
+                new Resource() { Id=0 , Name="Nancy Davolio", GroupId=100, BackgroundCss="dxbl-green-color", TextCss="text-white" },
+                new Resource() { Id=1 , Name="Andrew Fuller", GroupId=101, BackgroundCss="dxbl-orange-color", TextCss="text-white" },
+                new Resource() { Id=2 , Name="Janet Leverling", GroupId=100, BackgroundCss="dxbl-purple-color", TextCss="text-white" },
+                new Resource() { Id=3 , Name="Margaret Peacock", GroupId=101, BackgroundCss="dxbl-indigo-color", TextCss="text-white" },
+                new Resource() { Id=4 , Name="Steven Buchanan", GroupId=100, BackgroundCss="dxbl-red-color", TextCss="text-white" }
             };
         }
 

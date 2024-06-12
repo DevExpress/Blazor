@@ -1,0 +1,49 @@
+﻿@page "/TreeList/Summary/TotalSummary"
+
+<DemoPageSectionComponent Id="TreeList-Summary-TotalSummary" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject ISalesByRegionDataProvider SalesByRegionDataProvider
+
+        <DxTreeList @ref="TreeList"
+                    Data="@TreeListData"
+                    KeyFieldName="ID"
+                    ParentKeyFieldName="RegionID"
+                    ShowAllRows="true"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    SizeMode="Params.SizeMode"
+                    CssClass="max-h-480">
+            <Columns>
+                <DxTreeListDataColumn FieldName="Region"/>
+                <DxTreeListDataColumn FieldName="MarchSales" DisplayFormat="c0" />
+                <DxTreeListDataColumn FieldName="SeptemberSales" DisplayFormat="c0" />
+                <DxTreeListDataColumn FieldName="MarchChange" DisplayFormat="p2" />
+                <DxTreeListDataColumn FieldName="SeptemberChange" DisplayFormat="p2" />
+                <DxTreeListDataColumn FieldName="MarketShare" DisplayFormat="p0" />
+            </Columns>
+            <TotalSummary>
+                <DxTreeListSummaryItem SummaryType="TreeListSummaryItemType.Count" FieldName="Region"/>
+                <DxTreeListSummaryItem SummaryType="TreeListSummaryItemType.Max" FieldName="MarchChange"/>
+                <DxTreeListSummaryItem SummaryType="TreeListSummaryItemType.Min" FieldName="MarchChange"/>
+                <DxTreeListSummaryItem SummaryType="TreeListSummaryItemType.Max" FieldName="SeptemberChange"/>
+                <DxTreeListSummaryItem SummaryType="TreeListSummaryItemType.Min" FieldName="SeptemberChange"/>
+                <DxTreeListSummaryItem SummaryType="TreeListSummaryItemType.Max" FieldName="MarketShare"/>
+                <DxTreeListSummaryItem SummaryType="TreeListSummaryItemType.Min" FieldName="MarketShare"/>
+            </TotalSummary>
+        </DxTreeList>
+
+        @code {
+            ITreeList TreeList { get; set; }
+            List<SalesByRegion> TreeListData { get; set; }
+
+            protected override void OnInitialized () {
+                TreeListData = SalesByRegionDataProvider.GenerateData();
+            }
+
+            protected override void OnAfterRender (bool firstRender) {
+                if(firstRender)
+                    TreeList.ExpandRow(2);
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

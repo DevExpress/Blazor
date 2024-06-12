@@ -1,0 +1,71 @@
+﻿@page "/ChartRealTimeData"
+@using System.Collections.ObjectModel
+@implements IDisposable
+@inject INetworkSpeedTesterService NetworkSpeedTester
+@inject NavigationManager NavigationManager
+
+<DemoPageSectionComponent Id="Charts-RealTimeData">
+    <div class="w-100">
+        <DxChart Data="@ChartsData" Width="100%" CssClass="rtd-chart" >
+            <DxChartTitle Text="Network Bandwidth Usage" />
+
+            <DxChartLegend Visible=false />
+
+            <DxChartSplineSeries T="Tuple<DateTime, int>"                                 
+                                 TArgument="DateTime"
+                                 TValue="int"
+                                 ArgumentField="tm => tm.Item1"
+                                 ValueField="tm => tm.Item2">
+                <DxChartAggregationSettings  Enabled="true" Method="ChartAggregationMethod.Average" />
+                <DxChartSeriesPoint Visible="false" HoverMode="ChartSeriesPointHoverMode.None" />
+            </DxChartSplineSeries>
+
+            <DxChartArgumentAxis>
+                <DxChartAxisRange Length="ChartAxisInterval.Minutes(10)" />                
+            </DxChartArgumentAxis>
+
+            <DxChartValueAxis VisualRangeUpdateMode="ChartVisualRangeUpdateMode.Keep">
+                <DxChartAxisTitle Text="Data transfer rate (mb/s)" />
+                <DxChartAxisRange StartValue="0" EndValue="250" />
+            </DxChartValueAxis>
+
+            <DxChartTooltip Enabled="true">
+                @context.Point.Render((seriesPoint) =>
+                    @<div style="margin: 0.75rem">
+                        <span>@($"{seriesPoint.Value} Mb/s")</span>
+                    </div>
+                )
+            </DxChartTooltip>
+
+            <DxChartZoomAndPanSettings ArgumentAxisZoomAndPanMode="ChartAxisZoomAndPanMode.Both" ValueAxisZoomAndPanMode="ChartAxisZoomAndPanMode.None" />
+            <DxChartScrollBarSettings ArgumentAxisScrollBarVisible="true" ArgumentAxisScrollBarPosition="ChartScrollBarPosition.Bottom" />
+        </DxChart>
+    </div>
+
+    @code {
+        [Parameter]
+        public ObservableCollection<Tuple<DateTime, int>> ChartsData { get; set; }
+
+        DateTime start = DateTime.Now;
+
+        public void Dispose() {
+            NetworkSpeedTester.DataReceived -= OnSpeedChanged;
+        }
+
+        protected override void OnInitialized() {
+                /*BeginHide*/
+                if(DemoRenderUtils.PreventRenderDemoSection(NavigationManager.Uri, "Charts-RealTimeData")) return;
+                /*EndHide*/
+
+                base.OnInitialized();
+                ChartsData = new ObservableCollection<Tuple<DateTime, int>>(NetworkSpeedTester.GetInitialData(DateTime.Now, 600));
+        
+                NetworkSpeedTester.DataReceived += OnSpeedChanged;
+        }
+
+
+        void OnSpeedChanged(object sender, Tuple<DateTime, int> data) {
+            ChartsData.Add(data);
+        }
+    }
+</DemoPageSectionComponent>

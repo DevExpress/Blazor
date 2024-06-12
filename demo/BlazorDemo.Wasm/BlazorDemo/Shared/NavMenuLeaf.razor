@@ -27,7 +27,7 @@
         if(status == DemoItemStatus.New)
             return "New";
         if(status == DemoItemStatus.Updated)
-            return "Upd";
+            return " ";
         return string.Empty;
     }
 
@@ -37,6 +37,10 @@
             return "item-ctp";
         if(status == DemoItemStatus.MaintenanceMode)
             return "item-maintenance";
+        if(status == DemoItemStatus.New)
+            return "item-new";
+        if(status == DemoItemStatus.Updated)
+            return "item-upd";
         return "";
     }
 }

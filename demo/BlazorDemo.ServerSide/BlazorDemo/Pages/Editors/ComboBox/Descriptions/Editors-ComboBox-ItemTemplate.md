@@ -1,3 +1,9 @@
-Use the [ItemTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.ItemTemplate) property to customize the appearance of individual items displayed within the DevExpress [ComboBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2#items) component. The template's **context** parameter allows you to access a data object and its fields.
+Use the [ItemDisplayTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.ItemDisplayTemplate) property to customize the appearance of [ComboBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2#items) items. This property accepts a [ComboBoxItemDisplayTemplateContext](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ComboBoxItemDisplayTemplateContext-1) object as its **context** parameter. You can use the parameter's members to obtain item information.
 
-In this demo, the **ItemTemplate** property is used to display the ComboBox's items in a card-like view. Each item shows an employee's first name, last name, photo, and phone number.
+* [DataItem](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ComboBoxItemDisplayTemplateContext-1.DataItem)
+* [DisplayText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ListBoxItemDisplayTemplateContext-1.DisplayText)
+* [HighlightedDisplayText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ListBoxItemDisplayTemplateContext-1.HighlightedDisplayText)
+* [Value](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ListBoxItemDisplayTemplateContext-1.Value)
+* [VisibleIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.ListBoxDisplayTemplateContextBase-1.VisibleIndex)
+
+In this demo, the **ItemDisplayTemplate** property is used to display the ComboBox's items in a card-like view. Each item displays an employee's first name, last name, photo, and phone number.

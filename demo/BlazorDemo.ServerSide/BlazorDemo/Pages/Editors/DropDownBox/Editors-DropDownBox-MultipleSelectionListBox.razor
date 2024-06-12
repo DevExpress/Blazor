@@ -1,0 +1,66 @@
+<DemoPageSectionComponent Id="Editors-DropDownBox-MultipleSelectionListBox" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <style>
+            .templateListbox {
+                --dxbl-list-box-border-width: 0px;
+                width: 100%
+            }
+        </style>
+
+        <label for="ddbMultipleSelectionListBox" class="demo-text cw-480 mb-1">Employees</label>
+        <DxDropDownBox @bind-Value="Value"
+                       QueryDisplayText="QueryText"
+                       DropDownWidthMode="DropDownWidthMode.EditorWidth"
+                       SizeMode="Params.SizeMode"
+                       InputId="ddbMultipleSelectionListBox"
+                       CssClass="cw-480"
+                       >
+            <DropDownBodyTemplate>
+                <DxListBox Data="@ListBoxData" TData="Employee" TValue="Employee"
+                           Values="@(GetListBoxValues(context.DropDownBox))"
+                           ValuesChanged="@(values => ListBoxValuesChanged(values, context.DropDownBox))"
+                           TextFieldName="@nameof(Employee.Text)"
+                           SelectionMode="ListBoxSelectionMode.Multiple"
+                           ShowCheckboxes="true"
+                           CssClass="templateListbox"
+                           >
+                </DxListBox>
+            </DropDownBodyTemplate>
+        </DxDropDownBox>
+        <p class="demo-text cw-480 mt-3">
+            Selected items count: <b>@GetSelectedItemsCount()</b>
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        IEnumerable<Employee> ListBoxData { get; set; }
+        object Value { get; set; }
+
+        string QueryText(DropDownBoxQueryDisplayTextContext arg) {
+            var names = (arg.Value as IEnumerable<Employee>)?.Select(x => x.LastName);
+            return names != null ? string.Join(",", names) : string.Empty;
+        }
+
+        IEnumerable<Employee> GetListBoxValues(IDropDownBox dropDownBox) {
+            return dropDownBox.Value as IEnumerable<Employee>;
+        }
+
+        void ListBoxValuesChanged(IEnumerable<Employee> values, IDropDownBox dropDownBox) {
+            dropDownBox.BeginUpdate();
+            dropDownBox.Value = values;
+            dropDownBox.EndUpdate();
+        }
+
+        int GetSelectedItemsCount() {
+            if(Value is IEnumerable<Employee> value)
+                return value.Count();
+            return 0;
+        }
+
+        protected override async Task OnInitializedAsync() {
+            ListBoxData = await NwindDataService.GetEmployeesAsync();
+            Value = ListBoxData.Take(2);
+        }
+    }
+</DemoPageSectionComponent>

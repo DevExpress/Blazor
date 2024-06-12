@@ -20,6 +20,9 @@ namespace BlazorDemo.Services {
     }
 
     public class DemoReportSource : IDemoReportSource {
+        static DemoReportSource() {
+            XtraReportsDemos.ObjectDataSourceTypesRegistrator.RegisterTrustedTypes();
+        }
         readonly protected List<ReportInfo> commonReports = new() {
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.DrillDown, Name = XtraReportsDemos.ReportNames.DrillDownName, CreateAction = () => new XtraReportsDemos.DrillDownReport.DrillDownReport() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.DrillThrough, Name = XtraReportsDemos.ReportNames.DrillThroughName, CreateAction = () => new XtraReportsDemos.DrillThroughReport.Report() },
@@ -29,7 +32,7 @@ namespace BlazorDemo.Services {
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.HierarchicalReport, Name = XtraReportsDemos.ReportNames.HierarchicalReportName, CreateAction = () => new XtraReportsDemos.HierarchicalReport.Report(), ShouldLoadFont = true },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.TableReport, Name = XtraReportsDemos.ReportNames.TableReportName, CreateAction = () => new XtraReportsDemos.TableReport.Report() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.MasterDetailReport, Name = XtraReportsDemos.ReportNames.MasterDetailReportName, CreateAction = () => new XtraReportsDemos.MasterDetailReport.Report() },
-            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.Subreports, Name = XtraReportsDemos.ReportNames.SubreportsName, CreateAction = () => new XtraReportsDemos.Subreports.MasterReport() },            
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.Subreports, Name = XtraReportsDemos.ReportNames.SubreportsName, CreateAction = () => new XtraReportsDemos.Subreports.MasterReport() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.ReportMergingWithPdf, Name = XtraReportsDemos.ReportNames.ReportMergingWithPdfName, CreateAction = () => new XtraReportsDemos.ReportMergingWithPdf.Report() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.EmbeddedPDFContent, Name = XtraReportsDemos.ReportNames.EmbeddedPDFContentName, CreateAction = () => new XtraReportsDemos.EmbeddedPDFContent.Invoice() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.SideBySideReports, Name = XtraReportsDemos.ReportNames.SideBySideReportsName, CreateAction = () => new XtraReportsDemos.SideBySideReports.EmployeeComparisonReport() },
@@ -43,7 +46,7 @@ namespace BlazorDemo.Services {
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.Chart, Name = XtraReportsDemos.ReportNames.ChartName, CreateAction = () => new XtraReportsDemos.Charts.Report() },
 
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.CharacterComb, Name = XtraReportsDemos.ReportNames.CharacterCombName, CreateAction = () => new XtraReportsDemos.CharacterComb.Report() },
-            
+
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.CalculatedFields, Name = XtraReportsDemos.ReportNames.CalculatedFieldsName, CreateAction = () => new XtraReportsDemos.CalculatedFieldsReport.Report() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.MailMerge, Name = XtraReportsDemos.ReportNames.MailMergeName, CreateAction = () => new XtraReportsDemos.MailMerge.Report() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.MultiColumn, Name = XtraReportsDemos.ReportNames.MultiColumnName, CreateAction = () => new XtraReportsDemos.MultiColumnReport.Report(), ShouldLoadFont = true },
@@ -52,7 +55,7 @@ namespace BlazorDemo.Services {
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.NorthwindTraders_Catalog, Name = XtraReportsDemos.ReportNames.NorthwindTraders_CatalogName, CreateAction = () => new XtraReportsDemos.NorthwindTraders.CatalogReport() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.ShrinkGrow, Name = XtraReportsDemos.ReportNames.ShrinkGrowName, CreateAction = () => new XtraReportsDemos.ShrinkGrow.Report() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.Anchor, Name = XtraReportsDemos.ReportNames.AnchorName, CreateAction = () => new XtraReportsDemos.AnchorVertical.Report() },
-            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.HiddenColumns, Name = XtraReportsDemos.ReportNames.HiddenColumnsName, CreateAction = () => new XtraReportsDemos.IListDatasource.Report() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.HiddenColumns, Name = XtraReportsDemos.ReportNames.HiddenColumnsName, CreateAction = () => new XtraReportsDemos.IListDataSource.Report() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.SalesSummary, Name = XtraReportsDemos.ReportNames.SalesSummaryName, CreateAction = () => new XtraReportsDemos.SalesSummary.Report() },
 
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.Sparkline, Name = XtraReportsDemos.ReportNames.SparklineName, CreateAction = () => new XtraReportsDemos.Sparkline.Report() },
@@ -94,7 +97,7 @@ namespace BlazorDemo.Services {
 
         public async Task<XtraReport> GetReportAsync(string reportName, ReportProviderContext context) {
             var shouldRequestFont = commonReports.FirstOrDefault(x => x.Name == reportName)?.ShouldLoadFont;
-            if (shouldRequestFont.Value) {
+            if(shouldRequestFont.Value) {
                 await ReportingFontLoader.LoadFonts(httpClient, "arial");
             }
             return GetReport(reportName);

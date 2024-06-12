@@ -4,25 +4,37 @@
 <DemoPageSectionComponent Id="Grid-MasterDetail-NestedGrid" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
-        <DxGrid @ref="Grid" Data="MasterGridData" AutoCollapseDetailRow="AutoCollapseDetailRow" SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
-            <Columns>
-                <DxGridDataColumn FieldName="ContactName" SortIndex="0" />
-                <DxGridDataColumn FieldName="CompanyName" />
-                <DxGridDataColumn FieldName="Country" />
-                <DxGridDataColumn FieldName="City" />
-            </Columns>
-            <DetailRowTemplate>
-                <Grid_MasterDetail_NestedGrid_DetailContent Customer="(Customer)context.DataItem" KeyboardNavigationEnabled="true" />
-            </DetailRowTemplate>
-        </DxGrid>
-    </ChildContentWithParameters>
 
-    <OptionsContent>
-        <OptionCheckBox T="bool"
-                        Label="Auto Collapse Detail Rows"
-                        Checked="AutoCollapseDetailRow"
-                        CheckedChanged="AutoCollapseDetailRow_Changed" />
-    </OptionsContent>
+        <div class="grid-container">     
+            <DxGrid @ref="Grid" Data="MasterGridData" AutoCollapseDetailRow="AutoCollapseDetailRow" SizeMode="Params.SizeMode"
+                ColumnResizeMode="GridColumnResizeMode.NextColumn" TextWrapEnabled="false" PageSize="15">
+                <Columns>
+                    <DxGridDataColumn FieldName="ContactName" SortIndex="0" />
+                    <DxGridDataColumn FieldName="CompanyName" />
+                    <DxGridDataColumn FieldName="Country" />
+                    <DxGridDataColumn FieldName="City" />
+                </Columns>
+                <DetailRowTemplate>
+                    <Grid_MasterDetail_NestedGrid_DetailContent Customer="(Customer)context.DataItem" />
+                </DetailRowTemplate>
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
+                        <Items>
+                            <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                                <Template Context="toolbar_item_context">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <DxCheckBox @bind-Checked="AutoCollapseDetailRow">
+                                            Auto Collapse Detail Rows
+                                        </DxCheckBox>
+                                    </div>
+                                </Template>
+                            </DxToolbarItem>
+                        </Items>
+                    </DxToolbar>
+                </ToolbarTemplate>
+            </DxGrid>
+        </div>
+    </ChildContentWithParameters>
 
     @code {
         IGrid Grid { get; set; }
@@ -32,12 +44,6 @@
 
         protected override async Task OnInitializedAsync() {
             MasterGridData = await NwindDataService.GetCustomersAsync();
-        }
-
-        protected override void OnAfterRender(bool firstRender) {
-            if(firstRender) {
-                Grid.ExpandDetailRow(0);
-            }
         }
 
         void AutoCollapseDetailRow_Changed(bool newValue) {

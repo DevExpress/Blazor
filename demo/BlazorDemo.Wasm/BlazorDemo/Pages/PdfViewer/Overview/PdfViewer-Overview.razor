@@ -1,0 +1,51 @@
+﻿@page "/PdfViewer"
+@using System.IO
+@using System.Reflection
+@using DevExpress.Blazor.PdfViewer
+@inject IDemoStaticResourceService DemoStaticResourceService
+
+<link rel="stylesheet" href=@DemoStaticResourceService.GetUrlWithVersion("_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.bs5.css")>
+
+<DemoPageSectionComponent Id="PdfViewer-Overview">
+    <div id="overviewDemoDropZone" class="card custom-drop-zone bg-light rounded-3 w-100 m-0">
+        <span class="drop-file-icon mb-3"></span>
+        <span>Drag and Drop File Here</span><span class="m-1">or</span>
+        <button id="overviewDemoSelectButton" class="btn border-primary btn-primary m-1">Select File</button>
+    </div>
+    <DxFileInput @ref="fileInput"
+                 AcceptedFileTypes="@ALLOWED_FILE_TYPES"
+                 AllowedFileExtensions="@ALLOWED_FILE_TYPES"
+                 CssClass="w-100"
+                 ExternalDropZoneCssSelector="#overviewDemoDropZone"
+                 ExternalDropZoneDragOverCssClass="bg-light border-secondary text-dark"
+                 ExternalSelectButtonCssSelector="#overviewDemoSelectButton"
+                 FilesUploading="OnFilesUploading"
+                 MaxFileSize="2000000">
+    </DxFileInput>
+    <DxPdfViewer CssClass="w-100 pdf-viewer" DocumentContent="DocumentContent" />
+
+    @code {
+        readonly List<string> ALLOWED_FILE_TYPES = new List<string>{ ".pdf" };
+
+        DxFileInput fileInput;
+        byte[] DocumentContent { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            using(Stream stream = assembly.GetManifestResourceStream("BlazorDemo.DataSources.Invoice.pdf"))
+            using(var binaryReader = new BinaryReader(stream))
+                DocumentContent = binaryReader.ReadBytes((int)stream.Length);
+        }
+
+        protected async Task OnFilesUploading(FilesUploadingEventArgs args) {
+            using(MemoryStream stream = new MemoryStream()) {
+                IFileInputSelectedFile file = args.Files[0];
+                await file.OpenReadStream(file.Size).CopyToAsync(stream);
+
+                DocumentContent = stream.ToArray();
+                await InvokeAsync(StateHasChanged);
+            }
+        }
+    }
+</DemoPageSectionComponent>

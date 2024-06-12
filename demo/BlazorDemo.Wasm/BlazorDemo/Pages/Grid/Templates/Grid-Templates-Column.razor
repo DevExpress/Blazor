@@ -5,7 +5,7 @@
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        <DxGrid Data="@Data" SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
+        <DxGrid Data="@Data" SizeMode="Params.SizeMode" ColumnResizeMode="GridColumnResizeMode.NextColumn" TextWrapEnabled="false">
             <Columns>
                 <DxGridDataColumn FieldName="FirstName" MinWidth="80" />
                 <DxGridDataColumn FieldName="LastName" MinWidth="80" />

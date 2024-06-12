@@ -1,0 +1,15 @@
+/*BeginHide*/ ::deep /*EndHide*/.dxbl-grid {
+    height: 522px;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.highlighted-item > td {
+    background-color: var(--bs-danger-border-subtle)
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.highlighted-item > td:first-child {
+    background-color: transparent;
+}
+/*BeginHide*/ .grid-container {
+    display: contents;
+}
+/*EndHide*/

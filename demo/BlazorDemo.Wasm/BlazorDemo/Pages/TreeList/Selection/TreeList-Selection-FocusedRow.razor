@@ -1,0 +1,70 @@
+﻿@page "/TreeList/Selection/FocusedRow"
+
+<DemoPageSectionComponent Id="TreeList-Selection-FocusedRow" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject ISpaceObjectDataProvider SpaceObjectDataProvider
+
+        <div class="d-flex flex-wrap w-100">
+            <div class="w-auto mt-1 me-1 flex-grow-1" style="flex-basis: 500px">
+                <div class="card-header bg-transparent text-body py-2 px-0 border-bottom-0 fw-bold">Solar system objects:</div>
+                <DxTreeList @ref="TreeList"
+                            Data="@TreeListData"
+                            ChildrenFieldName="Satellites"
+                            ShowAllRows="true"
+                            FocusedRowEnabled="true"
+                            FocusedRowChanged="TreeList_FocusedRowChanged"
+                            ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                            TextWrapEnabled="false"
+                            SizeMode="Params.SizeMode"
+                            CssClass="max-h-480">
+                    <Columns>
+                        <DxTreeListDataColumn FieldName="Name"/>
+                        <DxTreeListDataColumn FieldName="TypeOfObject" Caption="Type"/>
+                        <DxTreeListDataColumn FieldName="Mass10pow21kg" Caption="Mass, kg" DisplayFormat="N2">
+                            <HeaderCaptionTemplate>Mass, 10<sup>21</sup> &#215; kg</HeaderCaptionTemplate>
+                        </DxTreeListDataColumn>
+                    </Columns>
+                </DxTreeList>
+            </div>
+            <div class="me-1 mt-1 flex-grow-1" style="flex-basis: 380px">
+                <div class="card-header bg-transparent text-body py-2 border-bottom-0 fw-bold">Focused object:</div>
+                <div class="card-body p-0 pb-2 max-h-380 overflow-auto">
+                    <ul class="list-group list-group-flush bg-transparent border-0">
+                        <li class="list-group-item bg-transparent text-body py-0 border-0 mb-2">
+                            <div class="card">
+                                @if(FocusedSpaceObject != null) {
+                                    <h5 class="card-header">@FocusedSpaceObject.Name</h5>
+                                    <ul class="list-group list-group-flush bg-transparent border-0">
+                                        <li class="list-group-item bg-transparent text-body py-1 border-0"><b>Radius</b>: @FocusedSpaceObject.MeanRadiusInKM.ToString("N2") km</li>
+                                        <li class="list-group-item bg-transparent text-body py-1 border-0"><b>Density</b>: @FocusedSpaceObject.Density.ToString("N2") g/cm<sup>3</sup></li>
+                                        <li class="list-group-item bg-transparent text-body py-1 border-0"><b>Gravity</b>: @FocusedSpaceObject.SurfaceGravity.ToString("N2") m/s<sup>2</sup></li>
+                                    </ul>
+                                }
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        @code {
+            ITreeList TreeList { get; set; }
+
+            List<SpaceObject> TreeListData { get; set; }
+            SpaceObject FocusedSpaceObject { get; set; }
+
+            protected override void OnInitialized () {
+                TreeListData = SpaceObjectDataProvider.GenerateData();
+            }
+
+            protected override void OnAfterRender (bool firstRender) {
+                if(firstRender)
+                    TreeList.ExpandAll();
+            }
+
+            void TreeList_FocusedRowChanged(TreeListFocusedRowChangedEventArgs e) {
+                FocusedSpaceObject = e.DataItem as SpaceObject;
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

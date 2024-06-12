@@ -6,12 +6,12 @@
                      DataStorage="@DataStorage"
                      GroupType="SchedulerGroupType.Date" 
                      @bind-ShowAppointmentTooltip="@ShowAppointmentTooltip"
-                     CssClass="w-100">
+                     CssClass="demo-sc-size">
             <Views>
-                <DxSchedulerDayView DayCount="2" ShowWorkTimeOnly="true">
+                <DxSchedulerDayView DayCount="2" ShowWorkTimeOnly="true" CellMinWidth="120">
                     <HorizontalAppointmentTemplate>
                         @{
-                            string backgroundCss = context.Resource == null ? "dx-purple-color" : context.Resource.BackgroundCssClass;
+                            string backgroundCss = context.Resource == null ? "dxbl-purple-color" : context.Resource.BackgroundCssClass;
                         }
                         <div class="demo-sc-apt @(IsAccepted(context.Appointment) ? "demo-sc-accepted" : "")" style="width: 100%;">
                             <div class="card demo-apt-bg @backgroundCss" style="width: 100%;"></div>
@@ -22,7 +22,7 @@
                     </HorizontalAppointmentTemplate>
                     <VerticalAppointmentTemplate>
                         @{
-                            string backgroundCss = context.Resource == null ? "dx-purple-color" : context.Resource.BackgroundCssClass;
+                            string backgroundCss = context.Resource == null ? "dxbl-purple-color" : context.Resource.BackgroundCssClass;
                         }
                         <div class="shadow-sm demo-sc-apt @(IsAccepted(context.Appointment) ? "demo-sc-accepted"  : "")">
                             <div class="card demo-apt-bg @backgroundCss"></div>
@@ -50,7 +50,7 @@
             </AppointmentTooltipHeaderTemplate>
             <AppointmentTooltipTemplate>
                 @{
-                    string resourceCssClass = context.Resource == null ? "dx-purple-color" : context.Resource.BackgroundCssClass;
+                    string resourceCssClass = context.Resource == null ? "dxbl-purple-color" : context.Resource.BackgroundCssClass;
                     bool accepted = IsAccepted(context.Appointment);
                     string buttonText = accepted ? "Accepted" : "Tentative";
                     string iconCssClass = accepted ? "dx-icon-accepted" : "dx-icon-tentative";
@@ -59,14 +59,14 @@
                 <div class="container">
                     <div class="row mb-3">
                         <div class="col-auto ms-1">
-                            <div class="dxsc-label-item @resourceCssClass"></div>
+                            <div class="dxbl-sc-label-item @resourceCssClass"></div>
                         </div>
                         <div class="col ps-0">
-                            <span class="dxsc-subject" style="vertical-align: middle;">
+                            <span class="dxbl-sc-subject" style="vertical-align: middle;">
                                 @context.Appointment.Subject
                             </span>
                             @if(context.Resource != null) {
-                                <span class="dxsc-subject" style="vertical-align: middle;">
+                                <span class="dxbl-sc-subject" style="vertical-align: middle;">
                                     (@context.Resource.Caption)
                                 </span>
                             }

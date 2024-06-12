@@ -1,0 +1,11 @@
+Our Blazor TreeList allows you to compute total summaries based on custom logic. To create a custom summary, declare a [DxTreeListSummaryItem](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeListSummaryItem) object in the [TotalSummary](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.TotalSummary) template and set the [SummaryType](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeListSummaryItem.SummaryType) property to `Custom`. Handle the TreeList's [CustomSummary](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.CustomSummary) event to implement a summary calculation algorithm. This event occurs multiple times as follows: 
+
+* Before TreeList rows are processed: The event argument's [SummaryStage](https://docs.devexpress.com/Blazor/DevExpress.Blazor.TreeListCustomSummaryEventArgs.SummaryStage) property value is `Start`. At this stage, you can initialize a summary value. 
+* For each data row in the processed range: The [SummaryStage](https://docs.devexpress.com/Blazor/DevExpress.Blazor.TreeListCustomSummaryEventArgs.SummaryStage) property value is `Calculate`. At this stage, you can accumulate a summary value. 
+* After TreeList rows are processed: The [SummaryStage](https://docs.devexpress.com/Blazor/DevExpress.Blazor.TreeListCustomSummaryEventArgs.SummaryStage) property value is `Finalize`. At this stage, you can finalize summary calculations.
+
+You can interrupt summary calculations at any time. To do so, set the [TotalValueReady](https://docs.devexpress.com/Blazor/DevExpress.Blazor.TreeListCustomSummaryEventArgs.TotalValueReady) event argument to `true`.
+
+To refresh TreeList summary values, call the [RefreshSummary](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.RefreshSummary) method. You can also specify the [DisplayText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeListSummaryItem.DisplayText) property or handle the [CustomizeSummaryDisplayText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.CustomizeSummaryDisplayText) event to customize the summary's display text. 
+
+In this demo, the custom summary calculates the sum for **March Sales** values against selected TreeList rows. Built-in total summaries calculate the grand total for all rows and the row count.

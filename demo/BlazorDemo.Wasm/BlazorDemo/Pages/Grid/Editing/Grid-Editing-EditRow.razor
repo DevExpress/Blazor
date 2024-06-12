@@ -4,7 +4,6 @@
 <DemoPageSectionComponent Id="Grid-Editing-EditRow" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
-
         <DxGrid @ref="Grid"
                 Data="DataSource"
                 PageSize="12"
@@ -14,7 +13,10 @@
                 EditModelSaving="Grid_EditModelSaving"
                 DataItemDeleting="Grid_DataItemDeleting"
                 EditMode="GridEditMode.EditRow"
-                SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
+                ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                TextWrapEnabled="false"
+                SizeMode="Params.SizeMode"
+                HighlightRowOnHover="true">
             <Columns>
                 <DxGridCommandColumn Width="160px" />
                 <DxGridDataColumn FieldName="FirstName" MinWidth="80" />
@@ -33,10 +35,6 @@
 
         protected override async Task OnInitializedAsync() {
             DataSource = await NwindDataService.GetEmployeesEditableAsync();
-        }
-        protected override async Task OnAfterRenderAsync(bool firstRender) {
-            if(firstRender)
-                await Grid.StartEditRowAsync(0);
         }
         void Grid_CustomizeEditModel(GridCustomizeEditModelEventArgs e) {
             if(e.IsNew) {

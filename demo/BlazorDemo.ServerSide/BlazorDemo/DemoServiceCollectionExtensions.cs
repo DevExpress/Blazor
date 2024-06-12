@@ -44,6 +44,8 @@ namespace BlazorDemo {
             if(blazorWasm) {
                 services.AddScoped<DevExpress.XtraReports.Services.IReportProviderAsync, DemoReportSourceWasm>();
                 services.AddDevExpressWebAssemblyBlazorReportViewer();
+
+                DevExpress.XtraPrinting.PrintingOptions.Pdf.RenderingEngine = DevExpress.XtraPrinting.XRPdfRenderingEngine.Skia;
             }
             services.AddDocumentMetadata(ConfigureMetadata);
             services.AddSingleton<DemoConfiguration>();

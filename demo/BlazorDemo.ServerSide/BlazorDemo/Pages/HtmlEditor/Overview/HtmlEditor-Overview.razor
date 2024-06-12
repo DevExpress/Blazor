@@ -1,0 +1,14 @@
+﻿@page "/HtmlEditor"
+
+<DemoPageSectionComponent Id="HtmlEditor-Overview">
+    @inject IHtmlEditorStringDataProvider HtmlEditorStringDataProvider
+    <DxHtmlEditor Markup="@markup" Height="500px" />
+
+    @code {
+        string markup = "";
+
+        protected override void OnInitialized() {
+            markup = HtmlEditorStringDataProvider.GetData();
+        }
+    }
+</DemoPageSectionComponent>

@@ -17,14 +17,6 @@ namespace BlazorDemo {
             }, fieldNamesToWatch);
             return modifiedFields;
         }
-        public static Dictionary<string, object> GetFieldValues<T>(T dataItem, IEnumerable<string> fieldNames = null) where T: class {
-            Dictionary<string, object> values = new();
-            ForEachFieldOf<T>(
-                fieldProperty => values.Add(fieldProperty.Name, fieldProperty.GetValue(dataItem)),
-                fieldNames
-            );
-            return values;
-        }
         static void ForEachFieldOf<T>(Action<PropertyDescriptor> func, IEnumerable<string> fieldNames = null) {
             var properties = TypeDescriptor.GetProperties(typeof(T));
             if(fieldNames == null)

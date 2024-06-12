@@ -1,0 +1,72 @@
+﻿@using BlazorDemo.Pages.Charts.Sparkline.SparklineComponents
+
+<DemoPageSectionComponent Id="Charts-Sparkline">
+    <OptionsContent>
+        <OptionComboBox
+            Label="Series Type:"
+            Data="@SparklineTypes"
+            @bind-Value="@SelectedSparklineType"
+            ValueField="@nameof(SparklineTypeSelection.Type)"
+            TextField="@nameof(SparklineTypeSelection.Name)"
+        />
+    </OptionsContent>
+    <DemoChildContent>
+        @inject ISparklineDataProvider SparklineDataProvider
+
+        <div class="sparkline-title">Company Website: 2023 Traffic Analysis</div>
+
+        <DxGrid Data="@Data" AllowSort="false" ColumnCaptionAlignment="GridTextAlignment.Center">
+            <Columns>
+                <DxGridDataColumn TextAlignment="GridTextAlignment.Center" Caption="Webpage" FieldName="Page" DisplayFormat="d" />
+                <DxGridDataColumn TextAlignment="GridTextAlignment.Center" Caption="Total Visits" FieldName="TotalVisits" />
+                <DxGridDataColumn TextAlignment="GridTextAlignment.Center" Caption="Monthly Average" FieldName="MonthlyAverage" />
+                @RenderSparklineColumn()
+            </Columns>
+        </DxGrid>
+
+        @code {
+            IEnumerable<SparklineGridDataRow> Data = Enumerable.Empty<SparklineGridDataRow>();
+            SparklineType SelectedSparklineType { get; set; }
+
+            public class SparklineTypeSelection {
+                public SparklineType Type { get; set; }
+                public string Name { get; set; }
+
+                public SparklineTypeSelection(SparklineType type, string name) {
+                    Type = type;
+                    Name = name;
+                }
+            }
+
+            List<SparklineTypeSelection> SparklineTypes = new List<SparklineTypeSelection>() {
+                new SparklineTypeSelection(SparklineType.Line, "Line"),
+                new SparklineTypeSelection(SparklineType.StepLine, "Step Line"),
+                new SparklineTypeSelection(SparklineType.Spline, "Spline"),
+                new SparklineTypeSelection(SparklineType.Area, "Area"),
+                new SparklineTypeSelection(SparklineType.StepArea, "Step Area"),
+                new SparklineTypeSelection(SparklineType.SplineArea, "Spline Area"),
+                new SparklineTypeSelection(SparklineType.Bar, "Bar"),
+                new SparklineTypeSelection(SparklineType.WinLoss, "Win Loss"),
+            };
+
+            protected override void OnInitialized() {
+                Data = SparklineDataProvider.GenerateData();
+                SelectedSparklineType = SparklineTypes.FirstOrDefault().Type;
+            }
+
+            RenderFragment RenderSparklineColumn() {
+                return
+                    @<DxGridDataColumn Caption="Monthly Trends">
+                        <CellDisplayTemplate>
+                            <SparklineTemplate
+                                Data="@(context.GetRowValue("Data") as IEnumerable<SparklineDataPoint>)"
+                                BaseColor="@(context.GetRowValue("Color").ToString())"
+                                WinLossThreshold="@((int)context.GetRowValue("WinLossThreshold"))"
+                                SparklineType="@SelectedSparklineType"
+                            />
+                        </CellDisplayTemplate>
+                    </DxGridDataColumn>;
+            }
+        }
+    </DemoChildContent>
+</DemoPageSectionComponent>

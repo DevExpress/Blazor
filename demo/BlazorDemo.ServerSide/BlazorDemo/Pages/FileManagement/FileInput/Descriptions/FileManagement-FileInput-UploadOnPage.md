@@ -1,0 +1,1 @@
+In this demo, the File Input component allows you to select a JPG, JPEG, GIF, or PNG image (up to 15MB in size). The [FilesUploading](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFileInput.FilesUploading) event handler uploads the selected image directly to the web page and displays it in the drop zone container.

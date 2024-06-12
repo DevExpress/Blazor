@@ -1,3 +1,5 @@
+The scrollbar appears automatically if content does not fit the component container.
+
 To enable vertical virtual scrolling, set our Blazor Grid's [VirtualScrollingEnabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.VirtualScrollingEnabled) property to `true` . In this mode, users can scroll through all data rows without paging. To improve overall performance, the Grid renders a small number of rows on-screen (based on viewport size). For server-side data, our Grid component requests data in small chunks (when the user scrolls the component).
 
 To make a row visible, can call the following methods:

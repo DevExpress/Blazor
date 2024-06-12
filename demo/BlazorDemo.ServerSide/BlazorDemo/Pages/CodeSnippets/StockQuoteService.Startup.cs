@@ -5,5 +5,6 @@ public class Startup {
     public void ConfigureServices(IServiceCollection services) {
         // ...
         services.AddSingleton<IStockQuoteService, StockQuoteService>();
+        services.AddSingleton<IStockQuoteByRegionService, StockQuoteByRegionService>();
     }
 }

@@ -5,32 +5,58 @@
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        <DxGrid Data="@Data"
-            ColumnResizeMode="@ColumnResizeMode"
-            SizeMode="Params.SizeMode" KeyboardNavigationEnabled="true">
-            <Columns>
-                <DxGridDataColumn FieldName="ContactName" MinWidth="100" />
-                <DxGridDataColumn FieldName="ContactTitle" MinWidth="100" />
-                <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
-                <DxGridDataColumn FieldName="City" Width="10%" MinWidth="80" />
-                <DxGridDataColumn FieldName="Country" Width="10%" MinWidth="80" />
-                <DxGridDataColumn FieldName="Phone" Width="15%" MinWidth="80" />
-            </Columns>
-        </DxGrid>
+        <div class="grid-container">
+            <DxGrid Data="@Data" ColumnResizeMode="@CurrentColumnResizeMode" SizeMode="Params.SizeMode"
+                TextWrapEnabled="false" ShowAllRows="true">          
+                <Columns>
+                    <DxGridDataColumn FieldName="ContactName" MinWidth="100" />
+                    <DxGridDataColumn FieldName="ContactTitle" MinWidth="100" />
+                    <DxGridDataColumn FieldName="CompanyName" MinWidth="100" />
+                    <DxGridDataColumn FieldName="City" Width="10%" MinWidth="80" />
+                    <DxGridDataColumn FieldName="Country" Width="10%" MinWidth="80" />
+                    <DxGridDataColumn FieldName="Phone" Width="15%" MinWidth="80" />
+                </Columns>
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Contained" SizeMode="Params.SizeMode">
+                        <Items>
+                            <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                                <Template Context="toolbar_item_context">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <div class="me-2">Column Resize Mode:</div>
+                                        <DxComboBox Data="GridColumnResizeModes.Keys"
+                                            Value="CurrentColumnResizeModeDisplayText"
+                                            ValueChanged="@((string value) => ChangeResizeMode(value))" />
+                                    </div>
+                                </Template>
+                            </DxToolbarItem>
+                        </Items>
+                    </DxToolbar>
+                </ToolbarTemplate>
+            </DxGrid>
+        </div>
     </ChildContentWithParameters>
-    <OptionsContent>
-        <OptionComboBox Label="Column Resize Mode:"
-                        Data="Enum.GetValues<GridColumnResizeMode>()"
-                        Value="ColumnResizeMode"
-                        ValueChanged="@((GridColumnResizeMode mode) => { ColumnResizeMode = mode; })"
-                        CssClass="ow-150" />
-    </OptionsContent>
 
     @code {
         IEnumerable<Supplier> Data { get; set; }
-        GridColumnResizeMode ColumnResizeMode { get; set; } = GridColumnResizeMode.NextColumn;
 
-        protected override async Task OnInitializedAsync() {
+        GridColumnResizeMode CurrentColumnResizeMode { get; set; } = GridColumnResizeMode.NextColumn;
+        string CurrentColumnResizeModeDisplayText { get; set; } = "Next Column";
+
+        Dictionary<string, GridColumnResizeMode> GridColumnResizeModes { get; } = new Dictionary<string,
+        GridColumnResizeMode>{
+    { "Disabled", GridColumnResizeMode.Disabled },
+    { "Next Column", GridColumnResizeMode.NextColumn },
+    { "Columns Container", GridColumnResizeMode.ColumnsContainer }
+    };
+
+        void ChangeResizeMode(string key)
+        {
+            CurrentColumnResizeModeDisplayText = key;
+            CurrentColumnResizeMode = GridColumnResizeModes[key];
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
             Data = await NwindDataService.GetSuppliersAsync();
         }
     }

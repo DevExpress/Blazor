@@ -6,7 +6,7 @@
     <div class="demo-resnavigator">
         <div class="demo-resnavigator-container card">
             <div class="demo-resnavigator-title card-body">
-                <DxButton RenderStyle="ButtonRenderStyle.None" Click="@ToggleResourceNavigator" IconCssClass="demo-resnavigator-icon" />
+                <DxButton RenderStyle="ButtonRenderStyle.None" Click="@ToggleResourceNavigator" IconCssClass="demo-resnavigator-icon" title="Toggle the resource navigator" />
                 @if(ResourceNavigatorExpanded) {
                     <span style="">Resources</span>
                 }
@@ -45,7 +45,7 @@
                          VisibleResourcesDataSource="@VisibleResources"
                          GroupType="SchedulerGroupType.Resource"
                          ResourceNavigatorVisible="false"
-                         CssClass="demo-sc-docked w-100">
+                         CssClass="demo-sc-docked demo-sc-size">
                 <DxSchedulerDayView DayCount="1" ShowWorkTimeOnly="true"></DxSchedulerDayView>
             </DxScheduler>
         </div>

@@ -1,0 +1,80 @@
+﻿@page "/TreeList/Sorting"
+
+<DemoPageSectionComponent Id="TreeList-Sorting" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject IEmployeeTaskDataProvider EmployeeTaskDataProvider
+
+        <DxTreeList @ref="TreeList"
+                    Data="TreeListData"
+                    KeyFieldName="Id"
+                    ParentKeyFieldName="ParentId"
+                    VirtualScrollingEnabled="true"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn" PagerVisible="false"
+                    TextWrapEnabled="false"
+                    SizeMode="Params.SizeMode"
+                    CssClass="max-h-480">
+            <Columns>
+                <DxTreeListDataColumn FieldName="Name" Caption="Task" SortIndex="0" SortOrder="TreeListColumnSortOrder.Ascending" />
+                <DxTreeListDataColumn FieldName="EmployeeName" Caption="Assigned To" TextAlignment="TreeListTextAlignment.Left" Width="200px" />
+                <DxTreeListDataColumn FieldName="StartDate" Width="100px" />
+                <DxTreeListDataColumn FieldName="DueDate" Width="100px" />
+                <DxTreeListDataColumn FieldName="Priority" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                    <CellDisplayTemplate>
+                        <span title="@TreeListRenderHelper.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem) priority">@TreeListRenderHelper.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem)</span>
+                    </CellDisplayTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn Caption="Progress" FieldName="Status" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                    <CellDisplayTemplate>
+                        <span>@TreeListRenderHelper.EmployeeTaskStatusToString((EmployeeTask)context.DataItem)</span>
+                    </CellDisplayTemplate>
+                </DxTreeListDataColumn>
+            </Columns>
+            <ToolbarTemplate>
+                <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
+                    <Items>
+                        <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                            <Template Context="toolbar_item_context">
+                                <div class="d-flex flex-row align-items-center h-100">
+                                    <div class="me-2">Sort by:</div>
+                                    <DxComboBox Data="@SortInfo.Keys"
+                                                Value="@CurrentSortInfoKey"
+                                                ValueChanged="@((string value) => ChangeSorting(value))" CssClass="ow-180" />
+                                </div>
+                            </Template>
+                        </DxToolbarItem>
+                    </Items>
+                </DxToolbar>
+            </ToolbarTemplate>
+        </DxTreeList>
+
+        @code {
+            ITreeList TreeList { get; set; }
+            object TreeListData { get; set; }
+
+            Dictionary<string, string[]> SortInfo { get; } = new Dictionary<string, string[]> {
+                { "Task", new string[] { "Name" } },
+                { "Priority, Due Date", new string[] { "Priority", "DueDate" } },
+                { "Progress", new string[] { "Status" } }
+            };
+
+            string CurrentSortInfoKey { get; set; } = "Task";
+
+            protected override void OnInitialized() {
+                TreeListData = EmployeeTaskDataProvider.GenerateData();
+            }
+
+            protected void ChangeSorting(string key) {
+                CurrentSortInfoKey = key;
+                var currentSortInfo = SortInfo[key];
+
+                TreeList.BeginUpdate();
+
+                TreeList.ClearSort();
+                foreach(var columnName in currentSortInfo)
+                    TreeList.SortBy(columnName);
+
+                TreeList.EndUpdate();
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

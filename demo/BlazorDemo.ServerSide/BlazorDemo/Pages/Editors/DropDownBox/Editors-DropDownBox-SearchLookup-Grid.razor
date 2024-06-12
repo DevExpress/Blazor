@@ -1,0 +1,56 @@
+﻿@inject NwindDataService NwindDataService
+<style>
+    .templateGrid {
+        border-width: 0;
+        width: 800px;
+        height: 350px
+    }
+</style>
+<DxGrid @ref="Grid"
+        Data="@GridData"
+        KeyFieldName="@nameof(Customer.CustomerId)"
+        ShowSearchBox="true"
+        HighlightRowOnHover="true"
+        SearchTextParseMode="GridSearchTextParseMode.GroupWordsByAnd"
+        SelectionMode="GridSelectionMode.Single"
+        AllowSelectRowByClick="true"
+        SelectedDataItem="@(DropDownBox.Value as Customer)"
+        SelectedDataItemChanged="@GridSelectedDataItemChanged"
+        FocusedRowEnabled="true"
+        TextWrapEnabled="false"
+        CssClass="templateGrid"
+        >
+    <Columns>
+        <DxGridDataColumn FieldName="ContactName" />
+        <DxGridDataColumn FieldName="CompanyName" />
+        <DxGridDataColumn FieldName="Country" />
+        <DxGridDataColumn FieldName="City" />
+    </Columns>
+</DxGrid>
+
+@code {
+    [Parameter]
+    public IDropDownBox DropDownBox { get; set; }
+
+    IGrid Grid;
+
+    IEnumerable<Customer> GridData { get; set; }
+
+    void GridSelectedDataItemChanged(object item) {
+        DropDownBox.BeginUpdate();
+        DropDownBox.Value = item;
+        DropDownBox.HideDropDown();
+        DropDownBox.EndUpdate();
+    }
+
+    protected override async Task OnInitializedAsync() {
+        GridData = await NwindDataService.GetCustomersAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if(firstRender && DropDownBox.Value is Customer value) {
+            await Grid.SetFocusedDataItemAsync(value);
+            await Grid.MakeDataItemVisibleAsync(value);
+        }
+    }
+}

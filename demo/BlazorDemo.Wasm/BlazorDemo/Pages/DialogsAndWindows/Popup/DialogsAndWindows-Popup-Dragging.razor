@@ -7,27 +7,29 @@
             <p class="target-caption">CLICK TO SHOW A POP-UP WINDOW</p>
         </div>
 
-        <DxPopup
-            AllowDrag="true"
-            HeaderText="Popup"
-            @bind-Visible="@PopupVisible"
-            BodyText="@Constants.Text"
-            SizeMode="Params.SizeMode"
-            PositionX="positionX"
-            PositionY="positionY"
-            DragCompleted="OnPopupDragCompleted">
+        <DxPopup AllowDrag="true"
+                 AllowDragByHeaderOnly="allowDragByHeaderOnly"
+                 HeaderText="Popup"
+                 @bind-Visible="@PopupVisible"
+                 BodyText="@Constants.Text"
+                 SizeMode="Params.SizeMode"
+                 PositionX="positionX"
+                 PositionY="positionY"
+                 DragCompleted="OnPopupDragCompleted">
         </DxPopup>
     </ChildContentWithParameters>
 
     <OptionsContent>
         <OptionButton Text="Reload Page" OnClick="ReloadPageButton_ClickAsync" />
         <OptionButton Text="Reset Popup Position" OnClick="ResetPositionButton_ClickAsync" />
+        <OptionCheckBox Label="Allow Drag By Header Only" @bind-Checked="allowDragByHeaderOnly" />
     </OptionsContent>
     @code {
         bool PopupVisible { get; set; } = false;
         const string LocalStorageKey = "DialogsAndWindows-Popup-Dragging";
 
         int? positionX, positionY;
+        bool allowDragByHeaderOnly = true;
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {

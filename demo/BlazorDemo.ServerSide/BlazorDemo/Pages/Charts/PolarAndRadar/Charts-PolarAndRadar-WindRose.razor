@@ -1,0 +1,57 @@
+﻿@page "/ChartPolarWindRose"
+@using System.Collections.Immutable
+@using System.Linq.Expressions
+
+<DemoPageSectionComponent Id="Charts-PolarAndRadar-WindRose">
+    <OptionsContent>
+        <OptionComboBox Label="Period:" Data="@Periods" @bind-Value="@SelectedPeriod"/>
+    </OptionsContent>
+    <DemoChildContent>
+        @inject IChartWindRoseDataProvider WindRoseDataProvider
+        <DxPolarChart Data="@DataSource[SelectedPeriod]" Width="100%" Height="500">
+            <DxChartTitle>
+                <div class="windrose-chart-title">
+                    Wind Rose, Philadelphia PA
+                </div>
+            </DxChartTitle>
+            <DxChartLegend Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Right"/>
+            <DxPolarChartArgumentAxis DiscreteDivisionMode="ChartDiscreteAxisDivisionMode.CrossLabels" FirstPointOnStartAngle="true" />
+                @foreach(var series in SeriesSource) {
+                    <DxPolarChartStackedBarSeries Name="@series.Name" ArgumentField="@((WindRosePoint i) => i.Arg)" ValueField="@series.ValueField"/>
+                }
+        </DxPolarChart>
+
+        @code {
+            IDictionary<string, List<WindRosePoint>> DataSource = ImmutableDictionary<string, List<WindRosePoint>>.Empty;
+            IEnumerable<string> Periods;
+            string SelectedPeriod;
+
+            protected override void OnInitialized () {
+                DataSource = WindRoseDataProvider.GenerateData();
+                Periods = DataSource.Keys;
+                SelectedPeriod = Periods.FirstOrDefault();
+            }
+
+            public class Series {
+                public string Name { get; set; }
+                public Expression<Func<WindRosePoint, object>> ValueField { get; set; }
+
+                public Series (string name, Expression<Func<WindRosePoint, object>> valueField) {
+                    Name = name;
+                    ValueField = valueField;
+                }
+            }
+
+            List<Series> SeriesSource = new List<Series>() {
+                new Series("1.3-4 m/s", (WindRosePoint i) => i.Val1),
+                new Series("4-8 m/s", i => i.Val2),
+                new Series("8-13 m/s", i => i.Val3),
+                new Series("13-19 m/s", i => i.Val4),
+                new Series("19-25 m/s", i => i.Val5),
+                new Series("25-32 m/s", i => i.Val6),
+                new Series("32-39 m/s", i => i.Val7),
+                new Series("39-47 m/s", i => i.Val8),
+            };
+        }
+    </DemoChildContent>
+</DemoPageSectionComponent>

@@ -6,22 +6,43 @@
             Country Name
         </label>
         <DxComboBox NullText="Select a country..."
-                    Data="@Data"
-                    @bind-Value="@CurrentCountry"
+                    Data="@Countries"
+                    Value="@Country"
+                    ValueChanged="@((Country country) => SelectedCountryChanged(country))"
                     TextFieldName="@nameof(Country.CountryName)"
                     ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
                     SizeMode="Params.SizeMode"
                     CssClass="cw-480"
                     InputId="cbNullText"/>
+        <p class="demo-text cw-480 mt-3">
+            Country: <b>@GetSelectedValueDescription()</b>, Capital: <b>@GetSelectedCountryCapitalDescription()</b>
+        </p>
     </ChildContentWithParameters>
 
     @code {
-        IEnumerable<Country> Data { get; set; }
-        Country CurrentCountry { get; set; }
+        IEnumerable<Country> Countries { get; set; }
+        IEnumerable<City> Cities { get; set; }
+        Country Country { get; set; }
+        City Capital { get; set; }
 
         protected override async Task OnInitializedAsync() {
-            Data = await WorldcitiesDataService.GetCountriesAsync();
-            CurrentCountry = Data.FirstOrDefault();
+            Countries = await WorldcitiesDataService.GetCountriesAsync();
+            Cities = await WorldcitiesDataService.GetCitiesAsync();
+            Country = Countries.FirstOrDefault(x => string.Equals(x.CountryName, "USA"));
+            Capital = Country != null ? Cities.FirstOrDefault(x => x.CityId == Country.CapitalId) : null;
+        }
+
+        string GetSelectedValueDescription() {
+            return Country != null ? Country.CountryName : "null";
+        }
+
+        string GetSelectedCountryCapitalDescription() {
+            return Capital != null ? Capital.CityName : "null";
+        }
+
+        void SelectedCountryChanged(Country country) {
+            Country = country;
+            Capital = Country != null ? Cities.FirstOrDefault(x => x.CityId == country.CapitalId) : null;
         }
     }
 </DemoPageSectionComponent>

@@ -7,36 +7,41 @@
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
 
-        <DxGrid Data="GridData"
-            FilterMenuButtonDisplayMode="GridFilterMenuButtonDisplayMode.Always"
-            SizeMode="Params.SizeMode"
-            KeyboardNavigationEnabled="true">
-            <Columns>
-                <DxGridDataColumn FieldName="OrderDate" Width="140px" />
-                <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
-                <DxGridDataColumn FieldName="CategoryId" Caption="Category" Width="130px">
-                    <EditSettings>
-                        <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId" TextFieldName="CategoryName" />
-                    </EditSettings>
-                </DxGridDataColumn>
-                <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c2" Width="140px" />
-                <DxGridDataColumn FieldName="Quantity" Width="110px" />
-                <DxGridDataColumn FieldName="Discount" DisplayFormat="p0" Width="110px" />
-                <DxGridDataColumn FieldName="Total"
-                                  UnboundType="GridUnboundColumnType.Decimal"
-                                  UnboundExpression="[UnitPrice] * [Quantity] * (1 - [Discount])"
-                                  DisplayFormat="c2"
-                                  Width="110px">
-                    <FilterMenuTemplate>
-                        <Grid_Filtering_ColumnFilterMenu_CustomRange FilterContext="context" Items="TotalPriceIntervals" />
-                    </FilterMenuTemplate>
-                </DxGridDataColumn>
-                <DxGridDataColumn FieldName="Shipped"
-                                  UnboundType="GridUnboundColumnType.Boolean"
-                                  UnboundExpression="[ShippedDate] <> Null"
-                                  Width="100px" />
-            </Columns>
-        </DxGrid>
+        <div class="grid-container">
+            <DxGrid Data="GridData"
+                FilterMenuButtonDisplayMode="GridFilterMenuButtonDisplayMode.Always"
+                SizeMode="Params.SizeMode"            
+                ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                TextWrapEnabled="false"
+                VirtualScrollingEnabled="true">
+                <Columns>
+                    <DxGridDataColumn FieldName="OrderDate" Width="140px" />
+                    <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
+                    <DxGridDataColumn FieldName="CategoryId" Caption="Category" Width="130px">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId" TextFieldName="CategoryName" />
+                        </EditSettings>
+                    </DxGridDataColumn>
+                    <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c2" Width="140px" />
+                    <DxGridDataColumn FieldName="Quantity" Width="110px" />
+                    <DxGridDataColumn FieldName="Discount" DisplayFormat="p0" Width="110px" />
+                    <DxGridDataColumn FieldName="Total"
+                                      UnboundType="GridUnboundColumnType.Decimal"
+                                      UnboundExpression="[UnitPrice] * [Quantity] * (1 - [Discount])"
+                                      DisplayFormat="c2"
+                                      Width="110px">
+                        <FilterMenuTemplate>
+                            <Grid_Filtering_ColumnFilterMenu_CustomRange FilterContext="context" Items="TotalPriceIntervals" />
+                        </FilterMenuTemplate>
+                    </DxGridDataColumn>
+                    <DxGridDataColumn FieldName="Shipped"
+                                      UnboundType="GridUnboundColumnType.Boolean"
+                                      UnboundExpression="[ShippedDate] <> Null"
+                                      Width="100px" />
+                </Columns>
+            </DxGrid>
+        </div>
+
         @code {
             static IReadOnlyList<CustomRangeFilterItem> TotalPriceIntervals { get; } = CustomRangeFilterItem.CreateIntervals("Total", 100, 10, true, "{0:c}");
 

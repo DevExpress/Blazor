@@ -7,14 +7,16 @@
         <DxPieChart Data="@SalesData"
                     Diameter="diameter"
                     InnerDiameter="innerDiameter"
+                    StartAngle="startAngle"
+                    SegmentDirection="segmentDirection"
                     T="SaleInfo">
 
             <DxPieChartSeries T="SaleInfo"
-                                TArgument="string"
-                                TValue="double"
-                                ValueField="si => si.Amount"
-                                ArgumentField="si => si.Region"
-                                SummaryMethod="Enumerable.Sum">
+                              TArgument="string"
+                              TValue="double"
+                              ValueField="si => si.Amount"
+                              ArgumentField="si => si.Region"
+                              SummaryMethod="Enumerable.Sum">
                 <DxChartSeriesLabel Visible="showLabels"
                                     Position="labelPosition"
                                     ValueFormat="ChartElementFormat.Thousands(1)">
@@ -60,6 +62,19 @@
                         DisplayFormat="0.0#"
                         @bind-Value="innerDiameter"
                         CssClass="ow-120" />
+        <OptionSpinEdit T="int"
+                        Label="Start Angle:"
+                        MinValue="-360"
+                        MaxValue="360"
+                        @bind-Value="startAngle"
+                        Increment="10"
+                        CssClass="ow-120" />
+        <OptionComboBox T="PieChartSegmentDirection"
+                        TData="PieChartSegmentDirection"
+                        Label="Segment Direction:"
+                        Data="Enum.GetValues<PieChartSegmentDirection>()"
+                        @bind-Value="segmentDirection"
+                        CssClass="ow-120" />
         <OptionComboBox T="RelativePosition"
                         TData="RelativePosition"
                         Label="Label Position:"
@@ -77,6 +92,8 @@
         double? diameter = null;
         double innerDiameter = 0.5;
         bool showLabels = true;
+        int startAngle = 0;
+        PieChartSegmentDirection segmentDirection = PieChartSegmentDirection.Clockwise;
         RelativePosition labelPosition = RelativePosition.Outside;
 
         protected override async Task OnInitializedAsync() {

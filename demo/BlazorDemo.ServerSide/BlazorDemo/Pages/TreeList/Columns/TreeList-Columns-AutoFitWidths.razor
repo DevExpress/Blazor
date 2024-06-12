@@ -1,0 +1,62 @@
+﻿@page "/TreeList/Columns/AutoFitWidths"
+
+<DemoPageSectionComponent Id="TreeList-Columns-AutoFitWidths" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject IEmployeeTaskDataProvider EmployeeTaskDataProvider
+        <DxTreeList @ref="TreeList"
+                    Data="Data"
+                    KeyFieldName="Id"
+                    ParentKeyFieldName="ParentId"
+                    VirtualScrollingEnabled="true"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn" PagerVisible="false"
+                    TextWrapEnabled="false"
+                    SizeMode="Params.SizeMode"
+                    CssClass="max-h-480">
+            
+            <Columns>
+                <DxTreeListDataColumn FieldName="Name" Caption="Task" SortOrder="TreeListColumnSortOrder.Ascending" Width="100px" />
+                <DxTreeListDataColumn FieldName="EmployeeName" Caption="Assigned To" TextAlignment="TreeListTextAlignment.Left" Width="100px"/>
+                <DxTreeListDataColumn FieldName="StartDate"/>
+                <DxTreeListDataColumn FieldName="DueDate"/>
+                <DxTreeListDataColumn FieldName="Priority" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                    <CellDisplayTemplate>
+                        @{
+                            var displayText = TreeListRenderHelper.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem);
+                        }
+                        <span title="@displayText  priority">@displayText</span>
+                    </CellDisplayTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn Caption="Progress" FieldName="Status" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                    <CellDisplayTemplate>
+                        <span>@TreeListRenderHelper.EmployeeTaskStatusToString((EmployeeTask)context.DataItem)</span>
+                    </CellDisplayTemplate>
+                </DxTreeListDataColumn>
+            </Columns>
+            <ToolbarTemplate>
+                <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Contained">
+                    <Items>
+                        <DxToolbarItem Alignment="ToolbarItemAlignment.Left" Text="Auto Fit Columns" Click="TreeList_FitWidths" RenderStyle="ButtonRenderStyle.Secondary" />
+                        <DxToolbarItem Alignment="ToolbarItemAlignment.Right" Text="Column Chooser" RenderStyle="ButtonRenderStyle.Secondary" IconCssClass="treelist-toolbar-column-chooser" Click="ColumnChooserButton_Click" />
+                    </Items>
+                </DxToolbar>
+            </ToolbarTemplate>
+        </DxTreeList>
+
+        @code {
+            ITreeList TreeList { get; set; }
+            object Data { get; set; }
+
+            protected override void OnInitialized () {
+                Data = EmployeeTaskDataProvider.GenerateData();
+            }
+
+            void TreeList_FitWidths() {
+                TreeList.AutoFitColumnWidths();
+            }
+        
+            void ColumnChooserButton_Click() {
+                TreeList.ShowColumnChooser();
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>
