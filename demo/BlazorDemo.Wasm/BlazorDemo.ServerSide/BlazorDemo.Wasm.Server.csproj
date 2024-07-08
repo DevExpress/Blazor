@@ -17,6 +17,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.27" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.27" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.27" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.61.3" />
     <PackageReference Include="DevExtreme.AspNet.Data" Version="4.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.25" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.25" />
