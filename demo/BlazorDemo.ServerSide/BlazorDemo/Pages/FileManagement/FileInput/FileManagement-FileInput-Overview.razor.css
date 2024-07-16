@@ -1,17 +1,21 @@
 .custom-drop-zone {
     padding: 0 !important;
-    border-style: dashed !important;
+    border-style: dashed;
     border-width: 2px !important;
     height: 230px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: rgba(183, 183, 183, 0.1);
+}
+.custom-drop-zone.custom-drop-zone-hover {
+    border-style: solid;
 }
 .custom-drop-zone svg {
     width: 42px;
     height: 42px;
 }
-.theme-default-dark  .custom-drop-zone ::deep {
-    background-color: #282B2F !important
+/*BeginHide*/::deep/*EndHide*/.custom-drop-zone > *:not(#overviewDemoSelectButton) {
+    pointer-events: none;
 }

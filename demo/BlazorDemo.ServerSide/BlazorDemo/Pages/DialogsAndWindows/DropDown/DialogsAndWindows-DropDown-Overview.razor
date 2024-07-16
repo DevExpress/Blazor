@@ -3,11 +3,13 @@
         <div id="dropdown-overview-target-container">
             <DxButton
                 Click="() => IsOpen = !IsOpen"
-                RenderStyle="@ButtonRenderStyle.Secondary">SHOW A DROPDOWN</DxButton>
+                RenderStyle="@ButtonRenderStyle.Secondary"
+                aria-describedby="dropDown-overview">SHOW A DROPDOWN</DxButton>
         </div>
 
         <DxDropDown
             @bind-IsOpen="@IsOpen"
+            Id="dropDown-overview"
             HeaderVisible="true"
             HeaderText="Header"
             BodyText="@Constants.Content"

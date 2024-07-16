@@ -3,10 +3,12 @@
         <div id="dropdown-customization-target-container">
             <DxButton
                 Click="() => IsOpen = !IsOpen"
-                RenderStyle="@ButtonRenderStyle.Secondary">SHOW A DROPDOWN</DxButton>
+                RenderStyle="@ButtonRenderStyle.Secondary"
+                aria-describedby="dropDown-customization">SHOW A DROPDOWN</DxButton>
         </div>
         <DxDropDown
             @bind-IsOpen="@IsOpen"
+            Id="dropDown-customization"
             MinWidth="max(25vw, 250px)"
             PositionMode="DropDownPositionMode.Bottom"
             PositionTarget="#dropdown-customization-target-container"

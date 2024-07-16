@@ -532,12 +532,17 @@ body.modal-open .main {
     mask-repeat: no-repeat;
     -webkit-mask-repeat: no-repeat;
     background-position: center center;
-    background-color: currentColor;
+    background-color: #ADB5BD;
     width: 48px;
     height: 48px;
     -webkit-mask-image: url("../images/icons/drop-file.svg");
     mask-image: url("../images/icons/drop-file.svg");
 }
+.drop-file-label {
+    font-weight: 500;
+    font-size: 1rem;
+}
+
 
 /*Chart*/
 .chart-icon {

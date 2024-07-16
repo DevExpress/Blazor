@@ -1,4 +1,6 @@
-The [Upload](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload) component allows users to upload files to the server. Users can select files in the open file dialog or drag and drop files to the drop zone. The main Upload API members are listed below:
+DevExpress Blazor UI Component Library includes two components that allow you to handle file upload: [DxUpload](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload) and [DxFileInput](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFileInput). Both these components allow you to upload files to a server, send them to another destination, or save them to the file system. The key difference between these components is that the Upload component requires creating a separate web API controller to upload files, while the File Input component gives you direct and secure access to selected files in Razor code.
+
+The [Upload](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload) component allows users to select files in the open file dialog or drag and drop files onto the drop zone. The main Upload API members are listed below:
 
 *   [Name](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload.Name) — Required to access uploaded files on the server.
 *   [UploadUrl](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxUpload.UploadUrl) — Specifies a target URL for the upload request.

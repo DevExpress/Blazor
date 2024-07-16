@@ -1,29 +1,15 @@
-﻿@using DevExtreme.AspNet.Data.ResponseModel
-@using DevExtreme.AspNet.Data
-@using System.Threading
-@using System.Text.Json
-<DemoPageSectionComponent Id="Editors-ComboBox-EmptyDataAreaTemplate" ShowSizeMode="true">
+﻿<DemoPageSectionComponent Id="Editors-ComboBox-EmptyDataAreaTemplate" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        @inject NwindDataService NwindDataService
-
-        <DxComboBox TData="@WebApiLookup"
-                    TValue="string"
-                    ClearButtonDisplayMode="@DataEditorClearButtonDisplayMode.Auto"
-                    CustomData="@LoadCustomData"
+        <DxComboBox Data="@DataItems"
+                    @bind-Value="@Item"
                     CssClass="cw-480"
-                    DropDownVisibleChanged="@OnDropDownVisibleChanged"
-                    NullText="Select a value..."
-                    ListRenderMode="ListRenderMode.Virtual"
+                    NullText="Select an order..."
                     SizeMode="Params.SizeMode">
             <EmptyDataAreaTemplate>
-                @if(context.IsDataLoading) {
+                @if (!context.IsDataLoading) {
                     <div class="empty-data-area-template">
                         <div class="d-flex flex-column">
-                            <DxWaitIndicator Visible="true"
-                                             SizeMode="Params.SizeMode"
-                                             CssClass="m-auto"
-                                             AnimationType="WaitIndicatorAnimationType.Spin" />
-                            <p class="dxbl-text d-block mt-1">Loading, please wait...</p>
+                            No orders found
                         </div>
                     </div>
                 }
@@ -32,40 +18,7 @@
     </ChildContentWithParameters>
 
     @code {
-        [Inject] protected HttpClient Client { get; set; }
-        bool ThrottleRequireTotalCount { get; set; } = true;
-
-        async Task<LoadResult> LoadCustomData(DataSourceLoadOptionsBase options, CancellationToken cancellationToken) {
-            using var response = await Client.GetAsync(options.ConvertToGetRequestUri("https://js.devexpress.com/Demos/NetCore/api/DataGridWebApi/CustomersLookup"), cancellationToken);
-            response.EnsureSuccessStatusCode();
-            while(options.RequireTotalCount && ThrottleRequireTotalCount) {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Task.Yield();
-            }
-            using var responseStream = await response.Content.ReadAsStreamAsync();
-            var result = await JsonSerializer.DeserializeAsync<LoadResult>(responseStream, cancellationToken: cancellationToken);
-            return result;
-        }
-
-        void OnDropDownVisibleChanged(bool value) {
-            if(!value) {
-                ThrottleRequireTotalCount = true;
-            } else {
-                _ = ResetThrottleRequireTotalCountAsync(true);
-            }
-        }
-        async Task ResetThrottleRequireTotalCountAsync(bool value) {
-            try {
-                await Task.Delay(TimeSpan.FromSeconds(5));
-            }
-            finally {
-                ThrottleRequireTotalCount = !value;
-            }
-        }
-
-        public class WebApiLookup {
-            public string Text { get; set; }
-            public string Value { get; set; }
-        }
+        IEnumerable<string> DataItems { get; set; }
+        string Item { get; set; }
     }
 </DemoPageSectionComponent>

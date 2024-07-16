@@ -4,12 +4,13 @@ You can also customize built-in editor command buttons or add custom buttons to 
 
 The following built-in buttons are available:
 
-* [DxComboBoxDropDownButton](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBoxDropDownButton) — Invokes a drop-down menu ([DxComboBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2) only).
-* [DxDateEditDropDownButton](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEditDropDownButton) — Invokes a drop-down calendar ([DxDateEdit](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1) only).
-* [DxSpinButtons](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinButtons) — Spin buttons that allow you to increase and decrease the value ([DxSpinEdit](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1) only).
-* [DxTimeEditDropDownButton](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEditDropDownButton) — Invokes a drop-down time picker ([DxTimeEdit](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1) only).
+* [DxComboBoxDropDownButton](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBoxDropDownButton) — Invokes a drop-down menu in the [DxComboBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2) component.
+* [DxDateEditDropDownButton](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEditDropDownButton) — Invokes a drop-down calendar in the [DxDateEdit](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1) component.
+* [DxDropDownBoxDropDownButton](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownBoxDropDownButton) — Invokes a drop-down window in the [DxDropDownBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownBox) component. 
+* [DxSpinButtons](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinButtons) — Spin buttons that allow you to increase and decrease the value in the [DxSpinEdit](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1) component.
+* [DxTimeEditDropDownButton](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEditDropDownButton) — Invokes a drop-down time picker in the [DxTimeEdit](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1) component.
 
-The following button types are available for [DxComboBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2), [DxDateEdit](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1), [DxMaskedInput](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMaskedInput-1), [DxSpinEdit](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1), [DxTextBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextBox), and [DxTimeEdit](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1) components:
+The following button types are available for [DxComboBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2), [DxDateEdit](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDateEdit-1), [DxMaskedInput](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMaskedInput-1), [DxDropDownBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownBox), [DxSpinEdit](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSpinEdit-1), [DxTextBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextBox), and [DxTimeEdit](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1) components:
 
 * [DxEditorButton](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxEditorButton) — A custom button.
 

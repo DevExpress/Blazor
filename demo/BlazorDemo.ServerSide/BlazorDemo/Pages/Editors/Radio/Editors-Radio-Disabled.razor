@@ -1,8 +1,8 @@
 ﻿<DemoPageSectionComponent Id="Editors-Radio-Disabled" ShowSizeMode="@true">
     <ChildContentWithParameters Context="Params">
-        <fieldset>
+        <fieldset role="radiogroup">
             <legend class="@GetLegendCssClass(Params.SizeMode)">Select your preferred language:</legend>
-            <div class="dx-demo-radio-group" role="radiogroup">
+            <div class="dx-demo-radio-group">
                 @foreach(var language in Languages) {
                     <DxRadio GroupName="disabled-option-radio-group"
                              @bind-GroupValue="@PreferredLanguage"

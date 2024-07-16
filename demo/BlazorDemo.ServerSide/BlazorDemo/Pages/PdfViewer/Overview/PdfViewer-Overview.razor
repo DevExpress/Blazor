@@ -7,17 +7,20 @@
 <link rel="stylesheet" href=@DemoStaticResourceService.GetUrlWithVersion("_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.bs5.css")>
 
 <DemoPageSectionComponent Id="PdfViewer-Overview">
-    <div id="overviewDemoDropZone" class="card custom-drop-zone bg-light rounded-3 w-100 m-0">
+    <div id="overviewDemoDropZone" class="card custom-drop-zone rounded-3 w-100 m-0">
         <span class="drop-file-icon mb-3"></span>
-        <span>Drag and Drop File Here</span><span class="m-1">or</span>
-        <button id="overviewDemoSelectButton" class="btn border-primary btn-primary m-1">Select File</button>
+        <span class="drop-file-label">Drag and Drop File Here</span><span class="m-1">or</span>
+        <DxButton Id="overviewDemoSelectButton"
+                  CssClass="m-1"
+                  RenderStyle="ButtonRenderStyle.Primary"
+                  Text="Select File" />
     </div>
     <DxFileInput @ref="fileInput"
                  AcceptedFileTypes="@ALLOWED_FILE_TYPES"
                  AllowedFileExtensions="@ALLOWED_FILE_TYPES"
                  CssClass="w-100"
                  ExternalDropZoneCssSelector="#overviewDemoDropZone"
-                 ExternalDropZoneDragOverCssClass="bg-light border-secondary text-dark"
+                 ExternalDropZoneDragOverCssClass="custom-drop-zone-hover"
                  ExternalSelectButtonCssSelector="#overviewDemoSelectButton"
                  FilesUploading="OnFilesUploading"
                  MaxFileSize="2000000">

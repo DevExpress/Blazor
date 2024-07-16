@@ -20,7 +20,7 @@
                 <DxTreeListDataColumn FieldName="Name" Caption="Task" SortOrder="TreeListColumnSortOrder.Ascending" FilterRowValue='"Product"' />
                 <DxTreeListDataColumn FieldName="EmployeeName" Caption="Assigned To" TextAlignment="TreeListTextAlignment.Left" Width="200px">
                     <EditSettings>
-                        <DxComboBoxSettings Data="TreeListData" ValueFieldName="EmployeeName" TextFieldName="EmployeeName" FilteringMode="DataGridFilteringMode.Contains" />
+                        <DxComboBoxSettings Data="EmployeeNames" FilteringMode="DataGridFilteringMode.Contains" />
                     </EditSettings>
                 </DxTreeListDataColumn>
                 <DxTreeListDataColumn FieldName="StartDate" Width="100px" />
@@ -76,12 +76,14 @@
                 .Select(e => TreeListFilterTreeModeItem.Create(e)).ToList();
 
             ITreeList TreeList { get; set; }
-            object TreeListData { get; set; }
+            List<EmployeeTask> TreeListData { get; set; }
+            List<string> EmployeeNames { get; set; }
             TreeListFilterTreeModeItem FilterTreeMode { get; set; }
 
             protected override void OnInitialized() {
                 FilterTreeMode = FilterModes.First();
                 TreeListData = EmployeeTaskDataProvider.GenerateData();
+                EmployeeNames = TreeListData.Select(t => t.EmployeeName).Distinct().ToList();
             }
 
             protected override void OnAfterRender(bool firstRender) {

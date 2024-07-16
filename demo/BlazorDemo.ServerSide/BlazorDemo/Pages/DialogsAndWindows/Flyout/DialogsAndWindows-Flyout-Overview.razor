@@ -1,11 +1,14 @@
-﻿<DemoPageSectionComponent Id="DialogsAndWindows-Flyout-Overview" ShowSizeMode="true">
+<DemoPageSectionComponent Id="DialogsAndWindows-Flyout-Overview" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         <div id="flyout-overview-target-container">
-            <DxButton RenderStyle="ButtonRenderStyle.Secondary" Click="() => IsOpen = !IsOpen">SHOW A FLYOUT</DxButton>
+            <DxButton RenderStyle="ButtonRenderStyle.Secondary" Click="() => IsOpen = !IsOpen" aria-describedby="flyout-overview">
+                SHOW A FLYOUT
+            </DxButton>
         </div>
 
         <DxFlyout
             @bind-IsOpen=IsOpen
+            Id="flyout-overview"
             RenderStyle="@ButtonRenderStyle.Secondary"
             PositionTarget="#flyout-overview-target-container"
             RestrictionTarget="#Navigation-Flyout-Overview"

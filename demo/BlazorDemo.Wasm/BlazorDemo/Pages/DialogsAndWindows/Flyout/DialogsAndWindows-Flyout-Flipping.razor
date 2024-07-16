@@ -10,10 +10,12 @@
                 <DxButton
                     CssClass="flipping-button"
                     RenderStyle="@ButtonRenderStyle.Secondary"
-                    Click="() => IsOpen = !IsOpen">SHOW A FLYOUT</DxButton>
+                    Click="() => IsOpen = !IsOpen"
+                    aria-describedby="flyout-flipping">SHOW A FLYOUT</DxButton>
             </dxbl-demo-scrollable>
             <DxFlyout
                 @bind-IsOpen=IsOpen
+                Id="flyout-flipping"
                 PositionTarget=".flipping-button"
                 RestrictionTarget=".flipping-overflow-container"
                 RestrictionMode="FlyoutRestrictionMode.TargetElement"

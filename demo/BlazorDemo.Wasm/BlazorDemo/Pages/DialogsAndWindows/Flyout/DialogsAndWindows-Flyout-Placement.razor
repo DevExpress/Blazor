@@ -13,12 +13,14 @@
                   IconCssClass="popup-icon-user"
                   CssClass=@($"{(IsMobile ? "mobile-button" : "")} mt-auto mb-auto")
                   Text=@(!IsMobile ? "My account" : null)
-                  Id="flyout-placement-target-container"/>
+                  Id="flyout-placement-target-container"
+                  aria-describedby="flyout-placement"/>
         <p class="demo-text">
             FlyoutPosition: <b>@(Position)</b>
         </p>
         @*EndHide*@
         <DxFlyout @bind-IsOpen=@IsOpen
+                  Id="flyout-placement"
                   PositionTarget="#flyout-placement-target-container"
                   Position=@Position
                   CloseOnOutsideClick=false

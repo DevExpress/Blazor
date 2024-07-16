@@ -1,9 +1,9 @@
 ﻿<DemoPageSectionComponent Id="Editors-Radio-Overview" ShowSizeMode="@true" VerticalAlignment="@VerticalAlignment.Top">
     <ChildContentWithParameters Context="Params">
         <div class="survey-wrapper">
-            <fieldset>
+            <fieldset role="radiogroup">
                 <legend class="@GetLegendCssClass(Params.SizeMode)">Are you developing Blazor WebAssembly apps?</legend>
-                <div class="@GetGroupClass()" role="radiogroup">
+                <div class="@GetGroupClass()">
                     @foreach(var option in GeneralAnswerOptions) {
                         <DxRadio GroupName="general-radio-group"
                                  @bind-GroupValue="@GeneralAnswer"
@@ -16,9 +16,9 @@
                 </div>
             </fieldset>
                 @if(AOTGroupVisible) {
-                    <fieldset>
+                    <fieldset role="radiogroup">
                         <legend class="@GetLegendCssClass(Params.SizeMode)">Do you expect to enable AOT in your Blazor WebAssembly apps?</legend>
-                        <div class="dx-demo-radio-group" role="radiogroup">
+                        <div class="dx-demo-radio-group">
                             @foreach(var option in AOTAnswerOptions) {
                                 <DxRadio GroupName="aot-radio-group"
                                          @bind-GroupValue="@AOTAnswer"

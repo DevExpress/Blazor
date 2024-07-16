@@ -1,0 +1,3 @@
+This demo shows the calculation of carried forward/brought forward summaries in a report. Carried forward is the practice of automatically transferring specific values or calculations from one reporting period to another. In this demo, calculated running summaries are transferred from the report's footer to the header of the next page.
+
+The report includes XRLabel controls placed in the GroupHeaderBand and GroupFooterBand that are bound to the expression sumCarryoverSum([Amount]). This expression allows you to display the current amount on each page. The records span across multiple pages, and the summary in the footer of the first page is repeated in the header of subsequent pages.

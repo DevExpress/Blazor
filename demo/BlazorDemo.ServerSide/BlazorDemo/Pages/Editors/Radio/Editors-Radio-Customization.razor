@@ -1,8 +1,8 @@
 ﻿<DemoPageSectionComponent Id="Editors-Radio-Customization" ShowSizeMode="@true">
     <ChildContentWithParameters Context="Params">
-        <fieldset class="survey-wrapper">
+        <fieldset class="survey-wrapper" role="radiogroup">
             <legend class="@GetLegendCssClass(Params.SizeMode)">Select priority level:</legend>
-            <div class="dx-demo-radio-group" role="radiogroup">
+            <div class="dx-demo-radio-group">
                 @foreach(var priorityLevel in PriorityLevels) {
                     <DxRadio GroupName="priorities-radio-group"
                              @bind-GroupValue="@SelectedPriorityLevel"

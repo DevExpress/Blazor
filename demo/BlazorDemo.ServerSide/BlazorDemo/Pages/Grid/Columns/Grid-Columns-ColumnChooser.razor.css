@@ -1,4 +1,4 @@
-::deep .btn-column-chooser {
+/*BeginHide*/::deep /*EndHide*/ .btn-column-chooser {
     width: 16px;
     height: 16px;
     -webkit-mask-image: url("images/icons/column-chooser.svg");

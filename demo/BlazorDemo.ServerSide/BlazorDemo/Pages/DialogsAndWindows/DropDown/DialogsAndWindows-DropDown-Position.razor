@@ -6,11 +6,13 @@
         <div id="dropdown-position-target-container">
             <DxButton
                 Click="() => IsOpen = !IsOpen"
-                RenderStyle="@ButtonRenderStyle.Secondary">SHOW A DROPDOWN</DxButton>
+                RenderStyle="@ButtonRenderStyle.Secondary"
+                aria-describedby="dropDown-position">SHOW A DROPDOWN</DxButton>
         </div>
 
         <DxDropDown
             @bind-IsOpen="@IsOpen"
+            Id="dropDown-position"
             HeaderVisible="true"
             HeaderText="Header"
             BodyText="@Constants.Content"

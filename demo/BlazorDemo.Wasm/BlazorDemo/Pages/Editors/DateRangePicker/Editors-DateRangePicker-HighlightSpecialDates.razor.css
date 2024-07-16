@@ -1,0 +1,6 @@
+ .dxbl-calendar-selected-range > a {
+    color: #fff/*BeginHide*/!important/*EndHide*/;
+}
+.dxbl-calendar-day > a {
+    text-decoration: none;
+}

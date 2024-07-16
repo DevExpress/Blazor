@@ -36,6 +36,7 @@ namespace BlazorDemo.Services {
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.ReportMergingWithPdf, Name = XtraReportsDemos.ReportNames.ReportMergingWithPdfName, CreateAction = () => new XtraReportsDemos.ReportMergingWithPdf.Report() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.EmbeddedPDFContent, Name = XtraReportsDemos.ReportNames.EmbeddedPDFContentName, CreateAction = () => new XtraReportsDemos.EmbeddedPDFContent.Invoice() },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.SideBySideReports, Name = XtraReportsDemos.ReportNames.SideBySideReportsName, CreateAction = () => new XtraReportsDemos.SideBySideReports.EmployeeComparisonReport() },
+            new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.CarryoverSummaryReport, Name = XtraReportsDemos.ReportNames.CarryoverSummaryReportName, CreateAction = () => new XtraReportsDemos.CarryoverSummaryReport.Report() },
 
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.BalanceSheetReport, Name = XtraReportsDemos.ReportNames.BalanceSheetReportName, CreateAction = () => new XtraReportsDemos.BalanceSheetReport.Report(), ShouldLoadFont = true },
             new ReportInfo() { DisplayName = XtraReportsDemos.ReportNames.NorthwindTraders_Invoice, Name = XtraReportsDemos.ReportNames.NorthwindTraders_InvoiceName, CreateAction = () => new XtraReportsDemos.NorthwindTraders.InvoiceReport() },

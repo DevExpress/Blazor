@@ -3,11 +3,13 @@
         <div id="dropdown-resizing-target-container">
             <DxButton
                 Click="() => IsOpen = !IsOpen"
-                RenderStyle="@ButtonRenderStyle.Secondary">SHOW A DROPDOWN</DxButton>
+                RenderStyle="@ButtonRenderStyle.Secondary"
+                aria-describedby="dropDown-resizing">SHOW A DROPDOWN</DxButton>
         </div>
 
         <DxDropDown
             @bind-IsOpen="@IsOpen"
+            Id="dropDown-resizing"
             AllowResize="true"
             CloseMode="DropDownCloseMode.Close"
             PreventCloseOnPositionTargetClick="true"
