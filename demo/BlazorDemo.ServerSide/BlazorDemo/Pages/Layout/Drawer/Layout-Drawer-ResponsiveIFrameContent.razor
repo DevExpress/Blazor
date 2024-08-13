@@ -17,7 +17,7 @@
             <p class="m-0">@nameof(Mode)=<b>@Mode</b>, @nameof(IsOpen)=<b>@(isOpen?.ToString() ?? $"Auto({IsOpen})")</b></p>
         </div>
     </div>
-    <div class="card-body p-0">
+    <div class="card-body p-0 overflow-auto">
         <DxDrawer CssClass="demo-drawer"
                   @bind-IsOpen="IsOpen"
                   Mode="Mode"

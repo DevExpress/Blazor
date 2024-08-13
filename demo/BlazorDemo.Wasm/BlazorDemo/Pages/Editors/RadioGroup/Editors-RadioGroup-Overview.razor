@@ -1,8 +1,9 @@
 ﻿<DemoPageSectionComponent Id="Editors-RadioGroup-Overview" ShowSizeMode="@true">
     <ChildContentWithParameters Context="Params">
-        <fieldset>
-            <legend class="@GetLegendCssClass(Params.SizeMode)">Select your preferred language:</legend>
-            <DxRadioGroup Items="@Languages"
+        <div>
+            <p id="radio-group-overview-label" class="@GetLegendCssClass(Params.SizeMode)">Select your preferred language:</p>
+            <DxRadioGroup aria-labelledby="radio-group-overview-label"
+                          Items="@Languages"
                           @bind-Value="@PreferredLanguage"
                           SizeMode="@Params.SizeMode"
                           CssClass="dx-demo-radio-group" />
@@ -10,7 +11,7 @@
                 Preferred language:
                 <strong>@PreferredLanguage</strong>
             </p>
-        </fieldset>
+        </div>
     </ChildContentWithParameters>
 
     @code {

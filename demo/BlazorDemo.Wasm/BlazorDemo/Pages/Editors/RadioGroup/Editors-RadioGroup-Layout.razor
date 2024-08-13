@@ -5,9 +5,10 @@
                         Label="RadioGroup layout:" />
     </OptionsContent>
     <ChildContentWithParameters Context="Params">
-        <fieldset>
-            <legend class="@GetLegendCssClass(Params.SizeMode)">Select your preferred language:</legend>
-            <DxRadioGroup Items="@Languages"
+        <div>
+            <p id="radio-group-layout-label" class="@GetLegendCssClass(Params.SizeMode)">Select your preferred language:</p>
+            <DxRadioGroup aria-labelledby="radio-group-layout-label"
+                          Items="@Languages"
                           @bind-Value="@PreferredLanguage"
                           Layout="@Layout"
                           SizeMode="@Params.SizeMode"
@@ -16,7 +17,7 @@
                 Preferred language:
                 <strong>@PreferredLanguage</strong>
             </p>
-        </fieldset>
+        </div>
     </ChildContentWithParameters>
 
     @code {

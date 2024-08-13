@@ -5149,7 +5149,7 @@
             },
             {
               "Id": "Flipping",
-              "Title": "Flipping",
+              "Title": "Automatic Position Adjustment",
               "DocUrl": "DevExpress.Blazor.DxDropDown#content-and-appearance",
               "AdditionalCodeFiles": [
                 {
@@ -5219,7 +5219,7 @@
             },
             {
               "Id": "Flipping",
-              "Title": "Flipping",
+              "Title": "Automatic Position Adjustment",
               "DocUrl": "DevExpress.Blazor.DxFlyout#content-and-appearance",
               "AdditionalCodeFiles": [
                 {
@@ -5409,6 +5409,11 @@
                 {
                   "Title": "CSS",
                   "Path": "Pages\\FileManagement\\FileInput\\FileManagement-FileInput-Overview.razor.css"
+                },
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "(.drop-file((-icon)|(-label))) {[^}]+}"
                 }
               ]
             },
@@ -5426,12 +5431,26 @@
             {
               "Id": "MultiFileSelection",
               "Title": "Multiple File Selection",
-              "DocUrl": "DevExpress.Blazor.DxFileInput#multiple-file-upload"
+              "DocUrl": "DevExpress.Blazor.DxFileInput#multiple-file-upload",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "((.drop-file((-icon)|(-label)))|(.upload-container[^{]*)) {[^}]+}"
+                }
+              ]
             },
             {
               "Id": "UploadModes",
               "Title": "Upload Modes",
-              "DocUrl": "DevExpress.Blazor.DxFileInput#upload-modes"
+              "DocUrl": "DevExpress.Blazor.DxFileInput#upload-modes",
+              "AdditionalCodeFiles": [
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "((.drop-file((-icon)|(-label)))|(.upload-container[^{]*)) {[^}]+}"
+                }
+              ]
             }
           ]
         },
@@ -5455,6 +5474,11 @@
                 {
                   "Title": "CSS",
                   "Path": "Pages\\FileManagement\\Upload\\FileManagement-Upload-Overview.razor.css"
+                },
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "(.drop-file((-icon)|(-label))) {[^}]+}"
                 }
               ]
             },
@@ -5470,6 +5494,11 @@
                 {
                   "Title": "ChunkMetadata.cs",
                   "Path": "Data\\ChunkMetadata.cs"
+                },
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "((.drop-file((-icon)|(-label)))|(.upload-container[^{]*)) {[^}]+}"
                 }
               ]
             },
@@ -5481,6 +5510,11 @@
                 {
                   "Title": "UploadController.cs",
                   "Path": "Controllers\\UploadController.cs"
+                },
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "((.drop-file((-icon)|(-label)))|(.upload-container[^{]*)) {[^}]+}"
                 }
               ]
             },
@@ -5492,6 +5526,11 @@
                 {
                   "Title": "UploadController.cs",
                   "Path": "Controllers\\UploadController.cs"
+                },
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "((.drop-file((-icon)|(-label)))|(.upload-container[^{]*)) {[^}]+}"
                 }
               ]
             },
@@ -5503,6 +5542,11 @@
                 {
                   "Title": "UploadValidationController.cs",
                   "Path": "Controllers\\UploadValidationController.cs"
+                },
+                {
+                  "Title": "Icons.css",
+                  "Path": "wwwroot\\css\\dx-demo-pages.css",
+                  "ExtractRegex": "((.drop-file((-icon)|(-label)))|(.upload-container[^{]*)) {[^}]+}"
                 }
               ]
             }

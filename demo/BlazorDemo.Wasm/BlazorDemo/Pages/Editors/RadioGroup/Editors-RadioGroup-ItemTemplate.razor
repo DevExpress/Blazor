@@ -5,9 +5,10 @@
         @if(Products == null) {
             <p><em>Loading...</em></p>
         } else {
-            <fieldset>
-                <legend class="@GetLegendCssClass(Params.SizeMode)">Select your drink:</legend>
-                <DxRadioGroup Items="@Drinks"
+            <div>
+                <p id="radio-group-item-template-label" class="@GetLegendCssClass(Params.SizeMode)">Select your drink:</p>
+                <DxRadioGroup aria-labelledby="radio-group-item-template-label"
+                              Items="@Drinks"
                               @bind-Value="@SelectedDrinkId"
                               ValueFieldName="@nameof(Product.ProductId)"
                               EnabledFieldName="@nameof(Product.InStock)"
@@ -19,7 +20,7 @@
                     You have selected:
                     <strong>@GetDrinkName()</strong>
                 </p>
-            </fieldset>
+            </div>
         }
     </ChildContentWithParameters>
 
@@ -51,6 +52,7 @@
                 result += sizeMode == SizeMode.Large ? " dx-demo-large" : " dx-demo-small";
             return result;
         }
+
     }
 
 </DemoPageSectionComponent>

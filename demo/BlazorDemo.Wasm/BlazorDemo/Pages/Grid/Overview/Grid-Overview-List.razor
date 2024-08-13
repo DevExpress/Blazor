@@ -7,7 +7,7 @@
     <DxGrid @ref="Grid" Data="@DataSource" ShowGroupPanel="true" TextWrapEnabled="false" AutoExpandAllGroupRows="true"
         CustomizeFilterRowEditor="Grid_CustomizeFilterRowEditor" FilterMenuButtonDisplayMode="GridFilterMenuButtonDisplayMode.Always"
         SizeMode="@SizeMode" ShowSearchBox="true" ColumnResizeMode="GridColumnResizeMode.NextColumn"
-        VirtualScrollingEnabled="true" AllowSelectRowByClick="true" @bind-SearchText="@GridSearchText"
+        AllowSelectRowByClick="true" @bind-SearchText="@GridSearchText" PageSize="15"
         HighlightRowOnHover="true" > 
         <Columns>
             <DxGridSelectionColumn Width="75px" />

@@ -4,7 +4,8 @@
                   @bind-Values="@Items"
                   CssClass="cw-480"
                   NullText="Select an order..."
-                  SizeMode="Params.SizeMode">
+                  SizeMode="Params.SizeMode"
+                  InputId="tbEmptyDataAreaTemplate">
             <EmptyDataAreaTemplate>
                 @if (!context.IsDataLoading) {
                     <div class="empty-data-area-template">
