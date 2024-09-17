@@ -1,4 +1,4 @@
-﻿<DemoPageSectionComponent Id="DialogsAndWindows-Toast-Template" ShowSizeMode="true" MinHeight="500">
+<DemoPageSectionComponent Id="DialogsAndWindows-Toast-Template" ShowSizeMode="true" MinHeight="500">
     <ChildContentWithParameters Context="Params">
         <div class="custom-toast-background d-flex align-items-center">
             <DxButton RenderStyle="ButtonRenderStyle.Secondary" Text="SHOW A TOAST WITH BUTTONS" Click="ShowToastButtons" />
@@ -6,29 +6,28 @@
             <DxButton RenderStyle="ButtonRenderStyle.Secondary" Text="SHOW A TOAST WITH RADIOBUTTONS" Click="ShowToastRadio" />
             <DxToastProvider Name="Template"
                              SizeMode="Params.SizeMode"
-                             MaxToastCount="3"/>
+                             MaxToastCount="3" 
+                             FreezeOnClick="true"/>
         </div>
 
         <DxToast @ref=toastButtons
-                 Title="Notification title"
-                 Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit,..."
+                 Title="New mail"
+                 Text="You received a message from Mary."
                  ProviderName="Template">
             <div class="d-flex align-items-center">
-                <DxButton CssClass="mx-2">Button</DxButton>
-                <DxButton RenderStyle="ButtonRenderStyle.Secondary">Button</DxButton>
+                <DxButton CssClass="mx-2">Reply...</DxButton>
             </div>
         </DxToast>
 
         <DxToast @ref=toastTextInput
-                 Title="Notification title"
-                 Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit,..."
+                 Title="New meeting"
+                 Text="Andy scheduled a new meeting at 2:00 PM."
                  ProviderName="Template">
-            <DxComboBox NullText="Default text item" Data="comboboxData" @bind-Value="comboboxValue" />
+            <DxComboBox NullText="Select action" Data="comboboxData" @bind-Value="comboboxValue" />
         </DxToast>
 
         <DxToast @ref=toastRadio
-                 Title="Notification title"
-                 Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit,..."
+                 Text="Was this page helpful?"
                  ProviderName="Template">
             <DxRadioGroup @bind-Value="radioValue"
                           Items="radioValues"
@@ -42,10 +41,10 @@
         DxToast toastTextInput;
         DxToast toastRadio;
 
-        string[] radioValues = { "Option 1", "Option 2" };
+        string[] radioValues = { "Yes", "No" };
         string radioValue;
 
-        string[] comboboxData = new[] { "Option 1", "Option 2", "Option 3" };
+        string[] comboboxData = new[] { "Accept", "Tentative", "Decline" };
         string comboboxValue = "";
 
         private void ShowToastButtons() {

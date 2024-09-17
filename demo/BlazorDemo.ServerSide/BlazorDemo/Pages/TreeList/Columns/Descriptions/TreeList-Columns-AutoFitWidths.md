@@ -1,4 +1,4 @@
-Call the [AutoFitColumnWidths](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.AutoFitColumnWidths) method to resize columns based on content.
+Call the [AutoFitColumnWidths](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.AutoFitColumnWidths) method to resize columns based on content (best fit).
 
 This method takes header, data cell, and summary value content into account. The auto fit algorithm uses the same units as the column's [Width](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeListColumn.Width) property value. 
 

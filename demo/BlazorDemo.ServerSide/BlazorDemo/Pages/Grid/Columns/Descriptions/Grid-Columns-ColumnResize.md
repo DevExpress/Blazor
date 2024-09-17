@@ -1,4 +1,4 @@
-The DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/403143/grid) allows users to resize columns. When a user position the mouse pointer over the right edge of a column, the cursor becomes a double-sided arrow. The grid controls indicate that the user can drag the column edge and change the column width. Users can also double-click a column's right border to apply the optimal width.
+The DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/403143/grid) allows users to resize columns. When a user position the mouse pointer over the right edge of a column, the cursor becomes a double-sided arrow. The grid controls indicate that the user can drag the column edge and change the column width. Users can also double-click a column's right border to apply the optimal width (best fit).
 
 To specify whether and how users can resize Grid columns, set the [ColumnResizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ColumnResizeMode) property to one of the following values:
 

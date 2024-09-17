@@ -1,5 +1,7 @@
 Our Blazor [Grid](https://docs.devexpress.com/Blazor/403143/grid) allows users to group data. To enable data grouping and display the Group panel, set the [ShowGroupPanel](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ShowGroupPanel) property to `true`. Users can drag and drop a column header onto the Group Panel to group data against the column. They can also drag headers within this panel to change group order. To ungroup data, users can simply drag the appropriate column header from the Group Panel back to the Column Header Panel.
 
+The Grid component groups date/time columns by the date part of their value. In other columns, rows are grouped by column values. Specify the [DxGridDataColumn.GroupInterval](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.GroupInterval) property to group column values by display text, implement interval or custom grouping.
+
 To disable grouping, set the [DxGrid.AllowGroup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.AllowGroup) or [DxGridDataColumn.AllowGroup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.AllowGroup) property to `false` (applied to the entire Grid or to an individual column). 
 
 Use the following API members to manage data grouping in code:

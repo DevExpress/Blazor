@@ -21,8 +21,8 @@
     <ProjectReference Include="..\BlazorDemo\BlazorDemo.Wasm.Core.csproj" />
   </ItemGroup>
 <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="24.1.5" />
-    <PackageReference Include="DevExpress.Pdf.SkiaRenderer" Version="24.1.5" />
+    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="24.1.6" />
+    <PackageReference Include="DevExpress.Pdf.SkiaRenderer" Version="24.1.6" />
     
     
     

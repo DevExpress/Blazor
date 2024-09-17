@@ -6,7 +6,8 @@
                              AnimationType="ToastAnimationType.Slide"
                              HorizontalAlignment="HorizontalAlignment.Center"
                              DisplayTime="TimeSpan.Zero"
-                             SizeMode="Params.SizeMode"/>
+                             SizeMode="Params.SizeMode"
+                             Width="320px"/>
         </div>
     </ChildContentWithParameters>
 
@@ -17,46 +18,45 @@
             ToastService.ShowToast(new ToastOptions() {
                 ProviderName = "Overview",
                 ThemeMode = ToastThemeMode.Light,
-                RenderStyle = ToastRenderStyle.Primary,
-                Title = "Notification title",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit,..."
+                RenderStyle = ToastRenderStyle.Warning,
+                Title = "Cannot open file",
+                Text = "The file may have been moved, renamed, or deleted."
             }, RenderButtons());
 
             ToastService.ShowToast(new ToastOptions() {
                 ProviderName = "Overview",
                 ThemeMode = ToastThemeMode.Pastel,
                 RenderStyle = ToastRenderStyle.Primary,
-                Title = "Notification title",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit,..."
+                Text = "Job is running: 'validation'."
             });
 
             ToastService.ShowToast(new ToastOptions() {
                 ProviderName = "Overview",
                 ThemeMode = ToastThemeMode.Dark,
-                RenderStyle = ToastRenderStyle.Primary,
-                Title = "Notification title",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit,..."
+                RenderStyle = ToastRenderStyle.Info,
+                Title = "New mail",
+                Text = "You received a message from Mary."
             });
 
             ToastService.ShowToast(new ToastOptions() {
                 ProviderName = "Overview",
                 ThemeMode = ToastThemeMode.Saturated,
                 RenderStyle = ToastRenderStyle.Success,
-                Title = "Notification title"
+                Title = "File download complete"
             });
 
             ToastService.ShowToast(new ToastOptions() {
                 ProviderName = "Overview",
                 ThemeMode = ToastThemeMode.Saturated,
                 RenderStyle = ToastRenderStyle.Danger,
-                Title = "Notification title"
+                Title = "Job failed: 'validation'"
             });
         }
 
         private RenderFragment RenderButtons() {
             return @<div style="display: flex; gap: 0.5rem;">
-                       <DxButton>Button</DxButton>
-                       <DxButton RenderStyle="ButtonRenderStyle.Secondary">Button</DxButton>
+            <DxButton RenderStyle="ButtonRenderStyle.Warning">Show details...</DxButton>
+                       <DxButton RenderStyle="ButtonRenderStyle.Secondary">OK</DxButton>
                    </div>;
         }
     }

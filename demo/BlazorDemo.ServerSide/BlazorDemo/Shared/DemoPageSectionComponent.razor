@@ -75,7 +75,7 @@
                             </a>
                         </li>
                         <li class="demo-page-section-toolbar">
-                            @if(ShowSizeMode && IsComponentAreaVisible) {
+                            @if((ShowSizeMode || !string.IsNullOrEmpty(DemoItem.DocUrl)) && IsComponentAreaVisible) {
                                 <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
                                     <Items>
                                         <DxToolbarItem

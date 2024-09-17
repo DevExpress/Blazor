@@ -111,7 +111,7 @@
 
 
     @code {
-        ISchedulerAppointmentActions Scheduler { get; set; }
+        DxScheduler Scheduler { get; set; }
         SchedulerAppointmentFormMode AppointmentFormMode { get; set; } = SchedulerAppointmentFormMode.Both;
         List<SchedulerAppointmentFormMode> EditModes = Enum.GetValues(typeof(SchedulerAppointmentFormMode))
             .OfType<SchedulerAppointmentFormMode>()
@@ -121,7 +121,7 @@
         SchedulerViewType ActiveViewType { get; set; } = SchedulerViewType.WorkWeek;
 
         public class CustomAppointmentFormInfo : SchedulerAppointmentFormInfo {
-            public CustomAppointmentFormInfo(DxSchedulerAppointmentItem AppointmentItem, DxSchedulerDataStorage DataStorage) : base(AppointmentItem, DataStorage) { }
+            public CustomAppointmentFormInfo(DxSchedulerAppointmentItem AppointmentItem, DxSchedulerDataStorage DataStorage, DxScheduler scheduler) : base(AppointmentItem, DataStorage, scheduler) { }
 
             [Required]
             public override string Subject {
@@ -136,7 +136,7 @@
         }
 
         void OnAppointmentFormShowing(SchedulerAppointmentFormEventArgs args) {
-            args.FormInfo = new CustomAppointmentFormInfo(args.Appointment, DataStorage);
+            args.FormInfo = new CustomAppointmentFormInfo(args.Appointment, DataStorage, Scheduler);
         }
 
         static bool IsAccepted(DxExpandoDictionaryObject customFields) => true == (bool?)customFields["IsAccepted"];
