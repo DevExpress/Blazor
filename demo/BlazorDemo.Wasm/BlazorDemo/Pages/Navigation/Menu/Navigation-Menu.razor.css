@@ -1,0 +1,4 @@
+::deep .card.demo-resizable-card,
+::deep .card.menu-card-container {
+    border-radius: var(--DS-border-radius-medium, var(--bs-card-border-radius));
+}

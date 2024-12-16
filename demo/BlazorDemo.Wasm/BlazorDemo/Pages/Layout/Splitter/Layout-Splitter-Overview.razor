@@ -1,0 +1,52 @@
+﻿
+<DemoPageSectionComponent Id="Layout-Splitter-Overview"
+                          ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxSplitter CssClass="border" Height="480px" Width="100%" SizeMode="Params.SizeMode">
+            <Panes>
+                <DxSplitterPane Size="170px" MinSize="100px">
+                    @PaneContent("Left Pane", "Resizable only", "Size: 170px", "MinSize: 100px")
+                </DxSplitterPane>
+                <DxSplitterPane>
+                    <DxSplitter Orientation="Orientation.Vertical">
+                        <Panes>
+                            <DxSplitterPane MaxSize="75%" AllowCollapse="true">
+                                @PaneContent("Central Pane", "Resizable and collapsible", "MaxSize: 75%")
+                            </DxSplitterPane>
+                            <DxSplitterPane AllowCollapse="true">
+                                <DxSplitter>
+                                    <Panes>
+                                        <DxSplitterPane Size="30%" MinSize="5%" AllowCollapse="true">
+                                            @PaneContent("Nested Left Pane", "Resizable and collapsible", "Size: 30%", "MinSize: 5%")
+                                        </DxSplitterPane>
+                                        <DxSplitterPane>
+                                            @PaneContent("Nested Central Pane", "Resizable only")
+                                        </DxSplitterPane>
+                                        <DxSplitterPane Size="30%" MinSize="5%" AllowCollapse="true">
+                                            @PaneContent("Nested Right Pane", "Resizable and collapsible", "Size: 30%", "MinSize: 5%")
+                                        </DxSplitterPane>
+                                    </Panes>
+                                </DxSplitter>
+                            </DxSplitterPane>
+                        </Panes>
+                    </DxSplitter>
+                </DxSplitterPane>
+                <DxSplitterPane Size="170px" AllowResize="false">
+                    @PaneContent("Right Pane", "Non-resizable and non-collapsible", "Size: 170px")
+                </DxSplitterPane>
+            </Panes>
+        </DxSplitter>
+    </ChildContentWithParameters>
+
+    @code {
+        RenderFragment PaneContent(string title, string state, params string[] options) {
+            return @<text>
+                        <div class="pane-title">@title</div>
+                        <div class="pane-state">@state</div>
+                        @foreach(var option in options) {
+                            <div class="pane-option">@option</div>
+                        }
+                    </text>;
+        }
+    }
+</DemoPageSectionComponent>

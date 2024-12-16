@@ -4,7 +4,7 @@ You can also use the following properties to customize chart appearance:
 
 * [Diameter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPieChart-1.Diameter) and [MinDiameter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPieChart-1.MinDiameter) to change a chart's shape.
 
-* [StartAngle](http://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPieChart-1.StartAngle) and [SegmentDirection](http://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPieChart-1.SegmentDirection) to rearrange series slices.
+* [StartAngle](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPieChart-1.StartAngle) and [SegmentDirection](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPieChart-1.SegmentDirection) to rearrange series slices.
 
 * [SeriesLabel.Position](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesLabel.Position) to change the position of chart labels.
 

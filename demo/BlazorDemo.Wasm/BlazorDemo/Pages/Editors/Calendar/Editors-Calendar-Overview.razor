@@ -1,5 +1,11 @@
 ﻿<DemoPageSectionComponent Id="Editors-Calendar-Overview" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <DxCalendar T="DateTime" VisibleDate="@DateTime.Today" SizeMode="Params.SizeMode" />
+        <style>
+            .demo-calendar {
+                border-width: 1px;
+                border-style: solid;
+            }
+        </style>
+        <DxCalendar T="DateTime" VisibleDate="@DateTime.Today" SizeMode="Params.SizeMode" CssClass="demo-calendar" />
     </ChildContentWithParameters>
 </DemoPageSectionComponent>

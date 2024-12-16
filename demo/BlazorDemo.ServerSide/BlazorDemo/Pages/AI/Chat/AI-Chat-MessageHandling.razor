@@ -1,0 +1,17 @@
+﻿@inject ICarouselImageDataProvider CarouselImageDataProvider
+@using DevExpress.AIIntegration.Blazor.Chat
+@using Microsoft.Extensions.AI
+
+<DemoPageSectionComponent Id="AI-Chat-MessageHandling"
+                          ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="chat-demo-container">
+            <DxAIChat CssClass="demo-chat" MessageSent="MessageSent" SizeMode="Params.SizeMode" />
+        </div>
+        @code {
+            async Task MessageSent(MessageSentEventArgs args) {
+                await args.Chat.SendMessage($"Processed: {args.Content}", ChatRole.Assistant);
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

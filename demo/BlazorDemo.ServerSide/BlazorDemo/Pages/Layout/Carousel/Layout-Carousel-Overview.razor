@@ -1,0 +1,57 @@
+﻿@inject ICarouselImageDataProvider CarouselImageDataProvider
+<DemoPageSectionComponent Id="Layout-Carousel-Overview"
+                          ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div>
+            <DxCarousel Width="500px"
+                        Height="300px"
+                        Data="@Data"
+                        LoopNavigationEnabled="@LoopMode"
+                        SlideShowEnabled="@SlideShow"
+                        NavButtonsDisplayMode="@NavButtonDisplayMode"
+                        ImageSizeMode="@ImageSizeMode"
+                        SizeMode="Params.SizeMode"
+                        PagerDisplayMode="@PagerDisplayMode"
+                        CssClass="demo-carousel-container">
+            </DxCarousel>
+        </div>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionCheckBox T="bool"
+                        @bind-Checked="LoopMode"
+                        Label="Loop Mode" />
+        <OptionCheckBox T="bool"
+                        @bind-Checked="SlideShow"
+                        Label="Slide Show" />
+        <OptionComboBox T="CarouselControlsDisplayMode"
+                        TData="CarouselControlsDisplayMode"
+                        Label="Navigation buttons:"
+                        Data="Enum.GetValues<CarouselControlsDisplayMode>()"
+                        @bind-Value="NavButtonDisplayMode"
+                        CssClass="ow-120" />
+        <OptionComboBox T="CarouselControlsDisplayMode"
+                        TData="CarouselControlsDisplayMode"
+                        Label="Pager:"
+                        Data="Enum.GetValues<CarouselControlsDisplayMode>()"
+                        @bind-Value="PagerDisplayMode"
+                        CssClass="ow-120" />
+        <OptionComboBox T="CarouselImageSizeMode"
+                        TData="CarouselImageSizeMode"
+                        Label="Image Size Mode:"
+                        Data="Enum.GetValues<CarouselImageSizeMode>()"
+                        @bind-Value="ImageSizeMode"
+                        CssClass="ow-120" />
+    </OptionsContent>
+    @code {
+        List<CarouselImageData> Data = new List<CarouselImageData>();
+        bool LoopMode = true;
+        bool SlideShow = true;
+        CarouselControlsDisplayMode NavButtonDisplayMode = CarouselControlsDisplayMode.AlwaysVisible;
+        CarouselControlsDisplayMode PagerDisplayMode = CarouselControlsDisplayMode.AlwaysVisible;
+        CarouselImageSizeMode ImageSizeMode = CarouselImageSizeMode.FillAndCrop;
+
+        protected override void OnInitialized() {
+            Data = CarouselImageDataProvider.GetData();
+        }
+    }
+</DemoPageSectionComponent>

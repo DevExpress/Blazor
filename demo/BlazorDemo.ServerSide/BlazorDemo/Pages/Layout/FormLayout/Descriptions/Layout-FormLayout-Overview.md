@@ -1,6 +1,6 @@
 The DevExpress Blazor [Form Layout](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayout) component allows you to construct responsive and auto-aligned edit forms.
 
-The component uses a responsive grid system based on the [CSS flexible box layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout) to render its items. Each layout item can occupy between 1 and 12 columns. This value can be defined separately for six different screen resolution types as listed below:
+The component uses a responsive grid system based on the [CSS flexible box layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout) to render its items. Each layout item can occupy between 1 and 12 columns. This value can be defined separately for six different screen resolution types as listed below:
 
 1.  [ColSpanXxl](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.FormLayoutItemBase.ColSpanXxl): Screens that are 1400px or wider.
 2.  [ColSpanXl](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.FormLayoutItemBase.ColSpanXl): Screens that are 1200px or wider.
@@ -12,3 +12,5 @@ The component uses a responsive grid system based on the [CSS flexible box layou
 Form Layout items support different size modes. To specify component size in code, use the [SizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayout.SizeMode) property. To apply different size modes in the demo, use the drop-down list in the demo card's header.
 
 In this demo, the [CaptionTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayoutItem.CaptionTemplate) property specifies custom content for the **Email** item's caption. The template contains a button that when clicked, displays clarification information.
+
+The Form Layout component also supports keyboard navigation. Press the Tab key or Shift+Tab to navigate through Form Layout items.

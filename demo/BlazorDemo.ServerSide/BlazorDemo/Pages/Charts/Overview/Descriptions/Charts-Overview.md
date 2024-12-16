@@ -2,15 +2,14 @@ The DevExpress chart components for Blazor help you transform data to its most a
 
 The Chart component ships with the following built-in features:
 
-* [25 Chart Types](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1#chart-types)
-* [Axis](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1#axes) / [Data Labels](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPieChart-1#labels)
-* [Axis Strips](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartAxisStrip) and [Error Bars](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesValueErrorBar)
-* [Secondary Axis](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1#axes)
-* [Legends](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1#legend)
-* Chart [Titles](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1#titles-and-subtitles) and [Tooltips](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1#tooltips)
-* [Annotations](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartAnnotationBase-1)
+* [25 Chart Types](https://docs.devexpress.com/Blazor/405041/components/charts/series-types)
+* [Axis](https://docs.devexpress.com/Blazor/405070/components/charts/axes) / [Data Labels](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPieChart-1#labels)
+* [Axis Strips](https://docs.devexpress.com/Blazor/405070/components/charts/axes#axis-strips) and [Error Bars](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesValueErrorBar)
+* [Legends](https://docs.devexpress.com/Blazor/405093/components/charts/descriptive-elements/descriptive-elements#legend)
+* Chart [Titles](https://docs.devexpress.com/Blazor/405093/components/charts/descriptive-elements/descriptive-elements#titles-and-subtitles) and [Tooltips](https://docs.devexpress.com/Blazor/405093/components/charts/descriptive-elements/descriptive-elements#tooltips)
+* [Annotations](https://docs.devexpress.com/Blazor/405150/components/charts/descriptive-elements/annotations)
 * [Integration with Pivot Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1#visualize-pivot-grid-data)
-* [Point Customization](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartBase.CustomizeSeriesPoint)
+* [Point Customization](https://docs.devexpress.com/Blazor/405098/components/charts/customization#customize-individual-series-points-and-point-labels)
 * [Drill-Down on Series Point Click](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.SeriesClick)
 * [Export Chart as PDF or Image](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartBase.ExportAsync.overloads)
 

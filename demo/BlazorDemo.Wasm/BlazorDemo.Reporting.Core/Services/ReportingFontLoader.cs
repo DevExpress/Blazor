@@ -12,9 +12,7 @@ namespace BlazorDemo.Services {
 #pragma warning disable DX0006
         public static async Task LoadFonts(HttpClient httpClient, string fontName) {
             if(!loadedFonts.ContainsKey(fontName)) {
-                var boldName = fontName + "bd";
                 await LoadFont(httpClient, fontName);
-                await LoadFont(httpClient, boldName);
                 loadedFonts.Add(fontName, true);
             }
         }

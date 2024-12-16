@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk.Razor">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <DxExtendStartupHost>False</DxExtendStartupHost>
     <Configurations>Debug;Release;VisualTests</Configurations>
     <EnableDefaultItems>False</EnableDefaultItems>
@@ -14,19 +14,35 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Markdig" Version="0.23.0" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.8" />
-    <PackageReference Include="DevExtreme.AspNet.Data" Version="4.0.0" />
-    <PackageReference Include="System.CodeDom" Version="6.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.25" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.10" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="4.0.1" />
+    <PackageReference Include="System.CodeDom" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.10" />
+    <PackageReference Include="System.Text.Json" Version="9.0.0" />
     <PackageReference Include="System.Reactive" Version="5.0.0" />
     <ProjectReference Include="..\BlazorDemo.DemoData\BlazorDemo.DemoData.csproj" />
     <ProjectReference Include="..\BlazorDemo.Reporting.Core\BlazorDemo.Reporting.Core.csproj" />
+    <PackageReference Include="System.Numerics.Tensors" Version="9.0.0" />
+    <PackageReference Include="Azure.AI.OpenAI" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.AI.Abstractions" Version="9.0.1-preview.1.24570.5" />
+    <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="9.0.1-preview.1.24570.5" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.PdfViewer" Version="24.1.6" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.WebAssembly" Version="24.1.6" />
-    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="24.1.6" />
-    <PackageReference Include="DevExpress.Reporting.Demos" Version="24.1.6" />
+    <PackageReference Include="DevExpress.Blazor.PdfViewer" Version="24.2.3" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.WebAssembly" Version="24.2.3" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" Version="24.2.3" />
+    <PackageReference Include="DevExpress.Reporting.Demos" Version="24.2.3" />
+    <PackageReference Include="DevExpress.Blazor.PivotTable" Version="24.2.3" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor" Version="24.2.3" />
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -44,18 +60,20 @@
     
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSources\Helpers\VehiclesData.cs" />
     <Compile Include="Pages\Charts\DrillDown\Charts-DrillDown.razor.cs" />
     <Compile Include="Pages\Editors\Common\Models\*.cs" />
     <Compile Include="Pages\Layout\Drawer\*.cs" />
+    <Compile Include="Pages\Editors\ColorPalette\Models\*.cs" />
     <Compile Include="Pages\TreeList\TreeListRenderHelper.cs" />
     <Compile Include="Services\BarGaugeTemperatureMeasurerService.cs" />
     <Compile Include="Services\DemoStaticResourceService.cs" />
     <Compile Include="Services\DemoThemeService.cs" />
-    <Compile Include="Services\EmployeeTaskService.cs" />
     <Compile Include="Services\IBarGaugeTemperatureMeasurerService.cs" />
     <Compile Include="Services\INetworkSpeedTesterService.cs" />
     <Compile Include="Services\IStockQuoteService.cs" />
     <Compile Include="Services\NetworkSpeedTesterService.cs" />
+    <Compile Include="Services\PromoteHttpStatusErrorsPipelineTransport.cs" />
     <Compile Include="Services\StockQuoteService.cs" />
     <Compile Include="DataUtils.cs" />
     <Compile Include="Utils.cs" />
@@ -82,7 +100,7 @@
     <Compile Include="DocumentMetadata\Components\WasmMetadataManager.cs" />
     <Compile Include="DocumentMetadata\DocumentMetadata.Wasm.cs" />
     <Content Include="wwwroot\**\*.*" Exclude="wwwroot\_code\**\*.*" CopyToPublishDirectory="Always" />
-    <Content Include="**\*.razor" Exclude="Pages\Reports\**\*.Server.razor;wwwroot\_code\**\*.razor" />
+    <Content Include="**\*.razor" Exclude="Pages\Reports\**\*.Server.razor;wwwroot\_code\**\*.razor;Pages\AI\Reports\**" />
     <Content Include="Pages\**\*.md" />
     <Content Include="Pages\**\*.razor.css" />
     <Content Include="Shared\**\*.razor.css" />
@@ -137,6 +155,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DataSources\Vehicles.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Data\Documents\ActiveCustomers.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -174,6 +197,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DataSources\Invoice.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Documents\FirstLook.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Target Name="ControllersCreate" BeforeTargets="PreBuildEvent" Condition="!Exists('Controllers')">
     <Exec Condition="$([MSBuild]::IsOSPlatform('Windows'))" Command="mklink /J &quot;Controllers&quot; &quot;..//BlazorDemo.ServerSide//Controllers&quot;" />

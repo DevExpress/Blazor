@@ -1,0 +1,186 @@
+﻿@page "/TreeList/EditData/EditBatch"
+@using DevExpress.Data.Extensions
+
+<DemoPageSectionComponent Id="TreeList-Editing-EditBatch" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject IEmployeeTaskEditableDataProvider EmployeeTaskDataProvider
+        <div class="treelist-container">
+            <DxTreeList @ref="TreeList"
+                        Data="DataSource"
+                        KeyFieldName="Id"
+                        ParentKeyFieldName="ParentId"
+                        HasChildrenFieldName="HasChildren"
+                        VirtualScrollingEnabled="true"
+                        ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                        TextWrapEnabled="false"
+                        SizeMode="Params.SizeMode"
+                        CssClass="max-h-480"
+                        ValidationEnabled="false"
+                        EditMode="TreeListEditMode.EditCell"
+                        EditModelSaving="TreeList_EditModelSaving"
+                        CustomizeElement="TreeList_CustomizeElement"
+                        CustomizeEditModel="TreeList_CustomizeEditModel">
+                <Columns>
+                    <DxTreeListDataColumn FieldName="Name" Caption="Task" />
+                    <DxTreeListDataColumn FieldName="StartDate" Width="120px" />
+                    <DxTreeListDataColumn FieldName="DueDate" Width="120px" />
+                    <DxTreeListDataColumn FieldName="Priority" Width="80px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                        <CellDisplayTemplate>
+                            @{
+                                var displayText = TreeListRenderHelper.TaskPriorityToString((int)context.GetRowValue("Priority"));
+                            }
+                            <span title="@displayText priority">@displayText</span>
+                        </CellDisplayTemplate>
+                        <EditSettings>
+                            <DxComboBoxSettings Data="Priorities" ValueFieldName="Value" TextFieldName="Text"/>
+                        </EditSettings>
+                    </DxTreeListDataColumn>
+                    <DxTreeListDataColumn Caption="Progress" FieldName="Status" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                        <CellDisplayTemplate>
+                            <DxProgressBar Value="Convert.ToDouble(context.Value)"
+                                           MinValue="0"
+                                           MaxValue="100"
+                                           CssClass="status-progress"
+                                           Thickness="0.875em"
+                                           Size="100%"
+                                           ShowLabel="false" />
+                        </CellDisplayTemplate>
+                        <EditSettings>
+                            <DxSpinEditSettings MinValue="0" MaxValue="100" InputCssClass="dxbl-align-right" />
+                        </EditSettings>
+                    </DxTreeListDataColumn>
+                    <DxTreeListCommandColumn Width="90px">
+                        <HeaderTemplate>
+                            <DxButton IconCssClass="grid-icon grid-icon-add"
+                                      RenderStyle="ButtonRenderStyle.Link"
+                                      aria-label="New"
+                                      Click="@(() => TreeList.StartEditNewRowAsync())" />
+                        </HeaderTemplate>
+                        <CellDisplayTemplate>
+                            <div class="grid-cell-align-center">
+                                <DxButton IconCssClass="grid-icon grid-icon-add"
+                                          RenderStyle="ButtonRenderStyle.Link"
+                                          aria-label="New"
+                                          Click="@(() => TreeList.StartEditNewRowAsync(context.VisibleIndex))"/>
+                                <DxButton IconCssClass="grid-icon grid-icon-delete"
+                                          CssClass="grid-delete-btn"
+                                          RenderStyle="ButtonRenderStyle.Link"
+                                          aria-label="Delete"
+                                          Click="@(() => DeleteDataItem(context.DataItem))"/>
+                            </div>
+                        </CellDisplayTemplate>
+                        <CellEditTemplate>
+                            <div class="grid-cell-align-center">
+                                <DxButton Enabled="false"
+                                          CssClass="grid-disabled-button"
+                                          IconCssClass="grid-icon grid-icon-add"
+                                          aria-label="New"
+                                          RenderStyle="ButtonRenderStyle.Link"/>
+                                <DxButton Enabled="false"
+                                          CssClass="grid-disabled-button"
+                                          IconCssClass="grid-icon grid-icon-delete"
+                                          aria-label="Delete"
+                                          RenderStyle="ButtonRenderStyle.Link"/>
+                            </div>
+                        </CellEditTemplate>
+                    </DxTreeListCommandColumn>
+                </Columns>
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
+                        <DxToolbarItem Text="Submit" Click="Submit_Click" IconCssClass="treelist-toolbar-save" Enabled="BatchItemsEnabled"/>
+                        <DxToolbarItem Text="Revert" Click="Revert_Click" IconCssClass="treelist-toolbar-cancel" Enabled="BatchItemsEnabled"/>
+                    </DxToolbar>
+                </ToolbarTemplate>
+            </DxTreeList>
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        ITreeList TreeList { get; set; }
+        IList<EmployeeTask> DataSource { get; set; }
+        object[] Priorities { get; } = new[] {
+            new { Text = "High", Value = 1 },
+            new { Text = "Medium", Value = 0 },
+            new { Text = "Low", Value = -1 }
+        };
+
+        Dictionary<EmployeeTask, DataChange> UnsavedChanges { get; } = new();
+        bool BatchItemsEnabled => UnsavedChanges.Count > 0 || TreeList.IsEditing();
+
+        protected override async Task OnInitializedAsync() => await UpdateDataAsync();
+        async Task Revert_Click() => await ClearUnsavedChangesAsync();
+        async Task Submit_Click() {
+            foreach(var unsavedChange in UnsavedChanges) {
+                var changedItem = unsavedChange.Key;
+                var changeType = unsavedChange.Value.Type;
+                switch(changeType) {
+                    case DataChangeType.Addition:
+                        await EmployeeTaskDataProvider.InsertEmployeeTask(changedItem);
+                        break;
+                    case DataChangeType.Delete:
+                        await EmployeeTaskDataProvider.RemoveEmployeeTask(changedItem);
+                        break;
+                    case DataChangeType.Modification:
+                        await EmployeeTaskDataProvider.UpdateEmployeeTask(changedItem);
+                        break;
+                }
+            }
+            await ClearUnsavedChangesAsync();
+        }
+        void TreeList_CustomizeElement(TreeListCustomizeElementEventArgs ea) {
+            if(ea.ElementType == TreeListElementType.DataCell) {
+                var employee = (EmployeeTask) TreeList.GetDataItem(ea.VisibleIndex);
+                var column = (ITreeListDataColumn) ea.Column;
+                bool isNew = employee == null;
+                if(!isNew && UnsavedChanges.TryGetValue(employee, out var changes)) {
+                    if(changes.Type == DataChangeType.Addition || changes.ChangedFields.Contains(column.FieldName))
+                        ea.CssClass = "treelist-modified-cell";
+                }
+            }
+        }
+        void TreeList_CustomizeEditModel(TreeListCustomizeEditModelEventArgs e) {
+            if(e.IsNew) {
+                var newTask = (EmployeeTask)e.EditModel;
+                newTask.Id = DataSource.Max(x => x.Id) + 1;
+                newTask.Name = "New task";
+                newTask.StartDate = DateTime.Today;
+                newTask.DueDate = DateTime.Today.AddDays(7);
+                if(e.ParentDataItem != null)
+                    newTask.ParentId = ((EmployeeTask)e.ParentDataItem).Id;
+            }
+        }
+        void TreeList_EditModelSaving(TreeListEditModelSavingEventArgs e) {
+            var editableEmployeeTask = (EmployeeTask)e.EditModel;
+            var employeeTask = (EmployeeTask)e.DataItem;
+            if(e.IsNew) {
+                DataSource.Add(editableEmployeeTask);
+                UnsavedChanges[editableEmployeeTask] = new(DataChangeType.Addition, new());
+            }
+            else {
+                var changedFields = DataUtils.ApplyModifiedFields(editableEmployeeTask, employeeTask);
+                if(changedFields.Count > 0) {
+                    if(UnsavedChanges.TryGetValue(employeeTask, out var changes))
+                        changes.ChangedFields.UnionWith(changedFields);
+                    else
+                        UnsavedChanges.Add(employeeTask, new(DataChangeType.Modification, changedFields));
+                }
+            }
+        }
+        void DeleteDataItem(object dataItem) {
+            var employeeTask = (EmployeeTask)dataItem;
+            UnsavedChanges[employeeTask] = new(DataChangeType.Delete, new());
+            DataSource.Remove(employeeTask);
+            TreeList.Reload();
+        }
+        async Task ClearUnsavedChangesAsync() {
+            UnsavedChanges.Clear();
+            await UpdateDataAsync();
+        }
+        async Task UpdateDataAsync() {
+            var tasks = (await EmployeeTaskDataProvider.GetEmployeeTasks()).Select(e => e.Clone());
+            DataSource = new List<EmployeeTask>(tasks);
+        }
+        record DataChange(DataChangeType Type, HashSet<string> ChangedFields);
+        enum DataChangeType { Modification, Addition, Delete }
+    }
+</DemoPageSectionComponent>

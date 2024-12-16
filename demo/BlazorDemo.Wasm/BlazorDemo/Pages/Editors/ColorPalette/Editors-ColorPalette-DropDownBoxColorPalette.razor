@@ -1,0 +1,55 @@
+﻿<DemoPageSectionComponent Id="Editors-ColorPalette-DropDownBoxColorPalette" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <style>
+            .dropdown-icon-color-background {
+                background-color: @Value;
+            }
+
+            .dropdown-template-color-palette {
+                border-width: 0px;
+            }
+        </style>
+        <DxDropDownBox @bind-Value="@Value"
+                        QueryDisplayText="@QueryText"
+                        NullText="Select color..."
+                        CssClass="cw-240" SizeMode="@Params.SizeMode">
+            <DropDownBodyTemplate>
+                <DxColorPalette Value="@GetColorDropDownValue(context.DropDownBox)"
+                                ValueChanged="@(value => ColorDropDownValueChanged(value, context.DropDownBox))"
+                                CssClass="dropdown-template-color-palette" SizeMode="@Params.SizeMode" />
+            </DropDownBodyTemplate>
+            <EditBoxDisplayTemplate>
+                <div class="template-container">
+                    <span class="dxbl-image dropdown-icon-color dropdown-icon-color-background"></span>
+                    <DxInputBox/>
+                </div>
+            </EditBoxDisplayTemplate>
+        </DxDropDownBox>
+        <p class="demo-text cw-240 mt-3">
+            @GetSelectedValueDescription()
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        object Value { get; set; } = "#66CDFF";
+
+        RenderFragment GetSelectedValueDescription() {
+            if(Value != null)
+                return @<text>Value: @Value</text>;
+            else
+                return @<text>No selected color</text>;
+        }
+        string GetColorDropDownValue(IDropDownBox dropDownBox) {
+            return dropDownBox.Value as string;
+        }
+        void ColorDropDownValueChanged(string value, IDropDownBox dropDownBox) {
+            dropDownBox.BeginUpdate();
+            dropDownBox.Value = value;
+            dropDownBox.DropDownVisible = false;
+            dropDownBox.EndUpdate();
+        }
+        string QueryText(DropDownBoxQueryDisplayTextContext arg) {
+            return arg.Value as string;
+        }
+    }
+</DemoPageSectionComponent>

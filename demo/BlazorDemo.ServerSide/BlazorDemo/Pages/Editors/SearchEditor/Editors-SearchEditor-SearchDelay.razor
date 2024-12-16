@@ -1,0 +1,83 @@
+﻿<DemoPageSectionComponent Id="Editors-SearchEditor-SearchDelay" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <div class="cw-640 mb-1">
+            <DxSearchBox NullText="Enter search text..."
+                         InputDelay="@InputDelay"
+                         BindValueMode="@BindValueMode"
+                         @bind-Text="@SearchText"
+                         aria-label="Search">
+            </DxSearchBox>
+            <br />
+            <DxListBox TData="Product" TValue="Product" Data="@Products"
+                       @bind-SearchText="@SearchText"
+                       SizeMode="Params.SizeMode"
+                       ListRenderMode="ListRenderMode.Virtual"
+                       SelectionMode="ListBoxSelectionMode.Multiple">
+                <Columns>
+                    <DxListEditorColumn FieldName="@nameof(Product.ProductName)" Caption="Product" Width="35%" />
+                    <DxListEditorColumn FieldName="@nameof(Product.Country)" SearchEnabled="false" />
+                    <DxListEditorColumn FieldName="@nameof(Product.City)" />
+                    <DxListEditorColumn FieldName="@nameof(Product.Address)" Width="35%" />
+                </Columns>
+            </DxListBox>
+        </div>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionComboBox CssClass="ow-150"
+                        Data="@Modes"
+                        @bind-Value="BindValueMode"
+                        Label="Bind Value Mode:"/>
+        <OptionSpinEdit CssClass="ow-150"
+                        MinValue="100"
+                        MaxValue="1000"
+                        Increment="100"
+                        Enabled="@BindDelayEnabled"
+                        Label="Input Delay:"
+                        @bind-Value="InputDelay" />
+    </OptionsContent>
+
+    @code {
+        int? InputDelay { get; set; } = 500;
+        bool BindDelayEnabled { get { return BindValueMode == BindValueMode.OnDelayedInput; } }
+        BindValueMode BindValueMode { get; set; } = BindValueMode.OnInput;
+        BindValueMode[] Modes { get; } = new BindValueMode[] {
+            BindValueMode.OnInput,
+            BindValueMode.OnDelayedInput
+        };
+
+        IEnumerable<Product> Products { get; set; }
+        string SearchText { get; set; }
+        protected override async Task OnInitializedAsync() {
+            var invoices = await NwindDataService.GetInvoicesAsync();
+            var products = await NwindDataService.GetProductsAsync();
+            Products = invoices.Join(products, i => i.ProductId, p => p.ProductId, (i, p) => new Product {
+                    ProductName = i.ProductName,
+                    Country = i.Country,
+                    City = i.City,
+                    Address = i.Address
+                }).Distinct();
+        }
+
+        public class Product {
+            public string ProductName { get; set; }
+            public string Country { get; set; }
+            public string City { get; set; }
+            public string Address { get; set; }
+
+            public override bool Equals(object obj) {
+                return obj is Product product &&
+                string.Equals(product.ProductName, ProductName) &&
+                string.Equals(product.Country, Country) &&
+                string.Equals(product.City, City) &&
+                string.Equals(product.Address, Address);
+            }
+
+            public override int GetHashCode() {
+                return HashCode.Combine(ProductName, Country, City, Address);
+            }
+        }
+    }
+</DemoPageSectionComponent>

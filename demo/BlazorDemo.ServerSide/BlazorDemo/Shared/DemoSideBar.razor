@@ -1,0 +1,41 @@
+﻿@inject DemoConfiguration Configuration
+@inject NavigationManager NavigationManager
+@inject IDemoVersion DemoVersion;
+
+<DemoSearchEditor @bind-SearchString="@SearchString" />
+<DxScrollView VisibleElementSelector="@NavMenuActiveSelector">
+    <NavMenu ActivePage="@ActivePage" SearchResult="@SearchResults"></NavMenu>
+</DxScrollView>
+<div class="info-wrapper">
+    <div class="version">Version: @DemoVersion.Version</div>
+    <div class="copyright">
+        <span>Copyright &copy; 2000-</span><span>@DateTimeNowYear</span>
+        Developer Express Inc
+    </div>
+</div>
+
+@code {
+    string _searchString = "";
+
+    static readonly int DateTimeNowYear = DateTime.Now.Year;
+    protected string ActivePage { get { return NavigationManager.GetCurrentPageName().Split('?')[0]; } }
+    protected string NavMenuActiveSelector { get { return SearchResults == null ? $"li:has(ul [href^='{ActivePage}'])" : ".demo-group, .sidebar-tree"; } }
+    public string SearchString {
+        get { return _searchString; }
+        set {
+            if(_searchString != value) {
+                _searchString = value;
+                InvokeAsync(UpdateSearchResults);
+            }
+        }
+    }
+    public DemoSearchResult SearchResults { get; set; }
+    async Task UpdateSearchResults() {
+        var searchResults = (SearchString != null && SearchString.Length > 1) ? Configuration.DoSearch(SearchString) : null;
+        if(SearchResults != searchResults) {
+            SearchResults = searchResults;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+}

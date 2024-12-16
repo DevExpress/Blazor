@@ -1,0 +1,36 @@
+/*BeginHide*/ .grid-container {
+    display:flex;
+} /*EndHide*/
+/*BeginHide*/ ::deep /*EndHide*/ .dxbl-grid {
+    height: 420px;
+}
+/*BeginHide*/ ::deep /*EndHide*/ .dxbl-grid:last-child {
+    margin-left: 20px;
+}
+/*BeginHide*/
+::deep /*EndHide*/ .grid-icon {
+    width: 16px;
+    height: 16px;
+    background-color: currentColor;
+    opacity: 0.7;
+}
+/*BeginHide*/
+::deep /*EndHide*/ .grid-icon-reorder-up {
+    -webkit-mask-image: url("images/icons/grid-reorder-up.svg");
+    mask-image: url("images/icons/grid-reorder-up.svg");
+}
+/*BeginHide*/
+::deep /*EndHide*/ .grid-icon-reorder-down {
+    -webkit-mask-image: url("images/icons/grid-reorder-down.svg");
+    mask-image: url("images/icons/grid-reorder-down.svg");
+}
+/*BeginHide*/
+::deep /*EndHide*/ .grid-icon-move-left {
+    -webkit-mask-image: url("images/icons/grid-move-left.svg");
+    mask-image: url("images/icons/grid-move-left.svg");
+}
+/*BeginHide*/
+::deep /*EndHide*/ .grid-icon-move-right {
+    -webkit-mask-image: url("images/icons/grid-move-right.svg");
+    mask-image: url("images/icons/grid-move-right.svg");
+}

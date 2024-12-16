@@ -1,4 +1,8 @@
-In both Blazor Server and Blazor WebAssembly-powered applications, you can use [GridDevExtremeDataSource\<T>](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridDevExtremeDataSource-1) to bind our Blazor [TreeList](https://docs.devexpress.com/Blazor/404942/components/treelist) to a large dataset supplied by an HTTP service. This data source implementation is based on our [DevExtreme.AspNet.Data](https://github.com/DevExpress/DevExtreme.AspNet.Data) library. When you use this data source, the TreeList delegates data filtering operations to an underlying query provider. The control loads child nodes when a user expands a parent node for the first time. This functionality optimizes performance and reduces overall memory consumption.
+In both Blazor Server and Blazor WebAssembly-powered applications, you can use [GridDevExtremeDataSource\<T>](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridDevExtremeDataSource-1) to bind our Blazor [TreeList](https://docs.devexpress.com/Blazor/404942/components/treelist) to a large dataset supplied by an HTTP service. This data source implementation is based on our [DevExtreme.AspNet.Data](https://github.com/DevExpress/DevExtreme.AspNet.Data) library. When you use this data source, the TreeList component performs the following actions to optimize performance and reduce overall memory consumption:
+
+* Loads child nodes when the node is expanded for the first time.
+* Delegates data filtering operations to an underlying query provider.
+* Switches [FilterTreeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.FilterTreeMode) to `Nodes`. In this mode, the TreeList ignores parent-child relationships and displays all nodes that meet the filter criteria at one level.
 
 Follow the steps below to bind a TreeList to a large data collection published as an HTTP service:
 

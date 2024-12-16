@@ -1,0 +1,25 @@
+﻿<DemoPageSectionComponent Id="Editors-ListBox-GroupData" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <DxListBox Data="@Data"
+                   @bind-Value="@Value"
+                   SizeMode="Params.SizeMode"
+                   ShowSearchBox="true"
+                   @bind-SearchText="@SearchText"
+                   TextFieldName="@nameof(Customer.ContactName)"
+                   GroupFieldName="@nameof(Customer.Country)"
+                   CssClass="cw-400 chi-220">
+        </DxListBox>
+    </ChildContentWithParameters>
+
+    @code {
+        string SearchText { get; set; }
+        IEnumerable<Customer> Data { get; set; }
+        Customer Value { get; set; }
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetCustomersAsync();
+            Value = Data.FirstOrDefault(x => x.Country == "Argentina");
+        }
+    }
+</DemoPageSectionComponent>

@@ -1,7 +1,7 @@
 ﻿@inject NavigationManager NavigationManager
 <link rel="preload" href="@GetDemoUrl()" as="document">
 
-<DemoPageSectionComponent Id="Layout-LayoutBreakpoint-ResponsiveLayout">    
+<DemoPageSectionComponent Id="Layout-LayoutBreakpoint-ResponsiveLayout">
     <DemoMobileContent>
         @if(afterFirstRender) {
             <iframe @onload="() => { loadIndicatorVisible = false; }"  src="@GetDemoUrl()"

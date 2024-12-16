@@ -1,0 +1,133 @@
+﻿@page "/TreeList/DragDropRows/Between"
+@using System.Collections.ObjectModel;
+
+<DemoPageSectionComponent Id="TreeList-DragDropRows-Between" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject IEmployeeTaskDataProvider EmployeeTaskDataProvider
+        <div class="components-container">
+            <DxTreeList @ref="PlannedTasksTreeList"
+                        Data="PlannedTasks"
+                        KeyFieldName="Id"
+                        ParentKeyFieldName="ParentId"
+                        AllowSort="false"
+                        AutoExpandAllNodes="true"
+                        AllowDragRows="true"
+                        AllowedDropTarget="TreeListAllowedDropTarget.All"
+                        VirtualScrollingEnabled="true"
+                        SizeMode="Params.SizeMode"
+                        ItemsDropped="TreeList_ItemsDropped">
+                <Columns>
+                    <DxTreeListDataColumn @ref="TreeList_NameDataColumn" FieldName="Name" Caption="Task" />
+                    <DxTreeListDataColumn FieldName="Priority" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                        <CellDisplayTemplate>
+                            @DemoTemplateIconUtils.GetEmployeeTaskPriorityIconHtml((EmployeeTask)context.DataItem)
+                        </CellDisplayTemplate>
+                    </DxTreeListDataColumn>
+                </Columns>
+                <DragHintTextTemplate>
+                    @if(context.DataItems[0] != null) {
+                        <span class="dxbl-text">@context.GetDisplayText(TreeList_NameDataColumn)</span>
+                        <span class="dxbl-text">@DemoTemplateIconUtils.GetEmployeeTaskPriorityIconHtml((EmployeeTask)context.DataItems[0])</span>
+                    }
+                </DragHintTextTemplate>
+                <ToolbarTemplate>
+                    <DxToolbar Title="Planned Tasks" />
+                </ToolbarTemplate>
+            </DxTreeList>
+
+            <DxGrid Data="PendingTasks"
+                    AllowSelectRowByClick="true"
+                    SelectionMode="GridSelectionMode.Multiple"
+                    TextWrapEnabled="false"
+                    AllowDragRows="true"
+                    AllowedDropTarget="GridAllowedDropTarget.All"
+                    VirtualScrollingEnabled="true"
+                    SizeMode="Params.SizeMode"
+                    ItemsDropped="Grid_ItemsDropped">
+                <Columns>
+                    <DxGridSelectionColumn Width="40px" />
+                    <DxGridDataColumn @ref="Grid_NameDataColumn" FieldName="Name" Caption="Task" />
+                    <DxGridDataColumn FieldName="Priority" Width="100px" CaptionAlignment="GridTextAlignment.Center" TextAlignment="GridTextAlignment.Center">
+                        <CellDisplayTemplate>
+                            @DemoTemplateIconUtils.GetEmployeeTaskPriorityIconHtml((EmployeeTask)context.DataItem)
+                        </CellDisplayTemplate>
+                    </DxGridDataColumn>
+                </Columns>
+                <DragHintTextTemplate>
+                    @if(context.DataItems.Count == 1) {
+                        <span class="dxbl-text">@context.GetDisplayText(Grid_NameDataColumn)</span>
+                        <span class="dxbl-text">@DemoTemplateIconUtils.GetEmployeeTaskPriorityIconHtml((EmployeeTask)context.DataItems[0])</span>
+                    }
+                    else {
+                        <span class="dxbl-text">@(context.DataItems.Count) tasks</span>
+                    }
+                </DragHintTextTemplate>
+                <ToolbarTemplate>
+                    <DxToolbar Title="Pending Tasks" />
+                </ToolbarTemplate>
+            </DxGrid>
+        </div>
+
+        @code {
+            ITreeList PlannedTasksTreeList { get; set; }
+
+            DxTreeListDataColumn TreeList_NameDataColumn { get; set; }
+            DxGridDataColumn Grid_NameDataColumn { get; set; }
+
+            ObservableCollection<EmployeeTask> PlannedTasks { get; set; }
+            ObservableCollection<EmployeeTask> PendingTasks { get; set; }
+
+            protected override void OnInitialized() {
+                var employeeTasks = EmployeeTaskDataProvider.GenerateData();
+                PendingTasks = new ObservableCollection<EmployeeTask>(employeeTasks.Where(t => t.Priority > 0));
+                var pendingTaskIds = PendingTasks.Select(t => t.Id).ToHashSet();
+                PlannedTasks = new ObservableCollection<EmployeeTask>(employeeTasks.Where(t => t.Priority <= 0 && !pendingTaskIds.Contains(t.ParentId)));
+            }
+
+            void TreeList_ItemsDropped(TreeListItemsDroppedEventArgs evt) {
+                var sourceTasks = GetTaskCollection(evt.SourceComponent);
+                RemoveDroppedItems(sourceTasks, evt.DroppedItems);
+
+                var targetTask = (EmployeeTask)evt.TargetItem;
+                var index = targetTask != null
+                    ? PlannedTasks.IndexOf(targetTask) + (evt.DropPosition == TreeListItemDropPosition.After ? 1 : 0)
+                    : PlannedTasks.Count;
+
+                var droppedTasks = evt.DroppedItems.OfType<EmployeeTask>();
+                foreach(var droppedTask in droppedTasks) {
+                    droppedTask.ParentId = evt.DropPosition == TreeListItemDropPosition.Inside
+                        ? targetTask.Id
+                        : targetTask.ParentId;
+                }
+
+                InsertDroppedItems(PlannedTasks, evt.DroppedItems, index);
+            }
+
+            void Grid_ItemsDropped(GridItemsDroppedEventArgs evt) {
+                var sourceTasks = GetTaskCollection(evt.SourceComponent);
+                RemoveDroppedItems(sourceTasks, evt.DroppedItems);
+
+                var targetTask = (EmployeeTask)evt.TargetItem;
+                var index = targetTask != null
+                    ? PendingTasks.IndexOf(targetTask) + (evt.DropPosition == GridItemDropPosition.After ? 1 : 0)
+                    : PendingTasks.Count;
+
+                InsertDroppedItems(PendingTasks, evt.DroppedItems, index);
+            }
+
+            void RemoveDroppedItems(IList<EmployeeTask> employeeTasks, IEnumerable<object> droppedItems) {
+                foreach(var item in droppedItems)
+                    employeeTasks.Remove((EmployeeTask)item);
+            }
+
+            void InsertDroppedItems(IList<EmployeeTask> employeeTasks, IEnumerable<object> droppedItems, int index) {
+                foreach(var item in droppedItems.Reverse())
+                    employeeTasks.Insert(index, (EmployeeTask)item);
+            }
+
+            ObservableCollection<EmployeeTask> GetTaskCollection(object grid) {
+                return grid == PlannedTasksTreeList ? PlannedTasks : PendingTasks;
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <DxExtendStartupHost>False</DxExtendStartupHost>
     <Configurations>Debug;Release;VisualTests</Configurations>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
@@ -24,18 +24,34 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Markdig" Version="0.23.0" />
-    <PackageReference Include="DevExtreme.AspNet.Data" Version="4.0.0" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="4.0.1" />
     <PackageReference Include="System.Reactive" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.AI.Abstractions" Version="9.0.0-preview.9.24556.5" />
+    <PackageReference Include="System.Text.Json" Version="9.0.0" />
     <ProjectReference Include="..\BlazorDemo.DemoData\BlazorDemo.DemoData.csproj" />
     <ProjectReference Include="..\BlazorDemo.Reporting.Core\BlazorDemo.Reporting.Core.csproj" />
+    <PackageReference Include="Azure.AI.OpenAI" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="9.0.0-preview.9.24507.7" />
+    <PackageReference Include="System.Numerics.Tensors" Version="9.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.PdfViewer" Version="24.1.6" />
-    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="24.1.6" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls" Version="24.1.6" />
-    <PackageReference Include="DevExpress.AspNetCore.Reporting" Version="24.1.6" />
-    <PackageReference Include="DevExpress.Reporting.Demos" Version="24.1.6" />
-    <PackageReference Include="DevExpress.Drawing.Skia" Version="24.1.6" />
+    <PackageReference Include="DevExpress.Blazor.PdfViewer" Version="24.2.3" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls" Version="24.2.3" />
+    <PackageReference Include="DevExpress.AspNetCore.Reporting" Version="24.2.3" />
+    <PackageReference Include="DevExpress.Reporting.Demos" Version="24.2.3" />
+    <PackageReference Include="DevExpress.Blazor.PivotTable" Version="24.2.3" />
+    <PackageReference Include="DevExpress.Drawing.Skia" Version="24.2.3" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor" Version="24.2.3" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" Version="24.2.3" />
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -155,6 +171,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DataSources\Vehicles.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <Content Update="wwwroot\images\documents\AlbertEinstein.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -192,12 +213,22 @@
     <_ContentIncludedByDefault Remove="Pages\Navigation\WaitIndicator\Navigation-WaitIndicator-Overview.razor" />
     <_ContentIncludedByDefault Remove="Pages\Navigation\WaitIndicator\Navigation-WaitIndicator-Templates.razor" />
     <_ContentIncludedByDefault Remove="Pages\Navigation\WaitIndicator\Navigation-WaitIndicator.razor" />
+    <_ContentIncludedByDefault Remove="Pages\Pivot\LargeDataSources\Pivot-LargeDataSources.razor" />
+    <_ContentIncludedByDefault Remove="Pages\Pivot\ChartIntegration\Pivot-ChartIntegration.razor" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DataSources\FileSystemDataItems.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="DataSources\Invoice.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Documents\FirstLook.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\PivotTable\LargeDataSource\Descriptions\" />
   </ItemGroup>
   <Target Name="ControllersCreate" BeforeTargets="PreBuildEvent" Condition="!Exists('Controllers')">
     <Exec Condition="$([MSBuild]::IsOSPlatform('Windows'))" Command="mklink /J &quot;Controllers&quot; &quot;..//BlazorDemo.ServerSide//Controllers&quot;" />

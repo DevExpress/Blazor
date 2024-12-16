@@ -1,9 +1,9 @@
-<DemoPageSectionComponent Id="Editors-DropDownBox-MultipleSelectionListBox" ShowSizeMode="true">
+﻿<DemoPageSectionComponent Id="Editors-DropDownBox-MultipleSelectionListBox" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
         <style>
             .templateListbox {
-                --dxbl-list-box-border-width: 0px;
+                border-width: 0;
                 width: 100%
             }
         </style>
@@ -23,6 +23,7 @@
                            TextFieldName="@nameof(Employee.Text)"
                            SelectionMode="ListBoxSelectionMode.Multiple"
                            ShowCheckboxes="true"
+                           ShowSearchBox="true"
                            CssClass="templateListbox"
                            >
                 </DxListBox>

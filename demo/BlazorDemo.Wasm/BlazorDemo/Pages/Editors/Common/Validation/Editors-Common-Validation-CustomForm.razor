@@ -17,7 +17,10 @@
                         <label for="identifierInputId" class="demo-text mb-1">
                             Identifier:
                         </label>
-                        <DxTextBox InputId="identifierInputId" @bind-Text="@starship.Identifier" SizeMode="Params.SizeMode" ShowValidationIcon="true" />
+                        <DxTextBox InputId="identifierInputId"
+                                   @bind-Text="@starship.Identifier"
+                                   SizeMode="Params.SizeMode"
+                                   ShowValidationIcon="true" />
                         <ValidationMessage For="@(() => starship.Identifier)" />
                     </div>
 
@@ -32,13 +35,17 @@
                                     TextFieldName="Value"
                                     ValueFieldName="Id"
                                     @bind-Value="@starship.Classification"
-                                    SizeMode="Params.SizeMode" ShowValidationIcon="true" />
+                                    SizeMode="Params.SizeMode"
+                                    ShowValidationIcon="true" />
                         <ValidationMessage For="@(() => starship.Classification)" />
                     </div>
 
                     <div class="col-md-6" style="padding-bottom: 12px">
                         <label for="accommodationInputId" class="demo-text mb-1">Maximum Accommodation: </label>
-                        <DxSpinEdit InputId="accommodationInputId" @bind-Value="@starship.MaximumAccommodation" SizeMode="Params.SizeMode" ShowValidationIcon="true" />
+                        <DxSpinEdit InputId="accommodationInputId"
+                                    @bind-Value="@starship.MaximumAccommodation"
+                                    SizeMode="Params.SizeMode"
+                                    ShowValidationIcon="true" />
                         <ValidationMessage For="@(() => starship.MaximumAccommodation)" />
                     </div>
 
@@ -46,7 +53,10 @@
                         <label for="productionDateInputId" class="demo-text mb-1">
                             Production Date:
                         </label>
-                        <DxDateEdit InputId="productionDateInputId" @bind-Date="@starship.ProductionDate" SizeMode="Params.SizeMode" ShowValidationIcon="true" />
+                        <DxDateEdit InputId="productionDateInputId"
+                                    @bind-Date="@starship.ProductionDate"
+                                    SizeMode="Params.SizeMode"
+                                    ShowValidationIcon="true" />
                         <ValidationMessage For="@(() => starship.ProductionDate)" />
                     </div>
 

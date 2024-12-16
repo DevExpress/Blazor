@@ -7,4 +7,4 @@ This demo customizes the context menu in the following manner:
 * Creates a custom *Clipboard* item and adds it to the main menu.
 * Removes built-in *CutSelection*, *CopySelection*, and *Paste* items from the main menu and adds them as sub-menu items to the new *Clipboard* item.
 
-To disable context menu functionality, set the [ContextMenuEnabled](http://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.DxRichEdit.ContextMenuEnabled) property to `false`.
+To disable context menu functionality, set the [ContextMenuEnabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.DxRichEdit.ContextMenuEnabled) property to `false`.

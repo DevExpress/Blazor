@@ -1,0 +1,38 @@
+.color-palette-main-container {
+    display: flex;
+    gap: 30px;
+}
+
+.color-palette-container {
+    width: fit-content;
+}
+
+.color-palette-container > .demo-text {
+    width: 100%;
+}
+
+.colors-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.colors-container ul {
+    list-style: none;
+    padding: 0px;
+}
+
+.colors-container li {
+    display: flex;
+    gap: 10px;
+    padding-bottom: 10px;
+    line-height: 35px;
+}
+
+.colors-container li::before {
+    content: "";
+    height: 35px;
+    width: 35px;
+    border-radius: 10%;
+}

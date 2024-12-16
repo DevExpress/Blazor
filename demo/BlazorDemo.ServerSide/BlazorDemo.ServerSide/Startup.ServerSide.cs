@@ -2,13 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using Azure.AI.OpenAI;
 using BlazorDemo.Configuration;
 using BlazorDemo.DataProviders;
 using BlazorDemo.DemoData;
+using BlazorDemo.ServerSide.Services;
 using BlazorDemo.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,7 +35,20 @@ namespace BlazorDemo.ServerSide {
                 });
             var optionsBuilder = services.AddOptions();
             optionsBuilder.AddOptions<DemoModel>("BlazorDemo");
+            var azureOpenAIEndpoint = context.Configuration.GetSection("AIIntegrationSettings")["EndpointUrl"];
+            var azureOpenAIKey = context.Configuration.GetSection("AIIntegrationSettings")["Key"];
+            var deploymentName = context.Configuration.GetSection("AIIntegrationSettings")["DeploymentName"];
 
+            var openAIClient = new AzureOpenAIClient(
+                new Uri(azureOpenAIEndpoint),
+                new System.ClientModel.ApiKeyCredential(azureOpenAIKey),
+                new AzureOpenAIClientOptions() {
+                    Transport = new PromoteHttpStatusErrorsPipelineTransport()
+                });
+            var asChatClient = openAIClient.AsChatClient(deploymentName);
+
+            services.AddSingleton(asChatClient);
+            services.AddDevExpressAI();
             services.AddSingleton<IDemoVersion, DemoVersion>(x => {
                 string customVersion = Configuration.GetValue<string>("dxversion");
                 if(!string.IsNullOrEmpty(customVersion))
@@ -40,11 +56,13 @@ namespace BlazorDemo.ServerSide {
                 var dxVersion = new Version(AssemblyInfo.Version);
                 return new DemoVersion(new Version(dxVersion.Major, dxVersion.Minor, dxVersion.Build) + customVersion);
             });
+            services.AddSingleton(openAIClient);
+            services.AddSingleton<SmartFilterProvider>();
+
             services.AddScoped<HttpClient>(serviceProvider => serviceProvider.GetService<IHttpClientFactory>().CreateClient());
 
             services.AddScoped<IContosoRetailDataProvider, ContosoRetailDataProvider>();
             services.AddScoped<IRentInfoDataProvider, RentInfoDataProvider>();
-            services.AddSingleton<EmployeeTaskService>();
 
             services.AddDbContextFactory<HomesContext>(opt => {
                 opt.UseSqlite(ConnectionStringUtils.GetHomesSqliteConnectionString(context.Configuration));

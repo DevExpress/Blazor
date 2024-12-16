@@ -1,0 +1,128 @@
+﻿@page "/TreeList/Layout"
+
+<DemoPageSectionComponent Id="TreeList-Layout" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @using System.Text.Json
+        @inject ISpaceObjectDataProvider SpaceObjectDataProvider
+        @inject IJSRuntime JSRuntime
+
+        @if (PreRendered) {
+            <DxTreeList @ref="TreeList"
+                        Data="TreeListData"
+                        ChildrenFieldName="Satellites"
+                        ShowAllRows="true"
+                        LayoutAutoLoading="TreeList_LayoutAutoLoading"
+                        LayoutAutoSaving="TreeList_LayoutAutoSaving"
+                        ShowFilterRow="true"
+                        ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                        TextWrapEnabled="false"
+                        SizeMode="Params.SizeMode"
+                        AutoExpandAllNodes="true"
+                        CssClass="max-h-480">
+                <Columns>
+                    <DxTreeListDataColumn FieldName="Name" />
+                    <DxTreeListDataColumn FieldName="TypeOfObject" Caption="Type" FilterRowOperatorType="TreeListFilterRowOperatorType.Equal">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="TreeListRenderHelper.SpaceObjectTypes" SearchMode="@ListSearchMode.AutoSearch"
+                                                SearchFilterCondition="@ListSearchFilterCondition.Contains" />
+                        </EditSettings>
+                    </DxTreeListDataColumn>
+                    <DxTreeListDataColumn FieldName="Mass10pow21kg" Caption="Mass, kg" DisplayFormat="N2">
+                        <HeaderCaptionTemplate>Mass, 10<sup>21</sup> &#215; kg</HeaderCaptionTemplate>
+                    </DxTreeListDataColumn>
+                    <DxTreeListDataColumn FieldName="MeanRadiusInKM" Caption="Radius, km" DisplayFormat="N2">
+                        <HeaderCaptionTemplate>Radius, km</HeaderCaptionTemplate>
+                    </DxTreeListDataColumn>
+                    <DxTreeListDataColumn FieldName="Volume10pow9KM3" DisplayFormat="N2" Caption="Volume">
+                        <HeaderCaptionTemplate>Volume, 10<sup>9</sup> &#215; km<sup>3</sup></HeaderCaptionTemplate>
+                    </DxTreeListDataColumn>
+                    <DxTreeListDataColumn FieldName="SurfaceGravity" Caption="Gravity" DisplayFormat="N2">
+                        <HeaderCaptionTemplate>Gravity, m/s<sup>2</sup></HeaderCaptionTemplate>
+                    </DxTreeListDataColumn>
+                </Columns>
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Contained">
+                        <Items>
+                            <DxToolbarItem Text="Reload Page" Click="ReloadPageButton_ClickAsync" BeginGroup="true" />
+                            <DxToolbarItem Text="Reset Layout" Click="ResetLayoutButton_ClickAsync" BeginGroup="true" />
+                            <DxToolbarItem Text="Show Column Chooser" Click="ShowColumnChooser_Click" BeginGroup="true" />
+                        </Items>
+                    </DxToolbar>
+                </ToolbarTemplate>
+            </DxTreeList>
+        } else {
+            <em>Loading...</em>
+        }
+
+        @code {
+            const string LocalStorageKey = "TreeList-LayoutPersistence-Data";
+
+            bool PreRendered { get; set; }
+            ITreeList TreeList { get; set; }
+            object TreeListData { get; set; }
+
+            protected override void OnInitialized() {
+                TreeListData = SpaceObjectDataProvider.GenerateData();
+            }
+
+            protected override void OnAfterRender(bool firstRender) {
+                if (firstRender) {
+                    PreRendered = true;
+                    StateHasChanged();
+                }
+            }
+
+            async Task TreeList_LayoutAutoLoading(TreeListPersistentLayoutEventArgs e) {
+                e.Layout = await LoadLayoutFromLocalStorageAsync();
+            }
+
+            async Task TreeList_LayoutAutoSaving(TreeListPersistentLayoutEventArgs e) {
+                await SaveLayoutToLocalStorageAsync(e.Layout);
+            }
+
+            // Refer to https://docs.microsoft.com/en-us/aspnet/core/blazor/state-management
+            // to learn more about Blazor state management
+            // In Blazor Server apps, prefer ASP.NET Core Protected Browser Storage
+
+            async Task<TreeListPersistentLayout> LoadLayoutFromLocalStorageAsync() {
+                try {
+                    var json = await JSRuntime.InvokeAsync<string>("localStorage.getItem", LocalStorageKey);
+                    return JsonSerializer.Deserialize<TreeListPersistentLayout>(json);
+                } catch {
+                    // Mute exceptions for the server prerender stage
+                    return null;
+                }
+            }
+
+            async Task SaveLayoutToLocalStorageAsync(TreeListPersistentLayout layout) {
+                try {
+                    var json = JsonSerializer.Serialize(layout);
+                    await JSRuntime.InvokeVoidAsync("localStorage.setItem", LocalStorageKey, json);
+                } catch {
+                    // Mute exceptions for the server prerender stage
+                }
+            }
+
+            async Task RemoveLayoutFromLocalStorageAsync() {
+                try {
+                    await JSRuntime.InvokeVoidAsync("localStorage.removeItem", LocalStorageKey);
+                } catch {
+                    // Mute exceptions for the server prerender stage
+                }
+            }
+
+            async Task ReloadPageButton_ClickAsync() {
+                await JSRuntime.InvokeVoidAsync("location.reload");
+            }
+
+            async Task ResetLayoutButton_ClickAsync() {
+                await RemoveLayoutFromLocalStorageAsync();
+                await JSRuntime.InvokeVoidAsync("location.reload");
+            }
+
+            void ShowColumnChooser_Click() {
+                TreeList.ShowColumnChooser();
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

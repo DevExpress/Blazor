@@ -1,0 +1,49 @@
+﻿@page "/ChartCrosshair"
+
+<DemoPageSectionComponent Id="Charts-Crosshair">
+    <DemoChildContent>
+        @inject ISalesAmountDataProvider DataProvider
+
+        <DxChart Data="@DataSource"
+                 Width="100%"
+                 Height="500px">
+            <DxChartTitle Text="DevAV Sales" />
+
+            <DxChartArgumentAxis>
+                <DxChartAxisTitle Text="Year" />
+                <DxChartAxisLabel Format="ChartElementFormat.Decimal()" />
+            </DxChartArgumentAxis>
+
+            <DxChartCrosshair Enabled="true" Width="2" DashStyle="ChartDashStyle.Dot">
+                <DxChartCrosshairLabel Visible="true" />
+            </DxChartCrosshair>
+
+            <DxChartCommonSeries NameField="@((SalesAmountData s) => s.ProductCategory)"
+                                 ArgumentField="@((SalesAmountData s) => s.Year)"
+                                 ValueField="@((SalesAmountData s) => s.SalesAmount)">
+                <SeriesTemplate Context="settings">
+                    <DxChartSplineSeries Settings="@settings" />
+                </SeriesTemplate>
+            </DxChartCommonSeries>
+
+            <DxChartLegend VerticalAlignment="VerticalEdge.Bottom"
+                           Position="RelativePosition.Outside" />
+          
+            <DxChartTooltip Enabled="true">
+                <div style="margin: 0.75rem">
+                    <div>
+                        @($"{context.Point.SeriesName}:  ${(double)context.Point.Value:F1} K")
+                    </div>
+                </div>
+            </DxChartTooltip>
+        </DxChart>
+    </DemoChildContent>
+
+    @code {
+        IEnumerable<SalesAmountData> DataSource = Enumerable.Empty<SalesAmountData>();
+        
+        protected override void OnInitialized() {
+            DataSource = DataProvider.GenerateData();
+        }
+    }
+</DemoPageSectionComponent>

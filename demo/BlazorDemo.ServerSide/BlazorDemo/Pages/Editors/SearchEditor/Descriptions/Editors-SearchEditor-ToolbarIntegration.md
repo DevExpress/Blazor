@@ -1,0 +1,1 @@
+You can incorporate the DevExpress Blazor [Search Box](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSearchBox) component within the Blazor [Toolbar](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbar) component.

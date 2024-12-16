@@ -1,0 +1,32 @@
+﻿@page "/ChartSankey"
+
+<DemoPageSectionComponent Id="Charts-Sankey">
+    <DemoChildContent>
+        @inject ISankeyDataProvider SankeyDataProvider
+
+        <DxSankey
+            Data="@Data"
+            Width="100%"
+            Height="500px"
+            SourceFieldName="Source"
+            TargetFieldName="Target"
+            WeightFieldName="Weight"
+            RedrawOnResize="true">
+            <DxSankeyNodeSettings Width="20" Spacing="35"/>
+            <DxSankeyLinkSettings ColorMode="SankeyLinkColorMode.Gradient"/>
+            <DxTooltipSettings Enabled="true">
+                <DxTextFormatSettings Type="TextFormat.Billions" Precision="1" ></DxTextFormatSettings>
+            </DxTooltipSettings>
+            <DxTitleSettings Text="Microsoft Q2 FY24 Income Statement"/>
+        </DxSankey>
+
+        @code{
+            IEnumerable<SankeyDataPoint> Data { get; set; }
+
+            protected override void OnInitialized() {
+                Data = SankeyDataProvider.GenerateData();
+            }
+        }
+
+    </DemoChildContent>
+</DemoPageSectionComponent>

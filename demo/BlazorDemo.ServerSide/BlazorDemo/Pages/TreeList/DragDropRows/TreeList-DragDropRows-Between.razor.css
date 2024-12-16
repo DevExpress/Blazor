@@ -1,0 +1,9 @@
+/*BeginHide*/ .components-container {
+    display:flex;
+} /*EndHide*/
+/*BeginHide*/ ::deep /*EndHide*/ .dxbl-grid {
+    height: 480px;
+}
+/*BeginHide*/ ::deep /*EndHide*/ .dxbl-grid:last-child {
+    margin-left: 20px;
+}

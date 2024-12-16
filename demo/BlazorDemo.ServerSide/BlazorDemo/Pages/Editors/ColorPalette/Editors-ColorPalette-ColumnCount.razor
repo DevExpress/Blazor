@@ -1,0 +1,33 @@
+﻿<DemoPageSectionComponent Id="Editors-ColorPalette-ColumnCount" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="color-palette-container">
+            <DxColorPalette @bind-Value="@Value"
+                            ColumnCount="@ColumnCount"
+                            ShowNoColorTile="false" SizeMode="@Params.SizeMode">
+                <Groups>
+                    <DxColorPaletteGroup Header="Warm" Colors="@DxColorPalettePresets.GetPalette(ColorPalettePresetType.Warm)" />
+                    <DxColorPaletteGroup Header="Cold" Colors="@DxColorPalettePresets.GetPalette(ColorPalettePresetType.Cold)" />
+                </Groups>
+            </DxColorPalette>
+            <p class="demo-text mt-3">
+                @GetSelectedValueDescription()
+            </p>
+        </div>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionSpinEdit Label="Column Count" @bind-Value="@ColumnCount" MinValue="1" MaxValue="15"/>
+    </OptionsContent>
+
+    @code {
+        string Value { get; set; }
+        int ColumnCount { get; set; } = 10;
+
+        RenderFragment GetSelectedValueDescription() {
+            if(Value != null)
+                return @<text>Value: @Value</text>;
+            else
+                return @<text>No selected color</text>;
+        }
+    }
+</DemoPageSectionComponent>

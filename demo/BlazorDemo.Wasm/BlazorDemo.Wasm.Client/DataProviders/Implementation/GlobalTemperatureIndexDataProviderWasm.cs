@@ -6,6 +6,7 @@ using BlazorDemo.DataProviders;
 
 namespace BlazorDemo.Wasm.DataProviders.Implementation {
     public class GlobalTemperatureIndexDataProviderWasm : IGlobalTemperatureIndexDataProvider {
+#pragma warning disable DX0006
         HttpClient httpClient;
 
         public GlobalTemperatureIndexDataProviderWasm(HttpClient httpClient) {
@@ -16,5 +17,6 @@ namespace BlazorDemo.Wasm.DataProviders.Implementation {
             string fileContent = await httpClient.GetStringAsync("api/get-global-temperature-index");
             return GlobalTemperatureIndexCsvParser.Parse(fileContent);
         }
+#pragma warning restore DX0006
     }
 }

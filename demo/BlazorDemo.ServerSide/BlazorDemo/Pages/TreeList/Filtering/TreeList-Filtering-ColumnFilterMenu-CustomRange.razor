@@ -1,0 +1,47 @@
+﻿@using DevExpress.Data.Filtering;
+@using DevExpress.Data.Filtering.Helpers;
+
+<div>
+    <DxListBox TData="CustomRangeFilterItem"
+               TValue="CriteriaOperator"
+               Data="Items"
+               ValueFieldName="Criteria"
+               TextFieldName="DisplayText"
+               Values="SelectedValues"
+               ValuesChanged="SelectedValues_Changed"
+               SelectionMode="ListBoxSelectionMode.Multiple"
+               ShowCheckboxes="true"
+               CssClass="list-box" />
+</div>
+
+@code {
+    [Parameter]
+    public TreeListDataColumnFilterMenuTemplateContext FilterContext { get; set; }
+
+    [Parameter]
+    public IReadOnlyList<CustomRangeFilterItem> Items { get; set; }
+
+    IEnumerable<CriteriaOperator> SelectedValues { get; set; }
+
+    protected override void OnInitialized() {
+        SelectedValues = LoadSelectedValues(FilterContext.FilterCriteria, Items.Select(item => item.Criteria).ToList());
+    }
+
+    void SelectedValues_Changed(IEnumerable<CriteriaOperator> value) {
+        SelectedValues = value;
+        FilterContext.FilterCriteria = GroupOperator.Combine(GroupOperatorType.Or, SelectedValues);
+    }
+
+    static IEnumerable<CriteriaOperator> LoadSelectedValues(CriteriaOperator criteria, IReadOnlyList<CriteriaOperator> possibleCriterias) {
+        if (possibleCriterias.Contains(criteria))
+            return new[] { criteria };
+        if (criteria is GroupOperator groupOp && groupOp.OperatorType == GroupOperatorType.Or && groupOp.Operands.All(i => possibleCriterias.Contains(i)))
+            return groupOp.Operands;
+        return Array.Empty<CriteriaOperator>();
+    }
+
+    public record CustomRangeFilterItem {
+        public CriteriaOperator Criteria { get; init; }
+        public string DisplayText { get; init; }
+    }
+}

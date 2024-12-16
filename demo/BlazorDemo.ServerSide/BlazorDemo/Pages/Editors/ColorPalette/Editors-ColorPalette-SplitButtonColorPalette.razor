@@ -1,0 +1,56 @@
+﻿<DemoPageSectionComponent Id="Editors-ColorPalette-SplitButtonColorPalette" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <style>
+            .splitbutton-icon-color-background {
+                background-color: @Value;
+            }
+
+            .splitbutton-template-color-palette {
+                border-width: 0px;
+            }
+        </style>
+        @*BeginHide*@
+        <div>
+        @*EndHide*@
+        <DxSplitButton @bind-DropDownVisible="@SplitButtonDropDownVisible"
+                        RenderStyle="ButtonRenderStyle.Secondary"
+                        IconCssClass="splitbutton-icon-color splitbutton-icon-color-background"
+                        Click="OnClick" SizeMode="@Params.SizeMode">
+            <DropDownContentTemplate>
+                <DxColorPalette Value="@GetColorSplitButtonValue()"
+                                ValueChanged="@ColorSplitButtonValueChanged"
+                                CssClass="splitbutton-template-color-palette" SizeMode="@Params.SizeMode" />
+            </DropDownContentTemplate>
+        </DxSplitButton>
+        @*BeginHide*@
+        </div>
+        @*EndHide*@
+        <p class="demo-text mt-3" style="color: @TextColor;">
+            @GetSelectedValueDescription()
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        const string UnsetValue = "unset";
+        string Value { get; set; } = "#66CDFF";
+        string TextColor { get; set; } = UnsetValue;
+        bool SplitButtonDropDownVisible { get; set; }
+
+        RenderFragment GetSelectedValueDescription() {
+            if(Value != null)
+                return @<text>Value: @Value</text>;
+            else
+                return @<text>No selected color</text>;
+        }
+        string GetColorSplitButtonValue() {
+            return Value as string;
+        }
+        void ColorSplitButtonValueChanged(string value) {
+            Value = value;
+            SplitButtonDropDownVisible = false;
+        }
+        void OnClick(MouseEventArgs args) {
+            TextColor = Value ?? UnsetValue;
+        }
+    }
+</DemoPageSectionComponent>

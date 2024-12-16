@@ -1,0 +1,57 @@
+﻿@page "/TreeList/Filtering/ColumnFilterMenu"
+@inject IEmployeeTaskDataProvider EmployeeTaskDataProvider
+
+@using DevExpress.Data.Filtering;
+@using DevExpress.Data.Filtering.Helpers;
+@using static BlazorDemo.Pages.TreeList.Filtering.TreeList_Filtering_ColumnFilterMenu_CustomRange
+
+<DemoPageSectionComponent Id="TreeList-Filtering-ColumnFilterMenu" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxTreeList Data="Data"
+                    KeyFieldName="Id"
+                    ParentKeyFieldName="ParentId"
+                    FilterMenuButtonDisplayMode="TreeListFilterMenuButtonDisplayMode.Always"
+                    SizeMode="Params.SizeMode"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    VirtualScrollingEnabled="true"
+                    CssClass="max-h-480">
+            <Columns>
+                <DxTreeListDataColumn FieldName="Name" Caption="Task" />
+                <DxTreeListDataColumn FieldName="EmployeeName" Caption="Assigned To" TextAlignment="TreeListTextAlignment.Left" />
+                <DxTreeListDataColumn FieldName="StartDate" Width="100px" />
+                <DxTreeListDataColumn FieldName="DueDate" Width="100px" />
+                <DxTreeListDataColumn FieldName="Status" Caption="Progress" Width="120px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                    <FilterMenuTemplate>
+                        <TreeList_Filtering_ColumnFilterMenu_CustomRange FilterContext="context" Items="StatusItems" />
+                    </FilterMenuTemplate>
+                    <CellDisplayTemplate>
+                        <DxProgressBar Value="Convert.ToDouble(context.Value)"
+                                        MinValue="0"
+                                        MaxValue="100"
+                                        Thickness="0.875em"
+                                        Size="100%"
+                                        ShowLabel="false" />
+                    </CellDisplayTemplate>
+                </DxTreeListDataColumn>
+            </Columns>
+        </DxTreeList>
+
+        @code {
+            IReadOnlyList<CustomRangeFilterItem> StatusItems;
+
+            object Data { get; set; }
+
+            protected override void OnInitialized() {
+                Data = EmployeeTaskDataProvider.GenerateData();
+
+                var property = new OperandProperty(nameof(EmployeeTask.Status));
+                StatusItems = new CustomRangeFilterItem[] {
+                    new CustomRangeFilterItem() { Criteria = property == 100, DisplayText = "Completed (100%)" },
+                    new CustomRangeFilterItem() { Criteria = property <= 99 & property >= 1, DisplayText = "In Progress (1-99%)" },
+                    new CustomRangeFilterItem() { Criteria = property == 0, DisplayText = "Not Started (0%)" },
+                };
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

@@ -1,7 +1,12 @@
 Our Blazor [Grid](https://docs.devexpress.com/Blazor/403143/grid) uses the standard [DataAnnotationsValidator](https://learn.microsoft.com/en-us/aspnet/core/blazor/forms/validation?view=aspnetcore-7.0#data-annotations-validator-component-and-custom-validation) to validate user input (based on [data annotation attributes](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation) defined in an edit model). The Grid validates editor values once a user moves focus away from data editors or uses a command that saves changes. In `EditCell` mode, the grid control validates user input when focus moves away from the edited row. The control prevents users from editing a different row until they address all validation errors.
 
-Once validation is completed, the component marks editors with colored outlines and displays validation icons: green for valid values, and red for invalid values. Hover the mouse pointer over an error icon to display the corresponding error message within the tooltip.
-
 You can implement your custom validator components and declare them in the [CustomValidators](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomValidators) template. To disable input validation, set the [ValidationEnabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ValidationEnabled) option to `false`.
+
+DevExpress Blazor data editors implement the following validation settings:
+ * [ValidationEnabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxEditSettings.ValidationEnabled) — Allows you to disable input validation in the editor.
+ * [ShowValidationIcon](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextEditSettings.ShowValidationIcon) — Specifies whether the editor shows validation icons.
+ * [ShowValidationSuccessState](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxEditSettings.ShowValidationSuccessState) — Specifies whether the editor displays green outline and validation icon after successful validation.
+
+In this demo, you can use checkboxes in the Grid toolbar to enable/disable validation and show/hide successful validation results. The **Edit Mode** combo box allows you to switch between [edit modes](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.EditMode).
 
 **Note**: You should not rely on form validation alone to secure your Blazor-powered app. Form validation is only designed to improve application usability. A threat actor can bypass validation and send malicious data to the server. To minimize security related threats/risks, you must track data changes using multiple strategies. Refer to the following topic for more information: [Validate User Input](https://docs.devexpress.com/Blazor/404263/common-concepts/validate-user-input).

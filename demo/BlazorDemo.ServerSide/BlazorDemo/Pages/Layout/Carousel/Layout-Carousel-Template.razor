@@ -1,0 +1,110 @@
+@using System.Threading
+<DemoPageSectionComponent Id="Layout-Carousel-Template"
+                          ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject ISalesInfoDataProvider Sales
+        <div>
+            <DxCarousel Width="750px"
+                        Height="450px"
+                        SizeMode="Params.SizeMode"
+                        AllowPagingByClick="false"
+                        CssClass="demo-carousel-container">
+                <Items>
+                    @foreach(var info in ChartInfos) {
+                        <DxCarouselItem>
+                            <div class="demo-carousel-content">
+                                <DxLoadingPanel @bind-Visible="PanelVisible"
+                                                IsContentBlocked="true"
+                                                ApplyBackgroundShading="false"
+                                                IndicatorAreaVisible="true"
+                                                Text="Loading...">
+                                    <DxChart Data="chartsData"
+                                             Width="100%"
+                                             Height="100%"
+                                             Rendered="@ChartRendered">
+                                        <DxChartTitle Text="@info.Title"></DxChartTitle>
+                                        @RenderSeries(info.Type, FirstSeriesName)
+                                        @RenderSeries(info.Type, SecondSeriesName)
+                                        <DxChartLegend HorizontalAlignment="HorizontalAlignment.Right"/>
+                                    </DxChart>
+                                </DxLoadingPanel>
+                            </div>
+                        </DxCarouselItem>
+                    }
+                </Items>
+            </DxCarousel>
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        IEnumerable<SaleInfo> chartsData;
+        int RemainingComponents;
+
+        protected override async Task OnInitializedAsync() {
+            RemainingComponents = ChartInfos.Count();
+            chartsData = await Sales.GetSalesAsync();
+        }
+
+        RenderFragment RenderSeries(string seriesType, string name) {
+            switch(seriesType) {
+                case "Line":
+                    return @<DxChartLineSeries Name="@name"
+                                               T="SaleInfo"
+                                               TArgument="DateTime"
+                                               TValue="int"
+                                               ArgumentField="si => new DateTime(si.Date.Year, si.Date.Month, 1)"
+                                               ValueField="si => si.Amount"
+                                               SummaryMethod="Enumerable.Sum"
+                                               Filter="si => si.Region == name">
+                           </DxChartLineSeries>;
+                case "StepLine":
+                    return @<DxChartStepLineSeries Name="@name"
+                                                   T="SaleInfo"
+                                                   TArgument="DateTime"
+                                                   TValue="int"
+                                                   ArgumentField="si => new DateTime(si.Date.Year, si.Date.Month, 1)"
+                                                   ValueField="si => si.Amount"
+                                                   SummaryMethod="Enumerable.Sum"
+                                                   Filter="si => si.Region == name">
+                           </DxChartStepLineSeries>;
+                case "Area":
+                    return @<DxChartAreaSeries Name="@name"
+                                               T="SaleInfo"
+                                               TArgument="DateTime"
+                                               TValue="int"
+                                               ArgumentField="si => new DateTime(si.Date.Year, si.Date.Month, 1)"
+                                               ValueField="si => si.Amount"
+                                               SummaryMethod="Enumerable.Sum"
+                                               Filter="si => si.Region == name">
+                           </DxChartAreaSeries>;
+                case "StackedSplineArea":
+                    return @<DxChartStackedSplineAreaSeries Name="@name"
+                                                            T="SaleInfo"
+                                                            TArgument="DateTime"
+                                                            TValue="int"
+                                                            ArgumentField="si => new DateTime(si.Date.Year, si.Date.Month, 1)"
+                                                            ValueField="si => si.Amount"
+                                                            SummaryMethod="Enumerable.Sum"
+                                                            Filter="si => si.Region == name">
+                           </DxChartStackedSplineAreaSeries>;
+            }
+            throw new ArgumentException("Incorrect series type");
+        }
+
+        IEnumerable<ChartInfo> ChartInfos = new List<ChartInfo> {
+            new("Line", "Line Series"),
+            new("StepLine", "Step-Line Series"),
+            new("Area", "Area Series"),
+            new("StackedSplineArea", "Stacked Spline-Area Series")
+        };
+
+        string FirstSeriesName = "North America";
+        string SecondSeriesName = "Europe";
+        bool PanelVisible { get; set; } = true;
+        void ChartRendered() {
+            Interlocked.Decrement(ref RemainingComponents);
+            if(RemainingComponents <= 0)
+                PanelVisible = false;
+        }
+    }
+</DemoPageSectionComponent>

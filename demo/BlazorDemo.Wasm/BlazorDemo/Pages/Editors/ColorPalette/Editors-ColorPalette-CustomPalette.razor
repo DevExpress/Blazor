@@ -1,0 +1,80 @@
+﻿@using BlazorDemo.Pages.Editors.ColorPalette.Models
+<DemoPageSectionComponent Id="Editors-ColorPalette-CustomPalette" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <style>
+            .colors-container li:nth-child(1)::before {
+                @GetBackground(Value)
+            }
+            .colors-container li:nth-child(2)::before {
+                @GetBackground(ColorBlindColors?.Protanopia)
+            }
+            .colors-container li:nth-child(3)::before {
+                @GetBackground(ColorBlindColors?.Deuteranopia)
+            }
+            .colors-container li:nth-child(4)::before {
+                @GetBackground(ColorBlindColors?.Tritanopia)
+            }
+        </style>
+        <div class="color-palette-main-container">
+            <div class="color-palette-container">
+                <DxColorPalette Value="@Value" ValueChanged="@OnValueChanged" ShowNoColorTile="@false" SizeMode="@Params.SizeMode">
+                    <Groups>
+                        <DxColorPaletteGroup Header="Color Blind Safe" Colors="@Colors.Keys.ToList()" />
+                    </Groups>
+                </DxColorPalette>
+                <p class="demo-text mt-3">
+                    @GetSelectedValueDescription()
+                </p>
+            </div>
+            <div class="colors-container">
+                <ul>
+                    <li>Standard</li>
+                    <li>Protanopia</li>
+                    <li>Deuteranopia</li>
+                    <li>Tritanopia</li>
+                </ul>
+            </div>
+        </div>
+        <p class="info-text">
+            <span>Source: <a href="https://personal.sron.nl/~pault/">Paul Tol</a></span>
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        readonly Dictionary<string, ColorBlindModel> Colors = new() {
+            { "rgb(68,119,170)", new ColorBlindModel { Protanopia = "rgb(98,113,165)", Deuteranopia = "rgb(89,114,170)", Tritanopia = "rgb(52,125,135)" } },
+            { "rgb(102,204,238)", new ColorBlindModel { Protanopia = "rgb(181,188,228)", Deuteranopia = "rgb(179,186,244)", Tritanopia = "rgb(94,205,222)" } },
+            { "rgb(34,136,51)", new ColorBlindModel { Protanopia = "rgb(131,118,49)", Deuteranopia = "rgb(145,112,63)", Tritanopia = "rgb(68,126,136)" } },
+            { "rgb(204,187,68)", new ColorBlindModel { Protanopia = "rgb(206,184,69)", Deuteranopia = "rgb(231,175,74)", Tritanopia = "rgb(214,173,187)" } },
+            { "rgb(238,102,119)", new ColorBlindModel { Protanopia = "rgb(150,145,138)", Deuteranopia = "rgb(172,139,110)", Tritanopia = "rgb(237,103,110)" } },
+            { "rgb(170,51,119)", new ColorBlindModel { Protanopia = "rgb(81,97,145)", Deuteranopia = "rgb(103,96,109)", Tritanopia = "rgb(164,67,71)" } },
+            { "rgb(187,187,187)", new ColorBlindModel { Protanopia = "rgb(189,185,185)", Deuteranopia = "rgb(203,180,187)", Tritanopia = "rgb(188,184,198)" } },
+        };
+
+        string Value { get; set; }
+        ColorBlindModel ColorBlindColors { get; set; }
+
+        protected override void OnInitialized()
+        {
+            var value = Colors.First();
+            Value = value.Key;
+            ColorBlindColors = value.Value;
+        }
+
+        RenderFragment GetSelectedValueDescription() {
+            if(Value != null)
+                return @<text>Value: @Value</text>;
+            else
+                return @<text>No selected color</text>;
+        }
+
+        void OnValueChanged(string value) {
+            Value = value;
+            ColorBlindColors = Colors.GetValueOrDefault(value);
+        }
+
+        string GetBackground(string color) {
+            return $"background: {color};";
+        }
+    }
+</DemoPageSectionComponent>

@@ -1,0 +1,91 @@
+﻿<DemoPageSectionComponent Id="Navigation-Ribbon-Adaptivity" ShowSizeMode="true">
+<ChildContentWithParameters Context="Params">
+    <DemoResizableContent>
+        <DxRibbon SizeMode="Params.SizeMode">
+            <DxRibbonTab Text="Home">
+                <DxRibbonGroup Text="Font" IconCssClass="rb-icon rb-icon-font">
+                    <DxRibbonItem Text="Undo"
+                                  IconCssClass="rb-icon rb-icon-undo" />
+                    <DxRibbonItem Text="Redo"
+                                  IconCssClass="rb-icon rb-icon-redo" />
+                    <DxRibbonItem Text="Paste"
+                                  IconCssClass="rb-icon rb-icon-paste"
+                                  SplitDropDownButton="true">
+                        <DxRibbonItem Text="Copy"
+                                      IconCssClass="rb-icon rb-icon-copy" />
+                        <DxRibbonItem Text="Cut"
+                                      IconCssClass="rb-icon rb-icon-cut" />
+                    </DxRibbonItem>
+                    <DxRibbonItem Text="Paint format"
+                                  IconCssClass="rb-icon rb-icon-paint" />
+                    <DxRibbonComboBoxItem Data="Fonts"
+                                          @bind-Value="CurrentFont"
+                                          TextFieldName="@nameof(FontInfo.Name)"
+                                          Width="120px" />
+                    <DxRibbonComboBoxItem Data="FontSizes"
+                                          @bind-Value="CurrentFontSize"
+                                          TextFieldName="@nameof(FontSizeInfo.Size)"
+                                          Width="65px" />
+                    <DxRibbonItem Text="Bold" IconCssClass="rb-icon rb-icon-bold" />
+                    <DxRibbonItem Text="Italic" IconCssClass="rb-icon rb-icon-italic" />
+                    <DxRibbonItem Text="Underscore" IconCssClass="rb-icon rb-icon-underline" />
+                    <DxRibbonColorPaletteItem Text="Font color" @bind-Value="color" />
+                </DxRibbonGroup>
+                <DxRibbonGroup Text="Paragraph" IconCssClass="rb-icon rb-icon-symbol">
+                    <DxRibbonItem Text="Bullets"
+                                  IconCssClass="rb-icon rb-icon-bullets"
+                                  SplitDropDownButton="true">
+                        <DxRibbonItem Text="Numbering" />
+                        <DxRibbonItem Text="Multilevel list" />
+                    </DxRibbonItem>
+                    <DxRibbonItem Text="Align left"
+                                  IconCssClass="rb-icon rb-icon-align-left"
+                                  SplitDropDownButton="true">
+                        <DxRibbonItem Text="Align right"
+                                      IconCssClass="rb-icon rb-icon-align-right" />
+                        <DxRibbonItem Text="Align center"
+                                      IconCssClass="rb-icon rb-icon-align-center" />
+                        <DxRibbonItem Text="Align justify"
+                                      IconCssClass="rb-icon rb-icon-align-justify" />
+                    </DxRibbonItem>
+                    <DxRibbonComboBoxItem Data="FontStyles"
+                                          @bind-Value="FontStyle"
+                                          Width="120px" />
+                    <DxRibbonItem Text="Search"
+                                  IconCssClass="rb-icon rb-icon-search"
+                                  SplitDropDownButton="true">
+                        <DxRibbonItem Text="Replace" />
+                        <DxRibbonItem Text="Select" />
+                    </DxRibbonItem>
+                    <DxRibbonItem Text="Dictate"
+                                  IconCssClass="rb-icon rb-icon-dictate"
+                                  SplitDropDownButton="true">
+                        <DxRibbonItem Text="Transcribe" />
+                    </DxRibbonItem>
+                    <DxRibbonItem Text="Link" IconCssClass="rb-icon rb-icon-link" />
+                </DxRibbonGroup>
+            </DxRibbonTab>
+        </DxRibbon>
+    </DemoResizableContent>
+</ChildContentWithParameters>
+</DemoPageSectionComponent>
+
+@code {
+    string color = "";
+
+    private FontInfo CurrentFont { get; set; } = FontInfo.DefaultFonts[0];
+    private IEnumerable<FontInfo> Fonts => FontInfo.DefaultFonts;
+
+    private FontSizeInfo CurrentFontSize { get; set; } = FontSizeInfo.DefaultFontSizes[0];
+    private IEnumerable<FontSizeInfo> FontSizes => FontSizeInfo.DefaultFontSizes;
+
+    private string FontStyle { get; set; }
+    private string[] FontStyles { get; set; } = [
+        "Normal", "No spacing", "Header 1", "Header 2", "Header 3", "Sub heading", "Highlighting"
+    ];
+
+    public override Task SetParametersAsync(ParameterView parameters) {
+        FontStyle = FontStyles[0];
+        return base.SetParametersAsync(parameters);
+    }
+}

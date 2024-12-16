@@ -1,0 +1,102 @@
+/*BeginHide*/
+::deep /*EndHide*/ .buttons-group-title {
+    font-weight: 500;
+}
+
+/*BeginHide*/
+::deep /*EndHide*/ .icon {
+    width: 16px;
+    height: 16px;
+    background-color: currentColor;
+    opacity: 0.7;
+}
+
+/*BeginHide*/
+::deep /*EndHide*/ .icon-continue {
+    -webkit-mask-image: url("images/icons/continue.svg");
+    mask-image: url("images/icons/continue.svg");
+}
+
+/*BeginHide*/
+::deep /*EndHide*/ .icon-pause {
+    -webkit-mask-image: url("images/icons/pause.svg");
+    mask-image: url("images/icons/pause.svg");
+}
+
+/*BeginHide*/
+::deep /*EndHide*/ .icon-last {
+    -webkit-mask-image: url("images/icons/last.svg");
+    mask-image: url("images/icons/last.svg");
+}
+
+/*BeginHide*/
+::deep /*EndHide*/ .icon-settings {
+    -webkit-mask-image: url("images/icons/settings.svg");
+    mask-image: url("images/icons/settings.svg");
+}
+
+/*BeginHide*/
+::deep /*EndHide*/ .icon-full-screen {
+    -webkit-mask-image: url("images/icons/full-screen.svg");
+    mask-image: url("images/icons/full-screen.svg");
+}
+
+/*BeginHide*/
+::deep /*EndHide*/ .icon-lock-column {
+    -webkit-mask-image: url("images/icons/lock-column.svg");
+    mask-image: url("images/icons/lock-column.svg");
+}
+
+/*BeginHide*/
+::deep /*EndHide*/ .icon-edit {
+    -webkit-mask-image: url("images/icons/edit.svg");
+    mask-image: url("images/icons/edit.svg");
+}
+
+/*BeginHide*/
+::deep /*EndHide*/ .icon-no-tooltip {
+    -webkit-mask-image: url("images/icons/scheduler-no-tooltip.svg");
+    mask-image: url("images/icons/scheduler-no-tooltip.svg");
+}
+
+/*BeginHide*/
+::deep /*EndHide*/ .icon-user {
+    -webkit-mask-image: url("images/icons/popup-user.svg");
+    mask-image: url("images/icons/popup-user.svg");
+}
+
+/*BeginHide*/
+::deep /*EndHide*/ .icon-validation-warning {
+    -webkit-mask-image: url("images/icons/validation-warning.svg");
+    mask-image: url("images/icons/validation-warning.svg");
+}
+
+/*BeginHide*/
+::deep /*EndHide*/ .icon-check {
+    -webkit-mask-image: url("images/icons/check.svg");
+    mask-image: url("images/icons/check.svg");
+}
+
+/*BeginHide*/
+::deep /*EndHide*/ .icon-user-profile {
+    -webkit-mask-image: url("images/icons/user-profile.svg");
+    mask-image: url("images/icons/user-profile.svg");
+}
+
+/*BeginHide*/
+::deep /*EndHide*/ .icon-clock {
+    -webkit-mask-image: url("images/icons/editor-clock.svg");
+    mask-image: url("images/icons/editor-clock.svg");
+}
+
+/*BeginHide*/
+::deep /*EndHide*/ .icon-plus {
+    -webkit-mask-image: url("images/icons/plus.svg");
+    mask-image: url("images/icons/plus.svg");
+}
+
+/*BeginHide*/
+::deep /*EndHide*/ .icon-delete {
+    -webkit-mask-image: url("images/icons/delete.svg");
+    mask-image: url("images/icons/delete.svg");
+}

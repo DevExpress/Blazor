@@ -1,0 +1,25 @@
+﻿@inject ICarouselImageDataProvider CarouselImageDataProvider
+@using DevExpress.AIIntegration.Blazor.Chat
+
+<DemoPageSectionComponent Id="AI-Chat-ContentTemplate"
+                          ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="chat-demo-container">
+            <DxAIChat CssClass="demo-chat" Initialized="ChatInitialized" SizeMode="Params.SizeMode" ResponseContentFormat="ResponseContentFormat.Markdown">
+                <MessageContentTemplate>
+                    <div class="demo-chat-content">
+                        @(new MarkupString(Markdig.Markdown.ToHtml(context.Content)))
+                    </div>
+                </MessageContentTemplate>
+            </DxAIChat>
+        </div>
+        @code {
+            void ChatInitialized(IAIChat chat) {
+                chat.LoadMessages(new[] {
+                    new BlazorChatMessage(Microsoft.Extensions.AI.ChatRole.User, "Hello, AI!"),
+                    new BlazorChatMessage(Microsoft.Extensions.AI.ChatRole.Assistant, "Hey there, human! What's on your mind? 😊")
+                });
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

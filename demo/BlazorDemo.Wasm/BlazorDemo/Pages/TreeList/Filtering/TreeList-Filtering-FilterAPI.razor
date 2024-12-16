@@ -31,7 +31,7 @@
             </Columns>
             <ToolbarTemplate>
                 <div class="cw-480">
-                    <DxTagBox Data="SpaceObjectTypes"
+                    <DxTagBox Data="TreeListRenderHelper.SpaceObjectTypes"
                               CssClass="cw-480 option-component"
                               Values="SelectedSpaceObjectTypes"
                               ValuesChanged="(IEnumerable<string> values) => TagBox_ValuesChanged(values)"
@@ -45,13 +45,7 @@
         @code {
             ITreeList TreeList { get; set; }
             object Data { get; set; }
-            IEnumerable<string> SpaceObjectTypes { get; } = new[] {
-                "Star",
-                "Planet",
-                "Dwarf planet",
-                "Satellite",
-                "Asteroid"
-            };
+
             IEnumerable<string> SelectedSpaceObjectTypes { get; set; }
 
             protected override void OnInitialized() {

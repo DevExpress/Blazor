@@ -7,7 +7,7 @@ Key Toolbar API members are as follows:
 *   [BeginGroup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarItemBase.BeginGroup) — Set to `true` to create a new item group.
 *   [IconCssClass](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarItemBase.IconCssClass) — Specifies the name of the CSS class applied to a toolbar item's icon.
 *   [NavigateUrl](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.NavigateUrl) — Specifies the item's navigation URL. When this property is specified, the button is rendered as a hyperlink.
-*   [Target](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.Target) — Specifies [target](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/A) attribute value for an item.
+*   [Target](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToolbarItem.Target) — Specifies [target](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target) attribute value for an item.
 *   [Alignment](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxToolbarItemBase.Alignment) — Specifies item alignment.
 *   [Enabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxNavigationControlComponent-2.Enabled) — Specifies whether the component is enabled.
 

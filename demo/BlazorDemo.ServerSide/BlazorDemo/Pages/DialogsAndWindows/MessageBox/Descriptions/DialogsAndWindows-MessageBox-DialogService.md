@@ -1,0 +1,4 @@
+Our Blazor Message Box Dialog Service allows you to create and display dialogs ([DxMessageBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMessageBox) objects) in code. To use the service, inject it with the `Inject` attribute and declare a [DxDialogProvider](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDialogProvider) object on the page. Call methods implemented by the [IDialogService](https://docs.devexpress.com/Blazor/DevExpress.Blazor.IDialogService) interface to create alert and confirmation dialogs:
+
+* [AlertAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.IDialogService.AlertAsync(DevExpress.Blazor.MessageBoxOptions)) creates and displays an alert dialog with an OK button.
+* [ConfirmAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.IDialogService.ConfirmAsync(DevExpress.Blazor.MessageBoxOptions)) creates and displays a confirmation dialog with OK and Cancel buttons.

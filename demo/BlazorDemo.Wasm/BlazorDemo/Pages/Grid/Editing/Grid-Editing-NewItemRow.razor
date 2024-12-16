@@ -1,0 +1,150 @@
+﻿@page "/Grid/EditData/NewItemRow"
+@layout DataProviderAccessArea<INwindDataProvider, IWorldcitiesDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Editing-NewItemRow" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        @inject WorldcitiesDataService WorldcitiesDataService
+
+        <div class="grid-container">
+            <DxGrid @ref="Grid"
+                    Data="DataSource"
+                    ValidationEnabled="false"
+                    SizeMode="Params.SizeMode"
+                    EditMode="GridEditMode.EditCell"
+                    EditModelSaving="Grid_EditModelSaving"
+                    DataItemDeleting="Grid_DataItemDeleting"
+                    CustomizeEditModel="Grid_CustomizeEditModel"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                    EditNewRowPosition="NewItemRowPosition"
+                    ShowAllRows="true"
+                    TextWrapEnabled="false"
+                    HighlightRowOnHover="true">
+                <Columns>
+                    <DxGridDataColumn FieldName="CompanyName" />
+                    <DxGridDataColumn FieldName="ContactName" />
+                    <DxGridDataColumn FieldName="ContactTitle" />
+                    <DxGridDataColumn FieldName="Phone" Width="10%" />
+                    <DxGridDataColumn FieldName="Country" Width="10%">
+                        <CellEditTemplate>
+                            @{
+                                var supplier = (Supplier)context.EditModel;
+                            }
+                            <DxComboBox Data="@Countries"
+                                        NullText="Select Country..."
+                                        SearchMode="ListSearchMode.AutoSearch"
+                                        SearchFilterCondition="ListSearchFilterCondition.Contains"
+                                        TextFieldName="CountryName"
+                                        ValueFieldName="CountryName"
+                                        Value="@supplier.Country"
+                                        ValueChanged="(string newCellValue) => {
+                                                            supplier.Country = newCellValue;
+                                                            supplier.City = null;
+                                                      }">
+                            </DxComboBox>
+                        </CellEditTemplate>
+                    </DxGridDataColumn>
+                    <DxGridDataColumn FieldName="City" Width="10%">
+                        <CellEditTemplate>
+                            @{
+                                var supplier = (Supplier)context.EditModel;
+                                var countryId = Countries.Where(c => c.CountryName == supplier.Country).FirstOrDefault()?.CountryId;
+                                var cities = Cities.Where(x => x.CountryId == countryId);
+                            }
+                            <DxComboBox Data="@cities"
+                                        NullText="Select City..."
+                                        SearchMode="ListSearchMode.AutoSearch"
+                                        SearchFilterCondition="ListSearchFilterCondition.Contains"
+                                        @bind-Value="@supplier.City"
+                                        TextFieldName="CityName"
+                                        ValueFieldName="CityName">
+                            </DxComboBox>
+                        </CellEditTemplate>
+                    </DxGridDataColumn>
+                    <DxGridCommandColumn Width="30px" NewButtonVisible="false">
+                        <CellDisplayTemplate>
+                            <div class="grid-cell-align-center">
+                                <DxButton IconCssClass="grid-icon grid-icon-delete"
+                                          RenderStyle="ButtonRenderStyle.Link"
+                                          CssClass="grid-delete-btn"
+                                          aria-label="Delete"
+                                          Click="@(() => Grid.ShowRowDeleteConfirmation(context.VisibleIndex))"/>
+                            </div>
+                        </CellDisplayTemplate>
+                        <CellEditTemplate>
+                            <div class="grid-cell-align-center">
+                                <DxButton Enabled="false"
+                                          CssClass="grid-disabled-button"
+                                          IconCssClass="grid-icon grid-icon-delete"
+                                          aria-label="Delete"
+                                          RenderStyle="ButtonRenderStyle.Link"/>
+                            </div>
+                        </CellEditTemplate>
+                    </DxGridCommandColumn>
+                </Columns>
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" SizeMode="Params.SizeMode">
+                        <Items>
+                            <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                                <Template Context="toolbar_item_context">
+                                    <div class="d-flex flex-row align-items-center h-100">
+                                        <div class="me-2">New Item Row Position:</div>
+                                        <DxComboBox Data="GridNewItemRowPositionItems" TextFieldName="Name" @bind-Value="NewItemRowPositionItem" />
+                                    </div>
+                                </Template>
+                            </DxToolbarItem>
+                        </Items>
+                    </DxToolbar>
+                </ToolbarTemplate>
+            </DxGrid>
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        IGrid Grid { get; set; }
+        IEnumerable<Supplier> DataSource { get; set; }
+        IEnumerable<Country> Countries { get; set; }
+        IEnumerable<City> Cities { get; set; }
+
+        IEnumerable<GridEditNewRowPositionItem> GridNewItemRowPositionItems { get; } = new[] {
+            GridEditNewRowPositionItem.Create(GridEditNewRowPosition.FixedOnTop),
+            GridEditNewRowPositionItem.Create(GridEditNewRowPosition.LastRow)
+        };
+        GridEditNewRowPositionItem NewItemRowPositionItem { get; set; }
+        GridEditNewRowPosition NewItemRowPosition => NewItemRowPositionItem?.Value ?? GridEditNewRowPosition.FixedOnTop;
+
+        protected override async Task OnInitializedAsync() {
+            await InitializeDataAsync();
+            Countries = await WorldcitiesDataService.GetCountriesAsync();
+            Cities = await WorldcitiesDataService.GetCitiesAsync();
+
+            NewItemRowPositionItem = GridNewItemRowPositionItems.First();
+        }
+        void Grid_CustomizeEditModel(GridCustomizeEditModelEventArgs e) {
+            if(e.IsNew) {
+                var newSupplier = (Supplier)e.EditModel;
+                newSupplier.CompanyName = "DevExpress";
+                newSupplier.ContactName = "John Doe";
+            }
+        }
+        async Task Grid_EditModelSaving(GridEditModelSavingEventArgs e) {
+            var editableSupplier = (Supplier)e.EditModel;
+            if(e.IsNew)
+                await NwindDataService.InsertSupplierAsync(editableSupplier);
+            else
+                await NwindDataService.UpdateSupplierAsync((Supplier)e.DataItem, editableSupplier);
+            await InitializeDataAsync();
+        }
+        async Task Grid_DataItemDeleting(GridDataItemDeletingEventArgs e) {
+            await NwindDataService.RemoveSupplierAsync((Supplier)e.DataItem);
+            await InitializeDataAsync();
+        }
+        async Task InitializeDataAsync() {
+            DataSource = await NwindDataService.GetSuppliersEditableAsync();
+        }
+
+        record GridEditNewRowPositionItem(string Name, GridEditNewRowPosition Value) {
+            public static GridEditNewRowPositionItem Create(GridEditNewRowPosition mode) => new (SplitTextHelper.SplitPascalCaseString(mode.ToString()), mode);
+        }
+    }
+</DemoPageSectionComponent>

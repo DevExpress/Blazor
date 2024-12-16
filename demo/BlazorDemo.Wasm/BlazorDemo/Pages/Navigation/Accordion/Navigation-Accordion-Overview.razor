@@ -10,7 +10,7 @@
                     @foreach(var (employee, i) in Items) {
                         <DxAccordionItem Text=@($"{employee.FirstName} {employee.LastName}") Expanded=@(i == 0)>
                             <ContentTemplate>
-                                <div class="py-3 px-3">
+                                <div class="py-3 px-3" tabindex="0">
                                     <EmployeeCard EmployeeInfo="@employee"/>
                                 </div>
                             </ContentTemplate>

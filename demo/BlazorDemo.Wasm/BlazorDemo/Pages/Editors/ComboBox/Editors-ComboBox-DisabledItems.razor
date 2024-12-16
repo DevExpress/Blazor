@@ -1,0 +1,27 @@
+﻿﻿<DemoPageSectionComponent Id="Editors-ComboBox-DisabledItems" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <label for="cbDisabledItems" class="demo-text cw-480 mb-1">
+            Product
+        </label>
+        <DxComboBox Data="@Products"
+                    @bind-Value="@SelectedProduct"
+                    CssClass="cw-480"
+                    NullText="Select a product without discount..."
+                    SizeMode="Params.SizeMode"
+                    TextFieldName="@(nameof(Product.ProductName))"
+                    DisabledFieldName="@(nameof(Product.Discontinued))"
+                    InputId="cbDisabledItems">
+        </DxComboBox>
+    </ChildContentWithParameters>
+
+    @code {
+        IEnumerable<Product> Products { get; set; }
+        Product SelectedProduct { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Products = await NwindDataService.GetProductsAsync();
+            SelectedProduct = Products.FirstOrDefault();
+        }
+    }
+</DemoPageSectionComponent>

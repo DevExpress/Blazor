@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
     public sealed class RemoteDataProviderLoader {
+#pragma warning disable DX0006
         private const int FetchBatchSize = 500;
 
         static readonly Dictionary<Guid, Type> EntityTypeLookup = new Dictionary<Guid, Type>() {
@@ -223,5 +224,6 @@ namespace BlazorDemo.Wasm.DataProviders.TransportInfrastructure {
             return _serviceProvider.GetService<EntityDataContainer>();
 #endif
         }
+#pragma warning restore DX0006
     }
 }

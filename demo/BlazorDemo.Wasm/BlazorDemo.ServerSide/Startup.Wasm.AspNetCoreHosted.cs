@@ -9,6 +9,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.IO;
+using Microsoft.Extensions.AI;
+using Azure.AI.OpenAI;
 
 namespace BlazorDemo.ServerSide {
     partial class Startup {

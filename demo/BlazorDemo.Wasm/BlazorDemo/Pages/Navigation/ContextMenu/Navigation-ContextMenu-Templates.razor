@@ -1,34 +1,51 @@
 ﻿<DemoPageSectionComponent Id="Navigation-ContextMenu-Templates" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        @*BeginHide*@
+        <style>
+            .dxbl-color-palette {
+                border-width: 0px;
+            }
+        </style>
+        @*EndHide*@
         <div class="demo-preventsel target-container" tabindex="0"
              @oncontextmenu="@OnContextMenu"
              @oncontextmenu:preventDefault
              @onkeydown="@OnKeyDown">
-            <p style="display: inline-block; text-align: center; margin: auto; color:@TextColor; background-color:@BackgroundColor">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</p>
+            <p style="display: inline-block; text-align: center; margin: auto; color:@GetTextColor(); background-color:@GetBackgroudColor()">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</p>
         </div>
 
         <DxContextMenu @ref="@ContextMenu" PositionTarget="#section-Templates .target-container" SizeMode="Params.SizeMode">
             <Items>
                 <DxContextMenuItem Text="Text color">
                     <SubMenuTemplate>
-                        <ColorPicker HeaderText="Text color" SelectedColor="@TextColor" ColorChanged="ChangeTextColor"/>
+                        <DxColorPalette Value="@TextColor" ValueChanged="ChangeTextColor">
+                            <Groups>
+                                <DxColorPaletteGroup Header="Text color" Colors="DxColorPalettePresets.GetPalette(ColorPalettePresetType.Universal)" />
+                                <DxColorPaletteGroup Colors="DxColorPalettePresets.GetPalette(ColorPalettePresetType.UniversalGradient)" />
+                            </Groups>
+                        </DxColorPalette>
                     </SubMenuTemplate>
                 </DxContextMenuItem>
                 <DxContextMenuItem Text="Background color">
                     <SubMenuTemplate>
-                        <ColorPicker HeaderText="Background color" SelectedColor="@BackgroundColor" ColorChanged="@ChangeBackgroundColor"/>
+                        <DxColorPalette Value="@BackgroundColor" ValueChanged="ChangeBackgroundColor">
+                            <Groups>
+                                <DxColorPaletteGroup Header="Background color" Colors="DxColorPalettePresets.GetPalette(ColorPalettePresetType.Universal)" />
+                                <DxColorPaletteGroup Colors="DxColorPalettePresets.GetPalette(ColorPalettePresetType.UniversalGradient)" />
+                            </Groups>
+                        </DxColorPalette>
                     </SubMenuTemplate>
                 </DxContextMenuItem>
                 <DxContextMenuItem Text="Reset colors" Click="@ResetColors" BeginGroup="true"
-                                   Enabled="@(BackgroundColor != UnsetValue || TextColor != UnsetValue)"/>
+                                   Enabled="@(BackgroundColor != null || TextColor != null)"/>
             </Items>
         </DxContextMenu>
 
         @code {
             const string UnsetValue = "unset";
             DxContextMenu ContextMenu { get; set; }
-            private string TextColor { get; set; } = UnsetValue;
-            private string BackgroundColor { get; set; } = UnsetValue;
+            private string TextColor { get; set; } = null;
+            private string BackgroundColor { get; set; } = null;
 
             void ChangeTextColor(string color) {
                 TextColor = color;
@@ -39,7 +56,7 @@
                 ContextMenu.HideAsync();
             }
             void ResetColors() {
-                BackgroundColor = TextColor = UnsetValue;
+                BackgroundColor = TextColor = null;
                 InvokeAsync(StateHasChanged);
             }
             async void OnContextMenu(MouseEventArgs args) {
@@ -49,6 +66,8 @@
                 if (args.Key == "F10" && args.ShiftKey)
                     await ContextMenu.ShowAsync(ContextMenuPosition.Center);
             }
+            string GetTextColor() => TextColor == null ? UnsetValue : TextColor;
+            string GetBackgroudColor() => BackgroundColor == null ? UnsetValue : BackgroundColor;
         }
     </ChildContentWithParameters>
 </DemoPageSectionComponent>

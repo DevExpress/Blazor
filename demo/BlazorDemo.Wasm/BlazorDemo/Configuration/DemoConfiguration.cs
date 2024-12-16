@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
-using DevExpress.Blazor.DocumentMetadata;
+using System.Linq;
 using BlazorDemo.DemoData;
+using DevExpress.Blazor.DocumentMetadata;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
 
@@ -15,18 +16,23 @@ namespace BlazorDemo.Configuration {
         }
         public DemoConfiguration(IConfiguration configuration) {
             Configuration = configuration;
-
             Model = DemoModel.Create(IsServerSide);
-            Products = Model.Products;
-            RootPages = Model.RootPages;
-            Redirects = Model.Redirects ?? new Dictionary<string, string>();
-            Search = new DemoSearchHelper(Model.Search, RootPages);
+            Search = new DemoSearchEngine(Model.Search, Groups);
         }
 
         private IConfiguration Configuration { get; set; }
         public DemoModel Model { get; private set; }
-        public DemoSearchHelper Search { get; private set; }
+        public DemoSearchEngine Search { get; private set; }
 
+        bool? isSiteMode;
+        public bool IsSiteMode {
+            get => isSiteMode ??= GetConfigurationValue<bool>("SiteMode");
+        }
+
+        bool? isSingleProduct;
+        public bool IsSingleProduct {
+            get => isSingleProduct ??= Groups.Count() < 2;
+        }
         public bool IsServerSide =>
 #if SERVER_BLAZOR
             true;
@@ -35,20 +41,29 @@ namespace BlazorDemo.Configuration {
 #endif
         public virtual bool ShowOnlyReporting => false;
 
-        public virtual IEnumerable<DemoProductInfo> Products { get; }
-        public virtual IEnumerable<DemoRootPage> RootPages { get; }
-        public Dictionary<string, string> Redirects { get; private set; }
+        public virtual IEnumerable<DemoProductInfo> Products { get => Model.Products; }
+        public virtual IEnumerable<DemoGroup> Groups {
+            get {
+                return Model.Groups
+                    .Where(g => g.GetNavTreeChildren(IsSiteMode).Any())
+                    .Where(g => !ShowOnlyReporting || g.Category == GroupCategory.Reports);
+            }
+        }
+        public Dictionary<string, string> Redirects { get { return Model.Redirects; } }
 
         public T GetConfigurationValue<T>(string key) {
             return Configuration.GetValue<T>(key);
         }
 
-        public DemoPageBase GetDemoPageByUrl(NavigationManager navigationManager, string currentUrl) {
+        public DemoPage GetDemoPageByUrl(NavigationManager navigationManager, string currentUrl) {
             var demoPageUrl = navigationManager.ToAbsoluteUri(currentUrl).GetLeftPart(UriPartial.Path).Replace(navigationManager.BaseUri, "");
             return Model.GetDemoPageByUrl(demoPageUrl);
         }
         public DemoItem GetDemoItem(string id) {
             return Model.GetDemoItem(id);
+        }
+        public DemoItem FindDemoItemRecursively(Func<DemoItem, bool> predicate) {
+            return Model.FindDemoItemRecursively(predicate);
         }
 
         string GetDemoItemDescriptionResourcePath(DemoItem item) {
@@ -89,12 +104,12 @@ namespace BlazorDemo.Configuration {
                 .Viewport("width=device-width, initial-scale=1.0");
 
             var titleFormat = Model.TitleFormat ?? "{0}";
-            foreach(var rootPage in Model.RootPages) {
+            foreach(var rootPage in Model.Groups.SelectMany(g => g.Pages)) {
                 var title = rootPage.SeoTitle ?? rootPage.Title;
                 ConfigurePage(metadataCollection, rootPage, title, titleFormat);
             }
         }
-        static void ConfigurePage(IDocumentMetadataCollection metadataCollection, DemoPageBase page, string title, string titleFormat, bool stopIndexation = false) {
+        static void ConfigurePage(IDocumentMetadataCollection metadataCollection, DemoPage page, string title, string titleFormat, bool stopIndexation = false) {
             if(page.Url != null && !page.IsMaintenanceMode) {
                 var pageUrl = page.Url == "./" ? "" : page.Url;
                 var metaBuilder = metadataCollection.AddPage(pageUrl)
@@ -114,7 +129,7 @@ namespace BlazorDemo.Configuration {
                 ConfigurePage(metadataCollection, subPage, string.Join(" - ", title, subPage.Title), titleFormat, page.IsMaintenanceMode);
         }
         // Search
-        public List<DemoSearchResult> DoSearch(string request) {
+        public DemoSearchResult DoSearch(string request) {
             return Search.DoSearch(request);
         }
     }

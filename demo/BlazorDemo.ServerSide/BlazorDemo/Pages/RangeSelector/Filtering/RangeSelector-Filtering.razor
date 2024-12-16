@@ -1,0 +1,96 @@
+﻿@page "/RangeSelectorFiltering"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+@using DevExpress.Data.Filtering
+<DemoPageSectionComponent Id="RangeSelector-Filtering">
+    <DemoChildContent>
+        @inject NwindDataService NwindDataService
+        <DxRangeSelector Width="100%"
+                         ValueChanged="@OnValueChanged"
+                         ValueChangeMode="RangeSelectorValueChangeMode.OnHandleMove">
+            <DxTitleSettings Text="Filter Order List by Total Cost"></DxTitleSettings>
+            <DxRangeSelectorScale StartValue="@MinTotal"
+                                  EndValue="@MaxTotal">
+            </DxRangeSelectorScale>
+            <DxRangeSelectorSliderMarker>
+                <DxTextFormatSettings LdmlString="@LabelFormat" />
+            </DxRangeSelectorSliderMarker>
+        </DxRangeSelector>
+        <div class="grid-container">
+            <h2 class="grid-header">Orders</h2>
+            <DxGrid @ref="@Grid"
+                    Data="@Data"
+                    TextWrapEnabled="false"
+                    VirtualScrollingEnabled="true"
+                    HighlightRowOnHover="true">
+                <Columns>
+                    <DxGridDataColumn FieldName="OrderId" Caption="Order ID" TextAlignment="GridTextAlignment.Left" DisplayFormat="d" Width="10%" MinWidth="80"/>
+                    <DxGridDataColumn FieldName="CustomerId" Caption="Customer" Width="20%" MinWidth="100">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="Customers" ValueFieldName="CustomerId" TextFieldName="ContactName"/>
+                        </EditSettings>
+                    </DxGridDataColumn>
+                    <DxGridDataColumn FieldName="OrderDate" Width="10%" MinWidth="80"/>
+                    <DxGridDataColumn FieldName="ShipCountry" MinWidth="100"/>
+                    <DxGridDataColumn FieldName="ShipCity" MinWidth="100"/>
+                    <DxGridDataColumn FieldName="ShippedDate" Width="10%" MinWidth="80"/>
+                    <DxGridDataColumn FieldName="Total" DisplayFormat="c" Width="220px"/>
+                </Columns>
+                <TotalSummary>
+                    <DxGridSummaryItem SummaryType="GridSummaryItemType.Sum" FieldName="Total" DisplayText="Grand Total: {0}" ValueDisplayFormat="c0"/>
+                </TotalSummary>
+            </DxGrid>
+        </div>
+    </DemoChildContent>
+
+    @code {
+        IGrid Grid { get; set; }
+        IEnumerable<GridData> Data { get; set; }
+        IReadOnlyList<Customer> Customers { get; set; }
+        decimal MinTotal;
+        decimal MaxTotal;
+        string LabelFormat = ",##0";
+
+        protected override async Task OnInitializedAsync() {
+            Customers = (await NwindDataService.GetCustomersAsync()).ToList();
+            var orders = await NwindDataService.GetOrdersAsync();
+            var orderDetails = await NwindDataService.GetOrderDetailsAsync();
+            var orderCosts = orderDetails
+                .GroupBy(d => d.OrderId)
+                .ToDictionary(
+                    g => g.Key,
+                    g => g.Sum(x => x.UnitPrice * x.Quantity)
+                );
+            Data = orders.Join(orderCosts,
+                o => o.OrderId,
+                c => c.Key,
+                (o, c) => new GridData {
+                    OrderId = o.OrderId,
+                    CustomerId = o.CustomerId,
+                    OrderDate = o.OrderDate,
+                    ShippedDate = o.ShippedDate,
+                    ShipCountry = o.ShipCountry,
+                    ShipCity = o.ShipCity,
+                    Total = c.Value
+            });
+
+            MinTotal = Data.Min(x => x.Total);
+            MaxTotal = Data.Max(x => x.Total);
+        }
+
+        class GridData {
+            public decimal Total { get; set; }
+            public int OrderId { get; set; }
+            public string CustomerId { get; set; }
+            public DateTime? OrderDate { get; set; }
+            public DateTime? ShippedDate { get; set; }
+            public string ShipCountry { get; set; }
+            public string ShipCity { get; set; }
+        }
+
+        void OnValueChanged(RangeSelectorValueChangedEventArgs info) {
+            var filterCriteria = new BetweenOperator("Total", info.CurrentRange[0], info.CurrentRange[1]);
+            Grid.SetFieldFilterCriteria("Total", filterCriteria);
+        }
+    }
+</DemoPageSectionComponent>

@@ -1,0 +1,40 @@
+/*BeginHide*/ ::deep /*EndHide*/.priority-info {
+    background-color: var(--bs-info)
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.priority-warning {
+    background-color: var(--bs-orange)
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.priority-danger {
+    background-color: var(--bs-red)
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.status-icon {
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.status-icon-new {
+    background-color: var(--bs-cyan);
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.status-icon-rejected {
+    background-color: var(--bs-red);
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.status-icon-postponed {
+    background-color: var(--bs-gray-600);
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.status-icon-fixed {
+    background-color: var(--bs-green);
+}
+
+/*BeginHide*/ ::deep /*EndHide*/.dxbl-grid {
+    height: 522px;
+}
+/*BeginHide*/ .grid-container {
+    display: contents;
+}
+/*EndHide*/

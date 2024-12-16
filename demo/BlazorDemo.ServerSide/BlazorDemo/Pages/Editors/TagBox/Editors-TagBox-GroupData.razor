@@ -1,0 +1,28 @@
+﻿<DemoPageSectionComponent Id="Editors-TagBox-GroupData" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <label for="tbGroupData" class="demo-text cw-480 mb-1">
+            Employees
+        </label>
+        <DxTagBox Data="@Data"
+                  @bind-Values="@Values"
+                  TextFieldName="@nameof(Customer.ContactName)"
+                  GroupFieldName="@nameof(Customer.Country)"
+                  SearchMode="@ListSearchMode.AutoSearch"
+                  SearchFilterCondition="@ListSearchFilterCondition.Contains"
+                  SizeMode="Params.SizeMode"
+                  CssClass="cw-480"
+                  InputId="tbGrouping">
+        </DxTagBox>
+    </ChildContentWithParameters>
+
+    @code {
+        IEnumerable<Customer> Data { get; set; }
+        IEnumerable<Customer> Values { get; set; }
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetCustomersAsync();
+            Values = Data.Where(x => x.Country == "Argentina").Take(1);
+        }
+    }
+</DemoPageSectionComponent>

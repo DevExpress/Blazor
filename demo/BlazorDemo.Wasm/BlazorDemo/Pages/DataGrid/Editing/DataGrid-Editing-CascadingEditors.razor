@@ -24,7 +24,7 @@
                         var editingContext = (CellEditContext)context;
                         var country = (string)editingContext.GetEditorValue(nameof(Supplier.Country));
                     }
-                    <DxComboBox Data="@Countries"
+                    <DxComboBoxLegacy Data="@Countries"
                                 NullText="Select Country..."
                                 TextFieldName="@nameof(Country.CountryName)"
                                 ValueFieldName="@nameof(Country.CountryName)"
@@ -33,7 +33,7 @@
                                                     editingContext.OnChanged(newCellValue);
                                                     editingContext.OnChanged(nameof(Supplier.City), null);
                                                     }))">
-                    </DxComboBox>
+                    </DxComboBoxLegacy>
                 </EditTemplate>
             </DxDataGridComboBoxColumn>
             <DxDataGridColumn Field="@nameof(Supplier.City)">
@@ -46,13 +46,13 @@
                         var countryId = Countries.Where(c => c.CountryName == country).FirstOrDefault()?.CountryId;
                         var cities = Cities.Where(x => x.CountryId == countryId);
                     }
-                    <DxComboBox Data="@cities"
+                    <DxComboBoxLegacy Data="@cities"
                                 NullText="Select City..."
                                 Text="@city"
                                 TextFieldName="@nameof(City.CityName)"
                                 ValueFieldName="@nameof(City.CityName)"
                                 ValueChanged="@(EventCallback.Factory.Create(this, (string newCellValue) => editingContext.OnChanged(newCellValue)))">
-                    </DxComboBox>
+                    </DxComboBoxLegacy>
                 </EditTemplate>
             </DxDataGridColumn>
         </DxDataGrid>

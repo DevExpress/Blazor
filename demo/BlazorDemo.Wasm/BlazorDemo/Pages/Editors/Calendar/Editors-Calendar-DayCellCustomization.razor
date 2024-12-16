@@ -1,6 +1,6 @@
 ﻿<DemoPageSectionComponent Id="Editors-Calendar-DayCellCustomization" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <DxCalendar T="DateTime" SizeMode="Params.SizeMode">
+        <DxCalendar T="DateTime" SizeMode="Params.SizeMode" CssClass="demo-calendar">
             <DayCellTemplate>
                 <a class="@GetCssClassNames(context)">@context.Day.ToString()</a>
             </DayCellTemplate>

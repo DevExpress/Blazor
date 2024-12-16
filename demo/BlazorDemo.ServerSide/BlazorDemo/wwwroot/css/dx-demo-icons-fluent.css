@@ -1,0 +1,355 @@
+/* Grid */
+.theme-fluent-light .content .grid-icon-column-chooser,
+.theme-fluent-dark .content .grid-icon-column-chooser,
+.theme-fluent-light .content .treelist-toolbar-column-chooser,
+.theme-fluent-dark .content .treelist-toolbar-column-chooser,
+.theme-fluent-light .content .grid-toolbar-column-chooser,
+.theme-fluent-dark .content .grid-toolbar-column-chooser {
+    -webkit-mask-image: url("../images/icons/column-chooser-fluent.svg");
+    mask-image: url("../images/icons/column-chooser-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .file-system-icon-folder,
+.theme-fluent-dark .content .file-system-icon-folder {
+    -webkit-mask-image: url("../images/icons/folder-color-fluent.svg");
+    mask-image: url("../images/icons/folder-color-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .file-system-icon-file,
+.theme-fluent-dark .content .file-system-icon-file {
+    -webkit-mask-image: url("../images/icons/document-color-fluent.svg");
+    mask-image: url("../images/icons/document-color-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .grid-toolbar-export,
+.theme-fluent-dark .content .grid-toolbar-export {
+    -webkit-mask-image: url("../images/icons/export-fluent.svg");
+    mask-image: url("../images/icons/export-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .grid-toolbar-delete,
+.theme-fluent-dark .content .grid-toolbar-delete {
+    -webkit-mask-image: url("../images/icons/grid-toolbar-delete-fluent.svg");
+    mask-image: url("../images/icons/grid-toolbar-delete-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .grid-toolbar-edit,
+.theme-fluent-dark .content .grid-toolbar-edit {
+    -webkit-mask-image: url("../images/icons/grid-toolbar-edit-fluent.svg");
+    mask-image: url("../images/icons/grid-toolbar-edit-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .grid-toolbar-cancel,
+.theme-fluent-dark .content .grid-toolbar-cancel {
+    -webkit-mask-image: url("../images/icons/undo-fluent.svg");
+    mask-image: url("../images/icons/undo-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .grid-toolbar-save,
+.theme-fluent-dark .content .grid-toolbar-save {
+    -webkit-mask-image: url("../images/icons/save-fluent.svg");
+    mask-image: url("../images/icons/save-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .grid-toolbar-new,
+.theme-fluent-dark .content .grid-toolbar-new {
+    -webkit-mask-image: url("../images/icons/grid-toolbar-new-fluent.svg");
+    mask-image: url("../images/icons/grid-toolbar-new-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .grid-icon-delete,
+.theme-fluent-dark .content .grid-icon-delete {
+    -webkit-mask-image: url("../images/icons/delete-fluent.svg");
+    mask-image: url("../images/icons/delete-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .grid-icon-add,
+.theme-fluent-dark .content .grid-icon-add {
+    -webkit-mask-image: url("../images/icons/add-fluent.svg");
+    mask-image: url("../images/icons/add-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+/* Editors */
+.theme-fluent-light .content .editor-icon-chevron-right,
+.theme-fluent-dark .content .editor-icon-chevron-right {
+    -webkit-mask-image: url("../images/icons/chevron-right-fluent.svg");
+    mask-image: url("../images/icons/chevron-right-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .editor-icon-chevron-left,
+.theme-fluent-dark .content .editor-icon-chevron-left {
+    -webkit-mask-image: url("../images/icons/chevron-left-fluent.svg");
+    mask-image: url("../images/icons/chevron-left-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .editor-icon-chevron-right-small,
+.theme-fluent-dark .content .editor-icon-chevron-right-small {
+    -webkit-mask-image: url("../images/icons/chevron-right-fluent.svg");
+    mask-image: url("../images/icons/chevron-right-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .editor-icon-chevron-left-small,
+.theme-fluent-dark .content .editor-icon-chevron-right-small {
+    -webkit-mask-image: url("../images/icons/chevron-left-fluent.svg");
+    mask-image: url("../images/icons/chevron-left-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .editor-icon-dollar,
+.theme-fluent-dark .content .editor-icon-dollar {
+    -webkit-mask-image: url("../images/icons/dollar-fluent.svg");
+    mask-image: url("../images/icons/dollar-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .editor-icon-euro,
+.theme-fluent-dark .content .editor-icon-euro {
+    -webkit-mask-image: url("../images/icons/euro-fluent.svg");
+    mask-image: url("../images/icons/euro-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .editor-icon-add,
+.theme-fluent-dark .content .editor-icon-add {
+    -webkit-mask-image: url("../images/icons/add-fluent.svg");
+    mask-image: url("../images/icons/add-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .editor-icon-mail,
+.theme-fluent-dark .content .editor-icon-mail {
+    -webkit-mask-image: url("../images/icons/mail-fluent.svg");
+    mask-image: url("../images/icons/mail-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+.theme-fluent-light .content .btn-icon-undo,
+.theme-fluent-dark .content .btn-icon-undo {
+    -webkit-mask-image: url("../images/icons/undo-fluent.svg");
+    mask-image: url("../images/icons/undo-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+}
+.theme-fluent-light .content .btn-icon-redo,
+.theme-fluent-dark .content .btn-icon-redo {
+    -webkit-mask-image: url("../images/icons/redo-fluent.svg");
+    mask-image: url("../images/icons/redo-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+}
+.theme-fluent-light .content .btn-icon-like,
+.theme-fluent-dark .content .btn-icon-like {
+    -webkit-mask-image: url("../images/icons/like-fluent.svg");
+    mask-image: url("../images/icons/like-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+}
+body:has(main.theme-fluent-light) .editor-icon-city,
+body:has(main.theme-fluent-dark) .editor-icon-city {
+    -webkit-mask-image: url("../images/icons/city-fluent.svg");
+    mask-image: url("../images/icons/city-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+body:has(main.theme-fluent-light) .editor-icon-birthdate,
+body:has(main.theme-fluent-dark) .editor-icon-birthdate {
+    -webkit-mask-image: url("../images/icons/birthdate-fluent.svg");
+    mask-image: url("../images/icons/birthdate-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+/* Popup, Flyout */
+body:has(main.theme-fluent-light) .popup-icon-user,
+body:has(main.theme-fluent-dark) .popup-icon-user {
+    -webkit-mask-image: url("../images/icons/popup-user-fluent.svg");
+    mask-image: url("../images/icons/popup-user-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+body:has(main.theme-fluent-light) .popup-icon-position,
+body:has(main.theme-fluent-dark) .popup-icon-position {
+    -webkit-mask-image: url("../images/icons/popup-position-fluent.svg");
+    mask-image: url("../images/icons/popup-position-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+/* Scheduler */
+.theme-fluent-light .content .demo-resnavigator-icon,
+.theme-fluent-dark .content .demo-resnavigator-icon {
+    width: 20px;
+    height: 20px;
+    -webkit-mask: url("../images/icons/scheduler-navigator-fluent.svg");
+    mask: url("../images/icons/scheduler-navigator-fluent.svg");
+    background-color: currentColor;
+}
+.theme-fluent-light .content .icon-edit,
+.theme-fluent-dark .content .icon-edit {
+    -webkit-mask: url("../images/icons/scheduler-edit-fluent.svg");
+    mask: url("../images/icons/scheduler-edit-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .icon-add,
+.theme-fluent-dark .content .icon-add {
+    -webkit-mask: url("../images/icons/scheduler-add-fluent.svg");
+    mask: url("../images/icons/scheduler-add-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .icon-delete,
+.theme-fluent-dark .content .icon-delete {
+    -webkit-mask: url("../images/icons/scheduler-delete-fluent.svg");
+    mask: url("../images/icons/scheduler-delete-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+.theme-fluent-light .content .icon-drag-appointment-btw-resources,
+.theme-fluent-dark .content .icon-drag-appointment-btw-resources {
+    -webkit-mask: url("../images/icons/scheduler-drag-between-resources-fluent.svg");
+    mask: url("../images/icons/scheduler-drag-between-resources-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .icon-drag-and-sizing,
+.theme-fluent-dark .content .icon-drag-and-sizing {
+    -webkit-mask: url("../images/icons/scheduler-drag-and-resize-fluent.svg");
+    mask: url("../images/icons/scheduler-drag-and-resize-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+}
+
+.theme-fluent-light .content .dx-icon-time,
+.theme-fluent-dark .content .dx-icon-time {
+    -webkit-mask: url("../images/icons/time-fluent.svg");
+    mask: url("../images/icons/time-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+}
+.theme-fluent-light .content .icon-tooltip,
+.theme-fluent-dark .content .icon-tooltip {
+    -webkit-mask: url("../images/icons/scheduler-no-tooltip-fluent.svg");
+    mask: url("../images/icons/scheduler-no-tooltip-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+}
+body:has(main.theme-fluent-light) .dx-icon-accepted,
+body:has(main.theme-fluent-dark) .dx-icon-accepted {
+    background-color: currentColor;
+    -webkit-mask: url("../images/icons/accept-fluent.svg");
+    mask: url("../images/icons/accept-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+}
+
+body:has(main.theme-fluent-light) .dx-icon-tentative,
+body:has(main.theme-fluent-dark) .dx-icon-tentative {
+    background-color: currentColor;
+    -webkit-mask: url("../images/icons/quest-fluent.svg");
+    mask: url("../images/icons/quest-fluent.svg");
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+}
+/* Upload */
+.theme-fluent-light .component-container .drop-file-icon,
+.theme-fluent-dark .component-container .drop-file-icon {
+    -webkit-mask-image: url("../images/icons/drop-file-fluent.svg");
+    mask-image: url("../images/icons/drop-file-fluent.svg");
+}

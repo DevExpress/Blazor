@@ -1,11 +1,11 @@
-using System.Linq;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using System;
+using BlazorDemo.Configuration;
 using BlazorDemo.Shared;
 using BlazorDemo.Shared.ThemeSwitcher;
-using BlazorDemo.Configuration;
 
 namespace BlazorDemo.Services {
     public interface IDemoThemeChangeRequestDispatcher {
@@ -23,6 +23,8 @@ namespace BlazorDemo.Services {
             ["blazing-dark"] = "blazing-dark.bs5",
             ["office-white"] = "office-white.bs5",
             ["purple"] = "purple.bs5",
+            ["fluent-light"] = "fluent-light.bs5",
+            ["fluent-dark"] = "fluent-dark.bs5",
         };
         private DemoTheme _activeTheme;
 #if SERVER_BLAZOR
@@ -35,7 +37,8 @@ namespace BlazorDemo.Services {
             { DefaultThemeName, "default" },
             { "blazing-dark", "androidstudio" },
             { "cyborg", "androidstudio" },
-            { "default-dark", "androidstudio" }
+            { "default-dark", "androidstudio" },
+            { "fluent-dark", "androidstudio" },
         };
 
         public IDemoThemeChangeRequestDispatcher ThemeChangeRequestDispatcher { get; set; }
@@ -56,7 +59,7 @@ namespace BlazorDemo.Services {
 
         public string GetThemeCssUrl(DemoTheme theme) {
             if(EnableNewBlazorThemes) {
-                if (this.newBlazorThemesMapping.ContainsKey(theme.Name))
+                if(this.newBlazorThemesMapping.ContainsKey(theme.Name))
                     return $"_content/DevExpress.Blazor.Themes/{this.newBlazorThemesMapping.GetValueOrDefault(theme.Name)}.min.css";
                 return $"_content/DevExpress.Blazor.Themes/bootstrap-external.bs5.min.css";
             }
@@ -103,7 +106,8 @@ namespace BlazorDemo.Services {
         private static List<DemoThemeSet> CreateSets(DemoThemeService config) {
             return new List<DemoThemeSet>() {
                 new DemoThemeSet("DevExpress Themes", "blazing-berry", "blazing-dark", "purple", "office-white"),
-                new DemoThemeSet("Bootstrap Themes", "default", "default-dark", "cerulean", "cyborg", "flatly", "journal", "litera", "lumen", "lux", "pulse", "simplex", "solar", "superhero", "united", "yeti")
+                new DemoThemeSet("Bootstrap Themes", "default", "default-dark", "cerulean", "cyborg", "flatly", "journal", "litera", "lumen", "lux", "pulse", "simplex", "solar", "superhero", "united", "yeti"),
+                new DemoThemeSet("Fluent Themes", "fluent-light", "fluent-dark")
             };
         }
     }

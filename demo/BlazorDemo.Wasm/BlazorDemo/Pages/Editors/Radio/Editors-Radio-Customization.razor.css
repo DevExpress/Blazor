@@ -15,7 +15,7 @@
 /*BeginHide*/::deep /*EndHide*/.dx-demo-radio-group {
     padding-bottom: 1rem;
 }
-/*BeginHide*/::deep /*EndHide*/.dx-demo-radio-group > .dx-demo-radio + .dx-demo-radio {
+/*BeginHide*/::deep /*EndHide*/.dx-demo-radio-group > .dx-demo-radio ~ .dx-demo-radio {
      padding-top: 0.5rem;
  }
 /*BeginHide*/::deep /*EndHide*/.dx-demo-radio-group > .dx-demo-radio.dx-demo-radio-selected {

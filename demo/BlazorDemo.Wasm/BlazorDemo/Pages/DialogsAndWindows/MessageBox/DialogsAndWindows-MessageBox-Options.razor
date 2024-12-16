@@ -1,0 +1,31 @@
+<DemoPageSectionComponent Id="DialogsAndWindows-MessageBox-Options" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="target-container" @onclick="@(() => MessageBoxVisible = true)">
+            <p class="target-caption">CLICK TO SHOW A MESSAGE BOX WINDOW</p>
+        </div>
+
+        <DxMessageBox @bind-Visible="MessageBoxVisible"
+                      Title="Error"
+                      Text="Unable to process the request. Please try again later or contact support."
+                      OkButtonText="Contact support..."
+                      ShowCloseButton="@MessageBoxShowCloseButton"
+                      CloseOnOutsideClick="@MessageBoxCloseOnOutsideClick"
+                      CloseOnEscape="@MessageBoxCloseOnEscape"
+                      RenderStyle="@MessageBoxRenderStyle.Danger"
+                      SizeMode="@Params.SizeMode"
+                      Type="@MessageBoxType.Confirmation"
+        >
+        </DxMessageBox>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionCheckBox Label="Show Close Button" @bind-Checked="@MessageBoxShowCloseButton" />
+        <OptionCheckBox Label="Close on Outside Click" @bind-Checked="@MessageBoxCloseOnOutsideClick" />
+        <OptionCheckBox Label="Close on Escape" @bind-Checked="@MessageBoxCloseOnEscape" />
+    </OptionsContent>
+    @code {
+        bool MessageBoxVisible { get; set; } = false;
+        bool MessageBoxCloseOnEscape { get; set; } = false;
+        bool MessageBoxCloseOnOutsideClick { get; set; } = false;
+        bool MessageBoxShowCloseButton { get; set; } = false;
+    }
+</DemoPageSectionComponent>

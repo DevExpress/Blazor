@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace BlazorDemo.Wasm.DataProviders.Implementation {
     public class WeatherSummaryDataProviderWasm : IWeatherSummaryDataProvider {
+#pragma warning disable DX0006
         HttpClient httpClient;
 
         public WeatherSummaryDataProviderWasm(HttpClient httpClient) {
@@ -22,5 +23,6 @@ namespace BlazorDemo.Wasm.DataProviders.Implementation {
             else
                 return summary;
         }
+#pragma warning restore DX0006
     }
 }

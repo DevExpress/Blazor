@@ -1,0 +1,77 @@
+﻿@page "/TreeList/DragDropRows/Reordering"
+@using System.Collections.ObjectModel;
+
+<DemoPageSectionComponent Id="TreeList-DragDropRows-Reordering" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject IEmployeeTaskDataProvider EmployeeTaskDataProvider
+
+        <DxTreeList @ref="TreeList"
+                    Data="DataSource"
+                    KeyFieldName="Id"
+                    ParentKeyFieldName="ParentId"
+                    AllowDragRows="true"
+                    AutoExpandAllNodes="true"
+                    VirtualScrollingEnabled="true"
+                    CssClass="max-h-480"
+                    SizeMode="Params.SizeMode"
+                    ItemsDropped="TreeList_ItemsDropped">
+            <Columns>
+                <DxTreeListDataColumn @ref="TreeList_NameDataColumn" FieldName="Name" Caption="Task" SortOrder="TreeListColumnSortOrder.Ascending" />
+                <DxTreeListDataColumn FieldName="EmployeeName" Caption="Assigned To" TextAlignment="TreeListTextAlignment.Left" Width="200px" />
+                <DxTreeListDataColumn FieldName="StartDate" Width="100px" />
+                <DxTreeListDataColumn FieldName="DueDate" Width="100px" />
+                <DxTreeListDataColumn FieldName="Priority" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                    <CellDisplayTemplate>
+                        @DemoTemplateIconUtils.GetEmployeeTaskPriorityIconHtml((EmployeeTask)context.DataItem)
+                    </CellDisplayTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn @ref="TreeList_StatusDataColumn" Caption="Progress" FieldName="Status" Width="100px" DisplayFormat="{0:0.##}%" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                    <CellDisplayTemplate>
+                        <DxProgressBar Value="Convert.ToDouble(context.Value)"
+                                       MinValue="0"
+                                       MaxValue="100"
+                                       Thickness="0.875em"
+                                       Size="100%"
+                                       ShowLabel="false" />
+                    </CellDisplayTemplate>
+                </DxTreeListDataColumn>
+            </Columns>
+            <DragHintTextTemplate>
+                @{
+                    <span class="dxbl-text">@context.GetDisplayText(TreeList_NameDataColumn)</span>
+                    <span class="dxbl-text">@DemoTemplateIconUtils.GetEmployeeTaskPriorityIconHtml((EmployeeTask)context.DataItems[0])</span>
+                    <span class="dxbl-text">@context.GetDisplayText(TreeList_StatusDataColumn)</span>
+                }
+            </DragHintTextTemplate>
+        </DxTreeList>
+
+        @code {
+            ITreeList TreeList { get; set; }
+
+            DxTreeListDataColumn TreeList_NameDataColumn { get; set; }
+            DxTreeListDataColumn TreeList_StatusDataColumn { get; set; }
+
+            ObservableCollection<EmployeeTask> DataSource { get; set; }
+
+            protected override void OnInitialized() {
+                DataSource = new ObservableCollection<EmployeeTask>(EmployeeTaskDataProvider.GenerateData());
+            }
+
+            void TreeList_ItemsDropped(TreeListItemsDroppedEventArgs evt) {
+                if(evt.TargetItem == null)
+                    return;
+
+                var droppedTask = (EmployeeTask)evt.DroppedItems[0];
+                DataSource.Remove(droppedTask);
+
+                var targetTask = (EmployeeTask)evt.TargetItem;
+                droppedTask.ParentId = evt.DropPosition == TreeListItemDropPosition.Inside
+                    ? targetTask.Id
+                    : targetTask.ParentId;
+
+                var index = DataSource.IndexOf(targetTask) + (evt.DropPosition == TreeListItemDropPosition.After ? 1 : 0);
+                DataSource.Insert(index, droppedTask);
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

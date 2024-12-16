@@ -16,6 +16,10 @@
     width: 160px;
 }
 
+.card.overview-navigation {
+    border-radius: var(--DS-border-radius-medium, var(--bs-card-border-radius));
+}
+
 .overview-navigation > .card-header {
     font-weight: inherit;
     font-size: inherit;

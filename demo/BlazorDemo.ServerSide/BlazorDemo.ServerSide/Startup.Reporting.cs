@@ -11,9 +11,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using DevExpress.XtraReports.Web.WebDocumentViewer;
-#if SERVER_BLAZOR
+using Microsoft.Extensions.AI;
+using DevExpress.AIIntegration;
+using DevExpress.AIIntegration.Blazor.Reporting.Viewer.Models;
+using System.Collections.Generic;
 using DevExpress.Blazor.Reporting;
-#endif
 
 namespace BlazorDemo.ServerSide {
     class StartupFilter : IStartupFilter {
@@ -69,6 +71,7 @@ namespace BlazorDemo.ServerSide {
                 services.AddTransient<IStartupFilter, StartupFilter>();
                 services.AddSession();
 #if SERVER_BLAZOR
+                services.AddDevExpressServerSideBlazorPdfViewer();
                 services.AddDevExpressServerSideBlazorReportViewer();
                 services.AddDevExpressBlazorReporting();
 #else
@@ -85,6 +88,25 @@ namespace BlazorDemo.ServerSide {
                         viewer.UseCachedReportSourceBuilder();
                     });
                 });
+                var azureOpenAIEndpoint = webHostBuilderContext.Configuration.GetSection("AIIntegrationSettings")["EndpointUrl"];
+                var azureOpenAIKey = webHostBuilderContext.Configuration.GetSection("AIIntegrationSettings")["Key"];
+                var deploymentName = webHostBuilderContext.Configuration.GetSection("AIIntegrationSettings")["DeploymentName"];
+
+                IChatClient asChatClient = new Azure.AI.OpenAI.AzureOpenAIClient(new Uri(azureOpenAIEndpoint),
+                    new System.ClientModel.ApiKeyCredential(azureOpenAIKey))
+                    .AsChatClient(deploymentName);
+
+                services.AddSingleton(asChatClient);
+                services.AddDevExpressAI(config => {
+                    config.AddBlazorReportingAIIntegration(reportingCfg => {
+                        reportingCfg.Languages = new List<LanguageItem>() {
+                            new LanguageItem(){ Key = "En", Text = "English"},
+                            new LanguageItem(){ Key = "De", Text = "German"},
+                        };
+                        reportingCfg.SummarizationMode = SummarizationMode.Abstractive;
+                    });
+                    config.AddWebReportingAIIntegration(cfg => cfg.SummarizationMode = SummarizationMode.Abstractive);
+                });
                 services.AddTransient<DevExpress.DataAccess.Wizard.Services.ICustomQueryValidator, DevExpress.DataAccess.Wizard.Services.CustomQueryValidator>();
                 services.AddSingleton<IDemoReportSource, DemoReportSource>();
                 services.AddSingleton<IPdfSignatureOptionsProviderAsync, CustomPdfSignatureOptionsProviderAsync>();
@@ -92,7 +114,7 @@ namespace BlazorDemo.ServerSide {
                 services.AddScoped(serviceProvider => (IReportProviderAsync)serviceProvider.GetRequiredService<ReportStorageWebExtension>());
                 services.AddControllers(options => options.EnableEndpointRouting = false);
                 if(!RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
-                    DevExpress.Drawing.Internal.DXDrawingEngine.ForceSkia();
+                    DevExpress.Drawing.Settings.DrawingEngine = DevExpress.Drawing.DrawingEngine.Skia;
                 }
             });
         }

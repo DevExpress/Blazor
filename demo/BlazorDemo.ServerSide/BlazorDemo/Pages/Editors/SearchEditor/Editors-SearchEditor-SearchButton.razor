@@ -1,0 +1,69 @@
+﻿<DemoPageSectionComponent Id="Editors-SearchEditor-SearchButton" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <div class="cw-640 mb-1">
+            <div class="d-flex">
+                <DxSearchBox NullText="Enter search text and press the Search button..."
+                             @bind-Text="@Text"
+                             aria-label="Search"
+                             style="flex-grow: 1">
+                </DxSearchBox>
+                <DxButton Text="Search" CssClass="ms-3" Click="@OnSearchButtonClick"></DxButton>
+            </div>
+            <br />
+            <DxListBox TData="Product" TValue="Product" Data="@Products"
+                       SearchText="@SearchText"
+                       SizeMode="Params.SizeMode"
+                       ListRenderMode="ListRenderMode.Virtual"
+                       SelectionMode="ListBoxSelectionMode.Multiple">
+                <Columns>
+                    <DxListEditorColumn FieldName="@nameof(Product.ProductName)" Caption="Product" Width="35%" />
+                    <DxListEditorColumn FieldName="@nameof(Product.Country)" SearchEnabled="false" />
+                    <DxListEditorColumn FieldName="@nameof(Product.City)" />
+                    <DxListEditorColumn FieldName="@nameof(Product.Address)" Width="35%" />
+                </Columns>
+            </DxListBox>
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        DxListBox<Product, Product> listBox { get; set; }
+        IEnumerable<Product> Products { get; set; }
+        string Text { get; set; }
+        string SearchText { get; set; }
+        protected override async Task OnInitializedAsync() {
+            var invoices = await NwindDataService.GetInvoicesAsync();
+            var products = await NwindDataService.GetProductsAsync();
+            Products = invoices.Join(products, i => i.ProductId, p => p.ProductId, (i, p) => new Product {
+                    ProductName = i.ProductName,
+                    Country = i.Country,
+                    City = i.City,
+                    Address = i.Address
+                }).Distinct();
+        }
+
+        void OnSearchButtonClick(MouseEventArgs args) {
+            SearchText = Text;
+        }
+
+        public class Product {
+            public string ProductName { get; set; }
+            public string Country { get; set; }
+            public string City { get; set; }
+            public string Address { get; set; }
+
+            public override bool Equals(object obj) {
+                return obj is Product product &&
+                string.Equals(product.ProductName, ProductName) &&
+                string.Equals(product.Country, Country) &&
+                string.Equals(product.City, City) &&
+                string.Equals(product.Address, Address);
+            }
+
+            public override int GetHashCode() {
+                return HashCode.Combine(ProductName, Country, City, Address);
+            }
+        }
+    }
+</DemoPageSectionComponent>

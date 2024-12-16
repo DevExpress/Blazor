@@ -1,0 +1,36 @@
+﻿<DemoPageSectionComponent Id="Editors-SearchEditor-ToolbarIntegration" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @*BeginHide*@
+        <div class="card w-100">
+            <div class="card-header border-0 p-2 rounded demo-bg-transparent">
+                @*EndHide*@
+                <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain"
+                            SizeMode="Params.SizeMode"
+                            Title="DevExpress Logo">
+                    <TitleTemplate>
+                        <div class="icon-logo" role="img" aria-label="@context"></div>
+                    </TitleTemplate>
+                    <Items>
+                        <DxToolbarItem BeginGroup="true"
+                                       Alignment="ToolbarItemAlignment.Right">
+                            <Template>
+                                <DxSearchBox @bind-Text="@Value"
+                                             SizeMode="Params.SizeMode"
+                                             aria-label="Search" />
+                            </Template>
+                        </DxToolbarItem>
+                        <DxToolbarItem IconCssClass="tb-icon tb-icon-settings"
+                                       Tooltip="Settings" />
+                    </Items>
+                </DxToolbar>
+                @*BeginHide*@
+            </div>
+        </div>
+        @*EndHide*@
+    </ChildContentWithParameters>
+
+    @code {
+        string Value { get; set; }
+    }
+
+</DemoPageSectionComponent>

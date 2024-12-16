@@ -1,0 +1,126 @@
+﻿@page "/TreeList/EditData/EditCell"
+
+<DemoPageSectionComponent Id="TreeList-Editing-EditCell" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject IEmployeeTaskDataProvider EmployeeTaskDataProvider
+
+        <DxTreeList @ref="TreeList"
+                    Data="DataSource"
+                    KeyFieldName="Id"
+                    ParentKeyFieldName="ParentId"
+                    HasChildrenFieldName="HasChildren"
+                    VirtualScrollingEnabled="true"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    SizeMode="Params.SizeMode"
+                    CssClass="max-h-480"
+                    ValidationEnabled="false"
+                    EditMode="TreeListEditMode.EditCell"
+                    EditModelSaving="TreeList_EditModelSaving"
+                    DataItemDeleting="TreeList_DataItemDeleting"
+                    CustomizeEditModel="TreeList_CustomizeEditModel"
+                    HighlightRowOnHover="true">
+            <Columns>
+                <DxTreeListDataColumn FieldName="Name" Caption="Task"/>
+                <DxTreeListDataColumn FieldName="StartDate" Width="120px"/>
+                <DxTreeListDataColumn FieldName="DueDate" Width="120px"/>
+                <DxTreeListDataColumn FieldName="Priority" Width="80px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                    <CellDisplayTemplate>
+                        @{
+                            var displayText = TreeListRenderHelper.TaskPriorityToString((int)context.GetRowValue("Priority"));
+                        }
+                        <span title="@displayText priority">@displayText</span>
+                    </CellDisplayTemplate>
+                    <EditSettings>
+                        <DxComboBoxSettings Data="Priorities" ValueFieldName="Value" TextFieldName="Text"/>
+                    </EditSettings>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn Caption="Progress" FieldName="Status" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                    <CellDisplayTemplate>
+                        <DxProgressBar Value="Convert.ToDouble(context.Value)"
+                                       MinValue="0"
+                                       MaxValue="100"
+                                       CssClass="status-progress"
+                                       Thickness="0.875em"
+                                       Size="100%"
+                                       ShowLabel="false"/>
+                    </CellDisplayTemplate>
+                    <EditSettings>
+                        <DxSpinEditSettings MinValue="0" MaxValue="100" InputCssClass="dxbl-align-right" />
+                    </EditSettings>
+                </DxTreeListDataColumn>
+                <DxTreeListCommandColumn Width="90px">
+                    <HeaderTemplate>
+                        <DxButton IconCssClass="grid-icon grid-icon-add"
+                                  RenderStyle="ButtonRenderStyle.Link"
+                                  aria-label="Add"
+                                  Click="@(() => TreeList.StartEditNewRowAsync())" />
+                    </HeaderTemplate>
+                    <CellDisplayTemplate>
+                        <div class="grid-cell-align-center">
+                            <DxButton IconCssClass="grid-icon grid-icon-add"
+                                      RenderStyle="ButtonRenderStyle.Link"
+                                      aria-label="New"
+                                      Click="@(() => TreeList.StartEditNewRowAsync(context.VisibleIndex))"/>
+                            <DxButton IconCssClass="grid-icon grid-icon-delete"
+                                      RenderStyle="ButtonRenderStyle.Link"
+                                      CssClass="grid-delete-btn"
+                                      aria-label="Delete"
+                                      Click="@(() => TreeList.ShowRowDeleteConfirmation(context.VisibleIndex))"/>
+                        </div>
+                    </CellDisplayTemplate>
+                    <CellEditTemplate>
+                        <div class="grid-cell-align-center">
+                            <DxButton Enabled="false"
+                                      CssClass="grid-disabled-button"
+                                      IconCssClass="grid-icon grid-icon-add"
+                                      aria-label="New"
+                                      RenderStyle="ButtonRenderStyle.Link"/>
+                            <DxButton Enabled="false"
+                                      CssClass="grid-disabled-button"
+                                      IconCssClass="grid-icon grid-icon-delete"
+                                      aria-label="Delete"
+                                      RenderStyle="ButtonRenderStyle.Link"/>
+                        </div>
+                    </CellEditTemplate>
+                </DxTreeListCommandColumn>
+            </Columns>
+        </DxTreeList>
+    </ChildContentWithParameters>
+
+    @code {
+        ITreeList TreeList { get; set; }
+        IList<EmployeeTask> DataSource { get; set; }
+        object[] Priorities { get; } = new[] {
+            new { Text = "High", Value = 1 },
+            new { Text = "Medium", Value = 0 },
+            new { Text = "Low", Value = -1 }
+        };
+
+        protected override void OnInitialized() {
+            DataSource = EmployeeTaskDataProvider.GenerateData();
+        }
+        void TreeList_CustomizeEditModel(TreeListCustomizeEditModelEventArgs e) {
+            if(e.IsNew) {
+                var newTask = (EmployeeTask)e.EditModel;
+                newTask.Id = DataSource.Max(x => x.Id) + 1;
+                newTask.Name = "New task";
+                newTask.StartDate = DateTime.Today;
+                newTask.DueDate = DateTime.Today.AddDays(7);
+                if(e.ParentDataItem != null) {
+                    newTask.ParentId = ((EmployeeTask)e.ParentDataItem).Id;
+                }
+            }
+        }
+        void TreeList_EditModelSaving(TreeListEditModelSavingEventArgs e) {
+            if(e.IsNew) {
+                DataSource.Add((EmployeeTask)e.EditModel);
+            } else {
+                e.CopyChangesToDataItem();
+            }
+        }
+        void TreeList_DataItemDeleting(TreeListDataItemDeletingEventArgs e) {
+            DataSource.Remove((EmployeeTask)e.DataItem);
+        }
+    }
+</DemoPageSectionComponent>

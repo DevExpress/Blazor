@@ -3,7 +3,6 @@
 
 <DemoPageSectionComponent Id="Grid-Editing-EditForms" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        @implements IDisposable
         @inject NwindDataService NwindDataService
         @inject WorldcitiesDataService WorldcitiesDataService
 
@@ -50,7 +49,8 @@
                         <DxFormLayoutItem Caption="Country:" ColSpanMd="6">
                             <DxComboBox Data="@Countries"
                                         NullText="Select Country..."
-                                        FilteringMode="DataGridFilteringMode.Contains"
+                                        SearchMode="@ListSearchMode.AutoSearch"
+                                        SearchFilterCondition="@ListSearchFilterCondition.Contains"
                                         TextFieldName="CountryName"
                                         ValueFieldName="CountryName"
                                         Value="@supplier.Country"
@@ -67,7 +67,8 @@
                             }
                             <DxComboBox Data="@cities"
                                         NullText="Select City..."
-                                        FilteringMode="DataGridFilteringMode.Contains"
+                                        SearchMode="@ListSearchMode.AutoSearch"
+                                        SearchFilterCondition="@ListSearchFilterCondition.Contains"
                                         @bind-Value="@supplier.City"
                                         TextFieldName="CityName"
                                         ValueFieldName="CityName">
@@ -99,7 +100,6 @@
         IGrid Grid { get; set; }
         bool UsePopupEditForm { get; set; }
         GridEditMode CurrentEditMode { get { return UsePopupEditForm ? GridEditMode.PopupEditForm : GridEditMode.EditForm; } }
-        TaskCompletionSource<bool> DataLoadedTcs { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
 
         async Task UsePopupEditForm_CheckedChanged(bool value) {
             UsePopupEditForm = value;
@@ -110,7 +110,6 @@
             DataSource = await NwindDataService.GetSuppliersEditableAsync();
             Countries = await WorldcitiesDataService.GetCountriesAsync();
             Cities = await WorldcitiesDataService.GetCitiesAsync();
-            DataLoadedTcs.TrySetResult(true);
         }
         void Grid_CustomizeEditModel(GridCustomizeEditModelEventArgs e) {
             if(e.IsNew) {
@@ -132,9 +131,6 @@
         }
         async Task UpdateDataAsync() {
             DataSource = await NwindDataService.GetSuppliersEditableAsync();
-        }
-        public void Dispose() {
-            DataLoadedTcs.TrySetCanceled();
         }
     }
 </DemoPageSectionComponent>

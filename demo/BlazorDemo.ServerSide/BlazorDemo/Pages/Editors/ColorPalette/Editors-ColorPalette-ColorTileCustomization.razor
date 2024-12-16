@@ -1,0 +1,21 @@
+﻿<DemoPageSectionComponent Id="Editors-ColorPalette-ColorTileCustomization" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="color-palette-container">
+            <DxColorPalette @bind-Value="@Value" TileCssClass="custom-tile-class" SizeMode="@Params.SizeMode" />
+            <p class="demo-text mt-3">
+                @GetSelectedValueDescription()
+            </p>
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        string Value { get; set; }
+
+        RenderFragment GetSelectedValueDescription() {
+            if(Value != null)
+                return @<text>Value: @Value</text>;
+            else
+                return @<text>No selected color</text>;
+        }
+    }
+</DemoPageSectionComponent>

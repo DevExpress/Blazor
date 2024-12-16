@@ -1,0 +1,14 @@
+﻿.pane-title {
+    font-weight: 600;
+    margin-bottom: 0.125rem;
+}
+
+.pane-state {
+    margin-bottom: 0.25rem;
+}
+
+.pane-option {
+    color: color-mix(in srgb, var(--dxbl-splitter-color) 80%, transparent);
+    font-size: calc(var(--dxbl-splitter-font-size) - 0.125rem);
+    line-height: calc(var(--dxbl-splitter-line-height) - 0.125rem);
+}

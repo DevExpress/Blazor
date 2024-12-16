@@ -12,7 +12,7 @@
                     TextWrapEnabled="false"
                     SizeMode="Params.SizeMode"
                     CssClass="max-h-480">
-            
+
             <Columns>
                 <DxTreeListDataColumn FieldName="Name" Caption="Task" SortOrder="TreeListColumnSortOrder.Ascending" Width="100px" />
                 <DxTreeListDataColumn FieldName="EmployeeName" Caption="Assigned To" TextAlignment="TreeListTextAlignment.Left" Width="100px"/>
@@ -23,7 +23,7 @@
                         @{
                             var displayText = TreeListRenderHelper.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem);
                         }
-                        <span title="@displayText  priority">@displayText</span>
+                        <span title="@displayText priority">@displayText</span>
                     </CellDisplayTemplate>
                 </DxTreeListDataColumn>
                 <DxTreeListDataColumn Caption="Progress" FieldName="Status" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
@@ -36,7 +36,7 @@
                 <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Contained">
                     <Items>
                         <DxToolbarItem Alignment="ToolbarItemAlignment.Left" Text="Auto Fit Columns" Click="TreeList_FitWidths" RenderStyle="ButtonRenderStyle.Secondary" />
-                        <DxToolbarItem Alignment="ToolbarItemAlignment.Right" Text="Column Chooser" RenderStyle="ButtonRenderStyle.Secondary" IconCssClass="treelist-toolbar-column-chooser" Click="ColumnChooserButton_Click" />
+                        <DxToolbarItem Alignment="ToolbarItemAlignment.Right" Text="Column Chooser" RenderStyle="ButtonRenderStyle.Secondary" IconCssClass="treelist-icon-column-chooser" Click="ColumnChooserButton_Click" />
                     </Items>
                 </DxToolbar>
             </ToolbarTemplate>
@@ -53,7 +53,7 @@
             void TreeList_FitWidths() {
                 TreeList.AutoFitColumnWidths();
             }
-        
+
             void ColumnChooserButton_Click() {
                 TreeList.ShowColumnChooser();
             }

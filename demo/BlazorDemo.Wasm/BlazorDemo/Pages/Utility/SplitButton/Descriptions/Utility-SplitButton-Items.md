@@ -1,0 +1,5 @@
+The DevExpress Blazor [Split Button](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSplitButton) component can display multi-level drop-down lists. Once you create a root-level menu, populate a command's [Items](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownButtonBase.Items) property with [DxDropDownButtonItem](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownButtonItem) objects to create a nested menu. 
+
+Use the [BeginGroup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownButtonItem.BeginGroup) property to separate items into groups (at any nesting level).
+
+The Split Button component can display icons for both the primary button and drop-down list items. Use [IconCssClass](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButtonBase.IconCssClass) and [IconPosition](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButtonBase.IconPosition) properties to configure icon settings. You can also use the [DropDownToggleCssClass](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownButtonBase.DropDownToggleCssClass) property to define the drop-down toggle appearance.

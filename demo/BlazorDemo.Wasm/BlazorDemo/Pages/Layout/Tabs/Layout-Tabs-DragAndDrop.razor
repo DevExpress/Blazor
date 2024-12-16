@@ -1,0 +1,49 @@
+﻿@using static DevExpress.Blazor.DxTabs
+@inject NwindDataService NwindDataService
+<DemoPageSectionComponent Id="Layout-Tabs-DragAndDrop" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @if (Employees == null) {
+            <p>
+                <em>Loading...</em>
+            </p>
+        } else {
+            <div class="w-100 ch-220" style="max-height: 300px;">
+                <DxTabs TabsPosition="@Position" RenderMode="TabsRenderMode.AllTabs" SizeMode="Params.SizeMode" AllowTabReorder="true">
+                    @foreach (var employee in Employees) {
+                        <DxTabPage Text="@(employee.FirstName + ' ' + employee.LastName)" AllowClose="true">
+                            <div class="h-100 d-flex demo-employee-card">
+                                <div class="flex-shrink-0 pe-3">
+                                    <img src="@(StaticAssetUtils.GetImagePath(employee.ImageFileName))" width="125" alt="@(employee.FullName + " photo")"/>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h5>@employee.Title @employee.FirstName @employee.LastName</h5>
+                                    <p>
+                                        <b>Birthday:</b> @employee.BirthDate?.ToShortDateString()
+                                    </p>
+                                </div>
+                            </div>
+                        </DxTabPage>
+                    }
+                </DxTabs>
+            </div>
+        }
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionComboBox Label="Tab Position:"
+                        Data="@Positions"
+                        @bind-Value="Position">
+        </OptionComboBox>
+    </OptionsContent>
+
+    @code {
+        /*BeginHide*/
+        IEnumerable<TabsPosition> Positions { get; } = Enum.GetValues<TabsPosition>();
+        TabsPosition Position { get; set; } = TabsPosition.Top;
+        /*EndHide*/
+        List<Employee> Employees { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Employees =  new List<Employee>(await NwindDataService.GetEmployeesAsync());
+        }
+    }
+</DemoPageSectionComponent>

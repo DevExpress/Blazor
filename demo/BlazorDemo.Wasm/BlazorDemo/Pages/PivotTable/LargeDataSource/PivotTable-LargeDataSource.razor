@@ -1,0 +1,73 @@
+﻿@page "/PivotTableLargeDataSource"
+@using BlazorDemo.DataProviders
+
+<DemoPageSectionComponent Id="PivotTable-LargeDataSource" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject ISalesDataProvider SaleDataProvider
+        <div class="pivot-container">
+            @if(PivotData == null) {
+                <div class="pivot-loading-panel-container">
+                    <div class="d-flex flex-column">
+                        <DxLoadingPanel Visible="true"
+                                        SizeMode="Params.SizeMode"
+                                        Text="Data Loading..."
+                                        IndicatorAreaVisible="false"
+                                        IndicatorAnimationType="@WaitIndicatorAnimationType.Spin"></DxLoadingPanel>
+                    </div>
+                </div>
+            } else {
+                <DxPivotTable Data="@PivotData" VirtualScrollingEnabled="true" SizeMode="Params.SizeMode">
+                    <Fields>
+                        <DxPivotTableField Field="Product.Name"
+                                           Area="@PivotTableArea.Row"
+                                           Caption="Product Name"/>
+                        <DxPivotTableField Field="Order.SalesPerson.Name"
+                                           Area="@PivotTableArea.Row"
+                                           Caption = "Sales Person Name"/>
+                        <DxPivotTableField Field="Order.Date"
+                                           GroupInterval="@PivotTableGroupInterval.DateYear"
+                                           Caption="Year"
+                                           Area="@PivotTableArea.Column"/>
+                        <DxPivotTableField Field="Order.Date"
+                                           GroupInterval="@PivotTableGroupInterval.DateQuarter"
+                                           Caption="Quarter"
+                                           Area="@PivotTableArea.Column" >
+                            <ValueTemplate>
+                                <span>@($"Q{context.Text}")</span>
+                            </ValueTemplate>
+                        </DxPivotTableField>
+                        <DxPivotTableField Field="Quantity"
+                                           Area="@PivotTableArea.Data" />
+                        <DxPivotTableField Field="UnitPrice"
+                                           Area="@PivotTableArea.Data" />
+                    </Fields>
+                </DxPivotTable>
+            }
+        </div>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionSpinEdit CssClass="ow-150"
+                        Increment="100"
+                        Label="Records Count:"
+                        MinValue="0" MaxValue="int.MaxValue"
+                        @bind-Value="RecordsCount" />
+        <OptionButton Text="Generate Database" OnClick="GenerateDatabase_BtnClick" />
+    </OptionsContent>
+    @code {
+        object PivotData { get; set; }
+        int RecordsCount { get; set; } = 100000;
+
+        protected override async Task OnInitializedAsync() {
+            await GenerateDatabase();
+        }
+
+        async Task GenerateDatabase_BtnClick() {
+            PivotData = null;
+            await GenerateDatabase();
+        }
+
+        async Task GenerateDatabase() {
+            PivotData = await SaleDataProvider.GetDataAsync(RecordsCount);
+        }
+    }
+</DemoPageSectionComponent>

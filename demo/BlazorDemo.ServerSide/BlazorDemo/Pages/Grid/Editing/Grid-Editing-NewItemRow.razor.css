@@ -1,0 +1,12 @@
+/*BeginHide*/ ::deep /*EndHide*/ .dxbl-grid {
+    height: 522px;
+}
+/*BeginHide*/ .grid-container {
+    display: contents;
+}
+/*EndHide*/
+
+/*BeginHide*/::deep .grid-delete-btn:hover {
+    color: var(--DS-color-surface-warning-default-rest);
+}
+/*EndHide*/

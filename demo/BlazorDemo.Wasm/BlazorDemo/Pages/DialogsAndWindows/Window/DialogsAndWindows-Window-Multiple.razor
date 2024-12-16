@@ -1,7 +1,6 @@
 ﻿<DemoPageSectionComponent Id="DialogsAndWindows-Window-Multiple" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @using BlazorDemo.Data.Homes
-        @using DevExpress.Blazor.Internal
         @inject HomesDataService HomesDataService
 
         <div class="d-flex justify-content-center p-3">
@@ -50,7 +49,6 @@
                 </BodyContentTemplate>
             </DxWindow>
         }
-
     </ChildContentWithParameters>
 
     @code {
@@ -66,12 +64,11 @@
         protected override async Task OnInitializedAsync() {
             homes = (await HomesDataService.GetHomesAsync()).Take(windowsCount).ToArray();
         }
-
         private async Task ToggleWindowsVisibility(MouseEventArgs args) {
-            if (!windowsVisible) {
-                for (int i = 0; i < windows.Length; i++)
+            if(!windowsVisible) {
+                for(int i = 0; i < windows.Length; i++)
                     await windows[i].ShowAtAsync(
-                        args.ClientX + i * 30 - width / 2, args.ClientY + i * 30 - height * 2 / 3);
+                        Math.Max(0, args.ClientX - width / 2) + i * 30, Math.Max(0, args.ClientY - height * 2 / 3) + i * 30);
             }
             else {
                 foreach (var window in windows)

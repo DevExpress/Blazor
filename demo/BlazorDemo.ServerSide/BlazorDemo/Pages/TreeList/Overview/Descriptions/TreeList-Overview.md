@@ -4,6 +4,7 @@ The TreeList component ships with the following built-in capabilities:
 
 * High Performance Data Processing
 * Data Sorting
+* Data Editing and Input Validation 
 * Data Filtering
 * Total and Custom Summary
 * Single and Multiple Row Selection

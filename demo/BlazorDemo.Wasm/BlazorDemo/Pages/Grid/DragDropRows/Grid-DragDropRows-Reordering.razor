@@ -1,0 +1,71 @@
+﻿@page "/Grid/DragDropRows/Reordering"
+@layout DataProviderAccessArea<IIssuesDataProvider>
+@using BlazorDemo.Data.Issues
+@using System.Collections.ObjectModel;
+
+<DemoPageSectionComponent Id="Grid-DragDropRows-Reordering" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject IssuesDataService IssuesDataService
+        <div class="grid-container">
+            <DxGrid @ref="Grid"
+                    Data="DataSource"
+                    AllowSort="false"
+                    AllowDragRows="true"
+                    SizeMode="Params.SizeMode"
+                    VirtualScrollingEnabled="true"
+                    ItemsDropped="Grid_ItemsDropped">
+                <Columns>
+                    <DxGridDataColumn @ref="Grid_NameDataColumn" FieldName="Name" Caption="Subject" MinWidth="220" />
+                    <DxGridDataColumn @ref="Grid_StatusDataColumn" FieldName="Status" Caption="Status" Width="140px" MinWidth="140">
+                        <CellDisplayTemplate>
+                            <div class="d-flex align-items-center">
+                                @DemoTemplateIconUtils.GetIssueStatusIconHtml(((Issue)context.DataItem).Status)
+                                @context.HighlightedDisplayText
+                            </div>
+                        </CellDisplayTemplate>
+                    </DxGridDataColumn>
+                    <DxGridDataColumn FieldName="CreatedDate" Caption="Created" Width="120px" MinWidth="120" />
+                    <DxGridDataColumn FieldName="FixedDate" Caption="Fixed" Width="120px" MinWidth="120" />
+                    <DxGridDataColumn FieldName="Priority" Caption="Priority" Width="90px">
+                        <CellDisplayTemplate>
+                            <div>@DemoTemplateIconUtils.GetIssuePriorityIconHtml(((Issue)context.DataItem).Priority)</div>
+                        </CellDisplayTemplate>
+                    </DxGridDataColumn>
+                </Columns>
+
+                <DragHintTextTemplate>
+                    @{
+                        var dataItem = (Issue)context.DataItems[0];
+                        <span class="dxbl-text">@context.GetDisplayText(Grid_NameDataColumn)</span>
+                        <span class="dxbl-text">
+                            @DemoTemplateIconUtils.GetIssueStatusIconHtml(dataItem.Status)
+                            @context.GetDisplayText(Grid_StatusDataColumn)
+                        </span>
+                        <span class="dxbl-text">@DemoTemplateIconUtils.GetIssuePriorityIconHtml(dataItem.Priority)</span>
+                    }
+                </DragHintTextTemplate>
+            </DxGrid>
+        </div>
+
+        @code {
+            IGrid Grid { get; set; }
+
+            DxGridDataColumn Grid_NameDataColumn { get; set; }
+            DxGridDataColumn Grid_StatusDataColumn { get; set; }
+
+            ObservableCollection<Issue> DataSource { get; set; }
+
+            protected override async Task OnInitializedAsync() {
+                DataSource = new ObservableCollection<Issue>(await IssuesDataService.GetIssuesAsync());
+            }
+
+            async Task Grid_ItemsDropped(GridItemsDroppedEventArgs evt) {
+                var droppedItem = (Issue)evt.DroppedItems[0];
+                DataSource.Remove(droppedItem);
+
+                var index = await evt.GetTargetDataSourceIndexAsync();
+                DataSource.Insert(index, droppedItem);
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

@@ -1,0 +1,23 @@
+﻿<DemoPageSectionComponent Id="DialogsAndWindows-MessageBox-Overview" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="target-container" @onclick="@(() => MessageBoxVisible = true)">
+            <p class="target-caption">CLICK TO SHOW A MESSAGE BOX WINDOW</p>
+        </div>
+
+        <DxMessageBox @bind-Visible="MessageBoxVisible"
+                      Title="Cannot open file"
+                      Text="The file may have been moved, renamed, or deleted."
+                      OkButtonText="Show details..."
+                      CancelButtonText="Ok"
+                      RenderStyle="@MessageBoxRenderStyle.Warning"
+                      SizeMode="@Params.SizeMode"
+                      Type="@MessageBoxType.Confirmation">
+        </DxMessageBox>
+
+    </ChildContentWithParameters>
+
+    @code {
+        bool MessageBoxVisible { get; set; } = false;
+    }
+
+</DemoPageSectionComponent>

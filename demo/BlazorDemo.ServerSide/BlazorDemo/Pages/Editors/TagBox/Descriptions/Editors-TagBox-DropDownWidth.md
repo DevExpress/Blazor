@@ -1,4 +1,4 @@
-Use the [DropDownWidthMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2.DropDownWidthMode) property to specify the width of a drop-down list.
+Use the [DropDownWidthMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDropDownListEditorBase-2.DropDownWidthMode) property to specify the width of a drop-down list.
 
 *   [ContentOrEditorWidth](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DropDownWidthMode) (Default) — The list's width is equal to the width of the longest list item or the editor's width (whichever is larger).
 *   [ContentWidth](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DropDownWidthMode) — The list's width is equal to the width of the longest list item.

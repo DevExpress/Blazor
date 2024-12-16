@@ -1,0 +1,26 @@
+﻿<DemoPageSectionComponent Id="Editors-TagBox-DisabledItems" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <label for="tbDisabledItems" class="demo-text cw-480 mb-1">
+            Product
+        </label>
+        <DxTagBox Data="@Products"
+                  @bind-Values="@SelectedProducts"
+                  TextFieldName="@nameof(Product.ProductName)"
+                  DisabledFieldName="@nameof(Product.Discontinued)"
+                  SizeMode="Params.SizeMode"
+                  CssClass="cw-480"
+                  InputId="tbDisabledItems">
+        </DxTagBox>
+    </ChildContentWithParameters>
+
+    @code {
+        IEnumerable<Product> Products { get; set; }
+        IEnumerable<Product> SelectedProducts { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Products = await NwindDataService.GetProductsAsync();
+            SelectedProducts = Products.Take(1);
+        }
+    }
+</DemoPageSectionComponent>

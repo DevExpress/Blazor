@@ -1,0 +1,39 @@
+﻿<DemoPageSectionComponent Id="Utility-DropDownButton-Items" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div>
+            <DxDropDownButton RenderStyle="ButtonRenderStyle.Secondary"
+                              Text="Clipboard"
+                              IconCssClass="tb-icon tb-icon-paste"
+                              SizeMode="Params.SizeMode"
+                              CssClass="me-1"
+                              ItemClick="@OnItemClick">
+                <Items>
+                    <DxDropDownButtonItem Text="Cut" IconCssClass="menu-icon-cut menu-icon"/>
+                    <DxDropDownButtonItem Text="Copy" IconCssClass="menu-icon-copy menu-icon"/>
+                    <DxDropDownButtonItem Text="Paste" IconCssClass="tb-icon tb-icon-paste"/>
+                    <DxDropDownButtonItem Text="Paste Special" BeginGroup="true">
+                        <Items>
+                            <DxDropDownButtonItem Text="Paste Text Only"/>
+                            <DxDropDownButtonItem Text="Paste Picture" Enabled="false"/>
+                            <DxDropDownButtonItem Text="Paste as Hyperlink"/>
+                        </Items>
+                    </DxDropDownButtonItem>
+                </Items>
+            </DxDropDownButton>
+            <p class="demo-text cw-400 mt-2">
+                Selected item: <b>@SelectedItem?.Text</b>
+            </p>
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        IDropDownButtonItemInfo SelectedItem { get; set; }
+
+        void OnItemClick(DropDownButtonItemClickEventArgs args) {
+            if(!args.ItemInfo.DropDownToggleVisible)
+                SelectedItem = args.ItemInfo;
+        }
+
+    }
+
+</DemoPageSectionComponent>

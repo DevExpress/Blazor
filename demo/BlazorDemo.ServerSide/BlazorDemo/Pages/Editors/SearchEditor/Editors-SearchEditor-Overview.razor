@@ -1,0 +1,16 @@
+﻿<DemoPageSectionComponent Id="Editors-SearchEditor-Overview" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxSearchBox @bind-Text="@Value"
+                     ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                     SizeMode="Params.SizeMode"
+                     CssClass="cw-320"
+                     aria-label="Search" />
+        <p class="demo-text cw-320 mt-3">
+            Search text: <b>@Value</b>
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        string Value { get; set; }
+    }
+</DemoPageSectionComponent>

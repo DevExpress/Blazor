@@ -1,0 +1,57 @@
+@page "/RangeSelectorOverview"
+@using System.Linq.Expressions
+
+<DemoPageSectionComponent Id="RangeSelector-Overview">
+    <DemoChildContent>
+        @inject IRangeSelectorZoomingDataProvider RangeSelectorZoomingDataProvider
+
+        <DxChart Data="@Data"
+                 Width="100%">
+            @CreateChartLineSeries(s => s.Y1)
+            @CreateChartLineSeries(s => s.Y2)
+            @CreateChartLineSeries(s => s.Y3)
+            <DxChartLegend Visible="false"/>
+            <DxChartArgumentAxis>
+                <DxChartAxisRange StartValue="@StartValue" EndValue="@EndValue"/>
+            </DxChartArgumentAxis>
+        </DxChart>
+
+        <DxRangeSelector Width="100%"
+                         Data="@Data"
+                         ValueChanged="@OnValueChanged"
+                         ValueChangeMode="RangeSelectorValueChangeMode.OnHandleMove">
+            <DxRangeSelectorChart>
+                @CreateChartAreaSeries(s => s.Y1)
+                @CreateChartAreaSeries(s => s.Y2)
+                @CreateChartAreaSeries(s => s.Y3)
+            </DxRangeSelectorChart>
+            <DxRangeSelectorScale TickInterval="50" />
+        </DxRangeSelector>
+    </DemoChildContent>
+
+    @code {
+        object StartValue;
+        object EndValue;
+        List<ZoomingData> Data;
+
+        void OnValueChanged(RangeSelectorValueChangedEventArgs info) {
+            StartValue = info.CurrentRange[0];
+            EndValue = info.CurrentRange[1];
+        }
+
+        protected override void OnInitialized() {
+            Data = RangeSelectorZoomingDataProvider.GetData();
+        }
+
+        private RenderFragment CreateChartLineSeries(Expression<Func<ZoomingData, double>> valueField) =>
+            @<DxChartLineSeries ArgumentField="@(s => s.Arg)"
+                                ValueField="@(valueField)">
+                <DxChartSeriesPoint Size="7"></DxChartSeriesPoint>
+            </DxChartLineSeries>;
+
+        private RenderFragment CreateChartAreaSeries(Expression<Func<ZoomingData, double>> valueField) =>
+            @<DxChartAreaSeries ArgumentField="@(s => s.Arg)"
+                                ValueField="@(valueField)">
+            </DxChartAreaSeries>;
+    }
+</DemoPageSectionComponent>
