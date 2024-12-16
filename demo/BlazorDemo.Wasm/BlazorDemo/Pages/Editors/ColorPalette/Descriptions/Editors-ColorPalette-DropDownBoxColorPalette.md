@@ -1,0 +1,1 @@
+﻿In this demo, the [Color Palette](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxColorPalette) component is integrated into our Blazor [DropDownBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownBox) UI component. 

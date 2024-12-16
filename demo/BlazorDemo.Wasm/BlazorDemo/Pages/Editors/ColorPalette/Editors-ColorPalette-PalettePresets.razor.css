@@ -1,0 +1,11 @@
+.color-preset-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    row-gap: 30px;
+}
+
+.color-palette-container {
+    display: flex;
+    flex-direction: column;
+}

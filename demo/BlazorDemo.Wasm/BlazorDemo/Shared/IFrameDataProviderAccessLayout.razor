@@ -1,5 +1,18 @@
 ﻿@inherits LayoutComponentBase
+@inject DemoThemeService Themes
 @typeparam T
 <DataProviderAccessAreaContainer DataProviders="@GetDataProviders()">
-    @Body
+    <div class="@($"iframe-theme-wrapper {CurrentThemeClassName}")">
+        <div class="content">
+            @Body
+        </div>
+    </div>
 </DataProviderAccessAreaContainer>
+
+@code {
+    string CurrentThemeClassName { get; set; }
+
+    protected override void OnInitialized() {
+        CurrentThemeClassName = "theme-" + Themes.ActiveTheme.Name;
+    }
+}

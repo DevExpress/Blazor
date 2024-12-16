@@ -2,27 +2,35 @@
 
 <link rel="stylesheet" href=@DemoStaticResourceService.GetUrlWithVersion("_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.bs5.css")>
 
+@using DevExpress.Blazor.Viewer.Models
 @using DevExpress.XtraPrinting.Caching;
 @using DevExpress.XtraReports.UI;
 @using DevExpress.Blazor.Reporting.EditingFields;
+@using DevExpress.Blazor.Reporting.Models;
+@using DevExpress.AIIntegration.Blazor.Reporting.Viewer;
+@using DevExpress.AIIntegration.Blazor.Reporting.Viewer.Models;
 
 <DemoScriptLoader Src="_content/BlazorDemo/lib/reporting.js" @ref=demoScriptLoader>
 </DemoScriptLoader>
 
-<DxReportViewer RootCssClasses="w-100" @ref="Viewer" SizeMode="Params.SizeMode" SinglePagePreview="false"></DxReportViewer>
+<DxReportViewer RootCssClasses="w-100" @ref="Viewer" Report="Report" SizeMode="Params.SizeMode" SinglePagePreview="false"></DxReportViewer>
 
 @code {
     DxReportViewer Viewer { get; set; }
     DemoScriptLoader demoScriptLoader { get; set; }
-    string latestReportName;
-    [Parameter]
-    public string ReportName { get; set; }
+    XtraReport Report;
+    string lastReportName;
+    string lastCategoryName;
+    const string AICategoryName = "AIPoweredExtensions";
+    [Parameter] public string ReportName { get; set; }
+    [Parameter] public string CategoryName { get; set; }
     [Parameter] public DemoPageSectionParameters Params { get; set; }
     [Inject] public HttpClient Http { get; set; }
     [Inject] public EditingFieldModelFactory EditingFieldModelFactory { get; set; }
     [Inject] public DevExpress.XtraReports.Services.IReportProviderAsync ReportProvider { get; set; }
 
     async Task AssignReportAsync() {
+        lastReportName = ReportName;
         XtraReport report = await ReportProvider.GetReportAsync(ReportName, null);
         if(report == null) {
             throw new Exception($"{ReportName} not found");
@@ -31,8 +39,10 @@
     if(ReportName == XtraReportsDemos.ReportNames.LargeDatasetName)
         await Viewer.OpenReportAsync(new CachedReportSource(report, new MemoryDocumentStorage()));
     else
-#endif
         await Viewer.OpenReportAsync(report);
+#else
+        Report = report;
+#endif
     }
     protected override async Task OnAfterRenderAsync(bool firstRender) {
         if(firstRender) {
@@ -45,19 +55,39 @@
             EditingFieldModelFactory.RegisterMaskEditor("Year", new MaskEditorOptions() { MaskMode = MaskMode.RegEx, Mask = @"[0-2]([0-9]{3})" });
         }
         await demoScriptLoader.Loaded;
-        if(ReportName != latestReportName) {
-            latestReportName = ReportName;
+        if(ReportName != lastReportName || CategoryName != lastCategoryName) {
+            lastCategoryName = CategoryName;
+            if (CategoryName == AICategoryName)
+                UpdateAIServiceVisibility(true);
+            else
+                UpdateAIServiceVisibility(false);
+        #if SERVER_BLAZOR
             await AssignReportAsync();
+        #endif
         }
         await base.OnAfterRenderAsync(firstRender);
     }
 
-    protected override void OnParametersSet() {
+    void UpdateAIServiceVisibility(bool visible) {
+        var aiTab = Viewer?.TabPanelModel[TabContentKind.AIOperations];
+        var aiMenu = Viewer?.QuickActionsModel[QuickActionKind.AIOperations];
+        if(aiTab != null)
+            aiTab.Visible = visible;
+        if(aiMenu != null)
+            aiMenu.Visible = visible;
+    }
+
+    protected override Task OnParametersSetAsync() {
         base.OnParametersSet();
-#if SERVER_BLAZOR
-    ReportName = ReportName ?? "InvoiceReport";
-#else
+    #if SERVER_BLAZOR
+        ReportName = ReportName ?? "InvoiceReport";
+        return Task.CompletedTask;
+    #else
         ReportName = ReportName ?? XtraReportsDemos.ReportNames.BalanceSheetReportName;
-#endif
+        if (ReportName != lastReportName)
+            return AssignReportAsync();
+        else 
+            return Task.CompletedTask;
+    #endif
     }
 }

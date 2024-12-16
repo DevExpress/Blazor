@@ -36,7 +36,7 @@
 @code {
     DemoScriptLoader feedbackHelper;
 
-    protected DemoPageBase CurrentDemoPage { get; set; }
+    protected DemoPage CurrentDemoPage { get; set; }
     public bool Enabled { get; set; }
     public FeedbackPanelState State { get; set; } = FeedbackPanelState.Normal;
     public string FeedbackText { get; set; }
@@ -62,8 +62,8 @@
     }
 
     public string GetSupportForumUrl() {
-        var rootDemoPage = CurrentDemoPage.RootPage ?? (CurrentDemoPage as DemoRootPage);
-        var currentProductID = rootDemoPage.AnalyticsId;
+        var rootDemoPage = CurrentDemoPage.RootPage ?? CurrentDemoPage;
+        var currentProductID = rootDemoPage.SupportCenterId;
         var currentProductFilter = "filters=%5B%7B%22filterName%22:%22PlatformedProductId%22,%22selectedValues%22:%5B%22" + currentProductID + "%22%5D%7D%5D";
         var searchString = rootDemoPage != CurrentDemoPage && CurrentDemoPage.Title != "Overview" ? rootDemoPage.Title + " " + CurrentDemoPage.Title : rootDemoPage.Title;
         return string.Format("https://supportcenter.devexpress.com/ticket/list?{0}&searchString={1}&sorting=Relevance", currentProductFilter, searchString);

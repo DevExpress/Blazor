@@ -1,4 +1,5 @@
 ﻿@page "/RichEditAPI"
+@using System.Drawing
 @using DevExpress.Office.Utils
 @inject NavigationManager NavigationManager
 
@@ -24,11 +25,16 @@
             documentAPI.BeginUpdate();
 
             await CreateTable(documentAPI);
+
+            documentAPI.BeginTransaction();
+
             await CreateHorizontalLine(documentAPI);
             await CreateBodyParagraph(documentAPI);
             await CreatePictureParagraph(documentAPI);
             await CreateTitleParagraph(documentAPI);
             await AddTextToFooter(documentAPI);
+
+            await documentAPI.EndTransaction();
 
             documentAPI.EndUpdate();
         }
@@ -75,69 +81,65 @@
             var horizontalLine = await documentAPI.Tables.CreateAsync(0, 1, 2);
 
             await horizontalLine.ChangePropertiesAsync(properties => {
-                properties.Width.Type = TableWidthType.Percent;
-                properties.Width.Value = 100;
-                properties.Borders.Top.Style = BorderLineStyle.None;
-                properties.Borders.Right.Style = BorderLineStyle.None;
-                properties.Borders.Left.Style = BorderLineStyle.None;
-                properties.Borders.Bottom.Style = BorderLineStyle.None;
-                properties.Borders.InsideHorizontal.Width = 45;
+                properties.Width = new TableWidth(TableWidthType.Percent, 100);
+                var borders = new TableBorders();
+                borders.Top.Style = BorderLineStyle.None;
+                borders.Right.Style = BorderLineStyle.None;
+                borders.Left.Style = BorderLineStyle.None;
+                borders.Bottom.Style = BorderLineStyle.None;
+                borders.InsideHorizontal = new TableBorder(BorderLineStyle.Single, Color.Black, 45);
+                properties.Borders = borders;
             });
         }
 
-        async Task CreateTable(Document documentAPI) {
-            string[,] tableContent = {
-                { "Title (translated)", "Significance" },
-                { "\"On a Heuristic Viewpoint Concerning the Production and Transformation of Light\"", "Resolved an unsolved puzzle by suggesting that energy is exchanged only in discrete amounts (quanta). This idea was pivotal to the early development of quantum theory." },
-                { "\"On the Motion of Small Particles Suspended in a Stationary Liquid, as Required by the Molecular Kinetic Theory of Heat\"", "Explained empirical evidence for the atomic theory, supporting the application of statistical physics." },
-                { "\"On the Electrodynamics of Moving Bodies\"", "Reconciled Maxwell's equations for electricity and magnetism with the laws of mechanics by introducing changes to mechanics, resulting from analysis based on empirical evidence that the speed of light is independent of the motion of the observer. Discredited the concept of a \"luminiferous ether\"." },
-            };
+    async Task CreateTable(Document documentAPI) {
+        string[,] tableContent = {
+            { "Title (translated)", "Significance" },
+            { "\"On a Heuristic Viewpoint Concerning the Production and Transformation of Light\"", "Resolved an unsolved puzzle by suggesting that energy is exchanged only in discrete amounts (quanta). This idea was pivotal to the early development of quantum theory." },
+            { "\"On the Motion of Small Particles Suspended in a Stationary Liquid, as Required by the Molecular Kinetic Theory of Heat\"", "Explained empirical evidence for the atomic theory, supporting the application of statistical physics." },
+            { "\"On the Electrodynamics of Moving Bodies\"", "Reconciled Maxwell's equations for electricity and magnetism with the laws of mechanics by introducing changes to mechanics, resulting from analysis based on empirical evidence that the speed of light is independent of the motion of the observer. Discredited the concept of a \"luminiferous ether\"." },
+        };
 
-            await documentAPI.Paragraphs.CreateAsync(0);
+        documentAPI.BeginTransaction();
+        await documentAPI.Paragraphs.CreateAsync(0);
+        Table table = await documentAPI.Tables.CreateAsync(1, 2, 4);
+        await table.ChangePropertiesAsync(properties => {
+            properties.AutoFit = false;
+            properties.Width = new TableWidth { Type = TableWidthType.Percent, Value = 85 };
+            properties.TableStyleOptions = TableStyleOptions.HeaderRow;
+            properties.StyleName = TableStyleName.GridTable4Accent3;
+        });
+        await documentAPI.EndTransaction();
 
-            Table table = await documentAPI.Tables.CreateAsync(1, 2, 4);
+        table = await documentAPI.Tables.GetAsync(0);
 
-            await table.ChangePropertiesAsync(properties => {
-                properties.AutoFit = false;
-                properties.Width = new TableWidth { Type = TableWidthType.Percent, Value = 85 };
-                properties.TableStyleOptions = TableStyleOptions.HeaderRow;
-                properties.StyleName = TableStyleName.GridTable4Accent3;
-            });
-
-            TableRows rows = table.Rows;
-
-            for(var i = rows.Count - 1; i >= 0; i--) {
-                var cells = rows[i].Cells;
-
-                for(var j = cells.Count - 1; j >= 0; j--)
-                    await documentAPI.AddTextAsync(cells[j].Interval.Start, tableContent[i, j]);
-            }
-
-            table = await documentAPI.Tables.GetAsync(0);
-
-            foreach(var cell in table.Rows[0].Cells) {
-                await cell.ChangePropertiesAsync(properties => {
-                    properties.ContentHorizontalAlignment = HorizontalAlignment.Center;
-                    properties.CharacterProperties.FontBold = true;
+        documentAPI.BeginTransaction();
+        TableRows rows = table.Rows;
+        for (var i = rows.Count - 1; i >= 0; i--) {
+            var cells = rows[i].Cells;
+            for (var j = cells.Count - 1; j >= 0; j--) {
+                await cells[j].ChangePropertiesAsync(properties => {
+                    properties.Width = new TableWidth(TableWidthType.Percent, j == 0 ? 30 : 55);
                 });
-            }
-
-            TableRow newRow = await table.Rows.InsertAsync(3, true);
-
-            await documentAPI.AddTextAsync(newRow.Cells[1].Interval.Start, "Equivalence of matter and energy, E = mc2 (and by implication, the ability of gravity to \"bend\" light), the existence of \"rest energy\", and the basis of nuclear energy.");
-            await documentAPI.AddTextAsync(newRow.Cells[0].Interval.Start, "\"Does the Inertia of a Body Depend Upon Its Energy Content?\"");
-
-            table = await documentAPI.Tables.GetAsync(0);
-
-            foreach(var row in table.Rows) {
-                await row.Cells[0].ChangePropertiesAsync(properties => {
-                    properties.Width = new TableWidth(TableWidthType.Percent, 30);
-                });
-                await row.Cells[1].ChangePropertiesAsync(properties => {
-                    properties.Width = new TableWidth(TableWidthType.Percent, 55);
-                });
+                await documentAPI.AddTextAsync(cells[j].Interval.Start, tableContent[i, j]);
             }
         }
+        foreach (var cell in table.Rows[0].Cells) {
+            await cell.ChangePropertiesAsync(properties => {
+                properties.ContentHorizontalAlignment = HorizontalAlignment.Center;
+                var characterProperties = new CharacterProperties();
+                characterProperties.FontBold = true;
+                properties.CharacterProperties = characterProperties;
+            });
+        }
+        await documentAPI.EndTransaction();
+        
+        TableRow newRow = await table.Rows.InsertAsync(3, true);
+
+        documentAPI.BeginTransaction();
+        await documentAPI.AddTextAsync(newRow.Cells[1].Interval.Start, "Equivalence of matter and energy, E = mc2 (and by implication, the ability of gravity to \"bend\" light), the existence of \"rest energy\", and the basis of nuclear energy.");
+        await documentAPI.AddTextAsync(newRow.Cells[0].Interval.Start, "\"Does the Inertia of a Body Depend Upon Its Energy Content?\"");
+        await documentAPI.EndTransaction();    }
 
         async Task AddTextToFooter(Document documentAPI) {
             Section section = await documentAPI.Sections.GetAsync(0);

@@ -29,3 +29,13 @@
 .dx-demo-text-strikethrough {
     text-decoration: line-through;
 }
+/*BeginHide*/
+.theme-fluent-light .dx-demo-row + .dx-demo-row,
+.theme-fluent-dark .dx-demo-row + .dx-demo-row {
+    margin-top: 0;
+}
+.theme-fluent-light .dx-demo-select-all-checkbox,
+.theme-fluent-dark .dx-demo-select-all-checkbox {
+    margin-bottom: 0;
+}
+/*EndHide*/

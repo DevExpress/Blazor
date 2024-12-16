@@ -1,0 +1,38 @@
+﻿<DemoPageSectionComponent Id="Editors-ListBox-SearchBox" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+
+        <div class="cw-400 mb-1">
+            <DxListBox Data="@Data"
+                       TextFieldName="@nameof(Customer.ContactName)"
+                       @bind-SearchText="@SearchText"
+                       @bind-Value="@Value"
+                       ShowSearchBox="true"
+                       SearchTextParseMode="@SearchTextParseMode"
+                       ListRenderMode="ListRenderMode.Virtual">
+            </DxListBox>
+            <p class="demo-text cw-400 mt-2">
+                Selected item: <b>@Value.ContactName</b>
+            </p>
+        </div>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionComboBox Label="Search Text Parse Mode:"
+                        Data="@(Enum.GetNames(typeof(ListSearchTextParseMode)))"
+                        Value="@(SearchTextParseMode.ToString())"
+                        ValueChanged="@((string item) => { SearchTextParseMode = Enum.Parse<ListSearchTextParseMode>(item); })" />
+    </OptionsContent>
+
+    @code {
+        IEnumerable<Customer> Data { get; set; }
+        Customer Value { get; set; }
+
+        ListSearchTextParseMode SearchTextParseMode { get; set; } = ListSearchTextParseMode.GroupWordsByAnd;
+        string SearchText { get; set; } = "an m";
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetCustomersAsync();
+            Value = Data.FirstOrDefault();
+        }
+    }
+</DemoPageSectionComponent>

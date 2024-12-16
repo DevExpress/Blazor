@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace BlazorDemo.Wasm.DataProviders.Implementation {
     public class UsdJpyDataProviderWasm : ICurrencyExchangeDataProvider {
+#pragma warning disable DX0006
         HttpClient httpClient;
 
         public UsdJpyDataProviderWasm(HttpClient httpClient) {
@@ -18,5 +19,6 @@ namespace BlazorDemo.Wasm.DataProviders.Implementation {
             string fileContent = await httpClient.GetStringAsync("api/get-usdjpy-exchange-data");
             return CurrencyExchangeCsvParser.Parse(fileContent);
         }
+#pragma warning restore DX0006
     }
 }

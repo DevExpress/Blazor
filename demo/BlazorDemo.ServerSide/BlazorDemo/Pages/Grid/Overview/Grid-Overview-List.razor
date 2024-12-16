@@ -14,7 +14,7 @@
             <DxGridDataColumn FieldName="Name" Caption="Subject" MinWidth="220" AllowGroup="false">
                 <CellDisplayTemplate>
                     <button class="btn btn-link grid-btn-link" @onclick="() => GotoDetailsViewClick((Issue)context.DataItem)">
-                        @GetIssueTypeIconHtml(((Issue)context.DataItem).Type)
+                        @DemoTemplateIconUtils.GetIssueTypeIconHtml(((Issue)context.DataItem).Type)
                         @context.HighlightedDisplayText
                     </button>
                 </CellDisplayTemplate>
@@ -22,19 +22,22 @@
             <DxGridDataColumn FieldName="ProjectID" Caption="Project" GroupIndex="0" Width="220px">
                 <EditSettings>
                     <DxComboBoxSettings Data="ProjectList" ValueFieldName="ID" TextFieldName="Name"
-                        FilteringMode="DataGridFilteringMode.Contains" />
+                                        SearchMode="@ListSearchMode.AutoSearch"
+                                        SearchFilterCondition="@ListSearchFilterCondition.Contains" />
                 </EditSettings>
             </DxGridDataColumn>
             <DxGridDataColumn FieldName="CreatorID" Caption="Owner" Width="140px" MinWidth="100">
                 <EditSettings>
                     <DxComboBoxSettings Data="UserList" ValueFieldName="ID" TextFieldName="FullName"
-                        FilteringMode="DataGridFilteringMode.Contains" />
+                                        SearchMode="@ListSearchMode.AutoSearch"
+                                        SearchFilterCondition="@ListSearchFilterCondition.Contains" />
                 </EditSettings>
             </DxGridDataColumn>
             <DxGridDataColumn FieldName="OwnerID" Caption="Assignee" Width="140px" MinWidth="100">
                 <EditSettings>
                     <DxComboBoxSettings Data="UserList" ValueFieldName="ID" TextFieldName="FullName"
-                        FilteringMode="DataGridFilteringMode.Contains" />
+                                        SearchMode="@ListSearchMode.AutoSearch"
+                                        SearchFilterCondition="@ListSearchFilterCondition.Contains" />
                 </EditSettings>
             </DxGridDataColumn>
             <DxGridDataColumn FieldName="Status" Caption="Status" Width="140px" MinWidth="140"
@@ -44,7 +47,7 @@
                 </EditSettings>
                 <CellDisplayTemplate>
                     <div class="d-flex align-items-center">
-                        @GetIssueStatusIcon((context.DataItem as Issue).Status)
+                        @DemoTemplateIconUtils.GetIssueStatusIconHtml((context.DataItem as Issue).Status)
                         @context.HighlightedDisplayText
                     </div>
                 </CellDisplayTemplate>
@@ -59,7 +62,7 @@
                         Click="@(() => Grid.ClearFilter())">Clear</DxButton>
                 </FilterRowCellTemplate>
                 <CellDisplayTemplate>
-                    <div>@GetIssuePriorityIconHtml((context.DataItem as Issue).Priority)</div>
+                    <div>@DemoTemplateIconUtils.GetIssuePriorityIconHtml((context.DataItem as Issue).Priority)</div>
                 </CellDisplayTemplate>
             </DxGridDataColumn>
         </Columns>
@@ -73,7 +76,7 @@
 </div>
 
 @code {
-    IGrid Grid;
+    IGrid Grid { get; set; }
     IEnumerable<Issue> DataSource { get; set; }
     IEnumerable<Project> ProjectList { get; set; }
     IEnumerable<User> UserList { get; set; }
@@ -111,47 +114,6 @@
     {
         if (e.FieldName == "CreatedDate" || e.FieldName == "ModifiedDate" || e.FieldName == "FixedDate")
             ((ITextEditSettings)e.EditSettings).ClearButtonDisplayMode = DataEditorClearButtonDisplayMode.Never;
-    }
-
-    public MarkupString GetIssueStatusIcon(IssueStatus status)
-    {
-        string statusIconName = status switch
-        {
-            IssueStatus.Fixed => "fixed",
-            IssueStatus.Postponed => "postponed",
-            IssueStatus.Rejected => "rejected",
-            IssueStatus.New => "new",
-            _ => throw new NotSupportedException()
-        };
-
-        string html = string.Format("<span class='status-icon status-icon-{0} me-1 rounded-circle d-inline-block'></span>",
-        statusIconName);
-        return new MarkupString(html);
-    }
-    public MarkupString GetIssuePriorityIconHtml(IssuePriority priority)
-    {
-        string priorytyClass = "warning";
-        string title = "Medium";
-        if (priority == IssuePriority.High)
-        {
-            priorytyClass = "danger";
-            title = " High ";
-        }
-        if (priority == IssuePriority.Low)
-        {
-            priorytyClass = "info";
-            title = " Low ";
-        }
-        string html = string.Format("<span class='badge priority-{0} py-1 px-2' title='{1} Priority'>{1}</span>", priorytyClass,
-        title);
-        return new MarkupString(html);
-    }
-    public MarkupString GetIssueTypeIconHtml(IssueType type)
-    {
-        string html = "";
-        if (type == IssueType.Bug)
-            html = "<span class='bug-icon d-inline-block me-1' title='Bug'></span>";
-        return new MarkupString(html);
     }
     public bool IsGridFiltered()
     {

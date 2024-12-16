@@ -16,7 +16,8 @@
                     ColumnResizeMode="GridColumnResizeMode.NextColumn"
                     TextWrapEnabled="false"
                     SizeMode="Params.SizeMode"
-                    HighlightRowOnHover="true">
+                    HighlightRowOnHover="true"
+                    SearchText="@GridSearchText">
                 <ToolbarTemplate>
                     <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" SizeMode="Params.SizeMode">
                         <DxToolbarItem Text="New" Click="NewItem_Click" IconCssClass="grid-toolbar-new" />
@@ -29,6 +30,14 @@
                                 <DxToolbarItem Text="To XLSX" Click="ExportXlsxItem_Click" />
                                 <DxToolbarItem Text="To XLS" Click="ExportXlsItem_Click" />
                             </Items>
+                        </DxToolbarItem>
+                        <DxToolbarItem BeginGroup="true">
+                            <Template Context="toolbar_item_context">
+                                <DxSearchBox @bind-Text="GridSearchText"
+                                             BindValueMode="BindValueMode.OnInput"
+                                             ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                                             aria-label="Search" />
+                            </Template>
                         </DxToolbarItem>
                     </DxToolbar>
                 </ToolbarTemplate>
@@ -77,6 +86,7 @@
 
         @code {
             const string ExportFileName = "ExportResult";
+            string GridSearchText = "";
 
             bool EditItemsEnabled { get; set; }
 

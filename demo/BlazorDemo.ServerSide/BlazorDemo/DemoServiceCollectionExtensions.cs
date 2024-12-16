@@ -1,13 +1,14 @@
 using System;
-using System.Globalization;
 using System.Reflection;
+using Azure.AI.OpenAI;
 using BlazorDemo.Configuration;
+using BlazorDemo.DataProviders;
 using BlazorDemo.Services;
 using DevExpress.Blazor.DocumentMetadata;
 using DevExpress.Blazor.RichEdit.SpellCheck;
+using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.Options;
 
 
 namespace BlazorDemo {
@@ -21,6 +22,23 @@ namespace BlazorDemo {
             services.AddScoped<HomesDataService>();
             services.AddScoped<IssuesDataService>();
             services.AddScoped<WorldcitiesDataService>();
+            services.AddScoped<DictionaryEntryDataProvider>();
+            var azureOpenAIEndpoint = "https://public-api.devexpress.com/demo-openai"; //DevExpress proxy-server
+            var azureOpenAIKey = "DEMO"; //Demo key
+
+            var openAIClient = new AzureOpenAIClient(
+                new Uri(azureOpenAIEndpoint),
+                new System.ClientModel.ApiKeyCredential(azureOpenAIKey),
+                new AzureOpenAIClientOptions() {
+                    Transport = new PromoteHttpStatusErrorsPipelineTransport()
+            });
+
+            var asChatClient = openAIClient.AsChatClient("gpt-4o-mini");
+
+            services.AddSingleton(asChatClient);
+            services.AddSingleton(openAIClient);
+            services.AddDevExpressAI();
+            services.AddSingleton<SmartFilterProvider>();
             services.AddDevExpressBlazor(opts => {
                 opts.BootstrapVersion = DevExpress.Blazor.BootstrapVersion.v5;
             }).AddSpellCheck(opts => {
@@ -43,6 +61,7 @@ namespace BlazorDemo {
 
             if(blazorWasm) {
                 services.AddScoped<DevExpress.XtraReports.Services.IReportProviderAsync, DemoReportSourceWasm>();
+                services.AddDevExpressWebAssemblyBlazorPdfViewer();
                 services.AddDevExpressWebAssemblyBlazorReportViewer();
 
                 DevExpress.XtraPrinting.PrintingOptions.Pdf.RenderingEngine = DevExpress.XtraPrinting.XRPdfRenderingEngine.Skia;

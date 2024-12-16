@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly" InitialTargets="RestoreWasmWorkload">
+﻿<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <EnableDefaultItems>False</EnableDefaultItems>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
     <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
@@ -8,21 +8,27 @@
     <IntermediateOutputPath>obj.WASM</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
-    <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
-    <PackageReference Include="System.Security.Permissions" Version="6.0.0" />
-    <PackageReference Include="DevExtreme.AspNet.Data" Version="4.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.25" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.25" PrivateAssets="all" />
-    <PackageReference Include="SkiaSharp.Views.Blazor" Version="2.88.7" />
-    <PackageReference Include="SkiaSharp.HarfBuzz" Version="2.88.7" />
+    <PackageReference Include="Azure.AI.OpenAI" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.AI.Abstractions" Version="9.0.1-preview.1.24570.5" />
+    <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="9.0.1-preview.1.24570.5" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.1" />
+    <PackageReference Include="System.Net.Http.Json" Version="8.0.1" />
+    <PackageReference Include="System.Private.Uri" Version="4.3.2" />
+    <PackageReference Include="System.Security.Permissions" Version="8.0.0" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="4.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.10" PrivateAssets="all" />
+    <PackageReference Include="SkiaSharp.Views.Blazor" Version="2.88.9" />
+    <PackageReference Include="SkiaSharp.HarfBuzz" Version="2.88.9" />
     <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="7.3.0" />
     <NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\2.0.23\*.a" />
     <ProjectReference Include="..\BlazorDemo\BlazorDemo.Wasm.Core.csproj" />
   </ItemGroup>
 <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.RichEdit" Version="24.1.6" />
-    <PackageReference Include="DevExpress.Pdf.SkiaRenderer" Version="24.1.6" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor" Version="24.2.3" />
+    <PackageReference Include="DevExpress.Blazor.PivotTable" Version="24.2.3" />
+    <PackageReference Include="DevExpress.Pdf.SkiaRenderer" Version="24.2.3" />
+    
     
     
     
@@ -38,11 +44,7 @@
 	</EmbeddedResource>
   </ItemGroup>
   <ItemGroup Condition="'$(DXTrimming)'=='true'">
-    <TrimmableAssembly Include="DevExpress.Data.v24.1" />
+    <TrimmableAssembly Include="DevExpress.Data.v24.2" />
     <TrimmerRootDescriptor Include="TrimmerRootDescriptor.xml" />
   </ItemGroup>
-	<Target Name="RestoreWasmWorkload" BeforeTargets="BeforeRestore">
-    <!-- Unix requires sudo and password input for this command -->
-		<Exec Condition="$([MSBuild]::IsOSPlatform('Windows'))" Command="dotnet workload install wasm-tools-net6 --source https://api.nuget.org/v3/index.json --skip-manifest-update"></Exec>
-	</Target>
 </Project>

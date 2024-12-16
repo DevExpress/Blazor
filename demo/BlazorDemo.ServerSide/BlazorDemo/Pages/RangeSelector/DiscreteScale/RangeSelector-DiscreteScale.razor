@@ -1,0 +1,40 @@
+@page "/RangeSelectorDiscreteScale"
+
+<DemoPageSectionComponent Id="RangeSelector-DiscreteScale">
+    <DemoChildContent>
+        @inject IPopulationDataProvider PopulationDataProvider
+        <DxRangeSelector Width="100%"
+                         Data="@Data"
+                         ValueChanged="@onValueChanged"
+                         ValueChangeMode="RangeSelectorValueChangeMode.OnHandleMove">
+            <DxTitleSettings Text="Population by Country, 2023"></DxTitleSettings>
+            <DxRangeSelectorChart>
+                <DxChartBarSeries ArgumentField="@((PopulationPoint s) => s.Country)"
+                                  ValueField="@((PopulationPoint s) => s.Value)"/>
+            </DxRangeSelectorChart>
+        </DxRangeSelector>
+        <h2 class="total-result">Total: @string.Format("{0:N0}", TotalPopulation) people</h2>
+    </DemoChildContent>
+
+    @code {
+        long TotalPopulation;
+        void onValueChanged(RangeSelectorValueChangedEventArgs info) {
+            TotalPopulation = CalculatePopulation(info);
+        }
+
+        List<PopulationPoint> Data;
+
+        long CalculatePopulation(RangeSelectorValueChangedEventArgs info = null) {
+            int startIndex = info != null ? Data.FindIndex(x => x.Country == (string)info.CurrentRange[0]) : 0;
+            int endIndex = info != null ? Data.FindIndex(x => x.Country == (string)info.CurrentRange[1]) : Data.Count - 1;
+
+            var filteredData = Data.Skip(startIndex).Take(endIndex - startIndex + 1).ToList();
+            return filteredData.Sum(dp => dp.Value);
+        }
+
+        protected override void OnInitialized() {
+            Data = PopulationDataProvider.GetData();
+            TotalPopulation = CalculatePopulation();
+        }
+    }
+</DemoPageSectionComponent>

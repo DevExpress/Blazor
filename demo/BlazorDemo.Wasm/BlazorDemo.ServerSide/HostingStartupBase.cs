@@ -90,6 +90,7 @@ namespace BlazorDemo.ServerSide {
                 services.AddSingleton<IPopulationStructureDataProvider, PopulationAgeStructureDataProvider>();
                 services.AddSingleton<ICurrencyExchangeDataProvider, UsdJpyDataProvider>();
                 services.AddSingleton<IUsdJpyCsvFileContentProvider, UsdJpyCsvFileContentProvider>();
+                services.AddSingleton<IVehiclesXmlFileContentProvider, VehiclesXmlFileContentProvider>();
                 services.AddSingleton<IWeatherSummaryCsvFileContentProvider, WeatherSummaryCsvFileContentProvider>();
                 services.AddSingleton<IWeatherSummaryDataProvider, WeatherSummaryDataProvider>();
                 services.AddSingleton<IIssuesDataProvider, IssuesDataProvider>();
@@ -108,16 +109,24 @@ namespace BlazorDemo.ServerSide {
                 services.AddSingleton<IChartSpiderDataProvider, ChartSpiderDataProvider>();
                 services.AddSingleton<IChartWindRoseDataProvider, ChartWindRoseDataProvider>();
                 services.AddSingleton<ISparklineDataProvider, SparklineDataProvider>();
+                services.AddSingleton<ISankeyDataProvider, SankeyDataProvider>();
                 services.AddSingleton<IHtmlEditorStringDataProvider, HtmlEditorStringDataProvider>();
                 services.AddSingleton<IMapApiKeyProvider, MapApiKeyProvider>();
+                services.AddSingleton<ISalesDataProvider, SalesDataProvider>();
                 // Editable should be scoped
                 services.AddScoped<INwindDataProvider, NwindDataProvider>();
                 services.AddScoped<IHomesDataProvider, HomesDataProvider>();
+                services.AddScoped<IEmployeeTaskEditableDataProvider, EmployeeTaskEditableDataProvider>();
 
                 services.AddSingleton<IEmployeeTaskDataProvider, EmployeeTaskDataProvider>();
                 services.AddSingleton<IFileSystemDataProvider, FileSystemDataProvider>();
                 services.AddSingleton<ISpaceObjectDataProvider, SpaceObjectDataProvider>();
+                services.AddSingleton<ISalesAmountDataProvider, SalesAmountDataProvider>();
                 services.AddSingleton<ISalesByRegionDataProvider, SalesByRegionDataProvider>();
+                services.AddSingleton<ICarouselImageDataProvider, CarouselImageDataProvider>();
+                services.AddSingleton<IRangeSelectorZoomingDataProvider, RangeSelectorZoomingDataProvider>();
+                services.AddSingleton<IPopulationDataProvider, PopulationDataProvider>();
+                services.AddSingleton<DictionaryEntryDataProvider>();
 
                 static void ConfigureHttpClient(HttpClient httpClient) {
                     httpClient.DefaultRequestHeaders.Add("Accept", "application/json");

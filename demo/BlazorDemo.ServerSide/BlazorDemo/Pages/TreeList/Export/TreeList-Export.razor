@@ -1,0 +1,82 @@
+﻿@page "/TreeList/Export"
+
+<DemoPageSectionComponent Id="TreeList-Export" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @using DevExpress.Export
+        @inject ISpaceObjectDataProvider SpaceObjectDataProvider
+
+        <DxTreeList @ref="TreeList"
+                    Data="TreeListData"
+                    ChildrenFieldName="Satellites"
+                    ShowAllRows="true"
+                    TextWrapEnabled="false"
+                    ShowFilterRow="true"
+                    SizeMode="Params.SizeMode"
+                    CssClass="max-h-480">
+            <Columns>
+                <DxTreeListDataColumn FieldName="Name" />
+                <DxTreeListDataColumn FieldName="TypeOfObject" Caption="Type" FilterRowOperatorType="TreeListFilterRowOperatorType.Equal">
+                    <EditSettings>
+                        <DxComboBoxSettings Data="TreeListRenderHelper.SpaceObjectTypes" SearchMode="@ListSearchMode.AutoSearch"
+                                            SearchFilterCondition="@ListSearchFilterCondition.Contains" />
+                    </EditSettings>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn FieldName="Mass10pow21kg" Caption="Mass, kg" DisplayFormat="N2">
+                    <HeaderCaptionTemplate>Mass, 10<sup>21</sup> &#215; kg</HeaderCaptionTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn FieldName="MeanRadiusInKM" Caption="Radius, km" DisplayFormat="N2" />
+                <DxTreeListDataColumn FieldName="Volume10pow9KM3" Caption="Volume, km³" DisplayFormat="N2">
+                    <HeaderCaptionTemplate>Volume, 10<sup>9</sup> &#215; km<sup>3</sup></HeaderCaptionTemplate>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn FieldName="SurfaceGravity" Caption="Gravity" DisplayFormat="N2">
+                    <HeaderCaptionTemplate>Gravity, m/s<sup>2</sup></HeaderCaptionTemplate>
+                </DxTreeListDataColumn>
+            </Columns>
+            <TotalSummary>
+                <DxTreeListSummaryItem SummaryType="TreeListSummaryItemType.Count" FieldName="Name" />
+            </TotalSummary>
+            <ToolbarTemplate>
+                <DxToolbar>
+                    <DxToolbarItem Text="Export to XLSX" Click="ExportXlsx_Click" BeginGroup="true" />
+                    <DxToolbarItem Text="Export to XLS" Click="ExportXls_Click" BeginGroup="true" />
+                    <DxToolbarItem Text="Export to CSV" Click="ExportCsv_Click" BeginGroup="true" />
+                </DxToolbar>
+            </ToolbarTemplate>
+        </DxTreeList>
+
+        @code {
+            ITreeList TreeList { get; set; }
+            object TreeListData { get; set; }
+
+            protected override void OnInitialized() {
+                TreeListData = SpaceObjectDataProvider.GenerateData();
+            }
+
+            protected override void OnAfterRender(bool firstRender) {
+                if(firstRender) {
+                    TreeList.ExpandRow(0);
+                    TreeList.ExpandRow(3);
+                }
+            }
+
+            async Task ExportXlsx_Click() {
+                await TreeList.ExportToXlsxAsync("ExportResult", new TreeListXlExportOptions() {
+                    CustomizeCell = OnCustomizeCell
+                });
+            }
+            async Task ExportXls_Click() {
+                await TreeList.ExportToXlsAsync("ExportResult", new TreeListXlExportOptions() {
+                    CustomizeCell = OnCustomizeCell
+                });
+            }
+            async Task ExportCsv_Click() {
+                await TreeList.ExportToCsvAsync("ExportResult");
+            }
+            void OnCustomizeCell(TreeListExportCustomizeCellEventArgs args) {
+                if(args.ColumnFieldName == "TypeOfObject" && args.AreaType == SheetAreaType.DataArea)
+                    args.Formatting.Font = new XlCellFont() { Italic = true };
+                args.Handled = true;
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

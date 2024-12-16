@@ -21,8 +21,8 @@
                 <ToolbarTemplate>
                     <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
                         <DxToolbarItem Text="New" Click="New_Click" IconCssClass="grid-toolbar-new" Enabled="true"/>
-                        <DxToolbarItem Text="Save" Click="Save_Click" IconCssClass="grid-toolbar-save" Enabled="BatchItemsEnabled" BeginGroup="true"/>
-                        <DxToolbarItem Text="Cancel" Click="Cancel_Click" IconCssClass="grid-toolbar-cancel" Enabled="BatchItemsEnabled"/>
+                        <DxToolbarItem Text="Submit" Click="Submit_Click" IconCssClass="grid-toolbar-save" Enabled="BatchItemsEnabled" BeginGroup="true"/>
+                        <DxToolbarItem Text="Revert" Click="Revert_Click" IconCssClass="grid-toolbar-cancel" Enabled="BatchItemsEnabled"/>
                     </DxToolbar>
                 </ToolbarTemplate>
                 <Columns>
@@ -38,6 +38,7 @@
                         <CellDisplayTemplate>
                             <div class="grid-cell-align-center">
                                 <DxButton IconCssClass="grid-icon grid-icon-delete"
+                                          CssClass="grid-delete-btn"
                                           RenderStyle="ButtonRenderStyle.Link"
                                           aria-label="Delete"
                                           Click="@(() => DeleteDataItem(context.DataItem))"/>
@@ -66,8 +67,8 @@
 
         protected override async Task OnInitializedAsync() => await UpdateDataAsync();
         async Task New_Click() => await Grid.StartEditNewRowAsync();
-        async Task Cancel_Click() => await ClearUnsavedChangesAsync();
-        async Task Save_Click() {
+        async Task Revert_Click() => await ClearUnsavedChangesAsync();
+        async Task Submit_Click() {
             foreach(var unsavedChange in UnsavedChanges) {
                 var changedItem = unsavedChange.Key;
                 var changeType = unsavedChange.Value.Type;

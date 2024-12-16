@@ -1,0 +1,31 @@
+.chat-demo-container {
+    width: 100%
+}
+
+/*BeginHide*/::deep /*EndHide*/ .demo-chat {
+    width: 100%;
+    height: 400px;
+}
+
+    /*BeginHide*/ ::deep /*EndHide*/ .demo-chat .demo-chat-message {
+        padding: 10px;
+        border-radius: 10px;
+        width: calc(100% - 60px);
+        box-shadow: 0px 2px 6px -2px;
+        color: black;
+    }
+
+        /*BeginHide*/ ::deep /*EndHide*/ .demo-chat .demo-chat-message.demo-assistant-message {
+            background-color: rgb(219, 255, 204);
+            align-self: self-start;
+        }
+
+        /*BeginHide*/ ::deep /*EndHide*/ .demo-chat .demo-chat-message.demo-user-message {
+            background-color: #FFF;
+            align-self: self-end;
+        }
+
+        /*BeginHide*/ ::deep /*EndHide*/ .demo-chat .demo-chat-message.demo-error-message {
+            background-color: rgb(255, 183, 194);
+            align-self: center;
+        }

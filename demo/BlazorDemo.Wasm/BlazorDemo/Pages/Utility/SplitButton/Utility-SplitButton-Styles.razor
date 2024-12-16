@@ -1,0 +1,57 @@
+﻿<DemoPageSectionComponent Id="Utility-SplitButton-Styles" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="component-container flex-column w-100">
+            <div class="buttons-group mb-2">
+                <div class="buttons-group-title mb-2">
+                    @SelectedRenderStyleMode.ToString() style:
+                </div>
+                <div class="d-flex flex-row flex-wrap">
+                    @foreach(var style in _btnStyles) {
+                        <div class="me-2 mb-2">
+                            <DxSplitButton RenderStyle="@style"
+                                           RenderStyleMode="@SelectedRenderStyleMode"
+                                           SizeMode="Params.SizeMode"
+                                           Text="@(Enum.GetName(typeof(ButtonRenderStyle), style) ?? string.Empty)"
+                                           CssClass="w-100">
+                                <Items>
+                                    <DxDropDownButtonItem Text="Favorites"/>
+                                    <DxDropDownButtonItem Text="Recently added"/>
+                                    <DxDropDownButtonItem Text="Show all"/>
+                                </Items>
+                            </DxSplitButton>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionComboBox Label="Button Render Style Mode:"
+                        Data="@(Enum.GetNames(typeof(ButtonRenderStyleMode)))"
+                        Value="@(SelectedRenderStyleMode.ToString())"
+                        ValueChanged="@((string selectedItem) => { SelectedRenderStyleMode = Enum.Parse<ButtonRenderStyleMode>(selectedItem); })"/>
+    </OptionsContent>
+
+
+    @code {
+        List<ButtonRenderStyle> _btnStyles;
+        ButtonRenderStyleMode SelectedRenderStyleMode { get; set; } = ButtonRenderStyleMode.Contained;
+
+        protected override void OnInitialized() {
+            base.OnInitialized();
+            _btnStyles = [
+                ButtonRenderStyle.Primary,
+                ButtonRenderStyle.Secondary,
+                ButtonRenderStyle.Info,
+                ButtonRenderStyle.Link,
+                ButtonRenderStyle.Success,
+                ButtonRenderStyle.Warning,
+                ButtonRenderStyle.Danger,
+                ButtonRenderStyle.None,
+            ];
+        }
+
+    }
+
+</DemoPageSectionComponent>

@@ -1,0 +1,26 @@
+﻿<DemoPageSectionComponent Id="Editors-ColorPalette-NoColorTile" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="color-palette-container">
+            <DxColorPalette @bind-Value="@Value" ShowNoColorTile="@ShowNoColorTile" SizeMode="@Params.SizeMode" />
+            <p class="demo-text mt-3">
+                @GetSelectedValueDescription()
+            </p>
+        </div>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionCheckBox Label="Show No Color Tile" @bind-Checked="@ShowNoColorTile"/>
+    </OptionsContent>
+
+    @code {
+        string Value { get; set; }
+        bool ShowNoColorTile { get; set; } = true;
+
+        RenderFragment GetSelectedValueDescription() {
+            if(Value != null)
+                return @<text>Value: @Value</text>;
+            else
+                return @<text>No selected color</text>;
+        }
+    }
+</DemoPageSectionComponent>

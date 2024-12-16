@@ -14,3 +14,5 @@ Use the following API members to sort Blazor TreeList data in code:
 * [DxTreeListDataColumn.SortIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeListDataColumn.SortIndex) — Specifies the column's position among sorted columns. If the property is set to `-1`, TreeList data is not sorted against this column. 
 * [DxTreeListDataColumn.SortOrder](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeListDataColumn.SortOrder) — Specifies column sort order (ascending or descending). 
 * [DxTreeListDataColumn.SortMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeListDataColumn.SortMode) — Specifies whether to use custom logic to sort column data.
+
+You can focus a column header with a keyboard and press Space, Shift+Space, or Ctrl+Space to change sort criteria.

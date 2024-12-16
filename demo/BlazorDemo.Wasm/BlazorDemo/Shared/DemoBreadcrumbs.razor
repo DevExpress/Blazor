@@ -35,6 +35,7 @@
                 Items.Insert(0, new (demoPage.Title, url));
                 demoPage = demoPage.ParentPage;
             }
+            Items.Insert(0, new (currentPage.Group.Title, ""));
             Items.Insert(0, new (HomePageTitle, "./"));
         } else {
             Items.Add(new (HomePageTitle, ""));

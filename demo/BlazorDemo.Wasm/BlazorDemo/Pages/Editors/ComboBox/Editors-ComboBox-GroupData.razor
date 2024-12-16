@@ -1,0 +1,26 @@
+﻿<DemoPageSectionComponent Id="Editors-ComboBox-GroupData" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <label for="cbGroupData" class="demo-text cw-480 mb-1">
+            Employee
+        </label>
+        <DxComboBox Data="@Data"
+                    @bind-Value="Value"
+                    TextFieldName="@nameof(Customer.ContactName)"
+                    GroupFieldName="@nameof(Customer.Country)"
+                    SearchMode="@ListSearchMode.AutoSearch"
+                    SearchFilterCondition="@ListSearchFilterCondition.Contains"
+                    SizeMode="Params.SizeMode"
+                    CssClass="cw-480"
+                    InputId="cbGrouping"/>
+    </ChildContentWithParameters>
+
+    @code {
+        IEnumerable<Customer> Data { get; set; }
+        Customer Value { get; set; }
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetCustomersAsync();
+            Value = Data.FirstOrDefault(x => x.Country == "Argentina");
+        }
+    }
+</DemoPageSectionComponent>

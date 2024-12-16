@@ -1,0 +1,41 @@
+﻿<DemoPageSectionComponent Id="DialogsAndWindows-MessageBox-Customization" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="target-container" @onclick="@(() => MessageBoxVisible = true)">
+            <p class="target-caption">CLICK TO SHOW A MESSAGE BOX WINDOW</p>
+        </div>
+
+        <DxMessageBox @bind-Visible="MessageBoxVisible"
+                      Title="@(Type.ToString())"
+                      Text="@($"I am a(n) {Type}")"
+                      ThemeMode="@ThemeMode"
+                      RenderStyle="@RenderStyle"
+                      SizeMode="@Params.SizeMode"
+                      Type="@Type"
+                      >
+        </DxMessageBox>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionComboBox Label="Type"
+                        CssClass="ow-100"
+                        Data="@TypeSource"
+                        @bind-Value="@Type"/>
+        <OptionComboBox Label="Render Style:"
+                        CssClass="ow-100"
+                        Data="RenderStyleSource"
+                        @bind-Value="RenderStyle"/>
+        <OptionComboBox Label="Theme Mode:"
+                        CssClass="ow-100"
+                        Data="ThemeModeSource"
+                        @bind-Value="ThemeMode"/>
+    </OptionsContent>
+    @code {
+        bool MessageBoxVisible { get; set; } = false;
+        static MessageBoxRenderStyle[] RenderStyleSource { get; set; } = Enum.GetValues<MessageBoxRenderStyle>();
+        static MessageBoxThemeMode[] ThemeModeSource { get; set; } = Enum.GetValues<MessageBoxThemeMode>();
+        static MessageBoxType[] TypeSource { get; set; } = Enum.GetValues<MessageBoxType>();
+        MessageBoxRenderStyle RenderStyle { get; set; } = MessageBoxRenderStyle.Primary;
+        MessageBoxThemeMode ThemeMode { get; set; } = MessageBoxThemeMode.Auto;
+        MessageBoxType Type { get; set; } = MessageBoxType.Alert;
+    }
+</DemoPageSectionComponent>
+

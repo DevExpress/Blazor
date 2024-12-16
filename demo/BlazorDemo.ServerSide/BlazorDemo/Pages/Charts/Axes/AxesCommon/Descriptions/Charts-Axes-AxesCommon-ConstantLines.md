@@ -18,4 +18,4 @@ You can also define the following parameters to customize constant line appearan
 
 To customize font settings of a constant line label, use the [DxChartFont](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartFont) component.
 
-Data for this demo is obtained from the following data source: [https://climate.nasa.gov/vital-signs/global-temperature/](https://climate.nasa.gov/vital-signs/global-temperature/). 
+Data for this demo is obtained from the following data source: [Global Temperature | Vital Signs – Climate Change](https://climate.nasa.gov/vital-signs/global-temperature/?intent=121).

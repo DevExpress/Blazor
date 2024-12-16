@@ -14,7 +14,10 @@
 
                 <DxFormLayout SizeMode="Params.SizeMode">
                     <DxFormLayoutItem Caption="Identifier:" ColSpanMd="6">
-                        <DxTextBox @bind-Text="@starship.Identifier" ShowValidationIcon="true"/>
+                        <DxTextBox @bind-Text="@starship.Identifier"
+                                   ValidationEnabled="@EnableValidation"
+                                   ShowValidationIcon="@ShowValidationIcon"
+                                   ShowValidationSuccessState="@ShowValidationSuccessState" />
                     </DxFormLayoutItem>
 
                     <DxFormLayoutItem Caption="Primary Classification:" ColSpanMd="6">
@@ -24,23 +27,33 @@
                                     TextFieldName="Value"
                                     ValueFieldName="Id"
                                     @bind-Value="@starship.Classification"
-                                    ShowValidationIcon="true"/>
+                                    ValidationEnabled="@EnableValidation"
+                                    ShowValidationIcon="@ShowValidationIcon"
+                                    ShowValidationSuccessState="@ShowValidationSuccessState" />
                     </DxFormLayoutItem>
 
                     <DxFormLayoutItem Caption="Maximum Accommodation:"
                                       ColSpanMd="6">
-                        <DxSpinEdit ShowValidationIcon="true"
-                                    @bind-Value="@starship.MaximumAccommodation"/>
+                        <DxSpinEdit @bind-Value="@starship.MaximumAccommodation"
+                                    ValidationEnabled="@EnableValidation"
+                                    ShowValidationIcon="@ShowValidationIcon"
+                                    ShowValidationSuccessState="@ShowValidationSuccessState" />
                     </DxFormLayoutItem>
 
                     <DxFormLayoutItem Caption="Production Date:"
                                       ColSpanMd="6">
-                        <DxDateEdit @bind-Date="@starship.ProductionDate" ShowValidationIcon="true"/>
+                        <DxDateEdit @bind-Date="@starship.ProductionDate"
+                                    ValidationEnabled="@EnableValidation"
+                                    ShowValidationIcon="@ShowValidationIcon"
+                                    ShowValidationSuccessState="@ShowValidationSuccessState" />
                     </DxFormLayoutItem>
 
                     <DxFormLayoutItem Caption="Description:"
                                       ColSpanMd="12">
-                        <DxMemo @bind-Text="@starship.Description" ShowValidationIcon="true"/>
+                        <DxMemo @bind-Text="@starship.Description"
+                                ValidationEnabled="@EnableValidation"
+                                ShowValidationIcon="@ShowValidationIcon"
+                                ShowValidationSuccessState="@ShowValidationSuccessState" />
                     </DxFormLayoutItem>
 
                     <DxFormLayoutItem ColSpanMd="12">
@@ -48,24 +61,39 @@
                                   Text="Submit"
                                   RenderStyle="ButtonRenderStyle.Secondary"/>
                     </DxFormLayoutItem>
-
-                    <DxFormLayoutItem ColSpanMd="12">
-                        <ValidationSummary/>
-                    </DxFormLayoutItem>
-
+                    @if(EnableValidation) {
+                        <DxFormLayoutItem ColSpanMd="12">
+                            <ValidationSummary/>
+                        </DxFormLayoutItem>
+                    }
                 </DxFormLayout>
-
-                <div class="row w-100 mx-0">
-                    <p class="demo-text col-12 mt-2">
-                        Form Validation State:
-                        <b>@FormValidationState</b>
-                    </p>
-                </div>
+                @if(EnableValidation) {
+                    <div class="row w-100 mx-0">
+                        <p class="demo-text col-12 mt-2">
+                            Form Validation State:
+                            <b>@FormValidationState</b>
+                        </p>
+                    </div>
+                }
             </EditForm>
         </div>
     </ChildContentWithParameters>
 
+    <OptionsContent>
+        <OptionCheckBox @bind-Checked="@EnableValidation"
+                        Label="Enable Validation" />
+        <OptionCheckBox @bind-Checked="@ShowValidationIcon"
+                        Label="Show Validation Icon"
+                        Enabled="@EnableValidation"/>
+        <OptionCheckBox @bind-Checked="@ShowValidationSuccessState"
+                        Label="Show Validation Success State"
+                        Enabled="@EnableValidation"/>
+    </OptionsContent>
+
     @code {
+        bool EnableValidation { get; set; } = true;
+        bool ShowValidationIcon { get; set; } = true;
+        bool ShowValidationSuccessState { get; set; }
         string FormValidationState = @"Press the ""Submit"" button to validate the form.";
 
         Starship starship = new() {

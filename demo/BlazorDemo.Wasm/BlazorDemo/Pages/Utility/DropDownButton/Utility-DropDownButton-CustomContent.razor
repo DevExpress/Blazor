@@ -1,0 +1,51 @@
+﻿<DemoPageSectionComponent Id="Utility-DropDownButton-CustomContent" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <div>
+            <DxDropDownButton RenderStyle="ButtonRenderStyle.Secondary"
+                              Text="Select Employee"
+                              SizeMode="Params.SizeMode"
+                              CssClass="me-1"
+                              IconCssClass="menu-icon-user-profile menu-icon"
+                              DropDownVisible="DropDownVisible">
+                <DropDownContentTemplate>
+                    <div>
+                        <DxListBox Data="@Data"
+                                   @bind-Value="@Value"
+                                   CssClass="listbox">
+                            <ItemDisplayTemplate>
+                                <div class="listbox-item-template">
+                                    <img src="@StaticAssetUtils.GetImagePath(GetImageFileName(context.DataItem))" alt="@context.DataItem.FullName"/>
+                                    <span class="listbox-item-template-name">@context.DataItem.FullName</span>
+                                </div>
+                            </ItemDisplayTemplate>
+                        </DxListBox>
+                    </div>
+                </DropDownContentTemplate>
+            </DxDropDownButton>
+            <p class="demo-text cw-400 mt-2">
+                Selected item: <b>@Value?.Text</b>
+            </p>
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        IEnumerable<Employee> Data { get; set; }
+        bool DropDownVisible { get; set; }
+        Employee Value { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Data = await NwindDataService.GetEmployeesAsync();
+            Value = Data.FirstOrDefault();
+            DropDownVisible = false;
+
+            await base.OnInitializedAsync();
+        }
+
+        string GetImageFileName(Employee employee) {
+            return $"employees/item-template{employee.EmployeeId}.jpg";
+        }
+
+    }
+
+</DemoPageSectionComponent>

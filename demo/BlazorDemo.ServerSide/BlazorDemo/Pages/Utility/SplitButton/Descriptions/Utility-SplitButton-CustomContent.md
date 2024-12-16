@@ -1,0 +1,3 @@
+The DevExpress Blazor [Split Button](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSplitButton) component can display drop-down windows with custom content. Specify the [DropDownContentTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownButtonBase.DropDownContentTemplate) property (for the component or an item) to customize the layout and appearance of the corresponding drop-down window.
+
+In this demo, the button's drop-down window contains a [DxListBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2) component. When a user changes selection, the event handler closes the drop-down window and displays selected item information within the primary button.

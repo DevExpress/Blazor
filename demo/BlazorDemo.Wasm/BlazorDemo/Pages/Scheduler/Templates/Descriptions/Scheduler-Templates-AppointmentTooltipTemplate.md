@@ -10,6 +10,6 @@ Our Blazor Scheduler component allows you to add the following predefined button
 * [DevExpress.Blazor.DxSchedulerShowAppointmentCompactFormButton](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerShowAppointmentCompactFormButton)
 * [DevExpress.Blazor.DxSchedulerShowAppointmentEditFormButton](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSchedulerShowAppointmentEditFormButton)
 
-If our predefined buttons do not address your requirements, you can create [custom buttons](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler#custom-buttons) as requirements dictate. 
+If our predefined buttons do not address your requirements, you can create [custom buttons](https://docs.devexpress.com/Blazor/404564/components/scheduler/customization/appointment-forms-and-tooltips#custom-buttons) as requirements dictate. 
 
 You can also use the [ShowAppointmentTooltip](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxScheduler.ShowAppointmentTooltip) property to display/hide a tooltip.

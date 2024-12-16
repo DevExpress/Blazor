@@ -8,6 +8,7 @@ using BlazorDemo.DataProviders;
 
 namespace BlazorDemo.Wasm.DataProviders.Implementation {
     public class DocumentProviderWasm : IDocumentProvider {
+#pragma warning disable DX0006
         HttpClient httpClient;
 
         public DocumentProviderWasm(HttpClient httpClient) {
@@ -18,5 +19,6 @@ namespace BlazorDemo.Wasm.DataProviders.Implementation {
             string base64 = await httpClient.GetStringAsync($"api/get-file-async?name={name}", cancellationToken);
             return Convert.FromBase64String(base64);
         }
+#pragma warning restore DX0006
     }
 }

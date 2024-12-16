@@ -4,4 +4,4 @@ The [List Box](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2)
 *   [FieldName](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.FieldName) — Specifies the data source field that populates column items.
 *   [Visible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.Visible) — Specifies the column visibility.
 *   [VisibleIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.VisibleIndex) — Specifies the column display order.
-*   [Width](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.Width) — Specifies the column width.
+*   [Width](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.Width) — Specifies the column width.

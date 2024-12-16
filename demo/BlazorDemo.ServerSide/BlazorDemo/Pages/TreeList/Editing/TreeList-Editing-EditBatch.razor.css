@@ -1,0 +1,45 @@
+/*BeginHide*/::deep .treelist-toolbar-new,
+    ::deep .treelist-toolbar-delete,
+    ::deep .treelist-toolbar-save,
+    ::deep .treelist-toolbar-cancel {
+    background-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    background-position: center center;
+    background-color: currentColor;
+    height: 16px;
+    width: 16px;
+    opacity: 0.7;
+}
+
+::deep .treelist-toolbar-new {
+    -webkit-mask-image: url("images/icons/grid-toolbar-new.svg");
+    mask-image: url("images/icons/grid-toolbar-new.svg");
+}
+
+::deep .treelist-toolbar-delete {
+    -webkit-mask-image: url("images/icons/grid-toolbar-delete.svg");
+    mask-image: url("images/icons/grid-toolbar-delete.svg");
+}
+
+::deep .treelist-toolbar-save {
+    -webkit-mask-image: url("images/icons/save.svg");
+    mask-image: url("images/icons/save.svg");
+}
+
+::deep .treelist-toolbar-cancel {
+    -webkit-mask-image: url("images/icons/undo.svg");
+    mask-image: url("images/icons/undo.svg");
+}/*EndHide*/
+
+/*BeginHide*/::deep /*EndHide*/.treelist-modified-cell {
+    background-color: rgba(var(--bs-primary-rgb), 0.15) !important;
+}
+/*BeginHide*/ .treelist-container {
+    display: contents;
+}
+
+::deep .grid-delete-btn:hover {
+    color: var(--DS-color-surface-warning-default-rest);
+}
+/*EndHide*/

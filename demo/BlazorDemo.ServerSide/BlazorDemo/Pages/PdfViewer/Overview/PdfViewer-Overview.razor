@@ -33,7 +33,7 @@
         DxFileInput fileInput;
         byte[] DocumentContent { get; set; }
 
-        protected override async Task OnInitializedAsync() {
+        protected override void OnInitialized() {
             Assembly assembly = Assembly.GetExecutingAssembly();
 
             using(Stream stream = assembly.GetManifestResourceStream("BlazorDemo.DataSources.Invoice.pdf"))

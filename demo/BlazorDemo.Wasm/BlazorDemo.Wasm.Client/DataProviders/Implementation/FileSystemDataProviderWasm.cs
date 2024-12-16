@@ -11,6 +11,7 @@ using System.Net.Http;
 
 namespace BlazorDemo.DataProviders.Implementation {
     public class FileSystemDataProviderWasm : IFileSystemDataProvider {
+#pragma warning disable DX0006
         List<FileSystemDataItem> _rootItems;
 
         public FileSystemDataProviderWasm(HttpClient httpClient) {
@@ -26,5 +27,6 @@ namespace BlazorDemo.DataProviders.Implementation {
             }
             return _rootItems;
         }
+#pragma warning restore DX0006
     }
 }

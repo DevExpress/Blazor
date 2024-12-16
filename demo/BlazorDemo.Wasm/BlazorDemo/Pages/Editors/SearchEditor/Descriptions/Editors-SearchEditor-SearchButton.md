@@ -1,0 +1,1 @@
+In this demo, our Blazor Search Box component is used alongside a Submit button to simulate a common search/filtering-related UI metaphor.

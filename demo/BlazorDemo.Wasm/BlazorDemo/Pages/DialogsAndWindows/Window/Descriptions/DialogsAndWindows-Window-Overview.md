@@ -10,3 +10,5 @@ Users can close a Window in the following ways:
 - Press Escape. You can set the [CloseOnEscape](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow.CloseOnEscape) property to `false` to disable this capability.
 
 The [HeaderText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow.HeaderText), [BodyText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow.BodyText), and [FooterText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow.FooterText) properties specify text displayed in the Window elements. You can also customize the Window element's content and appearance. Refer to the following topic for more information: [DxWindow - Content and Appearance](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow#content-and-appearance).
+
+The Window component also supports [keyboard navigation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxWindow#keyboard-navigation). Press the Tab key or Shift+Tab to move focus to the next or previous focusable element inside window and press the Esc key to close the window

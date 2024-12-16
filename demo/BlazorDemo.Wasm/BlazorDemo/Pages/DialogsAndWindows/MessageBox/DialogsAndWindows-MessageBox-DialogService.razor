@@ -1,0 +1,25 @@
+<DemoPageSectionComponent Id="DialogsAndWindows-MessageBox-DialogService" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="target-container" @onclick="@OpenConfirmDialogAsync">
+            <p class="target-caption">CLICK TO SHOW A MESSAGE BOX WINDOW</p>
+            <p>RESULT: @(Result is not null ? Result.ToString() : "No result")</p>
+        </div>
+        <DxDialogProvider SizeMode="@Params.SizeMode"/>
+    </ChildContentWithParameters>
+    @code {
+        [Inject] IDialogService DialogService { get; set; }
+
+        private bool? Result { get; set; } = null;
+
+        private async Task OpenConfirmDialogAsync() {
+            Result = await DialogService.ConfirmAsync(new MessageBoxOptions() {
+                Text = "Are you sure you want to delete this record?",
+                OkButtonText = "Yes",
+                CancelButtonText = "No",
+                ShowIcon=false,
+                ShowCloseButton=false,
+                RenderStyle = MessageBoxRenderStyle.Danger,
+            });
+        }
+    }
+</DemoPageSectionComponent>

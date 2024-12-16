@@ -25,7 +25,8 @@
                 <DxTreeListDataColumn FieldName="Name" Caption="Task" SortOrder="TreeListColumnSortOrder.Ascending" />
                 <DxTreeListDataColumn FieldName="EmployeeName" Caption="Assigned To" TextAlignment="TreeListTextAlignment.Left" Width="200px">
                     <EditSettings>
-                        <DxComboBoxSettings Data="TreeListData" ValueFieldName="EmployeeName" TextFieldName="EmployeeName" FilteringMode="DataGridFilteringMode.Contains"/>
+                        <DxComboBoxSettings Data="TreeListData" ValueFieldName="EmployeeName" TextFieldName="EmployeeName" SearchMode="@ListSearchMode.AutoSearch"
+                                            SearchFilterCondition="@ListSearchFilterCondition.Contains" />
                     </EditSettings>
                 </DxTreeListDataColumn>
                 <DxTreeListDataColumn FieldName="StartDate" Width="100px"/>

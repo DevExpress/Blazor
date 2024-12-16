@@ -1,0 +1,116 @@
+﻿@page "/Grid/DragDropRows/Between"
+@layout DataProviderAccessArea<INwindDataProvider>
+@using System.Collections.ObjectModel;
+
+<DemoPageSectionComponent Id="Grid-DragDropRows-Between" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <div class="grid-container">
+            <DxGrid @ref="@InStockGrid"
+                    Data="InStockProducts"
+                    AllowSort="false"
+                    AllowSelectRowByClick="true"
+                    SelectionMode="GridSelectionMode.Multiple"
+                    ShowAllRows="true"
+                    AllowDragRows="true"
+                    AllowedDropTarget="InStockAllowedDropTarget"
+                    SizeMode="Params.SizeMode"
+                    ItemsDropped="Grid_ItemsDropped">
+                <Columns>
+                    <DxGridSelectionColumn Width="40px" />
+                    <DxGridDataColumn FieldName="ProductName" MinWidth="50" />
+                    <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c2" />
+                </Columns>
+                <ToolbarTemplate>
+                    <DxToolbar Title="Products in Stock">
+                        <Items>
+                            <DxToolbarItem Context="itemCtx" Alignment="ToolbarItemAlignment.Right" BeginGroup="true">
+                                <Template>
+                                    <div class="d-flex flex-row align-items-center h-100 ms-2 me-2">
+                                        <div id="allowed-drop-target-label" class="me-2">Allowed Drop Target:</div>
+                                        <DxComboBox @bind-Value="InStockAllowedDropTarget"
+                                                    Data="AllowedDropTargetValues"
+                                                    CssClass="allowed-drop-target-combobox" aria-labelledby="allowed-drop-target-label"/>
+                                    </div>
+                                </Template>
+                            </DxToolbarItem>
+                        </Items>
+                    </DxToolbar>
+                </ToolbarTemplate>
+            </DxGrid>
+
+            <DxGrid Data="DiscontinuedProducts"
+                    AllowSort="false"
+                    AllowSelectRowByClick="true"
+                    SelectionMode="GridSelectionMode.Multiple"
+                    ShowAllRows="true"
+                    AllowDragRows="true"
+                    AllowedDropTarget="DiscontinuedAllowedDropTarget"
+                    SizeMode="Params.SizeMode"
+                    ItemsDropped="Grid_ItemsDropped">
+                <Columns>
+                    <DxGridSelectionColumn Width="40px" />
+                    <DxGridDataColumn FieldName="ProductName" MinWidth="50" />
+                    <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c2" />
+                </Columns>
+                <ToolbarTemplate>
+                    <DxToolbar Title="Discontinued Products">
+                        <Items>
+                            <DxToolbarItem Context="itemCtx" Alignment="ToolbarItemAlignment.Right" BeginGroup="true">
+                                <Template>
+                                    <div class="d-flex flex-row align-items-center h-100 ms-2 me-2">
+                                        <div id="label-allowed-drop-target" class="me-2">Allowed Drop Target:</div>
+                                        <DxComboBox @bind-Value="DiscontinuedAllowedDropTarget"
+                                                    Data="AllowedDropTargetValues"
+                                                    CssClass="allowed-drop-target-combobox" aria-labelledby="label-allowed-drop-target" />
+                                    </div>
+                                </Template>
+                            </DxToolbarItem>
+                        </Items>
+                    </DxToolbar>
+                </ToolbarTemplate>
+            </DxGrid>
+        </div>
+
+        @code {
+            IGrid InStockGrid { get; set; }
+
+            ObservableCollection<Product> InStockProducts { get; set; }
+            ObservableCollection<Product> DiscontinuedProducts { get; set; }
+
+            GridAllowedDropTarget InStockAllowedDropTarget { get; set; } = GridAllowedDropTarget.All;
+            GridAllowedDropTarget DiscontinuedAllowedDropTarget { get; set; } = GridAllowedDropTarget.All;
+
+            GridAllowedDropTarget[] AllowedDropTargetValues => Enum.GetValues<GridAllowedDropTarget>();
+
+            protected override async Task OnInitializedAsync() {
+                var products = await NwindDataService.GetProductsAsync();
+                InStockProducts = new ObservableCollection<Product>(products.Where(p => p.InStock));
+                DiscontinuedProducts = new ObservableCollection<Product>(products.Where(p => p.Discontinued));
+            }
+
+            async Task Grid_ItemsDropped(GridItemsDroppedEventArgs evt) {
+                var sourceProducts = GetProductCollection(evt.SourceComponent);
+                RemoveDroppedItems(sourceProducts, evt.DroppedItems);
+
+                var destinationProducts = GetProductCollection(evt.Grid);
+                var index = await evt.GetTargetDataSourceIndexAsync();
+                InsertDroppedItems(destinationProducts, evt.DroppedItems, index);
+            }
+
+            ObservableCollection<Product> GetProductCollection(object grid) {
+                return grid == InStockGrid ? InStockProducts : DiscontinuedProducts;
+            }
+
+            void RemoveDroppedItems(IList<Product> sourceProducts, IEnumerable<object> droppedItems) {
+                foreach(var item in droppedItems)
+                    sourceProducts.Remove((Product)item);
+            }
+
+            void InsertDroppedItems(IList<Product> destinationProducts, IEnumerable<object> droppedItems, int index) {
+                foreach(var item in droppedItems.Reverse())
+                    destinationProducts.Insert(index, (Product)item);
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

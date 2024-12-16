@@ -2,72 +2,103 @@
 @inject DemoConfiguration Configuration
 @inject NavigationManager NavigationManager
 
-@{
-    var siteMode = Configuration.GetConfigurationValue<bool>("SiteMode");
+@if(!VisibleGroups.Any() && SearchResult != null) {
+    <div class="search-no-results">No results found for <b>@SearchResult.RequestString</b>.</div>
 }
-
-<DxTreeView @ref="@treeView"
-            CssClass="sidebar-tree"
-            NodeExpandCollapseAction="TreeViewNodeExpandCollapseAction.NodeClick"
-            AllowSelectNodes="true"
-            TextWrapEnabled="true"
-            SelectionChanged="@SelectionChanged">
-    <Nodes>
-        @foreach (var demoPage in Pages) {
-            var hideDemoInTree = demoPage.IsMaintenanceMode || demoPage.IsExternal && !siteMode;
-            if (!hideDemoInTree) {
-                <NavMenuLeaf Page="@demoPage"></NavMenuLeaf>
-            }
+else {
+    var expandedItems = GetExpandedItems();
+    @foreach(var group in VisibleGroups) {
+        @if(!Configuration.IsSingleProduct) {
+            <h5 class="demo-group">@GetGroupTitle(group)</h5>
         }
-    </Nodes>
-</DxTreeView>
+
+        <DxTreeView @ref="@treeView"
+                    CssClass="sidebar-tree"
+                    UrlMatchMode="NavigationUrlMatchMode.Exact"
+                    NodeExpandCollapseAction="TreeViewNodeExpandCollapseAction.NodeClick"
+                    AllowSelectNodes="true"
+                    TextWrapEnabled="true" aria-label="@GetTreeLabel(group)">
+            <Nodes>
+                @foreach(var demoPage in group.GetNavTreeChildren(Configuration.IsSiteMode).Where(p => IsVisibleItem(p))) {
+                    <NavMenuLeaf DemoItem="@demoPage" SearchResult="@SearchResult" ExpandedItems="@expandedItems"></NavMenuLeaf>
+                }
+            </Nodes>
+        </DxTreeView>
+    }
+}
 @code {
-    DxTreeView treeView;
+    DxTreeView treeView { set => treeViews.Add(value); }
+
+    List<DxTreeView> treeViews = new();
+
+    public IEnumerable<DemoGroup> Groups { get => Configuration.Groups; }
+
+    bool IsVisibleGroup(DemoGroup group) {
+        return SearchResult == null || SearchResult.ContainsInHierarchy(group);
+    }
+    bool IsVisibleItem(DemoItem item) {
+        return SearchResult == null || SearchResult.ContainsInHierarchy(item);
+    }
+
+    protected IEnumerable<DemoGroup> VisibleGroups { get => Groups.Where(g => IsVisibleGroup(g)); }
+
+    public MarkupString GetGroupTitle(DemoGroup group) {
+        if(SearchResult == null)
+            return new(group.Title);
+        return new(SearchResult.GetHighlightedMarkup(group.Title));
+    }
+
+    public string GetTreeLabel(DemoGroup group) {
+        return !Configuration.IsSingleProduct && !string.IsNullOrEmpty(group.NavigationAriaLabel) ? group.NavigationAriaLabel : null;
+    }
 
     [Parameter]
-    public IEnumerable<DemoPageBase> Pages { get; set; }
-
+    public DemoSearchResult SearchResult { get; set; }
+    [Parameter]
+    public string ActivePage { get; set; }
+    void UpdateSelection() {
+        foreach(var treeView in treeViews) {
+            treeView.ClearSelection();
+            treeView.SelectNode(n => IsSelectedNode(n, ActivePage));
+        }
+    }
     protected override void OnInitialized() {
         NavigationManager.LocationChanged += OnLocationChanged;
+        base.OnInitialized();
     }
     protected override void OnAfterRender(bool firstRender) {
-        UpdateSelection(NavigationManager.Uri, true);
+        UpdateSelection();
+        base.OnAfterRender(firstRender);
     }
-    void OnLocationChanged(object sender, LocationChangedEventArgs args) {
-        UpdateSelection(NavigationManager.Uri, true);
-    }
-    void UpdateSelection(string currentUri, bool expandNodesToSelection) {
-        treeView.SelectNode(n => {
-            if(!string.IsNullOrEmpty(n.NavigateUrl) && (currentUri.EndsWith("/" + n.NavigateUrl) || currentUri == NavigationManager.BaseUri && n.NavigateUrl == "./")) {
-                if(expandNodesToSelection)
-                    ExpandToSelectedNode(n);
-                return true;
-            }
-            return false;
-        });
-    }
-    void ExpandToSelectedNode(ITreeViewNodeInfo selectedNode) {
-        var nodes = treeView.GetNodesInfo(n => true);
-        foreach(var node in nodes) {
-            treeView.SetNodeExpanded(n => n == node, IsParentNode(node, selectedNode));
-        }
-    }
-    bool IsParentNode(ITreeViewNodeInfo parentNode, ITreeViewNodeInfo node) {
-        while(node != null) {
-            if(node == parentNode)
-                return true;
-            node = node.Parent;
-        }
-        return false;
-    }
-    protected void SelectionChanged(TreeViewNodeEventArgs e) {
-        if(e.Reason != NavigationItemStateChangeReason.ApiCall && string.IsNullOrEmpty(e.NodeInfo.NavigateUrl))
-            UpdateSelection(NavigationManager.Uri, false);
+    protected override void OnParametersSet() {
+        UpdateSelection();
+        base.OnParametersSet();
     }
     public void Dispose() {
         NavigationManager.LocationChanged -= OnLocationChanged;
     }
-    protected override bool ShouldRender() {
-        return false;
+
+    void OnLocationChanged(object sender, LocationChangedEventArgs args) {
+        UpdateSelection();
+    }
+
+    HashSet<string> GetExpandedItems() {
+        var selectedItem = !string.IsNullOrEmpty(ActivePage) ? Configuration.FindDemoItemRecursively(i => IsSelectedNode(i.GetUrl(), ActivePage)) : null;
+        var result = new HashSet<string>();
+        while(selectedItem != null) {
+            result.Add(selectedItem.UniqueId);
+            selectedItem = selectedItem.ParentPage;
+        }
+        return result;
+    }
+
+    bool IsSelectedNode(ITreeViewNodeInfo node, string currentUri) {
+        return IsSelectedNode(node.NavigateUrl, currentUri);
+    }
+    bool IsSelectedNode(string navigateUrl, string currentUrl) {
+        if (string.IsNullOrEmpty(navigateUrl)) return false;
+        return currentUrl.EndsWith($"/{navigateUrl}", StringComparison.OrdinalIgnoreCase) ||
+               (currentUrl == NavigationManager.BaseUri && navigateUrl == "./") ||
+               currentUrl.EndsWith(navigateUrl.Split('#')[0], StringComparison.OrdinalIgnoreCase);
     }
 }

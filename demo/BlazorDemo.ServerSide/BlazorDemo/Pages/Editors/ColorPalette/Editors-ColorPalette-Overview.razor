@@ -1,0 +1,24 @@
+﻿<DemoPageSectionComponent Id="Editors-ColorPalette-Overview" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="color-palette-container">
+            <div class="color-palette-logo-container me-5">
+                <div class="color-palette-image" style="background-color: @Value;"></div>
+                <p class="demo-text mt-3">
+                    @GetSelectedValueDescription()
+                </p>
+            </div>
+            <DxColorPalette @bind-Value="@Value" SizeMode="@Params.SizeMode" />
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        string Value { get; set; } = "#F58220";
+
+        RenderFragment GetSelectedValueDescription() {
+            if(Value != null)
+                return @<text>Value: @Value</text>;
+            else
+                return @<text>No selected color</text>;
+        }
+    }
+</DemoPageSectionComponent>

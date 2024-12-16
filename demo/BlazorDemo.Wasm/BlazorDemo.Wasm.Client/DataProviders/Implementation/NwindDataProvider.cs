@@ -28,9 +28,11 @@ namespace BlazorDemo.Wasm.DataProviders.Implementation {
         public async Task InsertEmployeeAsync(IDictionary<string, object> newValues, CancellationToken ct = default) {
             var employee = new EditableEmployee();
             UpdateItemProperties(employee, newValues);
-            await Loader.AddEntity(this, employee);
+            await InsertEmployeeAsync(employee, ct);
         }
         public async Task InsertEmployeeAsync(EditableEmployee newDataItem, CancellationToken ct = default) {
+            var employees = (await GetEmployeesEditableAsync(ct)).AsQueryable();
+            UpdateItemKey(employees, newDataItem, x => x.EmployeeId, (x, key) => x.EmployeeId = key);
             await Loader.AddEntity(this, newDataItem);
         }
         public async Task RemoveEmployeeAsync(EditableEmployee dataItem, CancellationToken ct = default) {

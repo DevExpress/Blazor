@@ -1,0 +1,5 @@
+The DevExpress Blazor [Message Box](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMessageBox) component allows you to display alert or confirmation dialogs in your application.
+
+You can place the component in markup and display it on demand or use the dialog service ([IDialogService](https://docs.devexpress.com/Blazor/DevExpress.Blazor.IDialogService)) to create message boxes at runtime (see the [Dialog Service](MessageBox#DialogService) demo). 
+
+In this demo, the [DxMessageBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMessageBox) component is declared in markup. The [Visible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMessageBox.Visible) property controls message box visibility. Implement two-way binding for the property to display and close the message box in code. When a user clicks the demo area, the property is set to true and the message box appears on-screen. When a user closes the dialog, the component updates the `Visible` property value accordingly.

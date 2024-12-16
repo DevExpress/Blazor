@@ -1,10 +1,11 @@
 using System.Text.Json.Serialization;
 
 namespace BlazorDemo.DemoData {
-    public abstract class DemoItem {
+    public abstract class DemoItem : DemoItemBase {
         public string[] RedirectFrom { get; set; }
+        [JsonIgnore]
+        public DemoGroup Group { get; set; }
         public string Id { get; set; }
-        public string Title { get; set; }
         public string TitleOnPage { get; set; }
         public string DataSourceInfo { get; set; }
         public bool IsServerSideOnly { get; set; }
@@ -17,9 +18,9 @@ namespace BlazorDemo.DemoData {
         public bool IsExternal { get; set; }
 
         [JsonIgnore]
-        public DemoPageBase ParentPage { get; set; }
+        public DemoPage ParentPage { get; set; }
         [JsonIgnore]
-        public DemoRootPage RootPage { get; set; }
+        public DemoPage RootPage { get => ParentPage?.RootPage ?? ParentPage ?? this as DemoPage; }
         [JsonIgnore]
         public string UniqueId { get { return string.Join("-", GetUniqueIdParts()); } }
         [JsonIgnore]
@@ -28,6 +29,7 @@ namespace BlazorDemo.DemoData {
         public abstract string GetRazorFilesFolder();
         public abstract string GetDescriptionFilesFolder();
         public abstract string GetUrl();
+        public abstract string GetNavTreeUrl();
         public abstract DemoItem[] GetChildItems();
 
         public DemoCodeFile[] GetAdditionalCodeFiles() {
@@ -45,14 +47,14 @@ namespace BlazorDemo.DemoData {
             return true;
         }
 
-        public string[] GetUniqueIdParts() {
+        public List<string> GetUniqueIdParts() {
             List<string> result = new List<string>();
             var item = this;
             while(item != null) {
                 result.Insert(0, item.Id);
                 item = item.ParentPage;
             }
-            return result.ToArray();
+            return result;
         }
 
         public DemoItemStatus GetStatus() {
@@ -98,7 +100,7 @@ namespace BlazorDemo.DemoData {
             }
             return string.Empty;
         }
-        protected virtual DemoPageBase FindPage(Func<DemoPageBase, bool> findFunc) {
+        protected virtual DemoPage FindPage(Func<DemoPage, bool> findFunc) {
             var page = ParentPage;
             while(page != null) {
                 if(findFunc(page))

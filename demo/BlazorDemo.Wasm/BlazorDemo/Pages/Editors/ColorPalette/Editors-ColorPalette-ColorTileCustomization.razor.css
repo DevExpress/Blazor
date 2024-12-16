@@ -1,0 +1,11 @@
+/*BeginHide*/::deep /*EndHide*/.custom-tile-class, /*BeginHide*/::deep /*EndHide*/.custom-tile-class > div {
+    border-radius: 50% !important;
+}
+
+.color-palette-container {
+    width: fit-content;
+}
+
+.color-palette-container > .demo-text {
+    width: 100%;
+}

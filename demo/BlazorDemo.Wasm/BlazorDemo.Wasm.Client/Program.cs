@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BlazorDemo.Configuration;
@@ -31,6 +32,7 @@ namespace BlazorDemo.Wasm {
             services.AddSingleton<IChartDrillDownDataProvider, ChartDrillDownDataProvider>();
             services.AddSingleton<IPopulationStructureDataProvider, PopulationAgeStructureDataProvider>();
             services.AddSingleton<ICurrencyExchangeDataProvider, UsdJpyDataProviderWasm>();
+            services.AddSingleton<IVehiclesXmlFileContentProvider, VehiclesXmlFileContentProviderWasm>();
             services.AddSingleton<IIssuesDataProvider, IssuesDataProvider>();
             services.AddSingleton<IWeatherSummaryDataProvider, WeatherSummaryDataProviderWasm>();
             services.AddSingleton<IWorldcitiesDataProvider, WorldcitiesDataProvider>();
@@ -57,8 +59,10 @@ namespace BlazorDemo.Wasm {
             services.AddSingleton<IHistogramDataProvider, HistogramDataProvider>();
             services.AddSingleton<IDocumentProvider, DocumentProviderWasm>();
             services.AddSingleton<IHomesDataProvider, HomesDataProvider>();
+            services.AddSingleton<ISalesDataProvider, SalesDataProvider>();
             // Editable should be scoped
             services.AddScoped<INwindDataProvider, NwindDataProvider>();
+            services.AddScoped<IEmployeeTaskEditableDataProvider, EmployeeTaskEditableDataProvider>();
 
             services.AddSingleton<IChartBirthLifeDataProvider, ChartBirthLifeDataProvider>();
             services.AddSingleton<IChartApplePriceDataProvider, ChartApplePriceDataProvider>();
@@ -70,19 +74,23 @@ namespace BlazorDemo.Wasm {
             services.AddSingleton<IChartSpiderDataProvider, ChartSpiderDataProvider>();
             services.AddSingleton<IChartWindRoseDataProvider, ChartWindRoseDataProvider>();
             services.AddSingleton<ISparklineDataProvider, SparklineDataProvider>();
+            services.AddSingleton<ISankeyDataProvider, SankeyDataProvider>();
             services.AddSingleton<IMapApiKeyProvider, MapApiKeyProvider>();
             services.AddSingleton<IHtmlEditorStringDataProvider, HtmlEditorStringDataProvider>();
-            services.AddSingleton<EmployeeTaskService>();
 
             services.AddSingleton<IEmployeeTaskDataProvider, EmployeeTaskDataProvider>();
             services.AddSingleton<ISpaceObjectDataProvider, SpaceObjectDataProvider>();
             services.AddSingleton<ISalesByRegionDataProvider, SalesByRegionDataProvider>();
+            services.AddSingleton<ICarouselImageDataProvider, CarouselImageDataProvider>();
+            services.AddSingleton<ISalesAmountDataProvider, SalesAmountDataProvider>();
+            services.AddSingleton<IRangeSelectorZoomingDataProvider, RangeSelectorZoomingDataProvider>();
+            services.AddSingleton<IPopulationDataProvider, PopulationDataProvider>();
 
             services.AddNotSupportedDemoServices();
-
+#pragma warning disable DX0006
             var client = new HttpClient() { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) };
             builder.Services.AddScoped(sp => client);
-
+#pragma warning restore DX0006
             services.AddSingleton<IDemoVersion, DemoVersion>(x => {
                 var dxVersion = new Version(AssemblyInfo.Version);
                 return new DemoVersion(new Version(dxVersion.Major, dxVersion.Minor, dxVersion.Build).ToString());

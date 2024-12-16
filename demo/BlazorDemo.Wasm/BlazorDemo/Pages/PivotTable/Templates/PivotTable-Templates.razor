@@ -1,0 +1,111 @@
+﻿@page "/PivotTableTemplates"
+@using DevExpress.Blazor.Internal
+@layout DataProviderAccessArea<ISalesInfoDataProvider>
+
+<DemoPageSectionComponent Id="PivotTable-Templates" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject ISalesInfoDataProvider SaleInfoDataProvider
+        <div class="pivot-container">
+            @if(Data == null) {
+                <div class="pivot-loading-panel-container">
+                    <div class="d-flex flex-column">
+                        <DxLoadingPanel Visible="true"
+                        SizeMode="Params.SizeMode"
+                        Text="Data Loading..."
+                        IndicatorAreaVisible="false"
+                        IndicatorAnimationType="@WaitIndicatorAnimationType.Spin"></DxLoadingPanel>
+                    </div>
+                </div>
+            } else {
+                <DxPivotTable Data="@Data" AutoExpandGroups="false" SizeMode="Params.SizeMode">
+                    <Fields>
+                        <DxPivotTableField Field="@nameof(SaleInfo.Region)" SortOrder="PivotTableSortOrder.Ascending" Area="PivotTableArea.Row" Width="140"/>
+                        <DxPivotTableField Field="@nameof(SaleInfo.Country)" Area="PivotTableArea.Row" Width="160"/>
+                        <DxPivotTableField Field="@nameof(SaleInfo.City)" Area="PivotTableArea.Row" Width="120"/>
+                        <DxPivotTableField Field="@nameof(SaleInfo.Date)" GroupInterval="PivotTableGroupInterval.DateYear" Area="PivotTableArea.Column" Caption="Year" />
+                        <DxPivotTableField Field="@nameof(SaleInfo.Date)" GroupInterval="PivotTableGroupInterval.DateQuarter" Area="PivotTableArea.Column" Caption="Quarter">
+                            <ValueTemplate>
+                                <span>@($"Q{context.Text}")</span>
+                            </ValueTemplate>
+                        </DxPivotTableField>
+                        <DxPivotTableField Field="@nameof(SaleInfo.Date)" GroupInterval="PivotTableGroupInterval.DateMonth" Area="PivotTableArea.Column" Caption="Month"/>
+                        <DxPivotTableField Field="@nameof(SaleInfo.Amount)" Area="PivotTableArea.Data" SummaryType="PivotTableSummaryType.Sum">
+                            <CellTemplate>
+                                @if(ShouldFormatCellContent(context)) {
+                                    <div class="pivot-table-cell-template">
+                                        <span class="@GetCellTemplateIconCssClass(context)"></span>
+                                        <span class="@GetCellTemplateCssClass(context)">
+                                            @string.Format("{0:c0}", context.Value)
+                                        </span>
+                                    </div>
+                                }
+                                else {
+                                    <span>@string.Format("{0:c0}", context.Value)</span>
+                                }
+                            </CellTemplate>
+                        </DxPivotTableField>
+                        <DxPivotTableField Field="@nameof(SaleInfo.OrderId)" Caption="Count" Area="PivotTableArea.Data" SummaryType="PivotTableSummaryType.Count" Width="80">
+                            <CellTemplate>
+                                <span class="fw-bold">@context.Value</span>
+                            </CellTemplate>
+                        </DxPivotTableField>
+                    </Fields>
+                </DxPivotTable>
+            }
+        </div>
+        @code {
+            IEnumerable<SaleInfo> Data { get; set; }
+
+            protected override async Task OnInitializedAsync() {
+                Data = await SaleInfoDataProvider.GetSalesAsync();
+            }
+
+            bool ShouldFormatCellContent(PivotTableFieldCellTemplateContext context) {
+                return context.ColumnValueType != PivotTableValueType.GrandTotal && context.RowValueType != PivotTableValueType.GrandTotal;
+            }
+
+            string GetCellTemplateCssClass(PivotTableFieldCellTemplateContext context) {
+                if(IsCellTemplateValueNegative(context))
+                    return "text-danger";
+                if(IsCellTemplateValuePositive(context))
+                    return "text-success";
+                return string.Empty;
+            }
+            string GetCellTemplateIconCssClass(PivotTableFieldCellTemplateContext context) {
+                string baseClass = "pivot-table-cell-template-icon";
+                if(IsCellTemplateValueNegative(context))
+                    return $"{baseClass} pivot-table-red-arrow-down";
+                if(IsCellTemplateValuePositive(context))
+                    return $"{baseClass} pivot-table-green-arrow-up";
+                if(IsCellTemplateValueNeutral(context))
+                    return $"{baseClass} pivot-table-yellow-arrow-right";
+                if(IsCellTemplateValueNegativeTrend(context))
+                    return $"{baseClass} pivot-table-yellow-arrow-down-right";
+                if(IsCellTemplateValuePositiveTrend(context))
+                    return $"{baseClass} pivot-table-yellow-arrow-up-right";
+                return string.Empty;
+            }
+
+            bool IsCellTemplateValuePositive(PivotTableFieldCellTemplateContext context) {
+                var value = Convert.ToDecimal(context.Value != null ? context.Value : 0);
+                return value > 60000;
+            }
+            bool IsCellTemplateValuePositiveTrend(PivotTableFieldCellTemplateContext context) {
+                var value = Convert.ToDecimal(context.Value != null ? context.Value : 0);
+                return value >= 50000 && value < 60000;
+            }
+            bool IsCellTemplateValueNeutral(PivotTableFieldCellTemplateContext context) {
+                var value = Convert.ToDecimal(context.Value != null ? context.Value : 0);
+                return value >= 30000 && value < 50000;
+            }
+            bool IsCellTemplateValueNegativeTrend(PivotTableFieldCellTemplateContext context) {
+                var value = Convert.ToDecimal(context.Value != null ? context.Value : 0);
+                return value >= 10000 && value < 30000;
+            }
+            bool IsCellTemplateValueNegative(PivotTableFieldCellTemplateContext context) {
+                var value = Convert.ToDecimal(context.Value != null ? context.Value : 0);
+                return value < 10000;
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

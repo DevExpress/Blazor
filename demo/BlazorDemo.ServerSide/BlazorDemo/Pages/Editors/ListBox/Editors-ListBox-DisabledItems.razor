@@ -1,0 +1,23 @@
+﻿<DemoPageSectionComponent Id="Editors-ListBox-DisabledItems" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <DxListBox Data="@Products"
+                   @bind-Values="@SelectedProducts"
+                   TextFieldName="@nameof(Product.ProductName)"
+                   DisabledFieldName="@nameof(Product.Discontinued)"
+                   SelectionMode="ListBoxSelectionMode.Multiple"
+                   SizeMode="Params.SizeMode"
+                   CssClass="cw-400 chi-220">
+        </DxListBox>
+    </ChildContentWithParameters>
+
+    @code {
+        IEnumerable<Product> Products { get; set; }
+        IEnumerable<Product> SelectedProducts { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            Products = await NwindDataService.GetProductsAsync();
+            SelectedProducts = Products.Take(1);
+        }
+    }
+</DemoPageSectionComponent>

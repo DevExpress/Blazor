@@ -1,0 +1,212 @@
+﻿<DemoPageSectionComponent Id="Navigation-Ribbon-Overview" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="ribbon-container">
+            <DxRibbon SizeMode="@Params.SizeMode">
+                <DxRibbonApplicationTab Text="File">
+                    <DxRibbonApplicationTabItem Text="New"
+                                                IconCssClass="rb-icon rb-icon-document-blank"
+                                                Click="@(() => ClickItem("New tab item"))" />
+                    <DxRibbonApplicationTabItem Text="Open"
+                                                IconCssClass="rb-icon rb-icon-folder-open"
+                                                Click="@(() => ClickItem("Open tab item"))" />
+                    <DxRibbonApplicationTabItem Text="Save as"
+                                                IconCssClass="rb-icon rb-icon-save"
+                                                Click="@(() => ClickItem("Save as tab item"))">
+                        <DxRibbonApplicationTabItem Text="Text file" Click="@(() => ClickItem("Text file tab item"))"/>
+                        <DxRibbonApplicationTabItem Text="Word document" Click="@(() => ClickItem("Word document tab item"))"/>
+                        <DxRibbonApplicationTabItem Text="Pdf file" Click="@(() => ClickItem("Pdf file tab item"))"/>
+                    </DxRibbonApplicationTabItem>
+                    <DxRibbonApplicationTabItem Text="Share"
+                                                IconCssClass="rb-icon rb-icon-share"
+                                                Click="@(() => ClickItem("Share tab item"))" />
+                    <DxRibbonApplicationTabItem Text="Print"
+                                                IconCssClass="rb-icon rb-icon-print"
+                                                Click="@(() => ClickItem("Print tab item"))" />
+                </DxRibbonApplicationTab>
+                <DxRibbonTab Text="Home">
+                    <DxRibbonGroup>
+                        <DxRibbonItem Text="Undo"
+                                      IconCssClass="rb-icon rb-icon-undo"
+                                      Click="@(() => ClickItem("Undo button"))" />
+                        <DxRibbonItem Text="Redo"
+                                      IconCssClass="rb-icon rb-icon-redo"
+                                      Click="@(() => ClickItem("Redo button"))" />
+                        <DxRibbonItem Text="Paste"
+                                      IconCssClass="rb-icon rb-icon-paste"
+                                      SplitDropDownButton="true"
+                                      Click="@(() => ClickItem("Paste button"))">
+                            <DxRibbonItem Text="Copy"
+                                          IconCssClass="rb-icon rb-icon-copy"
+                                          Click="@(() => ClickItem("Copy button"))" />
+                            <DxRibbonItem Text="Cut"
+                                          IconCssClass="rb-icon rb-icon-cut"
+                                          Click="@(() => ClickItem("Cut button"))" />
+                        </DxRibbonItem>
+                        <DxRibbonItem Text="Paint format"
+                                      IconCssClass="rb-icon rb-icon-paint"
+                                      Click="@(() => ClickItem("Paint format button"))" />
+                    </DxRibbonGroup>
+                    <DxRibbonGroup>
+                        <DxRibbonComboBoxItem Data="Fonts"
+                                              @bind-Value="CurrentFont"
+                                              TextFieldName="@nameof(FontInfo.Name)"
+                                              Width="120px" />
+                        <DxRibbonComboBoxItem Data="FontSizes"
+                                              @bind-Value="CurrentFontSize"
+                                              TextFieldName="@nameof(FontSizeInfo.Size)"
+                                              Width="65px" />
+                    </DxRibbonGroup>
+                    <DxRibbonGroup>
+                        <DxRibbonItem Text="Bold"
+                                      IconCssClass="rb-icon rb-icon-bold"
+                                      Click="@(() => ClickItem("Bold button"))" />
+                        <DxRibbonItem Text="Italic"
+                                      IconCssClass="rb-icon rb-icon-italic"
+                                      Click="@(() => ClickItem("Italic button"))" />
+                        <DxRibbonItem Text="Underscore"
+                                      IconCssClass="rb-icon rb-icon-underline"
+                                      Click="@(() => ClickItem("Underscore button"))" />
+                        <DxRibbonColorPaletteItem Text="Font color"
+                                                 @bind-Value="color">
+                            <IconTemplate>
+                                <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="@color"  d="M4.5 12C3.67157 12 3 12.6716 3 13.5V16.5C3 17.3284 3.67157 18 4.5 18H15.5C16.3284 18 17 17.3284 17 16.5V13.5C17 12.6716 16.3284 12 15.5 12H4.5Z" />
+                                    <path d="M10.4642 2.3143C10.3883 2.12448 10.2045 2 10 2C9.79556 2 9.6117 2.12448 9.53577 2.3143L6.53577 9.8143C6.43322 10.0707 6.55792 10.3617 6.81432 10.4642C7.07071 10.5668 7.36169 10.4421 7.46425 10.1857L8.53707 7.50364H11.4629L12.5358 10.1857C12.6383 10.4421 12.9293 10.5668 13.1857 10.4642C13.4421 10.3617 13.5668 10.0707 13.4642 9.8143L10.4642 2.3143ZM10 3.84629L11.0629 6.50364H8.93707L10 3.84629Z" />
+                                </svg>
+                            </IconTemplate>
+                        </DxRibbonColorPaletteItem>
+
+                    </DxRibbonGroup>
+                    <DxRibbonGroup>
+                        <DxRibbonItem Text="Bullets"
+                                      IconCssClass="rb-icon rb-icon-bullets"
+                                      SplitDropDownButton="true"
+                                      Click="@(() => ClickItem("Bullets button"))">
+                            <DxRibbonItem Text="Numbering" Click="@(() => ClickItem("Numbering button"))" />
+                            <DxRibbonItem Text="Multilevel list" Click="@(() => ClickItem("Multilevel list button"))" />
+                        </DxRibbonItem>
+                        <DxRibbonItem Text="Align left"
+                                      IconCssClass="rb-icon rb-icon-align-left"
+                                      SplitDropDownButton="true"
+                                      Click="@(() => ClickItem("Align paragraph button"))">
+                            <DxRibbonItem Text="Align right"
+                                          IconCssClass="rb-icon rb-icon-align-right"
+                                          Click="@(() => ClickItem("Align right button"))" />
+                            <DxRibbonItem Text="Align center"
+                                          IconCssClass="rb-icon rb-icon-align-center"
+                                          Click="@(() => ClickItem("Align center button"))" />
+                            <DxRibbonItem Text="Align justify"
+                                          IconCssClass="rb-icon rb-icon-align-justify"
+                                          Click="@(() => ClickItem("Align justify button"))" />
+                        </DxRibbonItem>
+                    </DxRibbonGroup>
+                    <DxRibbonGroup>
+                        <DxRibbonComboBoxItem Data="FontStyles"
+                                              @bind-Value="FontStyle"
+                                              Width="120px" />
+                    </DxRibbonGroup>
+                    <DxRibbonGroup>
+                        <DxRibbonItem Text="Search"
+                                      IconCssClass="rb-icon rb-icon-search"
+                                      SplitDropDownButton="true"
+                                      Click="@(() => ClickItem("Search button"))">
+                            <DxRibbonItem Text="Replace" Click="@(() => ClickItem("Replace button"))" />
+                            <DxRibbonItem Text="Select" Click="@(() => ClickItem("Select button"))" />
+                        </DxRibbonItem>
+                    </DxRibbonGroup>
+                    <DxRibbonGroup>
+                        <DxRibbonItem Text="Dictate"
+                                      IconCssClass="rb-icon rb-icon-dictate"
+                                      SplitDropDownButton="true"
+                                      Click="@(() => ClickItem("Dictate button"))">
+                            <DxRibbonItem Text="Transcribe" Click="@(() => ClickItem("Transcribe button"))" />
+                        </DxRibbonItem>
+                        <DxRibbonItem Text="Configuring the settings"
+                                      CollapseInGlobalGroup="true"
+                                      Click="@(() => ClickItem("Configuring the settings button"))"/>
+                    </DxRibbonGroup>
+                </DxRibbonTab>
+                <DxRibbonTab Text="Insert">
+                    <DxRibbonGroup>
+                        <DxRibbonItem Text="Page Break"
+                                      IconCssClass="rb-icon rb-icon-page-break"
+                                      Click="@(() => ClickItem("Page break button"))" />
+                        <DxRibbonItem Text="Table"
+                                      IconCssClass="rb-icon rb-icon-table"
+                                      SplitDropDownButton="true"
+                                      Click="@(() => ClickItem("Table button"))">
+                            <DxRibbonItem Text="Insert Table..." />
+                            <DxRibbonItem Text="Draw Table" />
+                        </DxRibbonItem>
+                        <DxRibbonItem Text="Picture"
+                                      IconCssClass="rb-icon rb-icon-picture"
+                                      SplitDropDownButton="true"
+                                      Click="@(() => ClickItem("Picture button"))">
+                            <DxRibbonItem Text="This Device..." />
+                            <DxRibbonItem Text="Stock Images..." />
+                            <DxRibbonItem Text="Online Pictures..." />
+                        </DxRibbonItem>
+                        <DxRibbonItem Text="Link"
+                                      IconCssClass="rb-icon rb-icon-link"
+                                      Click="@(() => ClickItem("Link button"))">
+                        </DxRibbonItem>
+                        <DxRibbonItem Text="Bookmark"
+                                      IconCssClass="rb-icon rb-icon-bookmarks"
+                                      Click="@(() => ClickItem("Bookmark button"))">
+                        </DxRibbonItem>
+                        <DxRibbonItem Text="Page Numbers"
+                                      IconCssClass="rb-icon rb-icon-page-numbers"
+                                      SplitDropDownButton="true"
+                                      Click="@(() => ClickItem("Page numbers button"))">
+                            <DxRibbonItem Text="Format Page Numbers..." />
+                            <DxRibbonItem Text="Remove Page Numbers..." />
+                        </DxRibbonItem>
+                        <DxRibbonItem Text="Symbol"
+                                      IconCssClass="rb-icon rb-icon-symbol"
+                                      Click="@(() => ClickItem("Symbol button"))">
+                        </DxRibbonItem>
+                    </DxRibbonGroup>
+                </DxRibbonTab>
+            </DxRibbon>
+
+            <DxToastProvider Name="RibbonOverview"
+                             RenderStyle="ToastRenderStyle.Info"
+                             ThemeMode="ToastThemeMode.Pastel"
+                             HorizontalAlignment="HorizontalAlignment.Center"
+                             VerticalAlignment="VerticalEdge.Bottom"
+                             DisplayTime="TimeSpan.FromSeconds(2)"
+                             MaxToastCount="1" />
+        </div>
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>
+
+@code {
+    [Inject] private IToastNotificationService ToastService { get; set; }
+
+    string color = "";
+
+    private FontInfo CurrentFont { get; set; } = FontInfo.DefaultFonts[0];
+    private IEnumerable<FontInfo> Fonts => FontInfo.DefaultFonts;
+
+    private FontSizeInfo CurrentFontSize { get; set; } = FontSizeInfo.DefaultFontSizes[0];
+    private IEnumerable<FontSizeInfo> FontSizes => FontSizeInfo.DefaultFontSizes;
+
+    private string FontStyle { get; set; }
+    private string[] FontStyles { get; set; } = [
+        "Normal", "Header 1", "Header 2", "Title"
+    ];
+
+    public override Task SetParametersAsync(ParameterView parameters) {
+        FontStyle = FontStyles[0];
+        return base.SetParametersAsync(parameters);
+    }
+
+    void ClickItem(string name) {
+        ToastService.ShowToast(new ToastOptions
+        {
+            ProviderName = "RibbonOverview",
+            Text = name + " has been clicked",
+        });
+    }
+
+}

@@ -9,9 +9,10 @@
     background-position: center center;
 }
 
-/*BeginHide*/ ::deep /*EndHide*/ .file-system-icon-folder {
+/*BeginHide*/ ::deep  .file-system-icon-folder {
     background-image: url("images/icons/folder-color.svg");
 }
-/*BeginHide*/ ::deep /*EndHide*/ .file-system-icon-file {
+::deep .file-system-icon-file {
     background-image: url("images/icons/document-color.svg");
 }
+/*EndHide*/

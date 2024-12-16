@@ -1,0 +1,7 @@
+This demo illustrates how to integrate a [Button Group](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButtonGroup) into the DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid) component (to filter grid data). The Blazor Button Group component imitates a Grid toolbar and uses `Miltiple` [selection mode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButtonGroup.SelectionMode). When you click a button group item, the Grid applies corresponding filters to its data.
+
+To replicate this demo and attach a Button Group to our Blazor Grid, you must:
+1. Add a [ToolbarTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ToolbarTemplate) to the Grid component's markup.
+2. In the template, add a [DxButtonGroup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButtonGroup) component and set its selection mode to `Multiple`.
+3. Create [button group items](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButtonGroupItem) based on Grid **Category** column values.
+4. In buttom group item's [Click](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButtonBase.Click) event handler, call the Grid's [SetFieldFilterCriteria](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.SetFieldFilterCriteria(System.String-DevExpress.Data.Filtering.CriteriaOperator)) method to filter grid data based on selected categories.

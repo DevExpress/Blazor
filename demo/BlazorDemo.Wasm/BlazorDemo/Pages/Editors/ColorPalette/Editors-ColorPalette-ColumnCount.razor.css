@@ -1,0 +1,7 @@
+.color-palette-container {
+    width: fit-content;
+}
+
+.color-palette-container > .demo-text {
+    width: 100%;
+}

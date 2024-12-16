@@ -1,7 +1,9 @@
 The DevExpress Blazor TreeList allows users to filter data as their needs dictate. The [FilterTreeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.FilterTreeMode) property specifies how the TreeList component displays filtered nodes:
 
-*   `ParentBranch` (Default) — The component displays a node that meets the filter criteria and all its parent nodes, even if they do not meet the criteria.
 *   `EntireBranch` — The component displays a node that meets the filter criteria and all its parent and child nodes, even if they do not meet the criteria.
+*   `Nodes` — The component ignores parent-child relationships and displays all nodes that meet the filter criteria at one level.
+*   `ParentBranch` — The component displays a node that meets the filter criteria and all its parent nodes, even if they do not meet the criteria.
+*   `Auto` (default) — The filter tree mode depends on the bound data source. When bound to a [GridDevExtremeDataSource\<T>](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridDevExtremeDataSource-1), the TreeList component switches to the `Nodes` mode to improve performance. In other data binding scenarios, the TreeList operates in `ParentBranch` mode.
 
 Enable the [ShowFilterRow](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.ShowFilterRow) property to activate the integrated DevExpress TreeList Filter Row (displays in-place editors for all data columns). When a user enters a value into an editor, the TreeList creates a filter condition based on the value and applies this condition to the corresponding column.
 

@@ -99,7 +99,7 @@ namespace BlazorDemo.Services {
         public async Task<XtraReport> GetReportAsync(string reportName, ReportProviderContext context) {
             var shouldRequestFont = commonReports.FirstOrDefault(x => x.Name == reportName)?.ShouldLoadFont;
             if(shouldRequestFont.Value) {
-                await ReportingFontLoader.LoadFonts(httpClient, "arial");
+                await ReportingFontLoader.LoadFonts(httpClient, "opensans");
             }
             return GetReport(reportName);
         }

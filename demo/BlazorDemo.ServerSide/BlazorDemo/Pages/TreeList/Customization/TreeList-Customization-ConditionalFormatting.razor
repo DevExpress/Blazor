@@ -5,8 +5,8 @@
         @inject ISalesByRegionDataProvider SalesByRegionDataProvider
 
         <style>
-            .parent-region-row {
-                background-color: color-mix(in srgb, var(--bs-gray-300), transparent 50%);                
+            .parent-region-row { /*BeginHide*/--custom-row-color: var(--DS-color-surface-neutral-subdued-rest, color-mix(in srgb, var(--bs-gray-300), transparent 50%)); /*EndHide*/
+                background-color: var(--custom-row-color);
             }
             td.loss-threshold {
                 background-color: rgba(245, 198, 203, 0.5);
@@ -25,7 +25,8 @@
                     TextWrapEnabled="false"
                     CustomizeElement="TreeList_CustomizeElement"
                     SizeMode="Params.SizeMode"
-                    CssClass="max-h-480">
+                    CssClass="max-h-480"
+                    AutoExpandAllNodes="true">
             <Columns>
                 <DxTreeListDataColumn FieldName="Region" />
                 <DxTreeListDataColumn FieldName="MarchSales" DisplayFormat="c0" />
@@ -43,11 +44,6 @@
 
             protected override void OnInitialized () {
                 Data = SalesByRegionDataProvider.GenerateData();
-            }
-
-            protected override void OnAfterRender (bool firstRender) {
-                if(firstRender)
-                    TreeList.ExpandAll();
             }
 
             void TreeList_CustomizeElement(TreeListCustomizeElementEventArgs e) {

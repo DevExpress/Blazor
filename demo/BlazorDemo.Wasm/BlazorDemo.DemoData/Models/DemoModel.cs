@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -9,12 +6,12 @@ namespace BlazorDemo.DemoData {
         public string AssemblyName { get; set; }
         public string TitleFormat { get; set; }
 
-        public DemoRootPage[] RootPages { get; set; }
+        public DemoGroup[] Groups { get; set; }
         public DemoProductInfo[] Products { get; set; }
         public DemoSearchModel Search { get; set; }
 
         [JsonIgnore]
-        public Dictionary<string, string> Redirects { get; private set; }
+        public Dictionary<string, string> Redirects { get; private set; } = new();
 
         [JsonIgnore]
         public bool IsBlazorServer { get; private set; }
@@ -31,28 +28,27 @@ namespace BlazorDemo.DemoData {
         }
         void Prepare() {
             Products = PrepareList(Products);
-            RootPages = PrepareList(RootPages);
             Redirects = new Dictionary<string, string>();
-            PrepareRecursive(RootPages, null, null);
+            foreach(var group in Groups) {
+                group.Pages = PrepareList(group.Pages);
+                PrepareRecursive(group.Pages, null, group);
+            }
+            Groups = PrepareList(Groups);
         }
-        void PrepareRecursive(IEnumerable<DemoItem> childItems, DemoPageBase parent, DemoRootPage root) {
+        void PrepareRecursive(IEnumerable<DemoItem> childItems, DemoPage parent, DemoGroup group) {
             foreach(var item in childItems) {
-                if(item is DemoRootPage rootPage) {
-                    rootPage.Pages = PrepareList(rootPage.Pages);
-                    PrepareRecursive(rootPage.Pages, rootPage, rootPage);
-                }
+                item.ParentPage = parent;
+                item.Group = group;
                 if(item is DemoPage page) {
                     page.Pages = PrepareList(page.Pages);
                     page.PageSections = PrepareList(page.PageSections);
-                    PrepareRecursive(page.GetChildItems(), page, root);
+                    PrepareRecursive(page.GetChildItems(), page, group);
                 }
-                item.ParentPage = parent;
-                item.RootPage = root;
-
                 if(item.RedirectFrom?.Length > 0) {
                     foreach(var redirect in item.RedirectFrom)
                         Redirects.Add(redirect.ToLower(), item.GetUrl());
                 }
+                DemoItemById[item.UniqueId] = item;
             }
         }
         T[] PrepareList<T>(T[] list) {
@@ -63,41 +59,41 @@ namespace BlazorDemo.DemoData {
                .Where(i => i switch {
                    DemoProductInfo info => !(IsBlazorServer ? info.IsClientSideOnly : info.IsServerSideOnly),
                    DemoItem item => !(IsBlazorServer ? item.IsClientSideOnly : item.IsServerSideOnly),
+                   DemoGroup group => group.Pages.Length > 0,
                    _ => throw new NotSupportedException()
                });
             return result
-                .OrderBy(i => i is DemoPageBase page ? page.IsMaintenanceMode : false)
+                .OrderBy(i => i is DemoPage page ? page.IsMaintenanceMode : false)
                 .ToArray();
         }
 
-        public DemoPageBase GetDemoPageByUrl(string pageUrl) {
+        public DemoPage GetDemoPageByUrl(string pageUrl) {
             pageUrl = pageUrl.Trim('/').Split('#')[0];
-
-            DemoPageBase FindRecursive(IEnumerable<DemoPageBase> pages) {
-                if(pages == null)
-                    return null;
-                foreach(var page in pages) {
-                    if(string.Equals(page.Url, pageUrl, StringComparison.OrdinalIgnoreCase))
-                        return page;
-                    var nestedResult = FindRecursive(page.Pages);
-                    if(nestedResult != null)
-                        return nestedResult;
-                }
-                return null;
-            }
-
-            return FindRecursive(RootPages);
+            return FindRecursive(Groups.SelectMany(g => g.Pages), item => item is DemoPage page && string.Equals(page.Url, pageUrl, StringComparison.OrdinalIgnoreCase)) as DemoPage;
         }
-        public DemoItem GetDemoItem(string id) {
-            string[] idParts = id.Split("-");
-            DemoItem result = null;
-            for(var i = 0; i < idParts.Length; i++) {
-                DemoItem[] childItems = result != null ? result.GetChildItems() : RootPages;
-                result = childItems.FirstOrDefault(p => p.Id == idParts[i]);
-                if(result == null)
-                    return null;
+
+        public DemoItem FindDemoItemRecursively(Func<DemoItem, bool> predicate) {
+            return FindRecursive(Groups.SelectMany(g => g.Pages), predicate);
+        }
+
+        DemoItem FindRecursive(IEnumerable<DemoItem> pages, Func<DemoItem, bool> predicate) {
+            if(pages == null)
+                return null;
+            foreach(var page in pages) {
+                if(predicate(page)) return page;
+                var nestedResult = FindRecursive(page.GetChildItems(), predicate);
+                if(nestedResult != null)
+                    return nestedResult;
             }
-            return result;
+            return null;
+        }
+
+        protected Dictionary<string, DemoItem> DemoItemById { get; } = new();
+
+        public DemoItem GetDemoItem(string id) {
+            if(DemoItemById.TryGetValue(id, out var res))
+                return res;
+            return null;
         }
         public string GetDemoItemDescriptionResourcePath(DemoItem item, string rootFolder) {
             return GetDemoItemResourcePath(item, rootFolder, s => {
@@ -112,10 +108,10 @@ namespace BlazorDemo.DemoData {
             }, ".razor");
         }
         string GetDemoItemResourcePath(DemoItem item, string rootFolder, Func<string, string> getFolder, string extension) {
-            string[] itemIds = item.GetUniqueIdParts();
-            var partCount = itemIds.Length;
-            if(item is DemoPageSection || (!item.GetChildItems().Any() && item.ParentPage != item.RootPage))
-                partCount--;
+            var itemIds = item.UniqueId.Split('-').ToList();
+            var partCount = itemIds.Count;
+            if(item is DemoPageSection || partCount > 2)
+                partCount = Math.Max(partCount - 1, 1);
             List<string> pathParts = new List<string>();
             if(!string.IsNullOrEmpty(rootFolder))
                 pathParts.Add(rootFolder);

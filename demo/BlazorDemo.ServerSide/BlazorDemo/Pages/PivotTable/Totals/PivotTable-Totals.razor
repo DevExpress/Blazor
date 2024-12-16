@@ -1,0 +1,104 @@
+﻿@page "/PivotTableTotals"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="PivotTable-Totals" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <div class="pivot-container">
+            @if(PivotData == null) {
+                <div class="pivot-loading-panel-container">
+                    <div class="d-flex flex-column">
+                        <DxLoadingPanel Visible="true"
+                                        SizeMode="Params.SizeMode"
+                                        Text="Data Loading..."
+                                        IndicatorAreaVisible="false"
+                                        IndicatorAnimationType="@WaitIndicatorAnimationType.Spin"></DxLoadingPanel>
+                    </div>
+                </div>
+            } else {
+                <DxPivotTable Data="@PivotData"
+                         VirtualScrollingEnabled="true"
+                         SizeMode="Params.SizeMode"
+                         ShowRowTotals="@ShowTotals"
+                         ShowColumnTotals="@ShowTotals"
+                         RowTotalsPosition="@RowTotalsPosition.Value"
+                         ColumnTotalsPosition="@ColumnTotalsPosition.Value"
+                         ShowRowGrandTotals="@ShowGrandTotals"
+                         ShowColumnGrandTotals="@ShowGrandTotals">
+                    <Fields>
+                        <DxPivotTableField Field="CompanyName" Area="PivotTableArea.Row" Caption="Customer" Width="270"/>
+                        <DxPivotTableField Field="ProductName" Area="PivotTableArea.Row" Caption="Product Name" />
+                        <DxPivotTableField Field="ProductAmount" Area="PivotTableArea.Data" Caption="Product Amount" CellFormat="{0:c0}"/>
+                        <DxPivotTableField Field="OrderDate" GroupInterval="PivotTableGroupInterval.DateYear" Area="PivotTableArea.Column" Caption="Order Year" />
+                        <DxPivotTableField Field="OrderDate" GroupInterval="PivotTableGroupInterval.DateQuarter" Area="PivotTableArea.Column" Caption="Order Quater">
+                            <ValueTemplate>
+                                <span>@($"Q{context.Text}")</span>
+                            </ValueTemplate>
+                        </DxPivotTableField>
+                    </Fields>
+                </DxPivotTable>
+            }
+        </div>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <OptionCheckBox Label="Show Totals"
+                        @bind-Checked="@ShowTotals"/>
+        <OptionCheckBox Label="Show Grand Totals"
+                        @bind-Checked="@ShowGrandTotals" />
+        <OptionComboBox Data="@(RowTotalsPositionItem.GetItems())"
+                        CssClass="ow-240"
+                        TextField="@nameof(RowTotalsPositionItem.Description)"
+                        ValueField="@nameof(RowTotalsPositionItem.Value)"
+                        @bind-Value="@RowTotalsPosition"/>
+        <OptionComboBox Data="@(ColumnTotalsPositionItem.GetItems())"
+                        CssClass="ow-240"
+                        TextField="@nameof(ColumnTotalsPositionItem.Description)"
+                        ValueField="@nameof(ColumnTotalsPositionItem.Value)"
+                        @bind-Value="@ColumnTotalsPosition"/>
+    </OptionsContent>
+        @code {
+            IEnumerable<object> PivotData { get; set; }
+
+            bool ShowTotals { get; set; } = true;
+            bool ShowGrandTotals { get; set; } = true;
+            RowTotalsPositionItem RowTotalsPosition { get; set; } = new RowTotalsPositionItem();
+            ColumnTotalsPositionItem ColumnTotalsPosition { get; set; } = new ColumnTotalsPositionItem();
+
+            protected override async Task OnInitializedAsync() {
+                var invoices = await NwindDataService.GetInvoicesAsync();
+                var customers = await NwindDataService.GetCustomersAsync();
+                var yearRangeStart = DateTime.Now.AddMonths(-27);
+                var yearRangeEnd = DateTime.Now.AddMonths(12);
+                PivotData = invoices.Where(i => i.OrderDate >= yearRangeStart && i.OrderDate < yearRangeEnd).Join(customers, i => i.CustomerId, c => c.CustomerId, (i, c) => {
+                    return new {
+                        CompanyName = c.CompanyName,
+                        UnitPrice = i.UnitPrice,
+                        OrderDate = i.OrderDate,
+                        ProductName = i.ProductName,
+                        ProductAmount = i.Quantity * i.UnitPrice
+                    };
+                });
+            }
+
+            class RowTotalsPositionItem {
+                public string Description { get; set; }
+                public PivotTableRowTotalsPosition Value { get; set; } = PivotTableRowTotalsPosition.After;
+
+                public static IEnumerable<RowTotalsPositionItem> GetItems() {
+                    IEnumerable<PivotTableRowTotalsPosition> values = Enum.GetValues(typeof(PivotTableRowTotalsPosition)).Cast<PivotTableRowTotalsPosition>();
+                    return values.Select(v => new RowTotalsPositionItem() { Description = $"Row Totals Position - {v}", Value = v });
+                }
+            }
+
+            class ColumnTotalsPositionItem {
+                public string Description { get; set; }
+                public PivotTableColumnTotalsPosition Value { get; set; } = PivotTableColumnTotalsPosition.After;
+
+                public static IEnumerable<ColumnTotalsPositionItem> GetItems() {
+                    IEnumerable<PivotTableColumnTotalsPosition> values = Enum.GetValues(typeof(PivotTableColumnTotalsPosition)).Cast<PivotTableColumnTotalsPosition>();
+                    return values.Select(v => new ColumnTotalsPositionItem() { Description = $"Column Totals Position - {v}", Value = v });
+                }
+            }
+        }
+    
+</DemoPageSectionComponent>

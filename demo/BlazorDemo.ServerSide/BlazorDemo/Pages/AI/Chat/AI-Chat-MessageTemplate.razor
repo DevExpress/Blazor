@@ -1,0 +1,42 @@
+﻿@inject ICarouselImageDataProvider CarouselImageDataProvider
+@using DevExpress.AIIntegration.Blazor.Chat
+
+<DemoPageSectionComponent Id="AI-Chat-MessageTemplate"
+                          ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="chat-demo-container">
+            <DxAIChat CssClass="demo-chat" SizeMode="Params.SizeMode" Initialized="ChatInitialized">
+                <MessageTemplate>
+                    <div class="@GetMessageClasses(context)">
+                        @if(context.Typing) {
+                            <span>Loading...</span>
+                        } else {
+                            <div class="demo-chat-content">
+                                @context.Content
+                            </div>
+                        }
+                    </div>
+                </MessageTemplate>
+            </DxAIChat>
+        </div>
+        @code {
+            string GetMessageClasses(BlazorChatMessage message) {
+                if(message.Role == ChatMessageRole.Assistant) {
+                    return "demo-chat-message demo-assistant-message";
+                } else if(message.Role == ChatMessageRole.User) {
+                    return "demo-chat-message demo-user-message";
+                } else if(message.Role == ChatMessageRole.Error) {
+                    return "demo-chat-message demo-error-message";
+                }
+                return "demo-chat-message";
+            }
+
+            void ChatInitialized(IAIChat chat) {
+                chat.LoadMessages(new[] {
+                    new BlazorChatMessage(Microsoft.Extensions.AI.ChatRole.User, "Hello, AI!"),
+                    new BlazorChatMessage(Microsoft.Extensions.AI.ChatRole.Assistant, "Hey there, human! What's on your mind? 😊")
+                });
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

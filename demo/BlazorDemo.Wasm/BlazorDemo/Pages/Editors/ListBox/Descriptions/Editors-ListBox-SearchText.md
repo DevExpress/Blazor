@@ -1,7 +1,0 @@
-The DevExpress Blazor [List Box](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2) component can search for text within visible data column cells, and filter/highlight search results. Use the [SearchText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.SearchText) property to specify the search text in code. Handle the [SearchTextChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.SearchTextChanged) event to respond to search text changes. If search text contains multiple words separated by space characters, words can be treated as a single condition or individual conditions. Set the [SearchTextParseMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.SearchTextParseMode) property to one of the following values to specify how the List Box control treats search words.
-
-* **GroupWordsByAnd** — Search words are treated as individual conditions grouped by the AND logical operator. Only records that match all conditions are displayed.
-* **GroupWordsByOr** — Search words are treated as individual conditions grouped by the OR logical operator. Records that match at least one of these conditions are displayed.
-* **ExactMatch** — Search words are not treated separately. Only records that match search text (exact match) are displayed.
-
-For more information, refer to the following help topic: [Search and Filter Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2#search-and-filter-data).

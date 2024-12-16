@@ -36,12 +36,12 @@
 
 <div @key="@DemoItem.Id" id="@("section-" + DemoItem.Id)" class="demo-page-section @(!ShowCode ? "no-code" : "") @(ShowHorizontalScrollBar ? "h-scroll" : "")">
     <div class="demo-page-section-title">
-        <h2 id="@DemoItem.Id">
-            <a class="demo-anchor"
-               href="@DemoItem.GetUrl()"
-               aria-labelledby="@DemoItem.Id" />
-               @(!string.IsNullOrEmpty(DemoItem.TitleOnPage) ? DemoItem.TitleOnPage : DemoItem.Title)
-        </h2>
+        <a class="demo-anchor h2"
+           href="@DemoItem.GetUrl()"
+           aria-labelledby="@DemoItem.Id" />
+        <h1 id="@DemoItem.Id" class="h2">
+        &nbsp;@(!string.IsNullOrEmpty(DemoItem.TitleOnPage) ? DemoItem.TitleOnPage : DemoItem.Title)
+        </h1>        
     </div>
     @{
         var statusMessage = DemoItem.GetStatusMessageMarkdown();

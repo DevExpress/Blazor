@@ -2,7 +2,7 @@
     height: 522px;
 }
 
-/*BeginHide*/::deep /*EndHide*/.grid-toolbar-column-chooser {
+/*BeginHide*/::deep .grid-toolbar-column-chooser {
     width: 16px;
     height: 16px;
     -webkit-mask-image: url("images/icons/column-chooser.svg");
@@ -14,7 +14,8 @@
     background-position: center center;
     opacity: 0.7;
 }
-/*BeginHide*/ .grid-container {
+
+.grid-container {
     display: contents;
 }
 /*EndHide*/

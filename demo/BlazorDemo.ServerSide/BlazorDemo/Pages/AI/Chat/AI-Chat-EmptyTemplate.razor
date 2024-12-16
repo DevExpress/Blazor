@@ -1,0 +1,17 @@
+﻿@inject ICarouselImageDataProvider CarouselImageDataProvider
+@using DevExpress.AIIntegration.Blazor.Chat
+
+<DemoPageSectionComponent Id="AI-Chat-EmptyTemplate"
+                          ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="chat-demo-container">
+            <DxAIChat CssClass="demo-chat" SizeMode="Params.SizeMode">
+                <EmptyMessageAreaTemplate>
+                    <div class="demo-chat-ui-description">
+                        AI Assistant is ready to answer your questions.
+                    </div>
+                </EmptyMessageAreaTemplate>
+            </DxAIChat>
+        </div>
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

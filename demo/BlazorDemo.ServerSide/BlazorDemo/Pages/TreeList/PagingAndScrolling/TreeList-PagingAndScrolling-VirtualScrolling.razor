@@ -12,7 +12,8 @@
                     ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
                     TextWrapEnabled="false"
                     SizeMode="Params.SizeMode"
-                    CssClass="max-h-480">
+                    CssClass="max-h-480"
+                    AutoExpandAllNodes="true">
             <Columns>
                 <DxTreeListDataColumn FieldName="Name" Caption="Task" SortOrder="TreeListColumnSortOrder.Ascending" />
                 <DxTreeListDataColumn FieldName="EmployeeName" Caption="Assigned To" TextAlignment="TreeListTextAlignment.Left" Width="200px"/>
@@ -23,7 +24,7 @@
                         @{
                             var displayText = TreeListRenderHelper.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem);
                         }
-                        <span title="@displayText  priority">@displayText</span>
+                        <span title="@displayText priority">@displayText</span>
                     </CellDisplayTemplate>
                 </DxTreeListDataColumn>
                 <DxTreeListDataColumn Caption="Progress" FieldName="Status" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
@@ -40,11 +41,6 @@
 
             protected override void OnInitialized () {
                 Data = EmployeeTaskDataProvider.GenerateData();
-            }
-
-            protected override void OnAfterRender (bool firstRender) {
-                if(firstRender)
-                    TreeList.ExpandAll();
             }
         }
     </ChildContentWithParameters>

@@ -1,0 +1,5 @@
+﻿Our Blazor Ribbon is adaptive by design. Use the following properties to control Ribbon behavior when container width changes:
+
+* [AdaptivityAutoCollapseItemsToGroups](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxRibbon.AdaptivityAutoCollapseItemsToGroups) — Set this property to `true` to hide groups text (only display icons when changes are made to browser window width). Manage hidden text order within groups using the [DxRibbonGroup.AdaptivePriority](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxRibbonGroup.AdaptivePriority) property.
+* [AdaptivityAutoCollapseItemsToIcons](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxRibbon.AdaptivityAutoCollapseItemsToIcons) — Set this property to `true` to hide items text (only display icons when changes are made to browser window width).
+* [AdaptivityAutoHideRootItems](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxRibbon.AdaptivityAutoHideRootItems) — Set this property to `true` to combine root items into the root submenu (when changes are made to browser window width).

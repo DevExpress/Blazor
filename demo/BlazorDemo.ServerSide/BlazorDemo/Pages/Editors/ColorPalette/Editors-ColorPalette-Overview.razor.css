@@ -1,0 +1,26 @@
+.color-palette-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.color-palette-logo-container {
+    display: flex;
+    flex-direction: column;
+    width: 160px;
+    height: fit-content;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.color-palette-logo-container .demo-text {
+    color: black;
+}
+
+.color-palette-image {
+    width: 122px;
+    height: 156px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("images/icons/logo-transparent.png");
+}

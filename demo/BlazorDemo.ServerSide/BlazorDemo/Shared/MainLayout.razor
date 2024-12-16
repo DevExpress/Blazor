@@ -4,9 +4,8 @@
 @inject DemoThemeService Themes
 
 <DemoScriptLoader @ref=@pageHelper Src="_content/BlazorDemo/lib/page-helper.js" />
-
-<div class="@GetDemoHeaderContainerCss()">
-    <nav class="demo-header p-0 navbar navbar-dark">
+<header class="@GetDemoHeaderContainerCss()">
+    <nav class="demo-header p-0 navbar navbar-dark" aria-label="Header menu">
         <DemoLayoutToggleButton @bind-Toggled="@LayoutToggled" />
         <div class="logo-image">
             <a href="https://www.devexpress.com/" target="_blank" title="DevExpress">
@@ -23,43 +22,32 @@
                 IconCssClass="demo-download-icon"
                 Text="Free Trial" SizeMode="SizeMode.Large"></DxButton>
             <DxButton NavigateUrl="https://github.com/DevExpress/blazor"
-                      CssClass="github-btn"
-                      IconCssClass="demo-github-icon"
-                      RenderStyle="ButtonRenderStyle.Secondary" RenderStyleMode="ButtonRenderStyleMode.Outline"
-                      Text="GitHub" SizeMode="SizeMode.Large"></DxButton>
+                        CssClass="github-btn"
+                        IconCssClass="demo-github-icon"
+                        RenderStyle="ButtonRenderStyle.Secondary" RenderStyleMode="ButtonRenderStyleMode.Outline"
+                        Text="GitHub" SizeMode="SizeMode.Large"></DxButton>
             <div class="btn-sep"></div>
             <DxButton Click="@ToggleThemeSwitcherPanel" CssClass="@GetThemeSwitcherCssClass()" SizeMode="SizeMode.Large"
-                      RenderStyle="ButtonRenderStyle.Secondary" RenderStyleMode="ButtonRenderStyleMode.Outline" IconCssClass="demo-theme-icon"
-                      aria-label="Themes"
-                      aria-haspopup="True"
-                      aria-expanded="@(ThemeSwitcherShown.ToString())">
+                        RenderStyle="ButtonRenderStyle.Secondary" RenderStyleMode="ButtonRenderStyleMode.Outline" IconCssClass="demo-theme-icon"
+                        aria-label="Themes"
+                        aria-haspopup="True"
+                        aria-expanded="@(ThemeSwitcherShown.ToString())">
             </DxButton>
         </div>
         <ThemeSwitcher @bind-Shown="@ThemeSwitcherShown" @bind-ThemeName="@ThemeName" />
     </nav>
-</div>
-<div class="@GetDemoBreadcrumbsContainerCss()">
+    <div class="@GetDemoBreadcrumbsContainerCss()">
     <div class="breadcrumb">
         <div class="@GetDemoBreadcrumbsCss()">
             <DemoBreadcrumbs></DemoBreadcrumbs>
         </div>
     </div>
-</div>
-<div class="@GetDemoContentContainerCss()" @ref="@contentContainerRef">
+    </div>
+</header>
+<main class="@GetDemoContentContainerCss()" @ref="@contentContainerRef">
     <div class="demo-content @LayoutStateCssClass">
         <div class="sidebar">
-            <DemoSearchEditor @bind-SearchString="@SearchString" />
-            <DxScrollView>
-                <DemoSearchResultList SearchString="@SearchString" SearchResults="@SearchResults" />
-                <NavMenuFactoryComponent />
-            </DxScrollView>
-            <div class="info-wrapper">
-                <div class="version">Version: @DemoVersion.Version</div>
-                <div class="copyright">
-                    <span>Copyright &copy; 2000-</span><span>@DateTimeNowYear</span>
-                    Developer Express Inc
-                </div>
-            </div>
+            <DemoSideBar></DemoSideBar>
         </div>
         <div class="main">
             <div class="content" @key="ShouldUseThemeNameKey() ? ThemeName : null">
@@ -73,27 +61,21 @@
             <DemoModalBackdrop Shown="@ModalBackgroundShown" ShownChanged="@ModalBackdropShownChanged" />
         }
     </div>
-</div>
+</main>
 
 @code {
-    static readonly int DateTimeNowYear = DateTime.Now.Year;
-
     string _themeName;
     bool _layoutToggled;
     bool _themeSwitcherShown;
     bool _isDesktop = true;
-    string _searchString = "";
     ElementReference contentContainerRef;
 
     DemoScriptLoader pageHelper;
 
     [Inject]
-    IDemoVersion DemoVersion { get; set; }
-    [Inject]
     protected NavigationManager NavigationManager { get; set; }
     [Inject]
     IJSRuntime JsRuntime { get; set; }
-
 
     protected string ThemeName {
         get { return _themeName; }
@@ -208,25 +190,6 @@
         if(!shown) {
             ThemeSwitcherShown = false;
             LayoutToggled = false;
-        }
-    }
-
-
-    public string SearchString {
-        get { return _searchString; }
-        set {
-            if(_searchString != value) {
-                _searchString = value;
-                InvokeAsync(UpdateSearchResults);
-            }
-        }
-    }
-    public List<DemoSearchResult> SearchResults { get; set; }
-    async Task UpdateSearchResults() {
-        var searchResults = (SearchString != null && SearchString.Length > 2) ? Configuration.DoSearch(SearchString) : null;
-        if(SearchResults != searchResults) {
-            SearchResults = searchResults;
-            await InvokeAsync(StateHasChanged);
         }
     }
 

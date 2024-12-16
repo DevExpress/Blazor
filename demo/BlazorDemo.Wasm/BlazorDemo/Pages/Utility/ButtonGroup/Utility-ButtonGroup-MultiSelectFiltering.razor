@@ -1,0 +1,61 @@
+﻿<DemoPageSectionComponent Id="Utility-ButtonGroup-MultiSelectFiltering" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @using DevExpress.Data.Filtering
+        @inject NwindDataService NwindDataService
+
+        <div class="grid-container">
+            <DxGrid @ref="Grid" Data="Products" SizeMode="Params.SizeMode" PageSize="15"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn" TextWrapEnabled="false" VirtualScrollingEnabled="true">
+                <Columns>
+                    <DxGridDataColumn FieldName="ProductName" MinWidth="100"/>
+                    <DxGridDataColumn FieldName="CategoryId" Caption="Category" MinWidth="100">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId"
+                                                TextFieldName="CategoryName"/>
+                        </EditSettings>
+                    </DxGridDataColumn>
+                    <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%"/>
+                    <DxGridDataColumn FieldName="UnitsInStock" Width="10%"/>
+                    <DxGridDataColumn FieldName="QuantityPerUnit" Width="15%" MinWidth="80"/>
+                    <DxGridDataColumn FieldName="Discontinued" Width="10%" MinWidth="90"/>
+                </Columns>
+                <ToolbarTemplate >
+                    <div class="d-flex align-items-center overflow-x-auto p-2">
+                        <div class="buttons-group-title me-2">Select Categories:</div>
+                        <DxButtonGroup RenderStyle="ButtonRenderStyle.Secondary" SelectionMode="ButtonGroupSelectionMode.Multiple">
+                            <Items>
+                                @foreach(var category in Categories) {
+                                    <DxButtonGroupItem Text="@category.CategoryName" Click="@(() => FilterChanged(category))"/>
+                                }
+                            </Items>
+                        </DxButtonGroup>
+                    </div>
+                </ToolbarTemplate>
+            </DxGrid>
+        </div>
+
+        @code {
+            IGrid Grid { get; set; }
+
+            IEnumerable<Product> Products { get; set; }
+            IEnumerable<Category> Categories { get; set; }
+
+            List<Category> SelectedCategories { get; set; } = [];
+
+            protected override async Task OnInitializedAsync() {
+                Categories = await NwindDataService.GetCategoriesAsync();
+                Products = await NwindDataService.GetProductsAsync();
+            }
+
+            void FilterChanged(Category selectedCategory) {
+                if(!SelectedCategories.Remove(selectedCategory))
+                    SelectedCategories.Add(selectedCategory);
+
+                var filterCriteria = SelectedCategories.Any() ? new InOperator("CategoryId", SelectedCategories.Select(c => c.CategoryId)) : null;
+                Grid.SetFieldFilterCriteria("CategoryId", filterCriteria);
+            }
+
+        }
+
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

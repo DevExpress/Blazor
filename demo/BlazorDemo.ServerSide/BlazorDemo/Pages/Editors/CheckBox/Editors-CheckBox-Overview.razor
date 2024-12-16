@@ -3,11 +3,11 @@
         <div class="cw-320">
             <fieldset>
                 <legend class="@GetLabelCssClass(Params.SizeMode)">Choose your new car options:</legend>
-                <DxCheckBox @bind-Checked="@SelectAllState"
-                            CssClass="dx-demo-select-all-checkbox"
-                            SizeMode="Params.SizeMode">
-                    Select All
-                </DxCheckBox>
+                <div class="dx-demo-select-all-checkbox">
+                    <DxCheckBox @bind-Checked="@SelectAllState" SizeMode="Params.SizeMode">
+                        Select All
+                    </DxCheckBox>
+                </div>
                 <div class="dx-demo-price-list-content">
                     <div class="dx-demo-row">
                         <DxCheckBox @bind-Checked="@Multimedia" SizeMode="Params.SizeMode">Multimedia</DxCheckBox>

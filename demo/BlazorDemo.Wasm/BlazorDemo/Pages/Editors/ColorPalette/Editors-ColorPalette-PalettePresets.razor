@@ -1,0 +1,32 @@
+﻿@using System.Text.RegularExpressions
+<DemoPageSectionComponent Id="Editors-ColorPalette-PalettePresets" ShowSizeMode="false">
+    <ChildContentWithParameters>
+        <div class="color-preset-container">
+            @foreach (var palette in Palettes) {
+                <div class="color-palette-container">
+                    <label class="mb-1">
+                        @palette.Key
+                    </label>
+                    <DxColorPalette ShowNoColorTile="false">
+                        <Groups>
+                            @foreach(var presetType in palette.Value) {
+                                <DxColorPaletteGroup Colors="DxColorPalettePresets.GetPalette(presetType)" />
+                            }
+                        </Groups>
+                    </DxColorPalette>
+                </div>
+            }
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        readonly Dictionary<string, List<ColorPalettePresetType>> Palettes = new() {
+            { "Universal", new() { ColorPalettePresetType.Universal, ColorPalettePresetType.UniversalGradient } },
+            { "Fluent", new() { ColorPalettePresetType.FluentTheme, ColorPalettePresetType.FluentThemeGradient } },
+            { "Pastel", new() { ColorPalettePresetType.Pastel, ColorPalettePresetType.PastelGradient } },
+            { "Warm", new() { ColorPalettePresetType.Warm, ColorPalettePresetType.WarmGradient } },
+            { "Cold", new() { ColorPalettePresetType.Cold, ColorPalettePresetType.ColdGradient } },
+            { "Standard", new() { ColorPalettePresetType.Standard } }
+        };
+    }
+</DemoPageSectionComponent>

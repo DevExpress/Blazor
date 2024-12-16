@@ -1,0 +1,167 @@
+﻿@page "/TreeList/EditData/InputValidation"
+
+<DemoPageSectionComponent Id="TreeList-Editing-InputValidation" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject IEmployeeTaskDataProvider EmployeeTaskDataProvider
+        <DxTreeList @ref="TreeList" Data="DataSource"
+                    KeyFieldName="Id"
+                    ParentKeyFieldName="ParentId"
+                    HasChildrenFieldName="HasChildren"
+                    VirtualScrollingEnabled="true"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    SizeMode="Params.SizeMode"
+                    CssClass="max-h-480"
+                    ValidationEnabled="EnableValidation"
+                    EditModelSaving="TreeList_EditModelSaving"
+                    DataItemDeleting="TreeList_DataItemDeleting"
+                    CustomizeEditModel="TreeList_CustomizeEditModel"
+                    CustomizeDataRowEditor="TreeList_CustomizeDataRowEditor"
+                    PopupEditFormCssClass="pw-800"
+                    EditMode="@EditMode.Mode"
+                    HighlightRowOnHover="true">
+            <Columns>
+                <DxTreeListCommandColumn Width="200px" />
+                <DxTreeListDataColumn FieldName="Name" Caption="Task" />
+                <DxTreeListDataColumn FieldName="StartDate" Width="120px" />
+                <DxTreeListDataColumn FieldName="DueDate" Width="120px" />
+                <DxTreeListDataColumn FieldName="Priority" Width="80px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                    <CellDisplayTemplate>
+                        @{
+                            var displayText = TreeListRenderHelper.TaskPriorityToString((int)context.GetRowValue("Priority"));
+                        }
+                        <span title="@displayText priority">@displayText</span>
+                    </CellDisplayTemplate>
+                    <EditSettings>
+                        <DxComboBoxSettings Data="Priorities" ValueFieldName="Value" TextFieldName="Text"/>
+                    </EditSettings>
+                </DxTreeListDataColumn>
+                <DxTreeListDataColumn Caption="Progress" FieldName="Status" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                    <CellDisplayTemplate>
+                        <DxProgressBar Value="Convert.ToDouble(context.Value)"
+                                       MinValue="0"
+                                       MaxValue="100"
+                                       CssClass="status-progress"
+                                       Thickness="0.875em"
+                                       Size="100%"
+                                       ShowLabel="false" />
+                    </CellDisplayTemplate>
+                    <EditSettings>
+                        <DxSpinEditSettings MinValue="0" MaxValue="100" InputCssClass="dxbl-align-right" />
+                    </EditSettings>
+                </DxTreeListDataColumn>
+            </Columns>
+            <EditFormTemplate Context="EditFormContext">
+                <DxFormLayout CssClass="w-100">
+                    <DxFormLayoutItem Caption="Task:" ColSpanMd="12">
+                        @EditFormContext.GetEditor("Name")
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Start Date:" ColSpanMd="6">
+                        @EditFormContext.GetEditor("StartDate")
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Due Date:" ColSpanMd="6">
+                        @EditFormContext.GetEditor("DueDate")
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Priority:" ColSpanMd="6">
+                        @EditFormContext.GetEditor("Priority")
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Progress:" ColSpanMd="6">
+                        @EditFormContext.GetEditor("Status")
+                    </DxFormLayoutItem>
+                </DxFormLayout>
+            </EditFormTemplate>
+            <ToolbarTemplate>
+                <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" SizeMode="Params.SizeMode">
+                    <Items>
+                        <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                            <Template Context="toolbar_item_context">
+                                <div class="d-flex flex-row align-items-center h-100">
+                                    <div class="me-2">Edit Mode:</div>
+                                    <DxComboBox Data="@TreeListEditModes" TextFieldName="Name"
+                                                @bind-Value="@EditMode" />
+                                </div>
+                            </Template>
+                        </DxToolbarItem>
+                        <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                            <Template Context="toolbar_item_context">
+                                <div class="d-flex flex-row align-items-center me-2">
+                                    <DxCheckBox Checked="EnableValidation" CheckedChanged="new Func<bool, Task>(EnableValidation_CheckedChanged)">Enable Validation</DxCheckBox>
+                                </div>
+                            </Template>
+                        </DxToolbarItem>
+                        <DxToolbarItem>
+                            <Template Context="toolbar_item_context">
+                                <div class="d-flex flex-row align-items-center">
+                                    <DxCheckBox Checked="ShowValidationSuccessState" Enabled="EnableValidation" CheckedChanged="new Func<bool, Task>(ShowValidationSuccessState_CheckedChanged)">Show Validation Success State</DxCheckBox>
+                                </div>
+                            </Template>
+                        </DxToolbarItem>
+                    </Items>
+                </DxToolbar>
+            </ToolbarTemplate>
+        </DxTreeList>
+    </ChildContentWithParameters>
+
+    @code {
+        TreeListEditModeItem EditMode { get; set; }
+        IEnumerable<TreeListEditModeItem> TreeListEditModes { get; }
+            = Enum.GetValues<TreeListEditMode>().Select(e => TreeListEditModeItem.Create(e)).ToList();
+        ITreeList TreeList { get; set; }
+
+        bool EnableValidation { get; set; } = true;
+        bool ShowValidationSuccessState { get; set; }
+
+        IList<EmployeeTask> DataSource { get; set; }
+        object[] Priorities { get; } = new[] {
+            new { Text = "High", Value = 1 },
+            new { Text = "Medium", Value = 0 },
+            new { Text = "Low", Value = -1 }
+        };
+
+        protected override void OnInitialized() {
+            DataSource = EmployeeTaskDataProvider.GenerateData();
+            EditMode = TreeListEditModes.First();
+        }
+        void TreeList_CustomizeEditModel(TreeListCustomizeEditModelEventArgs e) {
+            if(e.IsNew) {
+                var newTask = (EmployeeTask)e.EditModel;
+                newTask.Id = DataSource.Max(x => x.Id) + 1;
+                newTask.StartDate = DateTime.Today;
+                newTask.DueDate = DateTime.Today.AddDays(7);
+
+                if(e.ParentDataItem != null) {
+                    newTask.ParentId = ((EmployeeTask)e.ParentDataItem).Id;
+                }
+            }
+        }
+        void TreeList_EditModelSaving(TreeListEditModelSavingEventArgs e) {
+            if(e.IsNew) {
+                DataSource.Add((EmployeeTask)e.EditModel);
+            } else {
+                e.CopyChangesToDataItem();
+            }
+        }
+        void TreeList_DataItemDeleting(TreeListDataItemDeletingEventArgs e) {
+            DataSource.Remove((EmployeeTask)e.DataItem);
+        }
+
+        async Task EnableValidation_CheckedChanged(bool value) {
+            EnableValidation = value;
+            await TreeList.CancelEditAsync();
+        }
+        async Task ShowValidationSuccessState_CheckedChanged(bool value) {
+            ShowValidationSuccessState = value;
+            await TreeList.CancelEditAsync();
+        }
+        void TreeList_CustomizeDataRowEditor(TreeListCustomizeDataRowEditorEventArgs e) {
+            if (e.EditSettings is ITextEditSettings settings) {
+                settings.ShowValidationIcon = true;
+                settings.ShowValidationSuccessState = ShowValidationSuccessState;
+            }
+        }
+        record TreeListEditModeItem(string Name, TreeListEditMode Mode) {
+            public static TreeListEditModeItem Create(TreeListEditMode mode) =>
+                new (SplitTextHelper.SplitPascalCaseString(mode.ToString()), mode);
+        }
+    }
+</DemoPageSectionComponent>

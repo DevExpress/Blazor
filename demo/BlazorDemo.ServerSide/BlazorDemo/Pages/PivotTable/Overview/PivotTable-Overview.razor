@@ -1,0 +1,67 @@
+﻿@page "/PivotTable"
+@using BlazorDemo.Data
+
+<DemoPageSectionComponent Id="PivotTable-Overview" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject IVehiclesXmlFileContentProvider VehiclesDataProvider
+        <div class="pivot-container">
+            @if(PivotData == null) {
+                <div class="pivot-loading-panel-container">
+                    <div class="d-flex flex-column">
+                        <DxLoadingPanel Visible="true"
+                                        SizeMode="Params.SizeMode"
+                                        Text="Data Loading..."
+                                        IndicatorAreaVisible="false"
+                                        IndicatorAnimationType="@WaitIndicatorAnimationType.Spin"></DxLoadingPanel>
+                    </div>
+                </div>
+            } else {
+                <DxPivotTable Data="@PivotData" SizeMode="Params.SizeMode">
+                    <Fields>
+                        <DxPivotTableField Field="@nameof(VehiclesData.TrademarkItem.Name)"
+                                      Area="@PivotTableArea.Row"
+                                      SortOrder="@PivotTableSortOrder.Descending"
+                                      AreaIndex="1"/>
+                        <DxPivotTableField Field="@nameof(VehiclesData.TrademarkItem.TrademarkName)"
+                                      Area="@PivotTableArea.Row"
+                                      Caption="Trademark"
+                                      AreaIndex="0"/>
+                        <DxPivotTableField Field="@nameof(VehiclesData.TrademarkItem.SalesDate)"
+                                      GroupInterval="@PivotTableGroupInterval.DateYear"
+                                      Area="@PivotTableArea.Column"
+                                      AreaIndex="0"/>
+                        <DxPivotTableField Field="@nameof(VehiclesData.TrademarkItem.SalesDate)"
+                                      GroupInterval="@PivotTableGroupInterval.DateQuarter"
+                                      Area="@PivotTableArea.Column"
+                                      AreaIndex="1"
+                                      Caption="Quarter">
+                            <ValueTemplate>
+                                <span>@($"Q{context.Text}")</span>
+                            </ValueTemplate>
+                        </DxPivotTableField>
+                        <DxPivotTableField Field="@nameof(VehiclesData.TrademarkItem.ModelPrice)"
+                                      SortOrder="@PivotTableSortOrder.Ascending"
+                                      CellFormat="{0:c0}"
+                                      Width="120"
+                                      Area="@PivotTableArea.Data" />
+                        <DxPivotTableField Field="@nameof(VehiclesData.TrademarkItem.Discount)"
+                                      Caption="Discount"
+                                      Area="@PivotTableArea.Data"
+                                      SummaryType="@PivotTableSummaryType.Average"
+                                      Width="120"
+                                      CellFormat="{0:P0}" />
+                    </Fields>
+                </DxPivotTable>
+            }
+        </div>
+        @code {
+            IEnumerable<VehiclesData.TrademarkItem> PivotData { get; set; }
+            static readonly int NumberOfDaysToDisplay = 548;
+
+            protected override async Task OnInitializedAsync() {
+                PivotData = await VehiclesDataProvider.GetDataAsync(1000, NumberOfDaysToDisplay);
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>
+

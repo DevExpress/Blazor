@@ -1,0 +1,39 @@
+﻿<DemoPageSectionComponent Id="Utility-SplitButton-Items" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div>
+            <DxSplitButton RenderStyle="ButtonRenderStyle.Secondary"
+                           Text="Send"
+                           IconCssClass="sb-icon sb-icon-send"
+                           SizeMode="Params.SizeMode"
+                           CssClass="me-1"
+                           ItemClick="@OnItemClick">
+                <Items>
+                    <DxDropDownButtonItem Text="Schedule for later" IconCssClass="sb-icon sb-icon-reschedule"/>
+                    <DxDropDownButtonItem Text="Save draft" IconCssClass="sb-icon sb-icon-save-draft"/>
+                    <DxDropDownButtonItem Text="Delete" IconCssClass="sb-icon sb-icon-delete"/>
+                    <DxDropDownButtonItem Text="Share" BeginGroup="true" IconCssClass="sb-icon sb-icon-share">
+                        <Items>
+                            <DxDropDownButtonItem Text="Email" IconCssClass="sb-icon sb-icon-email"/>
+                            <DxDropDownButtonItem Text="Copy Link" Enabled="false" IconCssClass="sb-icon sb-icon-link"/>
+                            <DxDropDownButtonItem Text="Print" IconCssClass="sb-icon sb-icon-print"/>
+                        </Items>
+                    </DxDropDownButtonItem>
+                </Items>
+            </DxSplitButton>
+            <p class="demo-text cw-400 mt-2">
+                Selected item: <b>@SelectedItem?.Text</b>
+            </p>
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        IDropDownButtonItemInfo SelectedItem { get; set; }
+
+        void OnItemClick(DropDownButtonItemClickEventArgs args) {
+            if(!args.ItemInfo.DropDownToggleVisible)
+                SelectedItem = args.ItemInfo;
+        }
+
+    }
+
+</DemoPageSectionComponent>

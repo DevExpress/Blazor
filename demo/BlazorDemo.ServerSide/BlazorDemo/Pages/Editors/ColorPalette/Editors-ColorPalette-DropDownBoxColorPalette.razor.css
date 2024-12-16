@@ -1,0 +1,24 @@
+.dropdown-icon-color {
+    height: 16px;
+    width: 16px;
+    border: 1px solid #CCCCCC;
+    -webkit-mask-image: url("images/icons/theme-icon.svg");
+    mask-image: url("images/icons/theme-icon.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    margin-right: 0.375rem;
+}
+
+.dxbl-sm .dropdown-icon-color {
+    margin-right: 0.25rem;
+}
+
+.dxbl-lg .dropdown-icon-color {
+    margin-right: 0.5rem;
+}
+
+.template-container {
+    display: flex;
+    align-items: center;
+    width: 100%
+}

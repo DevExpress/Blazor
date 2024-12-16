@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32002.185
@@ -16,6 +16,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDemo.DemoData", "BlazorDemo.DemoData\BlazorDemo.DemoData.csproj", "{34F14C9A-D6A7-4137-9696-CB8027938E4C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDemo.Reporting.Core", "BlazorDemo.Reporting.Core\BlazorDemo.Reporting.Core.csproj", "{6BED6AA8-DFDD-4CB1-9EC0-3891D6143596}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevExpress.DemoReports.NetCore", "..\..\..\Reporting\CS\DevExpress.DemoReports\DevExpress.DemoReports.NetCore.csproj", "{79996034-D462-400E-A74C-F2AEAB2E8A8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +56,12 @@ Global
 		{6BED6AA8-DFDD-4CB1-9EC0-3891D6143596}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6BED6AA8-DFDD-4CB1-9EC0-3891D6143596}.VisualTests|Any CPU.ActiveCfg = Debug|Any CPU
 		{6BED6AA8-DFDD-4CB1-9EC0-3891D6143596}.VisualTests|Any CPU.Build.0 = Debug|Any CPU
+		{79996034-D462-400E-A74C-F2AEAB2E8A8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79996034-D462-400E-A74C-F2AEAB2E8A8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79996034-D462-400E-A74C-F2AEAB2E8A8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79996034-D462-400E-A74C-F2AEAB2E8A8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79996034-D462-400E-A74C-F2AEAB2E8A8D}.VisualTests|Any CPU.ActiveCfg = Debug|Any CPU
+		{79996034-D462-400E-A74C-F2AEAB2E8A8D}.VisualTests|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

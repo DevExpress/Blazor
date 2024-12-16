@@ -1,0 +1,12 @@
+.chat-demo-container {
+    width: 100%
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .demo-chat {
+    width: 100%;
+    height: 400px;
+}
+
+    /*BeginHide*/ ::deep /*EndHide*/ .demo-chat .demo-chat-content > p:last-child {
+        margin-bottom: 0;
+    }

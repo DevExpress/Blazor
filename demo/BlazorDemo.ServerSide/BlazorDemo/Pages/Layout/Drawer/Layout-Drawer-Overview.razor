@@ -10,12 +10,14 @@
                         <DxToolbarItem Attributes="@(DrawerUtils.GetToolbarButtonAttributes(IsNavigationOpen, "Navigation"))"
                                        Click="ToggleNavigation"
                                        IconCssClass="tb-icon icon-hamburger"
+                                       CssClass="demo-drawer-toggle-button"
                                        Text="Navigation" />
                         <DxToolbarItem Alignment="ToolbarItemAlignment.Right"
                                        Attributes="@(DrawerUtils.GetToolbarButtonAttributes(IsInfoOpen, "Info"))"
                                        BeginGroup="true"
                                        Click="ToggleInfo"
                                        IconCssClass="tb-icon tb-icon-info"
+                                       CssClass="demo-drawer-toggle-button"
                                        Text="Info" />
                     </Items>
                 </DxToolbar>

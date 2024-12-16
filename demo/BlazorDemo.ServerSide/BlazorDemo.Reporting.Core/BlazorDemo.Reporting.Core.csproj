@@ -1,20 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <EnableDefaultItems>False</EnableDefaultItems>
     <OutputType>Library</OutputType>
     <ImplicitUsings>enabled</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.JSInterop" Version="6.0.25" />
-    <PackageReference Include="System.Drawing.Common" Version="4.7.2" />
+    <PackageReference Include="Microsoft.JSInterop" Version="8.0.10" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.10" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="DevExpress.Reporting.Demos" Version="24.1.6" />
-    
-    
-    
-    
+  <ItemGroup Condition="!Exists('..\..\..\..\Reporting\CS\DevExpress.DemoReports\DevExpress.DemoReports.NetCore.csproj')">
+    <PackageReference Include="DevExpress.Reporting.Demos" Version="24.2.3" />
+  </ItemGroup>
+  <ItemGroup Condition="Exists('..\..\..\..\Reporting\CS\DevExpress.DemoReports\DevExpress.DemoReports.NetCore.csproj')">
+    <ProjectReference Include="..\..\..\..\Reporting\CS\DevExpress.DemoReports\DevExpress.DemoReports.NetCore.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Services\PdfSignatureOptionsProviderAsync.cs" />

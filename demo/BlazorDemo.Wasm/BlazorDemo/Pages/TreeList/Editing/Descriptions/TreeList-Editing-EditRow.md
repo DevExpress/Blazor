@@ -1,0 +1,8 @@
+In default [EditMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.EditMode), the DevExpress Blazor TreeList allows users to edit data using an inline edit row. The component automatically generates and configures cell editors for individual columns based on associated data types. To enable this capability, you must:
+
+1. Declare a [DxTreeListCommandColumn](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeListCommandColumn) object in the [Columns](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.Columns) template. This column displays predefined **New**, **Edit**, **Save**, **Cancel**, and **Delete** command buttons.
+2. Handle the [CustomizeEditModel](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.CustomizeEditModel) event to initialize an edit model for new data rows (set predefined cell values and link new nodes to their parent).
+3. Handle the following events to make final data changes, check access permissions, post changes to the underlying data source, and reload TreeList data:
+    * [EditModelSaving](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.EditModelSaving) — Fires when a user saves the edited row and validation passes.
+    * [DataItemDeleting](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.DataItemDeleting) — Fires when a user confirms the delete operation in the delete confirmation dialog.
+4. Specify the [KeyFieldName](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.KeyFieldName) property. If not set, the TreeList uses standard [.NET value equality comparison](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/equality-comparisons) to identify data items.

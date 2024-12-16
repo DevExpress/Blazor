@@ -1,0 +1,87 @@
+﻿<DemoPageSectionComponent Id="AI-SemanticSearch" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject DictionaryEntryDataProvider DictionaryEntryDataProvider
+
+        <div class="grid-container">
+            <DxLoadingPanel Visible="LoadingPanelVisible" ApplyBackgroundShading="true">
+                <DxGrid Data="DictionaryEntries" 
+                        SizeMode="Params.SizeMode"
+                        ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                        VirtualScrollingEnabled="true" 
+                        TextWrapEnabled="false">
+                    <Columns>
+                        <DxGridDataColumn FieldName="ID" Width="20" CaptionAlignment="GridTextAlignment.Right" />
+                        <DxGridDataColumn FieldName="Name" />
+                        <DxGridDataColumn FieldName="Description" />
+                    </Columns>
+                    <ToolbarTemplate>
+                        <DxToolbar>
+                            <DxToolbarItem>
+                                <Template Context="toolbar_item_context">
+                                    <div class="d-flex align-items-center me-2">
+                                        <span class="me-2">Similarity Factor:</span>
+                                        <DxSpinEdit @bind-Value="CurrentSimilarity"
+                                                    @bind-Value:after="RefreshData"
+                                                    Mask="0.00"
+                                                    BindValueMode="BindValueMode.OnInput"
+                                                    MaxValue="1"
+                                                    MinValue="0"
+                                                    Increment="0.05F" />
+                                    </div>
+                                </Template>
+                            </DxToolbarItem>
+                            <DxToolbarItem Alignment="ToolbarItemAlignment.Right">
+                                <Template Context="toolbar_item_context">
+                                    <DxSearchBox @bind-Text="CurrentSearchText"
+                                                 @bind-Text:after="RefreshData"
+                                                 InputDelay="500"
+                                                 BindValueMode="BindValueMode.OnDelayedInput"
+                                                 NullText="Try: clothing"
+                                                 ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" />
+                                </Template>
+                            </DxToolbarItem>
+                        </DxToolbar>
+                    </ToolbarTemplate>
+                </DxGrid>
+            </DxLoadingPanel>
+        </div>
+    </ChildContentWithParameters>
+    @code {
+        [Inject]
+        SmartFilterProvider FilterProvider { get; set; }
+
+        string CurrentSearchText { get; set; }
+        float CurrentSimilarity { get; set; } = 0.31f;
+
+        IList<DictionaryEntry> OriginalDictionaryEntries { get; set; }
+        IList<DictionaryEntry> DictionaryEntries { get; set; }
+
+        bool LoadingPanelVisible { get; set; } = true;
+        
+        protected override async Task OnInitializedAsync() {
+            OriginalDictionaryEntries = DictionaryEntryDataProvider.GenerateData();
+            DictionaryEntries = OriginalDictionaryEntries;
+
+            await FilterProvider.FillCacheAsync(OriginalDictionaryEntries.SelectMany(item => new string[] { item.Name, item.Description }));
+
+            LoadingPanelVisible = false;
+        }
+
+        async Task RefreshData() {
+            var searchText = CurrentSearchText;
+            var similarity = CurrentSimilarity;
+
+            if(string.IsNullOrEmpty(searchText)) {
+                DictionaryEntries = OriginalDictionaryEntries;
+                return;
+            }
+
+            await FilterProvider.FillCacheAsync([searchText]);
+            var entries = OriginalDictionaryEntries.Where(item => FilterProvider.IsSimilarTo(item.Name, searchText, similarity) || FilterProvider.IsSimilarTo(item.Description, searchText, similarity)).ToList();
+            if(CurrentSearchText != searchText || CurrentSimilarity != similarity)
+                return;
+
+            DictionaryEntries = entries;
+        }
+    }
+</DemoPageSectionComponent>

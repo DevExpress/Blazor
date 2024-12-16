@@ -27,7 +27,9 @@
                     </DxGridDataColumn>
                     <DxGridDataColumn FieldName="CustomerId" Caption="Customer" MinWidth="120">
                         <EditSettings>
-                            <DxComboBoxSettings Data="Customers" ValueFieldName="CustomerId" TextFieldName="DisplayText" FilteringMode="DataGridFilteringMode.Contains" />
+                            <DxComboBoxSettings Data="Customers" ValueFieldName="CustomerId" TextFieldName="DisplayText"
+                                SearchMode="@ListSearchMode.AutoSearch"
+                                SearchFilterCondition="@ListSearchFilterCondition.Contains" />
                         </EditSettings>
                     </DxGridDataColumn>
                     <DxGridDataColumn FieldName="Shipped" UnboundType="GridUnboundColumnType.Boolean" UnboundExpression="[ShippedDate] <> Null" Width="5%" MinWidth="95" />

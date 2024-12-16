@@ -1,4 +1,4 @@
-The DevExpress [Tabs](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTabs) component for Blazor allows you to build tabbed interfaces. You can create a single tab (the [DxTab](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTab) component) or a tab with content (the [DxTabPage](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTabPage) component).
+The DevExpress [Tabs](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTabs) component for Blazor allows you to build tabbed interfaces. You can display tabbed pages ([DxTabPage](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTabPage) components) or tab headers only ([DxTab](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTab) components).
 
 The main tab-related API is listed below:
 
@@ -9,3 +9,5 @@ The main tab-related API is listed below:
 *   [TabIconCssClass](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTabBase.TabIconCssClass) – Specifies the tab icon's CSS class.
 *   [TabTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTabBase.TabTemplate) – Specifies the tab's template.
 *   [TextTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxTabBase.TextTemplate) – Specifies the template used to display the tab's text.
+
+The Tabs component also supports [keyboard navigation](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTabs#keyboard-navigation). Press the Tab key or Shift+Tab to focus the component and use Arrow keys to navigate through tabs.

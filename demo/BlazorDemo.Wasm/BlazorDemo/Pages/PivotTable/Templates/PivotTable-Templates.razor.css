@@ -1,0 +1,43 @@
+.pivot-container {
+    width: 100%;
+}
+/*BeginHide*/ ::deep /*EndHide*/ .dxbl-pivot-table {
+    width: 100%;
+    height: 100%;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .pivot-loading-panel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%
+}
+/*BeginHide*/::deep /*EndHide*/ .pivot-table-cell-template {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+/*BeginHide*/ ::deep /*EndHide*/ .pivot-table-cell-template-icon {
+    width: 17px;
+    height: 17px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+/*BeginHide*/ ::deep /*EndHide*/ .pivot-table-green-arrow-up {
+    background-image: url("images/icons/pivot-table/pivot-table-green-arrow-up.svg");
+}
+/*BeginHide*/ ::deep /*EndHide*/ .pivot-table-red-arrow-down {
+    background-image: url("images/icons/pivot-table/pivot-table-red-arrow-down.svg");
+}
+/*BeginHide*/ ::deep /*EndHide*/ .pivot-table-yellow-arrow-right {
+    background-image: url("images/icons/pivot-table/pivot-table-yellow-arrow-right.svg");
+}
+/*BeginHide*/ ::deep /*EndHide*/ .pivot-table-yellow-arrow-down-right {
+    background-image: url("images/icons/pivot-table/pivot-table-yellow-arrow-down-right.svg");
+}
+/*BeginHide*/ ::deep /*EndHide*/ .pivot-table-yellow-arrow-up-right {
+    background-image: url("images/icons/pivot-table/pivot-table-yellow-arrow-up-right.svg");
+}

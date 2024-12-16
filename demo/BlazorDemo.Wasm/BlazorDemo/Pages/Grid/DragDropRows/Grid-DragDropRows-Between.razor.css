@@ -1,0 +1,12 @@
+/*BeginHide*/ .grid-container {
+    display:flex;
+} /*EndHide*/
+/*BeginHide*/ ::deep .allowed-drop-target-combobox {
+    width: 100px;
+} /*EndHide*/
+/*BeginHide*/ ::deep /*EndHide*/ .dxbl-grid {
+    height: 420px;
+}
+/*BeginHide*/ ::deep /*EndHide*/ .dxbl-grid:last-child {
+    margin-left: 20px;
+}

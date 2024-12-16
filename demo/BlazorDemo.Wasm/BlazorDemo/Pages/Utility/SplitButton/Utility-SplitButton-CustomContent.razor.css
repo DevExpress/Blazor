@@ -1,0 +1,28 @@
+/*BeginHide*/
+::deep /*EndHide*/.listbox {
+    width: 200px;
+    border: none;
+}
+
+.item-template {
+    display: flex;
+    align-items: center;
+}
+
+.item-template > img {
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+}
+
+img + .item-template-name {
+    margin-left: 0.5rem;
+}
+
+.dxbl-sm img + .item-template-name {
+    margin-left: 0.375rem;
+}
+
+.dxbl-lg img + .item-template-name {
+    margin-left: 0.625rem;
+}

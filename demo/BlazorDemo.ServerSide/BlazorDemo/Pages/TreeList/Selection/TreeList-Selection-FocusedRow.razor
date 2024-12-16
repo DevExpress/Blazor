@@ -16,7 +16,8 @@
                             ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
                             TextWrapEnabled="false"
                             SizeMode="Params.SizeMode"
-                            CssClass="max-h-480">
+                            CssClass="max-h-480"
+                            AutoExpandAllNodes="true">
                     <Columns>
                         <DxTreeListDataColumn FieldName="Name"/>
                         <DxTreeListDataColumn FieldName="TypeOfObject" Caption="Type"/>
@@ -55,11 +56,6 @@
 
             protected override void OnInitialized () {
                 TreeListData = SpaceObjectDataProvider.GenerateData();
-            }
-
-            protected override void OnAfterRender (bool firstRender) {
-                if(firstRender)
-                    TreeList.ExpandAll();
             }
 
             void TreeList_FocusedRowChanged(TreeListFocusedRowChangedEventArgs e) {

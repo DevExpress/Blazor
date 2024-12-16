@@ -1,0 +1,31 @@
+﻿@using System.IO;
+@using DevExpress.AIIntegration.Blazor.RichEdit
+
+<DemoPageSectionComponent Id="AI-RichEdit">
+    @inject IDocumentProvider DocumentProvider
+
+    <DxRichEdit DocumentContent="@DocumentContent" CssClass="w-100 ch-720">
+        <AdditionalItems>
+            <SummarizeAIContextMenuItem />
+            <ExplainAIContextMenuItem />
+            <ProofreadAIContextMenuItem />
+            <ExpandAIContextMenuItem />
+            <ShortenAIContextMenuItem />
+            <AskAssistantAIContextMenuItem />
+            <GenerateDescriptionAIContextMenuItem />
+            <ChangeStyleAIContextMenuItem />
+            <ChangeToneAIContextMenuItem />
+            <TranslateAIContextMenuItem Languages="@("English, German, French, Chinese")" />
+        </AdditionalItems>
+    </DxRichEdit>
+
+    @code {
+        byte[] DocumentContent;
+
+        protected override async Task OnInitializedAsync() {
+            DocumentContent = await DocumentProvider.GetDocumentAsync("FirstLook.docx");
+            await base.OnInitializedAsync();
+        }
+    }
+</DemoPageSectionComponent>
+

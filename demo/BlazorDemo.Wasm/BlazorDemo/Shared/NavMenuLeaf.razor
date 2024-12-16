@@ -1,25 +1,81 @@
 ﻿@using BlazorDemo.Configuration
 @inject DemoConfiguration Configuration
 
-@if(Page.Pages.Length > 0) {
-    <DxTreeViewNode Text="@Page.Title" CssClass="@GetItemCssClass(Page)" NavigateUrl="@Page.Url" BadgeText="@GetItemBadgeText(Page)">
-        <Nodes>
-            @foreach(var childPage in Page.Pages) {
-                <NavMenuLeaf Page="@childPage"></NavMenuLeaf>
-            }
-        </Nodes>
-    </DxTreeViewNode>
-} else {
-    <DxTreeViewNode Text="@Page.Title" CssClass="@GetItemCssClass(Page)" NavigateUrl="@Page.Url" BadgeText="@GetItemBadgeText(Page)">
-    </DxTreeViewNode>
-}
+<DxTreeViewNode title="@DemoItemTooltip" Text="@DemoItem.Title" CssClass="@GetItemCssClass(DemoItem)" NavigateUrl="@DemoItemUrl" BadgeText="@GetItemBadgeText(DemoItem)" Expanded="@DemoItemExpanded">
+    <TextTemplate>@DemoItemText</TextTemplate>
+    <Nodes>
+        @foreach(var childItem in DemoItem.GetNavTreeChildren(Configuration.IsSiteMode).Where(i => IsVisibleItem(i))) {
+            <NavMenuLeaf DemoItem="@childItem" SearchResult="@SearchResult" ExpandedItems="@ExpandedItems"></NavMenuLeaf>
+        }
+    </Nodes>
+</DxTreeViewNode>
 
 @code {
     [Parameter]
-    public DemoPageBase Page { get; set; }
+    public DemoItem DemoItem { get; set; }
+    [Parameter]
+    public DemoSearchResult SearchResult { get; set; }
+    [Parameter]
+    public HashSet<string> ExpandedItems { get; set; }
 
-    protected string GetItemBadgeText(DemoItem page) {
-        var status = page.GetStatus();
+    bool IsVisibleItem(DemoItem item) {
+        return SearchResult == null || SearchResult.ContainsInHierarchy(item);
+    }
+
+    public bool DemoItemExpanded {
+        get {
+            if (SearchResult != null || Configuration.IsSingleProduct)
+                return true;
+            if (ExpandedItems != null && ExpandedItems.Contains(DemoItem.UniqueId))
+                return true;
+            return false;
+        }
+    }
+
+    public RenderFragment DemoItemText {
+        get {
+            return @<span title="@DemoItemTooltip">
+                @(new MarkupString(SearchResult?.GetHighlightedMarkup(DemoItem.Title) ?? DemoItem.Title))
+            </span>;
+        }
+    }
+
+    public string DemoItemTooltip {
+        get {
+            if(SearchResult != null) {
+                var sources = SearchResult.GetRankSource(DemoItem);
+                if (sources != TextRankSource.None && !sources.Value.HasFlag(TextRankSource.Title))
+                    return $"Found by: { string.Join(", ", GetSourcesTooltip(sources.Value)) }";
+            }
+            return string.Empty;
+        }
+    }
+
+    public string DemoItemUrl {
+        get {
+            if(SearchResult != null) {
+                if (DemoItem is DemoPage page && page.PageSections.Length > 0 && !page.PageSections.Any(s => IsVisibleItem(s)))
+                    return page.PageSections[0].GetNavTreeUrl();
+            }
+            return DemoItem.GetNavTreeUrl();
+        }
+    }
+
+    IEnumerable<string> GetSourcesTooltip(TextRankSource sources) {
+        if (sources.HasFlag(TextRankSource.Url))
+            yield return "url";
+        if(sources.HasFlag(TextRankSource.Header))
+            yield return "header";
+        if(sources.HasFlag(TextRankSource.Keywords))
+            yield return "keywords";
+        if(sources.HasFlag(TextRankSource.Section))
+            yield return "sections";
+        if(sources.HasFlag(TextRankSource.ParentTitle))
+            yield return "parent title";
+    }
+
+    protected string GetItemBadgeText(DemoItem item) {
+        var status = item.GetStatus();
         if(status == DemoItemStatus.Preview)
             return "CTP";
         if(status == DemoItemStatus.MaintenanceMode)
@@ -31,8 +87,8 @@
         return string.Empty;
     }
 
-    protected string GetItemCssClass(DemoPageBase page) {
-        var status = page.GetStatus();
+    protected string GetItemCssClass(DemoItem item) {
+        var status = item.GetStatus();
         if(status == DemoItemStatus.Preview)
             return "item-ctp";
         if(status == DemoItemStatus.MaintenanceMode)

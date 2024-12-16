@@ -1,0 +1,78 @@
+﻿<DemoPageSectionComponent Id="Utility-ButtonGroup-Overview" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <div class="component-container flex-row flex-wrap align-items-start w-100">
+            <div class="d-flex flex-column justify-content-between me-4">
+                <div class="buttons-group-title mb-2">Click Buttons (No Selection)</div>
+                <div class="mb-3">
+                    <DxButtonGroup SizeMode="Params.SizeMode" RenderStyle="@SelectedRenderStyle" RenderStyleMode="@SelectedRenderStyleMode">
+                        <Items>
+                            <DxButtonGroupItem Text="Play/Pause" IconCssClass="@(IsPaused ? "icon icon-continue" : "icon icon-pause")" Click="@OnPlayPauseClick"/>
+                            <DxButtonGroupItem Text="Up Next" IconCssClass="icon icon-last"/>
+                            <DxButtonGroupItem Text="Settings" IconCssClass="icon icon-settings"/>
+                            <DxButtonGroupItem Text="Fullscreen" IconCssClass="icon icon-full-screen"/>
+                        </Items>
+                    </DxButtonGroup>
+                </div>
+                <div class="buttons-group-title mb-2">Radio Group (Single Selection)</div>
+                <div class="mb-3">
+                    <DxButtonGroup SizeMode="Params.SizeMode" RenderStyle="@SelectedRenderStyle" RenderStyleMode="@SelectedRenderStyleMode" SelectionMode="ButtonGroupSelectionMode.Single">
+                        <Items>
+                            <DxButtonGroupItem Text="Admin" IconCssClass="icon icon-lock-column"/>
+                            <DxButtonGroupItem Text="Editor" IconCssClass="icon icon-edit"/>
+                            <DxButtonGroupItem Text="Reviewer" IconCssClass="icon icon-no-tooltip"/>
+                            <DxButtonGroupItem Text="Guest" IconCssClass="icon icon-user"/>
+                        </Items>
+                    </DxButtonGroup>
+                </div>
+                <div class="buttons-group-title mb-2">Toggle Buttons (Multiple Selection)</div>
+                <div class="mb-3">
+                    <DxButtonGroup SizeMode="Params.SizeMode" RenderStyle="@SelectedRenderStyle" RenderStyleMode="@SelectedRenderStyleMode" SelectionMode="ButtonGroupSelectionMode.Multiple">
+                        <Items>
+                            <DxButtonGroupItem Text="High Priority" IconCssClass="icon icon-validation-warning"/>
+                            <DxButtonGroupItem Text="Completed" IconCssClass="icon icon-check"/>
+                            <DxButtonGroupItem Text="Assigned to me" IconCssClass="icon icon-user-profile"/>
+                            <DxButtonGroupItem Text="Overdue" IconCssClass="icon icon-clock"/>
+                        </Items>
+                    </DxButtonGroup>
+                </div>
+            </div>
+            <div>
+                <div class="buttons-group-title mb-2">Vertical Orientation</div>
+                <div>
+                    <DxButtonGroup SizeMode="Params.SizeMode" RenderStyle="@SelectedRenderStyle" RenderStyleMode="@SelectedRenderStyleMode" Orientation="Orientation.Vertical">
+                        <Items>
+                            <DxButtonGroupItem Text="Add Task" CssClass="justify-content-start" IconCssClass="icon icon-plus"/>
+                            <DxButtonGroupItem Text="Edit Task" CssClass="justify-content-start" IconCssClass="icon icon-edit"/>
+                            <DxButtonGroupItem Text="Assign Task" CssClass="justify-content-start" IconCssClass="icon icon-user-profile"/>
+                            <DxButtonGroupItem Text="Complete Task" CssClass="justify-content-start" IconCssClass="icon icon-check"/>
+                            <DxButtonGroupItem Text="Archive Task" CssClass="justify-content-start" IconCssClass="icon icon-delete"/>
+                        </Items>
+                    </DxButtonGroup>
+                </div>
+            </div>
+        </div>
+    </ChildContentWithParameters>
+
+    <OptionsContent>
+        <OptionComboBox Label="Button Render Style:"
+                        Data="@(Enum.GetNames(typeof(ButtonRenderStyle)))"
+                        Value="@(SelectedRenderStyle.ToString())"
+                        ValueChanged="@((string selectedItem) => { SelectedRenderStyle = Enum.Parse<ButtonRenderStyle>(selectedItem); })"/>
+        <OptionComboBox Label="Button Render Style Mode:"
+                        Data="@(Enum.GetNames(typeof(ButtonRenderStyleMode)))"
+                        Value="@(SelectedRenderStyleMode.ToString())"
+                        ValueChanged="@((string selectedItem) => { SelectedRenderStyleMode = Enum.Parse<ButtonRenderStyleMode>(selectedItem); })"/>
+    </OptionsContent>
+
+    @code {
+        ButtonRenderStyle SelectedRenderStyle { get; set; } = ButtonRenderStyle.Secondary;
+        ButtonRenderStyleMode SelectedRenderStyleMode { get; set; } = ButtonRenderStyleMode.Outline;
+        bool IsPaused { get; set; } = true;
+
+        void OnPlayPauseClick() {
+            IsPaused = !IsPaused;
+        }
+
+    }
+
+</DemoPageSectionComponent>
