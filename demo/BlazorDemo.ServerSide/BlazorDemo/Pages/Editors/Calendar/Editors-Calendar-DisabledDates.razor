@@ -1,9 +1,17 @@
 ﻿<DemoPageSectionComponent Id="Editors-Calendar-DisabledDates" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <DxCalendar T="DateTime" CustomDisabledDate="@OnCustomDisabledDate" SizeMode="Params.SizeMode" CssClass="demo-calendar" />
+        <DxCalendar @bind-SelectedDate="@SelectedDate" 
+                    CustomDisabledDate="@OnCustomDisabledDate" 
+                    SizeMode="Params.SizeMode" 
+                    CssClass="demo-calendar" />
+        <p class="demo-text cw-320 mt-3">
+            Selected date: <b>@SelectedDate.ToString("dddd, MMMM dd, yyyy")</b>
+        </p>
     </ChildContentWithParameters>
 
     @code {
+        DateTime SelectedDate { get; set; } = DateTime.Today;
+
         void OnCustomDisabledDate(CalendarCustomDisabledDateEventArgs args) {
             args.IsDisabled = args.Date < DateTime.Today.AddDays(-20)
                 || GetDisabledDates().Exists(d => DaysEqual(d, args.Date));

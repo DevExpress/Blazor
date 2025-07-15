@@ -7,6 +7,7 @@
     <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputType>Library</OutputType>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <RootNamespace>BlazorDemo</RootNamespace>
     <AssemblyName>BlazorDemo</AssemblyName>
   </PropertyGroup>
@@ -23,26 +24,27 @@
     <WarningsAsErrors>$(WarningsAsErrors);NU1605;RZ10012</WarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Markdig" Version="0.23.0" />
-    <PackageReference Include="DevExtreme.AspNet.Data" Version="4.0.1" />
-    <PackageReference Include="System.Reactive" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.AI.Abstractions" Version="9.0.0-preview.9.24556.5" />
-    <PackageReference Include="System.Text.Json" Version="9.0.0" />
+    <PackageReference Include="Markdig" />
+    <PackageReference Include="DevExtreme.AspNet.Data" />
+    <PackageReference Include="System.Reactive" />
+    <PackageReference Include="Microsoft.Extensions.AI.Abstractions" />
+    <PackageReference Include="System.Text.Json" />
     <ProjectReference Include="..\BlazorDemo.DemoData\BlazorDemo.DemoData.csproj" />
     <ProjectReference Include="..\BlazorDemo.Reporting.Core\BlazorDemo.Reporting.Core.csproj" />
-    <PackageReference Include="Azure.AI.OpenAI" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="9.0.0-preview.9.24507.7" />
-    <PackageReference Include="System.Numerics.Tensors" Version="9.0.0" />
+    <PackageReference Include="Azure.AI.OpenAI" />
+    <PackageReference Include="Microsoft.Extensions.AI.OpenAI" />
+    <PackageReference Include="System.Numerics.Tensors" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Condition="'$(TargetFramework)'=='net9.0'" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.PdfViewer" Version="24.2.3" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls" Version="24.2.3" />
-    <PackageReference Include="DevExpress.AspNetCore.Reporting" Version="24.2.3" />
-    <PackageReference Include="DevExpress.Reporting.Demos" Version="24.2.3" />
-    <PackageReference Include="DevExpress.Blazor.PivotTable" Version="24.2.3" />
-    <PackageReference Include="DevExpress.Drawing.Skia" Version="24.2.3" />
-    <PackageReference Include="DevExpress.AIIntegration.Blazor" Version="24.2.3" />
-    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" Version="24.2.3" />
+    <PackageReference Include="DevExpress.Blazor.PdfViewer" VersionOverride="25.1.3" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls" VersionOverride="25.1.3" />
+    <PackageReference Include="DevExpress.AspNetCore.Reporting" VersionOverride="25.1.3" />
+    <PackageReference Include="DevExpress.Reporting.Demos" VersionOverride="25.1.3" />
+    <PackageReference Include="DevExpress.Blazor.PivotTable" VersionOverride="25.1.3" />
+    <PackageReference Include="DevExpress.Drawing.Skia" VersionOverride="25.1.3" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor" VersionOverride="25.1.3" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" VersionOverride="25.1.3" />
     
     
     
@@ -182,6 +184,9 @@
     <Content Update="wwwroot\images\documents\SampleWatermark.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\images\documents\Eiffel-Tower.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\Documents\MailMergeTemplate.docx">
@@ -229,6 +234,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\PivotTable\LargeDataSource\Descriptions\" />
+    <Folder Include="Pages\PivotTable\Layout\Descriptions\" />
   </ItemGroup>
   <Target Name="ControllersCreate" BeforeTargets="PreBuildEvent" Condition="!Exists('Controllers')">
     <Exec Condition="$([MSBuild]::IsOSPlatform('Windows'))" Command="mklink /J &quot;Controllers&quot; &quot;..//BlazorDemo.ServerSide//Controllers&quot;" />

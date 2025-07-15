@@ -1,4 +1,9 @@
-To enable multiple selection in the [List Box](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2), set the [SelectionMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.SelectionMode) property to [ListBoxSelectionMode.Multiple](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.SelectionMode).
+To enable multi selection in the [List Box](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2), set the [SelectionMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.SelectionMode) property to [ListBoxSelectionMode.Multiple](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.SelectionMode).
 
-*   If the [ShowCheckboxes](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.ShowCheckboxes) option is enabled, users can click individual items and corresponding checkboxes or hold **Shift** to select a range of items.
-*   If the [ShowCheckboxes](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.ShowCheckboxes) option is disabled, users can press **Ctrl** to select individual items or hold **Shift** to select a range of items.
+Users can select multiple items as follows:
+
+* Press **Ctrl** to select individual items or hold **Shift** to select a range of items.
+*   If the [ShowCheckboxes](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.ShowCheckboxes) property is `true`, users can click individual items or corresponding checkboxes.
+*   If [ShowSelectAllCheckbox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.ShowSelectAllCheckbox) and [ShowCheckboxes](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.ShowCheckboxes) properties are `true`, users can click the **Select All** checkbox to select all visible items in the list.
+
+You can use [SelectAll](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.SelectAll) and [DeselectAll](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.DeselectAll) methods to select/deselect all visible items in code.

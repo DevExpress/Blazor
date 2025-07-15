@@ -1,0 +1,7 @@
+The DevExpress Blazor TreeList component includes an integrated Search Box UI element. When users enter values within the Search Box, our Blazor TreeList filters data rows, displays records that match the search string, and highlights search results. You can use the following properties to customize search behavior: 
+
+* [DxTreeList.FilterTreeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.FilterTreeMode) — Specifies whether the TreeList component displays child/parent records for rows that meet search criteria. Select the **Display Nodes** option to try different filter modes.
+* [DxTreeList.SearchTextParseMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.SearchTextParseMode) — Specifies how the TreeList searches for a match if the query contains multiple words: an exact matching phrase, all words in any order, or any individual word. Select a value from the **Find Nodes Containing** box to see how behavior changes.
+* [DxTreeListDataColumn.SearchEnabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeListDataColumn.SearchEnabled) — Allows you to exclude a specific column from search operations (the component searches across all visible data columns by default).
+ 
+Enable the [ShowSearchBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.ShowSearchBox) property to display the built-in Search Box. Use the [SearchText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTreeList.SearchText) property to set an initial search string or implement an external search editor.

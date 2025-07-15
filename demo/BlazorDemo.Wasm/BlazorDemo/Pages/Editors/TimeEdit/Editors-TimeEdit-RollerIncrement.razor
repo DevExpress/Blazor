@@ -1,0 +1,20 @@
+﻿<DemoPageSectionComponent Id="Editors-TimeEdit-RollerIncrement" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <label for="teRollerIncrement" class="demo-text cw-320 mb-1">
+            Time
+        </label>
+        <DxTimeEdit @bind-Time="@TimeValue"
+                    MinuteIncrement="10"
+                    SecondIncrement="15"
+                    CssClass="cw-320"
+                    SizeMode="Params.SizeMode"
+                    InputId="teRollerIncrement" />
+        <p class="demo-text cw-320 mt-3">
+            Selected time: <b>@TimeValue.ToString(@"hh\:mm\:ss")</b>
+        </p>
+    </ChildContentWithParameters>
+
+    @code {
+        TimeSpan TimeValue { get; set; } = TimeSpan.FromMinutes(630);
+    }
+</DemoPageSectionComponent>

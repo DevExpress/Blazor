@@ -1,7 +1,7 @@
 ﻿<DemoScriptLoader Src="_content/BlazorDemo/lib/reporting.js" @ref=demoScriptLoader></DemoScriptLoader>
 @if(ScriptsLoaded) {
     <DxDocumentViewer ReportName=@ReportName Height="700px" CssClass="w-100">
-        <DxDocumentViewerCallbacks OnInitializing="_dxr_onViewerInitializing"></DxDocumentViewerCallbacks>
+        <DxDocumentViewerCallbacks BeforeRender="_dxr_onViewerBeforeRender"></DxDocumentViewerCallbacks>
     </DxDocumentViewer>
 }
 

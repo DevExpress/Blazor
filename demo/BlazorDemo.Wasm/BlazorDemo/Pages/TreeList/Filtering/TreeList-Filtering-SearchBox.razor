@@ -1,0 +1,111 @@
+@page "/TreeList/Filtering/SearchBox"
+
+<DemoPageSectionComponent Id="TreeList-Filtering-SearchBox" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject IEmployeeTaskDataProvider EmployeeTaskDataProvider
+
+        <div class="tree-list-container">
+            <DxTreeList Data="@Data"
+                    KeyFieldName="Id"
+                    ParentKeyFieldName="ParentId"
+                    ShowSearchBox="true"
+                    SearchText="new prod low"
+                    SearchTextParseMode="CurrentSearchTextParseMode"
+                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false"
+                    VirtualScrollingEnabled="true"
+                    FilterTreeMode="FilterTreeMode.Mode"
+                    SizeMode="Params.SizeMode">
+                <Columns>
+                    <DxTreeListDataColumn FieldName="Name" Caption="Task" SortOrder="TreeListColumnSortOrder.Ascending" FilterRowValue='"Product"' />
+                    <DxTreeListDataColumn FieldName="EmployeeName" Caption="Assigned To" TextAlignment="TreeListTextAlignment.Left" Width="200px"/>
+                    <DxTreeListDataColumn FieldName="StartDate" Width="100px" />
+                    <DxTreeListDataColumn FieldName="DueDate" Width="100px" />
+                    <DxTreeListDataColumn FieldName="Priority" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="Priorities" ValueFieldName="Value" TextFieldName="Text" ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Never"/>
+                        </EditSettings>
+                        <CellDisplayTemplate>
+                            @{
+                                var employeeTask = (EmployeeTask)context.DataItem;
+                                var displayText = TreeListRenderHelper.EmployeeTaskPriorityToString(employeeTask);
+
+                                var badgeClass = employeeTask.Priority switch {
+                                    -1 => "bg-success",
+                                    0 => "bg-info",
+                                    1 => "bg-warning",
+                                    _ => throw new ArgumentException()
+                                };
+                            }
+                            <span class="badge @badgeClass py-1 px-2" title="@displayText  priority">@context.HighlightedDisplayText</span>
+                        </CellDisplayTemplate>
+                    </DxTreeListDataColumn>
+                </Columns>
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Contained">
+                        <Items>
+                            <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                                <Template Context="toolbar_item_context">
+                                    <div class="d-flex flex-row align-items-center h-100">
+                                        <div class="me-2">Find Nodes Containing:</div>
+                                        <DxComboBox Data="@SearchTextParseModes.Keys"
+                                                    ValueChanged="@((string value) => ChangeSearchMode(value))"
+                                                    Value="@CurrentSearchTextParseModeDisplayText"/>
+                                    </div>
+                                </Template>
+                            </DxToolbarItem>
+                            <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                                <Template Context="toolbar_item_context">
+                                    <div class="d-flex flex-row align-items-center h-100">
+                                        <div class="me-2">Display Nodes:</div>
+                                        <DxComboBox Data="FilterModes" @bind-Value="FilterTreeMode" TextFieldName="Name" />
+                                    </div>
+                                </Template>
+                            </DxToolbarItem>
+                        </Items>
+                    </DxToolbar>
+                </ToolbarTemplate>
+            </DxTreeList>
+        </div>
+
+        @code {
+            List<EmployeeTask> Data { get; set; }
+            record Priority (int Value, string Text);
+            static readonly IReadOnlyList<Priority> Priorities = new Priority[] {
+                new Priority(-1, "Low"),
+                new Priority(0, "Medium"),
+                new Priority(1, "High"),
+            };
+
+            Dictionary<string, TreeListSearchTextParseMode> SearchTextParseModes { get; } = new Dictionary<string, TreeListSearchTextParseMode>{
+                { "All words", TreeListSearchTextParseMode.GroupWordsByAnd },
+                { "Any word", TreeListSearchTextParseMode.GroupWordsByOr },
+                { "Exact match", TreeListSearchTextParseMode.ExactMatch }
+            };
+
+            void ChangeSearchMode(string key) {
+                CurrentSearchTextParseModeDisplayText = key;
+                CurrentSearchTextParseMode = SearchTextParseModes[key];
+            }
+
+            string CurrentSearchTextParseModeDisplayText { get; set; } = "All words";
+            TreeListSearchTextParseMode CurrentSearchTextParseMode { get; set; } = TreeListSearchTextParseMode.GroupWordsByAnd;
+
+            record TreeListFilterTreeModeItem(string Name, TreeListFilterTreeMode Mode) {
+                public static TreeListFilterTreeModeItem Create(TreeListFilterTreeMode mode) => new (SplitTextHelper.SplitPascalCaseString(mode.ToString()), mode);
+            }
+            static readonly IList<TreeListFilterTreeModeItem> FilterModes = new[] {
+                new TreeListFilterTreeModeItem("Include parents", TreeListFilterTreeMode.ParentBranch),
+                new TreeListFilterTreeModeItem("Include parents and children", TreeListFilterTreeMode.EntireBranch),
+                new TreeListFilterTreeModeItem("Matching nodes only", TreeListFilterTreeMode.Nodes),
+            };
+
+            TreeListFilterTreeModeItem FilterTreeMode { get; set; }
+
+            protected override async Task OnInitializedAsync() {
+                FilterTreeMode = FilterModes.First();
+                Data = EmployeeTaskDataProvider.GenerateData();
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

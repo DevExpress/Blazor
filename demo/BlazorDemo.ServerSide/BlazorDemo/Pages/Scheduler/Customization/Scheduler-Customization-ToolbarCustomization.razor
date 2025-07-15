@@ -1,0 +1,59 @@
+@page "/Scheduler/Customization/ToolbarCustomization"
+
+<DemoPageSectionComponent Id="Scheduler-Customization-ToolbarCustomization">
+    <DemoChildContent>
+        <DxScheduler @bind-StartDate="@StartDate"
+                     DataStorage="@DataStorage"
+                     CssClass="demo-sc-size">
+            <Views>
+                <DxSchedulerTimelineView Duration="@CurrentDuration">
+                    <Scales>
+                        <DxSchedulerTimeScale Unit="@SchedulerTimeScaleUnit.Day" UnitCount="1"></DxSchedulerTimeScale>
+                        <DxSchedulerTimeScale Unit="@SchedulerTimeScaleUnit.Hour" UnitCount="6"></DxSchedulerTimeScale>
+                    </Scales>
+                </DxSchedulerTimelineView>
+            </Views>
+            <ToolbarItems>
+                <DxSchedulerPreviousIntervalToolbarItem />
+                <DxSchedulerNextIntervalToolbarItem />
+                <DxSchedulerTodayToolbarItem />
+                <DxSchedulerDateNavigatorToolbarItem />
+                <DxToolbarItem GroupName="ScaleDuration"
+                               Text="1 day"
+                               Click="@((i) => CurrentDuration = TimeSpan.FromHours(24))"
+                               Checked="@(CurrentDuration == TimeSpan.FromHours(24))"
+                               BeginGroup="true"
+                               Alignment="ToolbarItemAlignment.Right"></DxToolbarItem>
+                <DxToolbarItem GroupName="ScaleDuration"
+                               Text="2 days"
+                               Click="@((i) => CurrentDuration = TimeSpan.FromHours(48))"
+                               Checked="@(CurrentDuration == TimeSpan.FromHours(48))"></DxToolbarItem>
+                <DxToolbarItem GroupName="ScaleDuration"
+                               Text="3 days"
+                               Click="@((i) => CurrentDuration = TimeSpan.FromHours(72))"
+                               Checked="@(CurrentDuration == TimeSpan.FromHours(72))"></DxToolbarItem>
+            </ToolbarItems>
+        </DxScheduler>
+    </DemoChildContent>
+
+
+    @code {
+        DateTime StartDate { get; set; } = DateTime.Today;
+        TimeSpan CurrentDuration = @TimeSpan.FromHours(48);
+
+        DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
+            AppointmentsSource = AppointmentCollection.GetAppointments(),
+            AppointmentMappings = new DxSchedulerAppointmentMappings() {
+                Type = "AppointmentType",
+                Start = "StartDate",
+                End = "EndDate",
+                Subject = "Caption",
+                AllDay = "AllDay",
+                Location = "Location",
+                Description = "Description",
+                LabelId = "Label",
+                StatusId = "Status",
+            }
+        };
+    }
+</DemoPageSectionComponent>

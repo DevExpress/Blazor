@@ -1,21 +1,28 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
+using Azure.AI.OpenAI;
 using BlazorDemo.Services;
+using DevExpress.AIIntegration;
+using DevExpress.AIIntegration.Reporting.Common.Models;
+
+#if !SERVER_BLAZOR
 using DevExpress.AspNetCore;
+#endif
 using DevExpress.AspNetCore.Reporting;
+using DevExpress.Blazor.Reporting;
+using DevExpress.Blazor.Reporting.Services;
 using DevExpress.XtraReports.Services;
 using DevExpress.XtraReports.Web.Extensions;
+using DevExpress.XtraReports.Web.ReportDesigner.Services;
+using DevExpress.XtraReports.Web.WebDocumentViewer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using DevExpress.XtraReports.Web.WebDocumentViewer;
 using Microsoft.Extensions.AI;
-using DevExpress.AIIntegration;
-using DevExpress.AIIntegration.Blazor.Reporting.Viewer.Models;
-using System.Collections.Generic;
-using DevExpress.Blazor.Reporting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace BlazorDemo.ServerSide {
     class StartupFilter : IStartupFilter {
@@ -62,8 +69,8 @@ namespace BlazorDemo.ServerSide {
     public sealed class ReportingHostingStartup {
         public static void Configure(IWebHostBuilder builder) {
             DevExpress.Security.Resources.AccessSettings.DataResources.SetRules(DevExpress.Security.Resources.DirectoryAccessRule.Deny(), DevExpress.Security.Resources.UrlAccessRule.Deny());
-            DevExpress.Security.Resources.AccessSettings.StaticResources.SetRules(DevExpress.Security.Resources.UrlAccessRule.Deny());
-            DevExpress.Security.Resources.AccessSettings.ReportingSpecificResources.SetRules(DevExpress.Security.Resources.UrlAccessRule.Deny());
+            DevExpress.Security.Resources.AccessSettings.StaticResources.SetRules(DevExpress.Security.Resources.DirectoryAccessRule.Deny(), DevExpress.Security.Resources.UrlAccessRule.Deny());
+            DevExpress.Security.Resources.AccessSettings.ReportingSpecificResources.SetRules(DevExpress.Security.Resources.DirectoryAccessRule.Deny(), DevExpress.Security.Resources.UrlAccessRule.Deny());
             DevExpress.Data.AsyncDownloadPolicy.SuppressAll();
 
             builder.ConfigureServices((webHostBuilderContext, services) => {
@@ -88,25 +95,58 @@ namespace BlazorDemo.ServerSide {
                         viewer.UseCachedReportSourceBuilder();
                     });
                 });
+
+#if SERVER_BLAZOR
                 var azureOpenAIEndpoint = webHostBuilderContext.Configuration.GetSection("AIIntegrationSettings")["EndpointUrl"];
                 var azureOpenAIKey = webHostBuilderContext.Configuration.GetSection("AIIntegrationSettings")["Key"];
                 var deploymentName = webHostBuilderContext.Configuration.GetSection("AIIntegrationSettings")["DeploymentName"];
 
-                IChatClient asChatClient = new Azure.AI.OpenAI.AzureOpenAIClient(new Uri(azureOpenAIEndpoint),
-                    new System.ClientModel.ApiKeyCredential(azureOpenAIKey))
-                    .AsChatClient(deploymentName);
+                var azureOpenAIClient = new AzureOpenAIClient(
+                    new Uri(azureOpenAIEndpoint),
+                    new System.ClientModel.ApiKeyCredential(azureOpenAIKey),
+                    new AzureOpenAIClientOptions() { Transport = new PromoteHttpStatusErrorsPipelineTransport() });
 
-                services.AddSingleton(asChatClient);
-                services.AddDevExpressAI(config => {
-                    config.AddBlazorReportingAIIntegration(reportingCfg => {
-                        reportingCfg.Languages = new List<LanguageItem>() {
-                            new LanguageItem(){ Key = "En", Text = "English"},
-                            new LanguageItem(){ Key = "De", Text = "German"},
-                        };
-                        reportingCfg.SummarizationMode = SummarizationMode.Abstractive;
+                IChatClient chatClient = azureOpenAIClient.GetChatClient(deploymentName).AsIChatClient();
+                services.TryAddSingleton(chatClient);
+                services.AddDevExpressAI(aiConfig => {
+                    aiConfig.AddBlazorReportingAIIntegration(reportingCfg => {
+                        reportingCfg
+                            .AddTranslation(translationCfg => {
+                                translationCfg
+                                    .EnableTranslation()
+                                    .EnableInlineTranslation()
+                                    .SetLanguages(new List<LanguageInfo>() {
+                                        new LanguageInfo(){ Id = "es-ES", Text = "Spanish"},
+                                        new LanguageInfo(){ Id = "de-DE", Text = "German"},
+                                    });
+                            })
+                        .AddSummarization(sumCfg => {
+                            sumCfg.SetSummarizationMode(SummarizationMode.Abstractive);
+                        });
                     });
-                    config.AddWebReportingAIIntegration(cfg => cfg.SummarizationMode = SummarizationMode.Abstractive);
+                    aiConfig.AddWebReportingAIIntegration(reportingCfg => {
+                        reportingCfg
+                        .AddPromptToReportConverter()
+                        .AddPromptToExpressionConverter()
+                        .AddLocalization()
+                        .AddTestDataSource()
+                        .AddSummarization(configure => configure.SetSummarizationMode(SummarizationMode.Abstractive))
+                        .AddTranslation(translationCfg => {
+                            translationCfg
+                                .EnableTranslation()
+                                .EnableInlineTranslation()
+                                .SetLanguages(new List<LanguageInfo>() {
+                                        new LanguageInfo(){ Id = "es-ES", Text = "Spanish"},
+                                        new LanguageInfo(){ Id = "de-DE", Text = "German"},
+                                });
+                        });
+                    }
+                    );
                 });
+                services.AddScoped<IReportDesignerExceptionHandler, AIReportDesignerExceptionHandler>();
+                services.AddScoped<IWebDocumentViewerExceptionHandler, AIWebDocumentViewerExceptionHandler>();
+                services.AddScoped<IErrorNotifier, AIReportViewerErrorNotifier>();
+#endif
                 services.AddTransient<DevExpress.DataAccess.Wizard.Services.ICustomQueryValidator, DevExpress.DataAccess.Wizard.Services.CustomQueryValidator>();
                 services.AddSingleton<IDemoReportSource, DemoReportSource>();
                 services.AddSingleton<IPdfSignatureOptionsProviderAsync, CustomPdfSignatureOptionsProviderAsync>();

@@ -1,0 +1,20 @@
+.pivot-container {
+    width: 100%;
+}
+
+.tagbox-container {
+    padding-bottom: 12px;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .dxbl-pivot-table {
+    width: 100%;
+    height: auto;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .pivot-loading-panel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%
+}

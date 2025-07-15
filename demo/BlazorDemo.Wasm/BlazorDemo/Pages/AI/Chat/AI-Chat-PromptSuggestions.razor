@@ -1,0 +1,31 @@
+﻿@inject IPromptSuggestionsDataProvider PromptSuggestionsDataProvider
+@using DevExpress.AIIntegration.Blazor.Chat
+@using System.Text.Json;
+@using System.IO;
+
+<DemoPageSectionComponent Id="AIChat-PromptSuggestions"
+                          ShowSizeMode="true">
+    <OptionsContent>
+        <OptionCheckBox Label="Use Streaming" @bind-Checked="UseStreaming" />
+    </OptionsContent>
+    <ChildContentWithParameters Context="Params">
+        <div class="chat-demo-container">
+            <DxAIChat CssClass="demo-chat" Initialized="ChatInitialized" UseStreaming="UseStreaming" SizeMode="Params.SizeMode">
+                <PromptSuggestions>
+                    @foreach (var suggestion in PromptSuggestions)
+                    {
+                        <DxAIChatPromptSuggestion Title="@suggestion.Title" Text="@suggestion.Text" PromptMessage="@suggestion.PromptMessage" />
+                    }
+                </PromptSuggestions>
+            </DxAIChat>
+        </div>
+        @code {
+            bool UseStreaming { get; set; } = false;
+            List<PromptSuggestion> PromptSuggestions { get; set; }
+
+            void ChatInitialized() {
+                PromptSuggestions = PromptSuggestionsDataProvider.GetData();
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

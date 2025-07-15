@@ -1,3 +1,6 @@
+.dxbl-calendar-selected-item > a {
+    color: #fff !important;
+}
 .dxbl-calendar-day > a {
     text-decoration: none;
 }

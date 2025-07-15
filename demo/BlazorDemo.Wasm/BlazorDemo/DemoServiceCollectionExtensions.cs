@@ -4,10 +4,12 @@ using Azure.AI.OpenAI;
 using BlazorDemo.Configuration;
 using BlazorDemo.DataProviders;
 using BlazorDemo.Services;
+using DevExpress.AIIntegration;
 using DevExpress.Blazor.DocumentMetadata;
 using DevExpress.Blazor.RichEdit.SpellCheck;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
 
 
@@ -29,35 +31,32 @@ namespace BlazorDemo {
             var openAIClient = new AzureOpenAIClient(
                 new Uri(azureOpenAIEndpoint),
                 new System.ClientModel.ApiKeyCredential(azureOpenAIKey),
-                new AzureOpenAIClientOptions() {
-                    Transport = new PromoteHttpStatusErrorsPipelineTransport()
-            });
+                new AzureOpenAIClientOptions() { Transport = new PromoteHttpStatusErrorsPipelineTransport() });
 
-            var asChatClient = openAIClient.AsChatClient("gpt-4o-mini");
-
-            services.AddSingleton(asChatClient);
-            services.AddSingleton(openAIClient);
+            var chatClient = openAIClient.GetChatClient("gpt-4.1").AsIChatClient();
+            services.AddScoped<IAIExceptionHandler, AIExceptionHandler>();
+            services.TryAddSingleton(chatClient);
+            services.TryAddSingleton(openAIClient);
             services.AddDevExpressAI();
             services.AddSingleton<SmartFilterProvider>();
-            services.AddDevExpressBlazor(opts => {
-                opts.BootstrapVersion = DevExpress.Blazor.BootstrapVersion.v5;
-            }).AddSpellCheck(opts => {
-                opts.FileProvider = new EmbeddedFileProvider(Assembly.GetExecutingAssembly(), "BlazorDemo");
-                opts.MaxSuggestionCount = 6;
-                opts.AddToDictionaryAction = (word, culture) => {
-                    //Write the selected word to a dictionary file
-                };
-                opts.Dictionaries.Add(new ISpellDictionary {
-                    DictionaryPath = "Data.Dictionaries.english.xlg",
-                    GrammarPath = "Data.Dictionaries.english.aff",
-                    Culture = "en-US"
-                });
-                opts.Dictionaries.Add(new Dictionary {
-                    DictionaryPath = "Data.Dictionaries.custom.dic",
-                    AlphabetPath = "Data.Dictionaries.english.txt",
-                    Culture = "en-US"
-                });
-            });
+            services.AddDevExpressBlazor()
+                    .AddSpellCheck(opts => {
+                        opts.FileProvider = new EmbeddedFileProvider(Assembly.GetExecutingAssembly(), "BlazorDemo");
+                        opts.MaxSuggestionCount = 6;
+                        opts.AddToDictionaryAction = (word, culture) => {
+                            //Write the selected word to a dictionary file
+                        };
+                        opts.Dictionaries.Add(new ISpellDictionary {
+                            DictionaryPath = "Data.Dictionaries.english.xlg",
+                            GrammarPath = "Data.Dictionaries.english.aff",
+                            Culture = "en-US"
+                        });
+                        opts.Dictionaries.Add(new Dictionary {
+                            DictionaryPath = "Data.Dictionaries.custom.dic",
+                            AlphabetPath = "Data.Dictionaries.english.txt",
+                            Culture = "en-US"
+                        });
+                    });
 
             if(blazorWasm) {
                 services.AddScoped<DevExpress.XtraReports.Services.IReportProviderAsync, DemoReportSourceWasm>();

@@ -35,27 +35,30 @@ namespace DevExpress.Blazor.DocumentMetadata {
         }
 
         public int Render(RenderTreeBuilder renderTreeBuilder, int seq, NavigationManager navigationManager) {
-            switch (GetTypeFlagValue(_flag)) {
-                case RendererFlag.Charset: return CharsetRender(renderTreeBuilder, seq, navigationManager);
-                case RendererFlag.BaseHref: return BaseHrefRender(renderTreeBuilder, seq, navigationManager);
-                case RendererFlag.Meta: return MetaRender(renderTreeBuilder, seq, navigationManager);
-                case RendererFlag.Script: return ScriptRender(renderTreeBuilder, seq, navigationManager);
-                case RendererFlag.Stylesheet: return StylesheetRender(renderTreeBuilder, seq, navigationManager);
-                case RendererFlag.Title: return TitleRender(renderTreeBuilder, seq, navigationManager);
-            }
-            return seq;
+            return GetTypeFlagValue(_flag) switch {
+                RendererFlag.Charset => CharsetRender(renderTreeBuilder, seq, navigationManager),
+                RendererFlag.BaseHref => BaseHrefRender(renderTreeBuilder, seq, navigationManager),
+                RendererFlag.Meta => MetaRender(renderTreeBuilder, seq, navigationManager),
+                RendererFlag.Script => ScriptRender(renderTreeBuilder, seq, navigationManager),
+                RendererFlag.Stylesheet => StylesheetRender(renderTreeBuilder, seq, navigationManager),
+                RendererFlag.Title => TitleRender(renderTreeBuilder, seq, navigationManager),
+                RendererFlag.OpenGraph => OpenGraphRender(renderTreeBuilder, seq, navigationManager),
+                _ => seq,
+            };
         }
 
         public bool Equals(Renderer other) {
-            if ((_flag & RendererFlag.UniqueByName) == 0 && _name != other._name)
+            if((_flag & RendererFlag.UniqueByName) == 0 && _name != other._name)
                 return false;
-            if (GetTypeFlagValue(_flag) != GetTypeFlagValue(other._flag))
+            if(GetTypeFlagValue(_flag) != GetTypeFlagValue(other._flag))
                 return false;
             return true;
         }
+
         public override bool Equals(object obj) {
             return Equals((Renderer)obj);
         }
+
         public override int GetHashCode() {
             return (_flag, _name).GetHashCode();
         }
@@ -73,18 +76,18 @@ namespace DevExpress.Blazor.DocumentMetadata {
             public override Renderer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {
                 return default;
             }
+
             public override void Write(Utf8JsonWriter writer, Renderer value, JsonSerializerOptions options) {
                 writer.WriteStartObject();
                 writer.WriteNumber("flag", (int)value._flag);
-                if (!string.IsNullOrEmpty(value._name))
+                if(!string.IsNullOrEmpty(value._name))
                     writer.WriteString("name", value._name);
-                if (!string.IsNullOrEmpty(value._mainAttributeValue))
+                if(!string.IsNullOrEmpty(value._mainAttributeValue))
                     writer.WriteString("value", value._mainAttributeValue);
-                if (value._optionalAttributes != 0)
+                if(value._optionalAttributes != 0)
                     writer.WriteNumber("opt", value._optionalAttributes);
                 writer.WriteEndObject();
             }
         }
     }
-
 }

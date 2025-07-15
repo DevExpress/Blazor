@@ -1,18 +1,27 @@
 ﻿@page "/"
+@using System.Text.Json
+@using BlazorDemo.Services
+@using DevExpress.Blazor
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @namespace BlazorDemo.ServerSide.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject BlazorDemo.Services.DemoThemeService Themes
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
 @{
-    var InitialThemeName = HttpContextAccessor.HttpContext.Request.Cookies[BlazorDemo.Services.DemoThemeService.ThemeCookieKey];
-    Themes.SetActiveThemeByName(InitialThemeName);
-    var bsTheme = Themes.GetBootstrapThemeCssUrl(Themes.ActiveTheme);
-    var dxTheme = Themes.GetThemeCssUrl(Themes.ActiveTheme);
-    var hlTheme = Themes.GetHighlightJSThemeCssUrl(Themes.ActiveTheme);
+    var storedThemeName = HttpContextAccessor.HttpContext.Request.Cookies[DemoThemeService.ThemeCookieKey];
+    var storedThemeState = HttpContextAccessor.HttpContext.Request.Cookies[DemoThemeService.ThemeStateCookieKey];
+    var themeState = new ThemeState();
+    if (storedThemeState != null)
+        themeState = JsonSerializer.Deserialize<ThemeState>(storedThemeState);
+
+    Themes.SetActiveThemeByName(storedThemeName);
+    Themes.SetThemeState(themeState);
+
+    var theme = Themes.ActiveTheme.ApplyStoredState(themeState);
 }
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="@Themes.ActiveTheme.BootstrapThemeMode"  >
+<html lang="en" data-bs-theme="@Themes.ActiveTheme.BootstrapThemeMode">
 <head>
     <meta data-dxmetadatamanager />
     <meta charset="utf-8" />
@@ -21,26 +30,26 @@
 
     <meta property="og:url" content="https://dxpr.es/2WogLq7" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Native Blazor Components powered by DevExpress" />
-    <meta property="og:description" content="DevExpress UI for Blazor ships with native user interface components (including a Data Grid, Pivot Grid, Charts and Scheduler) so you can design rich user experiences with both Blazor." />
     <meta property="og:image" content="https://static.devexpress.com/Products/Blazor/blazor-components-grid-pivot-scheduler-charts-editor-devexpress.jpg" />
     <meta http-equiv="Content-Security-Policy"
           content="base-uri 'self';
                default-src 'self';
                img-src data:
                        https:
-                       http:;
+                       http:
+                       blob:;
                object-src 'none';
                script-src 'self'
                           'unsafe-eval'
                           https://cdn.jsdelivr.net/
                           https://www.googletagmanager.com/
                           https://*.bing.com
+                          https://atlas.microsoft.com
                           https://*.virtualearth.net
-                          'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA='
                           'sha256-5IekJdLtTzD/IDYQ2FrNLbLmgyGP6WlpDJ2GbZLv+r0='
                           'sha256-3/2QOuYlxn5k9KorO7FOcY7NYI+Ui/I3n7nr0X+IWcE='
-                          'sha256-CLBTNKc5dWx2th3lg9lPM2K199I5ZFDpfsv8w5I+A/E=';
+                          'sha256-CLBTNKc5dWx2th3lg9lPM2K199I5ZFDpfsv8w5I+A/E='
+                          'sha256-QMkJ42L5lwKpGLZtE+0/xpz+e7/UpglECJZTgB/YlWg=';
                worker-src 'self'
                           blob:;
                frame-src 'self'
@@ -48,42 +57,45 @@
                style-src 'self'
                          https://cdnjs.cloudflare.com/
                          https://fonts.googleapis.com/
+                         https://atlas.microsoft.com/
                          https://*.bing.com
                          'unsafe-inline';
                font-src 'self'
                         data:
-                        https://fonts.gstatic.com/;
+                        https://fonts.gstatic.com/
+                        https://atlas.microsoft.com;
                connect-src 'self'
                         https://*.bing.com
+                        https://atlas.microsoft.com
+                        https://js.monitor.azure.com
+                        https://dc.services.visualstudio.com/v2/track
                         https://*.virtualearth.net
                         https://public-api.devexpress.com/
                         https://js.devexpress.com/;
                block-all-mixed-content;
           ">
-    @if (!string.IsNullOrEmpty(bsTheme))
-    {
-        <link rel="stylesheet" href="@bsTheme" asp-append-version="true" bs-theme-link />
+
+    @foreach (string style in theme.GetStyles()) {
+        <style data-theme-id="@theme.Name">
+            @style
+        </style>
     }
-    @if (!string.IsNullOrEmpty(dxTheme))
-    {
-        <link rel="stylesheet" href="@dxTheme" asp-append-version="true" dx-theme-link />
+
+    @foreach (string path in theme.GetFilePaths()) {
+        <link rel="stylesheet" href="@path" data-theme-id="@theme.Name" />
     }
-    @if (!string.IsNullOrEmpty(hlTheme))
-    {
-        <link rel="stylesheet" href="@hlTheme" asp-append-version="true" hl-theme-link />
-    }
-    <link rel="stylesheet" href="~/_content/BlazorDemo/css/dx-demo.css" asp-append-version="true" dx-demo-link>
-    <link rel="stylesheet" href="~/_content/BlazorDemo/css/dx-demo-pages.css" asp-append-version="true">
-    <link rel="stylesheet" href="~/_content/BlazorDemo/css/dx-demo-icons-fluent.css" asp-append-version="true">
+
+    <link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo.css" asp-append-version="true" dx-demo-link>
+    <link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-pages.css" asp-append-version="true">
 
     <environment include="ServerSide">
         <link rel="stylesheet" href="BlazorDemo.ServerSide.styles.css" asp-append-version="true">
-        <component type="typeof(BlazorDemo.Shared.DemoThemeJsChangeDispatcher)" render-mode="ServerPrerendered" param-InitialThemeName="@InitialThemeName" />
+        <component type="typeof(BlazorDemo.Shared.DemoThemeJsChangeDispatcher)" render-mode="ServerPrerendered" param-InitialThemeName="@storedThemeName" param-InitialThemeState="@themeState" />
         <script src="_framework/blazor.server.js" defer></script>
     </environment>
     <environment include="Wasm.AspNetCoreHosted">
         <link rel="stylesheet" href="BlazorDemo.Wasm.Server.styles.css" asp-append-version="true">
-        <component type="typeof(BlazorDemo.Shared.DemoThemeJsChangeDispatcher)" render-mode="WebAssemblyPrerendered" param-InitialThemeName="@InitialThemeName" />
+        <component type="typeof(BlazorDemo.Shared.DemoThemeJsChangeDispatcher)" render-mode="WebAssemblyPrerendered" param-InitialThemeName="@storedThemeName" param-InitialThemeState="@themeState"/>
         <script src="_framework/blazor.webassembly.js" defer></script>
     </environment>
     <environment include="Wasm.AspNetCoreHosted">
@@ -134,30 +146,31 @@
     </environment>
 </head>
 <body>
-    @{
-        var isIEOrEdgeLegacy = Request.Headers["User-Agent"].Any(userAgent => userAgent.Contains("MSIE") || userAgent.Contains("Trident"));
-    }
-    @if(isIEOrEdgeLegacy) {
-        <component type="typeof(BlazorDemo.Shared.BrowserNotSupported)" render-mode="Static" />
-    } else {
-        <div id="app">
-            <environment include="ServerSide">
-                <component type="typeof(BlazorDemo.App)" render-mode="ServerPrerendered" />
-            </environment>
-            <environment include="Wasm.AspNetCoreHosted">
-                <div id="applicationLoadingPanel" class="loading-items-center loading-font" style="height: 100vh; width: 100vw; background-color: #fff;">
-                    <div class="loading-items-center" style="flex-direction: column">
-                        <div class="loading position-relative loading-items-center" style="position: relative">
-                            <div class="loading-border border-secondary" style="position: absolute; border-color: #d9d9d9; height: 100%; width: 100%; border-radius: 50%"></div>
-                            <div class="spinner-border loading-boarder border-primary loading-border-primary" style="position: absolute; height: 100%; width: 100%; border-radius: 50%; border-left-color: transparent !important; border-right-color: transparent !important; border-bottom-color: transparent !important"></div>
-                            <div id="loadingBackground" class="loading-image-wrapper text-white bg-primary loading-items-center" style="color: #fff; border-radius: 50%"></div>
-                        </div>
-                        <div class="loading-caption mt-3">DevExpress UI for Blazor</div>
-                        <div class="loading-sm-text text-body mt-1" style="color: #a1a1a1">Loading...</div>
+@{
+    var isIEOrEdgeLegacy = Request.Headers["User-Agent"].Any(userAgent => userAgent.Contains("MSIE") || userAgent.Contains("Trident"));
+}
+@if (isIEOrEdgeLegacy) {
+    <component type="typeof(BlazorDemo.Shared.BrowserNotSupported)" render-mode="Static" />
+}
+else {
+    <div id="app">
+        <environment include="ServerSide">
+            <component type="typeof(BlazorDemo.App)" render-mode="ServerPrerendered" />
+        </environment>
+        <environment include="Wasm.AspNetCoreHosted">
+            <div id="applicationLoadingPanel" class="loading-items-center loading-font" style="height: 100vh; width: 100vw; background-color: #fff;">
+                <div class="loading-items-center" style="flex-direction: column">
+                    <div class="loading position-relative loading-items-center" style="position: relative">
+                        <div class="loading-border border-secondary" style="position: absolute; border-color: #d9d9d9; height: 100%; width: 100%; border-radius: 50%"></div>
+                        <div class="spinner-border loading-boarder border-primary loading-border-primary" style="position: absolute; height: 100%; width: 100%; border-radius: 50%; border-left-color: transparent !important; border-right-color: transparent !important; border-bottom-color: transparent !important"></div>
+                        <div id="loadingBackground" class="loading-image-wrapper text-white bg-primary loading-items-center" style="color: #fff; border-radius: 50%"></div>
                     </div>
+                    <div class="loading-caption mt-3">DevExpress UI for Blazor</div>
+                    <div class="loading-sm-text text-body mt-1" style="color: #a1a1a1">Loading...</div>
                 </div>
-            </environment>
-        </div>
-    }
+            </div>
+        </environment>
+    </div>
+}
 </body>
 </html>

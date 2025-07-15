@@ -55,7 +55,7 @@ namespace BlazorDemo.ServerSide {
                     endpoints.MapFallbackToPage("/_Host");
                 });
                 Configure(app, context.HostingEnvironment);
-            };
+            }
 
             void ConfigureServices(WebHostBuilderContext context, IServiceCollection services) {
                 Configuration = services.BuildServiceProvider().GetService<IConfiguration>();
@@ -126,15 +126,16 @@ namespace BlazorDemo.ServerSide {
                 services.AddSingleton<ICarouselImageDataProvider, CarouselImageDataProvider>();
                 services.AddSingleton<IRangeSelectorZoomingDataProvider, RangeSelectorZoomingDataProvider>();
                 services.AddSingleton<IPopulationDataProvider, PopulationDataProvider>();
+                services.AddSingleton<IPromptSuggestionsDataProvider, PromptSuggestionsDataProvider>();
                 services.AddSingleton<DictionaryEntryDataProvider>();
 
                 static void ConfigureHttpClient(HttpClient httpClient) {
                     httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
-                };
+                }
 
                 static void ConfigureJsonOptions(JsonOptions options) {
                     options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-                };
+                }
             }
         }
 #pragma warning restore DX0006

@@ -5,13 +5,13 @@ namespace BlazorDemo.DataProviders.Implementation {
                         <img src={StaticAssetUtils.GetImagePath("html-editor/html-editor.svg")} alt='HtmlEditor' />
                         HTML Editor
                     </h2><br>
-                    <p>The HTML Editor component for Blazor is a WYSIWYG (what you see is what you get) text editor that allows users to format text and add graphics. The document can use HTML or Markdown format.</p>
+                    <p>The HTML Editor component for Blazor is a WYSIWYG (what you see is what you get) text editor that allows users to format text and add graphics. The document uses HTML format.</p>
                     <p>Supported features:</p>
                     <ul>
                         <li>Inline formats:
                             <ul>
                                 <li><strong>Bold</strong>, <em>italic</em>, <s>strikethrough</s> text formatting</li>
-                                <li>Font, size, color changes (HTML only)</li>
+                                <li>Font, size, color changes</li>
                             </ul>
                         </li>
                         <li>Block formats:
@@ -23,7 +23,6 @@ namespace BlazorDemo.DataProviders.Implementation {
                                 <li>Quotes</li>
                             </ul>
                         </li>
-                        <li>HTML and Markdown support</li>
                         <li>Variable support: produce documents based on templates</li>
                         <li>Toolbar with adaptive layout support</li>
                         <li>Insert images: specify a URL or upload from the local file system</li>

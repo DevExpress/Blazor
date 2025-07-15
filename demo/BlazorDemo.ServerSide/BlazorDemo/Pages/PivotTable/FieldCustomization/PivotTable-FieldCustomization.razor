@@ -1,0 +1,85 @@
+﻿@page "/PivotTableFieldCustomization"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="PivotTable-FieldCustomization" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <div class="pivot-container">
+            @if(PivotData == null) {
+                <div class="pivot-loading-panel-container">
+                    <div class="d-flex flex-column">
+                        <DxLoadingPanel Visible="true"
+                                        SizeMode="Params.SizeMode"
+                                        Text="Data Loading..."
+                                        IndicatorAreaVisible="false"
+                                        IndicatorAnimationType="@WaitIndicatorAnimationType.Spin"></DxLoadingPanel>
+                    </div>
+                </div>
+            } else {
+                <DxPivotTable @ref="@PivotTable"
+                              Data="@PivotData"
+                              VirtualScrollingEnabled="true"
+                              SizeMode="Params.SizeMode">
+                    <Fields>
+                        <DxPivotTableField Field="CompanyName" Area="PivotTableArea.Row" Caption="Customer" Width="270" AllowedAreas="@(~PivotTableAllowedAreas.Data)"/>
+                        <DxPivotTableField Field="ProductName" Area="PivotTableArea.Row" Caption="Product Name" AllowedAreas="@(~PivotTableAllowedAreas.Column)"/>
+                        <DxPivotTableField Field="ProductAmount" Area="PivotTableArea.Data" Caption="Product Amount" CellFormat="{0:c0}"/>
+                        <DxPivotTableField Field="Country" AreaIndex="1"/>
+                        <DxPivotTableField Field="Region" AreaIndex="0"/>
+                        <DxPivotTableField Field="City" AreaIndex="-1"/>
+                        <DxPivotTableField Field="ExtendedPrice" AreaIndex="-1"/>
+                        <DxPivotTableField Field="Discount" AreaIndex="-1"/>
+                        <DxPivotTableField Field="SalesPerson" AreaIndex="-1"/>
+                        <DxPivotTableField Field="OrderDate" GroupInterval="PivotTableGroupInterval.DateYear" Area="PivotTableArea.Column" Caption="Order Year" AllowDrag="false" />
+                        <DxPivotTableField Field="OrderDate" GroupInterval="PivotTableGroupInterval.DateQuarter" Area="PivotTableArea.Column" Caption="Order Quater">
+                            <ValueTemplate>
+                                <span>@($"Q{context.Text}")</span>
+                            </ValueTemplate>
+                        </DxPivotTableField>
+                    </Fields>
+                </DxPivotTable>
+            }
+        </div>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Contained">
+            <Items>
+                <DxToolbarItem Alignment="ToolbarItemAlignment.Right" Text="Show Field List" RenderStyle="ButtonRenderStyle.Secondary" IconCssClass="pivot-table-icon-field-list" Click="FieldListButton_Click" />
+            </Items>
+        </DxToolbar>
+    </OptionsContent>
+        @code {
+            object PivotData { get; set; }
+            IPivotTable PivotTable { get; set; }
+
+            protected override async Task OnInitializedAsync() {
+                var invoices = await NwindDataService.GetInvoicesAsync();
+                var customers = await NwindDataService.GetCustomersAsync();
+                var minDate = invoices.Min(i => i.OrderDate).GetValueOrDefault();
+                var maxDate = invoices.Max(i => i.OrderDate).GetValueOrDefault();
+                PivotData = invoices.Where(i => {
+                    var invoiceDate = i.OrderDate.GetValueOrDefault();
+                    return invoiceDate.Year > minDate.Year && invoiceDate.Year <= maxDate.Year;
+                }).Join(customers, i => i.CustomerId, c => c.CustomerId, (i, c) => {
+                    return new {
+                        CompanyName = c.CompanyName,
+                        UnitPrice = i.UnitPrice,
+                        OrderDate = i.OrderDate,
+                        ProductName = i.ProductName,
+                        ProductAmount = i.Quantity * i.UnitPrice,
+                        Country = c.Country,
+                        Region = c.Region,
+                        ExtendedPrice = i.ExtendedPrice,
+                        City = c.City,
+                        Discount = i.Discount,
+                        SalesPerson = i.Salesperson
+                    };
+                });
+            }
+
+            void FieldListButton_Click() {
+                PivotTable.ShowFieldList();
+            }
+        }
+    
+</DemoPageSectionComponent>

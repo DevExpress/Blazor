@@ -27,10 +27,10 @@
                             <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
                                 <Template Context="toolbar_item_context">
                                     <div class="d-flex flex-row align-items-center h-100">
-                                        <div class="me-2">Search Text Parse Mode:</div>
+                                        <div class="me-2">Find Rows Containing:</div>
                                         <DxComboBox Data="@SearchTextParseModes.Keys"
                                                     ValueChanged="@((string value) => ChangeSearchMode(value))"
-                                                    Value="@CurrentSearchTextParseModeDisplayText"/>
+                                                    Value="@CurrentSearchTextParseModeDisplayText" />
                                     </div>
                                 </Template>
                             </DxToolbarItem>
@@ -44,9 +44,9 @@
             IEnumerable<object> Data { get; set; }
 
             Dictionary<string, GridSearchTextParseMode> SearchTextParseModes { get; } = new Dictionary<string, GridSearchTextParseMode>{
-                { "Group Words By And", GridSearchTextParseMode.GroupWordsByAnd },
-                { "Group Words By Or", GridSearchTextParseMode.GroupWordsByOr },
-                { "Exact Match", GridSearchTextParseMode.ExactMatch }
+                { "All words", GridSearchTextParseMode.GroupWordsByAnd },
+                { "Any word", GridSearchTextParseMode.GroupWordsByOr },
+                { "Exact match", GridSearchTextParseMode.ExactMatch }
             };
 
             void ChangeSearchMode(string key)
@@ -55,12 +55,12 @@
                 CurrentSearchTextParseMode = SearchTextParseModes[key];
             }
 
-            string CurrentSearchTextParseModeDisplayText { get; set; } = "Group Words By And";
+            string CurrentSearchTextParseModeDisplayText { get; set; } = "All words";
             GridSearchTextParseMode CurrentSearchTextParseMode { get; set; } = GridSearchTextParseMode.GroupWordsByAnd;
 
             protected override async Task OnInitializedAsync() {
                 Data = await NwindDataService.GetCustomersAsync();
-            }           
+            }
         }
     </ChildContentWithParameters>
 </DemoPageSectionComponent>

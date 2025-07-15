@@ -51,6 +51,7 @@
                     <DxToolbar>
                         <DxToolbarItem Text="Export to XLSX" Click="ExportXlsx_Click"  BeginGroup="true" />
                         <DxToolbarItem Text="Export to CSV" Click="ExportCsv_Click"  BeginGroup="true" />
+                        <DxToolbarItem Text="Export to PDF" Click="ExportPdf_Click" BeginGroup="true" />
                         <DxToolbarItem Context="itemCtx" Alignment="ToolbarItemAlignment.Right" BeginGroup="true">
                             <Template>
                                 <DxCheckBox @bind-Checked="ExportSelectedRowsOnly">Export Selected Rows Only</DxCheckBox>
@@ -95,6 +96,12 @@
         async Task ExportCsv_Click() {
             await Grid.ExportToCsvAsync("ExportResult", new GridCsvExportOptions() {
                 ExportSelectedRowsOnly = ExportSelectedRowsOnly
+            });
+        }
+        async Task ExportPdf_Click() {
+            await Grid.ExportToPdfAsync("ExportResult", new GridPdfExportOptions() {
+                ExportSelectedRowsOnly = ExportSelectedRowsOnly,
+                CustomizePageFooter = args => args.Text = "Page {0} of {1}",
             });
         }
     }

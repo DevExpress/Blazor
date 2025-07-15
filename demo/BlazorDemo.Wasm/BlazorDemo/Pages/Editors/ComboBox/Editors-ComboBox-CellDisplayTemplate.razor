@@ -1,0 +1,91 @@
+﻿<DemoPageSectionComponent Id="Editors-ComboBox-CellDisplayTemplate" ShowSizeMode="true">
+<ChildContentWithParameters Context="Params">
+@inject NwindDataService NwindDataService
+<DxComboBox Data="@Products"
+            @bind-Value="@SelectedProduct"
+            TextFieldName="@nameof(Product.ProductName)"
+            ListRenderMode="@ListRenderMode.Virtual"
+            SizeMode="Params.SizeMode"
+            CssClass="cw-480"
+            InputId="cbItemTemplate">
+    <Columns>
+        <DxListEditorColumn FieldName="@nameof(Product.ProductName)" Caption="Product" Width="30%">
+            <CellDisplayTemplate>
+                @GetCellTemplateRenderFragment(context.DisplayText)
+            </CellDisplayTemplate>
+        </DxListEditorColumn>
+        <DxListEditorColumn FieldName="@nameof(Product.UnitPrice)" Caption="Unit Price">
+            <CellDisplayTemplate>
+                @GetCellTemplateRenderFragment($"{context.Value:c}", AlignRightCssClass)
+            </CellDisplayTemplate>
+        </DxListEditorColumn>
+        <DxListEditorColumn FieldName="@nameof(Product.Quantity)">
+            <CellDisplayTemplate>
+                @GetCellTemplateRenderFragment(context.DisplayText, AlignRightCssClass)
+            </CellDisplayTemplate>
+        </DxListEditorColumn>
+        <DxListEditorColumn FieldName="@nameof(Product.Discount)">
+            <CellDisplayTemplate>
+                @GetCellTemplateRenderFragment($"{context.Value:p}")
+            </CellDisplayTemplate>
+        </DxListEditorColumn>
+        <DxListEditorColumn FieldName="@nameof(Product.Total)">
+            <CellDisplayTemplate>
+                @{
+                    var product = (Product)context.DataItem;
+                    var value = product.UnitPrice * product.Quantity;
+                    var valueCssClass = value >= TotalPriceCeiling ? TextGreenCssClass : TextRedCssClass;
+                }
+                @GetCellTemplateRenderFragment($"{value:c}", $"{AlignRightCssClass} {valueCssClass}")
+            </CellDisplayTemplate>
+        </DxListEditorColumn>
+    </Columns>
+</DxComboBox>
+</ChildContentWithParameters>
+
+
+@code {
+    const int SelectedProductsCount = 3;
+    const int TotalPriceCeiling = 100;
+
+    IEnumerable<Product> Products { get; set; }
+    Product SelectedProduct { get; set; }
+
+    const string AlignRightCssClass = "align-right";
+    const string TextGreenCssClass = "text-green";
+    const string TextRedCssClass = "text-red";
+
+    protected override async Task OnInitializedAsync() {
+        var invoices = await NwindDataService.GetInvoicesAsync();
+        var products = await NwindDataService.GetProductsAsync();
+        Products = invoices.Join(products, i => i.ProductId, p => p.ProductId, (i, p) =>
+        new Product {
+            ProductName = i.ProductName,
+            UnitPrice = i.UnitPrice,
+            Quantity = i.Quantity,
+            Discount = i.Discount
+        });
+        SelectedProduct = Products.FirstOrDefault();
+    }
+
+    RenderFragment GetCellTemplateRenderFragment(object displayValue, string cssClass = "") {
+        return @<div class="@cssClass">@displayValue</div>;
+    }
+
+    public class Product {
+        public string ProductName { get; set; }
+        public decimal UnitPrice { get; set; }
+        public int Quantity { get; set; }
+        public float Discount { get; set; }
+        public int Total { get; set; }
+
+        public override bool Equals(object obj){
+            return obj is Product product && string.Equals(product.ProductName, ProductName) && product.Quantity == Quantity;
+        }
+
+        public override int GetHashCode(){
+            return HashCode.Combine(ProductName, Quantity);
+        }
+    }
+}
+</DemoPageSectionComponent>

@@ -1,8 +1,9 @@
-﻿@page "/TreeList/Export"
+@page "/TreeList/Export"
 
 <DemoPageSectionComponent Id="TreeList-Export" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @using DevExpress.Export
+        @using DevExpress.Drawing
         @inject ISpaceObjectDataProvider SpaceObjectDataProvider
 
         <DxTreeList @ref="TreeList"
@@ -14,8 +15,8 @@
                     SizeMode="Params.SizeMode"
                     CssClass="max-h-480">
             <Columns>
-                <DxTreeListDataColumn FieldName="Name" />
-                <DxTreeListDataColumn FieldName="TypeOfObject" Caption="Type" FilterRowOperatorType="TreeListFilterRowOperatorType.Equal">
+                <DxTreeListDataColumn FieldName="Name" ExportWidth="240"/>
+                <DxTreeListDataColumn FieldName="TypeOfObject" Caption="Type" FilterRowOperatorType="TreeListFilterRowOperatorType.Equal" ExportWidth="160">
                     <EditSettings>
                         <DxComboBoxSettings Data="TreeListRenderHelper.SpaceObjectTypes" SearchMode="@ListSearchMode.AutoSearch"
                                             SearchFilterCondition="@ListSearchFilterCondition.Contains" />
@@ -24,11 +25,11 @@
                 <DxTreeListDataColumn FieldName="Mass10pow21kg" Caption="Mass, kg" DisplayFormat="N2">
                     <HeaderCaptionTemplate>Mass, 10<sup>21</sup> &#215; kg</HeaderCaptionTemplate>
                 </DxTreeListDataColumn>
-                <DxTreeListDataColumn FieldName="MeanRadiusInKM" Caption="Radius, km" DisplayFormat="N2" />
+                <DxTreeListDataColumn FieldName="MeanRadiusInKM" Caption="Radius, km" DisplayFormat="N2" ExportWidth="180"/>
                 <DxTreeListDataColumn FieldName="Volume10pow9KM3" Caption="Volume, km³" DisplayFormat="N2">
                     <HeaderCaptionTemplate>Volume, 10<sup>9</sup> &#215; km<sup>3</sup></HeaderCaptionTemplate>
                 </DxTreeListDataColumn>
-                <DxTreeListDataColumn FieldName="SurfaceGravity" Caption="Gravity" DisplayFormat="N2">
+                <DxTreeListDataColumn FieldName="SurfaceGravity" Caption="Gravity" DisplayFormat="N2" ExportWidth="120">
                     <HeaderCaptionTemplate>Gravity, m/s<sup>2</sup></HeaderCaptionTemplate>
                 </DxTreeListDataColumn>
             </Columns>
@@ -40,6 +41,7 @@
                     <DxToolbarItem Text="Export to XLSX" Click="ExportXlsx_Click" BeginGroup="true" />
                     <DxToolbarItem Text="Export to XLS" Click="ExportXls_Click" BeginGroup="true" />
                     <DxToolbarItem Text="Export to CSV" Click="ExportCsv_Click" BeginGroup="true" />
+                    <DxToolbarItem Text="Export to PDF" Click="ExportPdf_Click" BeginGroup="true" />
                 </DxToolbar>
             </ToolbarTemplate>
         </DxTreeList>
@@ -61,20 +63,31 @@
 
             async Task ExportXlsx_Click() {
                 await TreeList.ExportToXlsxAsync("ExportResult", new TreeListXlExportOptions() {
-                    CustomizeCell = OnCustomizeCell
+                    CustomizeCell = OnCustomizeXlCell
                 });
             }
             async Task ExportXls_Click() {
                 await TreeList.ExportToXlsAsync("ExportResult", new TreeListXlExportOptions() {
-                    CustomizeCell = OnCustomizeCell
+                    CustomizeCell = OnCustomizeXlCell
                 });
             }
             async Task ExportCsv_Click() {
                 await TreeList.ExportToCsvAsync("ExportResult");
             }
-            void OnCustomizeCell(TreeListExportCustomizeCellEventArgs args) {
+            async Task ExportPdf_Click() {
+                await TreeList.ExportToPdfAsync("ExportResult", new TreeListPdfExportOptions() {
+                    CustomizeCell = OnCustomizePdfCell,
+                    CustomizePageFooter = args => args.Text = "Page {0} of {1}",
+                });
+            }
+            void OnCustomizeXlCell(TreeListExportCustomizeCellEventArgs args) {
                 if(args.ColumnFieldName == "TypeOfObject" && args.AreaType == SheetAreaType.DataArea)
                     args.Formatting.Font = new XlCellFont() { Italic = true };
+                args.Handled = true;
+            }
+            void OnCustomizePdfCell (TreeListDocumentExportCustomizeCellEventArgs args) {
+                if(args.ColumnFieldName == "TypeOfObject" && args.AreaType == DocumentExportAreaType.DataArea)
+                    args.ElementStyle.Font = new DXFont(args.ElementStyle.Font.Name, args.ElementStyle.Font.Size, DXFontStyle.Italic);
                 args.Handled = true;
             }
         }

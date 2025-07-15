@@ -1,0 +1,49 @@
+﻿@inject NavigationManager NavigationManager
+
+<link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-reporting-pages.css">
+<link rel="stylesheet" href="_content/DevExpress.Blazor.RichEdit/dx-blazor-richedit.css">
+<DemoScriptLoader @ref="reportingScriptLoader" Src="_content/BlazorDemo/lib/reporting.js"></DemoScriptLoader>
+
+<DemoPageSectionComponent Id="@GetDesignerId()">
+    @if(ScriptsLoaded) {
+        <DxReportDesigner ReportName=@ReportName Height="770px" @ref="designer" CssClass="w-100">
+            <DxReportDesignerCallbacks BeforeRender="_dxr_DesignerUpdateAIServices"></DxReportDesignerCallbacks>
+        </DxReportDesigner>
+    }
+
+    @code {        
+        DxReportDesigner designer { get; set; }
+        DemoScriptLoader reportingScriptLoader { get; set; }
+        bool ScriptsLoaded { get; set; } = false;
+
+        protected override void OnInitialized() {
+        ReportName = ReportName ?? "InvoiceReport";
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if(!ScriptsLoaded) {
+            await reportingScriptLoader.Loaded;
+            ScriptsLoaded = true;
+            StateHasChanged();
+        } else {
+            designer.CallbacksModel = new ReportDesignerCallbacksModel();
+            designer.CallbacksModel.Events.ExitDesigner = "\"ReportDesignerExit\"";
+            designer.CallbacksModel.Events.BeforeRender = "\"_dxr_DesignerUpdateAIServices\"";
+        }
+        await base.OnAfterRenderAsync(firstRender);
+        }
+        protected string GetDesignerId()
+        {
+            if (NavigationManager.Uri.Contains("AIPoweredExtensions"))
+                return "Reports-AIPoweredExtensions-ReportDesigner";
+            else
+                return "Reports-ReportDesigner";
+                
+        }
+    }
+
+</DemoPageSectionComponent>
+
+@code{
+    [Parameter] public string ReportName { get; set; }    
+}

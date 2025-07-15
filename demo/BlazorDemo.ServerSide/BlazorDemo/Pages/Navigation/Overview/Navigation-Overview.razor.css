@@ -17,7 +17,7 @@
 }
 
 .card.overview-navigation {
-    border-radius: var(--DS-border-radius-medium, var(--bs-card-border-radius));
+    border-radius: var(--DS-border-radius-40, var(--bs-card-border-radius));
 }
 
 .overview-navigation > .card-header {

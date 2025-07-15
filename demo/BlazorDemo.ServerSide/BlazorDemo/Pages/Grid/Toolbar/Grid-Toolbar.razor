@@ -29,6 +29,7 @@
                                 <DxToolbarItem Text="To CSV" Click="ExportCsvItem_Click" />
                                 <DxToolbarItem Text="To XLSX" Click="ExportXlsxItem_Click" />
                                 <DxToolbarItem Text="To XLS" Click="ExportXlsItem_Click" />
+                                <DxToolbarItem Text="To PDF" Click="ExportPdfItem_Click" />
                             </Items>
                         </DxToolbarItem>
                         <DxToolbarItem BeginGroup="true">
@@ -153,6 +154,9 @@
             }
             async Task ExportCsvItem_Click() {
                 await Grid.ExportToCsvAsync(ExportFileName);
+            }
+            async Task ExportPdfItem_Click() {
+                await Grid.ExportToPdfAsync(ExportFileName);
             }
         }
     </ChildContentWithParameters>

@@ -5,15 +5,15 @@ namespace BlazorDemo.Data {
         private static readonly List<ComponentSet> componentSets =  new List<ComponentSet>() {
                 new ComponentSet("Components", componentSets:
                     new List<ComponentSet>() {
-                        new ComponentSet("Data Grid", GetImageUrl("DataGrid"),
+                        new ComponentSet("Data Grid", GetImageUrl("DataGrid"), GetFluentImageUrl("DataGrid"),
                             "The DevExpress Data Grid for Blazor allows you to display and manage data in a tabular format."),
-                        new ComponentSet("Pivot Grid", GetImageUrl("PivotGrid"),
+                        new ComponentSet("Pivot Grid", GetImageUrl("PivotGrid"), GetFluentImageUrl("PivotGrid"),
                             "The DevExpress Pivot Grid for Blazor allows you to display and analyze multi-dimensional data from an underlying data source."),
-                        new ComponentSet("Charts", GetImageUrl("Charts"),
+                        new ComponentSet("Charts", GetImageUrl("Charts"), GetFluentImageUrl("Charts"),
                             "DevExpress Charts for Blazor help you transform data to its most appropriate, concise, and readable visual representation."),
-                        new ComponentSet("Scheduler", GetImageUrl("Scheduler"),
+                        new ComponentSet("Scheduler", GetImageUrl("Scheduler"), GetFluentImageUrl("Scheduler"),
                             "The DevExpress Scheduler for Blazor allows you to create, display, and edit scheduled appointments in a calendar format."),
-                        new ComponentSet("Data Editors", GetImageUrl("Editors"),
+                        new ComponentSet("Data Editors", GetImageUrl("Editors"), GetFluentImageUrl("Editors"),
                             "DevExpress Data Editors for Blazor include components that can be used as standalone editors or within the Data Grid edit form."),
                     }
                 )
@@ -23,6 +23,10 @@ namespace BlazorDemo.Data {
 
         static string GetImageUrl(string imageName) {
             return StaticAssetUtils.GetImagePath($"landing/{imageName}.svg");
+        }
+
+        static string GetFluentImageUrl(string imageName) {
+            return StaticAssetUtils.GetImagePath($"landing/{imageName}-fluent.svg");
         }
     }
 }

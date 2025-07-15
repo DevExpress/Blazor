@@ -6,31 +6,6 @@
     mask-repeat: no-repeat;
     -webkit-mask-repeat: no-repeat;
     background-position: center center;
-    background-color: currentColor;
-    height: 16px;
-    width: 16px;
-    opacity: 0.7;
-}
-
-
-::deep .grid-toolbar-new {
-    -webkit-mask-image: url("images/icons/grid-toolbar-new.svg");
-    mask-image: url("images/icons/grid-toolbar-new.svg");
-}
-
-::deep .grid-toolbar-delete {
-    -webkit-mask-image: url("images/icons/grid-toolbar-delete.svg");
-    mask-image: url("images/icons/grid-toolbar-delete.svg");
-}
-
-::deep .grid-toolbar-save {
-    -webkit-mask-image: url("images/icons/save.svg");
-    mask-image: url("images/icons/save.svg");
-}
-
-::deep .grid-toolbar-cancel {
-    -webkit-mask-image: url("images/icons/undo.svg");
-    mask-image: url("images/icons/undo.svg");
 }
 
 ::deep .grid-delete-btn:hover {

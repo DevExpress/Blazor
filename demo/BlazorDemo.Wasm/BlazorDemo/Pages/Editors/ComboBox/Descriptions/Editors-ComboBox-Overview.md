@@ -1,4 +1,4 @@
-The DevExpress Blazor [ComboBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2) allows users to select an item from a drop-down list.
+The DevExpress Blazor [ComboBox](https://docs.devexpress.com/Blazor/405075/components/data-editors/combobox) allows users to select an item from a drop-down list.
 
 Core ComboBox API members are as follows:
 
@@ -11,6 +11,6 @@ Core ComboBox API members are as follows:
 
 Our Blazor ComboBox component supports different size modes. To specify the component's size in code, use the [SizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxEditorBase.SizeMode) property. To apply different size modes, use the drop-down list in the demo card's header.
 
-ComboBox also supports keyboard navigation ([list of supported keyboard shortcuts](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2#keyboard-navigation)), allowing users to navigate within the item list and select an item.
+ComboBox also supports keyboard navigation ([list of supported keyboard shortcuts](https://docs.devexpress.com/Blazor/405362/components/data-editors/combobox/keyboard-support)), allowing users to navigate within the item list and select an item.
 
 In this demo, the DevExpress ComboBox is bound to a list of complex business objects.

@@ -3,16 +3,11 @@
 }
 
 /*BeginHide*/::deep .grid-toolbar-column-chooser {
-    width: 16px;
-    height: 16px;
-    -webkit-mask-image: url("images/icons/column-chooser.svg");
-    mask-image: url("images/icons/column-chooser.svg");
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     background-color: currentColor;
     background-size: contain;
     background-position: center center;
-    opacity: 0.7;
 }
 
 .grid-container {

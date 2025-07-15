@@ -7,7 +7,7 @@ public class Startup {
         // ...
         IChatClient asChatClient = new Azure.AI.OpenAI.AzureOpenAIClient(new Uri(azureOpenAIEndpoint),
             new System.ClientModel.ApiKeyCredential(azureOpenAIKey))
-            .AsChatClient(deployment);
+            .GetChatClient(deployment).AsIChatClient();
         services.AddSingleton(asChatClient);
         services.AddDevExpressAI();
     }

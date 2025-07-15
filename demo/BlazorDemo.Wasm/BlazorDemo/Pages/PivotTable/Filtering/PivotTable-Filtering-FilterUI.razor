@@ -1,0 +1,146 @@
+﻿@page "/PivotTable/Filtering/FilterUI"
+@using BlazorDemo.Data
+@using BlazorDemo.Pages.PivotTable.Filtering.CustomFilters
+@using DevExpress.Blazor.PivotTable.Internal
+@using DevExpress.Data.Filtering
+@using static BlazorDemo.Data.VehiclesData
+
+<DemoPageSectionComponent Id="PivotTable-Filtering-FilterUI" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject IVehiclesXmlFileContentProvider VehiclesDataProvider
+        <div class="pivot-container">
+            @if(PivotData == null) {
+                <div class="pivot-loading-panel-container">
+                    <div class="d-flex flex-column">
+                        <DxLoadingPanel Visible="true"
+                                        SizeMode="Params.SizeMode"
+                                        Text="Data Loading..."
+                                        IndicatorAreaVisible="false"
+                                        IndicatorAnimationType="@WaitIndicatorAnimationType.Spin"></DxLoadingPanel>
+                    </div>
+                </div>
+            } else {
+                <DxPivotTable @ref="@PivotTable"
+                              Data="@PivotData"
+                              SizeMode="Params.SizeMode"
+                              FilterHeaderAreaDisplayMode="@PivotTableFilterHeaderAreaDisplayMode.Always"
+                              CustomizeFilterMenu="@OnCustomizeFilterMenu">
+                    <Fields>
+                        <DxPivotTableField Field="@nameof(VehiclesData.TrademarkItem.Name)"
+                                           Area="@PivotTableArea.Row"
+                                           SortOrder="@PivotTableSortOrder.Descending"
+                                           AreaIndex="1" />
+                        <DxPivotTableField Field="@nameof(VehiclesData.TrademarkItem.TrademarkName)"
+                                           Area="@PivotTableArea.Row"
+                                           Caption="Trademark"
+                                           AreaIndex="0" />
+                        <DxPivotTableField Field="@nameof(VehiclesData.TrademarkItem.SalesDate)"
+                                           GroupInterval="@PivotTableGroupInterval.DateYear"
+                                           Name="fieldSalesYear"
+                                           Caption="Sales Year"
+                                           Area="@PivotTableArea.Column"
+                                           AreaIndex="0" />
+                        <DxPivotTableField Field="@nameof(VehiclesData.TrademarkItem.SalesDate)"
+                                           GroupInterval="@PivotTableGroupInterval.DateMonth"
+                                           Name="fieldSalesMonth"
+                                           Caption="Sales Month"
+                                           Area="@PivotTableArea.Column"
+                                           AreaIndex="1"/>
+                        <DxPivotTableField Field="@nameof(VehiclesData.TrademarkItem.ModelPrice)"
+                                           SortOrder="@PivotTableSortOrder.Ascending"
+                                           Name="@ModelPriceName"
+                                           CellFormat="{0:c0}"
+                                           Width="120"
+                                           Area="@PivotTableArea.Data" />
+                        <DxPivotTableField Field="@nameof(VehiclesData.TrademarkItem.Modification)"
+                                           Area="@PivotTableArea.Filter"/>
+                        <DxPivotTableField Field="@nameof(VehiclesData.TrademarkItem.BodyStyle)"
+                                           Name="@BodyStyleName"
+                                           Area="@PivotTableArea.Filter" />
+                        <DxPivotTableField Field="@nameof(VehiclesData.TrademarkItem.SalesDate)"
+                                           GroupInterval="@PivotTableGroupInterval.Date"
+                                           Name="fieldSalesDate"
+                                           Area="@PivotTableArea.Filter" />
+                        <DxPivotTableField Field="@nameof(VehiclesData.TrademarkItem.MPGCity)"
+                                           Name="@MPGCityName"
+                                           Area="@PivotTableArea.Filter">
+                            <FilterMenuTemplate>
+                                <MPGCustomFiltersList FilterMenuContext="context" Filters="@MPGCityFilterItems"></MPGCustomFiltersList>
+                            </FilterMenuTemplate>
+                        </DxPivotTableField>
+                        <DxPivotTableField Field="@nameof(VehiclesData.TrademarkItem.MPGHighway)"
+                                           Name="@MPGHighwayName"
+                                           Area="@PivotTableArea.Filter">
+                            <FilterMenuTemplate>
+                                <MPGCustomFiltersList FilterMenuContext="context" Filters="@MPGHighwayFilterItems"></MPGCustomFiltersList>
+                            </FilterMenuTemplate>
+                        </DxPivotTableField>
+                    </Fields>
+                </DxPivotTable>
+            }
+        </div>
+        @code {
+            IPivotTable PivotTable { get; set;}
+            IEnumerable<VehiclesData.TrademarkItem> PivotData { get; set; }
+            IReadOnlyList<MPGCustomFilterItem> MPGCityFilterItems { get; set; }
+            IReadOnlyList<MPGCustomFilterItem> MPGHighwayFilterItems { get; set; }
+            static readonly int NumberOfDaysToDisplay = 1095;
+            static readonly string MPGHighwayName = "fieldMPGHighway";
+            static readonly string MPGCityName = "fieldMPGCity";
+            static readonly string ModelPriceName = "fieldModelPrice";
+            static readonly string BodyStyleName = "fieldBodyStyle";
+            readonly TaskCompletionSource<bool> dataLoadedTcs = new(TaskCreationOptions.RunContinuationsAsynchronously);
+
+            protected override async Task OnInitializedAsync() {
+                PivotData = await VehiclesDataProvider.GetDataAsync(1000, NumberOfDaysToDisplay);
+                MPGCityFilterItems = GetMPGCityFilterItems();
+                MPGHighwayFilterItems = GetMPGHighwayFilterItems();
+                dataLoadedTcs.TrySetResult(true);
+            }
+
+            protected override async Task OnAfterRenderAsync(bool firstRender) {
+                if(firstRender) {
+                    await dataLoadedTcs.Task;
+                    CriteriaOperator criteria = CriteriaOperator.Parse($"[{ModelPriceName}] >= 25000 And [{ModelPriceName}] <= 80000 And [{BodyStyleName}] In (6,7)");
+                    PivotTable.SetFilterCriteria(criteria);
+                }
+            }
+
+            void OnCustomizeFilterMenu(PivotTableCustomizeFilterMenuEventArgs args) {
+                if(string.Equals(args.Field.Field, nameof(VehiclesData.TrademarkItem.BodyStyle))) {
+                    foreach(var item in args.DataItems)
+                        item.Text = Enum.GetName<BodyStyle>((BodyStyle)item.Value);
+                }
+            }
+
+            IReadOnlyList<MPGCustomFilterItem> GetMPGCityFilterItems() {
+                return new List<MPGCustomFilterItem> {
+                    new MPGCustomFilterItem { Text = "High",
+                                              Key = 0,
+                                              FilterCriteria = CriteriaOperator.Parse($"[{MPGCityName}]>25") },
+                    new MPGCustomFilterItem { Text = "Medium",
+                                              Key = 1,
+                                              FilterCriteria = CriteriaOperator.Parse($"[{MPGCityName}]>=15 AND [{MPGCityName}]<=25") },
+                    new MPGCustomFilterItem { Text = "Low",
+                                              Key = 2,
+                                              FilterCriteria = CriteriaOperator.Parse($"[{MPGCityName}]<15") }
+                };
+            }
+
+            IReadOnlyList<MPGCustomFilterItem> GetMPGHighwayFilterItems() {
+                return new List<MPGCustomFilterItem> {
+                    new MPGCustomFilterItem { Text = "High",
+                                              Key = 3,
+                                              FilterCriteria = CriteriaOperator.Parse($"[{MPGHighwayName}]>30") },
+                    new MPGCustomFilterItem { Text = "Medium",
+                                              Key = 4,
+                                              FilterCriteria = CriteriaOperator.Parse($"[{MPGHighwayName}]>=20 AND [{MPGHighwayName}]<=30") },
+                    new MPGCustomFilterItem { Text = "Low",
+                                              Key = 5,
+                                              FilterCriteria = CriteriaOperator.Parse($"[{MPGHighwayName}]<20") }
+                };
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>
+

@@ -5,13 +5,7 @@
     align-items: center;
     flex: 1 1 100%;
     font-weight: 400;
-    --fp-color-primary: var(--bs-primary);
 }
-/*BeginHide*/
-.theme-blazing-dark .fp-header {
-    --fp-color-primary: #c86afa;
-}
-/*EndHide*/
 .fp-sub-header {
     font-size: 0.75rem;
     padding: 0.25rem 0;
@@ -59,33 +53,6 @@
     margin-left: auto;
 }
 
-/*BeginHide*/ ::deep /*EndHide*/.fp-icon {
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    flex: 0 0 auto;
-    margin-right: 0.5rem;
-}
-
-/*BeginHide*/ ::deep /*EndHide*/.fp-icon-bonus {
-    background-color: var(--fp-color-primary);
-    -webkit-mask-image: url("images/icons/bonus.svg");
-    mask-image: url("images/icons/bonus.svg");
-}
-
-/*BeginHide*/ ::deep /*EndHide*/.fp-icon-total {
-    background-color: var(--fp-color-primary);
-    -webkit-mask-image: url("images/icons/total.svg");
-    mask-image: url("images/icons/total.svg");
-}
-
-/*BeginHide*/ ::deep /*EndHide*/.fp-icon-credit {
-    background-image: url("images/icons/credit-card.svg");
-}
-
-/*BeginHide*/ ::deep /*EndHide*/.fp-icon-debit {
-    background-image: url("images/icons/debit-card.svg");
-}
 /*EndCollapse*/
 .fp-details {
     text-align: center;
@@ -118,12 +85,4 @@
     justify-content: center;
     margin-top: 1rem;
     font-size: 0.625rem;
-}
-
-/*BeginHide*/ ::deep /*EndHide*/.bill-info .fp-icon-bill {
-    --color-opacity: 0.54;
-    background-color: currentColor;
-    -webkit-mask-image: url("images/icons/link.svg");
-    mask-image: url("images/icons/link.svg");
-    margin-right: 0.5rem;
 }

@@ -4,8 +4,8 @@
 
 <DemoPageSectionComponent Id="Map-Markers">
     <DemoChildContent>
-        <DxMap Zoom="14" Provider="MapProvider.Bing" Width="100%" Height="600px" MapClick=@OnMapClick MarkerClick="@OnMapMarkerClick" >
-            <DxMapApiKeys Bing="@MapApiKeyProvider.GetBingProviderKey()" />
+        <DxMap Zoom="14" Provider="MapProvider.Azure" Width="100%" Height="600px" MapClick=@OnMapClick MarkerClick="@OnMapMarkerClick" >
+            <DxMapApiKeys Azure="@MapApiKeyProvider.GetAzureProviderKey()" />
             <DxMapCenter GeoPosition="40.7061, -73.9969" />
             <DxMapMarkers>
                 @foreach(var entity in Markers) {

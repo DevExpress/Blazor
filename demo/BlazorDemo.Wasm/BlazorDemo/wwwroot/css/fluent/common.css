@@ -1,0 +1,436 @@
+body {
+    --dxbl-icon-width: var(--DS-sizing-200);
+    --dxbl-icon-height: var(--DS-sizing-200);
+    --dxbl-icon-opacity: 1;
+    --dxbl-treeview-sidebar-tree-ctp-badge-color: var(--bs-white);
+}
+
+/* Toolbar */
+.tb-icon {
+    --dxbl-icon-bold: url("../images/icons/bold-fluent.svg");
+    --dxbl-icon-italic: url("../images/icons/italic-fluent.svg");
+    --dxbl-icon-underline: url("../images/icons/underline-fluent.svg");
+    --dxbl-icon-align-left: url("../images/icons/align-left-fluent.svg");
+    --dxbl-icon-align-center: url("../images/icons/align-center-fluent.svg");
+    --dxbl-icon-align-right: url("../images/icons/align-right-fluent.svg");
+    --dxbl-icon-undo: url("../images/icons/undo-fluent.svg");
+    --dxbl-icon-redo: url("../images/icons/redo-fluent.svg");
+    --dxbl-icon-paste: url("../images/icons/paste-fluent.svg");
+    --dxbl-icon-info: url("../images/icons/info-fluent.svg");
+    --dxbl-icon-save: url("../images/icons/save-fluent.svg");
+    --dxbl-icon-settings: url("../images/icons/settings-fluent.svg");
+    --dxbl-icon-refresh: url("../images/icons/refresh-fluent.svg");
+    --dxbl-icon-paragraph: url("../images/icons/paragraph-fluent.svg");
+    --dxbl-icon-watermark: url("../images/icons/watermark-fluent.svg");
+    --dxbl-icon-alert: url("../images/icons/alert-fluent.svg");
+    --dxbl-icon-font: url("../images/icons/font-fluent.svg");
+    --dxbl-icon-hamburger: url("../images/icons/hamburger-fluent.svg");
+}
+
+.content .tb-icon {
+    mask-size: contain;
+    -webkit-mask-size: contain;
+}
+
+.tb-icon:not(.content) {
+    --dxbl-icon-width: 1rem;
+    --dxbl-icon-height: 1rem;
+}
+
+.dxbl-sm .tb-icon {
+    width: var(--DS-sizing-160);
+    height: var(--DS-sizing-160);
+}
+
+/* Editors */
+.editor-icon {
+    --dxbl-icon-chevron-right: url("../images/icons/chevron-right-fluent.svg");
+    --dxbl-icon-chevron-left: url("../images/icons/chevron-left-fluent.svg");
+    --dxbl-icon-chevron-right-small: url("../images/icons/chevron-right-fluent.svg");
+    --dxbl-icon-chevron-left-small: url("../images/icons/chevron-left-fluent.svg");
+    --dxbl-icon-dollar: url("../images/icons/dollar-fluent.svg");
+    --dxbl-icon-euro: url("../images/icons/euro-fluent.svg");
+    --dxbl-icon-add: url("../images/icons/add-fluent.svg");
+    --dxbl-icon-mail: url("../images/icons/mail-fluent.svg");
+    --dxbl-icon-city: url("../images/icons/city-fluent.svg");
+    --dxbl-icon-birthdate: url("../images/icons/birthdate-fluent.svg");
+}
+
+/* Popups */
+
+.popup-icon-user {
+    --dxbl-icon-popup-user: url("../images/icons/popup-user-fluent.svg");
+}
+
+.popup-icon-position {
+    --dxbl-icon-popup-position: url("../images/icons/popup-position-fluent.svg");
+}
+
+.popup-icon-birthday {
+    --dxbl-icon-birthday: url("../images/icons/birthdate-fluent.svg");
+}
+
+.popup-icon-worked {
+    --dxbl-icon-about: url("../images/icons/about-fluent.svg");
+}
+
+/* Scheduler */
+.demo-resnavigator-icon {
+    --dxbl-icon-scheduler-navigator: url("../images/icons/scheduler-navigator-fluent.svg");
+}
+
+.dx-icon-toolbar {
+    --dxbl-icon-scheduler-edit: url("../images/icons/scheduler-edit-fluent.svg");
+    --dxbl-icon-scheduler-add: url("../images/icons/scheduler-add-fluent.svg");
+    --dxbl-icon-scheduler-delete: url("../images/icons/scheduler-delete-fluent.svg");
+    --dxbl-icon-drag-appointment-btw-resources: url("../images/icons/scheduler-drag-between-resources-fluent.svg");
+    --dxbl-icon-drag-and-sizing: url("../images/icons/scheduler-drag-and-resize-fluent.svg");
+    --dxbl-icon-tooltip: url("../images/icons/scheduler-no-tooltip-fluent.svg");
+}
+
+.dx-icon-time {
+    --dxbl-icon-time: url("../images/icons/time-fluent.svg");
+}
+
+.dx-icon-accepted {
+    --dxbl-icon-accepted: url("../images/icons/accept-fluent.svg");
+}
+
+.dx-icon-tentative {
+    --dxbl-icon-tentative: url("../images/icons/quest-fluent.svg");
+}
+
+.drop-file-icon {
+    --dxbl-icon-drop-file: url("../images/icons/drop-file-fluent.svg");
+}
+
+/* Grid */
+.grid-icon-column-chooser,
+.treelist-icon-column-chooser,
+.treelist-toolbar-column-chooser,
+.grid-toolbar-column-chooser {
+    --dxbl-toolbar-column-chooser: url("../images/icons/column-chooser-fluent.svg");
+}
+
+/* PivotTable */
+.pivot-table-icon-reload-page {
+    --dxbl-pivot-table-reload-page: url("../images/icons/pivot-reload-page-fluent.svg");
+}
+
+.pivot-table-icon-reset-layout {
+    --dxbl-pivot-table-reset-layout: url("../images/icons/pivot-reset-layout-fluent.svg");
+}
+
+.pivot-table-icon-field-list {
+    --dxbl-pivot-table-field-list: url("../images/icons/field-list-fluent.svg");
+}
+
+.file-system-icon-folder {
+    --dxbl-file-system-icon-folder: url("../images/icons/folder-color-fluent.svg");
+}
+
+.file-system-icon-file {
+    --dxbl-file-system-icon-file: url("../images/icons/document-color-fluent.svg");
+}
+
+.grid-toolbar-export {
+    --dxbl-grid-toolbar-export: url("../images/icons/export-fluent.svg");
+}
+
+.grid-toolbar-delete {
+    --dxbl-grid-toolbar-delete: url("../images/icons/grid-toolbar-delete-fluent.svg");
+}
+
+.grid-toolbar-edit {
+    --dxbl-grid-toolbar-edit: url("../images/icons/grid-toolbar-edit-fluent.svg");
+}
+
+.grid-toolbar-cancel {
+    --dxbl-grid-toolbar-cancel: url("../images/icons/undo-fluent.svg");
+}
+
+.grid-toolbar-save {
+    --dxbl-grid-toolbar-save: url("../images/icons/save-fluent.svg");
+}
+
+.grid-toolbar-new {
+    --dxbl-grid-toolbar-new: url("../images/icons/grid-toolbar-new-fluent.svg");
+}
+
+.grid-icon-delete {
+    --grid-icon-delete: url("../images/icons/delete-fluent.svg");
+}
+
+.grid-icon-add {
+    --dxbl-grid-icon-add: url("../images/icons/add-fluent.svg");
+}
+
+/* Buttons */
+.btn-icon {
+    --dxbl-btn-icon-undo: url("../images/icons/undo-fluent.svg");
+    --dxbl-btn-icon-redo: url("../images/icons/redo-fluent.svg");
+    --dxbl-btn-icon-like: url("../images/icons/like-fluent.svg");
+    --dxbl-btn-icon-close: url("../images/icons/close-fluent.svg");
+    --dxbl-btn-icon-continue: url("../images/icons/continue-fluent.svg");
+    --dxbl-btn-icon-pause: url("../images/icons/pause-fluent.svg");
+    --dxbl-btn-icon-last: url("../images/icons/last-fluent.svg");
+    --dxbl-btn-icon-settings: url("../images/icons/settings-fluent.svg");
+    --dxbl-btn-icon-full-screen: url("../images/icons/full-screen-fluent.svg");
+    --dxbl-btn-icon-lock-column: url("../images/icons/lock-column-fluent.svg");
+    --dxbl-btn-icon-edit: url("../images/icons/edit-fluent.svg");
+    --dxbl-btn-icon-no-tooltip: url("../images/icons/scheduler-no-tooltip-fluent.svg");
+    --dxbl-btn-icon-user: url("../images/icons/popup-user-fluent.svg");
+    --dxbl-btn-icon-validation-warning: url("../images/icons/validation-warning-fluent.svg");
+    --dxbl-btn-icon-check: url("../images/icons/check-fluent.svg");
+    --dxbl-btn-icon-user-profile: url("../images/icons/user-profile-fluent.svg");
+    --dxbl-btn-icon-clock: url("../images/icons/editor-clock-fluent.svg");
+    --dxbl-btn-icon-plus: url("../images/icons/plus-fluent.svg");
+    --dxbl-btn-icon-delete: url("../images/icons/delete-fluent.svg");
+    --dxbl-btn-icon-send: url("../images/icons/mail-fluent.svg");
+    --dxbl-btn-icon-reschedule: url("../images/icons/time-fluent.svg");
+    --dxbl-btn-icon-save-draft: url("../images/icons/save-fluent.svg");
+    --dxbl-btn-icon-share: url("../images/icons/export-fluent.svg");
+    --dxbl-btn-icon-email: url("../images/icons/mail-fluent.svg");
+    --dxbl-btn-icon-link: url("../images/icons/link-fluent.svg");
+    --dxbl-btn-icon-print: url("../images/icons/drop-file-fluent.svg");
+}
+
+/* Ribbon */
+.rb-icon {
+    --dxbl-icon-rb-undo: url("../images/icons/ribbon/fluent/undo.svg");
+    --dxbl-icon-rb-redo: url("../images/icons/ribbon/fluent/redo.svg");
+    --dxbl-icon-rb-clipboard: url("../images/icons/ribbon/fluent/clipboard.svg");
+    --dxbl-icon-rb-paint: url("../images/icons/ribbon/fluent/paint.svg");
+    --dxbl-icon-rb-bold: url("../images/icons/ribbon/fluent/bold.svg");
+    --dxbl-icon-rb-italic: url("../images/icons/ribbon/fluent/italic.svg");
+    --dxbl-icon-rb-underline: url("../images/icons/ribbon/fluent/underline.svg");
+    --dxbl-icon-rb-bullets: url("../images/icons/ribbon/fluent/bullets.svg");
+    --dxbl-icon-rb-align-left: url("../images/icons/ribbon/fluent/align-left.svg");
+    --dxbl-icon-rb-align-right: url("../images/icons/ribbon/fluent/align-right.svg");
+    --dxbl-icon-rb-align-center: url("../images/icons/ribbon/fluent/align-center.svg");
+    --dxbl-icon-rb-align-justify: url("../images/icons/ribbon/fluent/align-justify.svg");
+    --dxbl-icon-rb-search: url("../images/icons/ribbon/fluent/search.svg");
+    --dxbl-icon-rb-dictate: url("../images/icons/ribbon/fluent/mic.svg");
+    --dxbl-icon-rb-page-break: url("../images/icons/ribbon/fluent/page-break.svg");
+    --dxbl-icon-rb-table: url("../images/icons/ribbon/fluent/table.svg");
+    --dxbl-icon-rb-picture: url("../images/icons/ribbon/fluent/picture.svg");
+    --dxbl-icon-rb-link: url("../images/icons/ribbon/fluent/link.svg");
+    --dxbl-icon-rb-bookmarks: url("../images/icons/ribbon/fluent/bookmarks.svg");
+    --dxbl-icon-rb-page-numbers: url("../images/icons/ribbon/fluent/page-numbers.svg");
+    --dxbl-icon-rb-symbol: url("../images/icons/ribbon/fluent/pi.svg");
+    --dxbl-icon-rb-emoji: url("../images/icons/ribbon/fluent/emoji.svg");
+    --dxbl-icon-rb-font: url("../images/icons/ribbon/fluent/font.svg");
+    --dxbl-icon-rb-copy: url("../images/icons/ribbon/fluent/copy.svg");
+    --dxbl-icon-rb-cut: url("../images/icons/ribbon/fluent/cut.svg");
+    --dxbl-icon-rb-document-blank: url("../images/icons/ribbon/fluent/document-blank.svg");
+    --dxbl-icon-rb-folder-open: url("../images/icons/ribbon/fluent/folder-open.svg");
+    --dxbl-icon-rb-print: url("../images/icons/ribbon/fluent/print.svg");
+    --dxbl-icon-rb-share: url("../images/icons/ribbon/fluent/share.svg");
+    --dxbl-icon-rb-save: url("../images/icons/ribbon/fluent/save.svg");
+}
+
+.ribbon-container .dxbl-ribbon .dxbl-tabs-content-panel {
+    box-shadow: var(--DS-box-shadow-shadow-4);
+    border-radius: var(--DS-border-radius-40);
+}
+
+/* Tabs */
+.tabs-icon {
+    --dxbl-tabs-icon-home: url("../images/icons/home-fluent.svg");
+    --dxbl-tabs-icon-support: url("../images/icons/person-fluent.svg");
+    --dxbl-tabs-icon-products: url("../images/icons/layer-fluent.svg");
+}
+
+/* Form Layout */
+.demo-form-layout .dxbl-checkbox {
+    padding-left: 0;
+}
+
+/* Drawer */
+.dxbl-menu.demo-drawer-menu {
+    --dxbl-menu-item-padding-y-s: var(--DS-sizing-40);
+    --dxbl-menu-item-padding-x-s: 0.563rem;
+    --dxbl-menu-item-padding-x-m: 0.75rem;
+    --dxbl-menu-item-padding-x-l: 1.313rem;
+}
+
+.dxbl-btn-toolbar > .dxbl-btn-group > .dxbl-toolbar-item > .demo-drawer-toggle-button {
+    --dxbl-btn-padding-x-s: var(--DS-sizing-80);
+    --dxbl-btn-padding-x-m: var(--DS-sizing-120);
+    --dxbl-btn-padding-x-l: var(--DS-sizing-160);
+}
+
+.demo-drawer-overview-left .dxbl-menu.demo-drawer-menu {
+    --dxbl-menu-item-padding-x-s: 0.813rem;
+    --dxbl-menu-item-padding-x-m: 1.188rem;
+    --dxbl-menu-item-padding-x-l: 1.563rem;
+}
+
+/* TagBox */
+.tagbox-tag-template-btn {
+    padding: 0;
+}
+
+.tagbox-tag-template-btn .dxbl-btn-caption {
+    padding: 2px 4px 2px 8px;
+}
+
+/* Demo Page */
+.dxbl-check {
+    --dxbl-demo-page-margin-right: 0;
+}
+
+.demo-page-section > .card > .card-header > .nav-tabs {
+    border-bottom: 1px solid var(--DS-color-border-neutral-default-rest);
+}
+
+.icon-doc {
+    --dxbl-demo-page-icon-doc-width: var(--DS-sizing-160);
+    --dxbl-demo-page-icon-doc-height: var(--DS-sizing-160);
+}
+
+.dxbl-treeview.sidebar-tree .dxbl-treeview-item-content > .dxbl-treeview-item-container > .dxbl-badge {
+    --dxbl-treeview-sidebar-tree-badge-margin: 0 0 0 var(--dxbl-treeview-content-spacing);
+}
+
+.theme-fluent-light .demo-group {
+    --dxbl-demo-group-color: #212529;
+    --dxbl-demo-group-border-bottom-color: #D6D6D6;
+}
+
+.theme-fluent-dark .demo-group {
+    --dxbl-demo-group-color: rgb(197, 197, 197);
+    --dxbl-demo-group-border-bottom-color: #797979;
+}
+
+/* Accordion */
+.icon-square-minus {
+    --dxbl-icon-square-minus: url("../images/icons/subtract-square-fluent.svg");
+}
+
+.icon-square-plus {
+    --dxbl-icon-square-plus: url("../images/icons/add-square-fluent.svg");
+}
+
+.fp-header {
+    --fp-color-primary: var(--DS-color-content-primary-default-rest);
+}
+
+.fp-icon-bonus {
+    --dxbl-icon-bonus: url("../images/icons/gift-fluent.svg");
+}
+
+.fp-icon-total {
+    --dxbl-icon-total: url("../images/icons/total-fluent.svg");
+}
+
+.fp-icon-credit,
+.fp-icon-debit {
+    --dxbl-icon-payment: url("../images/icons/payment-fluent.svg");
+}
+
+.bill-info .fp-icon-bill {
+    --dxbl-icon-link: url("../images/icons/link-fluent.svg");
+}
+
+/* EmployeeCard */
+.e-name,
+.e-title,
+.e-email,
+.e-photo,
+.e-divider,
+.e-icon,
+.e-details label {
+    --employee-card-color: currentColor;
+}
+
+.e-icon-address {
+    --dxbl-icon-address: url("../images/icons/location-fluent.svg");
+}
+.e-icon-city {
+    --dxbl-icon-city: url("../images/icons/city-fluent.svg");
+}
+.e-icon-birthdate {
+    --dxbl-icon-calendar-day: url("../images/icons/birthdate-fluent.svg");
+}
+.e-icon-phone {
+    --dxbl-icon-phone: url("../images/icons/phone-fluent.svg");
+}
+
+/* TreeView */
+.treeview-icon-folder {
+    --dxbl-icon-folder: url("../images/icons/folder-color-fluent.svg");
+}
+
+.treeview-icon-image {
+    --dxbl-icon-image: url("../images/icons/image-color-fluent.svg");
+}
+
+.treeview-icon-video {
+    --dxbl-icon-video: url("../images/icons/video-fluent.svg");
+}
+
+.treeview-icon-music {
+    --dxbl-icon-music: url("../images/icons/music-note-fluent.svg");
+}
+
+.treeview-icon-document {
+    --dxbl-icon-document: url("../images/icons/document-color-fluent.svg");
+}
+
+.treeview-standard-icon {
+    --treeview-icon-visibility: none
+}
+
+.treeview-fluent-icon {
+    --treeview-fluent-icon-visibility: block;
+}
+
+/* Menu */
+.menu-icon-home {
+    --dxbl-icon-home: url("../images/icons/home-fluent.svg");
+}
+
+.menu-icon-support {
+    --dxbl-icon-support: url("../images/icons/support-fluent.svg");
+}
+
+.menu-icon-products {
+    --dxbl-icon-products: url("../images/icons/layer-fluent.svg");
+}
+
+.menu-icon-contacts {
+    --dxbl-icon-contacts: url("../images/icons/notebook-fluent.svg");
+}
+
+.menu-icon-about {
+    --dxbl-icon-about: url("../images/icons/about-fluent.svg");
+}
+
+.menu-icon-sort-by {
+    --dxbl-icon-sort: url("../images/icons/sort-fluent.svg");
+}
+
+.menu-icon-copy {
+    --dxbl-icon-copy: url("../images/icons/copy-fluent.svg");
+}
+
+.menu-icon-cut {
+    --dxbl-icon-cut: url("../images/icons/cut-fluent.svg");
+}
+
+.menu-icon-clear {
+    --dxbl-icon-dismiss: url("../images/icons/dismiss-fluent.svg");
+}
+
+.menu-icon-user-profile {
+    --dxbl-icon-user-profile: url("../images/icons/user-profile-fluent.svg");
+}
+
+.menu-icon-check {
+    --dxbl-menu-icon-check: url("../images/icons/check-fluent.svg");
+}
+
+.menu-icon-person-circle {
+    --dxbl-menu-icon-person-circle: url("../images/icons/person-circle-fluent.svg");
+}

@@ -22,9 +22,10 @@
         }
 
         protected async Task OnFilesUploading(FilesUploadingEventArgs args) {
-            var file = args.Files[0];
-            using var stream = new System.IO.MemoryStream();
-            await file.OpenReadStream(file.Size).CopyToAsync(stream);
+            foreach (var file in args.Files) {
+                using var stream = new System.IO.MemoryStream();
+                await file.OpenReadStream(file.Size).CopyToAsync(stream);
+            }
         }
     }
 </DemoPageSectionComponent>

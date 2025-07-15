@@ -2,22 +2,30 @@
     <ChildContentWithParameters Context="Params">
         <div class="target-container" @onclick="@(() => MessageBoxVisible = true)">
             <p class="target-caption">CLICK TO SHOW A MESSAGE BOX WINDOW</p>
+            <p>RESULT: @Result.ToString()</p>
         </div>
 
         <DxMessageBox @bind-Visible="MessageBoxVisible"
                       Title="Cannot open file"
                       Text="The file may have been moved, renamed, or deleted."
                       OkButtonText="Show details..."
-                      CancelButtonText="Ok"
+                      CancelButtonText="OK"
+                      CloseOnOutsideClick="true"
                       RenderStyle="@MessageBoxRenderStyle.Warning"
                       SizeMode="@Params.SizeMode"
-                      Type="@MessageBoxType.Confirmation">
+                      Type="@MessageBoxType.Confirmation"
+                      Closed="@Closed">
         </DxMessageBox>
 
     </ChildContentWithParameters>
 
     @code {
         bool MessageBoxVisible { get; set; } = false;
+        private bool Result { get; set; } = false;
+        
+        void Closed(bool Confirmed) {
+            Result = Confirmed;
+        }
     }
 
 </DemoPageSectionComponent>

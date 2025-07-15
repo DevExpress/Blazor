@@ -22,11 +22,10 @@
                     <DxButton RenderStyle="@buttonStyle"
                               RenderStyleMode="@buttonStyleMode"
                               Text="@tagContext.DisplayText"
-                              CssStyle="display:inline-block; padding-right: 0">
-                        @context
-                        <span @onclick="@tagContext.RemoveTagAction" style="display:inline-block; width: 1em; margin-left: 0.5em">
-                            &times;
-                        </span>
+							  CssClass="tagbox-tag-template-btn">
+
+						@context
+						<span @onclick="@tagContext.RemoveTagAction" class="tagbox-tag-template-close-btn-icon">&times;</span>
                     </DxButton>
                 }
             </TagDisplayTemplate>

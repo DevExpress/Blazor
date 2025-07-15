@@ -5,7 +5,7 @@
         @if(Employees == null) {
             <p><em>Loading...</em></p>
         } else {
-            <div class="w-100 ch-220">
+            <div class="w-100 chi-220">
                 <DxTabs SizeMode="Params.SizeMode">
                     @foreach(var employee in Employees) {
                         <DxTabPage Text="@(employee.FirstName + ' ' + employee.LastName)">

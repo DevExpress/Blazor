@@ -80,14 +80,14 @@
 
         protected override async Task OnInitializedAsync() {
             IEnumerable<Employee> dataSource = await NwindDataService.GetEmployeesAsync();
-            employee = dataSource.Select(e => e).First(e => e.FullName == "Andrew Fuller");
-            FirstName = employee.FirstName;
-            LastName = employee.LastName;
-            BirthDate = employee.BirthDate ?? DateTime.Now.AddYears(-20);
-            Position = employee.Title;
-            HireDate = employee.HireDate ?? DateTime.Now.AddYears(-20);
-            Notes = employee.Notes;
-            PostalCode = employee.PostalCode;
+            employee = dataSource.FirstOrDefault(e => e.FullName == "Andrew Fuller") ?? dataSource.FirstOrDefault();
+            FirstName = employee?.FirstName;
+            LastName = employee?.LastName;
+            BirthDate = employee?.BirthDate ?? DateTime.Now.AddYears(-20);
+            Position = employee?.Title;
+            HireDate = employee?.HireDate ?? DateTime.Now.AddYears(-20);
+            Notes = employee?.Notes;
+            PostalCode = employee?.PostalCode;
         }
 
     }

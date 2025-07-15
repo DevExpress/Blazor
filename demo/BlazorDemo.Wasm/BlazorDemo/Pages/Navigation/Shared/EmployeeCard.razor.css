@@ -1,12 +1,3 @@
-.e-name,
-.e-title,
-.e-email,
-.e-photo,
-.e-divider,
-.e-icon,
-/*BeginHide*/::deep /*EndHide*/label {
-    color: rgba(var(--bs-body-color-rgb, 0, 0, 0), var(--color-opacity));
-}
 .e-main {
     line-height: 1;
 }
@@ -17,11 +8,6 @@
     font-weight: 500;
     line-height: 1.2;
 }
-.e-title,
-.e-email,
-/*BeginHide*/::deep /*EndHide*/label {
-    --color-opacity: 0.75;
-}
 .e-title {
     font-size: 0.875rem;
     margin-bottom: 0.5rem;
@@ -30,10 +16,6 @@
     font-size: 0.75rem;
     text-decoration: underline;
     margin-bottom: 0;
-}
-.e-divider,
-.e-photo {
-    --color-opacity: 0.2;
 }
 .e-divider {
     height: 1px;
@@ -71,27 +53,5 @@
     align-items: center;
     justify-content: center;
 }
-.e-icon {
-    --color-opacity: 0.75;
-    display: inline-block;
-    background-color: currentColor;
-    width: 16px;
-    height: 16px;
-}
-.e-icon-address {
-    -webkit-mask-image: url("images/icons/address.svg");
-    mask-image: url("images/icons/address.svg");
-}
-.e-icon-city {
-    -webkit-mask-image: url("images/icons/city.svg");
-    mask-image: url("images/icons/city.svg");
-}
-.e-icon-birthdate {
-    -webkit-mask-image: url("images/icons/birthdate.svg");
-    mask-image: url("images/icons/birthdate.svg");
-}
-.e-icon-phone {
-    -webkit-mask-image: url("images/icons/phone.svg");
-    mask-image: url("images/icons/phone.svg");
-}
+
 

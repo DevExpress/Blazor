@@ -8,6 +8,7 @@
     <UserSecretsId>eb274127-1fcd-4ba5-9952-497c7df007d0</UserSecretsId>
     <RollForward>Major</RollForward>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>$(DefineConstants)TRACE;SERVER_BLAZOR</DefineConstants>
@@ -19,30 +20,26 @@
     <DefineConstants>$(DefineConstants)TRACE;SERVER_BLAZOR</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Azure.AI.OpenAI" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Extensions.AI.Abstractions" Version="9.0.0-preview.9.24556.5" />
-    <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="9.0.0-preview.9.24556.5" />
+    <PackageReference Include="Azure.AI.OpenAI" />
+    <PackageReference Include="Microsoft.Extensions.AI" />
+    <PackageReference Include="Microsoft.Extensions.AI.OpenAI" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+    <PackageReference Include="Microsoft.Identity.Client" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Azure.Identity" Version="1.11.4" />
-    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.1.2" />
-    <PackageReference Include="System.Formats.Asn1" Version="6.0.1" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.1.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.10" />
-    <PackageReference Include="Microsoft.Identity.Client" Version="4.65.0" />
-    <PackageReference Include="DevExpress.AIIntegration.AspNetCore.Reporting" Version="24.2.3" />
-    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" Version="24.2.3" />
-    <PackageReference Include="DevExpress.Blazor.PdfViewer" Version="24.2.3" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls" Version="24.2.3" />
-    <PackageReference Include="DevExpress.AspNetCore.Reporting" Version="24.2.3" />
-    <!--<PackageReference Include="System.Resources.Extensions" Version="4.6.0" />-->
-    <PackageReference Include="DevExpress.Reporting.Demos" Version="24.2.3" />
-    <PackageReference Include="DevExpress.Drawing.Skia" Version="24.2.3" />
-    <PackageReference Include="DevExpress.AIIntegration.Blazor" Version="24.2.3" />
+    <PackageReference Include="DevExpress.AIIntegration.AspNetCore.Reporting" VersionOverride="25.1.3" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" VersionOverride="25.1.3" />
+    <PackageReference Include="DevExpress.Blazor.PdfViewer" VersionOverride="25.1.3" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls" VersionOverride="25.1.3" />
+    <PackageReference Include="DevExpress.AspNetCore.Reporting" VersionOverride="25.1.3" />
+    <PackageReference Include="DevExpress.Reporting.Demos" VersionOverride="25.1.3" />
+    <PackageReference Include="DevExpress.Drawing.Skia" VersionOverride="25.1.3" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor" VersionOverride="25.1.3" />
     
     
     

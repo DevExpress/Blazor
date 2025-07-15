@@ -4,4 +4,4 @@ When a filter is applied, the ListBox raises its [FilterCriteriaChanged](https:/
 
 You can call the [ClearFilter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2.ClearFilter) method to clear previously applied filters and apply a new filter to List Box data.
 
-For more information, refer to the following help topic: [Filter Criteria](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2#filter-criteria).
+For more information, refer to the following help topic: [Filter Criteria](https://docs.devexpress.com/Blazor/405397/components/data-editors/listbox/data-shaping#filter-criteria).

@@ -1,3 +1,5 @@
 DevExpress Reporting allows you to specify how to process hidden cells in reports. In this demo, use the parameter in the Parameters panel to hide a column and see the XRTable.ProcessHiddenCellMode property's Resize Cells Proportionally mode in action: when a column is hidden, the remaining columns are resized, and empty space is eliminated.
 
 <a href="https://docs.devexpress.com/XtraReports/DevExpress.XtraReports.UI.XRTable.ProcessHiddenCellMode" target="_blank">See Documentation</a>
+
+Image licensing information: <a href="https://www.devexpress.com/carimages" target="_blank">https://www.devexpress.com/carimages</a>

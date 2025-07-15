@@ -1,0 +1,101 @@
+﻿@using DevExpress.AIIntegration.Blazor.Chat
+@using System.Text.Json;
+@using System.Reflection;
+@using System.IO;
+
+@inject HttpClient httpClient;
+@inject NavigationManager NavigationManager;
+
+<DemoPageSectionComponent Id="AIChat-FileAttachments"
+ShowSizeMode="true">
+    <OptionsContent>
+        <OptionCheckBox Label="Enable File Upload" @bind-Checked="FileUploadEnabled" />
+        <OptionComboBox Label="File Types:" Data="Enum.GetValues<FileTypes>()" @bind-Value="@SelectedFileExtension" />
+        <OptionCheckBox Label="Use Streaming" @bind-Checked="UseStreaming" />
+        @if (SelectedFileExtension == FileTypes.Tables || SelectedFileExtension == FileTypes.Documents) {
+            <div class="alert dxbl-alert alert-primary" role="alert">
+                Note: AI services used in this demo are powered by GPT-4o-mini. This service currently supports image files only. The demo cannot process other file types (such as PDFs, text documents, or spreadsheets). To unlock support for additional file formats, connect the application to a compatible AI model or service.
+            </div>
+        }
+    </OptionsContent>
+    <ChildContentWithParameters Context="Params">
+        <div class="chat-demo-container">
+            <DxAIChat FileUploadEnabled="FileUploadEnabled" CssClass="demo-chat" Initialized="ChatInitialized" UseStreaming="UseStreaming" SizeMode="Params.SizeMode">
+                <AIChatSettings>
+                    <DxAIChatFileUploadSettings MaxFileSize="10000000" MaxFileCount="3" AllowedFileExtensions="@Extensions[SelectedFileExtension]" />
+                </AIChatSettings>
+                <MessageTemplate>
+                    <div class="@GetMessageClasses(context)">
+                        @if (context.Typing) {
+                            <span>Loading...</span>
+                        } else {
+                            <div class="demo-chat-content">
+                                @if (context.Files != null && context.Files.Count > 0) {
+                                    foreach (var file in context.Files) {
+                                        <div class="demo-chat-file">
+                                            <img src="@GetImageSrc(file)" class="demo-chat-file-preview" />
+                                            <span>@file.Name</span>
+                                        </div>
+                                    }
+                                }
+                                @context.Content
+                            </div>
+                        }
+                    </div>
+                </MessageTemplate>
+            </DxAIChat>
+        </div>
+        @code {
+            const string IMAGE_NAME = "Eiffel-Tower.jpg";
+
+            bool UseStreaming { get; set; } = false;
+            bool FileUploadEnabled { get; set; } = true;
+            FileTypes SelectedFileExtension = FileTypes.Images;
+
+            public enum FileTypes {
+                Images,
+                Documents,
+                Tables,
+            }
+
+            Dictionary<FileTypes, List<string>> Extensions = new Dictionary<FileTypes, List<string>>() {
+                { FileTypes.Images, new List<string> { ".jpg", ".png" } },
+                { FileTypes.Documents, new List<string> { ".pdf", ".docx" } },
+                { FileTypes.Tables, new List<string> { ".xlsx", ".csv" } },
+            };
+
+            async void ChatInitialized(IAIChat chat) {
+                var fileBytes = await httpClient.GetByteArrayAsync(NavigationManager.BaseUri + StaticAssetUtils.GetImagePath($"/{IMAGE_NAME}"));
+                var testFiles = new List<AIChatUploadFileInfo> {
+                    new AIChatUploadFileInfo(
+                        name: IMAGE_NAME,
+                        type: "image/jpeg",
+                        size: fileBytes.Length,
+                        data: new ReadOnlyMemory<byte>(fileBytes)
+                    )
+                };
+
+                chat.LoadMessages(new[] {
+                    new BlazorChatMessage(Microsoft.Extensions.AI.ChatRole.User, "Analyze the image file and summarize its content." , testFiles),
+                    new BlazorChatMessage(Microsoft.Extensions.AI.ChatRole.Assistant, "The image features the Eiffel Tower, a renowned landmark located in Paris, France. The tower is shown from a low angle, emphasizing its height and intricate iron lattice structure. The sky is lit with dramatic clouds and warm hues of sunset, creating a visually striking backdrop for the iconic monument. The overall scene conveys a sense of grandeur and beauty, highlighting the Eiffel Tower as a symbol of romance and architectural achievement.")
+                });
+            }
+
+            private string GetImageSrc(AIChatUploadFileInfo file) {
+                var base64 = Convert.ToBase64String(file.Data.ToArray());
+                return $"data:{file.Type};base64,{base64}";
+            }
+
+            string GetMessageClasses(BlazorChatMessage message) {
+                if (message.Role == ChatMessageRole.Assistant) {
+                    return "demo-chat-message demo-assistant-message";
+                } else if (message.Role == ChatMessageRole.User) {
+                    return "demo-chat-message demo-user-message";
+                } else if (message.Role == ChatMessageRole.Error) {
+                    return "demo-chat-message demo-error-message";
+                }
+                return "demo-chat-message";
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

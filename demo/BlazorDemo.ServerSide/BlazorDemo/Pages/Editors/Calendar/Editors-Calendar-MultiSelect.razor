@@ -1,10 +1,17 @@
 ﻿<DemoPageSectionComponent Id="Editors-Calendar-MultiSelect" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <DxCalendar EnableMultiSelect="true" SelectedDates="@GetSelectedDates()" SizeMode="Params.SizeMode" CssClass="demo-calendar" />
+        <DxCalendar EnableMultiSelect="true" 
+                    @bind-SelectedDates="@SelectedDates" 
+                    SizeMode="Params.SizeMode" 
+                    CssClass="demo-calendar" />
+        <p class="demo-text cw-320 mt-3">
+            Number of selected dates: <b>@SelectedDates.Count()</b>
+        </p>
     </ChildContentWithParameters>
 
     @code {
-        List<DateTime> GetSelectedDates() {
+        public IEnumerable<DateTime> SelectedDates { get; set; }
+        IEnumerable<DateTime> GetSelectedDates() {
             DateTime baseDate = DateTime.Today;
 
             return new List<DateTime>() {
@@ -16,6 +23,10 @@
                 baseDate.AddDays(13),
                 baseDate.AddDays(15)
             };
+        }
+
+        protected override void OnInitialized() {
+            SelectedDates = GetSelectedDates();
         }
     }
 </DemoPageSectionComponent>

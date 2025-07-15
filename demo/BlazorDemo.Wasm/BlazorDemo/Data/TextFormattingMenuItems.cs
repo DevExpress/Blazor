@@ -15,7 +15,7 @@ namespace BlazorDemo.Data {
         public bool BeginGroup { get; set; }
         public string IconCss { get; set; }
         public string CssClass { get { return Checked ? "checked-item" : ""; } }
-        public string IconUrl { get { return Checked ? StaticAssetUtils.GetImagePath("icons/check.svg") : null; } }
+        public string IconUrl { get; set; }
         public bool SplitMenuButton { get; set; }
         public string Category { get; set; }
         public string Tooltip { get; set; }

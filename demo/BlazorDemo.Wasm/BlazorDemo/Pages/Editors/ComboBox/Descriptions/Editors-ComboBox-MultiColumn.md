@@ -1,4 +1,4 @@
-Our Blazor [ComboBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2) can display data across multiple columns. To create columns, use [DxListEditorColumn](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn) objects as needs dictate. Objects include the following column customization options:
+Our Blazor [ComboBox](https://docs.devexpress.com/Blazor/405075/components/data-editors/combobox) can display data across multiple columns. To create columns, use [DxListEditorColumn](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn) objects as needs dictate. Objects include the following column customization options:
 
 *   [Caption](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.Caption) — Specifies the column caption.
 *   [FieldName](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.FieldName) — Specifies the data source field used to populates column items.

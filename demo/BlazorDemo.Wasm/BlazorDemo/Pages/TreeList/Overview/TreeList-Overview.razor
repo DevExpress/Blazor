@@ -19,6 +19,7 @@
                     ShowFilterRow="true"
                     ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
                     TextWrapEnabled="false"
+                    ShowSearchBox="true" @bind-SearchText="@TreeListSearchText"
                     SizeMode="Params.SizeMode"
                     CssClass="max-h-480">
             <Columns>
@@ -47,7 +48,7 @@
                                 _ => throw new ArgumentException()
                             };
                         }
-                        <span class="badge @badgeClass py-1 px-2" title="@displayText  priority">@displayText</span>
+                        <span class="badge @badgeClass py-1 px-2" title="@displayText  priority">@context.HighlightedDisplayText</span>
                     </CellDisplayTemplate>
                 </DxTreeListDataColumn>
                 <DxTreeListDataColumn Caption="Progress" FieldName="Status" Width="120px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
@@ -75,6 +76,7 @@
         </DxTreeList>
 
         @code {
+            string TreeListSearchText = "";
             static readonly IReadOnlyList<FilterInterval> CompletedIntervals = new FilterInterval[] {
                 new("[Status] == 100", "Completed"),
                 new("[Status] < 100", "In Progress"),

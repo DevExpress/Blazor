@@ -10,4 +10,4 @@ In [EditCell](https://docs.devexpress.com/Blazor/404756/components/grid/editing-
 * If validation fails, the component displays error icons.
 * If validation succeeds, the component saves changes and starts editing a new row.
 
-In this demo, validation is disabled. Once focus leaves the New Item Row, the Grid adds the row to the data source.
+In this demo, validation is disabled. Once focus leaves the New Item Row, the Grid adds the row to the data source. The [EditOnKeyPress](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.EditOnKeyPress) property is enabled and row editing starts once you begin typing.

@@ -1,9 +1,9 @@
-The DevExpress Blazor [Pivot Table](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PivotTable.DxPivotTable) calculates totals for its data and displays them as separate columns and rows. There are four types of totals:
+The DevExpress Blazor [Pivot Table](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PivotTable.DxPivotTable) (Community Technology Preview – official ship date June 2025) calculates data [totals](https://docs.devexpress.com/Blazor/405459/components/pivottable/pivot-table-basics#totals-grand-totals) and displays them as separate columns and rows. Totals include the following:
 
-* **Row/column totals** display sub-totals calculated for outer row/column fields. 
-* **Row/column grand totals** display overall totals calculated against all rows/columns.
+* **Row/column Totals**: display sub-totals calculated for outside row/column fields.
+* **Row/column grand Totals**: display overall totals calculated against all rows/columns.
 
-You can use the following properties to change totals visibility:
+You can use the following properties to modify totals visibility:
 
 * [ShowRowTotals](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PivotTable.DxPivotTable.ShowRowTotals)
 * [ShowRowGrandTotals](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PivotTable.DxPivotTable.ShowRowGrandTotals)

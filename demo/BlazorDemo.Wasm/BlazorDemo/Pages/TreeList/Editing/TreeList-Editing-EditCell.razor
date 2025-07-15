@@ -16,6 +16,8 @@
                     CssClass="max-h-480"
                     ValidationEnabled="false"
                     EditMode="TreeListEditMode.EditCell"
+                    EditOnKeyPress="EnableEditOnKeyPress"
+                    EnterKeyDirection="EnterKeyDirectionValue"
                     EditModelSaving="TreeList_EditModelSaving"
                     DataItemDeleting="TreeList_DataItemDeleting"
                     CustomizeEditModel="TreeList_CustomizeEditModel"
@@ -60,6 +62,7 @@
                         <div class="grid-cell-align-center">
                             <DxButton IconCssClass="grid-icon grid-icon-add"
                                       RenderStyle="ButtonRenderStyle.Link"
+                                      CssClass="grid-new-btn"
                                       aria-label="New"
                                       Click="@(() => TreeList.StartEditNewRowAsync(context.VisibleIndex))"/>
                             <DxButton IconCssClass="grid-icon grid-icon-delete"
@@ -72,12 +75,12 @@
                     <CellEditTemplate>
                         <div class="grid-cell-align-center">
                             <DxButton Enabled="false"
-                                      CssClass="grid-disabled-button"
+                                      CssClass="grid-new-btn grid-disabled-button"
                                       IconCssClass="grid-icon grid-icon-add"
                                       aria-label="New"
                                       RenderStyle="ButtonRenderStyle.Link"/>
                             <DxButton Enabled="false"
-                                      CssClass="grid-disabled-button"
+                                      CssClass="grid-delete-btn grid-disabled-button"
                                       IconCssClass="grid-icon grid-icon-delete"
                                       aria-label="Delete"
                                       RenderStyle="ButtonRenderStyle.Link"/>
@@ -85,6 +88,31 @@
                     </CellEditTemplate>
                 </DxTreeListCommandColumn>
             </Columns>
+            <ToolbarTemplate>
+                <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" SizeMode="Params.SizeMode">
+                    <Items>
+                        <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                            <Template Context="toolbar_item_context">
+                                <div class="d-flex flex-row align-items-center ms-2 me-2">
+                                    <div id="enter-key-direction-label" class="me-2">Focus Moves on Enter:</div>
+                                    <DxComboBox @bind-Value="EnterKeyDirectionValue"
+                                                Data="EnterKeyDirectionValues"
+                                                ValueFieldName="Value"
+                                                TextFieldName="Text"
+                                                aria-labelledby="enter-key-direction-label" />
+                                </div>
+                            </Template>
+                        </DxToolbarItem>
+                        <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                            <Template Context="toolbar_item_context">
+                                <div class="ms-2 me-2">
+                                    <DxCheckBox @bind-Checked="EnableEditOnKeyPress">Edit On Key Press</DxCheckBox>
+                                </div>
+                            </Template>
+                        </DxToolbarItem>
+                    </Items>
+                </DxToolbar>
+            </ToolbarTemplate>
         </DxTreeList>
     </ChildContentWithParameters>
 
@@ -95,6 +123,14 @@
             new { Text = "High", Value = 1 },
             new { Text = "Medium", Value = 0 },
             new { Text = "Low", Value = -1 }
+        };
+        bool EnableEditOnKeyPress { get; set; }
+
+        TreeListEnterKeyDirection EnterKeyDirectionValue { get; set; } = TreeListEnterKeyDirection.None;
+        object[] EnterKeyDirectionValues { get; } = new[] {
+            new { Value = TreeListEnterKeyDirection.None, Text = "No" },
+            new { Value = TreeListEnterKeyDirection.Column, Text = "Up/Down" },
+            new { Value = TreeListEnterKeyDirection.Row, Text = "Left/Right" },
         };
 
         protected override void OnInitialized() {

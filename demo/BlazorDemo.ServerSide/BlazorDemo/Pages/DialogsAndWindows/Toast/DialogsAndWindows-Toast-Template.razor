@@ -1,4 +1,4 @@
-<DemoPageSectionComponent Id="DialogsAndWindows-Toast-Template" ShowSizeMode="true" MinHeight="500">
+﻿<DemoPageSectionComponent Id="DialogsAndWindows-Toast-Template" ShowSizeMode="true" MinHeight="500" UseScrollableContainer="true">
     <ChildContentWithParameters Context="Params">
         <div class="custom-toast-background d-flex align-items-center">
             <DxButton RenderStyle="ButtonRenderStyle.Secondary" Text="SHOW A TOAST WITH BUTTONS" Click="ShowToastButtons" />
@@ -6,7 +6,7 @@
             <DxButton RenderStyle="ButtonRenderStyle.Secondary" Text="SHOW A TOAST WITH RADIOBUTTONS" Click="ShowToastRadio" />
             <DxToastProvider Name="Template"
                              SizeMode="Params.SizeMode"
-                             MaxToastCount="3" 
+                             MaxToastCount="3"
                              FreezeOnClick="true"/>
         </div>
 
@@ -23,7 +23,11 @@
                  Title="New meeting"
                  Text="Andy scheduled a new meeting at 2:00 PM."
                  ProviderName="Template">
-            <DxComboBox NullText="Select action" Data="comboboxData" @bind-Value="comboboxValue" />
+            <DxComboBox NullText="Select action"
+                        Data="comboboxData"
+                        @bind-Value="comboboxValue"
+                        CssClass="toast-combobox"
+                        DropDownCssClass="toast-dropdown"/>
         </DxToast>
 
         <DxToast @ref=toastRadio
@@ -31,7 +35,8 @@
                  ProviderName="Template">
             <DxRadioGroup @bind-Value="radioValue"
                           Items="radioValues"
-                          Layout="RadioGroupLayout.Horizontal" />
+                          Layout="RadioGroupLayout.Horizontal"
+                          CssClass="toast-radio"/>
         </DxToast>
 
     </ChildContentWithParameters>

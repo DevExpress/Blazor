@@ -1,0 +1,68 @@
+﻿@page "/PivotTable/Filtering/FilterAPI"
+@layout DataProviderAccessArea<ISalesInfoDataProvider>
+
+
+<DemoPageSectionComponent Id="PivotTable-Filtering-FilterAPI" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject ISalesInfoDataProvider SaleInfoDataProvider
+        @using DevExpress.Data.Filtering
+        <div class="pivot-container">
+            @if (Data == null) {
+                <div class="pivot-loading-panel-container">
+                    <div class="d-flex flex-column">
+                        <DxLoadingPanel Visible="true"
+                                        SizeMode="Params.SizeMode"
+                                        Text="Data Loading..."
+                                        IndicatorAreaVisible="false"
+                                        IndicatorAnimationType="@WaitIndicatorAnimationType.Spin"></DxLoadingPanel>
+                    </div>
+                </div>
+            }
+            else {
+                <div class="cw-480 tagbox-container">
+                    <DxTagBox Data="Regions" Values="SelectedRegions"
+                              ValuesChanged="(IEnumerable<string> values) => TagBox_ValuesChanged(values)"
+                              NullText="Select region..."
+                              ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                              aria-label="Select region" />
+                </div>
+                <DxPivotTable
+                    @ref="PivotTable"
+                    Data="@Data"
+                    AutoExpandGroups="false"
+                    SizeMode="Params.SizeMode"
+                    FilterHeaderAreaDisplayMode="PivotTableFilterHeaderAreaDisplayMode.Never">
+                    <Fields>
+                        <DxPivotTableField Field="@nameof(SaleInfo.Region)" SortOrder="PivotTableSortOrder.Ascending" Area="PivotTableArea.Row" Width="140" />
+                        <DxPivotTableField Field="@nameof(SaleInfo.Country)" Area="PivotTableArea.Row" Width="160" />
+                        <DxPivotTableField Field="@nameof(SaleInfo.Date)" GroupInterval="PivotTableGroupInterval.DateYear" Area="PivotTableArea.Column" Caption="Year" />
+                        <DxPivotTableField Field="@nameof(SaleInfo.Date)" GroupInterval="PivotTableGroupInterval.DateQuarter" Area="PivotTableArea.Column" Caption="Quarter" />
+                        <DxPivotTableField Field="@nameof(SaleInfo.Date)" GroupInterval="PivotTableGroupInterval.DateMonth" Area="PivotTableArea.Column" Caption="Month" />
+                        <DxPivotTableField Field="@nameof(SaleInfo.Amount)" Area="PivotTableArea.Data" SummaryType="PivotTableSummaryType.Sum" Width="110" />
+                        <DxPivotTableField Field="@nameof(SaleInfo.OrderId)" Caption="Count" Area="PivotTableArea.Data" SummaryType="PivotTableSummaryType.Count" Width="80" />
+                    </Fields>
+                </DxPivotTable>
+            }
+        </div>
+        @code {
+            IPivotTable PivotTable { get; set; }
+
+            IEnumerable<SaleInfo> Data { get; set; }
+            IEnumerable<string> Regions { get; set; }
+            IEnumerable<string> SelectedRegions { get; set; }
+
+            protected override async Task OnInitializedAsync() {
+                Data = await SaleInfoDataProvider.GetSalesAsync();
+                Regions = Data.Select(s => s.Region).Distinct().Order().ToList();
+            }
+
+            void TagBox_ValuesChanged(IEnumerable<string> newSelectedRegions) {
+                SelectedRegions = newSelectedRegions;
+                var filterCriteria = SelectedRegions.Count() > 0
+                ? new InOperator(nameof(SaleInfo.Region), SelectedRegions)
+                : null;
+                PivotTable.SetFilterCriteria(filterCriteria);
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

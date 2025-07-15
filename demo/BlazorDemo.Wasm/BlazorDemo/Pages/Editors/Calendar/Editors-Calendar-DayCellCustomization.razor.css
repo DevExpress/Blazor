@@ -1,3 +1,21 @@
 .dxbl-calendar-day > a {
     text-decoration: none;
 }
+.personal-day {
+    color: var(--dxbl-client-component-palette-success);
+    --dxbl-calendar-item-text-color: var(--dxbl-client-component-palette-success);
+    --dxbl-calendar-today-text-color: var(--dxbl-client-component-palette-success);
+    --dxbl-calendar-item-selected-hover-color: var(--dxbl-client-component-palette-success);
+}
+.holiday {
+    color: var(--dxbl-client-component-palette-danger);
+    --dxbl-calendar-item-text-color: var(--dxbl-client-component-palette-danger);
+    --dxbl-calendar-today-text-color: var(--dxbl-client-component-palette-danger);
+    --dxbl-calendar-item-selected-hover-color: var(--dxbl-client-component-palette-danger);
+}
+.birth-date {
+    color: var(--dxbl-client-component-palette-info);
+    --dxbl-calendar-item-text-color: var(--dxbl-client-component-palette-info);
+    --dxbl-calendar-today-text-color: var(--dxbl-client-component-palette-info);
+    --dxbl-calendar-item-selected-hover-color: var(--dxbl-client-component-palette-info);
+}

@@ -8,7 +8,9 @@
 
         <div class="grid-container">
             <DxGrid @ref="Grid"
+                    KeyFieldName="SupplierId"
                     Data="DataSource"
+                    EditOnKeyPress="true"
                     ValidationEnabled="false"
                     SizeMode="Params.SizeMode"
                     EditMode="GridEditMode.EditCell"

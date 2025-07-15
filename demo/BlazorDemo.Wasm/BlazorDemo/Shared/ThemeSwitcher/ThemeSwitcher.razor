@@ -1,48 +1,129 @@
 ﻿@inject DemoThemeService Themes
 @implements IDisposable
+@using System.Text.RegularExpressions
 @implements IDemoThemeLoadNotifier
 
-<div class="themeswitcher-container shadow @StateCssClass">
-    @if(IsLoaded) {
-        <DxScrollView CssClass="blazor-themes">
-            <div class="list-group list-group-flush">
-                @foreach(var themeSet in Themes.ThemeSets) {
-                    <span class="themeswitcher-group card-header list-group-item">@themeSet.Title</span>
-                    @foreach(var theme in themeSet.Themes) {
-                        <ThemeSwitcherItem Theme="@theme" Click="ThemeSwitcherItem_Click"/>
+
+@if(IsLoaded) {
+    <div class="themeswitcher-container shadow @StateCssClass">
+        <DxScrollView>
+            <div class="themeswitcher-content">
+                <div class="themeswitcher-title">DevExpress Fluent</div>
+                <DxButtonGroup Enabled="Themes.ActiveTheme.IsFluent" CssClass="themeswitcher-fluent-mode"
+                               RenderStyle="ButtonRenderStyle.Secondary"
+                               RenderStyleMode="ButtonRenderStyleMode.Contained"
+                               SelectionMode="ButtonGroupSelectionMode.Single">
+                    <Items>
+                        <DxButtonGroupItem Click="() => OnFluentModeChange(ThemeMode.Light)"
+                                           Selected="Themes.ThemeState.Mode == ThemeMode.Light" Text="Light"
+                                           IconCssClass="themeswitcher-icon-fluent-mode-light"/>
+                        <DxButtonGroupItem Click="() => OnFluentModeChange(ThemeMode.Dark)"
+                                           Selected="Themes.ThemeState.Mode == ThemeMode.Dark" Text="Dark"
+                                           IconCssClass="themeswitcher-icon-fluent-mode-dark"/>
+                    </Items>
+                </DxButtonGroup>
+
+                <div class="themeswitcher-subtitle">Preset Colors</div>
+                <ul class="themeswitcher-colors">
+                    @foreach(var theme in Themes.FluentThemes) {
+                        <ThemeSwitcherItem Theme="theme" Click="ThemeSwitcherItem_Click"/>
                     }
-                }
+                </ul>
+
+                <div class="themeswitcher-subtitle">Custom Color</div>
+                <div class="themeswitcher-custom-color @GetCustomColorPickerCss()">
+                    <DxMaskedInput
+                        ValueChanged="e => OnFluentSetCustomAccentColor(e)"
+                        T="string"
+                        Mask="#([0-9a-fA-F]{6})"
+                        MaskMode="MaskMode.RegEx"
+                        NullText="#hex"
+                        Value="@GetColorPickerText()"/>
+                    <DxButton CssClass="themeswitcher-custom-color-button"
+                              RenderStyle="ButtonRenderStyle.Secondary"
+                              RenderStyleMode="ButtonRenderStyleMode.Contained"
+                              IconCssClass="themeswitcher-custom-color-button-icon">
+                        <div class="themeswitcher-custom-color-button-icon">
+                        </div>
+                        <input type="color" value="@GetColorPickerText()" @onchange="(e) => OnFluentSetCustomAccentColor(e.Value.ToString())"/>
+                    </DxButton>
+                </div>
             </div>
+
+            <div class="themeswitcher-content">
+                <div class="themeswitcher-title">DevExpress Classic</div>
+                <ul class="themeswitcher-colors">
+                    @foreach(var theme in Themes.ClassicThemes) {
+                        <ThemeSwitcherItem Theme="theme" Click="ThemeSwitcherItem_Click"/>
+                    }
+                </ul>
+            </div>
+
+            <div class="themeswitcher-content">
+                <div class="themeswitcher-title">Bootstrap</div>
+                <ul class="themeswitcher-colors">
+                    @foreach(var theme in Themes.BootstrapThemes) {
+                        <ThemeSwitcherItem Theme="theme" Click="ThemeSwitcherItem_Click"/>
+                    }
+                </ul>
+            </div>
+
         </DxScrollView>
-    }
-</div>
+    </div>
+}
+
 
 @code {
-    [Parameter]
-    public bool Shown { get; set; }
-    [Parameter]
-    public EventCallback<bool> ShownChanged { get; set; }
-    [Parameter]
-    public string ThemeName { get; set; }
-    [Parameter]
-    public EventCallback<string> ThemeNameChanged { get; set; }
+    [Parameter] public bool Shown { get; set; }
+    [Parameter] public EventCallback<bool> ShownChanged { get; set; }
+    [Parameter] public string ThemeName { get; set; }
+    [Parameter] public EventCallback<string> ThemeNameChanged { get; set; }
 
-    string StateCssClass { get { return IsLoaded ? ((Shown? "themeswitcher-container-shown" : "themeswitcher-container-hidden")) : ""; } }
+    string StateCssClass => IsLoaded ? ((Shown ? "themeswitcher-container-shown" : "themeswitcher-container-hidden")) : "";
     bool IsLoaded { get; set; }
+    const string hexRegexStr = "#([0-9a-fA-F]{6})";
 
     protected override void OnInitialized() {
         base.OnInitialized();
         Themes.ThemeLoadNotifier = this;
     }
 
-    async Task ThemeSwitcherItem_Click(DemoTheme theme) {
-        Themes.ThemeChangeRequestDispatcher?.RequestThemeChange(theme);
+    string GetCustomColorPickerCss() {
+        return IsCustomThemeSelected() ? "active" : null;
+    }
+
+    async Task ThemeSwitcherItem_Click(DemoTheme demoTheme) {
+        Themes.ThemeState.CustomAccentColor = null;
+        Themes.ThemeChangeRequestDispatcher?.RequestThemeChange(demoTheme);
         await ToggleThemeSwitcherPanel(false);
     }
 
-    public async Task NotifyThemeLoadedAsync(DemoTheme theme) {
-        ThemeName = theme.Name;
-        await ThemeNameChanged.InvokeAsync(ThemeName);
+    async Task OnFluentModeChange(ThemeMode mode) {
+        Themes.ThemeState.Mode = mode;
+        Themes.ThemeChangeRequestDispatcher?.RequestThemeChange(Themes.ActiveTheme);
+        await ToggleThemeSwitcherPanel(false);
+    }
+
+    async Task OnFluentSetCustomAccentColor(string color) {
+        if(string.IsNullOrEmpty(color) || !Regex.IsMatch(color, hexRegexStr))
+            return;
+
+        Themes.ThemeState.CustomAccentColor = color;
+        Themes.ThemeChangeRequestDispatcher?.RequestThemeChange(Themes.CustomFluentDemoTheme);
+        await ToggleThemeSwitcherPanel(false);
+    }
+
+    private string GetColorPickerText() {
+        return IsCustomThemeSelected() ? Themes.ThemeState.CustomAccentColor : null;
+    }
+
+    private bool IsCustomThemeSelected() {
+        return Themes.ActiveTheme == Themes.CustomFluentDemoTheme;
+    }
+
+    public async Task NotifyThemeLoadedAsync(DemoTheme demoTheme) {
+        ThemeName = demoTheme.Name;
+        await ThemeNameChanged.InvokeAsync(demoTheme.Name);
     }
 
     async Task ToggleThemeSwitcherPanel(bool shown) {

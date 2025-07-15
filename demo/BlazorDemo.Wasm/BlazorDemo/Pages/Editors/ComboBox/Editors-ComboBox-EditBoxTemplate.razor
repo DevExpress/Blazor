@@ -50,8 +50,21 @@
             return $"template-icon {item.IconCssClass}";
         }
         protected override void OnInitialized() {
-            Themes = ThemeService.ThemeSets.SelectMany(ts => ts.Themes);
+            Themes = CreateThemeList();
             CurrentTheme = Themes.FirstOrDefault();
+        }
+
+        List<DemoTheme> CreateThemeList() {
+            return [
+                DemoThemes.BlazingBerry,
+                DemoThemes.BlazingDark,
+                DemoThemes.Purple,
+                DemoThemes.OfficeWhite,
+                DemoThemes.BootstrapDefault,
+                DemoThemes.BootstrapDefaultDark,
+                DemoThemes.FluentOrchid,
+                DemoThemes.FluentMint
+            ];
         }
     }
 </DemoPageSectionComponent>

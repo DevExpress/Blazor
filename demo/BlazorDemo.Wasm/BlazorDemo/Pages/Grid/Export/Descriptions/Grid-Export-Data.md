@@ -1,17 +1,12 @@
-The DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/403143/grid) allows you to export data to XLS, XLSX, and CSV file formats. When exporting to Excel formats, the resulting file can maintain data grouping, sorting, filtering, totals, and group summaries.
+The DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/403143/grid) UI component allows you to export data to XLS, XLSX, PDF, and CSV formats via the following data export methods:
 
-The Grid implements the following data export methods:
+* [ExportToXlsAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ExportToXlsAsync.overloads) — Exports data to the XLS format.
+* [ExportToXlsxAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ExportToXlsxAsync.overloads) — Exports data to the XLSX format.
+* [ExportToCsvAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ExportToCsvAsync.overloads) — Exports data to the CSV format.
+* [ExportToPdfAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ExportToPdfAsync.overloads) — Exports data to PDF.
 
-* [ExportToXlsAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ExportToXlsAsync.overloads) — Exports data in XLS format.
-* [ExportToXlsxAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ExportToXlsxAsync.overloads) — Exports data in XLSX format.
-* [ExportToCsvAsync](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ExportToCsvAsync.overloads) — Exports data in CSV format.
+To customize the exported document, use the export method's `options` parameter.
 
-All these methods accept the [options](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridXlExportOptions) parameter. This options parameter allows you to customize the exported document. 
+This demo calls an export method once you click the desired "Export..." button. The **Export Selected Rows Only** checkbox above the Blazor Grid component sets the [ExportSelectedRowsOnly](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridExportOptions.ExportSelectedRowsOnly) option. When exporting to XLSX/XLS/PDF, the `CustomizeCell` event handler italicizes values stored in the **Contact Name** column. During PDF export operations, the [CustomizePageFooter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridDocumentExportOptions.CustomizePageFooter) event handler adds page numbers to the footer.
 
-The Grid exports data for every visible column. Set a column's [ExportEnabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.ExportEnabled) property to `false` to prevent data export for a specific column.
-
-In this demo, export methods are called when a user clicks a corresponding "Export..." button. These methods accept the following settings:
-* The [ExportSelectedRowsOnly](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridExportOptions.ExportSelectedRowsOnly) option is set based on the **Export Selected Rows Only** check box selection state.
-* The [CustomizeCell](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridExportOptions.CustomizeCell) event handler applies italic formatting to cells within the **ContactName** column.
-
-For detailed information on how to export grid data and examples, refer to the following help topic: [Export Data](https://docs.devexpress.com/Blazor/404338/components/grid/export).
+**Note**: Our Blazor Grid exports data from all visible columns. To exclude a column from export operations, set the column's [ExportEnabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.ExportEnabled) property to `false`.

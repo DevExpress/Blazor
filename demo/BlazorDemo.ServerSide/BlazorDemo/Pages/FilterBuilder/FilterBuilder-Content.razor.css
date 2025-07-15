@@ -1,0 +1,21 @@
+/*BeginHide*/
+::deep /*EndHide*/.dxbl-grid {
+    max-height: 522px;
+}
+
+/*BeginHide*/
+.grid-container {
+    display: contents;
+}
+
+/*EndHide*/
+
+.card {
+    width: 60%;
+}
+
+@media (max-width: 576px) {
+    .card {
+        width: unset;
+    }
+}

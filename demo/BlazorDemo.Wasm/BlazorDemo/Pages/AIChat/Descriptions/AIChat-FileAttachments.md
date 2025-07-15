@@ -1,0 +1,7 @@
+<div class="alert dxbl-alert alert-primary" role="alert">Note: AI services used for this demo have been rate limited. As such, you may experience performance-related delays when exploring the capabilities of DevExpress AI-powered Extensions.
+<br />When connected to your own AI model/service without rate limits, DevExpress AI-powered Extensions will perform seamlessly, without artificial delays.</div>
+
+DevExpress Blazor AI Chat allows users to attach files to messages. Set the [DxAIChat.FileUploadEnabled](https://docs.devexpress.com/Blazor/DevExpress.AIIntegration.Blazor.Chat.DxAIChat.FileUploadEnabled) property to `true` to activate file upload functionality. You can use a nested [DxAIChatFileUploadSettings](https://docs.devexpress.com/Blazor/DevExpress.AIIntegration.Blazor.Chat.DxAIChatFileUploadSettings) component to validate file size/extension and limit the number of files. This demo uses the drop-down menu to specify allowed file types.
+
+In this demo, the [Initialized](https://docs.devexpress.com/Blazor/DevExpress.AIIntegration.Blazor.Chat.DxAIChat.Initialized) event handler calls the [LoadMessages](https://docs.devexpress.com/Blazor/DevExpress.AIIntegration.Blazor.Chat.DxAIChat.LoadMessages(System.Collections.Generic.IEnumerable-DevExpress.AIIntegration.Blazor.Chat.BlazorChatMessage-)) method to pre-populate the chat with messages and file attachments.
+File attachments are specified by [AIChatUploadFileInfo](https://docs.devexpress.com/Blazor/DevExpress.AIIntegration.Blazor.Chat.AIChatUploadFileInfo) objects. 

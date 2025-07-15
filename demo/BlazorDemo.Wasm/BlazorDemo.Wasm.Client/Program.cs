@@ -85,6 +85,7 @@ namespace BlazorDemo.Wasm {
             services.AddSingleton<ISalesAmountDataProvider, SalesAmountDataProvider>();
             services.AddSingleton<IRangeSelectorZoomingDataProvider, RangeSelectorZoomingDataProvider>();
             services.AddSingleton<IPopulationDataProvider, PopulationDataProvider>();
+            services.AddSingleton<IPromptSuggestionsDataProvider, PromptSuggestionsDataProvider>();
 
             services.AddNotSupportedDemoServices();
 #pragma warning disable DX0006

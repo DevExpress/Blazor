@@ -11,7 +11,7 @@
                     <Items>
                         <DxToolbarItem Attributes="@(DrawerUtils.GetToolbarButtonAttributes(IsOpen))"
                                        Click="OnToolbarItemClick"
-                                       IconCssClass="tb-icon icon-hamburger" />
+                                       IconCssClass="tb-icon tb-icon-hamburger" />
                     </Items>
                 </DxToolbar>
             </div>
@@ -20,7 +20,8 @@
                           @bind-IsOpen="IsOpen"
                           Mode="Mode"
                           Position="Position"
-                          PanelWidth="20%">
+                          PanelWidth="20%"
+                          aria-label="Demo Drawer">
                     <BodyTemplate>
                         <DxMenu SizeMode="Params.SizeMode" CssClass="demo-drawer-menu w-100"
                                 Orientation="Orientation.Vertical">

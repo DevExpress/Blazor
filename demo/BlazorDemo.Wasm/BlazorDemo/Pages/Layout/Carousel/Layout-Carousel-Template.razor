@@ -1,6 +1,8 @@
-@using System.Threading
+﻿@using System.Threading
+
 <DemoPageSectionComponent Id="Layout-Carousel-Template"
-                          ShowSizeMode="true">
+                          ShowSizeMode="true"
+                          UseScrollableContainer="true">
     <ChildContentWithParameters Context="Params">
         @inject ISalesInfoDataProvider Sales
         <div>

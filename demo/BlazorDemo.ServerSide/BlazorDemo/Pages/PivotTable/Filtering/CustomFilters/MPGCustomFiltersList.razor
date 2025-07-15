@@ -1,0 +1,68 @@
+﻿@using DevExpress.Blazor.PivotTable.Internal
+@using DevExpress.Data.Filtering
+@using DevExpress.Data.Filtering.Helpers
+@using BlazorDemo.Pages.PivotTable.Filtering.CustomFilters
+
+<DxListBox Data="@Filters"
+           Values="@FilterValues"
+           KeyFieldName="@nameof(MPGCustomFilterItem.Key)"
+           ValuesChanged="@((IEnumerable<MPGCustomFilterItem> values) => OnValuesChanged(values))"
+           SelectionMode="@ListBoxSelectionMode.Multiple"
+           ShowCheckboxes="true"
+           style="border: none; overflow-x: hidden;">
+    <ItemDisplayTemplate>
+        <div>
+            <span>Fuel Economy</span>
+            <span class="@GetCssClass(context.DataItem)">
+                @($"({context.DataItem.Text})")
+            </span>
+        </div>
+    </ItemDisplayTemplate>
+</DxListBox>
+
+@code {
+    List<MPGCustomFilterItem> FilterValues { get; set; }
+
+    [Parameter]
+    public IReadOnlyList<MPGCustomFilterItem> Filters { get; set; }
+
+    [Parameter]
+    public PivotTableFieldFilterMenuTemplateContext FilterMenuContext { get; set; }
+
+    protected override Task OnInitializedAsync() {
+        RestoreSelectedValues(FilterMenuContext.FilterCriteria);
+        return base.OnInitializedAsync();
+    }
+
+    void RestoreSelectedValues(CriteriaOperator criteria) {
+        if(criteria.ReferenceEqualsNull())
+            return;
+        FilterValues = new List<MPGCustomFilterItem>();
+        GroupOperator op = criteria as GroupOperator;
+        if(!op.ReferenceEqualsNull() && op.OperatorType == GroupOperatorType.Or) {
+            foreach(var operand in op.Operands)
+                FilterValues.Add(FindCustomFilterItem(operand));
+        } else {
+            FilterValues.Add(FindCustomFilterItem(criteria));
+        }
+    }
+
+    MPGCustomFilterItem FindCustomFilterItem(CriteriaOperator criteria) {
+        return Filters.FirstOrDefault(item => item.FilterCriteria.Equals(criteria));
+    }
+
+    void OnValuesChanged(IEnumerable<MPGCustomFilterItem> values) {
+        FilterMenuContext.FilterCriteria = null;
+        foreach(MPGCustomFilterItem value in values)
+            FilterMenuContext.FilterCriteria = CriteriaOperator.Or(FilterMenuContext.FilterCriteria, value.FilterCriteria);
+    }
+
+    string GetCssClass(MPGCustomFilterItem item) {
+        return item.Text switch {
+            "Low" => "text-danger",
+            "Medium" => "text-warning",
+            "High" => "text-success",
+            _ => string.Empty
+        };
+    }
+}

@@ -11,7 +11,7 @@ namespace BlazorDemo.Data {
                 new FontFamilyMenuItem(textFormatting, "MS Sans Serif", "MS Sans Serif"),
                 new FontFamilyMenuItem(textFormatting, "Courier", "Courier"),
                 new FontFamilyMenuItem(textFormatting, "Segoe UI", "Segoe UI"),
-                new FontFamilyMenuItem(textFormatting, "Default", null) { BeginGroup = true }
+                new FontFamilyMenuItem(textFormatting, "Default", null) { BeginGroup = true, IconCss = "menu-icon menu-icon-check" }
             });
         public static TextFormattingMenuItem FontSizeMenuItem(TextFormatting textFormatting) =>
             new TextFormattingParentMenuItem(textFormatting, "Size", new List<TextFormattingMenuItem>() {

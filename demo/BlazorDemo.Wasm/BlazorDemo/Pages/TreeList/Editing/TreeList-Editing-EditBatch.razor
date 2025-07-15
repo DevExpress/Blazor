@@ -15,6 +15,7 @@
                         TextWrapEnabled="false"
                         SizeMode="Params.SizeMode"
                         CssClass="max-h-480"
+                        EditOnKeyPress="true"
                         ValidationEnabled="false"
                         EditMode="TreeListEditMode.EditCell"
                         EditModelSaving="TreeList_EditModelSaving"
@@ -59,6 +60,7 @@
                         <CellDisplayTemplate>
                             <div class="grid-cell-align-center">
                                 <DxButton IconCssClass="grid-icon grid-icon-add"
+                                          CssClass="grid-new-btn"
                                           RenderStyle="ButtonRenderStyle.Link"
                                           aria-label="New"
                                           Click="@(() => TreeList.StartEditNewRowAsync(context.VisibleIndex))"/>
@@ -72,12 +74,12 @@
                         <CellEditTemplate>
                             <div class="grid-cell-align-center">
                                 <DxButton Enabled="false"
-                                          CssClass="grid-disabled-button"
+                                          CssClass="grid-new-btn grid-disabled-button"
                                           IconCssClass="grid-icon grid-icon-add"
                                           aria-label="New"
                                           RenderStyle="ButtonRenderStyle.Link"/>
                                 <DxButton Enabled="false"
-                                          CssClass="grid-disabled-button"
+                                          CssClass="grid-delete-btn grid-disabled-button"
                                           IconCssClass="grid-icon grid-icon-delete"
                                           aria-label="Delete"
                                           RenderStyle="ButtonRenderStyle.Link"/>
@@ -108,7 +110,10 @@
         bool BatchItemsEnabled => UnsavedChanges.Count > 0 || TreeList.IsEditing();
 
         protected override async Task OnInitializedAsync() => await UpdateDataAsync();
-        async Task Revert_Click() => await ClearUnsavedChangesAsync();
+        async Task Revert_Click() {
+            await TreeList.CancelEditAsync();
+            await ClearUnsavedChangesAsync();
+        }
         async Task Submit_Click() {
             foreach(var unsavedChange in UnsavedChanges) {
                 var changedItem = unsavedChange.Key;

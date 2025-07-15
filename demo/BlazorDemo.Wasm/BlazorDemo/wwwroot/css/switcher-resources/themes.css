@@ -75,12 +75,20 @@
     background: #008cba;
 }
 
-.blazor-themes a.fluent-light:before {
+.blazor-themes a.light-blue:before {
     background: #0f6cbd;
 }
 
-.blazor-themes a.fluent-dark:before {
-    background: #282828;
+.blazor-themes a.dark-blue:before {
+    background: #0f6cbd;
+}
+
+.blazor-themes a.light-purple:before {
+    background: #a939ae;
+}
+
+.blazor-themes a.dark-purple:before {
+    background: #a939ae;
 }
 
 .theme-external {

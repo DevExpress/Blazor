@@ -1,4 +1,4 @@
-﻿<DemoPageSectionComponent Id="Utility-ButtonGroup-Overview" ShowSizeMode="true">
+﻿<DemoPageSectionComponent Id="Utility-ButtonGroup-Overview" ShowSizeMode="true" UseScrollableContainer="true">
     <ChildContentWithParameters Context="Params">
         <div class="component-container flex-row flex-wrap align-items-start w-100">
             <div class="d-flex flex-column justify-content-between me-4">
@@ -6,10 +6,10 @@
                 <div class="mb-3">
                     <DxButtonGroup SizeMode="Params.SizeMode" RenderStyle="@SelectedRenderStyle" RenderStyleMode="@SelectedRenderStyleMode">
                         <Items>
-                            <DxButtonGroupItem Text="Play/Pause" IconCssClass="@(IsPaused ? "icon icon-continue" : "icon icon-pause")" Click="@OnPlayPauseClick"/>
-                            <DxButtonGroupItem Text="Up Next" IconCssClass="icon icon-last"/>
-                            <DxButtonGroupItem Text="Settings" IconCssClass="icon icon-settings"/>
-                            <DxButtonGroupItem Text="Fullscreen" IconCssClass="icon icon-full-screen"/>
+                            <DxButtonGroupItem Text="Play/Pause" IconCssClass="@(IsPaused ? "btn-icon btn-icon-continue" : "btn-icon btn-icon-pause")" Click="@OnPlayPauseClick"/>
+                            <DxButtonGroupItem Text="Up Next" IconCssClass="btn-icon btn-icon-last"/>
+                            <DxButtonGroupItem Text="Settings" IconCssClass="btn-icon btn-icon-settings"/>
+                            <DxButtonGroupItem Text="Fullscreen" IconCssClass="btn-icon btn-icon-full-screen"/>
                         </Items>
                     </DxButtonGroup>
                 </div>
@@ -17,10 +17,10 @@
                 <div class="mb-3">
                     <DxButtonGroup SizeMode="Params.SizeMode" RenderStyle="@SelectedRenderStyle" RenderStyleMode="@SelectedRenderStyleMode" SelectionMode="ButtonGroupSelectionMode.Single">
                         <Items>
-                            <DxButtonGroupItem Text="Admin" IconCssClass="icon icon-lock-column"/>
-                            <DxButtonGroupItem Text="Editor" IconCssClass="icon icon-edit"/>
-                            <DxButtonGroupItem Text="Reviewer" IconCssClass="icon icon-no-tooltip"/>
-                            <DxButtonGroupItem Text="Guest" IconCssClass="icon icon-user"/>
+                            <DxButtonGroupItem Text="Admin" IconCssClass="btn-icon btn-icon-lock-column"/>
+                            <DxButtonGroupItem Text="Editor" IconCssClass="btn-icon btn-icon-edit"/>
+                            <DxButtonGroupItem Text="Reviewer" IconCssClass="btn-icon btn-icon-no-tooltip"/>
+                            <DxButtonGroupItem Text="Guest" IconCssClass="btn-icon btn-icon-user"/>
                         </Items>
                     </DxButtonGroup>
                 </div>
@@ -28,10 +28,10 @@
                 <div class="mb-3">
                     <DxButtonGroup SizeMode="Params.SizeMode" RenderStyle="@SelectedRenderStyle" RenderStyleMode="@SelectedRenderStyleMode" SelectionMode="ButtonGroupSelectionMode.Multiple">
                         <Items>
-                            <DxButtonGroupItem Text="High Priority" IconCssClass="icon icon-validation-warning"/>
-                            <DxButtonGroupItem Text="Completed" IconCssClass="icon icon-check"/>
-                            <DxButtonGroupItem Text="Assigned to me" IconCssClass="icon icon-user-profile"/>
-                            <DxButtonGroupItem Text="Overdue" IconCssClass="icon icon-clock"/>
+                            <DxButtonGroupItem Text="High Priority" IconCssClass="btn-icon btn-icon-validation-warning"/>
+                            <DxButtonGroupItem Text="Completed" IconCssClass="btn-icon btn-icon-check"/>
+                            <DxButtonGroupItem Text="Assigned to me" IconCssClass="btn-icon btn-icon-user-profile"/>
+                            <DxButtonGroupItem Text="Overdue" IconCssClass="btn-icon btn-icon-clock"/>
                         </Items>
                     </DxButtonGroup>
                 </div>
@@ -41,11 +41,11 @@
                 <div>
                     <DxButtonGroup SizeMode="Params.SizeMode" RenderStyle="@SelectedRenderStyle" RenderStyleMode="@SelectedRenderStyleMode" Orientation="Orientation.Vertical">
                         <Items>
-                            <DxButtonGroupItem Text="Add Task" CssClass="justify-content-start" IconCssClass="icon icon-plus"/>
-                            <DxButtonGroupItem Text="Edit Task" CssClass="justify-content-start" IconCssClass="icon icon-edit"/>
-                            <DxButtonGroupItem Text="Assign Task" CssClass="justify-content-start" IconCssClass="icon icon-user-profile"/>
-                            <DxButtonGroupItem Text="Complete Task" CssClass="justify-content-start" IconCssClass="icon icon-check"/>
-                            <DxButtonGroupItem Text="Archive Task" CssClass="justify-content-start" IconCssClass="icon icon-delete"/>
+                            <DxButtonGroupItem Text="Add Task" CssClass="justify-content-start" IconCssClass="btn-icon btn-icon-plus"/>
+                            <DxButtonGroupItem Text="Edit Task" CssClass="justify-content-start" IconCssClass="btn-icon btn-icon-edit"/>
+                            <DxButtonGroupItem Text="Assign Task" CssClass="justify-content-start" IconCssClass="btn-icon btn-icon-user-profile"/>
+                            <DxButtonGroupItem Text="Complete Task" CssClass="justify-content-start" IconCssClass="btn-icon btn-icon-check"/>
+                            <DxButtonGroupItem Text="Archive Task" CssClass="justify-content-start" IconCssClass="btn-icon btn-icon-delete"/>
                         </Items>
                     </DxButtonGroup>
                 </div>
@@ -55,7 +55,7 @@
 
     <OptionsContent>
         <OptionComboBox Label="Button Render Style:"
-                        Data="@(Enum.GetNames(typeof(ButtonRenderStyle)))"
+                        Data="@(ButtonRenderStyles)"
                         Value="@(SelectedRenderStyle.ToString())"
                         ValueChanged="@((string selectedItem) => { SelectedRenderStyle = Enum.Parse<ButtonRenderStyle>(selectedItem); })"/>
         <OptionComboBox Label="Button Render Style Mode:"
@@ -65,6 +65,7 @@
     </OptionsContent>
 
     @code {
+        string[] ButtonRenderStyles { get; set; }
         ButtonRenderStyle SelectedRenderStyle { get; set; } = ButtonRenderStyle.Secondary;
         ButtonRenderStyleMode SelectedRenderStyleMode { get; set; } = ButtonRenderStyleMode.Outline;
         bool IsPaused { get; set; } = true;
@@ -73,6 +74,14 @@
             IsPaused = !IsPaused;
         }
 
+        protected override void OnInitialized() {
+            base.OnInitialized();
+            ButtonRenderStyles = Enum.GetNames(typeof(ButtonRenderStyle));
+            @*BeginHide*@
+            string[] excluded = [nameof(ButtonRenderStyle.Light), nameof(ButtonRenderStyle.Dark)];
+            ButtonRenderStyles = ButtonRenderStyles.Where(name => !excluded.Contains(name)).ToArray();
+            @*EndHide*@
+        }
     }
 
 </DemoPageSectionComponent>

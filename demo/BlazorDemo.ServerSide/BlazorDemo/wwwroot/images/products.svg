@@ -233,4 +233,68 @@
         <rect x="16" y="64" width="72" height="4" rx="2" fill="var(--utilities-loading-bg)" />
         <rect x="16" y="64" width="48" height="4" rx="2" fill="var(--utilities-accent-color)" />
 	</symbol>
+	<symbol id="showcase" width="84" height="76" viewBox="0 0 84 76" fill="none">
+		<rect x="5" y="9" width="74" height="60" rx="8" fill="#989898"/>
+		<rect x="5" y="7" width="74" height="60" rx="8" fill="#EAEAEA"/>
+		<g filter="url(#filter0_d_77_1542)">
+			<path d="M79 59C79 63.4183 75.4183 67 71 67L13 67C8.58172 67 5 63.4183 5 59L5 53L79 53L79 59Z" fill="white"/>
+		</g>
+		<path d="M5 15H25V53H5V15Z" fill="white"/>
+		<rect x="9" y="20" width="13" height="3" rx="1.5" fill="var(--showcase-body-lines-color)"/>
+		<rect x="31" y="20" width="11" height="3" rx="1.5" fill="var(--showcase-body-lines-color)"/>
+		<rect x="31" y="27" width="11" height="3" rx="1.5" fill="var(--showcase-accent-color)"/>
+		<rect x="31" y="34" width="11" height="3" rx="1.5" fill="var(--showcase-body-bg)"/>
+		<rect x="31" y="41" width="11" height="3" rx="1.5" fill="var(--showcase-body-lines-color)"/>
+		<rect x="31" y="48" width="11" height="3" rx="1.5" fill="var(--showcase-accent-color)"/>
+		<rect x="44" y="20" width="15" height="3" rx="1.5" fill="var(--showcase-body-lines-color)"/>
+		<rect x="44" y="27" width="15" height="3" rx="1.5" fill="var(--showcase-accent-color)"/>
+		<rect x="44" y="34" width="15" height="3" rx="1.5" fill="var(--showcase-body-bg)"/>
+		<rect x="44" y="41" width="15" height="3" rx="1.5" fill="var(--showcase-body-lines-color)"/>
+		<rect x="44" y="48" width="15" height="3" rx="1.5" fill="var(--showcase-accent-color)"/>
+		<rect x="62" y="20" width="13" height="3" rx="1.5" fill="var(--showcase-body-lines-color)"/>
+		<rect x="62" y="27" width="13" height="3" rx="1.5" fill="var(--showcase-accent-color)"/>
+		<rect x="62" y="34" width="13" height="3" rx="1.5" fill="var(--showcase-body-bg)"/>
+		<rect x="62" y="41" width="13" height="3" rx="1.5" fill="var(--showcase-body-lines-color)"/>
+		<rect x="62" y="48" width="13" height="3" rx="1.5" fill="var(--showcase-accent-color)"/>
+		<rect x="16" y="34" width="6" height="3" rx="1.5" fill="var(--showcase-body-lines-color)"/>
+		<rect x="14" y="48" width="8" height="3" rx="1.5" fill="var(--showcase-body-lines-color)"/>
+		<rect x="9" y="41" width="13" height="3" rx="1.5" fill="var(--showcase-body-lines-color)"/>
+		<rect x="13" y="27" width="9" height="3" rx="1.5" fill="var(--showcase-body-lines-color)"/>
+		<g filter="url(#filter1_d_77_1542)">
+			<path d="M5 15C5 10.5817 8.58172 7 13 7H71C75.4183 7 79 10.5817 79 15V18H5V15Z" fill="white"/>
+		</g>
+		<rect x="70" y="10" width="5" height="5" rx="2.5" fill="var(--showcase-accent-color)"/>
+		<rect x="64" y="12" width="3" height="3" rx="1.5" fill="var(--showcase-header-lines-color)"/>
+		<rect x="59" y="12" width="3" height="3" rx="1.5" fill="var(--showcase-header-lines-color)"/>
+		<path d="M41 13.5C41 12.6716 41.6716 12 42.5 12H55.5C56.3284 12 57 12.6716 57 13.5C57 14.3284 56.3284 15 55.5 15H42.5C41.6716 15 41 14.3284 41 13.5Z" fill="var(--showcase-header-lines-color)"/>
+		<rect x="26" y="20" width="3" height="3" rx="1" fill="#BDBDBD"/>
+		<rect x="26" y="27" width="3" height="3" rx="1" fill="var(--showcase-accent-color)"/>
+		<rect x="26" y="34" width="3" height="3" rx="1" fill="#BABABA"/>
+		<rect x="26" y="41" width="3" height="3" rx="1" fill="#BDBDBD"/>
+		<rect x="26" y="48" width="3" height="3" rx="1" fill="var(--showcase-accent-color)"/>
+		<defs>
+			<filter id="filter0_d_77_1542" x="0" y="52" width="84" height="24" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+				<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+				<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+				<feMorphology radius="1" operator="erode" in="SourceAlpha" result="effect1_dropShadow_77_1542"/>
+				<feOffset dy="4"/>
+				<feGaussianBlur stdDeviation="3"/>
+				<feComposite in2="hardAlpha" operator="out"/>
+				<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+				<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_77_1542"/>
+				<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_77_1542" result="shape"/>
+			</filter>
+			<filter id="filter1_d_77_1542" x="0" y="6" width="84" height="21" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+				<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+				<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+				<feMorphology radius="1" operator="erode" in="SourceAlpha" result="effect1_dropShadow_77_1542"/>
+				<feOffset dy="4"/>
+				<feGaussianBlur stdDeviation="3"/>
+				<feComposite in2="hardAlpha" operator="out"/>
+				<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+				<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_77_1542"/>
+				<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_77_1542" result="shape"/>
+			</filter>
+		</defs>
+	</symbol>
 </svg>

@@ -7,13 +7,22 @@ window["_dxr_setId"] = function(key, id) {
     window["_dx_demoPageHelper"].setCookie(key, id, date);
 }
 
-window["_dxr_onViewerInitializing"] = function (s, e) {
+window["_dxr_onViewerBeforeRender"] = function (s, e) {
     var currentURL = window.location.href;
     if (currentURL.includes("AIPoweredExtensions")) {
-        DevExpress.Reporting.Viewer.Settings.AILanguages([{ key: 'en', text: 'English' }, { key: 'de', text: 'German' }]);
-        DevExpress.Reporting.Viewer.Settings.AIServicesEnabled(true);
+        DevExpress.Reporting.Viewer.Settings.AIServicesEnabled(true);        
     } else {
-        DevExpress.Reporting.Viewer.Settings.AILanguages([]);
+        DevExpress.Reporting.Viewer.Settings.AIServicesEnabled(false);        
+    }
+}
+
+window["_dxr_DesignerUpdateAIServices"] = function (s, e) {
+    var currentURL = window.location.href;
+    if (currentURL.includes("AIPoweredExtensions")) {
+        DevExpress.Reporting.Viewer.Settings.AIServicesEnabled(true);
+        DevExpress.Reporting.Designer.Settings.AIServicesEnabled(true);
+    } else {
         DevExpress.Reporting.Viewer.Settings.AIServicesEnabled(false);
+        DevExpress.Reporting.Designer.Settings.AIServicesEnabled(false);
     }
 }

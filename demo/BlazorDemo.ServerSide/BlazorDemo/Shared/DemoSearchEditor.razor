@@ -2,11 +2,11 @@
 
 <div class="search-editor">
     <div class="breadcrumb">
-        <DxTextBox NullText="Search" Text="@SearchString" BindValueMode="BindValueMode.OnDelayedInput" TextChanged="@TextChanged" InputId="txtSearch" />
-        <span class="icon icon-cancel-search @ClearButtonCssClass" @onclick="@ClearClick"></span>
         <label for="txtSearch" class="icon icon-search">
-            Search
+            Find demo by keyword
         </label>
+        <DxTextBox NullText="Find demo by keyword" Text="@SearchString" BindValueMode="BindValueMode.OnDelayedInput" TextChanged="@TextChanged" InputId="txtSearch" />
+        <span class="icon icon-cancel-search @ClearButtonCssClass" @onclick="@ClearClick"></span>
     </div>
 </div>
 

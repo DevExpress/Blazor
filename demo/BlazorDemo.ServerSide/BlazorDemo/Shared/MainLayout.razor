@@ -50,7 +50,7 @@
             <DemoSideBar></DemoSideBar>
         </div>
         <div class="main">
-            <div class="content" @key="ShouldUseThemeNameKey() ? ThemeName : null">
+            <div class="content" @key="ShouldUseThemeNameKey() ? ThemeKey : null">
                 <CascadingValue Value="@ThemeName" Name="ThemeName">
                     @Body
                 </CascadingValue>
@@ -87,6 +87,17 @@
         }
     }
 
+    protected string ThemeKey {
+        get {
+            string key = ThemeName;
+
+            if(Themes.ActiveTheme.IsFluent)
+                key += Themes.ThemeState.Mode.ToString()?.ToLowerInvariant();
+
+            return key;
+        }
+    }
+
     protected bool IsBootstrapNative {
         get { return Themes.ActiveTheme.IsBootstrapNative; }
     }
@@ -117,7 +128,7 @@
             await pageHelper.InvokeVoidAsync("DemoPageHelper.patchAppElement");
         }
         else {
-            await pageHelper.InvokeVoidAsync("DemoPageHelper.themes.setThemeName", DemoThemeService.ThemeCookieKey, ThemeName);
+            await pageHelper.InvokeVoidAsync("DemoPageHelper.themes.setTheme", DemoThemeService.ThemeCookieKey, ThemeName, Themes.ThemeState.ToString());
 
             if(_isDesktop && SavedLayoutToggled != LayoutToggled)
                 await pageHelper.InvokeVoidAsync("DemoPageHelper.raiseWindowOnResize");
@@ -204,6 +215,20 @@
         if(HasAnchorInUrl(uri))
             await pageHelper.InvokeVoidAsync("DemoPageHelper.scroll.ensureNavigationTargetIsVisible");
     }
+
+    string GetThemeCssClass() {
+        if(Themes.ActiveTheme.IsFluent) {
+            switch (Themes.ThemeState.Mode)
+            {
+                case ThemeMode.Light:
+                    return "theme-fluent-light";
+                case ThemeMode.Dark:
+                    return "theme-fluent-dark";
+            }
+        }
+
+        return "theme-" + ThemeName.Replace(" ", "-");
+    }
     string GetDemoContentContainerCss() {
         List<string> cssClasses = new List<string>();
         cssClasses.Add("demo-content-container");
@@ -211,7 +236,7 @@
         if(IsFirstTimeRendered)
             cssClasses.Add("animated");
 #endif
-        cssClasses.Add("theme-" + ThemeName.Replace(" ", "-"));
+        cssClasses.Add(GetThemeCssClass());
         if(IsBootstrapNative)
             cssClasses.Add("theme-external");
         return string.Join(" ", cssClasses);
@@ -219,7 +244,7 @@
     string GetDemoBreadcrumbsContainerCss() {
         List<string> cssClasses = new List<string>();
         cssClasses.Add("demo-breadcrumbs-container");
-        cssClasses.Add("theme-" + ThemeName.Replace(" ", "-"));
+        cssClasses.Add(GetThemeCssClass());
         if(IsBootstrapNative)
             cssClasses.Add("theme-external");
         return string.Join(" ", cssClasses);
@@ -233,7 +258,7 @@
     string GetDemoHeaderContainerCss() {
         List<string> cssClasses = new List<string>();
         cssClasses.Add("demo-header-container");
-        cssClasses.Add("theme-" + ThemeName.Replace(" ", "-"));
+        cssClasses.Add(GetThemeCssClass());
         if(IsBootstrapNative)
             cssClasses.Add("theme-external");
         return string.Join(" ", cssClasses);

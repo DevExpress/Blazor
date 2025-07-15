@@ -1,0 +1,149 @@
+﻿@page "/PivotTableLayout"
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="PivotTable-Layout" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @using System.Text.Json
+        @inject NwindDataService NwindDataService
+        @inject IJSRuntime JSRuntime
+
+        <div class="pivot-container">
+            @if(PivotData != null && PreRendered) {
+                <DxPivotTable @ref="@PivotTable"
+                              Data="@PivotData"
+                              VirtualScrollingEnabled="true"
+                              LayoutAutoLoading="PivotTable_LayoutAutoLoading"
+                              LayoutAutoSaving="PivotTable_LayoutAutoSaving"
+                              SizeMode="Params.SizeMode">
+                    <Fields>
+                        <DxPivotTableField Field="SalesPerson" Area="PivotTableArea.Row" Caption="Sales Person" Width="270"/>
+                        <DxPivotTableField Field="ProductName" Area="PivotTableArea.Row" Caption="Product Name"/>
+                        <DxPivotTableField Field="ProductAmount" Area="PivotTableArea.Data" Caption="Product Amount" CellFormat="{0:c0}"/>
+                        <DxPivotTableField Field="Discount" Area="PivotTableArea.Data" CellFormat="{0:p0}"/>
+                        <DxPivotTableField Field="Country" AreaIndex="1"/>
+                        <DxPivotTableField Field="Region" AreaIndex="0"/>
+                        <DxPivotTableField Field="City" AreaIndex="-1"/>
+                        <DxPivotTableField Field="ExtendedPrice" AreaIndex="-1"/>
+                        <DxPivotTableField Field="OrderDate" GroupInterval="PivotTableGroupInterval.DateYear" Area="PivotTableArea.Column" Caption="Order Year" />
+                        <DxPivotTableField Field="OrderDate" GroupInterval="PivotTableGroupInterval.DateQuarter" Area="PivotTableArea.Column" Caption="Order Quater">
+                            <ValueTemplate>
+                                <span>@($"Q{context.Text}")</span>
+                            </ValueTemplate>
+                        </DxPivotTableField>
+                    </Fields>
+                </DxPivotTable>
+            } else {
+                <div class="pivot-loading-panel-container">
+                    <div class="d-flex flex-column">
+                        <DxLoadingPanel Visible="true"
+                                        SizeMode="Params.SizeMode"
+                                        Text="Data Loading..."
+                                        IndicatorAreaVisible="false"
+                                        IndicatorAnimationType="@WaitIndicatorAnimationType.Spin"></DxLoadingPanel>
+                    </div>
+                </div>
+            }
+        </div>
+    </ChildContentWithParameters>
+    <OptionsContent>
+        <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Contained">
+            <Items>
+                <DxToolbarItem Text="Reload Page" Click="ReloadPageButton_ClickAsync" IconCssClass="pivot-table-icon-reload-page" BeginGroup="true" />
+                <DxToolbarItem Text="Reset Layout" Click="ResetLayoutButton_ClickAsync" IconCssClass="pivot-table-icon-reset-layout" BeginGroup="true" />
+                <DxToolbarItem Text="Show Field List" Click="FieldListButton_Click" IconCssClass="pivot-table-icon-field-list" BeginGroup="true" />
+            </Items>
+        </DxToolbar>
+    </OptionsContent>
+        @code {
+            const string LocalStorageKey = "PivotTable-LayoutPersistence-Data";
+            object PivotData { get; set; }
+            IPivotTable PivotTable { get; set; }
+
+            bool PreRendered { get; set; }
+
+            protected override void OnAfterRender(bool firstRender) {
+                if(firstRender) {
+                    PreRendered = true;
+                    StateHasChanged();
+                }
+            }
+
+            protected override async Task OnInitializedAsync() {
+                var invoices = await NwindDataService.GetInvoicesAsync();
+                var customers = await NwindDataService.GetCustomersAsync();
+                var minDate = invoices.Min(i => i.OrderDate).GetValueOrDefault();
+                var maxDate = invoices.Max(i => i.OrderDate).GetValueOrDefault();
+                PivotData = invoices.Where(i => {
+                    var invoiceDate = i.OrderDate.GetValueOrDefault();
+                    return invoiceDate.Year > minDate.Year && invoiceDate.Year <= maxDate.Year;
+                }).Join(customers, i => i.CustomerId, c => c.CustomerId, (i, c) => {
+                    return new {
+                        CompanyName = c.CompanyName,
+                        UnitPrice = i.UnitPrice,
+                        OrderDate = i.OrderDate,
+                        ProductName = i.ProductName,
+                        ProductAmount = i.Quantity * i.UnitPrice,
+                        Country = c.Country,
+                        Region = c.Region,
+                        ExtendedPrice = i.ExtendedPrice,
+                        City = c.City,
+                        Discount = i.Discount,
+                        SalesPerson = i.Salesperson,
+                    };
+                });
+            }
+
+             async Task PivotTable_LayoutAutoLoading(PivotTablePersistentLayoutEventArgs e) {
+                e.Layout = await LoadLayoutFromLocalStorageAsync();
+            }
+
+            async Task PivotTable_LayoutAutoSaving(PivotTablePersistentLayoutEventArgs e) {
+                await SaveLayoutToLocalStorageAsync(e.Layout);
+            }
+
+            // Refer to https://docs.microsoft.com/en-us/aspnet/core/blazor/state-management
+            // to learn more about Blazor state management
+            // In Blazor Server apps, prefer ASP.NET Core Protected Browser Storage
+
+            async Task<PivotTablePersistentLayout> LoadLayoutFromLocalStorageAsync() {
+                try {
+                    var json = await JSRuntime.InvokeAsync<string>("localStorage.getItem", LocalStorageKey);
+                    return JsonSerializer.Deserialize<PivotTablePersistentLayout>(json);
+                } catch {
+                    // Mute exceptions for the server prerender stage
+                    return null;
+                }
+            }
+
+            async Task SaveLayoutToLocalStorageAsync(PivotTablePersistentLayout layout) {
+                try {
+                    var json = JsonSerializer.Serialize(layout);
+                    await JSRuntime.InvokeVoidAsync("localStorage.setItem", LocalStorageKey, json);
+                } catch {
+                    // Mute exceptions for the server prerender stage
+                }
+            }
+
+            async Task RemoveLayoutFromLocalStorageAsync() {
+                try {
+                    await JSRuntime.InvokeVoidAsync("localStorage.removeItem", LocalStorageKey);
+                } catch {
+                    // Mute exceptions for the server prerender stage
+                }
+            }
+
+            async Task ReloadPageButton_ClickAsync() {
+                await JSRuntime.InvokeVoidAsync("location.reload");
+            }
+
+            async Task ResetLayoutButton_ClickAsync() {
+                await RemoveLayoutFromLocalStorageAsync();
+                await JSRuntime.InvokeVoidAsync("location.reload");
+            }
+
+            void FieldListButton_Click() {
+                PivotTable.ShowFieldList();
+            }
+        }
+    
+</DemoPageSectionComponent>

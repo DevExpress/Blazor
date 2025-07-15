@@ -7,6 +7,7 @@
                        TextFieldName="@nameof(Employee.Text)"
                        SelectionMode="ListBoxSelectionMode.Multiple"
                        ShowCheckboxes="@ShowCheckboxes"
+                       ShowSelectAllCheckbox="@ShowSelectAllCheckbox"
                        SizeMode="Params.SizeMode"
                        CssClass="w-auto mt-1 me-1 flex-grow-1 chi-220"
                        style="flex-basis: 240px"
@@ -31,10 +32,12 @@
 
     <OptionsContent>
         <OptionCheckBox @bind-Checked="@ShowCheckboxes" Label="Show Checkboxes"/>
+        <OptionCheckBox  Enabled="@ShowCheckboxes" @bind-Checked="@ShowSelectAllCheckbox" Label="Show Select All Checkbox"/>
     </OptionsContent>
 
     @code {
         bool ShowCheckboxes { get; set; } = true;
+        bool ShowSelectAllCheckbox { get; set; } = true;
         IEnumerable<Employee> Data { get; set; }
         IEnumerable<Employee> Values { get; set; }
 

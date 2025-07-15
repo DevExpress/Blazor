@@ -1,0 +1,5 @@
+﻿/*BeginHide*/
+::deep fieldset > legend ~ .dxbl-radio-group {
+    clear: left;
+}
+/*EndHide*/

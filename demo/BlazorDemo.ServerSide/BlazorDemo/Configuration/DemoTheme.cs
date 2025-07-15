@@ -1,38 +1,56 @@
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+using BlazorDemo.Services;
+using DevExpress.Blazor;
 
 namespace BlazorDemo.Configuration {
     public class DemoTheme {
-        const string BsNativeDarkModePostfix = "-dark";
+        public ITheme Theme { get; set; }
         public string Name { get; }
-        public string Title { get { return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(Name.Replace("-", " ")); } }
-        public string IconCssClass { get { return Name.ToLower(); } }
-        public bool IsBootstrapNative { get; }
-        public string BootstrapThemeMode => IsBootstrapNative && Name.Contains(BsNativeDarkModePostfix) ? "dark" : "light";
-        public string GetCssClass(bool isActive) => isActive ? "active" : "text-body";
-        public string ThemePath => IsBootstrapNative ? Name.Replace(BsNativeDarkModePostfix, string.Empty) : Name;
-        public DemoTheme(string name, bool isBootstrapNative) {
-            Name = name;
-            IsBootstrapNative = isBootstrapNative;
-        }
-    }
-
-    public class DemoThemeSet {
-        static readonly HashSet<string> BuiltInThemes = new HashSet<string>() {
-            "blazing-berry", "blazing-dark", "purple", "office-white", "fluent-light", "fluent-dark"
-        };
         public string Title { get; }
-        public DemoTheme[] Themes { get; }
-        public DemoThemeSet(string title, params string[] themes) {
+        public string IconCssClass => Name.ToLower();
+        public string MenuBackgroundColor { get; }
+        public bool IsFluent { get; init; }
+        public bool IsBootstrapNative { get; init; }
+        public string BootstrapThemeMode { get; init; } = "light";
+        private ThemeFluentAccentColor? FluentAccentColor { get; }
+        public static string GetCssClass(bool isActive) => isActive ? "active" : null;
+
+        public DemoTheme(string name, string title) {
+            Name = name;
             Title = title;
-            Themes = themes.Select(CreateTheme).ToArray();
+        }
 
+        public DemoTheme(ITheme theme, string name, string title, string menuBackgroundColor) : this(name, title) {
+            Theme = theme;
+            MenuBackgroundColor = menuBackgroundColor;
+        }
+        public DemoTheme(string name, string title, string menuBackgroundColor, ThemeFluentAccentColor color) : this(null, name, title, menuBackgroundColor) {
+            FluentAccentColor = color;
+            IsFluent = true;
+        }
 
-            DemoTheme CreateTheme(string name) {
-                bool isBootstrapNative = !BuiltInThemes.Contains(name);
-                return new DemoTheme(name, isBootstrapNative);
-            }
+        public ITheme ApplyStoredState(ThemeState themeState) {
+            if(!IsFluent)
+                return Theme;
+
+            return Themes.Fluent.Clone(properties => {
+                properties.Mode = themeState.Mode ?? DevExpress.Blazor.ThemeMode.Light;
+
+                if(FluentAccentColor != null)
+                    properties.AccentColor = FluentAccentColor.Value;
+
+                if(themeState.CustomAccentColor != null)
+                    properties.SetCustomAccentColor(themeState.CustomAccentColor);
+
+                properties.Name = $"{Name}{properties.Mode}{themeState.CustomAccentColor}";
+
+                properties.AddFilePaths(BlazorDemoThemes.FluentCommonStylesPath);
+
+                if(properties.Mode == ThemeMode.Light)
+                    properties.AddFilePaths(BlazorDemoThemes.GetBootstrapFluentThemePath("fluent-light"), BlazorDemoThemes.HighlightJsDefaultTheme);
+
+                if(properties.Mode == ThemeMode.Dark)
+                    properties.AddFilePaths(BlazorDemoThemes.GetBootstrapFluentThemePath("fluent-dark"), BlazorDemoThemes.HighlightJsAndroidTheme);
+            });
         }
     }
 }

@@ -1,0 +1,7 @@
+﻿@page "/AIPoweredExtensions/AIPoweredReportDesigner"
+@page "/AIPoweredExtensions/AIPoweredReportDesigner/{ReportName}"
+
+<Reports_ReportDesigner_Content_Server ReportName="@ReportName"></Reports_ReportDesigner_Content_Server>
+@code {
+    [Parameter] public string ReportName { get; set; }
+}

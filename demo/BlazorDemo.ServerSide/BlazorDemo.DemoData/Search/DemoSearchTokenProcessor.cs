@@ -94,6 +94,8 @@ namespace BlazorDemo.DemoData {
             return token;
         }
         static bool MatchToken(string requestToken, string indexToken) {
+            if(indexToken.StartsWith(requestToken, STRING_COMPARISON))
+                return true;
             var distance = requestToken.Length >= indexToken.Length ?
                 DamerauLevenshteinDistance(indexToken, requestToken) :
                 DamerauLevenshteinDistance(requestToken, indexToken);
@@ -152,11 +154,12 @@ namespace BlazorDemo.DemoData {
 
         public string[] SplitTextByTokens(string text, bool ignoreException) {
             if(string.IsNullOrWhiteSpace(text)) return [];
-            return TokenSplitRegex
+            return new HashSet<string>(TokenSplitRegex
                 .Split(text)
+                .Concat(text.Split())
                 .Where(s => !string.IsNullOrWhiteSpace(s) && (ignoreException || (s.Length > 1 && !IsExclusion(s))))
                 .Select(s => s.ToLower())
-                .ToArray();
+            ).ToArray();
         }
 
         public Dictionary<string, TokenRank> GetTokenRankDict(TokenRank[] tokenRanks) {

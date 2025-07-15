@@ -11,6 +11,6 @@ The main TagBox API members are listed below:
 
 The TagBox component supports different size modes. To specify the component's size in code, use the [SizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxEditorBase.SizeMode) property. To apply different size modes, use the drop-down list in the demo card's header.
 
-The TagBox supports keyboard navigation ([list of supported keyboard shortcuts](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2#keyboard-navigation)), allowing users to navigate within the item list and select tags.
+The TagBox supports keyboard navigation ([list of supported keyboard shortcuts](https://docs.devexpress.com/Blazor/405478/components/data-editors/tagbox/keyboard-support)), allowing users to navigate within the item list and select tags.
 
 This demo illustrates how to bind the TagBox to a list of complex business objects.

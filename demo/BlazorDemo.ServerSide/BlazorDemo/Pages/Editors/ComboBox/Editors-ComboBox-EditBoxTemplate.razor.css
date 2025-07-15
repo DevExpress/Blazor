@@ -1,4 +1,4 @@
-﻿.template-container {
+.template-container {
     display: flex;
     align-items: center;
     width: 100%
@@ -48,54 +48,10 @@
     color: #212529;
 }
 
-.template-container > .cerulean {
-    color: #2fa4e7;
+.template-container > .fluent-orchid {
+    color: #c239b3;
 }
 
-.template-container > .cyborg {
-    color: #060606;
-}
-
-.template-container > .flatly {
-    color: #dce4ec;
-}
-
-.template-container > .journal {
-    color: #eb6864;
-}
-
-.template-container > .litera {
-    color: #4582ec;
-}
-
-.template-container > .lumen {
-    color: #158cba;
-}
-
-.template-container > .lux {
-    color: #1a1a1a;
-}
-
-.template-container > .pulse {
-    color: #593196;
-}
-
-.template-container > .simplex {
-    color: #d9230f;
-}
-
-.template-container > .solar {
-    color: #b58900;
-}
-
-.template-container > .superhero {
-    color: #df691a;
-}
-
-.template-container > .united {
-    color: #e95420;
-}
-
-.template-container > .yeti {
-    color: #008cba;
+.template-container > .fluent-mint {
+    color: #018574;
 }

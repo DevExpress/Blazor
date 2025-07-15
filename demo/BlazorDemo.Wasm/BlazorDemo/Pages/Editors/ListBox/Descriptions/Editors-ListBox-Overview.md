@@ -2,4 +2,4 @@ Our Blazor [List Box](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxLis
 
 In this demo, the component allows users to select a single item. Select an item to view corresponding object property values.
 
-The List Box supports keyboard navigation ([list of supported keyboard shortcuts](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2#keyboard-navigation)), allowing users to navigate through List Box items and select values as needed.
+The List Box supports keyboard navigation ([list of supported keyboard shortcuts](https://docs.devexpress.com/Blazor/405398/components/data-editors/listbox/keyboard-support)), allowing users to navigate through List Box items and select values as needed.

@@ -12,6 +12,8 @@
                 ValidationEnabled="false"
                 SizeMode="Params.SizeMode"
                 EditMode="GridEditMode.EditCell"                
+                EditOnKeyPress="EnableEditOnKeyPress"
+                EnterKeyDirection="EnterKeyDirectionValue"
                 EditModelSaving="Grid_EditModelSaving"
                 DataItemDeleting="Grid_DataItemDeleting"
                 CustomizeEditModel="Grid_CustomizeEditModel"
@@ -54,12 +56,45 @@
                     </CellEditTemplate>
                 </DxGridCommandColumn>
             </Columns>
+            <ToolbarTemplate>
+                <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" SizeMode="Params.SizeMode">
+                    <Items>
+                        <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                            <Template Context="toolbar_item_context">
+                                <div class="d-flex flex-row align-items-center ms-2 me-2">
+                                    <div id="enter-key-direction-label" class="me-2">Focus Moves on Enter:</div>
+                                    <DxComboBox @bind-Value="EnterKeyDirectionValue"
+                                                Data="EnterKeyDirectionValues"
+                                                ValueFieldName="Value"
+                                                TextFieldName="Text"
+                                                aria-labelledby="enter-key-direction-label" />
+                                </div>
+                            </Template>
+                        </DxToolbarItem>
+                        <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                            <Template Context="toolbar_item_context">
+                                <div class="ms-2 me-2">
+                                    <DxCheckBox @bind-Checked="EnableEditOnKeyPress">Edit On Key Press</DxCheckBox>
+                                </div>
+                            </Template>
+                        </DxToolbarItem>
+                    </Items>
+                </DxToolbar>
+            </ToolbarTemplate>
         </DxGrid>
     </ChildContentWithParameters>
 
     @code {
         IGrid Grid { get; set; }
         IEnumerable<EditableEmployee> DataSource { get; set; }
+        bool EnableEditOnKeyPress { get; set; }
+
+        GridEnterKeyDirection EnterKeyDirectionValue { get; set; } = GridEnterKeyDirection.None;
+        object[] EnterKeyDirectionValues { get; } = new[] {
+            new { Value = GridEnterKeyDirection.None, Text = "No" },
+            new { Value = GridEnterKeyDirection.Column, Text = "Up/Down" },
+            new { Value = GridEnterKeyDirection.Row, Text = "Left/Right" },
+        };
 
         protected override async Task OnInitializedAsync() {
             DataSource = await NwindDataService.GetEmployeesEditableAsync();

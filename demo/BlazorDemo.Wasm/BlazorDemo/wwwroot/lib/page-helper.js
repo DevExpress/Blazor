@@ -33,13 +33,11 @@ var DemoPageHelper = (function() {
         document.cookie = escape(name) + '=' + escape(value.toString()) + '; expires=' + date.toGMTString() + '; path=/';
     }
 
-    function getThemeName(cookieName) {
-        return getCookie(cookieName);
-    }
-    function setThemeName(cookieName, themeName) {
+    function setTheme(cookieName, themeName, themeOptions) {
         var date = new Date();
         date.setFullYear(date.getFullYear() + 1);
         setCookie(cookieName, themeName, date);
+        setCookie(`${cookieName}_Opts`, themeOptions, date);
     }
 
     function demoMatchesQuery(mediaQuery, dotNetHelper) {
@@ -77,8 +75,7 @@ var DemoPageHelper = (function() {
             ensureNavigationTargetIsVisible: ensureNavigationTargetIsVisible
         },
         themes: {
-            getThemeName: getThemeName,
-            setThemeName: setThemeName
+            setTheme
         },
         getCookie: getCookie,
         setCookie: setCookie,

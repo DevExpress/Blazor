@@ -2,15 +2,28 @@
 @using DevExpress.AIIntegration.Blazor.Chat
 @using Microsoft.Extensions.AI
 
-<DemoPageSectionComponent Id="AI-Chat-MessageHandling"
+<DemoPageSectionComponent Id="AIChat-MessageHandling"
                           ShowSizeMode="true">
+    <OptionsContent>
+        <OptionCheckBox Label="Enable File Upload" @bind-Checked="FileUploadEnabled" />
+    </OptionsContent>
     <ChildContentWithParameters Context="Params">
         <div class="chat-demo-container">
-            <DxAIChat CssClass="demo-chat" MessageSent="MessageSent" SizeMode="Params.SizeMode" />
+            <DxAIChat FileUploadEnabled="FileUploadEnabled" CssClass="demo-chat" MessageSent="MessageSent" SizeMode="Params.SizeMode" />
         </div>
         @code {
+            bool FileUploadEnabled { get; set; } = true;
+
             async Task MessageSent(MessageSentEventArgs args) {
-                await args.Chat.SendMessage($"Processed: {args.Content}", ChatRole.Assistant);
+                var fileNames = args.Files.Select(x => x.Name);
+                var response = string.Join(Environment.NewLine, new[] {
+                    "Your message:",
+                    args.Content,
+                    "",
+                    "Attached files:",
+                    string.Join(Environment.NewLine, fileNames)
+                });
+                await args.Chat.SendMessage(response, ChatRole.Assistant);
             }
         }
     </ChildContentWithParameters>

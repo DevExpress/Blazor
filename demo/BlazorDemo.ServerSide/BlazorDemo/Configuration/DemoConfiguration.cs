@@ -12,8 +12,8 @@ namespace BlazorDemo.Configuration {
         public static readonly string PagesFolderName = "Pages";
         public static readonly string DescriptionsFolderName = "Descriptions";
 
-        protected DemoConfiguration() {
-        }
+        protected DemoConfiguration() { }
+
         public DemoConfiguration(IConfiguration configuration) {
             Configuration = configuration;
             Model = DemoModel.Create(IsServerSide);
@@ -25,14 +25,10 @@ namespace BlazorDemo.Configuration {
         public DemoSearchEngine Search { get; private set; }
 
         bool? isSiteMode;
-        public bool IsSiteMode {
-            get => isSiteMode ??= GetConfigurationValue<bool>("SiteMode");
-        }
+        public bool IsSiteMode { get => isSiteMode ??= GetConfigurationValue<bool>("SiteMode"); }
 
         bool? isSingleProduct;
-        public bool IsSingleProduct {
-            get => isSingleProduct ??= Groups.Count() < 2;
-        }
+        public bool IsSingleProduct { get => isSingleProduct ??= Groups.Count() < 2; }
         public bool IsServerSide =>
 #if SERVER_BLAZOR
             true;
@@ -42,6 +38,7 @@ namespace BlazorDemo.Configuration {
         public virtual bool ShowOnlyReporting => false;
 
         public virtual IEnumerable<DemoProductInfo> Products { get => Model.Products; }
+
         public virtual IEnumerable<DemoGroup> Groups {
             get {
                 return Model.Groups
@@ -49,6 +46,7 @@ namespace BlazorDemo.Configuration {
                     .Where(g => !ShowOnlyReporting || g.Category == GroupCategory.Reports);
             }
         }
+
         public Dictionary<string, string> Redirects { get { return Model.Redirects; } }
 
         public T GetConfigurationValue<T>(string key) {
@@ -56,12 +54,15 @@ namespace BlazorDemo.Configuration {
         }
 
         public DemoPage GetDemoPageByUrl(NavigationManager navigationManager, string currentUrl) {
-            var demoPageUrl = navigationManager.ToAbsoluteUri(currentUrl).GetLeftPart(UriPartial.Path).Replace(navigationManager.BaseUri, "");
+            var demoPageUrl = navigationManager.ToAbsoluteUri(currentUrl).GetLeftPart(UriPartial.Path)
+                .Replace(navigationManager.BaseUri, "");
             return Model.GetDemoPageByUrl(demoPageUrl);
         }
+
         public DemoItem GetDemoItem(string id) {
             return Model.GetDemoItem(id);
         }
+
         public DemoItem FindDemoItemRecursively(Func<DemoItem, bool> predicate) {
             return Model.FindDemoItemRecursively(predicate);
         }
@@ -69,26 +70,32 @@ namespace BlazorDemo.Configuration {
         string GetDemoItemDescriptionResourcePath(DemoItem item) {
             return Model.GetDemoItemDescriptionResourcePath(item, PagesFolderName);
         }
+
         public string GetDemoDescription(DemoItem item) {
             string path = GetDemoItemDescriptionResourcePath(item);
             return GetDemoFileContent(path);
         }
+
         string GetDemoItemRazorResourcePath(DemoItem item) {
             return Model.GetDemoItemRazorResourcePath(item, PagesFolderName);
         }
+
         public Dictionary<string, string> GetDemoCodeFiles(DemoItem item) {
             var result = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
             if(item.IsRazorFileVisible()) {
                 string razorPath = GetDemoItemRazorResourcePath(item);
                 result.Add("Razor", GetDemoFileContent(razorPath));
             }
+
             foreach(var codeFile in item.GetAdditionalCodeFiles()) {
                 string codeFilePath = codeFile.Path.Replace("\\", ".");
                 string codeFileContent = GetDemoFileContent(codeFilePath);
                 result[codeFile.Title] = codeFile.GetPreparedContent(codeFileContent);
             }
+
             return result;
         }
+
         protected string GetDemoFileContent(string path) {
             return DemoUtils.GetFileContent(typeof(DemoConfiguration), "BlazorDemo." + path);
         }
@@ -104,6 +111,9 @@ namespace BlazorDemo.Configuration {
                 .Viewport("width=device-width, initial-scale=1.0");
 
             var titleFormat = Model.TitleFormat ?? "{0}";
+
+            ConfigurePage(metadataCollection, Model.HomePage, Model.HomePage.Title, titleFormat);
+
             foreach(var rootPage in Model.Groups.SelectMany(g => g.Pages)) {
                 var title = rootPage.SeoTitle ?? rootPage.Title;
                 ConfigurePage(metadataCollection, rootPage, title, titleFormat);
@@ -111,13 +121,9 @@ namespace BlazorDemo.Configuration {
         }
         static void ConfigurePage(IDocumentMetadataCollection metadataCollection, DemoPage page, string title, string titleFormat, bool stopIndexation = false) {
             if(page.Url != null && !page.IsMaintenanceMode) {
-                var pageUrl = page.Url == "./" ? "" : page.Url;
-                var metaBuilder = metadataCollection.AddPage(pageUrl)
-                    .OpenGraph("url", page.OG_Url)
-                    .OpenGraph("type", page.OG_Type)
-                    .OpenGraph("title", page.OG_Title)
-                    .OpenGraph("description", page.OG_Description)
-                    .OpenGraph("image", page.OG_Image)
+                var metaBuilder = metadataCollection.AddPage(page.Url)
+                    .OpenGraph("title", page.OG_Title ?? string.Format(titleFormat, title))
+                    .OpenGraph("description", page.OG_Description ?? page.GetDescription())
                     .Title(string.Format(titleFormat, title))
                     .Meta("description", page.GetDescription())
                     .Meta("keywords", page.GetKeywords());
@@ -125,9 +131,13 @@ namespace BlazorDemo.Configuration {
                 if(stopIndexation)
                     metaBuilder.Meta("robots", "none");
             }
+
+            if(page.Pages == null) return;
+
             foreach(var subPage in page.Pages)
                 ConfigurePage(metadataCollection, subPage, string.Join(" - ", title, subPage.Title), titleFormat, page.IsMaintenanceMode);
         }
+
         // Search
         public DemoSearchResult DoSearch(string request) {
             return Search.DoSearch(request);

@@ -21,6 +21,12 @@
                         <DxTextFormatSettings LdmlString="@LabelFormat" />
                     </DxBarGaugeLabelSettings>
 
+                    <DxBarGaugeLegendSettings Visible="true"
+                                              ItemCaptions="@GetLegendCaptions()"
+                                              VerticalAlignment="VerticalEdge.Bottom"
+                                              HorizontalAlignment="HorizontalAlignment.Center">
+                    </DxBarGaugeLegendSettings>
+
                     <DxTitleSettings Text="Boiler Temperature">
                         <DxFontSettings Size="28" Weight="600" />
                     </DxTitleSettings>
@@ -36,22 +42,18 @@
             <div class="col">
                 <div class="card border-0 w-100">
                     <div class="card-body p-2">
-                        @for (int i = 0; i < MeasureLines.Length; i++) {                            
+                        @for (int i = 0; i < MeasureLines.Length; i++) {
                             var line = MeasureLines[i];
-                            var className = $"sw-line{i + 1}";
                             <div class="p-1">
-                                <DxCheckBox @bind-Checked="@line.Enabled" CheckType="CheckType.Switch" CssClass="@className">
+                                <DxCheckBox @bind-Checked="@line.Enabled" CheckType="CheckType.Switch">
                                     @line.Name
                                 </DxCheckBox>
-                            </div>                        
+                            </div>
                         }
                     </div>
                 </div>
             </div>
-
         </div>
-
-
 
         @code {
             string LabelFormat = "## °F";
@@ -101,8 +103,8 @@
                 return MeasureLines.Where(line => line.Enabled).Select(line => line.BarColor).ToArray();
             }
 
-            string GetLineSwitcherCssClass(MeasureLine line) {
-                return "sw-" + line.BarColor;
+            string[] GetLegendCaptions() {
+                return MeasureLines.Where(line => line.Enabled).Select(line => line.Name).ToArray();
             }
 
             class MeasureLine {

@@ -11,6 +11,18 @@
 <DemoScriptLoader @ref=@sectionHelper Src="_content/BlazorDemo/lib/page-section-helper.js" />
 
 @{
+    RenderFragment<DemoPageSectionParameters> ComponentContentArea = parameters => __builder =>
+    {
+        @DemoChildContent
+        @if(ChildContentWithParameters != null)
+            @ChildContentWithParameters(parameters)
+        @if(!string.IsNullOrEmpty(DemoItem.DataSourceInfo)) {
+            <div class="info-text">
+                Data Source: @DemoItem.DataSourceInfo
+            </div>
+        }
+    };
+
     RenderFragment<DemoPageSectionParameters> ComponentArea = parameters =>
     @<div class="demo-page-section-component-area">
         @if(IsComponentAreaVisible) {
@@ -20,13 +32,11 @@
                 </div>
             }
             <div @attributes="GetComponentContainerAttributes()">
-                @DemoChildContent
-                @if(ChildContentWithParameters != null) {
-                    @ChildContentWithParameters(parameters)
-                }
-                @if(!string.IsNullOrEmpty(DemoItem.DataSourceInfo)) {
-                    <div class="info-text">
-                        Data Source: @DemoItem.DataSourceInfo
+                @if(UseScrollableContainer == false)
+                    @ComponentContentArea(parameters)
+                else {
+                    <div class="component-scrollable-container">
+                        @ComponentContentArea(parameters)
                     </div>
                 }
             </div>
@@ -165,6 +175,9 @@
     public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.Center;
 
     [Parameter]
+    public bool UseScrollableContainer { get; set; } = false;
+
+    [Parameter]
     public int? MinHeight { get; set; }
 
     [Parameter]
@@ -218,13 +231,13 @@
     string GetTabCssClass(bool isActive) {
         return string.Join(" ", "nav-link", isActive ? "active" : "").Trim();
     }
-	string GetOptionsContentCssClass() {
-		List<string> cssClasses = new List<string>() { "options-container" };
-		if(HasOptionsGroups)
-			cssClasses.Add("px-0");
+    string GetOptionsContentCssClass() {
+        List<string> cssClasses = new List<string>() { "options-container" };
+        if(HasOptionsGroups)
+            cssClasses.Add("px-0");
         return string.Join(' ', cssClasses);
-	}
-	IReadOnlyDictionary<string, object> GetComponentContainerAttributes() {
+    }
+    IReadOnlyDictionary<string, object> GetComponentContainerAttributes() {
         var result = new Dictionary<string, object>();
         var className = GetComponentContainerCssClass();
         if(!string.IsNullOrEmpty(className))

@@ -52,7 +52,7 @@
                         <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
                             <Template Context="toolbar_item_context">
                                 <div class="d-flex flex-row align-items-center h-100">
-                                    <div class="me-2">Tree Filter Mode:</div>
+                                    <div class="me-2">Display Nodes:</div>
                                     <DxComboBox Data="FilterModes" @bind-Value="FilterTreeMode" TextFieldName="Name" />
                                 </div>
                             </Template>
@@ -73,8 +73,11 @@
                 new Priority(1, "High"),
             };
 
-            static readonly IList<TreeListFilterTreeModeItem> FilterModes = Enum.GetValues<TreeListFilterTreeMode>()
-                .Select(e => TreeListFilterTreeModeItem.Create(e)).ToList();
+            static readonly IList<TreeListFilterTreeModeItem> FilterModes = new[] {
+                new TreeListFilterTreeModeItem("Include parents", TreeListFilterTreeMode.ParentBranch),
+                new TreeListFilterTreeModeItem("Include parents and children", TreeListFilterTreeMode.EntireBranch),
+                new TreeListFilterTreeModeItem("Matching nodes only", TreeListFilterTreeMode.Nodes),
+            };
 
             ITreeList TreeList { get; set; }
             List<EmployeeTask> TreeListData { get; set; }

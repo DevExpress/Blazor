@@ -1,7 +1,9 @@
-/*BeginHide*/::deep /*EndHide*/ .checked-nodes {
-    padding-left: 1rem;
-    margin-left: 2rem;
-    border-left: 1px solid #dee2e6;
+@media (min-width: 576px) {
+    /*BeginHide*/::deep /*EndHide*/ .checked-nodes {
+        padding-left: 1rem;
+        margin-left: 2rem;
+        border-left: 1px solid #dee2e6;
+    }
 }
 
 .panel-class {
@@ -12,3 +14,15 @@
 .panel-class > div:first-of-type {
     margin-top: 1.5rem;
  }
+
+@media (max-width: 575px) {
+    .panel-class {
+        flex-direction: column;
+    }
+
+    /*BeginHide*/::deep /*EndHide*/ .checked-nodes {
+        padding-top: 1rem;
+        margin-top: 2rem;
+        border-top: 1px solid #dee2e6;
+    }
+}

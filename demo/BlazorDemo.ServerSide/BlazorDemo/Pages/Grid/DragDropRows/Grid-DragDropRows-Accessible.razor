@@ -2,7 +2,7 @@
 @layout DataProviderAccessArea<INwindDataProvider>
 @using System.Collections.ObjectModel;
 
-<DemoPageSectionComponent Id="Grid-DragDropRows-Accessible" ShowSizeMode="true">
+<DemoPageSectionComponent Id="Grid-DragDropRows-Accessible" ShowSizeMode="true" UseScrollableContainer="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
         <div class="grid-container">

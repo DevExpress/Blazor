@@ -7,35 +7,8 @@
     mask-repeat: no-repeat;
     -webkit-mask-repeat: no-repeat;
     background-position: center center;
-    background-color: currentColor;
-    height: 16px;
-    width: 16px;
-    opacity: 0.7;
-}
-
-::deep .grid-toolbar-new {
-    -webkit-mask-image: url("images/icons/grid-toolbar-new.svg");
-    mask-image: url("images/icons/grid-toolbar-new.svg");
-}
-
-::deep .grid-toolbar-delete {
-    -webkit-mask-image: url("images/icons/grid-toolbar-delete.svg");
-    mask-image: url("images/icons/grid-toolbar-delete.svg");
-}
-
-::deep .grid-toolbar-edit {
-    -webkit-mask-image: url("images/icons/grid-toolbar-edit.svg");
-    mask-image: url("images/icons/grid-toolbar-edit.svg");
-}
-
-::deep .grid-toolbar-column-chooser {
-    -webkit-mask-image: url("images/icons/column-chooser.svg");
-    mask-image: url("images/icons/column-chooser.svg");
-}
-
-::deep .grid-toolbar-export {
-    -webkit-mask-image: url("images/icons/export.svg");
-    mask-image: url("images/icons/export.svg");
+    /* Fix for the Firefox sub pixel rendering bug on the SizeMode change https://bugzilla.mozilla.org/show_bug.cgi?id=739176 */
+    transform: translate3d(0,0,0);    
 }
 
 ::deep .search-icon {

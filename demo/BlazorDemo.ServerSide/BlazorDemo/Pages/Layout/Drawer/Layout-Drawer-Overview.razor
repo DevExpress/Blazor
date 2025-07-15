@@ -9,7 +9,7 @@
                     <Items>
                         <DxToolbarItem Attributes="@(DrawerUtils.GetToolbarButtonAttributes(IsNavigationOpen, "Navigation"))"
                                        Click="ToggleNavigation"
-                                       IconCssClass="tb-icon icon-hamburger"
+                                       IconCssClass="tb-icon tb-icon-hamburger"
                                        CssClass="demo-drawer-toggle-button"
                                        Text="Navigation" />
                         <DxToolbarItem Alignment="ToolbarItemAlignment.Right"
@@ -43,12 +43,13 @@
                                   @bind-IsOpen="IsInfoOpen"
                                   Mode="DrawerMode.Overlap"
                                   Position="DrawerPosition.Right"
-                                  PanelWidth="225px">
+                                  PanelWidth="225px"
+                                  aria-label="Info Drawer">
                             <HeaderTemplate>
                                 Header
                                 <DxButton Attributes="GetCloseInfoButtonAttributes()"
                                           Click="CloseInfo"
-                                          IconCssClass="tb-icon icon-close"
+                                          IconCssClass="btn-icon btn-icon-close"
                                           RenderStyle="ButtonRenderStyle.Link" />
                             </HeaderTemplate>
                             <BodyTemplate>

@@ -1,6 +1,11 @@
 ﻿@inject IDemoStaticResourceService DemoStaticResourceService
+@inject DemoThemeService Themes
 
-<link rel="stylesheet" href=@DemoStaticResourceService.GetUrlWithVersion("_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.bs5.css")>
+@if(Themes.ActiveTheme.IsFluent){
+    <link rel="stylesheet" href=@DemoStaticResourceService.GetUrlWithVersion("_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.fluent.css")>
+} else {
+    <link rel="stylesheet" href=@DemoStaticResourceService.GetUrlWithVersion("_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.bs5.css")>    
+}
 
 @using DevExpress.Blazor.Viewer.Models
 @using DevExpress.XtraPrinting.Caching;

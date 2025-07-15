@@ -16,7 +16,10 @@
                     </div>
                 </div>
             } else {
-                <DxPivotTable Data="@PivotData" SizeMode="Params.SizeMode">
+                <DxPivotTable
+                    Data="@PivotData"
+                    SizeMode="Params.SizeMode"
+                    FilterHeaderAreaDisplayMode="PivotTableFilterHeaderAreaDisplayMode.Never">
                     <Fields>
                         <DxPivotTableField Field="@nameof(VehiclesData.TrademarkItem.Name)"
                                       Area="@PivotTableArea.Row"

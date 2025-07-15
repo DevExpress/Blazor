@@ -9,6 +9,7 @@
                     PageSize="12"
                     Data="DataSource"
                     KeyFieldName="EmployeeId"
+                    EditOnKeyPress="true"
                     ValidationEnabled="false"
                     SizeMode="Params.SizeMode"
                     EditMode="GridEditMode.EditCell"                    
@@ -67,7 +68,10 @@
 
         protected override async Task OnInitializedAsync() => await UpdateDataAsync();
         async Task New_Click() => await Grid.StartEditNewRowAsync();
-        async Task Revert_Click() => await ClearUnsavedChangesAsync();
+        async Task Revert_Click() {
+            await Grid.CancelEditAsync();
+            await ClearUnsavedChangesAsync();
+        }
         async Task Submit_Click() {
             foreach(var unsavedChange in UnsavedChanges) {
                 var changedItem = unsavedChange.Key;

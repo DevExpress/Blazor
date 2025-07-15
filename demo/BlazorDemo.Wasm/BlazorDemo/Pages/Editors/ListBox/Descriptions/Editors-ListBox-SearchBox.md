@@ -6,4 +6,4 @@ You can use the [SearchText](https://docs.devexpress.com/Blazor/DevExpress.Blazo
 * **GroupWordsByOr** — The control searches for individual words. A record needs to include at least one word. 
 * **ExactMatch** — The control looks for exact matches of the entire search text.
 
-For more information, refer to the following help topic: [Search and Filter Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2#search-and-filter-data).
+For more information, refer to the following help topic: [Search and Filter Data](https://docs.devexpress.com/Blazor/405397/components/data-editors/listbox/data-shaping#search-and-filter-data).

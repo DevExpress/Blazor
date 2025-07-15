@@ -21,8 +21,8 @@
             </DxChartLineSeries>
 
             <DxChartArgumentAxis>
-                <DxChartAxisRange StartValue="new DateTime(2020, 01, 01)"
-                                  EndValue="new DateTime(2021, 01, 29)" />
+                <DxChartAxisRange StartValue="startDate"
+                                  EndValue="endDate" />
             </DxChartArgumentAxis>
 
             <DxChartZoomAndPanSettings ArgumentAxisZoomAndPanMode="ChartAxisZoomAndPanMode.Both" />
@@ -42,6 +42,10 @@
             </DxChartTooltip>
 
         </DxChart>
+
+        <div class="chart-reset-btn">
+            <DxButton Text="Reset Zoom" Click="@SetArgumentAxisVisualRange" />
+        </div>
     </DemoChildContent>
 
     <OptionsContent>
@@ -50,14 +54,19 @@
 
     @code {
         IEnumerable<DatePricePoint> UsdJpyData;
-        DxChartBase chart;
+        DxChart<DatePricePoint> chart;
         @inject ICurrencyExchangeDataProvider UsdJpyDataProvider
+        DateTime startDate = new DateTime(2020, 01, 01);
+        DateTime endDate = new DateTime(2021, 01, 29);
 
         async void ExportChart(ChartExportFormat format) {
             await chart?.ExportAsync("ZoomAndPanChart", format);
         }
         protected override async Task OnInitializedAsync() {
             UsdJpyData = await UsdJpyDataProvider.GetDataAsync();
+        }
+        public void SetArgumentAxisVisualRange() {
+            chart.SetArgumentAxisVisualRange([startDate, endDate]);
         }
     }
 </DemoPageSectionComponent>

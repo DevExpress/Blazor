@@ -1,0 +1,25 @@
+<DemoPageSectionComponent Id="Editors-Calendar-ViewMode" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        <DxCalendar ViewMode="@ViewMode" 
+                    SizeMode="Params.SizeMode" 
+                    CssClass="demo-calendar"
+                    @bind-SelectedDate="@SelectedDate" />
+
+        <p class="demo-text cw-320 mt-3">
+            Selected date: <b>@SelectedDate.ToString("dddd, MMMM dd, yyyy")</b>
+        </p>
+    </ChildContentWithParameters>
+    <OptionsContent>
+         <OptionComboBox CssClass="ow-150"
+                        Label="View Mode:"
+                        Data="@(Enum.GetNames(typeof(CalendarViewMode)))"
+                        Value="@ViewMode.ToString()"
+                        ValueChanged="@((string selectedItem) =>
+                                        { ViewMode = Enum.Parse<CalendarViewMode>(selectedItem); })" />
+
+    </OptionsContent>
+    @code {
+        CalendarViewMode ViewMode { get; set; } = CalendarViewMode.Year;
+        DateTime SelectedDate { get; set; } = DateTime.Today;
+    }
+</DemoPageSectionComponent>

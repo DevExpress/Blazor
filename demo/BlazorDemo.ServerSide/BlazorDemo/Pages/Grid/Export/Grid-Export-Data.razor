@@ -1,9 +1,10 @@
-﻿@page "/Grid/Export/DataAwareExport"
+@page "/Grid/Export/DataAwareExport"
 @layout DataProviderAccessArea<INwindDataProvider>
 
 <DemoPageSectionComponent Id="Grid-Export-Data" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @using DevExpress.Export
+        @using DevExpress.Drawing
         @inject NwindDataService NwindDataService
 
         <div class="grid-container">
@@ -39,6 +40,7 @@
                         <DxToolbarItem Text="Export to XLSX" Click="ExportXlsx_Click" BeginGroup="true" />
                         <DxToolbarItem Text="Export to XLS" Click="ExportXls_Click" BeginGroup="true" />
                         <DxToolbarItem Text="Export to CSV" Click="ExportCsv_Click" BeginGroup="true" />
+                        <DxToolbarItem Text="Export to PDF" Click="ExportPdf_Click" BeginGroup="true" />
                         <DxToolbarItem Context="itemCtx" Alignment="ToolbarItemAlignment.Right" BeginGroup="true">
                             <Template>
                                 <DxCheckBox @bind-Checked="@ExportSelectedRowsOnly">Export Selected Rows Only</DxCheckBox>
@@ -60,13 +62,13 @@
             async Task ExportXlsx_Click() {
                 await Grid.ExportToXlsxAsync("ExportResult", new GridXlExportOptions() {
                     ExportSelectedRowsOnly = ExportSelectedRowsOnly,
-                    CustomizeCell = OnCustomizeCell
+                    CustomizeCell = OnCustomizeXlCell
                 });
             }
             async Task ExportXls_Click() {
                 await Grid.ExportToXlsAsync("ExportResult", new GridXlExportOptions() {
                     ExportSelectedRowsOnly = ExportSelectedRowsOnly,
-                    CustomizeCell = OnCustomizeCell
+                    CustomizeCell = OnCustomizeXlCell
                 });
             }
             async Task ExportCsv_Click() {
@@ -74,9 +76,21 @@
                     ExportSelectedRowsOnly = ExportSelectedRowsOnly
                 });
             }
-            void OnCustomizeCell (GridExportCustomizeCellEventArgs args) {
+            async Task ExportPdf_Click() {
+                await Grid.ExportToPdfAsync("ExportResult", new GridPdfExportOptions() {
+                    ExportSelectedRowsOnly = ExportSelectedRowsOnly,
+                    CustomizeCell = OnCustomizePdfCell,
+                    CustomizePageFooter = args => args.Text = "Page {0} of {1}",
+                });
+            }
+            void OnCustomizeXlCell (GridExportCustomizeCellEventArgs args) {
                 if(args.ColumnFieldName == "ContactName" && args.AreaType == SheetAreaType.DataArea)
                     args.Formatting.Font = new XlCellFont() { Italic = true };
+                args.Handled = true;
+            }
+            void OnCustomizePdfCell (GridDocumentExportCustomizeCellEventArgs args) {
+                if(args.ColumnFieldName == "ContactName" && args.AreaType == DocumentExportAreaType.DataArea)
+                    args.ElementStyle.Font = new DXFont(args.ElementStyle.Font.Name, args.ElementStyle.Font.Size, DXFontStyle.Italic);
                 args.Handled = true;
             }
         }

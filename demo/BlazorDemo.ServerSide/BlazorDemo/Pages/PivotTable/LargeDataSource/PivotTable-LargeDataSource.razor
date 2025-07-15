@@ -16,7 +16,11 @@
                     </div>
                 </div>
             } else {
-                <DxPivotTable Data="@PivotData" VirtualScrollingEnabled="true" SizeMode="Params.SizeMode">
+                <DxPivotTable
+                    Data="@PivotData"
+                    VirtualScrollingEnabled="true"
+                    SizeMode="Params.SizeMode"
+                    FilterHeaderAreaDisplayMode="PivotTableFilterHeaderAreaDisplayMode.Never">
                     <Fields>
                         <DxPivotTableField Field="Product.Name"
                                            Area="@PivotTableArea.Row"
@@ -49,7 +53,7 @@
         <OptionSpinEdit CssClass="ow-150"
                         Increment="100"
                         Label="Records Count:"
-                        MinValue="0" MaxValue="int.MaxValue"
+                        MinValue="0" MaxValue="10_000_000"
                         @bind-Value="RecordsCount" />
         <OptionButton Text="Generate Database" OnClick="GenerateDatabase_BtnClick" />
     </OptionsContent>

@@ -1,13 +1,14 @@
 ﻿@inject DemoThemeService Themes
 
-<a class="themeswitcher-item list-group-item list-group-item-action @Theme.GetCssClass(Themes.ActiveTheme == Theme) @Theme.IconCssClass" href="#"
-   @onclick:preventDefault
-   @onclick="Anchor_Click">
-    <span>@Theme.Title</span>
-</a>
+<li class="themeswitcher-color @Theme.Name @DemoTheme.GetCssClass(Themes.ActiveTheme == Theme)" style="--themeswitcher-color: @Theme.MenuBackgroundColor">
+    <a
+        @onclick:preventDefault
+        @onclick="Anchor_Click">@Theme.Title</a>
+</li>
+
 @code {
-    [Parameter] public DemoTheme Theme { get; set; }
     [Parameter] public EventCallback<DemoTheme> Click { get; set; }
+    [Parameter] public DemoTheme Theme { get; set; }
 
     async Task Anchor_Click() {
         await Click.InvokeAsync(Theme);

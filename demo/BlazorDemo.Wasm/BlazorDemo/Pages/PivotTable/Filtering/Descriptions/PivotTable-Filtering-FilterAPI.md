@@ -1,0 +1,7 @@
+The DevExpress Blazor [Pivot Table](https://docs.devexpress.com/Blazor/405245/pivot-table) allows you to filter data in code. To apply filter criteria, create a [criteria operator](https://docs.devexpress.com/CoreLibraries/2129/devexpress-data-library/criteria-operators) object that specifies a filter expression and send this object to the [SetFilterCriteria](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PivotTable.DxPivotTable.SetFilterCriteria(DevExpress.Data.Filtering.CriteriaOperator)) method. When you call this method, the Pivot Table clears all filters applied previously. When a filter is applied, the Pivot Table raises the [FilterCriteriaChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PivotTable.DxPivotTable.FilterCriteriaChanged) event. 
+
+To obtain currently applied filters, use the [GetFilterCriteria](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PivotTable.DxPivotTable.GetFilterCriteria) method.
+
+In this demo, the Tag Box component allows user to select continents. We create a criteria operator object based on the Tag Box's selected value/values. To apply the criteria operator, the [SetFilterCriteria](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PivotTable.DxPivotTable.SetFilterCriteria(DevExpress.Data.Filtering.CriteriaOperator)) method is called.
+
+For additional information, refer to the following topic: [Filter API](https://docs.devexpress.com/Blazor/405367/components/pivottable/filter-data#filter-api).

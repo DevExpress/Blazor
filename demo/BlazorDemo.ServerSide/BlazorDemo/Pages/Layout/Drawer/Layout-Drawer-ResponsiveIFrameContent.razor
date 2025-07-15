@@ -11,7 +11,7 @@
             <DxButton Attributes="@(DrawerUtils.GetToolbarButtonAttributes(IsOpen))"
                       CssClass="text-body"
                       Click="ToggleDrawer"
-                      IconCssClass="tb-icon icon-hamburger m-0"
+                      IconCssClass="tb-icon tb-icon-hamburger m-0"
                       RenderStyle="ButtonRenderStyle.Secondary"
                       RenderStyleMode="ButtonRenderStyleMode.Text"/>
             <p class="m-0">@nameof(Mode)=<b>@Mode</b>, @nameof(IsOpen)=<b>@(isOpen?.ToString() ?? $"Auto({IsOpen})")</b></p>
@@ -21,7 +21,8 @@
         <DxDrawer CssClass="demo-drawer"
                   @bind-IsOpen="IsOpen"
                   Mode="Mode"
-                  PanelWidth="180px">
+                  PanelWidth="180px"
+                  aria-label="Responsive Drawer">
             <BodyTemplate>
                 <DxMenu CssClass="demo-drawer-menu w-100"
                         Orientation="Orientation.Vertical">

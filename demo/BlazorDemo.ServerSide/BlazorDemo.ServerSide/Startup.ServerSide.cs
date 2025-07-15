@@ -6,8 +6,8 @@ using Azure.AI.OpenAI;
 using BlazorDemo.Configuration;
 using BlazorDemo.DataProviders;
 using BlazorDemo.DemoData;
-using BlazorDemo.ServerSide.Services;
 using BlazorDemo.Services;
+using DevExpress.AIIntegration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -45,9 +45,10 @@ namespace BlazorDemo.ServerSide {
                 new AzureOpenAIClientOptions() {
                     Transport = new PromoteHttpStatusErrorsPipelineTransport()
                 });
-            var asChatClient = openAIClient.AsChatClient(deploymentName);
+            var chatClient = openAIClient.GetChatClient(deploymentName).AsIChatClient();
 
-            services.AddSingleton(asChatClient);
+            services.AddSingleton(chatClient);
+            services.AddScoped<IAIExceptionHandler, AIExceptionHandler>();
             services.AddDevExpressAI();
             services.AddSingleton<IDemoVersion, DemoVersion>(x => {
                 string customVersion = Configuration.GetValue<string>("dxversion");
