@@ -113,6 +113,9 @@
 
         table = await documentAPI.Tables.GetAsync(0);
 
+        if (table == null)
+            return;
+
         documentAPI.BeginTransaction();
         TableRows rows = table.Rows;
         for (var i = rows.Count - 1; i >= 0; i--) {
@@ -133,7 +136,7 @@
             });
         }
         await documentAPI.EndTransaction();
-        
+
         TableRow newRow = await table.Rows.InsertAsync(3, true);
 
         documentAPI.BeginTransaction();

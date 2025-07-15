@@ -6,20 +6,16 @@ using DevExpress.Blazor.Internal;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-namespace BlazorDemo.Shared; 
+namespace BlazorDemo.Shared;
 
 public class DemoThemeJsChangeDispatcher : ComponentBase, IDemoThemeChangeRequestDispatcher, IAsyncDisposable {
-    [Parameter]
-    public string InitialThemeName { get; set; }
+    [Parameter] public string InitialThemeName { get; set; }
 
-    [Inject]
-    private ISafeJSRuntime JsRuntime { get; set; }
+    [Inject] private ISafeJSRuntime JsRuntime { get; set; }
 
-    [Inject]
-    private DemoThemeService Themes { get; set; }
+    [Inject] private DemoThemeService Themes { get; set; }
 
-    [Inject]
-    private IDemoStaticResourceService DemoStaticResourceService { get; set; }
+    [Inject] private IDemoStaticResourceService DemoStaticResourceService { get; set; }
 
     private DemoTheme _pendingTheme;
     private IJSObjectReference _module;
@@ -37,19 +33,21 @@ public class DemoThemeJsChangeDispatcher : ComponentBase, IDemoThemeChangeReques
         await base.OnAfterRenderAsync(firstRender);
 
         if(firstRender)
-            _module = await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlazorDemo/lib/theme-controller.js");
+            _module = await JsRuntime.InvokeAsync<IJSObjectReference>("import",
+                "./_content/BlazorDemo/lib/theme-controller.js");
     }
 
     public async void RequestThemeChange(DemoTheme theme) {
         if(_pendingTheme == theme) return;
 
         _pendingTheme = theme;
-        await _module.InvokeVoidAsync("ThemeController.setStylesheetLinks",
-            Themes.GetBootstrapThemeCssUrl(theme),
-            theme.BootstrapThemeMode,
-            DemoStaticResourceService.GetUrlWithVersion(Themes.GetThemeCssUrl(theme)),
-            Themes.GetHighlightJSThemeCssUrl(theme),
-            DotNetObjectReference.Create(this));
+
+        var bootstrapThemeCssUrl = Themes.GetBootstrapThemeCssUrl(theme);
+        var urlWithVersion = DemoStaticResourceService.GetUrlWithVersion(Themes.GetThemeCssUrl(theme));
+        var highlightJsThemeCssUrl = Themes.GetHighlightJSThemeCssUrl(theme);
+
+        await _module.InvokeVoidAsync("ThemeController.setStylesheetLinks", bootstrapThemeCssUrl,
+            theme.BootstrapThemeMode, urlWithVersion, highlightJsThemeCssUrl, DotNetObjectReference.Create(this));
     }
 
     [JSInvokable]
@@ -62,7 +60,9 @@ public class DemoThemeJsChangeDispatcher : ComponentBase, IDemoThemeChangeReques
     }
 
     public async ValueTask DisposeAsync() {
-        if(_module != null)
-            await _module.DisposeAsync();
+        try {
+            if(_module != null)
+                await _module.DisposeAsync();
+        } catch(JSDisconnectedException) { }
     }
 }

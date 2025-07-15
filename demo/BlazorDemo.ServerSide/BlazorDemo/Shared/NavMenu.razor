@@ -1,11 +1,9 @@
-﻿@using BlazorDemo.Configuration
-@inject DemoConfiguration Configuration
+﻿@inject DemoConfiguration Configuration
 @inject NavigationManager NavigationManager
 
 @if(!VisibleGroups.Any() && SearchResult != null) {
     <div class="search-no-results">No results found for <b>@SearchResult.RequestString</b>.</div>
-}
-else {
+} else {
     var expandedItems = GetExpandedItems();
     @foreach(var group in VisibleGroups) {
         @if(!Configuration.IsSingleProduct) {
@@ -26,6 +24,7 @@ else {
         </DxTreeView>
     }
 }
+
 @code {
     DxTreeView treeView { set => treeViews.Add(value); }
 
@@ -36,6 +35,7 @@ else {
     bool IsVisibleGroup(DemoGroup group) {
         return SearchResult == null || SearchResult.ContainsInHierarchy(group);
     }
+
     bool IsVisibleItem(DemoItem item) {
         return SearchResult == null || SearchResult.ContainsInHierarchy(item);
     }
@@ -52,28 +52,31 @@ else {
         return !Configuration.IsSingleProduct && !string.IsNullOrEmpty(group.NavigationAriaLabel) ? group.NavigationAriaLabel : null;
     }
 
-    [Parameter]
-    public DemoSearchResult SearchResult { get; set; }
-    [Parameter]
-    public string ActivePage { get; set; }
+    [Parameter] public DemoSearchResult SearchResult { get; set; }
+    [Parameter] public string ActivePage { get; set; }
+
     void UpdateSelection() {
         foreach(var treeView in treeViews) {
             treeView.ClearSelection();
             treeView.SelectNode(n => IsSelectedNode(n, ActivePage));
         }
     }
+
     protected override void OnInitialized() {
         NavigationManager.LocationChanged += OnLocationChanged;
         base.OnInitialized();
     }
+
     protected override void OnAfterRender(bool firstRender) {
         UpdateSelection();
         base.OnAfterRender(firstRender);
     }
+
     protected override void OnParametersSet() {
         UpdateSelection();
         base.OnParametersSet();
     }
+
     public void Dispose() {
         NavigationManager.LocationChanged -= OnLocationChanged;
     }
@@ -89,16 +92,20 @@ else {
             result.Add(selectedItem.UniqueId);
             selectedItem = selectedItem.ParentPage;
         }
+
         return result;
     }
 
     bool IsSelectedNode(ITreeViewNodeInfo node, string currentUri) {
         return IsSelectedNode(node.NavigateUrl, currentUri);
     }
+
     bool IsSelectedNode(string navigateUrl, string currentUrl) {
-        if (string.IsNullOrEmpty(navigateUrl)) return false;
+        if(string.IsNullOrEmpty(navigateUrl)) return false;
+
         return currentUrl.EndsWith($"/{navigateUrl}", StringComparison.OrdinalIgnoreCase) ||
                (currentUrl == NavigationManager.BaseUri && navigateUrl == "./") ||
+               currentUrl.Equals(navigateUrl, StringComparison.OrdinalIgnoreCase) ||
                currentUrl.EndsWith(navigateUrl.Split('#')[0], StringComparison.OrdinalIgnoreCase);
     }
 }

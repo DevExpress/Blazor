@@ -45,9 +45,9 @@ namespace BlazorDemo.ServerSide {
                 new AzureOpenAIClientOptions() {
                     Transport = new PromoteHttpStatusErrorsPipelineTransport()
                 });
-            var asChatClient = openAIClient.AsChatClient(deploymentName);
+            var chatClient = openAIClient.GetChatClient(deploymentName).AsIChatClient();
 
-            services.AddSingleton(asChatClient);
+            services.AddSingleton(chatClient);
             services.AddDevExpressAI();
             services.AddSingleton<IDemoVersion, DemoVersion>(x => {
                 string customVersion = Configuration.GetValue<string>("dxversion");

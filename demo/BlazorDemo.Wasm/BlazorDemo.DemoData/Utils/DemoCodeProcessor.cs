@@ -16,7 +16,7 @@ namespace BlazorDemo.DemoData {
         static readonly Regex DemoPageSectionComponentChildContentRegex = new Regex(@"\s*<DemoChildContent[^>]*>(?<Code>.*?)<\/DemoChildContent>", options);
         static readonly Regex DemoPageSectionComponentChildContentWithParametersRegex = new Regex(@"\s*<ChildContentWithParameters[^>]*>(?<Code>.*?)<\/ChildContentWithParameters>", options);
         static readonly Regex DemoPageSectionComponentOptionsContentRegex = new Regex(@"\s*<OptionsContent[^>]*>(?<Code>.*?)<\/OptionsContent>", options);
-        static readonly Regex DemoPageSectionBaseClassSizeModeAttributeRegex = new Regex("\\s?@?(Item)?SizeMode=\"[^\"]*\"", options);
+        static readonly Regex DemoPageSectionBaseClassSizeModeAttributeRegex = new Regex("\\s+(Item)?SizeMode=\"[^\"]*\"", options);
         static readonly Regex DemoDataProviderAccessAreaRegex = new Regex(@"<DataProviderAccessAreaContainer[^>]*>(?<Code>.*?)<\/DataProviderAccessAreaContainer>", options);
         static readonly Regex RandomWrapperRegex = new Regex(@"RandomWrapperFactory.Create\((?<Parameter>[^)]*?)\)", options);
         static readonly Regex IDataProviderRegex = new Regex(@"\:\s+IDataProvider", options);

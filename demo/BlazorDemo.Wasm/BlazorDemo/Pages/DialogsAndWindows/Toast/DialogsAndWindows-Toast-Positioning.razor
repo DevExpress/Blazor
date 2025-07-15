@@ -1,9 +1,11 @@
-﻿<DemoPageSectionComponent Id="DialogsAndWindows-Toast-Positioning" ShowSizeMode="true" MinHeight="500">
+<DemoPageSectionComponent Id="DialogsAndWindows-Toast-Positioning" ShowSizeMode="true" MinHeight="500">
     <ChildContentWithParameters Context="Params">
         <div class="custom-toast-background d-flex align-items-center">
             <DxButton RenderStyle="ButtonRenderStyle.Secondary" Text="SHOW A TOAST" Click="AddToast" />
             <DxToastProvider Name="Positioning"
                              MaxToastCount="3"
+                             DisplayTime="@TimeSpan.FromSeconds(3)"
+                             FreezeOnClick="true"
                              HorizontalAlignment="HorizontalAlignment"
                              VerticalAlignment="VerticalAlignment"
                              Width="@Width"

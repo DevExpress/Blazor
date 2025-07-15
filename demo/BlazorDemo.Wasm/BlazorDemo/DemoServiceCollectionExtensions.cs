@@ -29,13 +29,11 @@ namespace BlazorDemo {
             var openAIClient = new AzureOpenAIClient(
                 new Uri(azureOpenAIEndpoint),
                 new System.ClientModel.ApiKeyCredential(azureOpenAIKey),
-                new AzureOpenAIClientOptions() {
-                    Transport = new PromoteHttpStatusErrorsPipelineTransport()
-            });
+                new AzureOpenAIClientOptions() { Transport = new PromoteHttpStatusErrorsPipelineTransport() });
 
-            var asChatClient = openAIClient.AsChatClient("gpt-4o-mini");
+            var chatClient = openAIClient.GetChatClient("gpt-4o-mini").AsIChatClient();
 
-            services.AddSingleton(asChatClient);
+            services.AddSingleton(chatClient);
             services.AddSingleton(openAIClient);
             services.AddDevExpressAI();
             services.AddSingleton<SmartFilterProvider>();

@@ -62,8 +62,8 @@ namespace BlazorDemo.ServerSide {
     public sealed class ReportingHostingStartup {
         public static void Configure(IWebHostBuilder builder) {
             DevExpress.Security.Resources.AccessSettings.DataResources.SetRules(DevExpress.Security.Resources.DirectoryAccessRule.Deny(), DevExpress.Security.Resources.UrlAccessRule.Deny());
-            DevExpress.Security.Resources.AccessSettings.StaticResources.SetRules(DevExpress.Security.Resources.UrlAccessRule.Deny());
-            DevExpress.Security.Resources.AccessSettings.ReportingSpecificResources.SetRules(DevExpress.Security.Resources.UrlAccessRule.Deny());
+            DevExpress.Security.Resources.AccessSettings.StaticResources.SetRules(DevExpress.Security.Resources.DirectoryAccessRule.Deny(), DevExpress.Security.Resources.UrlAccessRule.Deny());
+            DevExpress.Security.Resources.AccessSettings.ReportingSpecificResources.SetRules(DevExpress.Security.Resources.DirectoryAccessRule.Deny(), DevExpress.Security.Resources.UrlAccessRule.Deny());
             DevExpress.Data.AsyncDownloadPolicy.SuppressAll();
 
             builder.ConfigureServices((webHostBuilderContext, services) => {
@@ -88,15 +88,17 @@ namespace BlazorDemo.ServerSide {
                         viewer.UseCachedReportSourceBuilder();
                     });
                 });
+
+#if SERVER_BLAZOR
                 var azureOpenAIEndpoint = webHostBuilderContext.Configuration.GetSection("AIIntegrationSettings")["EndpointUrl"];
                 var azureOpenAIKey = webHostBuilderContext.Configuration.GetSection("AIIntegrationSettings")["Key"];
                 var deploymentName = webHostBuilderContext.Configuration.GetSection("AIIntegrationSettings")["DeploymentName"];
 
-                IChatClient asChatClient = new Azure.AI.OpenAI.AzureOpenAIClient(new Uri(azureOpenAIEndpoint),
-                    new System.ClientModel.ApiKeyCredential(azureOpenAIKey))
-                    .AsChatClient(deploymentName);
-
-                services.AddSingleton(asChatClient);
+                var azureOpenAIClient = new Azure.AI.OpenAI.AzureOpenAIClient(new Uri(azureOpenAIEndpoint),
+                    new System.ClientModel.ApiKeyCredential(azureOpenAIKey));
+                    
+                IChatClient chatClient = azureOpenAIClient.GetChatClient(deploymentName).AsIChatClient();
+                services.AddSingleton(chatClient);
                 services.AddDevExpressAI(config => {
                     config.AddBlazorReportingAIIntegration(reportingCfg => {
                         reportingCfg.Languages = new List<LanguageItem>() {
@@ -107,6 +109,7 @@ namespace BlazorDemo.ServerSide {
                     });
                     config.AddWebReportingAIIntegration(cfg => cfg.SummarizationMode = SummarizationMode.Abstractive);
                 });
+#endif
                 services.AddTransient<DevExpress.DataAccess.Wizard.Services.ICustomQueryValidator, DevExpress.DataAccess.Wizard.Services.CustomQueryValidator>();
                 services.AddSingleton<IDemoReportSource, DemoReportSource>();
                 services.AddSingleton<IPdfSignatureOptionsProviderAsync, CustomPdfSignatureOptionsProviderAsync>();

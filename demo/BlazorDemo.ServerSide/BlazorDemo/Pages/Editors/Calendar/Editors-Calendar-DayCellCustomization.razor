@@ -12,11 +12,11 @@
 
         string GetCssClassNames(DateTime date) {
             if(Data.PersonalDays.Exists(d => DaysEqual(d, date)))
-                return "fw-bold text-success";
+                return "fw-bold personal-day";
             if(Data.Holidays.Exists(d => DaysEqual(d, date)))
-                return "text-danger";
+                return "holiday";
             if(Data.BirthDates.Exists(d => DaysEqual(d, date)))
-                return "fw-bold text-info";
+                return "fw-bold birth-date";
 
             return null;
         }

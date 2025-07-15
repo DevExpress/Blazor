@@ -12,7 +12,7 @@ namespace DevExpress.Blazor.DocumentMetadata {
             builder.AddContent(3, @"
                 function DxMetadataReady(dotnetRef, elementRef) {
                     var _ = DxMetadataReady;
-                    return _[_] || (_[_] = removeElement(elementRef, inject)());
+                    return _[_] || (_[_] = removeElement(elementRef, inject));
 
                     function inject() {
                         return new Promise(function (resolve, reject) {

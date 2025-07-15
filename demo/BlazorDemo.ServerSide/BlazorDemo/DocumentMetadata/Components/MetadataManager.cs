@@ -28,11 +28,11 @@ namespace DevExpress.Blazor.DocumentMetadata {
 
         protected override bool ShouldRender() => false;
         protected override async Task OnAfterRenderAsync(bool firstRender) {
-            if (firstRender && _dotnetRef == null) {
+            if(firstRender && _dotnetRef == null) {
                 _cancellationToken.ThrowIfCancellationRequested();
                 _dotnetRef = DotNetObjectReference.Create(this);
                 try {
-                    await JSRuntime.InvokeAsync<List<Renderer>>(JSInitializeMethod, _cancellationToken,
+                    await JSRuntime.InvokeVoidAsync(JSInitializeMethod, _cancellationToken,
                         _dotnetRef, ElementReference);
                 } catch { }
                 _cancellationToken.Register(Metadata.Subscribe(this).Dispose);
@@ -46,25 +46,25 @@ namespace DevExpress.Blazor.DocumentMetadata {
         async Task SyncMetadata() {
             _cancellationToken.ThrowIfCancellationRequested();
 
-            if (!_renderers.IsEmpty) {
+            if(!_renderers.IsEmpty) {
                 await JSRuntime.InvokeVoidAsync("_bulkUpdateMetadata", _cancellationToken, _dotnetRef, _renderers);
                 _renderers.Clear();
             }
         }
 
         public void Dispose() {
-            if (!_disposed) {
+            if(!_disposed) {
                 _disposed = true;
                 _renderers.Clear();
-                using (_cancellation) _cancellation.Cancel();
-                using (_dotnetRef) _dotnetRef = null;
+                using(_cancellation) _cancellation.Cancel();
+                using(_dotnetRef) _dotnetRef = null;
             }
         }
 
 
         void IObserver<Renderer>.OnNext(Renderer value) {
             _renderers.Enqueue(value);
-            if (_initialized) RequireMetadataSync();
+            if(_initialized) RequireMetadataSync();
         }
         void IObserver<Renderer>.OnCompleted() {
             _initialized = true;

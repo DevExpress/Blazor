@@ -18,22 +18,22 @@
     <PackageReference Include="DevExtreme.AspNet.Data" Version="4.0.1" />
     <PackageReference Include="System.CodeDom" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.10" />
-    <PackageReference Include="System.Text.Json" Version="9.0.0" />
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
     <PackageReference Include="System.Reactive" Version="5.0.0" />
     <ProjectReference Include="..\BlazorDemo.DemoData\BlazorDemo.DemoData.csproj" />
     <ProjectReference Include="..\BlazorDemo.Reporting.Core\BlazorDemo.Reporting.Core.csproj" />
     <PackageReference Include="System.Numerics.Tensors" Version="9.0.0" />
-    <PackageReference Include="Azure.AI.OpenAI" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Extensions.AI.Abstractions" Version="9.0.1-preview.1.24570.5" />
-    <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="9.0.1-preview.1.24570.5" />
+    <PackageReference Include="Azure.AI.OpenAI" Version="2.2.0-beta.4" />
+    <PackageReference Include="Microsoft.Extensions.AI.Abstractions" Version="9.5.0" />
+    <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="9.5.0-preview.1.25265.7" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.PdfViewer" Version="24.2.3" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.WebAssembly" Version="24.2.3" />
-    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" Version="24.2.3" />
-    <PackageReference Include="DevExpress.Reporting.Demos" Version="24.2.3" />
-    <PackageReference Include="DevExpress.Blazor.PivotTable" Version="24.2.3" />
-    <PackageReference Include="DevExpress.AIIntegration.Blazor" Version="24.2.3" />
+    <PackageReference Include="DevExpress.Blazor.PdfViewer" Version="24.2.8" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.WebAssembly" Version="24.2.8" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" Version="24.2.8" />
+    <PackageReference Include="DevExpress.Reporting.Demos" Version="24.2.8" />
+    <PackageReference Include="DevExpress.Blazor.PivotTable" Version="24.2.8" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor" Version="24.2.8" />
     
     
     

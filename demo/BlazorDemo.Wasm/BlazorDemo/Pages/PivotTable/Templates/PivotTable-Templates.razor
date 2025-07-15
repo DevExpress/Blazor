@@ -1,6 +1,7 @@
 ﻿@page "/PivotTableTemplates"
 @using DevExpress.Blazor.Internal
 @layout DataProviderAccessArea<ISalesInfoDataProvider>
+@inject DemoThemeService Themes
 
 <DemoPageSectionComponent Id="PivotTable-Templates" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
@@ -29,11 +30,13 @@
                             </ValueTemplate>
                         </DxPivotTableField>
                         <DxPivotTableField Field="@nameof(SaleInfo.Date)" GroupInterval="PivotTableGroupInterval.DateMonth" Area="PivotTableArea.Column" Caption="Month"/>
-                        <DxPivotTableField Field="@nameof(SaleInfo.Amount)" Area="PivotTableArea.Data" SummaryType="PivotTableSummaryType.Sum">
+                        <DxPivotTableField Field="@nameof(SaleInfo.Amount)" Area="PivotTableArea.Data" SummaryType="PivotTableSummaryType.Sum" Width="110">
                             <CellTemplate>
                                 @if(ShouldFormatCellContent(context)) {
                                     <div class="pivot-table-cell-template">
-                                        <span class="@GetCellTemplateIconCssClass(context)"></span>
+                                        <svg class="@GetCellTemplateSvgIconCssClass()">
+                                            <use href="@GetCellTemplateSvgIconUrl(context)" />
+                                        </svg>
                                         <span class="@GetCellTemplateCssClass(context)">
                                             @string.Format("{0:c0}", context.Value)
                                         </span>
@@ -71,19 +74,31 @@
                     return "text-success";
                 return string.Empty;
             }
-            string GetCellTemplateIconCssClass(PivotTableFieldCellTemplateContext context) {
-                string baseClass = "pivot-table-cell-template-icon";
+
+            string GetCellTemplateSvgIconUrl(PivotTableFieldCellTemplateContext context) {
                 if(IsCellTemplateValueNegative(context))
-                    return $"{baseClass} pivot-table-red-arrow-down";
+                    return GetCellTemplateSvgIconUrl("arrow-down");
                 if(IsCellTemplateValuePositive(context))
-                    return $"{baseClass} pivot-table-green-arrow-up";
+                    return GetCellTemplateSvgIconUrl("arrow-up");
                 if(IsCellTemplateValueNeutral(context))
-                    return $"{baseClass} pivot-table-yellow-arrow-right";
+                    return GetCellTemplateSvgIconUrl("arrow-right");
                 if(IsCellTemplateValueNegativeTrend(context))
-                    return $"{baseClass} pivot-table-yellow-arrow-down-right";
+                    return GetCellTemplateSvgIconUrl("arrow-down-right");
                 if(IsCellTemplateValuePositiveTrend(context))
-                    return $"{baseClass} pivot-table-yellow-arrow-up-right";
+                    return GetCellTemplateSvgIconUrl("arrow-up-right");
                 return string.Empty;
+            }
+
+            string GetCellTemplateSvgIconCssClass(){
+                string classSuffix = Themes.ActiveTheme.IsFluent ? "-fluent" : string.Empty;
+
+                return $"pivot-table-cell-template-icon{classSuffix}";
+            }
+
+            string GetCellTemplateSvgIconUrl(string name) {
+                string nameSuffix = Themes.ActiveTheme.IsFluent ? "-fluent" : string.Empty;
+
+                return StaticAssetUtils.GetImagePath($"icons/pivot-table/arrows.svg#{name}{nameSuffix}");
             }
 
             bool IsCellTemplateValuePositive(PivotTableFieldCellTemplateContext context) {

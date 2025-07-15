@@ -1,3 +1,104 @@
+/* Toolbar */
+.theme-fluent-light .content .tb-icon,
+.theme-fluent-dark .content .tb-icon {
+    width: var(--DS-sizing-xl);
+    height: var(--DS-sizing-xl);
+    mask-size: contain;
+    -webkit-mask-size: contain;
+}
+
+.theme-fluent-light .content .dxbl-sm .tb-icon,
+.theme-fluent-dark .content .dxbl-sm .tb-icon {
+    width: var(--DS-sizing-l);
+    height: var(--DS-sizing-l);
+}
+
+.theme-fluent-light .content .tb-icon-bold,
+.theme-fluent-dark .content .tb-icon-bold {
+    -webkit-mask-image: url("../images/icons/bold-fluent.svg");
+    mask-image: url("../images/icons/bold-fluent.svg");
+}
+.theme-fluent-light .content .tb-icon-italic,
+.theme-fluent-dark .content .tb-icon-italic {
+    -webkit-mask-image: url("../images/icons/italic-fluent.svg");
+    mask-image: url("../images/icons/italic-fluent.svg");
+}
+.theme-fluent-light .content .tb-icon-underline,
+.theme-fluent-dark .content .tb-icon-underline {
+    -webkit-mask-image: url("../images/icons/underline-fluent.svg");
+    mask-image: url("../images/icons/underline-fluent.svg");
+}
+.theme-fluent-light .content .tb-icon-align-left,
+.theme-fluent-dark .content .tb-icon-align-left {
+    -webkit-mask-image: url("../images/icons/align-left-fluent.svg");
+    mask-image: url("../images/icons/align-left-fluent.svg");
+}
+.theme-fluent-light .content .tb-icon-align-center,
+.theme-fluent-dark .content .tb-icon-align-center {
+    -webkit-mask-image: url("../images/icons/align-center-fluent.svg");
+    mask-image: url("../images/icons/align-center-fluent.svg");
+}
+.theme-fluent-light .content .tb-icon-align-right,
+.theme-fluent-dark .content .tb-icon-align-right{
+    -webkit-mask-image: url("../images/icons/align-right-fluent.svg");
+    mask-image: url("../images/icons/align-right-fluent.svg");
+}
+.theme-fluent-light .content .tb-icon-undo,
+.theme-fluent-dark .content .tb-icon-undo {
+    -webkit-mask-image: url("../images/icons/undo-fluent.svg");
+    mask-image: url("../images/icons/undo-fluent.svg");
+}
+.theme-fluent-light .content .tb-icon-redo,
+.theme-fluent-dark .content .tb-icon-redo {
+    -webkit-mask-image: url("../images/icons/redo-fluent.svg");
+    mask-image: url("../images/icons/redo-fluent.svg");
+}
+.theme-fluent-light .content .tb-icon-paste,
+.theme-fluent-dark .content .tb-icon-paste {
+    -webkit-mask-image: url("../images/icons/paste-fluent.svg");
+    mask-image: url("../images/icons/paste-fluent.svg");
+}
+.theme-fluent-light .content .tb-icon-info,
+.theme-fluent-dark .content .tb-icon-info {
+    mask-image: url("../images/icons/info-fluent.svg");
+    -webkit-mask-image: url("../images/icons/info-fluent.svg");
+}
+.theme-fluent-light .content .tb-icon-save,
+.theme-fluent-dark .content .tb-icon-save {
+    mask-image: url("../images/icons/save-fluent.svg");
+    -webkit-mask-image: url("../images/icons/save-fluent.svg");
+}
+.theme-fluent-light .content .tb-icon-settings,
+.theme-fluent-dark .content .tb-icon-settings {
+    mask-image: url("../images/icons/settings-fluent.svg");
+    -webkit-mask-image: url("../images/icons/settings-fluent.svg");
+}
+.theme-fluent-light .content .tb-icon-refresh,
+.theme-fluent-dark .content .tb-icon-refresh {
+    mask-image: url("../images/icons/refresh-fluent.svg");
+    -webkit-mask-image: url("../images/icons/refresh-fluent.svg");
+}
+.theme-fluent-light .content .tb-icon-paragraph,
+.theme-fluent-dark .content .tb-icon-paragraph {
+    mask-image: url("../images/icons/paragraph-fluent.svg");
+    -webkit-mask-image: url("../images/icons/paragraph-fluent.svg");
+}
+.theme-fluent-light .content .tb-icon-watermark,
+.theme-fluent-dark .content .tb-icon-watermark {
+    mask-image: url("../images/icons/watermark-fluent.svg");
+    -webkit-mask-image: url("../images/icons/watermark-fluent.svg");
+}
+.theme-fluent-light .content .tb-icon-alert,
+.theme-fluent-dark .content .tb-icon-alert {
+    mask-image: url("../images/icons/alert-fluent.svg");
+    -webkit-mask-image: url("../images/icons/alert-fluent.svg");
+}
+.theme-fluent-light .content .tb-icon-font,
+.theme-fluent-dark .content .tb-icon-font {
+    -webkit-mask-image: url("../images/icons/font-fluent.svg");
+    mask-image: url("../images/icons/font-fluent.svg");
+}
+
 /* Grid */
 .theme-fluent-light .content .grid-icon-column-chooser,
 .theme-fluent-dark .content .grid-icon-column-chooser,

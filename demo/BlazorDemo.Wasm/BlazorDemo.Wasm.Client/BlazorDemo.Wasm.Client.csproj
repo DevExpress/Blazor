@@ -6,11 +6,12 @@
     <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <IntermediateOutputPath>obj.WASM</IntermediateOutputPath>
+    <WasmBuildNative>true</WasmBuildNative>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Azure.AI.OpenAI" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Extensions.AI.Abstractions" Version="9.0.1-preview.1.24570.5" />
-    <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="9.0.1-preview.1.24570.5" />
+    <PackageReference Include="Azure.AI.OpenAI" Version="2.2.0-beta.4" />
+    <PackageReference Include="Microsoft.Extensions.AI.Abstractions" Version="9.5.0" />
+    <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="9.5.0-preview.1.25265.7" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.1" />
     <PackageReference Include="System.Net.Http.Json" Version="8.0.1" />
     <PackageReference Include="System.Private.Uri" Version="4.3.2" />
@@ -25,9 +26,9 @@
     <ProjectReference Include="..\BlazorDemo\BlazorDemo.Wasm.Core.csproj" />
   </ItemGroup>
 <ItemGroup>
-    <PackageReference Include="DevExpress.AIIntegration.Blazor" Version="24.2.3" />
-    <PackageReference Include="DevExpress.Blazor.PivotTable" Version="24.2.3" />
-    <PackageReference Include="DevExpress.Pdf.SkiaRenderer" Version="24.2.3" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor" Version="24.2.8" />
+    <PackageReference Include="DevExpress.Blazor.PivotTable" Version="24.2.8" />
+    <PackageReference Include="DevExpress.Pdf.SkiaRenderer" Version="24.2.8" />
     
     
     

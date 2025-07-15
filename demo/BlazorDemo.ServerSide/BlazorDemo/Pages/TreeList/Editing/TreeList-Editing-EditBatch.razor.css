@@ -39,7 +39,18 @@
     display: contents;
 }
 
-::deep .grid-delete-btn:hover {
+::deep .grid-delete-btn:hover,
+::deep .grid-new-btn:hover {
     color: var(--DS-color-surface-warning-default-rest);
+}
+::deep .grid-delete-btn,
+::deep .grid-new-btn {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    &.dxbl-sm {
+        padding-top: 0.1rem;
+        padding-bottom: 0.1rem;
+    }
 }
 /*EndHide*/

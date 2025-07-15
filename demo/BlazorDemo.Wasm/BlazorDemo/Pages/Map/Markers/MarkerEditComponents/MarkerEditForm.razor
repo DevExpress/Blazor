@@ -14,8 +14,8 @@
                 <DxTextBox @bind-Text="@EditingMarker.GeoPosition" />
             </DxFormLayoutItem>
             <DxFormLayoutItem ColSpanMd="12">
-                <DxMap Zoom="14" Provider="MapProvider.Bing" Width="100%" Height="400px" ShowControls="false" AutoAdjust="false" MapClick=@OnEditorMapClick>
-                    <DxMapApiKeys Bing="@MapApiKeyProvider.GetBingProviderKey()" />
+                <DxMap Zoom="14" Provider="MapProvider.Azure" Width="100%" Height="400px" ShowControls="false" AutoAdjust="false" MapClick=@OnEditorMapClick>
+                    <DxMapApiKeys Azure="@MapApiKeyProvider.GetAzureProviderKey()" />
                 <DxMapCenter GeoPosition="@GetMapGeoPosition()" />
                     <DxMapMarkers>
                         <DxMapMarker>

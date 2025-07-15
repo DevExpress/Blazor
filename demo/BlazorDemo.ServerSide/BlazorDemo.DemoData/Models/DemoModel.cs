@@ -7,25 +7,26 @@ namespace BlazorDemo.DemoData {
         public string TitleFormat { get; set; }
 
         public DemoGroup[] Groups { get; set; }
+        public DemoPage HomePage { get; set; }
         public DemoProductInfo[] Products { get; set; }
         public DemoSearchModel Search { get; set; }
 
-        [JsonIgnore]
-        public Dictionary<string, string> Redirects { get; private set; } = new();
+        [JsonIgnore] public Dictionary<string, string> Redirects { get; private set; } = new();
 
-        [JsonIgnore]
-        public bool IsBlazorServer { get; private set; }
+        [JsonIgnore] public bool IsBlazorServer { get; private set; }
 
         public static DemoModel Create(bool isBlazorServer) {
             var jsonContent = DemoUtils.GetFileContent(typeof(DemoModel), "BlazorDemo.DemoData.demo-metadata.json");
             return Create(isBlazorServer, jsonContent);
         }
+
         public static DemoModel Create(bool isBlazorServer, string jsonContent) {
             var model = JsonSerializer.Deserialize<DemoModel>(jsonContent);
             model.IsBlazorServer = isBlazorServer;
             model.Prepare();
             return model;
         }
+
         void Prepare() {
             Products = PrepareList(Products);
             Redirects = new Dictionary<string, string>();
@@ -33,8 +34,10 @@ namespace BlazorDemo.DemoData {
                 group.Pages = PrepareList(group.Pages);
                 PrepareRecursive(group.Pages, null, group);
             }
+
             Groups = PrepareList(Groups);
         }
+
         void PrepareRecursive(IEnumerable<DemoItem> childItems, DemoPage parent, DemoGroup group) {
             foreach(var item in childItems) {
                 item.ParentPage = parent;
@@ -44,32 +47,33 @@ namespace BlazorDemo.DemoData {
                     page.PageSections = PrepareList(page.PageSections);
                     PrepareRecursive(page.GetChildItems(), page, group);
                 }
+
                 if(item.RedirectFrom?.Length > 0) {
                     foreach(var redirect in item.RedirectFrom)
                         Redirects.Add(redirect.ToLower(), item.GetUrl());
                 }
+
                 DemoItemById[item.UniqueId] = item;
             }
         }
+
         T[] PrepareList<T>(T[] list) {
             if(list == null)
                 return Array.Empty<T>();
             IEnumerable<T> result = list;
-            result = result
-               .Where(i => i switch {
-                   DemoProductInfo info => !(IsBlazorServer ? info.IsClientSideOnly : info.IsServerSideOnly),
-                   DemoItem item => !(IsBlazorServer ? item.IsClientSideOnly : item.IsServerSideOnly),
-                   DemoGroup group => group.Pages.Length > 0,
-                   _ => throw new NotSupportedException()
-               });
-            return result
-                .OrderBy(i => i is DemoPage page ? page.IsMaintenanceMode : false)
-                .ToArray();
+            result = result.Where(i => i switch {
+                DemoProductInfo info => !(IsBlazorServer ? info.IsClientSideOnly : info.IsServerSideOnly),
+                DemoItem item => !(IsBlazorServer ? item.IsClientSideOnly : item.IsServerSideOnly),
+                DemoGroup group => group.Pages.Length > 0,
+                _ => throw new NotSupportedException()
+            });
+            return result.OrderBy(i => i is DemoPage page ? page.IsMaintenanceMode : false).ToArray();
         }
 
         public DemoPage GetDemoPageByUrl(string pageUrl) {
             pageUrl = pageUrl.Trim('/').Split('#')[0];
-            return FindRecursive(Groups.SelectMany(g => g.Pages), item => item is DemoPage page && string.Equals(page.Url, pageUrl, StringComparison.OrdinalIgnoreCase)) as DemoPage;
+            return FindRecursive(Groups.SelectMany(g => g.Pages),
+                item => item is DemoPage page && string.Equals(page.Url, pageUrl, StringComparison.OrdinalIgnoreCase)) as DemoPage;
         }
 
         public DemoItem FindDemoItemRecursively(Func<DemoItem, bool> predicate) {
@@ -85,6 +89,7 @@ namespace BlazorDemo.DemoData {
                 if(nestedResult != null)
                     return nestedResult;
             }
+
             return null;
         }
 
@@ -95,18 +100,21 @@ namespace BlazorDemo.DemoData {
                 return res;
             return null;
         }
+
         public string GetDemoItemDescriptionResourcePath(DemoItem item, string rootFolder) {
             return GetDemoItemResourcePath(item, rootFolder, s => {
                 var folder = item.GetDescriptionFilesFolder();
                 return !string.IsNullOrEmpty(folder) ? folder : s + ".Descriptions";
             }, ".md");
         }
+
         public string GetDemoItemRazorResourcePath(DemoItem item, string rootFolder) {
             return GetDemoItemResourcePath(item, rootFolder, s => {
                 var folder = item.GetRazorFilesFolder();
                 return !string.IsNullOrEmpty(folder) ? folder : s;
             }, ".razor");
         }
+
         string GetDemoItemResourcePath(DemoItem item, string rootFolder, Func<string, string> getFolder, string extension) {
             var itemIds = item.UniqueId.Split('-').ToList();
             var partCount = itemIds.Count;

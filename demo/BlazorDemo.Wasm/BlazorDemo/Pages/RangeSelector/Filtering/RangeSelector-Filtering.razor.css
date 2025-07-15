@@ -2,6 +2,10 @@
     height: 522px;
 }
 
+.grid-container {
+    display: contents;
+}
+
 .grid-header {
     font-weight: 100;
     margin: 38px 0 10px;

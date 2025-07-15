@@ -1,4 +1,4 @@
-﻿.template-container {
+.template-container {
     display: flex;
     align-items: center;
     width: 100%
@@ -98,4 +98,12 @@
 
 .template-container > .yeti {
     color: #008cba;
+}
+
+.template-container > .fluent-light {
+    color: #0f6cbd;
+}
+
+.template-container > .fluent-dark {
+    color: #282828;
 }

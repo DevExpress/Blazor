@@ -48,7 +48,7 @@
                                     @home.Features
                                 </p>
                                 <p class="card-link-container">
-                                    <a href="javascript:;" @onclick="@(() => ShowDetails(home.Features))">...More details</a>
+                                    <DxButton RenderStyle="ButtonRenderStyle.Link" Click="@(() => ShowDetails(home.Features))" Text="...More details"></DxButton>
                                 </p>
                                 <h5 class="text-center card-price">@string.Format("{0:C}", home.Price)</h5>
                             </Template>

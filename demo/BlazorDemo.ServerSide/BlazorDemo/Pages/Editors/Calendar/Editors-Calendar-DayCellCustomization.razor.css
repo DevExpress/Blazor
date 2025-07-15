@@ -1,3 +1,21 @@
 .dxbl-calendar-day > a {
     text-decoration: none;
 }
+.dxbl-calendar .dxbl-calendar-content .dxbl-calendar-day > a.personal-day:hover,
+.dxbl-calendar .dxbl-calendar-content .dxbl-calendar-day:not(.dxbl-calendar-selected-item) > a.personal-day {
+    color: var(--dxbl-client-component-palette-success);
+    --dxbl-calendar-today-text-color: var(--dxbl-client-component-palette-success);
+    --dxbl-calendar-item-selected-hover-color: var(--dxbl-client-component-palette-success);
+}
+.dxbl-calendar .dxbl-calendar-content .dxbl-calendar-day > a.holiday:hover,
+.dxbl-calendar .dxbl-calendar-content .dxbl-calendar-day:not(.dxbl-calendar-selected-item) > a.holiday {
+    color: var(--dxbl-client-component-palette-danger);
+    --dxbl-calendar-today-text-color: var(--dxbl-client-component-palette-danger);
+    --dxbl-calendar-item-selected-hover-color: var(--dxbl-client-component-palette-danger);
+}
+.dxbl-calendar .dxbl-calendar-content .dxbl-calendar-day > a.birth-date:hover,
+.dxbl-calendar .dxbl-calendar-content .dxbl-calendar-day:not(.dxbl-calendar-selected-item) > a.birth-date {
+    color: var(--dxbl-client-component-palette-info);
+    --dxbl-calendar-today-text-color: var(--dxbl-client-component-palette-info);
+    --dxbl-calendar-item-selected-hover-color: var(--dxbl-client-component-palette-info);
+}

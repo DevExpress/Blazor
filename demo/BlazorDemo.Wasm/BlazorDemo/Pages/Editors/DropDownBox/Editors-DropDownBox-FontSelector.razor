@@ -14,35 +14,35 @@
                 <div class="container templateContainer">
                     <div class="row">
                         <div class="col-6">
-                            <p class="mt-3">Font Family:</p>
+                            <p class="mt-3" id="font-family">Font Family:</p>
                             <DxListBox TData="string" TValue="string"
                                        Value="@(GetFontValue())"
                                        ValueChanged="@(s => FontValue = s)"
                                        Data="_fonts"
-                                       >
+                                       aria-labelledby="font-family">
                             </DxListBox>
                         </div>
                         <div class="col-6">
-                            <p class="mt-3">Font Style:</p>
+                            <p class="mt-3" id="font-style">Font Style:</p>
                             <DxListBox TData="string" TValue="string"
                                        Data="_fontStyles"
                                        Values="@(GetFontStyleValues())"
                                        ValuesChanged="@(values => FontStylesValue = values.ToList())"
                                        SelectionMode="ListBoxSelectionMode.Multiple"
                                        ShowCheckboxes="true"
-                                       >
+                                       aria-labelledby="font-style">
                             </DxListBox>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <p class="mt-3">Size:</p>
+                            <p class="mt-3" id="size">Size:</p>
                             <DxSpinEdit T="int"
                                         MinValue="0"
                                         Value="@(GetFontSizeValue())"
                                         ValueChanged="@(value => FontSizeValue = value)"
                                         CssClass="templateSpinEdit"
-                                        >
+                                        aria-labelledby="size">
                             </DxSpinEdit>
                         </div>
                     </div>

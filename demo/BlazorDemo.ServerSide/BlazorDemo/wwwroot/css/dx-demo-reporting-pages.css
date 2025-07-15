@@ -32,3 +32,8 @@
         padding: 0;
     }
 }
+
+.dxbl-checkbox.dxbrv-ai-toast-checkbox .dxbl-text {
+    color: var(--dxbl-toast-text-font-color);
+}
+

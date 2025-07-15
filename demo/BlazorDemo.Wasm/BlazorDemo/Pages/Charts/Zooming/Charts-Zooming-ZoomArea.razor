@@ -1,7 +1,8 @@
 ﻿<DemoPageSectionComponent Id="Charts-Zooming-ZoomArea">
     <DemoChildContent>
         @inject IChartBirthLifeDataProvider ChartBirthLifeDataProvider
-        <DxChart Data="@DataSource"
+        <DxChart @ref="@chart"
+                 Data="@DataSource"
                  Width="100%">
             <DxChartTitle Text="Life Expectancy vs. Birth Rate"/>
             <DxChartLegend Position="RelativePosition.Inside"
@@ -36,13 +37,22 @@
                                        AllowMouseWheel="true"
                                        PanKey="ChartEventPanKey.Shift"/>
         </DxChart>
+
+        <div class="chart-reset-btn">
+            <DxButton Text="Reset Zoom" Click="@ResetVisualRange"/>
+        </div>
     </DemoChildContent>
 
     @code {
         IEnumerable<BirthLife> DataSource = Enumerable.Empty<BirthLife>();
+        DxChart<BirthLife> chart;
 
         protected override void OnInitialized() {
             DataSource = ChartBirthLifeDataProvider.GenerateData();
+        }
+
+        public void ResetVisualRange() {
+            chart.ResetVisualRange();
         }
 
     }

@@ -57,7 +57,7 @@
                         @bind-Value="@ColumnTotalsPosition"/>
     </OptionsContent>
         @code {
-            IEnumerable<object> PivotData { get; set; }
+            object PivotData { get; set; }
 
             bool ShowTotals { get; set; } = true;
             bool ShowGrandTotals { get; set; } = true;
@@ -67,9 +67,12 @@
             protected override async Task OnInitializedAsync() {
                 var invoices = await NwindDataService.GetInvoicesAsync();
                 var customers = await NwindDataService.GetCustomersAsync();
-                var yearRangeStart = DateTime.Now.AddMonths(-27);
-                var yearRangeEnd = DateTime.Now.AddMonths(12);
-                PivotData = invoices.Where(i => i.OrderDate >= yearRangeStart && i.OrderDate < yearRangeEnd).Join(customers, i => i.CustomerId, c => c.CustomerId, (i, c) => {
+                var minDate = invoices.Min(i => i.OrderDate).GetValueOrDefault();
+                var maxDate = invoices.Max(i => i.OrderDate).GetValueOrDefault();
+                PivotData = invoices.Where(i => {
+                    var invoiceDate = i.OrderDate.GetValueOrDefault();
+                    return invoiceDate.Year > minDate.Year && invoiceDate.Year <= maxDate.Year;
+                }).Join(customers, i => i.CustomerId, c => c.CustomerId, (i, c) => {
                     return new {
                         CompanyName = c.CompanyName,
                         UnitPrice = i.UnitPrice,

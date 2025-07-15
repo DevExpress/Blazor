@@ -564,7 +564,7 @@ body,
     justify-content: space-between;
     align-items: center;
     flex-wrap: nowrap;
-    padding: 0 1rem 0 1rem;
+    padding: 0 1rem 0 .75rem;
     height: 3rem;
     width: 330px;
     border: 0;
@@ -613,7 +613,7 @@ body,
     -webkit-mask-repeat: no-repeat;
     background-position: center center;
     background-color: currentColor;
-    margin: 0 0 0 4px;
+    margin: 0 4px 0 0;
 }
 
 .search-editor .icon-search {

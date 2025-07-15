@@ -12,7 +12,7 @@ public class SmartFilterProvider {
     readonly IEmbeddingGenerator<string, Embedding<float>> Embedder;
     readonly static ConcurrentDictionary<string, Embedding<float>> cache = new(StringComparer.OrdinalIgnoreCase);
     public SmartFilterProvider(AzureOpenAIClient openAIClient) {
-        Embedder = openAIClient.AsEmbeddingGenerator("text-embedding-3-small");
+        Embedder = openAIClient.GetEmbeddingClient("text-embedding-3-small").AsIEmbeddingGenerator();
     }
 
     public async Task FillCacheAsync(IEnumerable<string> words) {

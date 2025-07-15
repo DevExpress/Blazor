@@ -710,6 +710,11 @@ body.modal-open .main {
     background-color: currentColor;
 }
 
+.theme-fluent-light .dxbl-active .tabs-icon,
+.theme-fluent-dark .dxbl-active .tabs-icon {
+    background-color: var(--dxbl-tabs-tab-bg);
+}
+
 :not(.dxbl-active) > .tabs-icon {
     opacity: 0.7;
 }

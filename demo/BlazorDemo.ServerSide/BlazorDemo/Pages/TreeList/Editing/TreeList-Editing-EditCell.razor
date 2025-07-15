@@ -60,6 +60,7 @@
                         <div class="grid-cell-align-center">
                             <DxButton IconCssClass="grid-icon grid-icon-add"
                                       RenderStyle="ButtonRenderStyle.Link"
+                                      CssClass="grid-new-btn"
                                       aria-label="New"
                                       Click="@(() => TreeList.StartEditNewRowAsync(context.VisibleIndex))"/>
                             <DxButton IconCssClass="grid-icon grid-icon-delete"
@@ -72,12 +73,12 @@
                     <CellEditTemplate>
                         <div class="grid-cell-align-center">
                             <DxButton Enabled="false"
-                                      CssClass="grid-disabled-button"
+                                      CssClass="grid-new-btn grid-disabled-button"
                                       IconCssClass="grid-icon grid-icon-add"
                                       aria-label="New"
                                       RenderStyle="ButtonRenderStyle.Link"/>
                             <DxButton Enabled="false"
-                                      CssClass="grid-disabled-button"
+                                      CssClass="grid-delete-btn grid-disabled-button"
                                       IconCssClass="grid-icon grid-icon-delete"
                                       aria-label="Delete"
                                       RenderStyle="ButtonRenderStyle.Link"/>
