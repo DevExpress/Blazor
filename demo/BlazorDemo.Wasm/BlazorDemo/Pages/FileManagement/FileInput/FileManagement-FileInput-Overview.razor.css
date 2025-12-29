@@ -19,3 +19,9 @@
 /*BeginHide*/::deep/*EndHide*/.custom-drop-zone > *:not(#overviewDemoSelectButton) {
     pointer-events: none;
 }
+
+/*BeginHide*/::deep/*EndHide*/.upload-validation-text {
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 12px;
+ }

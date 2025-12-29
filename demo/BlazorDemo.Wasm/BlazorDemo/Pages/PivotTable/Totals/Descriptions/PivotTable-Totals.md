@@ -1,4 +1,4 @@
-The DevExpress Blazor [Pivot Table](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PivotTable.DxPivotTable) (Community Technology Preview – official ship date June 2025) calculates data [totals](https://docs.devexpress.com/Blazor/405459/components/pivottable/pivot-table-basics#totals-grand-totals) and displays them as separate columns and rows. Totals include the following:
+The DevExpress Blazor [Pivot Table](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PivotTable.DxPivotTable) calculates data [totals](https://docs.devexpress.com/Blazor/405459/components/pivottable/pivot-table-basics#totals-grand-totals) and displays them as separate columns and rows. Totals include the following:
 
 * **Row/column Totals**: display sub-totals calculated for outside row/column fields.
 * **Row/column grand Totals**: display overall totals calculated against all rows/columns.

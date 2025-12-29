@@ -46,12 +46,12 @@
 
 <div @key="@DemoItem.Id" id="@("section-" + DemoItem.Id)" class="demo-page-section @(!ShowCode ? "no-code" : "") @(ShowHorizontalScrollBar ? "h-scroll" : "")">
     <div class="demo-page-section-title">
-        <a class="demo-anchor h2"
+        <a class="demo-anchor h1"
            href="@DemoItem.GetUrl()"
            aria-labelledby="@DemoItem.Id" />
-        <h1 id="@DemoItem.Id" class="h2">
+        <h1 id="@DemoItem.Id">
         &nbsp;@(!string.IsNullOrEmpty(DemoItem.TitleOnPage) ? DemoItem.TitleOnPage : DemoItem.Title)
-        </h1>        
+        </h1>
     </div>
     @{
         var statusMessage = DemoItem.GetStatusMessageMarkdown();
@@ -183,12 +183,11 @@
     [Parameter]
     public SizeMode SizeMode { get; set; } = SizeMode.Medium;
 
-    [CascadingParameter(Name = "ThemeName")]
-    string ThemeName {
-        get => themeName;
+    [CascadingParameter(Name = "DxActiveTheme")]
+    ITheme CurrentTheme {
         set {
-            if (value != themeName) {
-                themeName = value;
+            if (value.Name != themeName) {
+                themeName = value.Name;
                 IsComponentAreaVisible = false;
                 UpdateTabPagesVisibility();
             }
@@ -242,9 +241,6 @@
         var className = GetComponentContainerCssClass();
         if(!string.IsNullOrEmpty(className))
             result.Add("class", className);
-        var style = GetComponentContainerStyle();
-        if(!string.IsNullOrEmpty(style))
-            result.Add("style", style);
         return result;
     }
     string GetComponentContainerCssClass() {
@@ -258,13 +254,11 @@
             cssClasses.Add("align-items-start");
         else if(HorizontalAlignment == HorizontalAlignment.Right)
             cssClasses.Add("align-items-end");
-        return string.Join(" ", cssClasses);
-    }
-    string GetComponentContainerStyle() {
-        var cssRules = new List<string>();
+
         if(MinHeight != null)
-            cssRules.Add($"min-height: {MinHeight.Value}px");
-        return string.Join("; ", cssRules);
+            cssClasses.Add($"min-h-{MinHeight.Value}");
+
+        return string.Join(" ", cssClasses);
     }
 
     string GetTabPageLanguage(string key) {

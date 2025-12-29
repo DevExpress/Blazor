@@ -93,7 +93,7 @@
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender) {
-            if(firstRender) {
+            if(firstRender && Grid != null) {
                 await Grid.WaitForDataLoadAsync();
                 Grid.ExpandGroupRow(1);
 

@@ -69,7 +69,7 @@
                 e.CssClass = "highlighted-item";
             }
             if(e.ElementType == GridElementType.DataCell && e.Column.Name == "Total") {
-                e.Style = "font-weight: 800";
+                e.CssClass = "fw-800";
             }
             if(e.ElementType == GridElementType.GroupRow && e.Column.Name == "Country") {
                 var summaryItems = e.Grid.GetGroupSummaryItems().Select(i => e.Grid.GetGroupSummaryDisplayText(i, e.VisibleIndex));

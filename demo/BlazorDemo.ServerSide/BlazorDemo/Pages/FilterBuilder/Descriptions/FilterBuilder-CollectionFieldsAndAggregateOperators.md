@@ -1,0 +1,3 @@
+The DevExpress Blazor [Filter Builder](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFilterBuilder) allows you to define fields used to store object collections (the [IsCollection](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFilterBuilderField.IsCollection) property is `true`). For such fields, the component populates operator lists with aggregate functions (`Exists`, `Count`, `Avg`, `Sum`, `Min`, and `Max`). These functions calculate collection summaries and allow users to create filter conditions based on aggregated results.
+
+This demo defines an **Orders** collection field.

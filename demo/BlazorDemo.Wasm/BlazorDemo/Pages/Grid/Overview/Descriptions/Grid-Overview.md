@@ -1,6 +1,6 @@
 The DevExpress Blazor Grid is a performance optimized and responsive UI library designed to display, manage, and manipulate tabular data on-screen.
 
-## Key Features and Capabilities:
+## Key Features and Capabilities
 
 * High performance data processing engine
 * Accessibility compliance
@@ -11,11 +11,11 @@ The DevExpress Blazor Grid is a performance optimized and responsive UI library 
 * Master-detail visualization
 * Integrated templates and CSS customization
 * Export to PDF, XLSX, XLS, and CSV formats
-* Configurable toolbar
+* Configurable toolbar and context menu
 * Row-based drag & drop operations
 * Paging and virtual scrolling support
 
-## Learning Materials:
+## Learning Materials
 
 * [DevExpress Blazor Grid — Homepage](https://www.devexpress.com/blazor/data-grid/)
 * [DevExpress Blazor Grid — Documentation](https://docs.devexpress.com/Blazor/403143/components/grid)

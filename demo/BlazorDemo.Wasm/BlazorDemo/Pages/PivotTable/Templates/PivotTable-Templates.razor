@@ -1,6 +1,7 @@
 ﻿@page "/PivotTableTemplates"
 @using DevExpress.Blazor.Internal
 @layout DataProviderAccessArea<ISalesInfoDataProvider>
+
 @inject DemoThemeService Themes
 
 <DemoPageSectionComponent Id="PivotTable-Templates" ShowSizeMode="true">
@@ -100,7 +101,7 @@
             }
 
             string GetCellTemplateSvgIconUrl(string name) {
-                string nameSuffix = Themes.ActiveTheme.IsFluent ? "-fluent" : string.Empty;
+                string nameSuffix = Themes.ActiveTheme.IsFluent? "-fluent" : string.Empty;
 
                 return StaticAssetUtils.GetImagePath($"icons/pivot-table/arrows.svg#{name}{nameSuffix}");
             }

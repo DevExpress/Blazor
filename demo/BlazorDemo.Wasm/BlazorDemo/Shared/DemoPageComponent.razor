@@ -4,14 +4,14 @@
 @inject NavigationManager NavigationManager
 
 <div class="demo-page">
-    <div class="demo-page-content @(!HasPageNavigation ? "demo-page-no-navigation" : "")" style="@(Configuration.ShowOnlyReporting ? "max-width: 100%; margin-right: 0px" : "")">
+    <div class="@DemoRenderUtils.CombineCssClasses(GetPageContentClassNames())">
         @ChildContent
     </div>
     @if(!Configuration.ShowOnlyReporting) {
-    <div class="demo-page-right-container">
-        <DemoPageNavPanel />
-        <DemoFeedbackPanel />
-    </div>
+        <div class="demo-page-right-container">
+            <DemoPageNavPanel />
+            <DemoFeedbackPanel />
+        </div>
     }
 </div>
 
@@ -34,5 +34,12 @@
     }
     public void Dispose() {
         NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+    IEnumerable<string> GetPageContentClassNames() {
+        yield return "demo-page-content";
+        if(!HasPageNavigation)
+            yield return "demo-page-no-navigation";
+        if(Configuration.ShowOnlyReporting)
+            yield return "mw-100 me-0";
     }
 }

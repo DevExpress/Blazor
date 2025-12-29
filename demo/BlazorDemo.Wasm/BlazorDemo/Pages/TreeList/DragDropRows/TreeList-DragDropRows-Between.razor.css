@@ -1,9 +1,21 @@
-/*BeginHide*/ .components-container {
-    display:flex;
-} /*EndHide*/
+.components-container {
+    display: flex;
+}
 /*BeginHide*/ ::deep /*EndHide*/ .dxbl-grid {
     height: 480px;
 }
-/*BeginHide*/ ::deep /*EndHide*/ .dxbl-grid:last-child {
+/*BeginHide*/ ::deep /*EndHide*/ dxbl-grid {
     margin-left: 20px;
 }
+
+@media (max-width: 768px) {
+    .components-container {
+        flex-direction: column;
+    }
+
+    /*BeginHide*/ ::deep /*EndHide*/ dxbl-grid {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+}
+

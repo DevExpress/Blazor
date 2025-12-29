@@ -54,15 +54,15 @@
                 <div class="icon-container flex-shrink-0">
                     <span class="e-icon @iconCssClass"></span>
                 </div>
-                <div class="text-container flex-grow-1 ms-2">
+                <div class="text-container flex-grow-1 ms-2 overflow-hidden">
                     <label>@caption:</label>
-                    <div>@value</div>
+                    <div title="@value" class="overflow-hidden text-truncate">@value</div>
                 </div>
             </div>;
     }
 
     string GetPhotoUrl() /*BeginHide*/ {
-        return StaticAssetUtils.GetImagePath(EmployeeInfo.ImageFileName);
+        return StaticAssetUtils.GetEmployeeImagePath(EmployeeInfo.EmployeeId);
     }
     /*EndHide*/
 }

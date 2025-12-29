@@ -1,4 +1,6 @@
-﻿@if (_ready)
+﻿@inject ICspNonceService NonceProvider
+
+@if (_ready)
 {
     @ChildContent
 }
@@ -12,12 +14,18 @@ else if(_notSupported)
 }
 else
 {
+    <style nonce="@NonceProvider.Nonce">
+        .progress > .progress-bar {
+            @($"width: {_progress}%;")
+        }
+    </style>
+
     <div class="demo-description">
         <div class="data-provider-area">
             <p>Required data source is being prepared...</p>
         </div>
         <div class="progress">
-            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: @(_progress)%"
+            <div class="progress-bar progress-bar-striped" role="progressbar"
                  aria-valuenow="@_progress"
                  aria-valuemin="0"
                  aria-valuemax="100"></div>

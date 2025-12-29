@@ -6,9 +6,9 @@
 .themeswitcher-container {
     display: block;
 
-    --themeswitcher-color-hover: var(--DS-color-surface-neutral-default-selected, #e9e9e8);
-    --themeswitcher-color-active: var(--DS-color-surface-neutral-default-hovered, #f4f4f3);
-    --themeswitcher-color-active-hover: var(--DS-color-surface-neutral-default-selected-hovered, #d3d3d2);
+    --themeswitcher-color-hover: var(--dxds-color-surface-neutral-default-selected, #e9e9e8);
+    --themeswitcher-color-active: var(--dxds-color-surface-neutral-default-hovered, #f4f4f3);
+    --themeswitcher-color-active-hover: var(--dxds-color-surface-neutral-default-selected-hovered, #d3d3d2);
 }
 
 .theme-default-dark .themeswitcher-container, .theme-blazing-dark .themeswitcher-container {
@@ -125,7 +125,7 @@
 .themeswitcher-custom-color.active .themeswitcher-custom-color-button-icon:after {
     -webkit-mask-image: none;
     mask-image: none;
-    background-color: var(--DS-primary-90);
+    background-color: var(--dxds-primary-90);
 }
 
 .themeswitcher-custom-color input[type="color"] {

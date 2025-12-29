@@ -1,0 +1,126 @@
+﻿@page "/Grid/ContextMenuIntegration"
+@layout DataProviderAccessArea<INwindDataProvider>
+@using System.ComponentModel
+
+<DemoPageSectionComponent Id="Grid-ContextMenu" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <div class="grid-container">
+            <DxGrid Data="Data"
+                    FooterDisplayMode="GridFooterDisplayMode.Always"
+                    ShowGroupPanel="true"
+                    ContextMenus="@GridContextMenus.All"
+                    CustomizeContextMenu="CustomizeContextMenu"
+                    HighlightRowOnHover="true"
+                    AutoExpandAllGroupRows="true"
+                    GroupFooterDisplayMode="GridGroupFooterDisplayMode.IfExpanded"
+                    VirtualScrollingEnabled="true"
+                    SizeMode="Params.SizeMode">
+                <Columns>
+                    <DxGridDataColumn FieldName="City" />
+                    <DxGridDataColumn FieldName="Country" />
+                    <DxGridDataColumn FieldName="CustomerName" GroupIndex="0"/>
+                    <DxGridDataColumn FieldName="ProductName" />
+                    <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" />
+                    <DxGridDataColumn FieldName="Quantity" MinWidth="80" />
+                    <DxGridDataColumn FieldName="Total"
+                                      UnboundType="GridUnboundColumnType.Decimal"
+                                      UnboundExpression="[UnitPrice] * [Quantity]"
+                                      DisplayFormat="c"
+                                      MinWidth="100" />
+                </Columns>
+                <TotalSummary>
+                    @foreach(var item in SummaryItems) {
+                        <DxGridSummaryItem FieldName="@item.FieldName"
+                                           SummaryType="item.Type"
+                                           ValueDisplayFormat="@item.DisplayFormat"
+                                           @key="item"/>
+                    }
+                </TotalSummary>
+                <GroupSummary>
+                    @foreach(var item in GroupSummaryItems) {
+                        <DxGridSummaryItem FieldName="@item.FieldName" FooterColumnName="@item.FieldName"
+                                           SummaryType="item.Type"
+                                           ValueDisplayFormat="@item.DisplayFormat"
+                                           @key="item"/>
+                    }
+                </GroupSummary>
+            </DxGrid>
+        </div>
+        @code {
+            BindingList<Invoice> Data { get; set; }
+
+            IList<SummaryItem> SummaryItems { get; set; }
+            IList<SummaryItem> GroupSummaryItems { get; set; }
+            bool IsNumericColumn(string fieldName) => new[] { "UnitPrice", "Quantity", "Total" }.Contains(fieldName);
+
+            static readonly GridSummaryItemType[] SummaryTypes = Enum.GetValues<GridSummaryItemType>()
+                .Where(s => s != GridSummaryItemType.None && s != GridSummaryItemType.Custom)
+                .ToArray();
+
+
+            protected override  async Task OnInitializedAsync() {
+                var invoices = await NwindDataService.GetInvoicesAsync();
+                Data = new BindingList<Invoice>(invoices.ToList());
+
+                SummaryItems = new List<SummaryItem>([
+                    new SummaryItem("Total", GridSummaryItemType.Sum),
+                    new SummaryItem("Quantity", GridSummaryItemType.Avg)
+                ]);
+                GroupSummaryItems = new List<SummaryItem>([
+                    new SummaryItem("Total", GridSummaryItemType.Sum),
+                ]);
+            }
+
+            void CustomizeContextMenu(GridCustomizeContextMenuEventArgs e) {
+                IGridColumn column = null;
+                IReadOnlyList<IGridSummaryItem> contextSummaryItems = null;
+                IList<SummaryItem> summaryItemsCollection = null;
+                if(e.Context is GridFooterCommandContext footerCommandContext) {
+                    column = footerCommandContext.Column;
+                    contextSummaryItems = footerCommandContext.SummaryItems;
+                    summaryItemsCollection = SummaryItems;
+                } else if(e.Context is GridGroupFooterCommandContext groupFooterCommandContext) {
+                    column = groupFooterCommandContext.Column;
+                    contextSummaryItems = groupFooterCommandContext.SummaryItems;
+                    summaryItemsCollection = GroupSummaryItems;
+                }
+                if(column != null && column is IGridDataColumn dataColumn) {
+                    foreach(var summaryType in SummaryTypes) {
+                        var fieldName = dataColumn.FieldName;
+                        if(!IsNumericColumn(fieldName) && summaryType != GridSummaryItemType.Count)
+                            continue;
+                        var existingItem = contextSummaryItems.FirstOrDefault(i => i.FieldName == fieldName && i.SummaryType == summaryType);
+                        var isChecked = existingItem != null;
+
+                        var menuItem = e.Items.AddCustomItem(summaryType.ToString(), () => OnSummaryCommand(dataColumn, summaryType, summaryItemsCollection));
+                        menuItem.IconCssClass = isChecked ? "menu-icon menu-icon-check" : null;
+                    }
+                }
+                if(e.Context is GridDataRowCommandContext dataRowCommandContext) {
+                    var menuItem = e.Items.AddCustomItem("Delete", () => {
+                        Data.Remove((Invoice)dataRowCommandContext.DataItem);
+                    });
+                    menuItem.IconCssClass = "menu-icon grid-icon-delete";
+                }
+
+            }
+
+            void OnSummaryCommand(IGridDataColumn dataColumn, GridSummaryItemType summaryType, IList<SummaryItem> summaryItemsCollection) {
+                var fieldName = dataColumn.FieldName;
+                var existingItem = summaryItemsCollection.FirstOrDefault(i => i.FieldName == fieldName && i.Type == summaryType);
+                if(existingItem != null)
+                    summaryItemsCollection.Remove(existingItem);
+                else
+                    summaryItemsCollection.Add(new SummaryItem(fieldName, summaryType) {
+                        DisplayFormat = summaryType == GridSummaryItemType.Count ? null : dataColumn.DisplayFormat
+                    });
+                StateHasChanged();
+            }
+
+            record SummaryItem(string FieldName, GridSummaryItemType Type) {
+                public string DisplayFormat { get; init; }
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

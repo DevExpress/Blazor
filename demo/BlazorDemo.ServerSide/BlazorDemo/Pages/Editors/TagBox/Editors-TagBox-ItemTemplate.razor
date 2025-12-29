@@ -14,11 +14,11 @@
                       InputId="tbItemTemplate">
                 <TagDisplayTemplate Context="tagContext">
                     <div class="tagbox-tag-template">
-                        <img class="tagbox-tag-template-employee-photo" src="@StaticAssetUtils.GetImagePath(GetImageFileName(tagContext.DataItem))" alt="@tagContext.DataItem.FullName" />
+                        <img class="tagbox-tag-template-employee-photo" src="@GetImageFileName(tagContext.DataItem)" alt="@tagContext.DataItem.FullName" />
                         <div>@tagContext.DataItem.FullName</div>
-                        <DxButton Click="@tagContext.RemoveTagAction"
-                                  @onclick:stopPropagation
+                        <DxButton tabindex="-1"
                                   aria-label="Remove Tag"
+                                  Click="@tagContext.RemoveTagAction"
                                   CssClass="tagbox-tag-template-close-btn"
                                   IconCssClass="tagbox-tag-template-close-btn-icon"
                             RenderStyle="ButtonRenderStyle.None" RenderStyleMode="ButtonRenderStyleMode.Text">
@@ -27,7 +27,7 @@
                 </TagDisplayTemplate>
                 <ItemDisplayTemplate>
                     <div class="tagbox-item-template">
-                        <img class="tagbox-item-template-employee-photo" src="@StaticAssetUtils.GetImagePath(GetImageFileName(context.DataItem))" alt="@context.DataItem.FullName" />
+                        <img class="tagbox-item-template-employee-photo" src="@GetImageFileName(context.DataItem)" alt="@context.DataItem.FullName" />
                         <div>
                             <span class="tagbox-item-template-employee-first-name">@context.DataItem.FullName</span>
                             <span class="tagbox-item-template-employee-home-phone">@context.DataItem.HomePhone</span>
@@ -51,7 +51,7 @@
         }
 
         string GetImageFileName(Employee employee) {
-            return $"employees/item-template{employee.EmployeeId}.jpg";
+            return StaticAssetUtils.GetEmployeeImagePath(employee.EmployeeId);
         }
     }
 

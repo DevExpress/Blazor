@@ -11,7 +11,7 @@ namespace BlazorDemo.Configuration {
         public bool IsFluent { get; init; }
         public bool IsBootstrapNative { get; init; }
         public string BootstrapThemeMode { get; init; } = "light";
-        private ThemeFluentAccentColor? FluentAccentColor { get; }
+        public ThemeFluentAccentColor? FluentAccentColor { get; }
         public static string GetCssClass(bool isActive) => isActive ? "active" : null;
 
         public DemoTheme(string name, string title) {
@@ -33,7 +33,8 @@ namespace BlazorDemo.Configuration {
                 return Theme;
 
             return Themes.Fluent.Clone(properties => {
-                properties.Mode = themeState.Mode ?? DevExpress.Blazor.ThemeMode.Light;
+                properties.Mode = themeState.Mode ?? ThemeMode.Light;
+                properties.UseBootstrapStyles = true;
 
                 if(FluentAccentColor != null)
                     properties.AccentColor = FluentAccentColor.Value;
@@ -46,10 +47,10 @@ namespace BlazorDemo.Configuration {
                 properties.AddFilePaths(BlazorDemoThemes.FluentCommonStylesPath);
 
                 if(properties.Mode == ThemeMode.Light)
-                    properties.AddFilePaths(BlazorDemoThemes.GetBootstrapFluentThemePath("fluent-light"), BlazorDemoThemes.HighlightJsDefaultTheme);
+                    properties.AddFilePaths(BlazorDemoThemes.HighlightJsDefaultTheme);
 
                 if(properties.Mode == ThemeMode.Dark)
-                    properties.AddFilePaths(BlazorDemoThemes.GetBootstrapFluentThemePath("fluent-dark"), BlazorDemoThemes.HighlightJsAndroidTheme);
+                    properties.AddFilePaths(BlazorDemoThemes.HighlightJsAndroidTheme);
             });
         }
     }

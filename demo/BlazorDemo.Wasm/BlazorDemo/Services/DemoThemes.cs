@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using BlazorDemo.Configuration;
 using DevExpress.Blazor;
 
@@ -13,17 +12,15 @@ namespace BlazorDemo.Services {
     }
 
     public static class BlazorDemoThemes {
-        public const string HighlightJsAndroidTheme = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/androidstudio.min.css";
-        public const string HighlightJsDefaultTheme = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css";
-        public const string DxCommonStylesPath = "_content/BlazorDemo/css/dx/common.css";
-        public const string FluentCommonStylesPath = "_content/BlazorDemo/css/fluent/common.css";
+        private static readonly string AssemblyVersion = $"?v{typeof(ResourcesConfigurator).Assembly.GetName().Version}";
+
+        public static readonly string HighlightJsAndroidTheme = $"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/androidstudio.min.css{AssemblyVersion}";
+        public static readonly string HighlightJsDefaultTheme = $"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css{AssemblyVersion}";
+        public static readonly string DxCommonStylesPath = $"_content/BlazorDemo/css/dx/common.css{AssemblyVersion}";
+        public static readonly string FluentCommonStylesPath = $"_content/BlazorDemo/css/fluent/common.css{AssemblyVersion}";
 
         public static string GetBootstrapThemePath(string themeName) {
             return $"_content/BlazorDemo/css/switcher-resources/themes/{themeName}/bootstrap.min.css";
-        }
-
-        public static string GetBootstrapFluentThemePath(string themeName) {
-            return $"_content/BlazorDemo/css/switcher-resources/themes/fluent/{themeName}.bs5.min.css";
         }
 
         public static void AddDefaultDxTheme(ThemeProperties properties) {

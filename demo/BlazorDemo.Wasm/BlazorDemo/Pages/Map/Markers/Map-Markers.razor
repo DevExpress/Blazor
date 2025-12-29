@@ -37,8 +37,10 @@
             };
 
             void OnMapClick(MapClickEventArgs e) {
-                var marker = new MapMarkerInfo("new marker", e.CurrentLocation.Latitude, e.CurrentLocation.Longitude);
-                StartEditMarker(marker);
+                if(EditingMarker == null) {
+                    var marker = new MapMarkerInfo("new marker", e.CurrentLocation.Latitude, e.CurrentLocation.Longitude);
+                    StartEditMarker(marker);
+                }
             }
 
             void OnMapMarkerClick(MapMarkerClickEventArgs e) {

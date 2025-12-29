@@ -29,7 +29,7 @@
         DisableFieldDropDownCommandButton(tabs);
     }
     void RemoveOpenDocumentItem(RibbonTabCollection tabs) {
-        IRibbonTab fileTab = tabs[RichEditRibbonTabNames.File];
+        var fileTab = tabs[RichEditRibbonTabNames.File];
         IBarGroup fileCommonGroup = fileTab.Groups[RichEditRibbonGroupNames.FileCommon];
         fileCommonGroup.Items.Remove(RichEditBarItemNames.OpenDocument);
     }
@@ -38,7 +38,7 @@
         tabs.Remove(RichEditRibbonTabNames.TableLayout);
     }
     void AddCustomTableTab(RibbonTabCollection tabs) {
-        IRibbonTab tableToolsTab = tabs.AddCustomTab("Table Tools", RichEditRibbonContextTabType.Table);
+        var tableToolsTab = tabs.AddCustomTab("Table Tools", RichEditRibbonContextTabType.Table);
         IBarGroup firstGroup = tableToolsTab.Groups.AddCustomGroup();
         firstGroup.Items.Add(RichEditBarItemNames.SelectTableElementsMenu);
 
@@ -54,7 +54,7 @@
         fourthGroup.Items.Add(RichEditBarItemNames.TableCellShading);
     }
     void RemoveItemsFromFontComboBox(RibbonTabCollection tabs) {
-        IRibbonTab homeTab = tabs[RichEditRibbonTabNames.Home];
+        var homeTab = tabs[RichEditRibbonTabNames.Home];
         IBarGroup homeFontGroup = homeTab.Groups[RichEditRibbonGroupNames.HomeFont];
         IBarItem fontNameItem = homeFontGroup.Items[RichEditBarItemNames.FontName];
 
@@ -65,7 +65,7 @@
         }
     }
     void CustomizeInsertHeaderItemAction(RibbonTabCollection tabs) {
-        IRibbonTab insertTab = tabs[RichEditRibbonTabNames.Insert];
+        var insertTab = tabs[RichEditRibbonTabNames.Insert];
         IBarGroup insertHeaderAndFooterGroup = insertTab.Groups[RichEditRibbonGroupNames.InsertHeaderAndFooter];
         IBarItem insertHeaderItem = insertHeaderAndFooterGroup.Items[RichEditBarItemNames.InsertPageHeader];
 
@@ -90,7 +90,7 @@
         }
     }
     void DisableFieldDropDownCommandButton(RibbonTabCollection tabs) {
-        IRibbonTab mailMergeTab = tabs[RichEditRibbonTabNames.MailMerge];
+        var mailMergeTab = tabs[RichEditRibbonTabNames.MailMerge];
         IBarGroup fieldsGroup = mailMergeTab.Groups[RichEditRibbonGroupNames.MailMergeInsertFields];
         IBarItem insertFieldItem = fieldsGroup.Items[RichEditBarItemNames.InsertFieldMenu];
         if (insertFieldItem.Type == BarItemTypes.DropDown) {

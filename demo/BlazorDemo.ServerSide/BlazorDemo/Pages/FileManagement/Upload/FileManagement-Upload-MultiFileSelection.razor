@@ -2,9 +2,9 @@
     @inject NavigationManager NavigationManager
 
     <div class="upload-container">
-        <div style="@(SelectedFilesCount > 0 ? "display: none" : string.Empty)">
+        <div class="@(SelectedFilesCount > 0 ? "d-none" : null)">
             <span class="drop-file-icon mb-3"></span>
-            <span class="drop-file-label mb-3">Click the Select File button to select files</span>
+            <span class="drop-file-label mb-3">Click the button below to start your upload</span>
         </div>
         <DxUpload Name="myFile"
                   AllowMultiFileUpload="true"
@@ -12,6 +12,9 @@
                   SelectedFilesChanged="@SelectedFilesChanged"
                   MaxFileSize="15000000">
         </DxUpload>
+    </div>
+    <div class="upload-validation-text info-text">
+        You can upload multiple files, each up to 15 MB.
     </div>
 
     @code {

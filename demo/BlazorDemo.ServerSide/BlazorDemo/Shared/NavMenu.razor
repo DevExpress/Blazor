@@ -7,7 +7,15 @@
     var expandedItems = GetExpandedItems();
     @foreach(var group in VisibleGroups) {
         @if(!Configuration.IsSingleProduct) {
-            <h5 class="demo-group">@GetGroupTitle(group)</h5>
+            var groupTitle = GetGroupTitle(group);
+
+            <div class="demo-group">
+                <svg class="demo-group-icon dxbl-image">
+                    <use class="demo-group-icon-classic" href="@GetGroupIconUrl(group)"></use>
+                    <use class="demo-group-icon-fluent" href="@GetFluentGroupIconUrl(group)"></use>
+                </svg>
+                <h5 class="demo-group-title">@groupTitle</h5>
+            </div>
         }
 
         <DxTreeView @ref="@treeView"
@@ -18,7 +26,7 @@
                     TextWrapEnabled="true" aria-label="@GetTreeLabel(group)">
             <Nodes>
                 @foreach(var demoPage in group.GetNavTreeChildren(Configuration.IsSiteMode).Where(p => IsVisibleItem(p))) {
-                    <NavMenuLeaf DemoItem="@demoPage" SearchResult="@SearchResult" ExpandedItems="@expandedItems"></NavMenuLeaf>
+                    <NavMenuLeaf ActivePage="@ActivePage" DemoItem="@demoPage" SearchResult="@SearchResult" ExpandedItems="@expandedItems"></NavMenuLeaf>
                 }
             </Nodes>
         </DxTreeView>
@@ -46,6 +54,14 @@
         if(SearchResult == null)
             return new(group.Title);
         return new(SearchResult.GetHighlightedMarkup(group.Title));
+    }
+
+    static string GetGroupIconUrl(DemoGroup group) {
+        return string.IsNullOrEmpty(group.Icon) ? string.Empty : StaticAssetUtils.GetImagePath($"icons/{group.Icon}.svg");
+    }
+
+    static string GetFluentGroupIconUrl(DemoGroup group) {
+        return string.IsNullOrEmpty(group.Icon) ? string.Empty : StaticAssetUtils.GetImagePath($"icons/{group.Icon}-fluent.svg");
     }
 
     public string GetTreeLabel(DemoGroup group) {

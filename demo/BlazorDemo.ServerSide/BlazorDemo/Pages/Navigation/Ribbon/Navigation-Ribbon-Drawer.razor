@@ -1,0 +1,73 @@
+﻿<DemoPageSectionComponent Id="Navigation-Ribbon-Drawer">
+    <ChildContentWithParameters Context="Params">
+        <div class="ribbon-and-drawer-container">
+            <DxRibbon ApplicationTabClick="ApplicationTabClick">
+                <DxRibbonApplicationTab IconCssClass="rb-icon rb-icon-hamburger">
+                </DxRibbonApplicationTab>
+                <DxRibbonTab Text="Format">
+                    <DxRibbonGroup>
+                        <DxRibbonComboBoxItem Data="Fonts"
+                                              @bind-Value="CurrentFont"
+                                              TextFieldName="@nameof(FontInfo.Name)"
+                                              Width="120px" />
+                        <DxRibbonComboBoxItem Data="FontSizes"
+                                              @bind-Value="CurrentFontSize"
+                                              TextFieldName="@nameof(FontSizeInfo.Size)"
+                                              Width="65px" />
+                    </DxRibbonGroup>
+                    <DxRibbonGroup>
+                        <DxRibbonToggleItem Text="Bold"
+                                            @bind-Checked="BoldActive"
+                                            IconCssClass="rb-icon rb-icon-bold"
+                                            Tooltip="Bold"/>
+                        <DxRibbonToggleItem Text="Italic"
+                                            @bind-Checked="ItalicActive"
+                                            IconCssClass="rb-icon rb-icon-italic"
+                                            Tooltip="Italic"/>
+                        <DxRibbonToggleItem Text="Underline"
+                                            @bind-Checked="UnderlineActive"
+                                            IconCssClass="rb-icon rb-icon-underline"
+                                            Tooltip="Underline"/>
+                    </DxRibbonGroup>
+                </DxRibbonTab>
+            </DxRibbon>
+            <DxDrawer CssClass="demo-drawer demo-drawer-overview-left"
+                      @bind-IsOpen="IsNavigationOpen"
+                      PanelWidth="200px">
+                <BodyTemplate>
+                    <DxMenu CssClass="demo-drawer-menu w-100"
+                            Orientation="Orientation.Vertical">
+                        <Items>
+                            <DxMenuItem Text="Home" IconCssClass="menu-icon-home menu-icon" />
+                            <DxMenuItem Text="Components" IconCssClass="menu-icon-products menu-icon" />
+                            <DxMenuItem Text="Support" IconCssClass="menu-icon-support menu-icon" />
+                        </Items>
+                    </DxMenu>
+                </BodyTemplate>
+                <TargetContent>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Penatibus et magnis dis parturient. Eget dolor morbi non arcu risus. Tristique magna sit amet purus gravida quis blandit. Auctor urna nunc id cursus metus aliquam eleifend mi in. Tellus orci ac auctor augue mauris augue neque gravida. Nullam vehicula ipsum a arcu. Nullam ac tortor vitae purus faucibus ornare suspendisse sed nisi. Cursus in hac habitasse platea dictumst. Egestas dui id ornare arcu. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim.</p>
+                    <p>Mauris rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar. Neque volutpat ac tincidunt vitae semper quis lectus. Sed sed risus pretium quam vulputate dignissim suspendisse in. Urna nec tincidunt praesent semper feugiat nibh sed pulvinar. Ultricies lacus sed turpis tincidunt id aliquet risus feugiat. Amet cursus sit amet dictum sit amet justo donec enim. Vestibulum rhoncus est pellentesque elit ullamcorper. Id aliquet risus feugiat in ante metus dictum at.</p>
+                </TargetContent>
+            </DxDrawer>
+        </div>
+        @code {
+            bool IsNavigationOpen = false;
+
+            void ApplicationTabClick(RibbonApplicationTabClickEventArgs args) {
+                IsNavigationOpen = !IsNavigationOpen;
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>
+
+@code {
+    private FontInfo CurrentFont { get; set; } = FontInfo.DefaultFonts[0];
+    private IEnumerable<FontInfo> Fonts => FontInfo.DefaultFonts;
+
+    private FontSizeInfo CurrentFontSize { get; set; } = FontSizeInfo.DefaultFontSizes[0];
+    private IEnumerable<FontSizeInfo> FontSizes => FontSizeInfo.DefaultFontSizes;
+
+    private bool UnderlineActive { get; set; }
+    private bool BoldActive { get; set; }
+    private bool ItalicActive { get; set; }
+}

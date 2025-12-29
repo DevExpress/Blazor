@@ -45,7 +45,7 @@
                 <DxChartSeriesPoint Visible="false" />
             </DxChartSplineSeries>
             <DxChartTooltip Enabled="true">
-                <div style="margin: 0.75rem">
+                <div class="m-75">
                     @if (context.Series.Name == GeneratedDataSeriesName) {
                         <div class="fw-bold">
                             @string.Format("[{0:0.#} - {1:0.#})", (double)context.Point.Argument - Interval * 0.5, (double)context.Point.Argument + Interval * 0.5)

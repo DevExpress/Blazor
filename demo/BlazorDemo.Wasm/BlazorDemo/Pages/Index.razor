@@ -1,10 +1,9 @@
 ﻿@page "/"
 @layout MainLayout
 
-@using BlazorDemo.Configuration
 @inject DemoConfiguration Configuration
-@inject DemoThemeService Themes
 @inject NavigationManager NavigationManager
+@inject DemoThemeService Themes
 
 @{
     RenderFragment<DemoProductInfo> DemoProduct = (info) =>
@@ -23,23 +22,25 @@
     </div>;
 }
 @{
-    var showcaseLink = "https://demos.devexpress.com/blazor-showcase";
+    var CRMDemoLink = "https://demos.devexpress.com/blazor-showcase";
 }
 <div class="demo-products demo-products-description theme-@Themes.ActiveTheme.Name.Replace(" ", "-")">
     <h1 class="mb-4">DevExpress UI Components for Blazor</h1>
     <p>The <a href="https://www.devexpress.com/blazor/" target="_blank">DevExpress Blazor UI component suite</a> ships with a comprehensive suite of Blazor components (including a DataGrid, Scheduler, Chart, Data Editors, Rich Text Editor, and Reporting). To learn more about the capabilities of our Blazor UI suite for your next great Blazor-based web app, select a component library from the list below. DevExpress Blazor UI components ship as part of the DevExpress ASP.NET, DXperience, and Universal Subscriptions.</p>
     <p>Should you have any questions about the products listed herein or are considering DevExpress UI components for an upcoming Blazor project, please email <a href="mailto:info@devexpress.com" tabindex="-1">info@devexpress.com</a>. We will be happy to follow-up.</p>
-    <a class="demo-product demo-rwa mb-4" href="@showcaseLink">
-        <div class="demo-product-icon demo-rwa-icon demo-rwa-icon-showcase">
+    <a class="demo-product demo-rwa mb-4" href="@CRMDemoLink">
+        <div class="demo-product-icon demo-rwa-icon demo-rwa-icon-crm">
             <svg role="img" title="TODO">
-                <use href="@(StaticAssetUtils.GetImagePath("products.svg"))#showcase"></use>
+                <use href="@(StaticAssetUtils.GetImagePath("products.svg"))#crm"></use>
             </svg>
         </div>
-        <div class="flex-grow-1 text-body">
-            <h2 class="fw-bold">Blazor Showcase Demo</h2>
-            <span class="demo-rwa-info">Explore how to build modern application with DevExpress Blazor UI components. This demo showcases best practices for creating data tables, analytic dashboards, interactive reports, and task/event management views.</span>
+        <div class="flex-grow-1 d-md-flex align-items-md-center justify-content-md-between">
+            <div class="text-body">
+                <h2 class="fw-bold">Blazor CRM Demo</h2>
+                <span class="demo-rwa-info">Explore how to build modern application with DevExpress Blazor UI components. This demo showcases best practices for creating data tables, analytic dashboards, interactive reports, and task/event management views.</span>
+            </div>
+            <DxButton Text="View CRM" CssClass="demo-nav-button ms-0 mt-2 ms-md-4 mt-md-0" IconCssClass="demo-external-link-icon" NavigateUrl="@CRMDemoLink" />
         </div>
-        <DxButton Text="View Showcase" CssClass="demo-nav-button" IconCssClass="demo-external-link-icon" NavigateUrl="@showcaseLink" />
     </a>
     <div class="row mb-3">
         @foreach(var info in Configuration.Products) {

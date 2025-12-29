@@ -1,13 +1,7 @@
 ﻿<DemoPageSectionComponent Id="Editors-DropDownBox-MultipleSelectionListBox" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
-        <style>
-            .templateListbox {
-                border-width: 0;
-                width: 100%
-            }
-        </style>
-
+        
         <label for="ddbMultipleSelectionListBox" class="demo-text cw-480 mb-1">Employees</label>
         <DxDropDownBox @bind-Value="Value"
                        QueryDisplayText="QueryText"
@@ -25,7 +19,7 @@
                            ShowCheckboxes="true"
                            ShowSearchBox="true"
                            ShowSelectAllCheckbox="true"
-                           CssClass="templateListbox"
+                           CssClass="w-100 border-0"
                            >
                 </DxListBox>
             </DropDownBodyTemplate>

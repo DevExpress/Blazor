@@ -1,8 +1,10 @@
-[Memo](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMemo) supports different resize modes that are specified by the [ResizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMemo.ResizeMode) property:
 
-*   [Vertical](https://docs.devexpress.com/Blazor/DevExpress.Blazor.MemoResizeMode) (Default) — Users can only change the component height.
-*   [Horizontal](https://docs.devexpress.com/Blazor/DevExpress.Blazor.MemoResizeMode) — Users can only change the component width.
-*   [VerticalAndHorizontal](https://docs.devexpress.com/Blazor/DevExpress.Blazor.MemoResizeMode) — Users can change both the component height and width.
-*   [Disabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.MemoResizeMode) — Users are not allowed to resize the component.
+This demo allows you to test/evaluate our Memo component's [resize modes](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMemo.ResizeMode):
 
-To apply different resize modes, use the **Resize Mode** drop-down list below.
+* *Auto* — The Memo component changes height automatically (based on content). Users cannot resize the component.
+* *Disabled* — Users cannot resize the component.
+* *Horizontal* — Users can resize the component horizontally.
+* *Vertical* (Default) — Users can resize the component vertically.
+* *VerticalAndHorizontal* — Users can resize the component both horizontally and vertically.
+
+Additionally, you can limit Memo height using the [MaxRows](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxMemo.MaxRows) property. The property is applied when the `ResizeMode` property is set to `Auto`, `Vertical`, or `VerticalAndHorizontal`. This demo allows to evaluate the capabilities of the `MaxRows` property (for `Auto`/`Vertical`/`VerticalAndHorizontal` resize modes).

@@ -13,7 +13,9 @@ using DevExpress.AspNetCore;
 #endif
 using DevExpress.AspNetCore.Reporting;
 using DevExpress.Blazor.Reporting;
+#if SERVER_BLAZOR
 using DevExpress.Blazor.Reporting.Services;
+#endif
 using DevExpress.XtraReports.Services;
 using DevExpress.XtraReports.Web.Extensions;
 using DevExpress.XtraReports.Web.ReportDesigner.Services;
@@ -97,17 +99,6 @@ namespace BlazorDemo.ServerSide {
                 });
 
 #if SERVER_BLAZOR
-                var azureOpenAIEndpoint = webHostBuilderContext.Configuration.GetSection("AIIntegrationSettings")["EndpointUrl"];
-                var azureOpenAIKey = webHostBuilderContext.Configuration.GetSection("AIIntegrationSettings")["Key"];
-                var deploymentName = webHostBuilderContext.Configuration.GetSection("AIIntegrationSettings")["DeploymentName"];
-
-                var azureOpenAIClient = new AzureOpenAIClient(
-                    new Uri(azureOpenAIEndpoint),
-                    new System.ClientModel.ApiKeyCredential(azureOpenAIKey),
-                    new AzureOpenAIClientOptions() { Transport = new PromoteHttpStatusErrorsPipelineTransport() });
-
-                IChatClient chatClient = azureOpenAIClient.GetChatClient(deploymentName).AsIChatClient();
-                services.TryAddSingleton(chatClient);
                 services.AddDevExpressAI(aiConfig => {
                     aiConfig.AddBlazorReportingAIIntegration(reportingCfg => {
                         reportingCfg

@@ -1,0 +1,46 @@
+﻿@using BlazorDemo.Services;
+@using DevExpress.AIIntegration.Blazor.Chat
+@using System.Text.Json;
+@using System.IO;
+
+<DemoPageSectionComponent Id="AIChat-ToolCalling"
+                          ShowSizeMode="true">
+    <OptionsContent>
+        <OptionCheckBox Label="Use Streaming" @bind-Checked="UseStreaming" />
+        <OptionCheckBox Label="Include Function Call Details" @bind-Checked="IncludeFunctionCallInfo" />
+    </OptionsContent>
+    <ChildContentWithParameters Context="Params">
+        <div class="chat-demo-container">
+            <DxAIChat HeaderText="AI Assistant"
+                      ShowHeader="true"
+                      ChatClientServiceKey="@ChatClientKeys.FunctionCalling"
+                      CssClass="demo-chat" IncludeFunctionCallInfo="IncludeFunctionCallInfo"
+                      UseStreaming="UseStreaming"
+                      SizeMode="Params.SizeMode">
+                <EmptyMessageAreaTemplate>
+                    <div class="demo-chat-ui-description">
+                        Click a tile below to call a function
+                    </div>
+                </EmptyMessageAreaTemplate>
+                <PromptSuggestions>
+                    <DxAIChatPromptSuggestion Title="Weather in London"
+                                              Text="Check the current weather conditions in London."
+                                              PromptMessage="Check the current weather conditions in London."
+                                              SendOnClick="true" />
+                    <DxAIChatPromptSuggestion Title="Current Time"
+                                              Text="See the current time and time zone."
+                                              PromptMessage="Find out the current time and time zone details."
+                                              SendOnClick="true" />
+                    <DxAIChatPromptSuggestion Title="Exception Test"
+                                              Text="Trigger an error condition and display the exception."
+                                              PromptMessage="Run a test that triggers an error."
+                                              SendOnClick="true" />
+                </PromptSuggestions>
+            </DxAIChat>
+        </div>
+        @code {
+            bool UseStreaming { get; set; } = false;
+            bool IncludeFunctionCallInfo { get; set; } = true;
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

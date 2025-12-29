@@ -34,7 +34,7 @@
                         aria-expanded="@(ThemeSwitcherShown.ToString())">
             </DxButton>
         </div>
-        <ThemeSwitcher @bind-Shown="@ThemeSwitcherShown" @bind-ThemeName="@ThemeName" />
+        <ThemeSwitcher @bind-Shown="@ThemeSwitcherShown" />
     </nav>
     <div class="@GetDemoBreadcrumbsContainerCss()">
     <div class="breadcrumb">
@@ -51,9 +51,7 @@
         </div>
         <div class="main">
             <div class="content" @key="ShouldUseThemeNameKey() ? ThemeKey : null">
-                <CascadingValue Value="@ThemeName" Name="ThemeName">
-                    @Body
-                </CascadingValue>
+                @Body
             </div>
             <div class="content-footer"></div>
         </div>
@@ -62,59 +60,61 @@
         }
     </div>
 </main>
+<DxToastProvider Name="AITost"
+                 MaxToastCount="3"
+                 Width="500px"
+                 ShowCloseButton="true" />
 
 @code {
-    string _themeName;
     bool _layoutToggled;
     bool _themeSwitcherShown;
     bool _isDesktop = true;
+    string _currentAIToastId;
+    PromoteHttpStatusErrorsPipelineMessage _currentAIMessage;
     ElementReference contentContainerRef;
-
     DemoScriptLoader pageHelper;
 
     [Inject]
     protected NavigationManager NavigationManager { get; set; }
     [Inject]
     IJSRuntime JsRuntime { get; set; }
-
-    protected string ThemeName {
-        get { return _themeName; }
-        set {
-            if(_themeName != value) {
-                _themeName = value;
-                Themes.SetActiveThemeByName(value);
-            }
-        }
-    }
-
-    protected string ThemeKey {
-        get {
-            string key = ThemeName;
-
-            if(Themes.ActiveTheme.IsFluent)
-                key += Themes.ThemeState.Mode.ToString()?.ToLowerInvariant();
-
-            return key;
-        }
-    }
-
-    protected bool IsBootstrapNative {
-        get { return Themes.ActiveTheme.IsBootstrapNative; }
-    }
+    [Inject] AIHttpResponseProcessor AIHttpResponseProcessor { get; set; }
+    [Inject] IToastNotificationService ToastService { get; set; }
 
     protected override void OnInitialized() {
-#if MAUI
-        ThemeName = "";
-#else
-        ThemeName = Themes.ActiveTheme.Name;
-#endif
         NavigationManager.LocationChanged += OnLocationChanged;
+        AIHttpResponseProcessor.OnProcess += ProcessAIResponse;
+    }
+
+    void ProcessAIResponse(PromoteHttpStatusErrorsPipelineMessage message, string waitingTime) {
+        _currentAIToastId = Guid.NewGuid().ToString("N");
+        _currentAIMessage = message;
+        ToastService.ShowToast(new ToastOptions {
+            ProviderName = "AITost",
+            Id = _currentAIToastId,
+            DisplayTime = TimeSpan.FromSeconds(Convert.ToDouble(waitingTime)),
+            Title = "Waiting for AI Service",
+            Text = $"Our demo AI Service reached a temporary request limit. Your operation will resume automatically in {waitingTime} seconds. You can press Cancel to abort the operation."
+        }, RenderToastButtons());
+    }
+
+    void CancelAIGeneration() {
+        if(_currentAIMessage != null) {
+            _currentAIMessage.Cancel();
+            ToastService.CloseToast(_currentAIToastId);
+            _currentAIMessage = null;
+            _currentAIToastId = string.Empty;
+        }
+    }
+
+    RenderFragment RenderToastButtons() {
+        return @<DxButton RenderStyle="ButtonRenderStyle.Warning" Click="() => CancelAIGeneration()">Cancel</DxButton>;
     }
 
     void TryRedirect(string url) {
-        if(TryGetRedirectUrl(url, out var uri))
-            NavigationManager.NavigateTo(uri, true);
-    }
+            if(TryGetRedirectUrl(url, out var uri))
+                NavigationManager.NavigateTo(uri, true);
+        }
     protected bool TryGetRedirectUrl(string currentUrl, out string redirectUrl) {
         redirectUrl = "";
         return currentUrl?.Length > NavigationManager.BaseUri?.Length && Configuration.Redirects.TryGetValue(currentUrl.Substring(NavigationManager.BaseUri.Length).ToLower(), out redirectUrl);
@@ -128,7 +128,9 @@
             await pageHelper.InvokeVoidAsync("DemoPageHelper.patchAppElement");
         }
         else {
-            await pageHelper.InvokeVoidAsync("DemoPageHelper.themes.setTheme", DemoThemeService.ThemeCookieKey, ThemeName, Themes.ThemeState.ToString());
+            await pageHelper.InvokeVoidAsync("DemoPageHelper.themes.setTheme",
+                DemoThemeService.ThemeCookieKey,
+                Themes.ActiveTheme.Name, Themes.ThemeState.ToString());
 
             if(_isDesktop && SavedLayoutToggled != LayoutToggled)
                 await pageHelper.InvokeVoidAsync("DemoPageHelper.raiseWindowOnResize");
@@ -143,6 +145,7 @@
         if(!_isDesktop) {
             LayoutToggled = false;
         }
+        CancelAIGeneration();
         await ScrollToMainTopIfNeeded(args.Location);
         await InvokeAsync(StateHasChanged);
     }
@@ -183,6 +186,17 @@
         }
     }
 
+    string ThemeKey {
+        get {
+            string key = Themes.ActiveTheme.Name;
+
+            if(Themes.ActiveTheme.IsFluent)
+                key += Themes.ThemeState.Mode.ToString()?.ToLowerInvariant();
+
+            return key;
+        }
+    }
+
     void ToggleThemeSwitcherPanel() {
         ThemeSwitcherShown = !ThemeSwitcherShown;
     }
@@ -216,19 +230,6 @@
             await pageHelper.InvokeVoidAsync("DemoPageHelper.scroll.ensureNavigationTargetIsVisible");
     }
 
-    string GetThemeCssClass() {
-        if(Themes.ActiveTheme.IsFluent) {
-            switch (Themes.ThemeState.Mode)
-            {
-                case ThemeMode.Light:
-                    return "theme-fluent-light";
-                case ThemeMode.Dark:
-                    return "theme-fluent-dark";
-            }
-        }
-
-        return "theme-" + ThemeName.Replace(" ", "-");
-    }
     string GetDemoContentContainerCss() {
         List<string> cssClasses = new List<string>();
         cssClasses.Add("demo-content-container");
@@ -237,7 +238,7 @@
             cssClasses.Add("animated");
 #endif
         cssClasses.Add(GetThemeCssClass());
-        if(IsBootstrapNative)
+        if(Themes.ActiveTheme.IsBootstrapNative)
             cssClasses.Add("theme-external");
         return string.Join(" ", cssClasses);
     }
@@ -245,7 +246,7 @@
         List<string> cssClasses = new List<string>();
         cssClasses.Add("demo-breadcrumbs-container");
         cssClasses.Add(GetThemeCssClass());
-        if(IsBootstrapNative)
+        if(Themes.ActiveTheme.IsBootstrapNative)
             cssClasses.Add("theme-external");
         return string.Join(" ", cssClasses);
     }
@@ -259,14 +260,29 @@
         List<string> cssClasses = new List<string>();
         cssClasses.Add("demo-header-container");
         cssClasses.Add(GetThemeCssClass());
-        if(IsBootstrapNative)
+        if(Themes.ActiveTheme.IsBootstrapNative)
             cssClasses.Add("theme-external");
         return string.Join(" ", cssClasses);
     }
+    string GetThemeCssClass() {
+        if(Themes.ActiveTheme.IsFluent) {
+            switch (Themes.ThemeState.Mode)
+            {
+                case ThemeMode.Light:
+                    return "theme-fluent-light";
+                case ThemeMode.Dark:
+                    return "theme-fluent-dark";
+            }
+        }
+
+        return "theme-" + Themes.ActiveTheme.Name.Replace(" ", "-");
+    }
+
     string GetThemeSwitcherCssClass() {
         return "theme-settings " + ThemeSwitcherShown;
     }
     public void Dispose() {
         NavigationManager.LocationChanged -= OnLocationChanged;
+        AIHttpResponseProcessor.OnProcess -= ProcessAIResponse;
     }
 }

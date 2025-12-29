@@ -1,6 +1,6 @@
 The DevExpress Blazor [Form Layout](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxFormLayout) component allows you to construct responsive and auto-aligned edit forms.
 
-The component uses a responsive grid system based on the [CSS flexible box layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout) to render its items. Each layout item can occupy between 1 and 12 columns. This value can be defined separately for six different screen resolution types as listed below:
+The component uses a responsive grid system based on the [CSS flexible box layout](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Flexible_box_layout) to render its items. Each layout item can occupy between 1 and 12 columns. This value can be defined separately for six different screen resolution types as listed below:
 
 1.  [ColSpanXxl](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.FormLayoutItemBase.ColSpanXxl): Screens that are 1400px or wider.
 2.  [ColSpanXl](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.FormLayoutItemBase.ColSpanXl): Screens that are 1200px or wider.

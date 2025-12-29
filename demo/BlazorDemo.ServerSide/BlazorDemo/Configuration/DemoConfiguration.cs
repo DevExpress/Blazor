@@ -97,7 +97,9 @@ namespace BlazorDemo.Configuration {
         }
 
         protected string GetDemoFileContent(string path) {
+#pragma warning disable DX0025 // not a path, but resourceName (and path is passed from model)
             return DemoUtils.GetFileContent(typeof(DemoConfiguration), "BlazorDemo." + path);
+#pragma warning restore DX0025
         }
 
         // Metadata

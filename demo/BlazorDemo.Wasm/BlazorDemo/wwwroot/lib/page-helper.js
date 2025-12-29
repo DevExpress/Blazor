@@ -29,9 +29,23 @@ var DemoPageHelper = (function() {
         }
         return null;
     }
-    function setCookie(name, value, date) {
-        document.cookie = escape(name) + '=' + escape(value.toString()) + '; expires=' + date.toGMTString() + '; path=/';
+    function setCookie(name, value, date, sameSite) {
+        document.cookie = escape(name) + '=' + escape(value.toString()) + '; expires=' + date.toGMTString() + '; path=/' + resolveCookieSameSite(sameSite);
     }
+	function resolveCookieSameSite(sameSite) { // https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies#controlling_third-party_cookies_with_samesite
+		var cookieSameSitePossibleValues = ["none", "lax", "strict"];
+		var index = -1;
+		if(sameSite)
+			index = cookieSameSitePossibleValues.indexOf(sameSite.toString().toLowerCase());
+		if(index < 0)
+			index = 1; // Lax by default
+		sameSite = cookieSameSitePossibleValues[index];
+
+		var result = "; SameSite=" + sameSite;
+		if(sameSite === "none") // if SameSite=None is set then the Secure attribute must also be set
+			result += "; Secure";
+		return result;
+	}
 
     function setTheme(cookieName, themeName, themeOptions) {
         var date = new Date();

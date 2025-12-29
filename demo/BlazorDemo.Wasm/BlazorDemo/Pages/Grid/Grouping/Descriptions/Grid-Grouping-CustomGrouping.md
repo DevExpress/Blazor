@@ -1,8 +1,8 @@
-The DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/403143/grid) allows you to apply custom data grouping logic. Use the steps below to implement custom data grouping logic:
+The DevExpress Blazor [Grid](https://docs.devexpress.com/Blazor/403143/grid) component supports custom data grouping. Custom data groups allow you to merge data into custom intervals or combine similar values into a single entry. In this demo, the **Unit Price** column is grouped by custom range values: $0.00 — $10.00, $10.00 — $20.00, etc.
 
-1. Set the [DxGridDataColumn.GroupInterval](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.GroupInterval) property to `GridColumnGroupInterval.Custom`. 
-2. Handle the [DxGrid.CustomGroup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomGroup) event to implement your logic. You should compare column values and define whether these values belong to the same group. Use the [GridCustomGroupEventArgs](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridCustomGroupEventArgs) event arguments (`Value1`, `Value2`, `SameGroup`, etc.) to access and compare column values. 
-   
-   You can also handle the [CustomizeGroupValueDisplayText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomizeGroupValueDisplayText) event to customize text for group rows. 
+To implement your own custom grouping logic, you must:
 
-In this demo, custom group logic is implemented for the **Unit Price** column. Data is grouped for the following intervals: $0.00 — $10.00, $10.00 — $20.00, etc.  
+1. Define a custom sorting algorithm (because grouping relies on sort operations). To apply a custom algorithm, set the [DxGridDataColumn.SortMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.SortMode) property to `Custom` and handle the [CustomSort](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomSort) event. In the event handler, compare column values to define associated order.
+2. Set the [DxGridDataColumn.GroupInterval](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.GroupInterval) property to `Custom` and handle the [CustomGroup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomGroup) event. In the event handler, compare column values to define whether they belong to the same group.
+3. _(Optional)_ Handle the [CustomizeGroupValueDisplayText](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.CustomizeGroupValueDisplayText) event to modify group row text.
+4. _(Optional)_ Implement [GroupRowTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGridDataColumn.GroupRowTemplate) to display custom group row content.

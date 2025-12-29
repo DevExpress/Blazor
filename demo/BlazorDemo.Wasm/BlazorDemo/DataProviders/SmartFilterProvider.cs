@@ -30,11 +30,11 @@ public class SmartFilterProvider {
         }
     }
 
-    public bool IsSimilarTo(string filter, string text, float threshold = 0.75f) {
-        var eFilter = cache[filter];
-        var eText = cache[text];
+    public float GetSimilarity(string text, string searchText) {
+        var eFilter = cache[text];
+        var eText = cache[searchText];
         var cosineSimilarity = TensorPrimitives.CosineSimilarity(eText.Vector.Span, eFilter.Vector.Span);
-        return cosineSimilarity > threshold;
+        return cosineSimilarity;
     }
 }
 

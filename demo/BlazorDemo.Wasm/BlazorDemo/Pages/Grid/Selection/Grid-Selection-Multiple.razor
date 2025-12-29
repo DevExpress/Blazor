@@ -5,7 +5,7 @@
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
         <div class="d-flex flex-wrap w-100">
-            <div class="w-auto mt-1 me-1 flex-grow-1" style="flex-basis: 700px">
+            <div class="w-auto mt-1 me-1 flex-grow-1 flex-basis-700">
                 <DxGrid Data="@Products"
                         KeyFieldName="ProductId"
                         PageSize="20"
@@ -24,11 +24,11 @@
                             </EditSettings>
                         </DxGridDataColumn>
                         <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="15%" />
-                        <DxGridDataColumn FieldName="UnitsInStock" Width="15%" />
+                        <DxGridDataColumn FieldName="UnitsInStock" Caption="Units in Stock" Width="15%" />
                     </Columns>
                 </DxGrid>
             </div>
-            <div class="card mt-1 me-1 flex-grow-1 max-h-525" style="flex-basis: 280px">
+            <div class="card mt-1 me-1 flex-grow-1 max-h-525 flex-basis-280">
                 <div class="card-header bg-transparent text-body py-2 border-bottom-0 fw-bold">Selected products:</div>
                 <div class="card-body p-0 pb-2 overflow-auto">
                     <ul class="list-group list-group-flush bg-transparent border-0">

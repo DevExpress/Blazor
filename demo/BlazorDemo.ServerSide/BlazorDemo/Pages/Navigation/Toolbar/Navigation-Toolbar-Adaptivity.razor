@@ -1,6 +1,14 @@
-﻿<DemoPageSectionComponent Id="Navigation-Toolbar-Adaptivity" ShowSizeMode="true">
+﻿@inject ICspNonceService NonceProvider
+<DemoPageSectionComponent Id="Navigation-Toolbar-Adaptivity" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         <DemoResizableContent>
+            <style nonce="@NonceProvider.Nonce">
+                @foreach(var font in FontInfo.DefaultFonts) {
+                    var cssRule = $".{GetFontToolbarItemCssClassName(font)} {{ {font.GetCssString()} }}";
+                    <text>@cssRule</text>
+                }
+            </style>
+
             @*BeginHide*@
             <div class="card border-0">
                 <div class="card-header border-0 p-2 rounded demo-bg-transparent">
@@ -19,7 +27,7 @@
                                         <DxToolbarItem Text="@font.Name"
                                                        Click="(x) => { currentFont = font; }"
                                                        Checked="currentFont == font"
-                                                       Style="@font.GetCssString()" />
+                                                       CssClass="@GetFontToolbarItemCssClassName(font)" />
                                     }
                                 </Items>
                             </DxToolbarItem>
@@ -69,5 +77,6 @@
         string GetButtonOrientationSelector(Orientation orientation) {
             return this.orientation == orientation ? "active" : string.Empty;
         }
+        string GetFontToolbarItemCssClassName(FontInfo font) => $"toobar-item-font-{font.Name.ToLower().Replace(" ", "_")}";
     }
 </DemoPageSectionComponent>

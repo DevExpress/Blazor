@@ -1,6 +1,6 @@
 The DevExpress Blazor TreeList is a high-performance UI component that combines a Grid and TreeView, allowing you to display and manage hierarchical data with absolute ease.
 
-## Key Features and Capabilities:
+## Key Features and Capabilities
 
 * High performance data processing engine
 * Accessibility compliance
@@ -10,11 +10,11 @@ The DevExpress Blazor TreeList is a high-performance UI component that combines 
 * Single and multi row selection
 * Integrated templates and CSS customization
 * Export to PDF, XLSX, XLS, and CSV formats
-* Configurable toolbar area
+* Configurable toolbar and context menu
 * Row-based drag & drop operations
 * Paging and virtual scrolling support
 
-## Learning Materials:
+## Learning Materials
 
 * [DevExpress Blazor TreeList — Documentation](https://docs.devexpress.com/Blazor/404942/components/treelist)
 * [DevExpress Blazor TreeList — GitHub Examples](https://github.com/orgs/DevExpress-Examples/repositories?q=blazor+treelist)

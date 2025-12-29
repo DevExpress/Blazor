@@ -4,6 +4,16 @@
 <DemoPageSectionComponent Id="Grid-Editing-InputValidation" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject NwindDataService NwindDataService
+        @inject ICspNonceService NonceProvider
+
+        <style nonce="@NonceProvider.Nonce">
+            @@media (min-width: 899.98px) {
+                .pw-800 {
+                    max-width: 800px !important;
+                    width: 800px !important;
+                }
+            }
+        </style>
 
         <DxGrid @ref="Grid" Data="DataSource" PageSize="12" KeyFieldName="EmployeeId"
             CustomizeDataRowEditor="Grid_CustomizeDataRowEditor" CustomizeEditModel="Grid_CustomizeEditModel" EditModelSaving="Grid_EditModelSaving"
@@ -11,11 +21,11 @@
             ColumnResizeMode="GridColumnResizeMode.NextColumn" TextWrapEnabled="false" SizeMode="Params.SizeMode"
             HighlightRowOnHover="true" ValidationEnabled="EnableValidation">
             <Columns>
-                <DxGridCommandColumn Width="160px" />
+                <DxGridCommandColumn Width="110px" />
                 <DxGridDataColumn FieldName="FirstName" MinWidth="80" />
                 <DxGridDataColumn FieldName="LastName" MinWidth="80" />
                 <DxGridDataColumn FieldName="Title" MinWidth="100" />
-                <DxGridDataColumn FieldName="TitleOfCourtesy" MinWidth="120" />
+                <DxGridDataColumn FieldName="TitleOfCourtesy" Caption="Courtesy Title" MinWidth="120" />
                 <DxGridDataColumn FieldName="BirthDate" Width="10%" MinWidth="80" />
                 <DxGridDataColumn FieldName="HireDate" Width="10%" MinWidth="80" />
             </Columns>

@@ -3,11 +3,11 @@
                 AllowIndeterminateStateByClick="true"
                 DisableDefaultRender="true">
         <div class="template-container">
-            <div class="boxLabel" style="margin: 10px">
+            <div class="boxLabel">
                 Medium
             </div>
             <div class="d-flex border-top-0">
-                <div class="boxLabel" style="margin: 10px">
+                <div class="boxLabel">
                     Low
                 </div>
                 <div class="flexBox checkBox">
@@ -16,23 +16,23 @@
                         <div class="markerContainer">
                             <div class="roundMarkerHigh" />
                         </div>
-                        <div class="markerContainer" style="transform: rotate(-90deg)">
+                        <div class="markerContainer rotation-90">
                             <div class="roundMarkerMedium" />
                         </div>
-                        <div class="markerContainer" style="transform: rotate(-180deg)">
+                        <div class="markerContainer rotation-180">
                             <div class="roundMarkerLow" />
                         </div>
-                        <div class="flexBox @($"rotation-{Angle}")" style="width:100%;">
+                        <div class="flexBox @($"rotation-{Angle}") rotation-animated w-100">
                             <div class="light" />
                         </div>
                         <div class="centerCircle" />
-                        <div class="markerContainer @($"rotation-{Angle}")">
+                        <div class="markerContainer @($"rotation-{Angle}") rotation-animated">
                             <div class="marker" />
                         </div>
                     </div>
                     <div class="borderCyrcle" />
                 </div>
-                <div class="boxLabel" style="margin: 10px">
+                <div class="boxLabel">
                     High
                 </div>
             </div>

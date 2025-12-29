@@ -1,7 +1,13 @@
-Our Blazor [ComboBox](https://docs.devexpress.com/Blazor/405075/components/data-editors/combobox) ships with API members that allow you to search and apply filters to list content:
+The DevExpress Blazor [ComboBox](https://docs.devexpress.com/Blazor/405075/components/data-editors/combobox) allows users to filter data. When a user enters text in the edit box, the ComboBox searches for this text in all visible columns, filters items, and highlights matches.
 
-* [SearchMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDropDownListEditorBase-2.SearchMode) — Specifies whether the component can search for text users enter within the edit box.
-* [SearchFilterCondition](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDropDownListEditorBase-2.SearchFilterCondition) — Specifies the search and filter condition (**Contains** or **StartsWith**).
-* [SearchTextParseMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDropDownListEditorBase-2.SearchTextParseMode) — Specifies how the component treats search words. If search text contains multiple words separated by space characters, words can be treated as a single condition or individual conditions. The following modes are available: **GroupWordsByAnd**, **GroupWordsByOr**, and **ExactMatch**.
+Users can use [special characters](xref:DevExpress.Blazor.Base.DxDropDownListEditorBase`2.SearchMode#search-syntax) to create composite criteria.
 
-For additional information, refer to the following topic: [Search and Filter Data](https://docs.devexpress.com/Blazor/405359/components/data-editors/combobox/data-shaping#search-and-filter-data).
+You can use the following API members to configure search and filter capabilities:
+
+* [SearchMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDropDownListEditorBase-2.SearchMode) — Specifies search mode. **AutoSearch** is the default mode. You can set this property to **Disabled** to prevent search operations.
+* [SearchFilterCondition](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDropDownListEditorBase-2.SearchFilterCondition) — Specifies search/filter condition (**Contains**/**Default**, **Equals**, or **StartsWith**).
+* [SearchTextParseMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDropDownListEditorBase-2.SearchTextParseMode) — Specifies how the ComboBox treats search words. If search text contains multiple words separated by space characters, words can be treated as a single condition or individual conditions. The following modes are available: **GroupWordsByAnd**, **GroupWordsByOr**, and **ExactMatch**.
+* [SearchEnabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.SearchEnabled) - Specifies whether the component can search text in current column cells.
+* [SearchDelay](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2.SearchDelay) - Specifies the delay between the last input in the edit box and initiation of the search operation.
+
+For additional information, refer to the following help topic: [Search and Filter Data](https://docs.devexpress.com/Blazor/405359/components/data-editors/combobox/data-shaping#search-and-filter-data).

@@ -40,6 +40,10 @@
                                 <span>@($"Q{context.Text}")</span>
                             </ValueTemplate>
                         </DxPivotTableField>
+                        <DxPivotTableField Field="Order.Date"
+                                           GroupInterval="@PivotTableGroupInterval.DateMonth"
+                                           Caption="Month"
+                                           Area="@PivotTableArea.Column" />
                         <DxPivotTableField Field="Quantity"
                                            Area="@PivotTableArea.Data" />
                         <DxPivotTableField Field="UnitPrice"

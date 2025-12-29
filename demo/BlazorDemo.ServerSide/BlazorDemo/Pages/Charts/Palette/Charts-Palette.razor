@@ -1,6 +1,13 @@
 ﻿@page "/ChartPalette"
+@inject ICspNonceService NonceProvider
 <DemoPageSectionComponent Id="Charts-Palette">
     <DemoChildContent>
+        <style nonce="@NonceProvider.Nonce">
+            @foreach(var cssRule in GetPaletteColorItemsStyle()) {
+                <text>@cssRule</text>
+            }
+        </style>
+
         <div class="flex-container">
             <DxPieChart Data="@GetData()"
                         Width="400"
@@ -12,8 +19,10 @@
                                   ValueField="@((DataPoint s) => s.Value)"/>
             </DxPieChart>
             <div class="palette-container">
-                @foreach(var color in Colors[CurrentPalette]) {
-                    <div class="palette-item" style="background-color: @color"></div>
+                @{
+                    for(var i = 0; i < Colors[CurrentPalette].Length; i++) {
+                        <text><div class="palette-item @GetPaletteColorItemClassName(CurrentPalette, i)"></div></text>
+                    }
                 }
             </div>
         </div>
@@ -43,6 +52,16 @@
 
                 return result;
             }
+
+            IEnumerable<string> GetPaletteColorItemsStyle() {
+                foreach(var palettePair in Colors) {
+                    for(var i = 0; i < palettePair.Value.Length; i++) {
+                        var color = palettePair.Value[i];
+                        yield return $".{GetPaletteColorItemClassName(palettePair.Key, i)} {{ background-color: {color}; }}";
+                    } 
+                }
+            }
+            string GetPaletteColorItemClassName(Palettes palette, int itemIndex) => $"palette-color-item-{palette}-{itemIndex}";
 
             public class DataPoint {
                 public string Argument { get; set; }

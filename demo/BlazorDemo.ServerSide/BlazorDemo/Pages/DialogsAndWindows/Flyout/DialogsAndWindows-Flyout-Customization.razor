@@ -31,7 +31,9 @@
                   FooterVisible="true"
                   FooterCssClass="custom-flyout-footer"
                   Position=@(FlyoutPosition.BottomStart | FlyoutPosition.TopStart)
-                  SizeMode="Params.SizeMode">
+                  SizeMode="Params.SizeMode"
+                  role="dialog"
+                  aria-label="@($"{CurrentEmployee?.FirstName} {CurrentEmployee?.LastName}")">
             <BodyContentTemplate>
                 @*BeginHide*@
                 <div>

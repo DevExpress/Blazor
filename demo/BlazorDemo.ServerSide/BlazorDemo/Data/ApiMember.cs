@@ -113,8 +113,10 @@ namespace BlazorDemo.Data {
         string GetNavigateUrl() /*BeginHide*/ {
             if(Type == "container" || Id == null)
                 return null;
+#pragma warning disable DX0025 // not a path (and no traversal here)
             return "https://docs.devexpress.com/blazor/"
                    + Id.Replace(',', '-').Replace('{', '-').Replace('}', '-').Replace("--", "-");
+#pragma warning restore DX0025
         }
         /*EndHide*/
     }

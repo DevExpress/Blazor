@@ -57,7 +57,7 @@
                 var stockQuoteModel = (StockQuoteDisplayModel)e.Grid.GetDataItem(e.VisibleIndex);
                 var fieldName = ((IGridDataColumn)e.Column).FieldName;
                 if(stockQuoteModel.Change != 0 && (fieldName == "Change" || fieldName == "PercentageChange")) {
-                    e.Style = stockQuoteModel.Change > 0 ? "color: rgb(40, 167, 69)" : "color: rgb(220, 53, 69)";
+                    e.CssClass = stockQuoteModel.Change > 0 ? "change-up" : "change-down";
                 }
             }
 

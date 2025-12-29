@@ -33,6 +33,5 @@ namespace BlazorDemo.Data.Northwind {
 
         public string Text => $"{FirstName} {LastName} ({Title})";
         public string FullName => $"{FirstName} {LastName}";
-        public string ImageFileName => $"employees/{EmployeeId}.jpg";
     }
 }

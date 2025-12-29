@@ -26,14 +26,14 @@
                 <DxTreeListDataColumn FieldName="Priority" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
                     <CellDisplayTemplate>
                         @{
-                            var displayText = TreeListRenderHelper.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem);
+                            var displayText = EmployeeTask.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem);
                         }
                         <span title="@displayText priority">@displayText</span>
                     </CellDisplayTemplate>
                 </DxTreeListDataColumn>
                 <DxTreeListDataColumn Caption="Progress" FieldName="Status" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
                     <CellDisplayTemplate>
-                        <span>@TreeListRenderHelper.EmployeeTaskStatusToString((EmployeeTask)context.DataItem)</span>
+                        <span>@EmployeeTask.EmployeeTaskStatusToString((EmployeeTask)context.DataItem)</span>
                     </CellDisplayTemplate>
                 </DxTreeListDataColumn>
             </Columns>

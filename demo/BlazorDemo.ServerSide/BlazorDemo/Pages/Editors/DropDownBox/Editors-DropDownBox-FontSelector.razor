@@ -1,5 +1,12 @@
-﻿<DemoPageSectionComponent Id="Editors-DropDownBox-FontSelector" ShowSizeMode="true">
+﻿@inject ICspNonceService NonceProvider
+<DemoPageSectionComponent Id="Editors-DropDownBox-FontSelector" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+
+        <style nonce="@NonceProvider.Nonce">
+            .font-selector-demo-text-container {
+                @GetTextContainerStyle()
+            }
+        </style>
 
         <label for="ddbFontSelector" class="demo-text cw-480 mb-2">Font</label>
         <DxDropDownBox @bind-Value="Value"
@@ -58,7 +65,8 @@
             </DropDownFooterTemplate>
         </DxDropDownBox>
         
-        <span style="font-size:@GetTextFontSize(); font-family:@GetTextFontFamily()" class="@GetTextClass()">
+
+        <span class="@GetTextClass() font-selector-demo-text-container">
             The quick brown fox jumps over the lazy dog.
         </span>
     </ChildContentWithParameters>
@@ -130,6 +138,10 @@
                 return string.Join(" ", classes);
             }
             return string.Empty;
+        }
+
+        string GetTextContainerStyle() {
+            return $"font-size:{GetTextFontSize()}; font-family:{GetTextFontFamily()};";
         }
 
         FontProperties GetControlsValue() {

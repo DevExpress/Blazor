@@ -1,4 +1,10 @@
 ﻿@page "/FilterBuilder"
-@layout DataProviderAccessArea<INwindDataProvider>
 
-<FilterBuilder_Content />
+@layout DataProviderAccessArea<INwindDataProvider, IIssuesDataProvider>
+
+<FilterBuilder_Overview/>
+<FilterBuilder_ValueTemplate/>
+<FilterBuilder_ViewMode/>
+<FilterBuilder_OperatorCustomization/>
+<FilterBuilder_CollectionFieldsAndAggregateOperators/>
+

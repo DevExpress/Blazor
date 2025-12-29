@@ -1,0 +1,10 @@
+.scheduler-resource-container > img {
+    object-fit: cover;
+    height: 80px;
+    width: 80px;
+    object-position: 0px 0px;
+    border-radius: 50%;
+}
+.scheduler-resource-container > div {
+    padding: 0.4725rem;
+}

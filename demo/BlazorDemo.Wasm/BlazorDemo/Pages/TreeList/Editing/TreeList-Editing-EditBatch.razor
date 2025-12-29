@@ -28,7 +28,7 @@
                     <DxTreeListDataColumn FieldName="Priority" Width="80px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
                         <CellDisplayTemplate>
                             @{
-                                var displayText = TreeListRenderHelper.TaskPriorityToString((int)context.GetRowValue("Priority"));
+                                var displayText = EmployeeTask.TaskPriorityToString((int)context.GetRowValue("Priority"));
                             }
                             <span title="@displayText priority">@displayText</span>
                         </CellDisplayTemplate>
@@ -41,7 +41,6 @@
                             <DxProgressBar Value="Convert.ToDouble(context.Value)"
                                            MinValue="0"
                                            MaxValue="100"
-                                           CssClass="status-progress"
                                            Thickness="0.875em"
                                            Size="100%"
                                            ShowLabel="false" />

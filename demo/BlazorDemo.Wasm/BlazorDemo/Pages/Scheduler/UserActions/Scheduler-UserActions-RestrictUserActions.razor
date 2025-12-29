@@ -1,13 +1,6 @@
 ﻿@page "/Scheduler/UserActions/RestrictUserActions"
-
 <DemoPageSectionComponent Id="Scheduler-UserActions-RestrictUserActions">
     <DemoChildContent>
-        <style>
-            .caption-item {
-                opacity: 1 !important;
-                padding-right: 12px;
-            }
-        </style>
         <DxScheduler @bind-StartDate="@StartDate"
                      DataStorage="@DataStorage"
                      GroupType="SchedulerGroupType.Resource"
@@ -26,7 +19,7 @@
     <OptionsContent>
         <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
             <Items>
-                <DxToolbarItem CssClass="caption-item" Text="Enable/Disable User Actions:" Enabled="false" />
+                <DxToolbarItem CssClass="opacity-100 pe-2" Text="Enable/Disable User Actions:" Enabled="false" />
                 <DxToolbarItem CssClass="me-2 p-0" GroupName="Edit" @bind-Checked="@AllowEditAppointment" Tooltip="Allow Edit Operations" IconCssClass="dx-icon-toolbar icon-edit" />
                 <DxToolbarItem CssClass="me-2 p-0" GroupName="Create" @bind-Checked="@AllowCreateAppointment" Tooltip="Allow Insert Operations" IconCssClass="dx-icon-toolbar icon-add" />
                 <DxToolbarItem CssClass="me-2 p-0" GroupName="Delete" @bind-Checked="@AllowDeleteAppointment" Tooltip="Allow Delete Operations" IconCssClass="dx-icon-toolbar icon-delete" />

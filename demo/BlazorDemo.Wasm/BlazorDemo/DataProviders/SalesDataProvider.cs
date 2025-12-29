@@ -87,7 +87,7 @@ namespace BlazorDemo.DataProviders {
         }
         static DateTime GetDate() {
             DateTime dateTime = DateTime.Now;
-            return new DateTime(random.Next(dateTime.Year - 1, dateTime.Year + 1), random.Next(1, 13), random.Next(1, 28));
+            return new DateTime(random.Next(dateTime.Year - 3, dateTime.Year + 1), random.Next(1, 13), random.Next(1, 28));
         }
     }
 }

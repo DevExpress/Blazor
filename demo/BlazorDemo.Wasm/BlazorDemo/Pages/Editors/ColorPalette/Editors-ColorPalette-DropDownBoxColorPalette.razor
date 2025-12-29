@@ -1,6 +1,7 @@
-﻿<DemoPageSectionComponent Id="Editors-ColorPalette-DropDownBoxColorPalette" ShowSizeMode="true">
+﻿@inject ICspNonceService NonceProvider
+<DemoPageSectionComponent Id="Editors-ColorPalette-DropDownBoxColorPalette" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <style>
+        <style nonce="@NonceProvider.Nonce">
             .dropdown-icon-color-background {
                 background-color: @Value;
             }

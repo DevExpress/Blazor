@@ -27,7 +27,7 @@
                        Position="RelativePosition.Outside" />
         <DxChartTooltip Enabled="true"
                         Position="RelativePosition.Outside">
-            <div style="margin: 0.75rem">
+            <div class="m-75">
                 <div class="fw-bold">@context.Point.Argument</div>
                 <div>Gender: @((context.Series as IChartSeries).Stack)</div>
                 <div>Age Group: @(((PopulationAgeStructureItem)context.Point.DataItems.First()).AgeGroup)</div>

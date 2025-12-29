@@ -4,7 +4,7 @@
 @if(Themes.ActiveTheme.IsFluent){
     <link rel="stylesheet" href=@DemoStaticResourceService.GetUrlWithVersion("_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.fluent.css")>
 } else {
-    <link rel="stylesheet" href=@DemoStaticResourceService.GetUrlWithVersion("_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.bs5.css")>    
+    <link rel="stylesheet" href=@DemoStaticResourceService.GetUrlWithVersion("_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.bs5.css")>
 }
 
 @using DevExpress.Blazor.Viewer.Models
@@ -91,7 +91,7 @@
         ReportName = ReportName ?? XtraReportsDemos.ReportNames.BalanceSheetReportName;
         if (ReportName != lastReportName)
             return AssignReportAsync();
-        else 
+        else
             return Task.CompletedTask;
     #endif
     }

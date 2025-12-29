@@ -41,6 +41,7 @@
 
             <DxFormLayoutItem ColSpanMd="12" Caption="SpinEdit - Large Increment:" BeginRow="true">
                 <DxSpinEdit @bind-Value="@SpinEditValue"
+                            BindValueMode="BindValueMode.OnInput"
                             ShowSpinButtons="false"
                             CssClass="dx-demo-editor-width">
                     <Buttons>

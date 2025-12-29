@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk.Razor">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <DxExtendStartupHost>False</DxExtendStartupHost>
@@ -27,24 +27,26 @@
     <PackageReference Include="Markdig" />
     <PackageReference Include="DevExtreme.AspNet.Data" />
     <PackageReference Include="System.Reactive" />
-    <PackageReference Include="Microsoft.Extensions.AI.Abstractions" />
-    <PackageReference Include="System.Text.Json" />
-    <ProjectReference Include="..\BlazorDemo.DemoData\BlazorDemo.DemoData.csproj" />
-    <ProjectReference Include="..\BlazorDemo.Reporting.Core\BlazorDemo.Reporting.Core.csproj" />
+    <PackageReference Include="Microsoft.Extensions.AI" />
     <PackageReference Include="Azure.AI.OpenAI" />
     <PackageReference Include="Microsoft.Extensions.AI.OpenAI" />
     <PackageReference Include="System.Numerics.Tensors" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Condition="'$(TargetFramework)'=='net9.0'" />
+    
+    <ProjectReference Include="..\BlazorDemo.DemoData\BlazorDemo.DemoData.csproj" />
+    <ProjectReference Include="..\BlazorDemo.Reporting.Core\BlazorDemo.Reporting.Core.csproj" />
+    
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.PdfViewer" VersionOverride="25.1.3" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls" VersionOverride="25.1.3" />
-    <PackageReference Include="DevExpress.AspNetCore.Reporting" VersionOverride="25.1.3" />
-    <PackageReference Include="DevExpress.Reporting.Demos" VersionOverride="25.1.3" />
-    <PackageReference Include="DevExpress.Blazor.PivotTable" VersionOverride="25.1.3" />
-    <PackageReference Include="DevExpress.Drawing.Skia" VersionOverride="25.1.3" />
-    <PackageReference Include="DevExpress.AIIntegration.Blazor" VersionOverride="25.1.3" />
-    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" VersionOverride="25.1.3" />
+    <PackageReference Include="DevExpress.Blazor.PdfViewer" VersionOverride="25.2.3" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls" VersionOverride="25.2.3" />
+    <PackageReference Include="DevExpress.AspNetCore.Reporting" VersionOverride="25.2.3" />
+    <PackageReference Include="DevExpress.Reporting.Demos" VersionOverride="25.2.3" />
+    <PackageReference Include="DevExpress.Blazor.PivotTable" VersionOverride="25.2.3" />
+    <PackageReference Include="DevExpress.Drawing.Skia" VersionOverride="25.2.3" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" VersionOverride="25.2.3" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor" VersionOverride="25.2.3" />
+    
     
     
     
@@ -123,6 +125,20 @@
     <Content Include="DataSources\vehicles.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	    <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataSources\ChatResources\access.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+    <Content Include="DataSources\ChatResources\dashboard.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+    <Content Include="DataSources\ChatResources\dxaichat.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +251,7 @@
   <ItemGroup>
     <Folder Include="Pages\PivotTable\LargeDataSource\Descriptions\" />
     <Folder Include="Pages\PivotTable\Layout\Descriptions\" />
+    <Folder Include="Themes\" />
   </ItemGroup>
   <Target Name="ControllersCreate" BeforeTargets="PreBuildEvent" Condition="!Exists('Controllers')">
     <Exec Condition="$([MSBuild]::IsOSPlatform('Windows'))" Command="mklink /J &quot;Controllers&quot; &quot;..//BlazorDemo.ServerSide//Controllers&quot;" />

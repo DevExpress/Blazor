@@ -1,0 +1,3 @@
+You can activate [column/row virtualization](https://docs.devexpress.com/Blazor/405626/components/pivottable/scrolling) to optimize Blazor [Pivot Table](https://docs.devexpress.com/Blazor/405245/pivot-table) performance when loading large datasets. Once virtual scrolling is activated ([VirtualScrollingEnabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PivotTable.DxPivotTable.VirtualScrollingEnabled) is `true`), our Blazor Pivot Table component renders only a subset of rows/columns based on viewport size and loads additional cells dynamically as users scroll Pivot Table content.
+
+Use the [VirtualScrollingMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.VirtualScrollingMode) property to virtualize rows, columns, or both.

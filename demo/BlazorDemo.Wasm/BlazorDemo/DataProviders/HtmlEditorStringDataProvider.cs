@@ -1,6 +1,7 @@
 namespace BlazorDemo.DataProviders.Implementation {
     public class HtmlEditorStringDataProvider : IHtmlEditorStringDataProvider {
         public string GetData() {
+#pragma warning disable DX0025 // not a path (and no traversal here)
             return $@"<h2>
                         <img src={StaticAssetUtils.GetImagePath("html-editor/html-editor.svg")} alt='HtmlEditor' />
                         HTML Editor
@@ -55,5 +56,6 @@ namespace BlazorDemo.DataProviders.Implementation {
                     </table>
                     <br>";
         }
+#pragma warning restore DX0025
     }
 }

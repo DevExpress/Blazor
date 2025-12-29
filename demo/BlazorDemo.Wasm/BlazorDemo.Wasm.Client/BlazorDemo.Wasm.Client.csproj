@@ -11,7 +11,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Azure.AI.OpenAI" />
-    <PackageReference Include="Microsoft.Extensions.AI.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.AI" />
     <PackageReference Include="Microsoft.Extensions.AI.OpenAI" />
     <PackageReference Include="System.Configuration.ConfigurationManager" />
     <PackageReference Include="System.Net.Http.Json" />
@@ -27,9 +27,9 @@
     <ProjectReference Include="..\BlazorDemo\BlazorDemo.Wasm.Core.csproj" />
   </ItemGroup>
 <ItemGroup>
-    <PackageReference Include="DevExpress.AIIntegration.Blazor" VersionOverride="25.1.3" />
-    <PackageReference Include="DevExpress.Blazor.PivotTable" VersionOverride="25.1.3" />
-    <PackageReference Include="DevExpress.Pdf.SkiaRenderer" VersionOverride="25.1.3" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor" VersionOverride="25.2.3" />
+    <PackageReference Include="DevExpress.Blazor.PivotTable" VersionOverride="25.2.3" />
+    <PackageReference Include="DevExpress.Pdf.SkiaRenderer" VersionOverride="25.2.3" />
     
     
     
@@ -46,7 +46,7 @@
 	</EmbeddedResource>
   </ItemGroup>
   <ItemGroup Condition="'$(DXTrimming)'=='true'">
-    <TrimmableAssembly Include="DevExpress.Data.v25.1" />
+    <TrimmableAssembly Include="DevExpress.Data.v25.2" />
     <TrimmerRootDescriptor Include="TrimmerRootDescriptor.xml" />
   </ItemGroup>
 </Project>

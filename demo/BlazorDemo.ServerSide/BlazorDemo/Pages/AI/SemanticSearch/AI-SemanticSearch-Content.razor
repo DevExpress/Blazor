@@ -1,13 +1,13 @@
-﻿<DemoPageSectionComponent Id="AI-SemanticSearch" ShowSizeMode="true">
+﻿<DemoPageSectionComponent Id="AI-SemanticSearch-Content" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject DictionaryEntryDataProvider DictionaryEntryDataProvider
 
         <div class="grid-container">
             <DxLoadingPanel Visible="LoadingPanelVisible" ApplyBackgroundShading="true">
-                <DxGrid Data="DictionaryEntries" 
+                <DxGrid Data="DictionaryEntries"
                         SizeMode="Params.SizeMode"
                         ColumnResizeMode="GridColumnResizeMode.NextColumn"
-                        VirtualScrollingEnabled="true" 
+                        VirtualScrollingEnabled="true"
                         TextWrapEnabled="false">
                     <Columns>
                         <DxGridDataColumn FieldName="ID" Width="20" CaptionAlignment="GridTextAlignment.Right" />
@@ -57,12 +57,12 @@
         IList<DictionaryEntry> DictionaryEntries { get; set; }
 
         bool LoadingPanelVisible { get; set; } = true;
-        
+
         protected override async Task OnInitializedAsync() {
             OriginalDictionaryEntries = DictionaryEntryDataProvider.GenerateData();
             DictionaryEntries = OriginalDictionaryEntries;
 
-            await FilterProvider.FillCacheAsync(OriginalDictionaryEntries.SelectMany(item => new string[] { item.Name, item.Description }));
+            await FilterProvider.FillCacheAsync(OriginalDictionaryEntries.Select(GetItemDescription));
 
             LoadingPanelVisible = false;
         }
@@ -77,11 +77,21 @@
             }
 
             await FilterProvider.FillCacheAsync([searchText]);
-            var entries = OriginalDictionaryEntries.Where(item => FilterProvider.IsSimilarTo(item.Name, searchText, similarity) || FilterProvider.IsSimilarTo(item.Description, searchText, similarity)).ToList();
+            var entries = OriginalDictionaryEntries
+                    .Select(item => new {
+                        Entry = item,
+                        Similarity = FilterProvider.GetSimilarity(GetItemDescription(item), searchText),
+                    })
+                    .OrderByDescending(x => x.Similarity)
+                    .Where(x => x.Similarity > similarity)
+                    .Select(x => x.Entry)
+                    .ToList();
             if(CurrentSearchText != searchText || CurrentSimilarity != similarity)
                 return;
 
             DictionaryEntries = entries;
         }
+
+        string GetItemDescription(DictionaryEntry item) => $"{item.Name} - {item.Description}";
     }
 </DemoPageSectionComponent>

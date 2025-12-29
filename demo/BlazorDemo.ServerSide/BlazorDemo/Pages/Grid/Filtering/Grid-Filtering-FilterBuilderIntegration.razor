@@ -1,0 +1,116 @@
+﻿@page "/Grid/Filtering/FilterBuilderIntegration"
+@using DevExpress.Data.Filtering
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="Grid-Filtering-FilterBuilderIntegration" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject NwindDataService NwindDataService
+        <div class="grid-container">
+            <DxGrid @ref="Grid" Data="Data" FilterMenuButtonDisplayMode="GridFilterMenuButtonDisplayMode.Always"
+                FilterPanelDisplayMode="@GridFilterPanelDisplayMode.Always"
+                ColumnResizeMode="GridColumnResizeMode.NextColumn" TextWrapEnabled="false" SizeMode="Params.SizeMode"
+                VirtualScrollingEnabled="true">
+                <Columns>
+                    <DxGridDataColumn FieldName="SalesPerson" Caption="Salesperson">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="Salespersons" />
+                        </EditSettings>
+                    </DxGridDataColumn>
+                    <DxGridDataColumn FieldName="CompanyName" />
+                    <DxGridDataColumn FieldName="OrderDate" Caption="Order Date" Width="100px" />
+                    <DxGridBandColumn Caption="Product">
+                        <Columns>
+                            <DxGridDataColumn FieldName="ProductName" Caption="Name">
+                                <EditSettings>
+                                    <DxComboBoxSettings Data="ProductNames" />
+                                </EditSettings>
+                            </DxGridDataColumn>
+                            <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c"
+                                              CaptionAlignment="GridTextAlignment.Right" Width="100px" />
+                        </Columns>
+                    </DxGridBandColumn>
+                    <DxGridDataColumn FieldName="Quantity" Width="80px" />
+                </Columns>
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Contained" SizeMode="Params.SizeMode">
+                        <Items>
+                            <DxToolbarItem Alignment="ToolbarItemAlignment.Right" Text="Filter Builder" Click="() => Grid.ShowFilterBuilder()" RenderStyle="ButtonRenderStyle.Secondary" />
+                        </Items>
+                    </DxToolbar>
+                </ToolbarTemplate>
+                <FilterBuilderTemplate>
+                    <DxFilterBuilder @bind-FilterCriteria="context.FilterCriteria">
+                        <Fields>
+                            @context.RenderDefaultFields()
+                            <DxFilterBuilderField Caption="Shipping Info" FieldName="ShippingInfo" AllowSelection="false">
+                                <Fields>
+                                    <DxFilterBuilderField FieldName="ShipCountry" Caption="Country" CaptionFullPath="Shipping Info.Country">
+                                        <EditSettings>
+                                            <DxComboBoxSettings Data="ShipCountries" />
+                                        </EditSettings>
+                                    </DxFilterBuilderField>
+                                    <DxFilterBuilderField FieldName="ShipCity" Caption="City" CaptionFullPath="Shipping Info.City">
+                                        <EditSettings>
+                                            <DxComboBoxSettings Data="ShipCities" />
+                                        </EditSettings>
+                                    </DxFilterBuilderField>
+                                    <DxFilterBuilderField FieldName="ShipName" Caption="Name" CaptionFullPath="Shipping Info.Name">
+                                        <EditSettings>
+                                            <DxComboBoxSettings Data="ShipNames" />
+                                        </EditSettings>
+                                    </DxFilterBuilderField>
+                                </Fields>
+                            </DxFilterBuilderField>
+                          
+                        </Fields>
+                    </DxFilterBuilder>
+                </FilterBuilderTemplate>
+            </DxGrid>
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        object Data { get; set; }
+        IGrid Grid { get; set; }
+
+        IEnumerable<string> Salespersons { get; set; }
+        IEnumerable<string> ProductNames { get; set; }
+        IEnumerable<string> ShipCountries { get; set; }
+        IEnumerable<string> ShipCities { get; set; }
+        IEnumerable<string> ShipNames { get; set; }
+
+        protected override async Task OnInitializedAsync() {
+            var invoices = await NwindDataService.GetInvoicesAsync();
+            var customers = await NwindDataService.GetCustomersAsync();
+
+            var invoiceList = invoices.ToList();
+            Salespersons = invoiceList.Select(i => i.Salesperson).Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().OrderBy(s => s).ToList();
+            ProductNames = invoiceList.Select(i => i.ProductName).Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().OrderBy(s => s).ToList();
+            ShipCountries = invoiceList.Select(i => i.ShipCountry).Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().OrderBy(s => s).ToList();
+            ShipCities = invoiceList.Select(i => i.ShipCity).Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().OrderBy(s => s).ToList();
+            ShipNames = invoiceList.Select(i => i.ShipName).Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().OrderBy(s => s).ToList();
+
+            Data = invoiceList.OrderBy(i => i.OrderDate).Join(customers, i => i.CustomerId, c => c.CustomerId, (i, c) =>
+            {
+                return new
+                {
+                    CompanyName = c.CompanyName,
+                    SalesPerson = i.Salesperson,
+                    UnitPrice = i.UnitPrice,
+                    OrderDate = i.OrderDate,
+                    ProductName = i.ProductName,
+                    Quantity = i.Quantity,
+                    ShipCountry = i.ShipCountry,
+                    ShipCity = i.ShipCity,
+                    ShipName = i.ShipName
+                };
+            });
+        }
+
+        protected override Task OnAfterRenderAsync(bool firstRender) {
+            if(firstRender)
+                Grid.SetFilterCriteria(CriteriaOperator.Parse("[UnitPrice] > 100M And ([ShipCountry] In ('Argentina', 'Belgium') Or [CompanyName] == 'Ernst Handel')"));
+            return base.OnAfterRenderAsync(firstRender);
+        }
+    }
+</DemoPageSectionComponent>

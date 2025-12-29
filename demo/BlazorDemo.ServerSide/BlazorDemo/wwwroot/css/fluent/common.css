@@ -1,8 +1,34 @@
 body {
-    --dxbl-icon-width: var(--DS-sizing-200);
-    --dxbl-icon-height: var(--DS-sizing-200);
+    --dxbl-icon-width: var(--dxds-spacing-200);
+    --dxbl-icon-height: var(--dxds-spacing-200);
     --dxbl-icon-opacity: 1;
     --dxbl-treeview-sidebar-tree-ctp-badge-color: var(--bs-white);
+}
+
+/* Sizing */
+
+.dxbl-sm {
+    --dxbl-icon-width: var(--dxds-spacing-160);
+    --dxbl-icon-height: var(--dxds-spacing-160);
+}
+
+.dxbl-lg {
+    --dxbl-icon-width: var(--dxds-spacing-240);
+    --dxbl-icon-height: var(--dxds-spacing-240);
+}
+
+/* Utility colors */
+
+.color-green {
+    color: var(--dxds-color-content-utility-green-default-rest);
+}
+
+.color-blue {
+    color: var(--dxds-color-content-utility-blue-default-rest);
+}
+
+.color-red {
+    color: var(--dxds-color-content-utility-red-default-rest);
 }
 
 /* Toolbar */
@@ -25,6 +51,9 @@ body {
     --dxbl-icon-alert: url("../images/icons/alert-fluent.svg");
     --dxbl-icon-font: url("../images/icons/font-fluent.svg");
     --dxbl-icon-hamburger: url("../images/icons/hamburger-fluent.svg");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center center;
 }
 
 .content .tb-icon {
@@ -38,8 +67,8 @@ body {
 }
 
 .dxbl-sm .tb-icon {
-    width: var(--DS-sizing-160);
-    height: var(--DS-sizing-160);
+    width: var(--dxds-spacing-160);
+    height: var(--dxds-spacing-160);
 }
 
 /* Editors */
@@ -56,6 +85,12 @@ body {
     --dxbl-icon-birthdate: url("../images/icons/birthdate-fluent.svg");
 }
 
+.editor-icon,
+.dxbl-btn .editor-icon {
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center center;
+}
 /* Popups */
 
 .popup-icon-user {
@@ -74,6 +109,14 @@ body {
     --dxbl-icon-about: url("../images/icons/about-fluent.svg");
 }
 
+.popup-icon-user,
+.popup-icon-birthday,
+.popup-icon-worked,
+.popup-icon-position {
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center center;
+}
 /* Scheduler */
 .demo-resnavigator-icon {
     --dxbl-icon-scheduler-navigator: url("../images/icons/scheduler-navigator-fluent.svg");
@@ -86,6 +129,9 @@ body {
     --dxbl-icon-drag-appointment-btw-resources: url("../images/icons/scheduler-drag-between-resources-fluent.svg");
     --dxbl-icon-drag-and-sizing: url("../images/icons/scheduler-drag-and-resize-fluent.svg");
     --dxbl-icon-tooltip: url("../images/icons/scheduler-no-tooltip-fluent.svg");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center center;
 }
 
 .dx-icon-time {
@@ -104,12 +150,29 @@ body {
     --dxbl-icon-drop-file: url("../images/icons/drop-file-fluent.svg");
 }
 
+
 /* Grid */
 .grid-icon-column-chooser,
 .treelist-icon-column-chooser,
 .treelist-toolbar-column-chooser,
 .grid-toolbar-column-chooser {
     --dxbl-toolbar-column-chooser: url("../images/icons/column-chooser-fluent.svg");
+}
+
+.grid-toolbar-document-csv {
+    --dxbl-grid-toolbar-document-csv: url("../images/icons/document-csv-fluent.svg");
+}
+
+.grid-toolbar-document-xlsx {
+    --dxbl-grid-toolbar-document-xlsx: url("../images/icons/document-xlsx-fluent.svg");
+}
+
+.grid-toolbar-document-xls {
+    --dxbl-grid-toolbar-document-xls: url("../images/icons/document-xls-fluent.svg");
+}
+
+.grid-toolbar-document-pdf {
+    --dxbl-grid-toolbar-document-pdf: url("../images/icons/document-pdf-fluent.svg");
 }
 
 /* PivotTable */
@@ -145,11 +208,13 @@ body {
     --dxbl-grid-toolbar-edit: url("../images/icons/grid-toolbar-edit-fluent.svg");
 }
 
-.grid-toolbar-cancel {
+.grid-toolbar-cancel,
+.treelist-toolbar-cancel {
     --dxbl-grid-toolbar-cancel: url("../images/icons/undo-fluent.svg");
 }
 
-.grid-toolbar-save {
+.grid-toolbar-save,
+.treelist-toolbar-save {
     --dxbl-grid-toolbar-save: url("../images/icons/save-fluent.svg");
 }
 
@@ -163,6 +228,30 @@ body {
 
 .grid-icon-add {
     --dxbl-grid-icon-add: url("../images/icons/add-fluent.svg");
+}
+
+.grid-icon-column-chooser,
+.treelist-icon-column-chooser,
+.treelist-toolbar-column-chooser,
+.grid-toolbar-column-chooser,
+.pivot-table-icon-reload-page,
+.pivot-table-icon-reset-layout,
+.pivot-table-icon-field-list,
+.file-system-icon-folder,
+.file-system-icon-file,
+.grid-toolbar-export,
+.grid-toolbar-delete,
+.grid-toolbar-edit,
+.grid-toolbar-cancel,
+.treelist-toolbar-cancel,
+.grid-toolbar-save,
+.treelist-toolbar-save,
+.grid-toolbar-new,
+.grid-icon-delete,
+.grid-icon-add {
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center center;
 }
 
 /* Buttons */
@@ -193,10 +282,14 @@ body {
     --dxbl-btn-icon-email: url("../images/icons/mail-fluent.svg");
     --dxbl-btn-icon-link: url("../images/icons/link-fluent.svg");
     --dxbl-btn-icon-print: url("../images/icons/drop-file-fluent.svg");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center center;
 }
 
 /* Ribbon */
 .rb-icon {
+    --dxbl-icon-rb-hamburger: url("../images/icons/hamburger-fluent.svg");
     --dxbl-icon-rb-undo: url("../images/icons/ribbon/fluent/undo.svg");
     --dxbl-icon-rb-redo: url("../images/icons/ribbon/fluent/redo.svg");
     --dxbl-icon-rb-clipboard: url("../images/icons/ribbon/fluent/clipboard.svg");
@@ -227,11 +320,19 @@ body {
     --dxbl-icon-rb-print: url("../images/icons/ribbon/fluent/print.svg");
     --dxbl-icon-rb-share: url("../images/icons/ribbon/fluent/share.svg");
     --dxbl-icon-rb-save: url("../images/icons/ribbon/fluent/save.svg");
-}
-
-.ribbon-container .dxbl-ribbon .dxbl-tabs-content-panel {
-    box-shadow: var(--DS-box-shadow-shadow-4);
-    border-radius: var(--DS-border-radius-40);
+    --dxbl-icon-rb-calendar-day: url("../images/icons/ribbon/fluent/calendar-day.svg");
+    --dxbl-icon-rb-mail: url("../images/icons/ribbon/fluent/mail.svg");
+    --dxbl-icon-rb-delete: url("../images/icons/ribbon/fluent/delete.svg");
+    --dxbl-icon-rb-archive: url("../images/icons/ribbon/fluent/archive.svg");
+    --dxbl-icon-rb-clear-history: url("../images/icons/ribbon/fluent/clear-history.svg");
+    --dxbl-icon-rb-folder-arrow-right: url("../images/icons/ribbon/fluent/folder-arrow-right.svg");
+    --dxbl-icon-rb-chat: url("../images/icons/ribbon/fluent/chat.svg");
+    --dxbl-icon-rb-tag: url("../images/icons/ribbon/fluent/tag.svg");
+    --dxbl-icon-rb-flag: url("../images/icons/ribbon/fluent/flag.svg");
+    --dxbl-icon-rb-clock: url("../images/icons/ribbon/fluent/clock.svg");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center center;
 }
 
 /* Tabs */
@@ -239,6 +340,9 @@ body {
     --dxbl-tabs-icon-home: url("../images/icons/home-fluent.svg");
     --dxbl-tabs-icon-support: url("../images/icons/person-fluent.svg");
     --dxbl-tabs-icon-products: url("../images/icons/layer-fluent.svg");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center center;
 }
 
 /* Form Layout */
@@ -248,16 +352,16 @@ body {
 
 /* Drawer */
 .dxbl-menu.demo-drawer-menu {
-    --dxbl-menu-item-padding-y-s: var(--DS-sizing-40);
+    --dxbl-menu-item-padding-y-s: var(--dxds-spacing-40);
     --dxbl-menu-item-padding-x-s: 0.563rem;
     --dxbl-menu-item-padding-x-m: 0.75rem;
     --dxbl-menu-item-padding-x-l: 1.313rem;
 }
 
 .dxbl-btn-toolbar > .dxbl-btn-group > .dxbl-toolbar-item > .demo-drawer-toggle-button {
-    --dxbl-btn-padding-x-s: var(--DS-sizing-80);
-    --dxbl-btn-padding-x-m: var(--DS-sizing-120);
-    --dxbl-btn-padding-x-l: var(--DS-sizing-160);
+    --dxbl-btn-padding-x-s: var(--dxds-spacing-80);
+    --dxbl-btn-padding-x-m: var(--dxds-spacing-120);
+    --dxbl-btn-padding-x-l: var(--dxds-spacing-160);
 }
 
 .demo-drawer-overview-left .dxbl-menu.demo-drawer-menu {
@@ -281,12 +385,12 @@ body {
 }
 
 .demo-page-section > .card > .card-header > .nav-tabs {
-    border-bottom: 1px solid var(--DS-color-border-neutral-default-rest);
+    border-bottom: 1px solid var(--dxds-color-border-neutral-default-rest);
 }
 
 .icon-doc {
-    --dxbl-demo-page-icon-doc-width: var(--DS-sizing-160);
-    --dxbl-demo-page-icon-doc-height: var(--DS-sizing-160);
+    --dxbl-demo-page-icon-doc-width: var(--dxds-spacing-160);
+    --dxbl-demo-page-icon-doc-height: var(--dxds-spacing-160);
 }
 
 .dxbl-treeview.sidebar-tree .dxbl-treeview-item-content > .dxbl-treeview-item-container > .dxbl-badge {
@@ -303,6 +407,19 @@ body {
     --dxbl-demo-group-border-bottom-color: #797979;
 }
 
+.demo-group-icon {
+    --dxbl-demo-group-icon-fill: var(--dxds-color-content-utility-indigo-default-rest);
+}
+
+.demo-group-icon-classic {
+    --dxbl-demo-group-icon-visibility: none;
+}
+
+.demo-group-icon-fluent {
+    fill: var(--dxds-color-content-utility-indigo-default-rest);
+    --dxbl-demo-group-icon-visibility: block;
+}
+
 /* Accordion */
 .icon-square-minus {
     --dxbl-icon-square-minus: url("../images/icons/subtract-square-fluent.svg");
@@ -313,7 +430,7 @@ body {
 }
 
 .fp-header {
-    --fp-color-primary: var(--DS-color-content-primary-default-rest);
+    --fp-color-primary: var(--dxds-color-content-primary-default-rest);
 }
 
 .fp-icon-bonus {
@@ -357,6 +474,12 @@ body {
     --dxbl-icon-phone: url("../images/icons/phone-fluent.svg");
 }
 
+.e-icon {
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center center;
+}
+
 /* TreeView */
 .treeview-icon-folder {
     --dxbl-icon-folder: url("../images/icons/folder-color-fluent.svg");
@@ -387,6 +510,12 @@ body {
 }
 
 /* Menu */
+.menu-icon {
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center center;
+}
+
 .menu-icon-home {
     --dxbl-icon-home: url("../images/icons/home-fluent.svg");
 }
@@ -433,4 +562,9 @@ body {
 
 .menu-icon-person-circle {
     --dxbl-menu-icon-person-circle: url("../images/icons/person-circle-fluent.svg");
+}
+
+/* AIChat */
+.aichat-icon {
+    --dxbl-icon-ai-chat: url("../images/icons/ai-chat-fluent.svg");
 }

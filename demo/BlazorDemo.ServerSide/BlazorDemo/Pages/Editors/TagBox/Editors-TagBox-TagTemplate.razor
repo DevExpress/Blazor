@@ -19,7 +19,8 @@
                 @{
                     var buttonStyleMode = tagContext.IsCustom ? ButtonRenderStyleMode.Contained : GetModeByID(tagContext.DataItem.CityName);
                     var buttonStyle = tagContext.IsCustom ? ButtonRenderStyle.Dark : ButtonRenderStyle.Primary;
-                    <DxButton RenderStyle="@buttonStyle"
+                    <DxButton tabindex="-1"
+                              RenderStyle="@buttonStyle"
                               RenderStyleMode="@buttonStyleMode"
                               Text="@tagContext.DisplayText"
 							  CssClass="tagbox-tag-template-btn">

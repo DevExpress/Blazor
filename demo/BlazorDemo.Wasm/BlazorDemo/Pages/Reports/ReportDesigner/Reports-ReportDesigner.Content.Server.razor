@@ -6,7 +6,7 @@
 
 <DemoPageSectionComponent Id="@GetDesignerId()">
     @if(ScriptsLoaded) {
-        <DxReportDesigner ReportName=@ReportName Height="770px" @ref="designer" CssClass="w-100">
+        <DxReportDesigner ReportName=@ReportName Height="@null" Width="@null" @ref="designer" CssClass="w-100 ch-770">
             <DxReportDesignerCallbacks BeforeRender="_dxr_DesignerUpdateAIServices"></DxReportDesignerCallbacks>
         </DxReportDesigner>
     }

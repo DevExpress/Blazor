@@ -1,5 +1,12 @@
-﻿<DemoPageSectionComponent Id="Navigation-Toolbar-DataBinding" ShowSizeMode="true">
+﻿@inject ICspNonceService NonceProvider
+<DemoPageSectionComponent Id="Navigation-Toolbar-DataBinding" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <style nonce="@NonceProvider.Nonce">
+            div.toolbar-card-text-container {
+                @Formatting.GetStyleString()
+            }
+        </style>
+
         <div class="card w-100">
             <div class="card-header p-2 demo-bg-transparent">
                 <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain"
@@ -19,7 +26,7 @@
                 </DxToolbar>
             </div>
             <div class="card-body">
-                <div style="@Formatting.GetStyleString()">
+                <div class="toolbar-card-text-container">
                     @*BeginHide*@
                     <span class="demo-preventsel">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</span>
                     @*EndHide*@

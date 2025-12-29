@@ -8,12 +8,13 @@
     width: 1rem;
     height: 1rem;
     margin-right: 0.375rem;
-    -webkit-mask-image: url("images/icons/theme-icon.svg");
-    mask-image: url("images/icons/theme-icon.svg");
+    -webkit-mask-image: url("images/icons/color-item.svg");
+    mask-image: url("images/icons/color-item.svg");
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     background-color: currentColor;
-    border: 1px solid white;
+    border: 2px solid white;
+    border-radius: 3px;
 }
 
 .dxbl-sm .template-icon {
@@ -24,34 +25,26 @@
     margin-right: 0.5rem;
 }
 
-.template-container > .blazing-berry {
-    color: #5c2d91;
+.template-container > .green {
+    color: #43A047;
 }
 
-.template-container > .blazing-dark {
-    color: #46444a;
+.template-container > .red {
+    color: #E53935;
 }
 
-.template-container > .office-white {
-    color: #fe7109;
+.template-container > .blue {
+    color: #1E88E5;
+}
+
+.template-container > .yellow {
+    color: #F1CD2E;
+}
+
+.template-container > .orange {
+    color: #FB8C00;
 }
 
 .template-container > .purple {
-    color: #7989ff;
-}
-
-.template-container > .default {
-    color: #007bff;
-}
-
-.template-container > .default-dark {
-    color: #212529;
-}
-
-.template-container > .fluent-orchid {
-    color: #c239b3;
-}
-
-.template-container > .fluent-mint {
-    color: #018574;
+    color: #8E24AA;
 }

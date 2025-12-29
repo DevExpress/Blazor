@@ -1,7 +1,7 @@
 ﻿<DemoPageSectionComponent Id="Charts-Axes-AxesLabels-LabelOverlap">
     <DemoChildContent>
         @*BeginHide*@
-        <div style="max-width: 900px; width: 100% ">
+        <div class="w-100 max-w-900">
             @*EndHide*@
             @inject IPopulationDataProvider PopulationDataProvider
             <DxChart Data="@Data" Width="100%">
@@ -14,7 +14,7 @@
                         <div class="fw-bold">@context.Point.Argument</div>
                         <div>
                             Population:
-                            @if((int)context.Point.Value > 1000000000) {
+                            @if((long)context.Point.Value > 1000000000) {
                                 @string.Format("{0:0,,,.###B}", context.Point.Value)
                             } else {
                                 @string.Format("{0:0,,M}", context.Point.Value)

@@ -3,8 +3,8 @@
 @inject IJSRuntime JSRuntime
 <DemoPageSectionComponent Id="DialogsAndWindows-Popup-Dragging" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <div class="target-container" @onclick="@(() => PopupVisible = true)">
-            <p class="target-caption">CLICK TO SHOW A POP-UP WINDOW</p>
+        <div class="d-flex justify-content-center p-3">
+            <DxButton RenderStyle="ButtonRenderStyle.Secondary" Click="() => PopupVisible = true">CLICK TO SHOW A POP-UP WINDOW</DxButton>
         </div>
 
         <DxPopup AllowDrag="true"
@@ -46,7 +46,7 @@
             await SavePositionToLocalStorageAsync(args.End);
         }
 
-        // Refer to https://docs.microsoft.com/en-us/aspnet/core/blazor/state-management
+        // Refer to https://learn.microsoft.com/en-us/aspnet/core/blazor/state-management/
         // to learn more about Blazor state management
         // In Blazor Server apps, prefer ASP.NET Core Protected Browser Storage
         async Task<Point?> LoadPositionFromLocalStorageAsync()

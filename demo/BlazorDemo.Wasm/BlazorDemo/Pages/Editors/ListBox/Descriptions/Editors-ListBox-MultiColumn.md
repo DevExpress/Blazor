@@ -2,6 +2,6 @@ The [List Box](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListBox-2)
 
 *   [Caption](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.Caption) — Specifies the column caption.
 *   [FieldName](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.FieldName) — Specifies the data source field that populates column items.
-*   [Visible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.Visible) — Specifies the column visibility.
-*   [VisibleIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataColumnBase.VisibleIndex) — Specifies the column display order.
+*   [Visible](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.Visible) — Specifies the column visibility.
+*   [VisibleIndex](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.VisibleIndex) — Specifies the column display order.
 *   [Width](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxListEditorColumn.Width) — Specifies the column width.

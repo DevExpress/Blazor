@@ -27,6 +27,27 @@ namespace BlazorDemo.Data {
         public bool HasDescription => !string.IsNullOrEmpty(Description);
         public bool IsCompleted => Status == 100;
 
+        // Extended Properties
+        public string PriorityLabel { get; set; }
+        public int EstimatedHours { get; set; }
+        public int ActualHours { get; set; }
+        public double Progress { get; set; }
+        public decimal Budget { get; set; }
+        public decimal Cost { get; set; }
+        public string RiskLevel { get; set; }
+        public string Category { get; set; }
+        public string SubCategory { get; set; }
+        public string Owner { get; set; }
+        public string Reviewer { get; set; }
+        public string Approver { get; set; }
+        public string Department { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+        public bool IsBlocked { get; set; }
+        public string ExternalId { get; set; }
+        public string Epic { get; set; }
+        public string Environment { get; set; }
+
         public EmployeeTask(
             int id,
             int parentId,
@@ -54,6 +75,20 @@ namespace BlazorDemo.Data {
         public EmployeeTask() { }
         public EmployeeTask Clone() {
             return (EmployeeTask)MemberwiseClone();
+        }
+
+        public static string EmployeeTaskPriorityToString(EmployeeTask employeeTask) {
+            return TaskPriorityToString(employeeTask.Priority);
+        }
+        public static string TaskPriorityToString(int taskPriority) {
+            if(taskPriority == 0)
+                return "Medium";
+            if(taskPriority > 0)
+                return "High";
+            return "Low";
+        }
+        public static string EmployeeTaskStatusToString(EmployeeTask employeeTask) {
+            return employeeTask.Status < 100 ? "In progress" : "Completed";
         }
     }
 }

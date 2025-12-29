@@ -31,7 +31,7 @@
                         <DxComboBoxSettings Data="Priorities" ValueFieldName="Value" TextFieldName="Text" ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Never" />
                     </EditSettings>
                     <CellDisplayTemplate>
-                        <span title="@TreeListRenderHelper.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem) priority">@TreeListRenderHelper.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem)</span>
+                        <span title="@EmployeeTask.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem) priority">@EmployeeTask.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem)</span>
                     </CellDisplayTemplate>
                 </DxTreeListDataColumn>
                 <DxTreeListDataColumn Caption="Progress" FieldName="Status" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
@@ -42,7 +42,7 @@
                                     aria-label="Select status" />
                     </FilterRowCellTemplate>
                     <CellDisplayTemplate>
-                        <span>@TreeListRenderHelper.EmployeeTaskStatusToString((EmployeeTask)context.DataItem)</span>
+                        <span>@EmployeeTask.EmployeeTaskStatusToString((EmployeeTask)context.DataItem)</span>
                     </CellDisplayTemplate>
                 </DxTreeListDataColumn>
             </Columns>

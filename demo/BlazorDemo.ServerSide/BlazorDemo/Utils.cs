@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -13,11 +14,23 @@ namespace BlazorDemo {
         static string libraryPath = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
 
         public static string GetContentPath(string assetPath) {
+#pragma warning disable DX0025 // not a path, but url
             return $"./_content/{libraryPath}/{assetPath}";
+#pragma warning restore DX0025
         }
 
         public static string GetImagePath(string imageFileName) {
+#pragma warning disable DX0025 // not a path, but url
             return GetContentPath($"images/{imageFileName}");
+#pragma warning restore DX0025
+        }
+
+        public static string GetEmployeeImagePath(string employeeId) {
+            return GetImagePath($"employees/item-template{employeeId}.jpg");
+        }
+
+        public static string GetEmployeeImagePath(int employeeId) {
+            return GetEmployeeImagePath(employeeId.ToString());
         }
     }
 
@@ -28,11 +41,15 @@ namespace BlazorDemo {
         }
         public static string GetNorthwindSqliteConnectionString(IConfiguration config) {
             var dirPath = config.GetValue<string>("DataSourcesFolder");
+#pragma warning disable DX0025 // parameter is passed from configuration
             return $"Data Source={Path.Combine(dirPath, "nwind.db")}";
+#pragma warning restore DX0025
         }
         public static string GetHomesSqliteConnectionString(IConfiguration config) {
             var dirPath = config.GetValue<string>("DataSourcesFolder");
+#pragma warning disable DX0025 // parameter is passed from configuration
             return $"Data Source={Path.Combine(dirPath, "homes.db")}";
+#pragma warning restore DX0025
         }
 
         public static string GetIssuesConnectionString(IConfiguration config) {
@@ -40,7 +57,9 @@ namespace BlazorDemo {
         }
         public static string GetIssuesSqliteConnectionString(IConfiguration config) {
             var dirPath = config.GetValue<string>("DataSourcesFolder");
+#pragma warning disable DX0025 // parameter is passed from configuration
             return $"Data Source={Path.Combine(dirPath, "issue-list.db")}";
+#pragma warning restore DX0025
         }
 
         public static string GetWorlcitiesConnectionString(IConfiguration config) {
@@ -48,7 +67,9 @@ namespace BlazorDemo {
         }
         public static string GetWorlcitiesSqliteConnectionString(IConfiguration config) {
             var dirPath = config.GetValue<string>("DataSourcesFolder");
+#pragma warning disable DX0025 // parameter is passed from configuration
             return $"Data Source={Path.Combine(dirPath, "worldcities.db")}";
+#pragma warning restore DX0025
         }
 
         public static string GetGridLargeDataConnectionString(IConfiguration config) {
@@ -87,6 +108,11 @@ namespace BlazorDemo {
             return false;
         }
 
+        public static string CombineCssClasses(params string[] value) => CombineCssClasses((IEnumerable<string>)value);
+        public static string CombineCssClasses(IEnumerable<string> value) {
+            var cssClass = string.Join(" ", value.Where(v => !string.IsNullOrWhiteSpace(v))).Trim();
+            return string.IsNullOrWhiteSpace(cssClass) ? null : cssClass;
+        }
     }
 
     public static class SplitTextHelper {
@@ -98,7 +124,7 @@ namespace BlazorDemo {
 
     public static class DemoTemplateIconUtils {
         public static MarkupString GetEmployeeTaskPriorityIconHtml(EmployeeTask employeeTask) {
-            var displayText = TreeListRenderHelper.EmployeeTaskPriorityToString(employeeTask);
+            var displayText = EmployeeTask.EmployeeTaskPriorityToString(employeeTask);
             var badgeClass = employeeTask.Priority switch {
                 -1 => "bg-success",
                 0 => "bg-info",
@@ -155,3 +181,4 @@ namespace DevExpress.XtraReports.Web { }
 namespace DevExpress.XtraReports.Web.WebDocumentViewer { }
 namespace DevExpress.Blazor.RichEdit { }
 #endif
+

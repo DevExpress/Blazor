@@ -1,7 +1,7 @@
 ﻿@inject NwindDataService NwindDataService
-<style>
+@inject ICspNonceService NonceProvider
+<style nonce="@NonceProvider.Nonce">
     .templateGrid {
-        border-width: 0;
         width: 800px;
         height: 350px
     }
@@ -18,7 +18,7 @@
         SelectedDataItemChanged="@GridSelectedDataItemChanged"
         FocusedRowEnabled="true"
         TextWrapEnabled="false"
-        CssClass="templateGrid"
+        CssClass="templateGrid border-0"
         >
     <Columns>
         <DxGridDataColumn FieldName="ContactName" />

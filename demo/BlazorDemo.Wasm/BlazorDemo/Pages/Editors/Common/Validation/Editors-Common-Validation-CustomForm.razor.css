@@ -1,5 +1,9 @@
-﻿/*BeginHide*/
+/*BeginHide*/
 ::deep fieldset > legend ~ .dxbl-radio-group {
     clear: left;
 }
 /*EndHide*/
+
+/*BeginHide*/ ::deep /*EndHide*/ div.row > div.col-md-6 {
+    padding-bottom: 12px
+}

@@ -3,8 +3,9 @@
 <DemoPageSectionComponent Id="TreeList-Customization-AltRowStyle" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject ISalesByRegionDataProvider SalesByRegionDataProvider
+        @inject ICspNonceService NonceProvider
 
-        <style>
+        <style nonce="@NonceProvider.Nonce">
             /* DevExpress and Bootstrap Themes */
             .alt-item > td:not(.dxbl-grid-empty-cell) {
                 background-color: color-mix(in srgb, var(--bs-gray-300), transparent 50%);
@@ -12,7 +13,7 @@
 
             /* Fluent Themes */
             .alt-item {
-                --dxbl-grid-row-bg: var(--DS-color-surface-neutral-subdued-rest);
+                --dxbl-grid-row-bg: var(--dxds-color-surface-neutral-subdued-rest);
             }
         </style>
 

@@ -6,26 +6,27 @@
         @using BlazorDemo.Data.StockQuotes
         @inject IStockQuoteByRegionService StockQuoteService
         @implements IDisposable
-
-        <DxTreeList @ref="TreeList"
-                    Data="TreeListData"
-                    KeyFieldName="Id"
-                    ParentKeyFieldName="ParentId"
-                    ShowAllRows="true"
-                    ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
-                    TextWrapEnabled="false"
-                    CustomizeElement="TreeList_CustomizeElement"
-                    CustomizeCellDisplayText="TreeList_CustomizeCellDisplayText"
-                    SizeMode="Params.SizeMode"
-                    CssClass="max-h-480">
-            <Columns>
-                <DxTreeListDataColumn FieldName="Ticker" />
-                <DxTreeListDataColumn FieldName="LastPrice" DisplayFormat="N2" />
-                <DxTreeListDataColumn FieldName="Change" DisplayFormat="N2" />
-                <DxTreeListDataColumn FieldName="PercentageChange" Caption="% Change" DisplayFormat="P2" SortIndex="0" />
-                <DxTreeListDataColumn FieldName="LastUpdated" DisplayFormat="HH:mm:ss" />
-            </Columns>
-        </DxTreeList>
+        <div class="treelist-container">
+            <DxTreeList @ref="TreeList"
+                        Data="TreeListData"
+                        KeyFieldName="Id"
+                        ParentKeyFieldName="ParentId"
+                        ShowAllRows="true"
+                        ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                        TextWrapEnabled="false"
+                        CustomizeElement="TreeList_CustomizeElement"
+                        CustomizeCellDisplayText="TreeList_CustomizeCellDisplayText"
+                        SizeMode="Params.SizeMode"
+                        CssClass="max-h-480">
+                <Columns>
+                    <DxTreeListDataColumn FieldName="Ticker" />
+                    <DxTreeListDataColumn FieldName="LastPrice" DisplayFormat="N2" />
+                    <DxTreeListDataColumn FieldName="Change" DisplayFormat="N2" />
+                    <DxTreeListDataColumn FieldName="PercentageChange" Caption="% Change" DisplayFormat="P2" SortIndex="0" />
+                    <DxTreeListDataColumn FieldName="LastUpdated" DisplayFormat="HH:mm:ss" />
+                </Columns>
+            </DxTreeList>
+        </div>
 
         @code {
             ITreeList TreeList { get; set; }
@@ -43,7 +44,7 @@
                 var stockQuoteModel = (StockQuoteByRegionDisplayModel)e.TreeList.GetDataItem(e.VisibleIndex);
                 var fieldName = ((ITreeListDataColumn)e.Column).FieldName;
                 if(stockQuoteModel.Change != 0 && (fieldName == "Change" || fieldName == "PercentageChange")) {
-                    e.Style = stockQuoteModel.Change > 0 ? "color: rgb(40, 167, 69)" : "color: rgb(220, 53, 69)";
+                    e.CssClass = stockQuoteModel.Change > 0 ? "change-up" : "change-down";
                 }
             }
 

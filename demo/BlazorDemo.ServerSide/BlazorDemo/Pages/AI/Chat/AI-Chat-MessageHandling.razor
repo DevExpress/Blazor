@@ -1,6 +1,7 @@
 ﻿@inject ICarouselImageDataProvider CarouselImageDataProvider
 @using DevExpress.AIIntegration.Blazor.Chat
 @using Microsoft.Extensions.AI
+@using System.Text;
 
 <DemoPageSectionComponent Id="AIChat-MessageHandling"
                           ShowSizeMode="true">
@@ -16,14 +17,19 @@
 
             async Task MessageSent(MessageSentEventArgs args) {
                 var fileNames = args.Files.Select(x => x.Name);
-                var response = string.Join(Environment.NewLine, new[] {
-                    "Your message:",
-                    args.Content,
-                    "",
-                    "Attached files:",
-                    string.Join(Environment.NewLine, fileNames)
-                });
-                await args.Chat.SendMessage(response, ChatRole.Assistant);
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("Your message:");
+                sb.AppendLine(args.Content);
+
+                if (fileNames.Any()) {
+                    sb.AppendLine();
+                    sb.AppendLine("Attached files:");
+                    foreach (var fileName in fileNames) {
+                        sb.AppendLine(fileName);
+                    }
+                }
+
+                await args.Chat.SendMessage(sb.ToString(), ChatRole.Assistant);
             }
         }
     </ChildContentWithParameters>

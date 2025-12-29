@@ -35,19 +35,7 @@ namespace BlazorDemo.ServerSide {
                 });
             var optionsBuilder = services.AddOptions();
             optionsBuilder.AddOptions<DemoModel>("BlazorDemo");
-            var azureOpenAIEndpoint = context.Configuration.GetSection("AIIntegrationSettings")["EndpointUrl"];
-            var azureOpenAIKey = context.Configuration.GetSection("AIIntegrationSettings")["Key"];
-            var deploymentName = context.Configuration.GetSection("AIIntegrationSettings")["DeploymentName"];
 
-            var openAIClient = new AzureOpenAIClient(
-                new Uri(azureOpenAIEndpoint),
-                new System.ClientModel.ApiKeyCredential(azureOpenAIKey),
-                new AzureOpenAIClientOptions() {
-                    Transport = new PromoteHttpStatusErrorsPipelineTransport()
-                });
-            var chatClient = openAIClient.GetChatClient(deploymentName).AsIChatClient();
-
-            services.AddSingleton(chatClient);
             services.AddScoped<IAIExceptionHandler, AIExceptionHandler>();
             services.AddDevExpressAI();
             services.AddSingleton<IDemoVersion, DemoVersion>(x => {
@@ -57,7 +45,7 @@ namespace BlazorDemo.ServerSide {
                 var dxVersion = new Version(AssemblyInfo.Version);
                 return new DemoVersion(new Version(dxVersion.Major, dxVersion.Minor, dxVersion.Build) + customVersion);
             });
-            services.AddSingleton(openAIClient);
+            //services.AddSingleton(openAIClient);
             services.AddSingleton<SmartFilterProvider>();
 
             services.AddScoped<HttpClient>(serviceProvider => serviceProvider.GetService<IHttpClientFactory>().CreateClient());
@@ -133,6 +121,7 @@ namespace BlazorDemo.ServerSide {
                 app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions {
                 ServeUnknownFileTypes = true

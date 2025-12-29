@@ -1,8 +1,9 @@
-﻿@using BlazorDemo.Pages.Editors.ColorPalette.Models
+﻿@inject ICspNonceService NonceProvider
+@using BlazorDemo.Pages.Editors.ColorPalette.Models
 
 <DemoPageSectionComponent Id="Editors-ColorPalette-CustomPalette" ShowSizeMode="true" UseScrollableContainer="true">
     <ChildContentWithParameters Context="Params">
-        <style>
+        <style nonce="@NonceProvider.Nonce">
             .colors-container li:nth-child(1)::before {
                 @GetBackground(Value)
             }

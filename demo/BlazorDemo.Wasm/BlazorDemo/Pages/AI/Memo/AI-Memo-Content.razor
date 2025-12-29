@@ -1,0 +1,43 @@
+﻿<DemoPageSectionComponent Id="@Id" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @using DevExpress.AIIntegration.Blazor.Editors
+        <label for="memoSmartAutoComplete" class="demo-text cw-480 mb-1">
+            To see autocomplete suggestions, move the caret to the end and start typing.
+        </label>
+        <DxMemo @bind-Text=@TextValue
+                Rows="5"
+                SizeMode="Params.SizeMode"
+                CssClass="cw-480"
+                InputId="memoSmartAutoComplete">
+            <Extensions>
+                <MemoSmartAutoComplete InputDelay="1000" SuggestionReceived="@OnSuggestionReceived" />
+            </Extensions>
+        </DxMemo>
+        <div class="demo-text cw-480 mt-2">
+            <p class="mb-0">Request count: <b>@_requestCount</b></p>
+            <p>Current suggestion: <b>@GetSuggestionText()</b></p>
+        </div>
+    </ChildContentWithParameters>
+
+    @code {
+        /*BeginHide*/
+        [Parameter] public string Id { get; set; }
+        /*EndHide*/
+        string _lastSuggestionText { get; set; }
+        int _requestCount { get; set; }
+
+        string GetSuggestionText() {
+            if(string.IsNullOrWhiteSpace(_lastSuggestionText))
+                return "Empty string";
+            return _lastSuggestionText;
+        }
+        void OnSuggestionReceived(MemoSmartAutoCompleteSuggestionReceivedEventArgs e) {
+            _requestCount++;
+            _lastSuggestionText = e.SuggestionText;
+        }
+        string TextValue { get; set; } =
+        "Taylor continues to have problems managing expectations. " +
+        "She is too optimistic and refuses to be realistic about the workload involved. " +
+        "I recommend";
+    }
+</DemoPageSectionComponent>

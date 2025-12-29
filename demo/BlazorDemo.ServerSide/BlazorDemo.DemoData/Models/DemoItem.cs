@@ -12,6 +12,7 @@ namespace BlazorDemo.DemoData {
         public bool IsClientSideOnly { get; set; }
         public bool IsNew { get; set; }
         public bool IsUpdated { get; set; }
+        public bool IsAI { get; set; }
         public string DocUrl { get; set; }
         public DemoCodeFile[] AdditionalCodeFiles { get; set; }
         public bool? ShowRazorFile { get; set; }
@@ -59,7 +60,7 @@ namespace BlazorDemo.DemoData {
 
         public DemoItemStatus GetStatus() {
             var parentPage = ParentPage;
-            if(parentPage != null) {
+            if(parentPage != null && !IsAI) {
                 var siblingItems = parentPage.GetChildItems();
                 if(siblingItems.All(p => p.IsNew))
                     return DemoItemStatus.Empty;
@@ -73,6 +74,8 @@ namespace BlazorDemo.DemoData {
             return GetStatusCore();
         }
         protected virtual DemoItemStatus GetStatusCore() {
+            if(IsAI)
+                return DemoItemStatus.AI;
             if(IsNew)
                 return DemoItemStatus.New;
             var childItems = GetChildItems();
@@ -111,5 +114,5 @@ namespace BlazorDemo.DemoData {
         }
     }
 
-    public enum DemoItemStatus { Empty, Preview, MaintenanceMode, New, Updated }
+    public enum DemoItemStatus { Empty, Preview, MaintenanceMode, New, Updated, AI }
 }

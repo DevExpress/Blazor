@@ -1,23 +1,36 @@
-﻿@inject DemoThemeService Themes
-@implements IDisposable
-@using System.Text.RegularExpressions
-@implements IDemoThemeLoadNotifier
+﻿@using System.Text.RegularExpressions
+@using DevExpress.Blazor.Internal
 
+@implements IAsyncDisposable
+
+@inject DemoThemeService Themes
+@inject IThemeChangeService ThemeChangeService
+@inject ISafeJSRuntime JsRuntime
+@inject ICspNonceService NonceProvider
 
 @if(IsLoaded) {
+    <style nonce="@NonceProvider.Nonce">
+        @foreach(var theme in Themes.All) {
+            var cssRule = $".{ThemeSwitcherItem.GetThemeItemColorClassName(theme.Name)} {{ --themeswitcher-color: {theme.MenuBackgroundColor}; }}";
+            <text>@cssRule</text>
+        }
+    </style>
+
     <div class="themeswitcher-container shadow @StateCssClass">
         <DxScrollView>
             <div class="themeswitcher-content">
                 <div class="themeswitcher-title">DevExpress Fluent</div>
-                <DxButtonGroup Enabled="Themes.ActiveTheme.IsFluent" CssClass="themeswitcher-fluent-mode"
+                <DxButtonGroup Enabled="@Themes.ActiveTheme.IsFluent" CssClass="themeswitcher-fluent-mode"
                                RenderStyle="ButtonRenderStyle.Secondary"
                                RenderStyleMode="ButtonRenderStyleMode.Contained"
                                SelectionMode="ButtonGroupSelectionMode.Single">
                     <Items>
-                        <DxButtonGroupItem Click="() => OnFluentModeChange(ThemeMode.Light)"
+                        <DxButtonGroupItem Enabled="Themes.ThemeState.Mode == ThemeMode.Dark"
+                                           Click="() => OnFluentModeChange(ThemeMode.Light)"
                                            Selected="Themes.ThemeState.Mode == ThemeMode.Light" Text="Light"
                                            IconCssClass="themeswitcher-icon-fluent-mode-light"/>
-                        <DxButtonGroupItem Click="() => OnFluentModeChange(ThemeMode.Dark)"
+                        <DxButtonGroupItem Enabled="Themes.ThemeState.Mode == ThemeMode.Light"
+                                           Click="() => OnFluentModeChange(ThemeMode.Dark)"
                                            Selected="Themes.ThemeState.Mode == ThemeMode.Dark" Text="Dark"
                                            IconCssClass="themeswitcher-icon-fluent-mode-dark"/>
                     </Items>
@@ -74,34 +87,28 @@
 
 
 @code {
+    IJSObjectReference _module;
+
     [Parameter] public bool Shown { get; set; }
     [Parameter] public EventCallback<bool> ShownChanged { get; set; }
-    [Parameter] public string ThemeName { get; set; }
-    [Parameter] public EventCallback<string> ThemeNameChanged { get; set; }
 
     string StateCssClass => IsLoaded ? ((Shown ? "themeswitcher-container-shown" : "themeswitcher-container-hidden")) : "";
     bool IsLoaded { get; set; }
     const string hexRegexStr = "#([0-9a-fA-F]{6})";
 
-    protected override void OnInitialized() {
-        base.OnInitialized();
-        Themes.ThemeLoadNotifier = this;
-    }
-
-    string GetCustomColorPickerCss() {
-        return IsCustomThemeSelected() ? "active" : null;
-    }
-
     async Task ThemeSwitcherItem_Click(DemoTheme demoTheme) {
         Themes.ThemeState.CustomAccentColor = null;
-        Themes.ThemeChangeRequestDispatcher?.RequestThemeChange(demoTheme);
-        await ToggleThemeSwitcherPanel(false);
+
+        await SwitchTheme(demoTheme);
     }
 
     async Task OnFluentModeChange(ThemeMode mode) {
+        if(!Themes.ActiveTheme.IsFluent)
+            return;
+
         Themes.ThemeState.Mode = mode;
-        Themes.ThemeChangeRequestDispatcher?.RequestThemeChange(Themes.ActiveTheme);
-        await ToggleThemeSwitcherPanel(false);
+
+        await SwitchTheme(Themes.ActiveTheme);
     }
 
     async Task OnFluentSetCustomAccentColor(string color) {
@@ -109,39 +116,50 @@
             return;
 
         Themes.ThemeState.CustomAccentColor = color;
-        Themes.ThemeChangeRequestDispatcher?.RequestThemeChange(Themes.CustomFluentDemoTheme);
-        await ToggleThemeSwitcherPanel(false);
+
+        await SwitchTheme(Themes.CustomFluentDemoTheme);
+    }
+
+    async Task SwitchTheme(DemoTheme demoTheme) {
+        await _module.InvokeVoidAsync("ThemeController.switchBsThemeMode", demoTheme.BootstrapThemeMode, DotNetObjectReference.Create(this));
+
+        await ThemeChangeService.SetTheme(demoTheme.ApplyStoredState(Themes.ThemeState));
+
+        Themes.SetActiveThemeByName(demoTheme.Name);
+
+        if(Shown) {
+            Shown = false;
+            await ShownChanged.InvokeAsync(false);
+        }
     }
 
     private string GetColorPickerText() {
         return IsCustomThemeSelected() ? Themes.ThemeState.CustomAccentColor : null;
     }
 
+    string GetCustomColorPickerCss() {
+        return IsCustomThemeSelected() ? "active" : null;
+    }
+
     private bool IsCustomThemeSelected() {
         return Themes.ActiveTheme == Themes.CustomFluentDemoTheme;
     }
 
-    public async Task NotifyThemeLoadedAsync(DemoTheme demoTheme) {
-        ThemeName = demoTheme.Name;
-        await ThemeNameChanged.InvokeAsync(demoTheme.Name);
-    }
-
-    async Task ToggleThemeSwitcherPanel(bool shown) {
-        if(shown != Shown) {
-            Shown = shown;
-            await ShownChanged.InvokeAsync(shown);
-        }
-    }
-
-    protected override void OnAfterRender(bool firstRender) {
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
         if(firstRender) {
+            _module = await JsRuntime.InvokeAsync<IJSObjectReference>("import",
+                "./_content/BlazorDemo/lib/theme-controller.js");
+
             IsLoaded = true;
             if(Shown)
                 StateHasChanged();
         }
     }
 
-    public void Dispose() {
-        Themes.ThemeLoadNotifier = null;
+    public async ValueTask DisposeAsync() {
+        try {
+            if(_module != null)
+                await _module.DisposeAsync();
+        } catch(JSDisconnectedException) { }
     }
 }

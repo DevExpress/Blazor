@@ -1,0 +1,19 @@
+@* @using BlazorDemo.DemoThemes *@
+@inject DemoThemeService Themes
+
+@DxResourceManager.RegisterTheme(Themes.ActiveTheme.ApplyStoredState(Themes.ThemeState))
+
+@code {
+    [Parameter] public string InitialThemeName { get; set; }
+    [Parameter] public ThemeState InitialThemeState { get; set; }
+
+    protected override void OnInitialized() {
+        base.OnInitialized();
+
+        if(Themes.ActiveTheme == null)
+            Themes.SetActiveThemeByName(InitialThemeName);
+
+        if(Themes.ThemeState == null)
+            Themes.SetThemeState(InitialThemeState);
+    }
+}

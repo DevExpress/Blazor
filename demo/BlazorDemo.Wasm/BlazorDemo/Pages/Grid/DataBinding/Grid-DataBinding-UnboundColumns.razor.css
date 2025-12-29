@@ -1,6 +1,12 @@
 /*BeginHide*/ ::deep /*EndHide*/.dxbl-grid {
     height: 320px;
 }
+/*BeginHide*/ ::deep /*EndHide*/ .highlighted-cell {
+    color: #207A33;
+    font-weight: 700;
+    background-color: rgba(40, 167, 69, 0.15)
+}
+
 /*BeginHide*/ .grid-container {
     display: contents;
 }

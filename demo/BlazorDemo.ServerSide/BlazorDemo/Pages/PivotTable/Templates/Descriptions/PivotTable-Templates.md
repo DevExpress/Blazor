@@ -1,4 +1,4 @@
-The DevExpress Blazor [Pivot Table](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PivotTable.DxPivotTable) (Community Technology Preview – official ship date June 2025) allows you to leverage UI templates to customize the appearance of Pivot Table headers, field values, and data cells.
+The DevExpress Blazor [Pivot Table](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PivotTable.DxPivotTable) allows you to leverage UI templates to customize the appearance of Pivot Table headers, field values, and data cells.
 
 The following templates are available at the component level:
 

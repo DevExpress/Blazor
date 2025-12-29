@@ -9,6 +9,10 @@ DevExpress AI Chat for Blazor is an AI-enabled chat component that allows users 
 
 To add the [DxAIChat](https://docs.devexpress.com/Blazor/DevExpress.AIIntegration.Blazor.Chat.DxAIChat) component to your application, register the appropriate AI service at application startup.
 
-Enable the [UseStreaming](https://docs.devexpress.com/Blazor/DevExpress.AIIntegration.Blazor.Chat.DxAIChat.UseStreaming) property for a more responsive chat experience. This setting allows the AI client to send parts of a response once they become available (our Blazor Chat component will update the display message accordingly).
+Use the following properties to customize the chat appearance:
 
-Note: DevExpress AI-powered extensions follow the "bring your own key" principle. DevExpress does not offer a REST API and does not ship any built-in LLMs/SLMs. You need an active Azure/Open AI subscription to obtain the REST API endpoint, key, and model deployment name. These variables must be specified at application startup to register AI clients and enable DevExpress AI-powered Extensions in your application.
+- [ShowHeader](https://docs.devexpress.com/Blazor/DevExpress.AIIntegration.Blazor.Chat.DxAIChat.ShowHeader): Displays a customizable chat header and a **Clear Chat** button.
+- [UseStreaming](https://docs.devexpress.com/Blazor/DevExpress.AIIntegration.Blazor.Chat.DxAIChat.UseStreaming): Allows the AI client to send parts of a response once they become available. The AI Chat component will update the display message accordingly for a more responsive chat experience.
+- [AllowResizeInput](https://docs.devexpress.com/Blazor/DevExpress.AIIntegration.Blazor.Chat.DxAIChat.AllowResizeInput): Allows users to resize the Blazor AI Chat input box. If this property is set to `false`, the input box automatically resizes itself as a user types.
+
+**Note:** DevExpress AI-powered extensions follow the "bring your own key" principle. DevExpress does not offer a REST API and does not ship any built-in LLMs/SLMs. You need an active Azure/Open AI subscription to obtain the REST API endpoint, key, and model deployment name. These variables must be specified at application startup to register AI clients and enable DevExpress AI-powered Extensions in your application.

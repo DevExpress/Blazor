@@ -68,7 +68,7 @@
 
             <DxChartTooltip Enabled="true">
                 @context.GetBubblePoint().Render((bubblePoint) =>
-                    @<div style="margin: 0.75rem">
+                    @<div class="m-75">
                         <div> @(((PopulationCorrelationDataPoint)bubblePoint.DataItems.First()).Country)</div>
                         <div>Total Population: @($"{bubblePoint.Argument: 0.00M}")</div>
                         <div>Population with Age over 60: @($"{bubblePoint.Value: 0.00M} ({Math.Round(((double)bubblePoint.Size)*100)}%)")</div>

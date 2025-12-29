@@ -1,7 +1,7 @@
 ﻿<DemoPageSectionComponent Id="DialogsAndWindows-Popup-Alignment" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <div class="target-container" @onclick="@(() => Visible = true)">
-            <p class="target-caption">CLICK TO SHOW A POP-UP WINDOW</p>
+        <div class="d-flex justify-content-center p-3">
+            <DxButton RenderStyle="ButtonRenderStyle.Secondary" Click="() => Visible = true">CLICK TO SHOW A POP-UP WINDOW</DxButton>
         </div>
         <DxPopup
             HorizontalAlignment="@HorizontalAlignment"

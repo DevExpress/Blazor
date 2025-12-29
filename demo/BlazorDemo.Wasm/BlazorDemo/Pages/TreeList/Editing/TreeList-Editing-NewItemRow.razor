@@ -30,7 +30,7 @@
                 <DxTreeListDataColumn FieldName="Priority" Width="80px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
                     <CellDisplayTemplate>
                         @{
-                            var displayText = TreeListRenderHelper.TaskPriorityToString((int)context.GetRowValue("Priority"));
+                            var displayText = EmployeeTask.TaskPriorityToString((int)context.GetRowValue("Priority"));
                         }
                         <span title="@displayText priority">@displayText</span>
                     </CellDisplayTemplate>

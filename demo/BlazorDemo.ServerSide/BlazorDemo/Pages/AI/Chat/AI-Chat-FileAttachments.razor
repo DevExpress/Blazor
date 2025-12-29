@@ -10,19 +10,14 @@
 ShowSizeMode="true">
     <OptionsContent>
         <OptionCheckBox Label="Enable File Upload" @bind-Checked="FileUploadEnabled" />
-        <OptionComboBox Label="File Types:" Data="Enum.GetValues<FileTypes>()" @bind-Value="@SelectedFileExtension" />
+        <OptionComboBox Label="File Types:" Data="Enum.GetValues<FileTypes>()" @bind-Value="@SelectedFileType" />
         <OptionCheckBox Label="Use Streaming" @bind-Checked="UseStreaming" />
-        @if (SelectedFileExtension == FileTypes.Tables || SelectedFileExtension == FileTypes.Documents) {
-            <div class="alert dxbl-alert alert-primary" role="alert">
-                Note: AI services used in this demo are powered by GPT-4o-mini. This service currently supports image files only. The demo cannot process other file types (such as PDFs, text documents, or spreadsheets). To unlock support for additional file formats, connect the application to a compatible AI model or service.
-            </div>
-        }
     </OptionsContent>
     <ChildContentWithParameters Context="Params">
         <div class="chat-demo-container">
             <DxAIChat FileUploadEnabled="FileUploadEnabled" CssClass="demo-chat" Initialized="ChatInitialized" UseStreaming="UseStreaming" SizeMode="Params.SizeMode">
                 <AIChatSettings>
-                    <DxAIChatFileUploadSettings MaxFileSize="10000000" MaxFileCount="3" AllowedFileExtensions="@Extensions[SelectedFileExtension]" />
+                    <DxAIChatFileUploadSettings MaxFileSize="10000000" MaxFileCount="3" AllowedFileExtensions="@Extensions[SelectedFileType]" FileTypeFilter="@Types[SelectedFileType]" />
                 </AIChatSettings>
                 <MessageTemplate>
                     <div class="@GetMessageClasses(context)">
@@ -31,12 +26,27 @@ ShowSizeMode="true">
                         } else {
                             <div class="demo-chat-content">
                                 @if (context.Files != null && context.Files.Count > 0) {
-                                    foreach (var file in context.Files) {
-                                        <div class="demo-chat-file">
-                                            <img src="@GetImageSrc(file)" class="demo-chat-file-preview" />
-                                            <span>@file.Name</span>
-                                        </div>
-                                    }
+                                    <div class="demo-chat-file-list">
+                                        @foreach (var file in context.Files) {
+                                            var isImage = Extensions[FileTypes.Images].Contains(Path.GetExtension(file.Name));
+
+                                            @if (isImage) {
+                                                <div class="demo-chat-file-base custom-preview">
+                                                    <img src="@GetImageSrc(file)" class="demo-chat-file-preview" alt="@file.Name" />
+                                                    <div class="demo-chat-file-preview-title demo-chat-file-name">
+                                                        <span>@file.Name</span>
+                                                    </div>
+                                                </div>
+                                            } else {
+                                                <div class="demo-chat-file-base default-preview">
+                                                    <div class="demo-chat-file-icon-container">
+                                                        <img src="@StaticAssetUtils.GetImagePath("icons/file.svg")" class="demo-chat-file-icon" />
+                                                    </div>
+                                                    <span class="demo-chat-file-name">@file.Name</span>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
                                 }
                                 @context.Content
                             </div>
@@ -44,13 +54,16 @@ ShowSizeMode="true">
                     </div>
                 </MessageTemplate>
             </DxAIChat>
+            <div class="chat-demo-alert" role="alert">
+                AI services used in this demo are powered by GPT-4o-mini. This service currently supports image files only. The demo cannot process other file types (such as PDFs, text documents, or spreadsheets). To unlock support for additional file formats, connect the application to a compatible AI model or service.
+            </div>
         </div>
         @code {
             const string IMAGE_NAME = "Eiffel-Tower.jpg";
 
             bool UseStreaming { get; set; } = false;
             bool FileUploadEnabled { get; set; } = true;
-            FileTypes SelectedFileExtension = FileTypes.Images;
+            FileTypes SelectedFileType = FileTypes.Images;
 
             public enum FileTypes {
                 Images,
@@ -59,13 +72,19 @@ ShowSizeMode="true">
             }
 
             Dictionary<FileTypes, List<string>> Extensions = new Dictionary<FileTypes, List<string>>() {
-                { FileTypes.Images, new List<string> { ".jpg", ".png" } },
+                { FileTypes.Images, new List<string> { ".jpg", ".png", ".jpeg" } },
                 { FileTypes.Documents, new List<string> { ".pdf", ".docx" } },
                 { FileTypes.Tables, new List<string> { ".xlsx", ".csv" } },
             };
 
+            Dictionary<FileTypes, List<string>> Types = new Dictionary<FileTypes, List<string>>() {
+                { FileTypes.Images, new List<string> { "image/jpeg", "image/png" } },
+                { FileTypes.Documents, new List<string> { "application/pdf", "application/vnd.openxmlformats-officedocument.wordprocessingml.document" } },
+                { FileTypes.Tables, new List<string> { "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "text/csv" } },
+            };
+
             async void ChatInitialized(IAIChat chat) {
-                var fileBytes = await httpClient.GetByteArrayAsync(NavigationManager.BaseUri + StaticAssetUtils.GetImagePath($"/{IMAGE_NAME}"));
+            var fileBytes = await httpClient.GetByteArrayAsync(NavigationManager.ToAbsoluteUri(StaticAssetUtils.GetImagePath($"/{IMAGE_NAME}")));
                 var testFiles = new List<AIChatUploadFileInfo> {
                     new AIChatUploadFileInfo(
                         name: IMAGE_NAME,

@@ -11,7 +11,7 @@ This demo incorporates the following AI-powered functionality into the DevExpres
 
 - **Smart Preview with AI-generated Data**
 
-    A **Smart Preview** button appears next to default Design/Preview commands in the [Main Toolbar](https://docs.devexpress.com/XtraReports/17552/web-reporting/end-user-report-designer-for-web/interface-elements/main-toolbar). Click this button to display a report preview with AI-generated Test Data (to help prototype your report without an active database connection).
+    A **Test Data** button appears next to default Design/Preview commands in the [Main Toolbar](https://docs.devexpress.com/XtraReports/17552/web-reporting/end-user-report-designer-for-web/interface-elements/main-toolbar). Click this button to display a report preview with AI-generated Test Data (to help prototype your report without an active database connection).
 
     [Documentation](https://docs.devexpress.com/XtraReports/405467/ai-powered-functionality/web-reporting/test-data-source-in-web-report-designer)
 

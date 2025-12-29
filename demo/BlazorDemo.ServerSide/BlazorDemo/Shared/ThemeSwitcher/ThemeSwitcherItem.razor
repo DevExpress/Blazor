@@ -1,6 +1,8 @@
-﻿@inject DemoThemeService Themes
+﻿@using DevExpress.Blazor.Internal
+@* @using BlazorDemo.DemoThemes *@
+@inject DemoThemeService Themes
 
-<li class="themeswitcher-color @Theme.Name @DemoTheme.GetCssClass(Themes.ActiveTheme == Theme)" style="--themeswitcher-color: @Theme.MenuBackgroundColor">
+<li class="themeswitcher-color @Theme.Name @DemoTheme.GetCssClass(Themes.ActiveTheme == Theme) @GetThemeItemColorClassName(Theme.Name)">
     <a
         @onclick:preventDefault
         @onclick="Anchor_Click">@Theme.Title</a>
@@ -13,4 +15,10 @@
     async Task Anchor_Click() {
         await Click.InvokeAsync(Theme);
     }
+
+    string GetActiveCssClass() {
+        return Themes.ActiveTheme?.Name == Theme.Name ? "active" : null;
+    }
+
+    public static string GetThemeItemColorClassName(string theme) => $"theme-switcher-color-{theme}";
 }

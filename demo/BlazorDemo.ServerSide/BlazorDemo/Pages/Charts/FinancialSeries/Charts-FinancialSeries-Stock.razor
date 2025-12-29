@@ -26,7 +26,7 @@
             <DxChartArgumentAxis WorkdaysOnly="showWorkdays" TickInterval="ChartAxisInterval.Days(1)" />
             <DxChartTooltip Enabled="true">
                 @context.GetFinancialPoint().Render((financialPoint) =>
-                    @<div style="margin: 0.75rem">
+                    @<div class="m-75">
                         <div>Open: @($"{financialPoint.OpenValue: 0.0000}")</div>
                         <div>Close: @($"{financialPoint.CloseValue: 0.0000}")</div>
                         <div>High: @($"{financialPoint.HighValue: 0.0000}")</div>

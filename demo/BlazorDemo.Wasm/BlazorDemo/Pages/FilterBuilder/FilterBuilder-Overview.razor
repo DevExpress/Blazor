@@ -1,0 +1,136 @@
+﻿<DemoPageSectionComponent Id="FilterBuilder-Overview" ShowSizeMode="true" HorizontalAlignment="HorizontalAlignment.Left">
+    <ChildContentWithParameters Context="Params">
+        @using DevExpress.Data.Filtering
+        @inject NwindDataService NwindDataService
+
+        <div class="card p-2 gap-2 mb-2">
+            <DxFilterBuilder @bind-FilterCriteria="FilterCriteria" SizeMode="Params.SizeMode">
+                <Fields>
+                    <DxFilterBuilderField FieldName="ProductName" Caption="Product Name" Type="@typeof(string)" />
+                    <DxFilterBuilderField FieldName="CategoryId" Caption="Category" Type="@typeof(int)">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId" TextFieldName="CategoryName" />
+                        </EditSettings>
+                    </DxFilterBuilderField>
+                    <DxFilterBuilderField FieldName="SupplierId" Caption="Supplier" Type="@typeof(int)">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="Suppliers" ValueFieldName="SupplierId" TextFieldName="CompanyName">
+                                <ItemDisplayTemplate>
+                                    @{
+                                        var item = (Supplier)context.DataItem;
+                                    }
+                                    @item.CompanyName (@item.ContactName)
+                                </ItemDisplayTemplate>
+                            </DxComboBoxSettings>
+                        </EditSettings>
+                        <Fields>
+                            <DxFilterBuilderField FieldName="Supplier.CompanyName" Caption="Company Name" CaptionFullPath="Supplier.Company Name" Type="@typeof(string)" />
+                            <DxFilterBuilderField FieldName="Supplier.ContactName" Caption="Contact Name" CaptionFullPath="Supplier.Contact Name" Type="@typeof(string)" />
+                        </Fields>
+                    </DxFilterBuilderField>
+                    <DxFilterBuilderField FieldName="UnitPrice" Caption="Unit Price" Type="@typeof(decimal)" />
+                    <DxFilterBuilderField FieldName="UnitsInStock" Caption="Units in Stock" Type="@typeof(short)" />
+                    <DxFilterBuilderField FieldName="QuantityPerUnit" Caption="Quantity per Unit" Type="@typeof(int)" />
+                    <DxFilterBuilderField FieldName="Discontinued" Type="@typeof(bool)" />
+                </Fields>
+            </DxFilterBuilder>
+
+            <div class="d-flex gap-2 justify-content-end align-self-end">
+                <DxButton Text="Clear" Click="ClearFilterCriteria" RenderStyle="ButtonRenderStyle.Secondary" SizeMode="Params.SizeMode"/>
+                <DxButton Text="Apply" Click="ApplyFilterCriteria" SizeMode="Params.SizeMode"/>
+            </div>
+        </div>
+
+        <div class="grid-container">
+            <DxGrid @ref="Grid" Data="Data"
+                    SizeMode="Params.SizeMode"
+                    PageSize="15"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                    TextWrapEnabled="false" VirtualScrollingEnabled="true"
+                    FilterCriteriaChanged="GridFilterCriteriaChanged"
+                    FilterMenuButtonDisplayMode="GridFilterMenuButtonDisplayMode.Always">
+                <Columns>
+                    <DxGridDataColumn FieldName="ProductName" MinWidth="100">
+                        <CellDisplayTemplate>
+                            <div class="d-flex align-items-center">
+                                @GetProductName(context)
+                            </div>
+                        </CellDisplayTemplate>
+                    </DxGridDataColumn>
+                    <DxGridDataColumn FieldName="Category.CategoryName" Caption="Category" MinWidth="100" />
+                    <DxGridDataColumn FieldName="Supplier.CompanyName" Caption="Company Name" MinWidth="100" />
+                    <DxGridDataColumn FieldName="Supplier.ContactName" Caption="Contact Name" MinWidth="100" />
+                    <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
+                    <DxGridDataColumn FieldName="UnitsInStock" Caption="Units in Stock" Width="10%" />
+                    <DxGridDataColumn FieldName="QuantityPerUnit" Caption="Quantity per Unit" Width="15%" MinWidth="80" />
+                    <DxGridDataColumn FieldName="Discontinued" Width="10%" MinWidth="90" />
+                </Columns>
+            </DxGrid>
+        </div>
+
+        @code {
+            IGrid Grid { get; set; }
+            object Data { get; set; }
+            CriteriaOperator FilterCriteria { get; set; }
+
+            IEnumerable<Product> Products { get; set; }
+            IEnumerable<Category> Categories { get; set; }
+            IEnumerable<Supplier> Suppliers { get; set; }
+
+            protected override async Task OnInitializedAsync() {
+                Suppliers = await NwindDataService.GetSuppliersAsync();
+                Categories = await NwindDataService.GetCategoriesAsync();
+                Products = await NwindDataService.GetProductsAsync();
+
+                Data = Products.Join(Categories, p => p.CategoryId, c => c.CategoryId, (p, c) => new {
+                    p.ProductName,
+                    p.CategoryId,
+                    Category = new { c.CategoryName },
+                    p.SupplierId,
+                    p.UnitPrice,
+                    p.UnitsInStock,
+                    p.QuantityPerUnit,
+                    p.Discontinued,
+                }).Join(Suppliers, p => p.SupplierId, s => s.SupplierId, (p, s) => new {
+                    p.ProductName,
+                    p.CategoryId,
+                    p.Category,
+                    p.SupplierId,
+                    Supplier = new { s.CompanyName, s.ContactName },
+                    p.UnitPrice,
+                    p.UnitsInStock,
+                    p.QuantityPerUnit,
+                    p.Discontinued,
+                });
+
+                FilterCriteria = CriteriaOperator.Parse("StartsWith([ProductName], 'C') And ([UnitPrice] < 50.0m Or [Discontinued] = true)");
+            }
+
+            protected override void OnAfterRender(bool firstRender) {
+                base.OnAfterRender(false);
+
+                if (firstRender && Grid != null)
+                    ApplyFilterCriteria();
+            }
+
+            void ApplyFilterCriteria() {
+                Grid.SetFilterCriteria(FilterCriteria);
+            }
+
+            void ClearFilterCriteria() {
+                FilterCriteria = null;
+                Grid.ClearFilter();
+            }
+
+            void GridFilterCriteriaChanged(GridFilterCriteriaChangedEventArgs args) {
+                FilterCriteria = args.FilterCriteria;
+            }
+
+            string GetProductName(GridDataColumnCellDisplayTemplateContext context) {
+                Type myType = context.DataItem.GetType();
+                return myType.GetProperty("ProductName").GetValue(context.DataItem, null).ToString();
+            }
+        }
+
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

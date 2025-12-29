@@ -47,19 +47,19 @@
 /* Fluent themes */
 .theme-fluent-light .content .demo-device-orientation-selector button,
 .theme-fluent-dark .content .demo-device-orientation-selector button {
-    background-color: var(--DS-color-surface-neutral-subdued-rest) !important;
+    background-color: var(--dxds-color-surface-neutral-subdued-rest) !important;
     border: none;
-    color: var(--DS-color-content-neutral-default-rest);
+    color: var(--dxds-color-content-neutral-default-rest);
 }
 
 .theme-fluent-light .content .demo-device-container .demo-device,
 .theme-fluent-dark .content .demo-device-container .demo-device {
-    border-color: var(--DS-color-surface-neutral-subdued-rest) !important;
+    border-color: var(--dxds-color-surface-neutral-subdued-rest) !important;
 }
 
 .theme-fluent-light .content .demo-device-container .demo-display,
 .theme-fluent-dark .content .demo-device-container .demo-display {
-    border-color: var(--DS-color-border-neutral-default-rest) !important;
+    border-color: var(--dxds-color-border-neutral-default-rest) !important;
 }
 
 @media (max-width: 1679.98px) {

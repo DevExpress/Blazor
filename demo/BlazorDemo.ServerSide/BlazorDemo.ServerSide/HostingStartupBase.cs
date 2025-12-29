@@ -1,6 +1,7 @@
 using System.Net.Http;
 using BlazorDemo.DataProviders;
 using BlazorDemo.DataProviders.Implementation;
+using BlazorDemo.Services;
 using BlazorDemo.Wasm.Server.DataProviders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -78,8 +79,13 @@ namespace BlazorDemo.ServerSide {
                             "text/json"
                         };
                 });
+
+                var azureOpenAIEndpoint = context.Configuration.GetSection("AIIntegrationSettings")["EndpointUrl"];
+                var azureOpenAIKey = context.Configuration.GetSection("AIIntegrationSettings")["Key"];
+                var deploymentName = context.Configuration.GetSection("AIIntegrationSettings")["DeploymentName"];
+
                 services.AddControllers().AddJsonOptions(ConfigureJsonOptions);
-                services.AddDemoServices();
+                services.AddDemoServices(azureOpenAIEndpoint, azureOpenAIKey, deploymentName);
 
                 services.AddSingleton<ISalesInfoDataProvider, SalesInfoDataProvider>();
                 services.AddSingleton<IExperimentResultDataProvider, ExperimentResultDataProvider>();
@@ -113,6 +119,7 @@ namespace BlazorDemo.ServerSide {
                 services.AddSingleton<IHtmlEditorStringDataProvider, HtmlEditorStringDataProvider>();
                 services.AddSingleton<IMapApiKeyProvider, MapApiKeyProvider>();
                 services.AddSingleton<ISalesDataProvider, SalesDataProvider>();
+                services.AddSingleton<IChatResourcesDataProvider, AIChatResourcesDataProvider>();
                 // Editable should be scoped
                 services.AddScoped<INwindDataProvider, NwindDataProvider>();
                 services.AddScoped<IHomesDataProvider, HomesDataProvider>();
@@ -128,6 +135,11 @@ namespace BlazorDemo.ServerSide {
                 services.AddSingleton<IPopulationDataProvider, PopulationDataProvider>();
                 services.AddSingleton<IPromptSuggestionsDataProvider, PromptSuggestionsDataProvider>();
                 services.AddSingleton<DictionaryEntryDataProvider>();
+                services.AddSingleton<IOrderDataProvider, OrderDataProvider>();
+
+                services.AddScoped<CspNonceService>();
+                services.AddScoped<ICspNonceService>(sp => sp.GetRequiredService<CspNonceService>());
+                services.AddScoped<ICspNonceWriter>(sp => sp.GetRequiredService<CspNonceService>());
 
                 static void ConfigureHttpClient(HttpClient httpClient) {
                     httpClient.DefaultRequestHeaders.Add("Accept", "application/json");

@@ -6,5 +6,6 @@ namespace BlazorDemo.DataProviders {
         public List<EmployeeTask> GenerateData();
 
         public List<EmployeeTask> GenerateLargeData();
+        public List<EmployeeTask> GenerateExtendedData();
     }
 }

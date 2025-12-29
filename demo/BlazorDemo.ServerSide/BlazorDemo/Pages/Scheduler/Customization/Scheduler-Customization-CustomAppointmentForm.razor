@@ -11,9 +11,9 @@
             <Views>
                 <DxSchedulerWorkWeekView VisibleTime="@(new DxSchedulerTimeSpanRange(TimeSpan.FromHours(8), TimeSpan.FromHours(19)))">
                     <HorizontalAppointmentTemplate>
-                        <div class="demo-sc-apt @(IsAccepted(context.CustomFields) ? "demo-sc-accepted " : "")" style="width: 100%;">
-                            <div class="card demo-apt-bg dxbl-purple-color" style="width: 100%;"></div>
-                            <div class="card shadow-sm p-1 demo-sc-apt-content text-white" style="width:100%;">
+                        <div class="demo-sc-apt @(IsAccepted(context.CustomFields) ? "demo-sc-accepted " : "") w-100">
+                            <div class="card demo-apt-bg dxbl-purple-color w-100"></div>
+                            <div class="card shadow-sm p-1 demo-sc-apt-content text-white w-100">
                                 @context.Appointment.Subject
                             </div>
                         </div>
@@ -54,16 +54,16 @@
             </AppointmentFormHeaderTemplate>
             <AppointmentFormLayout Context="formInfo">
                 <DxSchedulerSubjectFormLayoutItem></DxSchedulerSubjectFormLayoutItem>
-                <DxSchedulerAllDayFormLayoutItem></DxSchedulerAllDayFormLayoutItem>
                 <DxSchedulerStartDateFormLayoutItem></DxSchedulerStartDateFormLayoutItem>
                 <DxSchedulerStartTimeFormLayoutItem></DxSchedulerStartTimeFormLayoutItem>
+                <DxSchedulerAllDayFormLayoutItem></DxSchedulerAllDayFormLayoutItem>
                 <DxSchedulerEndDateFormLayoutItem></DxSchedulerEndDateFormLayoutItem>
                 <DxSchedulerEndTimeFormLayoutItem></DxSchedulerEndTimeFormLayoutItem>
                 <DxSchedulerLocationFormLayoutItem></DxSchedulerLocationFormLayoutItem>
                 <DxSchedulerDescriptionFormLayoutItem></DxSchedulerDescriptionFormLayoutItem>
                 <DxSchedulerCustomFormLayoutItem ColSpanMd="12">
                     <Template>
-                        <div style="margin-left: auto; margin-top: 14px;">
+                        <div class="ms-auto mt-14">
                             <DxCheckBox @bind-Checked="@(((CustomAppointmentFormInfo)formInfo).IsAccepted)" Alignment="CheckBoxContentAlignment.Right">Accept</DxCheckBox>
                         </div>
                     </Template>
@@ -85,14 +85,14 @@
             </AppointmentCompactFormHeaderTemplate>
             <AppointmentCompactFormLayout Context="formInfo">
                 <DxSchedulerSubjectFormLayoutItem></DxSchedulerSubjectFormLayoutItem>
-                <DxSchedulerAllDayFormLayoutItem></DxSchedulerAllDayFormLayoutItem>
                 <DxSchedulerStartDateFormLayoutItem></DxSchedulerStartDateFormLayoutItem>
                 <DxSchedulerStartTimeFormLayoutItem></DxSchedulerStartTimeFormLayoutItem>
+                <DxSchedulerAllDayFormLayoutItem></DxSchedulerAllDayFormLayoutItem>
                 <DxSchedulerEndDateFormLayoutItem></DxSchedulerEndDateFormLayoutItem>
                 <DxSchedulerEndTimeFormLayoutItem></DxSchedulerEndTimeFormLayoutItem>
                 <DxSchedulerCustomFormLayoutItem ColSpanMd="12">
                     <Template>
-                        <div style="margin-left: auto; margin-top: 14px;">
+                        <div class="ms-auto mt-14">
                             <DxCheckBox @bind-Checked="@(((CustomAppointmentFormInfo)formInfo).IsAccepted)" Alignment="CheckBoxContentAlignment.Right">Accept</DxCheckBox>
                         </div>
                     </Template>

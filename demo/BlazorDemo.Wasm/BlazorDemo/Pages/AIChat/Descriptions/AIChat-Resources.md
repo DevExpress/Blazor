@@ -1,0 +1,6 @@
+<div class="alert dxbl-alert alert-primary" role="alert">Note: AI services used for this demo have been rate limited. As such, you may experience performance-related delays when exploring the capabilities of DevExpress AI-powered Extensions.
+<br />When connected to your own AI model/service without rate limits, DevExpress AI-powered Extensions will perform seamlessly, without artificial delays.</div>
+
+The DevExpress Blazor AI Chat component allows users to attach additional context to chat messages. Context can include binary files (images, audio, PDFs, documents) and non-file artifacts such as database schemas, structured records, or logs. You can also supply external content retrieved from a Model Context Protocol (MCP) server as a resource. Resources help the AI model generate more accurate answers and reduce hallucinations.
+
+Use the [Resources](https://docs.devexpress.com/Blazor/DevExpress.AIIntegration.Blazor.Chat.DxAIChat.Resources) collection to manage chat context programmatically.

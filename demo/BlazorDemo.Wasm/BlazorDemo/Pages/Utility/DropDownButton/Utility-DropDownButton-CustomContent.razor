@@ -15,7 +15,7 @@
                                    CssClass="listbox">
                             <ItemDisplayTemplate>
                                 <div class="listbox-item-template">
-                                    <img src="@StaticAssetUtils.GetImagePath(GetImageFileName(context.DataItem))" alt="@context.DataItem.FullName"/>
+                                    <img src="@GetImageFileName(context.DataItem)" alt="@context.DataItem.FullName"/>
                                     <span class="listbox-item-template-name">@context.DataItem.FullName</span>
                                 </div>
                             </ItemDisplayTemplate>
@@ -43,7 +43,7 @@
         }
 
         string GetImageFileName(Employee employee) {
-            return $"employees/item-template{employee.EmployeeId}.jpg";
+            return StaticAssetUtils.GetEmployeeImagePath(employee.EmployeeId);
         }
 
     }

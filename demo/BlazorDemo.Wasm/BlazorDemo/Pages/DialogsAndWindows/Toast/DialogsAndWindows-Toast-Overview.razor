@@ -7,7 +7,7 @@
                              HorizontalAlignment="HorizontalAlignment.Center"
                              DisplayTime="TimeSpan.Zero"
                              SizeMode="Params.SizeMode"
-                             Width="320px"/>
+                             Width="360px"/>
         </div>
     </ChildContentWithParameters>
 
@@ -54,7 +54,7 @@
         }
 
         private RenderFragment RenderButtons() {
-            return @<div style="display: flex; gap: 0.5rem;">
+            return @<div class="d-flex gap-2">
             <DxButton RenderStyle="ButtonRenderStyle.Warning">Show details...</DxButton>
                        <DxButton RenderStyle="ButtonRenderStyle.Secondary">OK</DxButton>
                    </div>;

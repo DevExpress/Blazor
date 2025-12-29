@@ -5,7 +5,7 @@
         @inject ISpaceObjectDataProvider SpaceObjectDataProvider
 
         <div class="d-flex flex-wrap w-100">
-            <div class="w-auto mt-1 me-1 flex-grow-1" style="flex-basis: 500px">
+            <div class="w-auto mt-1 me-1 flex-grow-1 flex-basis-500">
                 <DxTreeList @ref="TreeList"
                             Data="@TreeListData"
                             ChildrenFieldName="Satellites"
@@ -26,7 +26,7 @@
                     </Columns>
                 </DxTreeList>
             </div>
-            <div class="card mt-1 me-1 flex-grow-1 max-h-480" style="flex-basis: 380px">
+            <div class="card mt-1 me-1 flex-grow-1 max-h-480 flex-basis-380">
                 <div class="card-header bg-transparent text-body py-2 border-bottom-0 fw-bold">Selected solar system objects:</div>
                 <div class="card-body p-0 pb-2 overflow-auto">
                     <ul class="list-group list-group-flush bg-transparent border-0">

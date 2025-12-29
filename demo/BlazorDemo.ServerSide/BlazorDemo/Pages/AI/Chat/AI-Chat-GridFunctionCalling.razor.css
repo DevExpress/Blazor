@@ -1,0 +1,21 @@
+.chat-demo-container {
+    width: 100%;
+    height: 610px;
+    display: flex;
+    flex-direction: column;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .dxbl-grid {
+    height: 580px;
+}
+
+/*BeginHide*/::deep /*EndHide*/ .demo-chat {
+    width: 100%;
+    height: 100%;
+}
+
+/*BeginHide*/ ::deep /*EndHide*/ .demo-chat .demo-chat-ui-description {
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}

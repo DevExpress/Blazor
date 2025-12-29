@@ -1,11 +1,11 @@
 ﻿@using System.IO;
 @using DevExpress.AIIntegration.Blazor.RichEdit
 
-<DemoPageSectionComponent Id="AI-RichEdit">
+<DemoPageSectionComponent Id="AI-RichEdit-Content">
     @inject IDocumentProvider DocumentProvider
 
     <DxRichEdit DocumentContent="@DocumentContent" CssClass="w-100 ch-720">
-        <AdditionalItems>
+        <Extensions>
             <SummarizeAIContextMenuItem />
             <ExplainAIContextMenuItem />
             <ProofreadAIContextMenuItem />
@@ -16,7 +16,7 @@
             <ChangeStyleAIContextMenuItem />
             <ChangeToneAIContextMenuItem />
             <TranslateAIContextMenuItem Languages="@("English, German, French, Chinese")" />
-        </AdditionalItems>
+        </Extensions>
     </DxRichEdit>
 
     @code {

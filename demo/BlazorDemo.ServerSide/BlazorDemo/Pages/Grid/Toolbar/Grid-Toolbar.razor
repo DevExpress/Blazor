@@ -26,10 +26,10 @@
                         <DxToolbarItem Text="Column Chooser" BeginGroup="true" Click="ColumnChooserItem_Click" IconCssClass="grid-toolbar-column-chooser" />
                         <DxToolbarItem Text="Export" IconCssClass="grid-toolbar-export">
                             <Items>
-                                <DxToolbarItem Text="To CSV" Click="ExportCsvItem_Click" />
-                                <DxToolbarItem Text="To XLSX" Click="ExportXlsxItem_Click" />
-                                <DxToolbarItem Text="To XLS" Click="ExportXlsItem_Click" />
-                                <DxToolbarItem Text="To PDF" Click="ExportPdfItem_Click" />
+                                <DxToolbarItem Text="To CSV" Click="ExportCsvItem_Click" IconCssClass="grid-toolbar-document-csv"/>
+                                <DxToolbarItem Text="To XLSX" Click="ExportXlsxItem_Click" IconCssClass="grid-toolbar-document-xlsx" />
+                                <DxToolbarItem Text="To XLS" Click="ExportXlsItem_Click"  IconCssClass="grid-toolbar-document-xls"/>
+                                <DxToolbarItem Text="To PDF" Click="ExportPdfItem_Click"  IconCssClass="grid-toolbar-document-pdf"/>
                             </Items>
                         </DxToolbarItem>
                         <DxToolbarItem BeginGroup="true">
@@ -46,7 +46,7 @@
                     <DxGridDataColumn FieldName="FirstName" MinWidth="50" />
                     <DxGridDataColumn FieldName="LastName" MinWidth="50" />
                     <DxGridDataColumn FieldName="Title" MinWidth="200" />
-                    <DxGridDataColumn FieldName="TitleOfCourtesy" MinWidth="150" />
+                    <DxGridDataColumn FieldName="TitleOfCourtesy" Caption="Courtesy Title" MinWidth="150" />
                     <DxGridDataColumn FieldName="BirthDate" Width="10%" MinWidth="50" />
                     <DxGridDataColumn FieldName="HireDate" Width="10%" MinWidth="50" />
                     <DxGridDataColumn FieldName="Address" MinWidth="300" />

@@ -1,12 +1,16 @@
-﻿<DemoPageSectionComponent Id="Editors-ColorPalette-SplitButtonColorPalette" ShowSizeMode="true">
+﻿@inject ICspNonceService NonceProvider
+<DemoPageSectionComponent Id="Editors-ColorPalette-SplitButtonColorPalette" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <style>
+        <style nonce="@NonceProvider.Nonce">
             .splitbutton-icon-color-background {
                 background-color: @Value;
             }
 
             .splitbutton-template-color-palette {
                 border-width: 0px;
+            }
+            .splitbutton-text-container {
+                color: @TextColor;
             }
         </style>
         @*BeginHide*@
@@ -25,7 +29,7 @@
         @*BeginHide*@
         </div>
         @*EndHide*@
-        <p class="demo-text mt-3" style="color: @TextColor;">
+        <p class="demo-text mt-3 splitbutton-text-container">
             @GetSelectedValueDescription()
         </p>
     </ChildContentWithParameters>

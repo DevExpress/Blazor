@@ -13,7 +13,7 @@
                 <DataAnnotationsValidator />
 
                 <div class="row">
-                    <div class="col-md-6" style="padding-bottom: 12px">
+                    <div class="col-md-6">
                         <label for="identifierInputId" class="demo-text mb-1">
                             Identifier:
                         </label>
@@ -24,7 +24,7 @@
                         <ValidationMessage For="@(() => starship.Identifier)" />
                     </div>
 
-                    <div class="col-md-6" style="padding-bottom: 12px">
+                    <div class="col-md-6">
                         <label for="classificationInputId" class="demo-text mb-1">
                             Primary Classification:
                         </label>
@@ -40,7 +40,7 @@
                         <ValidationMessage For="@(() => starship.Classification)" />
                     </div>
 
-                    <div class="col-md-6" style="padding-bottom: 12px">
+                    <div class="col-md-6">
                         <label for="accommodationInputId" class="demo-text mb-1">Maximum Accommodation: </label>
                         <DxSpinEdit InputId="accommodationInputId"
                                     @bind-Value="@starship.MaximumAccommodation"
@@ -49,7 +49,7 @@
                         <ValidationMessage For="@(() => starship.MaximumAccommodation)" />
                     </div>
 
-                    <div class="col-md-6" style="padding-bottom: 12px">
+                    <div class="col-md-6">
                         <label for="productionDateInputId" class="demo-text mb-1">
                             Production Date:
                         </label>
@@ -60,7 +60,7 @@
                         <ValidationMessage For="@(() => starship.ProductionDate)" />
                     </div>
 
-                    <div class="col-md-6" style="padding-bottom: 12px">
+                    <div class="col-md-6">
                         <fieldset>
                             <legend class="demo-text mb-0">
                                 Engine Type:

@@ -1,0 +1,8 @@
+.ribbon-and-drawer-container {
+    width: 100%;
+    height: 600px;
+    max-width: 1150px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}

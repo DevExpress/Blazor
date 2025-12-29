@@ -1,0 +1,34 @@
+.horizontal-apt-container {
+    font-size: .925em;
+    font-weight: 600;
+    box-shadow: .125rem .25rem rgba(34,34,34,0.15)
+}
+
+.vertical-apt-container {
+    overflow: hidden;
+    box-shadow: .125rem .25rem rgba(34,34,34,0.15)
+}
+.vertical-apt-container > .dxbl-scheduler-color-item {
+    height: 6px;
+    position: absolute;
+    border-top-right-radius: var(--bs-card-border-radius);
+    border-top-left-radius: var(--bs-card-border-radius);
+}
+.vertical-apt-container > .dxbl-scheduler-color-item > .dxbl-scheduler-color-item-icon {
+    height: 6px;
+    border-radius: 0;
+    margin: 0;
+}
+.vertical-apt-container .apt-caption {
+    white-space: pre-wrap;
+}
+.vertical-apt-container .apt-subject {
+    font-weight:600;
+    font-size: .925em;
+}
+.vertical-apt-container .apt-time-container {
+    white-space: pre-wrap;
+    display: flex;
+    align-items: center;
+}
+

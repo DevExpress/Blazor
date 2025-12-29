@@ -1,12 +1,12 @@
 ﻿<DemoPageSectionComponent Id="DialogsAndWindows-MessageBox-Overview" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <div class="target-container" @onclick="@(() => MessageBoxVisible = true)">
-            <p class="target-caption">CLICK TO SHOW A MESSAGE BOX WINDOW</p>
-            <p>RESULT: @Result.ToString()</p>
+        <div class="d-flex flex-column align-items-center justify-content-center p-3">
+            <DxButton RenderStyle="ButtonRenderStyle.Secondary" Click="() => MessageBoxVisible = true">CLICK TO SHOW A MESSAGE BOX</DxButton>
+            <p>RETURN VALUE: @(Result is not null ? Result.ToString().ToUpper() : "NO VALUE")</p>
         </div>
 
         <DxMessageBox @bind-Visible="MessageBoxVisible"
-                      Title="Cannot open file"
+                      Title="Cannot open the file"
                       Text="The file may have been moved, renamed, or deleted."
                       OkButtonText="Show details..."
                       CancelButtonText="OK"
@@ -21,7 +21,7 @@
 
     @code {
         bool MessageBoxVisible { get; set; } = false;
-        private bool Result { get; set; } = false;
+        private bool? Result { get; set; } = null;
         
         void Closed(bool Confirmed) {
             Result = Confirmed;
@@ -29,3 +29,4 @@
     }
 
 </DemoPageSectionComponent>
+

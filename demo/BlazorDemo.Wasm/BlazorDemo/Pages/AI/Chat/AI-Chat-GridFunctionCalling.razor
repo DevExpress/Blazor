@@ -1,0 +1,144 @@
+﻿@using BlazorDemo.Services;
+@using DevExpress.AIIntegration
+@using DevExpress.AIIntegration.Blazor.Chat
+@using DevExpress.AIIntegration.Tools
+@using DevExpress.AIIntegration.Blazor
+@using System.Text.Json;
+@using System.IO;
+@using DevExpress.Data.Filtering;
+@implements IDisposable
+
+<DemoPageSectionComponent Id="AIChat-ToolsIntegration"
+                          ShowSizeMode="true">
+    <OptionsContent>
+        <OptionCheckBox Label="Use Streaming" @bind-Checked="UseStreaming" />
+        <OptionCheckBox Label="Include Function Call Details" @bind-Checked="IncludeFunctionCallInfo" />
+    </OptionsContent>
+    <ChildContentWithParameters Context="Params">
+        @inject IOrderDataProvider OrderDataProvider
+        @inject AIToolsContextContainer AIToolsContextContainer
+        @inject IAIExtensionsContainer IAIExtensionsContainer
+
+        <div class="chat-demo-container">
+            <DxDrawer CssClass="demo-drawer"
+                      @bind-IsOpen="IsOpen"
+                      Mode="Mode"
+                      Position="Position"
+                      PanelWidth="30%"
+                      aria-label="Demo Drawer">
+                <TargetContent>
+                    <DxGrid @ref="Grid"
+                            Data="@Data"
+                            TextWrapEnabled="false"
+                            HighlightRowOnHover="true"
+                            ShowAllRows="true"
+                            ShowGroupPanel="true"
+                            FilterMenuButtonDisplayMode="GridFilterMenuButtonDisplayMode.Default"
+                            FilterPanelDisplayMode="@CurrentGridFilterPanelDisplayMode"
+                            EditMode="GridEditMode.EditRow">
+                        <ToolbarTemplate>
+                            <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" SizeMode="Params.SizeMode">
+                                <DxToolbarItem Text="AI Assistant" Click="OnToolbarItemClick" IconCssClass="aichat-icon aichat-icon-main" />
+                                <DxToolbarItem BeginGroup="true">
+                                    <Template Context="toolbar_item_context">
+                                        <div class="d-flex flex-row align-items-center h-100">
+                                            <div class="me-2">Filter Panel Display Mode:</div>
+                                            <DxComboBox Data="@GridFilterPanelDisplayModes" @bind-Value="@CurrentGridFilterPanelDisplayMode" />
+                                        </div>
+                                    </Template>
+                                </DxToolbarItem>
+                            </DxToolbar>
+                        </ToolbarTemplate>
+                        <Columns>
+                            <DxGridDataColumn FieldName="OrderID" Caption="Order ID" />
+                            <DxGridDataColumn FieldName="CustomerName" Caption="Customer Name" />
+                            <DxGridDataColumn FieldName="Country" Caption="Country" />
+                            <DxGridDataColumn FieldName="OrderDate" Caption="Order Date" DisplayFormat="d" />
+                            <DxGridDataColumn FieldName="ProductName" Caption="Product Name" />
+                            <DxGridDataColumn FieldName="Quantity" Caption="Quantity" />
+                            <DxGridDataColumn FieldName="TotalAmount" Caption="Total ($)" DisplayFormat="c2" />
+                            <DxGridDataColumn FieldName="Status" Caption="Status" />
+                        </Columns>
+                    </DxGrid>
+                </TargetContent>
+                <BodyTemplate>
+                    <DxAIChat ShowHeader="true" ChatClientServiceKey="@ChatClientKeys.FunctionCallingWithGrid" CssClass="demo-chat" IncludeFunctionCallInfo="IncludeFunctionCallInfo" UseStreaming="UseStreaming" SizeMode="Params.SizeMode">
+                        <EmptyMessageAreaTemplate>
+                            <div class="demo-chat-ui-description">
+                                Click a tile below to call a function
+                            </div>
+                        </EmptyMessageAreaTemplate>
+                        <PromptSuggestions>
+                            <DxAIChatPromptSuggestion Title="Sort Grid Column"
+                                                      Text="Sort the grid against a specific column in ascending order."
+                                                      PromptMessage="Sort the grid by Country in ascending order."
+                                                      SendOnClick="true" />
+                            <DxAIChatPromptSuggestion Title="Group Grid Data"
+                                                      Text="Group grid data against a specific column."
+                                                      PromptMessage="Group grid data by Country."
+                                                      SendOnClick="true" />
+                            <DxAIChatPromptSuggestion Title="Clear Grouping"
+                                                      Text="Remove all data groupings from the grid."
+                                                      PromptMessage="Clear all data groupings in the grid."
+                                                      SendOnClick="true" />
+                            <DxAIChatPromptSuggestion Title="Filter Grid Data"
+                                                      Text="Filter the grid by order total amount."
+                                                      PromptMessage="Filter the grid and display orders where total amount is greater than 500."
+                                                      SendOnClick="true" />
+                            <DxAIChatPromptSuggestion Title="Clear Filters"
+                                                      Text="Remove all data filters from the grid."
+                                                      PromptMessage="Clear all data filters from the grid."
+                                                      SendOnClick="true" />
+                        </PromptSuggestions>
+                    </DxAIChat>
+                </BodyTemplate>
+            </DxDrawer>
+        </div>
+        @code {
+            AIToolsContext context;
+            IEnumerable<GridFilterPanelDisplayMode> GridFilterPanelDisplayModes { get; } = Enum.GetValues<GridFilterPanelDisplayMode>();
+            GridFilterPanelDisplayMode CurrentGridFilterPanelDisplayMode = GridFilterPanelDisplayMode.Auto;
+            bool IsOpen { get; set; } = true;
+            DrawerMode Mode { get; set; } = DrawerMode.Shrink;
+            DrawerPosition Position { get; set; } = DrawerPosition.Right;
+            DxGrid Grid { get; set; }
+            bool UseStreaming { get; set; } = false;
+            bool IncludeFunctionCallInfo { get; set; } = true;
+
+            object Data { get; set; }
+
+            void OnToolbarItemClick() {
+                IsOpen = !IsOpen;
+            }
+
+            protected override void OnInitialized() {
+                Data = OrderDataProvider.GetData(20);
+            }
+
+            protected override void OnAfterRender(bool firstRender) {
+                if (firstRender) {
+                    var toolsCollection = new GridTools(IAIExtensionsContainer);
+
+                    context = new AIToolsContextBuilder()
+                    .WithToolTarget(Grid, "The grid with a list of orders that includes details such as customer name, country, order date, product name, status, total price, and quantity.")
+                        .WithToolMethods(
+                            toolsCollection.GetAvailableColumns,
+                            toolsCollection.GroupByColumn,
+                            toolsCollection.SortByColumn,
+                            toolsCollection.SetFilter,
+                            toolsCollection.ClearFilter,
+                            toolsCollection.ClearGrouping,
+                            toolsCollection.ClearSorting)
+                        .Build();
+
+                    AIToolsContextContainer.Add(context);
+                }
+                base.OnAfterRender(firstRender);
+            }
+
+            public void Dispose() {
+                context?.Dispose();
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

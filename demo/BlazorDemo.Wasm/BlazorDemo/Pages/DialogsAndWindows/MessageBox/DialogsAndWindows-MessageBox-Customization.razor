@@ -1,7 +1,7 @@
 ﻿<DemoPageSectionComponent Id="DialogsAndWindows-MessageBox-Customization" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <div class="target-container" @onclick="@(() => MessageBoxVisible = true)">
-            <p class="target-caption">CLICK TO SHOW A MESSAGE BOX WINDOW</p>
+        <div class="d-flex justify-content-center p-3">
+            <DxButton RenderStyle="ButtonRenderStyle.Secondary" Click="() => MessageBoxVisible = true">CLICK TO SHOW A MESSAGE BOX</DxButton>
         </div>
 
         <DxMessageBox @bind-Visible="MessageBoxVisible"

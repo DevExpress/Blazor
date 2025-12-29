@@ -12,7 +12,7 @@
                     InputId="cbItemTemplate">
             <ItemDisplayTemplate>
                 <div class="combobox-item-template">
-                    <img src="@StaticAssetUtils.GetImagePath(GetImageFileName(context.DataItem))" alt="@context.DataItem.FullName" />
+                    <img src="@GetImageFileName(context.DataItem)" alt="@context.DataItem.FullName" />
                     <div class="combobox-item-template-text">
                         <span>@context.DataItem.FullName</span>
                         <span class="combobox-item-template-employee-phone">@context.DataItem.HomePhone</span>
@@ -33,7 +33,7 @@
         }
 
         string GetImageFileName(Employee employee) {
-            return $"employees/item-template{employee.EmployeeId}.jpg";
+            return StaticAssetUtils.GetEmployeeImagePath(employee.EmployeeId);
         }
     }
 

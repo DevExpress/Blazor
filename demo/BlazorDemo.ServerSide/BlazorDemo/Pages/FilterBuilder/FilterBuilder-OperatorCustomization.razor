@@ -1,0 +1,79 @@
+﻿<DemoPageSectionComponent Id="FilterBuilder-OperatorCustomization" ShowSizeMode="true"
+                          HorizontalAlignment="HorizontalAlignment.Center" VerticalAlignment="VerticalAlignment.Center">
+    <OptionsContent>
+        <OptionCheckBox Label="Inverse Logical Operators" @bind-Checked="@ShowInverseLogicalOperators"/>
+        <OptionCheckBox Label="Custom Functions" @bind-Checked="@ShowCustomFunctions"/>
+        <OptionCheckBox Label="Operator Groups" @bind-Checked="@ShowOperatorGroups"/>
+    </OptionsContent>
+    <ChildContentWithParameters Context="Params">
+        @using DevExpress.Data.Filtering
+
+        <DxFilterBuilder @bind-FilterCriteria="@FilterCriteria" GroupOperatorTypes="@GetAvailableGroupOperatorTypes()"
+                         CustomizeOperators="@OnCustomizeOperators" SizeMode="Params.SizeMode">
+            <Fields>
+                <DxFilterBuilderField FieldName="ProductName" Caption="Product Name" Type="@typeof(string)"/>
+                <DxFilterBuilderField FieldName="Country" Caption="Country" Type="@typeof(string)"/>
+                <DxFilterBuilderField FieldName="OrderDate" Caption="Order Date" Type="@typeof(DateTime)"/>
+                <DxFilterBuilderField FieldName="QuantityPerUnit" Caption="Quantity per Unit" Type="@typeof(int)"/>
+                <DxFilterBuilderField FieldName="UnitPrice" Caption="Unit Price" Type="@typeof(decimal)"/>
+                <DxFilterBuilderField FieldName="Discount" Type="@typeof(int)"/>
+            </Fields>
+        </DxFilterBuilder>
+
+        @code {
+            const string CustomGroupName = "Custom Functions";
+            bool _showCustomFunctions = true;
+
+            CriteriaOperator FilterCriteria { get; set; }
+            bool ShowInverseLogicalOperators { get; set; } = true;
+            bool ShowOperatorGroups { get; set; } = true;
+
+            bool ShowCustomFunctions {
+                get => _showCustomFunctions;
+                set {
+                    if(_showCustomFunctions == value) return;
+
+                    _showCustomFunctions = value;
+                    StateHasChanged();
+                }
+            }
+
+            FilterBuilderGroupOperatorType GetAvailableGroupOperatorTypes() {
+                var groupOperators = FilterBuilderGroupOperatorType.And | FilterBuilderGroupOperatorType.Or;
+
+                if(ShowInverseLogicalOperators)
+                    groupOperators |= FilterBuilderGroupOperatorType.NotAnd | FilterBuilderGroupOperatorType.NotOr;
+
+                return groupOperators;
+            }
+
+            void OnCustomizeOperators(FilterBuilderCustomizeOperatorsEventArgs obj) {
+                if(obj.FieldName is "ProductName" or "Country") {
+                    obj.Operators.Clear();
+                    obj.Operators.Add(new FilterBuilderOperatorItem(FilterBuilderOperatorType.BeginsWith));
+                    obj.Operators.Add(new FilterBuilderOperatorItem(FilterBuilderOperatorType.Contains));
+                    obj.Operators.Add(new FilterBuilderOperatorItem(FilterBuilderOperatorType.DoesNotEqual));
+                    obj.Operators.Add(new FilterBuilderOperatorItem(FilterBuilderOperatorType.Like));
+                    obj.Operators.Add(new FilterBuilderOperatorItem(FilterBuilderOperatorType.NotLike));
+                }
+
+                if(_showCustomFunctions) {
+                    obj.Operators.Add(new FilterBuilderOperatorItem(IsSalesDiscountFunction.FunctionName) { GroupName = CustomGroupName });
+                    obj.Operators.Add(new FilterBuilderOperatorItem(DoesNotBeginWithFunction.FunctionName) { GroupName = CustomGroupName });
+                    obj.Operators.Add(new FilterBuilderOperatorItem(IsWeekendFunction.FunctionName) { GroupName = CustomGroupName });
+                }
+
+                obj.ShowGroups = ShowOperatorGroups;
+            }
+
+            protected override void OnInitialized() {
+                FilterCriteria = CriteriaOperator.Parse("StartsWith([ProductName], 'C') And Discount = ? And OrderDate = ?");
+
+                IsSalesDiscountFunction.Register();
+                DoesNotBeginWithFunction.Register();
+                IsWeekendFunction.Register();
+            }
+        }
+
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

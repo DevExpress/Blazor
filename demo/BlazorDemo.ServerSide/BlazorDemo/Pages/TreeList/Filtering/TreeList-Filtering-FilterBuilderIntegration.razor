@@ -1,0 +1,125 @@
+﻿@page "/TreeList/Filtering/FilterBuilderIntegration"
+@using DevExpress.Data.Filtering
+@layout DataProviderAccessArea<INwindDataProvider>
+
+<DemoPageSectionComponent Id="TreeList-Filtering-FilterBuilderIntegration" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject IEmployeeTaskDataProvider EmployeeTaskDataProvider
+
+        <div class="grid-container">
+
+            <DxTreeList @ref="TreeList"
+                        Data="TreeListData"
+                        KeyFieldName="Id"
+                        ParentKeyFieldName="ParentId"
+                        VirtualScrollingEnabled="true"
+                        FilterPanelDisplayMode="@TreeListFilterPanelDisplayMode.Always"
+                        FilterMenuButtonDisplayMode="TreeListFilterMenuButtonDisplayMode.Always"
+                        FilterTreeMode="FilterTreeMode.Mode"
+                        ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
+                        TextWrapEnabled="false"
+                        SizeMode="Params.SizeMode"
+                        CssClass="max-h-480">
+                <Columns>
+                    <DxTreeListDataColumn FieldName="Name" Caption="Task" SortOrder="TreeListColumnSortOrder.Ascending" />
+                    <DxTreeListDataColumn FieldName="EmployeeName" Caption="Assigned To" TextAlignment="TreeListTextAlignment.Left" Width="200px">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="EmployeeNames" SearchMode="@ListSearchMode.AutoSearch"
+                                                SearchFilterCondition="@ListSearchFilterCondition.Contains" />
+                        </EditSettings>
+                    </DxTreeListDataColumn>
+                    <DxTreeListDataColumn FieldName="StartDate" Width="100px" />
+                    <DxTreeListDataColumn FieldName="DueDate" Width="100px" />
+                    <DxTreeListDataColumn FieldName="Priority" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="Priorities" ValueFieldName="Value" TextFieldName="Text" ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Never" />
+                        </EditSettings>
+                        <CellDisplayTemplate>
+                            <span title="@EmployeeTask.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem) priority">@EmployeeTask.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem)</span>
+                        </CellDisplayTemplate>
+                    </DxTreeListDataColumn>
+                </Columns>
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Contained" SizeMode="Params.SizeMode">
+                        <Items>
+                            <DxToolbarItem Alignment="ToolbarItemAlignment.Right" Text="Filter Builder" Click="() => TreeList.ShowFilterBuilder()" RenderStyle="ButtonRenderStyle.Secondary"/>
+                            <DxToolbarItem Alignment="ToolbarItemAlignment.Left" BeginGroup="true">
+                                <Template Context="toolbar_item_context">
+                                    <div class="d-flex flex-row align-items-center h-100">
+                                        <div class="me-2">Display Nodes:</div>
+                                        <DxComboBox Data="FilterModes" @bind-Value="FilterTreeMode" TextFieldName="Name" />
+                                    </div>
+                                </Template>
+                            </DxToolbarItem>
+                        </Items>
+                    </DxToolbar>
+                </ToolbarTemplate>
+                <FilterBuilderTemplate>
+                    <DxFilterBuilder @bind-FilterCriteria="context.FilterCriteria" CustomizeOperators="FilterBuilderCustomizeOperators">
+                        <Fields>
+                            @context.RenderDefaultFields()
+                            <DxFilterBuilderField FieldName="Status" Caption="Task Status" Type="typeof(int)">
+                                <EditSettings>
+                                    <DxSpinEditSettings MinValue="0" MaxValue="100" Increment="1"/>
+                                </EditSettings>
+                            </DxFilterBuilderField>
+
+                        </Fields>
+                    </DxFilterBuilder>
+                </FilterBuilderTemplate>
+            </DxTreeList>
+        </div>
+
+        @code {
+            IGrid TreeList { get; set; }
+
+            List<EmployeeTask> TreeListData { get; set; }
+            List<string> EmployeeNames { get; set; }
+            TreeListFilterTreeModeItem FilterTreeMode { get; set; }
+
+            static readonly IReadOnlyList<FilterInterval> CompletedIntervals = new FilterInterval[] {
+                new("[Status] == 100", "Completed"),
+                new("[Status] < 100", "In Progress"),
+            };
+            static readonly IReadOnlyList<Priority> Priorities = new Priority[] {
+                new Priority(-1, "Low"),
+                new Priority(0, "Medium"),
+                new Priority(1, "High"),
+            };
+            static readonly IList<TreeListFilterTreeModeItem> FilterModes = new[] {
+                new TreeListFilterTreeModeItem("Include parents", TreeListFilterTreeMode.ParentBranch),
+                new TreeListFilterTreeModeItem("Include parents and children", TreeListFilterTreeMode.EntireBranch),
+                new TreeListFilterTreeModeItem("Matching nodes only", TreeListFilterTreeMode.Nodes),
+            };
+
+            protected override void OnInitialized() {
+                FilterTreeMode = FilterModes.First();
+                TreeListData = EmployeeTaskDataProvider.GenerateData();
+                EmployeeNames = TreeListData.Select(t => t.EmployeeName).Distinct().ToList();
+            }
+
+            protected override Task OnAfterRenderAsync(bool firstRender) {
+                if(firstRender)
+                    TreeList.SetFilterCriteria(CriteriaOperator.Parse("[EmployeeName] In ('Arthur Miller', 'Davey Jones') And ([Priority] == 1 Or [Status] < 10)"));
+                return base.OnAfterRenderAsync(firstRender);
+            }
+
+            record Priority(int Value, string Text);
+
+            record FilterInterval(CriteriaOperator Criteria, string DisplayText) {
+                public FilterInterval(string CriteriaText, string DisplayText)
+                    : this(CriteriaOperator.Parse(CriteriaText), DisplayText) {
+                }
+            }
+
+            record TreeListFilterTreeModeItem(string Name, TreeListFilterTreeMode Mode) {
+                public static TreeListFilterTreeModeItem Create(TreeListFilterTreeMode mode) => new (SplitTextHelper.SplitPascalCaseString(mode.ToString()), mode);
+            }
+            void FilterBuilderCustomizeOperators(FilterBuilderCustomizeOperatorsEventArgs e) {
+                if(e.FieldName == nameof(EmployeeTask.Status)) {
+                    e.DefaultOperator = new FilterBuilderOperatorItem(FilterBuilderOperatorType.Between);
+                }
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

@@ -25,6 +25,7 @@
     font-style: normal;
     line-height: 1.67;
     letter-spacing: normal;
+    margin: 10px;
 }
 
 .borderCyrcle, .borderContainer {
@@ -109,16 +110,22 @@
 
 .rotation-0 {
     transform: rotate(0deg);
+}
+.rotation-0.rotation-animated {
     animation: turn0 0.5s ease-out
 }
 
 .rotation-90 {
     transform: rotate(-90deg);
+}
+.rotation-90.rotation-animated {
     animation: turn90 0.5s ease-out
 }
 
 .rotation-180 {
     transform: rotate(-180deg);
+}
+.rotation-180.rotation-animated {
     animation: turn180 0.5s ease-out
 }
 

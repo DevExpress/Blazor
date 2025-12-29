@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BlazorDemo.Data;
+using DevExpress.Data.Utils;
 
 namespace BlazorDemo.DataProviders.Implementation {
     public class EmployeeTaskDataProvider : IEmployeeTaskDataProvider {
@@ -422,6 +423,64 @@ namespace BlazorDemo.DataProviders.Implementation {
                 }
             }
             return _largeData;
+        }
+
+        public List<EmployeeTask> GenerateExtendedData() {
+            var data = GenerateData();
+
+            var employeeNames = data.Select(x => x.EmployeeName).Distinct().ToArray();
+
+            string[] departments = { "Marketing", "Finance", "Engineering", "Support", "HR" };
+            string[] categories = { "Planning", "Execution", "Reporting", "Review" };
+            string[] subcategories = { "Docs", "UI", "Backend", "Ops", "QA" };
+            string[] epics = { "Platform Stability", "New Onboarding", "Reporting Revamp", "Mobile Optimization", "Data Pipeline" };
+            string[] environments = { "Dev", "QA", "Staging", "Prod" };
+
+            var rnd = NonCryptographicRandom.Default;
+
+            data.ForEach(AssignExtendedData);
+
+            foreach(var parent in data.Where(t => t.ParentId == 0)) {
+                CalculateParentDataByChildrenAggregation(parent, data.Where(t => t.ParentId == parent.Id).ToList());
+            }
+            return data;
+
+            void AssignExtendedData(EmployeeTask task) {
+                var isParent = task.ParentId == 0;
+
+                task.HasChildren = isParent;
+                task.EstimatedHours = rnd.Next(isParent ? 80 : 2, isParent ? 400 : 80);
+                task.ActualHours = rnd.Next(0, isParent ? 300 : 80);
+                task.Progress = task.Status == 100 ? 1.0 : rnd.NextDouble();
+                task.Budget = rnd.Next(isParent ? 5000 : 500, isParent ? 50000 : 10000);
+                task.Cost = rnd.Next(isParent ? 2000 : 200, isParent ? 40000 : 9000);
+                task.RiskLevel = new[] { "Low", "Medium", "High" }[rnd.Next(3)];
+                task.Category = categories[rnd.Next(categories.Length)];
+                task.SubCategory = subcategories[rnd.Next(subcategories.Length)];
+                task.Owner = task.EmployeeName;
+                task.Reviewer = employeeNames[rnd.Next(employeeNames.Length)];
+                task.Approver = employeeNames[rnd.Next(employeeNames.Length)];
+                task.Department = departments[rnd.Next(departments.Length)];
+                task.CreatedAt = task.StartDate.AddDays(-rnd.Next(1, 10));
+                task.UpdatedAt = task.StartDate.AddDays(rnd.Next(0, 10));
+                task.IsBlocked = rnd.Next(0, 6) == 0;
+                task.ExternalId = Guid.NewGuid().ToString()[..8];
+                task.PriorityLabel = EmployeeTask.TaskPriorityToString(task.Priority);
+                task.Epic = epics[rnd.Next(epics.Length)];
+                task.Environment = environments[rnd.Next(environments.Length)];
+            }
+
+            void CalculateParentDataByChildrenAggregation(EmployeeTask parent, List<EmployeeTask> children) {
+                if(children.Count == 0) return;
+
+                parent.EstimatedHours = children.Sum(c => c.EstimatedHours);
+                parent.ActualHours = children.Sum(c => c.ActualHours);
+                parent.Budget = children.Sum(c => c.Budget);
+                parent.Cost = children.Sum(c => c.Cost);
+
+                parent.Progress = Math.Round(children.Average(c => c.Progress), 4);
+                parent.Status = parent.Progress >= 1.0 ? 100 : (int)(parent.Progress * 100);
+            }
         }
 
         List<EmployeeTask> GenerateLargeDataCore() {

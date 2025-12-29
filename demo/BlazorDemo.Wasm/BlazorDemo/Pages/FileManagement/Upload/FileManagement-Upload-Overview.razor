@@ -18,6 +18,9 @@
               UploadUrl="@GetUploadUrl("api/Upload/Upload/")"
               SelectedFilesChanged="@SelectedFilesChanged">
     </DxUpload>
+    <div class="upload-validation-text info-text">
+        Uploads are limited to a single file up to 15 MB.
+    </div>
 
     @code {
         bool UploadVisible { get; set; } = false;

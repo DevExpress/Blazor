@@ -1,9 +1,10 @@
 /*BeginHide*/::deep /*EndHide*/.splitbutton-icon-color {
     height: 16px;
     width: 16px;
-    border: 1px solid #CCCCCC;
-    -webkit-mask-image: url("images/icons/theme-icon.svg");
-    mask-image: url("images/icons/theme-icon.svg");
+    border: 2px solid #CCCCCC;
+    border-radius: 3px;
+    -webkit-mask-image: url("images/icons/color-item.svg");
+    mask-image: url("images/icons/color-item.svg");
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     margin-right: 1px;

@@ -7,6 +7,10 @@
 }
 /*EndHide*/
 
+/*BeginHide*/ ::deep /*EndHide*/ .header-bold {
+    background-color: #E6E6E6 !important;
+}
+
 /*BeginHide*/ ::deep /*EndHide*/ .header-bold span {
     font-weight: 700;
     color: #161616;
@@ -21,5 +25,5 @@
 
 /* Fluent Themes */
 /*BeginHide*/::deep /*EndHide*/ .alt-item {
-    --dxbl-grid-row-bg: var(--DS-color-surface-neutral-subdued-rest);
+    --dxbl-grid-row-bg: var(--dxds-color-surface-neutral-subdued-rest);
 }

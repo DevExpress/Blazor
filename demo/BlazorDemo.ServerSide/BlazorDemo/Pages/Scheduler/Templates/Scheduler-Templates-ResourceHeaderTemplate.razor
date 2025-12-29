@@ -11,11 +11,10 @@
             <Views>
                 <DxSchedulerDayView DayCount="2" ShowWorkTimeOnly="true" CellMinWidth="120">
                     <ResourceHeaderCellTemplate>
-                        <div class="" style="display: flex; flex-direction: row; align-items: center;">
-                            <img class="card" src="@(StaticAssetUtils.GetImagePath(context.Resource.CustomFields["ImageFileName"].ToString()))"
-                                 alt=""
-                                 style="object-fit: cover; height: 80px; width: 80px; object-position: 0px 0px; border-radius: 50%;" />
-                            <div style="padding: 0.4725rem;">@context.Resource.Caption</div>
+                        <div class="d-flex align-items-center flex-row scheduler-resource-container">
+                            <img class="card" src="@(StaticAssetUtils.GetEmployeeImagePath((int)context.Resource.CustomFields["EmployeeId"] + 1))"
+                                 alt="" />
+                            <div>@context.Resource.Caption</div>
                         </div>
                     </ResourceHeaderCellTemplate>
                 </DxSchedulerDayView>
@@ -48,7 +47,7 @@
                 BackgroundCssClass = "BackgroundCss",
                 TextCssClass = "TextCss",
                 CustomFieldMappings = new List<DxSchedulerCustomFieldMapping> {
-                    new DxSchedulerCustomFieldMapping{ Name = "ImageFileName", Mapping = "ImageFileName" }
+                    new DxSchedulerCustomFieldMapping{ Name = "EmployeeId", Mapping = "Id" }
                 }
             }
         };

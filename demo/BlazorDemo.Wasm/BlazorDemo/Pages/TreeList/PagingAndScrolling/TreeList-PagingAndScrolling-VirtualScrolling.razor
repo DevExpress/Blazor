@@ -2,45 +2,106 @@
 
 <DemoPageSectionComponent Id="TreeList-PagingAndScrolling-VirtualScrolling" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        @inject IEmployeeTaskDataProvider EmployeeTaskDataProvider
+        @inject ISalesByRegionDataProvider SalesByRegionDataProvider
 
-        <DxTreeList @ref="TreeList"
-                    Data="Data"
-                    KeyFieldName="Id"
-                    ParentKeyFieldName="ParentId"
+        <DxTreeList Data="TreeListData"
+                    KeyFieldName="ID"
+                    ParentKeyFieldName="RegionID"
                     VirtualScrollingEnabled="true"
+                    VirtualScrollingMode="VirtualizationMode"
+                    SkeletonRowsEnabled="SkeletonRowsEnabled"
+                    TextWrapEnabled="TextWrapEnabled"
                     ColumnResizeMode="TreeListColumnResizeMode.NextColumn"
-                    TextWrapEnabled="false"
                     SizeMode="Params.SizeMode"
                     CssClass="max-h-480"
                     AutoExpandAllNodes="true">
             <Columns>
-                <DxTreeListDataColumn FieldName="Name" Caption="Task" SortOrder="TreeListColumnSortOrder.Ascending" />
-                <DxTreeListDataColumn FieldName="EmployeeName" Caption="Assigned To" TextAlignment="TreeListTextAlignment.Left" Width="200px"/>
-                <DxTreeListDataColumn FieldName="StartDate" Width="100px"/>
-                <DxTreeListDataColumn FieldName="DueDate" Width="100px"/>
-                <DxTreeListDataColumn FieldName="Priority" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
-                    <CellDisplayTemplate>
-                        @{
-                            var displayText = TreeListRenderHelper.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem);
-                        }
-                        <span title="@displayText priority">@displayText</span>
-                    </CellDisplayTemplate>
-                </DxTreeListDataColumn>
-                <DxTreeListDataColumn Caption="Progress" FieldName="Status" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
-                    <CellDisplayTemplate>
-                        <span>@TreeListRenderHelper.EmployeeTaskStatusToString((EmployeeTask)context.DataItem)</span>
-                    </CellDisplayTemplate>
-                </DxTreeListDataColumn>
+                <DxTreeListDataColumn Width="300px" FieldName="Region" FixedPosition="TreeListColumnFixedPosition.Left"/>
+
+                <DxTreeListBandColumn Caption="Sales">
+                    <Columns>
+                        <DxTreeListDataColumn Width="100px" FieldName="JanuarySales" Caption="Jan" DisplayFormat="c0" />
+                        <DxTreeListDataColumn Width="100px" FieldName="FebruarySales" Caption="Feb" DisplayFormat="c0" />
+                        <DxTreeListDataColumn Width="100px" FieldName="MarchSales" Caption="Mar" DisplayFormat="c0" />
+                        <DxTreeListDataColumn Width="100px" FieldName="AprilSales" Caption="Apr" DisplayFormat="c0" />
+                        <DxTreeListDataColumn Width="100px" FieldName="MaySales" Caption="May" DisplayFormat="c0" />
+                        <DxTreeListDataColumn Width="100px" FieldName="JuneSales" Caption="Jun" DisplayFormat="c0" />
+                        <DxTreeListDataColumn Width="100px" FieldName="JulySales" Caption="Jul" DisplayFormat="c0" />
+                        <DxTreeListDataColumn Width="100px" FieldName="AugustSales" Caption="Aug" DisplayFormat="c0" />
+                        <DxTreeListDataColumn Width="100px" FieldName="SeptemberSales" Caption="Sep" DisplayFormat="c0" />
+                        <DxTreeListDataColumn Width="100px" FieldName="OctoberSales" Caption="Oct" DisplayFormat="c0" />
+                        <DxTreeListDataColumn Width="100px" FieldName="NovemberSales" Caption="Nov" DisplayFormat="c0" />
+                        <DxTreeListDataColumn Width="100px" FieldName="DecemberSales" Caption="Dec" DisplayFormat="c0" />
+                    </Columns>
+                </DxTreeListBandColumn>
+
+                <DxTreeListBandColumn Caption="Year-Over-Year Comparison">
+                    <Columns>
+                        <DxTreeListDataColumn Width="100px" FieldName="JanuaryChange" Caption="Jan" DisplayFormat="p2" />
+                        <DxTreeListDataColumn Width="100px" FieldName="FebruaryChange" Caption="Feb" DisplayFormat="p2" />
+                        <DxTreeListDataColumn Width="100px" FieldName="MarchChange" Caption="Mar" DisplayFormat="p2" />
+                        <DxTreeListDataColumn Width="100px" FieldName="AprilChange" Caption="Apr" DisplayFormat="p2" />
+                        <DxTreeListDataColumn Width="100px" FieldName="MayChange" Caption="May" DisplayFormat="p2" />
+                        <DxTreeListDataColumn Width="100px" FieldName="JuneChange" Caption="Jun" DisplayFormat="p2" />
+                        <DxTreeListDataColumn Width="100px" FieldName="JulyChange" Caption="Jul" DisplayFormat="p2" />
+                        <DxTreeListDataColumn Width="100px" FieldName="AugustChange" Caption="Aug" DisplayFormat="p2" />
+                        <DxTreeListDataColumn Width="100px" FieldName="SeptemberChange" Caption="Sep" DisplayFormat="p2" />
+                        <DxTreeListDataColumn Width="100px" FieldName="OctoberChange" Caption="Oct" DisplayFormat="p2" />
+                        <DxTreeListDataColumn Width="100px" FieldName="NovemberChange" Caption="Nov" DisplayFormat="p2" />
+                        <DxTreeListDataColumn Width="100px" FieldName="DecemberChange" Caption="Dec" DisplayFormat="p2" />
+                    </Columns>
+                </DxTreeListBandColumn>
+
+                <DxTreeListDataColumn Width="100px" FieldName="MarketShare" DisplayFormat="p0" FixedPosition="TreeListColumnFixedPosition.Right" />
+
             </Columns>
+            <ToolbarTemplate>
+                <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" SizeMode="Params.SizeMode">
+                    <Items>
+                        <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                            <Template Context="toolbar_item_context">
+                                <div class="d-flex flex-row align-items-center ms-2 me-2">
+                                    <div id="virtualization-mode-label" class="me-2">Virtual Scrolling Mode:</div>
+                                    <DxComboBox @bind-Value="VirtualizationMode"
+                                                Data="VirtualizationModes"
+                                                ValueFieldName="Value"
+                                                TextFieldName="Text"
+                                                aria-labelledby="virtualization-mode-label" />
+                                </div>
+                            </Template>
+                        </DxToolbarItem>
+                        <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                            <Template Context="toolbar_item_context">
+                                <div class="d-flex flex-row align-items-center">
+                                    <DxCheckBox @bind-Checked="SkeletonRowsEnabled">Skeleton Rows</DxCheckBox>
+                                </div>
+                            </Template>
+                        </DxToolbarItem>
+                        <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                            <Template Context="toolbar_item_context">
+                                <div class="d-flex flex-row align-items-center">
+                                    <DxCheckBox @bind-Checked="TextWrapEnabled">Wrap Text</DxCheckBox>
+                                </div>
+                            </Template>
+                        </DxToolbarItem>
+                    </Items>
+                </DxToolbar>
+            </ToolbarTemplate>
         </DxTreeList>
 
         @code {
-            ITreeList TreeList { get; set; }
-            object Data { get; set; }
+            object TreeListData { get; set; }
+            bool TextWrapEnabled { get; set; }
+            bool SkeletonRowsEnabled { get; set; } = true;
+            TreeListVirtualScrollingMode VirtualizationMode { get; set; } = TreeListVirtualScrollingMode.RowsAndColumns;
+            object[] VirtualizationModes { get; } = new object[] {
+                new { Value = TreeListVirtualScrollingMode.Rows, Text = "Rows" },
+                new { Value = TreeListVirtualScrollingMode.Columns, Text = "Columns" },
+                new { Value = TreeListVirtualScrollingMode.RowsAndColumns, Text = "Rows and Columns" },
+            };
 
-            protected override void OnInitialized () {
-                Data = EmployeeTaskDataProvider.GenerateData();
+            protected override void OnInitialized() {
+                TreeListData = SalesByRegionDataProvider.GenerateData();
             }
         }
     </ChildContentWithParameters>

@@ -1,0 +1,14 @@
+.card {
+    width: 60%;
+}
+
+/*BeginHide*/
+::deep /*EndHide*/.text-editor-checkbox {
+    margin-right: auto;
+}
+
+@media (max-width: 576px) {
+    .card {
+        width: unset;
+    }
+}

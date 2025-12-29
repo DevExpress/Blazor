@@ -1,18 +1,20 @@
-﻿@inject ICarouselImageDataProvider CarouselImageDataProvider
-@using DevExpress.AIIntegration.Blazor.Chat
+﻿@using DevExpress.AIIntegration.Blazor.Chat
 
 <DemoPageSectionComponent Id="AIChat-Overview"
                           ShowSizeMode="true">
     <OptionsContent>
+        <OptionCheckBox Label="Show Header" @bind-Checked="ShowHeader" />
         <OptionCheckBox Label="Use Streaming" @bind-Checked="UseStreaming" />
+        <OptionCheckBox Label="Allow Resize Input" @bind-Checked="AllowResizeInput" />
     </OptionsContent>
     <ChildContentWithParameters Context="Params">
         <div class="chat-demo-container">
-            <DxAIChat CssClass="demo-chat" UseStreaming="UseStreaming" SizeMode="Params.SizeMode" >
-            </DxAIChat>
+            <DxAIChat CssClass="demo-chat" UseStreaming="UseStreaming" SizeMode="Params.SizeMode" AllowResizeInput="AllowResizeInput" ShowHeader="ShowHeader" />
         </div>
         @code {
             bool UseStreaming { get; set; } = false;
+            bool ShowHeader { get; set; } = false;
+            bool AllowResizeInput { get; set; } = false;
         }
     </ChildContentWithParameters>
 </DemoPageSectionComponent>

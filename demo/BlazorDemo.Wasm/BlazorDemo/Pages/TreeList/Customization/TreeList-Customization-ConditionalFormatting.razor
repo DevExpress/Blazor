@@ -3,9 +3,10 @@
 <DemoPageSectionComponent Id="TreeList-Customization-ConditionalFormatting" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
         @inject ISalesByRegionDataProvider SalesByRegionDataProvider
+        @inject ICspNonceService NonceProvider
 
-        <style>
-            .parent-region-row { /*BeginHide*/--custom-row-color: var(--DS-color-surface-neutral-subdued-rest, color-mix(in srgb, var(--bs-gray-300), transparent 50%)); /*EndHide*/
+        <style nonce="@NonceProvider.Nonce">
+            .parent-region-row { /*BeginHide*/--custom-row-color: var(--dxds-color-surface-neutral-subdued-rest, color-mix(in srgb, var(--bs-gray-300), transparent 50%)); /*EndHide*/
                 background-color: var(--custom-row-color);
             }
             td.loss-threshold {

@@ -47,7 +47,7 @@
                            HorizontalAlignment="HorizontalAlignment.Right" />
             <DxChartTooltip Enabled="!ShowSeriesLabels">
                 @context.Point.Render((seriesPoint) =>
-                    @<div style="margin: 0.75rem">
+                    @<div class="m-75">
                         <div>@seriesPoint.SeriesName</div>
                         <span>@($"{seriesPoint.Argument: MMMM yyyy}: ")</span>
                         <span>@($"{seriesPoint.Value: $0,.0}K")</span>

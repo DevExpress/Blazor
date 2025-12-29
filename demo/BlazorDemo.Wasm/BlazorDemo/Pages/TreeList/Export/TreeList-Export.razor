@@ -15,11 +15,12 @@
                     SizeMode="Params.SizeMode"
                     CssClass="max-h-480">
             <Columns>
+                <DxTreeListSelectionColumn Width="60px" AllowSelectAll="true" />
                 <DxTreeListDataColumn FieldName="Name" ExportWidth="240"/>
                 <DxTreeListDataColumn FieldName="TypeOfObject" Caption="Type" FilterRowOperatorType="TreeListFilterRowOperatorType.Equal" ExportWidth="160">
                     <EditSettings>
                         <DxComboBoxSettings Data="TreeListRenderHelper.SpaceObjectTypes" SearchMode="@ListSearchMode.AutoSearch"
-                                            SearchFilterCondition="@ListSearchFilterCondition.Contains" />
+                                            SearchFilterCondition="@ListSearchFilterCondition.Contains"/>
                     </EditSettings>
                 </DxTreeListDataColumn>
                 <DxTreeListDataColumn FieldName="Mass10pow21kg" Caption="Mass, kg" DisplayFormat="N2">
@@ -42,6 +43,11 @@
                     <DxToolbarItem Text="Export to XLS" Click="ExportXls_Click" BeginGroup="true" />
                     <DxToolbarItem Text="Export to CSV" Click="ExportCsv_Click" BeginGroup="true" />
                     <DxToolbarItem Text="Export to PDF" Click="ExportPdf_Click" BeginGroup="true" />
+                    <DxToolbarItem Alignment="ToolbarItemAlignment.Right" BeginGroup="true">
+                        <Template Context="_">
+                            <DxCheckBox @bind-Checked="@ExportSelectedRowsOnly">Export Selected Rows Only</DxCheckBox>
+                        </Template>
+                    </DxToolbarItem>
                 </DxToolbar>
             </ToolbarTemplate>
         </DxTreeList>
@@ -49,6 +55,7 @@
         @code {
             ITreeList TreeList { get; set; }
             object TreeListData { get; set; }
+            bool ExportSelectedRowsOnly { get; set; }
 
             protected override void OnInitialized() {
                 TreeListData = SpaceObjectDataProvider.GenerateData();
@@ -63,19 +70,27 @@
 
             async Task ExportXlsx_Click() {
                 await TreeList.ExportToXlsxAsync("ExportResult", new TreeListXlExportOptions() {
+                    ExportSelectedRowsOnly = ExportSelectedRowsOnly,
+                    SelectedRowsExportMode = TreeListSelectedRowsExportMode.KeepHierarchy,
                     CustomizeCell = OnCustomizeXlCell
                 });
             }
             async Task ExportXls_Click() {
                 await TreeList.ExportToXlsAsync("ExportResult", new TreeListXlExportOptions() {
+                    ExportSelectedRowsOnly = ExportSelectedRowsOnly,
+                    SelectedRowsExportMode = TreeListSelectedRowsExportMode.KeepHierarchy,
                     CustomizeCell = OnCustomizeXlCell
                 });
             }
             async Task ExportCsv_Click() {
-                await TreeList.ExportToCsvAsync("ExportResult");
+                await TreeList.ExportToCsvAsync("ExportResult", new TreeListCsvExportOptions() {
+                    ExportSelectedRowsOnly = ExportSelectedRowsOnly
+                });
             }
             async Task ExportPdf_Click() {
                 await TreeList.ExportToPdfAsync("ExportResult", new TreeListPdfExportOptions() {
+                    ExportSelectedRowsOnly = ExportSelectedRowsOnly,
+                    SelectedRowsExportMode = TreeListSelectedRowsExportMode.KeepHierarchy,
                     CustomizeCell = OnCustomizePdfCell,
                     CustomizePageFooter = args => args.Text = "Page {0} of {1}",
                 });

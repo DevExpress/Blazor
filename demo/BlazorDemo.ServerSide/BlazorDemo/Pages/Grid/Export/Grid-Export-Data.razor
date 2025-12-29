@@ -62,12 +62,14 @@
             async Task ExportXlsx_Click() {
                 await Grid.ExportToXlsxAsync("ExportResult", new GridXlExportOptions() {
                     ExportSelectedRowsOnly = ExportSelectedRowsOnly,
+                    SelectedRowsExportMode = GridSelectedRowsExportMode.KeepGrouping,
                     CustomizeCell = OnCustomizeXlCell
                 });
             }
             async Task ExportXls_Click() {
                 await Grid.ExportToXlsAsync("ExportResult", new GridXlExportOptions() {
                     ExportSelectedRowsOnly = ExportSelectedRowsOnly,
+                    SelectedRowsExportMode = GridSelectedRowsExportMode.KeepGrouping,
                     CustomizeCell = OnCustomizeXlCell
                 });
             }
@@ -79,6 +81,7 @@
             async Task ExportPdf_Click() {
                 await Grid.ExportToPdfAsync("ExportResult", new GridPdfExportOptions() {
                     ExportSelectedRowsOnly = ExportSelectedRowsOnly,
+                    SelectedRowsExportMode = GridSelectedRowsExportMode.KeepGrouping,
                     CustomizeCell = OnCustomizePdfCell,
                     CustomizePageFooter = args => args.Text = "Page {0} of {1}",
                 });

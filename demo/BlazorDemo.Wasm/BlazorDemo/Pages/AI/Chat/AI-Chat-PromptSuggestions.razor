@@ -10,11 +10,16 @@
     </OptionsContent>
     <ChildContentWithParameters Context="Params">
         <div class="chat-demo-container">
-            <DxAIChat CssClass="demo-chat" Initialized="ChatInitialized" UseStreaming="UseStreaming" SizeMode="Params.SizeMode">
+            <DxAIChat HeaderText="AI Assistant"
+                      ShowHeader="true"
+                      CssClass="demo-chat"
+                      Initialized="ChatInitialized"
+                      UseStreaming="UseStreaming"
+                      SizeMode="Params.SizeMode">
                 <PromptSuggestions>
                     @foreach (var suggestion in PromptSuggestions)
                     {
-                        <DxAIChatPromptSuggestion Title="@suggestion.Title" Text="@suggestion.Text" PromptMessage="@suggestion.PromptMessage" />
+                        <DxAIChatPromptSuggestion Title="@suggestion.Title" Text="@suggestion.Text" PromptMessage="@suggestion.PromptMessage" SendOnClick="@suggestion.SendOnClick" />
                     }
                 </PromptSuggestions>
             </DxAIChat>

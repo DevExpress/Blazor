@@ -1,0 +1,91 @@
+﻿<DemoPageSectionComponent Id="FilterBuilder-ValueTemplate" ShowSizeMode="true"
+                          HorizontalAlignment="HorizontalAlignment.Center" VerticalAlignment="VerticalAlignment.Center">
+    <ChildContentWithParameters Context="Params">
+        @using BlazorDemo.Data.Issues
+        @using DevExpress.Data.Filtering
+        @inject IssuesDataService IssuesDataService
+
+        <DxFilterBuilder @bind-FilterCriteria="FilterCriteria" SizeMode="Params.SizeMode">
+            <Fields>
+                <DxFilterBuilderField FieldName="Name" Caption="Subject" Type="@typeof(string)"/>
+                <DxFilterBuilderField FieldName="Creator" Caption="Owner" Type="@typeof(string)">
+                    <ValueEditTemplate>
+                        @{
+                            var userFullName = (string)context.Value;
+                        }
+                        <DxComboBox TData="User" TValue="User"
+                                    Data="@UserList" AllowUserInput="true"
+                                    TextFieldName="@nameof(User.FullName)"
+                                    NullText="Type or select a value"
+                                    Text="@userFullName"
+                                    TextChanged="@((string v) => context.Value = v)"
+                                    TextExpression="@(() => userFullName)" />
+                    </ValueEditTemplate>
+                    <ValueDisplayTemplate>
+                        @if(string.IsNullOrEmpty(context.DisplayText)) {
+                            <span>Type or select a value</span>
+                        } else {
+                            @context.DisplayText
+                        }
+                    </ValueDisplayTemplate>
+                </DxFilterBuilderField>
+                <DxFilterBuilderField FieldName="Status" Caption="Status" Type="@typeof(IssueStatus)">
+                    <ValueEditTemplate>
+                        @{
+                            var status = (IssueStatus?)context.Value;
+                        }
+                        <DxComboBox Data="@(Enum.GetValues(typeof(IssueStatus)).OfType<IssueStatus?>())"
+                                    Value="@(status)"
+                                    ValueChanged="@((IssueStatus? v) => context.Value = v)"
+                                    ValueExpression="@(() => status)"
+                                    NullText="Select a status"
+                                    Context="comboBoxContext">
+                            <EditBoxDisplayTemplate>
+                                <div class="d-flex align-items-center">
+                                    @if(comboBoxContext.DataItem != null) {
+                                        @DemoTemplateIconUtils.GetIssueStatusIconHtml((IssueStatus)comboBoxContext.DataItem)
+                                    }
+                                    <DxInputBox/>
+                                </div>
+                            </EditBoxDisplayTemplate>
+                            <ItemDisplayTemplate>
+                                <div class="d-flex align-items-center">
+                                    @DemoTemplateIconUtils.GetIssueStatusIconHtml((IssueStatus)comboBoxContext.Value)
+                                    @comboBoxContext.DisplayText
+                                </div>
+                            </ItemDisplayTemplate>
+                        </DxComboBox>
+                    </ValueEditTemplate>
+                    <ValueDisplayTemplate>
+                        @if(context.Value != null) {
+                            <div class="d-flex align-items-center">
+                                @DemoTemplateIconUtils.GetIssueStatusIconHtml((IssueStatus)context.Value)
+                                @context.DisplayText
+                            </div>
+                        } else {
+                            <span>Select a status</span>
+                        }
+                    </ValueDisplayTemplate>
+                </DxFilterBuilderField>
+                <DxFilterBuilderField FieldName="CreatedDate" Caption="Date Created" Type="@typeof(DateTime)"/>
+                <DxFilterBuilderField FieldName="FixedDate" Caption="Date Fixed" Type="@typeof(DateTime)"/>
+                <DxFilterBuilderField FieldName="Priority" Caption="Priority" Type="@typeof(IssuePriority)"/>
+            </Fields>
+        </DxFilterBuilder>
+
+        @code {
+            CriteriaOperator FilterCriteria { get; set; }
+            IEnumerable<User> UserList { get; set; }
+            IEnumerable<Issue> IssueList { get; set; }
+
+            protected override async Task OnInitializedAsync() {
+                IssueList = await IssuesDataService.GetIssuesAsync();
+                var userIds = IssueList.Select(i => i.CreatorID).Distinct().ToList();
+                UserList = (await IssuesDataService.GetUsersAsync()).OrderBy(i => i.FullName).Where(i => userIds.Contains(i.ID)).ToList();
+
+                EnumProcessingHelper.RegisterEnum(typeof(IssueStatus), "BlazorDemo.Data.Issues.IssueStatus");
+                FilterCriteria = CriteriaOperator.Parse("StartsWith([Creator], '') And [Status] = ##Enum#BlazorDemo.Data.Issues.IssueStatus,New#");
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

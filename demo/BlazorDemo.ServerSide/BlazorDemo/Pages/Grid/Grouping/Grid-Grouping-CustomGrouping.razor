@@ -10,6 +10,7 @@
                     Data="@Data"
                     ShowGroupPanel="true"
                     CustomGroup="Grid_CustomGroup"
+                    CustomSort="Grid_CustomSort"
                     CustomizeGroupValueDisplayText="Grid_CustomizeGroupValueDisplayText"
                     ColumnResizeMode="GridColumnResizeMode.NextColumn"
                     TextWrapEnabled="false"
@@ -21,7 +22,7 @@
                     <DxGridDataColumn FieldName="CategoryName" MinWidth="100" />
                     <DxGridDataColumn FieldName="Country" Width="10%" />
                     <DxGridDataColumn FieldName="OrderDate" MinWidth="70" Width="10%" />
-                    <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" GroupIndex="0" GroupInterval="GridColumnGroupInterval.Custom" Width="10%" />
+                    <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" GroupIndex="0" GroupInterval="GridColumnGroupInterval.Custom" SortMode="GridColumnSortMode.Custom" Width="10%" />
                     <DxGridDataColumn FieldName="Quantity" Width="10%" />
                 </Columns>
                 <TotalSummary>
@@ -64,6 +65,12 @@
             void Grid_CustomGroup(GridCustomGroupEventArgs e) {
                 if(e.FieldName == "UnitPrice") {
                     e.SameGroup = Grid_CompareColumnValues(e.Value1, e.Value2) == 0;
+                    e.Handled = true;
+                }
+            }
+            void Grid_CustomSort(GridCustomSortEventArgs e) {
+                if (e.FieldName == "UnitPrice") {
+                    e.Result = Grid_CompareColumnValues(e.Value1, e.Value2);
                     e.Handled = true;
                 }
             }

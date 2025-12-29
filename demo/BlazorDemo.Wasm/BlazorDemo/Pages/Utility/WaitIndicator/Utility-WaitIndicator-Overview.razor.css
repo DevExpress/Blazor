@@ -1,5 +1,5 @@
 /*BeginHide*/::deep /*EndHide*/ .dxbl-wait-indicator {
-    --dxbl-wait-indicator-color: /*BeginHide*/ var(--DS-color-content-primary-default-rest, /*EndHide*/white/*BeginHide*/ ) /*EndHide*/;
+    --dxbl-wait-indicator-color: /*BeginHide*/ var(--dxds-color-content-primary-default-rest, /*EndHide*/white/*BeginHide*/ ) /*EndHide*/;
 }
 
 /*BeginHide*/::deep /*EndHide*/ .dxbl-btn.dxbl-lg {

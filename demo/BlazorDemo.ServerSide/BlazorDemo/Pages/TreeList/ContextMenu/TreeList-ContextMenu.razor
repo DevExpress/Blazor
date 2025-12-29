@@ -1,0 +1,177 @@
+﻿@page "/TreeList/ContextMenuIntegration"
+@using System.ComponentModel
+
+<DemoPageSectionComponent Id="TreeList-ContextMenu" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inject IEmployeeTaskDataProvider EmployeeTaskDataProvider
+
+        <DxTreeList @ref="TreeList"
+                    Data="@TreeListData"
+                    KeyFieldName="Id"
+                    ParentKeyFieldName="ParentId"
+                    FooterDisplayMode="TreeListFooterDisplayMode.Always"
+                    ContextMenus="TreeListContextMenus.All"
+                    CustomizeContextMenu="CustomizeContextMenu"
+                    CustomSummary="OnCustomSummary"
+                    CustomizeSummaryDisplayText="OnCustomizeSummaryDisplayText"
+                    ShowAllRows="true"
+                    HighlightRowOnHover="true"
+                    SizeMode="Params.SizeMode"
+                    CssClass="max-h-480">
+            <Columns>
+                <DxTreeListDataColumn FieldName="Name" Caption="Task" Width="320px" />
+                <DxTreeListDataColumn FieldName="EmployeeName" Caption="Employee" />
+                <DxTreeListDataColumn FieldName="DueDate" Caption="Due" />
+                <DxTreeListBandColumn Caption="Planning">
+                    <Columns>
+                        <DxTreeListDataColumn FieldName="Progress" Caption="Progress" DisplayFormat="p0" Width="100px"/>
+                        <DxTreeListDataColumn FieldName="Budget" Caption="Budget" DisplayFormat="c0" />
+                        <DxTreeListDataColumn FieldName="Cost" Caption="Cost" DisplayFormat="c0" />
+                    </Columns>
+                </DxTreeListBandColumn>
+            </Columns>
+            <TotalSummary>
+                @foreach(var item in SummaryItems) {
+                    <DxTreeListSummaryItem FieldName="@item.FieldName"
+                                       SummaryType="item.Type"
+                                       ValueDisplayFormat="@item.DisplayFormat"
+                                       @key="item"/>
+                }
+            </TotalSummary>
+        </DxTreeList>
+
+        @code {
+            ITreeList TreeList { get; set; }
+            BindingList<EmployeeTask> TreeListData { get; set; }
+            IList<SummaryItem> SummaryItems { get; set; }
+
+            static readonly HashSet<TreeListSummaryItemType> NonNumericColumnsSummaryTypes = new() {
+                TreeListSummaryItemType.Count,
+            };
+            static readonly HashSet<TreeListSummaryItemType> DateColumnsSummaryTypes = new() {
+                TreeListSummaryItemType.Count,
+                TreeListSummaryItemType.Min,
+                TreeListSummaryItemType.Max,
+            };
+            static readonly HashSet<TreeListSummaryItemType> CurrencyColumnsSummaryTypes = new() {
+                TreeListSummaryItemType.Custom,
+                TreeListSummaryItemType.Min,
+                TreeListSummaryItemType.Max,
+            };
+            static readonly HashSet<TreeListSummaryItemType> PercentColumnsSummaryTypes = new() {
+                TreeListSummaryItemType.Min,
+                TreeListSummaryItemType.Max,
+                TreeListSummaryItemType.Avg,
+            };
+
+            static readonly TreeListSummaryItemType[] SummaryTypes = Enum.GetValues<TreeListSummaryItemType>()
+                .Where(s => s != TreeListSummaryItemType.None)
+                .ToArray();
+
+            protected override void OnInitialized () {
+                TreeListData = new  BindingList<EmployeeTask>(EmployeeTaskDataProvider.GenerateExtendedData());
+                SummaryItems = new List<SummaryItem>([
+                    new SummaryItem("Cost", TreeListSummaryItemType.Custom) {
+                        DisplayFormat = "c0"
+                    },
+                ]);
+            }
+
+            protected override void OnAfterRender (bool firstRender) {
+                if(firstRender) {
+                    TreeList.ExpandRow(1);
+                    TreeList.ExpandRow(0);
+                }
+            }
+
+            bool IsAllowedSummaryTypeForColumn(TreeListSummaryItemType summaryType, ITreeListDataColumn column) {
+                var nonNumericColumns = new[] { "Name", "EmployeeName" };
+                var dateColumns = new[] { "DueDate" };
+                var currencyColumns = new[] { "Budget", "Cost" };
+                var percentColumns = new[] { "Progress" };
+
+                HashSet<TreeListSummaryItemType> allowedSummaryTypes = new HashSet<TreeListSummaryItemType>();
+
+                if(nonNumericColumns.Contains(column.FieldName)) {
+                    allowedSummaryTypes = NonNumericColumnsSummaryTypes;
+                }
+                if(dateColumns.Contains(column.FieldName)) {
+                    allowedSummaryTypes = DateColumnsSummaryTypes;
+                }
+                if(currencyColumns.Contains(column.FieldName)) {
+                    allowedSummaryTypes = CurrencyColumnsSummaryTypes;
+                }
+                if(percentColumns.Contains(column.FieldName)) {
+                    allowedSummaryTypes = PercentColumnsSummaryTypes;
+                }
+                return allowedSummaryTypes.Contains(summaryType);
+            }
+
+            void CustomizeContextMenu(TreeListCustomizeContextMenuEventArgs e) {
+                if(e.Context is TreeListFooterCommandContext footerCommandContext && footerCommandContext.Column is ITreeListDataColumn dataColumn) {
+                    foreach(var summaryType in SummaryTypes) {
+                        var fieldName = dataColumn.FieldName;
+                        if(!IsAllowedSummaryTypeForColumn(summaryType, dataColumn))
+                            continue;
+
+                        var existingItem = footerCommandContext.SummaryItems.FirstOrDefault(i => i.FieldName == fieldName && i.SummaryType == summaryType);
+                        var isChecked = existingItem != null;
+                        var itemText = summaryType == TreeListSummaryItemType.Custom ? "Custom Sum" : summaryType.ToString();
+                        var menuItem = e.Items.AddCustomItem(itemText, () => OnSummaryCommand(footerCommandContext, summaryType));
+                        menuItem.IconCssClass = isChecked ? "menu-icon menu-icon-check" : null;
+                    }
+                }
+                if(e.Context is TreeListDataRowCommandContext dataRowCommandContext) {
+                    var menuItem = e.Items.AddCustomItem("Delete", () => {
+                        TreeListData.Remove((EmployeeTask)dataRowCommandContext.DataItem);
+                    });
+                    menuItem.Enabled = ((EmployeeTask)dataRowCommandContext.DataItem).ParentId > 0;
+                    menuItem.IconCssClass = "menu-icon grid-icon-delete";
+                }
+            }
+
+            void OnSummaryCommand(TreeListFooterCommandContext context, TreeListSummaryItemType summaryType) {
+                var dataColumn = (ITreeListDataColumn)context.Column;
+                var fieldName = dataColumn.FieldName;
+                var existingItem = SummaryItems.FirstOrDefault(i => i.FieldName == fieldName && i.Type == summaryType);
+                if(existingItem != null)
+                    SummaryItems.Remove(existingItem);
+                else
+                    SummaryItems.Add(new SummaryItem(fieldName, summaryType) {
+                        DisplayFormat = summaryType == TreeListSummaryItemType.Count ? null : dataColumn.DisplayFormat
+                    });
+                StateHasChanged();
+            }
+
+            record SummaryItem(string FieldName, TreeListSummaryItemType Type) {
+                public string DisplayFormat { get; init; }
+            }
+            void OnCustomSummary(TreeListCustomSummaryEventArgs e) {
+                switch(e.SummaryStage) {
+                    case TreeListCustomSummaryStage.Start:
+                        e.TotalValue = 0m;
+                        break;
+                    case TreeListCustomSummaryStage.Calculate:
+                        var item = (EmployeeTask)e.DataItem;
+                        bool isParent = item.ParentId == 0;
+
+                        if(!isParent && e.FieldValue != null) {
+                            try {
+                                e.TotalValue = (decimal)e.TotalValue + Convert.ToDecimal(e.FieldValue);
+                            } catch {}
+                        }
+                        break;
+                }
+            }
+            void OnCustomizeSummaryDisplayText(TreeListCustomizeSummaryDisplayTextEventArgs e) {
+                if(e.Item.SummaryType == TreeListSummaryItemType.Custom) {
+                    e.DisplayText = string.Format(
+                        $"Custom Sum: {{0:{e.Item.ValueDisplayFormat}}}",
+                        e.Value
+                    );
+                }
+
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

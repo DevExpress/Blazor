@@ -4,12 +4,6 @@
     <ChildContentWithParameters Context="Params">
         @inject IEmployeeTaskDataProvider EmployeeTaskDataProvider
 
-        <style>
-            .status-progress .dxbl-progress-bar-label {
-                display: none;
-            }
-        </style>
-
         <DxTreeList Data="Data"
                     KeyFieldName="Id"
                     ParentKeyFieldName="ParentId"
@@ -28,7 +22,7 @@
                 <DxTreeListDataColumn FieldName="Priority" Width="100px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
                     <CellDisplayTemplate>
                         @{
-                            var displayText = TreeListRenderHelper.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem);
+                            var displayText = EmployeeTask.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem);
                         }
                         <span title="@displayText priority">@displayText</span>
                     </CellDisplayTemplate>
@@ -38,7 +32,6 @@
                         <DxProgressBar Value="Convert.ToDouble(context.Value)"
                                        MinValue="0"
                                        MaxValue="100"
-                                       CssClass="status-progress"
                                        Thickness="0.875em"
                                        Size="100%"
                                        ShowLabel="false" />

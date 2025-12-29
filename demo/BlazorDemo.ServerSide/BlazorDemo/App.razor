@@ -1,6 +1,7 @@
 ﻿@using BlazorDemo.Configuration
 @inject DemoConfiguration DemoConfiguration
 @inject BlazorDemo.Services.DemoThemeService Themes
+@inject ICspNonceWriter NonceProvider
 
 @DxResourceManager.RegisterScripts()
 
@@ -19,3 +20,15 @@
         </LayoutView>
     </NotFound>
 </Router>
+
+@code {
+    [Parameter]
+    public string CspStyleNonce { get; set; }
+
+    protected override void OnInitialized() {
+        base.OnInitialized();
+
+        if(!string.IsNullOrEmpty(CspStyleNonce))
+            NonceProvider.SetNonce(CspStyleNonce);
+    }
+}

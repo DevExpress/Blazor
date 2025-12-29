@@ -3,7 +3,7 @@
 @inject IDemoVersion DemoVersion;
 
 <DemoSearchEditor @bind-SearchString="@SearchString" />
-<DxScrollView VisibleElementSelector="@NavMenuActiveSelector">
+<DxScrollView VisibleElementOid="@VisibleElementOid">
     <NavMenu ActivePage="@ActivePage" SearchResult="@SearchResults"></NavMenu>
 </DxScrollView>
 <div class="info-wrapper">
@@ -19,7 +19,7 @@
 
     static readonly int DateTimeNowYear = DateTime.Now.Year;
     protected string ActivePage { get { return NavigationManager.GetCurrentPageName().Split('?')[0]; } }
-    protected string NavMenuActiveSelector { get { return SearchResults == null ? $"li:has(ul [href^='{ActivePage}'])" : ".demo-group, .sidebar-tree"; } }
+    protected string VisibleElementOid => ActivePage;
     public string SearchString {
         get { return _searchString; }
         set {

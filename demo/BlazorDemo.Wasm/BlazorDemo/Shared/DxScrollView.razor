@@ -1,12 +1,12 @@
 ﻿@using DevExpress.Blazor.Internal
 
-<DxScrollViewer CssClass="@($"{CssClass} blazor-scroll-view")" VisibleElementSelector="@VisibleElementSelector" VisibleElementVerticalAlign="@VerticalAlign.Top">
+<DxScrollViewer CssClass="@($"{CssClass} blazor-scroll-view")" VisibleElementOid="@VisibleElementOid" VisibleElementVerticalAlign="@VerticalAlign.Top">
     @ChildContent
 </DxScrollViewer>
 
 @code {
     [Parameter]
-    public string VisibleElementSelector { get; set; }
+    public string VisibleElementOid { get; set; }
     [Parameter]
     public string CssClass { get; set; }
     [Parameter]

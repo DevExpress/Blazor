@@ -1,0 +1,50 @@
+﻿@using System.Threading
+@using DevExpress.AIIntegration.Blazor.Chat
+@using Microsoft.Extensions.AI
+
+@inject IChatResourcesDataProvider ChatResourceDataProvider
+
+<DemoPageSectionComponent Id="AIChat-Resources"
+                          ShowSizeMode="true">
+    <OptionsContent>
+        <OptionCheckBox Label="Use Streaming" @bind-Checked="UseStreaming"/>
+    </OptionsContent>
+    <ChildContentWithParameters Context="Params">
+        <div class="chat-demo-container">
+            <DxAIChat CssClass="demo-chat"
+                      UseStreaming="UseStreaming"
+                      SizeMode="Params.SizeMode"
+                      FileUploadEnabled="true"
+                      Resources="Resources">
+                <AIChatSettings>
+                    <DxAIChatFileUploadSettings MaxFileSize="10000000" MaxFileCount="3"/>
+                </AIChatSettings>
+            </DxAIChat>
+        </div>
+
+        @code {
+            bool UseStreaming { get; set; } = false;
+            IEnumerable<AIChatResource> Resources { get; set; } = [];
+
+            protected override void OnInitialized() {
+                base.OnInitialized();
+                var accessLog = new AIChatResource("access.txt", "Access Log", GetLogResource, "text/plain", "Web server access log for the past 24 hours.");
+                var dashboardImage = new AIChatResource("dashboard.jpg", "Dashboard (Screenshot)", GetImageResource, "image/jpeg", "Latest dashboard screenshot for real-time data analysis.");
+                var chatDocumentation = new AIChatResource("dxaichat.md", "AI Chat Documentation", GetDocsResource, "text/markdown", "Reference guide for AI Chat functionality and usage.");
+
+                Resources = new List<AIChatResource> {
+                    accessLog,
+                    dashboardImage,
+                    chatDocumentation
+                };
+            }
+
+            async Task<IList<AIContent>> GetLogResource(AIChatResource resource, CancellationToken ct) {
+                var text = await ChatResourceDataProvider.GetLogResourceContents(ct);
+                return new List<AIContent> { new TextContent(text) };
+            }
+            async Task<ReadOnlyMemory<byte>> GetImageResource(AIChatResource resource, CancellationToken ct) => await ChatResourceDataProvider.GetImageResourceContents(ct);
+            async Task<string> GetDocsResource(AIChatResource resource, CancellationToken ct) => await ChatResourceDataProvider.GetDocsResourceContents(ct);
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

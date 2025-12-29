@@ -9,12 +9,12 @@
 }
 
 ::deep .grid-delete-btn:hover {
-    color: var(--DS-color-surface-warning-default-rest);
+    color: var(--dxds-color-surface-warning-default-rest);
 }
 /*EndHide*/
 
 /*BeginHide*/::deep /*EndHide*/.grid-modified-cell {
-    background-color: rgba(var(--bs-primary-rgb), 0.15) !important;
+    background-color: color-mix(in srgb, rgb(var(--bs-primary-rgb)) 15%, white) !important;
 }
 
 /*BeginHide*/ .grid-container {

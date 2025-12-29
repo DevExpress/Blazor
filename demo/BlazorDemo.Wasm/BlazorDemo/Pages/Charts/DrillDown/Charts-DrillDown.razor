@@ -6,12 +6,12 @@
 
 <DemoPageSectionComponent Id="Charts-DrillDown">
 
-    <nav aria-label="breadcrumb" class="w-100" style="--bs-breadcrumb-divider: '>';">
+    <nav aria-label="breadcrumb" class="w-100 breadcrumbs-container">
         <ol class="breadcrumb">
             @foreach (DrillDownState state in StateList) {
                 <li class="breadcrumb-item active ">
                     @if (state != StateList.Last()) {
-                        <a @onclick="@(() => OnBreadcrumbItemClick(state))" href="javascript:void(0);">
+                        <a class="breadcrumb-item-link" @onclick="@(() => OnBreadcrumbItemClick(state))">
                             @state.Name
                         </a>
                     }

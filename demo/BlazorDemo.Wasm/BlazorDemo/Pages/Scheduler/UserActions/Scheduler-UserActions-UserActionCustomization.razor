@@ -28,7 +28,7 @@
                                     CellMinWidth="120"
                                     VisibleTime="@(new DxSchedulerTimeSpanRange(TimeSpan.FromHours(8), TimeSpan.FromHours(19)))">
                     <HorizontalAppointmentTemplate>
-                        <div class="@(GetBackgroundCssClass(context))" style="width: 100%;"></div>
+                        <div class="@(GetBackgroundCssClass(context)) w-100"></div>
                         <div class="dxbl-apt-content">
                             <div class="dxbl-sc-content-wrapper">
                                 @context.Appointment.Subject

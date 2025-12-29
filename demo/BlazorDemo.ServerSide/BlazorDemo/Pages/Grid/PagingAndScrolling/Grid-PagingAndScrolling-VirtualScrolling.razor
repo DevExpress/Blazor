@@ -11,37 +11,77 @@
                     ShowGroupPanel="true"
                     AutoExpandAllGroupRows="true"
                     ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                    VirtualScrollingMode="VirtualizationMode"
                     VirtualScrollingEnabled="true"
+                    SkeletonRowsEnabled="SkeletonRowsEnabled"
                     SizeMode="Params.SizeMode">
                 <Columns>
-                    <DxGridDataColumn FieldName="OrderDate" GroupIndex="0" GroupInterval="GridColumnGroupInterval.DateYear" MinWidth="70" Width="10%" />
-                    <DxGridDataColumn FieldName="ProductName" MinWidth="100" />
-                    <DxGridDataColumn FieldName="CategoryId" Caption="Category" MinWidth="100" Width="10%">
-                        <EditSettings>
-                            <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId" TextFieldName="CategoryName" />
-                        </EditSettings>
-                    </DxGridDataColumn>
-                    <DxGridDataColumn FieldName="CustomerId" Caption="Customer" MinWidth="200" Width="20%">
-                        <EditSettings>
-                            <DxComboBoxSettings Data="Customers" ValueFieldName="CustomerId" TextFieldName="DisplayText" />
-                        </EditSettings>
-                    </DxGridDataColumn>
-                    <DxGridDataColumn FieldName="Country" Width="10%" />
-                    <DxGridDataColumn FieldName="UnitPrice" DisplayFormat="c" Width="10%" />
-                    <DxGridDataColumn FieldName="Quantity" Width="10%" />
-                    <DxGridDataColumn FieldName="Total" UnboundType="GridUnboundColumnType.Decimal" UnboundExpression="[UnitPrice] * [Quantity]" DisplayFormat="c" MinWidth="100" Width="10%" />
+                    <DxGridBandColumn Caption="Product">
+                        <Columns>
+                            <DxGridDataColumn FieldName="ProductId" Caption="ID" Width="100px" />
+                            <DxGridDataColumn FieldName="ProductName" Caption="Name" MinWidth="180" />
+                            <DxGridDataColumn FieldName="UnitPrice" Caption="Unit Price" DisplayFormat="c" Width="120px" />
+                            <DxGridDataColumn FieldName="Quantity" Caption="Quantity" Width="80px" />
+                            <DxGridDataColumn FieldName="Discount" Caption="Discount" DisplayFormat="p0" Width="100px" />
+                            <DxGridDataColumn FieldName="ExtendedPrice" Caption="Total" DisplayFormat="c" Width="120px" />
+                        </Columns>
+                    </DxGridBandColumn>
+                    <DxGridBandColumn Caption="Customer">
+                        <Columns>
+                            <DxGridDataColumn FieldName="CustomerId" Caption="Full Name" MinWidth="200" Width="20%">
+                                <EditSettings>
+                                    <DxComboBoxSettings Data="Customers" ValueFieldName="CustomerId" TextFieldName="DisplayText" />
+                                </EditSettings>
+                            </DxGridDataColumn>
+                            <DxGridDataColumn FieldName="CompanyName" Caption="Company" MinWidth="140" />
+                            <DxGridDataColumn FieldName="ContactName" Caption="Contact Name" MinWidth="140" />
+                            <DxGridDataColumn FieldName="ContactTitle" Caption="Title" MinWidth="140" />
+                            <DxGridDataColumn FieldName="Phone" Caption="Phone" MinWidth="140" />
+                            <DxGridDataColumn FieldName="Fax" Caption="Fax" MinWidth="140" />
+                            <DxGridDataColumn FieldName="Address" Caption="Address" MinWidth="200" />
+                            <DxGridDataColumn FieldName="City" Caption="City" Width="120px" />
+                            <DxGridDataColumn FieldName="Region" Caption="Region" Width="120px" />
+                            <DxGridDataColumn FieldName="PostalCode" Caption="Postal Code" Width="120px" />
+                            <DxGridDataColumn FieldName="Country" Caption="Country" Width="140px" />
+                        </Columns>
+                    </DxGridBandColumn>
+                    <DxGridBandColumn Caption="Shipping">
+                        <Columns>
+                            <DxGridDataColumn FieldName="ShipName" Caption="Recipient" MinWidth="200" GroupIndex="0" />
+                            <DxGridDataColumn FieldName="ShipAddress" Caption="Address" MinWidth="200" />
+                            <DxGridDataColumn FieldName="ShipCity" Caption="City" Width="120px" />
+                            <DxGridDataColumn FieldName="ShipRegion" Caption="Region" Width="120px" />
+                            <DxGridDataColumn FieldName="ShipPostalCode" Caption="Postal Code" Width="140px" />
+                            <DxGridDataColumn FieldName="ShipCountry" Caption="Country" Width="140px" />
+                        </Columns>
+                    </DxGridBandColumn>
                 </Columns>
-                <GroupSummary>
-                    <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="Country" />
-                    <DxGridSummaryItem SummaryType="GridSummaryItemType.Sum" FieldName="Total" />
-                </GroupSummary>
                 <ToolbarTemplate>
-                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" SizeMode="Params.SizeMode">
                         <Items>
-                                <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                            <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                                <Template Context="toolbar_item_context">
+                                    <div class="d-flex flex-row align-items-center ms-2 me-2">
+                                        <div id="virtualization-mode-label" class="me-2">Virtual Scrolling Mode:</div>
+                                        <DxComboBox @bind-Value="VirtualizationMode"
+                                                    Data="VirtualizationModes"
+                                                    ValueFieldName="Value"
+                                                    TextFieldName="Text"
+                                                    aria-labelledby="virtualization-mode-label" />
+                                    </div>
+                                </Template>
+                            </DxToolbarItem>
+                            <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
+                                <Template Context="toolbar_item_context">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <DxCheckBox @bind-Checked="SkeletonRowsEnabled">Skeleton Rows</DxCheckBox>
+                                    </div>
+                                </Template>
+                            </DxToolbarItem>
+                            <DxToolbarItem BeginGroup="true" Alignment="ToolbarItemAlignment.Left">
                                 <Template Context="toolbar_item_context">
                                     <div class="d-flex flex-row align-items-center">                                        
-                                        <DxCheckBox @bind-Checked="TextWrapEnabled">Enable Text Wrap</DxCheckBox>
+                                        <DxCheckBox @bind-Checked="TextWrapEnabled">Wrap Text</DxCheckBox>
                                     </div>
                                 </Template>
                             </DxToolbarItem>
@@ -54,31 +94,57 @@
 
     @code {
         bool TextWrapEnabled { get; set; }
-
+        bool SkeletonRowsEnabled { get; set; } = true;
         object GridData { get; set; }
-        IReadOnlyList<Category> Categories { get; set; }
         IReadOnlyList<CustomerInfo> Customers { get; set; }
 
+        GridVirtualScrollingMode VirtualizationMode { get; set; } = GridVirtualScrollingMode.RowsAndColumns;
+        object[] VirtualizationModes { get; } = new object[] {
+            new { Value = GridVirtualScrollingMode.Rows, Text = "Rows" },
+            new { Value = GridVirtualScrollingMode.Columns, Text = "Columns" },
+            new { Value = GridVirtualScrollingMode.RowsAndColumns, Text = "Rows and Columns" },
+        };
+
         protected override async Task OnInitializedAsync() {
-            Categories = (await NwindDataService.GetCategoriesAsync()).ToList();
-            Customers = (await NwindDataService.GetCustomersAsync())
+            var customers = await NwindDataService.GetCustomersAsync();
+            Customers = customers
                 .Select(i => new CustomerInfo(i.CustomerId, $"{i.ContactName} ({i.CompanyName})"))
                 .OrderBy(i => i.DisplayText)
                 .ToList();
 
             var invoices = await NwindDataService.GetInvoicesAsync();
             var products = await NwindDataService.GetProductsAsync();
-            GridData = invoices.Join(products, i => i.ProductId, p => p.ProductId, (i, p) => {
-                return new {
-                    ProductName = i.ProductName,
-                    CategoryId = p.CategoryId,
-                    CustomerId = i.CustomerId,
-                    Country = i.Country,
-                    OrderDate = i.OrderDate,
-                    UnitPrice = i.UnitPrice,
-                    Quantity = i.Quantity
-                };
-            });
+
+            GridData = from c in customers
+                       join i in invoices on c.CustomerId equals i.CustomerId
+                       join p in products on i.ProductId equals p.ProductId
+                       select new {
+                            ProductId = p.ProductId,
+                            ProductName = p.ProductName,
+                            UnitPrice = p.UnitPrice,
+                            Quantity = p.QuantityPerUnit,
+                            Discount = i.Discount,
+                            ExtendedPrice = i.ExtendedPrice,
+
+                            CustomerId = i.CustomerId,
+                            CompanyName = c.CompanyName,
+                            ContactName = c.ContactName,
+                            ContactTitle = c.ContactTitle,
+                            Phone = c.Phone,
+                            Fax = c.Fax,
+                            Address = c.Address,
+                            City = c.City,
+                            Region = c.Region,
+                            PostalCode = c.PostalCode,
+                            Country = c.Country,
+
+                            ShipName = i.ShipName,
+                            ShipAddress = i.ShipAddress,
+                            ShipCity = i.ShipCity,
+                            ShipRegion = i.ShipRegion,
+                            ShipPostalCode = i.ShipPostalCode,
+                            ShipCountry = i.ShipCountry,
+                    };
         }
 
         record CustomerInfo(string CustomerId, string DisplayText);

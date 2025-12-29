@@ -1,12 +1,23 @@
-/*BeginHide*/ .grid-container {
-    display:flex;
-} /*EndHide*/
+.grid-container {
+    display: flex;
+}
 /*BeginHide*/ ::deep .allowed-drop-target-combobox {
     width: 100px;
 } /*EndHide*/
 /*BeginHide*/ ::deep /*EndHide*/ .dxbl-grid {
     height: 420px;
 }
-/*BeginHide*/ ::deep /*EndHide*/ .dxbl-grid:last-child {
+/*BeginHide*/ ::deep /*EndHide*/ .dxbl-grid:nth-of-type(2) {
     margin-left: 20px;
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        flex-direction: column;
+    }
+
+    /*BeginHide*/ ::deep /*EndHide*/ .dxbl-grid:nth-of-type(2) {
+        margin-left: 0;
+        margin-top: 20px;
+    }
 }

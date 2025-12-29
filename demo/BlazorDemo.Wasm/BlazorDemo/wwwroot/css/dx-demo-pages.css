@@ -89,13 +89,23 @@ body.modal-open .main {
 
 /* Ribbon */
 .rb-icon {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: var(--dxbl-image-width);
+    height: var(--dxbl-image-height);
     background-size: contain;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-position: center;
+    mask-position: center;
     background-position: center center;
     background-color: currentColor;
+    opacity: var(--dxbl-icon-rb-opacity);
+}
+
+.rb-icon-hamburger {
+    -webkit-mask-image: var(--dxbl-icon-rb-hamburger);
+    mask-image: var(--dxbl-icon-rb-hamburger);
 }
 
 .rb-icon-undo {
@@ -246,6 +256,74 @@ body.modal-open .main {
 .rb-icon-save {
     -webkit-mask-image: var(--dxbl-icon-rb-save);
     mask-image: var(--dxbl-icon-rb-save);
+}
+
+.rb-icon-calendar-day {
+    -webkit-mask-image: var(--dxbl-icon-rb-calendar-day);
+    mask-image: var(--dxbl-icon-rb-calendar-day);
+}
+
+.rb-icon-mail {
+    -webkit-mask-image: var(--dxbl-icon-rb-mail);
+    mask-image: var(--dxbl-icon-rb-mail);
+}
+
+.rb-icon-delete {
+    -webkit-mask-image: var(--dxbl-icon-rb-delete);
+    mask-image: var(--dxbl-icon-rb-delete);
+}
+
+.rb-icon-archive {
+    -webkit-mask-image: var(--dxbl-icon-rb-archive);
+    mask-image: var(--dxbl-icon-rb-archive);
+}
+
+.rb-icon-clear-history {
+    -webkit-mask-image: var(--dxbl-icon-rb-clear-history);
+    mask-image: var(--dxbl-icon-rb-clear-history);
+}
+
+.rb-icon-folder-arrow-right {
+    -webkit-mask-image: var(--dxbl-icon-rb-folder-arrow-right);
+    mask-image: var(--dxbl-icon-rb-folder-arrow-right);
+}
+
+.rb-icon-chat {
+    -webkit-mask-image: var(--dxbl-icon-rb-chat);
+    mask-image: var(--dxbl-icon-rb-chat);
+}
+
+.rb-icon-tag {
+    -webkit-mask-image: var(--dxbl-icon-rb-tag);
+    mask-image: var(--dxbl-icon-rb-tag);
+}
+
+.rb-icon-flag {
+    -webkit-mask-image: var(--dxbl-icon-rb-flag);
+    mask-image: var(--dxbl-icon-rb-flag);
+}
+
+.rb-icon-clock {
+    -webkit-mask-image: var(--dxbl-icon-rb-clock);
+    mask-image: var(--dxbl-icon-rb-clock);
+}
+
+.rb-adaptive-ribbon {
+    --dxbl-ribbon-box-shadow: none;
+    --dxbl-ribbon-border-width: 0px;
+    --dxbl-ribbon-border-bottom-width: 0px;
+    padding: 1px;
+}
+
+.dxbl-ribbon__root .dxbl-ribbon-color-picker-item div.dxbl-image {
+    opacity: var(--dxbl-icon-rb-opacity);
+    width: var(--dxbl-image-width);
+    height: var(--dxbl-image-height);
+}
+
+.dxbl-ribbon__root .dxbl-ribbon-color-picker-item div.dxbl-image > svg {
+    width: 100%;
+    height: 100%;
 }
 
 /* GridLayout/StackLayout */
@@ -574,7 +652,7 @@ body.modal-open .main {
     -webkit-mask-repeat: no-repeat;
     background-position: center center;
     background-color: currentColor;
-    opacity: /*BeginHide*/var(--DS-opacity-100, /*EndHide*/0.7/*BeginHide*/)/*EndHide*/;
+    opacity: /*BeginHide*/var(--dxds-opacity-100, /*EndHide*/0.7/*BeginHide*/)/*EndHide*/;
 }
 
 .menu-icon-large {
@@ -653,7 +731,7 @@ body.modal-open .main {
     display: flex;
     height: 20px;
     width: 120px;
-    opacity: /*BeginHide*/var(--DS-opacity-100, /*EndHide*/0.7/*BeginHide*/)/*EndHide*/;
+    opacity: /*BeginHide*/var(--dxds-opacity-100, /*EndHide*/0.7/*BeginHide*/)/*EndHide*/;
     background-color: currentColor;
     mask-repeat: no-repeat;
     -webkit-mask-repeat: no-repeat;
@@ -853,9 +931,7 @@ body.modal-open .main {
 .grid-toolbar-column-chooser {
     width: var(--dxbl-icon-width);
     height: var(--dxbl-icon-height);
-    -webkit-mask-image: var(--dxbl-toolbar-column-chooser);
-    mask-image: var(--dxbl-toolbar-column-chooser);
-    background-color: currentColor;
+    background-image: var(--dxbl-toolbar-column-chooser);
     opacity: var(--dxbl-icon-opacity);
 }
 
@@ -916,24 +992,21 @@ body.modal-open .main {
 }
 
 .grid-toolbar-delete {
-    -webkit-mask-image: var(--dxbl-grid-toolbar-delete);
-    mask-image: var(--dxbl-grid-toolbar-delete);
+    background-image: var(--dxbl-grid-toolbar-delete);
     opacity: var(--dxbl-icon-opacity);
     width: var(--dxbl-icon-width);
     height: var(--dxbl-icon-height);
-    background-color: currentColor;
 }
 
 .grid-toolbar-edit {
-    -webkit-mask-image: var(--dxbl-grid-toolbar-edit);
-    mask-image: var(--dxbl-grid-toolbar-edit);
+    background-image: var(--dxbl-grid-toolbar-edit);
     opacity: var(--dxbl-icon-opacity);
     width: var(--dxbl-icon-width);
     height: var(--dxbl-icon-height);
-    background-color: currentColor;
 }
 
-.grid-toolbar-cancel {
+.grid-toolbar-cancel,
+.treelist-toolbar-cancel {
     -webkit-mask-image: var(--dxbl-grid-toolbar-cancel);
     mask-image: var(--dxbl-grid-toolbar-cancel);
     opacity: var(--dxbl-icon-opacity);
@@ -942,7 +1015,8 @@ body.modal-open .main {
     background-color: currentColor;
 }
 
-.grid-toolbar-save {
+.grid-toolbar-save,
+.treelist-toolbar-save {
     -webkit-mask-image: var(--dxbl-grid-toolbar-save);
     mask-image: var(--dxbl-grid-toolbar-save);
     opacity: var(--dxbl-icon-opacity);
@@ -958,6 +1032,34 @@ body.modal-open .main {
     width: var(--dxbl-icon-width);
     height: var(--dxbl-icon-height);
     background-color: currentColor;
+}
+
+.grid-toolbar-document-csv {
+    background-image: var(--dxbl-grid-toolbar-document-csv);
+    opacity: var(--dxbl-icon-opacity);
+    width: var(--dxbl-icon-width);
+    height: var(--dxbl-icon-height);
+}
+
+.grid-toolbar-document-xlsx {
+    background-image: var(--dxbl-grid-toolbar-document-xlsx);
+    opacity: var(--dxbl-icon-opacity);
+    width: var(--dxbl-icon-width);
+    height: var(--dxbl-icon-height);
+}
+
+.grid-toolbar-document-xls {
+    background-image: var(--dxbl-grid-toolbar-document-xls);
+    opacity: var(--dxbl-icon-opacity);
+    width: var(--dxbl-icon-width);
+    height: var(--dxbl-icon-height);
+}
+
+.grid-toolbar-document-pdf {
+    background-image: var(--dxbl-grid-toolbar-document-pdf);
+    opacity: var(--dxbl-icon-opacity);
+    width: var(--dxbl-icon-width);
+    height: var(--dxbl-icon-height);
 }
 
 .grid-icon-delete {
@@ -1415,4 +1517,22 @@ body.modal-open .main {
 
 .treeview-fluent-icon {
     display: var(--treeview-fluent-icon-visibility);
+}
+
+/* AIChat */
+.aichat-icon {
+    width: var(--dxbl-image-width);
+    height: var(--dxbl-image-height);
+    background-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    background-position: center center;
+    background-color: currentColor;
+    opacity: var( --dxbl-icon-opacity);
+}
+
+.aichat-icon-main {
+    -webkit-mask-image: var(--dxbl-icon-ai-chat);
+    mask-image: var(--dxbl-icon-ai-chat);
 }

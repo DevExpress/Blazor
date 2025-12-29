@@ -1,4 +1,4 @@
-Our [Rich Text Editor](https://www.devexpress.com/blazor/rich-text-editor/) for Blazor allows you to edit and format documents in code.
+Our [Rich Text Editor](https://www.devexpress.com/blazor/rich-text-editor/) for Blazor allows you to edit and format documents in code. Use the [DocumentAPI](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.DxRichEdit.DocumentAPI) property to access structural elements of the [main sub-document](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.SubDocument) (for example, sections, hyperlinks, or tables) and members related to common document functionality.
 
 Review the code in this demo modules and learn how to do the following:
 

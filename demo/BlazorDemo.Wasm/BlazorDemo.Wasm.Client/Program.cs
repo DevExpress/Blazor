@@ -19,7 +19,11 @@ namespace BlazorDemo.Wasm {
 
             var services = builder.Services;
 
-            services.AddDemoServices(true);
+            var azureOpenAIEndpoint = "https://public-api.devexpress.com/demo-openai";
+            var azureOpenAIKey = "DEMO";
+            var deploymentName = "gpt-4.1";
+
+            services.AddDemoServices(azureOpenAIEndpoint, azureOpenAIKey, deploymentName, true);
             services.AddTransient<EntityDataContainer>();
 
             services.AddTransient<RemoteDataProviderLoader>();
@@ -86,6 +90,8 @@ namespace BlazorDemo.Wasm {
             services.AddSingleton<IRangeSelectorZoomingDataProvider, RangeSelectorZoomingDataProvider>();
             services.AddSingleton<IPopulationDataProvider, PopulationDataProvider>();
             services.AddSingleton<IPromptSuggestionsDataProvider, PromptSuggestionsDataProvider>();
+            services.AddSingleton<IOrderDataProvider, OrderDataProvider>();
+            services.AddSingleton<IChatResourcesDataProvider, AIChatResourcesDataProviderWasm>();
 
             services.AddNotSupportedDemoServices();
 #pragma warning disable DX0006
@@ -99,6 +105,10 @@ namespace BlazorDemo.Wasm {
             services.AddSingleton<DemoConfiguration>();
             services.AddScoped<DemoThemeService>();
             services.AddScoped<IDemoStaticResourceService, DemoStaticResourceService>();
+
+            services.AddScoped<CspNonceService>();
+            services.AddScoped<ICspNonceService>(sp => sp.GetRequiredService<CspNonceService>());
+            services.AddScoped<ICspNonceWriter>(sp => sp.GetRequiredService<CspNonceService>());
 
             builder.RootComponents.AddDocumentMetadata();
             builder.RootComponents.Add<App>("#app");

@@ -1,4 +1,4 @@
-@page "/TreeList/Filtering/SearchBox"
+﻿@page "/TreeList/Filtering/SearchBox"
 
 <DemoPageSectionComponent Id="TreeList-Filtering-SearchBox" VerticalAlignment="VerticalAlignment.Top" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
@@ -15,9 +15,11 @@
                     TextWrapEnabled="false"
                     VirtualScrollingEnabled="true"
                     FilterTreeMode="FilterTreeMode.Mode"
-                    SizeMode="Params.SizeMode">
+                    SizeMode="Params.SizeMode"
+                    AutoExpandAllNodes="true"
+                    CssClass="max-h-480">
                 <Columns>
-                    <DxTreeListDataColumn FieldName="Name" Caption="Task" SortOrder="TreeListColumnSortOrder.Ascending" FilterRowValue='"Product"' />
+                    <DxTreeListDataColumn FieldName="Name" Caption="Task" SortOrder="TreeListColumnSortOrder.Ascending"/>
                     <DxTreeListDataColumn FieldName="EmployeeName" Caption="Assigned To" TextAlignment="TreeListTextAlignment.Left" Width="200px"/>
                     <DxTreeListDataColumn FieldName="StartDate" Width="100px" />
                     <DxTreeListDataColumn FieldName="DueDate" Width="100px" />
@@ -28,7 +30,7 @@
                         <CellDisplayTemplate>
                             @{
                                 var employeeTask = (EmployeeTask)context.DataItem;
-                                var displayText = TreeListRenderHelper.EmployeeTaskPriorityToString(employeeTask);
+                                var displayText = EmployeeTask.EmployeeTaskPriorityToString(employeeTask);
 
                                 var badgeClass = employeeTask.Priority switch {
                                     -1 => "bg-success",
@@ -102,7 +104,7 @@
 
             TreeListFilterTreeModeItem FilterTreeMode { get; set; }
 
-            protected override async Task OnInitializedAsync() {
+            protected override void OnInitialized() {
                 FilterTreeMode = FilterModes.First();
                 Data = EmployeeTaskDataProvider.GenerateData();
             }

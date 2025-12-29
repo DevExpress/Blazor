@@ -2,8 +2,8 @@
 @using System.IO
 @using System.Reflection
 @using DevExpress.Blazor.PdfViewer
-@inject DemoThemeService Themes
 @inject IDemoStaticResourceService DemoStaticResourceService
+@inject DemoThemeService Themes
 
 @if(Themes.ActiveTheme.IsFluent) {
     <link rel="stylesheet" href=@DemoStaticResourceService.GetUrlWithVersion("_content/DevExpress.Blazor.Viewer/css/dx-blazor-viewer-components.fluent.css")>
@@ -58,3 +58,4 @@ else {
         }
     }
 </DemoPageSectionComponent>
+

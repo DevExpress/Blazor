@@ -72,7 +72,7 @@
                     var orderDate = Convert.ToDateTime(e.Grid.GetRowValue(e.VisibleIndex, "OrderDate"));
                     var shippedDate = (DateTime?)e.Grid.GetRowValue(e.VisibleIndex, "ShippedDate");
                     if(IncreaseDiscountRequired(orderDate, shippedDate))
-                    e.Style = "color: #207A33; font-weight: 700; background-color: rgba(40, 167, 69, 0.15)";
+                        e.CssClass = "highlighted-cell";
                 }
             }
 

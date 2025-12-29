@@ -9,6 +9,7 @@
                 ResizeMode="MemoResizeMode"
                 CssClass="cw-480"
                 Rows="5"
+                MaxRows="@MaxRows"
                 InputId="memoResizeMode" />
     </ChildContentWithParameters>
 
@@ -18,10 +19,20 @@
                         Value="@(MemoResizeMode.ToString())"
                         ValueChanged="@((string selectedItem) =>
                                         { MemoResizeMode = Enum.Parse<MemoResizeMode>(selectedItem); })" />
+        <OptionSpinEdit CssClass="ow-150"
+                        MinValue="8"
+                        MaxValue="15"
+                        Increment="1"
+                        Enabled="@(MaxRowsEnabled)"
+                        Label="Max Rows:"
+                        @bind-Value="MaxRows" />
     </OptionsContent>
 
     @code {
-        MemoResizeMode MemoResizeMode { get; set; } = MemoResizeMode.VerticalAndHorizontal;
+        public int? MaxRows { get; set; } = 10;
+        MemoResizeMode MemoResizeMode { get; set; } = MemoResizeMode.Auto;
+        IEnumerable<MemoResizeMode> HeightRestrictedResizeModes { get; set; } =  new[] { MemoResizeMode.Auto, MemoResizeMode.Vertical, MemoResizeMode.VerticalAndHorizontal };
+        bool MaxRowsEnabled { get { return HeightRestrictedResizeModes.Contains(MemoResizeMode); } }
 
         string TextValue { get; set; } =
             "Prepare 2020 Marketing Plan: We need to double revenues in 2020 "+

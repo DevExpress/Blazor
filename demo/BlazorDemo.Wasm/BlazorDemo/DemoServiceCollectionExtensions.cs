@@ -3,7 +3,7 @@ using System.Reflection;
 using Azure.AI.OpenAI;
 using BlazorDemo.Configuration;
 using BlazorDemo.DataProviders;
-using BlazorDemo.Services;
+ using BlazorDemo.Services;
 using DevExpress.AIIntegration;
 using DevExpress.Blazor.DocumentMetadata;
 using DevExpress.Blazor.RichEdit.SpellCheck;
@@ -16,7 +16,7 @@ using Microsoft.Extensions.FileProviders;
 namespace BlazorDemo {
 
     public static class DemoServiceCollectionExtensions {
-        public static void AddDemoServices(this IServiceCollection services, bool blazorWasm = false) {
+        public static void AddDemoServices(this IServiceCollection services, string azureOpenAIEndpoint, string azureOpenAIKey, string deploymentName, bool blazorWasm = false) {
             services.AddScoped<WeatherForecastService>();
             services.AddScoped<RentInfoDataService>();
             services.AddScoped<ContosoRetailDataService>();
@@ -25,18 +25,45 @@ namespace BlazorDemo {
             services.AddScoped<IssuesDataService>();
             services.AddScoped<WorldcitiesDataService>();
             services.AddScoped<DictionaryEntryDataProvider>();
-            var azureOpenAIEndpoint = "https://public-api.devexpress.com/demo-openai"; //DevExpress proxy-server
-            var azureOpenAIKey = "DEMO"; //Demo key
+            services.AddScoped<AIHttpResponseProcessor>();
 
-            var openAIClient = new AzureOpenAIClient(
-                new Uri(azureOpenAIEndpoint),
-                new System.ClientModel.ApiKeyCredential(azureOpenAIKey),
-                new AzureOpenAIClientOptions() { Transport = new PromoteHttpStatusErrorsPipelineTransport() });
+            services.AddScoped((provider) => {
+                return new AzureOpenAIClient(
+                    new Uri(azureOpenAIEndpoint),
+                    new System.ClientModel.ApiKeyCredential(azureOpenAIKey),
+                    new AzureOpenAIClientOptions() {
+                        Transport = new PromoteHttpStatusErrorsPipelineTransport(provider.GetService<AIHttpResponseProcessor>())
+                 });
+            });
+            services.AddScoped<IChatClient>((provder) => {
+                var client = provder.GetService<AzureOpenAIClient>();
+                return client.GetChatClient(deploymentName).AsIChatClient();
+            });
 
-            var chatClient = openAIClient.GetChatClient("gpt-4.1").AsIChatClient();
+            services.AddKeyedScoped<IChatClient>(ChatClientKeys.FunctionCallingWithGrid, (provider, key) => {
+                var baseClient = provider.GetService<IChatClient>();
+                return baseClient.AsBuilder()
+                   .UseDXTools()
+                   .UseFunctionInvocation()
+                   .Build(provider);
+            });
+
+            services.AddKeyedScoped<IChatClient>(ChatClientKeys.FunctionCalling, (provider, key) => {
+                var baseClient = provider.GetService<IChatClient>();
+                return baseClient
+                    .AsBuilder()
+                    .ConfigureOptions(x => {
+                        x.Tools = [
+                            CustomAIFunctions.GetWeatherTool,
+                            CustomAIFunctions.TestExceptionTool,
+                            CustomAIFunctions.GetTimeTool
+                        ];
+                    })
+                    .UseFunctionInvocation()
+                    .Build();
+            });
+
             services.AddScoped<IAIExceptionHandler, AIExceptionHandler>();
-            services.TryAddSingleton(chatClient);
-            services.TryAddSingleton(openAIClient);
             services.AddDevExpressAI();
             services.AddSingleton<SmartFilterProvider>();
             services.AddDevExpressBlazor()

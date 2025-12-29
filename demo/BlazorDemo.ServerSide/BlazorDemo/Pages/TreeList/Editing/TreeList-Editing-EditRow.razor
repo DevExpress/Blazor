@@ -18,14 +18,14 @@
                     CustomizeEditModel="TreeList_CustomizeEditModel"
                     HighlightRowOnHover="true">
             <Columns>
-                <DxTreeListCommandColumn Width="200px"/>
+                <DxTreeListCommandColumn Width="150px" />
                 <DxTreeListDataColumn FieldName="Name" Caption="Task"/>
                 <DxTreeListDataColumn FieldName="StartDate" Width="120px"/>
                 <DxTreeListDataColumn FieldName="DueDate" Width="120px"/>
                 <DxTreeListDataColumn FieldName="Priority" Width="80px" CaptionAlignment="TreeListTextAlignment.Center" TextAlignment="TreeListTextAlignment.Center">
                     <CellDisplayTemplate>
                         @{
-                            var displayText = TreeListRenderHelper.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem);
+                            var displayText = EmployeeTask.EmployeeTaskPriorityToString((EmployeeTask)context.DataItem);
                         }
                         <span title="@displayText priority">@displayText</span>
                     </CellDisplayTemplate>
@@ -38,7 +38,6 @@
                         <DxProgressBar Value="Convert.ToDouble(context.Value)"
                                        MinValue="0"
                                        MaxValue="100"
-                                       CssClass="status-progress"
                                        Thickness="0.875em"
                                        Size="100%"
                                        ShowLabel="false"/>

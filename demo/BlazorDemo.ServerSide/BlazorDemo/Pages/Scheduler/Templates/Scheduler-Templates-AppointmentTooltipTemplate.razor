@@ -13,9 +13,9 @@
                         @{
                             string backgroundCss = context.Resource == null ? "dxbl-purple-color" : context.Resource.BackgroundCssClass;
                         }
-                        <div class="demo-sc-apt @(IsAccepted(context.Appointment) ? "demo-sc-accepted" : "")" style="width: 100%;">
-                            <div class="card demo-apt-bg @backgroundCss" style="width: 100%;"></div>
-                            <div class="card shadow-sm p-1 demo-sc-apt-content text-white" style="width:100%;">
+                        <div class="demo-sc-apt @(IsAccepted(context.Appointment) ? "demo-sc-accepted" : "") w-100">
+                            <div class="card demo-apt-bg @backgroundCss w-100"></div>
+                            <div class="card shadow-sm p-1 demo-sc-apt-content text-white w-100">
                                 @context.Appointment.Subject
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                 <div class="tooltip-text-header">@context.Appointment.Subject</div>
                 @if (IsAccepted(context.Appointment))
                 {
-                    <div style="margin-right: .3em;">(Accepted)</div>
+                    <div class="me-1">(Accepted)</div>
                 }
                 <DxSchedulerShowAppointmentCompactFormButton></DxSchedulerShowAppointmentCompactFormButton>
                 <DxSchedulerDeleteAppointmentButton></DxSchedulerDeleteAppointmentButton>
@@ -62,11 +62,11 @@
                             <div class="dxbl-sc-label-item @resourceCssClass"></div>
                         </div>
                         <div class="col ps-0">
-                            <span class="dxbl-sc-subject" style="vertical-align: middle;">
+                            <span class="dxbl-sc-subject align-middle">
                                 @context.Appointment.Subject
                             </span>
                             @if(context.Resource != null) {
-                                <span class="dxbl-sc-subject" style="vertical-align: middle;">
+                                <span class="dxbl-sc-subject align-middle">
                                     (@context.Resource.Caption)
                                 </span>
                             }
@@ -78,7 +78,7 @@
                                 <use href="#dxsc-time-icon"></use>
                             </svg>
                         </div>
-                        <div class="col ps-0"><span style="vertical-align: middle;">@startDateTime</span></div>
+                        <div class="col ps-0"><span class="align-middle">@startDateTime</span></div>
                     </div>
                     <hr />
                     <div class="sc-tooltip-bottom-container">

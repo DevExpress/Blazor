@@ -1,11 +1,18 @@
-﻿<DemoPageSectionComponent Id="Navigation-ContextMenu-DataBinding" ShowSizeMode="true">
+﻿@inject ICspNonceService NonceProvider
+<DemoPageSectionComponent Id="Navigation-ContextMenu-DataBinding" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <div style="@Formatting.GetStyleString()" class="demo-preventsel target-container" tabindex="0"
+        <style nonce="@NonceProvider.Nonce">
+            div.context-menu-text-container {
+                @Formatting.GetStyleString()
+            }
+        </style>
+
+        <div class="demo-preventsel target-container context-menu-text-container" tabindex="0"
             @oncontextmenu="@OnContextMenu"
             @oncontextmenu:preventDefault
             @onkeydown="@OnKeyDown">
             @*BeginHide*@
-            <span style="display: inline-block; text-align: center; margin: auto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</span>
+            <span class="d-inline-block text-center m-auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.</span>
             @*EndHide*@
         </div>
         <DxContextMenu PositionTarget="#section-DataBinding .target-container" Data="@MenuItems" ItemClick="@ItemClick" SizeMode="Params.SizeMode" @ref="@ContextMenu">

@@ -1,3 +1,5 @@
-This demo showcases the Pivot Table's performance with thousands of rows. The Pivot Table efficiently aggregates large data sources and allows users to navigate and sort data seamlessly.
- 
-Use the Pivot Table's virtual scrolling option to improve performance against large datasets. When the [VirtualScrollingEnabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PivotTable.DxPivotTable.VirtualScrollingEnabled) property is set to `true`, the DevExpress Blazor Pivot Table renders data on demand as users scroll through rows/columns.
+Our Blazor Pivot Table can aggregate large data sources efficiently and allows users to navigate and sort data with ease.
+
+This demo allows you to test Pivot Table performance when bound to a data source with thousands of rows.
+
+To optimize component performance against large datasets, this demo uses [column and row virtualization](https://docs.devexpress.com/Blazor/405626/components/pivottable/scrolling). When you activate the [VirtualScrollingEnabled](https://docs.devexpress.com/Blazor/DevExpress.Blazor.PivotTable.DxPivotTable.VirtualScrollingEnabled) option, the DevExpress Blazor Pivot Table renders data on demand as users scroll through rows/columns.

@@ -1,0 +1,27 @@
+@using DevExpress.Data.Filtering
+<DemoPageSectionComponent Id="FilterBuilder-CollectionFieldsAndAggregateOperators" ShowSizeMode="true" HorizontalAlignment="HorizontalAlignment.Center" VerticalAlignment="VerticalAlignment.Center">
+    <ChildContentWithParameters Context="Params">
+        <DxFilterBuilder @bind-FilterCriteria="FilterCriteria" SizeMode="Params.SizeMode">
+            <Fields>
+                <DxFilterBuilderField FieldName="ProductName" Caption="Product" Type="@typeof(string)" />
+                <DxFilterBuilderField FieldName="UnitPrice" Caption="Unit Price" Type="@typeof(decimal)" />
+                <DxFilterBuilderField FieldName="UnitsInStock" Caption="Units In Stock" Type="@typeof(int)" />
+                <DxFilterBuilderField FieldName="Orders" Caption="Orders" IsCollection="true">
+                    <Fields>
+                        <DxFilterBuilderField FieldName="OrderDate" Caption="Order Date" Type="@typeof(DateTime?)" />
+                        <DxFilterBuilderField FieldName="CustomerName" Caption="Customer" Type="@typeof(string)" />
+                        <DxFilterBuilderField FieldName="Quantity" Caption="Quantity" Type="@typeof(int)" />
+                    </Fields>
+                </DxFilterBuilderField>
+            </Fields>
+        </DxFilterBuilder>
+
+        @code {
+            CriteriaOperator FilterCriteria { get; set; }
+
+            protected override void OnInitialized() {
+                FilterCriteria = CriteriaOperator.Parse("[Orders][[CustomerName] = 'Seven Seas Imports' And [Quantity] < 50]");
+            }
+        }
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

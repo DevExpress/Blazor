@@ -28,6 +28,10 @@
                      AcceptedFileTypes="@AllowedFileExtensions">
         </DxFileInput>
     </div>
+    <div class="upload-validation-text info-text">
+        <span>Uploads are limited to a single file up to 15 MB.</span>
+        <span>Allowed file extensions: .jpg, .jpeg, .gif, .png.</span>
+    </div>
 
     @code {
         bool UploadComplete { get; set; } = false;

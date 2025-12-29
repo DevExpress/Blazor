@@ -2,9 +2,9 @@
     @inject NavigationManager NavigationManager
 
     <div class="upload-container">
-        <div style="@(SelectedFilesCount > 0 ? "display: none" : string.Empty)">
+        <div class="@(SelectedFilesCount > 0 ? "d-none" : null)">
             <span class="drop-file-icon mb-3"></span>
-            <span class="drop-file-label mb-3">Click the Select File button to select a file</span>
+            <span class="drop-file-label mb-3">Click the button below to start your upload</span>
         </div>
         <DxUpload Name="myFile"
                   MaxFileSize="4000000"
@@ -12,6 +12,10 @@
                   UploadUrl="@GetUploadUrl("api/UploadValidation/Upload/")"
                   SelectedFilesChanged="@SelectedFilesChanged">
         </DxUpload>
+    </div>
+    <div class="upload-validation-text info-text">
+        <span>Uploads are limited to a single file up to 15 MB.</span>
+        <span>Allowed file extensions: .jpg, .jpeg, .gif, .png.</span>
     </div>
 
     @code {

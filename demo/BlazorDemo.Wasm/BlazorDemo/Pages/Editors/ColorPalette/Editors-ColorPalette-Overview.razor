@@ -1,8 +1,13 @@
-﻿<DemoPageSectionComponent Id="Editors-ColorPalette-Overview" ShowSizeMode="true">
+﻿@inject ICspNonceService NonceProvider
+<DemoPageSectionComponent Id="Editors-ColorPalette-Overview" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
+        <style nonce="@NonceProvider.Nonce">
+            @ColorPaletteImageStyle()
+        </style>
+
         <div class="color-palette-container">
             <div class="color-palette-logo-container me-5">
-                <div class="color-palette-image" style="background-color: @Value;"></div>
+                <div class="color-palette-image"></div>
                 <p class="demo-text mt-3">
                     @GetSelectedValueDescription()
                 </p>
@@ -20,5 +25,7 @@
             else
                 return @<text>No selected color</text>;
         }
+
+        string ColorPaletteImageStyle() => $".color-palette-image {{ background-color: {Value}; }}";
     }
 </DemoPageSectionComponent>

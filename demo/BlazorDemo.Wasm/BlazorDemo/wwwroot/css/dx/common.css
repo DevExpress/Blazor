@@ -130,11 +130,29 @@ body {
     --dxbl-grid-toolbar-edit: url("../images/icons/grid-toolbar-edit.svg");
 }
 
-.grid-toolbar-cancel {
+.grid-toolbar-cancel,
+.treelist-toolbar-cancel {
     --dxbl-grid-toolbar-cancel: url("../images/icons/undo.svg");
 }
 
-.grid-toolbar-save {
+.grid-toolbar-document-csv {
+    --dxbl-grid-toolbar-document-csv: url("../images/icons/document-csv.svg");
+}
+
+.grid-toolbar-document-xlsx {
+    --dxbl-grid-toolbar-document-xlsx: url("../images/icons/document-xlsx.svg");
+}
+
+.grid-toolbar-document-xls {
+    --dxbl-grid-toolbar-document-xls: url("../images/icons/document-xls.svg");
+}
+
+.grid-toolbar-document-pdf {
+    --dxbl-grid-toolbar-document-pdf: url("../images/icons/document-pdf.svg");
+}
+
+.grid-toolbar-save,
+.treelist-toolbar-save {
     --dxbl-grid-toolbar-save: url("../images/icons/save.svg");
 }
 
@@ -182,6 +200,7 @@ body {
 
 /* Ribbon */
 .rb-icon {
+    --dxbl-icon-rb-hamburger: url("../images/icons/hamburger.svg");
     --dxbl-icon-rb-undo: url("../images/icons/ribbon/berry/undo.svg");
     --dxbl-icon-rb-redo: url("../images/icons/ribbon/berry/redo.svg");
     --dxbl-icon-rb-clipboard: url("../images/icons/ribbon/berry/clipboard.svg");
@@ -212,6 +231,20 @@ body {
     --dxbl-icon-rb-print: url("../images/icons/ribbon/berry/print.svg");
     --dxbl-icon-rb-share: url("../images/icons/ribbon/berry/share.svg");
     --dxbl-icon-rb-save: url("../images/icons/ribbon/berry/save.svg");
+    --dxbl-icon-rb-calendar-day: url("../images/icons/ribbon/berry/calendar-day.svg");
+    --dxbl-icon-rb-mail: url("../images/icons/ribbon/berry/mail.svg");
+    --dxbl-icon-rb-delete: url("../images/icons/ribbon/berry/delete.svg");
+    --dxbl-icon-rb-archive: url("../images/icons/ribbon/berry/archive.svg");
+    --dxbl-icon-rb-clear-history: url("../images/icons/ribbon/berry/clear-history.svg");
+    --dxbl-icon-rb-folder-arrow-right: url("../images/icons/ribbon/berry/folder-arrow-right.svg");
+    --dxbl-icon-rb-chat: url("../images/icons/ribbon/berry/chat-person.svg");
+    --dxbl-icon-rb-tag: url("../images/icons/ribbon/berry/tag.svg");
+    --dxbl-icon-rb-flag: url("../images/icons/ribbon/berry/flag.svg");
+    --dxbl-icon-rb-clock: url("../images/icons/ribbon/berry/clock.svg");
+}
+
+.dxbl-ribbon__root {
+    --dxbl-icon-rb-opacity: 0.7;
 }
 
 /* Tabs */
@@ -242,6 +275,18 @@ dxbl-check {
 .demo-group {
     --dxbl-demo-group-color: #495057;
     --dxbl-demo-group-border-bottom-color: #E9ECEF;
+}
+
+.demo-group-icon {
+    --dxbl-demo-group-icon-fill: initial;
+}
+
+.demo-group-icon-classic {
+    --dxbl-demo-group-icon-visibility: block;
+}
+
+.demo-group-icon-fluent {
+    --dxbl-demo-group-icon-visibility: none;
 }
 
 .theme-blazing-dark .demo-group {
@@ -406,4 +451,9 @@ dxbl-check {
 
 .dxbl-lg .dxbl-menu.demo-drawer-menu {
     --dxbl-menu-item-padding-x: 1.0625rem;
+}
+
+/* AIChat */
+.aichat-icon {
+    --dxbl-icon-ai-chat: url("../images/icons/ai-chat.svg");
 }

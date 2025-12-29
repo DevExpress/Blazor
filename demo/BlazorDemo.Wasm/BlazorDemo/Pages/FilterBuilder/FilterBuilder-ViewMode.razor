@@ -1,0 +1,83 @@
+﻿<DemoPageSectionComponent Id="FilterBuilder-ViewMode" ShowSizeMode="true" HorizontalAlignment="HorizontalAlignment.Center" VerticalAlignment="VerticalAlignment.Center">
+    <ChildContentWithParameters Context="Params">
+        @using DevExpress.Data.Filtering
+        @inject NwindDataService NwindDataService
+
+        <div class="card p-2 gap-2 mb-2">
+            <DxFilterBuilder @ref="@FilterBuilderRef" @bind-FilterCriteria="@FilterCriteria" SizeMode="@Params.SizeMode" ViewMode="@ViewMode">
+                <Fields>
+                    <DxFilterBuilderField FieldName="ProductName" Caption="Product Name" Type="@typeof(string)"/>
+                    <DxFilterBuilderField FieldName="CategoryId" Caption="Category" Type="@typeof(int)">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="Categories" ValueFieldName="CategoryId" TextFieldName="CategoryName"/>
+                        </EditSettings>
+                    </DxFilterBuilderField>
+                    <DxFilterBuilderField FieldName="SupplierId" Caption="Supplier" Type="@typeof(int)">
+                        <EditSettings>
+                            <DxComboBoxSettings Data="Suppliers" ValueFieldName="SupplierId" TextFieldName="CompanyName">
+                                <ItemDisplayTemplate>
+                                    @{
+                                        var item = (Supplier)context.DataItem;
+                                    }
+                                    @item.CompanyName (@item.ContactName)
+                                </ItemDisplayTemplate>
+                            </DxComboBoxSettings>
+                        </EditSettings>
+                        <Fields>
+                            <DxFilterBuilderField FieldName="Supplier.CompanyName" Caption="Company Name" CaptionFullPath="Supplier.Company Name" Type="@typeof(string)"/>
+                            <DxFilterBuilderField FieldName="Supplier.ContactName" Caption="Contact Name" CaptionFullPath="Supplier.Contact Name" Type="@typeof(string)"/>
+                        </Fields>
+                    </DxFilterBuilderField>
+                    <DxFilterBuilderField FieldName="UnitPrice" Caption="Unit Price" Type="@typeof(decimal)"/>
+                    <DxFilterBuilderField FieldName="UnitsInStock" Caption="Units in Stock" Type="@typeof(short)"/>
+                    <DxFilterBuilderField FieldName="QuantityPerUnit" Caption="Quantity per Unit" Type="@typeof(int)"/>
+                    <DxFilterBuilderField FieldName="Discontinued" Type="@typeof(bool)"/>
+                </Fields>
+            </DxFilterBuilder>
+
+            <div class="d-flex gap-2 justify-content-end w-100">
+                <DxCheckBox @bind-Checked="@ShowTextEditor" CssClass="text-editor-checkbox" SizeMode="Params.SizeMode">Text Editor</DxCheckBox>
+                <DxButton Text="Clear" Click="ClearFilterCriteria" RenderStyle="ButtonRenderStyle.Secondary" SizeMode="Params.SizeMode"/>
+                <DxButton Text="Apply" SizeMode="Params.SizeMode" Enabled="@IsApplyButtonEnabled"/>
+            </div>
+        </div>
+
+        @code {
+            CriteriaOperator FilterCriteria { get; set; }
+            DxFilterBuilder FilterBuilderRef { get; set; }
+            bool ShowTextEditor { get; set; }
+            bool IsApplyButtonEnabled { get; set; } = true;
+            IEnumerable<Category> Categories { get; set; }
+            IEnumerable<Supplier> Suppliers { get; set; }
+
+            FilterBuilderViewMode ViewMode => ShowTextEditor ? FilterBuilderViewMode.VisualAndText : FilterBuilderViewMode.Visual;
+
+            protected override async Task OnInitializedAsync() {
+                Suppliers = await NwindDataService.GetSuppliersAsync();
+                Categories = await NwindDataService.GetCategoriesAsync();
+
+                FilterCriteria = CriteriaOperator.Parse("StartsWith([ProductName], 'C') And ([UnitPrice] < 50.0m Or [Discontinued] = true)");
+            }
+
+            protected override void OnAfterRender(bool firstRender) {
+                base.OnAfterRender(false);
+
+                if(firstRender) {
+                    FilterBuilderRef.GetEditContext().OnValidationStateChanged += HandleValidationStateChanged;
+                }
+            }
+
+            private void HandleValidationStateChanged(object sender, ValidationStateChangedEventArgs e) {
+                var isValid = FilterBuilderRef.GetEditContext().GetValidationMessages();
+                IsApplyButtonEnabled = !isValid.Any();
+
+                StateHasChanged();
+            }
+
+            void ClearFilterCriteria() {
+                FilterCriteria = null;
+            }
+        }
+
+    </ChildContentWithParameters>
+</DemoPageSectionComponent>

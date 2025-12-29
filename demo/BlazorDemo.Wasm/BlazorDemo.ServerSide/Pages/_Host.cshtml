@@ -2,23 +2,27 @@
 @using System.Text.Json
 @using BlazorDemo.Services
 @using DevExpress.Blazor
+@using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @namespace BlazorDemo.ServerSide.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject BlazorDemo.Services.DemoThemeService Themes
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@inject ICspNonceService NonceProvider
 
 @{
+#if VISUALTESTS
+    var renderMode = RenderMode.Server;
+#else
+    var renderMode = RenderMode.ServerPrerendered;
+#endif
     var storedThemeName = HttpContextAccessor.HttpContext.Request.Cookies[DemoThemeService.ThemeCookieKey];
     var storedThemeState = HttpContextAccessor.HttpContext.Request.Cookies[DemoThemeService.ThemeStateCookieKey];
-    var themeState = new ThemeState();
-    if (storedThemeState != null)
-        themeState = JsonSerializer.Deserialize<ThemeState>(storedThemeState);
+
+    var themeState = Themes.RestoreThemeState(storedThemeState);
 
     Themes.SetActiveThemeByName(storedThemeName);
     Themes.SetThemeState(themeState);
-
-    var theme = Themes.ActiveTheme.ApplyStoredState(themeState);
 }
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="@Themes.ActiveTheme.BootstrapThemeMode">
@@ -75,102 +79,56 @@
                block-all-mixed-content;
           ">
 
-    @foreach (string style in theme.GetStyles()) {
-        <style data-theme-id="@theme.Name">
-            @style
-        </style>
-    }
-
-    @foreach (string path in theme.GetFilePaths()) {
-        <link rel="stylesheet" href="@path" data-theme-id="@theme.Name" />
-    }
-
-    <link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo.css" asp-append-version="true" dx-demo-link>
-    <link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-pages.css" asp-append-version="true">
-
     <environment include="ServerSide">
         <link rel="stylesheet" href="BlazorDemo.ServerSide.styles.css" asp-append-version="true">
-        <component type="typeof(BlazorDemo.Shared.DemoThemeJsChangeDispatcher)" render-mode="ServerPrerendered" param-InitialThemeName="@storedThemeName" param-InitialThemeState="@themeState" />
+        <component type="typeof(BlazorDemo.Shared.DemoThemeManager)" render-mode="@renderMode" param-InitialThemeName="@storedThemeName" param-InitialThemeState="@themeState" />
+
+        <script src="@DxResourceManager.PreloadScriptPath" type="text/javascript"></script>
         <script src="_framework/blazor.server.js" defer></script>
     </environment>
     <environment include="Wasm.AspNetCoreHosted">
         <link rel="stylesheet" href="BlazorDemo.Wasm.Server.styles.css" asp-append-version="true">
-        <component type="typeof(BlazorDemo.Shared.DemoThemeJsChangeDispatcher)" render-mode="WebAssemblyPrerendered" param-InitialThemeName="@storedThemeName" param-InitialThemeState="@themeState"/>
+        <component type="typeof(BlazorDemo.Shared.DemoThemeManager)" render-mode="WebAssemblyPrerendered" param-InitialThemeName="@storedThemeName" param-InitialThemeState="@themeState" />
+
+        <script src="@DxResourceManager.PreloadScriptPath" type="text/javascript"></script>
         <script src="_framework/blazor.webassembly.js" defer></script>
     </environment>
-    <environment include="Wasm.AspNetCoreHosted">
-        <style>
-            body {
-                margin: 0;
-            }
 
-            .loading-font {
-                font-family: "Segoe UI",Roboto,"Helvetica Neue","-apple-system",BlinkMacSystemFont,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-                font-size: .88rem;
-                font-weight: 400;
-                line-height: 1.5;
-                text-align: left;
-            }
-
-            .loading-items-center {
-                align-items: center;
-                justify-content: center;
-                display: flex;
-            }
-
-            .loading-border-primary {
-                border-color: #bfbfbf;
-            }
-
-            .loading {
-                width: 140px;
-                height: 140px;
-            }
-
-            .loading-caption {
-                font-size: 1.5rem;
-                font-weight: 600;
-            }
-
-            .loading-border {
-                border-width: 4px;
-                border-style: solid;
-            }
-
-            .loading-image-wrapper {
-                width: 120px;
-                height: 120px;
-                opacity: 0;
-            }
-        </style>
-    </environment>
+    <link rel="stylesheet" href="_content/BlazorDemo/css/switcher-resources/themes.css" asp-append-version="true">
+    <link rel="stylesheet" href="_content/BlazorDemo/css/switcher-resources/theme-switcher.css" asp-append-version="true">
+    <link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo.css" asp-append-version="true" dx-demo-link>
+    <link rel="stylesheet" href="_content/BlazorDemo/css/dx-demo-pages.css" asp-append-version="true">
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.0/build/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlightjs-cshtml-razor@2.2.0/dist/cshtml-razor.min.js"></script>
 </head>
 <body>
 @{
     var isIEOrEdgeLegacy = Request.Headers["User-Agent"].Any(userAgent => userAgent.Contains("MSIE") || userAgent.Contains("Trident"));
 }
+
 @if (isIEOrEdgeLegacy) {
     <component type="typeof(BlazorDemo.Shared.BrowserNotSupported)" render-mode="Static" />
 }
 else {
     <div id="app">
         <environment include="ServerSide">
-            <component type="typeof(BlazorDemo.App)" render-mode="ServerPrerendered" />
+            <component type="typeof(BlazorDemo.App)" render-mode="@renderMode" param-CspStyleNonce="@NonceProvider.Nonce" />
         </environment>
         <environment include="Wasm.AspNetCoreHosted">
-            <div id="applicationLoadingPanel" class="loading-items-center loading-font" style="height: 100vh; width: 100vw; background-color: #fff;">
-                <div class="loading-items-center" style="flex-direction: column">
-                    <div class="loading position-relative loading-items-center" style="position: relative">
-                        <div class="loading-border border-secondary" style="position: absolute; border-color: #d9d9d9; height: 100%; width: 100%; border-radius: 50%"></div>
-                        <div class="spinner-border loading-boarder border-primary loading-border-primary" style="position: absolute; height: 100%; width: 100%; border-radius: 50%; border-left-color: transparent !important; border-right-color: transparent !important; border-bottom-color: transparent !important"></div>
-                        <div id="loadingBackground" class="loading-image-wrapper text-white bg-primary loading-items-center" style="color: #fff; border-radius: 50%"></div>
+            <div id="applicationLoadingPanel" class="loading-items-center loading-font">
+                <div class="loading-items-center flex-column">
+                    <div class="loading position-relative loading-items-center">
+                        <div class="loading-border border-secondary"></div>
+                        <div class="spinner-border loading-boarder border-primary loading-border-primary"></div>
+                        <div id="loadingBackground" class="loading-image-wrapper text-white bg-primary loading-items-center"></div>
                     </div>
                     <div class="loading-caption mt-3">DevExpress UI for Blazor</div>
-                    <div class="loading-sm-text text-body mt-1" style="color: #a1a1a1">Loading...</div>
+                    <div class="loading-sm-text text-body mt-1">Loading...</div>
                 </div>
             </div>
         </environment>
     </div>
 }
+    <persist-component-state />
 </body>
 </html>

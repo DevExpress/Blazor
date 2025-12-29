@@ -2,13 +2,17 @@
 ::deep .grid-toolbar-delete,
 ::deep .grid-toolbar-edit,
 ::deep .grid-toolbar-column-chooser,
+::deep .grid-toolbar-document-csv,
+::deep .grid-toolbar-document-xlsx,
+::deep .grid-toolbar-document-xls,
+::deep .grid-toolbar-document-pdf,
 ::deep .grid-toolbar-export {
     background-size: contain;
     mask-repeat: no-repeat;
     -webkit-mask-repeat: no-repeat;
     background-position: center center;
     /* Fix for the Firefox sub pixel rendering bug on the SizeMode change https://bugzilla.mozilla.org/show_bug.cgi?id=739176 */
-    transform: translate3d(0,0,0);    
+    transform: translate3d(0,0,0);
 }
 
 ::deep .search-icon {

@@ -8,13 +8,6 @@ using BlazorDemo.Configuration;
 using DevExpress.Blazor;
 
 namespace BlazorDemo.Services {
-    public interface IDemoThemeChangeRequestDispatcher {
-        void RequestThemeChange(DemoTheme theme);
-    }
-
-    public interface IDemoThemeLoadNotifier {
-        Task NotifyThemeLoadedAsync(DemoTheme theme);
-    }
 
     public class ThemeState {
         public ThemeMode? Mode { get; set; } = ThemeMode.Light;
@@ -34,9 +27,6 @@ namespace BlazorDemo.Services {
         public const string ThemeCookieKey = "DXBZCurrentWasmTheme";
 #endif
         public static readonly string ThemeStateCookieKey = $"{ThemeCookieKey}_Opts";
-        public IDemoThemeChangeRequestDispatcher ThemeChangeRequestDispatcher { get; set; }
-
-        public IDemoThemeLoadNotifier ThemeLoadNotifier { get; set; }
 
         public DemoThemeService() {
             ResourcesReadyState = new ConcurrentDictionary<string, TaskCompletionSource<bool>>();
@@ -56,11 +46,22 @@ namespace BlazorDemo.Services {
         }
 
         private DemoTheme FindThemeByName(string themeName) {
-            return Themes.SingleOrDefault(theme => theme.Name == themeName);
+            return All.SingleOrDefault(theme => theme.Name == themeName);
         }
 
         public void SetThemeState(ThemeState themeState) {
             _themeState = themeState;
+        }
+
+        public ThemeState RestoreThemeState(string storedThemeState) {
+            if(!string.IsNullOrEmpty(storedThemeState)) {
+                try {
+                    return JsonSerializer.Deserialize<ThemeState>(storedThemeState);
+                }
+                catch (Exception) { }
+            }
+
+            return new ThemeState();
         }
 
         public List<DemoTheme> FluentThemes = [
@@ -96,7 +97,7 @@ namespace BlazorDemo.Services {
             DemoThemes.BootstrapLumen
         ];
 
-        public List<DemoTheme> Themes =>
+        public List<DemoTheme> All =>
             FluentThemes
                 .Concat(ClassicThemes)
                 .Concat(BootstrapThemes)

@@ -1,6 +1,7 @@
-﻿<DemoPageSectionComponent Id="Editors-Calendar-Overview" ShowSizeMode="true">
+﻿@inject ICspNonceService NonceProvider
+<DemoPageSectionComponent Id="Editors-Calendar-Overview" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <style>
+        <style nonce="@NonceProvider.Nonce">
             .demo-calendar {
                 border-width: 1px;
                 border-style: solid;

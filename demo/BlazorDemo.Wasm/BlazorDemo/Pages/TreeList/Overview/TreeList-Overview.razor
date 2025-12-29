@@ -5,12 +5,6 @@
     <ChildContentWithParameters Context="Params">
         @inject IEmployeeTaskDataProvider EmployeeTaskDataProvider
 
-        <style>
-            .status-progress .dxbl-progress-bar-label {
-                display: none;
-            }
-        </style>
-
         <DxTreeList @ref="TreeList"
                     Data="TreeListData"
                     KeyFieldName="Id"
@@ -21,6 +15,7 @@
                     TextWrapEnabled="false"
                     ShowSearchBox="true" @bind-SearchText="@TreeListSearchText"
                     SizeMode="Params.SizeMode"
+                    ContextMenus="TreeListContextMenus.Header"
                     CssClass="max-h-480">
             <Columns>
                 <DxTreeListDataColumn FieldName="Name" Caption="Task" SortOrder="TreeListColumnSortOrder.Ascending" />
@@ -39,7 +34,7 @@
                     <CellDisplayTemplate>
                         @{
                             var employeeTask = (EmployeeTask)context.DataItem;
-                            var displayText = TreeListRenderHelper.EmployeeTaskPriorityToString(employeeTask);
+                            var displayText = EmployeeTask.EmployeeTaskPriorityToString(employeeTask);
 
                             var badgeClass = employeeTask.Priority switch {
                                 -1 => "bg-success",
@@ -62,7 +57,6 @@
                         <DxProgressBar Value="Convert.ToDouble(context.Value)"
                                        MinValue="0"
                                        MaxValue="100"
-                                       CssClass="status-progress"
                                        Thickness="0.875em"
                                        Size="100%"
                                        ShowLabel="false" />
