@@ -9,13 +9,12 @@
 <DemoPageSectionComponent Id="AIChat-FileAttachments"
 ShowSizeMode="true">
     <OptionsContent>
-        <OptionCheckBox Label="Enable File Upload" @bind-Checked="FileUploadEnabled" />
         <OptionComboBox Label="File Types:" Data="Enum.GetValues<FileTypes>()" @bind-Value="@SelectedFileType" />
         <OptionCheckBox Label="Use Streaming" @bind-Checked="UseStreaming" />
     </OptionsContent>
     <ChildContentWithParameters Context="Params">
         <div class="chat-demo-container">
-            <DxAIChat FileUploadEnabled="FileUploadEnabled" CssClass="demo-chat" Initialized="ChatInitialized" UseStreaming="UseStreaming" SizeMode="Params.SizeMode">
+            <DxAIChat FileUploadEnabled="true" CssClass="demo-chat" Initialized="ChatInitialized" UseStreaming="UseStreaming" SizeMode="Params.SizeMode">
                 <AIChatSettings>
                     <DxAIChatFileUploadSettings MaxFileSize="10000000" MaxFileCount="3" AllowedFileExtensions="@Extensions[SelectedFileType]" FileTypeFilter="@Types[SelectedFileType]" />
                 </AIChatSettings>
@@ -62,7 +61,6 @@ ShowSizeMode="true">
             const string IMAGE_NAME = "Eiffel-Tower.jpg";
 
             bool UseStreaming { get; set; } = false;
-            bool FileUploadEnabled { get; set; } = true;
             FileTypes SelectedFileType = FileTypes.Images;
 
             public enum FileTypes {

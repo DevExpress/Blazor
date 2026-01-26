@@ -519,6 +519,7 @@ body,
     background: linear-gradient(90deg, #9CECFB 0%, #4BB5F1 27%, #0052D4 100%);
     color: white;
     outline: 0.2px solid rgba(255, 255, 255, 0.8);
+    border: none;
 }
 
 .dxbl-treeview.sidebar-tree .dxbl-treeview-items-container > .dxbl-treeview-item > .dxbl-treeview-item-content > .dxbl-treeview-item-container:not(.active) {

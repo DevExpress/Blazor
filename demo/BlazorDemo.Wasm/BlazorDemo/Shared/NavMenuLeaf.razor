@@ -1,7 +1,14 @@
-﻿@using BlazorDemo.Configuration
-@inject DemoConfiguration Configuration
+﻿@inject DemoConfiguration Configuration
 
-<DxTreeViewNode title="@DemoItemTooltip" aria-label="@DemoItem.Title" Text="@DemoItem.Title" CssClass="@GetItemCssClass(DemoItem)" NavigateUrl="@DemoItemUrl" BadgeText="@GetItemBadgeText(DemoItem)" Expanded="@DemoItemExpanded" data-required-visible-element-id="@GetVisibleElementOid()">
+<DxTreeViewNode Text="@DemoItem.Title"
+                CssClass="@GetItemCssClass(DemoItem)"
+                NavigateUrl="@DemoItemUrl"
+                AllowSelection="@(!string.IsNullOrEmpty(DemoItemUrl))"
+                BadgeText="@GetItemBadgeText(DemoItem)"
+                Expanded="@DemoItemExpanded"
+                title="@DemoItemTooltip"
+                aria-label="@DemoItem.Title"
+                data-required-visible-element-id="@GetVisibleElementOid()">
     <TextTemplate>@DemoItemText</TextTemplate>
     <Nodes>
         @foreach(var childItem in DemoItem.GetNavTreeChildren(Configuration.IsSiteMode).Where(i => IsVisibleItem(i))) {

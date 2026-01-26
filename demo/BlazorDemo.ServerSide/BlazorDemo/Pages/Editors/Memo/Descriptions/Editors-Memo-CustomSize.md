@@ -2,7 +2,7 @@ The [DevExpress Blazor Memo](https://docs.devexpress.com/Blazor/DevExpress.Blazo
 
 Initially the Memo displays two lines of text and can expand horizontally to fit the parent container's width. If content exceeds two lines, the editor displays a vertical scrollbar.
 
-You can use the [SizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataEditor`1.SizeMode) property to specify a predefined size mode: Large, Medium, or Small. This property sets text and **Clear** button size.
+You can use the [SizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataEditor-1.SizeMode) property to specify a predefined size mode: Large, Medium, or Small. This property sets text and **Clear** button size.
 
 To specify a custom size, use the following properties:
 

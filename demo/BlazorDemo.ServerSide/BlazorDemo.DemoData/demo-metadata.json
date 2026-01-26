@@ -1891,7 +1891,7 @@
               "Title": "Adaptivity",
               "Keywords": "LayoutBreakpoint, DxGrid, data grid, datagrid, page layout, adaptive grid, responsive grid, cardview, card view, implement cardview, grid layout, layout, layout breakpoints, breakpoint, adaptive UI, adaptivity, adaptive layout, responsive layout, responsive UI, arrange UI elements, layout items, rows, columns, areas, template areas, layout areas, grid areas",
               "Description": "Use the DevExpress Blazor Layout Breakpoint component to implement adaptivity in the Grid component.",
-              "DocUrl": "DevExpress.Blazor.LayoutBreakpoint#responsivelayout",
+              "DocUrl": "DevExpress.Blazor.DxLayoutBreakpoint#responsive-grid",
               "AdditionalCodeFiles": [
                 {
                   "Title": "Razor",
@@ -2304,7 +2304,7 @@
                   "Id": "Performance-LargeQueryable",
                   "Url": "Grid/Performance/LargeQueryable",
                   "Title": "Large Dataset (Queryable)",
-                  "DocUrl": "404337#large-data-queryable-collections",
+                  "DocUrl": "403737/components/grid/bind-to-data#large-data-queryable-collections",
                   "Keywords": "data grid, datagrid, grid, data binding, bind to data, data collections, large data source, large data, queryable collections"
                 }
               ]
@@ -2315,7 +2315,7 @@
               "Title": "AI Assistant",
               "Keywords": "data grid, datagrid, grid, data, data management, grid table, data shaping",
               "Description": "A component that displays data in a tabular format and allows users to edit, shape, and print/export data.",
-              "DocUrl": "DevExpress.AIIntegration.Blazor.Chat.DxAIChat#grid-function-calling",
+              "DocUrl": "DevExpress.AIIntegration.Blazor.Chat.DxAIChat#ai-tool-calling",
               "IsNew": true,
               "IsAI": true,
               "RedirectFrom": [
@@ -3553,7 +3553,7 @@
             {
               "Id": "MinMaxDate",
               "Title": "Min/Max Dates",
-              "DocUrl": "DevExpress.Blazor.DxCalendar-1#minmax-dates"
+              "DocUrl": "DevExpress.Blazor.DxCalendar-1#set-a-date-range"
             },
             {
               "Id": "DisabledDates",
@@ -4080,12 +4080,12 @@
             {
               "Id": "UseClientDateTimeOffset",
               "Title": "Client Time Offset",
-              "DocUrl": "DevExpress.Blazor.DxDateEdit-1#UseClientDateTimeOffset"
+              "DocUrl": "DevExpress.Blazor.DxDateEdit-1#date-time-offset"
             },
             {
               "Id": "MinMaxDate",
               "Title": "Date Range",
-              "DocUrl": "DevExpress.Blazor.DxDateEdit-1#set-a-date-range"
+              "DocUrl": "DevExpress.Blazor.DxDateEdit-1#minmax-dates"
             },
             {
               "Id": "DisabledDates",
@@ -6533,7 +6533,7 @@
               "Title": "Totals",
               "Keywords": "DxPivotTable, pivot, pivot table, pivot grid, totals, grand totals",
               "Description": "DevExpress Blazor Pivot Table can calculate totals and display them as separate columns and rows.",
-              "DocUrl": "DevExpress.Blazor.PivotTable.DxPivotTable#totals-grand-totals",
+              "DocUrl": "405459/components/pivottable/pivot-table-basics#totals-grand-totals",
               "AdditionalCodeFiles": [
                 {
                   "Title": "Invoice.cs",
@@ -6605,7 +6605,7 @@
               "Title": "Templates",
               "Keywords": "DxPivotTable, pivot, pivot table, pivot grid, customization, cell templates, formatting, templated content, custom content",
               "Description": "DevExpress Blazor Pivot Table allows you to use native Razor markup to define custom templates for grid fields.",
-              "DocUrl": "DevExpress.Blazor.PivotTable.DxPivotTable#templates",
+              "DocUrl": "405474",
               "AdditionalCodeFiles": [
                 {
                   "Title": "SalesInfo.cs",
@@ -6623,7 +6623,7 @@
               "Title": "Large Data Source",
               "Keywords": "Blazor, components, DxPivotTable, pivot, pivot table, pivot grid, large data source, virtual scrolling, endless paging",
               "Description": "The DevExpress Blazor Pivot Table supports binding to large data structures.",
-              "DocUrl": "DevExpress.Blazor.PivotTable.DxPivotTable#virtual-scrolling",
+              "DocUrl": "405626",
               "AdditionalCodeFiles": [
                 {
                   "Title": "Sale.cs",
@@ -7155,7 +7155,7 @@
             {
               "Id": "ResponsiveLayout",
               "Title": "Responsive Grid",
-              "DocUrl": "DevExpress.Blazor.LayoutBreakpoint#responsivelayout",
+              "DocUrl": "DevExpress.Blazor.DxLayoutBreakpoint#responsive-grid",
               "AdditionalCodeFiles": [
                 {
                   "Title": "Razor",
@@ -7182,7 +7182,6 @@
             {
               "Id": "CardView",
               "Title": "Card View",
-              "DocUrl": "DevExpress.Blazor.LayoutBreakpoint#cardview",
               "Keywords": "LayoutBreakpoint, page layout, cardview, card view, tile view, tile layout, implement cardview, grid layout, layout, layout breakpoints, breakpoint, adaptive UI, adaptivity, adaptive layout, responsive layout, responsive UI, arrange UI elements, layout items",
               "AdditionalCodeFiles": [
                 {
@@ -7737,7 +7736,7 @@
             {
               "Id": "RenderStyle",
               "Title": "Render Style",
-              "DocUrl": "DevExpress.Blazor.DxToolbar#render-style",
+              "DocUrl": "DevExpress.Blazor.DxToolbar#customize-appearance",
               "AdditionalCodeFiles": [
                 {
                   "Title": "Icons.css",
@@ -7810,12 +7809,12 @@
             {
               "Id": "Selection",
               "Title": "Node Selection",
-              "DocUrl": "DevExpress.Blazor.DxTreeView#node-selection"
+              "DocUrl": "DevExpress.Blazor.DxTreeView#select-nodes"
             },
             {
               "Id": "HierarchicalDataBinding",
               "Title": "Binding to Hierarchical Data",
-              "DocUrl": "DevExpress.Blazor.DxTreeView#data-binding",
+              "DocUrl": "DevExpress.Blazor.DxTreeView#hierarchical-data",
               "AdditionalCodeFiles": [
                 {
                   "Title": "ChemicalElements.cs",
@@ -7830,7 +7829,7 @@
             {
               "Id": "FlatDataBinding",
               "Title": "Binding to Flat Data",
-              "DocUrl": "DevExpress.Blazor.DxTreeView#data-binding",
+              "DocUrl": "DevExpress.Blazor.DxTreeView#flat-data",
               "RedirectFrom": [
                 "TreeView#MasterDetailDataBinding"
               ],
@@ -8256,7 +8255,7 @@
             {
               "Id": "ShowOptions",
               "Title": "Show Options",
-              "DocUrl": "DevExpress.Blazor.DxWindow#showoptions",
+              "DocUrl": "DevExpress.Blazor.DxWindow#show-and-close-a-window",
               "AdditionalCodeFiles": [
                 {
                   "Title": "Constants.cs",
@@ -8267,7 +8266,7 @@
             {
               "Id": "Resizing",
               "Title": "Resizing",
-              "DocUrl": "DevExpress.Blazor.DxWindow#resizing",
+              "DocUrl": "DevExpress.Blazor.DxWindow#resize-window",
               "AdditionalCodeFiles": [
                 {
                   "Title": "SampleEditForm.razor",
@@ -8278,7 +8277,7 @@
             {
               "Id": "Dragging",
               "Title": "Dragging",
-              "DocUrl": "DevExpress.Blazor.DxWindow#dragging",
+              "DocUrl": "DevExpress.Blazor.DxWindow#drag-window",
               "AdditionalCodeFiles": [
                 {
                   "Title": "Constants.cs",
@@ -8812,7 +8811,7 @@
               "IsAI": true,
               "Keywords": "Blazor, component, DxRichEdit, text editor, rich format, ai",
               "Description": "The DevExpress AI-powered extension for Rich Text Editor allows you to add AI-related commands that are designed to process text content to the editor's context menu.",
-              "DocUrl": "https://docs.devexpress.com/Blazor/405193/components/rich-edit/ai-integration?v=24.2"
+              "DocUrl": "405193/components/rich-edit/ai-integration"
             }
           ]
         }

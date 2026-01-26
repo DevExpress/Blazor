@@ -5,16 +5,11 @@
 
 <DemoPageSectionComponent Id="AIChat-MessageHandling"
                           ShowSizeMode="true">
-    <OptionsContent>
-        <OptionCheckBox Label="Enable File Upload" @bind-Checked="FileUploadEnabled" />
-    </OptionsContent>
     <ChildContentWithParameters Context="Params">
         <div class="chat-demo-container">
-            <DxAIChat FileUploadEnabled="FileUploadEnabled" CssClass="demo-chat" MessageSent="MessageSent" SizeMode="Params.SizeMode" />
+            <DxAIChat FileUploadEnabled="true" CssClass="demo-chat" MessageSent="MessageSent" SizeMode="Params.SizeMode" />
         </div>
         @code {
-            bool FileUploadEnabled { get; set; } = true;
-
             async Task MessageSent(MessageSentEventArgs args) {
                 var fileNames = args.Files.Select(x => x.Name);
                 StringBuilder sb = new StringBuilder();

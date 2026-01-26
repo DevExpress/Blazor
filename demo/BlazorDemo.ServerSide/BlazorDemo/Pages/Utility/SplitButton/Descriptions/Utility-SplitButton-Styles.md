@@ -11,4 +11,4 @@ Split Button APIs include the following key members:
 * [Tooltip](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownButtonBase.Tooltip) — Specifies the button's tooltip text.
 * [Items](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownButtonBase.Items) — Specifies commands available in the drop-down menu.
 
-The Split Button component supports different size modes. To specify component size within your DevExpress-powered Blazor project, use the [SizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButtonBase.SizeMode) property.
+The Split Button component supports different size modes. To specify component size within your DevExpress-powered Blazor project, use the [SizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSplitButton.SizeMode) property.

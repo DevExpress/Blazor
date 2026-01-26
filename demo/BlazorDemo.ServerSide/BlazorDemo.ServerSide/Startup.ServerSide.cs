@@ -52,6 +52,7 @@ namespace BlazorDemo.ServerSide {
 
             services.AddScoped<IContosoRetailDataProvider, ContosoRetailDataProvider>();
             services.AddScoped<IRentInfoDataProvider, RentInfoDataProvider>();
+            services.AddScoped<ILargeAreaRentInfoDataProvider, LargeAreaRentInfoDataProvider>();
 
             services.AddDbContextFactory<HomesContext>(opt => {
                 opt.UseSqlite(ConnectionStringUtils.GetHomesSqliteConnectionString(context.Configuration));

@@ -21,9 +21,9 @@
 
         <div class="chat-demo-container">
             <DxDrawer CssClass="demo-drawer"
-                      @bind-IsOpen="IsOpen"
-                      Mode="Mode"
-                      Position="Position"
+                      IsOpen="true"
+                      Mode="DrawerMode.Shrink"
+                      Position="DrawerPosition.Right"
                       PanelWidth="30%"
                       aria-label="Demo Drawer">
                 <TargetContent>
@@ -34,21 +34,8 @@
                             ShowAllRows="true"
                             ShowGroupPanel="true"
                             FilterMenuButtonDisplayMode="GridFilterMenuButtonDisplayMode.Default"
-                            FilterPanelDisplayMode="@CurrentGridFilterPanelDisplayMode"
+                            FilterPanelDisplayMode="GridFilterPanelDisplayMode.Auto"
                             EditMode="GridEditMode.EditRow">
-                        <ToolbarTemplate>
-                            <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain" SizeMode="Params.SizeMode">
-                                <DxToolbarItem Text="AI Assistant" Click="OnToolbarItemClick" IconCssClass="aichat-icon aichat-icon-main" />
-                                <DxToolbarItem BeginGroup="true">
-                                    <Template Context="toolbar_item_context">
-                                        <div class="d-flex flex-row align-items-center h-100">
-                                            <div class="me-2">Filter Panel Display Mode:</div>
-                                            <DxComboBox Data="@GridFilterPanelDisplayModes" @bind-Value="@CurrentGridFilterPanelDisplayMode" />
-                                        </div>
-                                    </Template>
-                                </DxToolbarItem>
-                            </DxToolbar>
-                        </ToolbarTemplate>
                         <Columns>
                             <DxGridDataColumn FieldName="OrderID" Caption="Order ID" />
                             <DxGridDataColumn FieldName="CustomerName" Caption="Customer Name" />
@@ -96,20 +83,11 @@
         </div>
         @code {
             AIToolsContext context;
-            IEnumerable<GridFilterPanelDisplayMode> GridFilterPanelDisplayModes { get; } = Enum.GetValues<GridFilterPanelDisplayMode>();
-            GridFilterPanelDisplayMode CurrentGridFilterPanelDisplayMode = GridFilterPanelDisplayMode.Auto;
-            bool IsOpen { get; set; } = true;
-            DrawerMode Mode { get; set; } = DrawerMode.Shrink;
-            DrawerPosition Position { get; set; } = DrawerPosition.Right;
             DxGrid Grid { get; set; }
             bool UseStreaming { get; set; } = false;
             bool IncludeFunctionCallInfo { get; set; } = true;
 
             object Data { get; set; }
-
-            void OnToolbarItemClick() {
-                IsOpen = !IsOpen;
-            }
 
             protected override void OnInitialized() {
                 Data = OrderDataProvider.GetData(20);

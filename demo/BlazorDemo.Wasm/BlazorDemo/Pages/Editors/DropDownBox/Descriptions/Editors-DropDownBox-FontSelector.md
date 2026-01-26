@@ -8,4 +8,4 @@ This demo uses the editor's [Value](https://docs.devexpress.com/Blazor/DevExpres
 
 The [DropDownClosing](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownBox.DropDownClosing) event fires when a user closes the drop-down window. This demo handles this event to reset editor values.
 
-Note: You must enclose your code between [BeginUpdate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownBox.BeginUpdate) and [EndUpdate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownBox.EndUpdate) method calls to set editor value/other settings in code.
+Note: You must enclose your code between [BeginUpdate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxEditorBase.BeginUpdate) and [EndUpdate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxEditorBase.EndUpdate) method calls to set editor value/other settings in code.

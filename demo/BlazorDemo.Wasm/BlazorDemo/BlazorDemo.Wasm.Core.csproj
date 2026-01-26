@@ -29,12 +29,12 @@
     <PackageReference Include="Microsoft.Extensions.AI.OpenAI" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.PdfViewer" VersionOverride="25.2.3" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.WebAssembly" VersionOverride="25.2.3" />
-    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" VersionOverride="25.2.3" />
-    <PackageReference Include="DevExpress.Reporting.Demos" VersionOverride="25.2.3" />
-    <PackageReference Include="DevExpress.Blazor.PivotTable" VersionOverride="25.2.3" />
-    <PackageReference Include="DevExpress.AIIntegration.Blazor" VersionOverride="25.2.3" />
+    <PackageReference Include="DevExpress.Blazor.PdfViewer" VersionOverride="25.2.4" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.WebAssembly" VersionOverride="25.2.4" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" VersionOverride="25.2.4" />
+    <PackageReference Include="DevExpress.Reporting.Demos" VersionOverride="25.2.4" />
+    <PackageReference Include="DevExpress.Blazor.PivotTable" VersionOverride="25.2.4" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor" VersionOverride="25.2.4" />
     
     
     

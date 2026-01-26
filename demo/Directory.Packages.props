@@ -9,6 +9,7 @@
     <NoWarn>NU1507;$(NoWarn)</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="System.Linq.Dynamic.Core" Version="1.6.7" />
     <PackageVersion Include="DevExtreme.AspNet.Data" Version="5.1.0" />
     <PackageVersion Include="Markdig" Version="0.33.0" />
     <PackageVersion Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="8.1.2" />

@@ -14,9 +14,12 @@
             HeaderText="DevExpress EULA"
             Closing="EulaPopupClosing"
             Closed="EulaPopupClosed"
-            SizeMode="Params.SizeMode">
+            SizeMode="Params.SizeMode"
+            aria-describedby="popup-text-content">
             <BodyContentTemplate>
-                @(new MarkupString(Constants.MarkupEULAString))
+                <div id="popup-text-content">
+                    @(new MarkupString(Constants.MarkupEULAString))
+                </div>
             </BodyContentTemplate>
             <FooterContentTemplate Context="Context">
                 <div class="popup-demo-events-footer">

@@ -1,0 +1,86 @@
+﻿@page "/Grid/Performance/1MRows1KColumns"
+@layout DataProviderAccessArea<ILargeAreaRentInfoDataProvider>
+@using BlazorDemo.Pages.Grid.Filtering
+@using static BlazorDemo.Pages.Grid.Filtering.Grid_Filtering_ColumnFilterMenu_CustomRange;
+
+<DemoPageSectionComponent Id="Grid-Performance-1MRows1KColumns" ShowSizeMode="true">
+    <ChildContentWithParameters Context="Params">
+        @inherits OwningComponentBase
+        @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+
+        <DataProviderAccessAreaContainer DataProvider="@LargeAreaRentInfoDataProvider">
+            <DxGrid Data="Data" SizeMode="Params.SizeMode"
+                    ShowGroupPanel="true"
+                    VirtualScrollingEnabled="true" VirtualScrollingMode="GridVirtualScrollingMode.RowsAndColumns"
+                    FilterMenuButtonDisplayMode="GridFilterMenuButtonDisplayMode.Always"
+                    EditMode="GridEditMode.EditRow" EditModelSaving="OnEditModelSaving"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn" TextWrapEnabled="false"
+                    CssClass="ch-480">
+                <Columns>
+                    <DxGridCommandColumn FixedPosition="GridColumnFixedPosition.Left" DeleteButtonVisible="false" NewButtonVisible="false" Width="80px" />
+                    @for(var i = 1; i <= 125; i++) {
+                        <DxGridDataColumn FieldName="@($"State{i}")" Caption="@($"State ({i})")" Width="110" />
+                        <DxGridDataColumn FieldName="@($"Area{i}")" Caption="@($"Area ({i})")" Width="100px" />
+                        <DxGridDataColumn FieldName="@($"City{i}")" Caption="@($"County ({i})")" Width="120" />
+                        <DxGridDataColumn FieldName="@($"Name{i}")" Caption="@($"Location ({i})")" Width="120" />
+                        <DxGridDataColumn FieldName="@($"Year{i}")" Caption="@($"Year ({i})")" CaptionAlignment="GridTextAlignment.Right" DisplayFormat="0" Width="100" />
+                        <DxGridDataColumn FieldName="@($"Population{i}")" Caption="@($"Population ({i})")" CaptionAlignment="GridTextAlignment.Right" DisplayFormat="#,0" Width="100">
+                            <FilterMenuTemplate>
+                                <Grid_Filtering_ColumnFilterMenu_CustomRange FilterContext="context" Items="PopulationIntervals" />
+                            </FilterMenuTemplate>
+                        </DxGridDataColumn>
+                        <DxGridDataColumn FieldName="@($"Bedrooms{i}")" Caption="@($"Bedrooms ({i})")" CaptionAlignment="GridTextAlignment.Right" Width="100">
+                            <EditSettings>
+                                <DxComboBoxSettings Data="BedroomDisplayValues" ValueFieldName="Value" TextFieldName="DisplayValue" />
+                            </EditSettings>
+                        </DxGridDataColumn>
+                        <DxGridDataColumn FieldName="@($"Rent{i}")" Caption="@($"Rent ({i})")" CaptionAlignment="GridTextAlignment.Right" DisplayFormat="C0" Width="140">
+                            <FilterMenuTemplate>
+                                <Grid_Filtering_ColumnFilterMenu_CustomRange FilterContext="context" Items="RentIntervals" />
+                            </FilterMenuTemplate>
+                        </DxGridDataColumn>
+                    }
+                </Columns>
+            </DxGrid>
+        </DataProviderAccessAreaContainer>
+    </ChildContentWithParameters>
+
+    @code {
+        static IReadOnlyList<CustomRangeFilterItem> PopulationIntervals { get; } = CustomRangeFilterItem.CreateIntervals("Population", 10, 6, false, "{0:N0}");
+        static IReadOnlyList<CustomRangeFilterItem> RentIntervals { get; } = CustomRangeFilterItem.CreateIntervals("Rent", 200, 10, true, "{0:c}");
+        static IReadOnlyList<BedroomInfo> BedroomDisplayValues { get; } = new[] { 
+            new BedroomInfo("Studio", 0),
+            new BedroomInfo("One Bedroom", 1),
+            new BedroomInfo("Two Bedrooms", 2),
+            new BedroomInfo("Three Bedrooms", 3),
+            new BedroomInfo("Four Bedrooms", 4)
+        };
+        ILargeAreaRentInfoDataProvider LargeAreaRentInfoDataProvider { get; set; }
+
+        object Data { get; set; }
+
+        protected override void OnInitialized() {
+            LargeAreaRentInfoDataProvider = ScopedServices.GetRequiredService<ILargeAreaRentInfoDataProvider>();
+
+            var connectionString = ConnectionStringUtils.GetGridLargeDataConnectionString(Configuration);
+            if(string.IsNullOrEmpty(connectionString)) return;
+            
+            var dataSource = new GridDevExtremeDataSource<LargeAreaRentInfo>(LargeAreaRentInfoDataProvider.GetLargeAreaRentInfo());
+            dataSource.CustomizeLoadOptions = (loadOptions) => {
+                // If underlying data is a large SQL table, specify PrimaryKey and PaginateViaPrimaryKey.
+                // This can make SQL execution plans more efficient.
+                loadOptions.PrimaryKey = new[] { "Oid" };
+                loadOptions.PaginateViaPrimaryKey = true;
+            };
+
+            Data = dataSource;
+        }
+
+        private void OnEditModelSaving(GridEditModelSavingEventArgs args) {
+            args.CopyChangesToDataItem();
+            args.Reload = false;
+        }
+
+        record BedroomInfo(string DisplayValue, int Value);
+    }
+</DemoPageSectionComponent>

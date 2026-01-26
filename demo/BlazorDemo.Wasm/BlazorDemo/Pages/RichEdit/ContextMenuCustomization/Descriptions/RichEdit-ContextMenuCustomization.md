@@ -1,4 +1,4 @@
-The [CustomizeContextMenu](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.DxRichEdit.CustomizeContextMenu) event allows you to access and customize the context menu used within the DevExpress Blazor [Rich Text Editor](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.DxRichEdit). You can customize or remove existing commands or add root-level and nested [menu items](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Office.IContextMenuItem) as needed.
+The [CustomizeContextMenu](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.DxRichEdit.CustomizeContextMenu) event allows you to access and customize the context menu used within the DevExpress Blazor [Rich Text Editor](https://docs.devexpress.com/Blazor/DevExpress.Blazor.RichEdit.DxRichEdit). You can customize or remove existing commands or add root-level and nested [menu items](https://docs.devexpress.com/Blazor/DevExpress.Blazor.IContextMenuItem) as needed.
 
 This demo customizes the context menu in the following manner:
 

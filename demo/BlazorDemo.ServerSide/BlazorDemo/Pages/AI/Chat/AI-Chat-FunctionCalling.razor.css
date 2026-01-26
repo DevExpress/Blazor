@@ -1,6 +1,6 @@
 .chat-demo-container {
     width: 100%;
-    border: 1px solid var(--bs-gray-300);
+    border: 1px solid var(--bs-card-border-color);
     border-radius: var(--bs-card-border-radius);
     overflow: hidden;
 }

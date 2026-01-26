@@ -10,4 +10,4 @@ Drop-Down Button APIs include the following key members:
 * [Tooltip](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownButtonBase.Tooltip) — Specifies the button's tooltip text.
 * [Items](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownButtonBase.Items) — Specifies drop-down button items.
 
-The Drop-Down Button component also supports different size modes. To specify component size in code, use the [SizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxButtonBase.SizeMode) property.
+The Drop-Down Button component also supports different size modes. To specify component size in code, use the [SizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxDropDownButton.SizeMode) property.

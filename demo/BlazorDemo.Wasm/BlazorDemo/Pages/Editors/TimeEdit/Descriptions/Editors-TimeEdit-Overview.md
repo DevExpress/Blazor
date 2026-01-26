@@ -1,5 +1,5 @@
 As its name implies, our Blazor [Time Edit](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1) allows users to modify time values via its time editor or its drop-down time picker. A user can enter time values into the text box or select time values via its drop-down window. To specify time values in code, use the [Time](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1.Time) property.
 
-The Time Edit component supports different size modes. To specify the component's size in code, use the [SizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxResizableEditorBase-2.SizeMode) property. To apply different size modes in this demo, use the drop-down list in the demo card's header.
+The Time Edit component supports different size modes. To specify the component's size in code, use the [SizeMode](https://docs.devexpress.com/Blazor/DevExpress.Blazor.Base.DxDataEditor-1.SizeMode) property. To apply different size modes in this demo, use the drop-down list in the demo card's header.
 
 The Time Edit supports keyboard navigation ([list of supported keyboard shortcuts](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTimeEdit-1#keyboard-navigation)), allowing users to navigate to the editor's input element and within the drop-down time picker.
