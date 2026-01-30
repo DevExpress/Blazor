@@ -28,7 +28,7 @@ The following help topics describe how to start using Blazor components:
 
 ## Documentation
 
-Refer to [online documentation](https://docs.devexpress.com/Blazor/400725/blazor-components).
+You can find more information in our [online Blazor documentation](https://docs.devexpress.com/Blazor/400725/blazor-components).
 
 # Helpful Resources
 
@@ -38,7 +38,7 @@ Refer to [online documentation](https://docs.devexpress.com/Blazor/400725/blazor
 
 ## Support and Feedback
 
-Welcome to our [Support Center](https://supportcenter.devexpress.com/ticket/create) if you want to ask questions, share ideas, or report an issue.
+In our [Support Center](https://supportcenter.devexpress.com/ticket/create), you can ask questions, share ideas, or report an issue.
 
 ## Themes
 

@@ -14,5 +14,5 @@ To run demos on your machine locally, you must:
 
 3. [Obtain the NuGet feed](https://docs.devexpress.com/Blazor/405708/get-started/prepare#get-nuget-feed-credentials) and install the [DevExpress Blazor NuGet package](https://docs.devexpress.com/Blazor/405709/get-started/visual-studio/install#devexpresscom-online-nuget-feed).
 
-4. _Only for the BlazorDemo.Wasm._ Make sure that the _BlazorDemo.Wasm.ServerSide_ project is set as the solution startup project.
+4. _For BlazorDemo.Wasm only:_ Make sure that the _BlazorDemo.Wasm.ServerSide_ project is set as the solution startup project.
 5. Run the application.
