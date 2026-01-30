@@ -1,6 +1,10 @@
-# How to Run DevExpress Blazor Demos Locally
+# DevExpress Blazor Demos
 
-The DevExpress Blazor component suite ships with demo source code. To run demos on your machine locally, you must:
+The DevExpress Blazor component suite ships with demo source code. You can find it in the current folder or in the [local installation folder](https://docs.devexpress.com/Blazor/401058/demos#demos-in-the-installation-folder).
+
+## How to Build DevExpress Blazor Demos
+
+To run demos on your machine locally, you must:
 
 1. Download this folder.
 2. Open one of the following solution files in Visual Studio:

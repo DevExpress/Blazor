@@ -15,7 +15,7 @@ This repo contains demos for DevExpress Blazor components. Refer to the followin
 
 ## Demos
 
-The **demo** folder contains demo sources. For information on how to run this source code, refer to the following file: [How to Run DevExpress Blazor Demos Locally](./demo/README.md).
+The **demo** folder contains demo sources. For information on how to run this source code, refer to the following file: [Demo Source Code (ReadMe)](./demo/README.md).
 
 You can also try our DevExpress Blazor components online: [DevExpress Blazor - Online Demos](https://demos.devexpress.com/blazor/). 
 
