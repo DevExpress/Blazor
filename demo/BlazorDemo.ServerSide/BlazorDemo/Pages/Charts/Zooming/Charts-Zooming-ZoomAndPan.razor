@@ -1,8 +1,24 @@
 ﻿<DemoPageSectionComponent Id="Charts-Zooming-ZoomAndPan">
     <DemoChildContent>
+        <DxToolbar CssClass="w-100 chart-toolbar" ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
+            <DxToolbarItem Alignment="ToolbarItemAlignment.Right"
+                           IconCssClass="chart-icon chart-icon-zoom-in"
+                           Click="@ZoomIn"
+                           Tooltip="Zoom In" />
+            <DxToolbarItem Alignment="ToolbarItemAlignment.Right"
+                           IconCssClass="chart-icon chart-icon-zoom-out"
+                           Click="@ZoomOut"
+                           Tooltip="Zoom Out" />
+            <DxToolbarItem Alignment="ToolbarItemAlignment.Right"
+                           IconCssClass="chart-icon chart-icon-arrow-reset"
+                           Click="@ResetZoom"
+                           Tooltip="Reset Zoom" />
+        </DxToolbar>
+
         <DxChart @ref="@chart"
                  T="DatePricePoint"
                  Data="@UsdJpyData"
+                 VisualRangeChanged="@OnVisualRangeChanged"
                  Width="100%">
 
             <DxChartLegend Position="RelativePosition.Inside"
@@ -42,31 +58,84 @@
             </DxChartTooltip>
 
         </DxChart>
-
-        <div class="chart-reset-btn">
-            <DxButton Text="Reset Zoom" Click="@SetArgumentAxisVisualRange" />
-        </div>
     </DemoChildContent>
 
     <OptionsContent>
-        <OptionChartExportComponent ExportMethod="@ExportChart"/>
+        <OptionChartExportComponent ExportMethod="@ExportChart" />
     </OptionsContent>
 
     @code {
         IEnumerable<DatePricePoint> UsdJpyData;
         DxChart<DatePricePoint> chart;
         @inject ICurrencyExchangeDataProvider UsdJpyDataProvider
+
         DateTime startDate = new DateTime(2020, 01, 01);
         DateTime endDate = new DateTime(2021, 01, 29);
 
-        async void ExportChart(ChartExportFormat format) {
+        DateTime currentStart = new DateTime(2020, 01, 01);
+        DateTime currentEnd = new DateTime(2021, 01, 29);
+
+        const double ZoomFactor = 0.25;
+
+        async void ExportChart(ChartExportFormat format)
+        {
             await chart?.ExportAsync("ZoomAndPanChart", format);
         }
-        protected override async Task OnInitializedAsync() {
+
+        protected override async Task OnInitializedAsync()
+        {
             UsdJpyData = await UsdJpyDataProvider.GetDataAsync();
         }
-        public void SetArgumentAxisVisualRange() {
-            chart.SetArgumentAxisVisualRange([startDate, endDate]);
+
+        void OnVisualRangeChanged(ChartVisualRangeChangedEventArgs args)
+        {
+            if (args.IsArgumentAxis)
+            {
+                currentStart = (DateTime)args.CurrentRange[0];
+                currentEnd = (DateTime)args.CurrentRange[1];
+            }
+        }
+
+        static void CalcDateRange(
+        DateTime start, DateTime end, DateTime min, DateTime max, bool zoomIn,
+        out DateTime newStart, out DateTime newEnd)
+        {
+            var totalTicks = (end - start).Ticks;
+            var delta = (long)(totalTicks * ZoomFactor / 2);
+            if (zoomIn)
+            {
+                newStart = start.AddTicks(delta);
+                newEnd = end.AddTicks(-delta);
+            }
+            else
+            {
+                newStart = start.AddTicks(-delta) < min ? min : start.AddTicks(-delta);
+                newEnd = end.AddTicks(delta) > max ? max : end.AddTicks(delta);
+            }
+        }
+
+        void ZoomIn()
+        {
+            CalcDateRange(currentStart, currentEnd, startDate, endDate, true, out DateTime newStart, out DateTime newEnd);
+            if (newEnd > newStart)
+            {
+                currentStart = newStart;
+                currentEnd = newEnd;
+                chart.SetArgumentAxisVisualRange([(object)currentStart, (object)currentEnd]);
+            }
+        }
+
+        void ZoomOut()
+        {
+            CalcDateRange(currentStart, currentEnd, startDate, endDate, false, out currentStart, out currentEnd);
+            chart.SetArgumentAxisVisualRange([(object)currentStart, (object)currentEnd]);
+        }
+
+        void ResetZoom()
+        {
+            currentStart = startDate;
+            currentEnd = endDate;
+            chart.SetArgumentAxisVisualRange([(object)currentStart, (object)currentEnd]);
         }
     }
 </DemoPageSectionComponent>

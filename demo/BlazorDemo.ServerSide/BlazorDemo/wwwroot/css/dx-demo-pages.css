@@ -785,6 +785,10 @@ body.modal-open .main {
 
 
 /*Chart*/
+.chart-toolbar {
+    margin-bottom: 1em;
+}
+
 .chart-icon {
     width: 1rem;
     height: 1rem;
@@ -830,6 +834,21 @@ body.modal-open .main {
 .chart-icon-export-to-pdf {
     -webkit-mask-image: url("../images/icons/export-pdf.svg");
     mask-image: url("../images/icons/export-pdf.svg");
+}
+
+.chart-icon-arrow-reset {
+    -webkit-mask-image: url("../images/icons/arrow-reset-fluent.svg");
+    mask-image: url("../images/icons/arrow-reset-fluent.svg");
+}
+
+.chart-icon-zoom-in {
+    -webkit-mask-image: url("../images/icons/zoom-in-fluent.svg");
+    mask-image: url("../images/icons/zoom-in-fluent.svg");
+}
+
+.chart-icon-zoom-out {
+    -webkit-mask-image: url("../images/icons/zoom-out-fluent.svg");
+    mask-image: url("../images/icons/zoom-out-fluent.svg");
 }
 
 

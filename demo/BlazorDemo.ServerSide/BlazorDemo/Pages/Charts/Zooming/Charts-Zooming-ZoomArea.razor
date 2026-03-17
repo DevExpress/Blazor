@@ -1,30 +1,47 @@
 ﻿<DemoPageSectionComponent Id="Charts-Zooming-ZoomArea">
     <DemoChildContent>
         @inject IChartBirthLifeDataProvider ChartBirthLifeDataProvider
+
+        <DxToolbar CssClass="w-100 chart-toolbar" ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
+            <DxToolbarItem Alignment="ToolbarItemAlignment.Right"
+                           IconCssClass="chart-icon chart-icon-zoom-in"
+                           Click="@ZoomIn"
+                           Tooltip="Zoom In" />
+            <DxToolbarItem Alignment="ToolbarItemAlignment.Right"
+                           IconCssClass="chart-icon chart-icon-zoom-out"
+                           Click="@ZoomOut"
+                           Tooltip="Zoom Out" />
+            <DxToolbarItem Alignment="ToolbarItemAlignment.Right"
+                           IconCssClass="chart-icon chart-icon-arrow-reset"
+                           Click="@ResetZoom"
+                           Tooltip="Reset Zoom" />
+        </DxToolbar>
+
         <DxChart @ref="@chart"
                  Data="@DataSource"
+                 VisualRangeChanged="@OnVisualRangeChanged"
                  Width="100%">
-            <DxChartTitle Text="Life Expectancy vs. Birth Rate"/>
+            <DxChartTitle Text="Life Expectancy vs. Birth Rate" />
             <DxChartLegend Position="RelativePosition.Inside"
                            VerticalAlignment="VerticalEdge.Top"
-                           HorizontalAlignment="HorizontalAlignment.Right"/>
+                           HorizontalAlignment="HorizontalAlignment.Right" />
             <DxChartScatterSeries ArgumentField="@((BirthLife i) => i.LifeExp)"
                                   ValueField="@((BirthLife i) => i.BirthRate)"
                                   Filter="@((BirthLife i) => i.Year == 1970)"
                                   Name="1970">
-                <DxChartSeriesPoint Size="8"/>
+                <DxChartSeriesPoint Size="8" />
             </DxChartScatterSeries>
             <DxChartScatterSeries ArgumentField="@((BirthLife i) => i.LifeExp)"
                                   ValueField="@((BirthLife i) => i.BirthRate)"
                                   Filter="@((BirthLife i) => i.Year == 2010)"
                                   Name="2010">
-                <DxChartSeriesPoint Size="8"/>
+                <DxChartSeriesPoint Size="8" />
             </DxChartScatterSeries>
             <DxChartArgumentAxis>
-                <DxChartAxisTitle Text="Life Expectancy"/>
+                <DxChartAxisTitle Text="Life Expectancy" />
             </DxChartArgumentAxis>
             <DxChartValueAxis>
-                <DxChartAxisTitle Text="Birth Rate"/>
+                <DxChartAxisTitle Text="Birth Rate" />
             </DxChartValueAxis>
             <DxChartTooltip Enabled="true">
                 <div class="chart-tooltip">
@@ -35,26 +52,98 @@
                                        ValueAxisZoomAndPanMode="ChartAxisZoomAndPanMode.Both"
                                        AllowDragToZoom="true"
                                        AllowMouseWheel="true"
-                                       PanKey="ChartEventPanKey.Shift"/>
+                                       PanKey="ChartEventPanKey.Shift" />
         </DxChart>
-
-        <div class="chart-reset-btn">
-            <DxButton Text="Reset Zoom" Click="@ResetVisualRange"/>
-        </div>
     </DemoChildContent>
 
     @code {
         IEnumerable<BirthLife> DataSource = Enumerable.Empty<BirthLife>();
         DxChart<BirthLife> chart;
 
-        protected override void OnInitialized() {
+        double argMin, argMax, valMin, valMax;
+        double currentArgStart, currentArgEnd, currentValStart, currentValEnd;
+
+        const double ZoomFactor = 0.25;
+
+        protected override void OnInitialized()
+        {
             DataSource = ChartBirthLifeDataProvider.GenerateData();
+            argMin = DataSource.Min(d => d.LifeExp);
+            argMax = DataSource.Max(d => d.LifeExp);
+            valMin = DataSource.Min(d => d.BirthRate);
+            valMax = DataSource.Max(d => d.BirthRate);
+            currentArgStart = argMin;
+            currentArgEnd = argMax;
+            currentValStart = valMin;
+            currentValEnd = valMax;
         }
 
-        public void ResetVisualRange() {
+        void OnVisualRangeChanged(ChartVisualRangeChangedEventArgs args)
+        {
+            if (args.IsArgumentAxis)
+            {
+                currentArgStart = Convert.ToDouble(args.CurrentRange[0]);
+                currentArgEnd = Convert.ToDouble(args.CurrentRange[1]);
+            }
+            else
+            {
+                currentValStart = Convert.ToDouble(args.CurrentRange[0]);
+                currentValEnd = Convert.ToDouble(args.CurrentRange[1]);
+            }
+        }
+
+        static void CalcRange(double start, double end, double min, double max, bool zoomIn, out double newStart, out double newEnd)
+        {
+            var span = end - start;
+            var delta = span * ZoomFactor / 2;
+            if (zoomIn)
+            {
+                newStart = start + delta;
+                newEnd = end - delta;
+            }
+            else
+            {
+                newStart = Math.Max(start - delta, min);
+                newEnd = Math.Min(end + delta, max);
+            }
+        }
+
+        void ApplyVisualRange()
+        {
+            chart.SetArgumentAxisVisualRange([(object)currentArgStart, (object)currentArgEnd]);
+            chart.SetValueAxisVisualRange([(object)currentValStart, (object)currentValEnd]);
+        }
+
+        void ZoomIn()
+        {
+            CalcRange(currentArgStart, currentArgEnd, argMin, argMax, true, out double newArgStart, out double newArgEnd);
+            CalcRange(currentValStart, currentValEnd, valMin, valMax, true, out double newValStart, out double newValEnd);
+
+            if (newArgEnd > newArgStart && newValEnd > newValStart)
+            {
+                currentArgStart = newArgStart;
+                currentArgEnd = newArgEnd;
+                currentValStart = newValStart;
+                currentValEnd = newValEnd;
+                ApplyVisualRange();
+            }
+        }
+
+        void ZoomOut()
+        {
+            CalcRange(currentArgStart, currentArgEnd, argMin, argMax, false, out currentArgStart, out currentArgEnd);
+            CalcRange(currentValStart, currentValEnd, valMin, valMax, false, out currentValStart, out currentValEnd);
+            ApplyVisualRange();
+        }
+
+        void ResetZoom()
+        {
             chart.ResetVisualRange();
+            currentArgStart = argMin;
+            currentArgEnd = argMax;
+            currentValStart = valMin;
+            currentValEnd = valMax;
         }
-
     }
 
 </DemoPageSectionComponent>
