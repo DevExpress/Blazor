@@ -18,7 +18,9 @@
 
         <DxRangeSelector Width="100%"
                          Data="@Data"
-                         ValueChanged="@OnValueChanged"
+                         SelectedRangeStartValue="RangeSelectorStartValue"
+                         SelectedRangeEndValue="RangeSelectorEndValue"
+                         ValueChanged="OnValueChanged"
                          ValueChangeMode="RangeSelectorValueChangeMode.OnHandleMove">
             <DxRangeSelectorChart>
                 @CreateChartAreaSeries(s => s.Y1)
@@ -27,16 +29,54 @@
             </DxRangeSelectorChart>
             <DxRangeSelectorScale TickInterval="50" />
         </DxRangeSelector>
+
+        <div class="range-btns">
+            <div style="margin-right: 1rem;">
+                <label for="minSpinEdit" class="demo-text cw-320 mb-1">
+                    Min Value:
+                </label>
+                <DxSpinEdit Value="StartValue" ValueChanged="@((double newValue) => OnSpinEditStartValueChanged(newValue))" InputId="minSpinEdit" CssClass="cw-320" Increment="10" MinValue="10" MaxValue="650" />
+            </div>
+
+            <div>
+                <label for="maxSpinEdit" class="demo-text cw-320 mb-1">
+                    Max Value:
+                </label>
+                <DxSpinEdit Value="EndValue" ValueChanged="@((double newValue) => OnSpinEditEndValueChanged(newValue))" InputId="maxSpinEdit" CssClass="cw-320" Increment="10" MinValue="10" MaxValue="650" />
+            </div>
+        </div>
     </DemoChildContent>
 
     @code {
-        object StartValue;
-        object EndValue;
+        double StartValue = 10;
+        double EndValue = 650;
+        double RangeSelectorStartValue = 10;
+        double RangeSelectorEndValue = 650;
         List<ZoomingData> Data;
 
+        void OnSpinEditStartValueChanged(double newStartValue) {
+            if (newStartValue > EndValue) {
+                StartValue = EndValue;
+                return;
+            }
+
+            StartValue = newStartValue;
+            RangeSelectorStartValue = StartValue;
+        }
+
+        void OnSpinEditEndValueChanged(double newEndValue) {
+            if (newEndValue < StartValue) {
+                EndValue = StartValue;
+                return;
+            }
+
+            EndValue = newEndValue;
+            RangeSelectorEndValue = EndValue;
+        }
+
         void OnValueChanged(RangeSelectorValueChangedEventArgs info) {
-            StartValue = info.CurrentRange[0];
-            EndValue = info.CurrentRange[1];
+            StartValue = (double)info.CurrentRange[0];
+            EndValue = (double)info.CurrentRange[1];
         }
 
         protected override void OnInitialized() {
