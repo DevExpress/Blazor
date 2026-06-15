@@ -891,6 +891,11 @@ body.modal-open .main {
     -webkit-mask-image: var(--dxbl-icon-birthdate);
     mask-image: var(--dxbl-icon-birthdate);
 }
+.theme-fluent-light .demo-calendar,
+.theme-fluent-dark .demo-calendar {
+    --dxbl-calendar-border-width: 1px;
+    --dxbl-calendar-border-style: solid;
+}
 /*Grid*/
 .grid-icon {
     display: inline-block;

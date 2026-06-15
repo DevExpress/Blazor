@@ -1,8 +1,15 @@
-/*BeginHide*/::deep /*EndHide*/ .demo-carousel-container {
+/*BeginHide*/::deep /*EndHide*/.demo-carousel-container {
     border-radius: 4px;
+    max-width: min(750px, 80vw);
 }
 
 .demo-carousel-content {
     padding: 10px 50px;
     height: 100%;
+}
+
+@media (max-width: 767.98px) {
+    .demo-carousel-content {
+        padding: 10px;
+    }
 }

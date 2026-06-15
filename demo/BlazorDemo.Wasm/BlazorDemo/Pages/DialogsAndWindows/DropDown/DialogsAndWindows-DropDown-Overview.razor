@@ -19,7 +19,11 @@
             RestrictionTarget="#Navigation-DropDown-Overview"
             CloseMode="DropDownCloseMode.Close"
             PreventCloseOnPositionTargetClick="true"
+            FooterVisible="true"
             SizeMode="Params.SizeMode">
+            <FooterContentTemplate>
+                <DxButton CssClass="popup-button my-1 ms-2" RenderStyle="ButtonRenderStyle.Primary" Text="OK" Click="@context.CloseCallback" />
+            </FooterContentTemplate>
         </DxDropDown>
     </ChildContentWithParameters>
 

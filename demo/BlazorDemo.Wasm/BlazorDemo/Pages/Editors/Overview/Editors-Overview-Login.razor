@@ -5,9 +5,9 @@
               Context="EditFormContext">
         <DataAnnotationsValidator />
         <div class="card-header text-center py-3">
-            <h4>Welcome to DevExpress</h4>
+            <h2>Login Form</h2>
             <p class="tm-8 mb-0 fw-normal fs-825">
-                Log in to see it in action
+                Enter your credentials to log in
             </p>
         </div>
         <div class="card-body">
@@ -73,7 +73,7 @@
         await GotoRegistrationForm.InvokeAsync();
     }
     void HandleValidSubmit() {
-        FormSubmitResult = "You have been logged in successully.";
+        FormSubmitResult = "You are now logged in.";
     }
     void HandleInvalidSubmit() {
         FormSubmitResult = "";

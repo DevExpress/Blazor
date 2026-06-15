@@ -9,6 +9,7 @@ namespace BlazorDemo.Data {
 
             return new List<Appointment>() {
                 new Appointment {
+                    Id = 0,
                     Accepted = true,
                     Caption = "Install New Router in Dev Room",
                     StartDate = date + (new TimeSpan(0, 10, 0, 0)),
@@ -17,6 +18,7 @@ namespace BlazorDemo.Data {
                     Resources = DxSchedulerResourceIdCollection.ToXml(0)
                 },
                 new Appointment {
+                    Id = 1,
                     Caption = "Upgrade Personal Computers",
                     Accepted = false,
                     StartDate = date + (new TimeSpan(0,  13, 0, 0)),
@@ -25,6 +27,7 @@ namespace BlazorDemo.Data {
                     Resources = DxSchedulerResourceIdCollection.ToXml(0, 1)
                 },
                 new Appointment {
+                    Id = 2,
                     Caption = "Website Redesign Plan",
                     Accepted = false,
                     StartDate = date + (new TimeSpan(1, 9, 30, 0)),
@@ -33,6 +36,7 @@ namespace BlazorDemo.Data {
                     Resources = DxSchedulerResourceIdCollection.ToXml(0, 1, 2)
                 },
                 new Appointment {
+                    Id = 3,
                     Caption = "Approve Personal Computer Upgrade Plan",
                     Accepted = true,
                     StartDate = date + (new TimeSpan(1, 14, 0, 0)),

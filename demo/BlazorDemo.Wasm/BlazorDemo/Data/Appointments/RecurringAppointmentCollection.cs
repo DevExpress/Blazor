@@ -11,6 +11,7 @@ namespace BlazorDemo.Data {
             date = DateTimeUtils.GetWeekStart(date);
             return new List<Appointment>() {
                 new Appointment {
+                    Id = 0,
                     AppointmentType = 1,
                     Caption = "Watercolor Landscape",
                     Label = 5,
@@ -20,6 +21,7 @@ namespace BlazorDemo.Data {
                     ResourceId = 0
                 },
                 new Appointment {
+                    Id = 1,
                     AppointmentType = 1,
                     Caption = "Oil Painting for Beginners",
                     Label = 2,
@@ -29,6 +31,7 @@ namespace BlazorDemo.Data {
                     ResourceId = 0
                 },
                 new Appointment {
+                    Id = 2,
                     AppointmentType = 1,
                     Caption = "Testing",
                     Label = 8,
@@ -38,6 +41,7 @@ namespace BlazorDemo.Data {
                     ResourceId = 1
                 },
                 new Appointment {
+                    Id = 3,
                     AppointmentType = 1,
                     Caption = "Meeting of Instructors",
                     Label = 1,
@@ -47,6 +51,7 @@ namespace BlazorDemo.Data {
                     ResourceId = 1
                 },
                 new Appointment {
+                    Id = 4,
                     AppointmentType = 1,
                     Caption = "Monthly Planning",
                     Label = 1,
@@ -56,6 +61,7 @@ namespace BlazorDemo.Data {
                     ResourceId = 2
                 },
                 new Appointment {
+                    Id = 5,
                     AppointmentType = 1,
                     Caption = "Annual Open Day",
                     Label = 6,

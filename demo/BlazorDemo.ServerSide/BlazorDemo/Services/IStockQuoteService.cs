@@ -6,7 +6,4 @@ namespace BlazorDemo.Services {
         event EventHandler<StockQuoteChangedEventArgs> StockQuoteChanged;
     }
 
-    public interface IStockQuoteByRegionService {
-        event EventHandler<StockQuoteByRegionChangedEventArgs> StockQuoteChanged;
-    }
 }

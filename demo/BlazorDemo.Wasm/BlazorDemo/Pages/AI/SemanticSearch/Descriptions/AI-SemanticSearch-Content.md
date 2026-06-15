@@ -5,11 +5,15 @@ This demo incorporates semantic search into the DevExpress Blazor Grid. Semantic
 
 To review the benefits of this feature, search for dictionary entries and their descriptions and use synonyms or generic descriptions instead of exact search strings (such as “clothing” instead of a specific product name). You can fine-tune the search results: use the **Similarity Factor** spin editor to change the search precision.
 
-Note: DevExpress AI-powered extensions follow the "bring your own key" principle. DevExpress does not offer a REST API and does not ship any built-in LLMs/SLMs. You need an active Azure/Open AI subscription to obtain the REST API endpoint, key, and model deployment name. These variables must be specified at application startup to register AI clients and enable DevExpress AI-powered extensions in your application.
-
 Follow the steps below to reproduce the capabilities of this demo in your Blazor project:
 
-1. [Add AI libraries](https://devblogs.microsoft.com/dotnet/introducing-microsoft-extensions-ai-preview/) of your choice to the project. In this demo, we use OpenAI.
+1. Register the desired AI service in your application. Select the approach that best fits your needs:
+
+   * [Use the DevExpress Template Kit](https://docs.devexpress.com/Blazor/405228/ai-powered-extensions) to create a new project with pre-configured AI services and NuGet packages.
+   * [Integrate](https://docs.devexpress.com/Blazor/405228/ai-powered-extensions#manual-ai-services-integration) the desired AI service into your existing application.
+
 2. Configure your Grid: bind it to data, create columns, enable all appropriate functionality.
 3. Add an external [Search Box](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSearchBox) to the [ToolbarTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.ToolbarTemplate).
 4. In the [DxSearchBox.TextChanged](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxSearchBox.TextChanged) event handler, call the `Filter` method to find similarities between data items and the search string. Refer to the **SmartFilterProvider.cs** tab for implementation details.
+
+**Note:** DevExpress AI-powered extensions follow the "bring your own key" principle. DevExpress does not offer a REST API and does not ship any built-in LLMs/SLMs. You need an active Azure/Open AI subscription to obtain the REST API endpoint, key, and model deployment name. These variables must be specified at application startup to register AI clients and enable DevExpress AI-powered extensions in your application.

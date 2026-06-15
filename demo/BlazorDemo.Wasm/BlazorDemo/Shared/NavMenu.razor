@@ -50,6 +50,9 @@
 
     protected IEnumerable<DemoGroup> VisibleGroups { get => Groups.Where(g => IsVisibleGroup(g)); }
 
+    string activePage = null;
+    protected string ActivePage { get { return activePage ??= NavigationManager.GetCurrentPageName().Split('?')[0]; } }
+
     public MarkupString GetGroupTitle(DemoGroup group) {
         if(SearchResult == null)
             return new(group.Title);
@@ -69,7 +72,6 @@
     }
 
     [Parameter] public DemoSearchResult SearchResult { get; set; }
-    [Parameter] public string ActivePage { get; set; }
 
     void UpdateSelection() {
         foreach(var treeView in treeViews) {
@@ -98,7 +100,9 @@
     }
 
     void OnLocationChanged(object sender, LocationChangedEventArgs args) {
+        activePage = null;
         UpdateSelection();
+        InvokeAsync(StateHasChanged);
     }
 
     HashSet<string> GetExpandedItems() {

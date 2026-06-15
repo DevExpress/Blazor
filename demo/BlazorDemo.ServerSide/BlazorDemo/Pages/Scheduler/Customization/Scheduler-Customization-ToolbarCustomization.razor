@@ -1,4 +1,4 @@
-@page "/Scheduler/Customization/ToolbarCustomization"
+﻿@page "/Scheduler/Customization/ToolbarCustomization"
 
 <DemoPageSectionComponent Id="Scheduler-Customization-ToolbarCustomization">
     <DemoChildContent>
@@ -44,6 +44,7 @@
         DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
             AppointmentsSource = AppointmentCollection.GetAppointments(),
             AppointmentMappings = new DxSchedulerAppointmentMappings() {
+                Id = "Id",
                 Type = "AppointmentType",
                 Start = "StartDate",
                 End = "EndDate",

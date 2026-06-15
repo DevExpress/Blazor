@@ -14,7 +14,7 @@
 /*EndHide*/
 
 /*BeginHide*/::deep /*EndHide*/.grid-modified-cell {
-    background-color: color-mix(in srgb, rgb(var(--bs-primary-rgb)) 15%, white) !important;
+    background-color: color-mix(in srgb, var(--dxds-primary-80, var(--bs-primary)) 15%, white) !important;
 }
 
 /*BeginHide*/ .grid-container {

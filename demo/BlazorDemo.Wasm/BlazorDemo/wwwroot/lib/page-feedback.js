@@ -15,11 +15,11 @@ var DemoFeedbackHelper = (function() {
         form_data.append("project", "Blazor");
         form_data.append("host", window.location.host);
         form_data.append("title", document.title);
+        form_data.append("versionName", requestParams.versionName);
         if(requestParams.message)
             form_data.append("message", requestParams.message);
         var doneCallback = function() {
-            if(requestParams.completed)
-                dotNetReference && dotNetReference.invokeMethodAsync('FeedbackCompleted');
+            dotNetReference && dotNetReference.invokeMethodAsync('FeedbackCompleted');
         }
         var errorCallback = function() {
             dotNetReference && dotNetReference.invokeMethodAsync('FeedbackFailed');
@@ -36,8 +36,8 @@ var DemoFeedbackHelper = (function() {
 
         xhr.send(form_data);
     }
-    function sendFeedback(value, message, completed) {
-        sendFeedbackData({ value: value, message: message, completed: completed });
+    function sendFeedback(value, message, versionName) {
+        sendFeedbackData({ value: value, message: message, versionName: versionName });
     }
 
     return {

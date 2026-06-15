@@ -5,7 +5,7 @@
   <PropertyGroup>
     <NuGetAuditMode>all</NuGetAuditMode>
     <WarningsAsErrors>NU1604;NU1603;$(WarningsAsErrors)</WarningsAsErrors>
-    <WarningsNotAsErrors>NU1901;NU1902;NU1903;NU1904;NU1510;DX1000;DX1001;$(WarningsNotAsErrors)</WarningsNotAsErrors>
+    <WarningsNotAsErrors>NU1301;NU1801;NU1901;NU1902;NU1903;NU1904;NU1510;DX1000;DX1001;DX1002;$(WarningsNotAsErrors)</WarningsNotAsErrors>
     <NoWarn>NU1507;$(NoWarn)</NoWarn>
   </PropertyGroup>
   <ItemGroup>
@@ -16,7 +16,7 @@
     <PackageVersion Include="SkiaSharp.Views.Blazor" Version="3.119.1" />
     <PackageVersion Include="SkiaSharp.HarfBuzz" Version="3.119.1" />
     <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="8.3.1.2" />
-    <PackageVersion Include="System.Reactive" Version="6.0.0" />
+    <PackageVersion Include="System.Reactive" Version="6.0.1" />
     <PackageVersion Include="System.Numerics.Tensors" Version="9.0.7" />
     <PackageVersion Include="System.CodeDom" Version="8.0.0" />
     <PackageVersion Include="System.Configuration.ConfigurationManager" Version="8.0.1" />
@@ -31,7 +31,7 @@
     <PackageVersion Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.1.2" />
     <PackageVersion Include="Microsoft.JSInterop" Version="8.0.10" />
     <PackageVersion Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.10" />
-    <PackageVersion Include="Azure.AI.OpenAI" Version="2.2.0-beta.5" />
+    <PackageVersion Include="Azure.AI.OpenAI" Version="2.3.0-beta.2" />
     <PackageVersion Include="Azure.Identity" Version="1.17.1" />
     <PackageVersion Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="9.0.0" />
     <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.0" />
@@ -50,6 +50,7 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net8.0'">
     <PackageVersion Include="System.Drawing.Common" Version="8.0.15" />

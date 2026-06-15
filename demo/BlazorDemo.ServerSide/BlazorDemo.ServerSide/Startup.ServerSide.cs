@@ -90,10 +90,13 @@ namespace BlazorDemo.ServerSide {
                     opt.UseSqlServer(connectionString);
             });
 
-
+#if VISUALTESTS
+            services.AddSingleton<IStockQuoteService, VisualTestsStockQuoteService>();
+            services.AddSingleton<IStockQuoteByRegionService, VisualTestsStockQuoteByRegionService>();
+#else
             services.AddSingleton<IStockQuoteService, StockQuoteService>();
             services.AddSingleton<IStockQuoteByRegionService, StockQuoteByRegionService>();
-
+#endif
 
 
             services.AddHostedService<StockQuoteChangeTimerService>(

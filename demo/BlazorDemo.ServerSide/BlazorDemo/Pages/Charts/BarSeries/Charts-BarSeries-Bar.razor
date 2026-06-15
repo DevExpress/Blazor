@@ -52,7 +52,5 @@
         protected override async Task OnInitializedAsync() {
             ChartsData = await DataProvider.QueryData();
         }
-        [Parameter] public bool ShowSeriesPointMarkers { get; set; }
-        [Parameter] public bool ShowSeriesLabels { get; set; }
     }
 </DemoPageSectionComponent>

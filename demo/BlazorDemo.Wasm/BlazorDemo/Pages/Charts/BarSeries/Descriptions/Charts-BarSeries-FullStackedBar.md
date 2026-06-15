@@ -1,3 +1,5 @@
-Use the Full-Stacked Bar series to compare to compare percentage contributions of values to totals in each category.
-
-Note that you need to use the [Stack](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartStackedBarSeriesBase-3.Stack) property to enable side-by-side views.
+Full stacked bar series visualize data as percentages (you must add more than one series of this type). The total height of vertically stacked rectangular bars at any point always equals 100% of the plot area. Follow the steps below to create full stacked bar series:
+1. Use the [DxChart.Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.Data) property to specify a data source.
+2. Add [DxChartFullStackedBarSeries](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartFullStackedBarSeries-3) objects to chart markup. Each series can specify data used via the [Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.Data) property.
+3. Use series [ArgumentField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.ArgumentField) and [ValueField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.ValueField) properties to specify data source fields that supply arguments and values (bars).
+4. *Optional*. Specify series [Filter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.Filter) and [SummaryMethod](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.SummaryMethod) properties to filter and aggregate series values. This demo filters data by age group. It also groups arguments by country and calculates aggregate values using the `Enumerable.Sum` method.

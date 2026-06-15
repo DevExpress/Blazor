@@ -39,14 +39,14 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.PdfViewer" VersionOverride="25.2.4" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls" VersionOverride="25.2.4" />
-    <PackageReference Include="DevExpress.AspNetCore.Reporting" VersionOverride="25.2.4" />
-    <PackageReference Include="DevExpress.Reporting.Demos" VersionOverride="25.2.4" />
-    <PackageReference Include="DevExpress.Blazor.PivotTable" VersionOverride="25.2.4" />
-    <PackageReference Include="DevExpress.Drawing.Skia" VersionOverride="25.2.4" />
-    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" VersionOverride="25.2.4" />
-    <PackageReference Include="DevExpress.AIIntegration.Blazor" VersionOverride="25.2.4" />
+    <PackageReference Include="DevExpress.Blazor.PdfViewer" VersionOverride="25.2.8" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls" VersionOverride="25.2.8" />
+    <PackageReference Include="DevExpress.AspNetCore.Reporting" VersionOverride="25.2.8" />
+    <PackageReference Include="DevExpress.Reporting.Demos" VersionOverride="25.2.8" />
+    <PackageReference Include="DevExpress.Blazor.PivotTable" VersionOverride="25.2.8" />
+    <PackageReference Include="DevExpress.Drawing.Skia" VersionOverride="25.2.8" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" VersionOverride="25.2.8" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor" VersionOverride="25.2.8" />
     
     
     

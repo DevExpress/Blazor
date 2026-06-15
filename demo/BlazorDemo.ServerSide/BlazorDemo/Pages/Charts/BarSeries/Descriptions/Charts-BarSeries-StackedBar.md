@@ -1,3 +1,5 @@
-Use the Stacked Bar series if you need to display multiple series and need to emphasize totals in each category.
-
-Note that you need to use the [Stack](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartStackedBarSeriesBase-3.Stack) property to enable side-by-side views.
+Stacked bar series plot data as vertically stacked rectangular bars to visualize cumulative values (you must add more than one series of this type). Each bar series in a stacked bar chart uses the top of the previous series as its baseline. Follow the steps below to create stacked bar series:
+1. Use the [DxChart.Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.Data) property to specify a data source.
+2. Add [DxChartStackedBarSeries](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartStackedBarSeries-3) objects to chart markup. Each series can specify data used via the [Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.Data) property.
+3. Use series [ArgumentField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.ArgumentField) and [ValueField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.ValueField) properties to specify data source fields that supply arguments and values (bars).
+4. *Optional*. Specify series [Filter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.Filter) and [SummaryMethod](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.SummaryMethod) properties to filter and aggregate series values. This demo filters data by age group. It also groups arguments by country and calculates aggregate values using the `Enumerable.Sum` method.

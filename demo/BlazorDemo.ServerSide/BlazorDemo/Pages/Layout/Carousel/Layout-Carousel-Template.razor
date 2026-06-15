@@ -6,7 +6,7 @@
     <ChildContentWithParameters Context="Params">
         @inject ISalesInfoDataProvider Sales
         <div>
-            <DxCarousel Width="750px"
+            <DxCarousel Width="100%"
                         Height="450px"
                         SizeMode="Params.SizeMode"
                         AllowPagingByClick="false"
@@ -19,7 +19,8 @@
                                                 IsContentBlocked="true"
                                                 ApplyBackgroundShading="false"
                                                 IndicatorAreaVisible="true"
-                                                Text="Loading...">
+                                                Text="Loading..."
+                                                CssClass="h-100">
                                     <DxChart Data="chartsData"
                                              Width="100%"
                                              Height="100%"

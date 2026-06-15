@@ -35,7 +35,7 @@
 }
 
 .mention {
-    color: var(--bs-primary);
+    color: var(--dxds-primary-80, var(--bs-primary));
 }
 
 @media (max-width: 576px) {

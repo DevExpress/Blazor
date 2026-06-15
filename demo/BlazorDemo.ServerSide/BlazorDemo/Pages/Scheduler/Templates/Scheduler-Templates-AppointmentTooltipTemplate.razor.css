@@ -4,3 +4,7 @@
     overflow: hidden;
     white-space: nowrap;
 }
+
+.demo-sc-apt-content {
+    color: var(--dxbl-scheduler-appointment-subject-color);
+}

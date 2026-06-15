@@ -20,8 +20,12 @@
             PositionTarget="#dropdown-position-target-container"
             PositionMode="@PositionMode"
             CloseMode="DropDownCloseMode.Close"
+            FooterVisible="true"
             SizeMode="Params.SizeMode"
             PreventCloseOnPositionTargetClick="true">
+            <FooterContentTemplate>
+                <DxButton CssClass="popup-button my-1 ms-2" RenderStyle="ButtonRenderStyle.Primary" Text="OK" Click="@context.CloseCallback" />
+            </FooterContentTemplate>
         </DxDropDown>
     </ChildContentWithParameters>
 

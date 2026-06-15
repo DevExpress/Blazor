@@ -24,7 +24,7 @@
 }
 
 .fp-badge-primary {
-    background-color: var(--bs-primary);
+    background-color: var(--dxds-primary-80, var(--bs-primary));
     color: var(--bs-white);
 }
 

@@ -521,6 +521,10 @@
                       "Path": "Services\\IStockQuoteService.cs"
                     },
                     {
+                      "Title": "StockQuoteService.cs",
+                      "Path": "Services\\StockQuoteService.cs"
+                    },
+                    {
                       "Title": "Startup.cs",
                       "Path": "Pages\\CodeSnippets\\StockQuoteService.Startup.cs"
                     },
@@ -2496,12 +2500,16 @@
                       "Path": "Data\\StockQuotes\\StockQuoteByRegionChangedEventArgs.cs"
                     },
                     {
-                      "Title": "IStockQuoteService.cs",
-                      "Path": "Services\\IStockQuoteService.cs"
+                      "Title": "IStockQuoteByRegionService.cs",
+                      "Path": "Services\\IStockQuoteByRegionService.cs"
+                    },
+                    {
+                      "Title": "StockQuoteByRegionService.cs",
+                      "Path": "Services\\StockQuoteByRegionService.cs"
                     },
                     {
                       "Title": "Startup.cs",
-                      "Path": "Pages\\CodeSnippets\\StockQuoteService.Startup.cs"
+                      "Path": "Pages\\CodeSnippets\\StockQuoteByRegionService.Startup.cs"
                     }
                   ]
                 }

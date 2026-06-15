@@ -31,21 +31,19 @@
         return SearchResult == null || SearchResult.ContainsInHierarchy(item);
     }
 
-    bool IsRootDemoItem() {
-        return DemoItem.ParentPage == null;
-    }
-
     string GetVisibleElementOid() {
-        if(!IsRootDemoItem() || string.IsNullOrWhiteSpace(ActivePage))
+        if(string.IsNullOrWhiteSpace(ActivePage))
             return null;
-        return HasChildWithActivePageUrl(DemoItem, Configuration.IsSiteMode) ? ActivePage : null;
-    }
-
-    bool HasChildWithActivePageUrl(DemoItem demoItem, bool demoMode) {
-        if(demoItem.GetNavTreeUrl() == ActivePage)
-            return true;
-        return demoItem.GetNavTreeChildren(demoMode)
-                       .Any(child => HasChildWithActivePageUrl(child, demoMode));
+        if (DemoItem.GetNavTreeUrl() == ActivePage)
+            return ActivePage;
+        var parentPage = DemoItem.ParentPage;
+        if (parentPage == null)
+            return null;
+        var parentPageUrl = parentPage.GetUrl();
+        if (parentPageUrl != ActivePage)
+            return null;
+        var firstVisibleSection = parentPage.PageSections.Where(s => IsVisibleItem(s)).FirstOrDefault();
+        return DemoItem == firstVisibleSection ? ActivePage : null;
     }
 
     public bool DemoItemExpanded {

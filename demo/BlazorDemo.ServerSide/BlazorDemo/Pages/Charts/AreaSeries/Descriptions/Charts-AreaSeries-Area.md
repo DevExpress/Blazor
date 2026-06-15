@@ -1,3 +1,9 @@
-The Area chart displays data as a region between the data curve and the argument axis. Use the Area series to emphasize value changes or compare values in multiple series. 
+Area series visualize data as colored regions between data curves and the argument axis. Follow the steps below to create an area series:
+1. Use the [DxChart.Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.Data) property to specify a data source.
+2. Add a [DxChartAreaSeries](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartAreaSeries-3) object to chart markup.
+3. Use series [ArgumentField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.ArgumentField) and [ValueField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.ValueField) properties to specify data source fields that supply arguments and values (chart points).
+4. *Optional*. Specify series [Filter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.Filter) and [SummaryMethod](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.SummaryMethod) properties to filter and aggregate series values. This demo filters data by region. It also groups arguments by date and calculates aggregate values using the `Enumerable.Sum` method.
 
-Use the check boxes at the top of the chart to display data point markers and labels.
+The [DxChart](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1) component allows you to add multiple series objects to component markup. Each series can specify data used via the [Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.Data) property.
+
+Area-based series support point [markers](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesPoint) and [labels](https://docs.devexpress.com/Blazor/405083/components/charts/labels#series-labels). Use checkboxes to display or hide these elements. 

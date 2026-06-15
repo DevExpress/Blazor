@@ -809,7 +809,7 @@ body,
     left: 0;
     width: 3px;
     height: 100%;
-    background-color: var(--bs-primary);
+    background-color: var(--dxds-primary-80, var(--bs-primary));
 }
 .demo-page-nav .nav-pills .nav-link.active:after {
     content: "";
@@ -991,6 +991,11 @@ body,
 
 .demo-page-section.h-scroll .demo-page-section-code-area {
     overflow-x: auto;
+}
+
+.demo-page-section .demo-page-section-description li ul,
+.demo-page-section .demo-page-section-description li ol {
+    margin-bottom: 16px;
 }
 
 .demo-page-section-component-area {
@@ -2028,7 +2033,7 @@ body,
     width: 72px;
     height: 73px;
     display: block;
-    background-color: var(--bs-primary);
+    background-color: var(--dxds-primary-80, var(--bs-primary));
     margin: 0 auto;
 }
 
@@ -2176,3 +2181,23 @@ body,
     height: 770px;
 }
 
+/* Inline code elements must have borders and background  */
+.demo-page-section-description code {
+    font-size: 0.75rem;
+    padding: 0.165em 0.5em;
+
+    border-radius: 6px;
+    border-width: 1px;
+    border-style: solid;
+
+    color: #1F2328;
+    background-color: #EFF1F3;
+    border-color: #D0D7DE;
+}
+
+:where(.theme-default-dark, .theme-blazing-dark, .theme-fluent-dark)
+.demo-page-section-description code {
+    color: #CDD9E5;
+    background-color: #2D333B;
+    border-color: #444C56;
+}

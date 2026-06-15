@@ -9,9 +9,9 @@
         <DataAnnotationsValidator />
 
         <div class="card-header text-center py-3">
-            <h4>Register to DevExpress</h4>
+            <h2>Registration Form</h2>
             <p class="tm-8 mb-0 fw-normal fs-825">
-                Create a new account to see it in action
+                Enter your information to create an account
             </p>
         </div>
 
@@ -60,9 +60,9 @@
                     </div>
                 </DxFormLayoutItem>
                 <DxFormLayoutItem ColSpanMd="12">
-                    <label for="deBirthDate" class="d-none">Birthday</label>
+                    <label for="deBirthDate" class="d-none">Date of Birth</label>
                     <DxDateEdit @bind-Date="@Data.BirthDate"
-                                NullText="Birthday"
+                                NullText="Date of Birth"
                                 NullValue="@BirthDateNullValue"
                                 ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
                                 Mask="@DateTimeMask.ShortDate"
@@ -157,7 +157,7 @@
         await GotoLoginForm.InvokeAsync();
     }
     void HandleValidSubmit() {
-        FormSubmitResult = "You have been registred successully.";
+        FormSubmitResult = "Your account was successfully registered.";
     }
     void HandleInvalidSubmit() {
         FormSubmitResult = "";

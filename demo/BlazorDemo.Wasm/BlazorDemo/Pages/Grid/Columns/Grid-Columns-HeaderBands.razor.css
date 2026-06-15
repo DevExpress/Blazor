@@ -5,9 +5,10 @@
 /*BeginHide*/::deep .grid-toolbar-column-chooser {
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
-    background-color: currentColor;
     background-size: contain;
     background-position: center center;
+    /* Fix for the Firefox sub pixel rendering bug on the SizeMode change https://bugzilla.mozilla.org/show_bug.cgi?id=739176 */
+    transform: translate3d(0,0,0);
 }
 
 .grid-container {

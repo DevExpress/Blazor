@@ -29,12 +29,12 @@
     <PackageReference Include="Microsoft.Extensions.AI.OpenAI" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor.PdfViewer" VersionOverride="25.2.4" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.WebAssembly" VersionOverride="25.2.4" />
-    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" VersionOverride="25.2.4" />
-    <PackageReference Include="DevExpress.Reporting.Demos" VersionOverride="25.2.4" />
-    <PackageReference Include="DevExpress.Blazor.PivotTable" VersionOverride="25.2.4" />
-    <PackageReference Include="DevExpress.AIIntegration.Blazor" VersionOverride="25.2.4" />
+    <PackageReference Include="DevExpress.Blazor.PdfViewer" VersionOverride="25.2.8" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.WebAssembly" VersionOverride="25.2.8" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" VersionOverride="25.2.8" />
+    <PackageReference Include="DevExpress.Reporting.Demos" VersionOverride="25.2.8" />
+    <PackageReference Include="DevExpress.Blazor.PivotTable" VersionOverride="25.2.8" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor" VersionOverride="25.2.8" />
     
     
     
@@ -81,11 +81,14 @@
     <Compile Include="Services\IBarGaugeTemperatureMeasurerService.cs" />
     <Compile Include="Services\CspNonceService.cs" />
     <Compile Include="Services\INetworkSpeedTesterService.cs" />
+    <Compile Include="Services\IStockQuoteByRegionService.cs" />
     <Compile Include="Services\IStockQuoteService.cs" />
     <Compile Include="Services\NetworkSpeedTesterService.cs" />
     <Compile Include="Services\PromoteHttpStatusErrorsPipelineTransport.cs" />
+    <Compile Include="Services\StockQuoteByRegionService.cs" />
     <Compile Include="Services\StockQuoteService.cs" />
     <Compile Include="DataUtils.cs" />
+    <Compile Include="Services\VisualTestsStockQuoteService.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Configuration\**\*.cs" />
     <Compile Include="DemoServiceCollectionExtensions.cs" />

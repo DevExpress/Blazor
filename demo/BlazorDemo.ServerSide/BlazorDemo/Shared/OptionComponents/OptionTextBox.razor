@@ -1,0 +1,26 @@
+﻿<OptionComponent Id="@id" Label="@Label" SmallSpacing="@SmallSpacing">
+    <DxTextBox CssClass="@CssClass"
+               Text="@Text"
+               TextChanged="OnValueChange"
+               InputId="@id"
+               Enabled="Enabled"/>
+</OptionComponent>
+
+@code {
+    readonly string id = Guid.NewGuid().ToString();
+
+    [Parameter] public string CssClass { get; set; }
+    [Parameter] public string Label { get; set; }
+    [Parameter] public string Text { get; set; }
+    [Parameter] public EventCallback<string> TextChanged { get; set; }
+    [Parameter] public bool Enabled { get; set; } = true;
+    [Parameter] public bool SmallSpacing { get; set; }
+
+    protected void OnValueChange(string newValue) {
+        if(!Equals(Text, newValue)) {
+            Text = newValue;
+            TextChanged.InvokeAsync(newValue);
+        }
+    }
+
+}

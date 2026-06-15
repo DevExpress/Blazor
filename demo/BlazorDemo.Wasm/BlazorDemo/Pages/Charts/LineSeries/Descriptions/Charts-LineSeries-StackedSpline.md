@@ -1,9 +1,7 @@
-Stacked spline series visualize cumulative values (you need to add more than one series). The topmost series displays the total of all available values. Follow the steps below to create a stacked spline series:
+Stacked spline series visualize cumulative values (you must add more than one series of this type). The topmost series displays the total of all available values. Follow the steps below to create stacked spline series:
 1. Use the [DxChart.Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChart-1.Data) property to specify a data source.
-2. Add a [DxChartStackedSplineSeries](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartStackedSplineSeries-3) object to chart markup.
+2. Add [DxChartStackedSplineSeries](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartStackedSplineSeries-3) objects to chart markup. Each series can specify data used via the [Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.Data) property.
 3. Use series [ArgumentField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.ArgumentField) and [ValueField](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.ValueField) properties to specify data source fields that supply arguments and values for chart points.
 4. *Optional*. Specify series [Filter](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.Filter) and [SummaryMethod](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.SummaryMethod) properties to filter and aggregate series values. This demo filters data by region. It also groups arguments by date and calculates aggregate values using the `Enumerable.Sum` method.
 
-Each series can specify its data via the [Data](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartXYSeries-4.Data) property.
- 
-Line-based series support point [markers](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesPoint) and [labels](https://docs.devexpress.com/Blazor/405083/components/charts/labels#series-labels). Use checkboxes to show or hide these elements.
+Line-based series support point [markers](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxChartSeriesPoint) and [labels](https://docs.devexpress.com/Blazor/405083/components/charts/labels#series-labels). Use checkboxes to display/hide these elements.

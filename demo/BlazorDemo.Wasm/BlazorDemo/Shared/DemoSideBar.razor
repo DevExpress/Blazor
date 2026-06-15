@@ -1,10 +1,11 @@
 ﻿@inject DemoConfiguration Configuration
 @inject NavigationManager NavigationManager
 @inject IDemoVersion DemoVersion;
+@implements IDisposable
 
 <DemoSearchEditor @bind-SearchString="@SearchString" />
 <DxScrollView VisibleElementOid="@VisibleElementOid">
-    <NavMenu ActivePage="@ActivePage" SearchResult="@SearchResults"></NavMenu>
+    <NavMenu SearchResult="@SearchResults"></NavMenu>
 </DxScrollView>
 <div class="info-wrapper">
     <div class="version">Version: @DemoVersion.Version</div>
@@ -16,10 +17,10 @@
 
 @code {
     string _searchString = "";
+    string _visibleElementOid;
 
     static readonly int DateTimeNowYear = DateTime.Now.Year;
-    protected string ActivePage { get { return NavigationManager.GetCurrentPageName().Split('?')[0]; } }
-    protected string VisibleElementOid => ActivePage;
+    protected string VisibleElementOid => _visibleElementOid;
     public string SearchString {
         get { return _searchString; }
         set {
@@ -38,4 +39,17 @@
         }
     }
 
+    protected override void OnInitialized() {
+        _visibleElementOid = NavigationManager.GetCurrentPageName().Split('?')[0];
+        NavigationManager.LocationChanged += OnLocationChanged;
+    }
+
+    void OnLocationChanged(object sender, LocationChangedEventArgs args) {
+        _visibleElementOid = NavigationManager.GetCurrentPageName().Split('?')[0];
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose() {
+         NavigationManager.LocationChanged -= OnLocationChanged;
+    }
 }

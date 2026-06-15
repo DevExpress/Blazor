@@ -23,9 +23,15 @@
                 PreventCloseOnPositionTargetClick="true"
                 CloseMode="@CloseMode"
                 FitToRestriction="@FitToRestriction"
+                FooterVisible="true"
                 SizeMode="Params.SizeMode"
                 Width="240">
-                <span class="fs-75">@Constants.ContentShort</span>
+                <BodyContentTemplate>
+                    <span class="fs-75">@Constants.ContentShort</span>
+                </BodyContentTemplate>
+                <FooterContentTemplate>
+                    <DxButton CssClass="popup-button my-1 ms-2" RenderStyle="ButtonRenderStyle.Primary" Text="OK" Click="@context.CloseCallback" />
+                </FooterContentTemplate>
             </DxDropDown>
         </div>
     </ChildContentWithParameters>

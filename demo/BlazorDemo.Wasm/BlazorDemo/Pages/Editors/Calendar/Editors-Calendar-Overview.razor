@@ -1,12 +1,6 @@
 ﻿@inject ICspNonceService NonceProvider
 <DemoPageSectionComponent Id="Editors-Calendar-Overview" ShowSizeMode="true">
     <ChildContentWithParameters Context="Params">
-        <style nonce="@NonceProvider.Nonce">
-            .demo-calendar {
-                border-width: 1px;
-                border-style: solid;
-            }
-        </style>
         <DxCalendar @bind-SelectedDate="@SelectedDate" 
                     SizeMode="Params.SizeMode" 
                     CssClass="demo-calendar" />
@@ -15,8 +9,8 @@
             Selected date: <b>@SelectedDate.ToString("dddd, MMMM dd, yyyy")</b>
         </p>
     </ChildContentWithParameters>
+    @code {
+        DateTime SelectedDate { get; set; } = DateTime.Today;
+    }
 </DemoPageSectionComponent>
 
-@code {
-    DateTime SelectedDate { get; set; } = DateTime.Today;
-}

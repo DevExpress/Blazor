@@ -7,7 +7,10 @@ DevExpress AI Chat for Blazor is an AI-enabled chat component that allows users 
 * Azure OpenAI
 * Ollama
 
-To add the [DxAIChat](https://docs.devexpress.com/Blazor/DevExpress.AIIntegration.Blazor.Chat.DxAIChat) component to your application, register the appropriate AI service at application startup.
+To add the [DxAIChat](https://docs.devexpress.com/Blazor/DevExpress.AIIntegration.Blazor.Chat.DxAIChat) component to your application, register the desired AI service in your application. Select the approach that best fits your needs:
+
+* [Use the DevExpress Template Kit](https://docs.devexpress.com/Blazor/405228/ai-powered-extensions) to create a new project with pre-configured AI services and NuGet packages.
+* [Integrate](https://docs.devexpress.com/Blazor/405228/ai-powered-extensions#manual-ai-services-integration) the desired AI service into your existing application.
 
 Use the following properties to customize the chat appearance:
 
@@ -16,3 +19,4 @@ Use the following properties to customize the chat appearance:
 - [AllowResizeInput](https://docs.devexpress.com/Blazor/DevExpress.AIIntegration.Blazor.Chat.DxAIChat.AllowResizeInput): Allows users to resize the Blazor AI Chat input box. If this property is set to `false`, the input box automatically resizes itself as a user types.
 
 **Note:** DevExpress AI-powered extensions follow the "bring your own key" principle. DevExpress does not offer a REST API and does not ship any built-in LLMs/SLMs. You need an active Azure/Open AI subscription to obtain the REST API endpoint, key, and model deployment name. These variables must be specified at application startup to register AI clients and enable DevExpress AI-powered Extensions in your application.
+

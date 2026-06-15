@@ -2,7 +2,7 @@
 
 <DemoPageSectionComponent Id="Scheduler-Templates-TimeCellTemplate">
     <DemoChildContent>
-        <div>
+        <div class="d-flex w-100">
 
         <DxScheduler @bind-StartDate="@StartDate"
                      DataStorage="@DataStorage"
@@ -32,6 +32,7 @@
         DxSchedulerDataStorage DataStorage = new DxSchedulerDataStorage() {
             AppointmentsSource = RecurringAppointmentCollection.GetAppointments(),
             AppointmentMappings = new DxSchedulerAppointmentMappings() {
+                Id = "Id",
                 Type = "AppointmentType",
                 Start = "StartDate",
                 End = "EndDate",

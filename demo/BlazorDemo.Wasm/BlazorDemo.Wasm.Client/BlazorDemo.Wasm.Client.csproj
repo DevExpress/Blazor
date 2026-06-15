@@ -27,9 +27,9 @@
     <ProjectReference Include="..\BlazorDemo\BlazorDemo.Wasm.Core.csproj" />
   </ItemGroup>
 <ItemGroup>
-    <PackageReference Include="DevExpress.AIIntegration.Blazor" VersionOverride="25.2.4" />
-    <PackageReference Include="DevExpress.Blazor.PivotTable" VersionOverride="25.2.4" />
-    <PackageReference Include="DevExpress.Pdf.SkiaRenderer" VersionOverride="25.2.4" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor" VersionOverride="25.2.8" />
+    <PackageReference Include="DevExpress.Blazor.PivotTable" VersionOverride="25.2.8" />
+    <PackageReference Include="DevExpress.Pdf.SkiaRenderer" VersionOverride="25.2.8" />
     
     
     
